@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://ohmyraku.github.io/begining-raku/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/cro/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/learning-raku/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/parsing-with-raku-regexes-and-grammars/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/raku-advent-calendar/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/raku-at-a-glance/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/raku-by-example/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/raku-deep-dive/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/raku-guide/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/raku-quick-syntax-reference/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/rakudoc/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/using-raku/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/tags/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/</loc>
+  </url>
+  
+</urlset>

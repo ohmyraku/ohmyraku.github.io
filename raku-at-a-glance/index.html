@@ -1,0 +1,3766 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> :: 山川异域, 风月同天</title>
+
+<meta name="author" content="ohmyraku">
+<meta name="application-name" content="山川异域, 风月同天">
+<meta name="description" content="Table of Contents 1. Raku 概要 1.1. Hello, World 1.2. 变量 1.3. 内省 1.4. Twigils 1.5. 经常使用的特殊变量 1.6. 内置类型   2. 运算符 2.1. 前缀 2.2. 后缀 2.3. 方法后缀 2.4. 中缀运算符 2.5. 列表运算符 2.6. Junction 运算符 2.7. 短路运算符 2.8. 其它中缀运算符 2.9. 元运算符 2.10. 超运算符   3. 正则表达式和 Grammars 3.1. 正则表达式 3.2. $/ 对象 3.3. Grammars 3.4. Actions 3.5. AST 和属性 3.6. 计算器     1. Raku 概要 1.">
+<meta name="robots" content="noodp"/>
+<meta name="generator" content="Hugo 0.63.2" />
+<meta name="referrer" content="no-referrer" />
+<meta name="format-detection" content="telephone=no">
+
+<link rel="canonical" href="https://ohmyraku.github.io/raku-at-a-glance/" />
+
+
+<link rel="icon" href="https://ohmyraku.github.io/logo.png" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="" />
+<meta name="twitter:description" content="Table of Contents 1. Raku 概要 1.1. Hello, World 1.2. 变量 1.3. 内省 1.4. Twigils 1.5. 经常使用的特殊变量 1.6. 内置类型   2. 运算符 2.1. 前缀 2.2. 后缀 2.3. 方法后缀 2.4. 中缀运算符 2.5. 列表运算符 2.6. Junction 运算符 2.7. 短路运算符 2.8. 其它中缀运算符 2.9. 元运算符 2.10. 超运算符   3. 正则表达式和 Grammars 3.1. 正则表达式 3.2. $/ 对象 3.3. Grammars 3.4. Actions 3.5. AST 和属性 3.6. 计算器     1. Raku 概要 1." />
+<meta name="twitter:site" content="https://ohmyraku.github.io" />
+<meta name="twitter:creator" content="ohmyraku" />
+<meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
+<meta property="og:type" content="article" />
+<meta property="og:locale" content="en" />
+<meta property="og:name" content="ohmyraku" />
+<meta property="og:title" content="" />
+<meta property="og:url" content="https://ohmyraku.github.io" />
+<meta property="og:site_name" content="山川异域, 风月同天" />
+<meta property="og:description" content="Table of Contents 1. Raku 概要 1.1. Hello, World 1.2. 变量 1.3. 内省 1.4. Twigils 1.5. 经常使用的特殊变量 1.6. 内置类型   2. 运算符 2.1. 前缀 2.2. 后缀 2.3. 方法后缀 2.4. 中缀运算符 2.5. 列表运算符 2.6. Junction 运算符 2.7. 短路运算符 2.8. 其它中缀运算符 2.9. 元运算符 2.10. 超运算符   3. 正则表达式和 Grammars 3.1. 正则表达式 3.2. $/ 对象 3.3. Grammars 3.4. Actions 3.5. AST 和属性 3.6. 计算器     1. Raku 概要 1." />
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Article",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https:\/\/ohmyraku.github.io\/raku-at-a-glance\/"
+      },
+      "headline": "",
+      
+      "datePublished": "0001-01-01",
+      "dateModified": "0001-01-01 00:00:00 \x2b0000 UTC",
+      "author": {
+        "@type": "Person",
+        "name": "ohmyraku"
+      },
+      "description": "Table of Contents 1. Raku 概要 1.1. Hello, World 1.2. 变量 1.3. 内省 1.4. Twigils 1.5. 经常使用的特殊变量 1.6. 内置类型   2. 运算符 2.1. 前缀 2.2. 后缀 2.3. 方法后缀 2.4. 中缀运算符 2.5. 列表运算符 2.6. Junction 运算符 2.7. 短路运算符 2.8. 其它中缀运算符 2.9. 元运算符 2.10. 超运算符   3. 正则表达式和 Grammars 3.1. 正则表达式 3.2. $\/ 对象 3.3. Grammars 3.4. Actions 3.5. AST 和属性 3.6. 计算器     1. Raku 概要 1.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "https:\/\/ohmyraku.github.io",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https:\/\/ohmyraku.github.io\/logo.png"
+        }
+      }
+    }
+</script><link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
+<script>
+
+const theme = window.localStorage.getItem('theme'); 
+if (theme && theme !== "1") {
+    document.documentElement.classList.add('theme-' + theme);
+}
+</script>
+
+
+</head>
+<body>
+  <main class="site__content">
+    <div class="site__page">
+  <nav class="site__breadcrumbs">
+    <a class="site__breadcrumb" href="https://ohmyraku.github.io/">山川异域, 风月同天</a><a class="site__breadcrumb--active" href="https://ohmyraku.github.io/raku-at-a-glance/"></a>
+</nav>
+
+<h1 class="page__title"></h1>
+  <div class="page__meta">
+    <p>
+    
+    <span class="page__date">
+    on <time datetime="0001-01-01T00:00:00Z">0001-01-01</time>
+    
+    </span>
+    </p>
+
+    
+
+    
+    </div>
+</div>
+
+
+</div>
+
+<article class="page__content" ><div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_raku_概要">1. Raku 概要</a>
+<ul class="sectlevel2">
+<li><a href="#_hello_world">1.1. Hello, World</a></li>
+<li><a href="#_变量">1.2. 变量</a></li>
+<li><a href="#_内省">1.3. 内省</a></li>
+<li><a href="#_twigils">1.4. Twigils</a></li>
+<li><a href="#_经常使用的特殊变量">1.5. 经常使用的特殊变量</a></li>
+<li><a href="#_内置类型">1.6. 内置类型</a></li>
+</ul>
+</li>
+<li><a href="#_运算符">2. 运算符</a>
+<ul class="sectlevel2">
+<li><a href="#_前缀">2.1. 前缀</a></li>
+<li><a href="#_后缀">2.2. 后缀</a></li>
+<li><a href="#_方法后缀">2.3. 方法后缀</a></li>
+<li><a href="#_中缀运算符">2.4. 中缀运算符</a></li>
+<li><a href="#_列表运算符">2.5. 列表运算符</a></li>
+<li><a href="#_junction_运算符">2.6. Junction 运算符</a></li>
+<li><a href="#_短路运算符">2.7. 短路运算符</a></li>
+<li><a href="#_其它中缀运算符">2.8. 其它中缀运算符</a></li>
+<li><a href="#_元运算符">2.9. 元运算符</a></li>
+<li><a href="#_超运算符">2.10. 超运算符</a></li>
+</ul>
+</li>
+<li><a href="#_正则表达式和_grammars">3. 正则表达式和 Grammars</a>
+<ul class="sectlevel2">
+<li><a href="#_正则表达式">3.1. 正则表达式</a></li>
+<li><a href="#_对象">3.2. <code>$/</code> 对象</a></li>
+<li><a href="#_grammars">3.3. Grammars</a></li>
+<li><a href="#_actions">3.4. Actions</a></li>
+<li><a href="#_ast_和属性">3.5. AST 和属性</a></li>
+<li><a href="#_计算器">3.6. 计算器</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="sect1">
+<h2 id="_raku_概要">1. Raku 概要</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_hello_world">1.1. Hello, World</h3>
+<div class="paragraph">
+<p>Raku编译器可以从文件或+ e命令行开关的内容中读取程序。 最简单的“Hello，World！”程序如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "Hello, Raku ";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>把它保存到文件中并运行:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku hello.pl
+Hello, Raku</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>或者，您可以使用 <code>+e</code> 选项：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ raku -e'say "Hello, Raku"'
+Hello, Raku</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_变量">1.2. 变量</h3>
+<div class="sect3">
+<h4 id="_符号">1.2.1. 符号</h4>
+<div class="paragraph">
+<p>Raku使用符号来标记变量。 这些符号部分兼容
+使用Perl 5语法。 例如，标量，列表和散列分别使用$，@和％sigils。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $scalar = 42;
+say $scalar;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>代码打印42并不奇怪。</p>
+</div>
+<div class="paragraph">
+<p>考虑以下片段，它也给出了可预测的结果（方括号表示一个数组）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @array = (10, 20, 30);
+say @array; # [10 20 30]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，让我们使用Raku的优点并重写上面的代码，使用更少的输入，更少的字符和更少的标点符号：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @list1 = &lt;10 20 30&gt;;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>或者甚至像这样:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @list2 = 10, 20, 30;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>类似地，我们可以在初始化哈希时省略括号，留下裸内容：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my %hash =
+    'Language' =&gt; 'Perl',
+    'Version'  =&gt; '6';
+say %hash;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个小程序打印出这个（哈希键的顺序）
+输出可能不同，你不应该依赖它）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">{Language =&gt; Perl, Version =&gt; 6}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>为了访问列表或散列的元素，Raku使用不同类型的括号。 重要的是要记住，印记始终保持不变。 在以下示例中，我们从列表和哈希中提取标量：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @squares = 0, 1, 4, 9, 14, 25;
+say @squares[3]; # This prints the 4th element, thus 9
+
+my %capitals =
+           'France'  =&gt; 'Paris',
+           'Germany' =&gt; 'Berlin';
+        say %capitals{'Germany'};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>存在用于创建散列和访问其元素的替代语法。 要了解它是如何工作的，请检查下一段代码：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my %month+abbrs =
+           :jan('January'),
+           :feb('February'),
+           :mar('March');
+say %month+abbrs&lt;mar&gt;; # prints March</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>命名变量是一件相当有趣的事情，因为Raku不仅允许使用ASCII字母，数字和下划线字符，还允许使用许多UTF-8元素，包括连字符和撇号：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $hello+world = "Hello, World";
+say $hello+world;
+
+my $don't = "Isn’t it a Hello?";
+say $don't;
+
+my $привет = "A Cyrillic Hi ";
+say $привет;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>由于内省的机制，很容易告诉变量中的数据类型（Raku中的变量通常被称为容器）。 为此，请在变量上调用预定义的WHAT方法。 即使它是一个裸标量，Raku也会在内部将其视为一个对象; 因此，你可以在上面调用一些方法。
+对于标量，结果取决于驻留在变量中的实际数据类型。 这是一个例子（括号是输出的一部分）：
+使用非拉丁字符变量名称没有任何性能影响。 但如果你做，总是想到那些可能需要阅读你的代码的开发人员在将来</p>
+</div>
+<div class="paragraph">
+<p>您是否更喜欢变量名称中的非拉丁字符？ 虽然它可能会降低打字的速度，因为它需要切换键盘布局，
+。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_内省">1.3. 内省</h3>
+<div class="paragraph">
+<p>由于内省的机制，很容易告诉变量中的数据类型（Raku中的变量通常被称为容器）。 为此，请在变量上调用预定义的WHAT方法。 即使它是一个裸标量，Raku也会在内部将其视为一个对象; 因此，你可以在上面调用一些方法。
+对于标量，结果取决于驻留在变量中的实际数据类型。 这是一个例子（括号是输出的一部分）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $scalar = 42;
+my $hello-world = "Hello, World";
+
+say $scalar.WHAT;      # (Int)
+say $hello-world.WHAT; # (Str)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于那些以符号 <strong>@</strong> 和 <strong>%</strong> 开头的变量, <strong>WHAT</strong> 方法返回字符串 <strong>(Array)</strong> 和 <strong>(Hash)</strong>。</p>
+</div>
+<div class="paragraph">
+<p>在数组上调用 <strong>WHAT</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @list = 10, 20, 30;
+my @squares = 0, 1, 4, 9, 14, 25;
+
+say @list.WHAT;    #(Array)
+say @squares.WHAT; #(Array)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在散列上调用 <strong>WHAT</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my %hash     = 'Language' =&gt; 'Perl';
+my %capitals = 'France'   =&gt; 'Paris';
+
+say %hash.WHAT;     # (Hash)
+say %capitals.WHAT; # (Hash)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>WHAT</strong> 调用之后返回的东西, 叫做所谓的类型对象。在 Raku 中, 你应该使用 <code>===</code> 运算符来比较这些对象。</p>
+</div>
+<div class="paragraph">
+<p>例如:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $value = 42;
+say "OK" if $value.WHAT === Int;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>还有一种方法可以检查驻留在容器中的对象的类型 -  isa 方法。 在一个对象上调用它，将类型名称作为参数传递，并得到答案：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $value = 42;
+say "OK" if $value.isa(Int);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_twigils">1.4. Twigils</h3>
+<div class="paragraph">
+<p>在 Raku 中，变量名称前面可以是单字符符号，例如 <code>$</code>，<code>@</code> 或 <code>％</code>，或者带有双字符序列。 在后一种情况下，这被称为twigil。 它的第一个字符意味着与一个简单的印记相同的东西，而第二个字符扩展了描述。</p>
+</div>
+<div class="paragraph">
+<p>例如，twigil 的第二个字符可以描述变量的范围。 考虑 <code>*</code>，它表示动态范围（在第3章中有更多内容）。 以下调用逐个打印命令行参数：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say for @*ARGS;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里，<code>@*ARGS</code> 数组是一个全局数组，包含从命令行接收的参数（请注意，这称为 ARGS 而不是 Perl 5 中的 ARGV）。 <code>.say</code> 构造是对循环变量调用 say 方法。 如果你想让它更详细，你会这样写：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for @*ARGS {
+    $_.say;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>让我们列出一些其他有用的预定义动态变量，其中包含星号。 twigil的第一个元素表示容器的类型（因此是标量，数组或散列）：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>$*PERL 包含 Perl 版本 (Raku)</p>
+</li>
+<li>
+<p>$*PID - 进程标识符</p>
+</li>
+<li>
+<p>$*PROGRAM-NAME - 当前执行程序的文件名(对于单行程序它的值被设置为 <code>-e</code>)</p>
+</li>
+<li>
+<p>$*EXECUTABLE - 解释器的路径</p>
+</li>
+<li>
+<p>$*VM - 虚拟机的名字, 你编译 Raku 所用的虚拟机</p>
+</li>
+<li>
+<p>$*DISTRO - 操作系统分发的名字和版本</p>
+</li>
+<li>
+<p>$*KERNEL - 类似, 但是是对于内核的</p>
+</li>
+<li>
+<p>$*CWD - 当前的工作目录</p>
+</li>
+<li>
+<p>$*TZ 当前时区</p>
+</li>
+<li>
+<p>%*ENV - 环境变量</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>在我这里, 上面的变量打印出下面的信息:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Raku (6.c)
+90177
+twigilAvars.pl
+"/usr/bin/raku".IO
+moar (2016.11)
+macosx (10.10.5)
+darwin (14.5.0)
+"/Users/ash/Books/Raku/code".IO  {Apple_PubSub_Socket_Render =&gt; /private/tmp/com.apple....,
+DISPLAY =&gt; /private/tmp/com.apple..., HISTCONTROL =&gt; igA norespace, HOME =&gt; /Users/ash, LC_CTYPE =&gt; UTFA8, LOGNAME  =&gt; ash ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>下一组预定义变量包括那些带有 <code>?</code> 的变量作为他们的 twigil。 这些是“常量”或所谓的编译时常量，它包含有关程序流当前位置的信息。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>$?FILE - 文件名(不包含路径; 单行程序包含字符串 <code>-e</code>)</p>
+</li>
+<li>
+<p>$?LINE - 行号(单行程序中被设置为 1)</p>
+</li>
+<li>
+<p>$?PACKAGE - 当前模块的名字, 在顶层级别中, 这是 <strong>(GLOBAL)</strong></p>
+</li>
+<li>
+<p>$?TABSTOP - 空白(以制表符计)的个数(可用于 <strong>heredocs</strong> 中)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_经常使用的特殊变量">1.5. 经常使用的特殊变量</h3>
+<div class="paragraph">
+<p>$ _变量与Perl 5中的变量类似，在某些情况下，它是包含当前上下文参数的默认变量。 与任何其他变量一样，$ _是Raku中的一个对象，即使在最简单的用例中也是如此。 例如，最近的示例.say！for @ * ARGS隐式包含$ _。say调用。 相同的效果会产生$ _。say（），.say（）或只是.say。</p>
+</div>
+<div class="paragraph">
+<p>在其他情况下，此变量用作默认变量，例如，在与正则表达式匹配期间：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for @*ARGS {
+    .say if /\d/;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个简短的代码相当于以下，它使用了智能匹配（<code>~~</code>）运算符：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for @*ARGS {
+    .say if $_ ~~ /\d/;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>$/</strong> 变量中提供了与正则表达式匹配的结果。 要获取匹配的字符串，可以调用 $/.Str 方法。 为了获得在比赛期间捕获的子串，使用了以下内容：$/[2] 或者更简单的形式，$2。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">"Perl's Birthday: 18 December 1987" ~~
+    / (\d+) \s (\D+) \s (\d+) /;
+say $/.Str;
+say $/[$_] for 0..2;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这里，我们正在寻找约会。 在这种情况下，日期定义为数字序列 <code>\d+</code>，空格 <code>\s</code>，单词没有数字 <code>\D+</code>，另一个空格 <code>\s</code>，还有一些数字 <code>\d+</code>。 如果匹配成功，<code>$/.Str</code> 插槽包含整个日期，而 <code>$/[0]</code>，<code>$/[1]</code> 和 <code>$/[2]</code> 保留其部分（小方角括号是输出的一部分） 表示 <strong>Match</strong> 对象，请参阅第6章）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">18 December 1987
+「18」
+「December」
+「1987]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后，<code>$!</code> 变量将包含错误消息，例如，try 块中发生的错误消息，或者打开文件时发生的错误消息：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">try {
+    say 42/0;
+}
+say $! if $!;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果删除此程序中的最后一行，则不会打印任何内容。 这是因为try块屏蔽了任何错误输出。 删除try，然后重新出现错误消息（程序本身终止）。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_内置类型">1.6. 内置类型</h3>
+<div class="paragraph">
+<p>Raku允许使用类型变量。 要告诉编译器输入变量，只需在声明变量时命名类型。</p>
+</div>
+<div class="paragraph">
+<p>Raku中提供的一些类型很明显，不需要注释：</p>
+</div>
+<div class="paragraph">
+<p>Bool, Int, Str
+Array, Hash, Complex</p>
+</div>
+<div class="paragraph">
+<p>有些可能需要一个小注释：</p>
+</div>
+<div class="paragraph">
+<p>Num, Pair, Rat</p>
+</div>
+<div class="paragraph">
+<p>Num 类型用于处理浮点变量，而 Pair 是一个"键/值"对。 Rat 类型使用数字和分母引入有理数。</p>
+</div>
+<div class="sect3">
+<h4 id="_带类型的变量">1.6.1. 带类型的变量</h4>
+<div class="paragraph">
+<p>这是你如何声明一个带类型的变量的:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Int $x;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里，标量容器 <code>$x</code> 可能只包含整数值。 尝试去为它分配一个非整数的值会导致错误：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Int $x;
+$x = "abc"; # Error: Type check failed in assignment to $x;
+            # expected Int but got Str</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于类型转换，相应的方法调用非常方便。 请记住，虽然$x包含一个整数，但它被视为一个整体的容器对象，这就是为什么你可以在它上面使用一些预定义的方法。 您可以直接在字符串上执行相同的操作。 例如：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Int $x;
+$x = "123".Int; $ Now this is OK
+say $x; # 123</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_bool">1.6.2. Bool</h4>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">尽管有一些您可能想知道的细节，但Bool变量的使用很简单。 Bool类型是一个内置的枚举，并提供两个值：True和False（或者，在完整形式中，Bool </dt>
+<dd>
+<p>True和Bool :: False）。 允许递增或递减布尔变量：</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $b = Bool::True;
+$b--;
+say $b; $ 打印 False
+
+$b = Bool::False;
+$b++;
+say $b; # True</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Raku对象（即所有变量）包含Bool方法，该方法将变量的值转换为两个布尔值之一：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 42.Bool;   # True
+
+my $pi = 3.14;
+say $pi.Bool;  # True
+
+say 0.Bool;    # False
+say "00".Bool; # True</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>类似地，您可以在变量上调用Int方法并获取整数
+布尔值的表示（或任何其他类型的值）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say Bool::True.Int; # 1</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_int">1.6.3. Int</h4>
+<div class="paragraph">
+<p>Int 类型用于承载任意大小的整数变量。 例如，以下任务中没有数字丢失：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Int $x = 12389147319583948275874801735817503285431532;
+say $x;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>存在一种特殊语法，用于定义具有10个以上基数的整数：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say :16&lt;D0CF11E0&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>此外，允许使用下划线字符分隔数字，以便更容易读取大数字：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Int $x = 735_817_503_285_431_532;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当然，当您打印该值时，所有下划线都消失了。
+在Int对象上，您可以调用一些其他方便的方法，例如，将数字转换为字符或检查手中的整数是否为素数（是的，is-prime 是内置方法！）。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Int $a = 65;
+say $a.chr; # A
+
+my Int $i = 17;
+say $i.is-prime; # True
+
+say 42.is-prime; # False</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_字符串">1.6.4. 字符串</h4>
+<div class="paragraph">
+<p>Str 毫无疑问是一个字符串。 在 Raku 中，有一些操作字符串的方法。 再次，您将它们称为对象上的方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = "My string";
+
+say $str.lc; # my string
+say $str.uc; # MY STRING
+
+say $str.index('t'); # 4</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在让我们得到一个字符串的长度。 编写 $str.length的天真尝试会产生错误消息。 但是，还提供了一个提示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">No such method 'length' for invocant of type 'Str'. Did you mean any of these?
+    codes
+    chars</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>因此，我们有一个简单的单语义方法来获取Unicode字符串的长度。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "περλ 6".chars; # 6</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>习惯使用字符串作为对象的新方法可能需要一些时间。 例如，这是如何将printf作为字符串上的方法调用的：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">"Today is %02i %s %i\n".printf($day, $month, $year);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_数组">1.6.5. 数组</h4>
+<div class="paragraph">
+<p>Array变量（即所有以@sigil开头的变量）都配备了一些简单但相当有用的方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @a = 1, 2, 3, 5, 7, 11;
+say @a.Int; # 数组长度
+say @a.Str; # 空格分割的值</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果打印数组，则将其值作为方括号中以空格分隔的列表。 或者，您可以将其插入字符串中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @a = 1, 2, 3, 5, 7, 11;
+
+say @a;                 # [1 2 3 5 7 11]
+say "This is @a: @a[]"; # This is @a: 1 2 3 5 7 11</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_散列">1.6.6. 散列</h4>
+<div class="paragraph">
+<p>哈希提供了一些具有明确语义的方法，例如：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my %hash = Language =&gt; 'Perl', Version =&gt; 6;
+
+say %hash.elems;  # number of pairs in the hash
+say %hash.keys;   # the list of the keys
+say %hash.values; # the list of the values</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里是输出:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">2
+(Version Language)
+(6 Raku)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>不仅可以遍历散列键或值，还可以遍历整个对：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for %hash.pairs {
+    say $_.key;
+    say $_.value;
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">kv 方法返回一个包含交替键和哈希值的列表：</div>
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say %hash.kv # (Version 6 Language Perl)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_运算符">2. 运算符</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>即使对于那些不熟悉Perl 5的人来说，Raku中许多操作符的含义也很明显。另一方面，有时操作符的行为包含一些您可能没有想到的微小细节。 在本章中，我们将列出一些运算符，并在必要时给出一些注释。
+操作员可以根据其合成属性分为几组。 这些组是前缀，中缀，后缀和此处未涉及的一些其他类型的运算符（例如cir-cumflex，它是“汉堡包”运算符，就像一对括号）。</p>
+</div>
+<div class="sect2">
+<h3 id="_前缀">2.1. 前缀</h3>
+<div class="paragraph">
+<p>前缀运算符是那些位于其操作数之前的运算符。 显然，前缀运算符只需要一个操作数。 在某些情况下，当操作符号位于两个操作数之间时，操作符号可用作中缀操作符。</p>
+</div>
+<div class="sect3">
+<h4 id="_not">2.1.1. !, not</h4>
+<div class="paragraph">
+<p><strong>!</strong> 是布尔否定运算符。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say !True;    # False
+say !(1 == 2) # True</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>not</strong> 运算符执行相同但优先级较低。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say not False; # True</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="">2.1.2. +</h4>
+<div class="paragraph">
+<p>+ 是一元加运算符，它将操作数转换为数字上下文。 该操作等同于Numeric方法的调用。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Str $price  = '4' ~ '2';
+my Int $amount = +$price;
+
+say $amount;        # 42
+say $price.Numeric; # 42</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们将在第6章中看到一元加的一个重要用例：+$/。 该构造将Match类的对象转换为数字，该对象包含有关正则表达式的匹配部分的信息。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_2">2.1.3. -</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>是一元减号，它改变了它的操作数的符号。 因为此运算符以静默方式调用Numeric方法，所以它也可以转换上下文，就像使用一元加运算符一样。</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Str $price = '4' ~ '2';
+say -$price; # -42</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_so">2.1.4. ?, so</h4>
+<div class="paragraph">
+<p>? 是一个一元运算符，通过调用，将上下文转换为布尔值Bool方法对象。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say ?42; # True</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第二种形式, <strong>so</strong>, 是一个一元运算符, 其优先级更低。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say so 42;   # True
+say so True; # True
+say so 0.0;  # False</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_3">2.1.5. ~</h4>
+<div class="paragraph">
+<p><code>~</code> 将对象强制转换为字符串。 请注意，我们现在正在讨论前缀或一元运算符。 如果代字号被用作中缀（参见本章后面有关什么是中缀），它可以作为字符串连接运算符，但它仍然处理字符串。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Str $a = ~42;
+say $a.WHAT;  #(Str)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在某些情况下，可以隐式创建字符串上下文，例如，当您在双引号内插入变量时。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4">2.1.6. ++</h4>
+<div class="paragraph">
+<p>++ 是增量的前缀运算符。 首先，完成增量，然后返回一个新值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 41;
+say ++$x; # 42</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>增量操作不仅限于使用数字。它也可以处理字符串。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = 'a';
+say ++$a; # b</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>一个实际的例子是增加包含数字的文件名。 文件扩展名将继续存在，并且只会增加数字部分。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $f = "file001.txt";
+
+++$f;
+say $f; # file002.txt
+
+++$f
+say $f; # file003.txt</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_5">2.1.7. &#8201;&#8212;&#8201;</h4>
+<div class="paragraph">
+<p>&#8201;&#8212;&#8201;是减量的前缀形式。 它的工作方式与++前缀完全相同，但当然会使操作数更小（无论是字符串还是数字）。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 42;
+say --$x; # 41</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_6">2.1.8. +^</h4>
+<div class="paragraph">
+<p>+^ 是具有二进制补码的按位求反运算符。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 10;
+my $y = +^$x;
+say $y; # -11 (但是不是 -10)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>将此运算符与以下运算符进行比较。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_7">2.1.9. ?^</h4>
+<div class="paragraph">
+<p>?^ 是逻辑否定运算符。 请注意，这不是一个按位否定。 首先，将参数转换为布尔值，然后否定结果。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 10;
+my $y = ?^$x;
+
+say $y;      # False
+say $y.WHAT; # (Bool)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_8">2.1.10. ^</h4>
+<div class="paragraph">
+<p>^是范围创建运算符或所谓的upto运算符。 它创建一个范围（它是Range类型的一个对象），从0到给定值（不包括它）。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.print for ^5; # 01234</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>此代码等效于以下范围的两端明确指定：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.print for 0..4; # 01234</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_9">2.1.11. |</h4>
+<div class="paragraph">
+<p>| 将复合对象展平为列表。 例如，当您将列表传递给子例程时，应该使用此运算符，子例程需要一个标量列表：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub sum($a, $b) {
+    $a + $b
+}
+
+my @data = (10, 20);
+say sum(|@data); # 30</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果没有 | 运算符，编译器将报告错误，因为子例程需要两个标量，并且不能接受数组作为参数：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Calling sum(Positional) will never work with declared signature ($a, $b)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_temp">2.1.12. temp</h4>
+<div class="paragraph">
+<p>temp 创建一个临时变量并在范围的末尾恢复其值（就像它在Perl 5中的本地内置运算符一样）。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 'x';
+{
+    temp $x = 'y';
+    say $x; # y
+}
+say $x;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>将它与以下运算符进行比较，let。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_let">2.1.13. let</h4>
+<div class="paragraph">
+<p>let 是一个前缀运算符，类似于temp，但可以正常使用异常。 如果由于异常而留下范围，则将恢复变量的先前值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $var = 'a';
+try {
+    let $var = 'b';
+    die;
+}
+say $var; # a</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>使用 die，此示例代码将打印初始值a。 如果注释掉骰子的调用，则对b的赋值的效果将保持不变，并且该变量将包含try块之后的值b。
+let 关键字看起来类似于我和我们的声明符，但它是一个前缀运算符。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_后缀">2.2. 后缀</h3>
+<div class="paragraph">
+<p>后缀运算符是在单个操作数之后放置的一元运算符。</p>
+</div>
+<div class="sect3">
+<h4 id="_10">2.2.1. ++</h4>
+<div class="paragraph">
+<p>++ 是一个后缀增量。 在表达式中使用当前值之后，将更改值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $x = 42;
+say $x++; # 42
+say $x;   # 43</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_11">2.2.2. &#8201;&#8212;&#8201;</h4>
+<div class="paragraph">
+<p>&#8201;&#8212;&#8201;是后缀自减。</p>
+</div>
+<div class="paragraph">
+<p>postfix和prefix运算符都神奇地知道如何处理文件名中的数字。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $filename = 'file01.txt';
+for 1..10 {
+    say $filename++;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>此示例使用递增的数字打印文件名列表：file01.txt，file02.txt，&#8230;&#8203; file10.txt。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_方法后缀">2.3. 方法后缀</h3>
+<div class="paragraph">
+<p>Raku中有一些语法元素，以点开头。 这些运算符可能看起来像一个后缀运算符，但它们都是在对象上调用方法的形式。 与Perl 5不同，点操作符不执行任何字符串连接。</p>
+</div>
+<div class="sect3">
+<h4 id="_12">2.3.1. .</h4>
+<div class="paragraph">
+<p><code>.method</code> 在变量上调用方法。 这适用于真实对象和那些不是任何类的实例的变量，例如整数等内置类型。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "0.0".Numeric; # 0
+say 42.Bool; # True
+
+class C {
+    method m() {say "m()"}
+}
+my $c = C.new;
+$c.m(); # m()</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_13">2.3.2. .=</h4>
+<div class="paragraph">
+<p><code>.=method</code> 是对象的方法的变异调用。 调用 $x.=method 与更详细的任务相同 $x = $x.method。
+在下面的示例中，$o容器最初包含C类的对象，但在$o.=m()之后，该值将替换为D类的实例。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class D { }
+
+class C {
+    method m() {
+        return D.new;
+    }
+}
+
+my $o = C.new;
+say $o.WHAT; # (C)
+
+$o.=m();
+say $o.WHAT; # (D)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_14">2.3.3. .^</h4>
+<div class="listingblock">
+<div class="title">^method 在对象的元对象上调用方法。 元对象是HOW类的一个实例，包含有关该对象的一些其他信息。 应用于$i变量的以下两个操作是等效的，并打印可用于Int变量的方法列表。</div>
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Int $i;
+say $i.^methods();
+say $i.HOW.methods($i);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_15">2.3.4. .?</h4>
+<div class="listingblock">
+<div class="title">?method 如果定义了方法，则调用方法。 如果对象没有具有给定名称的方法，则返回 Nil。</div>
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class C {
+    method m() {'m'}
+}
+
+my $c = C.new();
+say $c.?m(); # m
+say $c.?n(); # Nil</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_16">2.3.5. .+</h4>
+<div class="listingblock">
+<div class="title">+method 尝试在对象上调用具有给定名称的所有方法。 例如，当实例是对象层次结构的一部分并且其父实例也具有相同名称的方法时，可以使用此方法。 有关第4章中的类和类层次结构的更多信息。</div>
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class A {
+    method m($x) {"A::m($x)"}
+}
+class B is A {
+    method m($x) {"B::m($x)"}
+}
+
+my $o = B.new;
+my @a = $o.+m(7);
+say @a; # 打印 [B::m(7) A::m(7)]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里，$o 对象在它自己的B类和它的类中都有m方法,父类A. $o.+m(7) 调用这两种方法并将其结果放入列表中。
+如果未定义方法，则将引发异常。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_17">2.3.6. .*</h4>
+
+</div>
+</div>
+<div class="sect2">
+<h3 id="_中缀运算符">2.4. 中缀运算符</h3>
+<div class="paragraph">
+<div class="title">*method 使用给定的方法名称调用所有方法，并返回包含结果的parcel。 如果未定义方法，则返回空列表。 在其余部分，它的行为类似于 .+ 运算符。</div>
+<p>中缀运算符放在两个操作数之间的程序中。 大多数中缀运算符都是二进制运算符，并且只有一个三元运算符，它需要三个操作数。
+二元运算符的最简单示例是加法运算符+。 在右侧和左侧，它需要两个值，例如，两个变量：$a + $b。 重要的是要理解相同的符号或相同的字符序列可以是中缀或前缀操作符，具体取决于上下文。 在带加号的示例中，一元对应是一元加运算符，它将操作数强制转换为数字：+$str。</p>
+</div>
+<div class="sect3">
+<h4 id="_算数运算符">2.4.1. 算数运算符</h4>
+<div class="sect4">
+<h5 id="_18">+, -, *, /</h5>
+<div class="paragraph">
+<p>+，-，* 和 / 是执行相应算术运算的运算符，不需要任何注释。 使用 Raku 时，请记住在执行操作之前，如果必要，操作将自动转换为数字类型。</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_19">%</h5>
+<div class="paragraph">
+<p>％ 是模运算符，返回整数除法的余数。 如有必要，首先将操作数转换为整数。</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_div_mod">div, mod</h5>
+<div class="paragraph">
+<p>div 是整数除法运算符。 如果浮点被截断，则结果舍入为前一个较低的整数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 10 div 3;  # 3
+say -10 div 3; # 4</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>mod 是模的另一种形式：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 10 % 3;   # 1
+say 10 mod 3; # 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>与 / 和 % 运算符不同，div 和 mod 形式不会将操作数强制转换为数值。 比较以下两个例子。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 10 % "3" # 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>使用 mod 运算符, 则出现错误:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 10 mod "3";</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Calling 'infix:&lt;mod&gt;' will never work with argument types  (Int, Str)
+Expected any of: :(Real $a, Real $b)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>为了满足要求，您可以使用+前缀运算符明确地进行类型转换：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 10 mod +"3" # 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>或调用 <code>.Int</code> 方法</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 10 mod "3".Int; # 1</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_20">%%</h5>
+<div class="paragraph">
+<p>%% 是所谓的整除运算符：它告诉给定的操作数对是否可能没有余数的整数除法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 10 %% 3; # False
+say 12 %% 3; # True</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_21">+&amp;, +|, +^</h5>
+<div class="paragraph">
+<p>＆，！ |和！+ ^是乘法的按位操作数，加法，
+和XOR操作。 运算符中的加号表示如果需要，操作数将转换为整数类型。</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_22">?|, ?&amp;, ?^</h5>
+<div class="paragraph">
+<p>？|，！？＆，和？^！将操作数转换为布尔类型（因此？中的？）
+运算符名称）并执行OR，AND和XOR的逻辑运算。</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_23">+&lt;, +&gt;</h5>
+<div class="paragraph">
+<p>+ &lt;和 +&gt; 是左右移位运算符。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 8 +&lt; 2;    # 32
+say 1024 +&gt; 8; # 4</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_gcd">gcd</h5>
+
+</div>
+<div class="sect4">
+<h5 id="_lcm">lcm</h5>
+
+</div>
+<div class="sect4">
+<h5 id="_24">== !=</h5>
+
+</div>
+<div class="sect4">
+<h5 id="_25">&lt;, &gt;, &#8656;, &gt;=</h5>
+
+</div>
+<div class="sect4">
+<h5 id="_26">&lt;&#8658;</h5>
+
+</div>
+</div>
+<div class="sect3">
+<h4 id="_字符串运算符">2.4.2. 字符串运算符</h4>
+<div class="sect4">
+<h5 id="_27">~</h5>
+
+</div>
+<div class="sect4">
+<h5 id="_x">x</h5>
+
+</div>
+<div class="sect4">
+<h5 id="_eq_ne">eq, ne</h5>
+
+</div>
+<div class="sect4">
+<h5 id="_lt_gt_le_ge">lt, gt, le, ge</h5>
+
+</div>
+<div class="sect4">
+<h5 id="_leg">leg</h5>
+
+</div>
+</div>
+<div class="sect3">
+<h4 id="_通用比较运算符">2.4.3. 通用比较运算符</h4>
+<div class="sect4">
+<h5 id="_cmp">cmp</h5>
+
+</div>
+<div class="sect4">
+<h5 id="_before_after">before, after</h5>
+
+</div>
+<div class="sect4">
+<h5 id="_eqv">eqv</h5>
+
+</div>
+<div class="sect4">
+<h5 id="_28">===</h5>
+
+</div>
+<div class="sect4">
+<h5 id="_29">=:=</h5>
+
+</div>
+<div class="sect4">
+<h5 id="_30">~~</h5>
+
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_列表运算符">2.5. 列表运算符</h3>
+<div class="sect3">
+<h4 id="_xx">2.5.1. xx</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_z">2.5.2. Z</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_x_2">2.5.3. X</h4>
+
+</div>
+</div>
+<div class="sect2">
+<h3 id="_junction_运算符">2.6. Junction 运算符</h3>
+<div class="sect3">
+<h4 id="_31">2.6.1. |, &amp;, ^</h4>
+
+</div>
+</div>
+<div class="sect2">
+<h3 id="_短路运算符">2.7. 短路运算符</h3>
+<div class="sect3">
+<h4 id="_32">2.7.1. &amp;&amp;</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_33">2.7.2. ||</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_34">2.7.3. ^^</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_35">2.7.4. //</h4>
+
+</div>
+</div>
+<div class="sect2">
+<h3 id="_其它中缀运算符">2.8. 其它中缀运算符</h3>
+<div class="sect3">
+<h4 id="_min_max">2.8.1. min, max</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_36">2.8.2. ?? !!</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_37">2.8.3. =</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_38">2.8.4. &#8658;</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_39">2.8.5. ,</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_40">2.8.6. :</h4>
+
+</div>
+</div>
+<div class="sect2">
+<h3 id="_元运算符">2.9. 元运算符</h3>
+<div class="sect3">
+<h4 id="_赋值">2.9.1. 赋值</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_否定">2.9.2. 否定</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_翻转运算符">2.9.3. 翻转运算符</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_化简">2.9.4. 化简</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_交叉运算符">2.9.5. 交叉运算符</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_zip_元运算符">2.9.6. Zip 元运算符</h4>
+
+</div>
+</div>
+<div class="sect2">
+<h3 id="_超运算符">2.10. 超运算符</h3>
+<div class="sect3">
+<h4 id="_41">2.10.1. &gt;&gt;&gt;&gt; &lt;&lt;&lt;&lt; &lt;&lt;&gt;&gt; &gt;&gt;&lt;&lt;</h4>
+<div class="paragraph">
+<p>Subroutines, or subs
+For a sub, which takes no arguments, its definition and the call are very straightforward and easy.
+sub call+me {      say "I&#8217;m called"  }
+call+me;</p>
+</div>
+<div class="paragraph">
+<p>The syntax for declaring a sub’s parameters is similar to what other lan- guages (including Perl 5.20 and higher) provide.
+sub cube($x) {      return $x ** 3;  }
+say cube(3); # 27
+The required parameters are a comma-separated list in the parentheses immediately after the sub name. No other keywords, such as my, are required to declare them.
+sub min($x, $y) {      return $x &lt; $y ?? $x    $y;  }</p>
+</div>
+<div class="paragraph">
+<p>say min(2, 2);  # -2
+say min(42, 24); # 24
+(?? ...    is a ternary operator in Raku. Also, there’s a built-in opera-
+tor min; see the details in the Chapter 2.)
+The above-declared arguments are required; thus, if a sub is called with
+a different number of actual arguments, an error will occur. 58
+Non-value argument passing
+By default, you pass the arguments by their values. Despite that, it is not possible to modify them inside the sub. To pass a variable by refer- ence, add the is rw trait. (Note that formally this is not a reference but a mutable argument.)
+sub inc($x is rw) {      $x+;
+}</p>
+</div>
+<div class="paragraph">
+<p>my $value = 42;  inc($value);  say $value; # 43
+Typed arguments
+Similarly to the above-described typed variables, it is possible to indi-
+cate that the sub’s parameters are typed. To do so, add a type name before the name of the parameter.
+sub say+hi(Str $name) {      say "Hi, $name ";  }
+If the types of the expected and the actual parameters do not match, a compile-time error will occur.
+say+hi("Mr. X"); # OK
+# say+hi(123); # Error: Calling say-hi(Int) will never work
+               # with declared signature (Str $name)
+Optional parameters
+Optional parameters are marked with a question mark after their
+names. The defined built-in function helps to tell if the parameter was really passed:</p>
+</div>
+<div class="paragraph">
+<p>59</p>
+</div>
+<div class="paragraph">
+<p>sub send+mail(Str $to, Str $bcc?) {      if defined $bcc {
+        # . . .         say "Sent to $to with a bcc to $bcc.";      }
+    else {          # . . .
+        say "Sent to $to.";
+    }
+}</p>
+</div>
+<div class="paragraph">
+<p>send+mail('<a href="mailto:mail@example.com">mail@example.com</a>');  send+mail('<a href="mailto:mail@example.com">mail@example.com</a>', '<a href="mailto:copy@example.com">copy@example.com</a>');
+Default values
+Raku also allows specifying the default values of the sub’s arguments. Syntactically, this looks like an assignment.
+sub i+live+in(Str $city = "Moscow") {         say "I live in $city.";               }</p>
+</div>
+<div class="paragraph">
+<p>i+live+in('Saint Petersburg');  i+live+in(); # The default city
+It is also possible to pass values that are not known at the compile phase. When the default value is not a constant, it will be calculated at runtime.
+sub to+pay($salary, $bonus = 100.rand) {      return ($salary + $bonus).floor;
+}</p>
+</div>
+<div class="paragraph">
+<p>say to+pay(500, 50); # Always 550 net.  say to+pay(500);     # Any number between 500 and 600.  say to+pay(500);     # Same call but probably different output.
+The “default” value will be calculated whenever it is required. Please also note that both rand and floor are called as methods, not as func- tions.
+60</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>It is also possible to use previously passed parameters as default values:</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>sub f($a, $b = $a) {      say $a + $b;
+}</p>
+</div>
+<div class="paragraph">
+<p>f(42);    # 84 f(42, +1) # 41
+Optional parameters or parameters with default values must be listed after all the required ones because otherwise, the compiler will not be able to understand which is which.
+Named arguments
+Apart from the positional parameters (those that have to go in the same order both in the sub definition and in the sub call), Raku allows named variables, somewhat similar to how you pass a hash to a Perl 5 subroutine. To declare a named parameter, a semicolon is used:
+sub power(:$base, :$exponent) {      return $base <strong> $exponent;  }
+Now, the name of the variable is the name of the parameter, and the order is not important anymore.
+say power(:base(2), :exponent(3)); # 8  say power(:exponent(3), :base(2)); # 8
+It is also possible to have different names for the named arguments and those variables, which will be used inside the sub. To give a different name, put it after a colon:
+sub power(:val($base), :pow($exponent)) {      return $base </strong> $exponent;
+}
+Now the sub expects new names of the arguments.</p>
+</div>
+<div class="paragraph">
+<p>61</p>
+</div>
+<div class="paragraph">
+<p>say power(:val(5), :pow(2)); # 25  say power(:pow(2), :val(5)); # 25
+Alternatively, you can use the fatarrow syntax to pass named parame- ters as it is done in the following example:</p>
+</div>
+<div class="paragraph">
+<p>say power(val &#8658; 5, pow &#8658; 2); # 25
+Slurpy parameters and flattening
+Raku allows passing scalars, arrays, hashes, or objects of any other type as the arguments to a sub. There are no restrictions regarding the com- bination and its order in a sub declaration. For example, the first argu- ment may be an array, and the second one may be a scalar. Raku will pass the array as a whole. Thus the following scalar will not be eaten by the array.
+In the following example, the @text variable is used inside the sub, and it contains only the values from the array passed in the sub call.
+sub cute+output(@text, $before, $after) {      say $before ~ $_ ~ $after for @text;  }</p>
+</div>
+<div class="paragraph">
+<p>my @text = &lt;C C Perl Go&gt;;  cute+output(@text, '{', '}');
+The output looks quite predictable.
+{C}&amp;
+{C}&amp;
+{Perl}&amp;
+{Go}&amp;
+The language expects that the sub receives the arguments of the same types that were listed in the sub declaration.
+That also means, for example, that if the sub is declared with only one list argument, then it cannot accept a few scalars.
+62</p>
+</div>
+<div class="paragraph">
+<p>sub get+array(@a) {
+    say @a;
+}</p>
+</div>
+<div class="paragraph">
+<p>get+array(1, 2, 3); # Error: Calling get-array(Int, Int, Int)
+                    # will never work with declared signature (@a)</p>
+</div>
+<div class="paragraph">
+<p>To let an array accept a list of separate scalar values, you need to say that explicitly by placing an asterisk before the argument name. Such an argument is called slurpy.
+sub get+array(*@a) {      say @a;
+}</p>
+</div>
+<div class="paragraph">
+<p>get+array(1, 2, 3); # Good: [1 2 3]
+Similarly, it will work in the opposite direction, that is to say, when the sub expects to get a few scalars but receives an array when called.
+sub get+scalars($a, $b, $c) {      say "$a and $b and $c";  }</p>
+</div>
+<div class="paragraph">
+<p>my @a = &lt;3 4 5&gt;;
+get+scalars(@a); # Error: Calling get-scalars(Positional)                  # will never work with declared                  # signature ($a, $b, $c)
+A vertical bar is used to unpack an array to a list of scalars.
+get+scalars(|@a); # 3 and 4 and 5</p>
+</div>
+<div class="paragraph">
+<p>63</p>
+</div>
+<div class="paragraph">
+<p>Nested subs
+Nested subs are allowed in Raku.
+sub cube($x) {      sub square($x) {          return $x * $x;      }
+      return $x * square($x);  }</p>
+</div>
+<div class="paragraph">
+<p>say cube(3); # 27
+The name of the inner sub square is only visible within the body of the outer sub cube.
+Anonymous subs
+Let’s look at the creation of anonymous subs. One of the options (there are more than one) is to use syntax similar to what you often see in JavaScript.
+say sub ($x, $y) {$x ~ ' ' ~ $y}("Perl", 6);
+The first pair of parentheses contains the list of formal arguments of the anonymous sub; the second, the list of the arguments passed. The body of the sub is located between the braces. (The tilde denotes a string concatenation operator in Raku.)
+By the way, it is important that there be no spaces before parentheses with the actual values of the sub parameters.
+Another way of creating an anonymous sub is to use the arrow operator (+&gt;). We will discuss it later in the section dedicated to anonymous blocks.
+64</p>
+</div>
+<div class="paragraph">
+<p>Variables and signatures
+Lexical variables
+Lexical variables in Raku are those declared with the my keyword. The- se variables are only visible within the block where they were declared. If you tried accessing them outside the scope, you’d get the error: Var+ iable '$x' is not declared.
+{
+     my $x = 42;
+     say $x; # This is fine
+}
+# say $x;    # This is not</p>
+</div>
+<div class="paragraph">
+<p>To “extend” the scope, lexical variables can be used in closures. In the
+following example, the seq sub returns a block, which uses a variable defined inside the sub.
+sub seq($init) {       my $c = $init;       return {$c++};  }
+The sub returns a code block containing the variable $c. After the sub’s execution, the variable will not only still exist but also will keep its val- ue, which you can easily see by calling a function by its reference a few times more.
+my $a = seq(1);
+say $a(); # 1   say $a(); # 2   say $a(); # 3
+It is possible to create two independent copies of the local variable.
+my $a = seq(1);   my $b = seq(42);</p>
+</div>
+<div class="paragraph">
+<p>65</p>
+</div>
+<div class="paragraph">
+<p>To see how it works, call the subs a few times:</p>
+</div>
+<div class="paragraph">
+<p>say $a(); # 1   say $a(); # 2   say $b(); # 42   say $a(); # 3   say $b(); # 43
+state variables
+State variables (declared with the keyword state) appeared in Perl 5.10 and work in Raku. Such variables are initialized during the first call and keep their values in subsequent sub calls.
+It is important to keep in mind that a single instance of the variable is created. Let us return to the example with a counter and replace the my declaration with the state one. The closure will now contain a refer- ence to the same variable.
+sub seq($init) {       state $c = $init;       return {$c++};  }
+What happens when you create more than one closure?
+my $a = seq(1);
+my $b = seq(42);</p>
+</div>
+<div class="paragraph">
+<p>All of them will reference the same variable, which will increase after
+calling either $a() or $b().
+say $a(); # 1  say $a(); # 2  say $b(); # 3  say $a(); # 4  say $b(); # 5
+66</p>
+</div>
+<div class="paragraph">
+<p>Dynamic variables
+The scope of dynamic variables is calculated at the moment when a
+variable is accessed. Thus, two or more calls of the same code may pro- duce different results.
+Dynamic variables are marked with the * twigil (a character clearly ref- erencing a wildcard).
+In the following example, the echo() function prints a dynamic variable  $*var, which is not declared in the function, nor is it a global variable. It, nevertheless, can be resolved when used in other functions, even if they have their own instances of the variable with the same name.</p>
+</div>
+<div class="paragraph">
+<p>sub alpha {      my $*var = 'Alpha';      echo();
+}</p>
+</div>
+<div class="paragraph">
+<p>sub beta {      my $*var = 'Beta';      echo();
+}</p>
+</div>
+<div class="paragraph">
+<p>sub echo() {      say $*var;
+}</p>
+</div>
+<div class="paragraph">
+<p>alpha(); # Alpha
+beta();  # Beta
+Anonymous code blocks
+Raku introduces the concept of so-called pointy blocks (or pointy ar- row blocks). These are anonymous closure blocks, which return a refer- ence to the function and can take arguments.
+The syntax of defining pointy blocks is an arrow +&gt; followed by the ar- gument list and a block of code.</p>
+</div>
+<div class="paragraph">
+<p>67</p>
+</div>
+<div class="paragraph">
+<p>my $cube = +&gt; $x {$x ** 3};
+say $cube(3); # 27</p>
+</div>
+<div class="paragraph">
+<p>Here, the block {$x <strong> 3}, which takes one argument $x, is created
+first. Then, it is called using a variable $cube as a reference to the func- tion: $cube(3).
+Pointy blocks are quite handy in loops.
+for 1..10 +&gt; $c {      say $c;
+}
+The for loop takes two arguments: the range 1..10 and the block of code with the argument $c. The whole construction looks like syntactic sugar for loops.
+There can be more than one argument. In that case, list them all after an arrow.
+my $pow = +&gt; $x, $p {$x </strong> $p};
+say $pow(2, 15); # 32768</p>
+</div>
+<div class="paragraph">
+<p>The same works with loops and with other Perl elements where you
+need passing anonymous code blocks.
+for 0..9 +&gt; $i, $j {      say $i + $j;
+}</p>
+</div>
+<div class="paragraph">
+<p>In a loop iteration, two values from the list are consumed each time. So, the loop iterates five times and prints the sum of the pairs of num- bers: 1, 5, 9, 13 and 17.
+68</p>
+</div>
+<div class="paragraph">
+<p>Placeholders
+When an anonymous code block is created, declaring a list of arguments is not mandatory even when a block takes an argument. To let this hap- pen, Raku uses special variable containers, which come with the ^  twigil. This is similar to the predefined variables $a and $b in Perl 5.
+In the case of more than one argument, their actual order corresponds to the alphabetical order of the names of the ^-ed variables.
+my $pow = {$^x ** $^y};   say $pow(3, 4); # 81
+The values 3 and 4, which were passed in the function call, will land in its variables $^x and $^y, respectively.
+Now, let us go back to the loop example from the previous section and rewrite it in the form with no arguments (and thus, no arrow).
+for 0..9 {
+    say "$^n2, $^n1";
+}</p>
+</div>
+<div class="paragraph">
+<p>Note that the code block starts immediately after the list, and there is
+no arrow. There are two loop variables, $^n1 and $^n2, and they are not in alphabetical order in the code. Still, they get the values as though they were mentioned in the function signature as ($n1, $n2).
+Finally, the placeholders may be named parameters. The difference is in the twigil. To make the placeholder named, use the colon :.
+my $pow = {$:base ** $:exp};  say $pow(:base(25), :exp(2)); # 625</p>
+</div>
+<div class="paragraph">
+<p>With the named placeholders, the alphabetical order is of no im-
+portance anymore. The following call gives us the same result.</p>
+</div>
+<div class="paragraph">
+<p>69</p>
+</div>
+<div class="paragraph">
+<p>say $pow(:exp(2), :base(25)); # 625
+Keep in mind that using named placeholders is
+sub f($a) {
+    # say $^a; # Error: Redeclaration of symbol '$^a'                # as a placeholder parameter
+}
+Neither you can use any other placeholder names if the signature of the sub is already defined:
+sub f($a) {
+    say $^b; # Placeholder variable '$^b' cannot
+             # override existing signature
+}
+Function overloading
+The multi keyword allows defining more than one function (or sub- routine, or simply sub) with the same name. The only restriction is that those functions should have different signatures. In Raku, the signature of the sub is defined together with its name, and the arguments may be typed. In the case of multi subs, typed arguments make even more sense because they help to distinguish between different versions of the function with a single name and make a correct choice when the com- piler needs to call one of them.
+multi sub twice(Int $x) {       return $x * 2;
+}    multi sub twice(Str $s) {       return "$s, $s";
+}    70
+ specifying a signature to the block, and you cannot have both.
+just a different way of
+  The following example demonstrates that you cannot use a placeholder
+ with the name of the already existing parameter:</p>
+</div>
+<div class="paragraph">
+<p>say twice(42);   # 84   say twice("hi"); # hi, hi
+As we have two functions here, one taking an integer argument and another expecting a string, the compiler can easily decide which one it should use.
+Sub overloading with subtypes
+Multi subs can be made even more specific by using subtypes. In Raku, subtypes are created with the subset keyword. A subtype definition takes one of the existing types and adds a restriction to select the val- ues to be included in the subtype range.
+The following lines give a clear view of how subtypes are defined. From the same integer type, Int, the Odd subtype selects only the odd num- bers, while the Even subtype picks only the even numbers.
+subset Odd of Int where {$^n % 2 == 1};   subset Even of Int where {$^n % 2 == 0};
+Now, the subtypes can be used in the signatures of the multi subs. The  testnum function has two versions, one for odd and one for even num- bers.
+multi sub testnum(Odd $x) {       say "$x is odd";
+}
+  multi sub testnum(Even $x) {       say "$x is even";
+}</p>
+</div>
+<div class="paragraph">
+<p>Which function will be used in a call, testnum($x), depends on the actual value of the variable $x. Here is an example with the loop, calling either testnum(Even)  for even numbers or  testnum(Odd)  for odd numbers.</p>
+</div>
+<div class="paragraph">
+<p>71</p>
+</div>
+<div class="paragraph">
+<p>for 1..4 +&gt; $x {       testnum($x);   }</p>
+</div>
+<div class="paragraph">
+<p>The loop prints a sequence of alternating function call results, which tells us that Raku made a correct choice by using the rules provided in the subtype definitions.
+1&amp;is&amp;odd&amp;&amp; 2&amp;is&amp;even&amp;&amp; 3&amp;is&amp;odd&amp;&amp; 4&amp;is&amp;even&amp;
+Modules
+Basically, the Raku modules are the files on disk containing the Raku code. Modules are kept in files with the .pm extension. The disk hierar- chy reflects the namespace enclosure, which means that a module named X::Y corresponds to the file X/Y.pm, which will be searched for in one of the predefined catalogues or in the location specified by the + I command line option. Raku has more sophisticated rules for where and how to search for the real files (e. g., it can distinguish between different versions of the same module), but let us skip that for now.
+module
+The keyword module declares a module. The name of the module is given after the keyword. There are two methods of scoping the module. Either it can be a bare directive in the beginning of a file, or the whole module can be scoped in the code block within the pair of braces.
+In the first option, the rest of the file is the module definition (note the presence of the unit keyword).</p>
+</div>
+<div class="paragraph">
+<p>72</p>
+</div>
+<div class="paragraph">
+<p>unit module X;
+sub x() {      say "X::x()";  }</p>
+</div>
+<div class="paragraph">
+<p>In the second option, the code looks similar to the way you declare classes (more on classes in Chapter 4).
+module X {       sub x() {           say "X::x()";       }
+}
+export
+The my and our variables, as well as subs, which are defined in the module, are not visible outside of its scope by default. To export a name, the is export trait is required.
+unit module X;
+  sub x() is export {       say "X::x()";   }</p>
+</div>
+<div class="paragraph">
+<p>This is all you need to do to be able to call the x() sub in the pro- gramme using your module.
+use
+To use a module in your code, use the keyword use.
+An example. Let us first create the module Greet and save it in the file named Greet.pm.</p>
+</div>
+<div class="paragraph">
+<p>73</p>
+</div>
+<div class="paragraph">
+<p>unit module Greet;
+  sub hey($name) is export {       say "Hey, $name ";
+}
+Then, let us use this module in our programme by saying use Greet.
+use Greet;</p>
+</div>
+<div class="paragraph">
+<p>hey("you"); # Hey, you</p>
+</div>
+<div class="paragraph">
+<p>Module names can be more complicated. With is export, all the ex- ported names will be available in the current scope after the module is  used.
+In the following example, the module  Greet::Polite  sits in the  Greet/Polite.pm file.
+module Greet::Polite {       sub hello($name) is export {           say "Hello, $name ";       }
+}
+The programme uses both of these modules and can access all the ex- ported subs.
+use Greet;   use Greet::Polite;</p>
+</div>
+<div class="paragraph">
+<p>hey("you");     # a sub from Greet
+hello("Mr. X"); # from Greet::Polite
+import
+The  use  keyword automatically imports the names from modules. When a module is defined in the current file in the lexical scope (please note that the module can be declared as local with my module), no im-
+74</p>
+</div>
+<div class="paragraph">
+<p>port will be done by default. In this case, importing the names should be done explicitly with the import keyword.
+my module M {       sub f($x) is export {           return $x;       }
+}</p>
+</div>
+<div class="paragraph">
+<p>import M;</p>
+</div>
+<div class="paragraph">
+<p>say f(42);</p>
+</div>
+<div class="paragraph">
+<p>The f name will only be available for use after it is imported. Again,
+only the names marked as is export are exported.
+As import happens in the compile-time, the import instruction itself
+can be located even after some names from the module are used.
+my module M {       sub f($x) is export {           return $x;       }
+}</p>
+</div>
+<div class="paragraph">
+<p>say f(1); # 1  import M;   say f(2); # 2
+need
+To just load a module and do no exports, use the need keyword.
+Let us create a module named N, which contains the sub n(). This time, the sub is declared as our but with no is export.
+unit module N;</p>
+</div>
+<div class="paragraph">
+<p>our sub n() {       say "N::n()";   }</p>
+</div>
+<div class="paragraph">
+<p>75</p>
+</div>
+<div class="paragraph">
+<p>Then you need a module and may use its methods using the fully quali- fied names.
+need N;</p>
+</div>
+<div class="paragraph">
+<p>N::n();</p>
+</div>
+<div class="paragraph">
+<p>The sequence of the two instructions: need M; import M; (now im+ port should always come after the need) is equivalent to a single use  M; statement.
+require
+The require keyword loads a module at a runtime unlike the use, which loads it at the compile-time.
+For example, here is a module with a single sub, which returns the sum of its arguments.
+unit module Math;      our sub sum(*@a) {       return [+] @a;   }</p>
+</div>
+<div class="paragraph">
+<p>(The star in *@a is required to tell Perl to pack all the arguments into a single array so that we can call the sub as sum(1, 2, 3). With no *, a syntax error will occur, as the sub expects an array but not three sca- lars.)
+Now, require the module and use its sub.
+require Math;</p>
+</div>
+<div class="paragraph">
+<p>say Math::sum(24..42); # 627
+Before the import Math instruction, the programme will not be able to call Math::sum() because the name is not yet known. A single import
+76</p>
+</div>
+<div class="paragraph">
+<p>Math; will not help as the import happens at compile-time when the module is not loaded yet.
+Import summary
+Here is a concise list of the keywords for working with modules.
+use loads and imports a module at compile time
+need  loads a module at compile time but does not import anything
+from it
+import imports the names from the loaded module at compile time require loads a module at runtime without importing the names</p>
+</div>
+<div class="paragraph">
+<p>We have already seen elements of the object-oriented programming in Raku. Methods may be called on those variables, which do not look like real objects from the first view. Even more, methods may be called on constants.
+The types that were used earlier (like Int or Str) are container types. Variables of a container type can contain values corresponding to some native representation. The compiler does all the conversion it needs for executing a programme. For example, when it sees 42.say, it calls the say method, which the Int object inherits from the top of the type hierarchy in Raku.
+Raku also supports object-oriented programming in its general under- standing. If you are familiar with how to use classes in other modern programming languages, it will be easy for you to work with classes in Raku.
+This is how the class is declared:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Cafe {  }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Class attributes
+Class data variables are called attributes. They are declared with the has keyword. An attribute’s scope is defined via its twigil. As usual, the first character of the twigil indicates the type of the container (thus, a scalar, an array, or a hash). The second character is either . if a variable is public or   for the private ones. An accessor will be generated by a compiler for the public attributes.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Cafe {      has $.name;      has @ orders;  }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To create or instantiate an object of the class X, the constructor is called: X.new(). This is basically a method derived from the Any class (this is one of the classes on the top of the object system in Raku).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $cafe = Cafe.new(      name =&gt; "Paris"  );</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>At this point, you can read public attributes.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $cafe.name;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Reading from $.name is possible because, by default, all public fields are readable and a corresponding access method for them is created. However, that does not allow changing the attribute. To make a field writable, indicate it explicitly by adding the is rw trait.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Cafe {
+    has $.name is rw;
+    has @ orders;
+}
+my $cafe = Cafe.new( name =&gt; "Paris"  );</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, read and write actions are available.
+$cafe.name = "Berlin";  say $cafe.name;
+Class methods
+The method keyword defines a method
+sub
+  routines with</p>
+</div>
+<div class="paragraph">
+<p>, similarly to how we define sub-
+ . A method has access to all attributes of the class,
+ both public and private.</p>
+</div>
+<div class="paragraph">
+<p>The method itself can be private. We will return to this later after talk- ing about inheritance.
+In the following short example, two methods are created, and each of them manipulates the private @ orders array.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Cafe {
+    has $.name;      has @ orders;
+
+    method order($what) {          @ orders.push($what);      }
+
+    method list+orders {          @ orders.sort.join(', ').say;      }
+}
+
+my $cafe = Cafe.new(      name =&gt; "Paris"
+);
+
+$cafe.order('meet');  $cafe.order('fish');  $cafe.list+orders; # fish, meet</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The code should be quite readable for people familiar with OOP. Just keep in mind that “everything is an object” and you may chain method calls.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">@orders.sort.join(', ').say;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Instance methods receive a special variable, self (having no sigil), which points to the current object. It can be used to access instance data or the class methods.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method order($what) {      @ orders.push($what);      self.list+orders;
+}
+
+method list+orders {      say self.name;      @ orders.sort.join(', ').say;  }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Inheritance</p>
+</div>
+<div class="paragraph">
+<p>Inheritance is easy. Just say is Baseclass when declaring a class. Hav- ing said that, your class will be derived from the base class.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class A {      method x {          say "A.x"      }      method y {          say "A.y"      }
+}
+
+class B is A {      method x {          say "B.x"      }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The further usage of the inherited classes is straightforward.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = A.new;  $a.x; # A.x $a.y; # A.y
+my $b = B.new;  $b.x; # B.x  $b.y; # A.y</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is important that the result of the method search does not depend on which type was used to declare a variable. Raku always will first use the methods belonging to the class of the variable, which is currently stored in the variable container. For example, return to the previous example and declare the variable $b to be one of type A, but still create an instance of B with B.new. Even in that case, calling $b.x will still lead to the method defined in the derived class.
+my A $b = B.new;  $b.x; # B.x  $b.y; # A.y
+Meta-methods (which also are available for every object without writ- ing any code) provide information about the class details. In particular, to see the exact order in which method resolution will be executed, call the .^mro metamethod.
+say $b.^mro;
+In our example, the following order will be printed.
+B)&amp;(A)&amp;(Any)&amp;(Mu&amp;
+Of course, you may call the .^mro method on any other variable or ob- ject in a programme, regardless of whether it is an instance of the user- defined class, a simple variable, or a constant. Just get an idea of how this is implemented internally.
+$ raku +e'42.^mro.say'
+Int)&amp;(Cool)&amp;(Any)&amp;(Mu&amp;
+84</p>
+</div>
+<div class="paragraph">
+<p>Multiple inheritance
+When more than one class is mentioned in the list of base classes, we have multiple inheritance.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class A {      method a {          say "A.a"      }
+}
+
+class B {      method b {          say "B.b";      }
+}
+  class C is A is B {  }
+
+my $c = C.new;  $c.a;
+$c.b;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With multiple inheritance, method resolution order is more important, as different base classes may have methods with the same name, or, for example, the two base classes have another common parent. This is why you should know the order of the base class now.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class A {      method meth {          say "A.meth"      }
+}
+
+class B {      method meth {          say "B.meth";      }
+}
+
+
+class C is A is B {  }
+  class D is B is A {  }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, the method named meth exists in both parent classes A and B, thus calling it on variables of the types C and D will be resolved differ- ently.
+my $c = C.new;  $c.meth; # A.meth</p>
+</div>
+<div class="paragraph">
+<p>my $d = D.new;  $d.meth; # B.meth
+This behaviour is confirmed by the method resolution order list, which is actually used by the compiler.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$c.^mro.say; # ((C) (A) (B) (Any) (Mu))  $d.^mro.say; # ((D) (B) (A) (Any) (Mu))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Private (closed) methods
+Now, after we have discussed inheritance, let us return to the private (or closed) methods. These methods may only be used within the class itself. Thus, you cannot call them from the programme that uses an instance of the class. Nor are they accessible in the derived classes. An exclamation mark is used to denote a private method.
+The following example demonstrates the usage of a private method of a class. The comments in the code will help you to understand how it works.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class A {
+    # Method is only available within A
+    method  private {          say "A.private";      }
+
+    # Public method calling a private method     method public {
+        # You cannot avoid self here.         # Consider the ' ' as a separator like '.'         self private;
+    }
+}
+
+class B is A {
+    method method {
+        # Again self, but this the '.' this time.         # This is a public method.         self.public;
+
+        # This will be a compile-time error.
+        # self private;      }
+}
+
+my $b = B.new;  $b.method; # A.private</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The exclamation mark is actually part of the method name. So you can have both method meth and method  meth in the same class. To access them, use self.meth and self meth, respectively:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class C {      method meth  {say 'meth' }      method  meth {say ' meth'}      method demo {          self.meth;          self meth;
+    }
+}
+
+my $c = C.new;
+$c.demo; # Prints both meth and  meth</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Submethods</p>
+</div>
+<div class="paragraph">
+<p>Raku defines the so-called submethods for classes. These are the methods which are not propagating to the subclass’s definition. The submethods may be either private or public, but they will not be inher- ited by the children.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class A {      submethod submeth {          say "A.submeth"      }
+}
+
+class B is A {
+}
+
+my A $a;
+my B $b;
+
+$a.submeth;   # OK
+# $b.submeth; # Error: No such method 'submeth' for invocant of type 'B'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Constructors
+You may have noticed in the previous examples that two different ap- proaches to creating a typed variable were used.
+The first was via an explicit call of the new constructor. In this case, a new instance was created.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = A.new;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the second, a variable was declared as a typed variable. Here, a con- tainer was created.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my A $a;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Creating a container means not only that the variable will be allowed to host an object of that class but also that you will still need to create that object itself.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my A $a = A.new;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let us consider an example of a class which involves one public method and one public data field.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class A {
+    has $.x = 42;      method m {          say "A.m";      }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The internal public variable $.x is initialized with the constant value. Now, let us create a scalar container for the variable of the A class. my A $a;
+The container is here, and we know its type, but there are no data yet. At this moment, the class method may be called. It will work, as it is a class method and does not require any instance with real data.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$a.m; # Prints “A.m”</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Meanwhile, the $.x field is not available yet.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $a.x; # Error: Cannot look up attributes in a A type object</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We need to create an instance object by calling a constructor first.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my A $b = A.new;  say $b.x; # Prints 42</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Please note that the initialization (= 42) only happens when a construc- tor is called. Prior to this, there is no object, and thus no value can be assigned to an attribute.
+The new method is inherited from the Mu class. It accepts a list of the named arguments. So, this method can be used on any object with any reasonable arguments. For instance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my A $c = A.new(x =&gt; 14);  say $c.x; # 14, not 42</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that the name of the field (x) may not be quoted. An attempt of A.new('x' &#8658; 14) will fail because it will be interpreted as a Pair being passed as a positional parameter.
+Alternatively, you can use the :named(value) format for specifying named parameters:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my A $c = A.new :x(14); # Or A.new(:x(14)) if you wish  say $c.x; # 14</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For the more sophisticated constructors, the class’s own BUILD sub- method may be defined. This method expects to get a list of the named arguments.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class A {
+    # Two fields in an object.
+    # One of them will be calculated in the constructor.
+    has $.str;
+    has $ len;
+
+    # The constructor expects its argument named ‘str’.     submethod BUILD(:$str) {
+        # This field is being copied as is:         $ str = $str;
+
+        # And this field is calculated:         $ len = $str.chars;
+        }
+
+
+    method dump {
+        # Here, we print the current values.         # The variables are interpolated as usual         # but to escape an apostrophe character from         # the variable name, a pair of braces is added.
+        "{$.str}'s length is $ len.".say;      }
+}
+
+my $a = A.new(str =&gt; "Perl");  $a.dump;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This programme prints the following output:</p>
+</div>
+<div class="paragraph">
+<p>Roles
+Apart from the bare classes, the Raku language allows roles. These are what are sometimes called interfaces in other object-oriented languages. Both the methods and the data, which are defined in a role, are availa- ble for “addition” (or mixing-in) to a new class with the help of the does keyword.
+A role looks like a base class that appends its methods and data to gen- erate a new type. The difference between prepending a role and deriv- ing a class from a base class is that with a role, you do not create any inheritance. Instead, all the fields from the role become the fields of an existing class. In other words, classes are the is a characteristic of an object, while roles are the does traits. With roles, name conflicts will be found at compile time; there is no need to traverse the method resolu- tion order paths.
+The following example defines a role, which is later used to create two classes; we could achieve the same with bare inheritance, though:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># The role of the catering place is to take orders
+# (via the order method), to count the total amount
+# of the order (method calc) and issuing a bill (method bill).
+role FoodService {      has @ orders;
+
+    method order($price) {          @ orders.push($price);      }
+
+    method calc {
+        # [+] is a hyperoperator (hyperop) connecting all the         # elements of an array.
+        # It means that [+] @a is equivalent to
+        # @a[0] + @a[1] + ... + @a[N].         return [+] @ orders;
+    }
+
+    method bill {
+        # Order's total is still a sum of the orders.         return self.calc;
+    }
+}
+
+# Launching a cafe. A cafe is a catering place. class Cafe does FoodService {      method bill {
+        # But with a small surcharge.         return self.calc * 1.1;
+    }
+}
+
+# And now a restaurant. class Restaurant does FoodService {      method bill {
+        # First, let the customer wait some time.         sleep 10.rand;
+
+        # Second, increase the prices even more.         return self.calc * 1.3;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let us try that in action. First, the cafe.</p>
+</div>
+<div class="paragraph">
+<p>my $cafe = Cafe.new;  $cafe.order(10);  $cafe.order(20);  say $cafe.bill; # Immediate 33
+Then, the restaurant. (Note that this code will have a delay because of the class definition).
+my $restaurant = Restaurant.new;  $restaurant.order(100);
+$restaurant.order(200);
+say $restaurant.bill; # 390 after some unpredictable delay
+Roles can be used for defining and API and forcing the presence of a meth- od in a class that uses a role. For example, let’s create a role named Liq+ uid, which requires that the flows method must be implemented.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">role Liquid {      method flows {...}
+}
+  class Water does Liquid {  }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is not possible to run this programme as it generates a compile-time error:</p>
+</div>
+<div class="paragraph">
+<p>Note that the ellipsis &#8230;&#8203; is a valid Raku construction that is used to
+create forward declarations.</p>
+</div>
+<div class="paragraph">
+<p>Channels
+Raku includes a number of solutions for parallel and concurrent calcu- lations. The great thing is that this is already built-in into the language and no external libraries are required.
+The idea of the channels is simple. You create a channel through which you can read and write. It is a kind of a pipe that can also easily transfer Raku objects. If you are familiar with channels in, for example, Go, you would find Raku’s channels easily to understand.
+Read and write
+In Raku, there is a predefined class Channel, which includes, among the others, the send and the receive methods. Here is the simplest example, where an integer number first is being sent to the channel $c  and is then immediately read from it.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $c = Channel.new;   $c.send(42);   say $c.receive; # 42</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A channel can be passed to a sub as any other variable. Should you do that, you will be able to read from that channel in the sub.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $ch = Channel.new;   $ch.send(2017);   func($ch);
+
+sub func($ch) {       say $ch.receive; # 2017   }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is possible to send more than one value to a channel. Of course, you can later read them all one by one in the same order as they were sent.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $channel = Channel.new;
+
+# A few even numbers are sent to the channel.
+for &lt;1 3 5 7 9&gt; {
+    $channel.send($_);
+}
+
+# Now, we read the numbers until the channel has them.
+# "while @a -&gt; $x" creates a loop with the $x as a loop variable. while $channel.poll +&gt; $x {
+    say $x;
+}
+
+# After the last available number, Nil is returned. $channel.poll.say; # Nil</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the last example, instead of the previously used receive method,
+another one is used: $channel.poll. The difference lies in how they handle the end of the queue. When there are no more data in the chan- nel, the receive will block the execution of the programme until new data arrive. Instead, the poll method returns Nil when no data are left.
+To prevent the programme from hanging after the channel data is con- sumed, close the channel by calling the close method.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$channel.close;
+while $channel.receive +&gt; $x {
+    say $x;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, you only read data, which are already in the channel, but after
+the queue is over, an exception will occur: Cannot receive a mes+ sage on a closed channel. Thus either put a try block around it or use poll.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$channel.close;
+try {       while $channel.receive +&gt; $x {           say $x;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, closing a channel is a required to quit after the last data piece from the channel arrives.
+The list method
+The list method accompanies the previously seen methods and re- turns everything that is left unread in the channel.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $c = Channel.new;
+$c.send(5);   $c.send(6);
+
+$c.close;
+say $c.list; # (5 6)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The method blocks the programme until the channel is open, thus it is
+wise to close it before calling the list method.
+Beyond scalars
+Channels may also transfer both arrays and hashes and do it as easily as they work with scalars. Unlike Perl 5, an array will not be unfolded to a list of scalars but will be passed as a single unit. Thus, you may write the following code.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $c = Channel.new;   my @a = (2, 4, 6, 8);   $c.send(@a);
+
+say $c.receive; # [2 4 6 8]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The @a array is sent to the channel as a whole and later is consumed as a whole with a single receive call.
+What’s more, if you save the received value into a scalar variable, that variable will contain an array.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = $c.receive;   say $x.WHAT; # (Array)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The same discussions apply to hashes.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $c = Channel.new;  my %h = (alpha =&gt; 1, beta =&gt; 2);   $c.send(%h);
+
+say $c.receive; # {alpha =&gt; 1, beta =&gt; 2}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Instead of calling the list method, you can use the channel in the list context (but do not forget to close it first).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$c.close;
+my @v = @$c;
+say @v; # [{alpha =&gt; 1, beta =&gt; 2}]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that if you send a list, you will receive it as a list element of the  @v array.
+Here is another example of “dereferencing” a channel:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$c.close;   for @$c +&gt; $x {       say $x;
+} # {alpha =&gt; 1, beta =&gt; 2}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The closed method
+The Channel class also defines a method that checks on whether the channel is closed. This method is called closed.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $c = Channel.new;   say "open" if  $c.closed; # is open
+
+$c.close;   say "closed" if $c.closed; # closed</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Despite the simplicity of using the method, it in fact returns not a sim- ple Boolean value but a promise object (a variable of the Promise class). A promise (we will talk about this later) can be either kept or broken. Thus, if the channel is open, the closed promise is not yet kept; it is only given (or planned).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Promise.new(status&amp;=&gt;&amp;PromiseStatus::Planned,&amp;...)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After the channel is closed, the promise is kept.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Promise.new(status&amp;=&gt;&amp;PromiseStatus::Kept,&amp;...)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can see the state of the promise above in its status field.</p>
+</div>
+<div class="paragraph">
+<p>In this section, we discussed the simplest applications of channels, where things happen in the same thread. The big thing about channels is that they transparently do the right thing if you’re sending in one or more threads, and receiving in another one or more threads. No value will be received by more than one thread, and no value shall be lost because of race conditions when sending them from more than one thread.</p>
+</div>
+<div class="paragraph">
+<p>Promises
+Promises are objects aimed to help synchronize parallel processes. The simplest use case involving them is to notify if the earlier given promise is kept or broken or if its status is not yet known.
+Basics
+The Promise.new constructor builds a new promise. The status of it
+can be read using the status method. Before any other actions are done with the promise, its status remains to be Planned.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $p = Promise.new;   say $p.status; # Planned</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When the promise is kept, call the keep method to update the status to the value of Kept.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $p = Promise.new;
+$p.keep;
+say $p.status; # Kept</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, to break the promise, call the break method and set the status of the promise to Broken.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $p = Promise.new;
+say $p.status; # Planned
+
+$p.break;   say $p.status; # Broken</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Instead of asking for a status, the whole promise object can be convert- ed to a Boolean value. There is the Bool method for that; alternatively, the unary operator ? can be used instead.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $p.Bool;
+say ?$p;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Keep in mind that as a Boolean value can only take one of the two pos- sible states, the result of the Boolean typecast is not a full replacement for the status method.
+There is another method for getting a result called result. It returns truth if the promise has been kept.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $p = Promise.new;   $p.keep;   say $p.result; # True</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Be careful. If the promise is not kept at the moment the result is called, the programme will be blocked until the promise is not in the  Planned status anymore.
+In the case of the broken promise, the call of result throws an excep- tion.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $p = Promise.new;   $p.break;   say $p.result;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Run this programme and get the exception details in the console.
+Tried&amp;to&amp;get&amp;the&amp;result&amp;of&amp;a&amp;broken&amp;Promise&amp;
+To avoid quitting the programme under an exception, surround the code with the try block (but be ready to lose the result of say—it will not appear on the screen).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $p = Promise.new;   $p.break;
+try {       say $p.result;   }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The cause method, when called instead of the result, will explain the details for the broken promise. The method cannot be called on the kept promise:</p>
+</div>
+<div class="paragraph">
+<p>Like with exceptions, both kept and broken promises can be attributed to a message or an object. In this case, the result will return that mes- sage instead of a bare True or False.
+This is how a message is passed for the kept promise:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $p = Promise.new;  $p.keep('All done');  say $p.status; # Kept  say $p.result; # All done</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is how it works with the broken promise:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $p = Promise.new;  $p.break('Timeout');  say $p.status; # Broken  say $p.cause;  # Timeout</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Factory methods
+There are a few factory methods defined in the Promise class.
+start
+The start method creates a promise containing a block of code. There is an alternative way to create a promise by calling Promise.start via the start keyword.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $p = start {
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>(Note that in Raku, a semicolon is assumed after a closing brace at the end of a line.)</p>
+</div>
+<div class="paragraph">
+<p>The start method returns a promise. It will be broken if the code block throws an exception. If there are no exceptions, the promise will be kept.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $p = start {
+}
+say $p.result; # 42
+say $p.status; # Kept</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Please note that the start instruction itself just creates a promise and the code from the code block will be executed on its own. The start method immediately returns, and the code block runs in parallel. A test of the promise status will depend on whether the code has been exe- cuted or not. Again, remember that result will block the execution until the promise is not in the Planned status anymore.
+In the given example, the result method returns the value calculated in the code block. After that, the status call will print Kept.
+If you change the last two lines in the example, the result may be dif- ferent. To make the test more robust, add a delay within the code block.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $p = start {       sleep 1;
+    42
+}
+
+say $p.status; # Planned
+say $p.result; # 42   say $p.status; # Kept</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, it can be clearly seen that the first call of $p.status is happening immediately after the promise has been created and informs us that the promise is Planned. Later, after the result unblocked the programme flow in about a second, the second call of $p.status prints Kept, which means that the execution of the code block is completed and no excep- tions were thrown.
+104</p>
+</div>
+<div class="paragraph">
+<p>Would the code block generate an exception, the promise becomes broken.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $p = start {
+    die;
+}
+try {
+    say $p.result;
+}
+say $p.status; # This line will be executed
+               # and will print 'Broken'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The second thing you have to know when working with start is to un- derstand what exactly causes an exception. For example, an attempt to divide by zero will only throw an exception when you try using the re- sult of that division. The division itself is harmless. In Raku, this be- haviour is called soft failure. Before the result is actually used, Raku assumes that the result is of the Rat (rational) type.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># $p1 is Kept
+my $p1 = start {
+    my $inf = 1 / 0;
+}
+
+# $p2 is Broken
+my $p2 = start {
+    my $inf = 1 / 0;
+    say $inf;
+}
+
+sleep 1; # Wait to make sure the code blocks are done
+say $p1.status; # Kept
+say $p2.status; # Broken</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>in and at
+The other two factory methods, Promise.in and Promise.at, create a
+promise, which will be kept after a given number of seconds or by a given time. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $p = Promise.in(3);
+for 1..5 {
+    say $p.status;
+    sleep 1;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The programme prints the following lines.
+Planned
+Planned
+Planned
+Kept
+Kept</p>
+</div>
+<div class="paragraph">
+<p>That means that the promise was kept after three seconds.
+anyof and allof
+Another pair of factory methods, Promise.anyof and Promise.allof, creates new promises, which will be only kept when at least one of the promises (in the case of anyof) is kept or, in the case of allof, all of the promises listed at the moment of creation are kept.
+One of the useful examples found in the documentation is a timeout keeper to prevent long calculations from hanging the programme.
+Create the promise $timeout, which must be kept after a few seconds, and the code block, which will be running for longer time. Then, list them both in the constructor of Promise.anyof.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $code = start {
+    sleep 5
+}
+my $timeout = Promise.in(3);
+my $done = Promise.anyof($code, $timeout);  say $done.result;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The code should be terminated after three seconds. At this moment, the $timeout promise is kept, and that makes the $done promise be kept, too.</p>
+</div>
+<div class="paragraph">
+<p>then
+The then method, when called on an already existing promise, creates another promise, whose code will be called after the “parent” promise is either kept or broken.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $p = Promise.in(2);   my $t = $p.then({say "OK"}); # Prints this in two seconds
+say "promised"; # Prints immediately
+sleep 3;
+
+say "done";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The code above produces the following output:</p>
+</div>
+<div class="paragraph">
+<p>promised
+OK
+done</p>
+</div>
+<div class="paragraph">
+<p>In another example, the promise is broken.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Promise.start({  # A new promise       say 1 / 0    # generates an exception                    # (the result of the division is used in say). }).then({        # The code executed after the broken line.     say "oops"
+}).result        # This is required so that we wait until                  # the result is known.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The only output here is the following:
+oops</p>
+</div>
+<div class="paragraph">
+<p>An example
+Finally, a funny example of how promises can be used for implement- ing the sleep sort algorithm. In sleep sort, every integer number, con- sumed from the input, creates a delay proportional to its value. As the sleep is over, the number is printed out.
+Promises are exactly the things that will execute the code and tell the result after they are done. Here, a list of promises is created, and then the programme waits until all of them are done (this time, we do it using the await keyword).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @promises;   for @*ARGS +&gt; $a {       @promises.push(start {           sleep $a;           say $a;
+    })
+}
+   await(|@promises);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Provide the programme with a list of integers:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku sleep+sort.pl 3 7 4 9 1 6 2 5</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For each value, a separate promise will be created with a respective delay in seconds. You may experiment and make smaller delays such as  sleep $a / 10 instead. The presence of await ensures that the pro- gramme is not finished until all the promises are kept.
+As an exercise, let’s simplify the code and get rid of an explicit array that collects the promises.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">await do for @*ARGS {      start {          sleep $_;          say $_;      }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>First, we use the $_ variable here and thus don’t have to declare $a. Second, notice the do for combination, which returns the result of each loop iteration. The following code will help you to understand how that works:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @a = do for 1..5 {$_ * 2};  say @a; # [2 4 6 8 10]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_正则表达式和_grammars">3. 正则表达式和 Grammars</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Raku 中的 grammars 是众所周知的正则表达式的"下一个级别"。 Grammars 可以让你创建更复杂的文本解析器。 只使用 Raku 提供的 grammars 设施，即可在没有任何外部帮助的情况下创建新的特定领域的语言（DSL），语言翻译器或解释器。</p>
+</div>
+<div class="sect2">
+<h3 id="_正则表达式">3.1. 正则表达式</h3>
+<div class="paragraph">
+<p>事实上，Raku 把正则表达式叫做正则。 基本语法与 Perl 5 略有不同，但大多数元素（如量词 * 或 <code>+</code>）看起来仍然很熟悉。 <strong>regex</strong> 关键字用于构建正则表达式。 让我们为工作日的短名称创建一个正则表达式。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex weekday
+    {[Mon | Tue | Wed | Thu | Fri  | Sat | Sun]};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>方括号包着一组备选项。</p>
+</div>
+<div class="paragraph">
+<p>您可以在其他正则表达式中使用命名的正则表达式，方法是在一对尖括号中引用它的名称。 要将字符串与正则表达式匹配，请使用 <strong>smartmatch</strong> 运算符（<strong>~~</strong>）。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'Thu' ~~ m/&lt;weekday&gt;/;
+say 'Thy' ~~ m/&lt;weekday&gt;/;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这两个匹配会打印如下输出:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">「Thu」
+  weekday =&gt; 「Thu」
+False</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>匹配的结果是 <strong>Match</strong> 类型的对象。 当你打印它时，你会在小方括号 「&#8230;&#8203;」 内看到所匹配到的子字符串 。</p>
+</div>
+<div class="paragraph">
+<p>正则表达式是最简单的命名结构。 除此之外，还有 rules 和 tokens（因此，关键字是 <strong>rule</strong> 和 <strong>token</strong>）。</p>
+</div>
+<div class="paragraph">
+<p>token 与 rule 的不同之处在于它们如何处理空格。 在 rule 中，空格是正则表达式的一部分。 在 token 中，空格只是视觉分隔符。 我们将在下面的示例中看到更多相关信息。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my token number_token { &lt;[\d]&gt; &lt;[\d]&gt; }
+my rule  number_rule  { &lt;[\d]&gt; &lt;[\d]&gt; }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>(注意闭合花括号后面没有不需要分号。)</p>
+</div>
+<div class="paragraph">
+<p><code>&lt;[&#8230;&#8203;]&gt;</code> 结构创建一个字符类。在上面的例子中, 两个字符的字符串 <strong>42</strong> 匹配 <code>number_token</code> token 但是不匹配 <code>number_rule</code> rule。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 1 if "42" ~~ /&lt;number_token&gt;/;
+say 1 if "42" ~~ /&lt;number_rule&gt;/;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_对象">3.2. <code>$/</code> 对象</h3>
+<div class="paragraph">
+<p>正如我们刚刚看到的，智能匹配运算符将字符串与正则表达式进行比较会返回一个 <strong>Match</strong> 类型的对象。 该对象存储在 <strong>$/</strong> 变量中。 它还包含所有匹配的子字符串。 为了保留（捕获）子字符串，需要使用一对圆括号。 第一个匹配索引为 <strong>0</strong>，你可以使用完整语法 <strong>$/[0]</strong> 或缩短的 <strong>$0</strong> 来将其作为数组元素进行访问。</p>
+</div>
+<div class="paragraph">
+<p>请记住，即使是 <strong>$0</strong> 或 <strong>$0</strong> 等单独的元素仍然包含 <strong>Match</strong> 类型的对象。 要将它们转换为字符串或数字，可以使用强制语法。 例如，<strong>~$0</strong> 将对象转换为字符串，<strong>+$0</strong> 将对象转换为整数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">'Wed 15' ~~ /(\w+) \s (\d+)/;
+say ~$0; # Wed
+say ~$1; # 15</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_grammars">3.3. Grammars</h3>
+<div class="paragraph">
+<p>Grammars 是正则表达式的发展。 从语法上讲，grammar 定义类似于类，但使用关键字 <strong>grammar</strong>。 在 grammar 里面，它包含 <strong>token</strong>s 和 <strong>rule</strong>s。 在下一节中，我们将在示例中探索 grammar。</p>
+</div>
+<div class="sect3">
+<h4 id="_简单的解析器">3.3.1. 简单的解析器</h4>
+<div class="paragraph">
+<p>Grammar 应用的第一个例子是定义赋值操作并包含打印指令的小语言的 grammar。以下是此语言的程序示例。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">x = 42;
+y = x;
+print x;
+print y;
+print 7;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>让我们开始编写该语言的 grammar。 首先，我们必须表达一个事实，即程序是由分号分隔的一系列语句。 因此，在顶层语法看起来像这样：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Lang {
+    rule TOP {
+        ^ &lt;statements&gt; $
+    }
+    rule statements {
+        &lt;statement&gt;+ %% ';'
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这里，<strong>Lang</strong> 是 grammar 的名称，而 <strong>TOP</strong> 是解析将开始的起始规则。规则的内容是由一对符号 <strong>^</strong> 和 <strong>$</strong> 包围的正则表达式，用于将规则绑定到文本的开头和结尾。换句话说，整个程序应该匹配 <strong>TOP</strong> 规则。规则的核心部分 <strong>&lt;statements&gt;</strong> 引用了另一条规则。规则将忽略其各部分之间的所有空格。因此，您可以自由地在 grammar 的定义中添加空格，以使其易于阅读。</p>
+</div>
+<div class="paragraph">
+<p>第二条规则解释了 <strong>&lt;statements&gt;</strong> 的含义。<strong>&lt;statements&gt;</strong> 块是一系列单独的 <strong>statement</strong>。它应该包含至少一个 <strong>statement</strong>，如 <strong>+</strong> 量词所要求的那样，并且分隔符是分号。在 <strong>%%</strong> 符号后面是分隔符。在 grammar 中，这意味着指令之间必须有分隔符，但是您可以在最后一个之后省略分隔符。如果只有一个百分号字符而不是两个百分号字符，则规则也要求在最后一个语句之后有分隔符。</p>
+</div>
+<div class="paragraph">
+<p>下一步是描述 <strong>statement</strong>。目前，我们的语言只有两个操作：赋值和打印。它们中的每一个都接受值或变量名。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule statement {
+    | &lt;assignment&gt;
+    | &lt;printout&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>垂直条分隔备选分支，就像它在 Perl 5 中的正则表达式一样。为了使代码看起来更好看并简化维护，可以在第一个子规则之前添加额外的垂直条。 以下两个描述相同：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule statement {
+      &lt;assignment&gt;
+    | &lt;printout&gt;
+}
+rule statement {
+    | &lt;assignment&gt;
+    | &lt;printout&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>然后，让我们定义 <strong>assignment</strong> 和 <strong>printout</strong> 的含义。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
+    &lt;identifier&gt; '=' &lt;expression&gt;
+}
+rule printout {
+    'print' &lt;expression&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这里，我们看到字符串字面量，即 <strong>'='</strong> 和 <strong>'print'</strong>。 同样，它们周围的空格不会影响规则。</p>
+</div>
+<div class="paragraph">
+<p><strong>expression</strong> 与标识符（在我们的例子中是变量名）或常量值匹配。 因此，<strong>expression</strong> 是 <strong>identifier</strong> 或没有附加字符串的 <strong>value</strong>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule expression {
+    | &lt;identifier&gt;
+    | &lt;value&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>此时，我们应该编写标识符和值的规则。 对于那种 grammar，最好使用另一种名为 <strong>token</strong> 的方法。 在 token 中，空格很重要（那些与大括号相邻的空格除外）。</p>
+</div>
+<div class="paragraph">
+<p>标识符是一组字母：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token identifier {
+    &lt;:alpha&gt;+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里，<code>&lt;:alpha&gt;</code> 是包含所有字母字符的预定义字符类。</p>
+</div>
+<div class="paragraph">
+<p>我们示例中的值是一组数字，因此我们这里仅限于整数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token value {
+    \d+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们的第一个 grammar 已经完成。 现在可以使用它来解析文本文件。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $parsed = Lang.parsefile('test.lang');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果文件内容已经存储在变量中, 那么你可以使用 <code>Lang.parse($str)</code> 方法来解析它。(附录中有更多关于从文件中读取的内容)</p>
+</div>
+<div class="paragraph">
+<p>如果解析成功, 即如果文件包含有效的文法, 那么 <code>$parse</code> 变量会包含一个 <strong>Match</strong> 类型的对象。可以把它转储出来(<code>say  $parsed</code>)并看看里面是什么。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">｢x = 42;
+y = x;
+print x;
+print y;
+print 7;｣
+ statements =&gt; ｢x = 42;
+y = x;
+print x;
+print y;
+print 7;｣
+  statement =&gt; ｢x = 42｣
+   assignment =&gt; ｢x = 42｣
+    identifier =&gt; ｢x｣
+    expression =&gt; ｢42｣
+     value =&gt; ｢42｣
+  statement =&gt; ｢y = x｣
+   assignment =&gt; ｢y = x｣
+    identifier =&gt; ｢y｣
+    expression =&gt; ｢x｣
+     identifier =&gt; ｢x｣
+  statement =&gt; ｢print x｣
+   printout =&gt; ｢print x｣
+    expression =&gt; ｢x｣
+     identifier =&gt; ｢x｣
+  statement =&gt; ｢print y｣
+   printout =&gt; ｢print y｣
+    expression =&gt; ｢y｣
+     identifier =&gt; ｢y｣
+  statement =&gt; ｢print 7｣
+   printout =&gt; ｢print 7｣
+    expression =&gt; ｢7｣
+     value =&gt; ｢7｣</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>此输出对应于本节开头的示例程序。 它包含已解析程序的结构。 捕获的部分显示在括号  ｢&#8230;&#8203;｣ 中。 首先，打印整个匹配的文本。 实际上，由于 <strong>TOP</strong> 规则使用了一对 <code>^ &#8230;&#8203; $</code> 结构，因此整个文本应该与规则匹配。</p>
+</div>
+<div class="paragraph">
+<p>然后，打印解析树。 它从 <strong>&lt;statements&gt;</strong> 开始，然后 grammar 的其他部分完全按照文件中的程序包含的内容呈现。 在下一级别，您可以看到 <strong>identifier</strong> 和 <strong>value</strong> token 的内容。</p>
+</div>
+<div class="paragraph">
+<p>如果程序在文法上不正确，则该解析方法将返回空值(<strong>Any</strong>)。 如果只有程序的起始部分与规则匹配，则会发生同样的情况。</p>
+</div>
+<div class="paragraph">
+<p>为方便起见，这是完整的 grammar：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Lang {
+    rule TOP        {
+        ^ &lt;statements&gt; $
+    }
+    rule statements {
+        &lt;statement&gt;+ %% ';'
+    }
+    rule statement  {
+        | &lt;assignment&gt;
+        | &lt;printout&gt;
+    }
+    rule assignment {
+        &lt;identifier&gt; '=' &lt;expression&gt;
+    }
+    rule printout   {
+        'print' &lt;expression&gt;
+    }
+    rule expression {
+        | &lt;identifier&gt;
+        | &lt;value&gt;
+    }
+    token identifier {
+         &lt;:alpha&gt;+
+    }
+    token value {
+        \d+
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_解释器">3.3.2. 解释器</h4>
+<div class="paragraph">
+<p>到目前为止，grammar 看到了程序的结构，并且可以判断它是否在 grammar 上是正确的，但它不会执行程序中包含的任何指令。 在本节中，我们将扩展解析器，以便它可以实际执行程序。</p>
+</div>
+<div class="paragraph">
+<p>我们的示例语言使用变量和整数值。值是常量并描述自己。对于变量，我们需要创建一个存储。在最简单的情况下，所有变量都是全局变量，并且需要一个散列：<code>my %var;</code>。</p>
+</div>
+<div class="paragraph">
+<p>我们现在要实现的第一个 action 是赋值。 它将获取值并将其保存在变量存储中。 在 grammar 的 <strong>assignment</strong> rule 中，期望在等号的右侧是一个 <strong>expression</strong>。 表达式可以是变量也可以是数字。为了简化变量名查找，让我们使 grammar 更复杂一些，并将赋值和打印规则分别拆分为两个备选项。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
+    | &lt;identifier&gt; '=' &lt;value&gt;
+    | &lt;identifier&gt; '=' &lt;identifier&gt;
+}
+rule printout {
+    | 'print' &lt;value&gt;
+    | 'print' &lt;identifier&gt;
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_actions">3.4. Actions</h3>
+<div class="paragraph">
+<p>Raku 中的 grammar 允许响应 rule 或 token 匹配的 action。 action 是在解析的文本中找到相应的 rule 或 token 时执行的代码块。 action 会接收一个对象 <code>$/</code>，您可以在其中查看匹配的详细信息。 例如，<code>$&lt;identifier&gt;</code> 的值将包含 <strong>Match</strong> 类型的对象，其中包含有关 grammar 实际消耗的子字符串的信息。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
+    | &lt;identifier&gt; '=' &lt;value&gt;
+          { say "$&lt;identifier&gt;=$&lt;value&gt;" }
+    | &lt;identifier&gt; '=' &lt;identifier&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果您使用上面的 action 更新 grammar 并针对同一示例文件运行程序，那么您将在输出中看到子字符串 <code>x=42</code>。</p>
+</div>
+<div class="paragraph">
+<p><strong>Match</strong> 对象在用双引号插值时转换为字符串，如给定示例中所示：<code>"$&lt;identifier&gt;=$&lt;value&gt;"</code>。 要使用带引号的字符串外部的文本值，您应该进行明确的类型转换：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
+    | &lt;identifier&gt; '=' &lt;value&gt;
+          {%var{~$&lt;identifier&gt;} = +$&lt;value&gt; }
+    | &lt;identifier&gt; '=' &lt;identifier&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>到目前为止，我们已经有了一个为变量赋值的 action，并且可以处理文件的第一行。 变量存储将包含 <code>{x &#8658; 42}</code> 对。</p>
+</div>
+<div class="paragraph">
+<p>在 <strong>assignment</strong> rule 的第二个备选项中，<code>&lt;identifier&gt;</code> 名称被提及了两次; 这就是为什么你可以引用它作为 <code>$&lt;identifier&gt;</code> 的数组元素的原因。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
+    | &lt;identifier&gt; '=' &lt;value&gt;
+      {
+          %var{~$&lt;identifier&gt;} = +$&lt;value&gt;
+      }
+    | &lt;identifier&gt; '=' &lt;identifier&gt;
+      {
+          %var{~$&lt;identifier&gt;[0]} =
+          %var{~$&lt;identifier&gt;[1]}
+      }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对代码的这一添加使得可以解析两个变量的赋值：<strong>y = x</strong>。 <strong>%var</strong> 散列将包含两个值：<strong>{x &#8658; 42, y &#8658; 42}</strong>。</p>
+</div>
+<div class="paragraph">
+<p>或者，可以使用捕获圆括号。 在这种情况下，要访问捕获的子字符串，请使用特殊变量，例如 <strong>$0</strong>：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
+    | (&lt;identifier&gt;) '=' (&lt;value&gt;)
+      {
+          %var{$0} = +$1
+      }
+    | (&lt;identifier&gt;) '=' (&lt;identifier&gt;)
+      {
+          %var{$0} = %var{$1}
+      }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里，当变量用作散列键时，不再需要一元运算符 <code>~</code> ，但仍需要 <strong>$1</strong> 之前的一元 <code>+</code> 以将 <strong>Match</strong> 对象转换为数字。</p>
+</div>
+<div class="paragraph">
+<p>同样，给打印创建 action。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule printout {
+    | 'print' &lt;value&gt;
+      {
+          say +$&lt;value&gt;
+      }
+    | 'print' &lt;identifier&gt;
+      {
+          say %var{$&lt;identifier&gt;}
+      }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，grammar 能够完成语言设计所需的所有 action，并将打印请求的值：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">42
+42
+7</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>只要我们在规则中使用捕获圆括号，解析树就会包含名为 <strong>0</strong> 和 <strong>1</strong> 的条目以及命名字符串，例如 <strong>identifier</strong>。 在解析 <strong>y = x</strong> 字符串时你可以清楚地看到它：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">statement =&gt; 「y = x」
+ assignment =&gt; 「y = x」
+  0 =&gt; 「y」
+   identifier =&gt; 「y」
+  1 =&gt; 「x」
+   identifier =&gt; 「x」</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>更新的解析器如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my %var;
+
+grammar Lang {
+    rule TOP {
+        ^ &lt;statements&gt; $
+    }
+    rule statements {
+        &lt;statement&gt;+ %% ';'
+    }
+    rule statement {
+        | &lt;assignment&gt;
+        | &lt;printout&gt;
+    }
+    rule assignment {
+        | (&lt;identifier&gt;) '=' (&lt;value&gt;)
+          {
+              %var{$0} = +$1
+          }
+        | (&lt;identifier&gt;) '=' (&lt;identifier&gt;)
+          {
+              %var{$0} = %var{$1}
+          }
+    }
+    rule printout {
+        | 'print' &lt;value&gt;
+          {
+              say +$&lt;value&gt;
+          }
+        | 'print' &lt;identifier&gt;
+          {
+              say %var{$&lt;identifier&gt;}
+          }
+    }
+    token identifier {
+        &lt;:alpha&gt;+
+    }
+    token value {
+        \d+
+    }
+}
+
+Lang.parsefile('data/test.lang');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>为方便起见，可以将 action 代码放在单独的类中。 当 action 更复杂并包含不止一两行代码时，这会有很大帮助。</p>
+</div>
+<div class="paragraph">
+<p>要创建外部 action，请创建一个类，稍后将在调用 grammar 的 <strong>parse</strong> 或 <strong>parsefile</strong> 方法时通过 <strong>:actions</strong> 参数引用该类。 与内置 action 一样，外部类中的 action 会接收 <strong>Match</strong> 类型的 <strong>$/</strong> 对象。</p>
+</div>
+<div class="paragraph">
+<p>首先，我们将训练一个小的孤立示例，然后返回我们的自定义语言解析器。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar G {
+    rule TOP {^ \d+ $}
+}
+
+class A {
+    method TOP($/) {say ~$/}
+}
+
+G.parse("42", :actions(A));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Grammar <strong>G</strong> 和 action 类 <strong>A</strong> 都有一个名为 <strong>TOP</strong> 的方法。通用名称将 action 与相应的规则相关联。 当 grammar 解析提供的测试字符串并使用 <strong>^ \d $</strong> 规则消耗值 <strong>42</strong> 时，将触发 <strong>A::TOP</strong> action，并将 <strong>$/</strong> 参数传递给它，并立即打印。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ast_和属性">3.5. AST 和属性</h3>
+<div class="paragraph">
+<p>现在，我们准备在将 <strong>assignment</strong> 和 <strong>printout</strong> 规则分别分割成两个备选项之后再次简化 grammar。 困难在于如果没有拆分，就无法理解触发了哪个分支。 您需要从 <strong>value</strong> token 中读取值，或者从 <strong>identifier</strong> token 中获取变量名，并在变量存储中查找它。</p>
+</div>
+<div class="paragraph">
+<p>Raku 的 grammar 提供了一种很好的机制，它在语言解析理论中很常见，即抽象语法树, 缩写为 AST。</p>
+</div>
+<div class="paragraph">
+<p>首先，更新规则并从其中删除一些替代规则。 包含两个分支的唯一规则是 <strong>expression</strong> 规则。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
+    &lt;identifier&gt; '=' &lt;expression&gt;
+}
+rule printout {
+    'print' &lt;expression&gt;
+}
+rule expression {
+    | &lt;identifier&gt;
+    | &lt;value&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在解析阶段构建的语法树可以包含前面步骤中计算的结果。 <strong>Match</strong> 对象有一个字段 <strong>ast</strong>，专门用于保持每个节点上的计算值。 可以简单地读取值以获得先前完成的 action 的结果。 树被称为抽象，因为计算值的方式不是很重要。 重要的是，当触发 action 时，您只需一个地点就可以获得完成 action 所需的结果。</p>
+</div>
+<div class="paragraph">
+<p>该 action 可以通过调用 <strong>$/.make</strong> 方法保存自己的结果（并因此在树上进一步传递）。 你保存在那里的数据可以通过 <strong>made</strong> 字段访问，该字段具有同义词 <strong>ast</strong>。</p>
+</div>
+<div class="paragraph">
+<p>让我们填充 <strong>identifier</strong> 和 <strong>value</strong> token 的语法树的属性。 与标识符的匹配产生变量名; 找到值时，action 会生成一个数字。 以下是 action 类的方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method identifier($/) {
+    $/.make(~$0);
+}
+method value($/) {
+    $/.make(+$0);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>向前移动一步，在我们构建表达式的值的地方。 它可以是变量值或整数。</p>
+</div>
+<div class="paragraph">
+<p>因为 <strong>expression</strong> 规则有两个备选项，第一项任务是了解哪一个匹配。 为此，检查 <strong>$/</strong> 对象中是否存在相应的字段。</p>
+</div>
+<div class="paragraph">
+<p>（如果在 action 方法的签名中使用推荐的变量名 <strong>$/</strong> ，则可以以不同方式访问其字段。完整语法为 <strong>$/&lt;identifier&gt;</strong>，但是有另一个版本 <strong>$&lt;identifier&gt;</strong>。）</p>
+</div>
+<div class="paragraph">
+<p>expression 方法的两个分支表现不同。 对于数字，它直接从捕获的子字符串中提取值。 对于变量，它从 <strong>%var</strong> 散列中获取值。 在这两种情况下，结果都使用 <strong>make</strong> 方法存储在 <strong>AST</strong> 中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method expression($/) {
+    if $&lt;identifier&gt; {
+        $/.make(%var{$&lt;identifier&gt;});
+    }
+    else {
+        $/.make(+$&lt;value&gt;);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>要使用尚未定义的变量，我们可以添加 defined-or 运算符以使用零值初始化变量。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$/.make(%var{$&lt;identifier&gt;} // 0);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，表达式将具有归属于它的值，但不再知道值的来源。 它可以是文件中的变量值或常量。 这使得 <strong>assignment</strong> 和 <strong>printout</strong> action 更简单：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method printout($/) {
+    say $&lt;expression&gt;.ast;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>打印值所需的只是从 <strong>ast</strong> 字段中获取它。</p>
+</div>
+<div class="paragraph">
+<p>对于 <strong>assignment</strong>，它有点复杂但仍然可以写成单行。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method assignment($/) {
+    %var{$&lt;identifier&gt;} = $&lt;expression&gt;.made;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该方法获取 <strong>$/</strong> 对象并使用其 <strong>identifier</strong> 和 <strong>expression</strong> 元素的值。 第一个转换为字符串，并成为 <strong>%var</strong> 散列的键。 从第二个开始，我们通过获取 <strong>made</strong> 属性来获取值。</p>
+</div>
+<div class="paragraph">
+<p>最后，让我们停止使用全局变量存储并将哈希移动到 action 类中（我们在 grammar 本身中不需要它）。因此它将被声明为 <strong>has %!var;</strong> 并在 action 主体中用作私有键变量：<strong>%!var{&#8230;&#8203;}</strong>。</p>
+</div>
+<div class="paragraph">
+<p>在此更改之后，在使用 grammar 对其进行解析之前，创建 actions 类的实例非常重要：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Lang.parsefile(
+    'test.lang',
+    :actions(LangActions.new())
+);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>以下是带有 action 的解析器的完整代码。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Lang {
+    rule TOP {
+        ^ &lt;statements&gt; $
+    }
+    rule statements {
+        &lt;statement&gt;+ %% ';'
+    }
+    rule statement {
+        | &lt;assignment&gt;
+        | &lt;printout&gt;
+    }
+    rule assignment {
+        &lt;identifier&gt; '=' &lt;expression&gt;
+    }
+    rule printout {
+        'print' &lt;expression&gt;
+    }
+    rule expression {
+        | &lt;identifier&gt;
+        | &lt;value&gt;
+    }
+    token identifier {
+        (&lt;:alpha&gt;+)
+    }
+    token value {
+        (\d+)
+    }
+}
+
+class LangActions {
+    has %var;
+
+    method assignment($/) {
+        %!var{$&lt;identifier&gt;} = $&lt;expression&gt;.made;
+    }
+    method printout($/) {
+        say $&lt;expression&gt;.ast;
+    }
+    method expression($/) {
+        if $&lt;identifier&gt; {
+            $/.make(%!var{$&lt;identifier&gt;} // 0);
+        }
+        else {
+            $/.make(+$&lt;value&gt;);
+        }
+    }
+    method identifier($/) {
+        $/.make(~$0);
+    }
+    method value($/) {
+        $/.make(+$0)
+    }
+}
+
+Lang.parsefile(
+        'data/test.lang',
+        :actions(LangActions.new())
+        );</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_计算器">3.6. 计算器</h3>
+<div class="paragraph">
+<p>在考虑语言解析器时，实现计算器就像编写一个 "Hello，World!"程序。 在本节中，我们将为计算器创建一个 grammar，可以处理四个算术运算符和圆括号。计算器示例的隐藏优势是您必须教它遵循运算符优先级和嵌套表达式。</p>
+</div>
+<div class="paragraph">
+<p>我们的计算器 grammar 将期望在顶层有单个表达式。 运算符的优先级将通过传统的 grammar 构建方法自动实现，其中表达式包括项和因式。</p>
+</div>
+<div class="paragraph">
+<p>项是由加号和减号分隔的部分：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;term&gt;+ %% ['+'|'-']</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里使用了 Raku 的 <strong>%%</strong> 符号。你可以使用更传统的量词来重写该规则:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;term&gt; [['+'|'-'] &lt;term&gt;]*</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>反过来，每个项是由乘法或除法符号分隔的因式列表：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;factor&gt;+ %% ['*'|'/']</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>项和因式都可以包含值或圆括号组。 组基本上是另一种表达方式。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule group {
+    '(' &lt;expression&gt; ')'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>此规则引用 <strong>expression</strong> 规则，因此可以启动另一个递归循环。</p>
+</div>
+<div class="paragraph">
+<p>是时候引入增强的 <strong>value</strong> token 了，以便它接受浮点值。 这个任务很简单; 它只需要创建一个与尽可能多的格式匹配的正则表达式。我将跳过负数和科学记数法格式的数字。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token value {
+    | \d+['.' \d+]*
+    | '.' \d+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里是计算器的完整 grammar:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Calc {
+    rule TOP {
+        ^ &lt;expression&gt; $
+    }
+    rule expression {
+        | &lt;term&gt;+ %% $&lt;op&gt;=(['+'|'-'])
+        | &lt;group&gt;
+    }
+    rule term {
+        &lt;factor&gt;+ %% $&lt;op&gt;=(['*'|'/'])
+    }
+    rule factor {
+        | &lt;value&gt;
+        | &lt;group&gt;
+    }
+    rule group {
+        '(' &lt;expression&gt; ')'
+    }
+    token value {
+        | \d+['.' \d+]*
+        | '.' \d+
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>注意某些规则中的 <strong>$&lt;op&gt;=(&#8230;&#8203;)</strong> 结构。 这是命名捕获。 该名称通过 <strong>$/</strong> 变量简化了对值的访问。 在这种情况下，您可以将值作为 <strong>$&lt;op&gt;</strong>，并且在更新规则后不必担心变量名称的可能更改，因为它发生在编号变量 <strong>$0</strong>，<strong>$1</strong> 等处。</p>
+</div>
+<div class="paragraph">
+<p>现在，为编译器创建 action。 在 <strong>TOP</strong> 级别，规则返回计算后的值，它从 <strong>expression</strong> 的 <strong>ast</strong> 字段中获取。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class CalcActions {
+    method TOP($/) {
+        $/.make: $&lt;expression&gt;.ast
+    }
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>基础规则 <strong>groups</strong> 和 <strong>value</strong> 的 action 就像我们刚才看到的一样简单。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method group($/) {
+    $/.make: $&lt;expression&gt;.ast
+}
+
+method value($/) {
+    $/.make: +$/
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>其余的 action 有点复杂。 <strong>factor</strong> action 包含两个可选分支，就像 <strong>factor</strong> 规则一样。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method factor($/) {
+    if $&lt;value&gt; {
+        $/.make: +$&lt;value&gt;
+    }
+    else {
+        $/.make: $&lt;group&gt;.ast
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>转到 <strong>term</strong> action。 在这里，我们必须处理具有可变长度的列表。 规则的正则表达式具有 <code>+</code> 量词，这意味着它可以捕获一个或多个元素。 此外，由于规则处理乘法运算符和除法运算符，因此必须区分这两种情况。 <strong>$&lt;op&gt;</strong> 变量包含 * 或 <strong>/</strong>  字符。</p>
+</div>
+<div class="paragraph">
+<p>这是具有三个项的字符串的语法树的样子，<code>3*4*5</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">expression =&gt; ｢3*4*5｣
+ term =&gt; ｢3*4*5｣
+  factor =&gt; ｢3｣
+   value =&gt; ｢3｣
+  op =&gt; ｢*｣
+  factor =&gt; ｢4｣
+   value =&gt; ｢4｣
+  op =&gt; ｢*｣
+  factor =&gt; ｢5｣
+   value =&gt; ｢5｣</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>正如您所看到的，顶层有 <strong>factor</strong> 和 <strong>op</strong> 条目。 您将在 action 中看到 <strong>$&lt;factor&gt;</strong> 和 <strong>$&lt;op&gt;</strong> 的值。 至少有一个 <strong>$&lt;factor&gt;</strong> 将始终可用。 节点的值已经知道并且在 <strong>ast</strong> 属性中可用。 因此，您需要做的就是遍历这两个数组的元素并执行乘法或除法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method term($/) {
+    my $result = $&lt;factor&gt;[0].ast;
+
+    if $&lt;op&gt; {
+        my @ops = $&lt;op&gt;.map(~*);
+        my @vals = $&lt;factor&gt;[1..*].map(*.ast);
+
+        for 0..@ops.elems - 1 -&gt; $c {
+            if @ops[$c] eq '*' {
+                $result *= @vals[$c];
+            }
+            else {
+                $result /= @vals[$c];
+            }
+        }
+    }
+    $/.make: $result;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在此代码片段中，星号出现在占位符的新角色中，该角色告诉 Perl 它应该处理此时可以获取的数据。 这听起来很奇怪，但它完美而直观地工作。</p>
+</div>
+<div class="paragraph">
+<p>带有运算符符号列表的 <code>@ops</code> 数组包含我们在对 <code>$&lt;op&gt;</code> 的值进行字符串化后得到的元素：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @ops = $&lt;op&gt;.map(~*);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>值本身将落在 <code>@vals</code> 数组中。 为了确保两个数组 <code>@vals</code> 和 <code>@ops</code> 的值彼此对应，得到从第二个元素开始的 <strong>$&lt;factor&gt;</strong> 的切片:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @vals = $&lt;factor&gt;[1..*].map(*.ast);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后，<strong>expression</strong> action 要么采用 <strong>group</strong> 的计算值，要么执行加法和减法的序列。 该算法接近 <strong>term</strong>  action 中的一个。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method expression($/) {
+    if $&lt;group&gt; {
+        $/.make: $&lt;group&gt;.ast
+    }
+    else {
+        my $result = $&lt;term&gt;[0].ast;
+
+        if $&lt;op&gt; {
+            my @ops = $&lt;op&gt;.map(~*);
+            my @vals = $&lt;term&gt;[1..*].map(*.ast);
+            for 0..@ops.elems -1 -&gt; $c {
+                if @ops[$c] eq '+' {
+                    $result += @vals[$c];
+                }
+                else {
+                    $result -= @vals[$c];
+                }
+            }
+        }
+        $/.make: $result;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>计算器的大部分代码都已准备就绪。 现在，我们需要从用户读取字符串，将其传递给解析器，然后打印结果。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $calc = Calc.parse(
+    @*ARGS[0],
+    :actions(CalcActions)
+);
+
+say $calc.ast;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>让我们看看它是否有效。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku calc.pl '39 + 3.14 * (7 - 18 / (505 - 502)) - .14'
+42</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它确实有效。</p>
+</div>
+<div class="paragraph">
+<p>在 github.com/ash/lang 上，您可以找到本章演示的代码的延续，它结合了语言翻译器和计算器，允许用户在变量赋值和打印指令中编写算术表达式。 这是一个解释器可以处理的示例：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">x = 40 + 2;
+print x;
+
+y = x - (5/2);
+print y;
+
+z = 1 + y * x;
+print z;
+
+print 14 - 16/3 + x;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</article>
+
+
+    
+
+  </main><section class="site__search">
+    <label class="site__form">
+        <p class="form__label">Search around the site</p> 
+        <input class="site__search-bar form__input" type="text">
+    </label>
+    <div class="site__search-bar-results"></div>
+</section>
+  
+  <footer class="site__footer">
+    
+    
+    <p class="footer__sign">© 2020 ohmyraku</p></footer>
+    
+
+    
+    <script>
+        window.addEventListener("load", function () {
+            const script = document.createElement("script");
+            script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+            script.async = true
+
+            document.head.appendChild(script);
+        })
+    </script>
+
+
+
+
+
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
+
+
+
+</body>
+</html>

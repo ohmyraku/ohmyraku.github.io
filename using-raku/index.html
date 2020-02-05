@@ -1,0 +1,2456 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> :: 山川异域, 风月同天</title>
+
+<meta name="author" content="ohmyraku">
+<meta name="application-name" content="山川异域, 风月同天">
+<meta name="description" content="Table of Contents 字符串 1. 1.1 使用字符串 1.1. 1. 你好, 世界! 1.2. 2. 跟人打招呼 1.3. 3. 字符串长度 1.4. 4. 唯一数字   2. 1.2 修改字符串数据 2.1. 5. 反转字符串 2.2. 6. 从字符串中移除空格 2.3. 7. 驼峰大小写 2.4. 8. 文件名递增 2.5. 9. 随机密码 2.6. 10. DNA 到 RNA 转换 2.7. 11. 凯撒密码   3. 1.3 文本分析 3.1. 12. 复数结尾 3.2. 13. 最常用单词 3.3. 14. 最长共同子串 3.4. 15. 回文测试 3.5. 16. 回文检验 3.6. 17.">
+<meta name="robots" content="noodp"/>
+<meta name="generator" content="Hugo 0.63.2" />
+<meta name="referrer" content="no-referrer" />
+<meta name="format-detection" content="telephone=no">
+
+<link rel="canonical" href="https://ohmyraku.github.io/using-raku/" />
+
+
+<link rel="icon" href="https://ohmyraku.github.io/logo.png" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="" />
+<meta name="twitter:description" content="Table of Contents 字符串 1. 1.1 使用字符串 1.1. 1. 你好, 世界! 1.2. 2. 跟人打招呼 1.3. 3. 字符串长度 1.4. 4. 唯一数字   2. 1.2 修改字符串数据 2.1. 5. 反转字符串 2.2. 6. 从字符串中移除空格 2.3. 7. 驼峰大小写 2.4. 8. 文件名递增 2.5. 9. 随机密码 2.6. 10. DNA 到 RNA 转换 2.7. 11. 凯撒密码   3. 1.3 文本分析 3.1. 12. 复数结尾 3.2. 13. 最常用单词 3.3. 14. 最长共同子串 3.4. 15. 回文测试 3.5. 16. 回文检验 3.6. 17." />
+<meta name="twitter:site" content="https://ohmyraku.github.io" />
+<meta name="twitter:creator" content="ohmyraku" />
+<meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
+<meta property="og:type" content="article" />
+<meta property="og:locale" content="en" />
+<meta property="og:name" content="ohmyraku" />
+<meta property="og:title" content="" />
+<meta property="og:url" content="https://ohmyraku.github.io" />
+<meta property="og:site_name" content="山川异域, 风月同天" />
+<meta property="og:description" content="Table of Contents 字符串 1. 1.1 使用字符串 1.1. 1. 你好, 世界! 1.2. 2. 跟人打招呼 1.3. 3. 字符串长度 1.4. 4. 唯一数字   2. 1.2 修改字符串数据 2.1. 5. 反转字符串 2.2. 6. 从字符串中移除空格 2.3. 7. 驼峰大小写 2.4. 8. 文件名递增 2.5. 9. 随机密码 2.6. 10. DNA 到 RNA 转换 2.7. 11. 凯撒密码   3. 1.3 文本分析 3.1. 12. 复数结尾 3.2. 13. 最常用单词 3.3. 14. 最长共同子串 3.4. 15. 回文测试 3.5. 16. 回文检验 3.6. 17." />
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Article",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https:\/\/ohmyraku.github.io\/using-raku\/"
+      },
+      "headline": "",
+      
+      "datePublished": "0001-01-01",
+      "dateModified": "0001-01-01 00:00:00 \x2b0000 UTC",
+      "author": {
+        "@type": "Person",
+        "name": "ohmyraku"
+      },
+      "description": "Table of Contents 字符串 1. 1.1 使用字符串 1.1. 1. 你好, 世界! 1.2. 2. 跟人打招呼 1.3. 3. 字符串长度 1.4. 4. 唯一数字   2. 1.2 修改字符串数据 2.1. 5. 反转字符串 2.2. 6. 从字符串中移除空格 2.3. 7. 驼峰大小写 2.4. 8. 文件名递增 2.5. 9. 随机密码 2.6. 10. DNA 到 RNA 转换 2.7. 11. 凯撒密码   3. 1.3 文本分析 3.1. 12. 复数结尾 3.2. 13. 最常用单词 3.3. 14. 最长共同子串 3.4. 15. 回文测试 3.5. 16. 回文检验 3.6. 17.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "https:\/\/ohmyraku.github.io",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https:\/\/ohmyraku.github.io\/logo.png"
+        }
+      }
+    }
+</script><link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
+<script>
+
+const theme = window.localStorage.getItem('theme'); 
+if (theme && theme !== "1") {
+    document.documentElement.classList.add('theme-' + theme);
+}
+</script>
+
+
+</head>
+<body>
+  <main class="site__content">
+    <div class="site__page">
+  <nav class="site__breadcrumbs">
+    <a class="site__breadcrumb" href="https://ohmyraku.github.io/">山川异域, 风月同天</a><a class="site__breadcrumb--active" href="https://ohmyraku.github.io/using-raku/"></a>
+</nav>
+
+<h1 class="page__title"></h1>
+  <div class="page__meta">
+    <p>
+    
+    <span class="page__date">
+    on <time datetime="0001-01-01T00:00:00Z">0001-01-01</time>
+    
+    </span>
+    </p>
+
+    
+
+    
+    </div>
+</div>
+
+
+</div>
+
+<article class="page__content" ><div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel0">
+<li><a href="#_字符串">字符串</a>
+<ul class="sectlevel1">
+<li><a href="#_1_1_使用字符串">1. 1.1 使用字符串</a>
+<ul class="sectlevel2">
+<li><a href="#_1_你好_世界">1.1. 1. 你好, 世界!</a></li>
+<li><a href="#_2_跟人打招呼">1.2. 2. 跟人打招呼</a></li>
+<li><a href="#_3_字符串长度">1.3. 3. 字符串长度</a></li>
+<li><a href="#_4_唯一数字">1.4. 4. 唯一数字</a></li>
+</ul>
+</li>
+<li><a href="#_1_2_修改字符串数据">2. 1.2 修改字符串数据</a>
+<ul class="sectlevel2">
+<li><a href="#_5_反转字符串">2.1. 5. 反转字符串</a></li>
+<li><a href="#_6_从字符串中移除空格">2.2. 6. 从字符串中移除空格</a></li>
+<li><a href="#_7_驼峰大小写">2.3. 7. 驼峰大小写</a></li>
+<li><a href="#_8_文件名递增">2.4. 8. 文件名递增</a></li>
+<li><a href="#_9_随机密码">2.5. 9. 随机密码</a></li>
+<li><a href="#_10_dna_到_rna_转换">2.6. 10. DNA 到 RNA 转换</a></li>
+<li><a href="#_11_凯撒密码">2.7. 11. 凯撒密码</a></li>
+</ul>
+</li>
+<li><a href="#_1_3_文本分析">3. 1.3 文本分析</a>
+<ul class="sectlevel2">
+<li><a href="#_12_复数结尾">3.1. 12. 复数结尾</a></li>
+<li><a href="#_13_最常用单词">3.2. 13. 最常用单词</a></li>
+<li><a href="#_14_最长共同子串">3.3. 14. 最长共同子串</a></li>
+<li><a href="#_15_回文测试">3.4. 15. 回文测试</a></li>
+<li><a href="#_16_回文检验">3.5. 16. 回文检验</a></li>
+<li><a href="#_17_最长回文">3.6. 17. 最长回文</a></li>
+<li><a href="#_18_找出重复文本">3.7. 18. 找出重复文本</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_数字">数字</a>
+<ul class="sectlevel1">
+<li><a href="#_2_1_使用数字">4. 2.1 使用数字</a>
+<ul class="sectlevel2">
+<li><a href="#_19_π">4.1. 19 π</a></li>
+<li><a href="#_20_阶乘">4.2. 20. 阶乘!</a></li>
+<li><a href="#_21_斐波那契数">4.3. 21. 斐波那契数</a></li>
+<li><a href="#_22_打印平方">4.4. 22. 打印平方</a></li>
+<li><a href="#_23_二的幂">4.5. 23. 二的幂</a></li>
+<li><a href="#_24_奇数和偶数">4.6. 24. 奇数和偶数</a></li>
+<li><a href="#_25_近似地比较数值">4.7. 25. 近似地比较数值</a></li>
+<li><a href="#_26_大数相乘">4.8. 26. 大数相乘</a></li>
+<li><a href="#_27_素数">4.9. 27. 素数</a></li>
+<li><a href="#_28_素数列表">4.10. 28. 素数列表</a></li>
+<li><a href="#_29_素数分解">4.11. 29. 素数分解</a></li>
+<li><a href="#_30_分数化简">4.12. 30. 分数化简</a></li>
+<li><a href="#_31_除零">4.13. 31. 除零</a></li>
+</ul>
+</li>
+<li><a href="#_2_2_随机数">5. 2.2 随机数</a>
+<ul class="sectlevel2">
+<li><a href="#_32_生成随机数">5.1. 32. 生成随机数</a></li>
+<li><a href="#_33_冯诺伊曼随机数">5.2. 33. 冯·诺伊曼随机数</a></li>
+<li><a href="#_34_随机数直方图">5.3. 34. 随机数直方图</a></li>
+</ul>
+</li>
+<li><a href="#_2_3_数学问题">6. 2.3 数学问题</a>
+<ul class="sectlevel2">
+<li><a href="#_36_标准差">6.1. 36. 标准差</a></li>
+<li><a href="#_37_极座标">6.2. 37. 极座标</a></li>
+<li><a href="#_38_蒙特卡洛法">6.3. 38. 蒙特卡洛法</a></li>
+</ul>
+</li>
+<li><a href="#_2_4_数字和字符串">7. 2.4 数字和字符串</a>
+<ul class="sectlevel2">
+<li><a href="#_39_unicode_数字">7.1. 39. Unicode 数字</a></li>
+<li><a href="#_40_猜数字">7.2. 40. 猜数字</a></li>
+<li><a href="#_41">7.3. 41.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="_字符串" class="sect0">字符串</h1>
+<div class="sect1">
+<h2 id="_1_1_使用字符串">1. 1.1 使用字符串</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_1_你好_世界">1.1. 1. 你好, 世界!</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">print 'Hello, World!'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>有两个内置函数可打印到控制台：<strong>print</strong> 和 <strong>say</strong>。 两者都打印其参数，但是 <strong>say</strong> 例程另外以换行符结束输出。</p>
+</div>
+<div class="paragraph">
+<p>因此，最快的解决方案是使用 <strong>say</strong> 并传递不带换行符的字符串：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'Hello, World!'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>另一种解决方案是使用 <strong>print</strong> 并在字符串本身中包含 <strong>\n</strong> 字符：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">print "Hello, World!\n"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>两个程序的输出是一样的：</p>
+</div>
+<div class="paragraph">
+<p><strong>Hello, World!</strong></p>
+</div>
+<div class="paragraph">
+<p>注意单引号和双引号之间的区别：单引号不会插入 <strong>\n</strong> 等特殊字符，而双引号会插入。 对于不带特殊字符的字符串使用双引号是没有错的，但是当您不希望在字符串中使用变量并且不需要插值变量时，最好使用适当的引号样式。</p>
+</div>
+<div class="paragraph">
+<p>在上面的示例中要看的另一件事是，单行程序不需要分号。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_跟人打招呼">1.2. 2. 跟人打招呼</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>询问用户的名字，并通过打印"你好, &lt;名字&gt;!" 来打招呼。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Raku 提供了一个简单的  <strong>prompt</strong> 函数，该函数执行两种操作：打印提示并读取输入。 因此，使用它的程序可能如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'Hello, ' ~ prompt('Enter your name: ') ~ '!';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>~</strong> 运算符代表字符串连接。 请勿被此代码中的文本字符串顺序所困扰。 为了构建字符串，Raku 需要拥有所有零件。 其中两个('Hello' 和 '!') 由文字字符串表示，而中间部分则需要用户输入。 因此，整个程序的流程仍然合乎逻辑：</p>
+</div>
+<div class="paragraph">
+<p><strong>Enter your name: Andy</strong>
+<strong>Hello, Andy!</strong></p>
+</div>
+<div class="paragraph">
+<p>如果您更喜欢传统的程序流程，请将其拆分为不同的部分，然后将变量插入到字符串中：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $name = prompt('Enter your name: ');
+say "Hello, $name!";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>或者，可以使用 <strong>get</strong> 函数。 它返回没有换行符的输入行。 现在，打印提示消息是您的责任：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">print 'Enter your name: ';
+my $name = get();
+say "Hello, $name!";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>get</strong> 函数可以在 $*IN 变量上作为方法调用, 它默认连接到标准输入：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $name = $*IN.get();</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_字符串长度">1.3. 3. 字符串长度</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>打印字符串的长度。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>默认情况下，Raku 语言将所有字符串作为 UTF-8 处理。 这就是为什么有多个参数描述字符串长度的原因。 实际上，<strong>length</strong> 例程不存在，尝试使用它会发出错误消息，并带有一些提示，提示您可以使用其他方法。</p>
+</div>
+<div class="paragraph">
+<p>要以字符数的形式获取字符串的长度，请使用 <strong>chars</strong> 方法：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'hello'.chars;  # 5
+say 'café'.chars;   # 4
+say 'привет'.chars; # 6</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>结果反映了直观的期望，并不依赖于字符的实际表示。 第一个字符串适合 ASCII 表，第二个字符串仍可以采用 8 位编码 Latin-1编码，而第三个字符串在 UTF-8 编码中每个字符需要两个字节。</p>
+</div>
+<div class="paragraph">
+<p>另一种方法，<strong>codes</strong>，返回 Unicode 空间中的代码点数值。 对于上述示例，<strong>chars</strong> 和 <strong>codes</strong> 都返回相同的数字，因为所有字符都可以由单个代码点表示。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'hello'.codes;  # 5
+say 'café'.codes;   # 4
+say 'привет'.codes; # 6</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>尽管在使用组合字符时，您可以创建一个字符，该字符在 Unicode 表中作为单独的字符不存在。 在这种情况下，<strong>chars</strong> 和 <strong>codes</strong> 的结果可能会有所不同。</p>
+</div>
+<div class="paragraph">
+<p>考虑一个由两个元素组成的字符的示例：拉丁字母 <strong>x</strong> 和一个组合字符 <strong>COMBINING OGONEK</strong>。 它们一起形成一个不存在的字母，该字母是一个字符，但有两个代码点：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'x̨'.chars; # 1
+say 'x̨'.codes; # 2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>让我们深入研究一下上述字符如何以 UTF-8 编码表示。 它由两部分组成：<strong>LATIN SMALL LETTER X</strong> 和组合字符 <strong>COMBINING OGONEK</strong>。 该字母本身是一个1字节的代码 <strong>0x78</strong>，并且组合字符具有 Unicode 入口点 <strong>0x328</strong>，并且在 UTF-8 中需要两个字节：<strong>0xCC 0xA8</strong>。</p>
+</div>
+<div class="paragraph">
+<p>让我们通过显式指定组合字符的代码点来重写示例：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "x\x[0328]".chars; # 1
+say "x\x[0328]".codes; # 2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>上面的示例是关于 Unicode 中作为单个代码点不存在的字符的。 现在，让我们使用另一个字母，例如 <strong>e</strong>，它形成具有相同组合字符的现有字符：<strong>ę</strong>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'ę'.chars; # 1
+say 'ę'.codes; # 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这种情况下，<strong>chars</strong> 和  <strong>codes</strong> 方法均返回 1。即使使用显式组合字符构建字符串，<strong>codes</strong> 方法也会将其强制返回到正确的代码点，并且不会将其视为单独的代码：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "e\x[0328]".chars; # 1
+say "e\x[0328]".codes; # 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>因此，在许多情况下，要获取字符串的长度，使用对该字符串调用的 <strong>chars</strong> 方法就足够了。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_唯一数字">1.4. 4. 唯一数字</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>从给定的整数数字中打印唯一数。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>如果将整数立即转换为字符串，则可以轻松解决该任务。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $number = prompt('Enter number&gt; ');
+say $number.comb.unique.sort.join(', ');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>不带参数调用的 <strong>comb</strong> 方法将字符串拆分为单独的字符。 该方法在 <strong>Str</strong> 类中定义； 因此，<strong>$number</strong> 首先转换为字符串。 可以将其明确地写为：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$number.Str.comb</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意，在使用 <strong>$number.split('')</strong>  的情况下，空元素被添加到数组的开头和结尾。</p>
+</div>
+<div class="paragraph">
+<p>此时，初始编号位于数组中，该数组的每个元素是 <strong>$number</strong> 中的数字。</p>
+</div>
+<div class="paragraph">
+<p>取得数组的唯一元素不需要任何手写程序-因为 <strong>Array</strong> 类包含一个特殊的方法：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$number.comb.unique</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后，为了使结果更好看，对唯一数字数组进行排序并以逗号分隔的列表形式进行打印：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$number.comb.unique.sort.join(', ')</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>与其单独调用 <strong>say</strong> 函数，不如在结果字符串上将它作为方法来调用：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$number.comb.unique.sort.join(', ').say;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_2_修改字符串数据">2. 1.2 修改字符串数据</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_5_反转字符串">2.1. 5. 反转字符串</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>从右到左以相反的顺序打印字符串。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>字符串或 <strong>Str</strong> 类的对象具有 <strong>flip</strong> 方法，该方法可以完成工作：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $string = 'Hello, World!';
+say $string.flip;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这段代码打印出想要的结果：</p>
+</div>
+<div class="paragraph">
+<p><strong>!dlroW ,olleH</strong></p>
+</div>
+<div class="paragraph">
+<p><strong>flip</strong> 例程既可以作为字符串上的方法又可以作为独立函数来调用：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say flip 'Abcdef'; # fedcbA
+say 'Word'.flip;   # droW</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>不要忘了 <strong>say</strong> 也可以作为方法调用：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">'Magic'.flip.say; # cigaM</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>还有 <strong>reverse</strong> 例程，但是不能直接应用于字符串。 它接受列表，因此首先必须将字符串转换为字符列表，然后反转，然后再次连接为字符串。</p>
+</div>
+<div class="paragraph">
+<p>这是根据此描述起作用的代码。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $string = 'Hello, World!';
+my $reversed = $string.split('').reverse().join('');
+say $reversed; # !dlroW ,olleH</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_6_从字符串中移除空格">2.2. 6. 从字符串中移除空格</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>从给定的字符串中删除前导，尾随和双侧空格。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>当您需要清除用户输入时（例如从 Web 表单中清除用户输入，例如名称中的前导或尾随空格很可能是用户错误，应将其删除），通常会发生此任务。</p>
+</div>
+<div class="paragraph">
+<p>删除单词之间的双侧空格和多个空格可以通过使用替换来解决：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $string = 'Hello, World!';
+$string ~~ s:g/\s+/ /;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>不要忘记使用 <code>:g</code> 副词使替换全局，以查找所有出现重复空格的地方。</p>
+</div>
+<div class="paragraph">
+<p>可以使用 <strong>trim</strong> 例程删除前导空格和尾随空格：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $string = ' Hello, World! ';
+say trim($string);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>trim</strong> 例程作为一个独立的函数存在，如前面的示例所示，还有 <strong>Str</strong> 类的方法，因此可以在变量或字符串上调用它：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $string.trim;
+say ' Hello, World! '.trim;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>还有两个例程，<strong>trim-leading</strong> 和 <strong>trim-trailing</strong>，它们仅删除前导空格或尾随空格。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say '¡' ~ ' Hi '.trim-leading;  # ¡Hi
+say ' Hi '.trim-trailing ~ '!'; # Hi!</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_7_驼峰大小写">2.3. 7. 驼峰大小写</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>根据给定的短语创建一个驼峰式标识符。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>在为任何编程语言中的变量，函数和类选择名称时，遵循某种模式是一个好习惯。 在 Raku 中，标识符区分大小写，并且与许多其他语言不同，允许使用连字符。 因此，可接受 <strong>$max-span</strong> 之类的变量名或 <strong>celsius-to-fahrenheit</strong> 之类的函数名。</p>
+</div>
+<div class="paragraph">
+<p>在此任务中，我们将从给定的短语中形成 <strong>CamelCase</strong> 变量名称。 以这种风格创建的名称由几个词组成； 每个字母都以大写字母开头。</p>
+</div>
+<div class="paragraph">
+<p>这是执行所需转换的程序：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $text = prompt('Enter short text &gt; ');
+my $CamelName = $text.comb(/\w+/).map({.tclc}).join('');
+say $CamelName;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>所有操作均按一系列方法调用完成。 使用带有正则表达式 <strong>/\w+/</strong> 的 <strong>comb</strong> 方法从输入 <strong>$text</strong> 中选择单词。 然后，使用 <strong>tclc</strong> 方法映射找到的每个单词，这等效于链式调用 <strong>.tc.lc</strong>：</p>
+</div>
+<div class="paragraph">
+<p>裸点表示在默认变量 <strong>$_</strong> 上调用该方法，该变量被重复设置为当前元素。 在 Raku 中，没有 <strong>ucfirst</strong> 方法可以使文本的首字母大写。 相反，我们使用 <strong>tc</strong> 方法（tc表示标题大小写），并在 <strong>lc</strong> 调用的结果上调用它，以确保在调用 <strong>.tclc</strong> 之后，除第一个字母外，所有字母均为小写字母。 最后，借助 <strong>join</strong> 方法将数组的元素连接在一起。 完成所有转换后，输入字符串 'Hello, World!' 将变为 <strong>HelloWord</strong>。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_8_文件名递增">2.4. 8. 文件名递增</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>创建一组这样的文件名：file1.txt, file2.txt, 等等。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Raku 允许直接递增这些类型的文件名：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $filename = 'file0.txt';
+for 1..5 {
+    $filename++;
+    say $filename;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个程序打印出一组连续的文件名:</p>
+</div>
+<div class="paragraph">
+<p><strong>file1.txt</strong>
+<strong>file2.txt</strong>
+<strong>file3.txt</strong>
+<strong>file4.txt</strong>
+<strong>file5.txt</strong></p>
+</div>
+<div class="paragraph">
+<p>请注意，达到 9 后，文件中的 <strong>e</strong> 字母将递增。 因此，file9.txt 之后是 filf0.txt。 为防止这种情况，请在模板中添加足够的零：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $filename = 'file000.txt';
+for 1..500 {
+    $filename++;
+    say $filename;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，该序列从 file001.txt 开始，并继续到 file500.txt。</p>
+</div>
+<div class="paragraph">
+<p>模板中的多个文件扩展名（例如 file000.tar.gz）也已正确处理，因此数字部分将递增。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_9_随机密码">2.5. 9. 随机密码</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>生成可以用作密码的随机字符串。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>一种可能的解决方案如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say ('0' .. 'z').pick(15).join('');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>没有参数的 <strong>pick</strong> 方法从 0 到 z 之间的 ASCII 字符范围内获取随机元素。 在上面的示例中，调用 <strong>pick(15)</strong> 选择 15 个不同的字符，然后使用 <strong>join</strong> 方法将它们结合在一起。</p>
+</div>
+<div class="paragraph">
+<p>重要的是要了解挑选方法的两个关键特征。 首先，当使用大于1的整数参数调用时，结果仅包含唯一元素。 因此，密码中的所有字符都不同。</p>
+</div>
+<div class="paragraph">
+<p>第二个特征是第一个特征的结果。 如果提供的元素列表不够长，并且其长度小于 <strong>pick</strong> 参数，则结果与原始数据列表一样长。</p>
+</div>
+<div class="paragraph">
+<p>要查看用于生成密码的元素，请使用大于整个ASCII序列的数字运行代码：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say ('0' .. 'z').pick(1000).sort.join('');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>通过此请求，您将看到参与形成随机密码的所有字符：</p>
+</div>
+<div class="paragraph">
+<p><strong>0123456789:;&lt;&#8658;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`</strong>
+<strong>abcdefghijklmnopqrstuvwxyz</strong></p>
+</div>
+<div class="paragraph">
+<p>生成密码的示例: 05&lt;EV]^bdfhnpyz.</p>
+</div>
+<div class="paragraph">
+<p>要限制字符范围，请在密码中列出要查看的字符：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @chars = '0' ... '9', 'A' ... 'Z', 'a' ... 'z';
+say @chars.pick(15).join('');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，密码仅包含字母数字符号：2zOIySp5PHb08Ql。</p>
+</div>
+<div class="paragraph">
+<p><strong>&#8230;&#8203;</strong> 运算符创建一个序列。 警告不要使用 <strong>..</strong> 运算符，它会创建一个范围，在这种情况下，<strong>@chars</strong> 数组是范围的数组，而不是单个字符的平面数组。</p>
+</div>
+<div class="paragraph">
+<p>该解决方案非常优雅，不需要显式使用 <strong>rand</strong> 函数。 都不需要循环。</p>
+</div>
+<div class="paragraph">
+<p>现在，让我们以可以在结果中重复字符的方式解决任务。 仍然可以使用 <strong>pick</strong> 方法，但应单独调用几次。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $password = '';
+$password ~= ('0' .. 'z').pick() for 1..15;
+say $password;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，密码可以包含多个相同字符，例如：jn@09Icoys@tD;o。</p>
+</div>
+<div class="paragraph">
+<p>要获取唯一字符的字符串，请使用 <strong>pick</strong> 方法而不是 <strong>roll</strong>。 使用 <strong>roll</strong> 时，必须确保字符源列表大于密码长度。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $password = '';
+$password ~= ('0' .. 'z').roll() for 1..15;
+say $password;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>多次运行该代码，以确认您生成的密码完全不同，并且包含的相同字符不止一次。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_10_dna_到_rna_转换">2.6. 10. DNA 到 RNA 转换</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="literalblock">
+<div class="content">
+<pre>将给定的 DNA 序列转换为互补 RNA。</pre>
+</div>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>我们不会深入探讨问题的生物学方面。 对我们而言，重要的是 DNA 是包含四个字母 A，C，G 和 T 的字符串，而 RNA 是包含 A，C，G 和 U 的字符串。从 DNA 到 RNA 的根据下表进行转化：</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>DNA    A    C    G    T
+RNA    U    G    C    A</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 <strong>Str</strong> 类中，定义了 <strong>trans</strong> 方法； 它接收成对的"旧字符-新字符"。 因此，要从 DNA 转换为 RNA，让我们将上面的表格写为哈希并与 <strong>trans</strong> 方法一起使用：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my %transcription =
+    A =&gt; 'U', C =&gt; 'G', G =&gt; 'C', T =&gt; 'A';
+
+my $dna = 'ACCATCAGTC';
+my $rna = $dna.trans(%transcription);
+say $rna; # UGGUAGUCAG</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>trans</strong> 方法接受一些替代其行为的属性。 例如，<strong>:squash</strong> 属性删除重复的字符。 这可能在生物学上没有意义，但可以为我们做一个练习：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $dna.trans(%transcription, :squash); # UGUAGUCAG</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>也可以替换一个以上字符的序列。 例如：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $dna.trans('ACCA' =&gt; 'UGGU', 'TCA' =&gt; 'AGU', 'GTC' =&gt; 'CAG');</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_11_凯撒密码">2.7. 11. 凯撒密码</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>使用凯撒密码技术对消息进行编码。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>凯撒（Caesar）代码是一种对消息的字母进行代码转换的简单方法，因此，每个字母都可以替换为字母 N 位置中早晚出现的字母。</p>
+</div>
+<div class="paragraph">
+<p>例如，如果 N 为 4，则字母 e 变为 a，f 转换为 b，依此类推。将字母循环，以使 z 变为 v，而字母 a 至 d 变为 w 至 z。</p>
+</div>
+<div class="paragraph">
+<p><strong>Str</strong> 数据类型配备了 <strong>trans</strong> 方法，我们在任务 10（DNA 到 RNA 的转录）中看到了这种方法。 在替换配方中使用范围也很容易：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $message = 'hello, world!';
+my $secret = $message.trans(
+    ['a' .. 'z'] =&gt;
+    ['w' .. 'z', 'a' .. 'v']
+);
+say $secret; # dahhk, sknhz!</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>您可以通过将原始消息翻译回原样来阅读原始消息方法，但交换数组：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $secret.trans(
+    ['w' .. 'z', 'a' .. 'v'] =&gt;
+    ['a' .. 'z']
+);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>尝试修改解决方案，以使其也可用于包含大写字母的字符串。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_3_文本分析">3. 1.3 文本分析</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_12_复数结尾">3.1. 12. 复数结尾</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>根据旁边的数字，以正确的形式（单数或复数）放置名词。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>在程序输出中，通常需要打印一些数字，后跟一个名词，例如：</p>
+</div>
+<div class="paragraph">
+<p><strong>10 files copied</strong></p>
+</div>
+<div class="paragraph">
+<p>如果只有一个文件，则应改为 "1 file copied"。 让我们看看该语言如何提供帮助。</p>
+</div>
+<div class="paragraph">
+<p>当然，使用字符串连接单独打印一个名词以使整个短语很容易：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for 1, 2, 3 -&gt; $n {          # Program output:
+    my $word = 'file';       # 1 file found
+    $word ~= 's' if $n &gt; 1;  # 2 files found
+    say "$n $word found";    # 3 files found
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>将单词选择插值到字符串本身中也是一种好习惯，这样可以避免额外的代码行并摆脱临时变量。</p>
+</div>
+<div class="paragraph">
+<p>以下程序生成相同的输出：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for 1, 2, 3 -&gt; $n {
+    say "$n file{'s' if $n &gt; 1} found";
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>字符串中大括号中的代码块包含常规的 Raku 代码。 如果数字 <strong>$n</strong> 大于1，则返回 s。 注意，这里不需要使用三元运算符。 一个后缀，如果看起来很不解。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_13_最常用单词">3.2. 13. 最常用单词</h3>
+<div class="paragraph">
+<p>在给定的文本中查找最常见的单词。</p>
+</div>
+<div class="paragraph">
+<p>要查找最常用的单词，您需要首先查找文本中的所有单词。</p>
+</div>
+<div class="paragraph">
+<p>可以通过全局正则表达式 <strong>m:g/(\w+)/</strong> 或使用 <strong>comb</strong> 方法来完成。 该方法返回所有匹配的子字符串的列表。 在解决任务的以下示例中，将正则表达式匹配放置在 for 循环内，该循环立即更新 <strong>%count</strong> 哈希，从而保留每个找到的单词的出现次数。 为了不区分大小写地计数单词，首先使用 <strong>lc</strong> 字符串方法将 <strong>$text</strong> 值小写。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $text = prompt('Text&gt; ');
+my %count;
+%count{$_}++ for $text.lc.comb(/\w+/);
+say (sort {%count{$^b} &lt;=&gt; %count{$^a}}, %count.keys)[0];</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>sort</strong> 函数使用单词频率作为排序参数对哈希进行排序。 然后，获取并打印第一个元素 <strong>[0]</strong>。</p>
+</div>
+<div class="paragraph">
+<p>在不同的文本上测试该程序以查看其工作方式。 您可能会注意到，即使其他单词出现的次数相同，该程序也只会打印一个单词。 要解决该问题，请提取重复次数并过滤 <strong>%count</strong> 哈希以查找符合此条件的所有单词。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $max = %count{(sort {%count{$^b} &lt;=&gt; %count{$^a}},
+                 count.keys)[0]};
+.say for %count.keys.grep({%count{$_} == $max});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该程序在 <strong>%count</strong> 中打印所有具有最大值的单词。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_14_最长共同子串">3.3. 14. 最长共同子串</h3>
+<div class="paragraph">
+<p>在给定的两个字符串中找到最长的公共子字符串。</p>
+</div>
+<div class="paragraph">
+<p>让我们限制自己仅查找第一个最长的子字符串。 如果存在更多相同长度的子字符串，则其余子字符串将被忽略。 第一个字符串(<strong>$a</strong>)有两个循环（另请参阅任务17，最长回文），它们使用 <strong>index</strong> 方法在第二个字符串(<strong>$b</strong>)中搜索子字符串。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = 'the quick brown fox jumps over the lazy dog';
+my $b = 'what does the fox say?';
+
+my $common = '';
+for 0 .. $a.chars -&gt; $start {
+    for $start ..^ $a.chars -&gt; $end {
+        my $s = $a.substr($start, $a.chars - $end);
+        if $s.chars &gt; $common.chars &amp;&amp; $b.index($s).defined {
+            $common = $s;
+        }
+    }
+}
+
+say $common
+    ?? "The longest common substring is '$common'."
+    !! 'There are no common substrings.';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果在字符串 <strong>$b</strong> 中找到了子字符串 <strong>$s</strong>，则 <strong>index</strong> 方法返回其位置。 检查是否找到了子字符串有些棘手，因为在字符串的开头找到子字符串时，返回的值为0（因为0是子字符串的位置）。 如果未找到子字符串，则返回 <strong>Nil</strong>。 <strong>Nil</strong> 不是数字值； 因此，无法使用 <strong>==</strong> 或 <strong>!=</strong> 运算符进行比较。 使用定义的方法检查 <strong>index</strong> 是否返回值，而不是 <strong>Nil</strong>：<strong>$b.index($s).defined</strong>。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_15_回文测试">3.4. 15. 回文测试</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>判断两个单词是否彼此相同。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>字谜是由相同字母组成的单词或短语。 我们仅从检查单词开始。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = prompt('First word &gt; ');
+my $b = prompt('Second word &gt; ');
+
+say normalize($a) eq normalize($b)
+    ?? 'Anagrams.' !! 'Not anagrams.';
+
+sub normalize($word) {
+    return $word.comb.sort.join('');
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>存储在 <strong>$a</strong> 和 <strong>$b</strong> 变量中的单词通过标准化函数传递，该函数将单词转换为字符串，所有字母均按字母顺序排序。 例如，"hello" 字符串变为 "ehllo"。 如果两个词都可以归一化为相同的形式，则它们就是字谜。</p>
+</div>
+<div class="paragraph">
+<p>为了使程序接受短语，让我们修改 <strong>normalize</strong> 函数，以便它删除短语中的空格并使所有字母小写：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub normalize($word) {
+    return $word.lc.comb.sort.join('').trans(' ' =&gt; '');
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>上面的方法调用链有两个附加功能：<strong>lc</strong> 将字符串转换为小写版本，<strong>trans</strong> 方法将所有空格替换为空字符串。 完成这些更改后，"Hello World" 短语将变为 "dehllloorw"。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_16_回文检验">3.5. 16. 回文检验</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>检查输入的字符串是否回文。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>回文是可以从两端读取的字符串：从左到右或从右到左。 首先，从简单的情况开始，即字符串仅包含字母。 （因此，空格和标点符号不会影响任何内容。）</p>
+</div>
+<div class="paragraph">
+<p>在任务5中，“反转字符串”使用 <strong>flip</strong> 方法来反转字符串。 要检查它是否是回文，请将该字符串与其翻转版本进行比较。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $string = prompt('Enter a string: ');
+my $is_palindrome = $string eq $string.flip;
+
+say 'The string is ' ~
+    (!$is_palindrome ?? 'not ' !! '') ~
+    'palindromic.';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>此代码与 ABBA 或 madam 或 kayak 等单个单词搭配使用效果很好。</p>
+</div>
+<div class="paragraph">
+<p>让我们迈出下一步，教该程序如何使用包含空格和标点符号的句子。 要删除所有非字母字符，正则表达式是一个不错的选择：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$string ~~ s:g/\W+//;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>\W+</strong> 正则表达式与所有非单词字符匹配。 它们的所有出现都将从字符串中删除（不替换任何内容）。 <strong>:g</strong> 副词告诉正则表达式重复扫描整个字符串。</p>
+</div>
+<div class="paragraph">
+<p>此外，字符串应小写：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$string .= lc;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 <strong>$string</strong> 上调用 <strong>lc</strong> 方法，并将结果分配回同一变量。 此构造等效于以下内容：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$string = $string.lc;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>将这两行添加到程序中：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $string = prompt('Enter a string: ');
+
+$string ~~ s:g/\W+//;
+$string .= lc;
+
+my $is_palindrome = $string eq $string.flip;
+
+say 'The string is ' ~
+    (!$is_palindrome ?? 'not ' !! '') ~
+    'palindromic.';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>检查修改后的程序是否包含一些随机句子和一些密码：</p>
+</div>
+<div class="paragraph">
+<p><strong>Never odd or even.</strong>
+<strong>Was it a rat I saw?</strong>
+<strong>Mr. Owl ate my metal worm.</strong></p>
+</div>
+<div class="paragraph">
+<p>就这样。 作为额外的笔划，最好是稍微简化连接的字符串并使用插值法：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $string = prompt('Enter a string: ');
+$string ~~ s:g/\W+//;
+$string .= lc;
+
+my $is_palindrome = $string eq $string.flip;
+my $not = $is_palindrome ?? '' !! ' not';
+say "The string is$not palindromic.";</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_17_最长回文">3.6. 17. 最长回文</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>在给定的字符串中找到最长的回文子字符串。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>解决方案的主要思想是使用宽度可变的窗口扫描字符串。 换句话说，从给定字符开始，测试该位置处所有可能长度的子字符串。</p>
+</div>
+<div class="paragraph">
+<p>对于字符串 <strong>$string</strong>，这是组织循环的方式：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for 0 .. $length -&gt; $start {
+    for $start .. $length - 1 -&gt; $end {
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，使用为 <strong>Str</strong> 类型的对象定义的substr方法提取子字符串，并执行类似于任务 16，回文测试的解决方案。 在这里，我们必须小心检查回文，而不考虑非字母字符，而是将结果保存为原始字符串的一部分。 为此，将创建子字符串的副本。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $substring = $string.substr($start, $length - $end);
+my $test = $substring;
+$test ~~ s:g/\W+//;
+$test .= lc;
+
+if $test eq $test.flip &amp;&amp; $substring.chars &gt; $found.chars {
+    $found = $substring;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>临时结果保存在 <strong>$found</strong> 变量中。 该算法跟踪第一个最长回文子串。 如果有多个相同长度的子字符串，则将其忽略。</p>
+</div>
+<div class="paragraph">
+<p>这是程序的完整代码。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $string = prompt('Enter string&gt; ');
+my $length = $string.chars;
+my $found = '';
+
+for 0 .. $length -&gt; $start {
+    for $start .. $length - 1 -&gt; $end {
+        my $substring =
+            $string.substr($start, $length - $end);
+        my $test = $substring;
+        $test ~~ s:g/\W+//;
+        $test .= lc;
+        if $test eq $test.flip &amp;&amp;
+            $substring.chars &gt; $found.chars {
+                $found = $substring;
+        }
+    }
+}
+if $found {
+    say "The longest substring is '$found'.";
+} else {
+    say "No palindromic substrings found.";
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>运行该程序，并查看其工作方式。</p>
+</div>
+<div class="paragraph">
+<p><strong>Enter string&gt; Hello, World!</strong>
+<strong>The longest substring is 'o, Wo'.</strong></p>
+</div>
+<div class="paragraph">
+<p>作为作业，请修改代码，以便它可以跟踪多个相同长度的回文子字符串。 例如，如果发现更长的回文，则可以将候选人保留在一个数组中并重新初始化。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_18_找出重复文本">3.7. 18. 找出重复文本</h3>
+<div class="paragraph">
+<p>在同一文本中查找重复的片段。</p>
+</div>
+<div class="paragraph">
+<p>当我意识到我在本书正文的不同部分使用相同的短语时，这项任务是由实际需要决定的。 其中有些是不可避免的，例如 Hello，World !，但这对找到其余部分将有很大帮助。</p>
+</div>
+<div class="paragraph">
+<p>这是完整的解决方案，该解决方案从标准输入中扫描文本并查找在文本中出现多次的 N 个单词的序列。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $text = $*IN.slurp; $text .= lc;
+$text ~~ s:g/\W+/ /;
+my $length = $text.chars;
+
+my %phrases;
+my $start = 0;
+while $text ~~ m:c($start)/(&lt;&lt; [\w+] ** 5 %% \s &gt;&gt;) .+ $0/ {
+    $start = $0.from + 1;
+    %phrases{$0}++;
+
+    print (100 * $start / $length).fmt('%i%% ');
+    say $0;
+}
+
+say "\nDuplicated strings:";
+
+for %phrases.keys.sort({%phrases{$^b} &lt;=&gt; %phrases{$^a}}) {
+    say "$_ = " ~ %phrases{$_} + 1;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该程序相对复杂，因此让我们逐一检查它。</p>
+</div>
+<div class="paragraph">
+<p>首先，程序使用 $\*IN.slurp 调用读取输入，该输入返回整个输入文本。它读取所有行，并从中创建一个字符串变量。在 <strong>$text</strong> 变量上调用的 <strong>.=lc</strong> 方法使字符串小写，并将其分配回该变量。</p>
+</div>
+<div class="paragraph">
+<p>通过替换 <strong>s/\W++/</strong>，所有非字母数字序列都用空格替换。因此，例如，我们消除了所有标点符号。</p>
+</div>
+<div class="paragraph">
+<p>准备工作的最后一步是将文本的长度保存在变量中，以便我们稍后在程序中直接使用它，而不是调用 <strong>chars</strong> 方法（请参阅任务3，字符串长度）。</p>
+</div>
+<div class="paragraph">
+<p>现在，主循环开始。它的目标是获取在文本中至少出现两次的所有五个单词序列，并将它们放入 <strong>%phrases</strong> 哈希中。每次找到该短语的另一个副本时，<strong>%phrases</strong> 哈希中的值都会增加。在循环的最后，散列包含每个这样的五个单词序列的出现次数。</p>
+</div>
+<div class="paragraph">
+<p>查看找到重复项的正则表达式：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">m:c($start)/(&lt;&lt; [\w+] ** 5 %% \s &gt;&gt;) .+ $0/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它的主要部分 &lt;&lt; [\w+] <strong> 5 %% \s &gt;&gt;，找到五个用空格分隔的单词。 &lt;&lt; 和 &gt;&gt; 锚点固定在单词边界上，[\w+ </strong> 5] 是五个单词的序列，在 %% 子句中提到了分隔符：%% \s。 然后，正则表达式需要正好匹配的短语的副本，这是正则表达式中 $0 变量的工作。</p>
+</div>
+<div class="paragraph">
+<p>最后，带有参数-<strong>$start</strong>值的 <strong>:c</strong> 副词使正则表达式与以 <strong>$start</strong> 位置开始的字符串匹配。 根据找到的第一个短语的位置，该计数器在循环体内递增：<strong>$start = $0.from + 1</strong>。</p>
+</div>
+<div class="paragraph">
+<p>程序的其余部分将结果打印为表格。 它对找到的短语进行排序，并显示最频繁的短语。</p>
+</div>
+</div>
+</div>
+</div>
+<h1 id="_数字" class="sect0">数字</h1>
+<div class="sect1">
+<h2 id="_2_1_使用数字">4. 2.1 使用数字</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_19_π">4.1. 19 π</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>打印 π 的值。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>无需附加模块即可访问 π 的值：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say π;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该指令并不出奇，它会打印出所需的值：</p>
+</div>
+<div class="paragraph">
+<p><strong>3.14159265358979</strong></p>
+</div>
+<div class="paragraph">
+<p>您可能已经注意到，代码中使用了非 ASCII 字符。 Raku 假定默认情况下源代码编码为 UTF-8。 相反，也可以使用非 Unicode 版本：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say pi;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>还有两个内置常数：<strong>tau</strong> 和 <strong>e</strong>; 他们两个都有 Unicode 变体：τ 和 𝑒（字符代码 <strong>0x1D452</strong>）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say τ;
+say 𝑒;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>tau</strong> 的值等于 2π，上面的程序打印出如下的结果：</p>
+</div>
+<div class="paragraph">
+<p><strong>6.28318530717959</strong>
+<strong>2.71828182845905</strong></p>
+</div>
+<div class="paragraph">
+<p>还值得一提的是，存在一个表示无穷大的特殊常数：Inf 或 ∞。 此数字大于任何其他（合理地大）数字； 整数或浮点值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 1E120 &lt; ∞; # Prints True</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_20_阶乘">4.2. 20. 阶乘!</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>打印给定数字的阶乘。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>根据定义，正整数 N 的阶乘是从 1 到 N 的所有整数（包括N）的乘积。这可以通过使用归约运算符轻松表示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = 5;
+my $f = [*] 1 .. $n;
+say $f;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>记录 [*] 1 .. $n 等价于如下表达式：</p>
+</div>
+<div class="paragraph">
+<p><strong>1 * 2 * 3 * 4 * &#8230;&#8203; * ($n – 1) * $n</strong></p>
+</div>
+<div class="paragraph">
+<p>紧凑的格式 [*] 表示将运算符 * 放在给定列表中的数字之间。</p>
+</div>
+<div class="paragraph">
+<p>在 <strong>$n</strong> 等于5的情况下，结果为：</p>
+</div>
+<div class="paragraph">
+<p><strong>120</strong></p>
+</div>
+<div class="paragraph">
+<p>计算阶乘的另一种方法是根据以下公式使用递归：</p>
+</div>
+<div class="paragraph">
+<p><strong>n! = n∙(n − 1)!</strong></p>
+</div>
+<div class="paragraph">
+<p>在每个迭代步骤中，该函数都使用递减的参数调用自身，并且该值小于2时应立即停止。 在 Raku 中，知道事实 1! 可以使用多功能将1编码为特殊情况。</p>
+</div>
+<div class="paragraph">
+<p>多功能是带有 <strong>multi</strong> 关键字前缀的子例程。 它们都共享名称，但可以通过其参数的类型，数量或值来区分。</p>
+</div>
+<div class="paragraph">
+<p>对于阶乘，定义两个多功能，一个用于计算最小数字0和1的阶乘（暂时忽略负数）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub factorial(Int $x where {$x &lt; 2}) {
+    return 1;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第二个变体适用于所有其他数字。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub factorial(Int $x) {
+    return $x * factorial($x - 1);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>函数签名中的 <strong>where</strong> 子句将调用拆分为阶乘函数。 仅在两个函数变体之一中具有 <strong>where</strong> 子句就足够了，但是为了清楚起见，您可以显式添加它：<strong>where $x &gt;= 2</strong>。</p>
+</div>
+<div class="paragraph">
+<p>用数字5调用阶乘会首先调用第二个变量，当 <strong>$x</strong> 达到1时切换到第一个变量。由于该变量不会迭代地调用自身，因此整个递归循环将停止。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say factorial(5);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>看一下函数的签名：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">(Int $x where {$x &lt; 2})</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>此处，变量 <strong>$x</strong> 的类型为 <strong>Int</strong>（在 Raku 中为整数），并由 <strong>where</strong> 子句中的条件 <strong>{$x &lt; 2}</strong> 限制。 因此，此信号将决定相应的子例程是否接受该数字。</p>
+</div>
+<div class="paragraph">
+<p>Raku 提供了另一个令人兴奋的东西，它在应用到阶乘任务中获得了相当可观的结果。 可以定义自己的后缀运算符，因此您可以编写 5! 在代码中并获得5的阶乘。</p>
+</div>
+<div class="paragraph">
+<p>这是定义后缀 ! 运算符的示例：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub postfix:&lt;!&gt;($n) {
+    return [*] 1 .. $n;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>使用起来很简单：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 5!;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>此阶乘运算符也适用于变量，包括默认变量：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 7;
+say $x!; # Prints 5040
+
+say .! for 3..7; # 6, 24, 120, 720, 5040</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>递归定义也可以与用户定义的运算符一起使用。 甚至可以从运算符定义本身的主体中使用它：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub postfix:&lt;!&gt;($n) {
+    $n &lt;= 1 ?? 1 !! $n * ($n - 1)!
+}
+
+say 5!; # Prints 120</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>递归的停止条件是通过布尔检查 <strong>$n &#8656; 1</strong> 来实现的。在如上所示的单行函数中，无需键入 <strong>return</strong> 关键字，因为最后的计算值将用作返回值结果。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_21_斐波那契数">4.3. 21. 斐波那契数</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>打印第 N 个斐波那契数。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>斐波那契数由以下公式定义：</p>
+</div>
+<div class="paragraph">
+<p>您可以一次分配两个值（请参阅任务48，交换两个值）。 您可以使用该技术从前两个计算下一个斐波纳契数。 要引导算法，需要两个第一个值。 在斐波那契行的定义中，前两个值均为1（有时，您可能会看到第一个数字为0）。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my ($a, $b) = (1, 1);
+($a, $b) = ($b, $a + $b) for 3 .. 10;
+say $b;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>生成序列的另一种方法是使用序列运算符。 使用此运算符，您可以创建一个惰性列表，该列表根据 generator 参数中给出的公式计算其值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @fib = 1, 1, * + * ... *;
+say @fib[9];</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>@fib</strong> 数组是一个序列。 它的前两个元素均为1，其余元素由公式 * + * 定义。 此代码创建一个匿名块，该匿名块等效于具有两个参数的函数的主体：<strong>{$a + $b}</strong>。 因此，该元素是其两个邻居的总和。 序列的右端指定为 *，表示它根据需求无限生成数字。</p>
+</div>
+<div class="paragraph">
+<p>下一行仅取数组的第10个元素并显示其值：</p>
+</div>
+<div class="paragraph">
+<p><strong>55</strong></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_22_打印平方">4.4. 22. 打印平方</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>打印从1到10的数字的平方。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>要打印一系列数字的平方，需要循环。 如果循环的主体很简单，则可以使用后缀表示法：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $_ ** 2 for 1..10;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>$_ 变量是一个循环变量，它在每个迭代上接收新值。</p>
+</div>
+<div class="paragraph">
+<p>Raku 提供了用于计算功效的 ** 运算符，因此可以代替使用简单乘法 $_ * $_ 中的一个。</p>
+</div>
+<div class="paragraph">
+<p>如果您需要命名循环变量，请选择另一种形式的循环：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for 1..10 -&gt; $x {
+    say $x * $x;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意，在 for 循环的范围内没有括号。</p>
+</div>
+<div class="paragraph">
+<p>我们还可以使用 <strong>map</strong> 函数创建一个平方的列表，如以下示例所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say for map {$_ ** 2}, 1..10;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在此，范围 1..10 首先转换为列表，其每个元素是初始列表中相应元素的平方，然后像以前一样逐个打印。</p>
+</div>
+<div class="paragraph">
+<p><strong>say</strong> 之前的点表示对默认变量调用 <strong>say</strong> 方法，因此 <strong>$_say</strong> 和 <strong>.say</strong> 都是等效的。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_23_二的幂">4.5. 23. 二的幂</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>打印二的前十个幂。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>可以创建用于计算2的幂的原生循环，类似于任务22"打印平方"的解决方案：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 2 ** $_ for 0..9;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它打印值 1、2、4等。直到 512。</p>
+</div>
+<div class="paragraph">
+<p>还有一种使用定义的元素计算规则来生成序列的方法：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @power2 = 1, 2, {$_ * 2} ... *;
+.say for @power2[^10];</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里的规则是 <strong>{$_ * 2}</strong>，因此每个下一个数字是前一个数字的两倍。 <strong>@power2</strong> 数组获取无限懒惰列表的值，并且仅前十个元素用于打印。 数组索引位置的 <strong>^10</strong> 构造创建范围 0..9，并获取 <strong>@power2</strong> 的相应切片。</p>
+</div>
+<div class="paragraph">
+<p>如果您提供列表的前几个元素，Raku 也可以推断出该规则：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @power2 = 1, 2, 4 ... *;
+say for @power2[^10];</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在不太明显的情况下，您最好为延迟列表使用显式生成器。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_24_奇数和偶数">4.6. 24. 奇数和偶数</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>打印前十个奇数。 打印前十个偶数。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>奇数是指除以2后得到余数的数字。可以直接利用此事实来过滤数字并仅打印与该定义匹配的数字。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say if $_ % 2 for 1 .. 20;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>要打印偶数，请通过选择另一个关键字来否定条件：除非，而不是 <strong>if</strong>：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say unless $_ % 2 for 1 .. 20;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>可以使用 <strong>grep</strong> 内置函数过滤数字：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say for grep {$_ % 2}, 1..20;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于奇数，请使用除数运算符对条件求反，当第一个操作数可被第二个数整除且没有余数时，该运算符将返回 True：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say for grep {$_ %% 2}, 1..20;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>另一种有趣的方法是使用序列。 显示它的第一个元素，其余元素自动生成：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @odd = 1, 3 ... *;
+say @odd[^10];</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>要打印偶数，请更改样本：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @even = 2, 4 ... *;
+say @even[^10];</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_25_近似地比较数值">4.7. 25. 近似地比较数值</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>近似地比较两个非整数值。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>比较非整数（表示为浮点数）通常是一项需要近似比较的任务。</p>
+</div>
+<div class="paragraph">
+<p>有一个 =~= 运算符，称为近似相等运算符，它检查其操作数是否彼此足够接近。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 1/1000 =~= 1/1001;         # False
+say 1/1E20 =~= 1 / (1E20 + 1); # True</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果差异小于 $*TOLERANCE 常数中设置的值（等于 1E-15），则近似比较的结果为 True。</p>
+</div>
+<div class="paragraph">
+<p>请注意，在 Raku 中，科学计数法中的数字是浮点数，而其他表示形式（例如 0.5 或 1/2 或 &lt;1/2&gt; 甚至 1⁄2）是浮点数。 老鼠类型（老鼠代表理性）。</p>
+</div>
+<div class="paragraph">
+<p>有理数存储为两个整数值，即分子和分母。 因此，使用此类数字进行计算不会降低准确性。 将以下经典示例的结果与其他语言的类似程序进行比较：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say0.1+0.2-0.3; #0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>即使您尝试在十进制点后面用很多数字打印结果，Raku 也会打印一个精确的零。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">'%.20f'.printf(0.1 + 0.2 - 0.3); # 0.00000000000000000000</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Raku 很好，不是吗？</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_26_大数相乘">4.8. 26. 大数相乘</h3>
+<div class="paragraph">
+<p>创建一个程序以将非常大的整数相乘。</p>
+</div>
+<div class="paragraph">
+<p>对大数字的支持是内置的：<strong>Int</strong> 类允许任意精度。 您不必做任何额外的工作。 只需将数字乘以它们即可，如示例中所示（数字应写在一行上，当然不能有空格）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = 83274938493874832658327320948349783624839479683297463483 72463286948532460989746932849382643928497328656329878246 39847823659328476832647392847836539843928645384329463287 53924837825643824302487637563724384782374803284710339876;
+
+my $b = 23849389520394874100302935470340851094327485279287346539 23423599234023403275324932549011093234845878830238479823 38497357295682768498203985784582309487857450938547650202 34958452087248754293875293059257429584375683984543867549;
+
+say $a * $b;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>运行程序并检查结果 :-)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku multiply.rk 1986056445427346134608816461674104817709618067621430859563207 9414372265722581757276335355613160103733076798778347026808946 4764504400339607310787754299375646554963128327698080593673173 1567112322543695408638461054692799962710717063045632562953661 6550281290208170934822137465164296276863255896755078697996012 2029114902545655702554835467523365237055296210216509834632137 6325794905191426940032936330373925095492741926233188581116641 016422307707317083924</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_27_素数">4.9. 27. 素数</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>确定给定数字是否为质数。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>质数是那些只能被1除以它们自己的数。</p>
+</div>
+<div class="paragraph">
+<p>该语言为我们提供了内置支持 <strong>is-prime</strong> 例程，用于检查数字是否为素数。 有两种使用方法。</p>
+</div>
+<div class="paragraph">
+<p>首先，作为内置函数：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'Prime' if is-prime(17);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>其次，作为对 <strong>Int</strong> 类型的对象的方法：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = 15;
+say $n.is-prime
+    ?? "$n is prime"
+    !! "$n is not prime"
+    ;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这里，使用了三元运算符 ?? &#8230;&#8203; !!。 这段代码根据调用 <strong>$n.is-prime</strong> 的结果输出两个字符串之一：</p>
+</div>
+<div class="paragraph">
+<p><strong>17 is prime</strong>
+<strong>15 is not prime</strong></p>
+</div>
+<div class="paragraph">
+<p>请注意，<strong>is-prime</strong> 例程的名称中包含连字符，这是 Raku 中标识符名称的有效字符。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_28_素数列表">4.10. 28. 素数列表</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>打印前十个质数的列表。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>在任务27（素数）中，我们了解了如何检查给定数字是否为素数。 要打印前十个数字的列表，请组织一个惰性列表。 代码非常紧凑：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @numbers = grep {.is-prime}, 1..*;
+say @numbers[^10];</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第一行必须从右到左读取。 懒惰列表 1..* 使用 <strong>grep</strong> 函数进行过滤，另一个懒惰列表位于 <strong>@numbers</strong> 变量中。</p>
+</div>
+<div class="paragraph">
+<p>然后，获取并打印前十个元素：</p>
+</div>
+<div class="paragraph">
+<p><strong>(2 3 5 7 11 13 17 19 23 29)</strong></p>
+</div>
+<div class="paragraph">
+<p>可以使用冒号将参数传递给函数。 上面显示的代码可以用不同的方式重写：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @numbers = (1..*).grep: *.is-prime;
+say @numbers[^10];</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意，* 的两种用法在这里表示不同的含义。 1..* 的范围可以用开放范围 <strong>^∞</strong> 或 <strong>^Inf</strong> 替换。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @numbers = (^Inf).grep: *.is-prime;
+say @numbers[^10];</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后，直接选择前十个元素：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say ((^∞).grep: *.is-prime)[^10];</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_29_素数分解">4.11. 29. 素数分解</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>找到给定数字的素数。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>质数因子是将给定整数精确除的质数。</p>
+</div>
+<div class="paragraph">
+<p>在任务28，素数列表中，我们了解了如何制作一个懒惰的素数列表。 该列表在程序中用作测试的因子编号的生成器。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = 123456789;
+
+my @list;
+my @prime = grep {.is-prime}, 1..*;
+my $pos = 0;
+
+while $n &gt; 1 {
+    my $factor = @prime[$pos];
+    $pos++;
+    next unless $n %% $factor;
+
+    $pos = 0;
+    $n /= $factor;
+    push @list, $factor;
+}
+say @list; # [3 3 3607 3803]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在每次迭代中，均使用 <strong>$n %% $factor</strong> 条件测试该数字。 如果找到了因子，则将其添加到 <strong>@list</strong> 数组中，将 <strong>@prime</strong> 数组中的当前位置重新设置为 0（因为因子可能重复），并且将数字 <strong>$n</strong> 除以 <strong>$factor</strong> 值 在下一次迭代之前。 <strong>$n</strong> 的值等于1时，循环结束。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_30_分数化简">4.12. 30. 分数化简</h3>
+<div class="paragraph">
+<p>由两个给定的整数（分子和分母）组成一个分数，并将其缩减为最低的项。</p>
+</div>
+<div class="paragraph">
+<p>5/15 和 16/280 是可以减少分数的示例。 该任务的最终结果是 1/3 和 2/35。 通常，减少分数的算法需要搜索最大的公因数，然后将分子和分母都除以该数字。</p>
+</div>
+<div class="paragraph">
+<p>有一个内置的运算符 <strong>gcd</strong> 返回最大的公约数，因此您可以使用它来解决任务（注意 <strong>gcd</strong> 用作运算符，而不是函数）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = 16;
+my $b = 280;
+
+my $gcd = $a gcd $b;
+say $a/$gcd; # 2
+say $b/$gcd; # 35</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这是经典的解决方案，但是 Raku 提供了更多神奇的东西- <strong>Rational</strong> 数据类型 <strong>Rat</strong>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Rat $r = $a/$b;
+say $r.numerator;   # 2
+say $r.denominator; # 35</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Rat</strong> 值将其部分保持为两个整数，可通过分子和分母方法访问。 <strong>dd</strong> 例程可为您提供即时见解：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">dd $r; # Rat $r = &lt;2/35&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_31_除零">4.13. 31. 除零</h3>
+<div class="paragraph">
+<p>用除数除零。</p>
+</div>
+<div class="paragraph">
+<p>在 Raku 中，零除本身并不是立即发生的错误。</p>
+</div>
+<div class="paragraph">
+<p>以下代码不会产生异常，并在出现问题的分割后输出消息。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $v = 42 / 0;
+say 'It still works!';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>但是，一旦将要显示存储在 <strong>$v</strong> 变量中的结果，程序便会由于错误而停止执行：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $v = 42 / 0;
+say $v;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>错误消息出现在控制台中：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Attempt to divide 42 by zero using div in block &lt;unit&gt; at divide0.rk line 2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>上述行为称为软故障。 仅当有人看到它时它才会失败:-)要捕获该错误，请使用 <strong>try</strong> 和 <strong>CATCH</strong> 块：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"> try {
+    say 42 / 0;
+    CATCH {
+        default {
+            say 'Error!'; }
+    }
+}
+say 'It still works!';</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_2_随机数">5. 2.2 随机数</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_32_生成随机数">5.1. 32. 生成随机数</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>生成一个介于0和N之间的随机数。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>使用 <strong>rand</strong> 方法，该方法将返回一个介于0和其主诉值之间的随机数：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 1.rand;   # between 0 and 1
+say 2.5.rand; # between 0 and 2.5
+say pi.rand;  # between 0 and 3.14...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>rand</strong> 方法在 <strong>Cool</strong> 类中定义，该类是 <strong>Int</strong>，<strong>Num</strong> 和 <strong>Rat</strong> 类型的基类。 它总是返回 <strong>Num</strong> 数据类型的浮点值。</p>
+</div>
+<div class="paragraph">
+<p>要生成随机整数，请调用 <strong>Int</strong> 方法：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say10.rand.Int; #Either0,or1,2,3,4,5,6,7,8,or9butnot10</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>srand</strong> 函数初始化随机数生成器。 该函数需要一个整数参数：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">srand(1);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>设置种子后，<strong>rand</strong> 方法开始以相同顺序生成数字。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">srand(1);
+my $a = 10.rand;
+
+srand(1);
+my $b = 10.rand;
+
+say $a == $b; # True</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_33_冯诺伊曼随机数">5.2. 33. 冯·诺伊曼随机数</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>实现冯·诺伊曼（von Neumann）的随机数生成器（也称为中间平方方法）。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>该算法是一种生成四位数随机整数的短序列的简单方法。 该方法有其缺点，但是对我们来说，这是一个有趣的算法任务。 该食谱包括以下步骤：</p>
+</div>
+<div class="paragraph">
+<p>1.取一个介于0和9999之间的数字。
+2.计算平方。
+3.如有必要，添加前导零以使数字为8位。
+4.取中间的四位数。
+5.从步骤2开始重复。</p>
+</div>
+<div class="paragraph">
+<p>为了举例说明，我们以数字 1234 作为种子。 在步骤2，它变为 1522756; 在第3步（01522756）之后。最后，在第4步提取数字5227。现在我们可以在代码中实现它。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = 1234;
+$n **= 2;
+$n = sprintf '%08i', $seed;
+$n ~~ s/^..(.*)..$/$0/;
+say $n;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>使用 **= 运算符可计算数字的平方。 这是基于 ** 运算符的元运算符。 该值以2为底，然后将结果分配回该变量。</p>
+</div>
+<div class="paragraph">
+<p>因为实际上不需要添加前导零并要求正则表达式始终匹配八个字符，所以可以简化获取中间数字的步骤。 因此，与其使用 <strong>/^..(.*)..$/</strong> 来捕获数字，不如在最后两位之前输入零到四位数。 如果少于四个实现冯·诺伊曼（von Neumann）的随机数生成器（也称为中间平方方法）。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = 1234;
+$n **= 2;
+$n ~~ /(. ** 0..4)..$/;
+say ~$0;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们还可以摆脱正则表达式替换 s///，并使用匹配对象的字符串化值：~$0。</p>
+</div>
+<div class="paragraph">
+<p>或者，可以将数字当作字符串来代替，而可以通过纯数字操作来达到相同的目的。 使用整数除法和取模运算可以得到中间的四位数：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = 1234;
+$n **= 2;
+$n = ($n / 100).Int % 10000;
+say ~$0;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>无论使用哪种方法，都应处理种子值，并查看生成器生成美观数据的时间。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = 1234;
+for 1..30 {
+    $n **= 2;
+    $n ~~ /(. ** 0..4)..$/;
+    $n = ~$0;
+    say $n;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>注意，在循环中，您需要更新 <strong>$n</strong> 才能在下一个循环中使用它。</p>
+</div>
+<div class="paragraph">
+<p>在许多情况下，经过多次重复后，这些值收敛到 0000。在某些情况下，例如使用初始数 2916，伪随机序列的周期非常短。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_34_随机数直方图">5.3. 34. 随机数直方图</h3>
+<div class="paragraph">
+<p>通过使用直方图可视化分布来测试随机生成器的质量。</p>
+</div>
+<div class="paragraph">
+<p>内置的随机数生成器的质量完全取决于编译器开发人员使用的算法。 作为用户，您不能做很多事情来更改现有的生成器，但是您始终可以测试它是否提供了在整个时间间隔内均匀分布的数字。</p>
+</div>
+<div class="paragraph">
+<p>有一个 <strong>rand</strong> 例程（请参阅任务32，生成随机数）返回一个介于0和1之间的浮点数（实际上是 <strong>Num</strong> 类型的值）。我们将运行 100,000 次，填充包含 10个 单元格的直方图。 每个随机数都属于其中之一。 例如，介于0和0.1之间的数字位于第一个单元格中，介于0.1和0.2之间的数字位于第二个单元格中，依此类推。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @histogram;
+@histogram[10 * rand]++ for 1..100_000;
+say @histogram;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>检查 <strong>@histogram</strong> 数组的索引的形成方式。 首先将0到1之间的随机整数乘以10，然后取其整数部分，因为数组索引运算符[]仅需要整数。 也可以显式进行转换：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">@histogram[(10 * rand).Int]++</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>运行该程序几次。 这是该程序几次运行的输出，它在每个单元格中或多或少地打印了相等的数字：</p>
+</div>
+<div class="paragraph">
+<p><strong>[10062 9818 10057 9922 10002 10118 9978 9959 10013 10071]</strong>
+<strong>[9959 9957 9813 9933 10160 10030 10036 10032 10059 10021]</strong></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_数学问题">6. 2.3 数学问题</h2>
+<div class="sectionbody">
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>计算表面上两点之间的距离。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>曲面上有两个点，每个点都有自己的坐标 x 和 y。 任务是找到这两点之间的距离。</p>
+</div>
+<div class="paragraph">
+<p>一个简单的解决方案是使用勾股定理：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my ($x1, $y1) = (10, 3);
+my ($x2, $y2) = (9, 1);
+say sqrt(($x1 - $x2) ** 2 + ($y1 - $y2) ** 2);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这可行，但是需要大量输入。 在 Raku 中，如果使用复数，则有一种更简单的方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = 10+3i;
+my $b = 9+1i;
+say ($a - $b).abs;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>两个程序的结果是相同的。 复数是 <strong>Complex</strong> 数据类型的对象，并通过i（虚数单位）引入：</p>
+</div>
+<div class="paragraph">
+<p>$a-$b 之差的结果也是一个复数，可以在其上调用 <strong>abs</strong> 方法。 此方法返回复数的绝对值，它实际上是两点之间的距离。</p>
+</div>
+<div class="paragraph">
+<p>注意样式：<strong>10+3i</strong> 与 <strong>10 + 3i</strong>。 第一个似乎更可取，因为它也被编译器用作默认输出格式。 当在表达式中使用复数和其他变量或数字时，第二个选项可能会造成混淆。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku -e'say (10+3i, -i, 4i, 10+0i)'
+(10+3i -0-1i 0+4i 10+0i)</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_36_标准差">6.1. 36. 标准差</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>对于给定的数据，计算标准偏差值（sigma）。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>标准差是一个统计术语，表示紧凑的数据分布。 公式如下：</p>
+</div>
+<div class="paragraph">
+<p>。。。</p>
+</div>
+<div class="paragraph">
+<p>其中 N 是数组 x 中元素的数量； 8̅ 是平均值（请参阅任务 56，数组上的平均值）。</p>
+</div>
+<div class="paragraph">
+<p>让我们使用来自 Wikipedia 的一些测试数据，并通过归约操作并避免显式循环来采用简单的方法：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @data = 727.7, 1086.5, 1091.0, 1361.3, 1490.5, 1956.1;
+
+my $avg = ([+] @data) / @data.elems;
+my $sigma = sqrt(
+    ([+] map * ** 2, map * - $avg, @data) /
+    (@data.elems - 1)
+);
+
+say $sigma; # 420.962489619523</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 <strong>sqrt</strong> 函数内部，[+] 约简运算符获取由两次嵌套map运行形成的数组。 首先，通过对每个元素应用 * - $avg 来消除常数偏移。 其次，已计算出每个项目的平方：* ** 2。</p>
+</div>
+<div class="paragraph">
+<p>在这两种情况下，都使用 <strong>WhateverCode</strong>。 它通常更具表现力，但可能会导致 * ** 2 之类的结构看起来有些神秘。</p>
+</div>
+<div class="paragraph">
+<p>两个 map 可以合成一个 map:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $sigma = sqrt(
+    ([+] map (* - $avg) ** 2, @data) / (@data.elems - 1)
+);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，让我们探讨使用提要运算符获得相同结果的第二种方法。 在 Raku 中，有两个方向的 feed 运算符：&#8656;= 和 =&#8658;。 它们的形状指示数据流的方向，因此这里是程序的另一个版本。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @data = 727.7, 1086.5, 1091.0, 1361.3, 1490.5, 1956.1;
+
+my $avg = ([+] @data) / @data.elems;
+@data
+    ==&gt; map * - $avg
+    ==&gt; map * ** 2
+    ==&gt; reduce * + *
+    ==&gt; my @σ;
+
+say sqrt(@σ[0] / (@data.elems - 1)); # 420.962489619523</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>数据流现在清晰可见。 @data 数组传递两个映射，然后使用+操作将其减少。 reduce * + * 的调用等效于以 [+] 的形式使用reduce运算符。</p>
+</div>
+<div class="paragraph">
+<p>请注意，@σ 数组是如何定义的，不仅要使用 Unicode 名称，而且还要将 my 声明放在供稿链的末尾。 这里使用数组是因为 feed 运算符不返回标量值，尽管我们只需要一个元素。</p>
+</div>
+<div class="paragraph">
+<p>为了使代码更接近原始数学公式，您可以为包含平均值的变量选择一个不同的名称（并删除 elems 调用）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x̄ = ([+] @data) / @data;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_37_极座标">6.2. 37. 极座标</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>将笛卡尔坐标转换为极坐标和后向坐标。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>极坐标是一种使用两个值表示表面上点的便捷方法：距坐标中心的距离以及矢量和极轴之间的角度。</p>
+</div>
+<div class="paragraph">
+<p>直角坐标系和极坐标系之间的转换公式如下（对于正x和y有效）：</p>
+</div>
+<div class="paragraph">
+<p>&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>这些表达式可以按原样在代码中实现：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub polar-to-cartesian($r, $φ) {
+    $r * cos($φ), $r * sin($φ)
+}
+sub cartesian-to-polar($x, $y) {
+    sqrt($x² + $y²), atan($y / $x)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该函数返回极坐标或笛卡尔坐标的列表。 由于实现的简单性，可以在行尾省略 <strong>return</strong> 关键字和分号。</p>
+</div>
+<div class="paragraph">
+<p>用一些正数调用转换函数，并检查第二次转换后是否恢复了初始坐标：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say cartesian-to-polar(1, 2);
+say polar-to-cartesian(2.236068, 1.107149);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于负的x和y，笛卡尔到极性的转换要复杂一些。 根据点的象限，A值较大KK或更小！ 当x为零时，它是−𝝅/2 或 𝝅/2。</p>
+</div>
+<div class="paragraph">
+<p>所有这些变体都可以通过将多个子例程与 <strong>where</strong> 子句一起使用来实现，如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub cartesian-to-polar($x, $y) {
+    sqrt($x² + $y²), cartesian-to-φ($x, $y)
+}
+
+multi sub cartesian-to-φ($x, $y where {$x &gt; 0}) {
+    atan($y / $x)
+}
+
+multi sub cartesian-to-φ($x, $y where {$x &lt; 0 &amp;&amp; $y ≥ 0}) {
+    atan($y / $x) + π
+}
+
+multi sub cartesian-to-φ($x, $y where {$x &lt; 0 &amp;&amp; $y &lt; 0}) {
+    atan($y / $x) – π
+}
+
+multi sub cartesian-to-φ($x, $y where {$x == 0 &amp;&amp; $y &gt; 0}) {
+    π / 2
+}
+
+multi sub cartesian-to-φ($x, $y where {$x == 0 &amp;&amp; $y &lt; 0}) {
+    -π / 2
+}
+
+multi sub cartesian-to-φ($x, $y where {$x == 0 &amp;&amp; $y == 0}) {
+    Nil
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_38_蒙特卡洛法">6.3. 38. 蒙特卡洛法</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>使用蒙特卡洛方法计算半径为1的圆的面积和球体的体积。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>蒙特卡洛方法是一种计算公式未知的统计数据的方法。 想法是生成大量随机数，并查看其中有多少满足条件。</p>
+</div>
+<div class="paragraph">
+<p>为了计算半径为1的圆的面积，生成-1和1之间的随机数对。 这些对代表边长为2的坐标中心的正方形中的点。正方形的面积因此为4。如果随机点与正方形的中心之间的距离小于1，则此点为 位于该半径的圆内。 一旦知道正方形的面积，计算落在圆内的点数和圆外的点数即可得出圆的面积的近似值。 这是程序。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $inside = 0; my $n = 100_000;
+for 1..$n {
+    my @point = map {2.rand - 1}, 1..2; # 1..3 for sphere
+    $inside++ if sqrt([+] map *², @point) &lt; 1;
+}
+say 4 * $inside / $n; # 8 for sphere</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>重复次数 $n 越大，结果越准确。 在使用蒙特卡洛方法计算半径为1的圆的面积和球体的体积。该程序的运行之一，它打印了3.14392，与真实值3接近结果是 𝝅r²，在我们的例子中等于 𝝅。 我们看到蒙特卡洛结果非常接近。</p>
+</div>
+<div class="paragraph">
+<p>对于球体的体积，请根据注释更改程序。公式为 4/3𝝅r³，大约为 4.189。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_4_数字和字符串">7. 2.4 数字和字符串</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_39_unicode_数字">7.1. 39. Unicode 数字</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>打印所有的 Unicode 数字。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>在现代编程语言中，Raku 对 Unicode 提供了最好的支持。 在谈论数字时，值得记住的是，例如，Unicode 标准将数字标记为数字的次数远远超过英语中使用的常规十个字符。</p>
+</div>
+<div class="paragraph">
+<p>让我们遍历整个代码点范围，并使用正则表达式中的 <strong>&lt;:digit&gt;</strong> 字符类选择数字。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for 1 .. 0x10FFFD {
+    my $char = $_.chr;
+    print $char if $char ~~ /&lt;:digit&gt;/;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个程序打印 580 个字符。我们列出其中一些:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>0123456789٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹߀߁߂߃߄߅߆߇߈߉०१२३४५६७८९০১২৩৪৫৬৭৮৯੦੧੨੩੪੫੬੭੮੯૦૧૨૩૪૫૬૭૮૯୦୧୨୩୪୫୬୭୮୯௦௧௨௩௪௫௬௭௮௯౦౧౨౩౪౫౬౭౮౯೦೧೨೩೪೫೬೭೮೯൦൧൨൩൪൫൬൭൮൯
+０１２３４５６７８９
+𝟘𝟙𝟚𝟛𝟜𝟝𝟞𝟟𝟠𝟡
+𝟢𝟣𝟤𝟥𝟦𝟧𝟨𝟩𝟪𝟫
+𝟬𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵
+𝟶𝟷𝟸𝟹𝟺𝟻𝟼𝟽𝟾𝟿</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果您想知道 Unicode 数字的名称，请在字符上调用 <strong>uniname</strong> 方法：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $char ~ ' ' ~ $char.uniname if $char ~~ /&lt;:digit&gt;/;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>例如，阿拉伯数字0到9具有简单的名称，例如 <strong>DIGIT ZERO</strong>； 另一组阿拉伯数字٠、١、٢等，最多٩具有诸如 <strong>ABABIC INDIC DIGIT THREE</strong> 之类的名称。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_40_猜数字">7.2. 40. 猜数字</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>编写一个程序，该程序生成一个0到10的随机整数，并要求用户猜测它，说输入的值太小还是太大。</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>首先，需要生成一个随机数。 在 Raku 中，可以在整数对象上调用 <strong>rand</strong> 例程，该例程将返回一个介于0和该整数之间的随机浮点值。 由于任务需要一个随机整数，因此请对结果调用 <strong>round</strong> 方法：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">10.rand.round</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，要求进行初始猜测并进入循环，该循环将猜测与 <strong>$n</strong> 进行比较。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = 10.rand.round;
+
+my $guess = prompt('Guess my number between 0 and 10: ');
+
+while $guess != $n {
+    if $guess &lt; $n {
+        say 'Too small.';
+    }
+    elsif $guess &gt; $n {
+        say 'Too big.';
+    }
+    $guess = prompt('Try again: ');
+}
+
+say 'Yes, this is it!';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>if-elsif</strong> 链可以用三元运算符代替：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $guess &lt; $n ?? 'Too small.' !! 'Too big.';</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_41">7.3. 41.</h3>
+
+</div>
+</div>
+</div>
+
+</article>
+
+
+    
+
+  </main><section class="site__search">
+    <label class="site__form">
+        <p class="form__label">Search around the site</p> 
+        <input class="site__search-bar form__input" type="text">
+    </label>
+    <div class="site__search-bar-results"></div>
+</section>
+  
+  <footer class="site__footer">
+    
+    
+    <p class="footer__sign">© 2020 ohmyraku</p></footer>
+    
+
+    
+    <script>
+        window.addEventListener("load", function () {
+            const script = document.createElement("script");
+            script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+            script.async = true
+
+            document.head.appendChild(script);
+        })
+    </script>
+
+
+
+
+
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
+
+
+
+</body>
+</html>

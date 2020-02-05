@@ -1,0 +1,4578 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> :: 山川异域, 风月同天</title>
+
+<meta name="author" content="ohmyraku">
+<meta name="application-name" content="山川异域, 风月同天">
+<meta name="description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 为什么我应该使用 Raku 1.4. 总结 1.5. 安装器 1.6. Docker 1.7. 从源代码创建 1.8. 测试你的 Rakudo Star 安装 1.9. 文档 1.10. 总结 1.11. 让数独变得可玩 1.12. 便捷,常量和更多便捷写法 1.13. IO 和其它悲剧 1.14. 获得创造性 1.15. 总结 1.16. 使用库 1.17. DateTime 格式化 1.18. 寻找其他途径 1.19. 处理时间 1.20. 系好你的安全带 1.21. MAIN 魔法 1.22. 总结   2. 测试 say 2.1. 总结 2.2. 异步运行命令 2.3. 实现超时 2.4. More on Promises 2.">
+<meta name="robots" content="noodp"/>
+<meta name="generator" content="Hugo 0.63.2" />
+<meta name="referrer" content="no-referrer" />
+<meta name="format-detection" content="telephone=no">
+
+<link rel="canonical" href="https://ohmyraku.github.io/raku-by-example/" />
+
+
+<link rel="icon" href="https://ohmyraku.github.io/logo.png" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="" />
+<meta name="twitter:description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 为什么我应该使用 Raku 1.4. 总结 1.5. 安装器 1.6. Docker 1.7. 从源代码创建 1.8. 测试你的 Rakudo Star 安装 1.9. 文档 1.10. 总结 1.11. 让数独变得可玩 1.12. 便捷,常量和更多便捷写法 1.13. IO 和其它悲剧 1.14. 获得创造性 1.15. 总结 1.16. 使用库 1.17. DateTime 格式化 1.18. 寻找其他途径 1.19. 处理时间 1.20. 系好你的安全带 1.21. MAIN 魔法 1.22. 总结   2. 测试 say 2.1. 总结 2.2. 异步运行命令 2.3. 实现超时 2.4. More on Promises 2." />
+<meta name="twitter:site" content="https://ohmyraku.github.io" />
+<meta name="twitter:creator" content="ohmyraku" />
+<meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
+<meta property="og:type" content="article" />
+<meta property="og:locale" content="en" />
+<meta property="og:name" content="ohmyraku" />
+<meta property="og:title" content="" />
+<meta property="og:url" content="https://ohmyraku.github.io" />
+<meta property="og:site_name" content="山川异域, 风月同天" />
+<meta property="og:description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 为什么我应该使用 Raku 1.4. 总结 1.5. 安装器 1.6. Docker 1.7. 从源代码创建 1.8. 测试你的 Rakudo Star 安装 1.9. 文档 1.10. 总结 1.11. 让数独变得可玩 1.12. 便捷,常量和更多便捷写法 1.13. IO 和其它悲剧 1.14. 获得创造性 1.15. 总结 1.16. 使用库 1.17. DateTime 格式化 1.18. 寻找其他途径 1.19. 处理时间 1.20. 系好你的安全带 1.21. MAIN 魔法 1.22. 总结   2. 测试 say 2.1. 总结 2.2. 异步运行命令 2.3. 实现超时 2.4. More on Promises 2." />
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Article",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https:\/\/ohmyraku.github.io\/raku-by-example\/"
+      },
+      "headline": "",
+      
+      "datePublished": "0001-01-01",
+      "dateModified": "0001-01-01 00:00:00 \x2b0000 UTC",
+      "author": {
+        "@type": "Person",
+        "name": "ohmyraku"
+      },
+      "description": "Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 为什么我应该使用 Raku 1.4. 总结 1.5. 安装器 1.6. Docker 1.7. 从源代码创建 1.8. 测试你的 Rakudo Star 安装 1.9. 文档 1.10. 总结 1.11. 让数独变得可玩 1.12. 便捷,常量和更多便捷写法 1.13. IO 和其它悲剧 1.14. 获得创造性 1.15. 总结 1.16. 使用库 1.17. DateTime 格式化 1.18. 寻找其他途径 1.19. 处理时间 1.20. 系好你的安全带 1.21. MAIN 魔法 1.22. 总结   2. 测试 say 2.1. 总结 2.2. 异步运行命令 2.3. 实现超时 2.4. More on Promises 2.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "https:\/\/ohmyraku.github.io",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https:\/\/ohmyraku.github.io\/logo.png"
+        }
+      }
+    }
+</script><link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
+<script>
+
+const theme = window.localStorage.getItem('theme'); 
+if (theme && theme !== "1") {
+    document.documentElement.classList.add('theme-' + theme);
+}
+</script>
+
+
+</head>
+<body>
+  <main class="site__content">
+    <div class="site__page">
+  <nav class="site__breadcrumbs">
+    <a class="site__breadcrumb" href="https://ohmyraku.github.io/">山川异域, 风月同天</a><a class="site__breadcrumb--active" href="https://ohmyraku.github.io/raku-by-example/"></a>
+</nav>
+
+<h1 class="page__title"></h1>
+  <div class="page__meta">
+    <p>
+    
+    <span class="page__date">
+    on <time datetime="0001-01-01T00:00:00Z">0001-01-01</time>
+    
+    </span>
+    </p>
+
+    
+
+    
+    </div>
+</div>
+
+
+</div>
+
+<article class="page__content" ><div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_什么是_raku">1. 什么是 Raku</a>
+<ul class="sectlevel2">
+<li><a href="#_perl5_老天鹅">1.1. Perl5, 老天鹅</a></li>
+<li><a href="#_库的可用性">1.2. 库的可用性</a></li>
+<li><a href="#_为什么我应该使用_raku">1.3. 为什么我应该使用 Raku</a></li>
+<li><a href="#_总结">1.4. 总结</a></li>
+<li><a href="#_安装器">1.5. 安装器</a></li>
+<li><a href="#_docker">1.6. Docker</a></li>
+<li><a href="#_从源代码创建">1.7. 从源代码创建</a></li>
+<li><a href="#_测试你的_rakudo_star_安装">1.8. 测试你的 Rakudo Star 安装</a></li>
+<li><a href="#_文档">1.9. 文档</a></li>
+<li><a href="#_总结_2">1.10. 总结</a></li>
+<li><a href="#_让数独变得可玩">1.11. 让数独变得可玩</a></li>
+<li><a href="#_便捷常量和更多便捷写法">1.12. 便捷,常量和更多便捷写法</a></li>
+<li><a href="#_io_和其它悲剧">1.13. IO 和其它悲剧</a></li>
+<li><a href="#_获得创造性">1.14. 获得创造性</a></li>
+<li><a href="#_总结_3">1.15. 总结</a></li>
+<li><a href="#_使用库">1.16. 使用库</a></li>
+<li><a href="#_datetime_格式化">1.17. DateTime 格式化</a></li>
+<li><a href="#_寻找其他途径">1.18. 寻找其他途径</a></li>
+<li><a href="#_处理时间">1.19. 处理时间</a></li>
+<li><a href="#_系好你的安全带">1.20. 系好你的安全带</a></li>
+<li><a href="#_main_魔法">1.21. MAIN 魔法</a></li>
+<li><a href="#_总结_4">1.22. 总结</a></li>
+</ul>
+</li>
+<li><a href="#_测试_say">2. 测试 say</a>
+<ul class="sectlevel2">
+<li><a href="#_总结_5">2.1. 总结</a></li>
+<li><a href="#_异步运行命令">2.2. 异步运行命令</a></li>
+<li><a href="#_实现超时">2.3. 实现超时</a></li>
+<li><a href="#_more_on_promises">2.4. More on Promises</a></li>
+<li><a href="#_可能的扩展">2.5. 可能的扩展</a></li>
+<li><a href="#_重构和自动化测试">2.6. 重构和自动化测试</a></li>
+<li><a href="#_总结_6">2.7. 总结</a></li>
+</ul>
+</li>
+<li><a href="#_有状态的_silent_cron">3. 有状态的 Silent Cron</a>
+<ul class="sectlevel2">
+<li><a href="#_持久化存储">3.1. 持久化存储</a></li>
+<li><a href="#_开发存储后端">3.2. 开发存储后端</a></li>
+<li><a href="#_使用存储后端">3.3. 使用存储后端</a></li>
+<li><a href="#_发展的空间">3.4. 发展的空间</a></li>
+<li><a href="#_总结_7">3.5. 总结</a></li>
+<li><a href="#_变量和作用域">3.6. 变量和作用域</a></li>
+<li><a href="#_子例程">3.7. 子例程</a></li>
+<li><a href="#_类和对象">3.8. 类和对象</a></li>
+<li><a href="#_并发">3.9. 并发</a></li>
+<li><a href="#_展望">3.10. 展望</a></li>
+<li><a href="#_正则表达式基础">3.11. 正则表达式基础</a></li>
+<li><a href="#_解析_ini_原语">3.12. 解析 INI 原语</a></li>
+<li><a href="#_把东西组装起来">3.13. 把东西组装起来</a></li>
+<li><a href="#_回溯">3.14. 回溯</a></li>
+<li><a href="#_grammars">3.15. Grammars</a></li>
+<li><a href="#_从匹配中提取数据">3.16. 从匹配中提取数据</a></li>
+<li><a href="#_生成好的错误信息">3.17. 生成好的错误信息</a></li>
+<li><a href="#_编写你自己的_grammars">3.18. 编写你自己的 Grammars</a></li>
+<li><a href="#_总结_8">3.19. 总结</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="sect1">
+<h2 id="_什么是_raku">1. 什么是 Raku</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Raku是一种编程语言。它旨在让人们轻松学习，阅读和书写，并受到自然语言的启发。它允许初学者用“婴儿Perl”写作，同时为经验丰富的程序员提供表达自由，从简洁到诗意。
+Raku逐渐打字。它主要遵循动态类型语言的范例，因为它接受在编译期间无法保证类型安全的程序。但是，与许多动态语言不同，它接受并强制执行类型约束。在可能的情况下，编译器使用类型注释在编译时做出决策，否则只能在运行时进行。
+许多编程范例都影响了Raku.您可以在Raku中编写命令式，面向对象和功能的程序。声明式编程通过多调度，子类型以及正则表达式和语法引擎等功能得到支持。
+Raku中的大多数查找都是词汇，并且语言避免了全局状态。这使得程序的并行和并发执行变得更容易，Raku也专注于高级并发原语。如果您不希望仅限于一个CPU核心，而不是考虑线程和锁定，则倾向于考虑承诺和消息队列。
+Raku作为一种语言并不是关于是否应编译或解释Raku程序的观点。 Rakudo Raku  - 主要实现 - 动态预编译模块并解释脚本。</p>
+</div>
+<div class="sect2">
+<h3 id="_perl5_老天鹅">1.1. Perl5, 老天鹅</h3>
+<div class="paragraph">
+<p>在2000年左右，Perl 5开发面临着来自冲突的发展愿望并保持向后兼容性的主要压力。
+Raku是释放这种张力的阀门。 所有需要中断向后兼容性的扩展提议都被引入到Raku中，使其处于梦幻状态，一切皆有可能并且没有任何修复。 经过几年的艰苦努力才能进入一个更加稳固的状态。</p>
+</div>
+<div class="paragraph">
+<p>在此期间，Perl 5也进化了，两种语言不同，大多数Perl 5开发人员不再认为Raku是一个自然的升级路径，Raku并没有试图淘汰Perl 5（至少没有 不仅仅是试图淘汰任何其他编程语言:-)，而2015年Raku的第一个稳定版本并未表明支持Perl 5的任何失误。
+Perl 5由一个独立的爱好者社区开发，他们密切关注Raku以找到值得采用Perl 5的功能。因此，虽然Perl 5和Raku社区有一定的重叠并相互通信，但两者都大多独立地发展。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_库的可用性">1.2. 库的可用性</h3>
+<div class="paragraph">
+<p>作为一种相对年轻的语言，Raku缺乏Perl 5和Python等语言提供的成熟模块生态系统。
+为了弥补这一差距，存在允许您调用用C，Python，Perl 5和Ruby编写的库的接口。 Perl 5和Python接口非常复杂，你可以编写一个Raku类，它用两种语言编写类的子类，反之亦然。
+因此，如果您喜欢特定的Python库，您可以通过Inline :: Python模块将其加载到Raku程序中。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_为什么我应该使用_raku">1.3. 为什么我应该使用 Raku</h3>
+<div class="paragraph">
+<p>如果您喜欢动态类型编程语言的快速原型制作经验，但您也需要足够的安全功能来构建大型，可靠的应用程序，Raku非常适合您。它的逐步输入允许您编写代码而无需全面了解所涉及的类型，然后引入类型约束以防止将来滥用您的内部和外部API。
+Perl有很长的历史，通过正则表达式（正则表达式）进行文本处理非常容易，但更复杂的正则表达式获得了声誉
+难以阅读和维护。 Raku通过将regex放在与代码相同的级别来解决这个问题，允许您将它们命名为子例程，甚至使用类继承和角色组合等面向对象的功能来管理代码和正则表达式重用。由此产生的语法非常强大且易于阅读。事实上，Rakudo Raku编译器使用Raku语法解析Raku源代码！
+说到文本，Raku具有惊人的Unicode支持。如果您向用户询问一个号码，并且他们输入的数字不是ASCII范围内的阿拉伯数字，那么Raku仍然可以覆盖您。如果您处理不能表示为单个Unicode代码点的字素，Raku仍会将其表示为单个字符。</p>
+</div>
+<div class="paragraph">
+<p>我可以列出更多的技术优势，但更重要的是，该语言的设计使用起来很有趣。 一个重要的方面是良好的错误消息。 您是否曾经因为通常只给出SyntaxError而烦恼于Python：当出现问题时语法无效？ 例如，这个错误可能来自忘记一个右括号。 在这种情况下，Raku编译器说</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Unable to parse expression in argument list; couldn't find final ')'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这实际上告诉你什么是错的。 但这只是冰山一角。 编译器捕获常见错误并指出可能的解决方案，并且
+甚至建议修复拼写错误。 Raku社区认为错误消息不是很棒，很短的LTA，值得bug报告，并且花了很多精力来提高错误消息的标准。
+最后，Raku使您能够以不同的方式和不同的编程范例自由地表达您的问题域和解决方案。 如果核心语言提供的选项不够，那么它在设计时考虑了可扩展性，允许您为面向对象的代码和新语法引入新的语义。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_总结">1.4. 总结</h3>
+<div class="paragraph">
+<p>Raku是一种灵活的编程语言，为初学者和专家提供了许多酷炫便捷的功能。 它提供灵活性，类型检查以及强大的Unicode和文本处理支持。
+== 运行 Raku</p>
+</div>
+<div class="paragraph">
+<p>在我们开始探索Raku之前，您应该拥有一个环境
+可以运行Raku代码。所以你需要安装Rakudo Raku，这是目前唯一一个积极开发的Raku编译器。或者更好的是，安装Rakudo Star，这是一个包含Rakudo本身的分发版，一些有用的模块，以及一个可以帮助您安装更多模块的工具。
+安装Rakudo本身只为您提供编译器。它遵循每月发布周期，因此它可以让您及时了解最新的发展。当您选择安装Rakudo Star时，通常每次都会发布
+三个月，您将获得更稳定的开发基础，以及一些工具，如调试器和模块安装程序。您可以使用模块安装程序来使用既不包含在Rakudo本身也不包含在Rakudo Star中的预打包软件库。
+以下部分讨论了安装Rakudo Star的几个选项。选择适合你的任何东西。
+本书中的示例使用Rakudo 2017.04.03或Rakudo Star 2017.04（建立在Rakudo 2017.04.03之上）并且应该使用此版本或任何更新版本的Rakudo，只要它支持Raku版本6.c.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_安装器">1.5. 安装器</h3>
+<div class="paragraph">
+<p>您可以从 <a href="https://rakudo.raku.org/downloads/star/" class="bare">https://rakudo.raku.org/downloads/star/</a> Mac OS（.dmg）和 Windows（.msi）下载安装程序。 下载后，您可以启动它们，它们将引导您完成安装过程。
+预装的Linux软件包可从https://github.com/nxadm/rakudo-pkg/releases/ 获得，适用于Debian，Ubuntu，CentOS和Fedora。
+在这两种情况下，使用版本2017.04以获得与本书中使用的示例的最佳兼容性。</p>
+</div>
+<div class="paragraph">
+<p>请注意，Rakudo不可重定位，这意味着您必须安装到由安装程序的创建者决定的固定位置。 无法将安装移动到其他目录。
+在Windows上，安装程序（图2-1）提供将 <code>C:\rakudo\share\raku\site\bin</code>  添加到PATH环境。 您应该选择该选项，因为它允许您执行Rakudo raku（以及模块安装程序代表您安装的程序），而无需指定完整路径。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_docker">1.6. Docker</h3>
+<div class="paragraph">
+<p>在支持Docker的平台上，您可以从docker hub中提取现有的Docker容器：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ docker pull rakudo-star</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>然后，您可以使用此命令获取交互式Rakudo shell：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ docker run -it rakudo-star raku:2017.04</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>但仅此一点对于执行脚本无效，因为容器有自己独立的文件系统。 要使容器内的脚本可用，您需要告诉Docker使当前目录可用于容器：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ docker run -v $PWD:/raku -w /raku -it rakudo-star raku</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>选项-v $ PWD：/ raku指示Docker将当前工作目录（$ PWD）挂载到容器中，它将作为/ raku提供。 为了使相对路径起作用，-w / raku指示Docker将Rakudo进程的工作目录设置为/ raku。
+由于此命令行开始变得难以处理，我创建了一个别名（这是Bash语法;其他shell可能具有稍微不同的别名机制）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">alias p6d='docker run -v $PWD:/raku -w /raku -it rakudo-star raku'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我把这行放到我的〜/ .bashrc文件中，所以新的shell实例有一个p6d命令，是“Raku docker”的缩写。
+作为一个简短的测试，看它是否有效，你可以运行</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ p6d -e 'say "hi"'
+hi</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果您使用Docker路由，请使用p6d别名而不是raku来运行脚本。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_从源代码创建">1.7. 从源代码创建</h3>
+<div class="paragraph">
+<p>要从源代码构建Rakudo Star，您需要安装make，GNU C Compiler1（GCC）或clang和Perl 5。 此示例安装在$ HOME / opt / rakudo-star中：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ wget https://rakudo.raku.org/downloads/star/rakudo-star-2017.04.
+tar.gz
+$ tar xzf rakudo-star-2017.04.tar.gz
+$ cd rakudo-star-2017.04/
+$ perl Configure.pl --prefix=$HOME/opt/rakudo-star --gen-moar
+$ make install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后一步你应该有大约2GB的RAM; 构建编译器是一项资源密集型任务。
+您需要将路径添加到PATH环境变量的两个目录中，一个用于Rakudo本身，另一个用于模块安装程序安装的程序：</p>
+</div>
+<div class="paragraph">
+<p>PATH=$PATH:$HOME/opt/rakudo-star/bin/:$HOME/opt/rakudo-star/share/raku/ site/bin</p>
+</div>
+<div class="paragraph">
+<p>如果你是Bash用户，你可以把它</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_测试你的_rakudo_star_安装">1.8. 测试你的 Rakudo Star 安装</h3>
+<div class="paragraph">
+<p>您现在应该能够从命令行运行Raku程序并询问Rakudo的版本：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku --version
+This is Rakudo version 2017.04.2 built on MoarVM version 2017.04
+implementing Raku.c.
+
+$ raku -e "say &lt;hi&gt;"
+hi</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果不顾一切，所有这些方法都无法生成可用的Rakudo安装，你应该向友好的Perl描述你的问题
+6社区，通常可以提供一些帮助。 <a href="https://raku.org/community/描述了与社区互动的方式。" class="bare">https://raku.org/community/描述了与社区互动的方式。</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_文档">1.9. 文档</h3>
+<div class="paragraph">
+<p>Rakudo本身几乎没有文档，因为大多数有趣的材料都是关于Raku语言的。 但是Rakudo会提供命令行选项的摘要，您可以通过调用raku --help来访问它们。
+Raku语言文档的官方位置是https：// docs。 raku.org/，旨在提供参考和教程式材料。 其他好的资源列在https://raku.org/resources/，其中许多是由Raku社区的成员创建和维护的。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_总结_2">1.10. 总结</h3>
+<div class="paragraph">
+<p>在大多数平台上，您可以从预构建的二进制安装程序安装Rakudo Star。 如果这不起作用，可以使用Docker镜像。 最后，Rakudo Star可以从它的来源建造。
+== 格式化数独字谜</p>
+</div>
+<div class="paragraph">
+<p>作为对Raku的温和介绍，让我们考虑一下我最近在追求自己的兴趣爱好时遇到的一项小任务。
+数独是一个数字放置拼图，在9×9单元格的网格上进行，细分为3×3的块（图3-1）。 一些单元格填充了1到9的数字，有些是空的。 游戏的目标是填充空单元格，以便在每行，每列和3×3块中，从1到9的每个数字恰好出现一次。</p>
+</div>
+<div class="paragraph">
+<div class="title">未解的数独字谜</div>
+<p>数独的有效存储格式只是一个81个字符的字符串，空单元格为0，预填充单元格为1到9。 我想要解决的任务是将其变为更友好的格式。
+输入可以是</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">000000075000080094000500600010000200000900057006003040001000023080000006063240000</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>关于我们的第一个Raku计划：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># file sudoku.p6
+use v6;
+my $sudoku = '000000075000080094000500600010000200000900057006003040001000023080000006063240000';
+for 0..8 -&gt; $line-number {
+    say substr $sudoku, $line-number * 9, 9;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你可以像这样运行它：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku sudoku.p6
+000000075
+000080094
+000500600
+010000200
+000900057
+006003040
+001000023
+080000006
+063240000</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>那里没有多少魔法，但让我们一次一行地查看代码。 第一行以＃开头，是一条延伸到行尾的注释。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use v6;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这条线并非绝对必要，但无论如何都是好的做法。 它声明你正在使用的Perl版本，这里是v6; 换句话说，任何版本的Raku语言。 我们可以更具体一点，并说使用v6.c来完全要求这里讨论的版本。 如果你不小心通过Perl 5运行Raku程序，你会很高兴你包含这一行，因为它会告诉你以下内容：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ perl sudoku.p6
+Perl v6.0.0 required--this is only v5.22.1, stopped at sudoku.p6 line 1. BEGIN failed--compilation aborted at sudoku.p6 line 1.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>而不是更加神秘</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">syntax error at sudoku.p6 line 4, near "for 0"
+Execution of sudoku.p6 aborted due to compilation errors.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第一个有趣的路线是</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $sudoku = '00000007500...';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我声明了一个词汇变量。 从声明的角度到当前作用域的结尾是可见的，这意味着要么是由大括号分隔的当前块的末尾，要么是在文件的末尾，如果它在任何块之外，就像在此 例。
+变量以sigil开头，这里是$。 Sigil让Perl成为线噪声的声誉，但噪音中却有信号。 $看起来像一个S，代表标量。 如果你知道一些数学，你知道标量只是一个值，而不是矢量甚至矩阵。
+这个变量的生命没有空，因为它旁边有一个初始化。 它开头的值是一个字符串文字，如引号所示。
+请注意，除了sigil暗示的非常模糊的“它是一个标量”之外，没有必要声明变量的类型。 如果我们想要，我们可以添加一个类型约束：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Str $sudoku = '00000007500...';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>但是当快速进行原型设计时，我倾向于放弃类型约束，因为我经常不知道代码究竟会如何运作。
+实际逻辑发生在下一行，通过迭代0到8行：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for 0..8 -&gt; $line-number {
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>for循环具有ITERABLE BLOCK的一般结构。这里的iterable是一个范围，1并且该块是一个尖的块。该块以 - &gt;开头，它引入了签名。签名告诉编译器块期望什么参数，这里是一个名为$ line-number的标量。</p>
+</div>
+<div class="paragraph">
+<p>Raku允许使用破折号 - 或单引号&#8217;将多个简单标识符连接到更大的标识符。这意味着只要下面的字符是字母或下划线，您就可以在标识符中使用它们。
+同样，类型约束是可选的。如果你选择包含它们，它将是 <code>for 0..8 &#8594; Int $line-number { &#8230;&#8203; }</code>。
+$ line-number也是一个词法变量，在签名后的块内可见。块由花括号分隔。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say substr $sudoku, $line-number * 9, 9;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>say2和substr3都是Raku标准库提供的功能。
+substr（$ string，$ from，$ num-chars）从$ string中提取子字符串。它从基于零的索引$ from开始，并获取$ num-chars指定的字符数。哦，在Raku中，一个字符确实是一个字符，即使它由多个代码点组成，如带有重音的罗马字母。
+然后打印这个子串，然后换行。
+从示例中可以看出，函数调用不需要括号，但如果需要，可以添加它们：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say substr($sudoku, $line-number * 9, 9);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>或甚至</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say(substr($sudoku, $line-number * 9, 9));</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_让数独变得可玩">1.11. 让数独变得可玩</h3>
+<div class="paragraph">
+<p>由于我们脚本的输出现在已经存在，即使您将它打印在纸上，也无法播放生成的数独。 所有那些讨厌的零都妨碍了实际输入你精心推断的数字！
+所以，让我们用空白替换每个0，这样你就可以解决这个难题：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># file sudoku.p6
+use v6;
+my $sudoku = '000000075000080094000500600010000200000900057006003040001000023080000006063240000';
+$sudoku = $sudoku.trans('0' =&gt; ' ');
+for 0..8 -&gt; $line-number {
+    say substr $sudoku, $line-number * 9, 9;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>trans是Str类的一种方法。 它的参数是一个Pair.5创建一个Pair的无聊方式是Pair.new（'0'，''），但由于它是如此常用，所以有一个胖箭头形式的快捷方式，&#8658;。 方法trans将对的键的每次出现替换为对的值，并返回结果字符串。
+说到快捷方式，您还可以缩短 <code>$sudoku = $sudoku. trans(&#8230;&#8203;) to $sudoku.=trans(&#8230;&#8203;)</code>。 这是一种通用模式，可以将返回结果的方法转换为mutators。
+使用新的字符串替换，结果是可玩的，但丑陋：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku sudoku.p6
+       75
+     8 94
+    5 6
+   1  2
+    9  57
+   6 3 4
+   1   23
+   8    6
+   6324</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>一点点ASCII艺术让它变得可以忍受：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">+---+---+---+
+|   | 1 |   |
+|   |   |79 |
+|  9|   |4  |
++---+---+---+
+|   | 4 | 5 |
+|   |   | 2 |
+| 3 | 29|18 |
++---+---+---+
+|  4| 87|2  |
+|  7| 2 |95 |
+| 5 | 3 | 8 |
++---+---+---+</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>要获得垂直分割线，我们需要将线细分为更小的块。 因为我们已经有一次将字符串分成固定大小的较小字符串，所以是时候将它封装到一个函数中：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub chunks(Str $s, Int $chars) {
+    gather loop (my $idx = 0; $idx &lt; $s.chars; $idx += $chars) {
+        take substr($s, $idx, $chars); }
+    }
+
+for chunks($sudoku, 9) -&gt; $line {
+    say chunks($line, 3).join('|');
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>输出为</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku sudoku.p6
+   |   | 75
+   | 8 | 94
+   |5  |6
+ 1 |   |2
+   |9  | 57
+  6|  3| 4
+  1|   | 23
+  8|   | 6
+63 |24 |</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>但是它是如何工作的？ 那么，sub（SIGNATURE）BLOCK声明一个子例程，short sub。 在这里我声明它采用两个参数，因为我倾向于将参数的顺序混淆我调用的函数，我添加了类型约束以使Raku很可能为我捕获错误。
+聚集在一起创造一份清单。 gather是入口点，每次执行take都会在列表中添加一个元素。 所以</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">gather {
+    take 1;
+    take 2;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>将返回列表1,2。此处聚集充当语句前缀，这意味着它从循环内收集所有内容。
+循环语句采用表单循环（INITIAL，CONDITION，POST）BLOCK，并且像C语言和相关语言中的for循环一样工作。 它首先执行INITIAL，然后当CONDITION为true时，首先是BLOCK然后是POST。
+子例程返回最后一个表达式的值，6这里是上面讨论的聚集循环&#8230;&#8203;构造。
+回到程序，for循环现在看起来像这样：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for chunks($sudoku, 9) -&gt; $line {
+    say chunks($line, 3).join('|');
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>首先，程序将完整的Sudoku字符串切换成9个字符的行，然后对于每行将其再次切换成三个字符串的列表，每个字符串长度为三个字符。 join方法7将其转换回字符串，但在块之间插入管道符号。
+在行的开头和结尾处仍然缺少垂直条，通过更改最后一行可以很容易地对其进行硬编码：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say '|', chunks($line, 3).join('|'), '|';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在输出是</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">|   |   | 75|
+|   | 8 | 94|
+|   |5  |6  |
+| 1 |   |2  |
+|   |9  | 57|
+| 6 | 3 | 4 |
+| 1 |   | 23|
+| 8 |   | 6 |
+| 63|24 |   |</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>只缺少水平线，这些线不太难添加：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $separator = '+---+---+---+';
+my $index = 0;
+for chunks($sudoku, 9) -&gt; $line {
+    if $index++ %% 3 {
+        say $separator;
+    }
+    say '|', chunks($line, 3).join('|'), '|';
+}
+say $separator;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这就是:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">+---+---+---+
+|   |   | 75|
+|   | 8 | 94|
+|   |5  |6  |
++---+---+---+
+| 1 |   |2  |
+|   |9  | 57|
+|  6|  3| 4 |
++---+---+---+
+|  1|   | 23|
+| 8 |   |  6|
+| 63|24 |   |
++---+---+---+</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里有一些新的方面：if条件，在结构上非常类似for循环，和divisibility运算符，%%。 从其他编程语言中你可能知道％为modulo，但是因为$ number
+％$ divisor == 0是这样一种常见模式，$ number %% $ divisor是Raku的快捷方式。
+最后，您可能从编程语言（如C或Perl 5）中了解++ postfix运算符。它将变量递增1，但返回旧值，因此</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 0;
+say $x++;
+say $x;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>首先打印0然后打印1。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_便捷常量和更多便捷写法">1.12. 便捷,常量和更多便捷写法</h3>
+<div class="paragraph">
+<p>Raku是以人类语言为模型的，人类语言内置了某种压缩方案，常用的单词往往很短，常见的结构有快捷方式。
+因此，有很多方法可以更简洁地编写代码。 第一个基本上是作弊，因为子块可以用Str类中的内置方法替换，comb：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># file sudoku.p6
+use v6;
+
+my $sudoku = '000000075000080094000500600010000200000900057006003040001000023080000006063240000';
+$sudoku = $sudoku.trans('0' =&gt; ' ');
+my $separator = '+---+---+---+';
+my $index = 0;
+for $sudoku.comb(9) -&gt; $line {
+    if $index++ %% 3 {
+        say $separator;
+    }
+    say '|', $line.comb(3).join('|'), '|';
+}
+say $separator;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>if条件可以作为语句后缀应用：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $separator if $index++ %% 3;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>除了初始化之外，变量$ index只使用一次，所以有
+不需要给它起个名字。 是的，Raku有匿名变量：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $separator = '+---+---+---+'; for $sudoku.comb(9) -&gt; $line {
+say $separator if $++ %% 3;
+    say '|', $line.comb(3).join('|'), '|';
+}
+say $separator;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>由于 <code>$separator</code> 是常量，我们可以将它声明为：</p>
+</div>
+<div class="paragraph">
+<p>如果你想降低线路噪声因子，你也可以放弃这个sigil，所以恒定的separator ='&#8230;&#8203;'。
+最后，有一个带参数的方法调用的另一种语法：而不是$ obj.method（args），你可以说$ obj.method：args，它将我们带到了小型数独格式化程序的惯用形式：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># file sudoku.p6
+use v6;
+
+my $sudoku = '000000075000080094000500600010000200000900057006003040 001000023080000006063240000';
+$sudoku = $sudoku.trans: '0' =&gt; ' ';
+constant separator = '+---+---+---+'; for $sudoku.comb(9) -&gt; $line {
+say separator if $++ %% 3;
+    say '|', $line.comb(3).join('|'), '|';
+}
+say separator;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Raku代码的这些更改使输出保持不变。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_io_和其它悲剧">1.13. IO 和其它悲剧</h3>
+<div class="paragraph">
+<p>实用脚本不将其输入包含为硬编码字符串文字，而是从命令行，标准输入或文件中读取它。
+如果要从命令行读取Sudoku，可以声明一个名为MAIN的子例程，该子例程获取传入的所有命令行参数：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># file sudoku.p6
+use v6;
+constant separator = '+---+---+---+';
+sub MAIN($sudoku) {
+    my $substituted = $sudoku.trans: '0' =&gt; ' ';
+
+    for $substituted.comb(9) -&gt; $line {
+        say separator if $++ %% 3;
+        say '|', $line.comb(3).join('|'), '|';
+    }
+    say separator;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这就是它如何被调用的:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku-m sudoku-format-08.p6 0000000750000800940005006000100002000009 00057006003040001000023080000006063240000</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">+---+---+---+
+|   |   | 75|
+|   | 8 | 94|
+|   |5  |6  |
++---+---+---+
+| 1 |   |2  |
+|   |9  | 57|
+|  6|  3| 4 |
++---+---+---+
+|  1|   | 23|
+| 8 |   |  6|
+| 63|24 |   |
++---+---+---+</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果您错误地使用它，您甚至可以免费获得一条用法消息，例如省略参数：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku-m sudoku.p6
+Usage:
+  sudoku.p6 &lt;sudoku&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>您可能已经注意到，最后一个示例对替换的Sudoku字符串使用单独的变量。 这是因为默认情况下，函数参数（也就是签名中声明的变量）是只读的。 我可以编写子MAIN（$ sudoku是副本）{&#8230;&#8203;}而不是创建一个新变量。
+经典的UNIX程序，例如cat和wc，遵循从命令行中给出的文件名读取输入的惯例，或者如果在命令行上没有给出文件名，则从标准输入读取输入。
+如果您希望程序遵循此约定，则lines（）提供来自以下任一源的行流：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># file sudoku.p6
+use v6;
+constant separator = '+---+---+---+';
+for lines() -&gt; $sudoku {
+    my $substituted = $sudoku.trans: '0' =&gt; ' ';
+    for $substituted.comb(9) -&gt; $line {
+        say separator if $++ %% 3;
+        say '|', $line.comb(3).join('|'), '|';
+    }
+    say separator;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_获得创造性">1.14. 获得创造性</h3>
+<div class="paragraph">
+<p>你不会从读书中学习编程语言; 你必须实际使用它，修补它。 如果您想扩展前面讨论的示例，我建议您尝试以不同的输出格式生成Sudokus。
+SVG9是一种基于文本的矢量图形格式，提供渲染数独所需的所有基元：矩形，线条，文本等等。 如果您想轻松获得相对较好的输出，可以使用它。
+这是数独的SVG文件的粗略骨架：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" standalone="no"?&gt;
+&lt;!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/ Graphics/SVG/1.1/DTD/svg11.dtd"&gt;
+&lt;svg width="304" height="304" version="1.1" xmlns="http://www.w3.org/2000/svg"&gt;
+&lt;line x1="0" x2="300" y1="33.3333" y2="33.3333" style="stroke:grey" /&gt;
+&lt;line x1="0" x2="300" y1="66.6667" y2="66.6667" style="stroke:grey" /&gt;
+&lt;line x1="0" x2="303" y1="100" y2="100" style="stroke:black; stroke-width:2"/&gt;
+&lt;line x1="0" x2="300" y1="133.333" y2="133.333" style="stroke:grey" /&gt;
+    &lt;!-- more horizontal lines here --&gt;
+&lt;line y1="0" y2="300" x1="33.3333" x2="33.3333" style="stroke:grey" /&gt;
+&lt;!-- more vertical lines here --&gt;
+&lt;text x="43.7333" y="124.5"&gt; 1 &lt;/text&gt;
+&lt;text x="43.7333" y="257.833"&gt; 8 &lt;/text&gt;
+&lt;!-- more cells go here --&gt;
+&lt;rect width="304" height="304" style="fill:none;stroke-width: 1;stroke:black;stroke-width:6"/&gt;
+&lt;/svg&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果您有Firefox或Chrome浏览器或专用矢量图形程序（如Inkscape，10），您可以使用它来打开SVG文件（图3-2）。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_总结_3">1.15. 总结</h3>
+<div class="paragraph">
+<p>第一个Raku示例引入了文字，变量和控制流。
+您还看到了基本的输入和输出原语，以及MAIN子例程
+这使您可以轻松接受命令行参数。
+== 日期时间转换命令行</p>
+</div>
+<div class="paragraph">
+<p>我偶尔会在数据库中存储 UNIX 时间戳, 即从 1970-01-01 开始的秒数。我在按照日期查询数据库中的数据时, 需要将 UNIX 时间戳转换为人类可读的时间, 所以我写了个很小的工具来帮助我在 UNIX  时间戳和日期/时间之间来回转换:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ autotime 2015-12-24
+1450915200
+$ autotime 2015-12-24 11:23:00
+1450956180
+$ autotime 1450915200
+2015-12-24
+$ autotime 1450956180
+2015-12-24 11:23:00</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_使用库">1.16. 使用库</h3>
+<div class="paragraph">
+<p>Raku 的 [DateTime](<a href="https://docs.raku.org/type/DateTime" class="bare">https://docs.raku.org/type/DateTime</a>) 和 [Date](<a href="https://docs.raku.org/type/Date" class="bare">https://docs.raku.org/type/Date</a>) 模块会做实际的转换。
+<code>DateTime.new</code> 构造函数有一个接收单个整数作为 UNIX 时间戳的变体:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ raku -e "say DateTime.new(1480915200)"
+2016-12-05T05:20:00Z</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>看起来我们已经完成了一个方向的转换,对吗?</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
+sub MAIN (Int $timestamp) {
+    say DateTime.new($timestamp)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们来运行它:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ autotime 1450915200
+Invalid DateTime string '1450915200'; use an ISO 8601 timestamp (yyyy-mm-ddThh:mm:ssZ or yyyy-mm-ddThh:mm:ss+01:00) instead
+  in sub MAIN at autotime line 2
+  in block &lt;unit&gt; at autotime line 2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>发生了什么？看起来 <code>DateTime</code> 构造函数把参数当作了字符串, 尽管 <code>sub MAIN</code> 的参数被声明为 <code>Int</code>。怎么会变成那样呢? 我们添加一些调试输出:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
+sub MAIN(Int $timestamp) {
+    say $timestamp.^name;
+    say DateTime.new($timestamp)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>打印出:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">IntStr</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>$thing.^name</code> 是 $thing 所属类的名字。 [IntStr](<a href="https://docs.raku.org/type/IntStr" class="bare">https://docs.raku.org/type/IntStr</a>) 是 <code>Int</code> 和 <code>Str</code> 类的子类, 这就是为什么 <code>DateTime</code> 构造函数正常地认为 $timestamp 是一个 <code>Str</code> 的原因。</p>
+</div>
+<div class="paragraph">
+<p>长话短说, 我们可以在参数前添加一个 <code>+</code> 前缀使参数强制为 "真" 整数, 这也是将字符串转为数值的通用机制:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
+sub MAIN(Int $timestamp) {
+    say DateTime.new(+$timestamp)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这一次它真的工作了:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ ./autotime-01.p6 1450915200
+2015-12-24T00:00:00Z</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>输出是 ISO 8601 样式的时间戳格式, 对眼睛不太友好。对于小时,分钟和秒数都为 0 的日期, 我们真正想要的只有日期:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
+sub MAIN(Int $timestamp) {
+    my $dt = DateTime.new(+$timestamp);
+    if $dt.hour == 0 &amp;&amp; $dt.minute == 0 &amp;&amp; $dt.second == 0 {
+        say $dt.Date;
+    }
+    else {
+        say $dt;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这样看起来更好一点:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ ./autotime 1450915200
+2015-12-24</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>但是上面那种三个比较都为 0 的写法实在太丑了, 如果是 4 个, 5 个, 6 个&#8230;&#8203; 那就是又丑又长。Raku 有一个 <code>all</code> Junction:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">if all($dt.hour, $dt.minute, $dt.second) == 0 {
+    say $dt.Date;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>all(&#8230;&#8203;)</code> 创建了一个 [Junction](<a href="https://docs.raku.org/type/Junction" class="bare">https://docs.raku.org/type/Junction</a>), 它是几个其他值的组合值, 它也存储了一个逻辑模式。当你比较一个 junction 和其他值的时候, 那个比较会自动地应用到该 junction 中的所有值上。<code>if</code> 语句在布尔上下文中对该 junction 进行求值, 在这个例子中, 当所有的比较为 <code>True</code> 时, if 也返回 <code>True</code>。</p>
+</div>
+<div class="paragraph">
+<p>其他类型的 junction 还有 <code>any</code>, <code>all</code>, <code>none</code>。考虑到在布尔上下文中, 0 是唯一一个求值为 false 的整数, 我们甚至可以把上面的例子写为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">if none($dt.hour, $dt.minute, $dt.second) {
+    say $dt.Date;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>但是也可能没有必要搞得那么复杂,  如果 <code>$dt</code> 这个 Datetime 对象转换为 <code>Date</code>  然后再转换为 DateTime 而不丢失信息, 那么它肯定是一个 Date:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">if $dt.Date.DateTime == $dt {
+    say $dt.Date;
+}
+else {
+    say $dt;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_datetime_格式化">1.17. DateTime 格式化</h3>
+<div class="paragraph">
+<p>如果时间戳没有被解析为整天, 那么当前我们的脚本的输出就会像这样:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">2015-12-24T00:00:01Z</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>其中的 "Z" 表示 UTC 或 "Zulu" 时区。</p>
+</div>
+<div class="paragraph">
+<p><code>DateTime</code> 类支持自定义格式化, 所以我们来写一个:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub MAIN(Int $timestamp) {
+    my $dt = DateTime.new(+$timestamp, formatter =&gt; sub ($o) {
+            sprintf '%04d-%02d-%02d %02d:%02d:%02d',
+                    $o.year, $o.month,  $o.day,
+                    $o.hour, $o.minute, $o.second,
+    });
+    if $dt.Date.DateTime == $dt {
+        say $dt.Date;
+    }
+    else {
+        say $dt.Str;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在输出看起来更好看了:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">./autotime 1450915201
+2015-12-24 00:00:01</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>语法 <code>formatter &#8658; &#8230;&#8203;</code> 在参数上下文中表示具名参数。
+这样的代码我不喜欢, 因为在 <code>DateTime.new</code> 调用中它是内联的, 这并不清晰。</p>
+</div>
+<div class="paragraph">
+<p>我们来单独写一个例程:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
+sub MAIN(Int $timestamp) {
+    sub formatter($o) {
+        sprintf '%04d-%02d-%02d %02d:%02d:%02d',
+                $o.year, $o.month,  $o.day,
+                $o.hour, $o.minute, $o.second,
+    }
+    my $dt = DateTime.new(+$timestamp, formatter =&gt; &amp;formatter);
+    if $dt.Date.DateTime == $dt {
+        say $dt.Date;
+    }
+    else {
+        say $dt.Str;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>是的, 你可以把一个子例程声明放在另一个子例程声明的正文中; 子例程只是一个普通的词法符号,就像一个用 <code>my</code> 声明的变量。</p>
+</div>
+<div class="paragraph">
+<p>在行 <code>my $dt = DateTime.new(+$timestamp,formatter &#8658; &amp;formatter);</code> 中, 语法 <code>&amp;formatter</code> 引用子例程作为一个对象,而不调用它。</p>
+</div>
+<div class="paragraph">
+<p>这是 Raku, <code>formatter &#8658; &amp;formatter</code> 有一个简写: <code>&amp;formatter</code>。
+作为一般规则,如果要填充一个名称为变量名称并且其值为变量值的命名参数, 可以通过写入 <code>:$variable</code> 创建它。 作为扩展, <code>:thing</code> 是 <code>thing &#8658; True</code> 的缩写。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_寻找其他途径">1.18. 寻找其他途径</h3>
+<div class="paragraph">
+<p>现在, 从时间戳到日期和时间的转换工作的很好, 让我们看另一种途径。
+我们的小工具需要解析输入, 并决定输入的是时间戳还是日期和可选的时间。</p>
+</div>
+<div class="paragraph">
+<p>一种无聊的方式是使用条件:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub MAIN($input) {
+    if $input ~~ / ^ \d+ $ / {
+        # convert from timestamp to date/datetime
+    }
+    else {
+        # convert from date to timestamp
+
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>但我讨厌无聊, 所以我想看看一个更令人兴奋的（端可扩展）方法。</p>
+</div>
+<div class="paragraph">
+<p>Raku 支持多重分派。这意味着您可以有多个具有相同名称但不同签名的子例程。
+Raku 自动决定要调用哪一个。 您必须通过编写 <code>multi sub</code> 而不是 <code>sub</code> 来显式地启用此功能, 以便 Raku 可以捕获意外的重新声明。</p>
+</div>
+<div class="paragraph">
+<p>让我们看看它在实际中的运用:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
+
+multi sub MAIN(Int $timestamp) {
+    sub formatter($o) {
+        sprintf '%04d-%02d-%02d %02d:%02d:%02d',
+                $o.year, $o.month,  $o.day,
+                $o.hour, $o.minute, $o.second,
+    }
+    my $dt = DateTime.new(+$timestamp, :&amp;formatter);
+    if $dt.Date.DateTime == $dt {
+        say $dt.Date;
+    }
+    else {
+        say $dt.Str;
+    }
+}
+
+
+multi sub MAIN(Str $date) {
+    say Date.new($date).DateTime.posix
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们看一下效果:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ ./autotime 2015-12-24
+1450915200
+$ ./autotime 1450915200
+Ambiguous call to 'MAIN'; these signatures all match:
+:(Int $timestamp)
+:(Str $date)
+  in block &lt;unit&gt; at ./autotime line 17</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>不是我所想象的。问题又是整数参数自动被转换为了 <code>IntStr</code>, Int 和 Str <code>multi</code>（或候选）都接受它作为参数。</p>
+</div>
+<div class="paragraph">
+<p>避免这种错误的最简单的方法是缩小 Str 候选者接受的字符串的种类。
+经典的方法是用一个正则表达式粗略验证传入的参数:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN(Str $date where /^ \d+ \- \d+ \- \d+ $ /) {
+    say Date.new($date).DateTime.posix
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它确实能工作, 但为什么重复 Date.new 已经有用于验证日期字符串的逻辑？
+如果你传递一个看起来不像日期的字符串参数,你会得到这样的错误：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Invalid Date string 'foobar'; use yyyy-mm-dd instead</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们可以使用这种行为约束 <code>MAIN multi</code> 候选者的字符串参数：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN(Str $date where { try Date.new($_) }) {
+    say Date.new($date).DateTime.posix
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这里额外的 <code>try</code> 是因为子类型约束后面的 <code>where</code> 不应该抛出异常, 而只是返回一个假值。</p>
+</div>
+<div class="paragraph">
+<p>现在它的工作得像预期的一样:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ ./autotime 2015-12-24;
+1450915200
+$ ./autotime 1450915200
+2015-12-24</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_处理时间">1.19. 处理时间</h3>
+<div class="paragraph">
+<p>剩下要实现的功能是把日期和时间转换为时间戳。换句话说, 我们想这样调用 <code>autotime 2015-12-24 11:23:00</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN(Str $date where { try Date.new($_) }, Str $time?) {
+    my $d = Date.new($date);
+    if $time {
+        my ( $hour, $minute, $second ) = $time.split(':');
+        say DateTime.new(date =&gt; $d, :$hour, :$minute, :$second).posix;
+    }
+    else {
+        say $d.DateTime.posix;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>凭借尾部的?, 新的第二个参数是可选的 。 如果存在第二个参数, 我们用冒号将时间字符串分割成小时,分钟和秒。 我写的第一个本能是使用较短的变量名称, <code>my($h, $m, $s) = $time.split(':')</code>, 但然后调用 <code>DateTime</code> 构造函数看起来像这样：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">DateTime.new(date =&gt; $d, hour =&gt; $h, minute =&gt; $m, second =&gt; $s);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>所以构造函数的命名参数使我选择更多的自解释变量名。</p>
+</div>
+<div class="paragraph">
+<p>所以, 这个可以工作:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">./autotime 2015-12-24 11:23:00
+1450956180</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>而且我们还可以检测它的原形:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ ./autotime 1450956180
+2015-12-24 11:23:00</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_系好你的安全带">1.20. 系好你的安全带</h3>
+<div class="paragraph">
+<p>Raku 的隐式变量或主题变量:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for 1..3 {
+    .say
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>产生如下输出:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">1
+2
+3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个例子中没有显式的迭代变量, 所以 Perl 隐式地把当前循环的值绑定给叫做 <code>$<em></code> 的变量。方法调用 <code>.say</code> 是 <code>$</em>.say</code> 的缩写。由于我们有一个子例程在同一个变量上调用了 6 个方法, 所以使用 <code>$_</code> 会有很好的可视效果:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub formatter($_) {
+    sprintf '%04d-%02d-%02d %02d:%02d:%02d',
+            .year, .month,  .day,
+            .hour, .minute, .second,
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果你不想求助于函数定义在词法作用域中设置 <code>$_</code>, 那么你可以使用 <code>given VALUE BLOCK</code> 结构:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">given DateTime.new(+$timestamp, :&amp;formatter) {
+    if .Date.DateTime == $_ {
+        say .Date;
+    }
+    else {
+        .say;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Raku 还提供了对 <code>$_</code> 变量的条件语句的快捷方式,可以用作一个通用的switch语句：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">given DateTime.new(+$timestamp, :&amp;formatter) {
+    when .Date.DateTime == $_ { say .Date }
+    default { .say }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果你有一个只读的变量或参数, 那么你可以不使用 <code>$</code> 符号, 虽然你可以在声明时使用反斜线:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN(Int \timestamp) {
+    ...
+    given DateTime.new(+timestamp, :&amp;formatter) {
+    ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>所以现在完整的代码看起来像这样:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
+
+multi sub MAIN(Int \timestamp) {
+    sub formatter($_) {
+        sprintf '%04d-%02d-%02d %02d:%02d:%02d',
+                .year, .month,  .day,
+                .hour, .minute, .second,
+    }
+    given DateTime.new(+timestamp, :&amp;formatter) {
+        when .Date.DateTime == $_ { say .Date }
+        default { .say }
+    }
+}
+
+multi sub MAIN(Str $date where { try Date.new($_) }, Str $time?) {
+    my $d = Date.new($date);
+    if $time {
+        my ( $hour, $minute, $second ) = $time.split(':');
+        say DateTime.new(date =&gt; $d, :$hour, :$minute, :$second).posix;
+    }
+    else {
+        say $d.DateTime.posix;
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_main_魔法">1.21. MAIN 魔法</h3>
+<div class="paragraph">
+<p>为我们调用 <code>sub MAIN</code> 的魔法还为我们提供了一个自动化的用法消息, 如果我们用不匹配任何 <code>multi</code> 的参数调用 MAIN, 例如调用时不提供参数:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ ./autotime
+Usage:
+  ./autotime &lt;timestamp&gt;
+  ./autotime &lt;date&gt; [&lt;time&gt;]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们可以通过在 MAIN subs 之前添加语义注释来为这些用法行添加简短描述:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
+
+#| Convert timestamp to ISO date
+multi sub MAIN(Int \timestamp) {
+    ...
+}
+
+#| Convert ISO date to timestamp
+multi sub MAIN(Str $date where { try Date.new($_) }, Str $time?) {
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在用法信息变为了:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ ./autotime
+Usage:
+  ./autotime &lt;timestamp&gt; -- Convert timestamp to ISO date
+  ./autotime &lt;date&gt; [&lt;time&gt;] -- Convert ISO date to timestamp</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_总结_4">1.22. 总结</h3>
+<div class="paragraph">
+<p>我们已经看到了一些 Date 和 DateTime 算法, 但令人兴奋的部分是 multi dispatch, 命名参数,带有 where 从句的子类型约束, given/ when 和 隐式 $_ 变量, 以及一些魔法, 当涉及到 MAIN subs 时。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_测试_say">2. 测试 say</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在上一章中，我更改了一些代码，以便它不会产生输出，而是在MAIN子中输出，这很方便地进行了测试。
+更改代码以使其更容易测试是合法的做法。 但是如果你必须通过调用say来测试产生输出的代码，那么你可以使用一个小技巧：比如在文件句柄上工作，你可以换掉连接到标准输出的默认文件句柄。 您可以在其位置放置一个虚拟文件句柄来捕获发给它的低级命令，而不是默认值，并记录下来进行测试。
+有一个现成的模块，IO :: String，1但是为了学习我们将看看它是如何工作的：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use v6;
+
+# function to be tested
+sub doublespeak($x) {
+    say $x ~ $x;
+}
+
+use Test;
+plan 1;
+
+my class OutputCapture {
+    has @!lines;
+    method print(\s) {
+        @!lines.push(s);
+    }
+    method captured() {
+        @!lines.join;
+    }
+}
+
+my $output = do {
+    my $*OUT = OutputCapture.new;
+    doublespeak(42);
+    $*OUT.captured;
+};
+is $output, "4242\n", 'doublespeak works';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>使用~string concatenation运算符连接自己的参数。 结果传递给说。
+在引擎盖下，说做一些格式化，然后查找变量$ * OUT。 在sigil之后的*将其标记为动态变量。 动态变量的查找通过调用堆栈，并在每个堆栈框架中查找变量的声明，取其找到的第一个。 然后说在该对象上调用方法print。
+通常，$ * OUT包含IO :: Handle类型的对象，但是say函数并不真正关心它，只要它可以在该对象上调用print方法即可。 这叫做鸭子打字：我们并不关心对象的类型，只要它像鸭子一样嘎嘎叫。 或者在这种情况下，像鸭子一样打印。
+然后加载测试模块，3然后声明要运行多少个测试：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Test;
+plan 1;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>您可以省略第二行，而是在测试后调用完成测试。 但是，如果测试代码本身可能存在错误，并且没有运行测试，那么最好先预先确定预期测试的数量，以便测试模块或测试工具能够捕获这些错误。
+该示例的下一部分是我们可以用来模拟IO :: Handle的类型的声明：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my class OutputCapture {
+    has @!lines;
+    method print(\s) {
+        @!lines.append(s);
+    }
+    method captured() {
+        @!lines.join;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>class引入了一个类，我的前缀使得名称具有词法作用，就像在我的$ var声明中一样。
+has @！lines声明一个属性，即为OutputCapture类的每个实例单独存在的变量。 的！ 将其标记为属性。 我们可以把它排除在外，但是把它放在那里意味着你总是知道在阅读更大的课程时这个名字的来源。
+@！行的属性以@开头，而不是我们到目前为止看到的其他变量。 @是数组变量的符号。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">符号</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">类型约束</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">默认类型</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">解释</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">$</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mu</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">单个值和对象</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">@</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Positional</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">整数索引的组合</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Associative</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hash</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">字符串或对象索引的组合</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&amp;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Callable</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">你可以调用的对象代码</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>您现在可能会看到一个趋势：变量或属性名称的第一个字符表示其粗略类型（标量，数组，＆用于例程，稍后我们将学习哈希值的％），如果第二个字符不是 信，它指明了它的范围。 我们将这第二个角色称为两个角色。 到目前为止，我们已经看到了*动态变量和！ 对于属性。 还有更多：</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Twigil</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">描述</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">动态作用域变量</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">!</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OO 领域的属性</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">^</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">隐式位置参数</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">:</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">隐式命名参数</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">编译器提供的常量</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">=</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pod(文档)变量</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>我们的例子的倒数第二个块是这样的：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $output = do {
+    my $*OUT = OutputCapture.new;
+    doublespeak(42);
+    $*OUT.captured;
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>do {&#8230;&#8203;}只执行花括号内的代码并返回最后一个语句的值。 与Raku中的所有代码块一样，它还引入了一个新的词法范围。
+新的范围在下一行中派上用场，我的$ * OUT声明了一个新的动态变量$ * OUT，但是它只在块的范围内有效。 它是使用OutputCapture.new初始化的，这是前面声明的类的新实例。 new不是魔术，它只是继承自OutputCapture的超类。 我们没有声明一个，但默认情况下，类的类型为Any4
+一个超类，它提供（除其他外）new方法作为构造函数。
+对doublespeak调用的调用说，然后调用$ * OUT.print。 由于$ * OUT是此动态范围中OutputCapture的一个实例，因此传递的字符串表示在OutputCapture的属性@！行中着陆，其中$ * OUT。 捕获可以再次访问它。
+最后一行，</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">is $output, "4242\n", 'doublespeak works';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>从Test模块调用is函数。
+在旧的测试传统中，这产生了TAP格式的输出：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">1..1
+ok 1 - doublespeak works</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_总结_5">2.1. 总结</h3>
+<div class="paragraph">
+<p>我们已经看到say（）使用动态范围的变量$ * OUT作为其输出文件句柄。 出于测试目的，我们可以将其替换为我们制作的对象，这使我们偶然发现了在Raku中如何编写类的第一眼。
+== Silent-Cron, 一个 Cron 包裹器</p>
+</div>
+<div class="paragraph">
+<p>在Linux和类UNIX系统上，名为cron1的程序会在后台定期执行用户定义的命令。 它用于系统维护任务，例如刷新或删除缓存，旋转和删除旧日志文件等。
+如果这样的命令产生任何输出，cron通常会发送一个包含输出的电子邮件，以便管理员可以查看它并判断是否需要某些操作。
+但并非所有命令行程序都是为了与cron一起使用而编写的。 例如，即使成功执行，它们也可能产生输出，并通过非零退出代码指示失败。 或者他们可能会挂起或以其他方式行为不端。
+为了处理这些命令，我们将开发一个名为silent-cron的小程序，它包含这些命令并在退出代码为零时抑制输出。 它还允许您指定一个超时，如果它耗时太长则会终止包装程序：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ silent-cron -- command-that-might-fail args
+$ silent-cron --timeout=5 -- command-that-might-hang</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_异步运行命令">2.2. 异步运行命令</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">当你想运行外部命令时，Raku基本上有两个选择：run，2是一个简单的同步接口; 和Proc </dt>
+<dd>
+<p>Async，3是一个异步且稍微复杂的选项。 即使我们在第一次迭代中省略了超时，我们也需要注意在异步接口中实现超时更容易，所以我们将使用它：</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
+sub MAIN(*@cmd) {
+    my $proc = Proc::Async.new(|@cmd);
+    my $collector = Channel.new;
+    for $proc.stdout, $proc.stderr -&gt; $supply {
+        $supply.tap: { $collector.send($_) }
+    }
+    my $result = $proc.start.result;
+    $collector.close;
+    my $output = $collector.list.join;
+    my $exitcode = $result.exitcode;
+    if $exitcode != 0 {
+        say "Program @cmd[] exited with code $exitcode";
+        print "Output:\n", $output if $output;
+    }
+    exit $exitcode;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里有很多新的功能和概念，所以让我们一点一点地浏览代码。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub MAIN(*@cmd) {</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你应该注意的第一件事是* @ cmd。 变量前面的*表示一个slurpy参数.4它之所以如此命名是因为它会冒出任意数量的参数。 <strong>仅在参数声明中需要。
+因此</strong> @ cmd收集数组变量@cmd中的所有命令行参数，其中第一个元素是要执行的命令，并且任何其他元素是传递给此命令的参数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $proc = Proc::Async.new(|@cmd);</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">下一行使用传入的命令创建一个新的Proc </dt>
+<dd>
+<p>Async实例，但尚未运行任何内容。 Proc :: Async.new不期望我们</p>
+</dd>
+<dt class="hdlist1">传递数组，但它希望我们传递任意数量的值作为参数。 因此我们使用| @cmd之前的垂直bar5以展平我们的数组，以便我们发送Proc </dt>
+<dd>
+<p>Async.new多个值而不是一个数组值。
+对于我们的程序，我们需要捕获$ proc的所有输出; 因此我们捕获STDOUT和STDERR流的输出（Linux上的文件句柄1和2），并将它组合成一个字符串。 在异步API中，STDOUT和STDERR被建模为Supply，6类型的对象，因此是事件流。 由于耗材可以并行发出事件，我们需要一个线程安全的数据结构来收集结果，Raku可以方便地为它提供一个Channel：</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $collector = Channel.new;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>要实际从程序中获取输出，我们需要进入
+STDOUT和STDERR流：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for $proc.stdout, $proc.stderr -&gt; $supply {
+    $supply.tap: { $collector.send($_) }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>每个 <code>$supply</code> executesthe block <code>{ $collector.send($_) }</code> 它收到的foreachstring。 如果流被缓冲，则字符串可以是字符，行或更大的字符串。 我们所做的就是通过send方法将字符串放入channel $ collector中。
+请注意，前面的代码相当于</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$proc.stdout.tap: { $collector.send($_) }
+$proc.stderr.tap: { $collector.send($_) }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>运行简单脚本时，您经常会看到正常输出和错误输出一起打印到终端。 我们的代码将STDOUT和STDERR输出交错到$ collector几乎相同的方式。
+既然已经将数据流分流并连接到我们的收集器，我们就可以启动该程序并等待它完成：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $result = $proc.start.result;</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Proc </dt>
+<dd>
+<p>Async.start执行外部进程并返回一个Promise.7一个promise包装了一段可能在另一个线程上运行的代码，
+状态（计划，保持或破碎），一旦完成，结果。 访问结果会自动等待包装的代码完成。 这里的代码是运行外部程序的代码，结果是Proc8类型的对象（它恰好与同步接口的run（）函数相同）。
+在这一行之后，我们可以确定外部命令已经终止，因此不再有来自$ proc.stdout和$ proc.stderr的输出。 因此，我们可以安全地关闭频道并通过Channel.list访问其所有元素：</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$collector.close;
+my $output = $collector.list.join;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后，是时候检查外部命令是否成功了
+检查其退出代码 - 并使用命令的退出代码退出包装器：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $exitcode = $result.exitcode;
+if $exitcode != 0 {
+    say "Program @cmd[] exited with code $exitcode";
+    print "Output:\n", $output if $output;
+}
+exit $exitcode;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在输出字符串内：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "Program @cmd[] exited with code $exitcode";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>变量$ exitcode是内插的，也就是说，它的名称被替换为
+它在运行时的价值。 这种情况发生在双引号字符串中，“&#8230;&#8203;”，但不是单引号字符串，'&#8230;&#8203;'。 只有标量变量以“&#8230;&#8203;&#8230;&#8203;”插值; 其他变量（数组，散列，代码对象）仅在它们跟随某种包围构造时进行插值。 这就是为什么@cmd后跟[]，我们称之为Zen切片。 返回多个值的数组或哈希索引通常称为切片; 例如，@ cmd [0,1]返回前两个值。 将索引保留为空将返回整个数组。
+实现插值的另一种方法是向以括号结尾的变量添加方法调用，因此它也可以写为</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "Program @cmd.join(' ') exited with code $exitcode";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>有关“..”的更深入信息，请参阅文档插值。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_实现超时">2.3. 实现超时</h3>
+<div class="paragraph">
+<p>在Raku中实现超时的惯用方法是将Promise.anyof组合器与计时器一起使用：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub MAIN(*@cmd, :$timeout) {
+    my $proc = Proc::Async.new(|@cmd);
+    my $collector = Channel.new;
+    for $proc.stdout, $proc.stderr -&gt; $supply {
+        $supply.tap: { $collector.send($_) }
+    }
+
+    my $promise = $proc.start;
+    my $waitfor = $promise;
+    $waitfor = Promise.anyof(Promise.in($timeout), $promise)
+        if $timeout;
+    await $waitfor;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>$proc的初始化没有改变。 但不是访问$ proc。 start.result，我们存储从$ proc.start返回的promise。 如果用户指定了超时，我们运行这段代码：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$waitfor = Promise.anyof(Promise.in($timeout), $promise)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Promise.in（$ seconds）返回一个将在$ seconds秒内完成的承诺。它基本上就是启动{sleep $ seconds}，但是关于不为睡眠分配整个线程可能会更聪明一些。
+Promise.anyof（$ p1，$ p2）返回一个承诺，只要其中一个参数（也应该是承诺）得到满足，它就会被履行。 因此，我们等待外部程序完成，或者直到完成睡眠承诺。
+等待$ waitfor; 该计划等待履行承诺
+（或破碎）。 在这种情况下，我们不能像以前一样简单地访问$promise.result，因为在超时的情况下，$promise（这是外部程序的承诺）可能无法实现。 所以我们必须首先检查承诺的状态，然后才能安全地访问$ promise.result：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">if !$timeout || $promise.status ~~ Kept {
+    my $exitcode = $promise.result.exitcode;
+    my $output = $collector.list.join;
+
+    if $exitcode != 0 {
+        say "Program @cmd[] exited with code $exitcode";
+        print "Output:\n", $output if $output;
+    }
+    exit $exitcode;
+}
+else {
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>表达式$ promise.status ~~ Kept使用~~智能匹配运算符来检查promise状态是否为常量Kept。 智能匹配是一个非常通用的运算符，语义依赖于表达式的右侧。 对于右侧的数字，比较是数字的。 对于右侧的类型，它是类型检查。 有关更多信息，请参阅官方文档10。</p>
+</div>
+<div class="paragraph">
+<p>在else {&#8230;&#8203;}分支中，我们需要处理超时情况。 这可能就像打印发生超时的语句一样简单，并且当silent-cron立即退出时，这可能是可以接受的。 但是我们可能希望将来做得更多，所以我们应该杀掉外部程序。 如果程序在友方终止信号之后没有终止，它应该收到kill（9），在UNIX系统上强制终止该程序：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">else { $proc.kill;
+    say "Program @cmd[] did not finish after $timeout seconds";
+    sleep 1 if $promise.status ~~ Planned;
+    $proc.kill(9);
+    await $promise;
+    exit 2;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>等待$ promise返回承诺的结果; 这里是一个Proc对象。 Proc具有内置的安全功能，如果使用非零退出代码返回的命令，则在void上下文中评估对象会引发异常。
+由于我们在代码中显式处理非零退出代码，因此我们可以通过将await的返回值赋给虚拟变量来抑制此异常的生成：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $dummy = await $promise</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>由于我们不需要该值，因此我们也可以将其指定为匿名
+变量而不是：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ = await $promise</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_more_on_promises">2.4. More on Promises</h3>
+<div class="paragraph">
+<p>如果您使用过其他语言的并发或并行程序，则可能遇到了线程，锁，互斥体和其他低级构造。 这些也存在于Raku中，但不鼓励直接使用它们。
+这种低级原语的问题在于它们不能很好地构成。 您可以拥有两个使用线程的库，并且可以自行运行，但在同一个程序中组合时会导致死锁。 或者不同的组件可能会自己启动线程，当多个这样的组件在同一个进程中聚集在一起时，这会导致太多的线程和高内存消耗。</p>
+</div>
+<div class="paragraph">
+<p>Raku提供更高级的原语。 您不必生成线程，而是使用start来异步运行代码，并且调度程序决定在哪个线程上运行它。 如果发生更多的启动调用请求线程安排事情，一些将连续运行。
+这是在后台运行计算的一个非常简单的示例：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub count-primes(Int $upto) {
+    (1..$upto).grep(&amp;is-prime).elems;
+}
+
+my $p = start count-primes 10_000;
+say $p.status;
+await $p;
+say $p.result;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它给出如下输出:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Planned
+1229</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你可以看到主要的执行线在开始调用后继续，$ p立即有一个值 - 承诺，状态为Planned。
+正如我们之前看到的那样，有承诺的组合者，无论是任何还是全部。 您还可以使用then方法将操作链接到promise：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub count-primes(Int $upto) {
+    (1..$upto).grep(&amp;is-prime).elems;
+}
+
+my $p1 = start count-primes 10_000;
+my $p2 = $p1.then({ say .result });
+await $p2;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果在异步执行代码中抛出异常，则promise的状态将变为Broken，并且调用其.result方法将重新抛出异常。
+为了演示调度程序分配任务，让我们考虑一个小的蒙特卡罗模拟来计算π的近似值。 蒙特卡罗模拟只是一个程序，它使用随机数来探索可能值的空间并进入确定性输出（图6-1）。</p>
+</div>
+<div class="paragraph">
+<p>我们生成一对0到1之间的随机数，并将它们解释为正方形中的点。 半径为1的四分之一圆覆盖π/ 4的面积，因此如果我们使用足够的点，则四分之一圆内随机放置的点与总点数的比率接近π/ 4。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub pi-approx($iterations) {
+    my $inside = 0;
+    for 1..$iterations {
+        my $x = 1.rand;
+        my $y = 1.rand;
+        $inside++ if $x * $x + $y * $y &lt;= 1;
+    }
+    return ($inside / $iterations) * 4;
+}
+my @approximations = (1..1000).map({ start pi-approx(80) });
+await @approximations;
+
+say @approximations.map({.result}).sum / @approximations;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该程序异步启动一千个计算，但是如果你在运行时查看系统监视工具，你将只观察到16个线程正在运行。 这个神奇的数字来自默认的线程调度程序，我们可以通过在前面的代码之上提供我们自己的调度程序实例来覆盖它：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $*SCHEDULER = ThreadPoolScheduler.new(:max_threads(3));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于像这种蒙特卡罗模拟这样的CPU绑定任务，最好将线程数大致限制为（可能是虚拟的）CPU内核的数量; 如果许多线程卡在等待I / O，则更多线程可以产生更好的性能。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_可能的扩展">2.5. 可能的扩展</h3>
+<div class="paragraph">
+<p>如果你想使用silent-cron，你可以添加一个重试机制。 如果命令因外部依赖性（如API或NFS共享）而失败，则外部依赖关系可能需要一段时间才能恢复。 因此，您应该添加二次或指数退避; 也就是说，重试之间的等待时间应以二次方式（1,2,4,9,16 &#8230;&#8203;&#8230;&#8203;）或指数方式（1,2,4,8,16,32 &#8230;&#8203;&#8230;&#8203;）增加。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_重构和自动化测试">2.6. 重构和自动化测试</h3>
+<div class="paragraph">
+<p>在我们在下一章中更多地扩展silent-cron之前，是时候重构一下并为它编写一些测试。</p>
+</div>
+<div class="sect3">
+<h4 id="_重构">2.6.1. 重构</h4>
+<div class="paragraph">
+<p>作为一个简短的提醒，这是程序的样子：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
+
+sub MAIN(*@cmd, :$timeout) {
+    my $proc = Proc::Async.new(|@cmd);
+    my $collector = Channel.new;
+    for $proc.stdout, $proc.stderr -&gt; $supply {
+        $supply.tap: { $collector.send($_) }
+    }
+    my $promise = $proc.start;
+    my $waitfor = $promise;
+    $waitfor = Promise.anyof(Promise.in($timeout), $promise)
+        if $timeout;
+    $ = await $waitfor;
+    $collector.close;
+    my $output = $collector.list.join;
+    if !$timeout || $promise.status ~~ Kept {
+        my $exitcode = $promise.result.exitcode;
+        if $exitcode != 0 {
+            say "Program @cmd[] exited with code $exitcode";
+            print "Output:\n", $output if $output;
+        }
+        exit $exitcode;
+    }
+    else {
+        $proc.kill;
+        say "Program @cmd[] did not finish after $timeout seconds";
+        sleep 1 if $promise.status ~~ Planned;
+        $proc.kill(9);
+        $ = await $promise;
+        exit 2;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在那里也存在用于执行具有超时的外部程序的逻辑
+作为处理两种可能结果的逻辑。 在可测试性和未来扩展方面，将外部程序的执行分解为子例程是有意义的。 此代码的结果不是单个值; 我们可能对它产生的输出，退出代码以及是否遇到超时感兴趣。
+我们可以编写一个返回列表或这些值的哈希值的子例程，但在这里我选择编写一个小类，新的子例程将返回：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class ExecutionResult {
+    has Int $.exitcode = -1;
+    has Str $.output is required;
+    has Bool $.timed-out = False;
+    method is-success {
+        !$.timed-out &amp;&amp; $.exitcode == 0;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们之前见过类，但这个有一些新功能。 使用.twigil声明的属性会自动获得一个访问器方法，所以</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">has Int $.exitcode;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>大致相同于</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">has Int $!exitcode;
+method exitcode() { $!exitcode }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它允许类的用户从外部访问属性中的值。 作为奖励，您还可以将它从标准构造函数初始化为命名参数ExecutionResult.new（exitcode &#8658; 42）。 退出代码不是必需属性，因为我们无法知道已超时的程序的退出代码。 因此，对于Int $ .exitcode = -1，我们给它一个默认值，如果该属性尚未初始化，则应用该默认值。
+输出是必需属性，因此我们将其标记为必需属性。 这是一个特点。 特征是修改其他事物行为的代码片段，这里是一个属性。 它们会在几个地方出现，例如子程序签名（复制参数），变量声明和类。 如果您尝试在不指定输出的情况下调用ExecutionResult.new（），则会出现如下错误：
+属性'$！output&#8217;是必需的，但您没有为它提供值。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_模拟和测试">2.6.2. 模拟和测试</h4>
+<div class="paragraph">
+<p>既然我们有一种方便的方法从假设的子程序中返回多个值，那么让我们看看这个子程序可能是什么样子：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub run-with-timeout(@cmd, :$timeout) {
+    my $proc = Proc::Async.new(|@cmd);
+    my $collector = Channel.new;
+    for $proc.stdout, $proc.stderr -&gt; $supply {
+        $supply.tap: { $collector.send($_) }
+    }
+    my $promise = $proc.start;
+    my $waitfor = $promise;
+    $waitfor = Promise.anyof(Promise.in($timeout), $promise)
+        if $timeout;
+    $ = await $waitfor;
+
+    $collector.close;
+    my $output = $collector.list.join;
+
+    if !$timeout || $promise.status ~~ Kept {
+        say "No timeout";
+        return ExecutionResult.new(
+            :$output,
+            :exitcode($promise.result.exitcode),
+        );
+    }
+    else {
+        $proc.kill;
+        sleep 1 if $promise.status ~~ Planned;
+        $proc.kill(9);
+        $ = await $promise;
+        return ExecutionResult.new(
+            :$output,
+            :timed-out,
+        );
+    }
+}</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Proc </dt>
+<dd>
+<p>Async11的用法保持不变，但是当发生错误时，例程不再生成输出，而是返回ExecutionResult对象。
+这简化了MAIN sub：</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN(*@cmd, :$timeout) {
+    my $result = run-with-timeout(@cmd, :$timeout);
+    unless $result.is-success {
+        say "Program @cmd[] ",
+            $result.timed-out ?? "ran into a timeout"
+                              !! "exited with code $result.
+                              exitcode()";
+
+        print "Output:\n", $result.output if $result.output;
+    }
+    exit $result.exitcode // 2;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里新的语法特征是三元运算符CONDITION ?? 真正的分支!! FALSE-BRANCH，你可以从其他编程语言知识中了解到可能的问题吗？ 真正的分支：错误的分支。
+最后，逻辑定义 - 或运算符LEFT // RIGHT返回左侧（如果已定义），如果不定义，则运行右侧并返回其值。 它像||一样工作 和/或中缀运算符，除了那些检查左边的布尔值，而不是它们是否被定义。</p>
+</div>
+<div class="paragraph">
+<p>几种内置类型覆盖了他们认为是真实的。 在布尔上下文中等于0的数字评估为False，空字符串和空容器（如数组，散列和集）也是如此。
+另一方面，只有内置类型Failure12覆盖定义。
+您可以通过实现Bool方法覆盖自定义类型的真值（
+应该返回True或False），并使用定义的方法定义。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">我们可以通过编写具有已定义特征（输出，运行时，退出代码）的自定义外部命令来开始测试sub-with-timeout，但这是以可靠，跨平台的方式进行的相当繁琐。 所以我想用模拟实现替换Proc </dt>
+<dd>
+<p>Async，并给sub一个方法来注入：</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub run-with-timeout(@cmd, :$timeout, :$executer = Proc::Async) {
+    my $proc = $executer.defined ?? $executer !! $executer.new(|@cmd);
+    # rest as before</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">通过sub run-with-timeout，我们可以快速列出存根Proc </dt>
+<dd>
+<p>Async实现所需的方法：stdout，stderr，start和kill。 stdout和stderr都需要返回一个Supply.13最简单的事情就是返回一个只发出一个值的Supply：</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my class Mock::Proc::Async {
+    has $.out = '';
+    has $.err = '';
+    method stdout {
+        Supply.from-list($.out);
+    }
+    method stderr {
+        Supply.from-list($.err);
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Supply.from-list14返回一个Supply，它将发出传递给它的所有参数; 所以这里只是一个字符串。</p>
+</div>
+<div class="paragraph">
+<p>kill最简单的实现方法就是什么都不做：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method kill($?) {}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>$？ 签名是一个没有名称的可选参数（$ foo？）。
+只剩下一种需要存根的方法：开始。 它应该返回一个Promise，它在一个确定的秒数后返回一个Proc对象或它的模拟。 由于代码只调用exitcode方法，因此编写存根很容易：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">has $.exitcode = 0;
+has $.execution-time = 1;
+method start {
+    Promise.in($.execution-time).then({
+        (class {
+            has $.exitcode;
+        }).new(:$.exitcode);
+    });
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>由于我们不需要其他任何地方的模拟过程类，我们甚至不需要给它起一个名字。 class {&#8230;&#8203;}创建一个匿名类，并且对它的.new调用会从中创建一个新对象。
+如前所述，具有非零退出代码的Proc在void上下文中进行计算时抛出异常，或者在我们在Raku中调用它时接收上下文。我们可以通过稍微扩展匿名类来模拟此行为：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class {
+    has $.exitcode;
+    method sink() {
+        die "mock Proc used in sink context";
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>通过所有这些准备工作，我们终于可以编写一些测试：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN('test') {
+    use Test;
+    my class Mock::Proc::Async {
+        has $.exitcode = 0;
+        has $.execution-time = 0;
+        has $.out = '';
+        has $.err = ''; method kill($?) {}
+
+        method stdout {
+            Supply.from-list($.out);
+        }
+        method stderr {
+            Supply.from-list($.err);
+        }
+        method start {
+            Promise.in($.execution-time).then({
+                (class {
+                    has $.exitcode;
+                    method sink() {
+                        die "mock Proc used in sink context";
+                    }
+                }).new(:$.exitcode);
+            });
+        }
+    }
+
+    # no timeout, success
+    my $result = run-with-timeout([],
+        timeout =&gt; 2,
+        executer =&gt; Mock::Proc::Async.new(
+            out =&gt; 'mocked output',
+        ),
+    );
+    isa-ok $result, ExecutionResult;
+    is $result.exitcode, 0, 'exit code';
+    is $result.output, 'mocked output', 'output';
+    ok $result.is-success, 'success';
+
+    # timeout
+    $result = run-with-timeout([],
+        timeout =&gt; 0.1,
+        executer =&gt; Mock::Proc::Async.new(
+            execution-time =&gt; 1,
+            out =&gt; 'mocked output',
+        ),
+    );
+    isa-ok $result, ExecutionResult;
+    is $result.output, 'mocked output', 'output';
+    ok $result.timed-out, 'timeout reported';
+    nok $result.is-success, 'success';
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这将运行两个方案，一个配置超时但未使用（因为模拟的外部程序首先退出），以及超时生效的一个方案。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_提高稳定性和测定时间">2.6.3. 提高稳定性和测定时间</h4>
+<div class="paragraph">
+<p>依靠测试中的时间总是没有吸引力。 如果时间太短（或者太慢），则可能会在缓慢或负载较重的机器上出现零星的测试失败风险。 如果使用更保守的时间间隔测试，测试可能变得非常慢。
+有一个模块（不与Rakudo一起分发）来减轻这种痛苦：Test :: Scheduler15提供了一个具有虚拟化时间的线程调度程序，允许您编写如下测试：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Test::Scheduler;
+my $*SCHEDULER = Test::Scheduler.new;
+my $result = start run-with-timeout([],
+    timeout =&gt; 5,
+    executer =&gt; Mock::Proc::Async.new(
+        execution-time =&gt; 2,
+        out =&gt; 'mocked output',
+    ),
+);
+$*SCHEDULER.advance-by(5); $result = $result.result;
+isa-ok $result, ExecutionResult; # more tests here</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">这将安装自定义调度程序，$ * SCHEDULER.advance-by（5）指示它将虚拟时间提前5秒，而不必等待五秒钟。 在撰写本文时（2016年12月），Test </dt>
+<dd>
+<p>Scheduler是一个相当新的模块，并且有一个错误，阻止第二个测试用例以这种方式工作。</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_安装模块">2.6.4. 安装模块</h4>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">如果您想试用Test </dt>
+<dd>
+<p>Scheduler，则需要先安装它。 如果您运行Rakudo Star，它已经为您提供了zef模块安装程序。 您可以使用它为您下载并安装模块：</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ zef install Test::Scheduler</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果您没有可用的zef，可以下载，引导和使用它：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ git clone https://github.com/ugexe/zef.git
+$ cd zef
+$ raku -Ilib bin/zef install.
+$ zef install Test::Scheduler</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_总结_6">2.7. 总结</h3>
+<div class="paragraph">
+<p>我们已经看到了一个用于运行外部程序的异步API以及如何使用Promises来实现超时。 我们还讨论了如何通过调度程序将promise分发给线程，允许您启动任意数量的promise而不会使计算机过载。
+在测试期间，我们已经看到了带有访问器，三元运算符和匿名类的属性。 已经讨论了线程代码的测试，以及第三方模块可以提供帮助的方式。 最后，我们对模块安装程序zef进行了一次非常小的一瞥。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_有状态的_silent_cron">3. 有状态的 Silent Cron</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在上一章中，我们查看了silent-cron，它是一个外部程序的包装器，在它们的退出状态为零时使它们静音。 但为了使它真正实用，它也应该使偶尔的失败沉默。
+外部API失败，网络变得拥挤，并且发生其他阻止作业成功的事情，因此需要某种重试机制。 在cron工作的情况下，cron已经负责定期重试工作，因此silent-cron应该只是抑制偶然的错误。 另一方面，如果作业一致失败，这通常是管理员或开发人员应该研究的内容，因此这是一个值得报告的问题。
+要实现此功能，silent-cron需要在不同的运行之间存储持久状态。 它需要记录当前运行的结果，然后确定故障历史是否符合“偶尔”的条件。</p>
+</div>
+<div class="sect2">
+<h3 id="_持久化存储">3.1. 持久化存储</h3>
+<div class="paragraph">
+<p>存储后端需要编写和检索结构化数据，并通过锁定保护对状态文件的并发访问。 这种存储后端的一个很好的库是SQLite，1是一个零维护的SQL引擎，可以作为C库使用。 它是公共领域的软件，并且在大多数主流浏览器，操作系统甚至是一些航空公司中使用
+Raku允许您通过DBIish访问SQLite的功能，3这是一个通用数据库接口，具有SQLite，MySQL，PostgreSQL的后端驱动程序，
+和Oracle DB。 要使用它，首先要确保安装了SQLite3，包括其头文件。 例如，在基于Debian的Linux系统上，您可以使用apt-get install libsqlite3-dev实现此目的。 如果您使用的是Rakudo Star发行版，则DBIish已经可用。 如果没有，您可以使用其中一个模块安装程序来检索和安装它：zef install DBIish。</p>
+</div>
+<div class="paragraph">
+<p>要使用DBIish的SQLite后端，首先必须创建一个数据库
+通过选择后端并提供连接信息来处理：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use DBIish;
+my $dbh = DBIish.connect('SQLite', :database('database-file.sqlite3'));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>连接到尚不存在的数据库文件会创建该文件。
+一次性SQL语句可以直接在数据库句柄上执行：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$dbh.do('INSERT INTO player (name) VALUES ?', 'John');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>的？ 在SQL中是一个占位符，它作为do方法的单独参数传递到带外，这可以避免SQL注入漏洞等潜在错误。
+查询倾向于首先准备一个返回语句句柄的语句。 您可以执行一次或多次语句，并在每次执行调用后检索结果行：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $sth = $dbh.prepare('SELECT id FROM player WHERE name = ?');
+my %ids;
+for &lt;John Jack&gt; -&gt; $name {
+    $sth.execute($name);
+    %ids{ $name } = $sth.row[0];
+}
+$sth.finish;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_开发存储后端">3.2. 开发存储后端</h3>
+<div class="paragraph">
+<p>我们不应该只将所有存储处理代码填充到子MAIN中; 我们应该仔细考虑为存储后端创建有用的API。 首先，我们只需要两个功能：插入作业执行的结果，并检索最新的结果。
+由于silent-cron可以用于保护同一台机器上的多个cron作业，因此我们可能需要一些东西来区分不同的作业，这样它们中的一个成功就不会阻止错误报告一个不断失败的作业。 为此，我们引入了一个作业名称，它可以默认为正在执行的命令（包括参数），但可以在命令行中显式设置。
+存储后端的API可能如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $repo = ExecutionResultRepository.new(
+    jobname =&gt; 'refresh cache',
+    statefile =&gt; 'silent-cron.sqlite3',
+);
+$repo.insert($result);
+my @last-results = $repo.tail(5);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>此API并非特定于SQLite后端; 与纯文本文件一起使用的存储后端可以具有完全相同的API。
+我们来实现这个API。 首先，我们需要从前面的用法示例中显而易见的类和两个属性：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class ExecutionResultRepository {
+    has $.jobname is required;
+    has $.statefile is required;
+    # ... more code</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>要实现insert方法，我们需要连接到数据库并创建相关表（如果它尚不存在）。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">has $!db; method !db() {
+    return $!db if $!db;
+    $!db = DBIish.connect('SQLite', :database($.statefile));
+    self!create-schema();
+    return $!db;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>此代码使用私有属性$！db来缓存数据库句柄和私有方法！db来创建句柄（如果它还不存在）。
+私有方法声明为普通方法，但名称以感叹号开头。 要调用一个，请用方法调用点替换感叹号; 换句话说，使用self！db（）而不是self.db（）。
+！db方法还调用下一个私有方法！create-schema，它创建存储表和一些索引：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">constant $table = 'job_execution';
+method !create-schema() {
+    $!db.do(qq:to/SCHEMA/);
+        CREATE TABLE IF NOT EXISTS $table (
+            id          INTEGER PRIMARY KEY,
+            jobname     VARCHAR NOT NULL,
+            exitcode    INTEGER NOT NULL,
+            timed_out   INTEGER NOT NULL,
+            output      VARCHAR NOT NULL,
+            executed    TIMESTAMP NOT NULL DEFAULT (DATETIME('NOW'))
+        );
+
+    SCHEMA
+    $!db.do(qq:to/INDEX/);
+        CREATE INDEX IF NOT EXISTS {$table}_jobname_exitcode ON
+        $table ( jobname, exitcode );
+    INDEX
+    $!db.do(qq:to/INDEX/);
+        CREATE INDEX IF NOT EXISTS {$table}_jobname_executed ON
+        $table ( jobname, executed );
+    INDEX
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>多行字符串文字最好用heredoc4语法编写。 qq：to / DELIMITER /告诉Raku完成解析当前行，这样你仍然可以关闭方法调用括号并添加语句结束分号。 下一行开始字符串文字，直到Raku自己在一行上找到分隔符。 从字符串文字的每一行中删除前导空格的次数与缩进的结尾分隔符一样多。</p>
+</div>
+<div class="paragraph">
+<p>因此:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">print q:to/EOS/;
+    Not indented
+        Indented four spaces
+    EOS</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>产生如下输出</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Not indented
+    Indented four spaces</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在我们有了一个有效的数据库连接并且知道数据库表存在，插入新记录变得容易：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method insert(ExecutionResult $r) {
+    self!db.do(qq:to/INSERT/, $.jobname, $r.exitcode, $r.timed-out, $r.output);
+        INSERT INTO $table (jobname, exitcode, timed_out, output)
+        VALUES(?, ?, ?, ?)
+    INSERT
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>选择最近的记录是一项更多的工作，部分原因是因为我们
+需要将表行转换为对象：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method tail(Int $count) {
+    my $sth = self!db.prepare(qq:to/SELECT/);
+        SELECT exitcode, timed_out, output
+          FROM $table
+          WHERE jobname = ?
+          ORDER BY executed DESC
+          LIMIT $count
+    SELECT
+    $sth.execute($.jobname);
+    $sth.allrows(:array-of-hash).map: -&gt; %h {
+        ExecutionResult.new(
+            exitcode  =&gt; %h&lt;exitcode&gt;,
+            timed-out =&gt; ?%h&lt;timed_out&gt;,
+            output    =&gt; %h&lt;output&gt;,
+        );
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>尾部方法中的最后一个语句值得特别关注。 $ sth.allrows（：hash-of-hash）产生了数据库，其中包含了数据。 这个列表是懒惰的，也就是说，它是按需生成的。 惰性列表是一个非常方便的功能，因为它们允许您使用具有相同API的迭代器和列表。 例如，你可以在每个文件中找到$ handle.lines  - &gt; $ line {&#8230;&#8203;}，而你的方法也不会将整个文件记录到内存中; 相反，它可以在访问时读取一行。
+$ sth.allrows（&#8230;&#8203;）是懒惰的，之后的.map调用也是如此。 map通过调用传递给它的代码对象，一次转换一个列表。 这也是懒惰的。 因此，当实际访问结果列表的元素时，SQLite仅从数据库文件中检索行。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_使用存储后端">3.3. 使用存储后端</h3>
+<div class="paragraph">
+<p>有了存储API，就可以使用它了：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN(*@cmd, :$timeout, :$jobname is copy,
+               :$statefile='silent-cron.sqlite3', Int :$tries = 3) {
+    $jobname //= @cmd.Str;
+    my $result = run-with-timeout(@cmd, :$timeout);
+    my $repo = ExecutionResultRepository.new(:$jobname, :$statefile);
+    $repo.insert($result);
+
+    my @runs = $repo.tail($tries);
+
+    unless $result.is-success or @runs.grep({.is-success}) {
+        say "The last @runs.elems() runs of @cmd[] all failed, the last execution ",
+        $result.timed-out ?? "ran into a timeout"
+                          !! "exited with code $result.exitcode()";
+
+        print "Output:\n", $result.output if $result.output;
+    }
+    exit $result.exitcode // 2;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，成功几次然后连续两次失败的作业不会产生任何错误输出; 只有连续执行的第三次失败才会产生输出。 您可以使用&#8212;&#8203;tries = 5在命令行上覆盖它。
+MAINsubroutine使用构造$ var // = EXPR。// standfor defined-OR，如果它有一个定义的值，它返回左侧。 否则，它会计算并返回EXPR的值。 结合赋值运算符，仅在变量未定义时才评估右侧，然后将表达式的值存储在变量中。 这是确保变量获取值的简便方法，甚至是编写缓存的简短方法。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_发展的空间">3.4. 发展的空间</h3>
+<div class="paragraph">
+<p>必须调查cron作业失败原因的系统管理员可能对该作业的历史感兴趣。 您可以实现一个命令，列出上次作业运行，成功或失败，退出代码或可能的运行时等等。
+或者你可以研究一个不同的后端。 如果要将状态存储在JSON文件而不是SQLite中，该怎么办？ 或启用两者？ （提示：您可以使用JSON :: Tiny5或JSON :: Fast6模块。）</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_总结_7">3.5. 总结</h3>
+<div class="paragraph">
+<p>我们已经讨论过DBIish，一个带有可插拔后端的数据库API，并探讨了如何将它与SQLite一起用来存储持久数据。 在这个过程中，我们还遇到了懒惰列表和一种名为heredocs的新形式的字符串文字。
+== 回顾 Raku 基础知识</p>
+</div>
+<div class="paragraph">
+<p>在前面的章节中，我们讨论了一些与Raku机制相互交叉的例子，这些例子使它们起作用。 在这里，我想总结和深化我们迄今为止所涉及的Raku知识，从原始示例中删除。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_变量和作用域">3.6. 变量和作用域</h3>
+<div class="paragraph">
+<p>在Raku中，变量名由sigil，$，@，％或＆组成，后跟标识符。 sigil意味着类型约束，其中$是最常见的约束
+（默认情况下没有限制），@表示数组，％表示哈希（关联数组/映射），＆表示代码对象。
+标识符可以包含 - 和&#8217;字符，只要它后面的字符是字母。 标识符必须以字母或下划线开头。
+用我声明的子程序和变量是词法范围的。 从声明到当前{} -enclosed块（或当前文件，如果声明在块外）的结尾，它们是可见的。 子程序参数在子程序的签名和块中可见。
+在印记和标识符之间的可选树枝可以影响范围。 * twigil标记一个动态范围的变量; 因此，在当前调用堆栈中执行查找。！ 标记属性，即附加到对象的每实例变量。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程">3.7. 子例程</h3>
+<div class="paragraph">
+<p>子程序或简称子程序是一段具有自己范围的代码，通常也是一个名称。 它有一个签名，指定在调用时必须传递的值：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub chunks(Str $s, Int $chars) {
+#         ^^^^^^^^^^^^^^^^^^^^ signature
+#   ^^^^^^ name
+    gather for 0 .. $s.chars / $chars - 1 -&gt; $idx {
+        take substr($s, $idx * $chars, $chars);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>签名中使用的变量称为参数，而我们调用您在参数中传递的值。
+要在不调用子程序的情况下引用子程序，请在它前面放一个与号（＆），如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &amp;chunks.name; # Output: chunks</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>要调用它，只需使用其名称，然后使用参数列表即可
+可选择在括号中：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say chunks 'abcd', 2; # Output: (ab cd)
+say chunks('abcd', 2); # Output: (ab cd)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果某些其他构造会干扰子例程调用，则只需要括号。 因此，如果你打算写</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say chunks(join('x', 'ab', 'c'), 2);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你遗漏了一对内括号</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say chunks(join 'x', 'ab', 'c', 2);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>然后所有参数都转到join函数，只剩下一个参数给chunks函数。 另一方面，可以省略外部括号并写入</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say chunks join('x', 'ab', 'c'), 2;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>因为这里没有歧义。
+值得注意的一个案例是，如果你调用一个没有参数的子程序
+if条件或for循环（或类似结构）的块，你必须包括括号，因为否则该块被解析为函数的参数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub random-choice() {
+    Bool.pick;
+}
+
+# right way:
+if random-choice() {
+    say 'You were lucky.';
+}
+
+# wrong way:
+if random-choice {
+    say 'You were lucky.';
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果你碰巧犯了这个错误，Raku编译器会非常努力地检测它。 在前面的例子中，它说</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Function 'random-choice' needs parens to avoid gobbling block</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当它试图解析if语句的块时，它找不到一个：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Missing block (apparently claimed by 'random-choice')</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当你有一个名为MAIN的子程序时，Raku使用它的签名来解析命令行参数并将这些命令行参数传递给MAIN。
+multi subs是几个具有相同名称但签名不同的子程序。 编译器在运行时根据参数和参数之间的最佳匹配来决定它调用哪个候选项。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_类和对象">3.8. 类和对象</h3>
+<div class="paragraph">
+<p>类声明遵循与子例程声明相同的语法模式：关键字class，后跟名称，后跟大括号中的主体：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class OutputCapture {
+    has @!lines;
+    method print(\s) {
+        @!lines.push(s);
+    }
+    method captured() {
+        @!lines.join;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>默认情况下，类型名称的范围限定为当前名称空间; 但是，你可以通过在课堂前面添加一个我的词汇来限定词法：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my class OutputCapture { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>创建新实例通常通过在类型对象上调用new方法来工作。 新方法继承自所有类型获得的隐式父类Any：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $c = OutputCapture.new;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>每个实例状态存储在属性中，这些属性使用has关键字声明，如前面的has @！行所示。 属性总是私有的，如下所示！twigil。 如果你使用点。 声明中的twigil相反，你有私有属性@！行和一个公共的只读访问器方法：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my class OutputCapture {
+    has @.lines;
+    method print(\s) {
+         # the private name with ! still works
+         @!lines.push(s);
+    }
+    method captured() {
+        @!lines.join;
+    }
+}
+my $c = OutputCapture.new;
+$c.print('42');
+# use the `lines` accessor method:
+say $c.lines; # Output: [42]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>使用点twigil声明属性时，还可以通过命名参数从构造函数初始化属性，如OutputCapture中所示。 new（lines &#8658; [42]）。
+私人方法始于！并且只能从类体内部调用self！private-method。
+方法基本上只是子程序，有两个不同之处。首先是
+他们得到一个名为self的隐式参数，它包含调用该方法的对象（我们称之为调用者）。第二个是，如果调用子例程，编译器将在当前词法范围以及外部范围中搜索此子例程。另一方面，方法调用仅在对象及其超类的类中查找。
+子例程查找可以在编译时进行，因为词法作用域在运行时是不可变的，因此编译器具有所有词法符号的知识。但是，即使存在类型约束，编译器也无法知道对象的类型是否可能是类型约束的子类型，这意味着必须将方法查找推迟到运行时。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_并发">3.9. 并发</h3>
+<div class="paragraph">
+<p>Raku为并发和并行执行提供了高级原语。 我们鼓励您使用start运行计算，而不是显式生成新线程，它返回Promise.1。这是一个承诺未来计算将产生结果的对象。 因此，状态可以是Planned，Kept或Broken。 您可以链接承诺，组合它们并等待它们。
+在后台，调度程序将此类计算分发到操作系统级线程。 默认调度程序是一个线程池调度程序，其中包含可供使用的线程数的上限。
+并行计算之间的通信应该通过线程安全的数据结构进行。 其中最重要的是Channel2（线程安全队列）和Supply3（Raku的Observer Pattern4实现）。 耗材非常强大，因为您可以使用诸如此类的方法对其进行转换
+map，grep，throttle或者延迟，并使用他们的</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_展望">3.10. 展望</h3>
+<div class="paragraph">
+<p>当您了解本章中讨论的主题并深入了解内置类型时，您应该熟悉Raku的基础知识并能够编写自己的程序。
+接下来，我们将研究Raku的优势之一：解析，通过正则表达式和语法。
+== 使用正则表达式和 Grammars 解析 INI 文件</p>
+</div>
+<div class="paragraph">
+<p>你之前可能已经见过 <code>.ini</code> 文件; 它们在微软 Windows 平台上很常见, 但是在其它地方也有发现, 例如 ODBC 配置文件, <a href="http://docs.ansible.com/ansible/intro_inventory.html">Ansible 的清单文件</a>, 等等。</p>
+</div>
+<div class="paragraph">
+<p>INI 文件看起来长这样:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ini" data-lang="ini">key1=value2
+
+[section1]
+key2=value2
+key3 = with spaces
+; comment lines start with a semicolon, and are ; ignored by the parser
+
+[section2]
+more=stuff</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Raku 提供正则表达式用于解析, 还提供 grammars 用于组织和重用正则表达式。</p>
+</div>
+<div class="paragraph">
+<p>你可以用<a href="https://modules.raku.org/dist/Config::INI">Config::INI</a>模块(用 <code>zef install Config::INI</code> 安装之后)来解析 INI 文件, 就像这样:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Config::INI;
+my %hash = Config::INI::parse($ini_string);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它在底层使用了正则表达式和 grammars。这里我们会探索怎样写一个自己的 INI 解析器。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_正则表达式基础">3.11. 正则表达式基础</h3>
+<div class="paragraph">
+<p>正则表达式是一段代码，用作具有共同结构的字符串的模式。 它源于计算机科学概念中的正则表达式，但比纯正则表达式提供了更多的构造, 允许并扩展了一些功能，使它们更容易使用。</p>
+</div>
+<div class="paragraph">
+<p>我们将使用命名正则表达式来匹配基元，然后使用调用这些命名正则表达式的正则表达式为 INI 文件构建解析器。 由于 INI 文件没有普遍接受的正式语法，我们必须一边进行, 一边制作东西。</p>
+</div>
+<div class="paragraph">
+<p>让我们从解析值对开始，比如 <code>key1=value1</code>。 首先让我们考虑一下键。 它可能包含字母，数字和下划线 <code>_</code>。 有一个快捷方式来匹配这些字符，即 <code>\w</code>，并通过附加 <code>+</code> 字符匹配一个或多个字符：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use v6;
+
+my regex key { \w+ }
+
+multi sub MAIN('test') {
+    use Test;
+    ok 'abc'     ~~ /^ &lt;key&gt; $/, '&lt;key&gt; matches a simple identifier';
+    ok  '[abc]' !~~ /^ &lt;key&gt; $/, '&lt;key&gt; does not match a  section header';
+    done-testing;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>my regex key { \w+ }</code> 声明了一个词法（<code>my</code>）作用域的名为 <code>key</code> 的正则表达式，它匹配一个或多个单词字符。</p>
+</div>
+<div class="paragraph">
+<p>编程语言有很长支持所谓的兼容 Perl 的正则表达式（PCRE）的传统。 许多编程语言支持与 PCRE 的一些偏差，包括 Perl 本身，但在大多数实现中仍然存在常见的语法元素。 Raku 仍支持其中一些元素，但在其他元素中存在很大差异。</p>
+</div>
+<div class="paragraph">
+<p>这里的 <code>\w+</code> 和 PCRE 中的相同，但忽略了 <code>\w+</code> 周围的空白的事实。 在测试例程中，<code>'abc'~~ /^ &lt;key&gt; $/</code> 中的斜杠分隔了一个匿名正则表达式。 在这个正则表达式中，<code>^</code> 和 <code>$</code> 分别表示匹配字符串的开头和结尾，这是 PCRE 所熟悉的。 但是，与 PCRE 相反，<code>&lt;key&gt;</code> 子规则从前面调用命名正则表达式 <code>key</code>。 这是 Raku 的扩展。 在 PCRE 中，正则表达式中的 <code>&lt;</code> 匹配文字 <code>&lt;</code>。 在 Raku 的正则表达式中，它引入了一个子规则调用。</p>
+</div>
+<div class="paragraph">
+<p>通常，所有非单词字符都保留用于“特殊”语法，你必须用引号引起它们或用反斜杠转义它们以获得其字面含义。 例如正则表达式中的 <code>\&lt;</code> 或 <code>'&lt;'</code> 匹配小于号。 引用可以应用于多个字符，因此正则表达式中的 <code>'a+b'</code> 与 a 匹配，后跟加号 <code>+</code>，后跟 b。单词字符（字母，数字和下划线）总是按字面意思匹配。</p>
+</div>
+<div class="sect3">
+<h4 id="_字符类">3.11.1. 字符类</h4>
+<div class="paragraph">
+<p>除了文字之外，字符类是正则表达式的常见构建块。 有许多预定义的字符类，以反斜杠的形式后跟一个小写的单个字母; 例如，<code>\d</code> 匹配一个数字。 它的反转使用大写字母，所以`\D` 匹配任何不是数字的字符。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">字符类</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">否定</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">匹配</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\d</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\D</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">一个数字</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\w</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\W</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">一个单词字符(字母,数字,下划线)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\s</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\S</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">空格,空白,换行,等等</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\h</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\H</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">水平空白</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\v</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\V</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">垂直空白</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\n</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">\N</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">逻辑换行(回车,换行)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">任意字符</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>您还可以通过枚举字符或字符范围来构建自己的字符类：</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">方法</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">例子</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">匹配</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">枚举</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;[abc]&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a, b 或 c</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">否定</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#8592;[abc]&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">除了 a, b 或 c 的任何东西</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">范围</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;[a..c]&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a, b 或 c</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_量词">3.11.2. 量词</h4>
+<div class="paragraph">
+<p>只匹配一个重复的东西很无聊，所以正则表达式提供量词。 量词表示前一个正则表达式必须匹配的频率。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">量词</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">匹配多少个字符</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0..Inf</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1..Inf</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0..1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">** 1..5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1..5</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>所以, 对于 <code>ab+</code> 这个例子来说, 它匹配字符串 ab, abb, aab, 但是不匹配 a。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_备选分支">3.11.3. 备选分支</h4>
+<div class="paragraph">
+<p>任何一个或者备选分支由垂直条分隔。 例如，<code>\d+ | x</code> 匹配一个或多个数字的序列或字符 x。</p>
+</div>
+<div class="paragraph">
+<p>如果备选项有多个路径匹配，则 Raku 更喜欢最长匹配。 如果不需要这种行为，<code>||</code> 采取匹配的第一个匹配项。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_解析_ini_原语">3.12. 解析 INI 原语</h3>
+<div class="paragraph">
+<p>回到 INI 解析，我们必须考虑值内允许的字符。列出允许的字符似乎是徒劳的，因为我们很可能忘记一些。相反，我们应该考虑值中不允许的内容。换行当然不是，因为它们引入了下一个键/值对或节标题。也不允许使用分号，因为它们引入了注释。</p>
+</div>
+<div class="paragraph">
+<p>我们可以将这个排除表示为否定的字符类：<code>&#8592;[ \n ; ]&gt;</code> 匹配既不是换行也不是分号的任何单个字符。请注意，在字符类中，几乎所有字符都失去了特殊含义。只有反斜杠，空格，两个圆点和闭合括号代表自己以外的任何东西。在字符类的内部和外部，<code>\n</code> 匹配单个换行符， <code>\s</code> 匹配单个空格。大写的字符类反转其语义，例如 <code>\S</code> 匹配任何不是空格的单个字符。</p>
+</div>
+<div class="paragraph">
+<p>这导致我们使用正则表达式的版本来匹配 INI 文件中的值：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex value { &lt;-[ \n ; ]&gt;+ }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个正则表达式有一个问题：它还匹配前导和尾随空格，我们不想将其视为值的一部分：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex value { &lt;-[ \n ; ]&gt;+ }
+if ' abc ' ~~ /&lt;value&gt;/ {
+    say "matched '$/'"; # matched ' abc '
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果 Raku 正则表达式仅限于计算机科学中的常规语言感觉，我们必须做这样的事情：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex value {
+    # match a first non-whitespace character
+    &lt;-[ \s ; ]&gt;
+    [
+        # then arbitrarily many that can contain whitespace
+        &lt;-[ \n ; ]&gt;*
+        # ... terminated by one non-whitespace
+        &lt;-[ \s ; ]&gt;
+    ]?  # and make it optional, in case the value is only
+        # only one non-whitespace character
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>而现在你知道为什么人们在提议用正则表达式解决问题时回答“现在你有两个问题”。 一个更简单的解决方案是匹配首先引入的值，然后引入一个约束，即第一个字符和最后一个字符都不是空格：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex value { &lt;!before \s&gt; &lt;-[ \n ; ]&gt;+ &lt;!after \s&gt; }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>以及伴随的测试：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">is ' abc ' ~~ /&lt;value&gt;/, 'abc', '&lt;value&gt; does not match leading or trailing whitespace';
+is ' a'    ~~ /&lt;value&gt;/, 'a',   '&lt;value&gt; matches single non-whitespace too';
+ok "a\nb" !~~ /^ &lt;value&gt; $/,    '&lt;value&gt; does not match \n';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>&lt;!before regex&gt;</code> 是否定前瞻，即，以下文本必须与正则表达式不匹配，并且匹配时不会消耗文本。 不出所料，<code>&lt;!after regex&gt;</code> 是否定的后视，它试图匹配已经匹配的文本，并且必须不能成功完成整个匹配才能成功。</p>
+</div>
+<div class="paragraph">
+<p>这是 Raku，当然还有另一种解决这个问题的方法。 如果你将需求表达为“一个值不能包含换行符或分号，并以非空格开头并以非空格结尾”，那么很明显，如果我们在正则表达式中只有一个AND运算符，这可能很容易。 它是：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex value { &lt;-[ \n ; ]&gt;+ &amp; \S.* &amp; .*\S }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>&amp;</code> 运算符分隔两个或多个必须的较小的正则表达式
+all成功匹配相同的字符串，以使整个匹配成功。 <code>\S.*</code> 匹配任何以非空白字符（<code>\S</code>）开头的字符串，后跟任意数字（。）任意次数 <code>\*</code>。 同样 <code>.*\S</code> 匹配任何以非空白字符结尾的字符串。</p>
+</div>
+<div class="paragraph">
+<p>谁会想到匹配一些看似简单的配置文件中的值可能如此复杂？ 幸运的是，匹配键/值对现在要简单得多，因为我们知道如何匹配每个键：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex pair { &lt;key&gt; '=' &lt;value&gt; }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>只要没有围绕平等的空白，这就很有效标志。 如果有，我们必须单独匹配它们：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex pair { &lt;key&gt; \h* '=' \h* &lt;value&gt; }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>\h</code> 匹配一个水平空格，即空格，制表符或任何其他奇特的空间类型的东西，我们为我们存储（例如，也是不间断的空格），但不是换行符。
+说到换行符，在正则表达式对的末尾匹配换行符是个好主意，因为我们忽略空行，所以我们也匹配多个行：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex pair { &lt;key&gt; \h* '=' \h* &lt;value&gt; \n+ }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>是时候写一些测试了:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">ok "key=value\n" ~~ /&lt;pair&gt;/, 'simple pair';
+ok "key = value\n\n" ~~ /&lt;pair&gt;/, 'pair with blanks';
+ok "key\n= value\n" !~~ /&lt;pair&gt;/, 'pair with newline before assignment';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>节标题是方括号中的字符串，因此字符串本身不应包含括号或换行符：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex header { '[' &lt;-[ \[ \] \n ]&gt;+ ']' \n+ }
+# and in multi sub MAIN('test'):
+ok "[abc]\n"    ~~ /^ &lt;header&gt; $/, 'simple header';
+ok "[a c]\n"    ~~ /^ &lt;header&gt; $/, 'header with spaces';
+ok "[a [b]]\n" !~~ /^ &lt;header&gt; $/, 'cannot nest headers';
+ok "[a\nb]\n"  !~~ /^ &lt;header&gt; $/, 'No newlines inside headers';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后剩下的原语是注释</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex comment { ';' \N*\n+ }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>\N</code> 匹配任何不是换行符的字符，因此注释只是一个分号，然后是直到行尾的任何东西。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_把东西组装起来">3.13. 把东西组装起来</h3>
+<div class="paragraph">
+<p>INI 文件的 <strong>section</strong> 是标题，后跟一些键/值对或注释行：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex section {
+    &lt;header&gt;
+    [ &lt;pair&gt; | &lt;comment&gt; ]*
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>[&#8230;&#8203;]</code> 将正则表达式的一部分分组，以便量词 <code>*</code> 应用于整个组，而不仅仅是最后一项。</p>
+</div>
+<div class="paragraph">
+<p>整个 INI 文件可能包含一些初始键/值对或注释，后跟一些 section：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex inifile {
+    [ &lt;pair&gt; | &lt;comment&gt; ]*
+    &lt;section&gt;*
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>狂热的读者注意到 <code>[ &lt;pair&gt; | &lt;comment&gt; ]*</code> 正则表达式的一部分已被使用了两次，因此最好将其提取为独立的正则表达式：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex block   { [ &lt;pair&gt; | &lt;comment&gt; ]* }
+my regex section { &lt;header&gt; &lt;block&gt; }
+my regex inifile { &lt;block&gt; &lt;section&gt;* }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>是时候进行“终极”测试了：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $ini = q:to/EOI/;
+key1=value2
+
+[section1]
+key2=value2
+key3 = with spaces
+
+; comment lines start with a semicolon, and are
+; ignored by the parser
+
+[section2]
+more=stuff
+EOI
+
+ok $ini ~~ /^&lt;inifile&gt;$/, 'Can parse a full INI file';</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_回溯">3.14. 回溯</h3>
+<div class="paragraph">
+<p>对许多程序员来说，正则表达式匹配似乎很神奇。 您只需说明模式，正则表达式引擎就会确定字符串是否与模式匹配。 虽然实现正则表达式引擎是一项棘手的业务，但基础知识并不难理解。
+正则表达式引擎从左到右遍历正则表达式的各个部分，尝试匹配正则表达式的每个部分。 它跟踪到目前为止它在光标中匹配的字符串部分。 如果正则表达式的一部分找不到匹配项，则正则表达式引擎会尝试更改上一个匹配项以占用更少的字符，然后在新位置重试失败的匹配项。
+例如，如果您执行正则表达式匹配</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">'abc' ~~ /.* b/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>正则表达式引擎首先评估。*。的。匹配任何角色。 *量词是贪婪的，这意味着它尝试匹配尽可能多的字符。它最终匹配整个字符串，abc。然后正则表达式引擎尝试匹配b，这是一个文字。由于前一个匹配吞噬了整个字符串，因此将c与剩余的空字符串匹配失败。所以前面的正则表达式部分。*必须放弃一个字符。它现在匹配ab，b的文字匹配器比较b和c，并再次失败。所以有一个最后的迭代，其中。*再次放弃它匹配的一个字符，现在b文字可以匹配字符串中的第二个字符。
+在正则表达式的各部分之间来回称为回溯。当您在字符串中搜索模式时，这是一个很棒的功能。但在解析器中，通常不可取。例如，如果正则表达式键与输入key2 = value2中的子字符串key2匹配，则不希望它匹配较短的子字符串，因为正则表达式的下一部分无法匹配。
+您不希望这样做有三个主要原因。首先是它使调试更难。当人们思考文本的结构时，他们通常会很快地进行基本的标记化，例如单词或句子结束的地方。因此，回溯可能非常不直观。如果根据哪个正则表达式无法匹配生成错误消息，则回溯基本上总是导致错误消息非常无用。
+第二个原因是回溯可能导致意外的正则表达式匹配。例如，您希望匹配两个单词，可选地用空格分隔，并尝试将其直接转换为正则表达式：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "two words" ~~ /\w+\s*\w+/; # 「two words」</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这似乎有效：第一个\ w +匹配第一个单词，第二个匹配第二个单词，一切都很好。直到你发现它实际上也匹配一个单词：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "two" ~~ /\w+\s*\w+/; # 「two」</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>那是怎么发生的？好吧，第一个\ w +匹配整个单词，\ s *成功匹配空字符串，然后第二个\ w +失败，强制正则表达式的前两部分匹配不同。所以在第二次迭代中，第一个\ w +只匹配tw，\ s *匹配tw和o之间的空字符串，第二个\ w +匹配o。然后你就会意识到这一点
+如果两个单词没有用空格分隔，你怎么知道一个单词的结尾和下一个单词的开头？禁用回溯后，正则表达式无法匹配而不是以非预期的方式进行匹配。
+第三个原因是表现。当你禁用回溯时，正则表达式引擎必须只查看每个字符一次，或者对于每个分支，它可以在备选方案中查看。通过回溯，正则表达式引擎可能会卡在回溯循环中，随着输入字符串长度的增加，这种循环占用的时间会过长。
+要禁用回溯，您只需在声明中使用令牌替换单词regex，或在正则表达式中使用：ratchet修饰符。
+在INI文件解析器中，只有正则表达式值需要回溯（尽管前面讨论的其他公式不需要它）;所有其他正则表达式都可以安全地切换到令牌：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my token key     { \w+ }
+my regex value   { &lt;!before \s&gt; &lt;-[\n;]&gt;+ &lt;!after \s&gt; }
+my token pair    { &lt;key&gt; \h* '=' \h* &lt;value&gt; \n+ }
+my token header  { '[' &lt;-[ \[ \] \n ]&gt;+ ']' \n+ }
+my token comment { ';' \N*\n+ }
+my token block   { [ &lt;pair&gt; | &lt;comment&gt; ]* }
+my token section { &lt;header&gt; &lt;block&gt; }
+my token inifile { &lt;block&gt; &lt;section&gt;* }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_grammars">3.15. Grammars</h3>
+<div class="paragraph">
+<p>这组解析INI文件的正则表达式并不是封装和可重用性的顶峰。
+因此，我们将探索语法，一种将正则表达式组合成类结构的功能，以及如何从成功匹配中提取结构化数据。
+语法是一个具有一些额外功能的类，使其适用于解析文本。 除了方法和属性，您还可以将正则表达式放入语法中。
+这是INI文件解析器在表达为语法时的样子：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar IniFile {
+    token key     { \w+ }
+    token value   { &lt;!before \s&gt; &lt;-[\n;]&gt;+ &lt;!after \s&gt; }
+    token pair    { &lt;key&gt; \h* '=' \h* &lt;value&gt; \n+ }
+    token header  { '[' &lt;-[ \[ \] \n ]&gt;+ ']' \n+ }
+    token comment { ';' \N*\n+ }
+    token block   { [&lt;pair&gt; | &lt;comment&gt;]* }
+    token section { &lt;header&gt; &lt;block&gt; }
+    token TOP     { &lt;block&gt; &lt;section&gt;* }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>您可以通过调用使用的parse方法来使用它来解析一些文本
+正则表达式或令牌TOP作为入口点：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $result = IniFile.parse($text);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>除了标准化的入口点，语法提供了更多的优势。您可以像普通类一样继承它，从而为正则表达式带来更多的可重用性。您可以通过向语法添加方法将额外功能与正则表达式组合在一起。语法中还有一些机制可以使您作为开发人员的生活更轻松。
+其中一个是处理空白。在INI文件中，水平空格通常被认为是无关紧要的，因为key = value和key = value导致应用程序的相同配置。到目前为止，我们通过将\ h *添加到令牌对来明确地处理了这个问题。但是有些地方我们还没有真正考虑过。例如，可以让评论不在行的开头。
+语法提供的机制是您可以定义一个名为ws的规则，当您使用规则而不是令牌声明令牌（或通过：sigspace修饰符在regex中启用此功能）时，Raku会为您插入隐式&lt;ws&gt;调用正则表达式定义中有空格的地方：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar IniFile {
+    token ws { \h* }
+    rule pair { &lt;key&gt;    '='    &lt;value&gt; \n+ }
+    # rest as before
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于需要解析空格的单个规则来说，这可能不值得付出努力，但是当有更多时，这确实可以通过在一个位置保持空格分析来获得回报。
+请注意，您应该只解析令牌ws中无关紧要的空格。 对于INI文件，换行是重要的，因此ws不应与它们匹配。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_从匹配中提取数据">3.16. 从匹配中提取数据</h3>
+<div class="paragraph">
+<p>到目前为止，IniFile语法仅检查给定输入是否与语法匹配。 但是，当它匹配时，我们真的希望解析结果在一个易于使用的数据结构中。 例如，我们可以翻译这个示例INI文件：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">key1=value2
+
+[section1]
+key2=value2
+key3 = with spaces
+; comment lines start with a semicolon, and are
+; ignored by the parser
+
+[section2]
+more=stuff</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>进入嵌套哈希的数据结构：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">{
+_ =&gt; {
+          key1 =&gt; "value2"
+      },
+      section1 =&gt; {
+          key2 =&gt; "value2",
+          key3 =&gt; "with spaces"
+      },
+      section2 =&gt; {
+          more =&gt; "stuff"
+      }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意，任何部分外部的键/值对都显示在_顶级键中。
+IniFile.parse调用的结果是一个Match5对象，它具有（几乎）提取所需匹配所需的所有信息。 如果将Match对象转换为字符串，它将成为匹配的字符串。 但还有更多。 您可以像散列一样使用它来从命名子匹配中提取匹配项。 因此，如果顶级匹配来自</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token TOP { &lt;block&gt; &lt;section&gt;* }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>产生一个Match对象 <code>$m</code>，然后 <code>$m&lt;block&gt;</code> 再次成为一个 Match 对象，这一个来自对象块的调用匹配。 <code>$m&lt;section&gt;</code> 是重复调用令牌部分的 Match 对象列表。 所以匹配实际上是一个匹配树（图9-1）。</p>
+</div>
+<div class="paragraph">
+<p>我们可以使用此数据结构来提取嵌套的哈希值。 标头标记匹配像“[section1] \ n”这样的字符串，我们只对“section1”感兴趣。 为了到达内部部分，我们可以通过在我们感兴趣的匹配的子规则周围插入一对括号来修改标题：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token header { '[' ( &lt;-[ \[ \] \n ]&gt;+ ) ']' \n+ }
+#                   ^^^^^^^^^^^^^^^^^^^^ a capturing group</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这是一个捕获组，我们可以通过使用头部的顶级匹配作为数组并访问其第一个元素来获得匹配。 这导致我们完整的INI解析器：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub parse-ini(Str $input) {
+    my $m = IniFile.parse($input);
+    unless $m {
+        die "The input is not a valid INI file.";
+    }
+
+    sub block(Match $m) {
+        my %result;
+        for $m&lt;block&gt;&lt;pair&gt; -&gt; $pair {
+            %result{ $pair&lt;key&gt;.Str } = $pair&lt;value&gt;.Str;
+        }
+        return %result;
+    }
+
+    my %result;
+    %result&lt;_&gt; = block($m);
+    for $m&lt;section&gt; -&gt; $section {
+        %result{ $section&lt;header&gt;[0].Str } = block($section);
+    }
+    return %result;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这种自上而下的方法有效，但它需要非常仔细地理解语法的结构。这意味着如果在维护期间更改结构，则很难确定如何更改数据提取代码。
+Raku也提供自下而上的方法。它允许您为每个正则表达式，标记或规则编写数据提取或操作方法。语法引擎将匹配对象作为单个参数传递，action方法可以调用例程make将结果附加到匹配对象。结果可通过匹配对象上的.made方法获得。
+一旦正则表达式成功匹配，就会执行此操作方法的执行;因此，正则表达式的动作方法可以依赖于子规则调用的动作方法已经运行的事实。例如，当正在执行规则对{&lt;key&gt;'='&lt;value&gt; \ n +}时，第一个令牌密钥成功匹配，其操作方法立即运行。然后，令牌值匹配，其操作方法也运行。最后，规则对本身可以成功匹配，因此其操作方法可以依赖于$ m &lt;key&gt; .made和$ m &lt;value&gt;。假设匹配结果存储在变量$ m中，则可用。</p>
+</div>
+<div class="paragraph">
+<p>说到变量，正则表达式匹配隐式地将其结果存储在特殊变量$ /中，并且习惯上使用$ /作为动作方法中的参数。 还有一个访问命名子匹配的快捷方式：您可以编写$ &lt;key&gt;而不是编写$ / &lt;key&gt;。 考虑到这种约定，动作类就变成了</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class IniFile::Actions {
+    method key($/) { make $/.Str }
+    method value($/) { make $/.Str }
+    method header($/) { make $/[0].Str }
+    method pair($/) { make $&lt;key&gt;.made =&gt; $&lt;value&gt;.made }
+    method block($/) { make $&lt;pair&gt;.map({ .made }).hash }
+    method section($/) { make $&lt;header&gt;.made =&gt; $&lt;block&gt;.made }
+    method TOP($/) {
+        make {
+            _ =&gt; $&lt;block&gt;.made,
+            $&lt;section&gt;.map: { .made },
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>前两种动作方法非常简单。键或值匹配的结果只是匹配的字符串。对于标题，它只是括号内的子字符串。恰好，一对返回一个Pair6对象，由key和value组成。块方法从块中的所有行构造散列
+通过迭代每对子匹配并提取已经连接的Pair对象。比匹配树高一级，该部分获取该哈希并将其与段的名称配对，从$ &lt;header&gt; .made中提取。最后，顶级操作方法收集key _以及所有部分下的无段键/值对，并以散列形式返回它们。
+在动作类的每个方法中，我们只依赖于直接从正则表达式调用的第一级正则表达式的知识，这些正则表达式对应于动作方法和它们所制作的数据类型。因此，当您重构一个正则表达式时，您还必须仅更改相应的操作方法。没有人需要了解语法的全局结构。
+现在我们只需告诉Raku实际使用action类：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub parse-ini(Str $input) {
+    my $m = IniFile.parse($input, :actions(IniFile::Actions));
+    unless $m {
+        die "The input is not a valid INI file.";
+    }
+
+    return $m.made
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果要使用与TOP不同的规则（例如，您可能希望在测试中执行）开始解析，则可以将命名参数规则传递给方法解析：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub parse-ini(Str $input, :$rule = 'TOP') {
+    my $m = IniFile.parse($input,
+        :actions(IniFile::Actions),
+        :$rule,
+    );
+    unless $m {
+        die "The input is not a valid INI file.";
+    }
+
+    return $m.made
+}
+
+say parse-ini($ini).perl;
+
+use Test;
+
+is-deeply parse-ini("k = v\n", :rule&lt;pair&gt;), 'k' =&gt; 'v',
+    'can parse a simple pair';
+done-testing;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>为了更好地封装语法中的所有解析功能，我们可以将parse-ini转换为方法：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar IniFile {
+    # regexes/tokens unchanged as before
+
+    method parse-ini(Str $input, :$rule = 'TOP') {
+        my $m = self.parse($input,
+            :actions(IniFile::Actions),
+            :$rule,
+        );
+    unless $m {
+        die "The input is not a valid INI file.";
+    }
+
+    return $m.made
+    }
+}
+
+# Usage:
+
+my $result = IniFile.parse-ini($text);</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">为了使这项工作，IniFile </dt>
+<dd>
+<p>Actions类必须在语法之前声明，或者需要在文件顶部使用类IniFile :: Action {&#8230;&#8203;}预先声明（使用文字三个点来标记 它作为前瞻性声明）。</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_生成好的错误信息">3.17. 生成好的错误信息</h3>
+<div class="paragraph">
+<p>良好的错误消息对任何产品的用户体验都至关重要。 解析器也不例外。 考虑第5行的消息Square括号[在第3行用花括号封闭}，而不是Python的惰性和泛型SyntaxError：无效语法。
+除了文本消息之外，了解解析错误的位置有助于找出错误的原因。
+我们将使用我们的INI文件解析器作为示例，探索如何从Raku语法生成更好的解析错误消息。</p>
+</div>
+<div class="sect3">
+<h4 id="_failure_is_normal">3.17.1. Failure Is Normal</h4>
+<div class="paragraph">
+<p>在我们开始之前，重要的是要意识到在基于语法的解析器中，正则表达式无法匹配是正常的，即使在整体成功的解析中也是如此。
+让我们回想一下解析器的一部分：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token block   { [&lt;pair&gt; | &lt;comment&gt;]* }
+token section { &lt;header&gt; &lt;block&gt; }
+token TOP     { &lt;block&gt; &lt;section&gt;* }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当这个语法与字符串匹配时</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">key=value
+[header]
+other=stuff</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>然后TOP调用block，调用pair和comment。 对匹配成功，评论匹配失败。 没什么大不了。 但由于令牌块中有*量词，它会再次尝试匹配对或注释。 两者都没有成功，但令牌块的整体匹配仍然成功。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">可视化传递和失败子匹配的一种好方法是安装Grammar </dt>
+<dd>
+<p>Tracer模块（zef install Grammar :: Tracer），并在语法定义之前简单地添加语句使用Grammar :: Tracer。这会生成调试输出，显示哪些规则匹配，哪些不匹配：</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">TOP
+|  block
+|  |  pair
+|  |  |  key
+|  |  |  * MATCH "key"
+|  |  |  ws
+|  |  |  * MATCH ""
+|  |  |  ws
+|  |  |  * MATCH ""
+|  |  |  value
+|  |  |  * MATCH "value"
+|  |  |  ws
+|  |  |  * MATCH ""
+|  |  |  ws
+|  |  |  * MATCH ""
+|  |  * MATCH "key=value\n"
+|  |  pair
+|  |  |  key
+|  |  |  * FAIL
+|  |  * FAIL
+|  |  comment
+|  |  * FAIL
+|  * MATCH "key=value\n"
+|  section
+...</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_检测有害失败">3.17.2. 检测有害失败</h4>
+<div class="paragraph">
+<p>要生成良好的解析错误消息，您必须区分预期和意外的解析失败。 如前所述，单个正则表达式或令牌的匹配失败通常不表示输入格式错误。 但是你可以找到你知道的点，一旦正则表达式引擎到达这一点，其余的匹配必须成功。
+如果你记得对：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule pair { &lt;key&gt; '=' &lt;value&gt; \n+ }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们知道如果解析了一个键，我们真的希望下一个字符是一个等号。 如果不是，则输入格式不正确。
+在代码中，这样写的如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule pair {
+    &lt;key&gt;
+    [ '=' || &lt;expect('=')&gt; ]
+    &lt;value&gt; \n+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>|| 是一个顺序替代，它首先尝试匹配左侧的子规则，如果失败则只执行右侧。
+所以现在我们必须定义expect：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method expect($what) {
+    die "Cannot parse input as INI file: Expected $what";
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>是的，您可以像正则表达式一样调用方法，因为正则表达式实际上是方法。 die会抛出异常，所以现在格式错误的输入会产生错误</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Cannot parse input as INI file: Expected =</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>然后是回溯。 这已经比“无效语法”更好了，尽管这个位置仍然缺失。 在方法期望中，我们可以通过方法pos找到当前的解析位置，该方法由语法声明带来的隐式父类Grammar7提供。
+我们可以使用它来改进错误消息：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method expect($what) {
+    die "Cannot parse input as INI file: Expected $what at character
+    {self.pos}";
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_提供上下文">3.17.3. 提供上下文</h4>
+<div class="paragraph">
+<p>对于较大的输入，我们确实要打印行号。 为了计算，我们
+需要获取目标字符串，该字符串可通过方法目标获得：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method expect($what) {
+    my $parsed-so-far = self.target.substr(0, self.pos);
+    my @lines = $parsed-so-far.lines;
+    die "Cannot parse input as INI file: Expected $what at line
+    @lines.elems(), after '@lines[*-1]'";
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这使我们从错误信息的“meh”领域变得非常好。 从而，</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">IniFile.parse(q:to/EOI/);
+key=value
+[section]
+key_without_value
+more=key
+EOI</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>now dies with</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Cannot parse input as INI file: Expected = at line 3, after
+'key_without_value'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>您可以通过在解析失败位置之前和之后提供上下文来进一步细化expect方法。 当然，你必须申请
+[东西|| &lt;expect（'thing'）&gt;]模式在正则表达式中的更多位置以获得更好的错误消息。
+最后，您还可以提供不同类型的错误消息。 例如，在解析节标题时，一旦初始[解析，您可能不希望出现错误消息“预期的节标题”，而是“格式错误的节标题，在行&#8230;&#8203;”：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule pair {
+    &lt;key&gt;
+    [ '=' || &lt;expect('=')&gt; ]
+    [ &lt;value&gt; || &lt;expect('value')&gt;]
+    \n+
+}
+token header {
+    '['
+     [ ( &lt;-[ \[ \] \n ]&gt;+ )    ']'
+         || &lt;error("malformed section header")&gt; ]
+}
+...
+method expect($what) {
+    self.error("expected $what");
+}
+
+method error($msg) {
+    my $parsed-so-far = self.target.substr(0, self.pos);
+    my @lines = $parsed-so-far.lines;
+    die "Cannot parse input as INI file: $msg at line @lines.
+    elems(), after '@lines[*-1]'";
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>由于Rakudo Raku使用语法来解析Raku输入，因此您可以使用Rakudo自己的语法8作为灵感来源，以获得更好的错误报告方法。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_解析匹配对的缺点">3.17.4. 解析匹配对的缺点</h4>
+<div class="paragraph">
+<p>由于它是如此常见的任务，Raku语法具有特殊的目标匹配语法，用于将一对分隔符与它们之间的某些内容进行匹配。 在INI文件示例中，这是一对括号，它们之间有一个节头。
+我们可以改变</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token header { '[' ( &lt;-[ \[ \] \n ]&gt;+ ) ']' \n+ }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>来读取</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token header { '[' ~ ']' ( &lt;-[ \[ \] \n ]&gt;+ ) \n+ }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这不仅具有将匹配分隔符放在一起的美学优势，如果除了结束分隔符之外的所有内容都匹配，它还会为我们调用方法FAILGOAL。 我们可以使用它来为匹配对的解析失败生成更好的错误消息：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method FAILGOAL($goal) {
+    my $cleaned-goal = $goal.trim;
+    $cleaned-goal = $0 if $goal ~~ / \' (.+) \' /;
+    self.error("Cannot find closing $cleaned-goal");
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>传递给FAILGOAL的参数是正则表达式源代码的字符串，它无法匹配结束分隔符，此处为']'（带有尾随空格）。 从那里我们想要为错误消息提取文字]，因此在方法中间的正则表达式匹配。 如果该正则表达式成功匹配，则文字位于$ / [0]中，其中$ 0是快捷方式。
+使用〜的所有解析构造都可以从这样的方法FAILGOAL中受益，因此在一个语法中写一个是值得的，它可以解析几个不同的引用或包围结构。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_编写你自己的_grammars">3.18. 编写你自己的 Grammars</h3>
+<div class="paragraph">
+<p>解析是一项必须学习的技能，大多与您的普通编程技能不同。 所以我鼓励你从一些小的东西开始，比如CSV的解析器或逗号分隔的值.9很容易一次性写出一个完整的语法，但我建议从解析一些原子开始（就像一个单元格的 两个逗号之间的数据），测试它，然后才进入下一个逗号。
+即使在像CSV这样看似简单的东西中，也会出现一些复杂性。 例如，您可以允许引用的字符串本身可以包含分隔符，以及一个转义字符，允许您在引用的字符串中使用引号字符。
+如果您对正则表达式的深层处理感兴趣，我强烈推荐Jeffrey E. F. Friedl掌握正则表达式（O&#8217;Reilly Media，2008）。 它不处理Raku正则表达式，但这些概念很好地转换为Raku正则表达式。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_总结_8">3.19. 总结</h3>
+<div class="paragraph">
+<p>Raku允许正则表达式重用，将它们视为一等公民，允许它们像普通例程一样被命名和调用。 通过允许正则表达式内的空白来消除进一步的混乱。
+这些功能允许您编写正则表达式来解析正确的文件格式甚至编程语言。 语法允许您构建，重用和封装正则表达式。
+正则表达式匹配的结果是Match对象，它实际上是一个树，每个命名子匹配和每个捕获组都有节点。 操作方法可以轻松地将解析与数据提取分离。
+要从解析器生成良好的错误消息，您需要区分预期和意外匹配失败。 顺序替代|| 是一个工具，您可以通过从备选方案的第二个分支引发异常来将意外匹配失败转换为错误消息。
+You bought a shiny new 2TB disk just a short while ago and you’re already getting low disk space warnings. What’s taking up all that space?
+To answer this question, and experiment a bit with data visualization, let’s write a small tool that visualizes which files use up how much disk space. We also get to explore some functional programming concepts in the process.
+10.1 Reading File Sizes
+To visualize file usage, we must first recursively read all directories and files in a given directory, and record their sizes. To get a listing of all elements in a directory, we can use the dir1 function, which returns a lazy list of IO::Path2 objects.
+We distinguish between directories, which can have child entries, and files, which can’t. Both can have a direct size, and in the case of directories also a total size, which includes files and subdirectories, recursively:
+class File { has $.name;
+has $.size;
+method total-size() { $.size } }</p>
+</div>
+<div class="paragraph">
+<p>class Directory { has $.name; has $.size;
+has @.children;
+has $!total-size; method total-size() {
+        $!total-size //= $.size + @.children.map({.total-size}).sum;
+    }
+}
+sub tree(IO::Path $path) { if $path.d {
+return Directory.new(
+            name     &#8658; $path.basename,
+            size     &#8658; $path.s,
+            children &#8658; dir($path).map(&amp;tree),
+); }
+else {
+return File.new(
+            name &#8658; $path.Str,
+            size &#8658; $path.s,
+        );
+} }
+The code for reading a file tree recursively uses the d and s methods on IO::Path. d returns True for directories and False for files. s returns the size.3
+Just to check that we’ve got a sensible data structure, we can write a short routine that prints it recursively, with indentation to indicate nesting of directory entries:
+sub print-tree($tree, Int $indent = 0) {
+say ' ' x $indent, format-size($tree.total-size), ' ', $tree.name;
+if $tree ~~ Directory {
+print-tree($_, $indent + 2) for $tree.children }
+}</p>
+</div>
+<div class="paragraph">
+<p>sub format-size(Int $bytes) {
+my @units = flat '', &lt;k M G T P&gt;;
+my @steps = (1, { $_ * 1024 } &#8230;&#8203; *).head(6); for @steps.kv &#8594; $idx, $step {
+my $in-unit = $bytes / $step; if $in-unit &lt; 1024 {
+return sprintf '%.1f%s', $in-unit, @units[$idx]; }
+} }
+sub MAIN($dir = '.') { print-tree(tree($dir.IO));
+}</p>
+</div>
+<div class="paragraph">
+<p>The subroutine print-tree is pretty boring, if you’re used to recursion.
+It prints out the name and size of the current node and, if the current node is
+a directory, recurses into each children with an increased indentation. The indentation is applied through the x string repetition operator, which when called as $string x $count repeats the $string $count times. It uses the ∼∼ smart matching operator to perform a type check; it tests if $tree is a Directory.
+To get a human-readable representation of the size of a number, format- size knows a list of six units: the empty string for one, k (kilo) for 1024, M (mega) for 1024×1024, and so on. This list is stored in the array @units. The multiple associated with each unit is stored in @steps, which is initialized through the series operator &#8230;&#8203;. Its structure is INITIAL, CALLABLE &#8230;&#8203; LIMIT, where it applies CALLABLE first to the initial value, and then to the next value generated, and so on, until it hits LIMIT. The limit here is *, a special term called Whatever, which means it’s unlimited. Thus, the sequence operator returns a lazy, potentially infinite, list and the trailing .head(6) call limits it to six values.
+To find the most appropriate unit to print with the size, we have to iterate over both the values and the indices of the array, which for @steps.kv &#8594; $idx, $step { .. } accomplishes. sprintf, known from other programming languages, does the actual formatting to one digit after the dot and appends the unit.
+10.2 Generating a Tree Map
+One possible visualization of file and directory sizes is a tree map, which represents each directory as a rectangle and each file inside it as a rectangle within the directory’s rectangle. The size of each rectangle is proportional to the size of the file or directory it represents.</p>
+</div>
+<div class="paragraph">
+<p>We’ll generate an SVG file containing all those rectangles. Modern browsers support displaying such files and also show mouse-over texts for each rectangle. This alleviates the burden of actually labeling the rectangles, which can be quite a hassle.
+To generate the SVG, we’ll use the SVG module, which you can install with $ zef install SVG
+This module provides a single static method, into which you pass nested pairs. Pairs whose values are arrays are turned into XML tags; other pairs are turned into attributes. As an example, this Raku script
+use SVG;
+print SVG.serialize(
+    :svg[
+        width &#8658; 100,
+        height &#8658; 20,
+        title &#8658; [
+'example', ]
+], );
+produces this output:
+&lt;svg xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100"
+height="20"&gt; &lt;title&gt;example&lt;/title&gt;
+&lt;/svg&gt;</p>
+</div>
+<div class="paragraph">
+<p>(without the indentation). The xmlns-tags are helpfully added by the SVG module and are necessary for programs to recognize the file as SVG.
+Returning to the tree maps (Figure 10-1), a very simple way to lay out the rectangle is to recurse into areas and for each area subdivide it either horizontally or vertically, depending upon which axis is longer:
+sub tree-map($tree, :$x1!, :$x2!, :$y1!, :$y2) {
+# do not produce rectangles for small files/dirs return if ($x2 - $x1) * ($y2 - $y1) &lt; 20;
+    # produce a rectangle for the current file or dir</p>
+</div>
+<div class="paragraph">
+<p>take 'rect' &#8658; [
+x &#8658; $x1,
+y &#8658; $y1,
+        width  &#8658; $x2 - $x1,
+        height &#8658; $y2 - $y1,
+        style  &#8658; "fill:" ~ random-color(),
+        title  &#8658; [$tree.name],
+];
+return if $tree ~~ File;
+if $x2 - $x1 &gt; $y2 - $y1 {
+# split along the x-axis
+my $base = ($x2 - $x1) / $tree.total-size; my $new-x = $x1;
+for $tree.children &#8594; $child {
+my $increment = $base * $child.total-size; tree-map(
+                $child,
+                x1 &#8658; $new-x,
+                x2 &#8658; $new-x + $increment,
+                :$y1,
+                :$y2,
+);
+            $new-x += $increment;
+        }
+}
+else {
+         # split along the y-axis
+my $base = ($y2 - $y1) / $tree.total-size; my $new-y = $y1;
+for $tree.children &#8594; $child {
+my $increment = $base * $child.total-size; tree-map(
+                 $child,
+                 :$x1,
+                 :$x2,
+                 y1 &#8658; $new-y,
+                 y2 &#8658; $new-y + $increment,
+);
+             $new-y += $increment;
+         }
+} }</p>
+</div>
+<div class="paragraph">
+<p>sub random-color {
+return 'rgb(' ~ (1..3).map({ (^256).pick }).join(',') ~ ')';
+}
+sub MAIN($dir = '.') {
+my $tree = tree($dir.IO); use SVG;
+my $width = 1024;
+my $height = 768;
+say SVG.serialize(
+        :svg[
+            :$width,
+:$height,
+| gather tree-map $tree, x1 &#8658; 0, x2 &#8658; $width, y1 &#8658; 0, y2 &#8658; $height
+] );
+}</p>
+</div>
+<div class="paragraph">
+<p>The generated file is not pretty, due to the random colors and due to some files being identified as very narrow rectangles. But it does make it obvious that there are a few big files and many mostly small files in a directory (which happens to be the .git directory of a repository). Viewing a file in a browser shows the name of the file on mouse-over.
+How did we generate this file?
+Sub tree-map calls take to add elements to a result list, so it must be called in the context of a gather statement. gather { take 1; take 2 } returns a lazy list of two elements, 1, 2. But the take calls don’t have to occur in the lexical scope of the gather; they can be in any code that’s directly or indirectly called from the gather. We call that the dynamic scope.
+The rest of sub tree-map is mostly straightforward. For each direction in which the remaining rectangle can be split, we calculate a base unit that signifies how many pixels a byte should occupy. This is used to split up the current canvas into smaller ones and use those to recurse into tree-map.
+The random color generation uses ˆ256 to create a range from 0 to 256 (exclusive) and .pick returns a random element from this range. The result is a random CSS color string like rgb(120,240,5).
+In sub MAIN, the gather returns a list, which would normally be nested inside the outer array. The pipe symbol | in :svg[ &#8230;&#8203;, | gather &#8230;&#8203; ] before the gather prevents the normal nesting and flattens the list into the outer array.
+10.3 Flame Graphs
+The disadvantage of tree maps as generated in the preceding is that the human brain isn’t very good at comparing the sizes of rectangles with different aspect ratios, especially if their widths are very different from their heights (i.e., very tall or very flat rectangles). Flame graphs prevent this perception error by showing file sizes as horizontal bars. The vertical arrangement indicates the nesting of directories and files inside other directories. The disadvantage is that less of the available space is used for visualizing the file sizes.
+It is easier to generate flame graphs than tree maps, because you only need to subdivide in one direction, whereas the height of each bar is fixed. Here it is set to 15 pixels:
+sub flame-graph($tree, :$x1!, :$x2!, :$y!, :$height!) { return if $y &gt;= $height;
+take 'rect' &#8658; [
+x &#8658; $x1,
+y &#8658; $y,
+width &#8658; $x2 - $x1,
+height &#8658; 15,
+style &#8658; "fill:" ~ random-color(),
+title &#8658; [$tree.name ~ ', ' ~ format-size($tree.total-size)],
+];</p>
+</div>
+<div class="paragraph">
+<p>return if $tree ~~ File;
+my $base = ($x2 - $x1) / $tree.total-size; my $new-x = $x1;
+for $tree.children &#8594; $child {
+my $increment = $base * $child.total-size; flame-graph(
+            $child,
+            x1 &#8658; $new-x,
+            x2 &#8658; $new-x + $increment,
+            y &#8658; $y + 15,
+            :$height,
+);
+        $new-x += $increment;
+    }
+}
+We can add a switch to sub MAIN to call either tree-map or flame-graph,
+depending on a command-line option:
+sub MAIN($dir = '.', :$type="flame") { my $tree = tree($dir.IO);
+use SVG;
+my $width = 1024;
+my $height = 768;
+my &amp;grapher = $type eq 'flame'
+?? { flame-graph $tree, x1 &#8658; 0, x2 &#8658; $width, y &#8658; 0, :$height }
+            !! { tree-map    $tree, x1 &#8658; 0, x2 &#8658; $width, y1 &#8658; 0,
+                 y2 &#8658; $height }
+    say SVG.serialize(
+        :svg[
+:$width,
+:$height,
+| gather grapher()
+] );
+}</p>
+</div>
+<div class="paragraph">
+<p>Since SVG’s coordinate system places the zero of the vertical axis at the top, this actually produces an inverted flame graph, sometimes called an icicle graph (Figure 10-2):</p>
+</div>
+<div class="paragraph">
+<p>Figure 10-2. Inverted flame graph, where the width of each bar represents a file/ directory size and the vertical position the nesting inside a directory
+This graph was generated by calling dirstat --type=flame src/ rakubook/.
+10.4 Functional Refactorings
+There’s a pattern that occurs three times in the code for generating tree maps and flame graphs: dividing an area based on the size of the files and directories in the tree associated with the area.
+Extracting such common code into a function is a good idea, but it’s slightly hindered by the fact that there is custom code inside the loop that’s part of the common code. Functional programming offers a solution: put the custom code inside a separate function and have the common code call it.
+Applying this technique to the tree graph flame graph looks like this:
+sub subdivide($tree, $lower, $upper, &amp;todo) {
+my $base = ($upper - $lower ) / $tree.total-size; my $var = $lower;
+for $tree.children &#8594; $child {
+my $incremented = $var + $base * $child.total-size; todo($child, $var, $incremented);
+$var = $incremented,
+} }
+sub flame-graph($tree, :$x1!, :$x2!, :$y!, :$height!) { return if $y &gt;= $height;
+take 'rect' &#8658; [
+x &#8658; $x1,
+y &#8658; $y,
+        width  &#8658; $x2 - $x1,
+Chapter 10 ■ a File and direCtory Usage graph
+ 103
+Chapter 10 ■ a File and direCtory Usage graph
+height &#8658; 15,
+style &#8658; "fill:" ~ random-color(),
+title &#8658; [$tree.name ~ ', ' ~ format-size($tree.total-size)],
+];
+return if $tree ~~ File;
+subdivide( $tree, $x1, $x2, &#8594; $child, $x1, $x2 {
+    flame-graph( $child, :$x1, :$x2, :y($y + 15), :$height );
+});
+}
+sub tree-map($tree, :$x1!, :$x2!, :$y1!, :$y2) { return if ($x2 - $x1) * ($y2 - $y1) &lt; 20; take 'rect' &#8658; [
+x &#8658; $x1,
+y &#8658; $y1,
+        width  &#8658; $x2 - $x1,
+        height &#8658; $y2 - $y1,
+        style  &#8658; "fill:" ~ random-color(),
+        title  &#8658; [$tree.name],
+];
+return if $tree ~~ File;
+if $x2 - $x1 &gt; $y2 - $y1 {
+# split along the x-axis
+subdivide $tree, $x1, $x2, &#8594; $child, $x1, $x2 {
+            tree-map $child, :$x1, :$x2, :$y1, :$y2;
+        }
+}
+else {
+        # split along the y-axis
+        subdivide $tree, $y1, $y2, &#8594; $child, $y1, $y2 {
+            tree-map $child, :$x1, :$x2, :$y1, :$y2;
+} }
+}
+The newly introduced subroutine subdivide takes a directory tree, a start and end point, and finally a code object &amp;todo. For each child of the directory tree it calculates the new coordinates and then calls the &amp;todo function.
+The usage in subroutine flame-graph looks like this:
+subdivide( $tree, $x1, $x2, &#8594; $child, $x1, $x2 {
+    flame-graph( $child, :$x1, :$x2, :y($y + 15), :$height );
+});
+104</p>
+</div>
+<div class="paragraph">
+<p>The code object being passed to subdivide starts with &#8594;, which introduces the signature of a block. The code block recurses into flame-graph, adding some extra arguments and turning two positional arguments into named arguments along the way.
+This refactoring shortened the code and made it overall more pleasant
+to work with. But there’s still quite a bit of duplication between tree-map
+and flame-graph: both have an initial termination condition, a take of a rectangle, and then a call or two to subdivide. If we’re willing to put all the small differences into small, separate functions, we can unify it further.
+If we were to pass all those new functions as arguments to each call, we would create an unpleasantly long argument list. Instead, we can use those functions to generate the previous functions flame-graph and tree-map:
+sub svg-tree-gen(:&amp;terminate!, :&amp;base-height!, :&amp;subdivide-x!, :&amp;other!) {
+sub inner($tree, :$x1!, :$x2!, :$y1!, :$y2!) { return if terminate(:$x1, :$x2, :$y1, :$y2); take 'rect' &#8658; [
+x &#8658; $x1,
+y &#8658; $y1,
+            width  &#8658; $x2 - $x1,
+            height &#8658; base-height(:$y1, :$y2),
+            style  &#8658; "fill:" ~ random-color(),
+            title  &#8658; [$tree.name ~ ', ' ~ format-size($tree.total-
+            size)],
+];
+return if $tree ~~ File;
+if subdivide-x(:$x1, :$y1, :$x2, :$y2) {
+            # split along the x-axis
+            subdivide $tree, $x1, $x2, &#8594; $child, $x1, $x2 {
+                inner($child, :$x1, :$x2, :y1(other($y1)), :$y2);
+} }
+else {
+# split along the y-axis
+subdivide $tree, $y1, $y2, &#8594; $child, $y1, $y2 {
+                inner($child, :x1(other($x1)), :$x2, :$y1, :$y2);
+            }
+} }
+}
+Chapter 10 ■ a File and direCtory Usage graph
+105</p>
+</div>
+<div class="paragraph">
+<p>Chapter 10 ■ a File and direCtory Usage graph
+my &amp;flame-graph = svg-tree-gen
+terminate &#8658; &#8594; :$y1, :$y2, | { $y1 &gt; $y2 }, base-height &#8658; &#8594; | { 15 },
+subdivide-x &#8658; &#8594; | { True },
+other &#8658; &#8594; $y1 { $y1 + 15 },
+;
+my &amp;tree-map = svg-tree-gen
+terminate &#8658; &#8594; :$x1, :$y1, :$x2, :$y2 { ($x2 - $x1) * ($y2 - $y1) &lt; 20 },
+base-height &#8658; &#8594; :$y1, :$y2 { $y2 - $y1 },
+subdivide-x &#8658; &#8594; :$x1, :$x2, :$y1, :$y2 { $x2 - $x1 &gt; $y2 - $y1 }, other &#8658; &#8594; $a { $a },
+;
+Now we have a new function svg-tree-gen, which returns a function. The behavior of the returned function depends on the four small functions that svg-tree-gen receives as arguments.
+The first argument, terminate, determines under what condition the inner function should terminate early. For tree-map, that’s when the area is below
+20 pixels; for flame-graph, that&#8217;s when the current y-coordinate $y1 exceeds the height of the whole image (stored in $y2). svg-tree-gen always calls this function with the four named arguments x1, x2, y1, and y2, so the terminate function must ignore the x1 and x2 values. It does this by adding | as a parameter, which is an anonymous capture. Such a parameter can bind arbitrary positional and named arguments, and since it’s an anonymous parameter, it discards all the values.
+The second configuration function, base-height, determines the
+height of the rectangle in the base case. For flame-graph it’s a constant, so the configuration function must discard all arguments, again with a |. For tree-graph, it must return the difference between $y2 and $y1, as before the refactoring.
+The third function determines when to subdivide along the x axis. Flame graphs always divide along the x axis, so &#8594; | { True } accomplishes that. Our simplistic approach to tree graphs divides along the longer axis, so only along the x axis if $x2 – $x1 &gt; $y2 – $y1.
+The fourth and final function we pass to svg-tree-gen calculates the coordinate of the axis that isn’t being subdivided. In the case of flame-graph that’s increasing over the previous value by the height of the bars, and for tree-map it’s theunchangedcoordinate,sowepasstheidentityfunction&#8594; $a { $a }.
+The inner function only needs a name because we need to call it from itself recursively; otherwise an anonymous function sub ($tree, :$x1!, :$x2!, :$y1!, :$y2!) { &#8230;&#8203; } would have worked fine.
+106</p>
+</div>
+<div class="paragraph">
+<p>This refactoring also unifies the names of the arguments to flame-graph and tree-map (previously, tree-map had :$y2 and flame-graph had :$height), so the call can now be simplified to
+my &amp;grapher = $type eq 'flame' ?? &amp;flame-graph !! &amp;tree-map; say SVG.serialize(
+    :svg[
+        :$width,
+:$height,
+| do gather grapher $tree, x1 &#8658; 0, x2 &#8658; $width, y1 &#8658; 0, y2 &#8658; $height
+] );
+Now that we have very compact definitions of flame-graph and tree-map, it’s a good time to play with some of the parameters. Let’s introduce a bit of margin in the flame graph by having the increment in other greater than the bar height in base-height:
+my &amp;flame-graph = svg-tree-gen base-height &#8658; &#8594; | { 15 },
+other &#8658; &#8594; $y1 { $y1 + 16 }, # rest as before
+Another knob to turn is to change the color generation to something more deterministic and make it configurable from the outside:
+sub svg-tree-gen(:&amp;color=&amp;random-color, :&amp;terminate!, :&amp;base- height!,
+:&amp;subdivide-x!, :&amp;other!) {
+sub inner($tree, :$x1!, :$x2!, :$y1!, :$y2!) {
+return if terminate(:$x1, :$x2, :$y1, :$y2); take 'rect' &#8658; [
+x &#8658; $x1,
+y &#8658; $y1,
+            width  &#8658; $x2 - $x1,
+            height &#8658; base-height(:$y1, :$y2),
+            style  &#8658; "fill:" ~ color(),
+            title  &#8658; [$tree.name ~ ', ' ~ format-size($tree.total-
+}
+];
+# rest as before
+size)],
+Chapter 10 ■ a File and direCtory Usage graph
+107</p>
+</div>
+<div class="paragraph">
+<p>Chapter 10 ■ a File and direCtory Usage graph
+We can, for instance, keep state within the color generator and return a
+slightly different color during each iteration:
+sub color-range(|) {
+state ($r, $g, $b) = (0, 240, 120); $r = ($r + 5) % 256;
+$g = ($g + 10) % 256;
+$b = ($b + 15) % 256;
+return "rgb($r,$g,$b)";
+}
+State variables keep their values between calls to the same subroutine
+and their initialization runs only on the first call. Hence this function slightly increases the lightness in each color channel for each invocation, except when it reaches 256, where the modulo operator % resets it back to a small value.
+If we plug this into our functions by passing color &#8658; &amp;color-range to the calls to svg-tree-gen, we get much less chaotic-looking output (Figures 10-3 and 10-4):
+ Figure 10-3. Tree map with deterministic color generation
+108</p>
+</div>
+<div class="paragraph">
+<p>Figure 10-4. Flame graph with deterministic color generation and one pixel margin between bars
+We could also pass in the coordinates to the &amp;color routine, which would make it possible to write a color generator that produces a nice gradient.
+10.5 More Language Support for Functional Programming
+As you’ve seen in the preceding examples, functional programming typically involves writing lots of small functions. Raku has some language features that make it very easy to write such small functions.
+A common task is to write a function that calls a particular method on its argument, as we’ve seen here:
+method total-size() {
+$!total-size //= $.size + @.children.map({.total-size}).sum; # <sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup>^
+}
+This can be abbreviated to <strong>.total-size:
+method total-size() {
+$!total-size //= $.size + @.children.map(</strong>.total-size).sum;
+}
+This works for chains of method calls too, so you could write @.children. map(<strong>.total-size.round) if total-size returned a fractional number and you wanted to call the .round method on the result.
+There are more cases where you can replace an expression with the “Whatever” star (</strong>) to create a small function. To create a function that adds 15 to its argument, you can write * + 15 instead of &#8594; $a { $a + 15 }.
+If you need to write a function to just call another function, but pass more arguments to the second function, you can use the method assuming.4
+4https://docs.raku.org/routine/assuming
+Chapter 10 ■ a File and direCtory Usage graph
+  109</p>
+</div>
+<div class="paragraph">
+<p>Chapter 10 ■ a File and direCtory Usage graph
+Forexample&#8594; $x { f(42, $x }canbereplacedwith&amp;f.assuming(42).This worksalsofornamedarguments,so&#8594; $x { f($x, height &#8658; 42 ) }canbe replacedwith&amp;f.assuming(height &#8658; 42).
+10.6 More Improvements
+The classes File and Directory have some common functionality, like the size and the name attributes, and the fact that they both have a method called total-size. A good way to factor out common behavior of classes is to put the common behavior into a role:
+role Path {
+has $.name;
+has $.size;
+method total-size() { &#8230;&#8203; } }
+class File does Path {
+method total-size() { $.size }
+}
+class Directory does Path { has @.children;
+has $!total-size; method total-size() {
+        $!total-size //= $.size + @.children.map(*.total-size).sum;
+    }
+}
+A role looks structurally similar to a class, and using the does keyword in
+the class declaration applies the role to the class. This role application copies attributes and methods into the target class, but with some additional compile- time checks. One such check is that a class must implement stubbed-out methods like method total-size, where the &#8230;&#8203; as the method body marked it as a stub. In addition, when you apply multiple roles to the same class, name clashes are detected and throw an error unless you implement the method in the class for disambiguation.
+Roles are the preferred method of code reuse (apart from delegation) in Raku, because of the safety features mentioned previously.
+Now that File and Directory have a common role, you can use that role as a type constraint for subroutines that expect one of these types, such as sub subdivide(Path $tree, $lower, $upper, &amp;todo).
+110</p>
+</div>
+<div class="paragraph">
+<p>Finally, the type argument to sub MAIN can have two possible values: flame for flame graphs or tree for tree maps. A data structure that models this behavior is an enum or enumeration:
+enum GraphType &lt;flame tree&gt;;
+sub MAIN($dir = '.', GraphType :$type=flame) {
+my $tree = tree($dir.IO);
+use SVG;
+my $width = 1024;
+my $height = 768;
+my &amp;grapher = $type == flame ?? &amp;flame-graph !! &amp;tree-map; say SVG.serialize(
+        :svg[
+            :$width,
+:$height,
+| do gather grapher $tree, x1 &#8658; 0, x2 &#8658; $width, y1 &#8658; 0, y2 &#8658; $height
+] );
+}
+The values of an enum are integers starting from zero, hence the comparison with == instead of eq. You can access the possible values of an enum either as short identifiers (flame) or through the namespace of the enum type, GraphType::flame.
+Now if you obtain a help message from the script (by running it with the --help option), the type argument is automatically documented: --type=&lt;GraphType&gt; (flame tree).
+10.7 Explore!
+To get familiar with the functional programming concept, I encourage you to look through the code you’ve written so far and refactor near-duplicate code blocks into a common base and to swap out the code that differs into callbacks.
+More importantly, try to find abstractions that make sense. In the visualization examples, the underlying principle is divide and conquer.5 Can you come up with a general divide and conquer implementation that is still useful?
+5https://en.wikipedia.org/wiki/Divide_and_conquer_algorithm
+Chapter 10 ■ a File and direCtory Usage graph
+ 111</p>
+</div>
+<div class="paragraph">
+<p>Chapter 10 ■ a File and direCtory Usage graph
+Thinking back to the tree map and flame graphs, maybe you can separate
+the logic for sizing rectangles from the logic for placing the rectangles?
+10.8 Summary
+Functional programming offers techniques for extracting common logic into separate functions. The desired differences in behavior can be encoded in more functions that you pass in as arguments to other functions.
+Raku supports functional programming by making functions first class, so you can pass them around as ordinary objects. It also offers closures (access to outer lexical variables from functions) and various shortcuts that make it more pleasant to write short functions.</p>
+</div>
+<div class="paragraph">
+<p>Every so often, I have to identify or research some Unicode characters. There’s a tool called uni1 in the Perl 5 distribution App::Uni,2 developed by Audrey Tang and Ricardo Signes.
+Let’s reimplement its basic functionality in a few lines of Raku code and use that as an occasion to talk about Unicode support in Raku.
+If you give it one character on the command line, it prints out a description of the following character:
+$ uni њ
+њ - U+0045a - CYRILLIC SMALL LETTER NJE
+If you give it a longer string instead, it searches in the list of Unicode character names and prints out the same information for each character whose description matches the search string:
+$ uni third|head -n3
+1⁄3 - U+02153 - VULGAR FRACTION ONE THIRD 2⁄3 - U+02154 - VULGAR FRACTION TWO THIRDS ↉ - U+02189 - VULGAR FRACTION ZERO THIRDS
+Each line corresponds to what Unicode calls a “code point,” which is usually a character on its own, but occasionally also something like U+00300-COMBINING GRAVE ACCENT, which, combined with a-U+00061-LATIN SMALL LETTER A makes the character à.
+Raku offers a method uniname in both the classes Str and Int that produces the Unicode code point name for a given character, either in its direct character</p>
+</div>
+<div class="paragraph">
+<p>form, or in the form of its code point number. With that, the first part of uni’s
+desired functionality looks like this:
+#!/usr/bin/env raku
+use v6;
+sub format-codepoint(Int $codepoint) { sprintf "%s - U+%05x - %s\n",
+        $codepoint.chr,
+        $codepoint,
+        $codepoint.uniname;
+}
+multi sub MAIN(Str $x where .chars == 1) { print format-codepoint($x.ord);
+}</p>
+</div>
+<div class="paragraph">
+<p>Let’s look at it in action:</p>
+</div>
+<div class="paragraph">
+<p>$ uni ø
+ø - U+000f8 - LATIN SMALL LETTER O WITH STROKE
+The chr method turns a code point number into the character and ord is the reverse: in other words, from character to code point number.
+The second part, searching in all Unicode character names, works by brute- force enumerating all possible characters and searching through their uniname:
+multi sub MAIN($search is copy) { $search.=uc;
+for 1..0x10FFFF &#8594; $codepoint {
+if $codepoint.uniname.contains($search) {
+            print format-codepoint($codepoint);
+        }
+} }
+Since all character names are in uppercase, the search term is first converted to uppercase with $search.=uc, which is short for $search = $search.uc. By default, parameters are read-only, which is why its declaration here uses is
+copy to prevent that.
+Instead of this rather imperative style, we can also formulate it in a more functional style. We could think of it as a list of all characters, which we whittle</p>
+</div>
+<div class="paragraph">
+<p>down to those characters that interest us, to finally format them the way we
+want :
+multi sub MAIN($search is copy) { $search.=uc;
+    print (1..0x10FFFF).grep(*.uniname.contains($search))
+                       .map(&amp;format-codepoint)
+.join;
+}
+To make it easier to identify (rather than search for) a string of more than one character, an explicit option can help disambiguate:
+multi sub MAIN($x, Bool :$identify!) {
+print $x.ords.map(&amp;format-codepoint).join;
+}
+Str.ords returns the list of code points that make up the string. With this
+multi candidate of sub MAIN in place, we can do something like
+$ uni --identify øre
+ø - U+000f8 - LATIN SMALL LETTER O WITH STROKE
+r - U+00072 - LATIN SMALL LETTER R
+e - U+00065 - LATIN SMALL LETTER E</p>
+</div>
+<div class="paragraph">
+<p>11.1 Code Points, Grapheme Clusters, and Bytes
+As alluded to in the preceding, not all code points are fully fledged characters
+on their own. Or put another way, some things that we visually identify as a single character are actually made up of several code points. Unicode calls such sequences of one base character and potentially several combining characters as a grapheme cluster.
+Strings in Raku are based on these grapheme clusters. If you get a list
+of characters in a string with $str.comb, or extract a substring with $str. substr(0, 4), match a regex against a string, determine the length, or do any other operation on a string, the unit is always the grapheme cluster. This best fits our intuitive understanding of what a character is and avoids accidentally tearing apart a logical character through a substr, comb, or similar operation:
+my $s = "ø\c[COMBINING TILDE]"; say $s; # Output: ø̃
+say $s.chars; # Output: 1</p>
+</div>
+<div class="paragraph">
+<p>The Uni3 type is akin to a string and represents a sequence of codepoints. It is useful in edge cases, but doesn’t support the same wealth of operations as Str.4 The typical way to go from Str to a Uni value is to use one of the NFC, NFD, NFKC, or NFKD methods, which yield a Uni value in the normalization form of the same name.
+Below the Uni level, you can also represent strings as bytes by choosing an encoding. If you want to get from the string to the byte level, call the encode5 method:
+my $bytes = 'Raku'.encode('UTF-8'); # utf8:0x&lt;50 65 72 6c 20 36&gt;
+UTF-8 is the default encoding and also the one Raku assumes when reading source files. The result is something that does the Blob6 role: you can access individual bytes with positional indexing, such as $bytes[0]. The decode method7 helps you convert a Blob to a Str.
+If you print out a Blob with say(), you get a string representation of the bytes in hexadecimal. Accessing individual bytes produces an integer, and thus will typically be printed in decimal.
+If you want to print out the raw bytes of a blob, you can use the write method of an I/O handle:
+$*OUT.write('Raku'.encode('UTF-8'));</p>
+</div>
+<div class="paragraph">
+<p>11.2 Numbers
+Number literals in Raku aren’t limited to the Arabic digits we are so used to in the English-speaking part of the world. All Unicode code points that have the Decimal_Number (short Nd) property are allowed, so you can for example use Eastern Arabic numerals,8 or from many other scripts:
+say ٤٢; # 42
+The same holds true for string-to-number conversions:
+say "٤٢".Int; # 42</p>
+</div>
+<div class="paragraph">
+<p>For other numeric code points, you can use the unival method to obtain its
+numeric value:
+say "\c[TIBETAN DIGIT HALF ZERO]".unival;
+which produces the output –0.5 and also illustrates how to use a codepoint by
+name inside a string literal.
+11.3 Other Unicode Properties
+The uniprop method9 in type Str returns the general category by default: say "ø".uniprop; # Ll
+say "\c[TIBETAN DIGIT HALF ZERO]".uniprop; # No
+The return value needs some Unicode knowledge in order to make sense of it, or one could read Unicode’s Technical Report 4410 for the gory details. Ll stands for Letter_Lowercase, No is Other_Number. This is what Unicode calls the General Category, but you can ask the uniprop (or uniprop-bool method if you’re only interested in a boolean result) for other properties as well:
+say "a".uniprop-bool('ASCII_Hex_Digit');
+say "ü".uniprop-bool('Numeric_Type');
+say ".".uniprop("Word_Break");
+11.4 Collation
+# True
+# False
+# MidNumLet
+Sorting strings starts to become complicated when you’re not limited to ASCII characters. Raku’s sort method uses the cmp infix operator, which does a pretty standard lexicographic comparison based on the codepoint number.
+If you need to use a more sophisticated collation algorithm, Rakudo 2017.02 and newer offer the Unicode Collation Algorithm11 as an experimental feature:
+my @list = &lt;a ö ä Ä o ø&gt;;
+say @list.sort; # (a o Ä ä ö ø)
+use experimental :collation;
+say @list.collate; # (a ä Ä o ö ø)</p>
+</div>
+<div class="paragraph">
+<p>$*COLLATION.set(:tertiary(False));
+say @list.collate; # (a Ä ä o ö ø)
+The default sort considers any character with diacritics to be larger than ASCII characters, because that’s how they appear in the code point list. On the other hand, collate knows that characters with diacritics belong directly after their base character, which is not perfect in every language, but internally a good compromise.
+For Latin-based scripts, the primary sorting criterion is alphabetic, the secondary is diacritics, and the third is case. $*COLLATION.set(:tertiary(False)) thus makes .collate ignore case, so it doesn’t force lowercase characters to come before uppercase characters anymore.
+At the time of writing, language-specific collation has not yet been implemented in Raku.</p>
+</div>
+<div class="paragraph">
+<p>11.5 Summary</p>
+</div>
+<div class="paragraph">
+<p>Raku takes languages other than English very seriously, and goes to great lengths to facilitate working with them and the characters they use.
+This includes basing strings on grapheme clusters rather than code points, support for non-Arabic digits in numbers, and access to large parts of the Unicode database through built-in methods.
+Occasionally I come across git repositories where I want to know how active they are and who the main developers are.
+Let’s develop a script that plots the commit history, and explore how to use Python modules in Raku.
+12.1 Extracting the Stats
+We want to plot the number of commits by author and date. We can get this information easily by passing some options to git log:
+my $proc = run :out, &lt;git log --date=short --pretty=format:%ad!%an&gt;; my (%total, %by-author, %dates);
+for $proc.out.lines &#8594; $line {
+my ( $date, $author ) = $line.split: '!', 2; %total{$author}; %by-author{$author}{$date}; %dates{$date}++;
+}
+run executes an external command and :out tells it to capture the command’s output, making it available as $proc.out. The command is a list, with the first element being the actual executable and the rest being command-line arguments to this executable.
+Here git log gets the options --date short --pretty=format:%ad!%an, whichinstructsittoproducelineslike2017-03-01!John Doe.Thislinecanbe parsedwithasimplecallto$line.split: '!', 2,whichsplitsonthe!and limitstheresulttotwoelements.Assigningittoatwo-elementlist( $date, $author )unpacksit.Wethenusehashestocountcommitsbyauthor(in %total), by author and date (%by-author), and finally by date. In the second case,</p>
+</div>
+<div class="paragraph">
+<p>%by-author{$author} isn’t even a hash yet and we can still hash-index it. This is due to a feature called autovivification, which automatically creates (“vivifies”) objects where we need them. The use of ++ creates integers, {&#8230;&#8203;} indexing creates hashes, [&#8230;&#8203;] indexing, .push creates arrays, and so on.
+To get from these hashes to the top contributors by commit count, we can sort %total by value. Since this sorts in ascending order, sorting by the negative value returns the list in descending order. The list contains Pair1 objects, where we only want the first five, and only their keys:
+my @top-authors = %total.sort(-<strong>.value).head(5).map(</strong>.key);
+For each author, we can extract the dates of their activity and their commit
+counts like this:
+my @dates = %by-author{$author}.keys.sort; my @counts = %by-author{$author}{@dates};
+The last line uses slicing, that is, indexing a hash with a list to return a list of elements.
+12.2 Plotting with Python
+Matplotlib is a very versatile library for all sorts of plotting and visualization tasks. It is based on NumPy,2 a Python library for scientific and numeric computing.
+Matplotlib3 is written in Python and for Python programs, but that won’t stop us from using it in a Raku program.
+But first, let’s take a look at a basic plotting example that uses dates on the x axis:
+import datetime
+import matplotlib.pyplot as plt
+fig, subplots = plt.subplots()
+subplots.plot(
+    [datetime.date(2017, 1, 5), datetime.date(2017, 3, 5),
+    datetime.date(2017, 5, 5)],
+    [ 42, 23, 42 ],
+    label='An example',
+)</p>
+</div>
+<div class="paragraph">
+<p>subplots.legend(loc='upper center', shadow=True)
+fig.autofmt_xdate()
+plt.show()
+To make this run, you have to install Python 2.7 and matplotlib.4 You can do this onDebian-basedLinuxsystemswithapt-get install -y python-matplotlib. The package name is the same on RPM-based distributions such as CentOS or SUSE Linux. MacOS users are advised to install Python 2.7 through homebrew or macportsandthenusepip2 install matplotliborpip2.7 install matplotlib to get the library. Windows installation is probably easiest through the conda5 package manager, which offers prebuilt binaries of both Python and matplotlib.
+When you run this script with python2.7 dates.py, it opens a GUI window, showing the plot and some controls, which allow you to zoom, scroll, and write the plot graphic to a file (Figure 12-1):</p>
+</div>
+<div class="paragraph">
+<p>12.3 Bridging the Gap
+The Rakudo Raku compiler comes with a handy library for calling foreign functions6—called ‘NativeCall’—which allows you to call functions written in C, or anything with a compatible binary interface.
+The Inline::Python7 library uses the native call functionality to talk to Python’s C API and offers interoperability between Raku and Python code. At the time of writing, this interoperability is still fragile in places, but can be worth using for some of the great libraries that Python has to offer.
+To install Inline::Python, you must have a C compiler available, and then run
+$ zef install Inline::Python
+Now you can start to run Python 2 code in your Raku programs:
+use Inline::Python;
+my $py = Inline::Python.new;
+$py.run: 'print("Hello, Raku")';
+Besides the run method, which takes a string of Python code and executes it, you can also use call to call Python routines by specifying the namespace, the routine to call, and a list of arguments:
+use Inline::Python;
+my $py = Inline::Python.new;
+$py.run('import datetime');
+my $date = $py.call('datetime', 'date', 2017, 1, 31); $py.call('<em>builtin</em>', 'print', $date); # 2017-01-31
+The arguments that you pass to call are Raku objects, such as the three Int objects in this example. Inline::Python automatically translates them into the corresponding Python built-in data structure. It translates numbers, strings, arrays, and hashes. Return values are also translated in the opposite direction, though since Python 2 does not distinguish properly between byte and Unicode strings, Python strings end up as buffers in Raku.</p>
+</div>
+<div class="paragraph">
+<p>Objects that Inline::Python cannot translate are handled as opaque objects on the Raku side. You can pass them back into Python routines
+(as shown with the preceding print call) and you can call methods on them:
+say $date.isoformat().decode; # 2017-01-31
+Raku exposes attributes through methods, so Raku has no syntax for accessing attributes from foreign objects directly. For instance, if you try to access the year attribute of datetime.date through the normal method call syntax, you get an error:
+say $date.year;
+dies with
+'int' object is not callable
+Instead, you have to use the getattr builtin:
+say $py.call('<em>builtin</em>', 'getattr', $date, 'year');
+12.4 Using the Bridge to Plot
+We need access to two namespaces in Python, datetime and matplotlib.pyplot, so let’s start by importing them and writing some short helpers:
+my $py = Inline::Python.new; $py.run('import datetime'); $py.run('import matplotlib.pyplot'); sub plot(Str $name, |c) {
+    $py.call('matplotlib.pyplot', $name, |c);
+}
+sub pydate(Str $d) {
+$py.call('datetime', 'date', $d.split('-').map(*.Int));
+}
+We can now call pydate('2017-03-01') to create a Python datetime. date object from an ISO-formatted string and call the plot function to access functionality from matplotlib:
+my ($figure, $subplots) = plot('subplots'); $figure.autofmt_xdate();
+my @dates = %dates.keys.sort;</p>
+</div>
+<div class="paragraph">
+<p>$subplots.plot:
+    $[@dates.map(&amp;pydate)],
+    $[ %dates{@dates} ],
+    label     &#8658; 'Total',
+    marker    &#8658; '.',
+    linestyle &#8658; '';
+The Raku call plot('subplots') corresponds to the Python code fig, subplots = plt.subplots(). Passing arrays to Python functions needs a bit of extra work, because Inline::Python flattens arrays. Using an extra $ sigil in front of an array puts it into an extra scalar and thus prevents the flattening.
+Now we can actually plot the number of commits by author, add a legend, and plot the result:
+for @top-authors &#8594; $author {
+my @dates = %by-author{$author}.keys.sort; my @counts = %by-author{$author}{@dates}; $subplots.plot:
+        $[ @dates.map(&amp;pydate) ],
+        $@counts,
+        label     &#8658; $author,
+        marker    &#8658;'.',
+        linestyle &#8658; '';
+}
+$subplots.legend(loc&#8658;'upper center', shadow&#8658;True);
+plot('title', 'Contributions per day');
+plot('show');
+When run in the zef git repository,8 it produces the plot shown in Figure 12-2:</p>
+</div>
+<div class="paragraph">
+<p>12.5 Stacked Plots
+I am not yet happy with the plot, so I want to explore using stacked plots for presenting the same information. In a regular plot, the y coordinate of each plotted value is proportional to its value. In a stacked plot, it is the distance to the previous value that is proportional to its value. This is nice for values that add up to a total that is also interesting.
+Matplotlib offers a method called stackplot9 for this task. Contrary to multiple plot calls on a subplot object, it requires a shared x axis for all data series. Hence we must construct one array for each author of git commits, where dates with no value are set to zero.
+This time we have to construct an array of arrays where each inner array has the values for one author:
+my @dates = %dates.keys.sort;
+my @stack = $[] xx @top-authors;
+for @dates &#8594; $d {
+for @top-authors.kv &#8594; $idx, $author {
+        @stack[$idx].push: %by-author{$author}{$d} // 0;
+    }
+}</p>
+</div>
+<div class="paragraph">
+<p>Now plotting becomes a simple matter of a method call, followed by the
+usual commands to add a title and show the plot:
+$subplots.stackplot($[@dates.map(&amp;pydate)], @stack);
+plot('title', 'Contributions per day');
+plot('show');
+The result (again run on the zef source repository) is shown in Figure 12-3:</p>
+</div>
+<div class="paragraph">
+<p>Comparing this to the previous visualization reveals a discrepancy: there were no commits in 2014, and yet the stacked plot makes it appear this way. In fact, the previous plots would have shown the same “alternative facts” if we had chosen lines instead of points. It comes from matplotlib (like nearly all plotting libraries) interpolating linearly between data points. But in our case, a date with no data points means zero commits happened on that date.
+To communicate this to matplotlib, we must explicitly insert zero values for missing dates. This can be achieved by replacing
+my @dates = %dates.keys.sort;</p>
+</div>
+<div class="paragraph">
+<p>with the line
+my @dates = %dates.keys.minmax;
+The minmax method10 finds the minimal and maximal values, and returns them in a Range.11 Assigning the range to an array turns it into an array of all values between the minimal and the maximal value. The logic for assembling the @stack variable already maps missing values to zero.
+The result looks a bit better, but still far from perfect (Figure 12-4):</p>
+</div>
+<div class="paragraph">
+<p>Thinking more about the problem, contributions from separate days should not be joined together, because it produces misleading results. Matplotlib doesn’t support adding a legend automatically to stacked plots, so this seems to be to be a dead end.</p>
+</div>
+<div class="paragraph">
+<p>Since a dot plot didn’t work very well, let’s try a different kind of plot that represents each data point separately: a bar chart, or more specifically, a stacked bar chart. Matplotlib offers the bar plotting method where the named parameter bottom can be used to generate the stacking:
+my @dates = %dates.keys.sort;
+my @stack = $[] xx @top-authors; my @bottom = $[] xx @top-authors;
+for @dates &#8594; $d { my $bottom = 0;
+for @top-authors.kv &#8594; $idx, $author { @bottom[$idx].push: $bottom;
+my $value = %by-author{$author}{$d} // 0; @stack[$idx].push: $value;
+$bottom += $value;
+} }
+We need to supply color names ourselves and set the edge color of the bars to the same color, otherwise the black edge color dominates the result:
+my $width = 1.0;
+my @colors = &lt;red green blue yellow black&gt;; my @plots;
+for @top-authors.kv &#8594; $idx, $author { @plots.push: plot(
+        'bar',
+        $[@dates.map(&amp;pydate)],
+        @stack[$idx],
+        $width,
+        bottom &#8658; @bottom[$idx],
+        color &#8658; @colors[$idx],
+        edgecolor &#8658; @colors[$idx],
+); }
+plot('legend', $@plots, $@top-authors);
+plot('title', 'Contributions per day');
+plot('show');</p>
+</div>
+<div class="paragraph">
+<p>If you want to improve the result further, you could experiment with limiting the number of bars by lumping together contributions by week or month (or maybe $n-day period).
+12.6 Idiomatic Use of Inline::Python
+Now that the plots look informative and correct, it’s time to explore how to better emulate the typical Python APIs through Inline::Python.
+12.6.1 Types of Python APIs
+Python is an object-oriented language, so many APIs involve method calls, which Inline::Python helpfully automatically translates for us.
+But the objects must come from somewhere and typically this is by calling a function that returns an object, or by instantiating a class. In Python, those two are really the same under the hood, since instantiating a class is the same as calling the class as if it were a function.</p>
+</div>
+<div class="paragraph">
+<p>If you want to improve the result further, you could experiment with limiting the number of bars by lumping together contributions by week or month (or maybe $n-day period).
+12.6 Idiomatic Use of Inline::Python
+Now that the plots look informative and correct, it’s time to explore how to better emulate the typical Python APIs through Inline::Python.
+12.6.1 Types of Python APIs
+Python is an object-oriented language, so many APIs involve method calls, which Inline::Python helpfully automatically translates for us.
+But the objects must come from somewhere and typically this is by calling a function that returns an object, or by instantiating a class. In Python, those two are really the same under the hood, since instantiating a class is the same as calling the class as if it were a function.</p>
+</div>
+<div class="paragraph">
+<p>my (&amp;subplots, &amp;bar, &amp;legend, &amp;title, &amp;show)
+= gen('matplotlib.pyplot', &lt;subplots bar legend title show&gt;); my ($figure, $subplots) = subplots();
+# more code here
+legend($@plots, $@top-authors);
+title('Contributions per day');
+show();
+This makes the functions’ usage quite nice, but comes at the cost of duplicating their names. One can view this as a feature, because it allows the creation of different aliases, or as a source for bugs when the order is messed up, or a name misspelled.
+How could we avoid the duplication should we choose to create wrapper functions?
+This is where Raku’s flexibility and introspection abilities pay off. There are two key components that allow a nicer solution: the fact that declarations are expressions, and that you can introspect variables for their names.
+The first part means you can write mysub my ($a, $b), which declares
+the variables $a and $b, and calls a function with those variables as arguments. The second part means that $a.VAR.name returns a string '$a', the name of the variable.
+Let’s combine this to create a wrapper that initializes subroutines for us:
+sub pysub(Str $namespace, |args) { $py.run("import $namespace");
+for args[0] &lt;&#8594; $sub {
+my $name = $sub.VAR.name.substr(1); $sub = sub (|args) {
+            $py.call($namespace, $name, |args);
+        }
+} }
+pysub 'matplotlib.pyplot',
+my (&amp;subplots, &amp;bar, &amp;legend, &amp;title, &amp;show);
+131
+Chapter 12 ■ plotting Using inline::python and Matplotlib
+This avoids duplicating the name, but forces us to use some lower-level
+Raku features in sub pysub. Using ordinary variables means that accessing their .VAR.name results in the name of the variable, not the name of the variable that’s used on the caller side. So we can’t use slurpy arguments as in
+sub pysub(Str $namespace, *@subs)
+Instead we must use |args to obtain the rest of the arguments in a Capture.12 This doesn’t flatten the list of variables passed to the function, so when we iterate over them, we must do so by accessing args[0]. By default, loop variables are read-only, which we can avoid by using &lt;&#8594; instead of &#8594; to introduce the signature. Fortunately, that also preserves the name of the caller side variable.
+12.6.3 An Object-Oriented Interface
+Instead of exposing the functions, we can also create types that emulate the method calls on Python modules. For that, we can implement a class with a method FALLBACK, which Raku calls for us when calling a method that is not implemented in the class:
+class PyPlot is Mu { has $.py;
+submethod TWEAK {
+$!py.run('import matplotlib.pyplot');
+}
+method FALLBACK($name, |args) {
+        $!py.call('matplotlib.pyplot', $name, |args);
+    }
+}
+my $pyplot = PyPlot.new(:$py);
+my ($figure, $subplots) = $pyplot.subplots; # plotting code goes here $pyplot.legend($@plots, $@top-authors);
+$pyplot.title('Contributions per day');
+$pyplot.show;</p>
+</div>
+<div class="paragraph">
+<p>Class PyPlot inherits directly from Mu, the root of the Raku type hierarchy, instead of Any, the default parent class (which in turn inherits from Mu). Any introduces a large number of methods that Raku objects get by default, and since FALLBACK is only invoked when a method is not present, this is something to avoid.
+The method TWEAK is another method that Raku calls automatically for us, after the object has been fully instantiated. All-caps method names are reserved for such special purposes. It is marked as a submethod, which means it is not inherited into subclasses. Since TWEAK is called at the level of each class, if it were a regular method, a subclass would call it twice implicitly. Note that TWEAK is only supported in Rakudo version 2016.11 and later.
+There’s nothing specific to the Python package matplotlib.pyplot in class PyPlot, except the namespace name. We could easily generalize it to any namespace:
+class PythonModule is Mu { has $.py;
+has $.namespace; submethod TWEAK {
+        $!py.run("import $!namespace");
+    }
+method FALLBACK($name, |args) { $!py.call($!namespace, $name, |args);
+} }
+my $pyplot = PythonModule.new(:$py, :namespace&lt;matplotlib.pyplot&gt;);
+This is one Raku type that can represent any Python module. If instead we want a separate Raku type for each Python module, we could use roles, which are optionally parameterized:
+role PythonModule[Str $namespace] is Mu { has $.py;
+submethod TWEAK {
+$!py.run("import $namespace");
+}
+method FALLBACK($name, |args) {
+        $!py.call($namespace, $name, |args);
+    }
+}
+my $pyplot = PythonModule['matplotlib.pyplot'].new(:$py);</p>
+</div>
+<div class="paragraph">
+<p>Chapter 12  plotting Using inline::python and Matplotlib
+Using this approach, we can create type constraints for Python modules in
+Raku space:
+sub plot-histogram(PythonModule['matplotlib.pyplot'], @data) { # implementation here
+}
+Passing in any wrapped Python module other than matplotlib.pyplot
+results in a type error.
+12.7 Summary
+We’ve explored several ways to represent commit occurrence in plots and utilized Inline::Python to interface with a Python-based plotting library.
+A bit of Raku metaprogramming allowed us to emulate different kinds of Python APIs pretty directly in Raku code, allowing a fairly direct translation of the original library’s documentation into Raku code.
+If you got this far reading this book, you likely have a solid grasp on the basics of Raku by now.
+The examples and discussions have touched on a wide variety of topics. We started with what Raku is, and how you can run Raku programs. Next up were the basic lexical structure of Raku programs, variables, control flow, and I/O. The more advanced topics include object orientation, persistence, regexes and grammars, Unicode support, concurrency, and finally the use of foreign libraries through Inline::Python.
+But there’s more to writing successful Raku code than learning about the language itself. In this final chapter, I want to hint at some topics that you might want to pursue to help you keep your code base maintainable, and to get it successfully in front of users.
+13.1 Scaling Your Code Base
+When your code base grows, it is often advisable to split it into separate files. You can create modules that contain your logic, organized by namespace and functionality. The scripts then tend to become shallow entry points that parse the command-line arguments, load the modules, and then call a function or method from a method to do the actual work.
+In this scenario, tests are written as separate scripts, usually in a directory named t, that load and test the same modules.
+The official documentation at <a href="https://docs.raku.org/language/modules" class="bare">https://docs.raku.org/language/modules</a> explains how you can write modules, as well as the standard directory layout and metadata that the module installer zef (and other tooling) relies on.
+As your code base grows, type annotations can help you to keep track
+of what arguments routines accept, and what they return. I tend to use type annotations mostly in signatures that are part of a public API. With “public” I mean routines that can be accessed from outside the module they are in. Inside the routines, I tend to omit them for brevity and flexibility.</p>
+</div>
+<div class="paragraph">
+<p>To make type constraints more reusable, you can define create subset types.
+For example we’ve seen an example with an ad hoc–type constraint:
+multi sub MAIN(Str $date where /^ \d+ \- \d+ \- \d+ $ /) { &#8230;&#8203; } Instead you could create a subset type, and use it several times:
+subset DateStr of Str where /^ \d+ \- \d+ \- \d+ $ /; multi sub MAIN(DateStr $date) { &#8230;&#8203; }
+sub parse-date(DateStr) returns Date { &#8230;&#8203; }
+You can collect several of these types in a module, and import them
+wherever you need them.
+13.2 Packaging Your Application
+In order to deploy your application to users, you typically put it in some kind of self-contained archive or package.
+Independent of the desired distribution format, the starting point is always the directory layout and metadata that the zef module installer uses, which is described at <a href="https://docs.raku.org/language/modules" class="bare">https://docs.raku.org/language/modules</a>.
+Raku packaging is still in active development, so instead of giving recipes, I want to briefly mention some options that you might find worth exploring.
+13.2.1 Packaging as a Traditional Raku Module
+Traditionally, Raku modules and software are distributed as tar archives1 that contain the source code and some metadata, like a META6.json file.
+Users need to have a Raku binary and zef installed. They can then unpack the archive, go into the newly created directory, and install the software with zef install.
+If your software is open source, you can add it to the official Raku ecosystem by sending a pull request against the Raku ecosystem git repository on GitHub.2 In this pull request, you simply add a link to your META6.json file by editing
+the file META.list in said repository. After the pull request is accepted (which typically only takes a few hours or minutes), users can install your software through zef without having to download any package themselves.</p>
+</div>
+<div class="paragraph">
+<p>13.2.2 Deploying with Docker
+Traditional Raku module distribution relies on a preinstalled Rakudo Raku compiler, which might not be available on all platforms.
+If you choose to distribute your application in a Docker image, you can base your image on the rakudo-star image, and simply zef install your application into the Docker container.
+This is the most basic Dockerfile that builds on a preexisting image and installs that Raku application from the current working directory:
+FROM rakudo-star:2017.04
+COPY myapp /tmp/install
+RUN zef install /tmp/install
+ENTRYPOINT ["/usr/share/raku/site/bin/myapp"]
+Running docker build -t myapp . creates a Docker image myapp, which you can then distribute, with all dependencies included.
+13.2.3 Windows Installers
+The module App::InstallerMaker::WiX3 can help you create a Windows .msi installer that creates a build of Rakudo, zef, and your application. It requires the Microsoft Visual C++ build tools and WiX.4 You create a YAML file that describes your application, and then run the script make-raku-wix-installer to create a stand-alone .msi file.
+13.3 Closing Thoughts
+Raku is a big language, embedded in an even bigger community and ecosystem. A book such as this one cannot cover everything, but hopefully it helped
+you learn enough to perform most programming tasks in Raku, and more importantly, got you excited and motivated to explore, and to learn more.</p>
+</div>
+</div>
+</div>
+</div>
+
+</article>
+
+
+    
+
+  </main><section class="site__search">
+    <label class="site__form">
+        <p class="form__label">Search around the site</p> 
+        <input class="site__search-bar form__input" type="text">
+    </label>
+    <div class="site__search-bar-results"></div>
+</section>
+  
+  <footer class="site__footer">
+    
+    
+    <p class="footer__sign">© 2020 ohmyraku</p></footer>
+    
+
+    
+    <script>
+        window.addEventListener("load", function () {
+            const script = document.createElement("script");
+            script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+            script.async = true
+
+            document.head.appendChild(script);
+        })
+    </script>
+
+
+
+
+
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
+
+
+
+</body>
+</html>
