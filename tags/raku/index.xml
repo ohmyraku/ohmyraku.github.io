@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>raku on 山川异域, 风月同天</title>
+    <link>https://ohmyraku.github.io/tags/raku/</link>
+    <description>Recent content in raku on 山川异域, 风月同天</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>ohmyraku@outlook.com (ohmyraku)</managingEditor>
+    <webMaster>ohmyraku@outlook.com (ohmyraku)</webMaster>
+    <lastBuildDate>Wed, 05 Feb 2020 15:26:52 +0800</lastBuildDate>
+    
+	<atom:link href="https://ohmyraku.github.io/tags/raku/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cro 入门</title>
+      <link>https://ohmyraku.github.io/cro/</link>
+      <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
+      <author>ohmyraku@outlook.com (ohmyraku)</author>
+      <guid>https://ohmyraku.github.io/cro/</guid>
+      <description>Table of Contents 1. Cro 开发工具 1.1. 存根服务 1.2. HTTP 服务 1.3. 运行服务 1.4. 追踪服务 1.5. 服务静态内容 1.6. 使用服务链接 1.7. URI 段匹配 1.8. 请求方法 1.9. 查询字符串,header 和 cookies 1.10. 访问 Cro::HTTP::Request 实例 1.11. 请求体 1.12. 添加自定义请求体解析器 1.13. 生成响应 1.14. 服务静态内容 1.15. 添加自定义响应体序列化器 1.16. 设置响应体缓存能力 1.17. Push 承诺 1.18. 组合路由 1.19. 代理路由到另一个 Cro::Transform 1.20. 在路由块中应用中间件 1.21. 基本示例 1.22. 为服务设置测试 1.23. 编写测试 1.24. 状态 1.25. 内容类型 1.26. 标题 1.27. body-text 1.28. body-blob 1.</description>
+    </item>
+    
+    <item>
+      <title>Raku Advent Calendar</title>
+      <link>https://ohmyraku.github.io/raku-advent-calendar/</link>
+      <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
+      <author>ohmyraku@outlook.com (ohmyraku)</author>
+      <guid>https://ohmyraku.github.io/raku-advent-calendar/</guid>
+      <description>Table of Contents 1. 第一天 – Raku 鬼精灵: 圣诞节实用指南 1.1. But True does False 1.2. Wrapping It Up 1.3. 看不见的斗篷 1.4. Ho-Ho-Ho 1.5. 结论   2. 第二天-Raku: 符号, 变量和容器 2.1. 把钱拿出来 2.2. 我们祝你有一个愉快的列表圣诞 2.3. That&amp;#8217;s Your Assignment 2.4. Position@lly 2.5. The One and Only 2.6. Decont 2.7. 不要让它溜走 2.8. I Want Less 2.9. Defaulting on Default Defaults 2.10. 自定义 2.11. 这就是全部，伙计 2.12. 结论   3. 第三天 – LetterOps with Raku 3.</description>
+    </item>
+    
+    <item>
+      <title>Raku at a glance</title>
+      <link>https://ohmyraku.github.io/raku-at-a-glance/</link>
+      <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
+      <author>ohmyraku@outlook.com (ohmyraku)</author>
+      <guid>https://ohmyraku.github.io/raku-at-a-glance/</guid>
+      <description>Table of Contents 1. Raku 概要 1.1. Hello, World 1.2. 变量 1.3. 内省 1.4. Twigils 1.5. 经常使用的特殊变量 1.6. 内置类型   2. 运算符 2.1. 前缀 2.2. 后缀 2.3. 方法后缀 2.4. 中缀运算符 2.5. 列表运算符 2.6. Junction 运算符 2.7. 短路运算符 2.8. 其它中缀运算符 2.9. 元运算符 2.10. 超运算符   3. 正则表达式和 Grammars 3.1. 正则表达式 3.2. $/ 对象 3.3. Grammars 3.4. Actions 3.5. AST 和属性 3.6. 计算器     1. Raku 概要 1.</description>
+    </item>
+    
+    <item>
+      <title>Raku 入门</title>
+      <link>https://ohmyraku.github.io/raku-guide/</link>
+      <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
+      <author>ohmyraku@outlook.com (ohmyraku)</author>
+      <guid>https://ohmyraku.github.io/raku-guide/</guid>
+      <description>Table of Contents 1. 序言 1.1. 什么是 Raku 1.2. 术语 1.3. 安装 Raku 1.4. 运行 Raku 代码 1.5. 编辑器 1.6. Hello World! 1.7. 语法概要   2. 运算符 2.1. 一般运算符 2.2. 反转运算符 2.3. 归约运算符   3. 变量 3.1. 标量 3.2. 数组 3.3. Hashes 哈希 3.4. 类型 3.5. 自省 3.6. 作用域 3.7. 赋值 vs. 绑定   4. 函数和修改器 5. 循环和条件语句 5.1. if 5.2. unless 5.3. with 5.4. for 5.5. given 5.</description>
+    </item>
+    
+    <item>
+      <title>Raku 基础</title>
+      <link>https://ohmyraku.github.io/raku-by-example/</link>
+      <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
+      <author>ohmyraku@outlook.com (ohmyraku)</author>
+      <guid>https://ohmyraku.github.io/raku-by-example/</guid>
+      <description>Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 为什么我应该使用 Raku 1.4. 总结 1.5. 安装器 1.6. Docker 1.7. 从源代码创建 1.8. 测试你的 Rakudo Star 安装 1.9. 文档 1.10. 总结 1.11. 让数独变得可玩 1.12. 便捷,常量和更多便捷写法 1.13. IO 和其它悲剧 1.14. 获得创造性 1.15. 总结 1.16. 使用库 1.17. DateTime 格式化 1.18. 寻找其他途径 1.19. 处理时间 1.20. 系好你的安全带 1.21. MAIN 魔法 1.22. 总结   2. 测试 say 2.1. 总结 2.2. 异步运行命令 2.3. 实现超时 2.4. More on Promises 2.</description>
+    </item>
+    
+    <item>
+      <title>Raku 学习手册</title>
+      <link>https://ohmyraku.github.io/learning-raku/</link>
+      <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
+      <author>ohmyraku@outlook.com (ohmyraku)</author>
+      <guid>https://ohmyraku.github.io/learning-raku/</guid>
+      <description>Table of Contents 1. 为什么是 Raku? 2. First Steps with the REPL 3. 阅读文档 4. 基础语法 4.1. 项 4.2. 运算符和表达式 4.3. 语句 4.4. 块儿 4.5. 注释 4.6. Unspace 4.7. 对象和类   5. Variables 5.1. 简单输出 5.2. 词法作用域 5.3. 预定义变量   6. Making and Running a Program 7. 总结 8. 绑定和赋值 9. A MAIN Program 9.1. Program Arguments 9.2. Prompting for Values   10. Literal Numbers 10.1. Formatting Numbers   11.</description>
+    </item>
+    
+    <item>
+      <title>Raku 官方文档</title>
+      <link>https://ohmyraku.github.io/rakudoc/</link>
+      <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
+      <author>ohmyraku@outlook.com (ohmyraku)</author>
+      <guid>https://ohmyraku.github.io/rakudoc/</guid>
+      <description>Table of Contents 1. 简介 1.1. v6 1.2. 语句 1.3. 词法和块 1.4. 符号和标识符 1.5. 标量 1.6. 文件句柄和赋值 1.7. 字符串字面量 1.8. 数组、方法和调用 1.9. 散列 1.10. for 和 block 1.11. Any 和 += 1.12. 后自增和前自增 1.13. 变量, $_ 1.14. 块 1.15. 稳定的排序 1.16. say，print 和 put 1.17. 插值 1.18. 双引号字符串和单引号字符串 1.19. 禅切 1.20. 练习   2. Perl 5 到 Raku 的指南 - 简而言之 2.1. CPAN 2.2. 语法 2.3. 空白 2.4. 符号 2.</description>
+    </item>
+    
+    <item>
+      <title>Raku 手册</title>
+      <link>https://ohmyraku.github.io/begining-raku/</link>
+      <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
+      <author>ohmyraku@outlook.com (ohmyraku)</author>
+      <guid>https://ohmyraku.github.io/begining-raku/</guid>
+      <description>Table of Contents 1. Rakudo 1.1. Rakudo Star 1.2. 安装 Rakudo Star   2. 在浏览器中运行 Raku 3. REPL 3.1. 命令行补全   4. 单行程序 4.1. 命令行选项   5. 运行程序 6. 错误信息 7. use v6 8. 文档 8.1. 在线文档 8.2. 本地文档   9. 更多信息 10. 速度 11. 使用 say 和 print 输出 12. 变量 12.1. 符号 12.2. Twigils 12.3. my   13. 注释 13.1. 多行注释 13.2. 嵌入式注释   14.</description>
+    </item>
+    
+    <item>
+      <title>Raku 深入研究</title>
+      <link>https://ohmyraku.github.io/raku-deep-dive/</link>
+      <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
+      <author>ohmyraku@outlook.com (ohmyraku)</author>
+      <guid>https://ohmyraku.github.io/raku-deep-dive/</guid>
+      <description>Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. Raku 资源 1.4. 编译器 1.5. 使用 Rakudo Star 1.6. 写出我们的 Hello, World 程序 1.7. 总结   2. 写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. 移相器 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4. 使用运算符 4.1. 运算符分类 4.2. Raku 中的运算符 4.3. Raku 中的元运算符 4.</description>
+    </item>
+    
+    <item>
+      <title>Raku 语法小册</title>
+      <link>https://ohmyraku.github.io/raku-quick-syntax-reference/</link>
+      <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
+      <author>ohmyraku@outlook.com (ohmyraku)</author>
+      <guid>https://ohmyraku.github.io/raku-quick-syntax-reference/</guid>
+      <description>Table of Contents 1. 运行 Raku 1.1. 在你自己的电脑上运行 Raku 1.2. Raku 在线 1.3. 命名行(和其它)选项 1.4. 结束语   2. 获取帮助 2.1. 第一响应者 2.2. IRC 频道和其它在线交流 2.3. 在线下获取帮助 2.4. 结束语   3. 字面值 3.1. 让我们来谈论 Unicode 3.2. 字面值表达式 3.3. 字符串？数字？同素异形体！ 3.4. 版本 3.5. 结束语 3.6. 基本表达式 3.7. 算术 3.8. 字符串 3.9. 处理语法错误 3.10. 智能比较运算符 3.11. 注释：文档的重要组成部分 3.12. 逻辑 3.13. 结束语   4. 构建数据 4.1. 代码对象 4.2. 列表、数组、范围和序列 4.3. 散列和映射 4.</description>
+    </item>
+    
+    <item>
+      <title>使用 Raku</title>
+      <link>https://ohmyraku.github.io/using-raku/</link>
+      <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
+      <author>ohmyraku@outlook.com (ohmyraku)</author>
+      <guid>https://ohmyraku.github.io/using-raku/</guid>
+      <description>Table of Contents 字符串 1. 1.1 使用字符串 1.1. 1. 你好, 世界! 1.2. 2. 跟人打招呼 1.3. 3. 字符串长度 1.4. 4. 唯一数字   2. 1.2 修改字符串数据 2.1. 5. 反转字符串 2.2. 6. 从字符串中移除空格 2.3. 7. 驼峰大小写 2.4. 8. 文件名递增 2.5. 9. 随机密码 2.6. 10. DNA 到 RNA 转换 2.7. 11. 凯撒密码   3. 1.3 文本分析 3.1. 12. 复数结尾 3.2. 13. 最常用单词 3.3. 14. 最长共同子串 3.4. 15. 回文测试 3.5. 16. 回文检验 3.6. 17.</description>
+    </item>
+    
+    <item>
+      <title>使用 Raku 正则表达式和 Grammars 进行解析</title>
+      <link>https://ohmyraku.github.io/parsing-with-raku-regexes-and-grammars/</link>
+      <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
+      <author>ohmyraku@outlook.com (ohmyraku)</author>
+      <guid>https://ohmyraku.github.io/parsing-with-raku-regexes-and-grammars/</guid>
+      <description>Table of Contents 1. 什么是正则表达式和 Grammars？ 1.1. 使用场景 1.2. 正则或正则表达式 1.3. Raku 正则表达式有什么特别之处   2. Raku 入门 2.1. 安装 Rakudo Raku 2.2. 使用 Rakudo Raku 2.3. 获取代码示例 2.4. Raku 第一步 2.5. 总结   3. 正则表达式构造块 3.1. 字面量 3.2. 元字符与字面量 3.3. Anchors 3.4. 预定义字符类 3.5. 量词 3.6. 析取 3.7. 连接 3.8. 零宽断言 3.9. 总结   4. 正则表达式和 Raku 代码 4.1. 智能匹配 4.2. 引号形式 4.3. 修饰符 4.4. comb 和 split 4.</description>
+    </item>
+    
+  </channel>
+</rss>

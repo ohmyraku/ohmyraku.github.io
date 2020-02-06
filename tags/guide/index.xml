@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>guide on 山川异域, 风月同天</title>
+    <link>https://ohmyraku.github.io/tags/guide/</link>
+    <description>Recent content in guide on 山川异域, 风月同天</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>ohmyraku@outlook.com (ohmyraku)</managingEditor>
+    <webMaster>ohmyraku@outlook.com (ohmyraku)</webMaster>
+    <lastBuildDate>Wed, 05 Feb 2020 15:26:52 +0800</lastBuildDate>
+    
+	<atom:link href="https://ohmyraku.github.io/tags/guide/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Raku 手册</title>
+      <link>https://ohmyraku.github.io/begining-raku/</link>
+      <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
+      <author>ohmyraku@outlook.com (ohmyraku)</author>
+      <guid>https://ohmyraku.github.io/begining-raku/</guid>
+      <description>Table of Contents 1. Rakudo 1.1. Rakudo Star 1.2. 安装 Rakudo Star   2. 在浏览器中运行 Raku 3. REPL 3.1. 命令行补全   4. 单行程序 4.1. 命令行选项   5. 运行程序 6. 错误信息 7. use v6 8. 文档 8.1. 在线文档 8.2. 本地文档   9. 更多信息 10. 速度 11. 使用 say 和 print 输出 12. 变量 12.1. 符号 12.2. Twigils 12.3. my   13. 注释 13.1. 多行注释 13.2. 嵌入式注释   14.</description>
+    </item>
+    
+  </channel>
+</rss>

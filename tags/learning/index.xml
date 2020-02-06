@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>learning on 山川异域, 风月同天</title>
+    <link>https://ohmyraku.github.io/tags/learning/</link>
+    <description>Recent content in learning on 山川异域, 风月同天</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>ohmyraku@outlook.com (ohmyraku)</managingEditor>
+    <webMaster>ohmyraku@outlook.com (ohmyraku)</webMaster>
+    <lastBuildDate>Wed, 05 Feb 2020 15:26:52 +0800</lastBuildDate>
+    
+	<atom:link href="https://ohmyraku.github.io/tags/learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Raku 学习手册</title>
+      <link>https://ohmyraku.github.io/learning-raku/</link>
+      <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
+      <author>ohmyraku@outlook.com (ohmyraku)</author>
+      <guid>https://ohmyraku.github.io/learning-raku/</guid>
+      <description>Table of Contents 1. 为什么是 Raku? 2. First Steps with the REPL 3. 阅读文档 4. 基础语法 4.1. 项 4.2. 运算符和表达式 4.3. 语句 4.4. 块儿 4.5. 注释 4.6. Unspace 4.7. 对象和类   5. Variables 5.1. 简单输出 5.2. 词法作用域 5.3. 预定义变量   6. Making and Running a Program 7. 总结 8. 绑定和赋值 9. A MAIN Program 9.1. Program Arguments 9.2. Prompting for Values   10. Literal Numbers 10.1. Formatting Numbers   11.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>glance on 山川异域, 风月同天</title>
+    <link>https://ohmyraku.github.io/tags/glance/</link>
+    <description>Recent content in glance on 山川异域, 风月同天</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>ohmyraku@outlook.com (ohmyraku)</managingEditor>
+    <webMaster>ohmyraku@outlook.com (ohmyraku)</webMaster>
+    <lastBuildDate>Wed, 05 Feb 2020 15:26:52 +0800</lastBuildDate>
+    
+	<atom:link href="https://ohmyraku.github.io/tags/glance/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Raku at a glance</title>
+      <link>https://ohmyraku.github.io/raku-at-a-glance/</link>
+      <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
+      <author>ohmyraku@outlook.com (ohmyraku)</author>
+      <guid>https://ohmyraku.github.io/raku-at-a-glance/</guid>
+      <description>Table of Contents 1. Raku 概要 1.1. Hello, World 1.2. 变量 1.3. 内省 1.4. Twigils 1.5. 经常使用的特殊变量 1.6. 内置类型   2. 运算符 2.1. 前缀 2.2. 后缀 2.3. 方法后缀 2.4. 中缀运算符 2.5. 列表运算符 2.6. Junction 运算符 2.7. 短路运算符 2.8. 其它中缀运算符 2.9. 元运算符 2.10. 超运算符   3. 正则表达式和 Grammars 3.1. 正则表达式 3.2. $/ 对象 3.3. Grammars 3.4. Actions 3.5. AST 和属性 3.6. 计算器     1. Raku 概要 1.</description>
+    </item>
+    
+  </channel>
+</rss>

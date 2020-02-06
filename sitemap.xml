@@ -3,75 +3,148 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://ohmyraku.github.io/begining-raku/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ohmyraku.github.io/cro/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ohmyraku.github.io/learning-raku/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ohmyraku.github.io/parsing-with-raku-regexes-and-grammars/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ohmyraku.github.io/raku-advent-calendar/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ohmyraku.github.io/raku-at-a-glance/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ohmyraku.github.io/raku-by-example/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ohmyraku.github.io/raku-deep-dive/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ohmyraku.github.io/raku-guide/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ohmyraku.github.io/raku-quick-syntax-reference/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ohmyraku.github.io/rakudoc/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://ohmyraku.github.io/using-raku/</loc>
-    <priority>0</priority>
+    <loc>https://ohmyraku.github.io/tags/advent/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://ohmyraku.github.io/categories/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/tags/cro/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/cro/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/tags/deep/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/tags/doc/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/tags/example/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/tags/glance/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/tags/grammar/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/tags/guide/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/tags/intro/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/tags/learning/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/tags/raku/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/categories/raku/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/raku-advent-calendar/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/raku-at-a-glance/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/raku-guide/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/raku-by-example/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/learning-raku/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/rakudoc/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/begining-raku/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/raku-deep-dive/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/raku-quick-syntax-reference/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/tags/syntax/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://ohmyraku.github.io/tags/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/tags/using/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/using-raku/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/parsing-with-raku-regexes-and-grammars/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://ohmyraku.github.io/</loc>
+    <lastmod>2020-02-05T15:26:52+08:00</lastmod>
   </url>
   
 </urlset>

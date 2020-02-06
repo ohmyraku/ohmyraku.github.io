@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>syntax on 山川异域, 风月同天</title>
+    <link>https://ohmyraku.github.io/tags/syntax/</link>
+    <description>Recent content in syntax on 山川异域, 风月同天</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>ohmyraku@outlook.com (ohmyraku)</managingEditor>
+    <webMaster>ohmyraku@outlook.com (ohmyraku)</webMaster>
+    <lastBuildDate>Wed, 05 Feb 2020 15:26:52 +0800</lastBuildDate>
+    
+	<atom:link href="https://ohmyraku.github.io/tags/syntax/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Raku 语法小册</title>
+      <link>https://ohmyraku.github.io/raku-quick-syntax-reference/</link>
+      <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
+      <author>ohmyraku@outlook.com (ohmyraku)</author>
+      <guid>https://ohmyraku.github.io/raku-quick-syntax-reference/</guid>
+      <description>Table of Contents 1. 运行 Raku 1.1. 在你自己的电脑上运行 Raku 1.2. Raku 在线 1.3. 命名行(和其它)选项 1.4. 结束语   2. 获取帮助 2.1. 第一响应者 2.2. IRC 频道和其它在线交流 2.3. 在线下获取帮助 2.4. 结束语   3. 字面值 3.1. 让我们来谈论 Unicode 3.2. 字面值表达式 3.3. 字符串？数字？同素异形体！ 3.4. 版本 3.5. 结束语 3.6. 基本表达式 3.7. 算术 3.8. 字符串 3.9. 处理语法错误 3.10. 智能比较运算符 3.11. 注释：文档的重要组成部分 3.12. 逻辑 3.13. 结束语   4. 构建数据 4.1. 代码对象 4.2. 列表、数组、范围和序列 4.3. 散列和映射 4.</description>
+    </item>
+    
+  </channel>
+</rss>
