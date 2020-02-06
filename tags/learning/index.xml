@@ -19,7 +19,7 @@
       <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
       <author>ohmyraku@outlook.com (ohmyraku)</author>
       <guid>https://ohmyraku.github.io/learning-raku/</guid>
-      <description>Table of Contents 1. 为什么是 Raku? 2. First Steps with the REPL 3. 阅读文档 4. 基础语法 4.1. 项 4.2. 运算符和表达式 4.3. 语句 4.4. 块儿 4.5. 注释 4.6. Unspace 4.7. 对象和类   5. Variables 5.1. 简单输出 5.2. 词法作用域 5.3. 预定义变量   6. Making and Running a Program 7. 总结 8. 绑定和赋值 9. A MAIN Program 9.1. Program Arguments 9.2. Prompting for Values   10. Literal Numbers 10.1. Formatting Numbers   11.</description>
+      <description>Table of Contents 1. 介绍 1.1. 为什么是 Raku? 1.2. First Steps with the REPL 1.3. 阅读文档 1.4. 基础语法 1.5. Variables 1.6. Making and Running a Program 1.7. 总结   2. 猜数字 2.1. 绑定和赋值 2.2. A MAIN Program 2.3. Literal Numbers 2.4. Numeric Operations 2.5. Conditional Execution 2.6. Putting It All Together 2.7. Summary   3. 数字 3.1. Number Types 3.2. Integers 3.3. 有理数 3.4. Imaginary and Complex Numbers 3.</description>
     </item>
     
   </channel>
