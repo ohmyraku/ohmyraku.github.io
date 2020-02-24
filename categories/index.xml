@@ -8,7 +8,7 @@
     <language>zh-cn</language>
     <managingEditor>ohmyraku@outlook.com (ohmyraku)</managingEditor>
     <webMaster>ohmyraku@outlook.com (ohmyraku)</webMaster>
-    <lastBuildDate>Wed, 05 Feb 2020 15:26:52 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 24 Feb 2020 12:54:52 +0800</lastBuildDate>
     
 	<atom:link href="https://ohmyraku.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -16,9 +16,18 @@
     <item>
       <title>raku</title>
       <link>https://ohmyraku.github.io/categories/raku/</link>
-      <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
+      <pubDate>Mon, 24 Feb 2020 12:54:52 +0800</pubDate>
       <author>ohmyraku@outlook.com (ohmyraku)</author>
       <guid>https://ohmyraku.github.io/categories/raku/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nim</title>
+      <link>https://ohmyraku.github.io/categories/nim/</link>
+      <pubDate>Sun, 09 Feb 2020 15:26:52 +0800</pubDate>
+      <author>ohmyraku@outlook.com (ohmyraku)</author>
+      <guid>https://ohmyraku.github.io/categories/nim/</guid>
       <description></description>
     </item>
     

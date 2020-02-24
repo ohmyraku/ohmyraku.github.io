@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>用 Raku 写编译器 :: 山川异域, 风月同天</title>
+
+<meta name="author" content="ohmyraku">
+<meta name="application-name" content="山川异域, 风月同天">
+<meta name="description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
+ 让我们从一个简单的解释器程序开始研究功能或 Raku 的 Grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。
+ my x; x = 42; say x;   在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何信号。
+ 该程序声明一个名为 x 的变量，为其分配一个整数值，然后将该值输出到控制台。
+ 假设您将代码保存在文件 test.lng 中。 现在让我们使用 Raku 读取它。
+ my $code = &#39;test.lng&#39;.IO.slurp(); say $code;   将此 Raku 程序保存在另一个文件 lingua.raku 中，然后运行它：
+ $ raku lingua.">
+<meta name="robots" content="noodp"/>
+<meta name="generator" content="Hugo 0.63.2" />
+<meta name="referrer" content="no-referrer" />
+<meta name="format-detection" content="telephone=no">
+
+<link rel="canonical" href="https://ohmyraku.github.io/creating-a-compiler-with-raku/" />
+
+
+<link rel="icon" href="https://ohmyraku.github.io/logo.png" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="用 Raku 写编译器" />
+<meta name="twitter:description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
+ 让我们从一个简单的解释器程序开始研究功能或 Raku 的 Grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。
+ my x; x = 42; say x;   在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何信号。
+ 该程序声明一个名为 x 的变量，为其分配一个整数值，然后将该值输出到控制台。
+ 假设您将代码保存在文件 test.lng 中。 现在让我们使用 Raku 读取它。
+ my $code = &#39;test.lng&#39;.IO.slurp(); say $code;   将此 Raku 程序保存在另一个文件 lingua.raku 中，然后运行它：
+ $ raku lingua." />
+<meta name="twitter:site" content="https://ohmyraku.github.io" />
+<meta name="twitter:creator" content="ohmyraku" />
+<meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
+<meta property="og:type" content="article" />
+<meta property="og:locale" content="en" />
+<meta property="og:name" content="ohmyraku" />
+<meta property="og:title" content="用 Raku 写编译器" />
+<meta property="og:url" content="https://ohmyraku.github.io" />
+<meta property="og:site_name" content="山川异域, 风月同天" />
+<meta property="og:description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
+ 让我们从一个简单的解释器程序开始研究功能或 Raku 的 Grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。
+ my x; x = 42; say x;   在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何信号。
+ 该程序声明一个名为 x 的变量，为其分配一个整数值，然后将该值输出到控制台。
+ 假设您将代码保存在文件 test.lng 中。 现在让我们使用 Raku 读取它。
+ my $code = &#39;test.lng&#39;.IO.slurp(); say $code;   将此 Raku 程序保存在另一个文件 lingua.raku 中，然后运行它：
+ $ raku lingua." />
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Article",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https:\/\/ohmyraku.github.io\/creating-a-compiler-with-raku\/"
+      },
+      "headline": "用 Raku 写编译器",
+      
+      "datePublished": "2020-02-24",
+      "dateModified": "2020-02-24 12:54:52 \x2b0800 CST",
+      "author": {
+        "@type": "Person",
+        "name": "ohmyraku"
+      },
+      "description": "Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。\n 让我们从一个简单的解释器程序开始研究功能或 Raku 的 Grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。\n my x; x = 42; say x;   在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何信号。\n 该程序声明一个名为 x 的变量，为其分配一个整数值，然后将该值输出到控制台。\n 假设您将代码保存在文件 test.lng 中。 现在让我们使用 Raku 读取它。\n my $code = \x27test.lng\x27.IO.slurp(); say $code;   将此 Raku 程序保存在另一个文件 lingua.raku 中，然后运行它：\n $ raku lingua.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "https:\/\/ohmyraku.github.io",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https:\/\/ohmyraku.github.io\/logo.png"
+        }
+      }
+    }
+</script><link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
+<script>
+
+const theme = window.localStorage.getItem('theme'); 
+if (theme && theme !== "1") {
+    document.documentElement.classList.add('theme-' + theme);
+}
+</script>
+
+
+</head>
+<body>
+  <main class="site__content">
+    <div class="site__page">
+  <nav class="site__breadcrumbs">
+    <a class="site__breadcrumb" href="https://ohmyraku.github.io/">山川异域, 风月同天</a><a class="site__breadcrumb--active" href="https://ohmyraku.github.io/creating-a-compiler-with-raku/">用 Raku 写编译器</a>
+</nav>
+
+<h1 class="page__title">用 Raku 写编译器</h1>
+  <div class="page__meta">
+    <p>
+    
+    <span class="page__date">
+    on <time datetime="2020-02-24T12:54:52&#43;08:00">2020-02-24</time>
+    
+    </span>
+    </p>
+
+    
+
+    
+    </div>
+</div>
+
+
+</div>
+
+<article class="page__content" ><div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_第一章_创建一个简单的解释器">1. 第一章 创建一个简单的解释器</a>
+<ul class="sectlevel2">
+<li><a href="#_grammar">1.1. Grammar</a></li>
+<li><a href="#_actions">1.2. Actions</a></li>
+<li><a href="#_模块">1.3. 模块</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="sect1">
+<h2 id="_第一章_创建一个简单的解释器">1. 第一章 创建一个简单的解释器</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>这是<a href="https://andrewshitov.com/creating-a-compiler-with-raku/">使用 Raku 创建编译器</a>的一章。</p>
+</div>
+<div class="paragraph">
+<p>让我们从一个简单的解释器程序开始研究功能或 Raku 的 Grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my x;
+x = 42;
+say x;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何信号。</p>
+</div>
+<div class="paragraph">
+<p>该程序声明一个名为 <code>x</code> 的变量，为其分配一个整数值，然后将该值输出到控制台。</p>
+</div>
+<div class="paragraph">
+<p>假设您将代码保存在文件 <code>test.lng</code> 中。 现在让我们使用 Raku 读取它。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $code = 'test.lng'.IO.slurp();
+say $code;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>将此 Raku 程序保存在另一个文件 <code>lingua.raku</code> 中，然后运行它：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku lingua.raku</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果您安装了 Raku，则会打印出我们测试程序的内容。</p>
+</div>
+<div class="sect2">
+<h3 id="_grammar">1.1. Grammar</h3>
+<div class="paragraph">
+<p>现在是时候使用 Raku 语法并解析程序了。 从语法上讲，语法是类，但是它们使用正则表达式描述其方法的行为，这些方法又称为规则和标记。 第一个应用的规则通常称为TOP； Raku选择它为默认凝视规则。 语法用于解析某些文本，因此只需对已定义的语法调用parse方法并将文本传递给它即可。 所有这些都在我们的第一个程序中得到了证明：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Lingua {
+    rule TOP {
+        .*
+    }
+}
+
+my $code = 'test.lng'.IO.slurp();
+my $result = Lingua.parse($code);
+say $result;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这里，定义了语法Lingua。 它会描述我们的目标语言，目前只有一条规则，这是应用于$ code中包含的Lingua代码的第一个和最后一个规则。</p>
+</div>
+<div class="paragraph">
+<p>TOP规则的主体是与任意行匹配的正则表达式：点与任何字符都匹配，并且星号允许重复任意数量。 TOP方法以静默方式将正则表达式锚定在字符串的开头和结尾，因此它实际上等效于^。* $。</p>
+</div>
+<div class="paragraph">
+<p>再次运行lingua.raku，您会看到解析器设法读取了整个程序。 这是控制台中打印的内容：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">｢my x;
+x = 42;
+say x;
+｣</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这些方括号表明这不是已打印的常规字符串。 在我们的例子中，$ result变量包含一个Lingua类的对象。</p>
+</div>
+<div class="paragraph">
+<p>从Lingua程序中可以看到，其语句用分号分隔。 为了准确起见，您必须确定语句是用分号分隔还是应该以分号结尾。 区别在于，在第一种情况下，您不必在最后一条语句之后（例如，在程序末尾）加上分号。 Raku语法允许实现这两种选择。</p>
+</div>
+<div class="paragraph">
+<p>因此，该程序由许多用分号分隔的语句组成。 在Raku语法中，您可以通过以下方式表达这一点：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
+    &lt;statement&gt;* %% ';'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，使用另一个实体语句描述TOP规则。 可以重复多次（包括不重复），并且如果有多个语句，则必须用';'分隔。 字符。 如果您更改定义并输入％而不是%%，则该规则将要求在每个语句之后使用分号。</p>
+</div>
+<div class="paragraph">
+<p>语句本身是另一条规则，我们首先可以定义它是非常模糊的：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule statement {
+    &lt;-[;]&gt;*
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它匹配除分号字符外的所有内容。 空语句也通过此过滤器。</p>
+</div>
+<div class="paragraph">
+<p>通过此更改，解释器现在将拆分语句并发出以下输出：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">｢my x;
+x = 42;
+say x;
+｣
+ statement =&gt; ｢my x｣
+ statement =&gt; ｢x = 42｣
+ statement =&gt; ｢say x｣
+ statement =&gt; ｢｣</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第一个块显示输入程序的整个文本（所有文本均已匹配并被使用），然后显示四个单独的语句。 最后一个语句为空，因为原始文件在最后一个非空字符之后包含换行符，并且语句规则允许空语句。</p>
+</div>
+<div class="paragraph">
+<p>我们的代码中有三种不同类型的语句。 它们是变量声明，赋值和调用内置函数。 可以很容易地用语法表示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule statement {
+    | &lt;variable-declaration&gt;
+    | &lt;assignment&gt;
+    | &lt;function-call&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>竖线界定规则的替代分支。 形式上，只需列出两个选项条即可列出三个选项，但是为了使代码美观，您可以再添加一个选项条，以使它们在代码轮廓中形成一条较长的垂直线。 如果这样做，则语法不会添加空匹配项作为第一种选择。 顺便说一句，Raku的另一个优点是它允许在变量和方法的名称中使用连字符，并且我更喜欢variable-declaration而不是variable_declaration。</p>
+</div>
+<div class="paragraph">
+<p>查看驻留在test.lng中的测试程序，我们可以为语法定义新规则：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule variable-declaration {
+    'my' &lt;variable-name&gt;
+}
+
+rule assignment {
+    &lt;variable-name&gt; '=' &lt;value&gt;
+}
+
+rule function-call {
+    &lt;function-name&gt; &lt;variable-name&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>带引号的字符串（例如“ my”和“ =”）将文学与目标语言中的相应语法项进行匹配。 尖括号中的名称是对我们需要定义以完成语法的其他规则或标记的引用。 这是我们的第一个标记：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token variable-name {
+    \w+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它与可以组成一个单词的一系列字符匹配（因此，至少包括字母，数字和下划线）。 另请注意，变量名称中至少应包含一个字符。</p>
+</div>
+<div class="paragraph">
+<p>规则和令牌之间的主要区别是Raku处理空白的方式。 例如，看一下变量声明规则的主体：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">'my' &lt;variable-name&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它使以下两个文本均合法：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my x
+my    x</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>您要创建令牌而不是规则，只能匹配myx。 如您所见，语法中的标记非常适合诸如变量名或关键字之类的终端。</p>
+</div>
+<div class="paragraph">
+<p>这是令牌的另一个示例：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token value {
+    \d+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在第一种方法中，我们仅将可能的值限制为非负整数。 稍后，我们将扩展令牌以包括其他类型的数字。</p>
+</div>
+<div class="paragraph">
+<p>最后，是函数名称的标记。 到目前为止，只有一个内置函数，因此规则（在这种情况下可以是令牌）很简单：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule function-name {
+    'say'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>而已。 运行程序，如果找到了，这里是什么（让我省略重复该程序整个文本的输出的第一部分）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">statement =&gt; ｢my x｣
+  variable-declaration =&gt; ｢my x｣
+   variable-name =&gt; ｢x｣
+ statement =&gt; ｢x = 42｣
+  assignment =&gt; ｢x = 42｣
+   variable-name =&gt; ｢x｣
+   value =&gt; ｢42｣
+ statement =&gt; ｢say x｣
+  function-call =&gt; ｢say x｣
+   function-name =&gt; ｢say ｣
+   variable-name =&gt; ｢x｣</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>输出反映语法理解的解析程序的结构。 缩进有助于查看程序及其元素的嵌套结构。 每行的右侧显示了源代码的匹配部分。</p>
+</div>
+<div class="paragraph">
+<p>例如，程序的第一行my x;是一条语句，其中包含变量声明my x和变量名称x。 分号被TOP规则的分隔符所消耗，并且没有进入输出树。 类似地，第二条语句x = 42，是将值42分配给变量名x。</p>
+</div>
+<div class="paragraph">
+<p>如果检查为第三行生成的输出，例如x ;，您会看到函数名称在函数名称之后包含一个多余的空格：｢say｣。 通过使规则成为令牌可以轻松解决此问题：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token function-name {
+    'say'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>进行此更改后，结果将更加清晰：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">statement =&gt; ｢say x｣
+  function-call =&gt; ｢say x｣
+   function-name =&gt; ｢say｣
+   variable-name =&gt; ｢x｣</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_actions">1.2. Actions</h3>
+<div class="paragraph">
+<p>目标文件现已完全解析。 我们可以将其拆分为单独的语句，并且可以理解其中的所有部分。 唯一缺少的元素是使所有这些部分协同工作以产生结果。 这就是Raku中的动作。</p>
+</div>
+<div class="paragraph">
+<p>返回Lingua的测试程序：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my x;
+x = 42;
+say x;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>要在控制台中看到42，我们必须确保有一个存储该值的地方，并且可以通过其名称x进行引用。 换句话说，我们需要一个存储空间。 最明显的选择是使用哈希。 首先让我们将其设为全局变量：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my %var;
+
+grammar Lingua {
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>成功匹配规则或令牌后，您可以要求Raku为您做点事情，即，您可以添加一个代码块（称为action），该代码块将在匹配后执行。 在其中，您可以访问刚刚提取的数据。</p>
+</div>
+<div class="paragraph">
+<p>我们的第一个动作是在看到变量声明时创建一个变量。 这是您的操作方式：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule variable-declaration {
+    'my' &lt;variable-name&gt; {
+        %var{$&lt;variable-name&gt;} = 0;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>将动作放在一对大括号中的正则表达式之后。 我们知道，该规则通过匹配文字“ my”和变量名来找到子字符串my x，变量名是命名令牌变量名。 我们可以使用该名称访问内容：$ &lt;变量名称&gt;。 实际上，这是Lingua类的对象，但是我们将其用作哈希的键，因此将其转换为字符串，并使用新的对x &#8658; 0填充哈希。因此， 创建并用零初始化。</p>
+</div>
+<div class="paragraph">
+<p>同样，让我们为变量分配创建一个动作。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
+    &lt;variable-name&gt; '=' &lt;value&gt; {
+        %var{~$&lt;variable-name&gt;} = +$&lt;value&gt;;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这里，为了说明您也可以做到这一点，将$ &lt;variable-name&gt;对象通过〜前缀运算符显式转换为Str数据类型的值。 在等号的右侧，完成了另一种类型转换：+运算符将$ &lt;value&gt;转换为数字。 这次，强制转换值非常重要，因为如果您不这样做，将保存一个Lingua对象而不是数字。</p>
+</div>
+<div class="paragraph">
+<p>现在转到函数调用。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule function-call {
+    &lt;function-name&gt; &lt;variable-name&gt; {
+        say %var{$&lt;variable-name&gt;}
+            if $&lt;function-name&gt; eq 'say';
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>say函数的实现嵌入在语法操作中。 由于我们现在只有一个内置函数，因此实际上不需要if子句，但是让我们保留它可以使代码更透明。</p>
+</div>
+<div class="paragraph">
+<p>到目前为止，这是如何完成的，这三个操作块是内联的。 它们是规则定义的一部分。 我们可以运行解释器并查看其作用。 将主代码更改为以下代码，以避免大量输出：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $code = 'test.lng'.IO.slurp();
+my $result = Lingua.parse($code);
+#say $result;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这段代码打印出如下行:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ raku lingua.raku
+42</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>恭喜你！ 该程序不仅被解析而且还被执行。 如您所见，它打印了变量x的内容，这正是我们放入变量x中的内容。 如果您转储％var容器（通过添加％var;），则会得到{x &#8658; 42}。</p>
+</div>
+<div class="paragraph">
+<p>这是我们的第一个真正的成就。 我们设法为将来的林瓜语言的子集创建了一个口译员。 这里最令人兴奋的部分是它没有绑定到我们之前使用的单个测试程序。 您可以根据需要创建任意多个变量，可以将其分配给不同的值，然后再次重新分配它们。 变量的名称可以长于单个字母。 所有这些神奇地起作用！ 自己尝试一下，这是我所做的一个示例：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">my alpha;
+my beta;
+alpha = 100;
+beta = 200;
+
+say alpha;
+say beta;
+
+my gamma;
+gamma = 33;
+say gamma;
+
+gamma = 44;
+say gamma;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>执行后，程序将打印正确的结果：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">100
+200
+33
+44</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>您也可以尝试多次分配值：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my value;
+
+value = 100;
+say value;
+
+value = 200;
+say value;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这次，该程序两次使用相同的变量并在其中存储了不同的值，您可以通过运行该程序轻松确认：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">100
+200</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_模块">1.3. 模块</h3>
+<div class="paragraph">
+<p>第一个简单的解释器已经准备就绪，但让我们花更多的时间使它的代码更结构化和更快。</p>
+</div>
+<div class="paragraph">
+<p>首先，可以将内联操作收集在单独的类中。 在我们当前的实现中，所有动作都是单行的，但是在更高级的编译器中，情况并非如此。 在Raku中，表达动作和语法规则之间的关系非常容易：在创建动作类的方法时，只需使用相同的名称即可。 查看以下代码，您将立即理解。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class LinguaActions {
+    method variable-declaration($/) {
+        %var{$&lt;variable-name&gt;} = 0;
+    }
+
+    method assignment($/) {
+        %var{~$&lt;variable-name&gt;} = +$&lt;value&gt;;
+    }
+
+    method function-call($/) {
+        say %var{$&lt;variable-name&gt;}
+            if $&lt;function-name&gt; eq 'say';
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>所有这些方法都采用一个参数。 它的名称可以是您想要的任何名称，但为方便起见，最好将其命名为$ /，因为在这种情况下，可以使用$ &lt;value&gt;之类的快捷方式代替$ / &lt;value&gt;。 如果您将其命名为$ arg，则必须输入更多字符才能访问其部分：$ arg &lt;value&gt;。 另外，别忘了从语法类中删除代码块及其周围的花括号。</p>
+</div>
+<div class="paragraph">
+<p>要将action类与语法一起使用，请将其作为命名参数传递给parse方法：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Lingua.parse($code, :actions(LinguaActions));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>提取类并将它们保存在单独的文件中也是一种好习惯。 例如，语法进入Lingua.raku，动作（连同％var哈希，目前是模块的全局变量）一起进入LinguaActions.raku。 整个解释器代码将缩短为以下内容：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Lingua;
+use LinguaActions;
+
+my $code = 'test.lng'.IO.slurp();
+Lingua.parse($code, :actions(LinguaActions));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>此步骤不仅有助于逻辑上组织代码，而且可以提高解释速度。 如果Raku编译器能够缓存已编译的模块，则只需要编译一次即可。 每次下一次运行都更快，因为使用了模块的预编译版本。</p>
+</div>
+</div>
+</div>
+</div>
+
+</article>
+
+
+    
+
+  </main><section class="site__search">
+    <label class="site__form">
+        <p class="form__label">Search around the site</p> 
+        <input class="site__search-bar form__input" type="text">
+    </label>
+    <div class="site__search-bar-results"></div>
+</section>
+  
+  <footer class="site__footer">
+    
+    
+    <p class="footer__sign">© 2020 ohmyraku</p></footer>
+    
+
+    
+    <script>
+        window.addEventListener("load", function () {
+            const script = document.createElement("script");
+            script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+            script.async = true
+
+            document.head.appendChild(script);
+        })
+    </script>
+
+
+
+
+
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
+
+
+
+</body>
+</html>
