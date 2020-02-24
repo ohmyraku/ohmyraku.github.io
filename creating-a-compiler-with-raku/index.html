@@ -220,7 +220,7 @@ say x;
 </div>
 </div>
 <div class="paragraph">
-<p>现在，使用另一个实体语句描述TOP规则。 可以重复多次（包括不重复），并且如果有多个语句，则必须用';'分隔。 字符。 如果您更改定义并输入 <code>%</code> 而不是 <code>%%</code>，则该规则将要求在每个语句之后使用分号。</p>
+<p>现在，使用另一个实体语句描述 TOP 规则。 可以重复多次（包括不重复），并且如果有多个语句，则必须用 ';' 分隔。 字符。 如果您更改定义并输入 <code>%</code> 而不是 <code>%%</code>，则该规则将要求在每个语句之后使用分号。</p>
 </div>
 <div class="paragraph">
 <p>语句本身是另一条规则，我们首先可以定义它是非常模糊的：</p>
@@ -462,7 +462,7 @@ grammar Lingua {
 </div>
 </div>
 <div class="paragraph">
-<p>say函数的实现嵌入在语法操作中。 由于我们现在只有一个内置函数，因此实际上不需要if子句，但是让我们保留它可以使代码更透明。</p>
+<p><code>say</code> 函数的实现嵌入在语法操作中。 由于我们现在只有一个内置函数，因此实际上不需要 <code>if</code> 子句，但是让我们保留它可以使代码更透明。</p>
 </div>
 <div class="paragraph">
 <p>到目前为止，这是如何完成的，这三个操作块是内联的。 它们是规则定义的一部分。 我们可以运行解释器并查看其作用。 将主代码更改为以下代码，以避免大量输出：</p>
@@ -572,7 +572,7 @@ say value;</code></pre>
 <p>所有这些方法都采用一个参数。 它的名称可以是您想要的任何名称，但为方便起见，最好将其命名为 <code>$/</code>，因为在这种情况下，可以使用 <code>$&lt;value&gt;</code> 之类的快捷方式代替 <code>$/&lt;value&gt;</code>。 如果您将其命名为 <code>$arg</code>，则必须输入更多字符才能访问其部分：<code>$arg&lt;value&gt;</code>。 另外，别忘了从语法类中删除代码块及其周围的花括号。</p>
 </div>
 <div class="paragraph">
-<p>要将action类与语法一起使用，请将其作为命名参数传递给parse方法：</p>
+<p>要将action类与语法一起使用，请将其作为命名参数传递给 <code>parse</code> 方法：</p>
 </div>
 <div class="listingblock">
 <div class="content">
