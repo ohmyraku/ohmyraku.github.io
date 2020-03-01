@@ -8,13 +8,12 @@
 
 <meta name="author" content="ohmyraku">
 <meta name="application-name" content="山川异域, 风月同天">
-<meta name="description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
+<meta name="description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
  让我们从一个简单的解释器程序开始研究 Raku 强大的 Grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。
  my x; x = 42; say x;   在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。
  该程序声明一个名为 x 的变量，为其赋一个整数值，然后将该值输出到控制台。
  假设您将代码保存在文件 test.lng 中。 现在让我们使用 Raku 读取它。
- my $code = &#39;test.lng&#39;.IO.slurp(); say $code;   将此 Raku 程序保存在另一个文件 lingua.raku 中，然后运行它：
- $ raku lingua.">
+ my $code = &#39;test.">
 <meta name="robots" content="noodp"/>
 <meta name="generator" content="Hugo 0.63.2" />
 <meta name="referrer" content="no-referrer" />
@@ -28,13 +27,12 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="用 Raku 写编译器" />
-<meta name="twitter:description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
+<meta name="twitter:description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
  让我们从一个简单的解释器程序开始研究 Raku 强大的 Grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。
  my x; x = 42; say x;   在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。
  该程序声明一个名为 x 的变量，为其赋一个整数值，然后将该值输出到控制台。
  假设您将代码保存在文件 test.lng 中。 现在让我们使用 Raku 读取它。
- my $code = &#39;test.lng&#39;.IO.slurp(); say $code;   将此 Raku 程序保存在另一个文件 lingua.raku 中，然后运行它：
- $ raku lingua." />
+ my $code = &#39;test." />
 <meta name="twitter:site" content="https://ohmyraku.github.io" />
 <meta name="twitter:creator" content="ohmyraku" />
 <meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
@@ -44,13 +42,12 @@
 <meta property="og:title" content="用 Raku 写编译器" />
 <meta property="og:url" content="https://ohmyraku.github.io" />
 <meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
+<meta property="og:description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
  让我们从一个简单的解释器程序开始研究 Raku 强大的 Grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。
  my x; x = 42; say x;   在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。
  该程序声明一个名为 x 的变量，为其赋一个整数值，然后将该值输出到控制台。
  假设您将代码保存在文件 test.lng 中。 现在让我们使用 Raku 读取它。
- my $code = &#39;test.lng&#39;.IO.slurp(); say $code;   将此 Raku 程序保存在另一个文件 lingua.raku 中，然后运行它：
- $ raku lingua." />
+ my $code = &#39;test." />
 <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -67,7 +64,7 @@
         "@type": "Person",
         "name": "ohmyraku"
       },
-      "description": "Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。\n 让我们从一个简单的解释器程序开始研究 Raku 强大的 Grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。\n my x; x = 42; say x;   在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。\n 该程序声明一个名为 x 的变量，为其赋一个整数值，然后将该值输出到控制台。\n 假设您将代码保存在文件 test.lng 中。 现在让我们使用 Raku 读取它。\n my $code = \x27test.lng\x27.IO.slurp(); say $code;   将此 Raku 程序保存在另一个文件 lingua.raku 中，然后运行它：\n $ raku lingua.",
+      "description": "Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。\n 让我们从一个简单的解释器程序开始研究 Raku 强大的 Grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。\n my x; x = 42; say x;   在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。\n 该程序声明一个名为 x 的变量，为其赋一个整数值，然后将该值输出到控制台。\n 假设您将代码保存在文件 test.lng 中。 现在让我们使用 Raku 读取它。\n my $code = \x27test.",
       "publisher": {
         "@type": "Organization",
         "name": "https:\/\/ohmyraku.github.io",
@@ -122,6 +119,14 @@ if (theme && theme !== "1") {
 <li><a href="#_grammar">1.1. Grammar</a></li>
 <li><a href="#_actions">1.2. Actions</a></li>
 <li><a href="#_模块">1.3. 模块</a></li>
+</ul>
+</li>
+<li><a href="#_第二章_解析数字">2. 第二章 解析数字</a>
+<ul class="sectlevel2">
+<li><a href="#_查找数字">2.1. 查找数字</a></li>
+<li><a href="#_获取值">2.2. 获取值</a></li>
+<li><a href="#_使用_ast">2.3. 使用 AST</a></li>
+<li><a href="#_最后的笔记">2.4. 最后的笔记</a></li>
 </ul>
 </li>
 </ul>
@@ -593,6 +598,805 @@ Lingua.parse($code, :actions(LinguaActions));</code></pre>
 </div>
 <div class="paragraph">
 <p>此步骤不仅有助于逻辑上组织代码，而且可以提高解释速度。 如果 Raku 编译器能够缓存已编译的模块，则只需要编译一次即可。 每次下一次运行都更快，因为使用了模块的预编译版本。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_第二章_解析数字">2. 第二章 解析数字</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在接下来的两章中，我们将暂时保留上一章中创建的编译器，并将使用一个单独的帮助程序，即计算器。 它本身是一件有趣的事情，我们将在一个孤立的示例中对其进行探索。 在下一章中，它将集成到解释器中。</p>
+</div>
+<div class="sect2">
+<h3 id="_查找数字">2.1. 查找数字</h3>
+<div class="paragraph">
+<p>计算器可以处理数字，因此我们要做的第一件事就是做一个用于解析数字的解析器。 在上一章中，我们仅使用非负整数，但是好的计算器必须理解更多的数字格式。 例如，它包括负数和浮点数，也可以用科学计数法表示。 我们还必须允许人们省略小数点前面的零并输入 <code>.5</code> 而不是 <code>0.5</code> 的情况。</p>
+</div>
+<div class="paragraph">
+<p>让我们为不同类型的数字迭代创建解析器。 由于我们将对 grammar 进行大量更改，因此提供了一个测试套件来进行救援。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @cases = 7, 77, -84;
+for @cases -&gt; $number {
+    say "Test $number";
+    say Number.parse($number);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>@cases</code> 数组包含将针对 <code>Number</code> grammar 进行测试的数字列表。 这是它的第一个版本：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Number {
+    rule TOP {
+        &lt;number&gt;
+    }
+
+    token number {
+        \d+
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>整个 grammar 需要一个数字，即一个数字序列。 它可以与我们当前的测试用例一起使用，并且程序的输出是可以预测的：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Test 7
+｢7｣
+ number =&gt; ｢7｣
+Test 77
+｢77｣
+ number =&gt; ｢77｣
+Test -84
+Nil</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>前两个数字通过了测试，但第三个没有通过。 对于负数，<code>parse</code> 方法返回 <code>Nil</code>。</p>
+</div>
+<div class="paragraph">
+<p>因此，我们需要扩展 <code>number</code> 标记并在数字前面添加可选的减号。 重要的是，它仍然必须是 token，因为您通常不希望符号和数字之间有空格。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token number {
+    '-'? \d+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个很小的变化使另一半整数（负整数）有效。 以上测试现在将通过。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Test -84
+｢-84｣
+ number =&gt; ｢-84｣</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>但是，如果您将正数拼写为 <code>+7</code> 会怎么样?</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @cases = 7, 77, -84, '+7', 0;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>(Grammar 分析器始终使用字符串，但是我们可以让 Raku 转换正数，以避免在测试用例列表中加引号。)</p>
+</div>
+<div class="paragraph">
+<p>根据 grammar，此数字不是有效数字。 因为它期望整个字符串是一个数字，所以我们不能期望加号会被简单地忽略。 解析器需要在开始时就知道可能的符号，因此，我们需要将其添加到 token 主体中：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token number {
+    &lt;[+-]&gt;? \d+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>让我们也减少输出中的噪声，并且不打印解析树：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for @cases -&gt; $number {
+    my $test = Number.parse($number);
+    say ($test ?? 'OK ' !! 'NOT OK ') ~ $number;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，输出与在测试 Perl 和 Raku 模块中广泛使用的 TAP（任何测试协议）部分兼容。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">OK 7
+OK 77
+OK -84
+OK +7
+OK 0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>添加一个无效的数字，您会立即看到它失败，例如：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">NOT OK 3.14</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>实现流点号解析器的第一次尝试可以像这样简单：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token number {
+    &lt;[+-]&gt;? \d+ ['.' \d+]?
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们只是添加了一个可选的小数部分。 但是，如果遇到一个有点但没有整数部分的数字怎么办？ 它不会通过测试，但是可以通过将正则表达式左侧的 <code>\d+</code> 更改为 <code>\d*</code> 来轻松解决：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token number {
+    &lt;[+-]&gt;? \d* ['.' \d+]?
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>不幸的是，此更改破坏了令牌，因为它可以应用于单个符号，甚至可以应用于空字符串。 现在所有这些测试用例都可以：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @cases =
+    7, 77, -84, '+7', 0,
+    3.14, -2.78, 5.0, '.5',
+    '', '-', '+';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>尝试在单个正则表达式中表达所有选项有点棘手。 显式列出所有备选方案要容易得多。 我们知道符号可以出现在任何数字的前面，让我们将备选方案放在方括号中：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token number {
+    &lt;[+-]&gt;? [
+        | \d+
+        | \d* ['.' \d+]
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这种方法使整个令牌更具可读性和可扩展性。 我们可以添加另一种选择来匹配科学计数法中的数字。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token number {
+    &lt;[+-]&gt;? [
+        | \d+
+        | \d* ['.' \d+]
+        | \d+ &lt;[eE]&gt; &lt;[+-]&gt;? \d+
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在有更多测试用例通过了 Grammar：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">'3E4', '-33E55', '3E-3', '-1E-2'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们所缺少的是科学计数法中带有非整数尾数的数字，例如3.14E2或.5E-3。 另一种选择可以解决此问题：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token number {
+    &lt;[+-]&gt;? [
+        | \d+
+        | \d* ['.' \d+]
+        | \d+ &lt;[eE]&gt; &lt;[+-]&gt;? \d+
+       | \d* ['.' \d+] &lt;[eE]&gt; &lt;[+-]&gt;? \d+
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这种形式中，有些部分会重复，例如\ d +或\ d * ['。 \ d +]。 在这种紧凑的规则中可能会很好，但是也可以对其进行进一步分解，并引入负责此类重复部分的子令牌。 转换后的数字令牌及其家族如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token number {
+    &lt;sign&gt;? [
+        | &lt;integer&gt;
+        | &lt;floating-point&gt;
+        | &lt;integer&gt; &lt;exponent&gt;
+        | &lt;floating-point&gt; &lt;exponent&gt;
+    ]
+}
+
+token sign {
+    &lt;[+-]&gt;
+}
+
+token exp {
+    &lt;[eE]&gt;
+}
+
+token integer {
+    \d+
+}
+
+token floating-point {
+    \d* ['.' &lt;integer&gt;]
+}
+
+token exponent {
+    &lt;exp&gt; &lt;sign&gt;? &lt;integer&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>尽管与以前的版本相比有更多的代码，但每个单独的令牌都更易于理解。 例如，比较科学记数形式的数字的先前和当前正则表达式，其尾数具有浮点数。 之前是：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">\d* ['.' \d+] &lt;[eE]&gt; &lt;[+-]&gt;? \d+</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>转换后，它变成：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;floating-point&gt; &lt;exponent&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>看一下主要代币的替代方案，</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">| &lt;integer&gt;
+| &lt;floating-point&gt;
+| &lt;integer&gt; &lt;exponent&gt;
+| &lt;floating-point&gt; &lt;exponent&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>您会立即看到他们的描述。 甚至，我们可以进一步减少它：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token number {
+    &lt;sign&gt;? [
+        | &lt;integer&gt;
+        | &lt;floating-point&gt;
+    ] &lt;exponent&gt;?
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>换句话说，数字可以是整数，也可以是浮点值，其后跟一个可选的符号，然后可以跟一个可选的指数部分。 以这种形式，描述是如此简洁和紧凑。 所有细节（正则表达式“噪声”）都隐藏在辅助标记中。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_获取值">2.2. 获取值</h3>
+<div class="paragraph">
+<p>该数字已解析，但是它的值是多少？ 对于编译器，我们不仅需要检查数字格式的有效性，还需要将其从字符串转换为数字，整数或浮点数。 在本节中，我们将在数字语法后面添加操作，以便我们可以构建数字并最终打印出来。</p>
+</div>
+<div class="paragraph">
+<p>让我们以整数开头，并将数字保留在全局变量中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = 0;
+class NumberActions {
+    method integer($/) {
+        $n = +$/;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里的一切看起来都很简单。 通过使用+前缀运算符将字符串的匹配部分转换为数字值，可以直接得出整数值。 要查看其工作原理，让我们更改主测试循环，以使其输出已解析的值：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for @cases -&gt; $number {
+    my $test = Number.parse($number, :actions(NumberActions));
+
+    if ($test) {
+        say "OK $number = $n";
+    }
+    else {
+        say "NOT OK $number";
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>使用非负整数，效果很好：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">OK 7 = 7
+OK 77 = 77
+OK -84 = 84
+OK +7 = 7
+OK 0 = 0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>负数无效。 看来+7字符串已正确处理，但实际上这并不完全正确，因为我们完全忽略了该符号。 这次，任务有点复杂。 第一个想法是，如果遇到减号，则翻转符号：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method sign($/) {
+    $n *= -1 if ~$/ eq '-';
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>但是，这是行不通的，因为符号是在解析数字之前先解析的，而否定$ n意味着将符号应用于零。 我们可以使用一个单独的变量来保留有关标志的信息，但这并不是最好的选择。 但是，请这样做，因为这将揭示另一个问题。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = 0;
+my $sign = 1;
+
+class NumberActions {
+    method integer($/) {
+        $n = $sign * +$/;
+    }
+
+    method sign($/) {
+        $sign = -1 if ~$/ eq '-';
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这有助于检测第一个负数，但会破坏所有其他负数。 当然，您可以检查符号是否为'+'，但问题是$ n和$ sign变量是全局变量，必须在解析下一个变量之前将其重置。 这是将它们移至动作类的好时机。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class NumberActions {
+    has $.n = 0;
+    has $!sign = 1;
+
+    method integer($/) {
+        $!n = $!sign * +$/;
+    }
+
+    method sign($/) {
+        $!sign = -1 if ~$/ eq '-';
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>$ n变量有意成为公共数据成员，因为我们必须以某种方式获得结果。 您还需要更改测试循环。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for @cases -&gt; $number {
+    my $actions = NumberActions.new();
+    my $test = Number.parse($number, :actions($actions));
+
+    if ($test) {
+        say "OK $number = " ~ $actions.n;
+    }
+    else {
+        say "NOT OK $number";
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>此处的主要更改是将NumberActions类的实例传递给语法的parse方法。 现在，在每次迭代中，解析器都会创建自己的变量以保留结果。</p>
+</div>
+<div class="paragraph">
+<p>我们已经走了足够远的距离，以至于可以正确解析所有整数：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">OK 7 = 7
+OK 77 = 77
+OK -84 = -84
+OK +7 = 7
+OK 0 = 0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于浮点数，它的工作不那么顺畅：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">OK 3.14 = 14
+OK -2.78 = -78
+OK 5.0 = 0
+OK .5 = 5
+OK -5.3 = -3
+OK -.3 = -3
+OK 3E4 = 4
+OK -33E55 = -55
+OK 3E-3 = -3
+OK 3.14E2 = 2
+OK .5E-3 = -3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如您所见，小数部分或指数部分均获胜。 在两种情况下，这都是语法的最后一个整数部分。 确实，早些时候，我们对语法进行了转换，以排除重复部分。 当我们不得不引入$ sign变量时，钟声响了，但现在我们遭受的痛苦更大。 所有这些都需要以不同的方式处理。 这就是AST可以提供帮助的方式。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_使用_ast">2.3. 使用 AST</h3>
+<div class="paragraph">
+<p>AST，或抽象语法树，是一种允许在不同阶段收集和保持数据解析的机制。 如果在读取浮点数3.14时两次调用了整数令牌，或者对具有指数的数字（例如3.14E2）调用了三次，则所有这些整数都可以保留在AST中，并在以后用于构建整数。 对应于整个字符串的值。</p>
+</div>
+<div class="paragraph">
+<p>在操作类的方法内，$ /变量有两种方法：make和made。 使用make可以存储一个值（将属性分配给解析树的当前节点）。 使用made时，您将读取先前存储的值。</p>
+</div>
+<div class="paragraph">
+<p>将以下调用添加到令牌操作：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method integer($/) {
+    $/.make(+$/);
+}
+
+method sign($/) {
+    $/.make(~$/ eq '-' ?? -1 !! 1);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，即使多次调用该方法，也将保存这些值。 要了解它是如何工作的，让我们看一下语法对象：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $test = Number.parse($number, :actions($actions));
+dd $test;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>dd例程是Rakudo专用的工具，可显示对象的内部结构。 对于输入数字-84，解析后将构建以下对象：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Number $test = Match.new(list =&gt; (), hash =&gt; Map.new((:number(Match.new(list =&gt; (), hash =&gt; Map.new((:integer(Match.new(list =&gt; (), hash =&gt; Map.new(()), made =&gt; 84, orig =&gt; -84, pos =&gt; 3, from =&gt; 1)),:sign(Match.new(list =&gt; (), hash =&gt; Map.new(()), made =&gt; -1, orig =&gt; -84, pos =&gt; 1, from =&gt; 0)))), made =&gt; Any, orig =&gt; -84, pos =&gt; 3, from =&gt; 0)))), made =&gt; Any, orig =&gt; -84, pos =&gt; 3, from =&gt; 0)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>看起来很凌乱，但您应该可以发现我们最感兴趣的两个地方：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">made =&gt; 84, orig =&gt; -84, pos =&gt; 3, from =&gt; 1
+made =&gt; -1, orig =&gt; -84, pos =&gt; 1, from =&gt; 0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>将from和pos键设置为指向第一个字符以及与正则表达式匹配的最后一个字符之后的字符。 因此，这两个子哈希中的第一个是解析数字的结果（字符串“ -84”中从位置1到位置3，即84）。 第二个哈希对应减号字符（同一字符串中的位置0到1）。</p>
+</div>
+<div class="paragraph">
+<p>made属性分别设置为84和-1，这确认语法能够正确解析数字及其符号。</p>
+</div>
+<div class="paragraph">
+<p>现在可以使用这些值在父标记中生成结果。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method number($/) {
+    my $n = $&lt;integer&gt;.made;
+    $n *= $&lt;sign&gt;.made if $&lt;sign&gt;;
+    $/.make($n);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它通过$ &lt;integer&gt;和$ &lt;sign&gt;对象的made属性访问整数值和符号乘数。 最后一行将结果传递到下一个级别，您可以从TOP规则中访问它：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method TOP($/) {
+    $/.make($&lt;number&gt;.made);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于当前的解析数字任务，可以将TOP规则和方法完全替换为数字令牌和操作方法的内容（请注意，TOP现在是令牌，而不是规则）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Number {
+    token TOP {
+        &lt;sign&gt;? [
+            | &lt;integer&gt;
+            | &lt;floating-point&gt;
+        ] &lt;exponent&gt;?
+    }
+
+    . . .
+}
+
+class NumberActions {
+    method TOP($/) {
+        my $n = $&lt;integer&gt;.made;
+        $n *= $&lt;sign&gt;.made if $&lt;sign&gt;;
+        $/.make($n);
+    }
+
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果查看由parse方法返回的对象，您将看到它包含以下字段：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">from =&gt; 0, orig =&gt; -84, made =&gt; -84, pos =&gt; 3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>成对的包含我们所需的负整数。 可以使用相同的属性从语法外部和操作外部进行访问：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $test = Number.parse($number, :actions($actions));
+
+if ($test) {
+    say "OK $number = " ~ $test.made;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>任务已完成，我们可以继续处理带有指数部分e的整数。 例如3E4。 使用这样的数字，整数令牌被触发两次，但这并不成问题，因为两个整数都位于不同对象的相应属性中。</p>
+</div>
+<div class="paragraph">
+<p>创建一个操作以处理指数部分：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method exponent($/) {
+    my $e = $&lt;integer&gt;;
+    $e *= -1 if $&lt;sign&gt; &amp;&amp; ~$&lt;sign&gt; eq '-';
+    $/.make($e);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>并使用该值乘以数字：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method TOP($/) {
+    my $n = $&lt;integer&gt;.made;
+    $n *= $&lt;sign&gt;.made if $&lt;sign&gt;;
+    $n *= 10 ** $&lt;exponent&gt;.made if $&lt;exponent&gt;;
+    $/.make($n);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>运行测试套件，并检查它对于3E4或-1E-2这样的数字产生什么：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">OK 3E4 = 30000
+OK -33E55 =
+-330000000000000000000000000000000000000000000000000000000
+OK 3E-3 = 0.003
+OK -1E-2 = -0.01</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>目前，唯一没有关联动作的令牌是浮点数。 （exp令牌不需要任何令牌，因为它的唯一任务是与e或E匹配）。 让我们再来看一次：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token floating-point {
+    \d* ['.' &lt;integer&gt;]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>创建令牌时，我们用&lt;integer&gt;替换了 <code>\d+</code> 部分。 实际上，一个可选序列 <code>\d*</code> 也可以替换为：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token floating-point {
+    &lt;integer&gt;? ['.' &lt;integer&gt;]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，同一令牌中有两个&lt;integer&gt;调用！ 在这种情况下，您在操作中写了什么？ 很简单：如果多次提到该名称，您将获得一个数组，因此可以将第一个匹配项引用为$ &lt;integer&gt; [0]，将$ &lt;integer&gt; [1]引用为第二个匹配项。</p>
+</div>
+<div class="paragraph">
+<p>唯一的问题是，在我们的情况下，第一个整数部分是可选的。 如果您解析3.14，则会获得两个元素，但是如果您解析了.14，则14将到达索引为0的元素。可能的解决方案之一就是检查数组的长度。 评估价值是一项相对简单的任务。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method floating-point($/) {
+    my $int = 0;
+    my $frac = 0;
+
+    if $&lt;integer&gt;.elems == 2 {
+        ($int, $frac) = $&lt;integer&gt;;
+    }
+    else {
+        $frac = $&lt;integer&gt;[0];
+    }
+
+    my $n = $int + $frac / 10 ** $frac.chars;
+
+    $/.make($n);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果解析了TOP令牌，则还必须更新它以获取浮点数的值：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = $&lt;integer&gt; ??
+        $&lt;integer&gt;.made !! $&lt;floating-point&gt;.made;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>任务似乎已经解决。 所有数字（包括带小数点和指数部分的数字）均已成功处理：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">OK 3.14 = 3.14
+OK -2.78 = -2.78
+OK 5.0 = 5
+OK .5 = 0.5
+OK -5.3 = -5.3
+OK -.3 = -0.3
+OK 3E-3 = 0.003
+OK -1E-2 = -0.01
+OK 3.14E2 = 314
+OK .5E-3 = 0.0005</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_最后的笔记">2.4. 最后的笔记</h3>
+<div class="paragraph">
+<p>在本章中，我们设法将字符串转换为数字，但是它们是哪种数字？ 为了获得数字，我们使用了Raku中可用的运算符，例如二进制+，算术运算符和幂运算符**。 使用所有这些的计算结果是一个数字，该数字是Raku提供的一种数字类型的实例。</p>
+</div>
+<div class="paragraph">
+<p>您可以通过在测试循环中显式打印类名称来看到它：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "OK $number = " ~ $test.made ~
+    ' (' ~ $test.made.^name ~ ')';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>所有不包含小数点的数字均为Ints，其余均为Rats：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">OK 7 = 7 (Int)
+OK 77 = 77 (Int)
+OK -84 = -84 (Int)
+OK +7 = 7 (Int)
+OK 0 = 0 (Int)
+OK 3.14 = 3.14 (Rat)
+OK -2.78 = -2.78 (Rat)
+OK 5.0 = 5 (Rat)
+OK .5 = 0.5 (Rat)
+OK -5.3 = -5.3 (Rat)
+OK -.3 = -0.3 (Rat)
+OK 3E4 = 30000 (Int)
+OK -33E55 = -330000000000000000000000000000000000000000000000000000000 (Int)
+OK 3E-3 = 0.003 (Rat)
+OK -1E-2 = -0.01 (Rat)
+OK 3.14E2 = 314 (Rat)
+OK .5E-3 = 0.0005 (Rat)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，再次查看action类中的浮点方法。 尽管其算法简单明了，并且可以产生正确的结果，但是它比较罗word，需要几行代码。 另外，您可以将此任务传递给宿主语言本身！ 让Raku为您解析浮点数：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = +"$int.$frac";
+$/.make($n);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>等待，什么是"$int.$frac"? 它是一个在解析过程中与浮点令牌匹配的字符串，这意味着与其重建字符串并将其转换为数字，我们还可以直接将$ /对象转换为数字，而无需访问它：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method floating-point($/) {
+    $/.make(+$/);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该代码是否类似于您已经看到的内容？ 此方法的主体与整数方法的主体完全相同：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method integer($/) {
+    $/.make(+$/);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>确实，当Raku仅包含数字时，我们允许它为我们建立数字。 如果我们也遇到带小数点的数字，则可以再次委托它。</p>
+</div>
+<div class="paragraph">
+<p>但这还不是全部。 我们的数字语法允许的数字都是有效的Raku数字，并且可以用一行代码替换我们所有的动作：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class NumberActions {
+    method TOP($/) {
+        $/.make(+$/);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>更改之后，数字的类型略有不同。 Raku在科学计数法中将数字视为Num，而不是Rat。 您可以确认购买再次运行测试循环：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">OK 7 = 7 (Int)
+OK 77 = 77 (Int)
+OK -84 = -84 (Int)
+OK +7 = 7 (Int)
+OK 0 = 0 (Int)
+OK 3.14 = 3.14 (Rat)
+OK -2.78 = -2.78 (Rat)
+OK 5.0 = 5 (Rat)
+OK .5 = 0.5 (Rat)
+OK -5.3 = -5.3 (Rat)
+OK -.3 = -0.3 (Rat)
+OK 3E4 = 30000 (Num)
+OK -33E55 = -3.3e+56 (Num)
+OK 3E-3 = 0.003 (Num)
+OK -1E-2 = -0.01 (Num)
+OK 3.14E2 = 314 (Num)
+OK .5E-3 = 0.0005 (Num)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里的输出格式还取决于Raku如何打印不同数字类型的数字。</p>
+</div>
+<div class="paragraph">
+<p>在此特定任务中，我们所有的体力劳动都由宿主语言中的编译器操作代替。 当然，这是有可能的，因为我们选择了许多编程语言都可以处理的标准数据格式。 一旦发现解决问题的简单方法，不要害怕删除自己的代码。 本章中介绍的使用AST的技术是本书未来冒险的基础。 敬请关注！</p>
+</div>
+<div class="olist upperalpha">
+<ol class="upperalpha">
+<li>
+<p>S.细心的读者可能已经注意到，数字语法不包含数字（例如4.），其中有整数部分，小数点但没有小数部分。 这些数字在Raku本身中是不允许的，因此我没有将其包括在语法中。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><a href="https://andrewshitov.com/2020/03/01/chapter-2-parsing-a-number/" class="bare">https://andrewshitov.com/2020/03/01/chapter-2-parsing-a-number/</a></p>
 </div>
 </div>
 </div>
