@@ -8,12 +8,9 @@
 
 <meta name="author" content="ohmyraku">
 <meta name="application-name" content="山川异域, 风月同天">
-<meta name="description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
+<meta name="description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记   3. 第三章 创建计算器 3.1. 汇总 3.2. 过早的优化 3.3. 更多操作数 3.4. 多样性测试 3.5. 增加更多数学 3.6. 测试代码 3.7. 添加更多能量 3.8. 允许括号     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
  让我们从一个简单的解释器程序开始研究 Raku 强大的 Grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。
- my x; x = 42; say x;   在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。
- 该程序声明一个名为 x 的变量，为其赋一个整数值，然后将该值输出到控制台。
- 假设您将代码保存在文件 test.lng 中。 现在让我们使用 Raku 读取它。
- my $code = &#39;test.">
+ my x; x = 42; say x;   在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。">
 <meta name="robots" content="noodp"/>
 <meta name="generator" content="Hugo 0.63.2" />
 <meta name="referrer" content="no-referrer" />
@@ -27,12 +24,9 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="用 Raku 写编译器" />
-<meta name="twitter:description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
+<meta name="twitter:description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记   3. 第三章 创建计算器 3.1. 汇总 3.2. 过早的优化 3.3. 更多操作数 3.4. 多样性测试 3.5. 增加更多数学 3.6. 测试代码 3.7. 添加更多能量 3.8. 允许括号     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
  让我们从一个简单的解释器程序开始研究 Raku 强大的 Grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。
- my x; x = 42; say x;   在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。
- 该程序声明一个名为 x 的变量，为其赋一个整数值，然后将该值输出到控制台。
- 假设您将代码保存在文件 test.lng 中。 现在让我们使用 Raku 读取它。
- my $code = &#39;test." />
+ my x; x = 42; say x;   在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。" />
 <meta name="twitter:site" content="https://ohmyraku.github.io" />
 <meta name="twitter:creator" content="ohmyraku" />
 <meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
@@ -42,12 +36,9 @@
 <meta property="og:title" content="用 Raku 写编译器" />
 <meta property="og:url" content="https://ohmyraku.github.io" />
 <meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
+<meta property="og:description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记   3. 第三章 创建计算器 3.1. 汇总 3.2. 过早的优化 3.3. 更多操作数 3.4. 多样性测试 3.5. 增加更多数学 3.6. 测试代码 3.7. 添加更多能量 3.8. 允许括号     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
  让我们从一个简单的解释器程序开始研究 Raku 强大的 Grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。
- my x; x = 42; say x;   在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。
- 该程序声明一个名为 x 的变量，为其赋一个整数值，然后将该值输出到控制台。
- 假设您将代码保存在文件 test.lng 中。 现在让我们使用 Raku 读取它。
- my $code = &#39;test." />
+ my x; x = 42; say x;   在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。" />
 <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -64,7 +55,7 @@
         "@type": "Person",
         "name": "ohmyraku"
       },
-      "description": "Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。\n 让我们从一个简单的解释器程序开始研究 Raku 强大的 Grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。\n my x; x = 42; say x;   在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。\n 该程序声明一个名为 x 的变量，为其赋一个整数值，然后将该值输出到控制台。\n 假设您将代码保存在文件 test.lng 中。 现在让我们使用 Raku 读取它。\n my $code = \x27test.",
+      "description": "Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记   3. 第三章 创建计算器 3.1. 汇总 3.2. 过早的优化 3.3. 更多操作数 3.4. 多样性测试 3.5. 增加更多数学 3.6. 测试代码 3.7. 添加更多能量 3.8. 允许括号     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。\n 让我们从一个简单的解释器程序开始研究 Raku 强大的 Grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。\n my x; x = 42; say x;   在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。",
       "publisher": {
         "@type": "Organization",
         "name": "https:\/\/ohmyraku.github.io",
@@ -127,6 +118,18 @@ if (theme && theme !== "1") {
 <li><a href="#_获取值">2.2. 获取值</a></li>
 <li><a href="#_使用_ast">2.3. 使用 AST</a></li>
 <li><a href="#_最后的笔记">2.4. 最后的笔记</a></li>
+</ul>
+</li>
+<li><a href="#_第三章_创建计算器">3. 第三章 创建计算器</a>
+<ul class="sectlevel2">
+<li><a href="#_汇总">3.1. 汇总</a></li>
+<li><a href="#_过早的优化">3.2. 过早的优化</a></li>
+<li><a href="#_更多操作数">3.3. 更多操作数</a></li>
+<li><a href="#_多样性测试">3.4. 多样性测试</a></li>
+<li><a href="#_增加更多数学">3.5. 增加更多数学</a></li>
+<li><a href="#_测试代码">3.6. 测试代码</a></li>
+<li><a href="#_添加更多能量">3.7. 添加更多能量</a></li>
+<li><a href="#_允许括号">3.8. 允许括号</a></li>
 </ul>
 </li>
 </ul>
@@ -1393,6 +1396,693 @@ OK .5E-3 = 0.0005 (Num)</code></pre>
 </div>
 <div class="paragraph">
 <p><a href="https://andrewshitov.com/2020/03/01/chapter-2-parsing-a-number/" class="bare">https://andrewshitov.com/2020/03/01/chapter-2-parsing-a-number/</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_第三章_创建计算器">3. 第三章 创建计算器</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在本章中，我们将创建一个程序，该程序可以评估简单的算术表达式，例如 <code>3 + 4</code> 或 <code>3 - 3 * 7</code>。我们将从具有两个操作数的最简单方程式开始，一直工作到引入括号。</p>
+</div>
+<div class="sect2">
+<h3 id="_汇总">3.1. 汇总</h3>
+<div class="paragraph">
+<p>让我们首先获取一个测试表达式 <code>3 + 4</code> 并为此创建一个可工作的计算器原型。 语法只需要解析整数和文字加号：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Calculator {
+    rule TOP {
+        &lt;number&gt; '+' &lt;number&gt;
+    }
+
+    token number {
+        \d+
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>动作也很简单。 我们正在使用 AST 属性来保留值：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class CalculatorActions {
+    method TOP($/) {
+        $/.make($&lt;number&gt;[0].made + $&lt;number&gt;[1].made);
+    }
+
+    method number($/) {
+        $/.make(+$/);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>一切准备就绪，可以运行测试并确认它确实打印 7：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Calculator.parse('3 + 4',
+                 :actions(CalculatorActions)).made.say;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这一点都不困难。 该代码可与其他整数一起使用，而语法或动作没有变化，但是我们的下一个目标是教它处理-进行减法。</p>
+</div>
+<div class="paragraph">
+<p>第一种方法可以在语法的最顶部引入不同类型的语句：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
+    | &lt;addition&gt;
+    | &lt;subtraction&gt;
+}
+
+rule addition {
+    &lt;number&gt; '+' &lt;number&gt;
+}
+
+rule subtraction {
+    &lt;number&gt; '-' &lt;number&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>因此，让我们为加法和减法创建单独的操作方法：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method TOP($/) {
+    $/.make($&lt;addition&gt; ??
+            $&lt;addition&gt;.made !! $&lt;subtraction&gt;.made);
+}
+
+method addition($/) {
+    $/.make($&lt;number&gt;[0].made + $&lt;number&gt;[1].made);
+}
+
+method subtraction($/) {
+    $/.make($&lt;number&gt;[0].made - $&lt;number&gt;[1].made);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，测试第二种情况：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @cases = '3 + 4', '3 - 4';
+for @cases -&gt; $test {
+    say "$test = " ~ Calculator.parse($test,
+                     :actions(CalculatorActions)).made;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>好的，一切都按预期进行：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">3 + 4 = 7
+3 - 4 = -1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>一切正常，但是您不应该对解决方案感到满意。 最好将加法和减法合并为一个规则：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
+    &lt;number&gt; &lt;op&gt; &lt;number&gt;
+}
+
+token op {
+    '+' | '-'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>语法变得更简单，并且运算符在其自己的与加号或减号匹配的标记中明确定义。</p>
+</div>
+<div class="paragraph">
+<p>同样，加法和减法动作方法可以用通用解决方案代替：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method TOP($/) {
+    if $&lt;op&gt; eq '+' {
+        $/.make($&lt;number&gt;[0].made + $&lt;number&gt;[1].made);
+    }
+    else {
+        $/.make($&lt;number&gt;[0].made - $&lt;number&gt;[1].made);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>就是这样。 更新后的语法将两个测试字符串都视为有效表达式，并根据$ &lt;op&gt;的内容进行正确的计算。 当检查 <code>$&lt;op&gt; eq '+'</code> 中的条件时，eq 字符串比较运算符将 <code>$&lt;op&gt;</code> 隐式转换为字符串，并且不需要单独的操作来处理 <code>op</code> 令牌。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_过早的优化">3.2. 过早的优化</h3>
+<div class="paragraph">
+<p>有什么方法可以使代码更具吸引力？ 有几个。 我们将尝试两种方法来统一通话。 目的是避免重复长的代码行，唯一的区别是操作的符号，例如：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$/.make($&lt;number&gt;[0].made - $&lt;number&gt;[1].made);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这两种情况下，运算符都被相同的两个操作数包围，这是编写几个双函数的好机会：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class CalculatorActions {
+    sub addition($a, $b) {
+        $a + $b
+    }
+
+    sub subtraction($a, $b) {
+        $a - $b
+    }
+
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这两个函数都可以放置在 CalculatorActions 类内部，并且当调用它们时，Raku 不会将指向该类实例的其他参数传递给它。 为了为这两个函数建立共同的入口点，让我们创建一个保留对它们的引用的哈希：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class CalculatorActions {
+    my %operation =
+        '+' =&gt; &amp;addition,
+        '-' =&gt; &amp;subtraction;
+
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>根据运算符调用函数非常容易：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method TOP($/) {
+    $/.make(%operation{~$&lt;op&gt;}(
+        $&lt;number&gt;[0].made, $&lt;number&gt;[1].made));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>简化代码并摆脱显式检查（如果检查）的另一个有趣选择是使用多个分派。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class CalculatorActions {
+    multi sub operation('+', $a, $b) {
+        $a + $b
+    }
+
+    multi sub operation('-', $a, $b) {
+        $a - $b
+    }
+
+    method TOP($/) {
+        $/.make(operation(~$&lt;op&gt;,
+                          $&lt;number&gt;[0].made,
+                          $&lt;number&gt;[1].made));
+    }
+
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这里，运算符被传递给操作函数，编译器选择要调用的候选对象：用加号定义的操作或需要减号作为其第一个参数的操作。 Raku 编译器很高兴为我们完成了这项工作。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_更多操作数">3.3. 更多操作数</h3>
+<div class="paragraph">
+<p>语法和动作现在已经足够聪明，可以解析和评估其中具有两个值的表达式，但不适用于1 + 2 + 3等更复杂的示例。由于TOP级别受规则限制，因此无法使用 仅两个数字：<code>&lt;number&gt; &lt;op&gt; &lt;number&gt;</code>。</p>
+</div>
+<div class="paragraph">
+<p>在语法中，链中新的可选项目可以用 * 量词表示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
+    &lt;number&gt; [&lt;op&gt; &lt;number&gt; &lt;ws&gt;]*
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>&lt;ws&gt;</code> 令牌是用于匹配可选空格的内置工具。 通过此更改，我们还允许包含单个数字的表达式。 因此，以下测试用例全部匹配：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @cases =
+    '3 + 4', '3 - 4',
+    '7',
+    '1 + 2 + 3', '1 + 3 + 5 + 7';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>进行真实计算的两个函数还必须适用于接受两个以上的值：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation('+', @values) {
+    [+] @values
+}
+
+multi sub operation('-', @values) {
+    [-] @values
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>此时，使用归约运算可大大简化语法。 最后，准备一个值数组，以将其传递给以下多功能之一：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method TOP($/) {
+    $/.make(operation(~$&lt;op&gt;[0], $&lt;number&gt;.map: *.made));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>为了从 AS T树中获取数字，此处使用 map 方法。 <code>*.made</code> 结构是对 <code>$&lt;number&gt;</code> 数组的每个元素执行的 WhateverCode 块。</p>
+</div>
+<div class="paragraph">
+<p>正如我们已经预期的那样，计算器必须使用单个数字，因此需要一个小的扩展名。 只有一个数字，表达式中没有运算符：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method TOP($/) {
+    if $&lt;op&gt; {
+        $/.make(operation(~$&lt;op&gt;[0], $&lt;number&gt;.map: *.made));
+    }
+    else {
+        $/.make($&lt;number&gt;[0].made);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>运行测试并检查是否正确评估了所有测试用例：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">3 + 4 = 7
+3 - 4 = -1
+7 = 7
+1 + 2 + 3 = 6
+1 + 3 + 5 + 7 = 16</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_多样性测试">3.4. 多样性测试</h3>
+<div class="paragraph">
+<p>运算符（例如[+]）的简化形式的优美和简单性使得可以用几个字符表示动作，但无法用 <code>7 + 8 - 3</code> 等不同的运算符来评估表达式。 为了处理这样的示例，可以组织一个遍历运算符和操作数的循环。</p>
+</div>
+<div class="paragraph">
+<p>在顶层，您必须遍历所有数字，然后将运算符带到旁边。 这是一个如何遍历值的示例：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method TOP($/) {
+    my @numbers = $&lt;number&gt;.map: *.made;
+    my $make = @numbers.shift;
+
+    operation(~$&lt;op&gt;.shift, $make, @numbers.shift)
+        while @numbers.elems;
+
+    $/.make($make);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>为了简化 while 循环，让操作多功能更新其参数之一：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation('+', $a is rw, $b) {
+    $a += $b
+}
+
+multi sub operation('-', $a is rw, $b) {
+    $a -= $b
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>同样，代码看起来紧凑，更重要的是，它可以正常工作。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">7 + 8 - 3 = 12
+14 - 4 = 10
+14 - 4 - 3 = 7
+100 - 200 + 300 + 1 - 2 = 199</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_增加更多数学">3.5. 增加更多数学</h3>
+<div class="paragraph">
+<p>计算器现在仅能进行加减运算。 好处是它可以计算包含两个以上数字的长表达式。 现在是时候教它处理乘法和除法了。</p>
+</div>
+<div class="paragraph">
+<p>仅扩展 op 令牌以创建更多的操作函数候选者是天真的：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Calculator {
+    . . .
+
+    token op {
+        '+' | '-' | '*' | '/'
+    }
+
+    . . .
+}
+
+class CalculatorActions {
+    . . .
+
+    multi sub operation('*', $a is rw, $b) {
+        $a *= $b
+    }
+
+    multi sub operation('/', $a is rw, $b) {
+        $a /= $b
+    }
+
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该语法使用全部四个算术运算来解析甚至评估所有可能的表达式，但是它不遵循标准的优先级规则：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">3 * 4 = 12
+100 / 25 = 4
+1 + 2 * 3 = 9</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>可能的解决方案之一是使用堆栈来执行计算。 您从左到右扫描输入字符串，并继续将下一个运算符应用于数字，直到遇到优先级更高的运算符为止。 在这种情况下，您将当前结果放入堆栈，并继续进行一系列新的计算，直到找到优先级较低的运算符。 然后，从堆栈中弹出数字和运算符，并将其减少，直到完全消耗掉为止。 这是在家中进行的好练习，但是我们将选择一种简单的方法。</p>
+</div>
+<div class="paragraph">
+<p>处理算术运算优先级的另一种方法是更改语法，以使其首先提取乘法和除法运算，然后将结果传递给其余的加法和减法。</p>
+</div>
+<div class="paragraph">
+<p>在下一个片段中，显示新语法：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Calculator {
+    rule TOP {
+        &lt;term&gt;* %% &lt;op1&gt;
+    }
+
+    rule term {
+        &lt;factor&gt;* %% &lt;op2&gt;
+    }
+
+    token op1 {
+        '+' | '-'
+    }
+
+    token op2 {
+        '*' | '/'
+    }
+
+    rule factor {
+        &lt;number&gt;
+    }
+
+    token number {
+        \d+
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>让我们检查一下。 首先，请注意我们与之前的变体相比如何更改了TOP规则。 使用%%运算符可以更轻松地表达片段重复。 比较两个正则表达式：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;number&gt; [&lt;op&gt; &lt;number&gt; &lt;ws&gt;]*</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>和</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;number&gt;* %% &lt;op&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第二个变化是引入了两个运算符集：+和-的op1以及*和/的op2。 op1中的运算符的优先级较低，它们出现在语法的顶级规则中。 换句话说，我们认为输入表达式的总和仅包含您要加或减的数字。</p>
+</div>
+<div class="paragraph">
+<p>乘法和除法运算符具有更高的优先级，您应该将其结果总体上视为最高级别。 这就是为什么引入令牌而不是匹配数字的原因。 最后可以是数字，但首先是由*或/分隔的一系列因素。 在我们的案例中，一个因素基本上是一个数字。 我故意添加了一个单独的代理规则，factor，以保留名称的术语和因数，您经常可以在与编译器相关的文献中看到这些规则。</p>
+</div>
+<div class="paragraph">
+<p>在动作类中，我们已经具有四个操作功能； 我们所需要做的只是为因子添加一个简单的方法并为术语创建操作。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class CalculatorActions {
+    . . .
+
+    method TOP($/) {
+        $/.make(process($&lt;term&gt;, $&lt;op1&gt;));
+    }
+
+    method term($/) {
+        $/.make(process($&lt;factor&gt;, $&lt;op2&gt;));
+    }
+
+    sub process(@data, @ops) {
+        my @nums = @data.map: *.made;
+        my $result = @nums.shift;
+
+        operation(~@ops.shift, $result, @nums.shift)
+            while @nums;
+
+        return $result;
+    }
+
+    method factor($/) {
+        $/.make($&lt;number&gt;.made);
+    }
+
+    method number($/) {
+        $/.make(+$/);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如您所见，TOP和term都实现相同的算法； 他们只是处理语法的不同部分（和不同的运算符）。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_测试代码">3.6. 测试代码</h3>
+<div class="paragraph">
+<p>到目前为止，我们已经有了一个可以对表达式中任意数量的数字执行四个算术运算的计算器。 您可以提出测试用例，但您可能不想在脑海中计算出正确的结果，并对照每个测试用例进行检查。</p>
+</div>
+<div class="paragraph">
+<p>Raku发行版包括Test模块，该模块显着有助于简化测试用例循环。 该模块会导出一些功能，我们将使用其中一个名为is的功能。 由于计算器表达式的语法与Raku的语法一致，因此让我们要求它检查结果：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Test;
+
+. . .
+
+for @cases -&gt; $test {
+    my $result = Calculator.parse(
+        $test, :actions(CalculatorActions)).made;
+    my $correct = EVAL($result);
+    is($result, $correct, "$test = $correct");
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>尝试不同的测试用例，包括那些混合使用运算符的测试用例。 例如：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">ok 10 - 3 * 4 = 12
+ok 11 - 100 / 25 = 4
+ok 12 - 1 + 2 * 3 = 7
+ok 13 - 1 + 2 - 3 * 4 / 5 = 0.6</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>实际上，每个测试都必须检查两件事：1）是否对示例进行了解析，以及2）评估是否正确。 我们可以拆分测试以满足这一观察要求：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for @cases -&gt; $test {
+    my $parse = Calculator.parse($test, :actions(CalculatorActions));
+    next unless isa-ok($parse, Match, "parsed $test");
+
+    my $result = $parse.made;
+    my $correct = EVAL($result);
+    is($result, $correct, "computed $test = $correct");
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>输出将相应地更新：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">ok 1 - parsed 3 + 4
+ok 2 - computed 3 + 4 = 7
+ok 3 - parsed 3 - 4
+ok 4 - computed 3 - 4 = -1
+. . .</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_添加更多能量">3.7. 添加更多能量</h3>
+<div class="paragraph">
+<p>在本节中，我们将使计算器更加通用，因为我们将要添加幂运算符**。 与以前的运算符集不同的是，幂运算符具有更高的优先级，必须在进行任何乘法或加法之前首先进行处理。</p>
+</div>
+<div class="paragraph">
+<p>可以类似于我们之前对*和/进行的操作添加操作符。 让我们替换因子规则并为运算符本身定义令牌：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule factor {
+    &lt;number&gt;* %% &lt;op3&gt;
+}
+
+token op3 {
+    '**'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>另一个需要做的细微变化是在数字令牌中添加空格。 您可以明确地做到这一点：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token number {
+    &lt;ws&gt; \d+ &lt;ws&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>或通过将令牌转换为规则来隐式地：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule number {
+    \d+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>更新操作类以支持新的运算符：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation('**', $a is rw, $b) {
+    $a **= $b
+}
+
+method factor($/) {
+    $/.make(process($&lt;number&gt;, $&lt;op3&gt;));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>所有的辛苦工作都完成了（很简单，不是吗？）。 计算器现在处理五个运算符：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">ok 26 - parsed 2 ** 3
+ok 27 - computed 2 ** 3 = 8
+ok 28 - parsed 2 + 3 ** 4
+ok 29 - computed 2 + 3 ** 4 = 83
+ok 30 - parsed 1 + 2 * 3 ** 4 - 5 * 6
+ok 31 - computed 1 + 2 * 3 ** 4 - 5 * 6 = 133
+ok 32 - parsed 2 ** 3 ** 4
+ok 33 - computed 2 ** 3 ** 4 = 4096</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_允许括号">3.8. 允许括号</h3>
+<div class="paragraph">
+<p>计算器设计的最后一点是使其理解括号。 尽管看似艰巨的任务，但实际上实现起来非常简单。 这是因为括号内的任何内容都是遵循相同语法规则的另一种表达方式。 换句话说，如果看到括号，则可以从TOP递归开始。</p>
+</div>
+<div class="paragraph">
+<p>计算括号内的值后，您将获得一个值，因此可以将其视为任何其他数字。 要扩展解析器，只需从数字中创建一个新值规则，然后在其中列出两个备选方案：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule factor {
+    &lt;value&gt;* %% &lt;op3&gt;
+}
+
+rule value {
+    | &lt;number&gt;
+    | '(' &lt;TOP&gt; ')'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>value</code> 方法获取上一级的值：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method value($/) {
+    $/.make($&lt;number&gt; ?? $&lt;number&gt;.made !! $&lt;TOP&gt;.made);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>而已。 仅需进行三个简单的更改，我们就可以解析更多复杂的表达式：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">ok 34 - parsed 10 * (20 - 30)
+ok 35 - computed 10 * (20 - 30) = -100
+ok 36 - parsed 10 * 20 - 30
+ok 37 - computed 10 * 20 - 30 = 170
+ok 38 - parsed (5 * 6)
+ok 39 - computed (5 * 6) = 30
+ok 40 - parsed (10)
+ok 41 - computed (10) = 10
+ok 42 - parsed 1 - (5 * (3 + 4)) / 2
+ok 43 - computed 1 - (5 * (3 + 4)) / 2 = -16.5</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们的计算器已经准备好了。 在下一章中，我们将其集成到解释器中，以便它可以解析涉及变量的算术表达式。</p>
+</div>
+<div class="paragraph">
+<p><a href="https://andrewshitov.com/2020/03/08/chapter-3-creating-a-calculator/" class="bare">https://andrewshitov.com/2020/03/08/chapter-3-creating-a-calculator/</a></p>
 </div>
 </div>
 </div>
