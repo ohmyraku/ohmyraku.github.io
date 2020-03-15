@@ -8,9 +8,7 @@
 
 <meta name="author" content="ohmyraku">
 <meta name="application-name" content="山川异域, 风月同天">
-<meta name="description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记   3. 第三章 创建计算器 3.1. 汇总 3.2. 过早的优化 3.3. 更多操作数 3.4. 多样性测试 3.5. 增加更多数学 3.6. 测试代码 3.7. 添加更多能量 3.8. 允许括号     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
- 让我们从一个简单的解释器程序开始研究 Raku 强大的 Grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。
- my x; x = 42; say x;   在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。">
+<meta name="description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记   3. 第三章 创建计算器 3.1. 汇总 3.2. 过早的优化 3.3. 更多操作数 3.4. 多样性测试 3.5. 增加更多数学 3.6. 测试代码 3.7. 添加更多能量 3.8. 允许括号   4. 第四章 更好的解释器 4.1. 跳过注释 4.2. 复杂数字 4.3. 复杂表达式 4.4. 使用变量 4.5. 初始化声明     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。">
 <meta name="robots" content="noodp"/>
 <meta name="generator" content="Hugo 0.63.2" />
 <meta name="referrer" content="no-referrer" />
@@ -24,9 +22,7 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="用 Raku 写编译器" />
-<meta name="twitter:description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记   3. 第三章 创建计算器 3.1. 汇总 3.2. 过早的优化 3.3. 更多操作数 3.4. 多样性测试 3.5. 增加更多数学 3.6. 测试代码 3.7. 添加更多能量 3.8. 允许括号     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
- 让我们从一个简单的解释器程序开始研究 Raku 强大的 Grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。
- my x; x = 42; say x;   在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。" />
+<meta name="twitter:description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记   3. 第三章 创建计算器 3.1. 汇总 3.2. 过早的优化 3.3. 更多操作数 3.4. 多样性测试 3.5. 增加更多数学 3.6. 测试代码 3.7. 添加更多能量 3.8. 允许括号   4. 第四章 更好的解释器 4.1. 跳过注释 4.2. 复杂数字 4.3. 复杂表达式 4.4. 使用变量 4.5. 初始化声明     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。" />
 <meta name="twitter:site" content="https://ohmyraku.github.io" />
 <meta name="twitter:creator" content="ohmyraku" />
 <meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
@@ -36,9 +32,7 @@
 <meta property="og:title" content="用 Raku 写编译器" />
 <meta property="og:url" content="https://ohmyraku.github.io" />
 <meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记   3. 第三章 创建计算器 3.1. 汇总 3.2. 过早的优化 3.3. 更多操作数 3.4. 多样性测试 3.5. 增加更多数学 3.6. 测试代码 3.7. 添加更多能量 3.8. 允许括号     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
- 让我们从一个简单的解释器程序开始研究 Raku 强大的 Grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。
- my x; x = 42; say x;   在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。" />
+<meta property="og:description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记   3. 第三章 创建计算器 3.1. 汇总 3.2. 过早的优化 3.3. 更多操作数 3.4. 多样性测试 3.5. 增加更多数学 3.6. 测试代码 3.7. 添加更多能量 3.8. 允许括号   4. 第四章 更好的解释器 4.1. 跳过注释 4.2. 复杂数字 4.3. 复杂表达式 4.4. 使用变量 4.5. 初始化声明     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。" />
 <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -55,7 +49,7 @@
         "@type": "Person",
         "name": "ohmyraku"
       },
-      "description": "Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记   3. 第三章 创建计算器 3.1. 汇总 3.2. 过早的优化 3.3. 更多操作数 3.4. 多样性测试 3.5. 增加更多数学 3.6. 测试代码 3.7. 添加更多能量 3.8. 允许括号     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。\n 让我们从一个简单的解释器程序开始研究 Raku 强大的 Grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。\n my x; x = 42; say x;   在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。",
+      "description": "Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记   3. 第三章 创建计算器 3.1. 汇总 3.2. 过早的优化 3.3. 更多操作数 3.4. 多样性测试 3.5. 增加更多数学 3.6. 测试代码 3.7. 添加更多能量 3.8. 允许括号   4. 第四章 更好的解释器 4.1. 跳过注释 4.2. 复杂数字 4.3. 复杂表达式 4.4. 使用变量 4.5. 初始化声明     1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。",
       "publisher": {
         "@type": "Organization",
         "name": "https:\/\/ohmyraku.github.io",
@@ -130,6 +124,15 @@ if (theme && theme !== "1") {
 <li><a href="#_测试代码">3.6. 测试代码</a></li>
 <li><a href="#_添加更多能量">3.7. 添加更多能量</a></li>
 <li><a href="#_允许括号">3.8. 允许括号</a></li>
+</ul>
+</li>
+<li><a href="#_第四章_更好的解释器">4. 第四章 更好的解释器</a>
+<ul class="sectlevel2">
+<li><a href="#_跳过注释">4.1. 跳过注释</a></li>
+<li><a href="#_复杂数字">4.2. 复杂数字</a></li>
+<li><a href="#_复杂表达式">4.3. 复杂表达式</a></li>
+<li><a href="#_使用变量">4.4. 使用变量</a></li>
+<li><a href="#_初始化声明">4.5. 初始化声明</a></li>
 </ul>
 </li>
 </ul>
@@ -2083,6 +2086,457 @@ ok 43 - computed 1 - (5 * (3 + 4)) / 2 = -16.5</code></pre>
 </div>
 <div class="paragraph">
 <p><a href="https://andrewshitov.com/2020/03/08/chapter-3-creating-a-calculator/" class="bare">https://andrewshitov.com/2020/03/08/chapter-3-creating-a-calculator/</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_第四章_更好的解释器">4. 第四章 更好的解释器</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>本章的目的是利用前三章的所有成果来构建更好的口译员。 新的解释器将能够处理不同类型的数字，并对变量执行不同的算术运算。 为了使它变得更好，我们将从一个非常有用的附加功能开始-注释。</p>
+</div>
+<div class="sect2">
+<h3 id="_跳过注释">4.1. 跳过注释</h3>
+<div class="paragraph">
+<p>注释对于任何编程语言都是必不可少的，因此让我们扩展Lingua语法以允许在我们的程序中对人类进行注释。</p>
+</div>
+<div class="paragraph">
+<p>首先，我们将实现一个单行注释，该注释以井号（＃）字符开头，并继续到该行的末尾，如下面的示例所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># Declare a variable
+my alpha;
+alpha = 100; # Assign a value</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们的语法规定程序是一组用分号分隔的语句。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
+    &lt;statement&gt;* %% ';'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>语句是以下之一：变量声明，赋值或函数调用。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule statement {
+    | &lt;variable-declaration&gt;
+    | &lt;assignment&gt;
+    | &lt;function-call&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们如何在此处添加评论规则？ 注释本身可以由匹配散列字符后跟任意数量的非换行符的规则表示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule comment {
+    '#' \N*
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>起初，您可能认为可以通过简单的方式将注释添加到语法中：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule statement {
+    | &lt;comment&gt;
+    | &lt;variable-declaration&gt;
+    | &lt;assignment&gt;
+    | &lt;function-call&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>不幸的是，这行不通。 一个规则要求注释一直到行尾，而另一条规则则要求在其后加一个分号。 可能的解决方案是承认该程序不仅仅是语句列表。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
+    [
+        | &lt;comment&gt;
+        | &lt;statement&gt; ';'
+    ]*
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，该程序包含注释和说明。 后者以分号结尾。</p>
+</div>
+<div class="paragraph">
+<p>进行此更改后，在程序末尾的最后一条语句之后必须使用分号。 这是一个棘手的时刻，让我们花一些时间正确地理解它。</p>
+</div>
+<div class="paragraph">
+<p>编写一个包含以下三个语句的简单程序：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my a;
+a = 10;
+say a</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>程序的末尾没有分号，但是如果您运行它，您仍然会在输出中看到10，就像最后一条指令也已执行一样。</p>
+</div>
+<div class="paragraph">
+<p>实际上，语法无法完全解析输入文本。 您可以通过查看Calculator.parse方法的返回值轻松证明这一点，该方法对于该程序为Nil。 因此，该语法不能确认程序的有效性，但是在解析程序时它仍然执行动作。 通过切换到实际的AST代，我们可以避免这种情况，我们将在以下各章中进行介绍。 同时，让我们更新解释器，以便它报告解析状态：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $result = Lingua.parse($code, :actions(LinguaActions));
+say $result ?? 'OK' !! 'Error';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们愿意允许的第二种注释类型是一对字符序列 <code>/<strong></code> 和 <code></strong>/</code> 之间的注释。 它们既可以包含单行注释，也可以包含多行注释，并且可以出现在代码的任何允许空白的地方。 例如：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my /* inline comment */ a;
+# one-line comment
+a = 10;
+
+/* multi-line
+   comment */
+say a;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>由于您无法控制用户在何处发表评论，因此该任务似乎很困难。 如前所述，在允许空白的任何地方都允许注释。 Raku已经为我们处理了空格，因此我们也可以要求它跳过注释吗？</p>
+</div>
+<div class="paragraph">
+<p>语法中的任何规则都隐含包含用于匹配空格的正则表达式。 例如，采用分配规则：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
+    &lt;variable-name&gt; '=' &lt;value&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该规则可以用带有几个嵌入式ws正则表达式的令牌替换：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token assignment {
+    &lt;variable-name&gt; &lt;ws&gt; '=' &lt;ws&gt; &lt;value&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果没有&lt;ws&gt;，令牌将要求您不要在等号周围使用空格。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">a=10;
+b=20;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>添加可选的空格使我们可以创建更多以人为本的程序：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">a = 10;
+b = 20;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>可以重新定义ws正则表达式。 默认情况下，它匹配单词外的任意数量的空格（包括无）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">regex ws {
+    &lt;!ww&gt; \s*
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这是定义 <code>/* */</code> 注释的理想位置。 正则表达式必须允许空格和注释定界符之间的任何文本序列：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">regex ws {
+    &lt;!ww&gt; [
+        | \s*
+        | \s* '/*' \s* .*? \s* '*/' \s*
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>由于存在许多斜线和星号，因此看起来很丑陋，但是可以按预期完成工作。 注意，必须在/ <strong>和</strong> /文字之前和之后都留一些空格。 另请注意，此语法方法是正则表达式，而不是规则或标记。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_复杂数字">4.2. 复杂数字</h3>
+<div class="paragraph">
+<p>解释器使用数字，我们已经可以很好地解析它。 让我们加入这两种语法，并让程序使用科学计数法处理所有数字，包括正数，负数，整数，浮点数和数字。</p>
+</div>
+<div class="paragraph">
+<p>从第2章中获取数字语法的正文，并将其复制到Lingua的语法中。 Number的TOP规则应成为Lingua中的价值规则。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token value {
+    &lt;sign&gt;? [
+        | &lt;integer&gt;
+        | &lt;floating-point&gt;
+    ] &lt;exponent&gt;?
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>同样不要忘记更新动作类：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method value($/) {
+    $/.make(+$/);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>立即尝试以下程序：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my alpha;
+my beta;
+my gamma;
+
+alpha = 3.14;
+beta = 42;
+gamma = -4.5E-2;
+
+say alpha;
+say beta;
+say gamma;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它应该解析数字并全部打印出来。 现在，此步骤已完全完成。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_复杂表达式">4.3. 复杂表达式</h3>
+<div class="paragraph">
+<p>我们可以轻松地采取的下一步是将计算器语法合并到语言定义中。 让我们将现有的value方法重命名为number，然后语言语法将使用在Calculator中定义的值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Lingua {
+    . . .
+
+    rule value {
+        | &lt;number&gt;
+        | '(' &lt;expression&gt; ')'
+    }
+
+    rule expression {
+        &lt;term&gt;* %% &lt;op1&gt;
+    }
+
+    token number {
+        &lt;sign&gt;? [
+            | &lt;integer&gt;
+            | &lt;floating-point&gt;
+        ] &lt;exponent&gt;?
+    }
+
+   . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>此处的表达规则是计算器语法的前TOP规则。 对称更新操作类：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class LinguaActions {
+    . . .
+
+    method value($/) {
+        $/.make($&lt;number&gt; ??
+            $&lt;number&gt;.made !! $&lt;exression&gt;.made);
+    }
+
+    method expression($/) {
+        $/.make(process($&lt;term&gt;, $&lt;op1&gt;));
+    }
+
+    method number($/) {
+        $/.make(+$/);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>此后，可以通过任意复杂度的表达式来表示程序中的任何数字。 当前语法中唯一使用数字的地方是赋值。 我们可以用表达式替换它的右侧。</p>
+</div>
+<div class="paragraph">
+<p>在语法上：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
+    &lt;variable-name&gt; '=' &lt;expression&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 action 类中:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method assignment($/) {
+    %var{~$&lt;variable-name&gt;} = $&lt;expression&gt;.made;
+}
+
+method value($/) {
+    $/.make($&lt;number&gt; ??
+        $&lt;number&gt;.made !! $&lt;expression&gt;.made);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>更改测试程序以在其中包含一些表达式。 这是我的示例：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my pi;
+pi = 22/7 - 0.001265; # very rough approximation
+say pi;
+
+my x;
+x = 2 * (3 + 4);
+say x; # prints 14</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>别忘了我们也可以在代码中使用注释！</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_使用变量">4.4. 使用变量</h3>
+<div class="paragraph">
+<p>到目前为止，我们的表达式只能使用数字。 如果我们也可以在那里使用变量，那将更加方便。 为此，需要对语法进行少量更改。 就语法规则而言，在表达式中包含变量意味着允许在其中包含变量名称：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule value {
+    | &lt;number&gt;
+    | &lt;variable-name&gt;
+    | '(' &lt;expression&gt; ')'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>没有与变量名标记关联的made属性，因此我们必须做一些简单的工作来访问存储：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method value($/) {
+    if $&lt;number&gt; {
+        $/.make($&lt;number&gt;.made);
+    }
+    elsif $&lt;variable-name&gt; {
+        $/.make(%var{$&lt;variable-name&gt;});
+    }
+    else {
+        $/.make($&lt;expression&gt;.made);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>值方法由三个分支组成，其任务是找到适当的数据以进一步传递。 对于变量，将进行哈希查找。</p>
+</div>
+<div class="paragraph">
+<p>有了这些，解释器现在可以处理以下程序并计算地球赤道的长度（假设我们之前已经将值分配给pi）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my r;
+r = 6371; # km
+
+my d;
+d = 2 * pi * r;
+say d;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_初始化声明">4.5. 初始化声明</h3>
+<div class="paragraph">
+<p>希望您注意到与第一章中的内容相比，进行最新更改非常容易。 本节将带来另一个此类示例。</p>
+</div>
+<div class="paragraph">
+<p>让我们简化变量的创建，并允许使用可选的赋值进行声明。 所以代替</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my x;
+x = 10;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们可以在一行中表示两个步骤：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my x = 10;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>变量声明由变量声明规则处理，因此让我们使用可选的赋值子句对其进行更新：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule variable-declaration {
+    'my' &lt;variable-name&gt; [ '=' &lt;expression&gt; ]?
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在操作中，检查是否存在表达式，并使用其值：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method variable-declaration($/) {
+    %var{$&lt;variable-name&gt;} =
+        $&lt;expression&gt; ?? $&lt;expression&gt;.made !! 0;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>使用以下附加功能重写测试程序：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my pi = 3.1415926;
+my r = 6371; # km
+
+my d = 2 * pi * r;
+say d;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该程序将打印结果，而我们只有不到200行代码（包括空行和其中带有单个花括号的行）。 Raku语法真的很棒！</p>
+</div>
+<div class="paragraph">
+<p><a href="https://andrewshitov.com/2020/03/15/chapter-4-a-better-interpreter/">https://andrewshitov.com/2020/03/15/chapter-4-a-better-interpreter/</a></p>
 </div>
 </div>
 </div>
