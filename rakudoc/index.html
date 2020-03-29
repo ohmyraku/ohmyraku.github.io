@@ -516,9 +516,9 @@ if (theme && theme !== "1") {
 </li>
 <li><a href="#_grammars">45. Grammars</a>
 <ul class="sectlevel2">
-<li><a href="#_具名正则_named_regexes">45.1. 具名正则 (Named Regexes)</a></li>
+<li><a href="#_具名正则">45.1. 具名正则</a></li>
 <li><a href="#_创建_grammar">45.2. 创建 Grammar</a></li>
-<li><a href="#_特殊的_tokens">45.3. 特殊的 Tokens</a></li>
+<li><a href="#_特殊的_token">45.3. 特殊的 token</a></li>
 <li><a href="#_grammar_中的方法">45.4. Grammar 中的方法</a></li>
 <li><a href="#_grammar_中的动态变量">45.5. Grammar 中的动态变量</a></li>
 <li><a href="#_grammar_中的属性">45.6. Grammar 中的属性</a></li>
@@ -20477,86 +20477,43 @@ EOH
 <h2 id="_grammars">45. Grammars</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Grammars - 一组具名 regexes 组成正式的 grammar</p>
+<p>Grammar 是一种功能强大的工具, 用于对文本进行解构。Grammar 通常返回通过解释文本而创建的数据结构。</p>
 </div>
 <div class="paragraph">
-<p>Grammars 是一个很强大的工具用于析构文本并通常返回数据结构。</p>
+<p>例如, 使用 Raku 风格的 grammar 来解析和执行 Raku 自身。</p>
 </div>
 <div class="paragraph">
-<p>例如, Raku 是使用 Raku 风格 grammar 解析并执行的。</p>
+<p>对于普通 Raku 用户来说, 更实用的一个例子是 <a href="https://github.com/moritz/json">JSON::Tiny</a> 模块, 该模块可以反序列化任何合法的 JSON 文件, 而且反序列代码只有不到 100 行, 还能扩展。</p>
 </div>
 <div class="paragraph">
-<p>对普通 Raku 使用者更实用的一个例子是 <a href="https://github.com/moritz/json">JSON::Tiny</a> 模块, 它能反序列化任何合法的 JSON 文件, 而反序列代码只有不到 100 行, 还能扩展。</p>
-</div>
-<div class="paragraph">
-<p>Grammars 允许你把 regexes 组织到一块儿, 就像类(class) 中组织方法那样。</p>
+<p>如果你在学校就不喜欢 grammar, 不要让它成为阻止你学习 grammar 的理由。Grammar 允许你像类组织方法那样组织正则表达式。</p>
 </div>
 <div class="sect2">
-<h3 id="_具名正则_named_regexes">45.1. 具名正则 (Named Regexes)</h3>
+<h3 id="_具名正则">45.1. 具名正则</h3>
 <div class="paragraph">
 <p>　
-grammars 的主要组成部分是 <a href="http://doc.raku.org/language/regexes">regexes</a>。 而 Raku 的 <a href="http://doc.raku.org/language/regexes">regexes</a>语法不在该文档的讨论范围, 具名正则(named regexes) 有它自己的特殊语法, 这跟子例程(subroutine) 的定义很像:</p>
+Grammar 的主要组成部分是 <a href="http://doc.raku.org/language/regexes">regexes</a>。 而 Raku 的 <a href="http://doc.raku.org/language/regexes">regexes</a> 语法不在该文档的讨论范围内, 具名正则有自己的特殊语法, 这跟子例程的定义很像:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my regex number { \d+ [ \. \d+ ]?   }   # 普通 regex 中空格被忽略, [] 是非捕获组</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku"># 普通 regex 中空格被忽略, [] 是非捕获括号
+my regex number { \d+ [ \. \d+ ]? }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>上面的代码使用 <code>my</code> 关键字指定了本地作用域的 regex, 因为具名正则(named regexes) 通常用在 grammars 里面。</p>
+<p>在这个例子中我们使用 <code>my</code> 关键字指定这个 regex 是本地作用域的, 因为具名正则通常用于 grammar 里面。</p>
 </div>
 <div class="paragraph">
-<p>正则有名字了就方便我们在任何地方重用那个正则了:</p>
+<p>正则被命名的好处是能够轻松地在其它地方重用正则表达式:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "32.51" ~~ &amp;number;
-say "15 + 4.5" ~~ /  \s* '+' \s*  /
-&amp;number           # my regex number { \d+ [ \. \d+ ]?   }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say so "32.51" ~~ &amp;number;                         # OUTPUT: «True␤»
+say so "15 + 4.5" ~~ /&lt;number&gt;\s* '+' \s*&lt;number&gt;/ # OUTPUT: «True␤»</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>为什么用 <code>&amp;number</code>, 对比具名子例程你就知道了:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">&gt; sub number { say "i am a subroutine" }  # 具名子例程
-&gt; &amp;number                                 # sub number () { #`(Sub|140651249646256) ... }</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><code>&amp;number</code> 就是直接引用了具名的 regex 或 子例程。而在`/ /` 或 grammars 里面, 引用一个具名正则的语法也很特殊, 就是给名字包裹上 <code>&lt; &gt;</code>。<code>&lt;&gt;</code> 就像引号那样, 当用它引起某个具名正则后, 引用这个 `` 就会把该具名正则插入(带入)到整个正则之中, 就像字符串插值那样：</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">use v6;
-
-# 具名正则的声明
-my regex number { \d+ [ \. \d+]? }
-my token ident  { \w+            }
-my rule  alpha  { &lt;[A..Za..z]&gt;   }
-
-# 1.0 通过 &amp; 来引用
-say so "12.34" ~~ &amp;number; # true
-
-# 2.0 在正则构造 // 里使用
-say so "12.88 + 0.12" ~~ /  \s* '+' \s*  /; # true
-# say so "12.88 + 0.12" ~~ /  \s* '+' \s*  /;
-# wrong, method 'number' not found for invocant of class 'Cursor'
-
-# 3.0 在 grammar 里面使用
-grammar EquationParse {
-    # 这里也不能给 number 起别名, 除非 number 是在 grammar 内部声明的
-     token TOP {  \s* '+' \s*  \s* '=' \s*  }
-}
-
-# 等式解析
-my $expr = EquationParse.parse("12.88 + 0.12 = 13.00");
-say $expr;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>声明具名正则不是只有一个 <code>regex</code> 声明符, 实际上 , regex 声明符用的最少, 大多数时候, 都是使用 <code>token</code> 或 <code>rule</code> 声明符。token 和 rule 这两个都是 <code>ratcheing</code> (棘轮)的, 这意味着如果匹配失败, 那么匹配引擎就不会回并尝试匹配了。这通常会是你想要的, 但不适用于所有情况:</p>
+<p><code>regex</code> 不是具名正则的唯一声明符, 实际上 , regex 声明符用的最少。 大多数情况下, 使用的是 <code>token</code> 或 <code>rule</code> 声明符。token 和 rule 这两个声明符都是带棘齿(<code>ratcheing</code>)的, 这意味着如果匹配失败, 那么匹配引擎就不会回溯并继续尝试匹配了。这通常可以满足你的需求, 但不适用于所有情况:</p>
 </div>
 <div class="quoteblock">
 <blockquote>
@@ -20570,19 +20527,36 @@ say $expr;</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">my regex works-but-slow { .+ q } # 可能会回溯
 my token fails-but-fast { .+ q } # 不回溯
 my $s = 'Tokens and rules won\'t backtrack, which makes them fail quicker!';
-say so $s ~~ &amp;works-but-slow; # True
-say so $s ~~ &amp;fails-but-fast; # False, .+ 得到了整个字符串但不回溯</code></pre>
+say so $s ~~ &amp;works-but-slow; # OUTPUT: «True␤»
+say so $s ~~ &amp;fails-but-fast; # OUTPUT: «False␤»
+                              # .+ 得到了整个字符串但不回溯</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>token</code> 和 <code>rule</code> 的唯一区别就是 <code>rule</code> 声明符会让正则中的 <code>:sigspace</code> 修饰符起效:</p>
+<p>请注意, 非回溯是作用在项上的, 即, 如下面的示例所示, 如果匹配了某些内容, 则将永远不会回溯。 但是, 如果匹配失败, 但是 <code>|</code> 或 <code>||</code> 引入了另一个候选者, 将会重试匹配。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my token tok-a { .* d  };
+my token tok-b { .* d | bd };
+say so "bd" ~~ &amp;tok-a;        # OUTPUT: «False␤»
+say so "bd" ~~ &amp;tok-b;        # OUTPUT: «True␤»</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_rules">45.1.1. Rules</h4>
+<div class="paragraph">
+<p><code>token</code> 和 <code>rule</code> 声明符的唯一区别就是 <code>rule</code> 声明符会让正则中的 <a href="https://docs.raku.org/language/regexes#Sigspace">:sigspace</a> 修饰符起效:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my token non-space-y { 'once' 'upon' 'a' 'time' }
 my rule space-y { 'once' 'upon' 'a' 'time' }
-say 'onceuponatime'    ~~ &amp;non-space-y;
-say 'once upon a time' ~~ &amp;space-y;</code></pre>
+say so 'onceuponatime'    ~~ &amp;non-space-y; # OUTPUT: «True␤»
+say so 'once upon a time' ~~ &amp;non-space-y; # OUTPUT: «False␤»
+say so 'onceuponatime'    ~~ &amp;space-y;     # OUTPUT: «False␤»
+say so 'once upon a time' ~~ &amp;space-y;     # OUTPUT: «True␤»</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -20590,15 +20564,18 @@ say 'once upon a time' ~~ &amp;space-y;</code></pre>
 <h3 id="_创建_grammar">45.2. 创建 Grammar</h3>
 <div class="paragraph">
 <p>　
-当使用 grammar 关键字而非 class 关键字声明来声明一个类时, 会自动得到以 <a href="https://docs.raku.org/type/Grammar">Grammar</a> 的父类。Grammars 应该只用于解析文本; 如果你想提取复杂的数据, 推荐 <a href="http://doc.raku.org/language/grammars#Action_Objects">action object</a>和 grammar 一块使用。</p>
+<a href="https://docs.raku.org/type/Grammar">Grammar</a> 是使用 grammar 关键字而不是 class 关键字声明类时, 它们自动获得的超类。Grammar 只能用于解析文本; 如果想提取复杂的数据, 则可以在 grammar 中添加 action, 或者建议将 <a href="http://doc.raku.org/language/grammars#Action_Objects">action 对象</a>和 grammar 结合使用。如果未使用 action 对象, 则 <code>.parse</code> 返回一个 <a href="https://docs.raku.org/type/Match">Match</a> 对象并默认把默认的匹配对象 <a href="https://docs.raku.org/syntax/$$SOLIDUS">$/</a> 设置为相同的值。</p>
 </div>
 <div class="sect3">
-<h4 id="_proto_regexes">45.2.1. Proto regexes</h4>
+<h4 id="_原型正则">45.2.1. 原型正则</h4>
 <div class="paragraph">
-<p><a href="https://docs.raku.org/type/Grammar">Grammars</a> 由 rules，token 和 regexes 组成; 他们实际上是方法，因为 grammars 是类。这些方法可以共享一个共同的名称和功能，因此可以使用 <a href="https://docs.raku.org/syntax/proto">proto</a>。</p>
+<p><a href="https://docs.raku.org/type/Grammar">Grammar</a> 由 rule, token 和 regex 组成; 他们实际上都是方法, 因为 grammar 是类。</p>
 </div>
 <div class="paragraph">
-<p>如果你有很多备选分支(alternations), 那么生成可读性好的代码或子类化(subclass)你的 grammar 可能会变得很困难。在下面的 <code>Actions</code> 类中, <code>TOP</code> 方法中的三元操作符并不理想, 并且当我们添加的操作越多, 它就变得越糟糕:</p>
+<p>这些方法可以共用一个名称和功能, 因此可以使用 <a href="https://docs.raku.org/syntax/proto">proto</a>。</p>
+</div>
+<div class="paragraph">
+<p>例如, 如果你有很多备选分支(alternations), 则可能难以生成可读性好的代码或将 grammar 子类化。在下面的 <code>Actions</code> 类中, <code>TOP</code> 方法中的三元操作符并不理想, 并且当我们添加的操作越多, 它就变得越糟糕:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -20617,12 +20594,11 @@ class Calculations {
 
 say Calculator.parse('2 + 3', actions =&gt; Calculations).made;
 
-# OUTPUT:
-# 5</code></pre>
+# OUTPUT: «5␤»</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>为了让事情变得更好, 我们可以在 tokens 身上使用看起来像 <code>:sym&lt;&#8230;&#8203;&gt;</code> 那样的副词来使用正则表达式原型(protoregexes):</p>
+<p>为了让事情变得更好, 我们可以在 token 上使用类似于 <code>:sym&lt;&#8230;&#8203;&gt;</code> 副词的原型正则表达式:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -20644,18 +20620,17 @@ class Calculations {
 
 say Calculator.parse('2 + 3', actions =&gt; Calculations).made;
 
-# OUTPUT:
-# 5</code></pre>
+# OUTPUT: «5␤»</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这个 grammar 中, 备选分支(alternation)已经被 <code>&lt;calc-op&gt;</code> 替换掉了, 它实质上是我们将要创建的一组值的名字。我们通过使用 <code>proto rule calc-op</code> 定义了一个 rule 原型类型(prototype) 来达成。我们之前的每一个备选分支已经被新的 rule <code>calc-op</code> 替换掉了并且备选分支的名字被附加上了 <code>:sym&lt;&gt;</code> 副词。</p>
+<p>在这个 grammar 中, 备选分支(alternation)已经被 <code>&lt;calc-op&gt;</code> 替换掉了, 这实际上是我们将要创建的一组值的名称。为此, 我们使用 <code>proto rule calc-op</code> 定义了一个 rule 原型类型(prototype)。我们之前的每个备选分支都由新的 rule <code>calc-op</code> 定义替换, 并且备选分支的名字附加有 <code>:sym&lt;&gt;</code> 副词。</p>
 </div>
 <div class="paragraph">
-<p>在 actions 类中, 我们现在摆脱了三目操作符, 仅仅只在 <code>$&lt;calc-op&gt;</code> 匹配对象上接收 <code>.made</code> 值。并且单独备选分支的 actions 现在和 grammar 遵守相同的命名模式:  <code>method calc-op:sym&lt;add&gt;</code> 和 <code>method calc-op:sym&lt;sub&gt;</code>。</p>
+<p>在声明 action 的类中, 我们现在摆脱了三目操作符, 仅从 <code>$&lt;calc-op&gt;</code> 匹配对象上获取 <code>.made</code> 值。现在各备选分支的 action 都遵循与 grammar 相同的命名模式:  <code>method calc-op:sym&lt;add&gt;</code> 和 <code>method calc-op:sym&lt;sub&gt;</code>。</p>
 </div>
 <div class="paragraph">
-<p>当你子类化(subclass)那个 grammar 和 actions 类的时候才能看到这个方法的真正魅力。假设我们想为 calculator 增加一个乘法功能:</p>
+<p>当你将 grammar 和 action 子类化时, 可以看到此方法的真正魅力。假设我们想为 calculator 增加一个乘法功能:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -20669,17 +20644,16 @@ class BetterCalculations is Calculations {
 
 say BetterCalculator.parse('2 * 3', actions =&gt; BetterCalculations).made;
 
-# OUTPUT:
-# 6</code></pre>
+# OUTPUT: «6␤»</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>所有我们需要添加的就是为 <code>calc-op</code> 组添加额外的 rule 和 action, 感谢正则表达式原型(protoregexes), 所有的东西都能正常工作。</p>
+<p>我们需要做的只是对 <code>calc-op</code> 组添加额外的 rule 和 action, 感谢原型正则表达式, 所有的东西都能正常工作。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_特殊的_tokens">45.3. 特殊的 Tokens</h3>
+<h3 id="_特殊的_token">45.3. 特殊的 token</h3>
 <div class="sect3">
 <h4 id="_top">45.3.1. TOP</h4>
 <div class="listingblock">
@@ -20690,26 +20664,43 @@ say BetterCalculator.parse('2 * 3', actions =&gt; BetterCalculations).made;
 </div>
 </div>
 <div class="paragraph">
-<p>The TOP token is the default first token attempted to match when parsing with a grammar—the root of the tree. Note that if you&#8217;re parsing with .parse method, token TOP is automatically anchored to the start and end of the string (see also: .subparse).</p>
+<p><code>TOP</code> token 是用 grammar 解析时, 尝试匹配的默认第一个 token。请注意, 如果使用 <a href="https://docs.raku.org/type/Grammar#method_parse">.parse</a> 方法进行解析, 那么 <code>token TOP</code> 会自动地锚定到字符串的开头和结尾。如果不想解析整个字符串, 请使用 <a href="https://docs.raku.org/type/Grammar#method_subparse">.subparse</a>。</p>
 </div>
 <div class="paragraph">
-<p><code>TOP</code> token 是默认的第一个尝试去匹配的 token , 当解析一个 grammar 的时候 - 那颗树的根。注意如果你正使用 <code>.parse</code> 方法进行解析, 那么 token TOP 被自动地锚定到字符串的开头和结尾(再看看 <code>.subparse</code>)。</p>
+<p>也可以使用 <code>rule TOP</code> 或 <code>regex TOP</code>。</p>
 </div>
 <div class="paragraph">
-<p>使用 <code>rule TOP</code> 或 <code>regex TOP</code> 也是可以接受的。</p>
-</div>
-<div class="paragraph">
-<p>在 <code>.parse</code>、<code>.subparse</code> 或 <code>.parsefile</code> Grammar 方法中使用 <code>:rule</code> 命名参数可以选择一个不同的 token 来进行首次匹配。</p>
+<p>在 <code>.parse</code>、<code>.subparse</code> 或 <code>.parsefile</code> 中使用 <code>:rule</code> 命名参数可以选择一个不同的 token 来进行首次匹配。 这些都是 <code>Grammar</code> 方法。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_ws">45.3.2. ws</h4>
 <div class="paragraph">
-<p>当使用 <code>rule</code> 而非 <code>token</code> 时, 原子(atom)后面的任何空白(whitespace)被转换为一个对 <code>ws</code> 的非捕获调用。即:</p>
+<p>默认的 <code>ws</code> 匹配零个或多个空白字符, 只要所匹配之处不在单词里面(用代码来表示就是 <code>regex ws { &lt;!ww&gt; \s* }</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">rule entry { &lt;key&gt; ’=’ &lt;value&gt; }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku"># First &lt;.ws&gt; matches word boundary at the start of the line
+# and second &lt;.ws&gt; matches the whitespace between 'b' and 'c'
+say 'ab   c' ~~ /&lt;.ws&gt; ab &lt;.ws&gt; c /; # OUTPUT: «｢ab   c｣␤»
+
+# Failed match: there is neither any whitespace nor a word
+# boundary between 'a' and 'b'
+say 'ab' ~~ /. &lt;.ws&gt; b/;             # OUTPUT: «Nil␤»
+
+# Successful match: there is a word boundary between ')' and 'b'
+say ')b' ~~ /. &lt;.ws&gt; b/;             # OUTPUT: «｢)b｣␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请记住, 我们对空白不感兴趣, 所以我们在 <code>ws</code> 前面加了一个点, 以避免捕获。由于空格通常是分隔符, 因此通常会找到它。</p>
+</div>
+<div class="paragraph">
+<p>当使用 <code>rule</code> 代替 <code>token</code> 时, 会默认启用 <code>:sigspace</code>, 并且将项和闭合圆括号/方括号之后的任何空白都转换为对 <code>ws</code> 的非捕获调用, 写为 <code>&lt;.ws&gt;</code>。 其中 <code>.</code> 表示不捕捉。 也就是说：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule entry { &lt;key&gt; '=' &lt;value&gt; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -20717,14 +20708,11 @@ say BetterCalculator.parse('2 * 3', actions =&gt; BetterCalculations).made;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">token entry { &lt;key&gt; &lt;.ws&gt; ’=’ &lt;.ws&gt; &lt;value&gt; &lt;.ws&gt; } # . = non-capturing</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">token entry { &lt;key&gt; &lt;.ws&gt; '=' &lt;.ws&gt; &lt;value&gt; &lt;.ws&gt; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>默认的 <code>ws</code> 匹配"空白"(whitespace), 例如空格序列(不管什么类型)、换行符、unspaces、或 heredocs。</p>
-</div>
-<div class="paragraph">
-<p>提供你自己的 <code>ws</code> token 是极好的:</p>
+<p>你也可以重新定义自己的 <code>ws</code> token:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -20739,13 +20727,20 @@ grammar Bar {
 </div>
 </div>
 <div class="paragraph">
-<p>上面的例子中, 在 Bar Gramamr 中重写了自己的 <code>ws</code>, 只匹配水平空白符, 所以 <code>\n\n</code> 匹配失败。</p>
+<p>甚至捕获空白, 但你需要显式地使用它。 请注意, 在下一个示例中, 我们使用 <code>token</code> 代替 <code>rule</code>, 因为后者会导致空白被隐式的非捕获 <code>.ws</code> 占用。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Foo { token TOP {\d &lt;ws&gt; \d} };
+my $parsed = Foo.parse: "3 3";
+say $parsed&lt;ws&gt;; # OUTPUT: «｢ ｣␤»</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_sym">45.3.3. sym</h4>
 <div class="paragraph">
-<p><code>&lt;sym&gt;</code> token 可以在原型正则表达式(proto regex) 中使用，以匹配那个特定正则表达式的 <code>:sym</code> 副词的字符串值：</p>
+<p><code>&lt;sym&gt;</code> token 可以在原型正则表达式中使用, 以匹配该特定正则表达式的 <code>:sym</code> 副词的字符串值：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -20763,16 +20758,16 @@ grammar Bar {
 </div>
 </div>
 <div class="paragraph">
-<p>当你已经将原型正则表达式与要匹配的字符串区分开来时，这很方便，因为使用 <code>&lt;sym&gt;</code> token 可防止重复这些字符串。</p>
+<p>当你已经将原型正则表达式与要匹配的字符串区分开来时, 这会派上用场, 因为使用 <code>&lt;sym&gt;</code> token 可防止重复这些字符串。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_总是成功断言">45.3.4. 总是成功断言</h4>
 <div class="paragraph">
-<p><code>&lt;?&gt;</code> is the always succeed assertion(总是匹配成功). 当它用作 grammar 中的 token 时, 它可以被用于触发一个 Action 类方法。在下面的 grammar 中, 我们查找阿拉伯数字并且使用 <code>always succeed assertion</code> 定义一个 succ token。</p>
+<p><code>&lt;?&gt;</code> 是始终成功断言。 当它用作 grammar 中的 token 时, 它可以被用于触发 Action 类方法。在下面的 grammar 中, 我们查找阿拉伯数字并且使用始终成功断言定义 <code>succ</code> token。</p>
 </div>
 <div class="paragraph">
-<p>在 action 类中, 我们使用对 succ 方法的调用来设置(在这个例子中, 我们在 @!numbers 中准备了一个新元素)。在 <code>digit</code> 方法中, 我们把阿拉伯数字转换为梵文数字并且把它添加到 @!numbers 数组的最后一个元素中。多亏了 <code>succ</code>, 最后一个元素总是当前正被解析的 <code>digit</code> 数字的数。</p>
+<p>在 action 类中, 我们使用对 <code>succ</code> 方法的调用来设置(在这个例子中, 我们在 <code>@!numbers</code> 中准备了一个新元素)。在 <code>digit</code> 方法中, 我们把阿拉伯数字转换为梵文数字并且把它添加到 <code>@!numbers</code> 数组的最后一个元素中。多亏了 <code>succ</code>, 最后一个元素总是当前正被解析的 <code>digit</code> 数字的数。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -20780,20 +20775,19 @@ grammar Bar {
     rule TOP {
         [ &lt;.succ&gt; &lt;digit&gt;+ ]+
     }
-    token succ   { &lt;?&gt; }
+    token succ  { &lt;?&gt; }
     token digit { &lt;[0..9]&gt; }
 }
 
 class Devanagari {
     has @!numbers;
-    method digit ($/) { @!numberslink:2358[*-1] ~= $/.ord.&amp;[+].chr }
+    method digit ($/) { @!numbers.tail ~= &lt;०  १  २  ३  ४  ५  ६  ७  ८  ९&gt;[$/] }
     method succ  ($)  { @!numbers.push: ''     }
     method TOP   ($/) { make @!numbers[^(*-1)] }
 }
 
 say Digifier.parse('255 435 777', actions =&gt; Devanagari.new).made;
-# OUTPUT:
-# (२५५ ४३५ ७७७)</code></pre>
+# OUTPUT: «(२५५ ४३५ ७७७)␤»</code></pre>
 </div>
 </div>
 </div>
@@ -20801,7 +20795,7 @@ say Digifier.parse('255 435 777', actions =&gt; Devanagari.new).made;
 <div class="sect2">
 <h3 id="_grammar_中的方法">45.4. Grammar 中的方法</h3>
 <div class="paragraph">
-<p>在 grammar 中使用 <code>method</code> 代替 <code>rule</code> 或 <code>token</code> 也是可以的, 只要它们返回一个 <a href="https://docs.raku.org/type/Cursor">Cursor</a> 类型:</p>
+<p>在 grammar 中使用 <code>method</code> 代替 <code>rule</code> 或 <code>token</code> 也是可以的, 只要它们返回一个 <a href="https://docs.raku.org/type/Match">Match</a>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -20815,27 +20809,25 @@ say Digifier.parse('255 435 777', actions =&gt; Devanagari.new).made;
 </div>
 </div>
 <div class="paragraph">
-<p>上面的 grammar 会根据 parse 方法提供的参数尝试不同的匹配:</p>
+<p>上面的 grammar 会根据提供给 <code>subparse</code> 方法的参数尝试不同的匹配:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">say +DigitMatcher.subparse: '12७१७९०९', args =&gt; \(:full-unicode);
-# OUTPUT:
-# 12717909
+# OUTPUT: «12717909␤»
 
 say +DigitMatcher.subparse: '12७१७९०९', args =&gt; \(:!full-unicode);
-# OUTPUT:
-# 12</code></pre>
+# OUTPUT: «12␤»</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_grammar_中的动态变量">45.5. Grammar 中的动态变量</h3>
 <div class="paragraph">
-<p>可以在标记中定义变量，方法是在定义它们的代码行前面加上 <code>:</code>。 通过将花括号括起来，可以将任意代码嵌入到 token 中的任何位置。 这对于保持标记之间的状态很有用，可用于更改语法解析文本的方式。 在 token 中使用动态变量(带有 <code>$<strong></code>，<code>@</strong></code>，<code>&amp;*</code>，<code>%*</code> twigils 的变量)可在其定义的那个变量内级联遍历此后定义的所有 token，从而避免了将它们作为参数从 token 传递到 token。</p>
+<p>可以在 token 标记中定义变量, 方法是在定义变量的代码行前面加上 <code>:</code>。 通过花括号, 可以将任意代码嵌入到 token 中的任何位置。 这对于保存 token 标记之间的状态很有用, 可用于更改 grammar 解析文本的方式。 在 token 中使用动态变量(带有 <code>$<strong></code>, <code>@</strong></code>, <code>&amp;*</code>, <code>%*</code> twigils 的变量)可在其定义的那个变量内级联遍历此后定义的所有 token, 从而避免了将它们作为参数从 token 传递到 token。</p>
 </div>
 <div class="paragraph">
-<p>动态变量的一种用途是匹配保护。 此示例使用防护措施来解释哪个正则表达式类按字面意义解析空格：</p>
+<p>动态变量的一种用途是匹配保护。 此示例使用守卫来解释哪个正则表达式类按字面意义解析空格：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -20857,7 +20849,7 @@ say +DigitMatcher.subparse: '12७१७९०९', args =&gt; \(:!full-unicode)
 </div>
 </div>
 <div class="paragraph">
-<p>在这里，仅当提及规则，标记或正则表达式所指定的状态与正确的防护匹配时，诸如“默认情况下对重要空白使用规则”之类的文本才会匹配：</p>
+<p>在这里, 仅当提及 rules, tokens 或 regexes 所指定的状态与正确的守卫匹配时, 诸如 "use rules for significant whitespace by default" 之类的文本才会匹配：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -20878,7 +20870,7 @@ say GrammarAdvice.subparse("use regexes for significant whitespace by default")
 <div class="sect2">
 <h3 id="_grammar_中的属性">45.6. Grammar 中的属性</h3>
 <div class="paragraph">
-<p>属性可以在语法中定义。 但是，只能通过方法访问它们。 尝试从标记中使用它们会引发异常，因为标记是 <a href="https://docs.raku.org/type/Match">Match</a> 的方法，而不是语法本身。 请注意，从令牌中调用的方法中更改属性只会修改该令牌自己的 <code>match</code> 对象的属性！ 如果公开，可以在解析后返回的匹配项中访问语法属性：</p>
+<p>Grammar 中可以定义属性。 但是, 只能通过方法访问属性。 尝试从 token 标记中使用它们会引发异常, 因为 token 标记是 <a href="https://docs.raku.org/type/Match">Match</a> 的方法, 而不是 grammar 本身。 请注意, 从 token 标记中调用的方法中更改属性只会修改该 token 自己的 <code>match</code> 对象的属性! 如果将 grammar 属性设置为公开, 则可以在解析后返回的匹配项中访问 grammar 属性：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -20948,13 +20940,13 @@ say "field(\"$m.&lt;field&gt;[0]\")={$m.&lt;field&gt;[0].invalid}";
 </div>
 </div>
 <div class="paragraph">
-<p>注意：如果我们想以某种方式（在此不完整示例的上下文中）严格遵守HTTP / 1.1（RFC 2616），则需要$ crlf和令牌&lt;.crlf&gt;。 原因是，与RFC 2616相比，Raku是Unicode兼容的，并且\ r \ n需要解释为唯一的\ n，从而阻止语法正确解析包含\ r \ n的字符串，这是预期的。 HTTP协议。 请注意属性无效对于每个组件是如何局部的（例如&lt;type&gt;的值为True，而&lt;path&gt;的值为False）。 还要注意我们如何有一个接受方法，否则该属性无效的原因将是未初始化的（即使存在）。</p>
+<p>注意：如果我们想以某种方式（在此不完整示例的上下文中）严格遵守 HTTP/1.1(RFC 2616), 则 <code>$crlf</code> 和 token <code>&lt;.crlf&gt;</code> 是必需的。 原因是, 与 RFC 2616 相比, Raku 是 Unicode 兼容的, 并且 <code>\r\n</code> 需要解释为单个 <code>\n</code>, 从而阻止 grammar 在 HTTP 协议的某些场景中正确解析包含 <code>\r\n</code> 的字符串。 请注意属性 <code>invalid</code> 在每个组件中都是本地的(例如, 对于 <code>&lt;type&gt;</code> 其值为 <code>True</code>, 而对于 <code>&lt;path&gt;</code> 其 值为 <code>False</code>)。 还要注意我们有一个 <code>accept</code> 方法, 否则 <code>invalid</code> 属性将是未初始化的(即使存在)。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_传递参数到_grammar_中">45.7. 传递参数到 Grammar 中</h3>
 <div class="paragraph">
-<p>要将参数传递到语法中，可以在语法的任何解析方法上使用：args的命名参数。 传递的参数应在列表中。</p>
+<p>要将参数传递到 grammar 中, 可以在 grammar 的任何解析方法上使用 <code>:args</code> 命名参数。 传递的参数应在列表中。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -20970,13 +20962,13 @@ say demonstrate-arguments.parse("I like sweets", :args(("sweets",)));
 </div>
 </div>
 <div class="paragraph">
-<p>一旦传入参数，就可以在语法内调用命名的正则表达式。</p>
+<p>一旦传入参数, 就可以在 grammar 内调用命名正则表达式。</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">grammar demonstrate-arguments-again {
     rule TOP ($word) {
-    &lt;phrase-stem&gt;&lt;added-word($word)&gt;
+        &lt;phrase-stem&gt;&lt;added-word($word)&gt;
     }
 
     rule phrase-stem {
@@ -20995,7 +20987,7 @@ say demonstrate-arguments-again.parse("I like vegetables", :args(("vegetables",)
 </div>
 </div>
 <div class="paragraph">
-<p>另外，您可以初始化动态变量并在语法中使用任何这样的参数。</p>
+<p>另外, 你可以初始化动态变量并在 grammar 中使用任何这样的参数。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -21023,10 +21015,10 @@ say demonstrate-arguments-dynamic.parse("I like everything else",
 <h3 id="_action_object">45.8. Action Object</h3>
 <div class="paragraph">
 <p>　
-一个成功的 grammar 匹配会给你一棵<a href="https://docs.raku.org/type/Match">匹配</a>对象(Match objects)的解析树, 匹配树(match tree)到达的越深, 则 grammar 中的分支越多, 那么在匹配树中航行以获取你真正感兴趣的东西就变的越来越困难。</p>
+一个成功的 grammar 匹配会给你一棵<a href="https://docs.raku.org/type/Match">匹配</a>对象的解析树, 匹配树越深入, 则 grammar 中的分支越多, 那么在匹配树中导航以获取你真正感兴趣的信息就变的越来越困难。</p>
 </div>
 <div class="paragraph">
-<p>为了避免你在匹配树(match tree)中迷失, 你可以提供一个 action object。grammar 中每次解析成功一个具名规则(named rule)之后, 它就会尝试调用一个和该 grammar rule 同名的方法, 并传递给这个方法一个 <code>Match</code> 对象作为位置参数。如果不存在这样的同名方法, 就跳过。</p>
+<p>为了避免你在匹配树中迷失, 你可以提供一个 action 对象。Grammar 中每次成功解析具名规则(named rule)之后, 它都会尝试调用一个和该 grammar rule 同名的方法, 并给这个方法传递一个 <code>Match</code> 对象作为位置参数。如果不存在这样的同名方法, 就跳过。</p>
 </div>
 <div class="paragraph">
 <p>这儿有一个例子来说明 grammar 和 action：</p>
@@ -21034,25 +21026,25 @@ say demonstrate-arguments-dynamic.parse("I like everything else",
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">grammar TestGrammar {
-    token TOP { ^ \d+ $ }
+    token TOP { \d+ }
 }
 
 class TestActions {
     method TOP($/) {
-        $/.make(2 + $/);  # 等价于 $/.make: 2 + $/
+        $/.make(2 + $/);
     }
 }
-my $actions = TestActions.new; # 创建 Action 实例
-my $match   = TestGrammar.parse('40', :$actions);
-say $match;       # ｢40｣
-say $match.made;  # 42</code></pre>
+
+my $match = TestGrammar.parse('40', actions =&gt; TestActions.new);
+say $match;         # OUTPUT: «｢40｣␤»
+say $match.made;    # OUTPUT: 42</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>TestActions</code> 的一个实例变量作为具名参数 <code>actions</code> 被传递给 <code>parse</code> 调用, 然后当 token <code>TOP</code> 匹配成功之后, 就会自动调用方法 <code>TOP</code>, 并传递匹配对象(match object) 作为方法的参数。</p>
+<p><code>TestActions</code> 的一个实例作为具名参数 <code>actions</code> 被传递给 <a href="https://docs.raku.org/routine/parse">parse</a> 调用, 然后当 token <code>TOP</code> 匹配成功之后, 就会自动调用方法 <code>TOP</code>, 并传递匹配对象作为此方法的参数。</p>
 </div>
 <div class="paragraph">
-<p>为了让参数是匹配对象更清楚, 上面的例子使用 <code>$/</code> 作为 action 方法的参数名, 尽管那仅仅是一个方便的约定, 跟内在无关。 <code>$match</code> 也可以。(尽管使用 <code>$/</code> 可以提供把 <code>$</code> 作为 <code>$/</code> 的缩写的优势。)</p>
+<p>为了明确说明该参数是匹配对象, 该示例使用 <code>$/</code> 作为 action 方法的参数名, 尽管这只是一个方便的约定, 没有内在的含义。 <code>$match</code> 也可以工作, 尽管使用 <code>$/</code> 确实提供了将 <code>$&lt;capture&gt;</code> 作为 <code>$/&lt;capture&gt;</code> 的快捷方式的优势; 无论如何, 我们在 <code>TOP</code> 的 action 中使用了另一个参数。</p>
 </div>
 <div class="paragraph">
 <p>下面是一个更有说服力的例子:</p>
@@ -21061,16 +21053,13 @@ say $match.made;  # 42</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">grammar KeyValuePairs {
     token TOP {
-        [&lt;pair&gt; \n+]*
+        [&lt;pair&gt; \v+]*
     }
 
-    token ws {
-        \h*
-    }
-
-    rule pair {
+    token pair {
         &lt;key=.identifier&gt; '=' &lt;value=.identifier&gt;
     }
+
     token identifier {
         \w+
     }
@@ -21081,21 +21070,25 @@ class KeyValuePairsActions {
         $/.make: $&lt;key&gt;.made =&gt; $&lt;value&gt;.made
     }
     method identifier($/) {
-        # 子例程 `make` 和在 $/ 上调用 .make 相同
+        # subroutine `make` is the same as calling .make on $/
         make ~$/
     }
+
     method TOP ($match) {
-        # TOP 方法的参数可以使用任意变量名, 而不仅仅是 $/
+        # can use any variable name for parameter, not just $/
         $match.make: $match&lt;pair&gt;».made
     }
 }
 
-my $res = KeyValuePairs.parse(q:to/EOI/, :actions(KeyValuePairsActions)).made;
-    second=b
-    hits=42
-    perl=6
-    EOI
-for @$res -&gt; $p {
+
+my $actions = KeyValuePairsActions;
+my @res = KeyValuePairs.parse(q:to/EOI/, :$actions).made;
+second=b
+hits=42
+perl=6
+EOI
+
+for @res -&gt; $p {
     say "Key: $p.key()\tValue: $p.value()";
 }</code></pre>
 </div>
@@ -21111,13 +21104,13 @@ Key: perl       Value: 6</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>pair</code> 这个 rule, 解析一对由等号分割的 pair, 并且给 <code>identifier</code> 这个 token 各自起了别名。对应的 action 方法构建了一个 <code>Pair</code> 对象, 并使用子匹配对象(sub match objects)的 <code>.made</code> 属性。这也暴露了一个事实: submatches 的 action 方法在那些调用正则/外部正则之前就被调用。所以 action 方法是按后续调用的。</p>
+<p><code>pair</code> 这个 rule, 解析一对由等号分割的 pair, 将对 token <code>identifier</code> 的两次调用起了别名以分割捕获名称, 从而使它们使用起来更容易, 更直观, 因为它们会用在对应的 action 中。对应的 action 方法构建了一个 <a href="https://docs.raku.org/type/Pair">Pair</a> 对象, 并使用子匹配对象的 <code>.made</code> 属性。这(就如 <code>TOP</code> action 方法一样)也暴露了一个事实: 子匹配的 action 方法在那些调用正则/外部正则之前就被调用。所以 action 方法是按<a href="https://en.wikipedia.org/wiki/Tree_traversal#Post-order">后续</a>调用的。</p>
 </div>
 <div class="paragraph">
 <p>名为 <code>TOP</code> 的 action 方法仅仅把由 <code>pair</code> 这个 rule 的多重匹配组成的所有对象收集到一块, 然后以一个列表的方式返回。</p>
 </div>
 <div class="paragraph">
-<p>注意 <code>KeyValuePairsActions</code> 是作为一个类型对象(type object)传递给方法 `parse`的, 这是因为 action 方法中没有一个使用属性(属性只能通过实例来访问)。</p>
+<p>还要注意 <code>KeyValuePairsActions</code> 是作为类型对象传递给 <code>parse</code> 方法的, 这是因为 action 方法中没有使用属性(属性只能通过实例来访问)。</p>
 </div>
 <div class="paragraph">
 <p>我们可以使用继承扩展上面的例子。</p>
@@ -21146,7 +21139,7 @@ token pair {
 </div>
 </div>
 <div class="paragraph">
-<p>我们将对前面的示例进行分类（实际上是对语法进行分类）。 我们通过添加注释来覆盖对的定义； 以前的TOP规则已降级为配置元素，并且有一个新的TOP现在考虑由垂直空间分隔的配置元素集。 我们还可以通过子类化动作类来重用动作：</p>
+<p>我们将对前面的示例进行子类化（实际上是对 grammar 进行子类化）。 我们通过添加注释来重写 <code>pair</code> 的定义； 以前的 <code>TOP</code> rule 已降级为 <code>configuration-element</code>, 并且有一个新的 <code>TOP</code> 现在考虑由垂直空白分隔的配置元素集。 我们还可以通过子类化 action 类来重用 action：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -21168,7 +21161,7 @@ method TOP ($match) {
 </div>
 </div>
 <div class="paragraph">
-<p>所有现有的动作都可以重用，尽管显然必须为语法中的新元素（包括TOP）编写新的动作。 这些可以从此脚本一起使用：</p>
+<p>所有现有的 action 都可以重用, 尽管显然必须为 grammar 中的新元素(包括 <code>TOP</code>)编写新的 action。 这些可以和此脚本一起使用：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -21203,21 +21196,7 @@ Element→ third c hits 33</code></pre>
 <p>其它情况下, action 方法可能会在属性中保存状态。 那么这当然需要你传递一个实例给 <code>parse</code> 方法。</p>
 </div>
 <div class="paragraph">
-<p>注意, <code>token ws</code> 有点特殊: 当 <code>:sigspace</code> 开启的时候(就是我们使用 <code>rule`的时候), 我们覆写的 `ws</code> 会替换某些空白序列。这就是为什么 <code>rule pair</code> 中等号两边的空格解析没有问题并且闭合 <code>}</code> 之前的空白不会狼吞虎咽地吃下换行符, 因为换行符在 <code>TOP</code> token 已经占位置了, 并且 token 不会回溯。</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"># ws 的内置定义
-/ &lt;.ws&gt; /                # match "whitespace":
-                         #   \s+ if it's between two \w characters,
-                         #   \s* otherwise
-
-&gt; my token ws { \h* } # 重写 ws 这个内置的 token
-&gt; say so "\n" ~~ &amp;ws # True</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>所以 <code>&lt;.ws&gt;</code> 内置的定义是：如果空白在两个 <code>\w</code> 单词字符之间, 则意思为 <code>\s+</code>, 否则为 <code>\s*</code>。 我们可以重写 <code>ws</code> 关于空白的定义, 重新定义我们需要的空白。比如把 <code>ws</code> 定义为 <code>{ \h* }</code> 就是所有水平空白符, 甚至可以将`ws` 定义为非空白字符。例如: <code>token ws { 'x' }</code></p>
+<p>注意, <code>token ws</code> 有点特殊: 当 <code>:sigspace</code> 开启的时候(就是我们使用 <code>rule`的时候), 它会替换某些空白序列。这就是为什么 `rule pair</code> 中等号周围的空格可以正常工作的原因, 以及为什么在闭合 <code>}</code> 之前的空白不会吞噬 token <code>TOP</code> 中的换行符的原因。</p>
 </div>
 </div>
 </div>
