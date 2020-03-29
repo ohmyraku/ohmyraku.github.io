@@ -20491,8 +20491,7 @@ EOH
 <div class="sect2">
 <h3 id="_具名正则">45.1. 具名正则</h3>
 <div class="paragraph">
-<p>　
-Grammar 的主要组成部分是 <a href="http://doc.raku.org/language/regexes">regexes</a>。 而 Raku 的 <a href="http://doc.raku.org/language/regexes">regexes</a> 语法不在该文档的讨论范围内, 具名正则有自己的特殊语法, 这跟子例程的定义很像:</p>
+<p>Grammar 的主要组成部分是 <a href="http://doc.raku.org/language/regexes">regexes</a>。 而 Raku 的 <a href="http://doc.raku.org/language/regexes">regexes</a> 语法不在该文档的讨论范围内, 具名正则有自己的特殊语法, 这跟子例程的定义很像:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -20514,13 +20513,6 @@ say so "15 + 4.5" ~~ /&lt;number&gt;\s* '+' \s*&lt;number&gt;/ # OUTPUT: «True�
 </div>
 <div class="paragraph">
 <p><code>regex</code> 不是具名正则的唯一声明符, 实际上 , regex 声明符用的最少。 大多数情况下, 使用的是 <code>token</code> 或 <code>rule</code> 声明符。token 和 rule 这两个声明符都是带棘齿(<code>ratcheing</code>)的, 这意味着如果匹配失败, 那么匹配引擎就不会回溯并继续尝试匹配了。这通常可以满足你的需求, 但不适用于所有情况:</p>
-</div>
-<div class="quoteblock">
-<blockquote>
-<div class="paragraph">
-<p>棘轮用于单向驱动, 防止逆转。</p>
-</div>
-</blockquote>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -20563,8 +20555,7 @@ say so 'once upon a time' ~~ &amp;space-y;     # OUTPUT: «True␤»</code></pre
 <div class="sect2">
 <h3 id="_创建_grammar">45.2. 创建 Grammar</h3>
 <div class="paragraph">
-<p>　
-<a href="https://docs.raku.org/type/Grammar">Grammar</a> 是使用 grammar 关键字而不是 class 关键字声明类时, 它们自动获得的超类。Grammar 只能用于解析文本; 如果想提取复杂的数据, 则可以在 grammar 中添加 action, 或者建议将 <a href="http://doc.raku.org/language/grammars#Action_Objects">action 对象</a>和 grammar 结合使用。如果未使用 action 对象, 则 <code>.parse</code> 返回一个 <a href="https://docs.raku.org/type/Match">Match</a> 对象并默认把默认的匹配对象 <a href="https://docs.raku.org/syntax/$$SOLIDUS">$/</a> 设置为相同的值。</p>
+<p><a href="https://docs.raku.org/type/Grammar">Grammar</a> 是使用 grammar 关键字而不是 class 关键字声明类时, 它们自动获得的超类。Grammar 只能用于解析文本; 如果想提取复杂的数据, 则可以在 grammar 中添加 action, 或者建议将 <a href="http://doc.raku.org/language/grammars#Action_Objects">action 对象</a>和 grammar 结合使用。如果未使用 action 对象, 则 <code>.parse</code> 返回一个 <a href="https://docs.raku.org/type/Match">Match</a> 对象并默认把默认的匹配对象 <a href="https://docs.raku.org/syntax/$$SOLIDUS">$/</a> 设置为相同的值。</p>
 </div>
 <div class="sect3">
 <h4 id="_原型正则">45.2.1. 原型正则</h4>
@@ -21014,8 +21005,7 @@ say demonstrate-arguments-dynamic.parse("I like everything else",
 <div class="sect2">
 <h3 id="_action_object">45.8. Action Object</h3>
 <div class="paragraph">
-<p>　
-一个成功的 grammar 匹配会给你一棵<a href="https://docs.raku.org/type/Match">匹配</a>对象的解析树, 匹配树越深入, 则 grammar 中的分支越多, 那么在匹配树中导航以获取你真正感兴趣的信息就变的越来越困难。</p>
+<p>一个成功的 grammar 匹配会给你一棵<a href="https://docs.raku.org/type/Match">匹配</a>对象的解析树, 匹配树越深入, 则 grammar 中的分支越多, 那么在匹配树中导航以获取你真正感兴趣的信息就变的越来越困难。</p>
 </div>
 <div class="paragraph">
 <p>为了避免你在匹配树中迷失, 你可以提供一个 action 对象。Grammar 中每次成功解析具名规则(named rule)之后, 它都会尝试调用一个和该 grammar rule 同名的方法, 并给这个方法传递一个 <code>Match</code> 对象作为位置参数。如果不存在这样的同名方法, 就跳过。</p>
