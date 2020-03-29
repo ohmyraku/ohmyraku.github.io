@@ -155,7 +155,7 @@ if (theme && theme !== "1") {
 <p>这是<a href="https://andrewshitov.com/creating-a-compiler-with-raku/">使用 Raku 创建编译器</a>的一章。</p>
 </div>
 <div class="paragraph">
-<p>让我们从一个简单的解释器程序开始研究 Raku 强大的 Grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。</p>
+<p>让我们从一个简单的解释器程序开始研究 Raku 强大的 grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -165,13 +165,13 @@ say x;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在理解此代码的含义时，您不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。</p>
+<p>在理解此代码的含义时，你不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。</p>
 </div>
 <div class="paragraph">
-<p>该程序声明一个名为 <code>x</code> 的变量，为其赋一个整数值，然后将该值输出到控制台。</p>
+<p>该程序声明一个名为 <code>x</code> 的变量，为其赋一个整数值，然后将该值打印到控制台。</p>
 </div>
 <div class="paragraph">
-<p>假设您将代码保存在文件 <code>test.lng</code> 中。 现在让我们使用 Raku 读取它。</p>
+<p>假设你将代码保存在文件 <code>test.lng</code> 中。 现在让我们使用 Raku 读取它。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -188,12 +188,12 @@ say $code;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果您安装了 Raku，则会打印出我们测试程序的内容。</p>
+<p>如果你安装了 Raku，则会打印出我们测试程序的内容。</p>
 </div>
 <div class="sect2">
 <h3 id="_grammar">1.1. Grammar</h3>
 <div class="paragraph">
-<p>现在是时候使用 Raku grammar 解析程序了。 从语法上讲，grammar 是类，但是它们使用正则表达式描述其方法的行为，这些方法又称为 <strong>rule</strong> 和 <strong>token</strong>。 第一个应用的 <strong>rule</strong> 通常称为 <code>TOP</code>; Raku 选择它为默认开始规则。 语法用于解析某些文本，因此只需对已定义的语法调用 <code>parse</code> 方法并将文本传递给它即可。 所有这些都在我们的第一个程序中得到了证明：</p>
+<p>现在是时候使用 Raku grammar 解析程序了。 从语法上讲，grammar 是类，但是它们使用正则表达式描述其方法的行为，这些方法又称为 <strong>rule</strong> 和 <strong>token</strong>。 第一个应用的 <strong>rule</strong> 通常称为 <code>TOP</code>; Raku 选择它为默认开始规则。 Grammar 用于解析某些文本，因此只需对已定义的 grammar 调用 <code>parse</code> 方法并将文本传递给它即可。 所有这些都在我们的第一个程序中得到了证明：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -209,13 +209,13 @@ say $result;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这里，定义了语法 Lingua。 它会描述我们的目标语言，目前只有一条规则，这是应用于 <code>$code</code> 中包含的 Lingua 代码的第一个和最后一个规则。</p>
+<p>在这里，定义了 grammar Lingua。 它会描述我们的目标语言，目前只有一条规则，这是应用于 <code>$code</code> 中包含的 Lingua 代码的第一个和最后一个规则。</p>
 </div>
 <div class="paragraph">
-<p>TOP 规则的主体是与任意行匹配的正则表达式：点与任何字符都匹配，并且星号允许重复任意数量。 TOP 方法以静默方式将正则表达式锚定在字符串的开头和结尾，因此它实际上等效于 <code>^.*$</code>。</p>
+<p><code>TOP</code> 规则的主体是与任意行匹配的正则表达式：点与任何字符都匹配，并且星号允许重复任意数量。 <code>TOP</code> 方法以静默方式将正则表达式锚定在字符串的开头和结尾，因此它实际上等效于 <code>^.*$</code>。</p>
 </div>
 <div class="paragraph">
-<p>再次运行 lingua.raku，您会看到解析器设法读取了整个程序。 这是控制台中打印的内容：</p>
+<p>再次运行 lingua.raku，你会看到解析器设法读取了整个程序。 这是控制台中打印的内容：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -226,13 +226,13 @@ say x;
 </div>
 </div>
 <div class="paragraph">
-<p>这些方括号表明这不是已打印的常规字符串。 在我们的例子中，<code>$result</code> 变量包含一个 Lingua 类的对象。</p>
+<p>这些方括号表明这打印的不是常规字符串。 在我们的例子中，<code>$result</code> 变量包含一个 Lingua 类的对象。</p>
 </div>
 <div class="paragraph">
-<p>从 Lingua 程序中可以看到，其语句用分号分隔。 为了准确起见，您必须确定语句是用分号分隔还是应该以分号结尾。 区别在于，在第一种情况下，您不必在最后一条语句之后（例如，在程序末尾）加上分号。 Raku 语法允许实现这两种选择。</p>
+<p>从 Lingua 程序中可以看到，其语句用分号分隔。 为了准确起见，你必须确定语句是用分号分隔还是应该以分号结尾。 区别在于，在第一种情况下，你不必在最后一条语句之后（例如，在程序末尾）加上分号。 Raku 的 grammar 允许实现这两种选项。</p>
 </div>
 <div class="paragraph">
-<p>因此，该程序由许多用分号分隔的语句组成。 在 Raku 语法中，您可以通过以下方式表达这一点：</p>
+<p>因此，该程序由许多用分号分隔的语句组成。 在 Raku 的 grammar 中，你可以通过以下方式表达这一点：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -242,10 +242,10 @@ say x;
 </div>
 </div>
 <div class="paragraph">
-<p>现在，使用另一个实体语句描述 TOP 规则。 可以重复多次（包括不重复），并且如果有多个语句，则必须用 ';' 分隔。 字符。 如果您更改定义并输入 <code>%</code> 而不是 <code>%%</code>，则该规则将要求在每个语句之后使用分号。</p>
+<p>现在，使用另一个实体, 即 <code>statement</code> 来描述 <code>TOP</code> 规则。 可以重复多次（包括不重复），并且如果有多个语句，则必须用 ';' 字符分隔。 如果你更改定义并输入 <code>%</code> 而不是 <code>%%</code>，则该规则将要求在每个语句后面必需有分号。</p>
 </div>
 <div class="paragraph">
-<p>语句本身是另一条规则，我们首先可以定义它是非常模糊的：</p>
+<p><code>statement</code> 本身是另一条规则，我们首先可以模糊地定义它：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -258,7 +258,7 @@ say x;
 <p>它匹配除分号字符外的所有内容。 空语句也通过此过滤器。</p>
 </div>
 <div class="paragraph">
-<p>通过此更改，解释器现在将拆分语句并发出以下输出：</p>
+<p>通过此更改，解释器现在将分割语句并发出以下输出：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -273,10 +273,10 @@ say x;
 </div>
 </div>
 <div class="paragraph">
-<p>第一个块显示输入程序的整个文本（所有文本均已匹配并被使用），然后显示四个单独的语句。 最后一个语句为空，因为原始文件在最后一个非空字符之后包含换行符，并且语句规则允许空语句。</p>
+<p>第一个块显示输入程序的整个文本（所有文本均已匹配并被使用），然后显示四个单独的语句。 最后一个语句为空，因为原始文件在最后一个非空字符之后包含换行符，并且 <code>statement</code> 规则允许空语句。</p>
 </div>
 <div class="paragraph">
-<p>我们的代码中有三种不同类型的语句。 它们是变量声明，赋值和调用内置函数。 可以很容易地用语法表示：</p>
+<p>我们的代码中有三种不同类型的语句。 它们是变量声明，赋值和调用内置函数。 可以很容易地用 grammar 表示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -288,10 +288,10 @@ say x;
 </div>
 </div>
 <div class="paragraph">
-<p>竖线界定规则的替代分支。 形式上，只需列出两个选项条即可列出三个选项，但是为了使代码美观，您可以再添加一个选项条，以使它们在代码轮廓中形成一条较长的垂直线。 如果这样做，则语法不会添加空匹配项作为第一种选择。 顺便说一句，Raku 的另一个优点是它允许在变量和方法的名称中使用连字符，并且我更喜欢 variable-declaration 而不是 variable_declaration。</p>
+<p>竖线界定规则的备选分支。 形式上，只需列出两个垂直条即可列出三个选项，但是为了使代码美观，你可以再添加一个垂直条，以使它们在代码轮廓中形成一条较长的垂直线。 如果这样做，则 grammar 不会添加空匹配项作为第一个备选分支。 顺便说一句，Raku 的另一个优点是它允许在变量和方法名中使用连字符，并且我更喜欢 <code>variable-declaration</code> 而不是 <code>variable_declaration</code>。</p>
 </div>
 <div class="paragraph">
-<p>查看驻留在 test.lng 中的测试程序，我们可以为语法定义新规则：</p>
+<p>查看驻留在 <code>test.lng</code> 中的测试程序，我们可以为该 grammar 定义新规则：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -309,7 +309,7 @@ rule function-call {
 </div>
 </div>
 <div class="paragraph">
-<p>带引号的字符串（例如"my"和"="）将文学与目标语言中的相应语法项进行匹配。 尖括号中的名称是对我们需要定义以完成语法的其他规则或标记的引用。 这是我们的第一个标记：</p>
+<p>带引号的字符串（例如 <code>'my'</code> 和 <code>'='</code>）将字面值与目标语言中的相应语法项进行匹配。 尖括号中的名称是对我们需要定义以完成 grrammar 的其他规则或标记的引用。 这是我们的第一个标记：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -322,7 +322,7 @@ rule function-call {
 <p>它与可以组成一个单词的一系列字符匹配（因此，至少包括字母，数字和下划线）。 另请注意，变量名称中至少应包含一个字符。</p>
 </div>
 <div class="paragraph">
-<p><strong>rule</strong> 和 <strong>token</strong> 之间的主要区别是 Raku 处理空白的方式。 例如，看一下变量声明 <strong>rule</strong> 的主体：</p>
+<p><strong>rule</strong> 和 <strong>token</strong> 之间的主要区别是 Raku 处理空白的方式。 例如，看一下 <code>variable-declaration</code> <strong>rule</strong> 的主体：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -339,7 +339,7 @@ my    x</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>您要创建令牌而不是规则，只能匹配 myx。 如您所见，语法中的标记非常适合诸如变量名或关键字之类的终端。</p>
+<p>如果你创建 <code>token</code> 而不是 <code>rule</code>，则只能匹配 <code>myx</code>。 如你所见，grammar 中的 token 非常适合诸如变量名或关键字之类的终端。</p>
 </div>
 <div class="paragraph">
 <p>这是 <strong>token</strong> 的另一个示例：</p>
@@ -352,10 +352,10 @@ my    x</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在第一种方法中，我们仅将可能的值限制为非负整数。 稍后，我们将扩展令牌以包括其他类型的数字。</p>
+<p>在第一种方法中，我们仅将可能的值限制为非负整数。 稍后，我们将扩展 token 以包括其他类型的数字。</p>
 </div>
 <div class="paragraph">
-<p>最后，是函数名称的标记。 到目前为止，只有一个内置函数，因此规则（在这种情况下可以是令牌）很简单：</p>
+<p>最后，是函数名称的标记。 到目前为止，只有一个内置函数，因此规则（在这种情况下可以是 token）很简单：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -365,7 +365,7 @@ my    x</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>而已。 运行程序，如果找到了，这里是什么（让我省略重复该程序整个文本的输出的第一部分）：</p>
+<p>就这样。 运行程序，看看它找到了什么（我省略了重复该程序整个文本的输出的第一部分）：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -383,13 +383,13 @@ my    x</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>输出反映语法理解的解析程序的结构。 缩进有助于查看程序及其元素的嵌套结构。 每行的右侧显示了源代码的匹配部分。</p>
+<p>输出反映 grammar 理解的解析程序的结构。 缩进有助于查看程序及其元素的嵌套结构。 每行的右侧显示了源代码的匹配部分。</p>
 </div>
 <div class="paragraph">
-<p>例如，程序的第一行my x;是一条语句，其中包含变量声明 <code>my x</code> 和变量名称 <code>x</code>。 分号被 TOP 规则的分隔符所消耗，并且没有进入输出树。 类似地，第二条语句 <code>x = 42</code>，是将值 42 分配给变量名 <code>x</code>。</p>
+<p>例如，程序的第一行 <code>my x;</code> 是一条语句，其中包含变量声明 <code>my x</code> 和变量名称 <code>x</code>。 分号被 <code>TOP</code> 规则的分隔符所消耗，并且没有进入输出树。 类似地，第二条语句 <code>x = 42</code>，是将值 42 分配给变量名 <code>x</code>。</p>
 </div>
 <div class="paragraph">
-<p>如果检查为第三行生成的输出，例如 <code>x</code> ;，您会看到函数名称在函数名称之后包含一个多余的空格：｢say｣。 通过使规则成为令牌可以轻松解决此问题：</p>
+<p>如果检查第三行 <code>say x;</code> 生成的输出，你会看到函数名在函数名之后包含一个多余的空格：<code>｢say ｣</code>。 通过把 <code>rule</code> 换成 <code>token</code> 可以轻松解决此问题：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -413,10 +413,10 @@ my    x</code></pre>
 <div class="sect2">
 <h3 id="_actions">1.2. Actions</h3>
 <div class="paragraph">
-<p>目标文件现已完全解析。 我们可以将其拆分为单独的语句，并且可以理解其中的所有部分。 唯一缺少的元素是使所有这些部分协同工作以产生结果。 这就是 Raku 中的动作。</p>
+<p>目标文件现已完全解析。 我们可以将其拆分为单独的语句，并且可以理解其中的所有部分。 唯一缺少的元素是使所有这些部分协同工作以产生结果。 这就是 Raku 中的 action 要做的。</p>
 </div>
 <div class="paragraph">
-<p>返回Lingua的测试程序：</p>
+<p>返回 Lingua 测试程序：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -426,7 +426,7 @@ say x;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>要在控制台中看到 42，我们必须确保有一个存储该值的地方，并且可以通过其名称 x 进行引用。 换句话说，我们需要一个存储空间。 最明显的选择是使用哈希。 首先让我们将其设为全局变量：</p>
+<p>要在控制台中看到 <code>42</code>，我们必须确保有一个存储该值的地方，并且可以通过其名称 <code>x</code> 进行引用。 换句话说，我们需要一个存储空间。 最明显的选择是使用哈希。 首先让我们将其设为全局变量：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -438,10 +438,10 @@ grammar Lingua {
 </div>
 </div>
 <div class="paragraph">
-<p>成功匹配规则或令牌后，您可以要求 Raku 为您做点事情，即，您可以添加一个代码块（称为 action），该代码块将在匹配后执行。 在其中，您可以访问刚刚提取的数据。</p>
+<p>成功匹配 <code>rule</code> 或 <code>token</code> 后，你可以要求 Raku 为你做点事情，即，你可以添加一个叫做 action 的代码块，该代码块将在匹配后执行。 在其中，你可以访问刚刚提取的数据。</p>
 </div>
 <div class="paragraph">
-<p>我们的第一个动作是在看到变量声明时创建一个变量。 这是您的操作方式：</p>
+<p>我们的第一个 action 是在看到变量声明时创建一个变量。 这是你的操作方式：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -453,10 +453,10 @@ grammar Lingua {
 </div>
 </div>
 <div class="paragraph">
-<p>将动作放在一对大括号中的正则表达式之后。 我们知道，该规则通过匹配文字 "my"和变量名来找到子字符串 <code>my x</code>，变量名是命名令牌变量名。 我们可以使用该名称访问内容：<code>$&lt;variable-name&gt;</code>。 实际上，这是 Lingua 类的对象，但是我们将其用作哈希的键，因此将其转换为字符串，并使用新的对 x &#8658; 0 填充哈希。因此， 创建并用零初始化。</p>
+<p>将 action 放在一对花括号中的正则表达式之后。 我们知道，该规则通过匹配字面值 <code>'my'</code> 和变量名来找到子字符串 <code>my x</code>，变量名是命名 token <code>variable-name</code>。 我们可以使用该名称访问内容：<code>$&lt;variable-name&gt;</code>。 实际上，这是 <code>Lingua</code> 类的对象，但是我们将其用作哈希的键，因此将其转换为字符串，并使用新的对 <code>x &#8658; 0</code> 填充哈希。因此， 创建并用零初始化。</p>
 </div>
 <div class="paragraph">
-<p>同样，让我们为变量分配创建一个动作。</p>
+<p>同样，让我们为变量复制创建一个 action。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -468,7 +468,7 @@ grammar Lingua {
 </div>
 </div>
 <div class="paragraph">
-<p>在这里，为了说明您也可以做到这一点，将 <code>$&lt;variable-name&gt;</code> 对象通过 <code>~</code> 前缀运算符显式转换为 Str 数据类型的值。 在等号的右侧，完成了另一种类型转换：+运算符将 <code>$&lt;value&gt;</code> 转换为数字。 这次，强制转换值非常重要，因为如果您不这样做，将保存一个 Lingua 对象而不是数字。</p>
+<p>在这里，为了说明你也可以做到这一点，将 <code>$&lt;variable-name&gt;</code> 对象通过 <code>~</code> 前缀运算符显式转换为 <code>Str</code> 数据类型的值。 在等号的右侧，完成了另一种类型转换：<code>+</code> 运算符将 <code>$&lt;value&gt;</code> 转换为数字。 这次，强制转换值非常重要，因为如果你不这样做，将保存一个 <code>Lingua</code> 对象而不是数字。</p>
 </div>
 <div class="paragraph">
 <p>现在转到函数调用。</p>
@@ -484,10 +484,10 @@ grammar Lingua {
 </div>
 </div>
 <div class="paragraph">
-<p><code>say</code> 函数的实现嵌入在语法操作中。 由于我们现在只有一个内置函数，因此实际上不需要 <code>if</code> 子句，但是让我们保留它可以使代码更透明。</p>
+<p><code>say</code> 函数的实现嵌入在 grammar 的 action 中。 由于我们现在只有一个内置函数，因此实际上不需要 <code>if</code> 子句，但是让我们保留它可以使代码更透明。</p>
 </div>
 <div class="paragraph">
-<p>到目前为止，这是如何完成的，这三个操作块是内联的。 它们是规则定义的一部分。 我们可以运行解释器并查看其作用。 将主代码更改为以下代码，以避免大量输出：</p>
+<p>到目前为止，这三个 action 块是内联的。 它们是规则定义的一部分。 我们可以运行解释器并查看其作用。 将主代码更改为以下代码，以避免大量输出：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -506,10 +506,10 @@ my $result = Lingua.parse($code);
 </div>
 </div>
 <div class="paragraph">
-<p>恭喜你！ 该程序不仅被解析而且还被执行。 如您所见，它打印了变量 x 的内容，这正是我们放入变量 x 中的内容。 如果您转储 <code>%var</code> 容器（通过添加 <code>%var;</code>），则会得到 <code>{x &#8658; 42}</code>。</p>
+<p>恭喜你！ 该程序不仅被解析而且还被执行。 如你所见，它打印了变量 <code>x</code> 的内容，这正是我们放入变量 <code>x</code> 中的内容。 如果你转储 <code>%var</code> 容器（通过添加 <code>say %var;</code>），则会得到 <code>{x &#8658; 42}</code>。</p>
 </div>
 <div class="paragraph">
-<p>这是我们的第一个真正的成就。 我们设法为将来的林瓜语言的子集创建了一个口译员。 这里最令人兴奋的部分是它没有绑定到我们之前使用的单个测试程序。 您可以根据需要创建任意多个变量，可以将其分配给不同的值，然后再次重新分配它们。 变量的名称可以长于单个字母。 所有这些神奇地起作用！ 自己尝试一下，这是我所做的一个示例：</p>
+<p>这是我们第一个真正的成就。 我们设法为将来的 Lingua 语言的子集创建了一个解释器。 这里最令人兴奋的部分是它没有绑定到我们之前使用的单个测试程序。 你可以根据需要创建任意多个变量，可以将其分配给不同的值，然后再次重新分配它们。 变量名比单个字母长。 所有这些神奇地起作用！ 自己尝试一下，这是我所做的一个示例：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -541,7 +541,7 @@ say gamma;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>您也可以尝试多次分配值：</p>
+<p>你也可以尝试多次给 <code>value</code> 赋值：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -555,7 +555,7 @@ say value;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这次，该程序两次使用相同的变量并在其中存储了不同的值，您可以通过运行该程序轻松确认：</p>
+<p>这次，该程序两次使用相同的变量并在其中存储了不同的值，你可以通过运行该程序轻松确认：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -567,10 +567,10 @@ say value;</code></pre>
 <div class="sect2">
 <h3 id="_模块">1.3. 模块</h3>
 <div class="paragraph">
-<p>第一个简单的解释器已经准备就绪，但让我们花更多的时间使它的代码更结构化和更快。</p>
+<p>第一个简单的解释器已经准备就绪，但让我们多花点时间使它的代码更加结构化并且更快。</p>
 </div>
 <div class="paragraph">
-<p>首先，可以将内联操作收集在单独的类中。 在我们当前的实现中，所有动作都是单行的，但是在更高级的编译器中，情况并非如此。 在 Raku 中，表达动作和语法规则之间的关系非常容易：在创建动作类的方法时，只需使用相同的名称即可。 查看以下代码，您将立即理解。</p>
+<p>首先，可以将内联 action 收集在单独的类中。 在我们当前的实现中，所有 action 都是单行的，但是在更高级的编译器中，情况并非如此。 在 Raku 中，表达 action 和 grammar 规则之间的关系非常容易：在创建 action 类的方法时，只需使用相同的名称即可。 查看以下代码，你就马上理解了。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -591,10 +591,10 @@ say value;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>所有这些方法都采用一个参数。 它的名称可以是您想要的任何名称，但为方便起见，最好将其命名为 <code>$/</code>，因为在这种情况下，可以使用 <code>$&lt;value&gt;</code> 之类的快捷方式代替 <code>$/&lt;value&gt;</code>。 如果您将其命名为 <code>$arg</code>，则必须输入更多字符才能访问其部分：<code>$arg&lt;value&gt;</code>。 另外，别忘了从语法类中删除代码块及其周围的花括号。</p>
+<p>所有这些方法都接收一个参数。 参数名可以是你想要的任何名称，但为方便起见，最好将其命名为 <code>$/</code>，因为在这种情况下，可以使用 <code>$&lt;value&gt;</code> 之类的快捷方式代替 <code>$/&lt;value&gt;</code>。 如果你将其命名为 <code>$arg</code>，则必须输入更多字符才能访问其部分：<code>$arg&lt;value&gt;</code>。 另外，别忘了从 grammar 类中删除代码块及其周围的花括号。</p>
 </div>
 <div class="paragraph">
-<p>要将action类与语法一起使用，请将其作为命名参数传递给 <code>parse</code> 方法：</p>
+<p>要将 action 类与 grammar 一起使用，请将其作为命名参数传递给 <code>parse</code> 方法：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -602,7 +602,7 @@ say value;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>提取类并将它们保存在单独的文件中也是一种好习惯。 例如，语法进入 Lingua.raku，动作（连同 <code>%var</code> 哈希，目前是模块的全局变量）一起进入 LinguaActions.raku。 整个解释器代码将缩短为以下内容：</p>
+<p>提取类并将它们保存在单独的文件中也是一种好习惯。 例如，把 grammar 放入 <code>Lingua.rakumod</code>，把 action(连同 <code>%var</code> 哈希，目前是模块的全局变量)放入 <code>LinguaActions.rakumod</code> 中。 整个解释器代码将缩短为以下内容：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -623,7 +623,7 @@ Lingua.parse($code, :actions(LinguaActions));</code></pre>
 <h2 id="_第二章_解析数字">2. 第二章 解析数字</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>在接下来的两章中，我们将暂时保留上一章中创建的编译器，并将使用一个单独的帮助程序，即计算器。 它本身是一件有趣的事情，我们将在一个孤立的示例中对其进行探索。 在下一章中，它将集成到解释器中。</p>
+<p>在接下来的两章中，我们将暂时保留上一章中创建的编译器，并将使用一个单独的助手程序，即计算器。 它本身是一件有趣的事情，我们将在一个孤立的示例中对其进行探索。 在下一章中，它将集成到解释器中。</p>
 </div>
 <div class="sect2">
 <h3 id="_查找数字">2.1. 查找数字</h3>
@@ -677,7 +677,7 @@ Nil</code></pre>
 <p>前两个数字通过了测试，但第三个没有通过。 对于负数，<code>parse</code> 方法返回 <code>Nil</code>。</p>
 </div>
 <div class="paragraph">
-<p>因此，我们需要扩展 <code>number</code> 标记并在数字前面添加可选的减号。 重要的是，它仍然必须是 token，因为您通常不希望符号和数字之间有空格。</p>
+<p>因此，我们需要扩展 <code>number</code> 标记并在数字前面添加可选的减号。 重要的是，它仍然必须是 token，因为你通常不希望符号和数字之间有空格。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -687,7 +687,7 @@ Nil</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这个很小的变化使另一半整数（负整数）有效。 以上测试现在将通过。</p>
+<p>这个很小的变化使另一半整数, 即负整数, 变得合法。 以上测试现在将通过。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -697,7 +697,7 @@ Nil</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>但是，如果您将正数拼写为 <code>+7</code> 会怎么样?</p>
+<p>但是，如果你将正数拼写为 <code>+7</code> 会怎么样?</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -705,10 +705,10 @@ Nil</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>(Grammar 分析器始终使用字符串，但是我们可以让 Raku 转换正数，以避免在测试用例列表中加引号。)</p>
+<p>Grammar 解析器始终消费字符串，但是我们可以让 Raku 转换诸如 <code>7</code> 或 <code>77</code> 之类的正数，以避免在测试用例列表中额外的引号。以 <code>+7</code> 为例, 我们必须保留加号, 所以该测试用例是一个显式的字符串。</p>
 </div>
 <div class="paragraph">
-<p>根据 grammar，此数字不是有效数字。 因为它期望整个字符串是一个数字，所以我们不能期望加号会被简单地忽略。 解析器需要在开始时就知道可能的符号，因此，我们需要将其添加到 token 主体中：</p>
+<p>根据 grammar，此数字不是有效数字。 因为它期望整个字符串是一个数字，所以我们不能期望加号会被简单地忽略掉。 解析器需要在开始时就知道可能的符号，因此，我们需要将其添加到 token 主体中：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -741,7 +741,7 @@ OK 0</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>添加一个无效的数字，您会立即看到它失败，例如：</p>
+<p>添加一个无效的数字，你会立即看到它失败，例如：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -749,7 +749,7 @@ OK 0</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>实现流点号解析器的第一次尝试可以像这样简单：</p>
+<p>实现浮点数解析器的第一次尝试可以像这样简单：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -769,7 +769,7 @@ OK 0</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>不幸的是，此更改破坏了令牌，因为它可以应用于单个符号，甚至可以应用于空字符串。 现在所有这些测试用例都可以：</p>
+<p>不幸的是，此更改破坏了该 token，因为它可以应用于单个符号，甚至可以应用于空字符串。 现在所有这些测试用例都是 <code>OK</code> 的：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -780,7 +780,7 @@ OK 0</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>尝试在单个正则表达式中表达所有选项有点棘手。 显式列出所有备选方案要容易得多。 我们知道符号可以出现在任何数字的前面，让我们将备选方案放在方括号中：</p>
+<p>尝试在单个正则表达式中表达所有选项有点棘手。 显式列出所有备选分支要容易得多。 我们知道符号可以出现在任何数字的前面，让我们将备选分支放在方括号中：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -793,7 +793,7 @@ OK 0</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这种方法使整个令牌更具可读性和可扩展性。 我们可以添加另一种选择来匹配科学计数法中的数字。</p>
+<p>这种方法使整个 tokenn 更具可读性和可扩展性。 我们可以添加另一种备选分支来匹配科学计数法中的数字。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -807,7 +807,7 @@ OK 0</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在有更多测试用例通过了 Grammar：</p>
+<p>现在有更多测试用例通过了该 grammar：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -815,7 +815,7 @@ OK 0</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们所缺少的是科学计数法中带有非整数尾数的数字，例如3.14E2或.5E-3。 另一种选择可以解决此问题：</p>
+<p>我们所缺少的是科学计数法中带有非整数小数部分的数字，例如 <code>3.14E2</code> 或 <code>.5E-3</code>。 另一种备选分支可以解决此问题：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -830,7 +830,7 @@ OK 0</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这种形式中，有些部分会重复，例如\ d +或\ d * ['。 \ d +]。 在这种紧凑的规则中可能会很好，但是也可以对其进行进一步分解，并引入负责此类重复部分的子令牌。 转换后的数字令牌及其家族如下所示：</p>
+<p>在这种形式中，有些部分会重复，例如 <code>\d+</code> 或 <code>\d* ['.' \d+]</code>。 在这种紧凑的规则中可能会很好，但是也可以对其进行进一步分解，并引入负责此类重复部分的子 token。 转换后的 <code>number</code> token 及其家族如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -865,7 +865,7 @@ token exponent {
 </div>
 </div>
 <div class="paragraph">
-<p>尽管与以前的版本相比有更多的代码，但每个单独的令牌都更易于理解。 例如，比较科学记数形式的数字的先前和当前正则表达式，其尾数具有浮点数。 之前是：</p>
+<p>尽管与以前的版本相比有更多的代码，但每个单独的 token 都更易于理解。 例如，先前和当前以科学记数形式表示的数字，其小数部分是浮点数。 之前是：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -881,7 +881,7 @@ token exponent {
 </div>
 </div>
 <div class="paragraph">
-<p>看一下主要代币的替代方案，</p>
+<p>看一下主 token 的备选分支，</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -892,7 +892,7 @@ token exponent {
 </div>
 </div>
 <div class="paragraph">
-<p>您会立即看到他们的描述。 甚至，我们可以进一步减少它：</p>
+<p>你会立即看到他们的描述。 甚至，我们可以进一步化简它：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -905,13 +905,13 @@ token exponent {
 </div>
 </div>
 <div class="paragraph">
-<p>换句话说，数字可以是整数，也可以是浮点值，其后跟一个可选的符号，然后可以跟一个可选的指数部分。 以这种形式，描述是如此简洁和紧凑。 所有细节（正则表达式“噪声”）都隐藏在辅助标记中。</p>
+<p>换句话说，数字可以是整数，也可以是浮点值，其后跟一个可选的符号，然后可以跟一个可选的指数部分。 以这种形式，描述是如此简洁和紧凑。 所有细节（正则表达式"噪声"）都隐藏在辅助 token 标记中。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_获取值">2.2. 获取值</h3>
 <div class="paragraph">
-<p>该数字已解析，但是它的值是多少？ 对于编译器，我们不仅需要检查数字格式的有效性，还需要将其从字符串转换为数字，整数或浮点数。 在本节中，我们将在数字语法后面添加操作，以便我们可以构建数字并最终打印出来。</p>
+<p>该数字已解析，但是它的值是什么？ 对于编译器，我们不仅需要检查数字格式的有效性，还需要将其从字符串转换为数字，整数或浮点数。 在本节中，我们将在 <code>Number</code> grammar 后面添加 action，以便我们可以构建数字并最终打印出来。</p>
 </div>
 <div class="paragraph">
 <p>让我们以整数开头，并将数字保留在全局变量中。</p>
@@ -927,7 +927,7 @@ class NumberActions {
 </div>
 </div>
 <div class="paragraph">
-<p>这里的一切看起来都很简单。 通过使用+前缀运算符将字符串的匹配部分转换为数字值，可以直接得出整数值。 要查看其工作原理，让我们更改主测试循环，以使其输出已解析的值：</p>
+<p>这里的一切看起来都很简单。 通过使用 <code>+</code> 前缀运算符将字符串的匹配部分转换为数字值，可以直接得出整数值。 要查看其工作原理，让我们更改主测试循环，以使其输出已解析的值：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -956,7 +956,7 @@ OK 0 = 0</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>负数无效。 看来+7字符串已正确处理，但实际上这并不完全正确，因为我们完全忽略了该符号。 这次，任务有点复杂。 第一个想法是，如果遇到减号，则翻转符号：</p>
+<p>负数无效。 看来 <code>+7</code> 字符串已被正确处理，但实际上这并不完全正确，因为我们完全忽略了该符号。 这次，任务有点复杂。 第一个想法是，如果遇到减号，则翻转符号：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -966,7 +966,7 @@ OK 0 = 0</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>但是，这是行不通的，因为符号是在解析数字之前先解析的，而否定$ n意味着将符号应用于零。 我们可以使用一个单独的变量来保留有关标志的信息，但这并不是最好的选择。 但是，请这样做，因为这将揭示另一个问题。</p>
+<p>但是，这是行不通的，因为符号是在解析数字之前先解析的，而否定 <code>$n</code> 意味着将符号应用于零。 我们可以使用一个单独的变量来保留有关标志的信息，但这并不是最好的选择。 但是，请这样做，因为这将引出另一个问题。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -985,7 +985,7 @@ class NumberActions {
 </div>
 </div>
 <div class="paragraph">
-<p>这有助于检测第一个负数，但会破坏所有其他负数。 当然，您可以检查符号是否为'+'，但问题是$ n和$ sign变量是全局变量，必须在解析下一个变量之前将其重置。 这是将它们移至动作类的好时机。</p>
+<p>这有助于检测第一个负数，但会破坏所有其他负数。 当然，你可以检查符号是否为 <code>'+'</code>，但问题是 <code>$n</code> 和 <code>$sign</code> 变量是全局变量，必须在解析下一个变量之前将其重置。 这是将它们移至 action 类的好时机。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1004,7 +1004,7 @@ class NumberActions {
 </div>
 </div>
 <div class="paragraph">
-<p>$ n变量有意成为公共数据成员，因为我们必须以某种方式获得结果。 您还需要更改测试循环。</p>
+<p>`$n 变量有意成为公共数据成员，因为我们必须以某种方式获得结果。 你还需要更改测试循环。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1022,7 +1022,7 @@ class NumberActions {
 </div>
 </div>
 <div class="paragraph">
-<p>此处的主要更改是将NumberActions类的实例传递给语法的parse方法。 现在，在每次迭代中，解析器都会创建自己的变量以保留结果。</p>
+<p>此处的主要更改是将 <code>NumberActions</code> 类的实例传递给 grammar 的 <code>parse</code> 方法。 现在，在每次迭代中，解析器都会创建自己的变量以保留结果。</p>
 </div>
 <div class="paragraph">
 <p>我们已经走了足够远的距离，以至于可以正确解析所有整数：</p>
@@ -1055,19 +1055,19 @@ OK .5E-3 = -3</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如您所见，小数部分或指数部分均获胜。 在两种情况下，这都是语法的最后一个整数部分。 确实，早些时候，我们对语法进行了转换，以排除重复部分。 当我们不得不引入$ sign变量时，钟声响了，但现在我们遭受的痛苦更大。 所有这些都需要以不同的方式处理。 这就是AST可以提供帮助的方式。</p>
+<p>如你所见，小数部分或指数部分均获胜。 在两种情况下，这都是 grammar 的最后一个整数部分。 确实，早些时候，我们对 grammar 进行了转换，以排除重复部分。 当我们不得不引入 <code>$sign</code> 变量时，钟声响了，但现在我们遭受的痛苦更大。 所有这些都需要以不同的方式处理。 这就是 AST 可以提供帮助的方式。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_使用_ast">2.3. 使用 AST</h3>
 <div class="paragraph">
-<p>AST，或抽象语法树，是一种允许在不同阶段收集和保持数据解析的机制。 如果在读取浮点数3.14时两次调用了整数令牌，或者对具有指数的数字（例如3.14E2）调用了三次，则所有这些整数都可以保留在AST中，并在以后用于构建整数。 对应于整个字符串的值。</p>
+<p>AST，或抽象语法树，是一种允许在不同阶段收集和保持数据解析的机制。 如果在读取浮点数 <code>3.14</code> 时两次调用了 <code>integer</code> token，或者对带有指数的数字(例如 <code>3.14E2</code>)调用了三次，则所有这些整数都可以保留在 AST 中，并在以后用于构建整数。 对应于整个字符串的值。</p>
 </div>
 <div class="paragraph">
-<p>在操作类的方法内，$ /变量有两种方法：make和made。 使用make可以存储一个值（将属性分配给解析树的当前节点）。 使用made时，您将读取先前存储的值。</p>
+<p>在 action 类的方法内，<code>$/</code> 变量有两种方法：<code>make</code> 和 <code>made</code>。 使用 <code>make</code> 可以存储一个值(将属性分配给解析树的当前节点)。 使用 <code>made</code> 时，你将读取先前存储的值。</p>
 </div>
 <div class="paragraph">
-<p>将以下调用添加到令牌操作：</p>
+<p>将以下调用添加到 token action 中：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1081,7 +1081,7 @@ method sign($/) {
 </div>
 </div>
 <div class="paragraph">
-<p>现在，即使多次调用该方法，也将保存这些值。 要了解它是如何工作的，让我们看一下语法对象：</p>
+<p>现在，即使多次调用该方法，也将保存这些值。 要了解它是如何工作的，让我们看一下 grammar 对象：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1090,7 +1090,7 @@ dd $test;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>dd例程是Rakudo专用的工具，可显示对象的内部结构。 对于输入数字-84，解析后将构建以下对象：</p>
+<p><code>dd</code> 例程是 Rakudo 专用的工具，可显示对象的内部结构。 对于输入数字 <code>-84</code>，解析后将构建以下对象：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1098,7 +1098,7 @@ dd $test;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>看起来很凌乱，但您应该可以发现我们最感兴趣的两个地方：</p>
+<p>看起来很凌乱，但你应该可以发现我们最感兴趣的两个地方：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1107,10 +1107,10 @@ made =&gt; -1, orig =&gt; -84, pos =&gt; 1, from =&gt; 0</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>将from和pos键设置为指向第一个字符以及与正则表达式匹配的最后一个字符之后的字符。 因此，这两个子哈希中的第一个是解析数字的结果（字符串“ -84”中从位置1到位置3，即84）。 第二个哈希对应减号字符（同一字符串中的位置0到1）。</p>
+<p>将 <code>from</code> 和 <code>pos</code> 键设置为指向第一个字符以及与正则表达式匹配的最后一个字符之后的字符。 因此，这两个子哈希中的第一个是解析数字的结果(字符串&#8217;-84'` 中从位置 1 到位置 3，即 <code>84</code>)。 第二个哈希对应减号字符(同一字符串中的位置0到1)。</p>
 </div>
 <div class="paragraph">
-<p>made属性分别设置为84和-1，这确认语法能够正确解析数字及其符号。</p>
+<p><code>made</code> 属性分别设置为 <code>84</code> 和 <code>-1</code>，这确认 grammar 能够正确解析数字及其符号。</p>
 </div>
 <div class="paragraph">
 <p>现在可以使用这些值在父标记中生成结果。</p>
@@ -1125,7 +1125,7 @@ made =&gt; -1, orig =&gt; -84, pos =&gt; 1, from =&gt; 0</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>它通过$ &lt;integer&gt;和$ &lt;sign&gt;对象的made属性访问整数值和符号乘数。 最后一行将结果传递到下一个级别，您可以从TOP规则中访问它：</p>
+<p>它通过 <code>$&lt;integer&gt;</code> 和 <code>$&lt;sign&gt;</code> 对象的 <code>made</code> 属性访问整数值和符号乘号。 最后一行将结果传递到下一个级别，你可以从 <code>TOP</code> 规则中访问它：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1135,7 +1135,7 @@ made =&gt; -1, orig =&gt; -84, pos =&gt; 1, from =&gt; 0</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>对于当前的解析数字任务，可以将TOP规则和方法完全替换为数字令牌和操作方法的内容（请注意，TOP现在是令牌，而不是规则）：</p>
+<p>对于当前的解析数字任务，可以将 <code>TOP</code> 规则和方法完全替换为 <code>number</code> token 和 action 方法的内容(请注意，<code>TOP</code> 现在是 token，而不是 rule)：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1162,7 +1162,7 @@ class NumberActions {
 </div>
 </div>
 <div class="paragraph">
-<p>如果查看由parse方法返回的对象，您将看到它包含以下字段：</p>
+<p>如果查看由 <code>parse</code> 方法返回的对象，你将看到它包含以下字段：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1170,7 +1170,7 @@ class NumberActions {
 </div>
 </div>
 <div class="paragraph">
-<p>成对的包含我们所需的负整数。 可以使用相同的属性从语法外部和操作外部进行访问：</p>
+<p><code>made</code> 的值包含我们所需的负整数。 可以使用相同的属性从 grammar 外部和 action 外部进行访问：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1182,10 +1182,10 @@ if ($test) {
 </div>
 </div>
 <div class="paragraph">
-<p>任务已完成，我们可以继续处理带有指数部分e的整数。 例如3E4。 使用这样的数字，整数令牌被触发两次，但这并不成问题，因为两个整数都位于不同对象的相应属性中。</p>
+<p>任务已完成，我们可以继续处理带有指数部分的整数。 例如 <code>3E4</code>。 使用这样的数字，<code>integer</code> token 被触发两次，但这并不成问题，因为两个整数都位于不同对象的相应的 <code>made</code> 属性中。</p>
 </div>
 <div class="paragraph">
-<p>创建一个操作以处理指数部分：</p>
+<p>创建一个 action 以处理指数部分：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1210,7 +1210,7 @@ if ($test) {
 </div>
 </div>
 <div class="paragraph">
-<p>运行测试套件，并检查它对于3E4或-1E-2这样的数字产生什么：</p>
+<p>运行测试套件，并检查它对于 <code>3E4</code> 或 <code>-1E-2</code> 这样的数字产生什么：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1222,7 +1222,7 @@ OK -1E-2 = -0.01</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>目前，唯一没有关联动作的令牌是浮点数。 （exp令牌不需要任何令牌，因为它的唯一任务是与e或E匹配）。 让我们再来看一次：</p>
+<p>目前，唯一没有关联 action 的 token 是浮点数。 (<code>exp</code> token 不需要任何 token，因为它的唯一任务是与 <code>e</code> 或 <code>E</code> 匹配)。 让我们再来看一次：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1232,7 +1232,7 @@ OK -1E-2 = -0.01</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>创建令牌时，我们用&lt;integer&gt;替换了 <code>\d+</code> 部分。 实际上，一个可选序列 <code>\d*</code> 也可以替换为：</p>
+<p>创建 token 时，我们用 <code>&lt;integer&gt;</code> 替换了 <code>\d+</code> 部分。 实际上，一个可选序列 <code>\d*</code> 也可以替换为：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1242,10 +1242,10 @@ OK -1E-2 = -0.01</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在，同一令牌中有两个&lt;integer&gt;调用！ 在这种情况下，您在操作中写了什么？ 很简单：如果多次提到该名称，您将获得一个数组，因此可以将第一个匹配项引用为$ &lt;integer&gt; [0]，将$ &lt;integer&gt; [1]引用为第二个匹配项。</p>
+<p>现在，同一 token 中有两个 <code>&lt;integer&gt;</code> 调用！ 在这种情况下，你在 action 中写了什么？ 很简单：如果多次提到该名称，你将获得一个数组，因此可以将第一个匹配项引用为 <code>$&lt;integer&gt;[0]</code>，将 <code>$&lt;integer&gt;[1]</code> 引用为第二个匹配项。</p>
 </div>
 <div class="paragraph">
-<p>唯一的问题是，在我们的情况下，第一个整数部分是可选的。 如果您解析3.14，则会获得两个元素，但是如果您解析了.14，则14将到达索引为0的元素。可能的解决方案之一就是检查数组的长度。 评估价值是一项相对简单的任务。</p>
+<p>唯一的问题是，在我们的情况下，第一个整数部分是可选的。 如果你解析 <code>3.14</code>，则会获得两个元素，但是如果你解析了 <code>.14</code>，则 <code>14</code> 将到达索引为 0 的元素。可能的解决方案之一就是检查数组的长度。 求值是一项相对简单的任务。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1267,7 +1267,7 @@ OK -1E-2 = -0.01</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果解析了TOP令牌，则还必须更新它以获取浮点数的值：</p>
+<p>如果解析了 <code>TOP</code> token，则还必须更新它以获取浮点数的值：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1296,10 +1296,10 @@ OK .5E-3 = 0.0005</code></pre>
 <div class="sect2">
 <h3 id="_最后的笔记">2.4. 最后的笔记</h3>
 <div class="paragraph">
-<p>在本章中，我们设法将字符串转换为数字，但是它们是哪种数字？ 为了获得数字，我们使用了Raku中可用的运算符，例如二进制+，算术运算符和幂运算符**。 使用所有这些的计算结果是一个数字，该数字是Raku提供的一种数字类型的实例。</p>
+<p>在本章中，我们设法将字符串转换为数字，但是它们是哪种数字？ 为了获得数字，我们使用了 Raku 中可用的运算符，例如二元运算符 <code>+</code>，算术运算符和幂运算符 <code>**</code>。 使用所有这些的计算结果是一个数字，该数字是 Raku 提供的一种数字类型的实例。</p>
 </div>
 <div class="paragraph">
-<p>您可以通过在测试循环中显式打印类名称来看到它：</p>
+<p>你可以通过在测试循环中显式打印类名称来看到它：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1308,7 +1308,7 @@ OK .5E-3 = 0.0005</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>所有不包含小数点的数字均为Ints，其余均为Rats：</p>
+<p>所有不包含小数点的数字均为 <code>Int</code>，其余均为 <code>Rat</code>：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1332,7 +1332,7 @@ OK .5E-3 = 0.0005 (Rat)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在，再次查看action类中的浮点方法。 尽管其算法简单明了，并且可以产生正确的结果，但是它比较罗word，需要几行代码。 另外，您可以将此任务传递给宿主语言本身！ 让Raku为您解析浮点数：</p>
+<p>现在，再次查看 action 类中的 <code>floating-point</code> 方法。 尽管其算法简单明了，并且可以产生正确的结果，但是它比较啰嗦，需要几行代码。 另外，你可以将此任务传递给宿主语言本身！ 让 Raku 为你解析浮点数：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1341,7 +1341,7 @@ $/.make($n);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>等待，什么是"$int.$frac"? 它是一个在解析过程中与浮点令牌匹配的字符串，这意味着与其重建字符串并将其转换为数字，我们还可以直接将$ /对象转换为数字，而无需访问它：</p>
+<p>等待，什么是 <code>"$int.$frac"</code>? 它是一个在解析过程中与 <code>floating-point</code> token 匹配的字符串，这意味着与其重建字符串并将其转换为数字，我们还可以直接将 <code>$/</code> 对象转换为数字，而无需访问它：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1351,7 +1351,7 @@ $/.make($n);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该代码是否类似于您已经看到的内容？ 此方法的主体与整数方法的主体完全相同：</p>
+<p>该代码是否类似于你已经看到的内容？ 此方法的主体与 <code>integer</code> 方法的主体完全相同：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1361,10 +1361,10 @@ $/.make($n);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>确实，当Raku仅包含数字时，我们允许它为我们建立数字。 如果我们也遇到带小数点的数字，则可以再次委托它。</p>
+<p>确实，当 Raku 仅包含数字时，我们允许它为我们建立数字。 如果我们也遇到带小数点的数字，则可以再次代理它。</p>
 </div>
 <div class="paragraph">
-<p>但这还不是全部。 我们的数字语法允许的数字都是有效的Raku数字，并且可以用一行代码替换我们所有的动作：</p>
+<p>但这还不是全部。 我们的 <code>Number</code> grammar 允许的数字都是有效的 Raku 数字，并且可以用一行代码替换我们所有的 action：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1376,7 +1376,7 @@ $/.make($n);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>更改之后，数字的类型略有不同。 Raku在科学计数法中将数字视为Num，而不是Rat。 您可以确认购买再次运行测试循环：</p>
+<p>更改之后，数字的类型略有不同。 Raku 在科学计数法中将数字视为 <code>Num</code>，而不是 <code>Rat</code>。 你可以通过再次运行测试循环来确认：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1400,13 +1400,13 @@ OK .5E-3 = 0.0005 (Num)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里的输出格式还取决于Raku如何打印不同数字类型的数字。</p>
+<p>这里的输出格式还取决于 Raku 如何打印不同数字类型的数字。</p>
 </div>
 <div class="paragraph">
-<p>在此特定任务中，我们所有的体力劳动都由宿主语言中的编译器操作代替。 当然，这是有可能的，因为我们选择了许多编程语言都可以处理的标准数据格式。 一旦发现解决问题的简单方法，不要害怕删除自己的代码。 本章中介绍的使用AST的技术是本书未来冒险的基础。 敬请关注！</p>
+<p>在此特定任务中，我们所有的体力劳动都由宿主语言中的编译器 action 代替。 当然，这是有可能的，因为我们选择了许多编程语言都可以处理的标准数据格式。 一旦发现解决问题的简单方法，不要害怕删除自己的代码。 本章中介绍的使用 AST 的技术是本书未来冒险的基础。 敬请关注！</p>
 </div>
 <div class="paragraph">
-<p><code>P. S</code>.细心的读者可能已经注意到，数字语法不包含数字（例如4.），其中有整数部分，小数点但没有小数部分。 这些数字在Raku本身中是不允许的，因此我没有将其包括在语法中。</p>
+<p><code>P. S</code>.细心的读者可能已经注意到，<code>Number</code> grammar 不包含数字(例如`4.``)，其中有整数部分，小数点但没有小数部分。 这些数字在 Raku 本身中是不允许的，因此我没有将其包括在 grammar 中。</p>
 </div>
 <div class="paragraph">
 <p><a href="https://andrewshitov.com/2020/03/01/chapter-2-parsing-a-number/" class="bare">https://andrewshitov.com/2020/03/01/chapter-2-parsing-a-number/</a></p>

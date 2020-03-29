@@ -180,9 +180,9 @@ if (theme && theme !== "1") {
 <li><a href="#_总结_7">8.6. 总结</a></li>
 </ul>
 </li>
-<li><a href="#_使用_grammars_进行解析">9. 使用 Grammars 进行解析</a>
+<li><a href="#_使用_grammar_进行解析">9. 使用 Grammar 进行解析</a>
 <ul class="sectlevel2">
-<li><a href="#_理解_grammars">9.1. 理解 Grammars</a></li>
+<li><a href="#_理解_grammar">9.1. 理解 Grammar</a></li>
 <li><a href="#_从简单开始">9.2. 从简单开始</a></li>
 <li><a href="#_组装完整的_grammars">9.3. 组装完整的 Grammars</a></li>
 <li><a href="#_调试_grammars">9.4. 调试 Grammars</a></li>
@@ -3724,21 +3724,21 @@ for &lt;true null 2015-12-24 42&gt; -&gt; $str {
 </div>
 </div>
 <div class="sect1">
-<h2 id="_使用_grammars_进行解析">9. 使用 Grammars 进行解析</h2>
+<h2 id="_使用_grammar_进行解析">9. 使用 Grammar 进行解析</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Grammars 是众所周知的用于解析的瑞士军刀。</p>
+<p>Grammar 是众所周知的用于解析的瑞士军刀。</p>
 </div>
 <div class="paragraph">
 <p>在本章中，我们将更详细地探讨它们。最重要的是，我们将讨论如何利用它们的力量。</p>
 </div>
 <div class="sect2">
-<h3 id="_理解_grammars">9.1. 理解 Grammars</h3>
+<h3 id="_理解_grammar">9.1. 理解 Grammar</h3>
 <div class="paragraph">
-<p>Grammar 实现了一种自上而下的解析方法。入口点， 通常是正则表达式 <code>TOP</code>，知道粗粒度结构和 进一步调用进入血腥细节的正则表达式。递归也可以参与其中。例如，如果您解析数学表达式，术语 可以是一对括号内的任意表达式。</p>
+<p>Grammar 实现了一种自上而下的解析方法。解析的入口点， 通常是正则表达式 <code>TOP</code>，了解粗粒度结构和进一步调用进入细节的正则表达式。递归也可以参与其中。例如，如果你解析数学表达式，则项可以是一对括号内的任意表达式。</p>
 </div>
 <div class="paragraph">
-<p>这是一种自上而下的结构，或者更准确地说是一种<a href="https://en.wikipedia.org/wiki/Recursive_descent_parser">递归下降解析器</a>。如果不涉及回溯，我们将其称为预测解析器，因为在字符串中的每个位置，我们确切地知道我们正在寻找什么 - 我们可以预测下一个 token 将是什么(即使我们只能预测 它可能是一组替代之一)。</p>
+<p>这是一种自上而下的结构，或者更准确地说是一种<a href="https://en.wikipedia.org/wiki/Recursive_descent_parser">递归下降解析器</a>。如果不涉及回溯，我们将其称为预测解析器，因为在字符串中的每个位置，我们确切地知道我们正在查找什么 - 我们可以预测下一个 token 将是什么(即使我们只能预测它可能是一组候选者之一)。</p>
 </div>
 <div class="paragraph">
 <p>结果匹配树在结构上对应于 grammar 中正则表达式的调用结构。让我们考虑解析一个数学表达式，仅包含运算符 <code>*</code>，<code>+</code> 和用于分组的括号:</p>
@@ -3765,32 +3765,32 @@ say MathExpression.parse('2 + 4 * 5 * (1 + 3)');</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">⌜2 + 4 * 5 * (1 + 3)⌟
- sum =&gt; ⌜2 + 4 * 5 * (1 + 3)⌟
-  product =&gt; ⌜2 ⌟
-   term =&gt; ⌜2 ⌟
-    number =&gt; ⌜2⌟
-  product =&gt; ⌜4 * 5 * (1 + 3)⌟
-   term =&gt; ⌜4 ⌟
-    number =&gt; ⌜4⌟
-   term =&gt; ⌜5 ⌟
-    number =&gt; ⌜5⌟
-   term =&gt; ⌜(1 + 3)⌟
-    group =&gt; ⌜(1 + 3)⌟
-     sum =&gt;⌜1+3⌟
-      product =&gt;⌜1⌟
-       term =&gt;⌜1⌟
-        number =&gt;⌜1⌟
-      product =&gt;⌜3⌟
-       term =&gt;⌜3⌟
-        number =&gt;⌜3⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">｢2 + 4 * 5 * (1 + 3)｣
+ sum =&gt; ｢2 + 4 * 5 * (1 + 3)｣
+  product =&gt; ｢2 ｣
+   term =&gt; ｢2 ｣
+    number =&gt; ｢2｣
+  product =&gt; ｢4 * 5 * (1 + 3)｣
+   term =&gt; ｢4 ｣
+    number =&gt; ｢4｣
+   term =&gt; ｢5 ｣
+    number =&gt; ｢5｣
+   term =&gt; ｢(1 + 3)｣
+    group =&gt; ｢(1 + 3)｣
+     sum =&gt; ｢1 + 3｣
+      product =&gt; ｢1 ｣
+       term =&gt; ｢1 ｣
+        number =&gt; ｢1｣
+      product =&gt; ｢3｣
+       term =&gt; ｢3｣
+        number =&gt; ｢3｣</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果您想知道如何解析特定数字，您可以 通过查找当前行上方的行来向后追踪路径 缩进较少; 例如，数字1由标记号解析， 从术语调用，从产品调用，等等。</p>
+<p>如果你想知道如何解析特定数字，你可以通过查找当前行上面的行来向后追踪路径 缩进较少; 例如，数字 1 由标记 <code>number</code> 解析， 从 <code>term</code> 调用，从 <code>product</code> 调用，等等。</p>
 </div>
 <div class="paragraph">
-<p>我们可以通过从令牌编号中引发异常来验证这一点:</p>
+<p>我们可以通过从 token <code>number</code> 中引发异常来验证这一点:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3852,7 +3852,7 @@ token operator { '*' | '+' }</code></pre>
 <p>使用第一版 grammar 解析此类表达式时， 解析树的结构表达了这种分组:它具有 - 作为顶级 - 一个 <code>sum</code>，操作数为 <code>1</code> 和 <code>2 * 5</code>。</p>
 </div>
 <div class="paragraph">
-<p>这是有代价的:每个优先级都需要一个单独的规则和名称，并且结果匹配对象的嵌套结果每个优先级别至少有一级。此外，以后添加更多优先权的水平并不是微不足道的，而且很难用通用的方式来做。如果你不愿意接受这些费用，你可以改用扁平模型 用于解析所有运算符的单个标记。如果你那么需要一个结构反映优先顺序的方法，您可以编写转换列表的代码 进了一棵树。这通常称为运算符优先级解析器。</p>
+<p>这是有代价的:每个优先级都需要一个单独的规则和名称，并且结果匹配对象的嵌套结果每个优先级别至少有一级。此外，以后添加更多优先权的水平并不是微不足道的，而且很难用通用的方式来做。如果你不愿意接受这些费用，你可以改用扁平模型 用于解析所有运算符的单个标记。如果你那么需要一个结构反映优先顺序的方法，你可以编写转换列表的代码 进了一棵树。这通常称为运算符优先级解析器。</p>
 </div>
 </div>
 <div class="sect3">
@@ -3875,7 +3875,7 @@ token operator { '*' | '+' }</code></pre>
 <p>避免左递归的常用技术是要有一个结构让你可以从通用(此处为`sum`)到特定(<code>number</code>)的顺序安排正则表达式。你只需要小心并检查消费的角色正则表达式偏离该顺序(例如，<code>group</code> 调用 <code>sum</code>)。</p>
 </div>
 <div class="paragraph">
-<p>无限循环的另一个潜在来源是可以匹配空字符串的量词化正则表达式 。解析语言时可能会发生这种情况 这实际上允许一些东西是空的。例如，在 UNIX shell 中， 您可以通过将右侧空置为空来分配变量:</p>
+<p>无限循环的另一个潜在来源是可以匹配空字符串的量词化正则表达式 。解析语言时可能会发生这种情况 这实际上允许一些东西是空的。例如，在 UNIX shell 中， 你可以通过将右侧空置为空来分配变量:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3887,7 +3887,7 @@ VAR2=</code></pre>
 <p>为 UNIX shell 命令编写 grammar 时，它可能是很想写一个可能匹配的 <code>token string { \w* }</code>  一个空字符串。在允许多个字符串文字的情况下，<code>&lt;string&gt;+</code> 然后可以挂起，因为有效的正则表达式 <code>[\w*]+</code> 会尝试 无限多次匹配零宽度字符串。</p>
 </div>
 <div class="paragraph">
-<p>一旦您意识到问题，解决方案非常简单: 将 token 更改为不允许空字符串(<code>token string { \w+ }</code>)， 并明确地处理允许空字符串的情况:</p>
+<p>一旦你意识到问题，解决方案非常简单: 将 token 更改为不允许空字符串(<code>token string { \w+ }</code>)， 并明确地处理允许空字符串的情况:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3936,7 +3936,7 @@ multi sub MAIN(Bool :$test!) {
 </div>
 </div>
 <div class="paragraph">
-<p>现在，您可以开始构建更复杂的表达式:</p>
+<p>现在，你可以开始构建更复杂的表达式:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3983,11 +3983,11 @@ multi sub MAIN(Bool :$test!) {
 <p>正则表达式或语法有两种失败模式:它可以匹配何时它不应该匹配(误报)，或者它可能无法匹配应该匹配(假阴性)。通常，误报更容易明白了，因为你可以检查生成的匹配对象并查看哪个正则表达式匹配字符串的哪一部分。</p>
 </div>
 <div class="paragraph">
-<p>有一个方便的工具来调试漏报: <code>Grammar::Tracer</code> 模块。如果您将模块加载到包含。的文件中 语法，运行语法产生可以的诊断信息 帮助您找出匹配出错的地方。</p>
+<p>有一个方便的工具来调试漏报: <code>Grammar::Tracer</code> 模块。如果你将模块加载到包含。的文件中 语法，运行语法产生可以的诊断信息 帮助你找出匹配出错的地方。</p>
 </div>
 <div class="paragraph">
 <p>请注意，这只是开发人员的诊断工具; 如果你想 为了给最终用户更好的错误信息，请阅读章节为改进建议。
-您需要安装 Raku 模块 <code>Grammar::Debugger</code>,它包含 <code>Grammar::Tracer</code>。如果你使用 <code>moritzlenz/raku-regex-alpine</code>   docker 镜像，这已经为你完成了。如果你通过另一种方法安装了 Raku, 你需要运行:</p>
+你需要安装 Raku 模块 <code>Grammar::Debugger</code>,它包含 <code>Grammar::Tracer</code>。如果你使用 <code>moritzlenz/raku-regex-alpine</code>   docker 镜像，这已经为你完成了。如果你通过另一种方法安装了 Raku, 你需要运行:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4085,7 +4085,7 @@ Grammar :: Tracer输出的最后一部分如下:</p>
 有惊人数量的文件格式和计算机语言 是&lt;.ws&gt;会吞噬的重要空白。这些包括 INI文件(换行符通常表示新的键/值对)，Python 和YAML(缩进用于分组)，CSV(换行符 发出新记录的信号)和Makefile(需要缩进的地方) 用制表符字符)。</p>
 </div>
 <div class="paragraph">
-<p>在这些情况下，最好在您自己的语法中覆盖ws 只匹配无关紧要的空白。我们来看看第二个， 简约INI解析器，独立开发的描述
+<p>在这些情况下，最好在你自己的语法中覆盖ws 只匹配无关紧要的空白。我们来看看第二个， 简约INI解析器，独立开发的描述
 在上一节中:</p>
 </div>
 <div class="listingblock">
@@ -4128,7 +4128,7 @@ password: s3kr1t</code></pre>
 </div>
 <div class="paragraph">
 <p>请注意此语法如何使用两个路径来解析空格: 一个自定义的ws标记只匹配水平空格(空格和空格) 标签)，以及匹配(重要)换行符的单独标记eol。该 eol令牌还吞噬了仅由空格组成的更多行。
-如果某种语言支持注释，并且您不希望它们出现 在你的解析树中，你可以在你的ws标记或eol中解析它们 (或等同于你)。它取决于评论的位置 被允许。在INI文件中，它们仅在键/值对之后或在 在他们自己的线上，所以eol将是合适的地方。相比之下，SQL允许 在允许空格的每个地方都有评论，所以很自然</p>
+如果某种语言支持注释，并且你不希望它们出现 在你的解析树中，你可以在你的ws标记或eol中解析它们 (或等同于你)。它取决于评论的位置 被允许。在INI文件中，它们仅在键/值对之后或在 在他们自己的线上，所以eol将是合适的地方。相比之下，SQL允许 在允许空格的每个地方都有评论，所以很自然</p>
 </div>
 <div class="paragraph">
 <p>用ws解析它们:</p>
@@ -4269,10 +4269,10 @@ token variable {
 </div>
 </div>
 <div class="paragraph">
-<p>您可能还记得先前的示例 <code>&lt;?{&#8230;&#8203;}&gt;</code> 执行
+<p>你可能还记得先前的示例 <code>&lt;?{&#8230;&#8203;}&gt;</code> 执行
 一段 Raku 代码，如果返回 false 值则无法解析。如果
 <code>$&lt;identifier&gt;</code> 不在 <code>%*SYMBOLS</code> 中，这正是发生的情况。在这 时间，令牌的非回溯性质很重要。如果变量 被解析的是abc，变量a是 <code>%*SYMBOLS</code>，回溯就是 尝试 <code>&lt;identifier&gt;</code> 的较短匹配，直到它命中，然后成功。
-由于 <code>%*SYMBOLS</code> 在令牌TOP中声明，因此您必须复制它 当您尝试从外部调用除TOP以外的规则时的声明 语法。没有像我的 <code>%*SYMBOLS</code> ;这样的声明，就像这样的调用</p>
+由于 <code>%*SYMBOLS</code> 在令牌TOP中声明，因此你必须复制它 当你尝试从外部调用除TOP以外的规则时的声明 语法。没有像我的 <code>%*SYMBOLS</code> ;这样的声明，就像这样的调用</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4387,7 +4387,7 @@ c = a, 5, b</code></pre>
 <p>使用动态变量管理符号表通常很有效好吧，但是有一些边缘情况可以使用更明确的方法更好。这种边缘情况包括那些有很多符号的边缘情况复制变得非常昂贵，或者超过了必须检查最上面的范围，或者复制符号表时由于其他原因不切实际。</p>
 </div>
 <div class="paragraph">
-<p>因此，您可以为符号表编写一个类(在最简单的情况是使用数组作为作用域的堆栈)并显式调用方法在进入和离开范围时，在声明变量时，以及检查范围中是否已知变量:</p>
+<p>因此，你可以为符号表编写一个类(在最简单的情况是使用数组作为作用域的堆栈)并显式调用方法在进入和离开范围时，在声明变量时，以及检查范围中是否已知变量:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4453,7 +4453,7 @@ grammar VariableLists {
 <p>Token TOP 创建了一个类 <code>SymbolTable</code> 类的新对象，声明 调用declare方法，并且令牌变量调用方法检查 - 声明。规则块在解析语句之前调用 enter-scope 列表，然后留下范围。这有效，但仅限于语句列表 可以成功解析; 如果没有，规则块在设法调用之前就失败了 离开作用域。</p>
 </div>
 <div class="paragraph">
-<p>Raku 具有针对这种情况的安全功能:如果您在声明前添加前缀 有了 LEAVE，Raku 会在常规出又处为您调用，无论何时何地 这是可能的(即使抛出异常)。自从LEAVE 移相器。 只能在常规代码而不是正则表达式中运行，我们需要将正则表达式包装起来</p>
+<p>Raku 具有针对这种情况的安全功能:如果你在声明前添加前缀 有了 LEAVE，Raku 会在常规出又处为你调用，无论何时何地 这是可能的(即使抛出异常)。自从LEAVE 移相器。 只能在常规代码而不是正则表达式中运行，我们需要将正则表达式包装起来</p>
 </div>
 <div class="listingblock">
 <div class="content">
