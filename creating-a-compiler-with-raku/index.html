@@ -146,6 +146,14 @@ if (theme && theme !== "1") {
 <li><a href="#_函数接收表达式">5.7. 函数接收表达式</a></li>
 </ul>
 </li>
+<li><a href="#_处理字符串">6. 处理字符串</a>
+<ul class="sectlevel2">
+<li><a href="#_字符串">6.1. 字符串</a></li>
+<li><a href="#_转义引号">6.2. 转义引号</a></li>
+<li><a href="#_变量插值">6.3. 变量插值</a></li>
+<li><a href="#_索引字符串">6.4. 索引字符串</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="sect1">
@@ -3071,6 +3079,407 @@ say 100 + 300 / 3 ** (7 - 5);</code></pre>
 </div>
 <div class="paragraph">
 <p>在本章中，对语法及其相关代码进行了许多转换。 这使语法变得更加透明，甚至允许我们添加一些不错的扩展。 请查阅<a href="https://github.com/ash/lingua/commits/master">仓库</a>以确保我们位于同一页面上。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_处理字符串">6. 处理字符串</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>到目前为止，该语言仅适用于数字（整数和浮点数），包括常规计数法和科学计数法。 在接下来的两章中，我们将更新语言并将其集成到其他数据类型中：字符串，数组和哈希。 让我们首先从字符串开始。</p>
+</div>
+<div class="sect2">
+<h3 id="_字符串">6.1. 字符串</h3>
+<div class="paragraph">
+<p>第一个目标是在变量赋值（或初始化）和函数调用中允许使用双引号引起来的字符串：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my str = "Hello, World";
+say str;
+
+say "Hello indeed";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这两种情况下，grammar 都期望一个表达式：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule variable-declaration {
+    'my' &lt;variable-name&gt; [ '=' &lt;expression&gt; ]?
+}
+
+rule function-call {
+    &lt;function-name&gt; &lt;expression&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>因此，最简单的解决方案是在可能出现数字的同一级别上将字符串添加为表达式的变体：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi rule expr(4) {
+    | &lt;number&gt;
+    | &lt;string&gt;
+    | &lt;variable-name&gt;
+    | '(' &lt;expression&gt; ')'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>给 action 也添加一个分支:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method expr($/) {
+    if $&lt;number&gt; {
+        $/.make($&lt;number&gt;.made);
+    }
+    elsif $&lt;string&gt; {
+        $/.make($&lt;string&gt;.made);
+    }
+
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>字符串本身被定义为双引号之间的字符序列：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule string {
+    '"' .*? '"'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它的 AST 属性只是一个字符串化的匹配对象：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method string($/) {
+    $/.make(~$/)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>那是一个低落的果实，但是这种方法有两个问题。 首先，引号成为字符串的一部分。 其次，如果用户将字符串放入算术表达式中（例如 <code>"Hello" + "World"</code>），则编译器将失败并出现异常。</p>
+</div>
+<div class="paragraph">
+<p>第一个问题很容易解决：在 action 中创建一个捕获组并以 <code>[0]</code> 的索引对其进行访问：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule string {
+    '"' ( &lt;-["]&gt;* ) '"'
+}
+
+. . .
+
+method string($/) {
+    $/.make(~$/[0]);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>顺便说一下，请注意，我们也开始更改字符串的正则表达式。 它可以包含任何期望双引号的字符。 我们将很快需要更多此类。</p>
+</div>
+<div class="paragraph">
+<p>第二个问题也是可以解决的，但是 grammar 有了更重要的重建。 让我们返回 <code>value</code> 规则，但是这次，它可以是算术表达式或字符串：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Lingua is CommentableLanguage does Number {
+    . . .
+
+    rule variable-declaration {
+        'my' &lt;variable-name&gt; [ '=' &lt;value&gt; ]?
+    }
+
+    rule assignment {
+        &lt;variable-name&gt; '=' &lt;value&gt;
+    }
+
+    rule function-call {
+        &lt;function-name&gt; &lt;value&gt;
+    }
+
+    rule value {
+        | &lt;expression&gt;
+        | &lt;string&gt;
+    }
+
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>因此，在赋值和函数调用中需要一个字符串 <code>String</code>（作为一种 <code>value</code> 值）。</p>
+</div>
+<div class="paragraph">
+<p>在 action 中，进行了类似的更改。 我们使用值而不是表达式：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class LinguaActions {
+    has %!var;
+
+    method variable-declaration($/) {
+        %!var{$&lt;variable-name&gt;} =
+            $&lt;value&gt; ?? $&lt;value&gt;.made !! 0;
+    }
+
+    method assignment($/) {
+        %!var{~$&lt;variable-name&gt;} = $&lt;value&gt;.made;
+    }
+
+    method function-call($/) {
+        say $&lt;value&gt;.made;
+    }
+
+    . . .
+
+    method value($/) {
+        if $&lt;expression&gt; {
+            $/.make($&lt;expression&gt;.made);
+        }
+        elsif $&lt;string&gt; {
+            $/.make($&lt;string&gt;.made);
+        }
+    }
+
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>结果正是所需要的。 普通字符串会被解析和理解，而尝试将它们与数字或表达式一起使用会导致解析错误。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_转义引号">6.2. 转义引号</h3>
+<div class="paragraph">
+<p>很明显，上面定义的字符串本身不能包含双引号。 让我们将 " 作为唯一可能的引号，但允许在字符串中转义引号字符：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "Hello, \"World\"!";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当前，解析器在第二个引号处停止并以错误终止：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Hello, \
+Error: parse failed</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>要允许转义的引号，<code>string</code> 规则必须使用所有非引号和非反斜杠字符，如果看到反斜杠，则仅将 <code>\"</code> 序列视为有效：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token string {
+    '"' ( [
+          | &lt;-["\\]&gt;+
+          | '\\"'
+          ]* )
+    '"'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>从现在起，我们希望使用 <code>token</code> 而不是 <code>rule</code>，以避免在开引号后跳过空格。</p>
+</div>
+<div class="paragraph">
+<p>在 Raku 中，您可以自由地对正则表达式进行格式化，以形成某种 ASCII 图形，从而有助于更快地掌握正则表达式。 正如我们之前所做的，再次添加了一个附加的竖线以可视化备选分支。</p>
+</div>
+<div class="paragraph">
+<p>现在允许使用转义的引号字符，但是在所有其他情况下，反斜杠本身都变为非法字符。 让我们添加另一个转义序列 <code>\\</code>，以在字符串中表达单个反斜杠：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token string {
+    '"' ( [
+          | &lt;-["\\]&gt;+
+          | '\\"'
+          | '\\\\'
+          ]* )
+    '"'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>不允许所有其他序列，例如 "\W" 是一个错误。 以下是带有反斜杠和引号的有效字符串的一些示例。 字符串可以包含换行符，也可以为空：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "\\";
+say "\"";
+say "\\\\";
+say "\"\"";
+say "multi-
+     line";
+say "";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>由于我们不需要在输出中使用转义的反斜杠，因此应在将其进一步传递之前将其从字符串中删除：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method string($a) {
+    my $s = ~$a[0];
+    $s ~~ s:g/\\\"/"/;
+    $s ~~ s:g/\\\\/\\/;
+    $a.make($s);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>（注意，否则在发生运行时错误时，我们必须更改方法参数的名称：<code>Cannot assign to a readonly variable ($/) or a value.</code>）</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_变量插值">6.3. 变量插值</h3>
+<div class="paragraph">
+<p>与 Raku 本身一样，如果 Lingua 中的变量出现在字符串中，我们希望对其进行插值。 让我们使用以下语法：插入变量，在变量名前加一个美元符号，如下例所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my name = "John";
+say "Hello, $name!";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果是这样，则必须根据需要转义字面值：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "5\$";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在字符串 token 中引入新的转义序列以及以 <code>$</code> 开头的新备选分支：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token string {
+    . . .
+            | '\\$'
+            | '$' &lt;variable-name&gt;
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>变量名本身由另一个标记 <code>variable-name</code> 解析。</p>
+</div>
+<div class="paragraph">
+<p>当解析器在字符串中看到插值候选时，它将在 match 对象中创建一个数组，其中包含所有变量名的列表（即使只有一个）。 这些名称可以从 <code>$a[0]&lt;variable-name&gt;</code> 中读取。 下一步是将所有此类事件替换为变量的内容。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method string($a) {
+    my $s = ~$a[0];
+
+    for $a[0]&lt;variable-name&gt;.reverse -&gt; $var {
+        $s.substr-rw($var.from - $a.from - 2,
+                     $var.pos - $var.from + 1) = %!var{$var};
+    }
+
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>循环需要一些注释。 <code>$a</code> 容器托管一个 <code>Match</code> 对象(<code>Match</code> 是 Raku 中的一个内置类，用于保留正则表达式匹配的结果），该对象保留对整个输入字符串的引用：不仅是 <code>$s</code> 中保存的部分，而且是整个程序的解析过程 。 它的 <code>from</code> 和 <code>pos</code> 属性显示d当前字符串的边缘（在我们的示例中，<code>Hello, $name!</code>）。</p>
+</div>
+<div class="paragraph">
+<p><code>$var</code> 是另一个 <code>Match</code> 对象，它在源文本中保留变量名的位置。 使用 <code>substr-rw</code> 方法的就地替换会将变量名称以及前面的美元字符替换为变量的值。</p>
+</div>
+<div class="paragraph">
+<p>为了简化插值变量名称的开始和结束位置的计算，从字符串的末尾到字符串的开始执行替换（请注意循环中的 <code>reverse</code> 方法）。</p>
+</div>
+<div class="paragraph">
+<p>因此，一个字符串中可能有多个插值变量：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my name = "John";
+my another_name = "Carla";
+say "Hello, $name and $another_name!";</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_索引字符串">6.4. 索引字符串</h3>
+<div class="paragraph">
+<p>获得给定字符将是对我们语言中字符串的一个很好的补充。 让我们允许这样的标准语法：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my s = "abcdef";
+say s[3]; # prints d</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们仅允许在字符串存储在变量中的情况下建立索引，因此让我们更新相应的规则以在方括号中具有可选的整数索引：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi rule expr(4) {
+    | &lt;number&gt;
+    | &lt;variable-name&gt; [ '[' &lt;integer&gt; ']' ]?
+    | '(' &lt;expression&gt; ')'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 action 中，检查 <code>&lt;integer&gt;</code> 属性是否存在，并返回请求的字符：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method expr($/) {
+    . . .
+
+    elsif $&lt;string&gt; {
+        $/.make($&lt;string&gt;.made);
+    }
+    elsif $&lt;variable-name&gt; {
+        if $&lt;integer&gt; {
+            $/.make(
+                %!var{$&lt;variable-name&gt;}.substr(
+                +$&lt;integer&gt;, 1));
+        }
+        else {
+            $/.make(%!var{$&lt;variable-name&gt;});
+        }
+    }
+
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>索引不适用于字符串插值，但是您始终可以使用一个临时变量来实现目标：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my ch = s[4];
+say "The 4th character is \"$ch\""; # e</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>作为练习，请尝试在插值字符串中实现字符串索引。 准备考虑在索引之外转义方括号。</p>
+</div>
+<div class="paragraph">
+<p><a href="https://andrewshitov.com/2020/03/29/chapter-6-dealing-with-strings/">处理字符串</a></p>
 </div>
 </div>
 </div>
