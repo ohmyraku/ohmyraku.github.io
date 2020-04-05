@@ -3500,12 +3500,12 @@ say "The 4th character is \"$ch\""; # e</code></pre>
 <h2 id="_数组和散列">7. 数组和散列</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>在本章中，我们将用聚合数据类型：数组和散列来扩展 Lingua 语言。从这一点出发，我们将调用数字和字符串标量变量。</p>
+<p>在本章中，我们将用聚合数据类型：数组和散列来扩展 Lingua 语言。从这里开始，我们将调用数字和字符串标量变量。</p>
 </div>
 <div class="sect2">
 <h3 id="_数组">7.1. 数组</h3>
 <div class="paragraph">
-<p>数组是元素的集合，使用它们共同的变量名，并通过整数索引访问。下面介绍一下数组声明的语法。</p>
+<p>数组是元素的集合，它们共享相同的变量名，并通过整数索引访问。下面介绍一下数组声明的语法。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3513,7 +3513,7 @@ say "The 4th character is \"$ch\""; # e</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>它与声明标量变量（可以保留数字或字符串）使用相同的 <code>my</code> 关键字，并且在名称后有两个方括号。<code>variable-declaration</code> grammar 规则现在可以分成两部分，一部分用于数组，一部分用于标量。</p>
+<p>它与声明标量变量（可以保存数字或字符串）使用相同的 <code>my</code> 关键字，并且在名称后有两个方括号。<code>variable-declaration</code> grammar 规则现在可以分成两部分，一部分用于数组，一部分用于标量。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3580,7 +3580,7 @@ method array-declaration($/) {
 </div>
 </div>
 <div class="paragraph">
-<p>有了这个变化，就不再需要变量声明方法了，可以从 <code>LinguaActions</code> 类中删除。</p>
+<p>有了这个变化，就不再需要 <code>variable-declaration</code> 方法了，可以从 <code>LinguaActions</code> 类中删除。</p>
 </div>
 <div class="paragraph">
 <p>你可以暂时用下面的代码来代替它，只是想看看解析器是如何处理数组的。</p>
@@ -3653,7 +3653,7 @@ data[1] = 20;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>用上述赋值运行程序后，数据变量将在存储中保留两个值。</p>
+<p>用上述赋值运行程序后，<code>data</code> 变量将在存储中保留两个值。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3664,7 +3664,7 @@ data[1] = 20;</code></pre>
 <div class="sect2">
 <h3 id="_题外话语法的乐趣">7.3. 题外话。语法的乐趣</h3>
 <div class="paragraph">
-<p>在转向更多的数组和哈希的特性之前，让我们先对语法进行一下改造。在赋值方法中，<code>if-else</code> 检查占据了比"有用"代码更多的行数。我们可以做两个改造，让方法更紧凑。</p>
+<p>在转向更多的数组和哈希特性之前，让我们先对 grammar 进行一下改造。在赋值方法中，<code>if-else</code> 检查占据了比"有用"代码更多的行数。我们可以做两个改造，让方法更紧凑。</p>
 </div>
 <div class="paragraph">
 <p>首先，让我们重复一下将一条规则一分为二的技巧。我们可以用两个子规则来代替一个通用的赋值规则。</p>
@@ -3686,7 +3686,7 @@ rule scalar-assignment {
 </div>
 </div>
 <div class="paragraph">
-<p>这让语法变得更加啰嗦，但动作变得更加紧凑。</p>
+<p>这让 grammar 变得更加啰嗦，但 action 变得更加紧凑。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3700,7 +3700,7 @@ method scalar-assignment($/) {
 </div>
 </div>
 <div class="paragraph">
-<p>第二种可能的解决方案是，保留原有的赋值规则，根据匹配对象的内容，使用方法签名中的 <code>where</code> 子句来调度调用。</p>
+<p>第二种可能的解决方案是，保留原有的 <code>assignment</code> 规则，根据匹配对象的内容，使用方法签名中的 <code>where</code> 子句来分派调用。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3714,10 +3714,10 @@ multi method assignment($/ where !$&lt;integer&gt;) {
 </div>
 </div>
 <div class="paragraph">
-<p>多方法的第二个变体的签名中的负条件 <code>!$&lt;integer&gt;</code> 是可选的，但为了代码的清晰性，我更愿意保留它。</p>
+<p>multi 方法的第二个变体的签名中的负条件 <code>!$&lt;integer&gt;</code> 是可选的，但为了代码的清晰性，我更愿意保留它。</p>
 </div>
 <div class="paragraph">
-<p>还有两个动作可以用同样的方式重写。<code>value</code> action。</p>
+<p>还有两个 action 可以用同样的方式重写。<code>value</code> action。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3731,7 +3731,7 @@ multi method value($/ where $&lt;string&gt;) {
 </div>
 </div>
 <div class="paragraph">
-<p>第二个大的 <code>if-elsif-else</code> 条件的 action 是 <code>expr</code>。</p>
+<p>另一个带有大的 <code>if-elsif-else</code> 条件的 action 是 <code>expr</code>, 我们也转换一下:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3767,7 +3767,7 @@ multi method expr($/ where $&lt;expression&gt;) {
 <div class="sect2">
 <h3 id="_访问数组元素">7.4. 访问数组元素</h3>
 <div class="paragraph">
-<p>接下来的目标是开始使用单个数组项，比如说下一个片段中就可以看出。</p>
+<p>接下来的目标是开始使用单个数组项，从下一个片段中就可以看出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3779,7 +3779,7 @@ say n;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们目前的动作类已经支持索引字符串，而这正是我们要扩展的地方。</p>
+<p>我们目前的 action 类已经支持字符串索引，而这正是我们要扩展的地方。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3795,7 +3795,7 @@ say n;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该方法检查存储在 <code>%!var</code> 散列中的变量类型，如果是数组，则返回请求的元素。另一个分支和之前一样，对字符串进行工作。</p>
+<p>该方法检查存储在 <code>%!var</code> 散列中的变量类型，如果是数组，则返回请求的元素。另一个分支和之前一样，对字符串进行操作。</p>
 </div>
 <div class="paragraph">
 <p>通过将代表数组（和字符串）索引的序列提取到一个单独的规则中，可以再次简化 grammar。</p>
@@ -3808,7 +3808,7 @@ say n;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>当你取值时，在 <code>assignment</code> 和 <code>expr</code> 内使用新规则。</p>
+<p>当你取值时，在 <code>assignment</code> 和 <code>expr</code> 内使用新的规则。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3829,7 +3829,7 @@ multi rule expr(4) {
 <p>如果你想改变索引的语法，比如说，把 <code>data:3</code> 改为 <code>data[3]</code>，有一个地方可以做到，那就是 <code>index</code> 规则。</p>
 </div>
 <div class="paragraph">
-<p>动作也必须适应。索引的属性是一个整数值。</p>
+<p>action 也必须适配。索引的属性是一个整数值。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3869,13 +3869,13 @@ multi method expr($/ where $&lt;variable-name&gt; &amp;&amp; !$&lt;index&gt;) {
 </div>
 </div>
 <div class="paragraph">
-<p>再次，多余的条件，如 <code>!$&lt;index&gt;</code> 在 <code>where</code> 子句中使用是为了使代码更易读；如果没有这些条件，多方法也可以正确地调度。</p>
+<p>再次，多余的条件，如在 <code>where</code> 子句中使用 <code>!$&lt;index&gt;</code> 是为了使代码更易读；如果没有这些条件，multi 方法也可以正确地调度。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_列表赋值">7.5. 列表赋值</h3>
 <div class="paragraph">
-<p>到目前为止，数组可以创建，但你必须逐一分配它们的元素。让我们允许列表分配和初始化。</p>
+<p>到目前为止，数组可以创建，但你必须逐一分配它们的元素。让我们允许列表赋值和初始化。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3885,7 +3885,7 @@ data = 7, 9, 11;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里出现了一个新的语法元素&#8212;&#8203;逗号。它与语言中的其他结构不冲突，因此可以很容易地嵌入到语法中。</p>
+<p>这里出现了一个新的语法元素&#8212;&#8203;逗号。它与语言中的其他结构不冲突，因此可以很容易地嵌入到 grammar 中。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3899,7 +3899,7 @@ rule assignment {
 </div>
 </div>
 <div class="paragraph">
-<p>在这两种情况下，都使用了值规则，这意味着你可以使用数字、字符串和算术表达式作为数组元素的初始化值。</p>
+<p>在这两种情况下，都使用了 <code>value</code> 规则，这意味着你可以使用数字、字符串和算术表达式作为数组元素的初始化值。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3937,7 +3937,7 @@ multi method assignment($/ where !$&lt;index&gt;) {
 </div>
 </div>
 <div class="paragraph">
-<p>在做一个新数组的时候，也可以用 <code>Array.new</code> 来代替 <code>$[]</code>。</p>
+<p>在创建新数组的时候，也可以用 <code>Array.new</code> 来代替 <code>$[]</code>。</p>
 </div>
 <div class="paragraph">
 <p>例如, 与 <code>operator</code> 函数不同，<code>init-array</code> 例程是一个方法，因为它必须访问变量存储 <code>%!var</code>。</p>
@@ -3946,7 +3946,7 @@ multi method assignment($/ where !$&lt;index&gt;) {
 <div class="sect2">
 <h3 id="_打印数组">7.6. 打印数组</h3>
 <div class="paragraph">
-<p>对于数组来说，另一个真正需要的是允许在一条指令中打印所有的元素。我们希望将整个数组的元素传递给say函数，而不是列出单独的项目。</p>
+<p>对于数组来说，另一个真正需要的是允许在一条指令中打印所有的元素。我们希望将整个数组的元素传递给 <code>say</code> 函数，而不是列出单独的项。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3980,7 +3980,7 @@ say data;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这个函数以逗号分隔的列表形式打印出数组的项目。</p>
+<p>这个函数将数组打印为以逗号形式分隔的列表项。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3991,10 +3991,13 @@ say data;</code></pre>
 <div class="sect2">
 <h3 id="_散列">7.7. 散列</h3>
 <div class="paragraph">
-<p>在本章的剩余部分，我们将在Lingua语言中实现哈希。在数组的例子中，你已经看到了大部分的想法，所以这些变化应该是透明的、明显的。所以，我们要实现几件事：声明、带初始化的声明、对整个散列和单个元素进行赋值、读取单个值和打印散列。</p>
+<p>在本章的剩余部分，我们将在 Lingua 语言中实现哈希。在数组的例子中，你已经看到了大部分的想法，所以这些变化应该是透明的、明显的。</p>
 </div>
 <div class="paragraph">
-<p>下面的片段演示了我们使用的语法。要声明一个散列，在变量名称后使用一对大括号。</p>
+<p>所以，我们要实现几个东西：声明、带初始化的声明、对整个散列和单个元素进行赋值、读取单个值和打印散列。</p>
+</div>
+<div class="paragraph">
+<p>下面的片段演示了我们使用的语法。要声明一个散列，在变量名后使用一对花括号。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4002,7 +4005,7 @@ say data;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>初始化和分配使用逗号分隔的键-值对列表来完成。键始终是字符串，值可以是任何标量值（数字或字符串）。键和值之间的分隔符是冒号。</p>
+<p>初始化和赋值使用逗号分隔的键-值对列表来完成。键始终是字符串，值可以是任何标量值（数字或字符串）。键和值之间的分隔符是冒号。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4013,7 +4016,7 @@ days = "Mon": "work", "Sat": "rest";</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>语法中包括一个单独的哈希声明规则。</p>
+<p>Grammar 中包括一个单独的哈希声明规则。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4047,7 +4050,7 @@ rule hash-declaration {
 </div>
 </div>
 <div class="paragraph">
-<p>在动作中，要仔细实现声明和散列赋值方法。它们都使用共同的方法 <code>init-hash</code>，来设置散列的键和值。</p>
+<p>在 action 中，要仔细实现声明和散列赋值方法。它们都使用共同的方法 <code>init-hash</code>，来设置散列的键和值。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4074,7 +4077,7 @@ multi method assignment($/ where !$&lt;index&gt;) {
 </div>
 </div>
 <div class="paragraph">
-<p>哈希实现的另一个部分是允许使用密钥访问值。重新使用 <code>index</code> 规则并使其成为两个备选的集合是明智的。</p>
+<p>哈希实现的另一个部分是允许通过键访问值。重新使用 <code>index</code> 规则并使其成为两个备选的集合是明智的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4093,7 +4096,7 @@ rule hash-index {
 </div>
 </div>
 <div class="paragraph">
-<p>在已经存在的方法中使用新的规则。<code>where</code> 子句收到一个额外的条件，以确保我们抓住了我们想要的规则。</p>
+<p>在已存在的方法中使用新的规则。<code>where</code> 子句收到一个额外的条件，以确保我们得到了我们想要的规则。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4120,7 +4123,7 @@ multi method assignment($/ where !$&lt;index&gt;) {
 </div>
 </div>
 <div class="paragraph">
-<p>新的索引规则已经可以在 <code>expr(4)</code> 规则中工作了，它允许我们使用 <code>hash{"key"}</code> 语法通过给定的hash键读取值。我们需要做的就是更新 <code>expr</code> 方法，让它知道新的数据结构。</p>
+<p>新的 <code>index</code> 规则已经可以在 <code>expr(4)</code> 规则中工作了，它允许我们使用 <code>hash{"key"}</code> 语法通过给定的散列键读取值。我们需要做的就是更新 <code>expr</code> 方法，让它知道新的数据结构。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4161,7 +4164,7 @@ say days{"Sat"};</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果你善于使用 <code>map</code> 方法，可以尝试制作一个更好的函数版本。<code>say days</code> 的预期输出；应该是这样的。</p>
+<p>如果你善于使用 <code>map</code> 方法，可以尝试制作一个更好的函数版本。<code>say days;</code> 的预期输出应该是这样的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4172,7 +4175,7 @@ say days{"Sat"};</code></pre>
 <div class="sect2">
 <h3 id="_复习和测试">7.8. 复习和测试</h3>
 <div class="paragraph">
-<p>让我们看看 Lingua 语言的现状。我们做了很大的工作，实现了对数字、字符串、数组和哈希的支持。我们可以改变变量的内容，并打印出变量的值。让我们再做一小步，允许变量作为数组索引或哈希键。</p>
+<p>让我们看看 Lingua 语言的现状。我们做了很多的工作，实现了对数字、字符串、数组和哈希的支持。我们可以改变变量的内容，并打印出变量的值。让我们再做一小步，允许变量作为数组索引或哈希键。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4186,7 +4189,7 @@ rule hash-index {
 </div>
 </div>
 <div class="paragraph">
-<p>相应的 action 可以转化成对的琐碎的 multi 方法。</p>
+<p>相应的 action 可以转化成琐碎的 pair 对的 multi 方法。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4208,7 +4211,7 @@ multi method hash-index($/ where $&lt;variable-name&gt;) {
 </div>
 </div>
 <div class="paragraph">
-<p>请参考资源库，检查是否有正确的文件，如果有的话，就可以运行下面的测试程序，这个测试程序使用了此刻实现的大部分功能。</p>
+<p>请参考<a href="https://github.com/ash/lingua">仓库</a>，检查是否有正确的文件，如果有的话，就可以运行下面的测试程序，这个测试程序使用了此刻实现的大部分功能。</p>
 </div>
 <div class="listingblock">
 <div class="content">
