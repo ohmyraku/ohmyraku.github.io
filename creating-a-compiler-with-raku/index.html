@@ -154,6 +154,18 @@ if (theme && theme !== "1") {
 <li><a href="#_索引字符串">6.4. 索引字符串</a></li>
 </ul>
 </li>
+<li><a href="#_数组和散列">7. 数组和散列</a>
+<ul class="sectlevel2">
+<li><a href="#_数组">7.1. 数组</a></li>
+<li><a href="#_给数组项赋值">7.2. 给数组项赋值</a></li>
+<li><a href="#_题外话语法的乐趣">7.3. 题外话。语法的乐趣</a></li>
+<li><a href="#_访问数组元素">7.4. 访问数组元素</a></li>
+<li><a href="#_列表赋值">7.5. 列表赋值</a></li>
+<li><a href="#_打印数组">7.6. 打印数组</a></li>
+<li><a href="#_散列">7.7. 散列</a></li>
+<li><a href="#_复习和测试">7.8. 复习和测试</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="sect1">
@@ -3480,6 +3492,778 @@ say "The 4th character is \"$ch\""; # e</code></pre>
 </div>
 <div class="paragraph">
 <p><a href="https://andrewshitov.com/2020/03/29/chapter-6-dealing-with-strings/">处理字符串</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_数组和散列">7. 数组和散列</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在本章中，我们将用聚合数据类型：数组和散列来扩展 Lingua 语言。从这一点出发，我们将调用数字和字符串标量变量。</p>
+</div>
+<div class="sect2">
+<h3 id="_数组">7.1. 数组</h3>
+<div class="paragraph">
+<p>数组是元素的集合，使用它们共同的变量名，并通过整数索引访问。下面介绍一下数组声明的语法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my data[];</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它与声明标量变量（可以保留数字或字符串）使用相同的 <code>my</code> 关键字，并且在名称后有两个方括号。<code>variable-declaration</code> grammar 规则现在可以分成两部分，一部分用于数组，一部分用于标量。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule variable-declaration {
+    'my' [
+         | &lt;array-declaration&gt;
+         | &lt;scalar-declaration&gt;
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里先用数组，因为数组的定义在变量名后面有额外的字符，可以提前抓取。</p>
+</div>
+<div class="paragraph">
+<p>或者，我们可以引入一个新的关键字，比如说 <code>arr</code>，来定义数组，而不是 <code>my</code>，在这一点上简化解析：<code>arr data</code>。但是，让我们回到我的选择，<code>my data[]</code>，因为当我们来到初始化的时候，它也有自己的优势，减少了保留的关键字数量。</p>
+</div>
+<div class="paragraph">
+<p>之前的标量变量声明规则迁移到一个单独的规则中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule array-declaration {
+    &lt;variable-name&gt; '[' ']'
+}
+
+rule scalar-declaration {
+    &lt;variable-name&gt; [ '=' &lt;value&gt; ]?
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>新的 <code>array-declaration</code> 规则需要一对方括号，还没有包含初始化器部分。</p>
+</div>
+<div class="paragraph">
+<p>在 action 中，我们还需要区分数组和标量，我们可以通过检查 <code>$&lt;array-declaration&gt;</code> 匹配对象的存在来实现。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method variable-declaration($/) {
+    if $&lt;scalar-declaration&gt; {
+        %!var{$&lt;scalar-declaration&gt;&lt;variable-name&gt;} =
+            $&lt;scalar-declaration&gt;&lt;value&gt; ??
+            $&lt;scalar-declaration&gt;&lt;value&gt;.made !! 0;
+    }
+    elsif $&lt;array-declaration&gt; {
+        %!var{$&lt;array-declaration&gt;&lt;variable-name&gt;} = $[];
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它可以使用，但由于嵌套匹配对象键的原因，看起来太过超负荷了。事实上，没有必要这样做，因为可以为每一种情况创建单独的 action。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method scalar-declaration($/) {
+    %!var{$&lt;variable-name&gt;} = $&lt;value&gt; ?? $&lt;value&gt;.made !! 0;
+}
+
+method array-declaration($/) {
+    %!var{$&lt;variable-name&gt;} = $[];
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>有了这个变化，就不再需要变量声明方法了，可以从 <code>LinguaActions</code> 类中删除。</p>
+</div>
+<div class="paragraph">
+<p>你可以暂时用下面的代码来代替它，只是想看看解析器是如何处理数组的。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method variable-declaration($/) {
+    dd %!var;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该方法在每一个变量声明后都会显示变量存储包含的内容。让我们用实际操作来测试一下。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my x = 3;
+say x;
+
+my data[];</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个程序编译成功，可以看到 <code>%!var</code> 的哈希变化。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Hash %!var = {:x(3)}
+3
+Hash %!var = {:data($[]), :x(3)}
+OK</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_给数组项赋值">7.2. 给数组项赋值</h3>
+<div class="paragraph">
+<p>OK，我们可以创建一个数组，是时候给它的元素填充一些数据了。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">data[0] = 10;
+data[1] = 20;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>assignment</code> 规则的更新方式与上一章中我们对字符串索引的更新方式类似，可以在方括号中添加一个可选的整数索引。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
+    &lt;variable-name&gt; [ '[' &lt;integer&gt; ']' ]? '=' &lt;value&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在相应的 action 中，索引的存在表示我们正在处理一个数组，否则就是一个标量变量。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method assignment($/) {
+    if $&lt;integer&gt; {
+        %!var{~$&lt;variable-name&gt;}[+$&lt;integer&gt;] =
+            $&lt;value&gt;.made;
+    }
+    else {
+        %!var{~$&lt;variable-name&gt;} = $&lt;value&gt;.made;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>用上述赋值运行程序后，数据变量将在存储中保留两个值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Hash %!var = {:data($[10, 20])}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_题外话语法的乐趣">7.3. 题外话。语法的乐趣</h3>
+<div class="paragraph">
+<p>在转向更多的数组和哈希的特性之前，让我们先对语法进行一下改造。在赋值方法中，<code>if-else</code> 检查占据了比"有用"代码更多的行数。我们可以做两个改造，让方法更紧凑。</p>
+</div>
+<div class="paragraph">
+<p>首先，让我们重复一下将一条规则一分为二的技巧。我们可以用两个子规则来代替一个通用的赋值规则。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
+    | &lt;array-item-assignment&gt;
+    | &lt;scalar-assignment&gt;
+}
+
+rule array-item-assignment {
+    &lt;variable-name&gt; [ '[' &lt;integer&gt; ']' ] '=' &lt;value&gt;
+}
+
+rule scalar-assignment {
+    &lt;variable-name&gt; '=' &lt;value&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这让语法变得更加啰嗦，但动作变得更加紧凑。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method array-item-assignment($/) {
+    %!var{~$&lt;variable-name&gt;}[+$&lt;integer&gt;] = $&lt;value&gt;.made;
+}
+
+method scalar-assignment($/) {
+    %!var{~$&lt;variable-name&gt;} = $&lt;value&gt;.made;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第二种可能的解决方案是，保留原有的赋值规则，根据匹配对象的内容，使用方法签名中的 <code>where</code> 子句来调度调用。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method assignment($/ where $&lt;integer&gt;) {
+    %!var{~$&lt;variable-name&gt;}[+$&lt;integer&gt;] = $&lt;value&gt;.made;
+}
+
+multi method assignment($/ where !$&lt;integer&gt;) {
+    %!var{~$&lt;variable-name&gt;} = $&lt;value&gt;.made;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>多方法的第二个变体的签名中的负条件 <code>!$&lt;integer&gt;</code> 是可选的，但为了代码的清晰性，我更愿意保留它。</p>
+</div>
+<div class="paragraph">
+<p>还有两个动作可以用同样的方式重写。<code>value</code> action。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method value($/ where $&lt;expression&gt;) {
+    $/.make($&lt;expression&gt;.made);
+}
+
+multi method value($/ where $&lt;string&gt;) {
+    $/.make($&lt;string&gt;.made);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第二个大的 <code>if-elsif-else</code> 条件的 action 是 <code>expr</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method expr($/ where $&lt;number&gt;) {
+    $/.make($&lt;number&gt;.made);
+}
+
+multi method expr($/ where $&lt;string&gt;) {
+    $/.make($&lt;string&gt;.made);
+}
+
+multi method expr($/ where $&lt;variable-name&gt; &amp;&amp; $&lt;integer&gt;) {
+    $/.make(%!var{$&lt;variable-name&gt;}.substr(+$&lt;integer&gt;, 1));
+}
+
+multi method expr($/ where $&lt;variable-name&gt; &amp;&amp; !$&lt;integer&gt;) {
+    $/.make(%!var{$&lt;variable-name&gt;});
+}
+
+multi method expr($/ where $&lt;expr&gt;) {
+    $/.make(process($&lt;expr&gt;, $&lt;op&gt;));
+}
+
+multi method expr($/ where $&lt;expression&gt;) {
+    $/.make($&lt;expression&gt;.made);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这些方法现在看起来很琐碎。请注意，有些候选者在匹配对象中检查多个键，例如：<code>$&lt;variable-name&gt; &amp;&amp; !$&lt;integer&gt;</code>。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_访问数组元素">7.4. 访问数组元素</h3>
+<div class="paragraph">
+<p>接下来的目标是开始使用单个数组项，比如说下一个片段中就可以看出。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say data[0];
+say data[1];
+
+my n = data[0] * data[1];
+say n;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们目前的动作类已经支持索引字符串，而这正是我们要扩展的地方。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method expr($/ where $&lt;variable-name&gt; &amp;&amp; $&lt;integer&gt;) {
+    if %!var{$&lt;variable-name&gt;} ~~ Array {
+        $/.make(%!var{$&lt;variable-name&gt;}[+$&lt;integer&gt;]);
+    }
+    else {
+        $/.make(%!var{$&lt;variable-name&gt;}.substr(
+            +$&lt;integer&gt;, 1));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该方法检查存储在 <code>%!var</code> 散列中的变量类型，如果是数组，则返回请求的元素。另一个分支和之前一样，对字符串进行工作。</p>
+</div>
+<div class="paragraph">
+<p>通过将代表数组（和字符串）索引的序列提取到一个单独的规则中，可以再次简化 grammar。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule index {
+    '[' &lt;integer&gt; ']'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当你取值时，在 <code>assignment</code> 和 <code>expr</code> 内使用新规则。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
+    &lt;variable-name&gt; &lt;index&gt;? '=' &lt;value&gt;
+}
+
+. . .
+
+multi rule expr(4) {
+    | &lt;number&gt;
+    | &lt;variable-name&gt; &lt;index&gt;?
+    | '(' &lt;expression&gt; ')'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果你想改变索引的语法，比如说，把 <code>data:3</code> 改为 <code>data[3]</code>，有一个地方可以做到，那就是 <code>index</code> 规则。</p>
+</div>
+<div class="paragraph">
+<p>动作也必须适应。索引的属性是一个整数值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method index($/) {
+    $/.make(+$&lt;integer&gt;);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>因此你应该用 <code>$&lt;index&gt;.made</code> 从其他方法中读取。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method assignment($/ where $&lt;index&gt;) {
+    %!var{~$&lt;variable-name&gt;}[$&lt;index&gt;.made] = $&lt;value&gt;.made;
+}
+
+multi method assignment($/ where !$&lt;index&gt;) {
+    %!var{~$&lt;variable-name&gt;} = $&lt;value&gt;.made;
+}
+
+. . .
+
+multi method expr($/ where $&lt;variable-name&gt; &amp;&amp; $&lt;index&gt;) {
+    if %!var{$&lt;variable-name&gt;} ~~ Array {
+        $/.make(%!var{$&lt;variable-name&gt;}[$&lt;index&gt;.made]);
+    }
+    else {
+        $/.make(%!var{$&lt;variable-name&gt;}.substr(
+            $&lt;index&gt;.made, 1));
+    }
+}
+
+multi method expr($/ where $&lt;variable-name&gt; &amp;&amp; !$&lt;index&gt;) {
+    $/.make(%!var{$&lt;variable-name&gt;});
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>再次，多余的条件，如 <code>!$&lt;index&gt;</code> 在 <code>where</code> 子句中使用是为了使代码更易读；如果没有这些条件，多方法也可以正确地调度。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_列表赋值">7.5. 列表赋值</h3>
+<div class="paragraph">
+<p>到目前为止，数组可以创建，但你必须逐一分配它们的元素。让我们允许列表分配和初始化。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my data[] = 111, 222, 333;
+
+data = 7, 9, 11;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里出现了一个新的语法元素&#8212;&#8203;逗号。它与语言中的其他结构不冲突，因此可以很容易地嵌入到语法中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule array-declaration {
+    &lt;variable-name&gt; '[' ']' [ '=' &lt;value&gt;+ %% ',' ]?
+}
+
+rule assignment {
+    &lt;variable-name&gt; &lt;index&gt;? '=' &lt;value&gt;+ %% ','
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这两种情况下，都使用了值规则，这意味着你可以使用数字、字符串和算术表达式作为数组元素的初始化值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my strings[] = "alpha", "beta", "gamma";
+say strings[1]; # beta
+
+my arr[] = 11, 3 * 4, 2 * (6 + 0.5);
+say arr[0]; # 11
+say arr[1]; # 12
+say arr[2]; # 13</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>为了在 action 中实现，让我们做一个辅助方法 <code>init-array</code>，取变量的名字和值的列表。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method init-array($variable-name, @values) {
+    %!var{$variable-name} = $[];
+    for @values -&gt; $value {
+        %!var{$variable-name}.push($value.made);
+    }
+}
+
+multi method array-declaration($/ where $&lt;value&gt;) {
+    self.init-array($&lt;variable-name&gt;, $&lt;value&gt;);
+}
+
+multi method assignment($/ where !$&lt;index&gt;) {
+    if %!var{$&lt;variable-name&gt;} ~~ Array {
+        self.init-array($&lt;variable-name&gt;, $&lt;value&gt;);
+    }
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在做一个新数组的时候，也可以用 <code>Array.new</code> 来代替 <code>$[]</code>。</p>
+</div>
+<div class="paragraph">
+<p>例如, 与 <code>operator</code> 函数不同，<code>init-array</code> 例程是一个方法，因为它必须访问变量存储 <code>%!var</code>。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_打印数组">7.6. 打印数组</h3>
+<div class="paragraph">
+<p>对于数组来说，另一个真正需要的是允许在一条指令中打印所有的元素。我们希望将整个数组的元素传递给say函数，而不是列出单独的项目。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my data[] = 5, 7, 9;
+say data;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>事实上，Raku 已经可以做到这一点，因为我们对 <code>say</code> 的实现只是将整个容器传递给 Raku 的 <code>say</code>，而 Raku 的 <code>say</code> 会打印出这样的数据。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">[5 7 9]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>让我们不那么谦虚，像以前那样，通过检查变量的类型来创建自己的输出格式。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method function-call($/) {
+    my $object = $&lt;value&gt;.made;
+
+    if $object ~~ Array {
+        say $object.join(', ');
+    }
+    else {
+        say $object;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个函数以逗号分隔的列表形式打印出数组的项目。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">5, 7, 9</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_散列">7.7. 散列</h3>
+<div class="paragraph">
+<p>在本章的剩余部分，我们将在Lingua语言中实现哈希。在数组的例子中，你已经看到了大部分的想法，所以这些变化应该是透明的、明显的。所以，我们要实现几件事：声明、带初始化的声明、对整个散列和单个元素进行赋值、读取单个值和打印散列。</p>
+</div>
+<div class="paragraph">
+<p>下面的片段演示了我们使用的语法。要声明一个散列，在变量名称后使用一对大括号。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my data{};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>初始化和分配使用逗号分隔的键-值对列表来完成。键始终是字符串，值可以是任何标量值（数字或字符串）。键和值之间的分隔符是冒号。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my hash{} = "alpha" : 1, "beta": 2, "gamma": 3;
+
+my days{};
+days = "Mon": "work", "Sat": "rest";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>语法中包括一个单独的哈希声明规则。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule variable-declaration {
+    'my' [
+        | &lt;array-declaration&gt;
+        | &lt;hash-declaration&gt;
+        | &lt;scalar-declaration&gt;
+    ]
+}
+
+rule hash-declaration {
+    &lt;variable-name&gt; '{' '}' [
+        '=' [ &lt;string&gt; ':' &lt;value&gt; ]+ %% ','
+    ]?
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>assignment</code> 规则应该知道如何处理哈希。这个时候，可以在不创建新的规则的情况下，就地修改。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
+    &lt;variable-name&gt; &lt;index&gt;? '='
+        [
+            | [ &lt;string&gt; ':' &lt;value&gt; ]+ %% ','
+            |                &lt;value&gt;+   %% ','
+        ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在动作中，要仔细实现声明和散列赋值方法。它们都使用共同的方法 <code>init-hash</code>，来设置散列的键和值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method init-hash($variable-name, @keys, @values) {
+    %!var{$variable-name} = Hash.new;
+    while @keys {
+        %!var{$variable-name}.{@keys.shift.made} =
+            @values.shift.made;
+   }
+}
+
+multi method hash-declaration($/) {
+    self.init-hash($&lt;variable-name&gt;, $&lt;string&gt;, $&lt;value&gt;);
+}
+
+multi method assignment($/ where !$&lt;index&gt;) {
+    . . .
+    elsif %!var{$&lt;variable-name&gt;} ~~ Hash {
+        self.init-hash($&lt;variable-name&gt;,
+                       $&lt;string&gt;, $&lt;value&gt;);
+    }
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>哈希实现的另一个部分是允许使用密钥访问值。重新使用 <code>index</code> 规则并使其成为两个备选的集合是明智的。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule index {
+    | &lt;array-index&gt;
+    | &lt;hash-index&gt;
+}
+
+rule array-index {
+    '[' &lt;integer&gt; ']'
+}
+
+rule hash-index {
+    '{' &lt;string&gt; '}'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在已经存在的方法中使用新的规则。<code>where</code> 子句收到一个额外的条件，以确保我们抓住了我们想要的规则。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method assignment($/ where $&lt;index&gt; &amp;&amp;
+                        $&lt;index&gt;&lt;array-index&gt;) {
+    %!var{$&lt;variable-name&gt;}[$&lt;index&gt;.made] =
+        $&lt;value&gt;[0].made;
+}
+
+multi method assignment($/ where $&lt;index&gt; &amp;&amp;
+                        $&lt;index&gt;&lt;hash-index&gt;) {
+    %!var{$&lt;variable-name&gt;}{$&lt;index&gt;.made} =
+        $&lt;value&gt;[0].made;
+}
+
+multi method assignment($/ where !$&lt;index&gt;) {
+    . . .
+    elsif %!var{$&lt;variable-name&gt;} ~~ Hash {
+        self.init-hash($&lt;variable-name&gt;,
+                       $&lt;string&gt;, $&lt;value&gt;);
+    }
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>新的索引规则已经可以在 <code>expr(4)</code> 规则中工作了，它允许我们使用 <code>hash{"key"}</code> 语法通过给定的hash键读取值。我们需要做的就是更新 <code>expr</code> 方法，让它知道新的数据结构。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method expr($/ where $&lt;variable-name&gt; &amp;&amp; $&lt;index&gt;) {
+    . . .
+    elsif %!var{$&lt;variable-name&gt;} ~~ Hash {
+        $/.make(%!var{$&lt;variable-name&gt;}{$&lt;index&gt;.made});
+    }
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在测试程序中添加下面这几行，并确认是否有效。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">days{"Tue"} = "work";
+say days{"Sat"};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后，教 <code>say</code> 函数打印哈希值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method function-call($/) {
+    . . .
+    elsif $object ~~ Hash {
+        my @str;
+        for $object.keys.sort -&gt; $key {
+            @str.push("$key: $object{$key}");
+        }
+        say @str.join(', ');
+    }
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果你善于使用 <code>map</code> 方法，可以尝试制作一个更好的函数版本。<code>say days</code> 的预期输出；应该是这样的。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Mon: work, Sat: rest, Tue: work</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_复习和测试">7.8. 复习和测试</h3>
+<div class="paragraph">
+<p>让我们看看 Lingua 语言的现状。我们做了很大的工作，实现了对数字、字符串、数组和哈希的支持。我们可以改变变量的内容，并打印出变量的值。让我们再做一小步，允许变量作为数组索引或哈希键。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule array-index {
+    '[' [ &lt;integer&gt; | &lt;variable-name&gt; ] ']'
+}
+
+rule hash-index {
+    '{' [ &lt;string&gt; | &lt;variable-name&gt; ] '}'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>相应的 action 可以转化成对的琐碎的 multi 方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method array-index($/ where !$&lt;variable-name&gt;) {
+    $/.make(+$&lt;integer&gt;);
+}
+
+multi method array-index($/ where $&lt;variable-name&gt;) {
+    $/.make(%!var{$&lt;variable-name&gt;});
+}
+
+multi method hash-index($/ where !$&lt;variable-name&gt;) {
+    $/.make($&lt;string&gt;.made);
+}
+
+multi method hash-index($/ where $&lt;variable-name&gt;) {
+    $/.make(%!var{$&lt;variable-name&gt;});
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请参考资源库，检查是否有正确的文件，如果有的话，就可以运行下面的测试程序，这个测试程序使用了此刻实现的大部分功能。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># Illustrating the Pythagorean theorem
+my a = 3;
+my b = 4;
+my c = 5;
+my left = a**2 + b**2;
+my right = c**2;
+say "The hypotenuse of a rectangle triangle with the
+sides $a and $b is indeed $c, as $left = $right.";
+
+/* Using floating-point numbers for
+computing the length of a circle */
+my pi = 3.1415926;
+my R = 7;
+my c = 2 * pi * R;
+say "The length of a circle of radius $R is $c.";
+
+# A list of prime numbers
+my n = 5;
+my data[] = 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31;
+my nth = data[n];
+say "$n th prime number is $nth.";
+
+# Demonstrating the use of hashes
+my countries{} =
+    "France": "Paris", "Germany": "Berlin", "Italy": "Rome";
+my country = "Italy";
+my city = countries{country};
+say "$city is the capital of $country.";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该程序打印的结果如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ ./lingua test22.lng
+The hypotenuse of a rectangle triangle with the
+sides 3 and 4 is indeed 5, as 25 = 25.
+The length of a circle of radius 7 is 43.9822964.
+5 th prime number is 13.
+Rome is the capital of Italy.
+OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>解释器对程序的理解是相当迷人的，这在以前是不曾有过的。你写了它，你可以在里面做很多修改，程序仍然会显示出你所期望的结果。</p>
+</div>
+<div class="paragraph">
+<p>在接下来的章节中，我们将从更复杂的方面来研究语言。</p>
+</div>
+<div class="paragraph">
+<p><a href="https://andrewshitov.com/2020/04/05/chapter-7-arrays-and-hashes/">数组和散列</a></p>
 </div>
 </div>
 </div>
