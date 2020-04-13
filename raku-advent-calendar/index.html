@@ -477,7 +477,9 @@ if (theme && theme !== "1") {
 <li><a href="#_编程编程">52.4. 编程编程</a></li>
 </ul>
 </li>
-<li><a href="#_线程">53. 线程</a></li>
+<li><a href="#_supply_块">53. Supply 块</a></li>
+<li><a href="#_channnels">54. Channnels</a></li>
+<li><a href="#_线程">55. 线程</a></li>
 </ul>
 </li>
 </ul>
@@ -16524,10 +16526,10 @@ start {
 == Promises</p>
 </div>
 <div class="paragraph">
-<p>在Raku中，Promise表示异步任务之间进行通信的最简单的高级语言功能。 它们非常像人与人之间的承诺。 例如，我可以保证儿子会帮助他完成学业。 当我帮助他时，我信守诺言。 如果我出于某种原因未能帮助他，或者我违反了诺言。 Raku中的Promise也是如此。 当值到达时，会保留返回值的承诺。 如果发生阻止值到达的错误，则返回值的承诺将被破坏。</p>
+<p>在 Raku 中, <a href="https://zostay.com/archive/2019/12/02/promises.html">Promise</a> 代表了异步任务之间通信的最简单的高级语言功能。 它们非常像人与人之间的承诺。 例如, 我可能会答应我的儿子, 我会帮助他完成学业。 当我帮助他的时候, 我会遵守这个承诺。 或者, 如果由于某种原因, 我未能帮助他, 我就会违背这个承诺。 Raku 中 的 Promise 也是如此。 当值到达的时候, Promise 要返回一个值的时候, 就会遵守这个承诺。 如果发生了错误, 使值无法到达, 那么返回值的承诺就会被破坏。</p>
 </div>
 <div class="paragraph">
-<p>因此，让我们来看看Raku在行动中的基本承诺：</p>
+<p>因此, 让我们来看看 Raku 中的基本承诺的操作：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16547,19 +16549,19 @@ await $promise.then({ say .result });</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>上面的代码使用开始块开始查找第10,000个素数。此块返回Promise对象。该对象以三种状态之一存在（可以使用.status方法检查）。初始状态为“计划中”，然后进入两个最终状态之一。如果无法达到结果（通常是因为发生异常），则进入“断开”状态，当结果可用时，进入“保持”状态。一旦处于保留状态，.result方法将立即返回保留的Promise的值。</p>
+<p>上面的代码使用 <a href="https://docs.raku.org/language/control#index-entry-control_flow_start-start">start</a> 块开始查找第 10,000 个素数。此块返回一个  <a href="https://docs.raku.org/type/Promise">Promise</a> 对象。该对象以三种状态之一存在（可以使用 <code>.status</code> 方法检查）。初始状态为 <strong>Planned</strong>, 然后进入两个最终状态之一。如果无法达到结果（通常是因为发生异常）, 则进入 ＊Broken* s状态, 当结果可用时, 则进入 <strong>Kept</strong> 状态。一旦处于 <code>Kept</code> 状态, <code>.result</code> 方法将立即返回被保存的 <code>Promise</code> 的值。</p>
 </div>
 <div class="paragraph">
-<p>可以使用then .then方法将承诺链接在一起。这是通过添加另一个块来实现的，该块在第一个块保留后立即开始。将为新块提供先前的Promise对象作为参数，并且该方法返回一个新的Promise，其中将包含下一个块的结果。</p>
+<p>可以使用 <code>.then</code> 方法将承诺链接在一起。这是通过添加另一个块来实现的, 该块在第一个块保留后立即开始。新的块将 被赋予前一个 Promise 对象作为参数, 该方法返回一个新的 Promise, 它包含下一个块的结果。</p>
 </div>
 <div class="paragraph">
-<p>上面代码中的start块调度计算在默认线程池中的下一个未使用线程上运行，并返回Promise对象。1我们使用.then（）在计算可用时立即输出.result。</p>
+<p>上面代码中的 start 块安排计算在默认线程池中的下一个未使用的线程上运行, 并返回一个 Promise对象。</p>
 </div>
 <div class="paragraph">
-<p>最后，我们有了await语句，该语句使主线程暂停直到该值变为可用为止。没有该语句，我们的程序将在计算完成之前结束。</p>
+<p>最后, 我们有一个 <a href="https://docs.raku.org/type/Promise#sub_await">await</a> 语句, 该语句使主线程暂停直到值变为可用为止。如果没有这个语句, 我们的程序将在计算完成之前结束。</p>
 </div>
 <div class="paragraph">
-<p>等待还允许残破的Promise传递异常。考虑以下代码：</p>
+<p>await 语句还可以让 一个被破坏的 Promise 传递异常。考虑一下这段代码：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16569,7 +16571,7 @@ say 'something';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>上面的代码将休眠1秒钟，并输出“内容”以进行输出。 但是，永远不会收到该异常。 这是因为尽管例外导致承诺被兑现，但我们根本没有看待承诺的结果。 我们可以在Promise上添加一个wait，准备好接收该值，并且将引发任何引发Promise中断的异常抛出：</p>
+<p>上面的代码会休眠 1 秒钟, 并打印 "something" 到标准输出。 然而, 这个异常永远不会被接收到。 这是因为尽管异常导致承诺被破坏, 但我们根本没有看到承诺的结果。 我们可以在 Promise 上添加一个 <code>await</code>, 准备好接收该值, 任何抛出的导致 Promise 被破坏的异常都会被接收。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16585,23 +16587,25 @@ CATCH {
 </div>
 </div>
 <div class="paragraph">
-<p>这段代码做的和以前完全一样，但是在“某物”之后也会输出“错误：坏东西”。 始终要确保以这种方式在开始块或另一个收到Promise的块中处理您的异常，否则您最终可能会遇到奇怪的意外问题。</p>
+<p>这段代码做的事情和之前的完全一样, 但是在 "something" 后面也会输出 "ERROR: bad stuff"。 始终要确保以这种方式在 <code>start</code> 块或另一个收到 Promise 的块中处理异常, 否则可能会遇到奇怪的、意想不到的问题。</p>
 </div>
 <div class="paragraph">
-<p>这些是乐天承诺的基本要素。</p>
+<p>这些都是 Raku Promise 的基本要素。</p>
 </div>
 <div class="paragraph">
 <p>干杯。</p>
 </div>
 <div class="paragraph">
-<p>请注意，这是在MoarVM下在Rakudo中运行的常规默认调度程序的过程。 实际发生的情况可能会根据$ * SCHEDULER变量中的当前值而有所不同。 我将在以后的文章中进一步讨论。 ↩</p>
+<p>请注意, 这是在 MoarVM 下运行的 Rakudo 通常的默认调度器的过程。 实际发生的情况可能会根据 <code>$*SCHEDULER</code> 变量中的当前值而有所不同。 我将在以后的文章中进一步讨论这个问题。 ↩</p>
 </div>
-<div class="paragraph">
-<p><a href="https://zostay.com/archive/2019/12/02/promises.html" class="bare">https://zostay.com/archive/2019/12/02/promises.html</a>
-==  Supply 块</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_supply_块">53. Supply 块</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>当需要在线程之间安全地访问 Raku 应用程序中的数据流时，您需要 <a href="https://docs.raku.org/type/Supply">Supply</a>。今天我们要讨论一种特殊的供应方式，即<a href="https://docs.raku.org/syntax/supply%20emit">供应</a>块。如果您熟悉序列，也就是 <a href="https://docs.raku.org/type/Seq">Seq</a> 对象，那么供应块以非常相似的方式工作，但是允许您在数据到来时拉动它，同时轻松地做其他事情。</p>
+<p>当需要在线程之间安全地访问 Raku 应用程序中的数据流时, 你需要 <a href="https://docs.raku.org/type/Supply">Supply</a>。今天我们要讨论一种特殊的供应方式, 即 <a href="https://docs.raku.org/syntax/supply%20emit">Supply</a> 块。如果你熟悉序列, 也就是 <a href="https://docs.raku.org/type/Seq">Seq</a> 对象, Supply 块的方式工作与之非常类似, 但是允许你在数据到来时拉动它, 并在这期间轻松地做其他事情。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16626,7 +16630,7 @@ react {
 </div>
 </div>
 <div class="paragraph">
-<p>我们这里有三段代码:</p>
+<p>所以我们这里有三段代码:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -16634,47 +16638,51 @@ react {
 <p>函数 <code>a()</code> 生成 Hofstadter Q-sequence 的值(以一种特别低效的方式)。</p>
 </li>
 <li>
-<p>有一个使用供应块生成的供应对象，它使用我们定义的函数输出 Hofstadter Q-sequence 的值，从开始到程序退出。</p>
+<p>有一个使用 Supply 块生成的 Supply 对象, 它使用我们定义的函数输出 Hofstadter Q-sequence 的值, 从头开始, 一直到程序退出。</p>
 </li>
 <li>
-<p>然后是一个 <a href="https://docs.raku.org/language/concurrency#index-entry-react">react</a> 块，每当值可用时就输出值，在值之间每秒钟输出一条等待消息。我将在以后更多的时候探究 <code>react</code> 块。现在，只需知道 <code>react</code> 块允许我们通过将结果拉回单个线程来同步异步工作。</p>
+<p>然后是一个 <a href="https://docs.raku.org/language/concurrency#index-entry-react">react</a> 块, 每当值可用时就输出值, 并在值之间每隔一秒钟输出一条等待消息。关于 <code>react</code> 块, 我将在以后再详细介绍。现在, 只需知道 <code>react</code> 块允许我们通过将结果拉回到单个线程中来同步异步工作。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>至于我们的中心主题，<code>supply</code> 块，它返回一个 <code>Supply</code> 对象，可以被"分接"。通过调用 <code>.tap</code> 或 <code>.act</code> 方法，或在 <code>whenever</code> 块中作为 <code>react</code> 或另一个 <code>supply</code> 块的一部分使用。</p>
+<p>至于我们的中心主题, <code>supply</code> 块, 它返回一个可以被"分接"(tapped)的 <code>Supply</code> 对象。通过调用 <code>.tap</code> 或 <code>.act</code> 方法, 或在 <code>whenever</code> 块中作为 <code>react</code> 或另一个 <code>supply</code> 块的一部分使用。</p>
 </div>
 <div class="paragraph">
-<p>在 <code>supply</code> 块的情况下，我们得到的这种 <code>Supply</code> 对象称为"按需供应"。这意味着每次打开 <code>Supply</code> 时，都会运行与该块相关的代码。每次遇到 <code>emit</code> 时，都会运行传递给 <code>.tap</code> 或 <code>whenever</code> 语句的块，并给出作为参数发出的值(在上面的示例代码中名为 <code>$v</code>)。执行将继续，直到给定的块退出，或者到达 <code>done</code> 语句，这将导致 <code>supply</code> 块退出(这与 <code>last</code> for 循环的操作非常相似)。</p>
+<p>在 <code>supply</code> 块的情况下, 我们得到的这种 <code>Supply</code> 对象被称为"按需供应"。这意味着每当 <code>Supply</code> 被分接(tap)时, 都会运行与该块相关的代码。每当遇到 <code>emit</code> 时, 都会运行传递给 <code>.tap</code> 或 <code>whenever</code> 语句的块, 并给出作为参数发出的值(在上面的示例代码中命名为 <code>$v</code>)。执行将继续, 直到给定的块退出, 或者到达 <code>done</code> 语句, 这将导致 <code>supply</code> 块退出(这与 <code>last</code> for 循环的操作非常相似)。</p>
 </div>
 <div class="paragraph">
-<p>例如，如果我们希望我们的序列在 100 次迭代后自动结束，我们可以这样重写我们的 <code>supply</code>:</p>
+<p>例如, 如果我们希望我们的序列在 100 次迭代后自动结束, 我们可以这样重写我们的 <code>supply</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $stopping-hofstadter-generator = supply
-    for (1 ... *).map(-&gt; $n { a($n) }) -&gt; $v {
-        emit $v;
-        done if $n &gt; 100;
-    }
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $stopping-hofstadter-generator = supply {
+        for (1 ... *).map(-&gt; $n { a($n) }) -&gt; $v {
+            emit $v;
+            done if $v &gt; 100;
+        }
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>使用 <code>supply</code> 块时要记住的一个非常重要的因素是，<code>emit</code> 命令会一直阻塞到每个 <code>tap</code> 完成工作。这意味着该 <code>supply</code> 块"支付"其分接头的计算时间。这种延迟提供了一种形式的反压，防止产生的 <code>Supply</code> 运行速度超过分接头可以处理的能力。因此,如果你想让你的事件流以光速运行并且不在乎工具处理是否可以跟上,你需要确保分接头立即 <code>start</code> 新任务运行以避免阻塞或你想要一个与普通 <code>Supply</code> 处理工作负载不同的机制。</p>
+<p>使用 <code>supply</code> 块时要记住的一个非常重要的因素是, <code>emit</code> 命令会一直阻塞直到每个分接(<code>tap</code>)完成工作。这意味着该 <code>supply</code> 块"支付"其分接的计算时间。这种延迟提供了一种形式的反压, 防止产生的 <code>Supply</code> 运行速度超过了分接(tap)可以处理的速度。因此,如果你想让你的事件流以光速运行, 并且不在乎工具处理是否可以跟上, 你需要确保分接(tap)立即 启动(<code>start</code>)新的任务来运行以避免阻塞, 或者你想要一个不同于普通 <code>Supply</code> 的机制来处理工作量。</p>
 </div>
 <div class="paragraph">
-<p>欢呼。
-== Channnels</p>
+<p>干杯。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_channnels">54. Channnels</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Raku 中的 <a href="https://docs.raku.org/type/Channel">Channel</a> 是一个异步数据队列。 你可以将数据送入队列的一端, 并在另一端安全地接收数据, 即使涉及多个线程参与时也是如此。</p>
 </div>
 <div class="paragraph">
-<p>Raku 中的 linnk:https://docs.raku.org/type/Channel[Channel] 是数据的异步队列。 即使涉及多个线程，也可以将数据馈入队列的一端，而在另一端安全地接收数据。</p>
+<p>让我们考虑一下<a href="https://en.wikipedia.org/wiki/Dining_philosophers_problem">用餐哲学家问题</a>的一个变体：有五个哲学家在桌旁喝汤。 他们没有互相交谈, 因为他们忙于思考哲学问题。 然而, 只有 2 个汤勺。 每当一个哲学家想喝一口汤时, 她都需要一个汤勺。 幸运的是, 每个哲学家愿意分享汤勺, 并在每次舀完后将勺子放在桌子的中央。</p>
 </div>
 <div class="paragraph">
-<p>让我们考虑一下<a href="https://en.wikipedia.org/wiki/Dining_philosophers_problem">用餐哲学家问题</a>的一个变体：有五个哲学家在桌旁喝汤。 他们不互相交谈是因为他们太忙于思考哲学。 但是，只有 2 个汤勺。 每次哲学家想喝一口汤时，她都需要汤勺。 幸运的是，每个哲学家愿意分享汤勺，并在每次舀完后将勺子放在桌子的中央。</p>
-</div>
-<div class="paragraph">
-<p>我们可以像这样对这个问题建模：</p>
+<p>我们可以这样来模拟这个问题：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16698,7 +16706,7 @@ await Promise.allof(@philosophers);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这里，我们有五个任务运行在五个线程中，每个任务都在争用两个汤勺资源之一。 他们每人要喝 100 口汤。 运行该程序将为您提供 500 行输出，类似于以下内容：</p>
+<p>在这里, 我们有五个任务运行在五个线程中, 每个任务都在争夺两个汤勺资源中的一个。 他们将各喝 100 口汤。 运行这个程序, 你会得到 500 行类似于这样的输出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16716,25 +16724,24 @@ Philosopher 0 takes a sip with the wooden spoon.
 </div>
 </div>
 <div class="paragraph">
-<p>代码本身非常简单。我们启动了(<code>start</code>)五个线程，每个线程代表一个哲学家。每个哲学家都调用 <code>.receive</code> 下一个可用的勺子。该方法将一直阻塞，直到有汤勺可用为止。哲学家喝了一口，然后使用 <code>.send</code> 将勺子放回桌子上，以供其他人使用。最终，哲学家喝完了 100 口，并且将由 <code>start</code> 返回的 Promise 保留。</p>
+<p>代码本身是非常简单的。我们启动了(<code>start</code>)五个线程, 每个线程代表一个哲学家。每个哲学家都调用 <code>.receive</code> 接收下一个可用的勺子。该方法将一直阻塞, 直到有汤勺可用为止。哲学家喝一口汤, 然后使用 <code>.send</code> 将勺子放回到桌子上供其他人使用。最终, 哲学家喝完了 100 口, 并且由 <code>start</code> 返回的 Promise 会被保留下来。</p>
 </div>
 <div class="paragraph">
-<p>主线程通过使用 <code>.send</code> 将两个汤勺放在桌子上来启动该过程。然后，它使用 <code>await</code> 保持程序运行，直到完成所有哲学家任务。</p>
+<p>主线程通过使用 <code>.send</code> 将两个汤勺放在桌子上来启动这个过程。然后, 它使用 <code>await</code> 来保持程序运行, 直到所有的哲学家完成任务。</p>
 </div>
 <div class="paragraph">
-<p>就 CPU 而言，通道的开销非常低。发送者将不会等待接收者。接收者可以使用 <code>.receive</code> 阻塞直到队列中有可用内容为止，也可以使用 <code>.poll</code> 来检查条目而不会阻塞。成本转移到内存中。通道必须在内部存储所有已发送的项，直到接收到它们为止，并且队列将继续增长，直到程序内存不足。</p>
+<p>就 CPU 而言, 通道的开销非常低。发送者将不会等待接收者。接收者可以使用 <code>.receive</code> 阻塞直到队列中有可用内容为止, 也可以使用 <code>.poll</code> 来检查条目而不会阻塞。成本转移到内存中。通道必须在内部存储所有已发送的项, 直到接收到它们为止, 并且队列将继续增长, 直到程序内存不足。</p>
 </div>
 <div class="paragraph">
-<p>因此，当您拥有要分配的资源或消息但又不想在任务之间共享时，通道会很有用。或者当您只需要点对点交流时。作业队列，资源池和对等任务通信是通道最适合解决这类问题的很好的例子。</p>
+<p>因此, 当你有资源或消息要分发, 但不在任务之间共享时, 通道会很有用。或者当你只需要点对点的通信时。作业队列, 资源池和点对点任务通信是通道最适合解决的问题。</p>
 </div>
 <div class="paragraph">
 <p>干杯。</p>
 </div>
 </div>
 </div>
-</div>
 <div class="sect1">
-<h2 id="_线程">53. 线程</h2>
+<h2 id="_线程">55. 线程</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>警告！ 我们现在正在研究 Raku 的内心深处。 线程是低级 API，几乎所有应用程序都应避免使用线程。 但是，如果您的特定应用程序需要直接线程访问，那么这里就是为您准备的。</p>
@@ -16885,13 +16892,13 @@ $t2.finish;</code></pre>
 == React 块</p>
 </div>
 <div class="paragraph">
-<p>Raku 中的 <a href="https://docs.raku.org/language/concurrency#index-entry-react">react</a> 块是重新同步异步编码活动的主要方法。 使用它，您可以轻松地将 <a href="https://docs.raku.org/type/Promise">promises</a>，<a href="https://docs.raku.org/type/Supply">supplies</a>和 <a href="https://docs.raku.org/type/Channel">channels</a> 组合在一起，以使程序或子系统完整一致。</p>
+<p>Raku 中的 <a href="https://docs.raku.org/language/concurrency#index-entry-react">react</a> 块是重新同步异步编码活动的主要方法。 使用它, 你可以轻松地将 <a href="https://docs.raku.org/type/Promise">promises</a>, <a href="https://docs.raku.org/type/Supply">supplies</a>和 <a href="https://docs.raku.org/type/Channel">channels</a> 组合在一起, 以使程序或子系统成为一个连贯的整体。</p>
 </div>
 <div class="paragraph">
-<p><code>react</code> 块本身可以运行您想要的任何代码，并在任何时候运行一个或多个代码。 块中的代码将运行一次，并且当调用完了的子例程时，或者当块完成时与之关联的所有对象（即，所有承诺都被保留或破坏，所有供应已退出或关闭，并且所有通道已失败或关闭）。</p>
+<p><code>react</code> 块本身可以运行你想要的任何代码, 还有一个或多个 whenever 块。 块中的代码会运行一次, 并且当调用 <code>done</code> 子例程时, 或者当所有与 <code>whenever</code> 块关联的对象完成时（即, 所有承诺都被保留或破坏, 所有供应已退出或关闭, 并且所有通道已失败或关闭）。</p>
 </div>
 <div class="paragraph">
-<p>除了语法之外，要注意的关于 <code>react</code> 块的关键一点是，该块内的所有代码将始终像单线程一样运行（即，可以使用多个线程，但绝不会同时运行该块内的任何代码） ）。</p>
+<p>除了语法之外, 关于 <code>react</code> 块, 需要注意的关键一点是, 这个块内的所有代码将始终像单线程一样运行(即, 可能会使用多线程, 但这个块内的任何代码都不会并发运行)。</p>
 </div>
 <div class="paragraph">
 <p>我们来看一个示例 <code>react</code> 块：</p>
@@ -16931,7 +16938,7 @@ react {
 </div>
 </div>
 <div class="paragraph">
-<p>该程序提供了一个小的交互式 shell，可以执行加法和减法。 运行时，可以按以下方式使用它：</p>
+<p>该程序提供了一个小型的交互式 shell, 可以执行加法和减法运算。 运行时, 你可以按以下方式使用它：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16944,17 +16951,19 @@ Quitting.</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如您所见，该代码与两个 <code>Supply</code> 对象，一个 <code>Channel</code> 和一个 <code>Promise</code> 一起工作。他们中的每一个都以预期的方式与之合作。 run 块中的所有代码都像在一个线程中一样运行（尽管并没有特别保证仅使用一个线程，也没有代码可以同时运行）。</p>
+<p>如你所见, 该代码与两个 <code>Supply</code> 对象, 一个 <code>Channel</code> 和一个 <code>Promise</code> 来操作的。他们中的每一个对象都能以预期的方式在任何时候工作。 <code>run</code> 块中的所有代码都像在一个线程中运行（尽管并没有特别保证仅使用一个线程, 只是没有代码会并发运行）。</p>
 </div>
 <div class="paragraph">
-<p>但是，在没有并发的情况下从单个任务运行确实会出现问题。 <code>$*IN</code> 文件句柄仅执行阻塞读取，即使您使用 <code>.Supply</code> 方法来异步获取数据也是如此。因此，我们必须将输入拉入在后台线程中运行的任务中，这就是为什么我们在读取字符输入的循环之前放置一个开始。如果没有此并发任务，我们将不得不额外按 Enter 键，以便其他子句都可以运行。</p>
+<p>但是, 在没有并发的情况下从单个任务运行确实会出现问题。 <code>$*IN</code> 文件句柄仅执行阻塞读, 即使你使用 <code>.Supply</code> 方法来异步获取数据也是如此。因此, 我们必须在后台线程中运行的任务中拉取输入, 这就是为什么我们在读取字符输入的循环之前放置一个 <code>start</code>。如果没有这个并发任务, 我们就必须多敲几次 Return 键, 以便其他 <code>whenever</code> 子句有机会运行。</p>
 </div>
 <div class="paragraph">
-<p>就是说，只要有块时，我们就可以将另一个的工作移到单独的并发任务中，只需将每个块拉到这个 <code>react</code> 块中，它就可以正常工作。 <code>react</code> 块的目标是以简单的语法同步异步工作。我认为它做得很好。</p>
+<p>也就是说, 我们可以把其它 <code>whenever</code> 块的工作转移到单独的并发任务中, 然后把每个任务都拉到这个 <code>react</code> 块中, 这样就能很好地工作。 <code>react</code> 块的目标是以简单的语法同步异步工作。我认为它的工作做得很好。</p>
 </div>
 <div class="paragraph">
-<p>干杯。
-在Raku中编写并发代码时，我们希望避免任务之间共享数据。 这是因为不共享数据的代码是自动安全的，并且不必担心与其他代码的相互依赖性。 因此，在可能的情况下，应该通过Supply，Promise和Channel对象进行工作，然后通过中央线程将它们同步在一起。 这样，所有状态更改都是安全的。</p>
+<p>干杯。</p>
+</div>
+<div class="paragraph">
+<p>在Raku中编写并发代码时，我们希望避免任务之间共享数据。 这是因为不共享数据的代码是自动安全的，并且不必担心与其他代码的相互依赖性。 因此，在可能的情况下，应该通过Supply，Promise和Channel对象进行工作，然后通过中央线程将它们同步在一起。 这样，所有状态更改都是安全的。</p>
 </div>
 <div class="paragraph">
 <p>但是，这并不总是可行的。 有时，共享可以在不同线程上运行的任务之间更改的数据确实更有效。 但是，这种共享本质上是不安全的。</p>
@@ -16977,9 +16986,9 @@ say $x;</code></pre>
 <p>我们可能期望$ x的值为200，但它不太可能为200。几乎可以肯定会更低。这是因为简单的$ x ++操作需要：</p>
 </div>
 <div class="paragraph">
-<p>读取$ x的值。
-将一个加到从$ x读取的值中。
-将计算出的值存储回int $ x。
+<p>读取 <code>$x</code> 的值。
+将一个加到从 <code>$x</code> 读取的值中。
+将计算出的值存储回 <code>int $x</code>。
 如果碰巧第一个任务执行了步骤1和2，然后第二个任务在第一个任务完成了步骤3之前执行了步骤1到3，则增量操作中的至少一个将丢失。在每个任务中进行100次迭代的过程中，我预计会丢失5或10次写操作，并且每次运行都可能给出稍微不同的答案。这就是在并发时不安全的含义。</p>
 </div>
 <div class="paragraph">
@@ -17034,12 +17043,16 @@ What’s faster than locks? Compare-and-swap. Modern CPUs have multiple cores. A
 <div class="paragraph">
 <p>Let’s start by writing our code in the naïve way:</p>
 </div>
-<div class="paragraph">
-<p>my Int $balance = 1000;
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Int $balance = 1000;
 start { $balance = $balance - 100 } # one
 start { $balance = $balance + 250 } # two
-say $balance;
-Unfortunately, it is now possible to end up with a balance that is different form $1150. This is because if these two tasks actually run simultaneously, they perform operations that could be interleaved like this:</p>
+say $balance;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Unfortunately, it is now possible to end up with a balance that is different form $1150. This is because if these two tasks actually run simultaneously, they perform operations that could be interleaved like this:</p>
 </div>
 <div class="paragraph">
 <p>1.Block one reads a $balance of 1000.
@@ -17055,12 +17068,16 @@ Unfortunately, it is now possible to end up with a balance that is different for
 <div class="paragraph">
 <p>Instead, we can use a cas operation to perform the operation sequentially. So, if we rewrite the above code using atomicint we end up with this:</p>
 </div>
-<div class="paragraph">
-<p>my atomicint $balance = 1000;
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my atomicint $balance = 1000;
 start { $balance ⚛️= ⚛️$balance - 100 } # one
 start { $balance ⚛️= ⚛️$balance + 250 } # two
-say $balance;
-Here the result will always be the expected 1150. Let’s assume these two tasks run simultaneously exactly as before, but the final assignment is a compare-and-swap operation rather than a regular set. It would play out like this:</p>
+say $balance;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here the result will always be the expected 1150. Let’s assume these two tasks run simultaneously exactly as before, but the final assignment is a compare-and-swap operation rather than a regular set. It would play out like this:</p>
 </div>
 <div class="paragraph">
 <p>1.Block one reads a $balance of 1000.
@@ -17116,8 +17133,9 @@ Here the result will always be the expected 1150. Let’s assume these two tasks
 <div class="paragraph">
 <p>First, consider this program using the cas function:</p>
 </div>
-<div class="paragraph">
-<p>my atomicinc $balance = 1000;
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my atomicinc $balance = 1000;
 sub update-balance($change-by) {
     my $new-balance;
     loop {
@@ -17131,17 +17149,22 @@ sub update-balance($change-by) {
 }
 start update-balance(-100); # one
 start update-balance(250);  # two
-say $balance;
-This is functionally identical, though more verbose, than the operation above. This is basically giving you direct access to the cas operation itself and lets you control the number of retries and the specific operation performed. This function works something like this, though the entire operation is atomic:</p>
+say $balance;</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>multi sub cas(atomicint $target is rw, int $expected-value, int $new-value -&#8594; int) {
+<p>This is functionally identical, though more verbose, than the operation above. This is basically giving you direct access to the cas operation itself and lets you control the number of retries and the specific operation performed. This function works something like this, though the entire operation is atomic:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub cas(atomicint $target is rw, int $expected-value, int $new-value --&gt; int) {
     my int $seen = $target;
     if $seen == $expected-value {
         $target = $new-value;
     }
     return $seen;
-}</p>
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>That means it will return the value it saw in every case, but will have changed the value stored in the target when what it saw matches what you expected.</p>
@@ -17149,18 +17172,23 @@ This is functionally identical, though more verbose, than the operation above. T
 <div class="paragraph">
 <p>There is a second version of this method, which can help streamline your code a bit by performing the looping for you. To write the ATM problem yet again, we can also write it like this:</p>
 </div>
-<div class="paragraph">
-<p>my atomicint $balance = 1000;
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my atomicint $balance = 1000;
 sub update-balance($change-by) {
-    cas $balance, &#8594; $seen-value { $seen-value + $change-by }
+    cas $balance, -&gt; $seen-value { $seen-value + $change-by }
 }
 start update-balance(-100); # one
 start update-balance(250);  # two
-say $balance;
-This greatly shortens the code required to implement this operation. It does so by performing the given operation repeatedly in a loop until the cas operation succeeds. In this case, the cas function is defined like this, but again, using atomic operations where appropriate:</p>
+say $balance;</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>multi sub cas(atomicint $target is rw, &amp;operation) {
+<p>This greatly shortens the code required to implement this operation. It does so by performing the given operation repeatedly in a loop until the cas operation succeeds. In this case, the cas function is defined like this, but again, using atomic operations where appropriate:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub cas(atomicint $target is rw, &amp;operation) {
     loop {
         my int $seen = $target;
         my $new-value = operation($seen);
@@ -17169,8 +17197,11 @@ This greatly shortens the code required to implement this operation. It does so 
         }
         return $new-value;
     }
-}
-Be aware that the cas subroutine alternative that takes a function returns the new value that was set, while the cas that takes two integers returns the value that was seen. That is, this second and compact form treats the return value like an assignment operation, but the way the other form works does not allow for that treatment.</p>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Be aware that the cas subroutine alternative that takes a function returns the new value that was set, while the cas that takes two integers returns the value that was seen. That is, this second and compact form treats the return value like an assignment operation, but the way the other form works does not allow for that treatment.</p>
 </div>
 <div class="paragraph">
 <p>I’d really like to share with you how cas can be used on any scalar value in Raku, but this post has already gone long. I will cover that later this Advent.</p>
@@ -17202,9 +17233,10 @@ Be aware that the cas subroutine alternative that takes a function returns the n
 <div class="paragraph">
 <p>Here is a copy of that from the Game::Life::Player::Basic implementation, which is basically the simplest way to go about this:</p>
 </div>
-<div class="paragraph">
-<p>role Game::Life::Player {
-    &#8230;&#8203;
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">role Game::Life::Player {
+    ...
     method next-turn-for-cell(
         Int:D $x,
         Int:D $y,
@@ -17212,42 +17244,29 @@ Be aware that the cas subroutine alternative that takes a function returns the n
         Board:D $next,
     ) {
         # Is the cell currently live?
-        my $live      = $current.cell($x, $y);</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre># How many live neighbors does it currently have?
-my $neighbors = [+] $current.neighbors($x, $y);</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre># If alive and has too many or too few neighbors, die.
-if $live &amp;&amp; !(2 &lt;= $neighbors &lt;= 3) {
-    return $next.kill($x, $y);
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre># if dead and has the right number of neighbors, come to life.
-elsif !$live &amp;&amp; $neighbors == 3 {
-    return $next.raise($x, $y);
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>        else {
+        my $live      = $current.cell($x, $y);
+
+        # How many live neighbors does it currently have?
+        my $neighbors = [+] $current.neighbors($x, $y);
+
+        # If alive and has too many or too few neighbors, die.
+        if $live &amp;&amp; !(2 &lt;= $neighbors &lt;= 3) {
+            return $next.kill($x, $y);
+        }
+
+        # if dead and has the right number of neighbors, come to life.
+        elsif !$live &amp;&amp; $neighbors == 3 {
+            return $next.raise($x, $y);
+        }
+
+        else {
             return Nil;
         }
     }
-}</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>class Game::Life::Player::Basic does Game::Life::Player {
-    &#8230;&#8203;
+}
+
+class Game::Life::Player::Basic does Game::Life::Player {
+    ...
     method next-turn-for(
         Int:D $l,
         Int:D $t,
@@ -17256,14 +17275,17 @@ elsif !$live &amp;&amp; $neighbors == 3 {
         Board:D $current,
         Board:D $next,
     ) {
-        for $l..$r &#8594; $x {
-            for $t..$b &#8594; $y {
+        for $l..$r -&gt; $x {
+            for $t..$b -&gt; $y {
                 self.next-turn-for-cell($x, $y, $current, $next);
             }
         }
     }
-}
-The implementation is simply iterating through every cell within the boundary and running .next-turn-for-cell on it. This method is implemented in the .role and just implements the rules as they apply to a single cell. Easy.2</p>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The implementation is simply iterating through every cell within the boundary and running .next-turn-for-cell on it. This method is implemented in the .role and just implements the rules as they apply to a single cell. Easy.2</p>
 </div>
 <div class="paragraph">
 <p>Iterating through this in a single chunk is going to take a long time even for relatively small playing fields. To improve this situation, we can divide the work up into reasonable sized chunks and process each in a separate task. With multiple threads, we should be able to cut the time required to do the work down by up to a factor of N, where N is the number of cores available for computation. In reality, you will get somewhat less than that, but we should definitely be able to improve speed this way.</p>
@@ -17274,9 +17296,10 @@ The implementation is simply iterating through every cell within the boundary an
 <div class="paragraph">
 <p>Here’s an implementation of parallel-next-turn-for that’s part of the Game::Life::Player::DivideAndConquer player class:</p>
 </div>
-<div class="paragraph">
-<p>class Game::Life::Player::DivideAndConquer is Game::Life::Player::Basic {
-    &#8230;&#8203;
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Game::Life::Player::DivideAndConquer is Game::Life::Player::Basic {
+    ...
     method parallel-next-turn-for(
         Int:D $l,
         Int:D $t,
@@ -17288,44 +17311,32 @@ The implementation is simply iterating through every cell within the boundary an
         my @jobs = gather {
             if $r - $l &gt; 20 {
                 my $m = ceiling($l + ($r - $l)/2);
-                #dd $l, $m, $r;</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>    take start self.parallel-next-turn-for($l, $t, $m - 1, $b, $current, $next);
-    take start self.parallel-next-turn-for($m, $t, $r, $b, $current, $next);
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>elsif $b - $t &gt; 20 {
-    my $m = ceiling($t + ($b - $t)/2);
-    #dd $t, $m, $b;</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>    take start self.parallel-next-turn-for($l, $t, $r, $m - 1, $current, $next);
-    take start self.parallel-next-turn-for($l, $m, $r, $b, $current, $next);
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>    else {
-        take start self.next-turn-for($l, $t, $r, $b, $current, $next);
+                #dd $l, $m, $r;
+
+                take start self.parallel-next-turn-for($l, $t, $m - 1, $b, $current, $next);
+                take start self.parallel-next-turn-for($m, $t, $r, $b, $current, $next);
+            }
+
+            elsif $b - $t &gt; 20 {
+                my $m = ceiling($t + ($b - $t)/2);
+                #dd $t, $m, $b;
+
+                take start self.parallel-next-turn-for($l, $t, $r, $m - 1, $current, $next);
+                take start self.parallel-next-turn-for($l, $m, $r, $b, $current, $next);
+            }
+
+            else {
+                take start self.next-turn-for($l, $t, $r, $b, $current, $next);
+            }
+        }
+
+        await Promise.allof(@jobs);
     }
-}</pre>
+}</code></pre>
 </div>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>        await Promise.allof(@jobs);
-    }
-}
-This takes the same input as before, but if there are too many columns to process, we cut the work in half by columns. If the columns are reasonable, but there are too many rows, we cut the work in half by rows. If the size is just right, we use the next-turn-for we inherited from Game::Life::Player::Basic.</pre>
-</div>
+<div class="paragraph">
+<p>This takes the same input as before, but if there are too many columns to process, we cut the work in half by columns. If the columns are reasonable, but there are too many rows, we cut the work in half by rows. If the size is just right, we use the next-turn-for we inherited from Game::Life::Player::Basic.</p>
 </div>
 <div class="paragraph">
 <p>Whether we split into two tasks or just do the work for some section of cells, we use start blocks to schedule the work and then await the outcome. Subdividing this way means we create a hierarchy of tasks that could subdivide and subdivide again. The Raku scheduler will then schedule the tasks to run as threads come available.</p>
@@ -17349,9 +17360,11 @@ Map-reduce is a common way of solving problems in functional programming. You ha
 <div class="paragraph">
 <p>In Raku, map-reduce is a common programming pattern:</p>
 </div>
-<div class="paragraph">
-<p>my $fibonacci = (1, 1, * + * &#8230;&#8203; <strong>);
-my $double-sum = $fibonacci[^100].grep(</strong>.is-prime).map(* * 2).reduce(* + *);</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $fibonacci = (1, 1, * + * ... *);
+my $double-sum = $fibonacci[^100].grep(*.is-prime).map(* * 2).reduce(* + *);</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>This creates a <a href="https://docs.raku.org/type/Seq">Seq</a> with the sequence operator. This is the classic Fibonacci sequence. We then take the first 100 elements of Fibonacci, filter out any non-primes, double the primes, and the sum the values.</p>
@@ -17365,10 +17378,14 @@ my $double-sum = $fibonacci[^100].grep(</strong>.is-prime).map(* * 2).reduce(* +
 <div class="paragraph">
 <p>Raku provides tools that let you parallelize this task in different ways with only a small change. Consider this variation:</p>
 </div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $fibonacci = (1, 1, * + * ... *);
+my $double-sum = $fibonacci[^100].race.grep(*.is-prime).map(* * 2).reduce(* + *);</code></pre>
+</div>
+</div>
 <div class="paragraph">
-<p>my $fibonacci = (1, 1, * + * &#8230;&#8203; <strong>);
-my $double-sum = $fibonacci[^100].race.grep(</strong>.is-prime).map(* * 2).reduce(* + *);
-By inserting the .race at the beginning, we tell Raku to perform the operation in parallel. It will split the task into parts, run the parts in separate tasks, which will be scheduled on separate threads. On my system, that operation runs 2-times to 3-times faster than the first.</p>
+<p>By inserting the .race at the beginning, we tell Raku to perform the operation in parallel. It will split the task into parts, run the parts in separate tasks, which will be scheduled on separate threads. On my system, that operation runs 2-times to 3-times faster than the first.</p>
 </div>
 <div class="paragraph">
 <p>Raku provides a couple different strategies for parallelizing map-reduce tasks.</p>
@@ -17395,10 +17412,14 @@ By inserting the .race at the beginning, we tell Raku to perform the operation i
 <div class="paragraph">
 <p>So, with that in mind, we could further tune the work above like this:</p>
 </div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $fibonacci = (1, 1, * + * ... *);
+my $double-sum = $fibonacci[^4000].race(:batch(1000), :4degree).grep(*.is-prime).map(* * 2).reduce(* + *);</code></pre>
+</div>
+</div>
 <div class="paragraph">
-<p>my $fibonacci = (1, 1, * + * &#8230;&#8203; <strong>);
-my $double-sum = $fibonacci[^4000].race(:batch(1000), :4degree).grep(</strong>.is-prime).map(* * 2).reduce(* + *);
-In this case, tuning doesn’t make a large difference on my 4-core laptop, but when there are more than 4 cores on your system, it is likely that tuning will help some.</p>
+<p>In this case, tuning doesn’t make a large difference on my 4-core laptop, but when there are more than 4 cores on your system, it is likely that tuning will help some.</p>
 </div>
 <div class="paragraph">
 <p>So, any time you have a task where you need to iterate through items and operate on them and have CPU time to spare to speed them up, consider employing .hyper or .race in your code.</p>
@@ -17410,11 +17431,13 @@ In this case, tuning doesn’t make a large difference on my 4-core laptop, but 
 <p>Raku does some amount of optimization already for this operation. For example, it does not perform a separate loop for .grep and .map. These operations will be chained together in a sequence so there&#8217;s essentially only a single iteration being performed.  ↩
 In Raku, there are different ways to pause your code. The simplest and most obvious way to do so is to use <a href="https://docs.raku.org/type/Date#sub_sleep">sleep</a>:</p>
 </div>
-<div class="paragraph">
-<p>my $before = now;
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $before = now;
 sleep 1;
 my $after = now - $before;
-say $after;</p>
+say $after;</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>Assuming your system is not bogged down at the moment, the output of $after should be a number pretty close to 1. Not very exciting: you didn’t do anything for a second. Woo. Woo.</p>
@@ -17425,33 +17448,23 @@ say $after;</p>
 <div class="paragraph">
 <p>If I were building a naïve implementation in memory (rather than a more reasonable on disk queue), I could do something like this:</p>
 </div>
-<div class="paragraph">
-<p>start {
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">start {
     my $retries = 10;
     my $success;
-    for ^10 &#8594; $retry {
-        $success = sendmail();</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>last if $success;</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>    sleep 60 * 2 ** $retry;
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>die "Never could send that email." unless $success;</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>    $success;
-}</pre>
+    for ^10 -&gt; $retry {
+        $success = sendmail();
+
+        last if $success;
+
+        sleep 60 * 2 ** $retry;
+    }
+
+    die "Never could send that email." unless $success;
+
+    $success;
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -17466,35 +17479,27 @@ say $after;</p>
 <div class="paragraph">
 <p>You can fix it in a way that frees up your threads to keep working and pauses the task. The await statement is a way for your code to tell Raku, “You can have my thread back, if you need it.” So let’s change that code above to read this way instead:</p>
 </div>
-<div class="paragraph">
-<p>start {
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">start {
     my $retries = 10;
     my $success;
-    for ^10 &#8594; $retry {
-        $success = sendmail();</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>last if $success;</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>    await Promise.in(60 * 2 ** $retry);
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>die "Never could send that email." unless $success;</pre>
+    for ^10 -&gt; $retry {
+        $success = sendmail();
+
+        last if $success;
+
+        await Promise.in(60 * 2 ** $retry);
+    }
+
+    die "Never could send that email." unless $success;
+
+    $success;
+}</code></pre>
 </div>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>    $success;
-}
-Now the code will go to sleep for the allotted time, but the thread is freed up for Raku to reuse, which means your application won’t be stuck waiting 18 hours while the mail server is down the next time you need to spam 65 people at once.</pre>
-</div>
+<div class="paragraph">
+<p>Now the code will go to sleep for the allotted time, but the thread is freed up for Raku to reuse, which means your application won’t be stuck waiting 18 hours while the mail server is down the next time you need to spam 65 people at once.</p>
 </div>
 <div class="paragraph">
 <p>This is true in general, not just for pausing for sleep. Any time you use an await (so long as you have a version of Raku supporting spec 6.d or later), your Raku will able to reuse that thread if the thing being awaited is not ready yet.</p>
@@ -17512,44 +17517,44 @@ Today I want to discuss the use of locks to make an object thread safe. That is,
 <div class="paragraph">
 <p>As a contrived example, if we’re building a linked list with only a push operation, we could build a simple list like this:</p>
 </div>
-<div class="paragraph">
-<p>class LinkedListRaw {
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class LinkedListRaw {
     has $.data;
     has $.next is rw;
-}</p>
+}
+
+my $list = LinkedListRaw.new(data =&gt; 1);
+$list.next = LinkedListRaw.new(data =&gt; 2);
+$list.next.next = LinedListRaw.new(data =&gt; 3);</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>my $list = LinkedListRaw.new(data &#8658; 1);
-$list.next = LinkedListRaw.new(data &#8658; 2);
-$list.next.next = LinedListRaw.new(data &#8658; 3);
-Whereas a much better design would be more like this:</p>
+<p>Whereas a much better design would be more like this:</p>
 </div>
-<div class="paragraph">
-<p>class LinkedList {
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class LinkedList {
     has $.data;
-    has $!next;</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>method !tail() {
-    my $here = self;
-    loop { return $here without $here.next; $here = $here.next }
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>    method push($data) {
+    has $!next;
+
+    method !tail() {
+        my $here = self;
+        loop { return $here without $here.next; $here = $here.next }
+    }
+
+    method push($data) {
         self!tail.next = LinkedList.new(:$data);
     }
-}</pre>
+}
+
+my $list = LinkedList.new(data =&gt; 1);
+$list.push: 2;
+$list.push: 3;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>my $list = LinkedList.new(data &#8658; 1);
-$list.push: 2;
-$list.push: 3;
-Now, the reason I took a moment to mention good object-oriented design practice is because the monitor pattern we will now consider relies on well-designed objects to be effective. (I also mention it because bad object-oriented design practices are pervasive even among otherwise good engineers.)</p>
+<p>Now, the reason I took a moment to mention good object-oriented design practice is because the monitor pattern we will now consider relies on well-designed objects to be effective. (I also mention it because bad object-oriented design practices are pervasive even among otherwise good engineers.)</p>
 </div>
 <div class="paragraph">
 <p>Monitors</p>
@@ -17563,30 +17568,28 @@ Now, the reason I took a moment to mention good object-oriented design practice 
 <div class="paragraph">
 <p>If you are in a situation were copying your object state is not practical and you need to share state between threads, a very easy solution is to employ the monitor pattern. Here’s a thread safe version of our push-only linked list from before using the monitor pattern:</p>
 </div>
-<div class="paragraph">
-<p>class LinkedListSafe {
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class LinkedListSafe {
     has $.data;
     has $!next;
-    has Lock $!lock .= new;</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>method !tail() {
-    my $here = self;
-    loop { return $here without $here.next; $here = $here.next }
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>    method push($data) {
+    has Lock $!lock .= new;
+
+    method !tail() {
+        my $here = self;
+        loop { return $here without $here.next; $here = $here.next }
+    }
+
+    method push($data) {
         $!lock.protect: {
             self!tail.next = LinkiedListSafe.new(:$data);
         }
     }
-}
-That’s it. That’s the whole monitor pattern, just using a Lock to protect all thec code of every public method that reads or writes from the mutable state of the object. While this is easy, there are a couple of downsides to employing this pattern:</pre>
+}</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>That’s it. That’s the whole monitor pattern, just using a Lock to protect all thec code of every public method that reads or writes from the mutable state of the object. While this is easy, there are a couple of downsides to employing this pattern:</p>
 </div>
 <div class="paragraph">
 <p>This is generally a low-performing solution if contention for state changes is high. For example, if many threads will be performing many pushes frequently on this linked list, the performance will not be very good.</p>
@@ -17600,30 +17603,27 @@ That’s it. That’s the whole monitor pattern, just using a Lock to protect al
 <div class="paragraph">
 <p>For the second, I recommend using a module by Jonathan Worthington. He has written a tool to automate the implementation of the monitor pattern. If you install <a href="https://github.com/jnthn/oo-monitors">OO::Monitors</a>, you can rewrite the above linked list as:</p>
 </div>
-<div class="paragraph">
-<p>use OO::Monitors;</p>
-</div>
-<div class="paragraph">
-<p>monitor LinkedListMonitor {
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use OO::Monitors;
+
+monitor LinkedListMonitor {
     has $.data;
-    has $!next;</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>method !tail() {
-    my $here = self;
-    loop { return $here without $here.next; $here = $here.next }
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>    method push($data) {
+    has $!next;
+
+    method !tail() {
+        my $here = self;
+        loop { return $here without $here.next; $here = $here.next }
+    }
+
+    method push($data) {
         self!tail.next = LinkiedListSafe.new(:$data);
     }
-}
-A monitor is a class implementing the monitor pattern. Every method is automatically protected by a lock for you.</pre>
+}</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>A monitor is a class implementing the monitor pattern. Every method is automatically protected by a lock for you.</p>
 </div>
 <div class="paragraph">
 <p>In cases where you need to make a stateful object thread safe and you want a simple mechanism for doing it, this is a reasonable pattern to follow. If performance is a primary concern, a monitor object may not be for you, though. Finally, be aware that this pattern depends on thoughtful OO design to work at all.</p>
@@ -17720,33 +17720,33 @@ ABABABABABABABABABABABABABABAB</p>
 </div>
 <div class="paragraph">
 <p>Cheers.
-One challenge I’ve often faced when writing asynchronous code is trying to figure out how to break the problem down in a reasonable way. How far do I go in breaking up my code? How many steps do I want to take? How do I deal with tasks that branch or fork? How do I deal with the interdependencies I’ve created. My hope in this article is to give some guidelines I’ve learned and some tools for answering these questions.</p>
+在编写异步代码时，我经常面临的一个挑战是想办法把问题合理的分解。我应该把代码分解到什么程度？我到底要走多少步？我如何处理分支或分叉的任务？我如何处理我所建立的相互依赖关系？我在这篇文章中的希望是给出一些我所学的指南和一些工具来回答这些问题。</p>
 </div>
 <div class="paragraph">
-<p>This advent calendar post will be focused on async problems. Later in the calendar, I come back and consider the same with a focus on concurrency.</p>
+<p>这篇预告日历的帖子将集中在异步问题上。在日历的后面，我再来考虑同样的问题，重点是并发问题。</p>
 </div>
 <div class="paragraph">
-<p>The Special Character of Async Problems</p>
+<p>异步问题的特殊性</p>
 </div>
 <div class="paragraph">
-<p>This problem is different in character, but not different in real substance when compared to more traditional programming problems. Just as you do when you write software that needs to be broken up into pieces using functions, methods, and subroutines, you largely do the same with async.</p>
+<p>这个问题与更多的传统编程问题相比，在性质上是不同的，但在实质上没有什么不同。就像你写软件需要用函数、方法和子程序来分解成块，你在写软件的时候也是这样做的，在异步问题上基本上也是这样做的。</p>
 </div>
 <div class="paragraph">
-<p>So what is the special “character” that sets these async problems apart. Well, what makes an async program async? It is the separation between call and result. You initiate work and your code that works with the results works whenever two factors are true:</p>
+<p>那么，是什么特殊的 "特征 "使这些异步问题与众不同。那么，是什么让异步程序成为异步呢？就是调用和结果之间的分离。只要有两个因素为真，你发起工作，而你的代码与结果一起工作的代码就会工作。</p>
 </div>
 <div class="paragraph">
-<p>You are ready to handle the work and
-The result is available.
-Therefore, the special character of async problems is that you want to the work in such a way as to make sure both of those conditions are true as often as possible so that your code is ready to process the work for processing a result at the moment the result is ready to be processed.</p>
+<p>你准备好了处理工作，并且
+结果是可用的。
+因此，异步问题的特殊性在于，你要在工作中尽可能地确保这两个条件都为真，这样你的代码就可以在结果准备好的那一刻，为处理一个结果的工作做准备。</p>
 </div>
 <div class="paragraph">
-<p>That is the only special consideration you need when looking at breaking down async problems. Otherwise, your programming problems are all typical programming problems. That said, let’s now consider some practical considerations for various types of async coding methods in Raku.</p>
+<p>这是你在看分解异步问题时唯一需要特别考虑的地方。否则，你的编程问题都是典型的编程问题。话虽如此，现在我们来考虑一下Raku中各种类型的异步编码方法的一些实际考虑。</p>
 </div>
 <div class="paragraph">
 <p>Use react Blocks</p>
 </div>
 <div class="paragraph">
-<p>My first piece of practical advice is to always use a [reactp(<a href="https://docs.raku.org/language/concurrency#index-entry-react" class="bare">https://docs.raku.org/language/concurrency#index-entry-react</a>) block whenever you need to gather your work together. A react block is the perfect place to coordinate multiple asynchronous processes that work together.</p>
+<p>My first piece of practical advice is to always use a <a href="https://docs.raku.org/language/concurrency#index-entry-react">react</a> block whenever you need to gather your work together. A react block is the perfect place to coordinate multiple asynchronous processes that work together.</p>
 </div>
 <div class="paragraph">
 <p>As an example, I use a Raku program to render this web site statically. The tool I developed for doing this has a mode in it called build-loop which watches for changes to files and rebuilds the site when those changes occur. In production, it monitors a socket which gets pinged whenever the sync tool detects a change to the master git repo. In development, it uses <a href="https://docs.raku.org/type/IO::Notification">IO::Notification</a> to watch for changes on disk and also runs a micro-web server so I can serve those files in a way that emulates the deployed system.</p>
@@ -17754,42 +17754,37 @@ Therefore, the special character of async problems is that you want to the work 
 <div class="paragraph">
 <p>It has a master react block which looks something like this:</p>
 </div>
-<div class="paragraph">
-<p>react {
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">react {
     my $needs-rebuild = True;
     with $notify-port {
-        whenever IO::Socket::Async.listen('127.0.0.1', $notify-port) &#8594; $conn {
+        whenever IO::Socket::Async.listen('127.0.0.1', $notify-port) -&gt; $conn {
             # manage a connection to set $needs-rebuild on ping
         }
-    }</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>with $server-port {
-    whenever IO::Socket::Async.listen('127.0.0.1', $server-port) -&gt; $conn {
-        # micro-web server for developer mode here
     }
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>whenever Supply.interval($interval, :$delay) {
-    if $needs-rebuild {
-        $needs-trigger--;
-        build-site();
-    }</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>        once {
+
+    with $server-port {
+        whenever IO::Socket::Async.listen('127.0.0.1', $server-port) -&gt; $conn {
+            # micro-web server for developer mode here
+        }
+    }
+
+    whenever Supply.interval($interval, :$delay) {
+        if $needs-rebuild {
+            $needs-trigger--;
+            build-site();
+        }
+
+        once {
             # configure IO::Notification to set $needs-rebuild on change
         }
     }
-}
-I’ve left out a lot of the details, but this should give you a feel for it. I am able to coordinate different means by which I can discover changes that cause a site rebuild. I have a tool for keeping the number of rebuilds to only as often as $interval seconds so groups of changes don’t re-trigger builds endlessly. I can simultaneously run a small web server for serving content in developer mode. And I’m doing all of this in the same event loop using a single thread.</pre>
+}</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>I’ve left out a lot of the details, but this should give you a feel for it. I am able to coordinate different means by which I can discover changes that cause a site rebuild. I have a tool for keeping the number of rebuilds to only as often as $interval seconds so groups of changes don’t re-trigger builds endlessly. I can simultaneously run a small web server for serving content in developer mode. And I’m doing all of this in the same event loop using a single thread.</p>
 </div>
 <div class="paragraph">
 <p>The nice thing is that for every whenever within a react, we can share variables and state without ever having to worry about thread safety. The blocks may or may not be running on the same thread, but in any case, Raku guarantees they won’t run concurrently.</p>
@@ -17803,10 +17798,14 @@ I’ve left out a lot of the details, but this should give you a feel for it. I 
 <div class="paragraph">
 <p>Whenever you break down your problem you will often have a choice of creating a <a href="https://docs.raku.org/type/Supplier">Supplier</a> object and feeding data into it or pipelining. If you can pipeline, then you should pipeline. The simplest example of a pipeline is the <a href="https://docs.raku.org/type/Supply#method_map">.map</a> method on <a href="https://docs.raku.org/type/Supply">Supply</a>:</p>
 </div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $original = Supply.interval(1);
+my Supply $plus-one = $original.map(* + 1);</code></pre>
+</div>
+</div>
 <div class="paragraph">
-<p>my $original = Supply.interval(1);
-my Supply $plus-one = $original.map(* + 1);
-Doing this vastly simplifies your processing. It clearly demonstrates the dependency one task has on the one before it. It is easy to read and follow. It will save you many headaches.</p>
+<p>Doing this vastly simplifies your processing. It clearly demonstrates the dependency one task has on the one before it. It is easy to read and follow. It will save you many headaches.</p>
 </div>
 <div class="paragraph">
 <p>See the documentation for Supply for other similar mapping functions that are built in. One of my favorites is <a href="https://docs.raku.org/type/Supply#method_lines">.lines</a> for turning a Supply that emits strings into a list of strings broken up by newlines.</p>
@@ -17820,17 +17819,25 @@ Doing this vastly simplifies your processing. It clearly demonstrates the depend
 <div class="paragraph">
 <p>If you are constructing a list, you can make that list using a <a href="https://docs.raku.org/language/concurrency#index-entry-supply_%28on-demand%29">supply</a> block. This works best with non-trivial processes or when you have the need to reuse the Supply frequently.</p>
 </div>
-<div class="paragraph">
-<p>my $primes = supply {
-    for 1&#8230;&#8203;* &#8594; $n {
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $primes = supply {
+    for 1...* -&gt; $n {
         emit $n if $n.is-prime;
     }
-}
-In the case of a trivial bit of processing like the supply block above and in a situation where you only need to tap it once, the simpler method may be to turn a <a href="https://docs.raku.org/type/Seq">Seq</a> into a Supply by calling <a href="https://docs.raku.org/routine/Supply#class_Any">.Supply</a> on the sequence:</p>
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>my $primes = (1&#8230;&#8203;<strong>).grep(</strong>.is-prime).Supply;
-That latter example is functionally equivalent to the first and, in my opinion, much easier to read and follow. However, keep supply ready for when you need to generate a reusable Supply or one based on non-trivial logic.</p>
+<p>In the case of a trivial bit of processing like the supply block above and in a situation where you only need to tap it once, the simpler method may be to turn a <a href="https://docs.raku.org/type/Seq">Seq</a> into a Supply by calling <a href="https://docs.raku.org/routine/Supply#class_Any">.Supply</a> on the sequence:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $primes = (1...*).grep(*.is-prime).Supply;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That latter example is functionally equivalent to the first and, in my opinion, much easier to read and follow. However, keep supply ready for when you need to generate a reusable Supply or one based on non-trivial logic.</p>
 </div>
 <div class="paragraph">
 <p>Use Supplier for Splits and Joins</p>
@@ -17844,15 +17851,14 @@ That latter example is functionally equivalent to the first and, in my opinion, 
 <div class="paragraph">
 <p>Consider this problem where we have a combined log and we want to treat error objects differently from access object:</p>
 </div>
-<div class="paragraph">
-<p>react {
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">react {
     my Supplier $emitter .= new;
     my Supplier $error .= new;
-    my Supplier $access .= new;</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>    whenever $emitter.Supply { .say }
+    my Supplier $access .= new;
+
+    whenever $emitter.Supply { .say }
     whenever $error.Supply -&gt; %e {
         $emitted.emit: "%e&lt;timestamp&gt; Error %e&lt;code&gt;: %e&lt;message&gt;";
     }
@@ -17866,9 +17872,11 @@ That latter example is functionally equivalent to the first and, in my opinion, 
             default { die "invalid log type" }
         }
     }
-}
-The reason splitting and joining can be better is that it can be a little easier to read and follow as each whenever is focused on a single task. In a case where one branch involves a longer process and the other branch involves a shorter process, it also allows you to consider how to best optimize each task separately.</pre>
+}</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>The reason splitting and joining can be better is that it can be a little easier to read and follow as each whenever is focused on a single task. In a case where one branch involves a longer process and the other branch involves a shorter process, it also allows you to consider how to best optimize each task separately.</p>
 </div>
 <div class="paragraph">
 <p>On Demand vs. Live Supplies</p>
@@ -17894,20 +17902,28 @@ The reason splitting and joining can be better is that it can be a little easier
 <div class="paragraph">
 <p>Therefore, it is primarily a convenience in cases where it can be difficult to initialize your taps before you begin emitting. For example:</p>
 </div>
-<div class="paragraph">
-<p>my Supplier::Preserving $msg .= new;
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Supplier::Preserving $msg .= new;
 $msg.emit($_) for ^10;
-$msg.Supply.tap: { .say };
-Even though the tap happens after emitting to $msg, the program will print the numbers 1 through 10.</p>
+$msg.Supply.tap: { .say };</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Even though the tap happens after emitting to $msg, the program will print the numbers 1 through 10.</p>
 </div>
 <div class="paragraph">
 <p>The problem is that Supplier::Preserving has risks associated with it, such as ballooning memory or long iterations over old data when first tapped. Instead, you should prefer to use Supplier and make sure all of your taps are in place before emitting.</p>
 </div>
-<div class="paragraph">
-<p>my Supplier $msg .new new;
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Supplier $msg .new new;
 $msg.Supply.tap: { .say }
-$msg.emit($_) for ^10;
-Or just be able to miss a few at the start. In some cases, you might actually want to use a <a href="https://docs.raku.org/type/Channel">Channel</a> instead.</p>
+$msg.emit($_) for ^10;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or just be able to miss a few at the start. In some cases, you might actually want to use a <a href="https://docs.raku.org/type/Channel">Channel</a> instead.</p>
 </div>
 <div class="paragraph">
 <p>There are cases where Supplier::Preserving is handy, so make it use of it as needed. I’ve just found it to be an easy crutch for proper bootstrapping when I’m being lazy, but in most cases it annoys me as time goes on.</p>
@@ -17949,9 +17965,13 @@ Sounds like a win for me.</p>
 <div class="paragraph">
 <p>If you are in a react block, you do not want to call <a href="https://docs.raku.org/type/Date#sub_sleep">sleep</a> unless your purpose is to block all execution on the current thread. Otherwise, you should prefer using an <a href="https://docs.raku.org/routine/await">await</a> to pause your task. If you do this, your react block can continue handling events until the await completes. If you need to add an await for a number of seconds, you can do this:</p>
 </div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">await Promise.in(10); # sleep 10 seconds</code></pre>
+</div>
+</div>
 <div class="paragraph">
-<p>await Promise.in(10); # sleep 10 seconds
-Beware of Deadlocks</p>
+<p>Beware of Deadlocks</p>
 </div>
 <div class="paragraph">
 <p>Even though Raku’s interfaces are composable, it is still possible to end up with deadlocks if you use them inappropriately. Anything inside a react block is guaranteed to run in a sequential manner. This means that if you expect two whenever blocks to be able to run simultaneously, you will be disappointed when the code stops abruptly. I mention this because I run into this problem from time to time. Even though I know a react block enforces that single thread at a time rule, I still manage to imagine that multiple whenever blocks could run at the same time every now and then.</p>
@@ -17971,115 +17991,84 @@ Beware of Deadlocks</p>
 <div class="paragraph">
 <p>A semaphore is a system of sending messages using flags. Oh wait, that’s what a semaphore is outside of computing. Among computers, a semaphore is like a kind of lock that locks after being acquired N times. This is useful for situations where you have a resource of N items, want to quickly distribute them when you know they are available, and then immediately block until a resource has been released. Raku provides a built-in <a href="https://docs.raku.org/type/Semaphore">Semaphore</a> class for this reason:</p>
 </div>
-<div class="paragraph">
-<p>class ConnectionPool {
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class ConnectionPool {
     has @.connections;
-    has Semaphore $!lock;</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>submethod BUILD(:@!connections) {
-    $!lock .= new(@!connections.elems);
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>method use-connection() {
-    $!lock.acquire;
-    pop @!connections;
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>    method return-connection($connection) {
+    has Semaphore $!lock;
+
+    submethod BUILD(:@!connections) {
+        $!lock .= new(@!connections.elems);
+    }
+
+    method use-connection() {
+        $!lock.acquire;
+        pop @!connections;
+    }
+
+    method return-connection($connection) {
         push @!connections, $connection;
         $!lock.release;
     }
-}
-Here we have a connection pool where we can quickly and safely pull entries out of the stack of connections. However, as soon as the last connection has been pulled, the .use-connection method will block until a connection is returned using the .return-connection.</pre>
+}</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Here we have a connection pool where we can quickly and safely pull entries out of the stack of connections. However, as soon as the last connection has been pulled, the .use-connection method will block until a connection is returned using the .return-connection.</p>
 </div>
 <div class="paragraph">
 <p>There is an additional <a href="https://docs.raku.org/type/Semaphore#method_try_acquire">.try_acquire</a> method that can be used instead of <a href="https://docs.raku.org/type/Semaphore#method_acquire">.acquire</a>, which returns a <a href="https://docs.raku.org/type/Bool">Bool</a> that determines success or failure. For example, we might have a buffer for key presses that we want to fail if it fills up, rather than continuing to store key events:</p>
 </div>
-<div class="paragraph">
-<p>class KeyBuffer {
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class KeyBuffer {
     has UInt $.size;
     has UInt $!read-cursor = 0;
     has UInt $!write-cursor = 0;
     has byte @!key-buffer;
     has Semaphore $!buffer-space;
-    has Semaphore $!lock .= new(1);</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>submethod BUILD(UInt :$!size) {
-    @!key-buffer = 0 xx $!size;
-    $!buffer-free .= new($!size);
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>method !increment-cursor($cursor is rw) {
-    $cursor++;
-    $cursor %= $!size;
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>method store(byte $key) {
-    $!buffer-space.try_acquire or die "buffer is full!"</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$!lock.acquire;
-LEAVE $!lock.free;</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>    @!key-buffer[ $!write-cursor ] = $key;
-    self!increment-cursor($!write-cursor);
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>method getc(--&gt; byte) {
-    my $result = 0;</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$!lock.acquire;
-LEAVE $!lock.release;</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>if $!read-cursor != $!write-cursor {
-    $result = @!key-buffer[ $!read-cursor ];
-    self!increment-cursor($!read-cursor);</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>    $!buffer-space.release;
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>        $result;
+    has Semaphore $!lock .= new(1);
+
+    submethod BUILD(UInt :$!size) {
+        @!key-buffer = 0 xx $!size;
+        $!buffer-free .= new($!size);
     }
-}
-This data structure uses two Semaphores. One, named $!lock, is used in the same way a link:https://docs.raku.org/type/Lock[Lock] works to guard the critical sections and make sure they are atomic. The other, $!buffer-space, is used to make sure the write operations fail when the buffer fills up.</pre>
+
+    method !increment-cursor($cursor is rw) {
+        $cursor++;
+        $cursor %= $!size;
+    }
+
+    method store(byte $key) {
+        $!buffer-space.try_acquire or die "buffer is full!"
+
+        $!lock.acquire;
+        LEAVE $!lock.free;
+
+        @!key-buffer[ $!write-cursor ] = $key;
+        self!increment-cursor($!write-cursor);
+    }
+
+    method getc(--&gt; byte) {
+        my $result = 0;
+
+        $!lock.acquire;
+        LEAVE $!lock.release;
+
+        if $!read-cursor != $!write-cursor {
+            $result = @!key-buffer[ $!read-cursor ];
+            self!increment-cursor($!read-cursor);
+
+            $!buffer-space.release;
+        }
+
+        $result;
+    }
+}</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>This data structure uses two Semaphores. One, named $!lock, is used in the same way a <a href="https://docs.raku.org/type/Lock">Lock</a> works to guard the critical sections and make sure they are atomic. The other, $!buffer-space, is used to make sure the write operations fail when the buffer fills up.</p>
 </div>
 <div class="paragraph">
 <p>As you can see, we use .try_acquire to acquire a resource from the Semaphore. If that method returns False, we throw an exception to let the caller know the operation failed. If the method returns True, then we have acquired permission to add another entry to the buffer. When we read from the buffer, we still use <a href="https://docs.raku.org/type/Semaphore#method_release">.release</a> to mark the space available again.</p>
@@ -18100,42 +18089,33 @@ In Raku we have a couple basic ways of getting at the events emitted from a <a h
 <div class="paragraph">
 <p>Let’s start with our base react block:</p>
 </div>
-<div class="paragraph">
-<p>sub seconds { state $base = now; now - $base }
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub seconds { state $base = now; now - $base }
 react {
-    say "REACT 1: {seconds}";</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>whenever Supply.interval(1) {
-    say "INTERVAL 1-$_: {seconds}";
-    done if $_ &gt; 3;
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>say "REACT 2: {seconds}";</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>whenever Supply.interval(0.5) {
-    say "INTERVAL 2-$_: {seconds}";
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>    say "REACT 3: {seconds}";
-}</pre>
+    say "REACT 1: {seconds}";
+
+    whenever Supply.interval(1) {
+        say "INTERVAL 1-$_: {seconds}";
+        done if $_ &gt; 3;
+    }
+
+    say "REACT 2: {seconds}";
+
+    whenever Supply.interval(0.5) {
+        say "INTERVAL 2-$_: {seconds}";
+    }
+
+    say "REACT 3: {seconds}";
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>The seconds routine is just a helper to give us time in seconds from the start of the block to work from. The output from this block will typically be similar to this:</p>
 </div>
-<div class="paragraph">
-<p>REACT 1: 0.0011569
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">REACT 1: 0.0011569
 REACT 2: 0.0068571
 REACT 3: 0.008015
 INTERVAL 1-0: 0.0092906
@@ -18150,7 +18130,8 @@ INTERVAL 2-5: 2.517795
 INTERVAL 1-3: 3.016291
 INTERVAL 2-6: 3.0182612
 INTERVAL 2-7: 3.521018
-INTERVAL 1-4: 4.0182113</p>
+INTERVAL 1-4: 4.0182113</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>So what’s it mean? Well, first thing to note is that all the code in the react block itself runs first. That is, it runs all the commands, including each whenever block to register the event taps for each Supply, but not to run the code yet. Once the react block finishes running, it blocks until either all the whenever blocks are done or the done statement is encountered. At that point, all the supplies are untapped and execution continues.</p>
@@ -18164,70 +18145,50 @@ INTERVAL 1-4: 4.0182113</p>
 <div class="paragraph">
 <p>So, how would we go about this behavior using .tap? We could do it like this:</p>
 </div>
-<div class="paragraph">
-<p>sub seconds { state $base = now; now - $base }
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub seconds { state $base = now; now - $base }
 REACT: {
-    say "REACT 1: {seconds}";</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>my $ready = Promise.new;
-my $mutex = Lock.new;
-my $finished = my $done = Promise.new;</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>my $interval1 = Supply.interval(1).tap: {
-    await $ready;
-    $mutex.protect: {
-        say "INTERVAL 1-$_: {seconds}";
-        $done.keep if $_ &gt; 3;
+    say "REACT 1: {seconds}";
+
+    my $ready = Promise.new;
+    my $mutex = Lock.new;
+    my $finished = my $done = Promise.new;
+
+    my $interval1 = Supply.interval(1).tap: {
+        await $ready;
+        $mutex.protect: {
+            say "INTERVAL 1-$_: {seconds}";
+            $done.keep if $_ &gt; 3;
+        }
     }
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$finished .= then: -&gt; $p {
-    $interval1.close;
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>say "REACT 2: {seconds}";</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>my $interval2 = Supply.interval(0.5).tap: {
-    await $ready;
-    $mutex.protect: {
-        say "INTERVAL 2-$_: {seconds}";
+
+    $finished .= then: -&gt; $p {
+        $interval1.close;
     }
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$finished .= then: -&gt; $p {
-    $interval2.close;
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>say "REACT 3: {seconds}";</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>    $ready.keep;
+
+    say "REACT 2: {seconds}";
+
+    my $interval2 = Supply.interval(0.5).tap: {
+        await $ready;
+        $mutex.protect: {
+            say "INTERVAL 2-$_: {seconds}";
+        }
+    }
+
+    $finished .= then: -&gt; $p {
+        $interval2.close;
+    }
+
+    say "REACT 3: {seconds}";
+
+    $ready.keep;
     await $finished;
-}
-This is similar to what the react block is actually doing, but with several additional manual steps. First we must prepare a couple of promises. The $ready link:https://docs.raku.org/type/Promise[Promise] is kept at the end of the “REACT” block to release the taps to do their work. The $done Promise is where we hold the main thread until execution is complete.</pre>
+}</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>This is similar to what the react block is actually doing, but with several additional manual steps. First we must prepare a couple of promises. The $ready <a href="https://docs.raku.org/type/Promise">Promise</a> is kept at the end of the “REACT” block to release the taps to do their work. The $done Promise is where we hold the main thread until execution is complete.</p>
 </div>
 <div class="paragraph">
 <p>I have not implemented the additional logic of automatically keeping $done if all supplies become done. Doing so could be done by creating another Promise for each tap that is kept when the tap done block is executed. A <a href="https://docs.raku.org/type/Promise#method_then">.then</a> block could be attached to a <a href="https://docs.raku.org/type/Promise#method_allof">Promise.allof()</a> promise for all those promises. I leave solving that as an exercise for the reader.</p>
@@ -18248,31 +18209,36 @@ In Raku, a <a href="https://docs.raku.org/type/Supply">Supply</a> is one of the 
 <div class="paragraph">
 <p>Consider this program:</p>
 </div>
-<div class="paragraph">
-<p>my $counter = Supplier.new;
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $counter = Supplier.new;
 start react whenever $counter.Supply {
-    say "A pre-whenever $<em>";
+    say "A pre-whenever $_";
     sleep rand;
-    say "A post-whenever $</em>";
+    say "A post-whenever $_";
 }
 start react whenever $counter.Supply {
-    say "B pre-whenever $<em>";
+    say "B pre-whenever $_";
     sleep rand;
-    say "B post-whenever $</em>";
+    say "B post-whenever $_";
 }
-start for 1&#8230;&#8203;* {
-    say "pre-emit $<em>";
-    $counter.emit($</em>);
+start for 1...* {
+    say "pre-emit $_";
+    $counter.emit($_);
     say "post-emit $_";
 }
-sleep 10;
-Here we have three tasks running, each in a separate thread. We let the main program quit after 10 seconds. The first threads two receive messages from the $counter.Supply. The third thread feeds a sequence of integers to this supply. You might be tempted to think that the final task will race through the delivery of events, but if so, you’d be wrong.</p>
+sleep 10;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here we have three tasks running, each in a separate thread. We let the main program quit after 10 seconds. The first threads two receive messages from the $counter.Supply. The third thread feeds a sequence of integers to this supply. You might be tempted to think that the final task will race through the delivery of events, but if so, you’d be wrong.</p>
 </div>
 <div class="paragraph">
 <p>Consider the output of this program:</p>
 </div>
-<div class="paragraph">
-<p>pre-emit 1
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">pre-emit 1
 A pre-whenever 1
 A post-whenever 1
 B pre-whenever 1
@@ -18283,8 +18249,11 @@ A pre-whenever 2
 A post-whenever 2
 B pre-whenever 2
 B post-whenever 2
-post-emit 2
-Notice a pattern? Even though there’s a random wait in the first two threads and no wait at all in the third, the third thread is blocked until both of the other threads complete. This behavior is the same regardless of how the Supply is tapped, i.e., it does not matter if you use whenever blocks or call .tap.</p>
+post-emit 2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice a pattern? Even though there’s a random wait in the first two threads and no wait at all in the third, the third thread is blocked until both of the other threads complete. This behavior is the same regardless of how the Supply is tapped, i.e., it does not matter if you use whenever blocks or call .tap.</p>
 </div>
 <div class="paragraph">
 <p>Therefore, if you want your emitter to blast through events as quickly as possible, you need to make sure the taps are written to finish as soon as possible or consider a different solution, such as using a Channel which will queue tasks in memory and they will get processed whenever the thread listening to that channel has time to process them.</p>
@@ -18301,24 +18270,20 @@ Notice a pattern? Even though there’s a random wait in the first two threads a
 <div class="paragraph">
 <p>A <a href="https://zostay.com/archive/2019/12/13/the-monitor-pattern.html">few days ago</a>, we considered monitors as a mechanism for creating a thread-safe object. Let’s consider the following monitor:</p>
 </div>
-<div class="paragraph">
-<p>class BankBalanceMonitor {
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class BankBalanceMonitor {
     has UInt $.balance = 1000;
-    has Lock $!lock .= new;</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>method deposit(UInt:D $amount) {
-    $!lock.protect: { $!balance += $amount };
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>    method withdraw(UInt:D $amount) {
+    has Lock $!lock .= new;
+
+    method deposit(UInt:D $amount) {
+        $!lock.protect: { $!balance += $amount };
+    }
+
+    method withdraw(UInt:D $amount) {
         $!lock.protect: { $!balance -= $amount };
     }
-}</pre>
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -18327,25 +18292,23 @@ Notice a pattern? Even though there’s a random wait in the first two threads a
 <div class="paragraph">
 <p>Thus, we can rewrite the above class as a lock-free data structure like this:</p>
 </div>
-<div class="paragraph">
-<p>class BankBalanceLockFree {
-    has UInt $.balance = 1000;</p>
-</div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>method deposit(UInt:D $amount) {
-    cas $!balance, -&gt; $current { $current + $amount };
-}</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>    method withdraw(UInt:D $amount) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class BankBalanceLockFree {
+    has UInt $.balance = 1000;
+
+    method deposit(UInt:D $amount) {
+        cas $!balance, -&gt; $current { $current + $amount };
+    }
+
+    method withdraw(UInt:D $amount) {
         cas $!balance, -&gt; $current { $current - $amount };
     }
-}
-That’s it. Same protections, but now we’ve made use of the scalar CAS operation instead. This can be more efficiently than locking. But why?</pre>
+}</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>That’s it. Same protections, but now we’ve made use of the scalar CAS operation instead. This can be more efficiently than locking. But why?</p>
 </div>
 <div class="paragraph">
 <p>Locks have a cost at the beginning and end every time the lock is encountered. Add to this the fact that the every critical section is a bottle neck where a multi-threaded system must become single-threaded for a moment. Whereas CAS has no particularly expensive operations, but might cause the critical section to re-run multiple times.</p>
@@ -18380,11 +18343,13 @@ That’s it. Same protections, but now we’ve made use of the scalar CAS operat
 <div class="paragraph">
 <p>A common pattern I see in my code looks like this:</p>
 </div>
-<div class="paragraph">
-<p>my $gui-task = start { &#8230;&#8203; }
-my $console  = start { &#8230;&#8203; }
-my $jobs     = start { &#8230;&#8203; }
-await Promise.allof($gui-task, $console, $jobs);</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $gui-task = start { ... }
+my $console  = start { ... }
+my $jobs     = start { ... }
+await Promise.allof($gui-task, $console, $jobs);</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>Just like that, I have three tasks running in three different threads and the main thread is holding until the three tasks complete.</p>
@@ -18404,8 +18369,9 @@ await Promise.allof($gui-task, $console, $jobs);</p>
 <div class="paragraph">
 <p>Avoid sharing file handles or sockets between threads. Only a single thread can read or write to a single handle at a time. The easiest way to make sure you do that safely is to keep that activity in a single thread. On a multi-threaded program where any thread may output to standard output or standard error, I often invoke a pattern like the following:</p>
 </div>
-<div class="paragraph">
-<p>my Supplier $out .= new;
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Supplier $out .= new;
 my Supplier $err .= new;
 start {
     react {
@@ -18418,8 +18384,11 @@ start {
 }
 start {
     for ^10_000 { $out.emit: $_ }
-}
-If you don’t employ a pattern like that, your program will probably still work, but you may end up with some strange oddities with your output.</p>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you don’t employ a pattern like that, your program will probably still work, but you may end up with some strange oddities with your output.</p>
 </div>
 <div class="paragraph">
 <p>Raku Data Structures are Not Inherently Safe</p>
@@ -18630,7 +18599,9 @@ await IO::Socket::Async.connect('127.0.0.1', 3456).then: -&gt; $connection {
 <p>干杯。</p>
 </div>
 <div class="paragraph">
-<p><a href="https://zostay.com/archive/2019/12/22/asynchronous-socket.html" class="bare">https://zostay.com/archive/2019/12/22/asynchronous-socket.html</a></p>
+<p><a href="https://zostay.com/archive/2019/12/22/asynchronous-socket.html" class="bare">https://zostay.com/archive/2019/12/22/asynchronous-socket.html</a>
+Unresolved directive in &lt;stdin&gt; - include::content/raku-advent-calendar/raku-async-concurrency/2019-12-23.adoc[]
+Unresolved directive in &lt;stdin&gt; - include::content/raku-advent-calendar/raku-async-concurrency/2019-12-24.adoc[]</p>
 </div>
 </div>
 </div>
