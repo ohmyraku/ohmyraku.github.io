@@ -480,6 +480,9 @@ if (theme && theme !== "1") {
 <li><a href="#_supply_块">53. Supply 块</a></li>
 <li><a href="#_channnels">54. Channnels</a></li>
 <li><a href="#_线程">55. 线程</a></li>
+<li><a href="#_raku_调度器">56. Raku 调度器</a></li>
+<li><a href="#_react_块">57. React 块</a></li>
+<li><a href="#_第十四天_比较并交换标量">58. 第十四天 比较并交换标量</a></li>
 </ul>
 </li>
 </ul>
@@ -16807,9 +16810,13 @@ $t2.finish;</code></pre>
 <p>几乎所有 Raku 程序都应该坚持使用启动块或 <code>Promise.start</code> 来启动要在另一个线程上运行的任务。 仅在确实需要 Thread 时才应直接使用 Thread，对于大多数 Raku 开发人员而言，Thread 可能永远不会使用或接近  Thread。</p>
 </div>
 <div class="paragraph">
-<p>干杯。
-== Raku 调度器</p>
+<p>干杯。</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_raku_调度器">56. Raku 调度器</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Raku 中大量面向并发的编码取决于 <a href="https://docs.raku.org/type/Scheduler">Scheduler</a> 的使用。许多异步操作取决于运行时开始时 VM 创建的默认调度程序。您可以通过名为 <a href="https://docs.raku.org/language/variables#index-entry-$*SCHEDULER">$*SCHEDULER</a> 的动态变量来访问它。</p>
 </div>
@@ -16888,9 +16895,13 @@ $t2.finish;</code></pre>
 <p>许多异步方法，例如 <a href="https://docs.raku.org/type/Promise">Promise</a> 上的 <a href="https://docs.raku.org/type/Promise#method_start"><code>.start</code></a> 方法，都有一个名为 <code>:scheduler</code> 的参数，您可以在其中传递自定义调度程序。通常，您可以坚持使用默认调度程序。调度程序最常见的调整可能是更改线程池中的线程数，或在某些情况下切换为使用当前线程调度程序。您可能不需要执行任何一项操作。而且，如果您需要一些新奇的东西，那么定义自己的调度程序也可能是合理的。要考虑的事情。</p>
 </div>
 <div class="paragraph">
-<p>干杯。
-== React 块</p>
+<p>干杯。</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_react_块">57. React 块</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Raku 中的 <a href="https://docs.raku.org/language/concurrency#index-entry-react">react</a> 块是重新同步异步编码活动的主要方法。 使用它, 你可以轻松地将 <a href="https://docs.raku.org/type/Promise">promises</a>, <a href="https://docs.raku.org/type/Supply">supplies</a>和 <a href="https://docs.raku.org/type/Channel">channels</a> 组合在一起, 以使程序或子系统成为一个连贯的整体。</p>
 </div>
@@ -17028,8 +17039,10 @@ say $x;</code></pre>
 <p>尽管有缺点，锁还是使代码线程安全的有用工具。在本节后的日历中，我们将使用锁来演示如何创建线程安全的数据结构。</p>
 </div>
 <div class="paragraph">
-<p>干杯。
-What’s faster than locks? Compare-and-swap. Modern CPUs have multiple cores. As such, all modern CPUs must have tools for performing absolutely atomic operations to allow those multiple cores to work together. One of those operations is the compare-and-swap or cas operation.</p>
+<p>干杯。</p>
+</div>
+<div class="paragraph">
+<p>What’s faster than locks? Compare-and-swap. Modern CPUs have multiple cores. As such, all modern CPUs must have tools for performing absolutely atomic operations to allow those multiple cores to work together. One of those operations is the compare-and-swap or cas operation.</p>
 </div>
 <div class="paragraph">
 <p>In the abstract, a cas operation takes three arguments, a variable to modify, a given value, and a new value. The variable is set to the new value modified only if the current value held by the variable is equal to the given value. And this is performed as a single operation guaranteed to be safe from interference by any other concurrent operation. Along the way, the system sets a flag marking the success or failure of the operation. If the variable has a different value than expected, the variable is left unchanged and the operation fails. To complete an atomic change, you repeatedly run a calculation and end with a cas operation until it succeeds. That may not sound very efficient, but it turns out that in most cases, it is faster than locks.</p>
@@ -17354,8 +17367,10 @@ class Game::Life::Player::Basic does Game::Life::Player {
 <p>I am not at all claiming this is an efficient way overall to simulate Conway&#8217;s Game of Life, but I am demonstrating how to take one version of that simulator and making it more efficient with the use of concurrency.  ↩</p>
 </div>
 <div class="paragraph">
-<p>This is grossly inefficient as large sections of the board are very likely to be blank. As I already mentioned, though, my goal here is not to implement an efficient player, but to show how we can improve efficiency using concurrency.  ↩
-Map-reduce is a common way of solving problems in functional programming. You have a list of items, you iterate through them to process them, and then you take the set and summarize them. We call this map-reduce because the iteration step is mapping values to new values and the summarize step reduces the number of values.</p>
+<p>This is grossly inefficient as large sections of the board are very likely to be blank. As I already mentioned, though, my goal here is not to implement an efficient player, but to show how we can improve efficiency using concurrency.  ↩</p>
+</div>
+<div class="paragraph">
+<p>Map-reduce is a common way of solving problems in functional programming. You have a list of items, you iterate through them to process them, and then you take the set and summarize them. We call this map-reduce because the iteration step is mapping values to new values and the summarize step reduces the number of values.</p>
 </div>
 <div class="paragraph">
 <p>In Raku, map-reduce is a common programming pattern:</p>
@@ -17428,8 +17443,10 @@ my $double-sum = $fibonacci[^4000].race(:batch(1000), :4degree).grep(*.is-prime)
 <p>Cheers.</p>
 </div>
 <div class="paragraph">
-<p>Raku does some amount of optimization already for this operation. For example, it does not perform a separate loop for .grep and .map. These operations will be chained together in a sequence so there&#8217;s essentially only a single iteration being performed.  ↩
-In Raku, there are different ways to pause your code. The simplest and most obvious way to do so is to use <a href="https://docs.raku.org/type/Date#sub_sleep">sleep</a>:</p>
+<p>Raku does some amount of optimization already for this operation. For example, it does not perform a separate loop for .grep and .map. These operations will be chained together in a sequence so there&#8217;s essentially only a single iteration being performed.  ↩</p>
+</div>
+<div class="paragraph">
+<p>In Raku, there are different ways to pause your code. The simplest and most obvious way to do so is to use <a href="https://docs.raku.org/type/Date#sub_sleep">sleep</a>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17505,8 +17522,10 @@ say $after;</code></pre>
 <p>This is true in general, not just for pausing for sleep. Any time you use an await (so long as you have a version of Raku supporting spec 6.d or later), your Raku will able to reuse that thread if the thing being awaited is not ready yet.</p>
 </div>
 <div class="paragraph">
-<p>Cheers.
-Today I want to discuss the use of locks to make an object thread safe. That is, by employing a simple pattern for locking access to your object, you can effectively guarantee that only a single thread has access to any part of the object at a time. This, therefore, guarantees that the state of the object can never be corrupted, even when multiple threads attempt to access it concurrently.</p>
+<p>Cheers.</p>
+</div>
+<div class="paragraph">
+<p>Today I want to discuss the use of locks to make an object thread safe. That is, by employing a simple pattern for locking access to your object, you can effectively guarantee that only a single thread has access to any part of the object at a time. This, therefore, guarantees that the state of the object can never be corrupted, even when multiple threads attempt to access it concurrently.</p>
 </div>
 <div class="paragraph">
 <p>Object-oriented Design</p>
@@ -17629,9 +17648,13 @@ monitor LinkedListMonitor {
 <p>In cases where you need to make a stateful object thread safe and you want a simple mechanism for doing it, this is a reasonable pattern to follow. If performance is a primary concern, a monitor object may not be for you, though. Finally, be aware that this pattern depends on thoughtful OO design to work at all.</p>
 </div>
 <div class="paragraph">
-<p>Cheers.
-== 第十四天 比较并交换标量</p>
+<p>Cheers.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_第十四天_比较并交换标量">58. 第十四天 比较并交换标量</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Previously, I discussed the compare-and-swap operation as an operation to perform on <a href="https://docs.raku.org/type/atomicint">atomicint</a> variables. That’s just the tip of the iceberg. While most of the atomic emoji ⚛️ operators are only for atomicints, the cas function, atomic-fetch (or prefix ⚛️ operator), and atomic-assign (or ⚛️= operator) can all be used on any kind of <a href="https://docs.raku.org/type/Scalar">Scalar</a> variable.</p>
 </div>
@@ -17719,8 +17742,10 @@ ABABABABABABABABABABABABABABAB</p>
 <p>Later this month, I plan to demonstrate in greater detail how this cas operation can be used to implement data structures without locks. So we will return to this topic again soon.</p>
 </div>
 <div class="paragraph">
-<p>Cheers.
-在编写异步代码时，我经常面临的一个挑战是想办法把问题合理的分解。我应该把代码分解到什么程度？我到底要走多少步？我如何处理分支或分叉的任务？我如何处理我所建立的相互依赖关系？我在这篇文章中的希望是给出一些我所学的指南和一些工具来回答这些问题。</p>
+<p>Cheers.</p>
+</div>
+<div class="paragraph">
+<p>在编写异步代码时，我经常面临的一个挑战是想办法把问题合理的分解。我应该把代码分解到什么程度？我到底要走多少步？我如何处理分支或分叉的任务？我如何处理我所建立的相互依赖关系？我在这篇文章中的希望是给出一些我所学的指南和一些工具来回答这些问题。</p>
 </div>
 <div class="paragraph">
 <p>这篇预告日历的帖子将集中在异步问题上。在日历的后面，我再来考虑同样的问题，重点是并发问题。</p>
@@ -18083,8 +18108,10 @@ Sounds like a win for me.</p>
 <p>A general thing to keep in mind is that whenever dealing with concurrency, the seemingly trivial edge cases can easily become important. Sometimes it becomes important in unforeseen ways.</p>
 </div>
 <div class="paragraph">
-<p>Cheers.
-In Raku we have a couple basic ways of getting at the events emitted from a <a href="https://docs.raku.org/type/Supply">Supply</a>, which begs the question, what’s the difference between each? I want to answer that question by creating a <a href="https://docs.raku.org/language/concurrency#index-entry-react">react</a> block with a couple intervals and then emulate the same basic functionality using <a href="https://docs.raku.org/type/Supply#method_tap">tap</a>.</p>
+<p>Cheers.</p>
+</div>
+<div class="paragraph">
+<p>In Raku we have a couple basic ways of getting at the events emitted from a <a href="https://docs.raku.org/type/Supply">Supply</a>, which begs the question, what’s the difference between each? I want to answer that question by creating a <a href="https://docs.raku.org/language/concurrency#index-entry-react">react</a> block with a couple intervals and then emulate the same basic functionality using <a href="https://docs.raku.org/type/Supply#method_tap">tap</a>.</p>
 </div>
 <div class="paragraph">
 <p>Let’s start with our base react block:</p>
@@ -18203,8 +18230,10 @@ REACT: {
 <p>And one final note, the documentation of the <a href="https://docs.raku.org/type/Supply#method_act">act</a> method states that it works like tap, but the given code is executed by only one thread at a time. I’m really uncertain as to what this really means because this same basic guarantee is inherent to tap as well. This is because a Supply is unable to continue with another emitted message until all taps have finished running. In practice, taps all run synchronously for each message too. I haven’t found any evidence in all my work that taps on a given supply ever run concurrently. Anyway, if someone can go on to the <a href="https://www.reddit.com/r/rakulang/comments/ebpf8j/zostay_advent_day_17_comparing_react_with_tap/">Reddit thread for this post</a> and explain what the actual difference is between tap and act, I would appreciate it.</p>
 </div>
 <div class="paragraph">
-<p>Cheers.
-In Raku, a <a href="https://docs.raku.org/type/Supply">Supply</a> is one of the primary tools for sending messages between threads. From the way a Supply is structured, it is obvious that is provides a means for one ore more tasks to send events to multiple recipient tasks. What is less obvious, however, is that a Supply imposes a cost on the sender.</p>
+<p>Cheers.</p>
+</div>
+<div class="paragraph">
+<p>In Raku, a <a href="https://docs.raku.org/type/Supply">Supply</a> is one of the primary tools for sending messages between threads. From the way a Supply is structured, it is obvious that is provides a means for one ore more tasks to send events to multiple recipient tasks. What is less obvious, however, is that a Supply imposes a cost on the sender.</p>
 </div>
 <div class="paragraph">
 <p>Consider this program:</p>
@@ -18512,8 +18541,10 @@ my $output-lines = hyper for $log-file.lines -&gt; $line {
 <p>现在，我们通过并行解析 JSON 行获得了大部分的加速，但是我们可以按照与原始文件相同的顺序输出。 之所以行之有效，是因为带有 hyper 或 race 前缀的 for 循环的输出就像 do 一样工作：结果是我们可以迭代的序列。 在这种情况下，这是 HyperSeq，可确保 Raku 正确处理多线程部分。</p>
 </div>
 <div class="paragraph">
-<p>干杯。
-有什么比套接字通信更异步的？ 当两个程序通常需要在世界不同地区的不同网络上的不同计算机上相互通信时，可以使用套接字进行连接。 无论是 HTTP 服务器还是某些自定义协议，都可以使用 <a href="https://docs.raku.org/type/IO::Socket::Async">IO::Socket::Async</a> 来实现通信的双方。</p>
+<p>干杯。</p>
+</div>
+<div class="paragraph">
+<p>有什么比套接字通信更异步的？ 当两个程序通常需要在世界不同地区的不同网络上的不同计算机上相互通信时，可以使用套接字进行连接。 无论是 HTTP 服务器还是某些自定义协议，都可以使用 <a href="https://docs.raku.org/type/IO::Socket::Async">IO::Socket::Async</a> 来实现通信的双方。</p>
 </div>
 <div class="paragraph">
 <p>让我们考虑一个简单的计算器服务。 它侦听 TCP 连接。 建立连接后，它将连接上的输入行作为简单的数学计算（例如 <code>2 + 2</code> 或 <code>6 * 7</code>）来解析每行。</p>
@@ -18599,8 +18630,10 @@ await IO::Socket::Async.connect('127.0.0.1', 3456).then: -&gt; $connection {
 <p>干杯。</p>
 </div>
 <div class="paragraph">
-<p><a href="https://zostay.com/archive/2019/12/22/asynchronous-socket.html" class="bare">https://zostay.com/archive/2019/12/22/asynchronous-socket.html</a>
-Raku 实际上提供了两个不同的锁定类。<a href="https://docs.raku.org/type/Lock">Lock</a> 对象提供了一个非常标准的锁定机制。当使用了.lock和.unlock或者调用了 <code>.protect</code> 时，你会得到一段代码，它会暂停直到锁释放，在保持锁的同时运行，然后释放锁，这样其他可能在锁上等待的代码就可以运行。</p>
+<p><a href="https://zostay.com/archive/2019/12/22/asynchronous-socket.html" class="bare">https://zostay.com/archive/2019/12/22/asynchronous-socket.html</a></p>
+</div>
+<div class="paragraph">
+<p>Raku 实际上提供了两个不同的锁定类。<a href="https://docs.raku.org/type/Lock">Lock</a> 对象提供了一个非常标准的锁定机制。当使用了.lock和.unlock或者调用了 <code>.protect</code> 时，你会得到一段代码，它会暂停直到锁释放，在保持锁的同时运行，然后释放锁，这样其他可能在锁上等待的代码就可以运行。</p>
 </div>
 <div class="paragraph">
 <p>然而，Lock类的工作方式是阻止当前线程的运行。正如我在本期日历的前面指出的那样，线程的目的是做事情，所以阻止线程运行就是阻止线程实现其目的。幸运的是，有一个解决方案。</p>
