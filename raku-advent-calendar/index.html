@@ -18600,8 +18600,150 @@ await IO::Socket::Async.connect('127.0.0.1', 3456).then: -&gt; $connection {
 </div>
 <div class="paragraph">
 <p><a href="https://zostay.com/archive/2019/12/22/asynchronous-socket.html" class="bare">https://zostay.com/archive/2019/12/22/asynchronous-socket.html</a>
-Unresolved directive in &lt;stdin&gt; - include::content/raku-advent-calendar/raku-async-concurrency/2019-12-23.adoc[]
-Unresolved directive in &lt;stdin&gt; - include::content/raku-advent-calendar/raku-async-concurrency/2019-12-24.adoc[]</p>
+Raku 实际上提供了两个不同的锁定类。<a href="https://docs.raku.org/type/Lock">Lock</a> 对象提供了一个非常标准的锁定机制。当使用了.lock和.unlock或者调用了 <code>.protect</code> 时，你会得到一段代码，它会暂停直到锁释放，在保持锁的同时运行，然后释放锁，这样其他可能在锁上等待的代码就可以运行。</p>
+</div>
+<div class="paragraph">
+<p>然而，Lock类的工作方式是阻止当前线程的运行。正如我在本期日历的前面指出的那样，线程的目的是做事情，所以阻止线程运行就是阻止线程实现其目的。幸运的是，有一个解决方案。</p>
+</div>
+<div class="paragraph">
+<p>如果你想要锁定，但又不想在等待锁释放的时候烧掉线程，可以考虑使用 <a href="https://docs.raku.org/type/Lock::Async">Lock::Async</a> 代替Lock。它的工作原理与 Lock 非常相似，但 <code>.lock</code> 方法并不阻止。相反，它返回一个 Promise，当锁被释放时，这个 <a href="https://docs.raku.org/type/Promise">Promise</a> 将被保留。等待该 Promise 的代码将以一种允许 Raku 为另一个任务重用当前线程的方式暂停。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class SafeQueue {
+    has @!queue;
+    has Lock::Async $!lock .= new;
+
+    method enqueue($value) {
+        await $!lock.lock;
+        push @!queue, $value;
+        $!lock.unlock;
+    }
+
+    method dequeue(--&gt; Any) {
+        $!lock.protect: { shift @!queue }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>上面的代码演示了 <code>.lock</code> 和 <code>.unlock</code> 以及 <code>.protect</code> 的使用。你应该总是倾向于使用 <code>.protect</code>，因为上面enqueue中的代码可能会让锁永远保持，如果在获得锁后抛出异常的话。从你的程序的角度来看，.protect会在Lock和 <code>Lock:::Async</code> 之间的行为类似于 Lock 和 <code>Lock:::Async</code>，但在内部会对.lock方法执行一个waiting。这意味着代码所运行的线程将被释放出来，被另一个等待排程的任务所使用。</p>
+</div>
+<div class="paragraph">
+<p>干杯。</p>
+</div>
+<div class="paragraph">
+<p>标题里有很多大词。简单来说，它意味着在后台运行一个程序，并在输入和输出可用时与它交互。Raku 中用于完成这项工作的工具叫做 Proc::Async。如果你曾经处理过试图与外部进程安全通信、写入输入和从输出和错误流中读取的痛苦，并且讨厌这种痛苦，我想你会喜欢 Raku 内置的工具。</p>
+</div>
+<div class="paragraph">
+<p>首先，让我们构思一个问题。让我们做一个外部程序，它把字符串作为输入，并将其反转，在标准输出上输出。同时，它在标准错误上报告给定的字符串是否为回文。我们可以这样写这个程序。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for $*IN.lines -&gt; $line {
+    my $rline = $line.flip;
+    say $rline;
+    note ($rline eq $line);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>而只是为了说明一下，对于这个样本输入。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">spam
+slap
+tacocat</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们将得到这样的输出。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">maps
+False
+pals
+False
+tacocat
+True</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>True 和 False 行为标准误差，其他线为标准输出。清楚了吗？很好。</p>
+</div>
+<div class="paragraph">
+<p>接下来，为了完成我们的问题，我们需要与这个程序进行交互，只需写出一条消息，比如 tacocat 是一个回文！因为每当我们看到一个回文的时候，就会很兴奋。否则我们想输出什么都不需要。让我们用 Proc:::Async 来与我们的另一个程序交互，我们称之为 palindromer，以示欢喜。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">react {
+    my $palindromes = Supplier.new;
+    my $p = Proc::Async.new: './palindromer', :w;
+    my @rlines;
+    my @palindrome-checks;
+
+    # Echo our own input
+    whenever $*IN.Supply.lines -&gt; $line {
+        $p.say: $line;
+
+        # Let palindromer know when we run out of input
+        LAST { $p.close-stdin }
+    }
+
+    # Watch for the reverse lines on palindromer's standard output
+    whenever $p.stdout.lines -&gt; $rline {
+        if @palindrome-checks.shift -&gt; $is-palindrome {
+            $palindromes.emit: $rline;
+        }
+        else {
+            push @rlines, $rline
+        }
+    }
+
+    # Watch for the True/False output from palindromer's standard error
+    whenever $p.stderr.lines -&gt; $is-palindrome {
+        if @rlines.shift -&gt; $rline {
+            $palindromes.emit: $rline if $is-palindrome eq 'True';
+        }
+        else {
+            push @palindrome-checks, $is-palindrome;
+        }
+    }
+
+    # PALINDROMES ARE EXCITING!
+    whenever $palindromes.Supply -&gt; $palindrome {
+        say "$palindrome is a palindrome!";
+    }
+
+    # Quit when palindromer quits
+    whenever $p.start { done }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，如果我们在新程序中使用与之前相同的输入，我们应该得到这样的输出。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">tacocat is a palindrome!</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们的代码处理了标准输出和标准误差脱节的潜在问题，通过使用队列来积累来自每一方的额外值。我们将发现的 palindromes 送入一个名为 <code>$palindromes</code> 的中央供应商，这样我们就可以在一个地方打印我们发现的 palindromes。</p>
+</div>
+<div class="paragraph">
+<p>使用 Proc:::Async 时要注意的几个关键点。</p>
+</div>
+<div class="paragraph">
+<p>一定要把.start调用放在标准输出和标准错误之后。否则，可能会出现漏行（即在你监听之前发出的行）的问题。如果 Raku 检测到你这样做了，它就会警告你。这个方法会返回一个Promise，在程序完成后会保留一个 Promise。
+确保你在完成输入时使用 <code>.close-stdin</code>，以确保其他程序知道你已经完成了。
+否则，还有一些更有趣的功能，比如 <code>.ready</code> 等，你可能会想在 Raku 的参考文档中了解更多。</p>
+</div>
+<div class="paragraph">
+<p>谢谢你。</p>
 </div>
 </div>
 </div>
