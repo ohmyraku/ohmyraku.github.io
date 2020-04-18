@@ -481,8 +481,30 @@ if (theme && theme !== "1") {
 <li><a href="#_channnels">54. Channnels</a></li>
 <li><a href="#_线程">55. 线程</a></li>
 <li><a href="#_raku_调度器">56. Raku 调度器</a></li>
-<li><a href="#_react_块">57. React 块</a></li>
-<li><a href="#_第十四天_比较并交换标量">58. 第十四天 比较并交换标量</a></li>
+<li><a href="#_react_块">57. React 块</a>
+<ul class="sectlevel2">
+<li><a href="#_面向对象设计">57.1. 面向对象设计</a></li>
+<li><a href="#_监控">57.2. 监控</a></li>
+</ul>
+</li>
+<li><a href="#_第十四天_比较并交换标量">58. 第十四天 比较并交换标量</a>
+<ul class="sectlevel2">
+<li><a href="#_异步问题的特殊性">58.1. 异步问题的特殊性</a></li>
+<li><a href="#_使用_react_块">58.2. 使用 react 块</a></li>
+<li><a href="#_使用_supplier_来进行分割和接合">58.3. 使用 Supplier 来进行分割和接合</a></li>
+<li><a href="#_按需供应与实时供应">58.4. 按需供应与实时供应</a></li>
+<li><a href="#_避免_supplierpreserving">58.5. 避免 Supplier::Preserving</a></li>
+<li><a href="#_拆分持续运行的_whenever_块">58.6. 拆分持续运行的 whenever 块</a></li>
+<li><a href="#_批量短任务">58.7. 批量短任务</a></li>
+<li><a href="#_避免睡眠">58.8. 避免睡眠</a></li>
+<li><a href="#_谨防死锁">58.9. 谨防死锁</a></li>
+<li><a href="#_结论_7">58.10. 结论</a></li>
+<li><a href="#_牢记你的承诺">58.11. 牢记你的承诺</a></li>
+<li><a href="#_批量小任务">58.12. 批量小任务</a></li>
+<li><a href="#_小心线程的限制">58.13. 小心线程的限制</a></li>
+<li><a href="#_避免休眠">58.14. 避免休眠</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -17042,19 +17064,19 @@ say $x;</code></pre>
 <p>干杯。</p>
 </div>
 <div class="paragraph">
-<p>What’s faster than locks? Compare-and-swap. Modern CPUs have multiple cores. As such, all modern CPUs must have tools for performing absolutely atomic operations to allow those multiple cores to work together. One of those operations is the compare-and-swap or cas operation.</p>
+<p>什么比锁的速度快？比较和交换(CAS)。现代 CPU 有多个核心。因此，所有的现代 CPU 都必须有工具来执行绝对的原子操作，让这些多核一起工作。这些操作之一就是 compare-and-and-swap 或 cas 操作。</p>
 </div>
 <div class="paragraph">
-<p>In the abstract, a cas operation takes three arguments, a variable to modify, a given value, and a new value. The variable is set to the new value modified only if the current value held by the variable is equal to the given value. And this is performed as a single operation guaranteed to be safe from interference by any other concurrent operation. Along the way, the system sets a flag marking the success or failure of the operation. If the variable has a different value than expected, the variable is left unchanged and the operation fails. To complete an atomic change, you repeatedly run a calculation and end with a cas operation until it succeeds. That may not sound very efficient, but it turns out that in most cases, it is faster than locks.</p>
+<p>抽象的说，cas 操作需要三个参数，一个要修改的变量、一个给定值和一个新值。只有当变量所持有的当前值等于给定值时，变量才会被设置为被修改的新值。而这是作为一个单项操作来执行的，保证不受其他任何并发操作的干扰。在这一过程中，系统会设置一个标志来标记操作的成功或失败。如果该变量的值与预期值不同，则该变量保持不变，操作失败。为了完成一个原子变化，你反复运行一个计算，并以 cas 操作结束，直到操作成功为止。这听起来可能不是很有效率，但事实证明，在大多数情况下，它比锁操作要快。</p>
 </div>
 <div class="paragraph">
-<p>Raku provides direct access to this operation through the <a href="https://docs.raku.org/type/atomicint#sub_cas">cas</a> function on the <a href="https://docs.raku.org/type/atomicint">atomicint</a> type and also through a number of operators which help you perform these atomic changes.</p>
+<p>Raku 通过 <a href="https://docs.raku.org/type/atomicint">atomicint</a> 类型上的 <a href="https://docs.raku.org/type/atomicint#sub_cas">cas</a> 函数提供了直接访问这个操作，同时也通过一些操作符来帮助你执行这些原子变化。</p>
 </div>
 <div class="paragraph">
-<p>To demonstrate one possible use of atomicint, let’s first consider the ATM problem. Two people have access to a bank account. Let’s say the account has $1000 in it at the beginning of the day. Person One withdraws $100 from an ATM in city center and Person Two deposits $250 at the ATM in the airport. At the end of the day, we clearly want the new balance to be $1150. However, if both transactions happen simultaneously, that is not guaranteed unless we take some care to guarantee it.</p>
+<p>为了证明 atomicint 的一个可能的使用，让我们首先考虑一下 ATM 问题。有两个人有一个银行账户。假设在一天开始的时候，这个账户里有 1000 美元。其中一个人在市中心的 ATM 机上取了 100 元，另一个人在机场的 ATM 机上存了 250 元。在一天结束时，我们显然希望新的余额是 1150 元。但是，如果这两笔交易同时发生，除非我们采取一定的措施来保证这一点，否则是无法保证的。</p>
 </div>
 <div class="paragraph">
-<p>Let’s start by writing our code in the naïve way:</p>
+<p>让我们先用天真的方法写出我们的代码。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17065,7 +17087,7 @@ say $balance;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Unfortunately, it is now possible to end up with a balance that is different form $1150. This is because if these two tasks actually run simultaneously, they perform operations that could be interleaved like this:</p>
+<p>不幸的是，现在可能会出现余额与 1150 美元不同的情况。这是因为如果这两个任务实际上同时运行，它们执行的操作可能会像这样交错进行。</p>
 </div>
 <div class="paragraph">
 <p>1.Block one reads a $balance of 1000.
@@ -17076,10 +17098,10 @@ say $balance;</code></pre>
 6.Block two sets the $balance to 1250 for two.</p>
 </div>
 <div class="paragraph">
-<p>The read and write operations must be executed sequentially in order for this to code to work correctly. We could use a <a href="https://docs.raku.org/type/Lock">lock</a> or <a href="https://docs.raku.org/type/Semaphore">semaphore</a> or some other traditional construct to form a critical section around modifications to the variable, but these are typically pretty dang slow.</p>
+<p>读和写操作必须按顺序执行，这样才能使代码正常工作。我们可以使用 <a href="https://docs.raku.org/type/Lock">lock</a> 或 <a href="https://docs.raku.org/type/Semaphore">semaphore</a> 或其他传统的构造来形成一个围绕着修改变量的关键部分，但这些操作通常都很慢。</p>
 </div>
 <div class="paragraph">
-<p>Instead, we can use a cas operation to perform the operation sequentially. So, if we rewrite the above code using atomicint we end up with this:</p>
+<p>相反，我们可以使用 cas 操作来依次执行操作。因此，如果我们使用原子点重写上面的代码，我们的结果是这样的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17090,7 +17112,7 @@ say $balance;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Here the result will always be the expected 1150. Let’s assume these two tasks run simultaneously exactly as before, but the final assignment is a compare-and-swap operation rather than a regular set. It would play out like this:</p>
+<p>这里的结果将永远是预期的 1150。让我们假设这两个任务和之前一样同时运行，但最后的分配是一个比较和交换操作，而不是一个常规的集。其结果会是这样的。</p>
 </div>
 <div class="paragraph">
 <p>1.Block one reads a $balance of 1000.
@@ -17104,10 +17126,10 @@ say $balance;</code></pre>
 9.Block two performs compare-and-swap $balance from 900 to 1150 and succeeds.</p>
 </div>
 <div class="paragraph">
-<p>The extra steps 7–9 occur because in a cas operation, the resolution of failure requires repeating the operation until it succeeds. Unless the levels of contention for write to a single variable are extreme, this should not lead to any task failing indefinitely.</p>
+<p>额外的步骤 7-9 之所以会出现，是因为在 cas 操作中，解决失败需要重复操作直到成功。除非写到单个变量的争论程度很极端，否则应该不会导致任何任务无限期失败。</p>
 </div>
 <div class="paragraph">
-<p>If you don’t like emoji in your code, that’s fine. There’s a Texas function for performing each of the operations provide by an atomic emoji operator. The atomicint provides the following operations:</p>
+<p>如果你不喜欢代码中的表情符号，那也没关系。有一个 Texas 函数可以执行由原子式 emoji 操作符提供的每一个操作。atomicint 提供了以下操作。</p>
 </div>
 <div class="ulist">
 <ul>
@@ -17141,10 +17163,10 @@ say $balance;</code></pre>
 </ul>
 </div>
 <div class="paragraph">
-<p>Let’s quickly consider the cas function itself which underlies the implementation for the other operators. This operation allows you to implement any operation that involves a compare-and-swap of an atomicint. It two basic forms and just to demonstrate how they work, we can re-implement our ATM problem from above using both forms.</p>
+<p>让我们快速考虑一下 cas 函数本身，它是其他运算符实现的基础。这个操作允许你实现任何涉及到原子量的比较和互换的操作。它有两种基本形式，为了证明它们的工作原理，我们可以用这两种形式重新实现我们的 ATM 问题。</p>
 </div>
 <div class="paragraph">
-<p>First, consider this program using the cas function:</p>
+<p>首先，考虑一下这个使用 cas 函数的程序。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17166,7 +17188,7 @@ say $balance;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This is functionally identical, though more verbose, than the operation above. This is basically giving you direct access to the cas operation itself and lets you control the number of retries and the specific operation performed. This function works something like this, though the entire operation is atomic:</p>
+<p>这在功能上是相同的，虽然比上面的操作更粗略。这基本上是给你直接访问 cas 操作本身，让你控制重试的次数和具体的操作。这个功能的工作原理是这样的，虽然整个操作是原子化的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17180,10 +17202,10 @@ say $balance;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>That means it will return the value it saw in every case, but will have changed the value stored in the target when what it saw matches what you expected.</p>
+<p>这意味着它将返回它在每个情况下看到的值，但当它看到的值与你预期的值相匹配时，它将改变存储在目标中的值。</p>
 </div>
 <div class="paragraph">
-<p>There is a second version of this method, which can help streamline your code a bit by performing the looping for you. To write the ATM problem yet again, we can also write it like this:</p>
+<p>这个方法还有第二个版本，它可以帮助你精简一下代码，为你执行循环。再来写一次 ATM 问题，我们也可以这样写。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17197,7 +17219,7 @@ say $balance;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This greatly shortens the code required to implement this operation. It does so by performing the given operation repeatedly in a loop until the cas operation succeeds. In this case, the cas function is defined like this, but again, using atomic operations where appropriate:</p>
+<p>这大大缩短了实现该操作所需的代码。它通过在一个循环中反复执行给定的操作，直到 cas 操作成功。在这种情况下，cas 函数是这样定义的，但同样，在适当的地方使用原子操作。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17214,19 +17236,19 @@ say $balance;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Be aware that the cas subroutine alternative that takes a function returns the new value that was set, while the cas that takes two integers returns the value that was seen. That is, this second and compact form treats the return value like an assignment operation, but the way the other form works does not allow for that treatment.</p>
+<p>需要注意的是，取一个函数的 cas 子例程会返回被设置的新值，而取两个整数的 cas 则返回被看到的值。也就是说，这种第二种紧凑的形式把返回值处理成了赋值操作，但另一种形式的工作方式不允许这样处理。</p>
 </div>
 <div class="paragraph">
-<p>I’d really like to share with you how cas can be used on any scalar value in Raku, but this post has already gone long. I will cover that later this Advent.</p>
+<p>我很想和大家分享一下如何在 Raku 中的任何标量值上使用 cas，但是这篇帖子已经说了很久了。我将在这个临终日之后再谈这个问题。</p>
 </div>
 <div class="paragraph">
-<p>Cheers.</p>
+<p>谢谢你。</p>
 </div>
 <div class="paragraph">
-<p>Let’s consider now how to solve a big problem with concurrency. If you have an algorithmic problem with lots of data that needs to be processed, you want to maximize the amount of load you can place on the available CPU cores to process it as quickly as possible. To demonstrate how we can go about this in Raku, we will consider Conway’s Game of Life, played on an effectively infinite game board.1</p>
+<p>现在我们来考虑一下如何解决并发的一个大问题。如果你有一个需要处理大量数据的算法问题，你希望在可用的 CPU 核心上最大限度地增加负载，以尽可能快地处理这些数据。为了证明我们如何在 Raku 中实现这个目标，我们将考虑 Conway 的生命游戏，在一个有效的无限游戏板上进行。</p>
 </div>
 <div class="paragraph">
-<p>Let’s start by defining Conway’s Game of Life, just in case you haven’t run across it before. The Game of Life is a simulation invented by British mathematician John Conway. It is played on a simple grid where each square is called a cell. Each cell may be either alive or dead during a given turn. Each cell has 8 neighbors, which are the cells directly above, below, left, right, and each of the 4 diagonals. To determine the state of a cell for the next turn, you perform the following checks using the state of the current cell and its neighbors from the current turn using these rules:</p>
+<p>让我们先来定义一下康威的《生命的游戏》，以防你之前没有接触过它。生命游戏是英国数学家约翰-康威发明的一种模拟游戏。它是在一个简单的网格上进行游戏，每个方块被称为一个单元格。每一个单元格都可能在一个特定的回合中要么是活的，要么是死的。每个单元格有 8 个邻居，分别是上、下、左、右、左、右 4 条对角线上的单元格。为了确定下一个回合的单元格的状态，你可以用当前单元格的状态和当前回合的邻居的状态来进行以下检查。</p>
 </div>
 <div class="paragraph">
 <p>1.Any live cell with fewer than two live neighbors dies.
@@ -17235,16 +17257,16 @@ say $balance;</code></pre>
 4.Any dead cell with three neighbors comes to life.</p>
 </div>
 <div class="paragraph">
-<p>If you want more details about this, you should check out the Wikipedia article on <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway’s Game of Life</a>.</p>
+<p>如果你想了解更多的细节，可以看看维基百科上关于康威的《生命的游戏》的文章。</p>
 </div>
 <div class="paragraph">
-<p>I have implemented Conway’s Game of Life in a nice long program with graphics (or text) output and all. However, it’s about 400 lines of code, so I’m not going to include all of it here. You can check out the ongoing evolution of this project on my <a href="https://github.com/zostay/raku-Game-Life">github</a>.</p>
+<p>我已经实现了康威的《生命的游戏》，在一个漂亮的长程序中实现了图形（或文字）输出和所有的内容。不过，它大约有 400 行代码，所以我不打算在这里全部包含。你可以在我的 <a href="https://github.com/zostay/raku-Game-Life">github</a> 上查看这个项目正在进行的演变。</p>
 </div>
 <div class="paragraph">
-<p>The simulator has a role named Game::Life::Player which defines the requirements for the player object. This object is responsible for performing the rules of the game. Specifically, the .next-turn-for method is given an immutable copy of the current game board, a set of bounds, and a mutable copy of the next game board to write to. It is responsible for turning the current board into the board for the next turn according to the rules just mentioned.</p>
+<p>模拟器有一个名为 <code>Game::Life::Player</code> 的角色，它定义了对玩家对象的要求。这个对象负责执行游戏的规则。具体来说，<code>.next-turn-for</code> 方法被赋予了一个当前游戏板的不可变的副本，一组边界，以及一个要写到下一个游戏板的可变副本。它负责根据刚才提到的规则，将当前棋盘变成下一个回合的棋盘。</p>
 </div>
 <div class="paragraph">
-<p>Here is a copy of that from the Game::Life::Player::Basic implementation, which is basically the simplest way to go about this:</p>
+<p>下面是 Game::Life::Player::Basic` 实现中的一个副本，这基本上是最简单的方法。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17298,16 +17320,16 @@ class Game::Life::Player::Basic does Game::Life::Player {
 </div>
 </div>
 <div class="paragraph">
-<p>The implementation is simply iterating through every cell within the boundary and running .next-turn-for-cell on it. This method is implemented in the .role and just implements the rules as they apply to a single cell. Easy.2</p>
+<p>实现方法只是在边界内的每个单元格中进行迭代，并在其上运行 <code>.next-turn-for-cell</code>。这个方法是在 <code>.role</code> 中实现的，只是实现了适用于单个单元格的规则。简单。</p>
 </div>
 <div class="paragraph">
-<p>Iterating through this in a single chunk is going to take a long time even for relatively small playing fields. To improve this situation, we can divide the work up into reasonable sized chunks and process each in a separate task. With multiple threads, we should be able to cut the time required to do the work down by up to a factor of N, where N is the number of cores available for computation. In reality, you will get somewhat less than that, but we should definitely be able to improve speed this way.</p>
+<p>在单个大块中反复迭代，即使对于相对较小的玩法，也要花很长时间。为了改善这种情况，我们可以将工作分成合理大小的大块，并在一个单独的任务中处理。通过多线程，我们应该可以将工作所需的时间减少到 N 的倍数，其中 N 是可用来计算的内核数。在现实中，你所得到的时间会比这少一些，但我们肯定可以通过这种方式提高速度。</p>
 </div>
 <div class="paragraph">
-<p>How might we do it? Here’s one possible solution that makes sure we never process chunks that are larger than 20 by 20, making for about 400 computations in a row. Gaining maximum efficiency requires some tuning, so a given system might do better with different numbers, but you get the idea.</p>
+<p>我们可能怎么做呢？这里有一个可能的解决方案，确保我们永远不会处理大于 20 乘 20 的大块，这样一来，我们可以连续进行 400 次左右的计算。获得最大的效率需要一些调整，所以一个给定的系统可能用不同的数字会做得更好，但你会明白这个道理。</p>
 </div>
 <div class="paragraph">
-<p>Here’s an implementation of parallel-next-turn-for that’s part of the Game::Life::Player::DivideAndConquer player class:</p>
+<p>这里有一个并行-下一回合的实现，这是 <code>Game::Life::Player::DivideAndConquer</code> 玩家类的一部分。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17349,31 +17371,31 @@ class Game::Life::Player::Basic does Game::Life::Player {
 </div>
 </div>
 <div class="paragraph">
-<p>This takes the same input as before, but if there are too many columns to process, we cut the work in half by columns. If the columns are reasonable, but there are too many rows, we cut the work in half by rows. If the size is just right, we use the next-turn-for we inherited from Game::Life::Player::Basic.</p>
+<p>这需要的输入方式和之前一样，如果列数太多，无法处理，我们就把工作按列数切成两半。如果列数合理，但行数太多，我们就按行数把工作分成两半。如果大小刚刚好，我们就使用我们从 <code>Game::Life::Player::Basic</code> 中继承的下一个任务。</p>
 </div>
 <div class="paragraph">
-<p>Whether we split into two tasks or just do the work for some section of cells, we use start blocks to schedule the work and then await the outcome. Subdividing this way means we create a hierarchy of tasks that could subdivide and subdivide again. The Raku scheduler will then schedule the tasks to run as threads come available.</p>
+<p>无论我们是将工作分成两个任务，还是只做某一部分单元格的工作，我们都会使用起始块来安排工作，然后等待结果。这样细分意味着我们创建了一个任务的层次结构，可以再细分，再细分。然后，Raku 调度器会根据线程的出现，对任务进行调度。</p>
 </div>
 <div class="paragraph">
-<p>On my 2015 Macbook Pro, the game runs through 200 turns of the Gosper glider gun in around 35 seconds using 100% CPU when running sequentially. The same program runs around 20–25 seconds at close to 300% CPU when running in parallel. It would probably be higher if I didn’t also have the rendering task occasionally using CPU to redraw the graphics window. But what fun would that be?</p>
+<p>在我的 2015 年的 Macbook Pro 上，游戏在顺序运行时，使用 100% 的 CPU，大约在 35 秒内跑完 200 个回合的 Gosper 滑翔机枪，使用 100% 的 CPU。同样的程序在并行运行时，在接近 300% 的 CPU 下运行约 20-25 秒。如果不是我也有渲染任务偶尔使用 CPU 重绘图形窗口，可能会更高。但那会是什么乐趣呢？</p>
 </div>
 <div class="paragraph">
-<p>So, that’s a concurrency pattern you can employ when you have multiple cores available and an algorithm that lends itself to being broken up into parts.</p>
+<p>所以，这就是当你有多个核心可用的时候，你可以采用的并发模式，以及一个适合被分解成部分的算法。</p>
 </div>
 <div class="paragraph">
-<p>Cheers.</p>
+<p>干杯。</p>
 </div>
 <div class="paragraph">
-<p>I am not at all claiming this is an efficient way overall to simulate Conway&#8217;s Game of Life, but I am demonstrating how to take one version of that simulator and making it more efficient with the use of concurrency.  ↩</p>
+<p>我并不是说这是一种高效的模拟康威的《生命的游戏》的方法，但我只是在演示如何利用一个版本的模拟器，并利用并发模式使其更高效。 ↩</p>
 </div>
 <div class="paragraph">
-<p>This is grossly inefficient as large sections of the board are very likely to be blank. As I already mentioned, though, my goal here is not to implement an efficient player, but to show how we can improve efficiency using concurrency.  ↩</p>
+<p>这是严重的低效率，因为大段的棋盘很可能是空白的。正如我已经提到的那样，我在这里的目的不是为了实现一个高效的棋手，而是展示我们如何利用并发来提高效率。 ↩</p>
 </div>
 <div class="paragraph">
-<p>Map-reduce is a common way of solving problems in functional programming. You have a list of items, you iterate through them to process them, and then you take the set and summarize them. We call this map-reduce because the iteration step is mapping values to new values and the summarize step reduces the number of values.</p>
+<p>Map-reduce 是函数式编程中常用的一种解决问题的方法。你有一个列表项，你通过迭代来处理这些项，然后拿着这个集合去汇总。我们称之为 map-reduce，因为迭代步骤是将值映射到新的值，而汇总步骤则是减少值的数量。</p>
 </div>
 <div class="paragraph">
-<p>In Raku, map-reduce is a common programming pattern:</p>
+<p>在 Raku 中，map-reduce 是一种常见的编程模式。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17382,16 +17404,16 @@ my $double-sum = $fibonacci[^100].grep(*.is-prime).map(* * 2).reduce(* + *);</co
 </div>
 </div>
 <div class="paragraph">
-<p>This creates a <a href="https://docs.raku.org/type/Seq">Seq</a> with the sequence operator. This is the classic Fibonacci sequence. We then take the first 100 elements of Fibonacci, filter out any non-primes, double the primes, and the sum the values.</p>
+<p>这样，就可以用序列运算符创建一个 <a href="https://docs.raku.org/type/Seq">Seq</a>。这就是经典的斐波那契序列。然后我们取 Fibonacci 的前 100 个元素，过滤掉所有的非正数，将正数加倍，然后求和。</p>
 </div>
 <div class="paragraph">
-<p>That’s a weird operation, but demonstrates the kind of tasks you would perform with the map-reduce pattern. We take a sequence of data (the first 100 elements of the Fibonacci sequence, in this case), we filter the data to keep only the prime numbers, we double the values, and then we add them together to get a final sum.</p>
+<p>这是一个很奇怪的操作，但展示了你会用 map-reduce 模式执行的任务。我们取一个数据序列（本例中是斐波那契序列的前100个元素），我们对数据进行过滤，只保留质数，将其值加倍，然后将其相加，得到最终的和。</p>
 </div>
 <div class="paragraph">
-<p>In this case, the answer is not a difficult calculation and probably instantaneous, but what if we needed to do that operation for the first 4,000 instead? That will likely take seconds on a typical system today. As the .grep and .map must iterate over each value to filter and transform, there’s no particular reason we have to do those operations sequentially for every value.1</p>
+<p>在这种情况下，答案并不难计算，很可能是瞬时的，但如果我们需要对前 4000 个数进行这个操作呢？这在今天的典型系统中可能需要几秒钟的时间。因为 <code>.grep</code> 和 <code>.map</code> 必须对每个值进行迭代过滤和转换，所以我们没有必要对每个值都按顺序进行这些操作。</p>
 </div>
 <div class="paragraph">
-<p>Raku provides tools that let you parallelize this task in different ways with only a small change. Consider this variation:</p>
+<p>Raku 提供了一些工具，让你只需稍作改动，就能以不同的方式并行化这个任务。考虑一下这个变化。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17400,32 +17422,32 @@ my $double-sum = $fibonacci[^100].race.grep(*.is-prime).map(* * 2).reduce(* + *)
 </div>
 </div>
 <div class="paragraph">
-<p>By inserting the .race at the beginning, we tell Raku to perform the operation in parallel. It will split the task into parts, run the parts in separate tasks, which will be scheduled on separate threads. On my system, that operation runs 2-times to 3-times faster than the first.</p>
+<p>通过在开头插入.race，我们告诉Raku要并行执行操作。它将把任务分成几个部分，在不同的任务中运行，这些部分将被安排在不同的线程上。在我的系统中，那个操作的运行速度要比第一个操作快2-3倍。</p>
 </div>
 <div class="paragraph">
-<p>Raku provides a couple different strategies for parallelizing map-reduce tasks.</p>
+<p>Raku 为并行化 map-reduce 任务提供了几种不同的策略。</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The <a href="https://docs.raku.org/type/Iterable#method_race">.race</a> method breaks the operation up to perform the work in batches that are processed concurrently. It does nothing to guarantee that the order of the original items is preserved, though. The items are just returned as the threads finish.</p>
+<p><a href="https://docs.raku.org/type/Iterable#method_race">.race</a> 方法将操作分解为以并发处理的批次执行工作。但它并不能保证保留原始项目的顺序。这些项目只是在线程完成时返回。</p>
 </li>
 <li>
-<p>The <a href="https://docs.raku.org/type/Iterable#method_hyper">.hyper</a> method is very similar to .race, but it guarantees that the order of the items from the original list is preserved. This means processing on later parts of the list will be held up if parts earlier in the list take longer. It is not quite as a efficient, but if you need to preserve the order, .hyper will guarantee that the order is preserved.</p>
+<p><a href="https://docs.raku.org/type/Iterable#method_hyper">.hyper</a> 方法与 <code>.race</code> 方法非常类似，但它保证保留了原始列表中的项的顺序。这意味着，如果列表中较早的部分需要较长时间，那么后面的处理将被保留。它的效率不高，但如果你需要保留顺序，.hyper可以保证保留顺序。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Each of these operations take a :batch and :degree parameter in case you want to customize the way the work is broken up and executed. Raku attempts to pick reasonable defaults, but tuning these for your particular setup will probably yield some improvements when you need to eek out even better performance.</p>
+<p>这些操作中的每个操作都有一个 <code>:batch</code> 和 <code>:degree</code> 参数，以备你想自定义工作的分解和执行方式。Raku 试图选择合理的默认值，但当你需要获得更好的性能时，为你的特定设置调整这些参数可能会带来一些改进。</p>
 </div>
 <div class="paragraph">
-<p>The :degree option selects how many workers to start. For CPU bound work, it is generally best to pick a number equal to the number of CPU cores available. There’s no reason to go higher because you’ll never run more than that many jobs at once in such a case. However, if the work involves waiting on the disk or network, it’s very likely your code will be paused for milliseconds or longer waiting for IO. In those cases, it can be wise to increase :degree to several times the number of CPUs to account for the wait time.</p>
+<p><code>:degree</code> 选项可以选择要启动多少个工作者。对于绑定 CPU 的工作，一般来说，最好选择一个与可用的 CPU 内核数相等的数字。没有理由选择更高的数值，因为在这种情况下，你永远不会同时运行超过那么多的工作。但是，如果工作涉及到在磁盘或网络上等待，你的代码很可能会暂停几毫秒或更长时间等待 IO。在这种情况下，明智的做法是将 <code>:degree</code> 增加到几倍于 CPU 的数量，以考虑到等待时间。</p>
 </div>
 <div class="paragraph">
-<p>The :batch option decides how to break the work up. A large number is useful when the work to be done is fast. This will keep your throughput high. A small number, even down to 1, is reasonable when the work is long or you want to get each result as soon as you can.</p>
+<p><code>:batch</code> 选项决定了如何将工作分解开来。当要完成的工作速度很快时，大量的数量是非常有用的。这将保持高吞吐量。当工作时间较长，或者你想尽快得到每个结果时，小的数字，甚至小到1也是合理的。</p>
 </div>
 <div class="paragraph">
-<p>So, with that in mind, we could further tune the work above like this:</p>
+<p>所以，考虑到这一点，我们可以把上面的工作进一步调整成这样。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17434,19 +17456,19 @@ my $double-sum = $fibonacci[^4000].race(:batch(1000), :4degree).grep(*.is-prime)
 </div>
 </div>
 <div class="paragraph">
-<p>In this case, tuning doesn’t make a large difference on my 4-core laptop, but when there are more than 4 cores on your system, it is likely that tuning will help some.</p>
+<p>在这种情况下，在我的 4 核笔记本上，调优并没有太大的区别，但是当你的系统上有超过 4 个核心的时候，调优很可能会有一些帮助。</p>
 </div>
 <div class="paragraph">
-<p>So, any time you have a task where you need to iterate through items and operate on them and have CPU time to spare to speed them up, consider employing .hyper or .race in your code.</p>
+<p>所以，任何时候，当你有任务需要对项目进行迭代和操作的时候，如果你有足够的 CPU 时间来加快它们的速度，可以考虑在你的代码中使用 <code>.hyper</code> 或 <code>.race</code>。</p>
 </div>
 <div class="paragraph">
-<p>Cheers.</p>
+<p>干杯。</p>
 </div>
 <div class="paragraph">
-<p>Raku does some amount of optimization already for this operation. For example, it does not perform a separate loop for .grep and .map. These operations will be chained together in a sequence so there&#8217;s essentially only a single iteration being performed.  ↩</p>
+<p>Raku 已经为这个操作做了一定程度的优化。例如，它不会为 <code>.grep</code> 和 <code>.map</code> 执行单独的循环。这些操作将以序列的形式链在一起，因此基本上只需要执行一次迭代。 ↩</p>
 </div>
 <div class="paragraph">
-<p>In Raku, there are different ways to pause your code. The simplest and most obvious way to do so is to use <a href="https://docs.raku.org/type/Date#sub_sleep">sleep</a>:</p>
+<p>在 Raku 中，有不同的方法来暂停你的代码。最简单也是最明显的方法是使用 <a href="https://docs.raku.org/type/Date#sub_sleep">sleep</a>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17457,13 +17479,13 @@ say $after;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Assuming your system is not bogged down at the moment, the output of $after should be a number pretty close to 1. Not very exciting: you didn’t do anything for a second. Woo. Woo.</p>
+<p>假设你的系统目前没有被拖累，<code>$after</code> 的输出应该是一个非常接近 1 的数字。不是很刺激：你一时间什么都没做。呜呜。呜呜。</p>
 </div>
 <div class="paragraph">
-<p>In real code, however, you do sometimes need to pause. For example, you might be trying to send an email and it fails. When sending email, it is nice if it arrives quickly, but essential that it arrives eventually. Thus, when queueing up a message, you want to watch for errors. When they occur, you want to keep trying for a long time before giving up. However, you don’t want to keep trying constantly. You need to pause between retries:</p>
+<p>然而，在实际代码中，你有时确实需要暂停一下。比如说，你可能正在尝试发送邮件，结果失败了。在发送邮件时，如果它能快速到达是很好的，但最终到达是必不可少的。因此，在排队发送邮件的时候，你要注意错误。当它们发生时，你希望在放弃之前继续尝试很长时间。然而，你不希望不断尝试。你需要在重试之间暂停一下。</p>
 </div>
 <div class="paragraph">
-<p>If I were building a naïve implementation in memory (rather than a more reasonable on disk queue), I could do something like this:</p>
+<p>如果我在内存中构建一个天真的实现（而不是更合理的磁盘队列），我可以这样做。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17485,16 +17507,16 @@ say $after;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>In this code, you have a sendmail function you assume does all the right things to send an email. You will try to send 10 times. You check for success and then you sleep using an exponentially lengthening interval that will spread the retries out for about the next 18 hours. After that, you will give up. To avoid blocking the regular work of the process for up to 18 hours, you ran the entire thing in a start block. The <a href="https://docs.raku.org/type/Promise">Promise</a> returned will be kept whenever the email is sent or broken if the email fails.</p>
+<p>在这段代码中，你有一个 <code>sendmail</code> 函数，你认为它可以做所有正确的事情来发送邮件。你将尝试发送 10 次。你会检查是否成功，然后你会使用一个指数级延长的时间间隔，在接下来的 18 个小时里，你会把重试的时间分散开来。在这之后，你会放弃。为了避免在长达 18 小时内阻断正常工作的进程，你在启动区块中运行了整个事情。每次发送邮件时，返回的 <a href="https://docs.raku.org/type/Promise">Promise</a> 都会被保留，如果邮件失败，则会被打破。</p>
 </div>
 <div class="paragraph">
-<p>There’s a problem, though. This code will block a thread for up to 18 hours. And Threads are a very finite resource: There are up to 64 in the default thread pool. That’s not good. That means our process can still work, but this thread is locked up doing a whole lot of nothing. Threads are expensive resources to use this way. If you have to send email more than once every 15 minutes, you will run out of threads.</p>
+<p>不过，有一个问题。这个代码会阻止一个线程长达 18 小时。而且线程是一个非常有限的资源。默认线程池中最多有 64 个。这并不是什么好事。这意味着我们的进程仍然可以工作，但这个线程被锁住了做了一大堆的事情。线程是昂贵的资源，这样一来，线程的使用成本很高。如果你每 15 分钟要发一次以上的邮件，就会用完线程。</p>
 </div>
 <div class="paragraph">
-<p>How do you solve this? You could reconfigure Raku to use a scheduler with more threads in the resource pool, but the goal of threads is do stuff. Why would you want to waste a thread doing nothing unless you really have no work for them to do?</p>
+<p>你怎么解决这个问题？你可以重新配置 Raku，使用资源池中的线程更多的调度器，但线程的目标是做事情。你为什么要浪费一个线程什么都不做，除非你真的没有工作让他们做，否则你要浪费一个线程？</p>
 </div>
 <div class="paragraph">
-<p>You can fix it in a way that frees up your threads to keep working and pauses the task. The await statement is a way for your code to tell Raku, “You can have my thread back, if you need it.” So let’s change that code above to read this way instead:</p>
+<p>你可以用一种方式来解决，让你的线程继续工作并暂停任务的方式来解决。<code>await</code> 语句是你的代码告诉 Raku，"如果你需要的话，你可以把我的线程还给你。" 所以，让我们把上面的代码改成这样读。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17516,25 +17538,24 @@ say $after;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Now the code will go to sleep for the allotted time, but the thread is freed up for Raku to reuse, which means your application won’t be stuck waiting 18 hours while the mail server is down the next time you need to spam 65 people at once.</p>
+<p>现在代码会在规定的时间内进入休眠状态，但线程被释放出来供 Raku 重用，这意味着你的应用程序不会在下一次需要同时给 65 个人发垃圾邮件的时候，在邮件服务器瘫痪的情况下，你的应用程序会被卡住等待 18 个小时。</p>
 </div>
 <div class="paragraph">
-<p>This is true in general, not just for pausing for sleep. Any time you use an await (so long as you have a version of Raku supporting spec 6.d or later), your Raku will able to reuse that thread if the thing being awaited is not ready yet.</p>
+<p>这在一般情况下都是如此，而不仅仅是为了暂停睡眠而暂停。任何时候，只要你使用了 <code>await</code>（只要你的 Raku 的版本支持规格 6.d 或更高的版本），你的 Raku 将能够重用该线程，如果被等待的东西还没有准备好。</p>
 </div>
 <div class="paragraph">
-<p>Cheers.</p>
+<p>谢谢你。</p>
 </div>
 <div class="paragraph">
-<p>Today I want to discuss the use of locks to make an object thread safe. That is, by employing a simple pattern for locking access to your object, you can effectively guarantee that only a single thread has access to any part of the object at a time. This, therefore, guarantees that the state of the object can never be corrupted, even when multiple threads attempt to access it concurrently.</p>
+<p>今天我想讨论的是利用锁来使对象的线程安全。也就是说，通过采用一个简单的模式来锁定对对象的访问，可以有效地保证一次只有一个线程可以访问对象的任何部分。因此，这就保证了对象的状态永远不会被破坏，即使是多个线程同时尝试访问对象的状态也不会被破坏。</p>
+</div>
+<div class="sect2">
+<h3 id="_面向对象设计">57.1. 面向对象设计</h3>
+<div class="paragraph">
+<p>在讨论共享的、可突变的对象的并发性之前，我们先来考虑一下是什么构成了一个设计良好的对象。在面向对象设计中，一个新的错误是把对象看成是信息的容器。当这样设计的时候，对象会根据它们所包含的数据被映射出来，而通过一系列的 getter 和 setter 来暴露这些数据是很有诱惑力的。然而，一个设计得好的对象将包含状态，作为封装功能的一种手段，需要该状态来操作。它通过允许其他对象通过方法向它发送消息，以执行那些可能更新内部状态的操作，作为一个副作用。</p>
 </div>
 <div class="paragraph">
-<p>Object-oriented Design</p>
-</div>
-<div class="paragraph">
-<p>Before discussing concurrency with shared, mutable objects, let’s first consider what makes for a well-designed object in general. A newby mistake in object-oriented design is to think of objects as being containers of information. When designed this way, objects get mapped based on the data they contain and there is a temptation to expose that data through a series of getters and setters. A well-designed object, however, will contain state as a means of encapsulation functionality which needs that state to operate. It does this by allowing other objects to send it messages via methods to perform those operations which may update the internal state as a side-effect.</p>
-</div>
-<div class="paragraph">
-<p>As a contrived example, if we’re building a linked list with only a push operation, we could build a simple list like this:</p>
+<p>作为一个拟人化的例子，如果我们要建立一个链接的列表，只用一个推送操作，我们可以建立一个简单的列表，就像这样。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17549,7 +17570,7 @@ $list.next.next = LinedListRaw.new(data =&gt; 3);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Whereas a much better design would be more like this:</p>
+<p>而一个更好的设计应该是这样的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17573,19 +17594,19 @@ $list.push: 3;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Now, the reason I took a moment to mention good object-oriented design practice is because the monitor pattern we will now consider relies on well-designed objects to be effective. (I also mention it because bad object-oriented design practices are pervasive even among otherwise good engineers.)</p>
+<p>现在，我之所以要花点时间提到良好的面向对象设计实践，是因为我们现在要考虑的监控器模式依赖于设计良好的对象才是有效的。(我之所以提到它，也是因为即使在其他优秀的工程师中，不良的面向对象设计实践也普遍存在)。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_监控">57.2. 监控</h3>
+<div class="paragraph">
+<p>当你有一个无状态的系统，或者是一个系统的状态是基于转换不可变对象的系统时，并发是最容易的。例如，如果你只需要将计算结果从一个线程传送到另一个线程，那么每个阶段都可以很容易地保留一个当前值的副本，转换这个值，然后将新的副本传递给下一个阶段。</p>
 </div>
 <div class="paragraph">
-<p>Monitors</p>
+<p>然而，有状态对象可能会带来一个挑战，因为当另一个线程对对象的状态进行新的操作时，对象的状态变化可能只在一个线程中被部分应用。如果我们不保护我们的对象一次执行多个状态变化，或者在一个状态变化只完成了一部分的时候，不保护我们的对象被读取，那么我们的代码将是不安全的线程。你不应该同时从多个线程中使用这样的对象。(大多数内置的 Raku 对象就是这样的对象！)</p>
 </div>
 <div class="paragraph">
-<p>Concurrency is easiest when you have a stateless system or a system whose state is based on transforming immutable objects. For example, if you just need to feed calculations from one thread to another, it’s very easy for each stage to keep a copy of the current value, transform that value, and pass a new copy on to the next stage.</p>
-</div>
-<div class="paragraph">
-<p>However, stateful objects can present a challenge because a change to the object’s state might be only partially applied in one thread when another thread begins a new operation with it. If we don’t protect our object from performing multiple state changes at once or from reads while a state change is only partially complete, our code will not be thread safe. You should never use such an object from multiple threads at once. (Most built-in Raku objects are such objects!)</p>
-</div>
-<div class="paragraph">
-<p>If you are in a situation were copying your object state is not practical and you need to share state between threads, a very easy solution is to employ the monitor pattern. Here’s a thread safe version of our push-only linked list from before using the monitor pattern:</p>
+<p>如果你遇到的情况是复制对象的状态是不实用的，而你需要在线程之间共享状态，一个非常简单的解决方案是使用监控模式。下面是我们在使用监控模式之前的一个线程安全版本的只推链接列表。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17608,19 +17629,19 @@ $list.push: 3;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>That’s it. That’s the whole monitor pattern, just using a Lock to protect all thec code of every public method that reads or writes from the mutable state of the object. While this is easy, there are a couple of downsides to employing this pattern:</p>
+<p>就是这样的。这就是整个监控模式，只是用一个 Lock 来保护每一个从对象的可变状态读或写的公共方法的所有 c 代码。虽然这很简单，但采用这种模式也有几个缺点。</p>
 </div>
 <div class="paragraph">
-<p>This is generally a low-performing solution if contention for state changes is high. For example, if many threads will be performing many pushes frequently on this linked list, the performance will not be very good.</p>
+<p>如果对状态变化的争夺很高，这通常是一个低性能的解决方案。例如，如果很多线程会在这个链接的列表上频繁地执行很多推送，性能就会很差。</p>
 </div>
 <div class="paragraph">
-<p>Adding the $!lock.protect: { &#8230;&#8203; } bit around every section is tedious to do and easy to forget during development.</p>
+<p>在每个部分的周围添加 <code>$!lock.protect.protect: { &#8230;&#8203; }</code>, 这样做很繁琐，而且在开发过程中容易忘记。</p>
 </div>
 <div class="paragraph">
-<p>To improve the first situation make sure that your monitor only contains the code related to encapsulating object state. Create secondary objects that are not monitors for any calculations and actions that are not monitors for any other stateless work.</p>
+<p>为了改善第一种情况，请确保你的监控器只包含与封装对象状态相关的代码。创建非监控器的次要对象，这些对象不是任何计算和动作的监控器，也不是任何其他无状态工作的监控器。</p>
 </div>
 <div class="paragraph">
-<p>For the second, I recommend using a module by Jonathan Worthington. He has written a tool to automate the implementation of the monitor pattern. If you install <a href="https://github.com/jnthn/oo-monitors">OO::Monitors</a>, you can rewrite the above linked list as:</p>
+<p>对于第二种情况，我推荐使用 Jonathan Worthington 的一个模块。他写了一个工具来自动实现监控器模式的实现。如果你安装了 <a href="https://github.com/jnthn/oo-monitors">OO::Monitors</a>，你可以把上面链列表改写成:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17642,13 +17663,14 @@ monitor LinkedListMonitor {
 </div>
 </div>
 <div class="paragraph">
-<p>A monitor is a class implementing the monitor pattern. Every method is automatically protected by a lock for you.</p>
+<p>监视器是一个实现监视器模式的类。每一个方法都会自动为你加锁保护。</p>
 </div>
 <div class="paragraph">
-<p>In cases where you need to make a stateful object thread safe and you want a simple mechanism for doing it, this is a reasonable pattern to follow. If performance is a primary concern, a monitor object may not be for you, though. Finally, be aware that this pattern depends on thoughtful OO design to work at all.</p>
+<p>如果你需要让一个有状态对象的线程安全，并且你希望有一个简单的机制来实现，这是个合理的模式。如果性能是一个主要的考虑因素，那么监控对象可能不适合你。最后，要注意的是，这种模式要想成功，必须依靠周到的面向对象设计。</p>
 </div>
 <div class="paragraph">
-<p>Cheers.</p>
+<p>干杯。</p>
+</div>
 </div>
 </div>
 </div>
@@ -17656,13 +17678,13 @@ monitor LinkedListMonitor {
 <h2 id="_第十四天_比较并交换标量">58. 第十四天 比较并交换标量</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Previously, I discussed the compare-and-swap operation as an operation to perform on <a href="https://docs.raku.org/type/atomicint">atomicint</a> variables. That’s just the tip of the iceberg. While most of the atomic emoji ⚛️ operators are only for atomicints, the cas function, atomic-fetch (or prefix ⚛️ operator), and atomic-assign (or ⚛️= operator) can all be used on any kind of <a href="https://docs.raku.org/type/Scalar">Scalar</a> variable.</p>
+<p>之前，我讨论过比较和互换操作是对 <a href="https://docs.raku.org/type/atomicint">atomicint</a> 变量进行的操作。这只是冰山一角。虽然大多数的原子量符操作符⚛️操作符只适用于原子量符，但cas函数、原子量-fetch（或前缀⚛️操作符）和原子量-assign（或⚛️=操作符）都可以用于任何类型的 <a href="https://docs.raku.org/type/Scalar">Scalar</a> 变量。</p>
 </div>
 <div class="paragraph">
-<p>First, we need to make sure we know what a Scalar is. In Raku, every variable name is associated with a container. If you want the full description of how that works, I recommend reading the language docs on <a href="https://docs.raku.org/language/containers">Containers</a>. For our purpose it will suffice to say that almost every regular variable starting with $ sigil is contained by a Scalar. If you do something special to initialize such a variable, it may not have a Scalar container.</p>
+<p>首先，我们需要确保我们知道什么是 Scalar。在 Raku 中，每个变量名都与容器相关联。如果你想知道它是如何工作的，我推荐你阅读关于 <a href="https://docs.raku.org/language/containers">Containers</a> 的语言文档。对于我们的目的，我们只需要说几乎每一个以 <code>$sigil</code> 开头的常规变量都包含在 Scalar 中就足够了。如果你在初始化这样的变量时做了一些特殊的事情，那么它可能没有 Scalar 容器。</p>
 </div>
 <div class="paragraph">
-<p>Here’s a quick example that will should clarify enough for our purposes here:</p>
+<p>这里有一个快速的例子，应该足够说明我们的目的了。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17687,10 +17709,10 @@ my $special := Proxy.new(
 </div>
 </div>
 <div class="paragraph">
-<p>If you try to use <a href="https://docs.raku.org/type/Scalar#sub_cas">cas</a> on a non-Scalar container, Raku will throw an exception that says something like “A Proxy container does not know how to do atomic compare and swap” so it should be pretty obvious what went wrong in most instances.</p>
+<p>如果你尝试在非 Scalar 容器上使用 <a href="https://docs.raku.org/type/Scalar#sub_cas">cas</a>，Raku 会抛出一个类似于 "Proxy容器不知道如何进行原子比较和交换"的异常，所以在大多数情况下，出错的地方应该很明显。</p>
 </div>
 <div class="paragraph">
-<p>Enough of that. How do you use it? Let’s try an example:</p>
+<p>够了。如何使用它呢？让我们试着举个例子。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17726,23 +17748,25 @@ sleep 10;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This is kind of a useless program, but it demonstrates what you can do. We have just a regular variable storing an empty string to start. We then have three tasks running concurrently. The first uses a cas operation to see if the string ends with an “A” and adds a “B”, if so. The second uses the cas operation to see if the string is empty or ends with a “B” and adds a “A”, if so. The third will only output the string if it ends with a “B” and has a length that is a multiple of 10. It runs for 10 seconds and quits. It is an inefficient program and one run on my laptop had output like this:</p>
+<p>这个程序有点没用，但它展示了你可以做的事情。我们只需要一个正则变量存储一个空字符串来启动。然后我们有三个任务同时运行。第一个任务使用 cas 操作来查看字符串是否以 "A" 结尾，如果是，则添加一个 "B"。第二个任务使用 cas 操作查看字符串是否为空或以 "B" 结尾，如果是，则添加 "A"。第三种操作只有在字符串以 "B" 结尾并且长度是 10 的倍数时才会输出字符串。它运行 10 秒就会退出。这是一个效率很低的程序，在我的笔记本电脑上运行一次就会有这样的输出。</p>
 </div>
-<div class="paragraph">
-<p>ABABABABAB
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">ABABABABAB
 ABABABABAB
 ABABABABAB
 ABABABABABABABABABAB
-ABABABABABABABABABABABABABABAB</p>
+ABABABABABABABABABABABABABABAB</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Essentially, every Scalar has access to an atomicint internally, which is used to lock the scalar while the change is being made. These can be more efficient than using Lock objects. When contention for access to some data is high, cas is likely to lose because each thread trying to work with the data will be busy waiting. However, when contention for the item is low and you don’t need to efficiently block and resume threads, a cas operation can be more efficient. It may require some AB testing of each approach to determine which is most efficient for your particular case.</p>
+<p>本质上，每个 Scalar 内部都可以访问一个原子量（atomicint），在进行更改的时候，这个原子量被用来锁定标量。这些可以比使用 Lock 对象更有效率。当对某些数据访问的争夺很高时，cas 很可能会输，因为每个试图处理数据的线程都会忙于等待。然而，当对该项的争夺很低，而且你不需要有效地阻止和恢复线程时，cas 操作会更有效率。这可能需要对每种方法进行一些 AB 测试，以确定哪种方法对你的特定情况下最有效。</p>
 </div>
 <div class="paragraph">
-<p>Later this month, I plan to demonstrate in greater detail how this cas operation can be used to implement data structures without locks. So we will return to this topic again soon.</p>
+<p>这个月晚些时候，我计划更详细地演示一下如何使用这种cas操作来实现无锁数据结构。所以我们很快就会再次回到这个话题。</p>
 </div>
 <div class="paragraph">
-<p>Cheers.</p>
+<p>谢谢你。</p>
 </div>
 <div class="paragraph">
 <p>在编写异步代码时，我经常面临的一个挑战是想办法把问题合理的分解。我应该把代码分解到什么程度？我到底要走多少步？我如何处理分支或分叉的任务？我如何处理我所建立的相互依赖关系？我在这篇文章中的希望是给出一些我所学的指南和一些工具来回答这些问题。</p>
@@ -17750,9 +17774,8 @@ ABABABABABABABABABABABABABABAB</p>
 <div class="paragraph">
 <p>这篇预告日历的帖子将集中在异步问题上。在日历的后面，我再来考虑同样的问题，重点是并发问题。</p>
 </div>
-<div class="paragraph">
-<p>异步问题的特殊性</p>
-</div>
+<div class="sect2">
+<h3 id="_异步问题的特殊性">58.1. 异步问题的特殊性</h3>
 <div class="paragraph">
 <p>这个问题与更多的传统编程问题相比，在性质上是不同的，但在实质上没有什么不同。就像你写软件需要用函数、方法和子程序来分解成块，你在写软件的时候也是这样做的，在异步问题上基本上也是这样做的。</p>
 </div>
@@ -17760,24 +17783,22 @@ ABABABABABABABABABABABABABABAB</p>
 <p>那么，是什么特殊的 "特征 "使这些异步问题与众不同。那么，是什么让异步程序成为异步呢？就是调用和结果之间的分离。只要有两个因素为真，你发起工作，而你的代码与结果一起工作的代码就会工作。</p>
 </div>
 <div class="paragraph">
-<p>你准备好了处理工作，并且
-结果是可用的。
-因此，异步问题的特殊性在于，你要在工作中尽可能地确保这两个条件都为真，这样你的代码就可以在结果准备好的那一刻，为处理一个结果的工作做准备。</p>
+<p>你准备好了处理工作，并且结果是可用的。因此，异步问题的特殊性在于，你要在工作中尽可能地确保这两个条件都为真，这样你的代码就可以在结果准备好的那一刻，为处理一个结果的工作做准备。</p>
 </div>
 <div class="paragraph">
 <p>这是你在看分解异步问题时唯一需要特别考虑的地方。否则，你的编程问题都是典型的编程问题。话虽如此，现在我们来考虑一下Raku中各种类型的异步编码方法的一些实际考虑。</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_使用_react_块">58.2. 使用 react 块</h3>
 <div class="paragraph">
-<p>Use react Blocks</p>
+<p>我的第一条实用建议是，每当你需要将工作集中在一起时，总是使用 <a href="https://docs.raku.org/language/concurrency#index-entry-react">react</a> 块。反应块是协调多个异步进程一起工作的完美场所。</p>
 </div>
 <div class="paragraph">
-<p>My first piece of practical advice is to always use a <a href="https://docs.raku.org/language/concurrency#index-entry-react">react</a> block whenever you need to gather your work together. A react block is the perfect place to coordinate multiple asynchronous processes that work together.</p>
+<p>作为一个例子，我使用 Raku 程序来静态地渲染这个网站。我为此开发的工具有一个名为 build-loop 的模式，它可以监视文件的变化，并在这些变化发生时重建网站。在生产中，它监控一个套接字，每当同步工具检测到主 git repo 有变化时，它就会被 ping。在开发中，它使用 <a href="https://docs.raku.org/type/IO::Notification">IO::Notification</a> 来监视磁盘上的变化，并且还运行一个微网服务器，这样我就可以以模拟部署系统的方式来服务这些文件。</p>
 </div>
 <div class="paragraph">
-<p>As an example, I use a Raku program to render this web site statically. The tool I developed for doing this has a mode in it called build-loop which watches for changes to files and rebuilds the site when those changes occur. In production, it monitors a socket which gets pinged whenever the sync tool detects a change to the master git repo. In development, it uses <a href="https://docs.raku.org/type/IO::Notification">IO::Notification</a> to watch for changes on disk and also runs a micro-web server so I can serve those files in a way that emulates the deployed system.</p>
-</div>
-<div class="paragraph">
-<p>It has a master react block which looks something like this:</p>
+<p>它有一个主 react 块，看起来是这样的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17809,19 +17830,18 @@ ABABABABABABABABABABABABABABAB</p>
 </div>
 </div>
 <div class="paragraph">
-<p>I’ve left out a lot of the details, but this should give you a feel for it. I am able to coordinate different means by which I can discover changes that cause a site rebuild. I have a tool for keeping the number of rebuilds to only as often as $interval seconds so groups of changes don’t re-trigger builds endlessly. I can simultaneously run a small web server for serving content in developer mode. And I’m doing all of this in the same event loop using a single thread.</p>
+<p>我省略了很多细节，但这应该能让你有个感觉。我能够协调不同的手段，通过这些手段，我可以发现导致网站重建的变化。我有一个工具，可以把重构的次数控制在 <code>$interval</code> 秒以内，这样就不会无休止地重复触发更改组的重构。我可以同时运行一个小型的 web 服务器，在开发者模式下为内容提供服务。而且我是在同一个事件循环中使用一个线程来完成这一切。</p>
 </div>
 <div class="paragraph">
-<p>The nice thing is that for every whenever within a react, we can share variables and state without ever having to worry about thread safety. The blocks may or may not be running on the same thread, but in any case, Raku guarantees they won’t run concurrently.</p>
+<p>好的地方在于，对于一个 react 内的每一个 whenever，我们可以共享变量和状态，而不必担心线程安全问题。这些块可能在同一个线程上运行，也可能不在同一个线程上运行，但无论如何，Raku 保证它们不会并发运行。</p>
 </div>
 <div class="paragraph">
-<p>Therefore, a react block is perfect for coordinating various tasks together. Almost every async program I write has a main loop like this in it somewhere. If tasks are strongly independent, I may have one event loop for each group of tasks, with the react block running within a <a href="https://docs.raku.org/language/control#index-entry-control_flow_start-start">start</a>. For example, I could have event loop for handling graphics updates and another for running a networking back-end.</p>
+<p>因此，react 块是协调各种任务一起执行的最佳选择。几乎我写的每一个异步程序都有一个这样的主循环。如果任务具有很强的独立性，我可能会给每一组任务设置一个事件循环，而反应块则在 <a href="https://docs.raku.org/language/control#index-entry-control_flow_start-start">start</a> 中运行。例如，我可以有一个事件循环来处理图形更新，另一个事件循环来运行网络后端。</p>
 </div>
+<div class="sect3">
+<h4 id="_首选管道">58.2.1. 首选管道</h4>
 <div class="paragraph">
-<p>Prefer Pipelines</p>
-</div>
-<div class="paragraph">
-<p>Whenever you break down your problem you will often have a choice of creating a <a href="https://docs.raku.org/type/Supplier">Supplier</a> object and feeding data into it or pipelining. If you can pipeline, then you should pipeline. The simplest example of a pipeline is the <a href="https://docs.raku.org/type/Supply#method_map">.map</a> method on <a href="https://docs.raku.org/type/Supply">Supply</a>:</p>
+<p>每当你分解问题时，你往往会选择创建一个 <a href="https://docs.raku.org/type/Supplier">Supplier</a> 对象，并将数据送入其中，或者是管道化。如果你可以管道化，那么你就应该管道化。管道的最简单的例子是 <a href="https://docs.raku.org/type/Supply">Supply</a> 上的 <a href="https://docs.raku.org/type/Supply#method_map">.map</a> 方法。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17830,19 +17850,19 @@ my Supply $plus-one = $original.map(* + 1);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Doing this vastly simplifies your processing. It clearly demonstrates the dependency one task has on the one before it. It is easy to read and follow. It will save you many headaches.</p>
+<p>这样做可以极大地简化你的处理过程。它清楚地表明了一个任务对前一个任务的依赖性。它很容易阅读和遵循。它将为你省去很多麻烦。</p>
 </div>
 <div class="paragraph">
-<p>See the documentation for Supply for other similar mapping functions that are built in. One of my favorites is <a href="https://docs.raku.org/type/Supply#method_lines">.lines</a> for turning a Supply that emits strings into a list of strings broken up by newlines.</p>
+<p>关于其他类似的映射功能，请看 Supply 的文档。我最喜欢的一个是 <a href="https://docs.raku.org/type/Supply#method_lines">.lines</a>，它可以把一个发出字符串的 Supply 变成一个由新线组成的字符串列表。</p>
 </div>
 <div class="paragraph">
-<p>The <a href="https://cro.services/">Cro</a> services platform formalizes this idea of a platform into transformations. Almost the entire system is one pipeline from request to response where each step of the way transforms input one step close to the eventual output. This is a very robust means of handling async processing.</p>
+<p><a href="https://cro.services/">Cro</a> 服务平台将这种平台的想法正式化为转化。几乎整个系统就是一个从请求到响应的流水线，每一步都会将输入转化为接近最终输出的一步。这是一种非常稳健的异步处理手段。</p>
 </div>
 <div class="paragraph">
-<p>Make Anything a Supply</p>
+<p>将任何事情都变成了供应</p>
 </div>
 <div class="paragraph">
-<p>If you are constructing a list, you can make that list using a <a href="https://docs.raku.org/language/concurrency#index-entry-supply_%28on-demand%29">supply</a> block. This works best with non-trivial processes or when you have the need to reuse the Supply frequently.</p>
+<p>如果你要构造一个列表，你可以使用 <a href="https://docs.raku.org/language/concurrency#index-entry-supply_%28on-demand%29">supply</a> 块来制作这个列表。这对于非琐碎的流程或者需要经常重复使用 Supply 的时候效果最好。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17854,7 +17874,7 @@ my Supply $plus-one = $original.map(* + 1);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>In the case of a trivial bit of processing like the supply block above and in a situation where you only need to tap it once, the simpler method may be to turn a <a href="https://docs.raku.org/type/Seq">Seq</a> into a Supply by calling <a href="https://docs.raku.org/routine/Supply#class_Any">.Supply</a> on the sequence:</p>
+<p>如果是像上面的 Supplier 块这样的琐碎的处理，在只需要点选一次的情况下，更简单的方法可能是通过调用序列上的 <a href="https://docs.raku.org/type/Seq">Seq</a> 变成 Supply，将 <a href="https://docs.raku.org/routine/Supply#class_Any">.Supply</a> 变成 Supply。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17862,19 +17882,20 @@ my Supply $plus-one = $original.map(* + 1);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>That latter example is functionally equivalent to the first and, in my opinion, much easier to read and follow. However, keep supply ready for when you need to generate a reusable Supply or one based on non-trivial logic.</p>
+<p>后一个例子在功能上与第一个例子相当，在我看来，更容易阅读和遵循。然而，当你需要生成一个可重用的 Supplier 或基于非琐碎逻辑的 Supplier 时，请准备好 Supplier。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_使用_supplier_来进行分割和接合">58.3. 使用 Supplier 来进行分割和接合</h3>
+<div class="paragraph">
+<p>当你有一组对象进来需要不同的处理时，你可以在这里插入一个if语句来处理每一种情况，或者你也可以将这些项目重新选取到单独的流中进行处理。如果处理的情况不复杂，可以考虑为每一种类型的处理使用一个单独的 Supplier 对象。然后，如果有必要的话，再使用一个供应商对象将这些流重新连接在一起。</p>
 </div>
 <div class="paragraph">
-<p>Use Supplier for Splits and Joins</p>
+<p>这类似于决定是否对一个有多个解决方案的给定问题使用单独的子程序。不使用单独的子程序，可以使用单独的 whenever 来代替。</p>
 </div>
 <div class="paragraph">
-<p>When you have a set of objects coming in that require different processing, you can insert an if statement to handle each case here or you can re-emit those items to be processed in separate streams. If the processing is non-trivial, consider using a separate Supplier object for each type of processing. Then, use one more Supplier to join the streams back together if necessary:</p>
-</div>
-<div class="paragraph">
-<p>This is similar to deciding whether to use a separate subroutine or not for a given problem with multiple solutions. Instead of separate subs, you can use separate whenevers.</p>
-</div>
-<div class="paragraph">
-<p>Consider this problem where we have a combined log and we want to treat error objects differently from access object:</p>
+<p>考虑一下这个问题，我们有一个合并的日志，我们想把错误对象和访问对象区别对待。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17901,31 +17922,31 @@ my Supply $plus-one = $original.map(* + 1);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The reason splitting and joining can be better is that it can be a little easier to read and follow as each whenever is focused on a single task. In a case where one branch involves a longer process and the other branch involves a shorter process, it also allows you to consider how to best optimize each task separately.</p>
+<p>拆分和加入的原因是，拆分和加入会更好，因为每一个无论何时都集中在一个任务上，所以阅读和遵循起来会更容易一些。在一个分支涉及到较长的流程，而另一个分支涉及到较短的流程的情况下，也可以考虑如何分别对每个任务进行最佳优化。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_按需供应与实时供应">58.4. 按需供应与实时供应</h3>
+<div class="paragraph">
+<p>你应该知道各种用品之间的区别。它们之间的区别有些微妙，可以在一定程度上互换使用。</p>
 </div>
 <div class="paragraph">
-<p>On Demand vs. Live Supplies</p>
+<p>1.使用 Supply 类创建一个活供应品。有一个单一的事件流，这些事件由关联的 Supply 对象上的当前 tap 接收。如果没有 tap，则不处理这些事件。如果有 N 个 taps，Support 对象的 <a href="https://docs.raku.org/type/Supplier#method_emit">.emit</a> 方法会阻塞，直到每个 tap 完成处理该事件。</p>
 </div>
 <div class="paragraph">
-<p>You should be aware of the difference between kinds of supplies. The differences are somewhat subtle and can be used somewhat interchangeably.</p>
+<p>2.按需供应是通过使用供应块或调用列表上的 <code>.Supply</code> 方法创建的。Supply 的每个分接实际上是一个独立的进程，从头到尾接收由该供应对象产生的所有项目。生成供给中每个项的代码都会被运行，再次运行供给块中的 <a href="https://docs.raku.org/language/control#supply/emit">emit</a>，直到单次 tap 完成。</p>
 </div>
 <div class="paragraph">
-<p>1.A live supply is created using the Supplier class. There is a single stream of events that are received by the current taps on the associated Supply object. If there are no taps, the events are not processed. If there are N taps, the <a href="https://docs.raku.org/type/Supplier#method_emit">.emit</a> method of Supplier blocks until every tap has finished processing that event.</p>
+<p>从本质上说，实时供应使用的是扇出式架构，而按需供应实际上只是 Seq 的一个变种。我认为，按需供应只是一个适配器，使返回序列的函数与每当块一起工作。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_避免_supplierpreserving">58.5. 避免 Supplier::Preserving</h3>
+<div class="paragraph">
+<p>然后是 <a href="https://docs.raku.org/type/Supplier::Preserving">Supplier::Preserving</a>。有人认为这是一种介于这两种类型之间的中间地带。但是，这个对象的语义与活供应器的语义是一样的，只是有一个例外：这个对象会缓冲没有 tap 时发出的事件，并立即将这些对象转储到第一个出现的 tap 中。</p>
 </div>
 <div class="paragraph">
-<p>2.An on-demand supply is created using a supply block or by calling the .Supply method on a list. Each tap of the Supply is effectively a separate process, receiving all the items generated by that supply object from start to end. The code that generates each item in the supply is run and again, the <a href="https://docs.raku.org/language/control#supply/emit">emit</a> in the supply blocks until the single tap completes.</p>
-</div>
-<div class="paragraph">
-<p>Essentially, a live supply uses a fan-out architecture while on-demand is really just a variation of Seq in how it behaves. I think of on-demand supplies as being just that, an adapter to make functions that return sequences work with whenever blocks.</p>
-</div>
-<div class="paragraph">
-<p>Avoid Supplier::Preserving</p>
-</div>
-<div class="paragraph">
-<p>Then, there is <a href="https://docs.raku.org/type/Supplier::Preserving">Supplier::Preserving</a>. Some think of this as a middle ground between the two types. However, the semantics of this object are identical to a live supply, but with one exception: the object buffers events emitted when there are no taps and immediately dumps those objects into the first tap that comes along.</p>
-</div>
-<div class="paragraph">
-<p>Therefore, it is primarily a convenience in cases where it can be difficult to initialize your taps before you begin emitting. For example:</p>
+<p>因此，它主要是为了方便在开始发射前难以初始化你的 tap 的情况下使用。比如说:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17935,10 +17956,10 @@ $msg.Supply.tap: { .say };</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Even though the tap happens after emitting to $msg, the program will print the numbers 1 through 10.</p>
+<p>即使是在向 <code>$msg</code> 发出 <code>$msg</code> 后发生的窃听，程序也会打印出从1到10的数字。</p>
 </div>
 <div class="paragraph">
-<p>The problem is that Supplier::Preserving has risks associated with it, such as ballooning memory or long iterations over old data when first tapped. Instead, you should prefer to use Supplier and make sure all of your taps are in place before emitting.</p>
+<p>但问题是，<code>Supplier::Preserving</code> 有相关的风险，比如第一次点播时内存膨胀或在旧数据上长时间迭代。相反，你应该倾向于使用 Supplier，并确保所有的 tap 都到位后再发出。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17948,73 +17969,73 @@ $msg.emit($_) for ^10;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Or just be able to miss a few at the start. In some cases, you might actually want to use a <a href="https://docs.raku.org/type/Channel">Channel</a> instead.</p>
+<p>或者一开始就能错过几个。有些情况下，其实你可能会想用 <a href="https://docs.raku.org/type/Channel">Channel</a> 来代替。</p>
 </div>
 <div class="paragraph">
-<p>There are cases where Supplier::Preserving is handy, so make it use of it as needed. I’ve just found it to be an easy crutch for proper bootstrapping when I’m being lazy, but in most cases it annoys me as time goes on.</p>
+<p>在有些情况下，<code>Supplier::Preserving</code> 是很方便的，所以根据需要利用它。我只是发现在我偷懒的时候，它是一个简单的拐杖，可以适当的引导，但在大多数情况下，随着时间的推移，它让我很烦。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_拆分持续运行的_whenever_块">58.6. 拆分持续运行的 whenever 块</h3>
+<div class="paragraph">
+<p>对于你的任务来说，什么是合理的，可能会有所不同，但请记住，在 react 块内运行的代码，只要一个 react 块，就会阻止其他所有的代码运行。反应块实际上只是在老式事件循环上的一个薄薄的表皮，在这里任何一个子任务都会使其他的处理时间被饿死。</p>
 </div>
 <div class="paragraph">
-<p>Break up Long Running whenever Blocks</p>
+<p>例如，考虑一下我在上面提到的 build-loop 工具的 react 块。当 <code>build-site()</code> 例程运行时，我的 web 服务器无法刷新。这样可以吗？</p>
 </div>
 <div class="paragraph">
-<p>What is reasonable for your task may vary, but remember that code running inside of a react block one whenever block will prevent all others from running. A react block is really just a thin veneer on the old fashioned event loop where any sub-task can starve the others of processing time.</p>
+<p>这是一个开发过程，所以我可以容忍 web 服务器运行过程中的一些怪异现象。
+我是唯一的开发者。
+这意味着我的网站要等到网站建设完成后才能刷新。
+我更愿意等待，只看到新鲜的内容。
+听起来，这对我来说是个赢家。</p>
 </div>
 <div class="paragraph">
-<p>For example, consider the react block I mention for the build-loop tool above. When the build-site() routine runs, my web server cannot refresh. Is that okay?</p>
+<p>在生产中，我是不会容忍的。现在的旧内容几乎总是比最新鲜的内容要好，如果说到网站内容的建设，要花几毫秒以上的时间。在这种情况下，我会设置一个单独的 Web 服务器线程。在这种特殊情况下，根本就没有应用服务器，只有静态内容，所以没有必要这样做。</p>
 </div>
 <div class="paragraph">
-<p>It is a development process so I can tolerate some oddity in how the web server runs.
-I’m the only developer.
-It means that my web site waits until the site finishes building to refresh.
-I’d prefer to wait and only see fresh content.
-Sounds like a win for me.</p>
+<p>这就是你在设计 whenever 块时必须要做的权衡。如果一个 whenever 块运行时间过长，其他块就会被搁置。如果这是一件坏事，那就把那个 whenever 块分成一系列较小的 whenever 块，把它们串联起来。每当你在一些长的运行过程中完成一个 whenever 块的时候，就是一个潜在的饥饿任务轮到你的机会。</p>
 </div>
 <div class="paragraph">
-<p>In production, I wouldn’t tolerate it. Old content now is almost always better than the freshest content if it is going to take more than a few milliseconds to build when it comes to web content. In that case, I would setup a separate web server thread. In this particular case, there’s no application server at all, just static content, so that’s not necessary.</p>
+<p>如果这样的任务仍然是个问题，你可能需要通过启动块将其转移到另一个线程中。</p>
 </div>
-<div class="paragraph">
-<p>That’s the sort of trade-off you have to decide when designing your whenever blocks. If a whenever block runs long, the other blocks are put off. If that’s a bad thing, break that whenever up into a series of smaller whenever blocks which are chained together. Each time you finish a whenever block in some long running process is an opportunity for a potentially starving task to take it’s turn.</p>
 </div>
+<div class="sect2">
+<h3 id="_批量短任务">58.7. 批量短任务</h3>
 <div class="paragraph">
-<p>If a task like this is still a problematic, you might need to move it to another thread via a start block.</p>
+<p>另外，琐碎的任务会涉及到一定量的开销，让反应块在不同的任务之间切换。如果一个任务的速度超级快，你可能会考虑使用 Supply 上的 <code>.batch</code> 方法，让你可以在元素组上循环，避免频繁切换任务。<a href="https://docs.raku.org/type/Supply#method_batch">.batch</a> 方法很方便，因为它可以让你把一个问题在时间延迟和元素数量上进行分解。这将让你的程序有更多的时间去做实际工作，而更少的时间去做决定下一步安排哪个任务的繁忙工作。</p>
 </div>
-<div class="paragraph">
-<p>Batch Short Tasks</p>
 </div>
+<div class="sect2">
+<h3 id="_避免睡眠">58.8. 避免睡眠</h3>
 <div class="paragraph">
-<p>Alternately, trivial tasks involve a certain amount of overhead for the react block to switch between. If a task is super fast, you might want to consider using the .batch method on Supply to allow you to loop over groups of elements to avoid switching tasks as often. The <a href="https://docs.raku.org/type/Supply#method_batch">.batch</a> method is handy because it will let you break up a problem on both a time delay and a number of elements. This will let your program spend more time doing real work and less time doing the busy work of deciding which task to schedule next.</p>
-</div>
-<div class="paragraph">
-<p>Avoid Sleep</p>
-</div>
-<div class="paragraph">
-<p>If you are in a react block, you do not want to call <a href="https://docs.raku.org/type/Date#sub_sleep">sleep</a> unless your purpose is to block all execution on the current thread. Otherwise, you should prefer using an <a href="https://docs.raku.org/routine/await">await</a> to pause your task. If you do this, your react block can continue handling events until the await completes. If you need to add an await for a number of seconds, you can do this:</p>
+<p>如果你在一个 react 块中，你不希望调用 <a href="https://docs.raku.org/type/Date#sub_sleep">sleep</a>，除非你的目的是阻止当前线程的所有执行。否则，你最好使用 <a href="https://docs.raku.org/routine/await">await</a> 来暂停你的任务。如果你这样做，你的 react 块可以继续处理事件，直到 await 完成。如果你需要添加一个 await 数秒，你可以这样做。</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">await Promise.in(10); # sleep 10 seconds</code></pre>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_谨防死锁">58.9. 谨防死锁</h3>
 <div class="paragraph">
-<p>Beware of Deadlocks</p>
+<p>即使 Raku 的接口是可合成的，但如果使用不当，仍然有可能导致死锁。反应块内的任何东西都会被保证以顺序的方式运行。这意味着，如果你期望两个 whenever 块能够同时运行，那么当代码突然停止时，你会很失望。我之所以提到这个问题，是因为我时不时会遇到这个问题。即使我知道反应块执行的是单线程的规则，但我仍然可以想象多个 whenever 块可以在同一时间运行。</p>
 </div>
 <div class="paragraph">
-<p>Even though Raku’s interfaces are composable, it is still possible to end up with deadlocks if you use them inappropriately. Anything inside a react block is guaranteed to run in a sequential manner. This means that if you expect two whenever blocks to be able to run simultaneously, you will be disappointed when the code stops abruptly. I mention this because I run into this problem from time to time. Even though I know a react block enforces that single thread at a time rule, I still manage to imagine that multiple whenever blocks could run at the same time every now and then.</p>
+<p>如果你真的需要这样做，这很容易解决。只要把一个 <code>start</code> 块放在 whenever 块里面，就可以让两个代码同时运行。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_结论_7">58.10. 结论</h3>
+<div class="paragraph">
+<p>现在就到此为止。几天后，我们将再次讨论这个话题，但我们将考虑分工的准则，而不是 Async，为并发处理分工。</p>
 </div>
 <div class="paragraph">
-<p>If you really need that, it is easy to fix. Just put a start block inside a whenever block and you can have two pieces of code running simultaneously.</p>
+<p>干杯。</p>
 </div>
 <div class="paragraph">
-<p>Conclusion</p>
-</div>
-<div class="paragraph">
-<p>That does it for now. In a few days, we will take up this conversation again, but instead async, we will consider the guidelines for divvying up work for concurrent processing.</p>
-</div>
-<div class="paragraph">
-<p>Cheers.</p>
-</div>
-<div class="paragraph">
-<p>A semaphore is a system of sending messages using flags. Oh wait, that’s what a semaphore is outside of computing. Among computers, a semaphore is like a kind of lock that locks after being acquired N times. This is useful for situations where you have a resource of N items, want to quickly distribute them when you know they are available, and then immediately block until a resource has been released. Raku provides a built-in <a href="https://docs.raku.org/type/Semaphore">Semaphore</a> class for this reason:</p>
+<p>semaphore 是一个使用标志发送消息的系统。哦，等等，这就是计算机之外的 semaphore。在计算机中，semaphore 就像一种锁，被获取了 N 次之后就会被锁住。这对于你有 N 个资源的情况很有用，当你知道有 N 个资源的时候，想快速分配，然后在知道有资源的时候，马上屏蔽，直到有资源被释放出来为止。Raku 为此提供了一个内置 <a href="https://docs.raku.org/type/Semaphore">Semaphore</a> 类。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18039,10 +18060,10 @@ Sounds like a win for me.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Here we have a connection pool where we can quickly and safely pull entries out of the stack of connections. However, as soon as the last connection has been pulled, the .use-connection method will block until a connection is returned using the .return-connection.</p>
+<p>这里我们有一个连接池，在这里我们可以快速、安全地从连接堆栈中拉出条目。但是，一旦最后一个连接被拉出，<code>.use-connection</code> 方法就会被阻止，直到使用 <code>.return-connection</code> 返回一个连接。</p>
 </div>
 <div class="paragraph">
-<p>There is an additional <a href="https://docs.raku.org/type/Semaphore#method_try_acquire">.try_acquire</a> method that can be used instead of <a href="https://docs.raku.org/type/Semaphore#method_acquire">.acquire</a>, which returns a <a href="https://docs.raku.org/type/Bool">Bool</a> that determines success or failure. For example, we might have a buffer for key presses that we want to fail if it fills up, rather than continuing to store key events:</p>
+<p>还有一个额外的 <a href="https://docs.raku.org/type/Semaphore#method_try_acquire">.try_acquire</a> 方法可以代替 <a href="https://docs.raku.org/type/Semaphore#method_acquire">.acquire</a> 方法，它返回一个 <a href="https://docs.raku.org/type/Bool">Bool</a> 来决定成败。例如，我们可能会有一个按键的缓冲区，如果缓冲区填满了，我们希望失败，而不是继续存储按键事件。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18093,28 +18114,28 @@ Sounds like a win for me.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>This data structure uses two Semaphores. One, named $!lock, is used in the same way a <a href="https://docs.raku.org/type/Lock">Lock</a> works to guard the critical sections and make sure they are atomic. The other, $!buffer-space, is used to make sure the write operations fail when the buffer fills up.</p>
+<p>这个数据结构使用了两个 Semaphores。其中一个名为 <code>$!lock</code>，它的作用与 <a href="https://docs.raku.org/type/Lock">Lock</a> 的作用相同，用来守护关键部分，并确保它们是原子的。另一个叫 <code>$!buffer-space</code>，用于确保当缓冲区填满时，写操作失败。</p>
 </div>
 <div class="paragraph">
-<p>As you can see, we use .try_acquire to acquire a resource from the Semaphore. If that method returns False, we throw an exception to let the caller know the operation failed. If the method returns True, then we have acquired permission to add another entry to the buffer. When we read from the buffer, we still use <a href="https://docs.raku.org/type/Semaphore#method_release">.release</a> to mark the space available again.</p>
+<p>如你所见，我们使用 <code>.try_acquire</code> 方法从 Semaphore 中获取资源。如果该方法返回 False，我们会抛出一个异常，让调用者知道操作失败。如果该方法返回 True，那么我们就获得了在缓冲区中添加另一个条目的权限。当我们从缓冲区中读取时，我们仍然使用 <a href="https://docs.raku.org/type/Semaphore#method_release">.release</a> 来再次标记可用的空间。</p>
 </div>
 <div class="paragraph">
-<p>I’ve used Semaphore for the mutual exclusion lock because it can be use that way and that’s what we’re talking about. However, the protect method of Lock or <a href="https://docs.raku.org/type/Lock::Async">Lock::Async</a> may be a better choice here as you don’t need to be careful to make sure .release gets called as the .protect block takes care of that for you. With that said, a <a href="https://docs.raku.org/language/phasers#LEAVE">LEAVE</a> phaser is a good way to make sure .release is called as LEAVE phasers will be called no matter how the block exits (i.e., it runs even on an exception).</p>
+<p>我之所以用 Semaphore 来做互斥锁，是因为它可以用这种方式，这就是我们要讲的。但是，Lock 或者 <a href="https://docs.raku.org/type/Lock::Async">Lock:::Async</a> 的保护方法可能是一个更好的选择，因为你不需要小心翼翼地确保 <code>.release</code> 被调用，因为 <code>.protect</code> 块会帮你解决这个问题。尽管如此，使用 <a href="https://docs.raku.org/language/phasers#LEAVE">leave</a> phaser 是确保 <code>.release</code> 被调用的好方法，因为无论块如何退出，leave phaser 都会被调用（也就是说，即使是在异常情况下也会运行）。</p>
 </div>
 <div class="paragraph">
-<p>It should be noted that if an exception happens in the .getc method above after the $!read-cursor is incremented, but before $!buffer-space.release is called, you could end up with the buffer in a bad state where it no longer has as much space. As such, an improvement that might be worth doing is making sure that exceptions in that if-block are caught and dealt with if such an exception is possible.</p>
+<p>需要注意的是，如果在上面的 <code>.getc</code> 方法中，在 <code>$!read-cursor</code> 被增量后，但在 <code>$!buffer-space.release</code> 被调用之前，如果发生了异常，你可能会导致缓冲区处于一个糟糕的状态，不再有那么多的空间。因此，一个值得改进的地方是，如果有可能的话，要确保 if-block 中的异常被捕获并处理。</p>
 </div>
 <div class="paragraph">
-<p>A general thing to keep in mind is that whenever dealing with concurrency, the seemingly trivial edge cases can easily become important. Sometimes it becomes important in unforeseen ways.</p>
+<p>一个需要记住的一般事情是，每当处理并发时，看似微不足道的边缘情况很容易变得重要。有时会以不可预见的方式变得重要。</p>
 </div>
 <div class="paragraph">
-<p>Cheers.</p>
+<p>干杯。</p>
 </div>
 <div class="paragraph">
-<p>In Raku we have a couple basic ways of getting at the events emitted from a <a href="https://docs.raku.org/type/Supply">Supply</a>, which begs the question, what’s the difference between each? I want to answer that question by creating a <a href="https://docs.raku.org/language/concurrency#index-entry-react">react</a> block with a couple intervals and then emulate the same basic functionality using <a href="https://docs.raku.org/type/Supply#method_tap">tap</a>.</p>
+<p>在 Raku 中，我们有几种基本的方式来获取 <a href="https://docs.raku.org/type/Supply">Supply</a> 发出的事件，这就引出了一个问题，那就是每一种方式有什么区别？我想通过创建一个  <a href="https://docs.raku.org/language/concurrency#index-entry-react">response</a> 块来回答这个问题，然后用 <a href="https://docs.raku.org/type/Supply#method_tap">tap</a> 来模拟同样的基本功能。</p>
 </div>
 <div class="paragraph">
-<p>Let’s start with our base react block:</p>
+<p>让我们从我们的基础的 react 块开始:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18138,7 +18159,7 @@ react {
 </div>
 </div>
 <div class="paragraph">
-<p>The seconds routine is just a helper to give us time in seconds from the start of the block to work from. The output from this block will typically be similar to this:</p>
+<p><code>seconds</code> 例程只是一个辅助工具，从块的起始时间开始给我们提供秒的时间。这个块的输出通常是类似于此。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18161,16 +18182,16 @@ INTERVAL 1-4: 4.0182113</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>So what’s it mean? Well, first thing to note is that all the code in the react block itself runs first. That is, it runs all the commands, including each whenever block to register the event taps for each Supply, but not to run the code yet. Once the react block finishes running, it blocks until either all the whenever blocks are done or the done statement is encountered. At that point, all the supplies are untapped and execution continues.</p>
+<p>那么它是什么意思呢？嗯，首先要注意的是，react 块中所有的代码本身都是先运行的。也就是说，它运行所有的命令，包括每一个 whenever 块来注册每一个 Supply 的事件 tap，但还不运行代码。一旦 react 块运行完毕，它就会阻塞，直到所有的 whenever 块都运行完毕或者是遇到 <code>done</code> 语句为止。这时，所有的 Supply 都被解开，继续执行。</p>
 </div>
 <div class="paragraph">
-<p>By the way, if you want to have a block run after a react block has completed (or a supply block for that matter), you can use the special <a href="https://docs.raku.org/language/phasers#CLOSE">CLOSE</a> phaser. A <a href="https://docs.raku.org/language/phasers#LEAVE">LEAVE</a> phaser will exit immediately when the code in the react block finishes setting up the react.</p>
+<p>顺便说一下，如果你想让一个块在 react 块完成后（或者是一个补给块完成后）运行，你可以使用特殊 <a href="https://docs.raku.org/language/phasers#CLOSE">CLOSE</a> phaser。<a href="https://docs.raku.org/language/phasers#LEAVE">leave</a> phaser 会在反应块中的代码设置完成后立即退出。</p>
 </div>
 <div class="paragraph">
-<p>Aside from that, it must be noted that everything related to the react block will only run in sequence. Raku doesn’t promise to run it in a single thread, but it does promise that no two parts of the code inside of a react block will run concurrently. This includes the first run through executing the react block itself as well as executing the whenever blocks in reaction to emitted values to supplies.</p>
+<p>除此以外，必须注意的是，与反应块相关的一切都只会依次运行。Raku 并没有承诺在一个线程中运行，但它确实承诺了反应块内的两部分代码不会同时运行。这包括执行反应块本身的第一次运行，以及执行反应块中的每当块，以响应于发出的值到供给。</p>
 </div>
 <div class="paragraph">
-<p>So, how would we go about this behavior using .tap? We could do it like this:</p>
+<p>那么，我们应该如何使用 <code>.tap</code> 来实现这个行为呢？我们可以这样做。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18215,28 +18236,28 @@ REACT: {
 </div>
 </div>
 <div class="paragraph">
-<p>This is similar to what the react block is actually doing, but with several additional manual steps. First we must prepare a couple of promises. The $ready <a href="https://docs.raku.org/type/Promise">Promise</a> is kept at the end of the “REACT” block to release the taps to do their work. The $done Promise is where we hold the main thread until execution is complete.</p>
+<p>这与反应块实际做的事情类似，但多了几个手动步骤。首先，我们必须准备几个承诺。<code>$ready</code> <a href="https://docs.raku.org/type/Promise">Promise</a> 是保留在 "react" 块的末尾，以释放 tap 进行工作。<code>$done</code> Promise 是我们保留主线程的地方，直到执行完成。</p>
 </div>
 <div class="paragraph">
-<p>I have not implemented the additional logic of automatically keeping $done if all supplies become done. Doing so could be done by creating another Promise for each tap that is kept when the tap done block is executed. A <a href="https://docs.raku.org/type/Promise#method_then">.then</a> block could be attached to a <a href="https://docs.raku.org/type/Promise#method_allof">Promise.allof()</a> promise for all those promises. I leave solving that as an exercise for the reader.</p>
+<p>我还没有实现如果所有的供给都完成了，就自动保留 <code>$done</code> 的额外逻辑。这样做可以通过为每个 tap done 块执行时，为每个 tap done 块创建另一个 Promise 来实现。<a href="https://docs.raku.org/type/Promise#method_then">.then</a> 块可以附加到 <a href="https://docs.raku.org/type/Promise#method_allof">Promise.allof()</a> 的 Promise 上，用于所有这些 Promise。我把这个问题的解决作为一个练习题留给读者。</p>
 </div>
 <div class="paragraph">
-<p>The other major addition is the $mutex <a href="https://docs.raku.org/type/Lock">Lock</a> object. This prevents the individual tap blocks from running simultaneously.</p>
+<p>另一个主要的补充是 <code>$mutex</code> <a href="https://docs.raku.org/type/Lock">lock</a> 对象。这可以防止单个 tap 块同时运行。</p>
 </div>
 <div class="paragraph">
-<p>That should be enough. This is probably not the most efficient solution, but it does demonstrate the extra help the react block gives you. You may notice that the tap version is ever so slightly faster. This should not be a surprise. This tap version is not taking as much care and organization as the react block. Therefore, if eeking out a few extra milliseconds matters to your code, you may want to consider implementing your async coordination code directly using tap and some other tools rather than a react block. However, be aware that the react block is likely saving you a pile of headaches in debugging by doing all those fiddly little details for you.</p>
+<p>这应该就足够了。这可能不是最有效的解决方案，但它确实展示了反应块给你带来的额外帮助。你可能会注意到 tap 版本的速度稍微快了一点。这不应该是个意外。这个 tap 版本不像 react 块那样需要更多的照顾和组织。因此，如果你的代码需要额外的几毫秒，你可以考虑直接使用 tap 和其他工具来实现异步协调代码，而不是使用 react 块。但是，要注意的是，反应块很可能会帮你在调试时省去很多麻烦。</p>
 </div>
 <div class="paragraph">
-<p>And one final note, the documentation of the <a href="https://docs.raku.org/type/Supply#method_act">act</a> method states that it works like tap, but the given code is executed by only one thread at a time. I’m really uncertain as to what this really means because this same basic guarantee is inherent to tap as well. This is because a Supply is unable to continue with another emitted message until all taps have finished running. In practice, taps all run synchronously for each message too. I haven’t found any evidence in all my work that taps on a given supply ever run concurrently. Anyway, if someone can go on to the <a href="https://www.reddit.com/r/rakulang/comments/ebpf8j/zostay_advent_day_17_comparing_react_with_tap/">Reddit thread for this post</a> and explain what the actual difference is between tap and act, I would appreciate it.</p>
+<p>还有最后一点，<a href="https://docs.raku.org/type/Supply#method_act">act</a> 方法的文档中说，它的工作原理和 tap 一样，但是给定的代码一次只由一个线程执行。我真的不清楚这到底是什么意思，因为这个基本保证也是 tap 所固有的。这是因为在所有 tap 运行完毕之前，一个 Supply 无法继续执行另一个发出的消息。在实践中，所有的分接也都是同步运行的。在我所有的工作中，我还没有发现任何证据表明在一个给定的 Supply 上的 tap 是同步运行的。无论如何，如果有人能去 <a href="https://www.reddit.com/r/rakulang/comments/ebpf8j/zostay_advent_day_17_comparing_react_with_tap/">本帖的 Reddit 线程</a>，并解释一下 tap 和 act 之间的实际区别是什么，我将不胜感激。</p>
 </div>
 <div class="paragraph">
-<p>Cheers.</p>
+<p>谢谢你。</p>
 </div>
 <div class="paragraph">
-<p>In Raku, a <a href="https://docs.raku.org/type/Supply">Supply</a> is one of the primary tools for sending messages between threads. From the way a Supply is structured, it is obvious that is provides a means for one ore more tasks to send events to multiple recipient tasks. What is less obvious, however, is that a Supply imposes a cost on the sender.</p>
+<p>在 Raku 中，<a href="https://docs.raku.org/type/Supply">Supply</a> 是线程之间发送消息的主要工具之一。从 Supply 的结构方式来看，很明显，它为一个或多个任务提供了一种向多个接收任务发送事件的手段。然而，不那么明显的是，Supply 会给发送者带来一定的成本。</p>
 </div>
 <div class="paragraph">
-<p>Consider this program:</p>
+<p>考虑一下这个程序。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18260,10 +18281,10 @@ sleep 10;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Here we have three tasks running, each in a separate thread. We let the main program quit after 10 seconds. The first threads two receive messages from the $counter.Supply. The third thread feeds a sequence of integers to this supply. You might be tempted to think that the final task will race through the delivery of events, but if so, you’d be wrong.</p>
+<p>这里我们有三个任务正在运行，每个任务都在一个独立的线程中。我们让主程序在10秒后退出。第一个线程的两个线程接收来自 <code>$counter.Supply</code> 的消息。第三个线程向这个 Supply 发送整数序列。你可能会想，最后的任务会在传递事件的过程中竞速完成，但如果是这样，那你就错了。</p>
 </div>
 <div class="paragraph">
-<p>Consider the output of this program:</p>
+<p>考虑一下这个程序的输出。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18282,22 +18303,22 @@ post-emit 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Notice a pattern? Even though there’s a random wait in the first two threads and no wait at all in the third, the third thread is blocked until both of the other threads complete. This behavior is the same regardless of how the Supply is tapped, i.e., it does not matter if you use whenever blocks or call .tap.</p>
+<p>注意到一个规律了吗？即使前两个线程有一个随机的等待，而第三个线程没有等待，但第三个线程会被阻塞，直到其他两个线程都完成。这种行为是一样的，无论 Supply 是如何被 tap 的，也就是说，无论你是使用 whenever block 还是调用 <code>.tap</code>，都没有关系。</p>
 </div>
 <div class="paragraph">
-<p>Therefore, if you want your emitter to blast through events as quickly as possible, you need to make sure the taps are written to finish as soon as possible or consider a different solution, such as using a Channel which will queue tasks in memory and they will get processed whenever the thread listening to that channel has time to process them.</p>
+<p>因此，如果你想让你的发射器尽可能快地爆破事件，你需要确保 tap 被写成尽快完成，或者考虑另一种解决方案，比如使用一个 Channel，它将在内存中排队任务，只要监听该 channel 的线程有时间处理它们，它们就会得到处理。</p>
 </div>
 <div class="paragraph">
-<p>Just be aware of this back pressure cost whenever using a Supply. The sender always pays.</p>
+<p>只是在使用 Supply 的时候要注意这个背压成本。发送者总是要付出代价的。</p>
 </div>
 <div class="paragraph">
-<p>Cheers.</p>
+<p>谢谢你。</p>
 </div>
 <div class="paragraph">
-<p>As I have said several times before in this calendar, it is always best to avoid sharing state between running threads. Again, however, here is yet another way to share state, when you need to do it.</p>
+<p>正如我之前在这个日历中说过的，在运行中的线程之间最好避免共享状态。然而，这里又有另一种共享状态的方法，当你需要的时候，这里有另一种共享状态的方法。</p>
 </div>
 <div class="paragraph">
-<p>A <a href="https://zostay.com/archive/2019/12/13/the-monitor-pattern.html">few days ago</a>, we considered monitors as a mechanism for creating a thread-safe object. Let’s consider the following monitor:</p>
+<p><a href="https://zostay.com/archive/2019/12/13/the-monitor-pattern.html">几天前</a>，我们考虑过监控器作为一种创建线程安全对象的机制。让我们考虑一下下面的监控器。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18316,10 +18337,10 @@ post-emit 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The <a href="https://zostay.com/archive/2019/12/14/compare-and-swap-your-scalars.html">day after that</a> we considered the compare-and-swap operation, a.k.a. cas, and how to use it with any scalar variable in Raku. By using cas, we can actually create thread safe objects without using locks at all.</p>
+<p><a href="https://zostay.com/archive/2019/12/14/compare-and-swap-your-scalars.html">后天</a>我们考虑了 compare-and-swap 操作，又名 cas，以及如何在 Raku 中的任何标量变量中使用它。通过使用 cas，我们实际上可以在完全不使用锁的情况下创建线程安全对象。</p>
 </div>
 <div class="paragraph">
-<p>Thus, we can rewrite the above class as a lock-free data structure like this:</p>
+<p>因此，我们可以把上面的类重写成一个无锁数据结构。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18337,40 +18358,40 @@ post-emit 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>That’s it. Same protections, but now we’ve made use of the scalar CAS operation instead. This can be more efficiently than locking. But why?</p>
+<p>就是这样。同样的保护，但现在我们用标量 CAS 操作代替了。这可以比锁定更有效率。但是，为什么呢？</p>
 </div>
 <div class="paragraph">
-<p>Locks have a cost at the beginning and end every time the lock is encountered. Add to this the fact that the every critical section is a bottle neck where a multi-threaded system must become single-threaded for a moment. Whereas CAS has no particularly expensive operations, but might cause the critical section to re-run multiple times.</p>
+<p>因为每次遇到锁的时候，锁都是有代价的。再加上每一个关键部分都是一个瓶颈，多线程的系统在这里必须暂时变成单线程。而 CAS 没有特别昂贵的操作，但可能会导致关键段多次重运行。</p>
 </div>
 <div class="paragraph">
-<p>Let’s consider the extremes of two variables in our system: contention and run time. Contention is a generic term describing the number of threads needing to work in the critical section at once. Run time here describes how long it takes to run the operation inside the critical section.</p>
+<p>让我们考虑一下我们系统中两个变量的极端：contention 和运行时间。Contention 是一个通用术语，描述了需要同时在关键部分工作的线程数量。这里的运行时间描述的是在关键部分内运行操作所需的时间。</p>
 </div>
 <div class="paragraph">
-<p>If an operation has low contention and short run time, CAS is almost certain to perform better. Locks have high overhead at start and end, whereas CAS is going to have almost no overhead. With low contention we might have to repeat an operation every now and then, but the operation is fast, so it doesn’t matter.</p>
+<p>如果一个操作有较低的 contention 和较短的运行时间，那么 CAS 几乎可以肯定它的性能会更好。洛克在开始和结束时有很高的开销，而 CAS 几乎没有开销。在低争用的情况下，我们可能每隔一段时间就要重复一次操作，但操作的速度很快，所以没有关系。</p>
 </div>
 <div class="paragraph">
-<p>If an operation has high contention and short run time, CAS is still likely to win. You could end up with a thread or two having to repeat the operation several times, but with a larger number of threads a lock’s enforcement of a single-threaded bottleneck does not scale well.</p>
+<p>如果一个操作的争用率很高，运行时间很短，CAS 还是很有可能胜出。你可能最终会有一两个线程不得不重复操作几次，但随着线程数量的增加，一个锁的执行单线程瓶颈并不能很好地扩展。</p>
 </div>
 <div class="paragraph">
-<p>If an operation has low contention and long run time, CAS might be a loser. If the critical section really must take hundreds of milliseconds or even longer, repeats are likely to be more costly. It may be worth A/B testing to see which wins, though.</p>
+<p>如果一个操作的争用率低，运行时间长，CAS 可能是个败笔。如果关键部分真的必须花几百毫秒甚至更长的时间，那么重复的代价可能会更大。不过，可能值得进行A/B测试，看看哪种方法会赢。</p>
 </div>
 <div class="paragraph">
-<p>If an operation has high contention and long run time, locks may win. At this point, however, it becomes less clear if your operation is really scalable across multiple threads at all. The bottleneck of locking for a long time on many competing threads essentially reduces your application to single-threaded. It might be time to consider how you can speed up the operation or do it in a way that doesn’t involve shared state.</p>
+<p>如果一个操作有较高的争论和较长的运行时间，锁可能会赢。然而，在这一点上，你的操作是否真的可以跨多线程扩展就不太清楚了。在许多竞争线程上长时间锁定的瓶颈，本质上会使你的应用降低到单线程。也许是时候考虑如何加快操作速度了，或者用不涉及共享状态的方式来做。</p>
 </div>
 <div class="paragraph">
-<p>Cheers.</p>
+<p>干杯。</p>
 </div>
 <div class="paragraph">
-<p>The goal of today’s article is to consider when you want to run your tasks simultaneously and how to do that. I am not going to give any rules for this because what works one time may not work the next. Instead, I will focus on sharing some guidelines that I have learned from personal experience.</p>
+<p>今天这篇文章的目的是考虑什么时候要同时运行你的任务，以及如何做到这一点。我不打算为此给出任何规则，因为一次有效的东西可能在下一次就不管用了。相反，我将重点分享一些我从个人经验中学到的准则。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_牢记你的承诺">58.11. 牢记你的承诺</h3>
+<div class="paragraph">
+<p>每当你使用并发的时候，你要抓紧相关 <a href="https://docs.raku.org/type/Promise">Promise</a> 对象。它们几乎都是重新加入你的任务，使主线程等待你的并发任务完成等等的最佳方式。</p>
 </div>
 <div class="paragraph">
-<p>Remember Your Promises</p>
-</div>
-<div class="paragraph">
-<p>Whenever you use concurrency, you want to hold on to the related <a href="https://docs.raku.org/type/Promise">Promise</a> objects. They are almost always the best way to rejoin your tasks, to cause the main thread to await completion of your concurrent tasks, etc.</p>
-</div>
-<div class="paragraph">
-<p>A common pattern I see in my code looks like this:</p>
+<p>我在代码中看到的一个常见模式是这样的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18381,22 +18402,22 @@ await Promise.allof($gui-task, $console, $jobs);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Just like that, I have three tasks running in three different threads and the main thread is holding until the three tasks complete.</p>
+<p>就像这样，我有三个任务在三个不同的线程中运行，主线程在这三个任务完成之前都在等待。</p>
 </div>
 <div class="paragraph">
-<p>That await is also where you want to add your CATCH blocks as that’s the point at which exceptions from the other threads will rejoin the calling thread.</p>
+<p><code>await</code> 也是你要添加 <code>CATCH</code> 块的地方，因为其他线程的异常会在这个时候重新加入到调用线程中。</p>
 </div>
 <div class="paragraph">
-<p>The Main Thread is Special</p>
+<p>主线程是特殊的</p>
 </div>
 <div class="paragraph">
-<p>When you write your concurrent program, be aware that the main thread is special. It will not be scheduled to run a task and your program will continue to run as long as it is doing something or awaiting on something. As soon as the main thread exits, your other tasks will immediately be reaped and quit.</p>
+<p>当你编写并发程序时，要注意主线程是特殊的。它不会被安排运行一个任务，只要你的程序在做某事或等待某事，它就会继续运行。只要主线程一退出，你的其他任务就会立即被收割并退出。</p>
 </div>
 <div class="paragraph">
-<p>Prefer a Single Thread for Input or Output</p>
+<p>倾向于用单线程进行输入或输出</p>
 </div>
 <div class="paragraph">
-<p>Avoid sharing file handles or sockets between threads. Only a single thread can read or write to a single handle at a time. The easiest way to make sure you do that safely is to keep that activity in a single thread. On a multi-threaded program where any thread may output to standard output or standard error, I often invoke a pattern like the following:</p>
+<p>避免线程之间共享文件句柄或套接字。一次只能在一个线程中读取或写入一个句柄。确保安全的最简单的方法是将该活动保持在一个线程中。在一个多线程程序中，任何线程都可能输出标准输出或标准错误，我经常会调用类似下面这样的模式。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18417,76 +18438,76 @@ start {
 </div>
 </div>
 <div class="paragraph">
-<p>If you don’t employ a pattern like that, your program will probably still work, but you may end up with some strange oddities with your output.</p>
+<p>如果你不采用这样的模式，你的程序可能仍然可以工作，但你的输出可能会出现一些奇怪的怪现象。</p>
 </div>
 <div class="paragraph">
-<p>Raku Data Structures are Not Inherently Safe</p>
+<p>Raku 数据结构本质上并不安全</p>
 </div>
 <div class="paragraph">
-<p>Similar to what was said in the previous section for input and output, please note that most Raku data structures are not thread safe. If you want to use a data structure across threads, you must use some strategy for making that access thread safe. Some strategies that will work are:</p>
+<p>与上一节中说的输入和输出类似，请注意，大多数 Raku 数据结构都不是线程安全的。如果你想跨线程使用一个数据结构，你必须使用一些策略来使该访问线程安全。一些可行的策略是。</p>
 </div>
 <div class="paragraph">
-<p>Use a thread that manages access to that data structure, as was done above for standard output and standard error.</p>
+<p>使用一个线程来管理对该数据结构的访问，就像上面对标准输出和标准错误所做的那样。</p>
 </div>
 <div class="paragraph">
-<p>Use a monitor pattern to secure the data structure.</p>
+<p>使用一个监控器模式来保护数据结构的安全。</p>
 </div>
 <div class="paragraph">
-<p>Make use of <a href="https://docs.raku.org/routine/cas">cas</a>, <a href="https://docs.raku.org/type/Lock">Lock</a>, <a href="https://docs.raku.org/type/Lock::Async">Lock::Async</a>, <a href="https://docs.raku.org/type/Semaphore">Semaphore</a>, Promise, or one of the other locking mechanisms available to guard access to the object as appropriate.</p>
+<p>利用 <a href="https://docs.raku.org/routine/cas">cas</a>、<a href="https://docs.raku.org/type/Lock">Lock</a>、<a href="https://docs.raku.org/type/Lock::Async">Lock:::Async</a>、<a href="https://docs.raku.org/type/Semaphore">Semaphore</a>、Promise 或其他可用的锁定机制之一来适当地保护对对象的访问。</p>
 </div>
 <div class="paragraph">
-<p>Manage the modifications to the object using a <a href="https://docs.raku.org/type/Channel">Channel</a> or <a href="https://docs.raku.org/type/Supply">Supply</a>.</p>
+<p>使用 <a href="https://docs.raku.org/type/Channel">Channel</a> 或 <a href="https://docs.raku.org/type/Supply">Supply</a> 管理对象的修改。</p>
 </div>
 <div class="paragraph">
-<p>Whatever you do, do not assume access to an object is thread safe unless thread safety is explicitly part of the design of the object.</p>
+<p>无论你做什么，都不要认为对对象的访问是线程安全的，除非线程安全是对象设计中明确规定的一部分。</p>
 </div>
 <div class="paragraph">
-<p>Use a Task per GUI Event Loop or Window</p>
+<p>在每个 GUI 事件循环或窗口中使用任务</p>
 </div>
 <div class="paragraph">
-<p>If your application has a GUI, you almost certainly want a separate thread for managing input and output with the GUI. Most GUI libraries have a built in event loop already and you want to run that as a task in a separate loop. You may want a single task for your whole GUI or you may want a separate task per Window.</p>
+<p>如果你的应用程序有一个GUI，你几乎肯定需要一个单独的线程来管理GUI的输入和输出。大多数GUI库已经有一个内置的事件循环，你想在一个单独的循环中作为一个任务来运行。你可能希望整个GUI有一个单独的任务，也可能希望每个窗口有一个单独的任务。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_批量小任务">58.12. 批量小任务</h3>
+<div class="paragraph">
+<p>你并不总是希望每个动作都有一个任务。有些动作实在是太琐碎了，执行时间太短，无法管理。什么是一个合理的任务大小真的取决于你和你的执行环境。只是要注意的是，当涉及到的处理是琐碎的时候，分批运行你的任务往往是一个更好的策略。</p>
 </div>
 <div class="paragraph">
-<p>Batch Small Tasks</p>
+<p>如果你使用 hyper 或 race <a href="https://docs.raku.org/language/statement-prefixes#index-entry-hyper_%28statement_prefix%29-hyper">keywords</a> 或 <a href="https://docs.raku.org/type/Iterable#method_hyper">methods</a> 来并行化工作，那么批处理是内置的、自动的。你可能想尝试一下参数，看看调整任务的批处理大小是否能提高速度。</p>
 </div>
 <div class="paragraph">
-<p>You do not always want to have a single task for every action. Some actions are simply too trivial and the execution is too short to manage this. What is a reasonable size of task is really up to you and your execution environment. Just be aware that running your tasks in batches is often a better strategy than running them in tiny bits when the processing involved is trivial.</p>
+<p>将较大的任务分解成较小的任务</p>
 </div>
 <div class="paragraph">
-<p>If you use the hyper or race <a href="https://docs.raku.org/language/statement-prefixes#index-entry-hyper_%28statement_prefix%29-hyper">keywords</a> or <a href="https://docs.raku.org/type/Iterable#method_hyper">methods</a> to parallelize work, batching is built-in and automatic. You may want to experiment with the parameters to see if tuning the batch sizes of your task results in speed increases.</p>
+<p>有些并发任务，你只想在 CPU 时间可用时连续运行，或者在事件可用时触发。然而，单次运行时间较长的任务有时可以通过分解成较小的任务来获益。可以同时运行的任务数量有限，将其分解可以帮助确保 CPU 保持忙碌。</p>
 </div>
 <div class="paragraph">
-<p>Break Larger Tasks into Smaller Ones</p>
+<p>将任务分解的一个简单方法是在自然位置插入 await 语句。从 Raku v6.d 开始，你可以有效地将任务变成 coroutines，通过使用 <code>await</code> 暂停，直到 socket 准备好了，有更多的数据进来，有信号从 Promise 或 Channel 等处到达，等等。记住，任何时候 Raku 遇到 await，都是 Raku 在当前任务使用的线程上为另一个任务安排工作的机会。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_小心线程的限制">58.13. 小心线程的限制</h3>
+<div class="paragraph">
+<p>可用的线程数量是有限的。如果你有一个任务有可能运行大量的任务，请花点时间考虑如何分解任务。限制任务之间的依赖关系的数量，可以让你的程序在不耗费资源的情况下高效地扩展。</p>
 </div>
 <div class="paragraph">
-<p>Some concurrent tasks you just want to run continuously as CPU time is available or trigger whenever an event comes available. However, single run tasks that run long can sometimes benefit from being broken down into smaller ones. There are only a finite number of tasks that can run simultaneously and breaking them down can help make sure that the CPU stays busy.</p>
+<p>任何时候，当你的任务必须暂停输入或因任何原因而暂停的时候，确保用 await 来做，将确保最大数量的线程准备好工作。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_避免休眠">58.14. 避免休眠</h3>
+<div class="paragraph">
+<p>我认为 <a href="https://docs.raku.org/type/Date#sub_sleep">sleep</a> 是有害的。相反，最好使用 <a href="https://docs.raku.org/type/Promise#method_in">await Promise.in(&#8230;&#8203;)</a>]，因为这样Raku就可以将当前线程重用到另一个任务中。只有当你故意想在暂停期间锁定一个线程时，才使用 sleep。我在这个临终日历中使用 sleep 主要是因为它比较熟悉。在实践中，我一般只在主线程上使用它。</p>
 </div>
 <div class="paragraph">
-<p>One easy way to break down your tasks is into insert await statements in natural places. As of Raku v6.d, you can effectively turn your tasks into coroutines by pausing with an await until a socket is ready, more data comes in, a signal arrives from a Promise or Channel, etc. Remember that any time Raku encounters an await, it is an opportunity for Raku to schedule work for another task on the thread the current task is using.</p>
+<p>三、结论</p>
 </div>
 <div class="paragraph">
-<p>Beware of Thread Limitations</p>
+<p>这些建议中的大部分内容与关于分解异步问题的建议相重叠。我希望这能在编写并发程序时提供一些有用的指导。</p>
 </div>
 <div class="paragraph">
-<p>There are a limited number of threads available. If you have a task with the potential to run a large number of tasks, take some time to consider how the tasks are broken down. Limiting the number of dependencies between tasks will allow your program to scale efficiently without exhausting resources.</p>
-</div>
-<div class="paragraph">
-<p>Any time your tasks must pause for input or for whatever reason, making sure to do that with an await will ensure that the maximum number of threads are ready for work.</p>
-</div>
-<div class="paragraph">
-<p>Avoid Sleep</p>
-</div>
-<div class="paragraph">
-<p>I consider <a href="https://docs.raku.org/type/Date#sub_sleep">sleep</a> to be harmful. Instead, prefer <a href="https://docs.raku.org/type/Promise#method_in">await Promise.in(&#8230;&#8203;)</a> as that gives Raku the ability to reuse the current thread for another task. Only use sleep when you deliberately want to lock up a thread during the pause. I make use of sleep in this Advent calendar mostly because it is more familiar. In practice, I generally only use it on the main thread.</p>
-</div>
-<div class="paragraph">
-<p>Conclusion</p>
-</div>
-<div class="paragraph">
-<p>Much of this advice overlaps the advice on breaking up async problems. I hope this provides some useful guidelines when writing concurrent programs.</p>
-</div>
-<div class="paragraph">
-<p>Cheers.</p>
+<p>谢谢你。</p>
 </div>
 <div class="paragraph">
 <p>迭代速度很慢。 如果在循环中要处理 N 件事，则循环将需要 N 次迭代来处理。 太慢了。 有时候，这是解决问题的唯一方法。</p>
@@ -18777,6 +18798,7 @@ True</code></pre>
 </div>
 <div class="paragraph">
 <p>谢谢你。</p>
+</div>
 </div>
 </div>
 </div>
