@@ -179,6 +179,14 @@ if (theme && theme !== "1") {
 <li><a href="#_ast_表达式">8.9. AST 表达式</a></li>
 <li><a href="#_函数调用">8.10. 函数调用</a></li>
 <li><a href="#_最终的调优">8.11. 最终的调优</a></li>
+<li><a href="#_声明字符串_2">8.12. 声明字符串</a></li>
+<li><a href="#_声明数组和散列_2">8.13. 声明数组和散列</a></li>
+<li><a href="#_标量赋值_2">8.14. 标量赋值</a></li>
+<li><a href="#_处理索引">8.15. 处理索引</a></li>
+<li><a href="#_数组和散列的赋值与初始化_2">8.16. 数组和散列的赋值与初始化</a></li>
+<li><a href="#_ast_表达式_2">8.17. AST 表达式</a></li>
+<li><a href="#_函数调用_2">8.18. 函数调用</a></li>
+<li><a href="#_最后的调试">8.19. 最后的调试</a></li>
 </ul>
 </li>
 </ul>
@@ -5568,6 +5576,774 @@ b = 1, 2, 3;</code></pre>
 </div>
 <div class="paragraph">
 <p>现在就到此为止。在这一章中，也是全书最大的一章，我们走了很远的路，将编译器从一个解释器转变为一个构建抽象语法树的机器。正如你刚才看到的那样，我们去掉了一些代码，大多时候只能依靠语法。尽管如此，所得到的树还是很好地表示了程序的流程，我们很快就会有效地使用它。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_声明字符串_2">8.12. 声明字符串</h3>
+<div class="paragraph">
+<p>对于字符串值, 让我们 来创建一种新的节点类型, 即 <code>AST::StringValue</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::StringValue is ASTNode {
+    has Str $.value;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>每当解析一个字符串，我们就会发出一个这个类的实例:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method string($a) {
+    . . .
+
+    $a.make(AST::StringValue.new(value =&gt; $s));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们将在下一章中返回到字符串，因为我们仍然需要重新实现变量插值。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_声明数组和散列_2">8.13. 声明数组和散列</h3>
+<div class="paragraph">
+<p>对于数组和散列，我们还必须创建负责声明这些类型的变量的节点。让我们从数组开始:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::ArrayDeclaration is ASTNode {
+    has Str $.variable-name;
+    has ASTNode @.elements;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，让我们改变一下 action。目前，数组声明立即在 <code>%!var</code> 存储中创建一个槽:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method array-declaration($/ where !$&lt;value&gt;) {
+    %!var{$&lt;variable-name&gt;} = Array.new;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当我们在处理 AST 树时，所有这些 action 都必须推迟到编译器遍历完整的树后再进行。现在，唯一的 action 就是进一步传递一个 <code>AST:::ArrayDeclaration</code> 节点:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method array-declaration($/ where !$) {
+    $/.make(AST::ArrayDeclaration.new(
+        variable-name =&gt; ~$,
+        elements =&gt; []
+    ));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个新方法只是在树上增加了一个 AST 节点。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method variable-declaration($/ where $&lt;array-declaration&gt;) {
+    $/.make($&lt;array-declaration&gt;.made);
+}
+
+multi method array-declaration($/ where !$&lt;value&gt;) {
+    $/.make(AST::ArrayDeclaration.new(
+        variable-name =&gt; ~$&lt;variable-name&gt;,
+        elements =&gt; []));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>散列支持需要类似的代码，明显的区别在于元素属性的聚合类型。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method variable-declaration($/
+    where $&lt;hash-declaration&gt;) {
+    $/.make($&lt;hash-declaration&gt;.made);
+}
+
+multi method hash-declaration($/ where !$&lt;string&gt;) {
+    $/.make(AST::HashDeclaration.new(
+        variable-name =&gt; ~$&lt;variable-name&gt;,
+        elements =&gt; {}));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>AST 节点的定义如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::HashDeclaration is ASTNode {
+    has Str $.variable-name;
+    has ASTNode %.elements;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个变化之后，你可能会发现有三个相似的方法:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method variable-declaration($/ where $&lt;scalar-declaration&gt;) {
+    $/.make($&lt;scalar-declaration&gt;.made);
+}
+
+multi method variable-declaration($/ where $&lt;array-declaration&gt;) {
+    $/.make($&lt;array-declaration&gt;.made);
+}
+
+multi method variable-declaration($/ where $&lt;hash-declaration&gt;) {
+    $/.make($&lt;hash-declaration&gt;.made);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果在 grammar 的 rule 中加入别名，这三个方法都可以被重写:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule variable-declaration {
+    'my' [
+        | &lt;declaration=array-declaration&gt;
+        | &lt;declaration=hash-declaration&gt;
+        | &lt;declaration=scalar-declaration&gt;
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>匹配变量现在包含两个条目：一个是原始规则名，第二个是别名:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">｢my array[]｣
+ declaration =&gt; ｢array[]｣
+  variable-name =&gt; ｢array｣
+ array-declaration =&gt; ｢array[]｣
+  variable-name =&gt; ｢array｣</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>有了这一点，这三个 action 就可以合并成一个简单的单一方法，对规则的所有分支都能完成任务。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method variable-declaration($/) {
+    $/.make($&lt;declaration&gt;.made);
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_标量赋值_2">8.14. 标量赋值</h3>
+<div class="paragraph">
+<p>正如你所看到的，在构建 AST 的时候，我们要用前面几章中构建的所有规则来工作。实际上，我们需要在下一章中再来一轮，届时我们将创建代码来执行不同 AST 节点所需的动作。</p>
+</div>
+<div class="paragraph">
+<p>现在，让我们先来实现标量分配。这个 AST 节点应该包含变量的名称和将被赋值的东西。让我们称它为 <code>$.rhs</code>，它代表右侧。这个对象肯定是 <code>ASTNode</code>，但我们不限制它到底承载什么东西。它可以是一个标量值，也可以是一个必须先被执行的表达式。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::ScalarAssignment is ASTNode {
+    has Str $.variable-name;
+    has ASTNode $.rhs;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>与声明规则不同的是，只有一个赋值规则，我们用它的部分来调度动作方法。下面是为标量建立赋值节点需要修改的内容。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method assignment($/ where !$&lt;index&gt;) {
+    . . .
+    else {
+        $/.make(AST::ScalarAssignment.new(
+            variable-name =&gt; ~$&lt;variable-name&gt;,
+            rhs =&gt; $&lt;value&gt;[0].made));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>为了统一传递节点到语句中，我们可以用上一节中的小技巧，在规则中加入别名，统一传递节点到语句中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule statement {
+    | &lt;statement=variable-declaration&gt;
+    | &lt;statement=assignment&gt;
+    | &lt;statement=function-call&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，一个 action 方法就可以处理三个分支:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method statement($/) {
+    $/.make($&lt;statement&gt;.made);
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_处理索引">8.15. 处理索引</h3>
+<div class="paragraph">
+<p>重要的是，我们要意识到，当我们在建立 AST 时，并不是要立即对其进行计算。比如说，这意味着我们不应该担心一个变量的真实内容。我们的任务只是把它的名字放在节点的属性中。访问数组和散列的元素也是一样的。在 AST 中，我们只保存变量的名称和元素的索引，如果变量是一个散列，我们只保存变量的名称和索引。</p>
+</div>
+<div class="paragraph">
+<p>让我们创建类来赋值给数组和散列项。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::ArrayItemAssignment is ASTNode {
+    has Str $.variable-name;
+    has Int $.index;
+    has ASTNode $.rhs;
+}
+
+class AST::HashItemAssignment is ASTNode {
+    has Str $.variable-name;
+    has Str $.key;
+    has ASTNode $.rhs;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>数组的索引存储在一个整型的 <code>$.index</code> 字段中，而一个散列的键保存在字符串 <code>$.key</code> 中。在其他方面，节点的结构是一样的。</p>
+</div>
+<div class="paragraph">
+<p>发出 AST 节点也是一项工作，对于数组和散列来说，看起来都是类似的:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method assignment($/
+    where $&lt;index&gt; &amp;&amp; $&lt;index&gt;&lt;array-index&gt;) {
+    $/.make(AST::ArrayItemAssignment.new(
+        variable-name =&gt; ~$&lt;variable-name&gt;,
+        index =&gt; $&lt;index&gt;.made,
+        rhs =&gt; $&lt;value&gt;[0].made
+    ));
+}
+
+multi method assignment($/
+    where $&lt;index&gt; &amp;&amp; $&lt;index&gt;&lt;hash-index&gt;) {
+    $/.make(AST::HashItemAssignment.new(
+        variable-name =&gt; ~$&lt;variable-name&gt;,
+        key =&gt; $&lt;index&gt;.made.value,
+        rhs =&gt; $&lt;value&gt;[0].made
+    ));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意，使用 AST 节点已经让我们的赋值变得相当通用。例如，我们的代码既支持数字，也支持方程右侧的字符串。以下面的 Lingua 为例:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my a[];
+a[2] = 3;
+
+my b{};
+b{"x"} = "y";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>其生成的 AST 树与节点所反映的代码行一起显示在下图中。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag5-2048x1402.png" alt="AST tree">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_数组和散列的赋值与初始化_2">8.16. 数组和散列的赋值与初始化</h3>
+<div class="paragraph">
+<p>我们跳过了初始化数组和散列，这样做是有原因的。让我们先来做一下在两个不同的语句中声明和赋值的情况下的 AST，如下例所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my d[];
+d = 3, 5, "7";
+
+my e{};
+e = "1": 2, "3": "4";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>数组和散列赋值与分配单个元素不同，所以这些 action 需要自己的 AST 节点类型:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::ArrayAssignment is ASTNode {
+    has Str $.variable-name;
+    has ASTNode @.elements;
+}
+
+class AST::HashAssignment is ASTNode {
+    has Str $.variable-name;
+    has Str @.keys;
+    has ASTNode @.values;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于数组，我们收集由一些 AST 节点组成的数组中的元素。对于散列数组，键和值被保存在不同的数组中，并且键被强制为字符串。或者，我们可以创建 <code>Pair</code> 对象（<code>Pair</code> 是 Raku 的内置类型）来组合键值对。</p>
+</div>
+<div class="paragraph">
+<p>在 action 中，我们必须仔细地将标量、数组和散列的赋值分开。Multi 方法在这里工作得很好，而在 <code>where</code> 子句中可能需要很多条件。另一种方法是将赋值规则分成三个，每个数据类型一个。总之，这里是我们目前的 action 方法的实现:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method assignment($/ where !$&lt;index&gt; &amp;&amp;
+                                  !$&lt;value&gt;) {
+    $/.make(AST::ScalarAssignment.new(
+        variable-name =&gt; ~$&lt;variable-name&gt;,
+        rhs =&gt; $&lt;value&gt;[0].made
+    ));
+}
+
+multi method assignment($/ where !$&lt;index&gt; &amp;&amp;
+                                   $&lt;value&gt; &amp;&amp;
+                                  !$&lt;string&gt;) {
+    $/.make(AST::ArrayAssignment.new(
+        variable-name =&gt; ~$&lt;variable-name&gt;,
+        elements =&gt; $&lt;value&gt;.map: *.made
+    ));
+}
+
+multi method assignment($/ where !$&lt;index&gt; &amp;&amp;
+                                   $&lt;value&gt; &amp;&amp;
+                                   $&lt;string&gt;) {
+    $/.make(AST::HashAssignment.new(
+        variable-name =&gt; ~$&lt;variable-name&gt;,
+        keys =&gt; ($&lt;string&gt;.map: *.made.value),
+        values =&gt; ($&lt;value&gt;.map: *.made)
+    ));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>仔细研究一下这段代码：你应该明白方法签名是如何帮助在每个给定情况下选择合适的方法的。在这段代码中，也使用了很多 <code>map</code> 方法，它们总是很简洁，大部分都很清晰，但是写起来却不容易。</p>
+</div>
+<div class="paragraph">
+<p>下一步就是使用初始化 action 完成赋值，我们已经有了初始化 action 的代码。将其提取到独立的函数中（就像我们之前在解释器中所做的那样），最后的结果是这样的。</p>
+</div>
+<div class="paragraph">
+<p>数组相关的方法:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub init-array($variable-name, $elements) {
+    return AST::ArrayAssignment.new(
+        variable-name =&gt; $variable-name,
+        elements =&gt; $elements.map: *.made
+    );
+}
+
+multi method array-declaration($/ where $&lt;value&gt;) {
+    $/.make(init-array(~$&lt;variable-name&gt;, $&lt;value&gt;));
+}
+
+multi method assignment($/ where !$&lt;index&gt; &amp;&amp; $&lt;value&gt; &amp;&amp; !$&lt;string&gt;) {
+    $/.make(init-array(~$&lt;variable-name&gt;, $&lt;value&gt;));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这段代码看起来又是透明的，不言自明。对散列相关的代码重复同样的操作:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub init-hash($variable-name, $keys, $values) {
+    return AST::HashAssignment.new(
+        variable-name =&gt; $variable-name,
+        keys =&gt; ($keys.map: *.made.value),
+        values =&gt; ($values.map: *.made)
+    );
+}
+
+multi method hash-declaration($/ where $&lt;string&gt; &amp;&amp; $&lt;value&gt;) {
+    $/.make(init-hash(~$&lt;variable-name&gt;,
+                  $&lt;string&gt;, $&lt;value&gt;));
+}
+
+multi method assignment($/ where !$&lt;index&gt; &amp;&amp; $&lt;value&gt; &amp;&amp; $&lt;string&gt;) {
+    $/.make(init-hash(~$&lt;variable-name&gt;,
+                      $&lt;string&gt;, $&lt;value&gt;));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在很多 grammar 规则都已经涵盖了。让我们继续填补新的编译器架构中的空白，实现表达式和函数调用的 AST 元素。我们的目标是，我们的目标是，有的动作方法只是将 <code>made</code> 的值传递给下一级，有的 action 方法则是将 <code>AST::*</code> 对象中的一个放到 <code>made</code> 属性中。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ast_表达式_2">8.17. AST 表达式</h3>
+<div class="paragraph">
+<p>考虑一个简单的程序:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my a;
+a = 2 + 3;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第一行是一个变量的声明，第二行是赋值。这里还有一个 action：加法，这也必须用一个 AST 节点来表示。让我们建立下面的树。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag6-2048x1630.png" alt="AST 语法树">
+</div>
+</div>
+<div class="paragraph">
+<p>你可能会注意到，新的节点叫做 <code>AST::MathOperations</code>，它包含两个数组，分别是运算符和操作数组。</p>
+</div>
+<div class="paragraph">
+<p>在最简单的例子中，只有一个运算符和两个运算符，但同样的对象也适用于较长的序列，例如 <code>2 + 3 - 4</code>，所有的运算符都有相同的优先级。这样的解决方案有助于减少 AST 节点的数量，同时也简化了下一步处理树的过程。</p>
+</div>
+<div class="paragraph">
+<p>所以，下面是类:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::MathOperations is ASTNode {
+    has Str @.operators;
+    has ASTNode @.operands;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>操作符以字符串的形式存储；操作子是其他 AST 节点。将 AST 生成嵌入到 <code>LinguaActions</code> 类中的 AST 生成有更多的删除量而不是插入量。我们必须删除所有的操作子程序。它们做实际的加法、乘法等操作，而我们在 AST 中不需要这些。所有这些实际的操作都将在后期的遍历树上完成。</p>
+</div>
+<div class="paragraph">
+<p>有几个多变体的 <code>expr</code> 动作，在一边，这种理念使得实现起来更加困难，因为你必须考虑到 AST 节点将如何传播到最上面的 AST 节点。另一方面，你可以把它拆成更小的动作，根据匹配对象中的 <code>$&lt;op&gt;</code> 键的存在，决定是否要发出一个 <code>AST::MathOperations</code> 或 <code>AST::NumberValue</code> 节点。换句话说，如果表达式中存在运算符，就使用 <code>AST::MathOperations</code>，否则就产生一个存储在 <code>AST::NumberValue</code> 节点属性中的数字。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method expr($/ where $&lt;expr&gt; &amp;&amp; !$&lt;op&gt;) {
+    $/.make($&lt;expr&gt;[0].made);
+}
+
+multi method expr($/ where $&lt;expr&gt; &amp;&amp; $&lt;op&gt;) {
+    $/.make(AST::MathOperations.new(
+        operators =&gt; ($&lt;op&gt;.map: ~*),
+        operands =&gt; ($&lt;expr&gt;.map: *.made)
+    ));
+}
+
+multi method expr($/ where $&lt;expression&gt;) {
+    $/.make($&lt;expression&gt;.made);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们的实现不是一个标准的算术表达式的 AST 树。让我们来考察一个简单的表达式，其中有不同优先级的运算符。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my x = 2 + 3 * 4 / 5 - 6;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在其他关于编译器设计和解析的书中，你很可能会遇到这样一棵树，每个节点代表一个有两个运算符的单项运算，如下图左侧所示。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag7-2048x1849.png" alt="Subtract">
+</div>
+</div>
+<div class="paragraph">
+<p>我们的编译器的树形图如右图所示。每个节点可以接受任意数量的操作符，而且树的结构更加紧凑：在这个例子中，与标准版本相比，节点数量是标准版本的2倍。如果节点有三个操作符，那么它应该有两个操作符，以后你将把它们放在操作符之间。</p>
+</div>
+<div class="paragraph">
+<p>树建立好后，TOP 方法中的 <code>$TOP</code> 变量包含以下数据结构:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">AST::TOP $top = AST::TOP.new(
+  statements =&gt; Array[ASTNode].new(
+    AST::ScalarDeclaration.new(
+      variable-name =&gt; "x",
+      value =&gt; AST::MathOperations.new(
+        operators =&gt; Array[Str].new(
+          "+",
+          "-"
+        ),
+        operands =&gt; Array[ASTNode].new(
+          AST::NumberValue.new(
+            value =&gt; 2
+          ),
+          AST::MathOperations.new(
+            operators =&gt; Array[Str].new(
+              "*",
+              "/"
+            ),
+            operands =&gt; Array[ASTNode].new(
+              AST::NumberValue.new(
+                value =&gt; 3
+              ),
+              AST::NumberValue.new(
+                value =&gt; 4
+              ),
+              AST::NumberValue.new(
+                value =&gt; 5
+              )
+            )
+          ),
+          AST::NumberValue.new(
+            value =&gt; 6
+          )
+        )
+      )
+    )
+  )
+)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_函数调用_2">8.18. 函数调用</h3>
+<div class="paragraph">
+<p>函数调用的形式也大大简化了 AST，因为节点只携带函数的名称和包含函数参数的节点。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::FunctionCall is ASTNode {
+    has Str $.function-name;
+    has ASTNode $.value;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>新的 action 方法不做任何真正的打印或字符串格式化。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method function-call($/) {
+    $/.make(AST::FunctionCall.new(
+        function-name =&gt; ~$&lt;function-name&gt;,
+        value =&gt; $&lt;value&gt;.made
+    ));
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_最后的调试">8.19. 最后的调试</h3>
+<div class="paragraph">
+<p>在本章的最后，让我们做一些改动，让我们有了一个更简单的 AST。这在早期并不是那么重要，但现在我们可以看到一个真正的解析树了。让我们在值规则中增加一个变量名称的快捷方式。目前，变量的名字应该是从最深的 <code>expr(4)</code> 规则中冒出来的。我们可以让解析器立即看到它。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule value {
+    | &lt;variable-name&gt;
+    | &lt;expression&gt;
+    | &lt;string&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>因此，这个 action，立即创建了 <code>AST:::Variable</code> 节点。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method value($/ where $&lt;variable-name&gt;) {
+    $/.make(AST::Variable.new(
+        variable-name =&gt; ~$&lt;variable-name&gt;
+    ));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最好是用可选的索引来扩展变量名称，以允许数组和哈散列中的元素。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule value {
+    | &lt;variable-name&gt; &lt;index&gt;?
+    | &lt;expression&gt;
+    | &lt;string&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们还需要为这类数据定义 AST 节点。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::ArrayItem is ASTNode {
+    has Str $.variable-name;
+    has ASTNode $.index;
+}
+
+class AST::HashItem is ASTNode {
+    has Str $.variable-name;
+    has ASTNode $.key;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们使用 <code>ASTNode</code> 类型来存储数组索引和散列键的原因是，我们希望它们不仅是整数或字符串，而且是其他变量。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my c{} = "a": 1, "b": 2;
+my s = "a";
+say c{s};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>纠正现有的 action，再增加几个 action。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method value($/ where $&lt;variable-name&gt; &amp;&amp; !$&lt;index&gt;) {
+    $/.make(AST::Variable.new(
+        variable-name =&gt; ~$&lt;variable-name&gt;
+    ));
+}
+
+multi method value($/ where $&lt;variable-name&gt; &amp;&amp; $&lt;index&gt; &amp;&amp;
+                            $&lt;index&gt;&lt;array-index&gt;) {
+    $/.make(AST::ArrayItem.new(
+        variable-name =&gt; ~$&lt;variable-name&gt;,
+        index =&gt; $&lt;index&gt;.made
+    ));
+}
+
+multi method value($/ where $&lt;variable-name&gt; &amp;&amp; $&lt;index&gt; &amp;&amp;
+                            $&lt;index&gt;&lt;hash-index&gt;) {
+    $/.make(AST::HashItem.new(
+        variable-name =&gt; ~$&lt;variable-name&gt;,
+        key =&gt; $&lt;index&gt;.made
+    ));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>索引本身需要转换为 AST 节点。对于每一种索引，根据我们是否看到变量，有两种多方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method array-index($/ where !$&lt;variable-name&gt;) {
+    $/.make(AST::NumberValue.new(
+        value =&gt; +$&lt;integer&gt;
+    ));
+}
+
+multi method array-index($/ where $&lt;variable-name&gt;) {
+    $/.make(AST::Variable.new(
+        variable-name =&gt; ~$&lt;variable-name&gt;
+    ));
+}
+
+multi method hash-index($/ where !$&lt;variable-name&gt;) {
+    $/.make($&lt;string&gt;.made);
+}
+
+multi method hash-index($/ where $&lt;variable-name&gt;) {
+    $/.make(AST::Variable.new(
+        variable-name =&gt; ~$&lt;variable-name&gt;
+    ));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>另一个需要我们担心变量的地方是，还有一个部分还是由旧 action 管理的部分。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method expr($/ where $&lt;variable-name&gt; &amp;&amp; $&lt;index&gt;) {
+    if %!var{$&lt;variable-name&gt;} ~~ Array {
+        $/.make(%!var{$&lt;variable-name&gt;}[$&lt;index&gt;.made]);
+    }
+    elsif %!var{$&lt;variable-name&gt;} ~~ Hash {
+        $/.make(%!var{$&lt;variable-name&gt;}{$&lt;index&gt;.made});
+    }
+    else {
+        $/.make(%!var{$&lt;variable-name&gt;}.substr($&lt;index&gt;.made, 1));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这段代码会检查手边的变量类型，并决定如何处理这个变量。正如我们之前在本章中已经做过的那样，我们将删除所有这些逻辑，取而代之的是 AST 节点中的一个节点，这不是取决于变量的类型，而是取决于此时的语法信息。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method expr($/ where $&lt;variable-name&gt; &amp;&amp; !$&lt;index&gt;) {
+    $/.make(AST::Variable.new(
+        variable-name =&gt; ~$&lt;variable-name&gt;
+    ));
+}
+
+multi method expr($/ where $&lt;variable-name&gt; &amp;&amp; $&lt;index&gt; &amp;&amp;
+                           $&lt;index&gt;&lt;array-index&gt;) {
+    $/.make(AST::ArrayItem.new(
+        variable-name =&gt; ~$&lt;variable-name&gt;,
+        index =&gt; $&lt;index&gt;.made
+    ));
+}
+
+multi method expr($/ where $&lt;variable-name&gt; &amp;&amp; $&lt;index&gt; &amp;&amp;
+                           $&lt;index&gt;&lt;hash-index&gt;) {
+    $/.make(AST::HashItem.new(
+        variable-name =&gt; ~$&lt;variable-name&gt;,
+        key =&gt; $&lt;index&gt;.made.value
+    ));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>作为一个家庭作业，可以尝试修改一下语法，以消除有变量快捷键的需要（你也会希望把上面的代码与我们在本节中看到的 `value`方法结合起来）。</p>
+</div>
+<div class="paragraph">
+<p>最后，让我们修改 action，以便在下面的作业中更加小心翼翼地进行修正。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my a;
+my b[];
+
+a = 1;
+b = 1, 2, 3;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在我们不知道变量的类型之前，判断赋值中的变量是数组还是标量的唯一方法就是计算等号右边的元素。下面是我们的方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method assignment($/ where !$&lt;index&gt; &amp;&amp; $&lt;value&gt; &amp;&amp; !$&lt;string&gt;) {
+    if $&lt;value&gt;.elems == 1 {
+        $/.make(AST::ScalarAssignment.new(
+            variable-name =&gt; ~$&lt;variable-name&gt;,
+            rhs =&gt; $&lt;value&gt;[0].made
+        ));
+    }
+    else {
+        $/.make(AST::ArrayAssignment.new(
+            variable-name =&gt; ~$&lt;variable-name&gt;,
+            elements =&gt; ($&lt;value&gt;.map: *.made)
+        ));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在就到此为止。在这一章中，也是全书最大的一章，我们走了很远的路，将编译器从一个解释器转变为一个构建抽象语法树的机器。正如你刚才看到的那样，我们去掉了一些代码，大多时候只能依靠 grammar。尽管如此，所得到的树还是很好地表示了程序的流程，我们很快就会有效地使用它。</p>
 </div>
 </div>
 </div>
