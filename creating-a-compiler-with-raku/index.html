@@ -352,7 +352,7 @@ rule function-call {
 </div>
 </div>
 <div class="paragraph">
-<p>带引号的字符串（例如 <code>'my'</code> 和 <code>'='</code>）将字面值与目标语言中的相应语法项进行匹配。 尖括号中的名称是对我们需要定义以完成 grrammar 的其他规则或标记的引用。 这是我们的第一个标记：</p>
+<p>带引号的字符串（例如 <code>'my'</code> 和 <code>'='</code>）将字面值与目标语言中的相应语法项进行匹配。 尖括号中的名称是对我们需要定义以完成 grammar 的其他规则或标记的引用。 这是我们的第一个标记：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1047,7 +1047,7 @@ class NumberActions {
 </div>
 </div>
 <div class="paragraph">
-<p>`$n 变量有意成为公共数据成员，因为我们必须以某种方式获得结果。 你还需要更改测试循环。</p>
+<p><code>$n</code> 变量有意成为公共数据成员，因为我们必须以某种方式获得结果。 你还需要更改测试循环。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1449,7 +1449,7 @@ OK .5E-3 = 0.0005 (Num)</code></pre>
 <p>在此特定任务中，我们所有的体力劳动都由宿主语言中的编译器 action 代替。 当然，这是有可能的，因为我们选择了许多编程语言都可以处理的标准数据格式。 一旦发现解决问题的简单方法，不要害怕删除自己的代码。 本章中介绍的使用 AST 的技术是本书未来冒险的基础。 敬请关注！</p>
 </div>
 <div class="paragraph">
-<p><code>P. S</code>.细心的读者可能已经注意到，<code>Number</code> grammar 不包含数字(例如`4.``)，其中有整数部分，小数点但没有小数部分。 这些数字在 Raku 本身中是不允许的，因此我没有将其包括在 grammar 中。</p>
+<p><code>P. S</code>.细心的读者可能已经注意到，<code>Number</code> grammar 不包含数字(例如`4.`)，其中有整数部分，小数点但没有小数部分。 这些数字在 Raku 本身中是不允许的，因此我没有将其包括在 grammar 中。</p>
 </div>
 <div class="paragraph">
 <p><a href="https://andrewshitov.com/2020/03/01/chapter-2-parsing-a-number/" class="bare">https://andrewshitov.com/2020/03/01/chapter-2-parsing-a-number/</a></p>
@@ -1601,7 +1601,7 @@ token op {
 </div>
 </div>
 <div class="paragraph">
-<p>就是这样。 更新后的语法将两个测试字符串都视为有效表达式，并根据$ &lt;op&gt;的内容进行正确的计算。 当检查 <code>$&lt;op&gt; eq '+'</code> 中的条件时，eq 字符串比较运算符将 <code>$&lt;op&gt;</code> 隐式转换为字符串，并且不需要单独的操作来处理 <code>op</code> 令牌。</p>
+<p>就是这样。 更新后的语法将两个测试字符串都视为有效表达式，并根据 <code>$&lt;op&gt;</code> 的内容进行正确的计算。 当检查 <code>$&lt;op&gt; eq '+'</code> 中的条件时，eq 字符串比较运算符将 <code>$&lt;op&gt;</code> 隐式转换为字符串，并且不需要单独的操作来处理 <code>op</code> 令牌。</p>
 </div>
 </div>
 <div class="sect2">
@@ -1688,7 +1688,7 @@ token op {
 <div class="sect2">
 <h3 id="_更多操作数">3.3. 更多操作数</h3>
 <div class="paragraph">
-<p>语法和动作现在已经足够聪明，可以解析和评估其中具有两个值的表达式，但不适用于1 + 2 + 3等更复杂的示例。由于TOP级别受规则限制，因此无法使用 仅两个数字：<code>&lt;number&gt; &lt;op&gt; &lt;number&gt;</code>。</p>
+<p>语法和动作现在已经足够聪明，可以解析和评估其中具有两个值的表达式，但不适用于 <code>1 + 2 + 3</code> 等更复杂的示例。由于TOP级别受规则限制，因此无法使用 仅两个数字：<code>&lt;number&gt; &lt;op&gt; &lt;number&gt;</code>。</p>
 </div>
 <div class="paragraph">
 <p>在语法中，链中新的可选项目可以用 * 量词表示：</p>
@@ -1913,7 +1913,7 @@ class CalculatorActions {
 </div>
 </div>
 <div class="paragraph">
-<p>第二个变化是引入了两个运算符集：+和-的op1以及*和/的op2。 op1中的运算符的优先级较低，它们出现在语法的顶级规则中。 换句话说，我们认为输入表达式的总和仅包含您要加或减的数字。</p>
+<p>第二个变化是引入了两个运算符集：<code>+</code> 和 <code>-</code> 的 <code>op1</code> 以及 <code>*</code> 和 <code>/</code> 的 <code>op2</code>。 <code>op1</code> 中的运算符的优先级较低，它们出现在语法的顶级规则中。 换句话说，我们认为输入表达式的总和仅包含您要加或减的数字。</p>
 </div>
 <div class="paragraph">
 <p>乘法和除法运算符具有更高的优先级，您应该将其结果总体上视为最高级别。 这就是为什么引入令牌而不是匹配数字的原因。 最后可以是数字，但首先是由*或/分隔的一系列因素。 在我们的案例中，一个因素基本上是一个数字。 我故意添加了一个单独的代理规则，factor，以保留名称的术语和因数，您经常可以在与编译器相关的文献中看到这些规则。</p>
@@ -1955,7 +1955,7 @@ class CalculatorActions {
 </div>
 </div>
 <div class="paragraph">
-<p>如您所见，TOP和term都实现相同的算法； 他们只是处理语法的不同部分（和不同的运算符）。</p>
+<p>如您所见，<code>TOP</code> 和 <code>term</code> 都实现相同的算法； 他们只是处理语法的不同部分（和不同的运算符）。</p>
 </div>
 </div>
 <div class="sect2">
@@ -1964,7 +1964,7 @@ class CalculatorActions {
 <p>到目前为止，我们已经有了一个可以对表达式中任意数量的数字执行四个算术运算的计算器。 您可以提出测试用例，但您可能不想在脑海中计算出正确的结果，并对照每个测试用例进行检查。</p>
 </div>
 <div class="paragraph">
-<p>Raku发行版包括Test模块，该模块显着有助于简化测试用例循环。 该模块会导出一些功能，我们将使用其中一个名为is的功能。 由于计算器表达式的语法与Raku的语法一致，因此让我们要求它检查结果：</p>
+<p>Raku 发行版包括 <code>Test</code> 模块，该模块显着有助于简化测试用例循环。 该模块会导出一些功能，我们将使用其中一个名为 <code>is</code> 的功能。 由于计算器表达式的语法与 Raku 的语法一致，因此让我们要求它检查结果：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2022,10 +2022,10 @@ ok 4 - computed 3 - 4 = -1
 <div class="sect2">
 <h3 id="_添加更多能量">3.7. 添加更多能量</h3>
 <div class="paragraph">
-<p>在本节中，我们将使计算器更加通用，因为我们将要添加幂运算符**。 与以前的运算符集不同的是，幂运算符具有更高的优先级，必须在进行任何乘法或加法之前首先进行处理。</p>
+<p>在本节中，我们将使计算器更加通用，因为我们将要添加幂运算符 <code>**</code>。 与以前的运算符集不同的是，幂运算符具有更高的优先级，必须在进行任何乘法或加法之前首先进行处理。</p>
 </div>
 <div class="paragraph">
-<p>可以类似于我们之前对*和/进行的操作添加操作符。 让我们替换因子规则并为运算符本身定义令牌：</p>
+<p>可以类似于我们之前对 <code>*</code> 和 <code>/</code> 进行的操作添加操作符。 让我们替换因子规则并为运算符本身定义令牌：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2091,7 +2091,7 @@ ok 33 - computed 2 ** 3 ** 4 = 4096</code></pre>
 <div class="sect2">
 <h3 id="_允许括号">3.8. 允许括号</h3>
 <div class="paragraph">
-<p>计算器设计的最后一点是使其理解括号。 尽管看似艰巨的任务，但实际上实现起来非常简单。 这是因为括号内的任何内容都是遵循相同语法规则的另一种表达方式。 换句话说，如果看到括号，则可以从TOP递归开始。</p>
+<p>计算器设计的最后一点是使其理解括号。 尽管看似艰巨的任务，但实际上实现起来非常简单。 这是因为括号内的任何内容都是遵循相同语法规则的另一种表达方式。 换句话说，如果看到括号，则可以从 <code>TOP</code> 递归开始。</p>
 </div>
 <div class="paragraph">
 <p>计算括号内的值后，您将获得一个值，因此可以将其视为任何其他数字。 要扩展解析器，只需从数字中创建一个新值规则，然后在其中列出两个备选方案：</p>
@@ -2497,7 +2497,7 @@ say x; # prints 14</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>没有与变量名标记关联的 made 属性，因此我们必须做一些简单的工作来访问存储：</p>
+<p>没有与变量名标记关联的 <code>made</code> 属性，因此我们必须做一些简单的工作来访问存储：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2952,7 +2952,7 @@ multi rule expr(4) {
 <p>这次，变化更大了。 我们引入了新的多规则 <code>expr</code>，它取代了 <code>term</code> 和 <code>factor</code>。 为了使 <code>expr</code> 方法统一，将 <code>value</code> 方法替换为 <code>expr(4)</code>。 这样做是为了能够从成为 <code>expr(3)</code> 的前一个因素访问作为 <code>expr(4)</code> 的前一个值。</p>
 </div>
 <div class="paragraph">
-<p>之后，可以将带有参数 1、2和3的前三个 <code>expr</code> 备选方案替换为具有 <code>$n + 1</code> 的简单数学运算的单个通用规则，从而使我们进入下一个层次。</p>
+<p>之后，可以将带有参数 1、2 和 3 的前三个 <code>expr</code> 备选方案替换为具有 <code>$n + 1</code> 的简单数学运算的单个通用规则，从而使我们进入下一个层次。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3018,7 +3018,7 @@ method expr($/) {
 </div>
 </div>
 <div class="paragraph">
-<p>最后，由于我们需要在内存中放置哈希值，因此您需要在调用parse方法之前实例化action类：</p>
+<p>最后，由于我们需要在内存中放置哈希值，因此您需要在调用 <code>parse</code> 方法之前实例化 <code>action</code> 类：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4550,8 +4550,10 @@ OK</code></pre>
 <div class="paragraph">
 <p>这个程序可以通过一个 AST 节点来呈现。让我们称它为 <code>AST::ScalarDeclaration</code>，并给它两个描述变量的属性：它的名字和值。在给定的程序中，初始值不是由用户设置的，所以我们将以 0 来初始化它。</p>
 </div>
-<div class="paragraph">
-<p>![img](<a href="https://andrewshitov.com/wp-content/uploads/2020/02/diag1.png" class="bare">https://andrewshitov.com/wp-content/uploads/2020/02/diag1.png</a>)</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag1.png" alt="diag1">
+</div>
 </div>
 <div class="paragraph">
 <p>目标已经确定了，那么让我们用代码来实现。从图中你可能猜到了，我们要创建一个 Raku 类。从一开始就继承一个普通的基类可能会有帮助，此刻可以空出一个基类。</p>
@@ -4593,8 +4595,10 @@ class AST::ScalarDeclaration is ASTNode {
 <div class="paragraph">
 <p>这对我们的程序来说已经足够了。这就是产生的 AST 的样子。</p>
 </div>
-<div class="paragraph">
-<p>![img](<a href="https://andrewshitov.com/wp-content/uploads/2020/02/diag1a-1024x557.png" class="bare">https://andrewshitov.com/wp-content/uploads/2020/02/diag1a-1024x557.png</a>)</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag1a-1024x557.png" alt="diag">
+</div>
 </div>
 <div class="paragraph">
 <p>稍后，我们可以沿着树枝行走，执行指令。但首先，让我们改变语法动作，使其产生 AST 节点。</p>
@@ -4679,8 +4683,10 @@ my b = 2;</code></pre>
 <div class="paragraph">
 <p>所需的 AST 应该包含两个语句节点，其中第二个语句节点声明第二个变量 <code>b</code> 的初始值 2。</p>
 </div>
-<div class="paragraph">
-<p>![img](<a href="https://andrewshitov.com/wp-content/uploads/2020/02/diag2-1-1200x431.png" class="bare">https://andrewshitov.com/wp-content/uploads/2020/02/diag2-1-1200x431.png</a>)</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag2-1-1200x431.png" alt="diag">
+</div>
 </div>
 <div class="paragraph">
 <p>这次最好不要使用多方法，因为相对于方法本身的大小来说，<code>scalar-declaration</code> 方法的变化很小。对 <code>$&lt;value&gt;</code> 的检查是内联的:</p>
@@ -4696,7 +4702,7 @@ my b = 2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>本章的其余部分专门用于覆盖现有的语法和生成其他规则和令牌的AST节点。</p>
+<p>本章的其余部分专门用于覆盖现有的语法和生成其他规则和令牌的 AST 节点。</p>
 </div>
 </div>
 <div class="sect2">
@@ -4742,8 +4748,10 @@ my b = 2;</code></pre>
 <div class="paragraph">
 <p>我们在树上再增加两个 AST 节点，如下图所示。</p>
 </div>
-<div class="paragraph">
-<p>![img](<a href="https://andrewshitov.com/wp-content/uploads/2020/02/diag3-1024x619.png" class="bare">https://andrewshitov.com/wp-content/uploads/2020/02/diag3-1024x619.png</a>)</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag3-1024x619.png" alt="diag">
+</div>
 </div>
 <div class="paragraph">
 <p>值节点必须由 grammar 中的 <code>number</code> 动作产生:</p>
@@ -4802,8 +4810,10 @@ my b = 2;</code></pre>
 <div class="paragraph">
 <p>下面是结果 AST 树:</p>
 </div>
-<div class="paragraph">
-<p>![img](<a href="https://andrewshitov.com/wp-content/uploads/2020/02/diag4-1200x541.png" class="bare">https://andrewshitov.com/wp-content/uploads/2020/02/diag4-1200x541.png</a>)</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag4-1200x541.png" alt="diag">
+</div>
 </div>
 <div class="paragraph">
 <p>这棵树对应于下面的程序。</p>
@@ -5098,8 +5108,10 @@ b{"x"} = "y";</code></pre>
 <div class="paragraph">
 <p>其生成的 AST 树与节点所反映的代码行一起显示在下图中。</p>
 </div>
-<div class="paragraph">
-<p>![img](<a href="https://andrewshitov.com/wp-content/uploads/2020/02/diag5-1200x821.png" class="bare">https://andrewshitov.com/wp-content/uploads/2020/02/diag5-1200x821.png</a>)</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag5-1200x821.png" alt="diag">
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -5238,8 +5250,10 @@ a = 2 + 3;</code></pre>
 <div class="paragraph">
 <p>第一行是一个变量的声明，第二行是赋值。这里还有一个动作：加法，这也必须用一个AST节点来表示。让我们建立下面的树。</p>
 </div>
-<div class="paragraph">
-<p>![img](<a href="https://andrewshitov.com/wp-content/uploads/2020/02/diag6-1200x955.png" class="bare">https://andrewshitov.com/wp-content/uploads/2020/02/diag6-1200x955.png</a>)</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag6-1200x955.png" alt="diag">
+</div>
 </div>
 <div class="paragraph">
 <p>你可能会注意到，新的节点叫做 <code>AST:::MathOperations</code>，它包含两个数组，分别是运算符和操作数组。</p>
@@ -5259,7 +5273,7 @@ a = 2 + 3;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>操作符以字符串的形式存储；操作子是其他AST节点。将 AST 生成嵌入到 <code>LinguaActions</code> 类中的 AST 生成有更多的删除量而不是插入量。我们必须删除所有的 <code>operation</code> 子程序。它们做实际的加法、乘法等操作，而我们在 AST 中不需要这些。所有这些实际的操作都将在后期的遍历树上完成。</p>
+<p>操作符以字符串的形式存储；操作子是其他 AST 节点。将 AST 生成嵌入到 <code>LinguaActions</code> 类中的 AST 生成有更多的删除量而不是插入量。我们必须删除所有的 <code>operation</code> 子程序。它们做实际的加法、乘法等操作，而我们在 AST 中不需要这些。所有这些实际的操作都将在后期的遍历树上完成。</p>
 </div>
 <div class="paragraph">
 <p>有几个多变体的 <code>expr</code> 动作，在一边，这种理念使得实现起来更加困难，因为你必须考虑到 AST 节点将如何传播到最上面的 AST 节点。另一方面，你可以把它拆成更小的动作，根据匹配对象中的 <code>$&lt;op&gt;</code> 键的存在，决定是否要发出一个 <code>AST:::MathOperations</code> 或 <code>AST:::NumberValue</code> 节点。换句话说，如果表达式中存在运算符，就使用 <code>AST:::MathOperations</code>，否则就产生一个存储在 <code>AST:::NumberValue</code> 节点属性中的数字。</p>
@@ -5293,8 +5307,10 @@ multi method expr($/ where $&lt;expression&gt;) {
 <div class="paragraph">
 <p>在其他关于编译器设计和解析的书中，你很可能会遇到这样一棵树，每个节点代表一个有两个运算符的单项运算，如下图左侧所示。</p>
 </div>
-<div class="paragraph">
-<p>![img](<a href="https://andrewshitov.com/wp-content/uploads/2020/02/diag7-1024x925.png" class="bare">https://andrewshitov.com/wp-content/uploads/2020/02/diag7-1024x925.png</a>)</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag7-1024x925.png" alt="diag">
+</div>
 </div>
 <div class="paragraph">
 <p>我们的编译器的树形图如右图所示。每个节点可以接受任意数量的操作符，而且树的结构更加紧凑：在这个例子中，与标准版本相比，节点数量是标准版本的2倍。如果节点有三个操作符，那么它应该有两个操作符，以后你将把它们放在操作符之间。</p>
@@ -5511,7 +5527,7 @@ multi method hash-index($/ where $&lt;variable-name&gt;) {
 </div>
 </div>
 <div class="paragraph">
-<p>这段代码会检查手边的变量类型，并决定如何处理这个变量。正如我们之前在本章中已经做过的那样，我们将删除所有这些逻辑，取而代之的是AST节点中的一个节点，这不是取决于变量的类型，而是取决于此时的语法信息。</p>
+<p>这段代码会检查手边的变量类型，并决定如何处理这个变量。正如我们之前在本章中已经做过的那样，我们将删除所有这些逻辑，取而代之的是 AST 节点中的一个节点，这不是取决于变量的类型，而是取决于此时的语法信息。</p>
 </div>
 <div class="listingblock">
 <div class="content">
