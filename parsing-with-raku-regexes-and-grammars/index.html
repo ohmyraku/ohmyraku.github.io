@@ -3090,15 +3090,15 @@ invalid input: no</code></pre>
 <h2 id="_重用和组合正则表达式">8. 重用和组合正则表达式</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Raku 提供了很好的组合正则表达式的工具，从而使它们可以重复使用。 这激励程序员精心组织和测试他们的正则表达式, 就像常规代码一样。</p>
+<p>Raku 提供了很好的组合正则表达式的工具, 从而使它们可以重复使用。 这激励程序员精心组织和测试他们的正则表达式, 就像常规代码一样。</p>
 </div>
 <div class="sect2">
 <h3 id="_命名正则表达式">8.1. 命名正则表达式</h3>
 <div class="paragraph">
-<p>给正则起名字，并能够通过名称来引用这些正则, 是可组合性和重用正则表达式的第一步。</p>
+<p>给正则起名字, 并能够通过名称来引用这些正则, 是可组合性和重用正则表达式的第一步。</p>
 </div>
 <div class="paragraph">
-<p>正如我们之前在一些示例中看到的那样，你可以给正则表达式起名字，就像你给变量、子程序等起名字一样。这就把正则表达式提升到了和语言中其他构造相同的高度, 使抽象化成为可能。</p>
+<p>正如我们之前在一些示例中看到的那样, 你可以给正则表达式起名字, 就像你给变量、子程序等起名字一样。这就把正则表达式提升到了和语言中其他构造相同的高度, 使抽象化成为可能。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3115,7 +3115,7 @@ say $str ~~ / ^ &lt;byte&gt; ** 4 % '.' $ /;</code></pre>
 <p>这里 <code>my regex byte { &#8230;&#8203; }</code> 声明了一个名为 <code>byte</code> 的正则表达式。<code>regex</code> 前面的关键字决定了作用域: <code>my</code> 是词法作用域的。 省略 <code>my</code> 关键字会声明一个附加到 grammar 的正则表达式。稍后会有更多介绍。</p>
 </div>
 <div class="paragraph">
-<p>Raku 中的正则表达式是代码对象，就像子例程或方法一样。就像例程那样，你可以通过在正则的名称前加上一个 <code>&amp;</code> 符号来引用正则表达式:</p>
+<p>Raku 中的正则表达式是代码对象, 就像子例程或方法一样。就像例程那样, 你可以通过在正则的名称前加上一个 <code>&amp;</code> 符号来引用正则表达式<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3124,7 +3124,7 @@ say &amp;byte ~~ Code; # Output: True</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>与一般的子例程不同，你不能直接调用正则表达式; 它需要一个游标对象用于跟踪其进度。这就是你尝试之后得到的结果:</p>
+<p>与一般的子例程不同, 你不能直接调用正则表达式; 它需要一个游标对象用于跟踪其进度。这就是你尝试之后得到的结果:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3133,7 +3133,7 @@ No such method '!cursor_start' for invocant of type 'Str'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>相反，你可以使用智能匹配来调用正则表达式，就像使用匿名正则表达式那样:</p>
+<p>相反, 你可以使用智能匹配来调用正则表达式, 就像使用匿名正则表达式那样:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3150,10 +3150,10 @@ say "x" ~~ &amp;a; # Output: ⌜x⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>通过尖括号语法 <code>&lt;a&gt;</code> 来调用一个命名正则表达式, 会创建一个和被调用的正则表达式同名的命名捕获，这里是 <code>a</code>。如果你想避免捕获，你可以将其写为 <code>&lt;&amp;a&gt;</code>。</p>
+<p>通过尖括号语法 <code>&lt;a&gt;</code> 来调用一个命名正则表达式, 会创建一个和被调用的正则表达式同名的命名捕获, 这里是 <code>a</code>。如果你想避免捕获, 你可以将其写为 <code>&lt;&amp;a&gt;</code>。</p>
 </div>
 <div class="paragraph">
-<p>如果你希望捕获具有不同的名字，则可以将其写为 <code>&lt;b=&amp;a&gt;</code>。 这会生成一个命名捕获 <code>b</code>，但会调用名为 <code>a</code> 的正则表达式。如果你写的是 <code>&lt;b=a&gt;</code>，那么同一个捕获在名字 <code>a</code>  和名字 <code>b</code> 下都可用。还有更多方法可以调用命名正则表达式(表 8-1)。</p>
+<p>如果你希望捕获具有不同的名字, 则可以将其写为 <code>&lt;b=&amp;a&gt;</code>。 这会生成一个命名捕获 <code>b</code>, 但会调用名为 <code>a</code> 的正则表达式。如果你写的是 <code>&lt;b=a&gt;</code>, 那么同一个捕获在名字 <code>a</code>  和名字 <code>b</code> 下都可用。还有更多方法可以调用命名正则表达式(表 8-1)。</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 8. 调用命名正则表达式的语法形式</caption>
@@ -3201,15 +3201,15 @@ say "x" ~~ &amp;a; # Output: ⌜x⌟</code></pre>
 </tbody>
 </table>
 <div class="paragraph">
-<p>如果开口 <code>&lt;</code> 后的第一个字符是一个单词字符，那么就会产生一个与该单词同名的命名捕获。任何形式的标点符号 - 不管是用于向前查看的 <code>?</code> 还是用于普通调用的 <code>&amp;</code>, 都会抑制捕获。</p>
+<p>如果开口 <code>&lt;</code> 后的第一个字符是一个单词字符, 那么就会产生一个与该单词同名的命名捕获。任何形式的标点符号 - 不管是用于向前查看的 <code>?</code> 还是用于普通调用的 <code>&amp;</code>, 都会抑制捕获。</p>
 </div>
 <div class="sect3">
 <h4 id="_词法分析与回溯控制">8.1.1. 词法分析与回溯控制</h4>
 <div class="paragraph">
-<p>在传统的解析文学中，分析一段文本通常会有两个阶段: 词法分析，也称为标记化，然后是实际的解析。</p>
+<p>在传统的解析文学中, 分析一段文本通常会有两个阶段: 词法分析, 也称为标记化, 然后是实际的解析。</p>
 </div>
 <div class="paragraph">
-<p>词法分析将一段文本分解为 token，即带有分类标签的小块文本。例如，如果我们要写一个小计算器，输入 <code>2  * (3 + 5)</code> 可能会产生一个像这样的 token 流:</p>
+<p>词法分析将一段文本分解为 token, 即带有分类标签的小块文本。例如, 如果我们要写一个小计算器, 输入 <code>2  * (3 + 5)</code> 可能会产生一个像这样的 token 流:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3235,16 +3235,16 @@ say "x" ~~ &amp;a; # Output: ⌜x⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这种两步法适用于简单的基本的数学表达式方法，但在解析某些具有上下文依赖的子语言那样的东西时往往会失败 。如果你要为 Raku 编写解析器，主语言的词法分析与引用字符串内部的语言有很大不同 ，与正则表达式内的词法分析也有 很大不同。</p>
+<p>这种两步法适用于简单的基本的数学表达式方法, 但在解析某些具有上下文依赖的子语言那样的东西时往往会失败 。如果你要为 Raku 编写解析器, 主语言的词法分析与引用字符串内部的语言有很大不同 , 与正则表达式内的词法分析也有 很大不同。</p>
 </div>
 <div class="paragraph">
-<p>为了适应这种情况，Raku 提供了关键字 <code>token</code>， 它引入了一个关闭回溯的正则表达式。这个想法就是 词法分析应该足够简单，一旦你决定了如何录制并标记一个 token，你就不想根据后来的输入放弃那个决定。因此，没有回溯。</p>
+<p>为了适应这种情况, Raku 提供了关键字 <code>token</code>,  它引入了一个关闭回溯的正则表达式。这个想法就是 词法分析应该足够简单, 一旦你决定了如何录制并标记一个 token, 你就不想根据后来的输入放弃那个决定。因此, 没有回溯。</p>
 </div>
 <div class="paragraph">
-<p>通过在正常的正则表达式匹配中进行词法分析，我们拥有所有我们需要决定要应用的标记化的上下文。</p>
+<p>通过在正常的正则表达式匹配中进行词法分析, 我们拥有所有我们需要决定要应用的标记化的上下文。</p>
 </div>
 <div class="paragraph">
-<p>本章的第一个例子涉及一个正则表达式 <code>byte</code>，它很简单，我们通常不想回溯。因此我们可以重写它以使用 <code>token</code>:</p>
+<p>本章的第一个例子涉及一个正则表达式 <code>byte</code>, 它很简单, 我们通常不想回溯。因此我们可以重写它以使用 <code>token</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3257,27 +3257,26 @@ say $str ~~ / ^ &lt;byte&gt; ** 4 % '.' $ /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>my token byte { &#8230;&#8203; }</code> 与显式禁用回溯的 <code>my regex byte { :r &#8230;&#8203;}.</code> 作用相同。但是，它用的如此频繁，所以它应该有自己的语法。</p>
+<p><code>my token byte { &#8230;&#8203; }</code> 与显式禁用回溯的 <code>my regex byte { :r &#8230;&#8203;}.</code> 作用相同。但是, 它用的如此频繁, 所以它应该有自己的语法。</p>
 </div>
 <div class="paragraph">
-<p>请注意，我们有时使用 <code>regex</code> 这个词来指代使用 <code>token</code> 关键字声明的正则表达式。</p>
+<p>请注意, 我们有时使用 <code>regex</code> 这个词来指代使用 <code>token</code> 关键字声明的正则表达式。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_空白">8.2. 空白</h3>
 <div class="paragraph">
-<p>回到标记化一个简单的数学表达式的例子，我们掩盖了一个重要的细节：输入包含 token 之间的空白，而 token 流之间不包含空白。词法分析通常会丢弃无关紧要的空白。</p>
+<p>回到标记化一个简单的数学表达式的例子, 我们掩盖了一个重要的细节：输入包含 token 之间的空白, 而 token 流之间不包含空白。词法分析通常会丢弃无关紧要的空白。</p>
 </div>
 <div class="paragraph">
-<p>并非所有的空白都是无关紧要的。 你不想写的是
- "Hello, World"，并出来的时候确是 Hello, World。 许多语言对空白做了区分, token 之间的空白无关紧要，但 token 里面的空白（如带引号的字符串）非常重要。</p>
+<p>并非所有的空白都是无关紧要的。 你不想写 "Hello, World", 出来的时候确是 Hello, World。 许多语言对空白做了区分, token 之间的空白无关紧要, 但 token 里面的空白（如带引号的字符串）非常重要。</p>
 </div>
 <div class="paragraph">
-<p>然而，这比那更微妙：在 SQL，Perl，Python，JavaScript 等语言中，当类似单词的 token 后跟着非单词 token 时，你可以省略空白，或者反过来（例如 <code>a+b</code> 和 <code>a + b</code> 是相同的）。 然而，不带任何空格连接两个类似单词的 token 是禁止的。 相反，如果两个 token 之间存在空白，则空白的数量无关紧要。</p>
+<p>然而, 这比那更微妙：在 SQL, Perl, Python, JavaScript 等语言中, 当类似单词的 token 后跟着非单词 token 时, 你可以省略空白, 或者反过来（例如 <code>a+b</code> 和 <code>a + b</code> 是相同的）。 然而, 不带任何空格连接两个类似单词的 token 是禁止的。 相反, 如果两个 token 之间存在空白, 则空白的数量无关紧要。<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup></p>
 </div>
 <div class="paragraph">
-<p>例如，下面这两个 SQL 语句生成相同的解析树：</p>
+<p>例如, 下面这两个 SQL 语句生成相同的解析树：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3289,7 +3288,7 @@ FROM   account;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>相反，以下将是语法错误，因为它连接了类似于单词的 token 而不带任何空格：</p>
+<p>相反, 以下将是语法错误, 因为它连接了类似于单词的 token 而不带任何空格：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3297,16 +3296,16 @@ FROM   account;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Raku 定义了一个名为 <code>ws</code> 的正则表达式，它是空白的缩写，它将空白解析为之前规定的规则：任意数量的空白（空格，制表符，换行符，&#8230;&#8203;&#8230;&#8203;），但至少有一个空白，除非它位于单词边界。 或者把它放在代码中，<code>regex ws { &lt;!ww&gt; \s* }</code> （其中  <code>&lt;!ww&gt;</code> 匹配除了单词内之外的任何地方）。</p>
+<p>Raku 定义了一个名为 <code>ws</code> 的正则表达式, 它是空白的缩写, 它将空白解析为之前规定的规则：任意数量的空白（空格, 制表符, 换行符, &#8230;&#8203;&#8230;&#8203;）, 但至少有一个空白, 除非它位于单词边界。 或者把它放在代码中, <code>regex ws { &lt;!ww&gt; \s* }</code> （其中  <code>&lt;!ww&gt;</code> 匹配除了单词内之外的任何地方）<sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnotedef_3" title="View footnote.">3</a>]</sup>。</p>
 </div>
 <div class="paragraph">
-<p>还有一个快捷方式可以帮助你避免在代码中的任何地方使用显式的 <code>&lt;ws&gt;</code> 或 <code>&lt;.ws&gt;</code> 调用。如果使用关键字  <code>rule</code> 而不是 <code>regex</code> 或 <code>token</code> 声明正则表达式，则 Raku  会在你的正则表达式中使用空格的地方插入隐式的 <code>&lt;.ws&gt;</code> 调用。 这与在正则表达式中使用 <code>:sigspace</code> 或 <code>:s</code> 修饰符具有相同的效果。</p>
+<p>还有一个快捷方式可以帮助你避免在代码中的任何地方使用显式的 <code>&lt;ws&gt;</code> 或 <code>&lt;.ws&gt;</code> 调用。<sup class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnotedef_4" title="View footnote.">4</a>]</sup> 如果使用关键字 <code>rule</code> 而不是 <code>regex</code> 或 <code>token</code> 声明正则表达式, 则 Raku  会在你的正则表达式中使用空格的地方插入隐式的 <code>&lt;.ws&gt;</code> 调用。 这与在正则表达式中使用 <code>:sigspace</code> 或 <code>:s</code> 修饰符具有相同的效果。</p>
 </div>
 <div class="paragraph">
-<p>由于 <code>ws</code> 的定义使用术语 <code>\s*</code>，正则表达式中的单个空白可以匹配字符串中的任何数量的空格，包括制表符，空格，垂直制表符等。</p>
+<p>由于 <code>ws</code> 的定义使用术语 <code>\s*</code>, 正则表达式中的单个空白可以匹配字符串中的任何数量的空格, 包括制表符, 空格, 垂直制表符等。</p>
 </div>
 <div class="paragraph">
-<p>再次考虑我们的数学表达式，我们可以编写以下正则表达式来匹配两个数字之和的最简单情况：</p>
+<p>再次考虑我们的数学表达式, 我们可以编写以下正则表达式来匹配两个数字之和的最简单情况：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3344,7 +3343,7 @@ say '1 + 2' ~~ / ^ &lt;sum&gt; $ /;</code></pre>
 <p>对于正则表达式中的空白, 插入的隐式的 <code>&lt;.ws&gt;</code> 调用并不是每次都发生。特别是正则表达式开头的空白, 在 <code>:r</code> 或 <code>:s</code> 这样的修饰符之后的空白, 在开口花括号或开口圆括号之后的空白, 还有 <code>&amp;</code>, <code>&amp;&amp;</code> 和 <code>||</code> 之后的空白, 这些空白不会被隐式 <code>&lt;.ws&gt;</code> 调用替换。一般的概念是规则解析匹配里面和匹配结尾的空白, 但不解析匹配开头的空白。</p>
 </div>
 <div class="paragraph">
-<p>如果你使用规则, 你必须清楚空白是重要的, 并且原子和它的量词之间的空白也有影响:</p>
+<p>如果你使用 <strong>rule</strong>, 你必须清楚空白是重要的, 并且原子和它的量词之间的空白也有影响:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3353,7 +3352,7 @@ say "a a" ~~ rule { a + }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>第一行打印「a」而第二行打印「a a], 包括了最后一个 a。a 和 <code>+</code> 之间的空白被解释为 <code>&lt;.ws&gt;</code> 调用, 所以第二个规则等同于:</p>
+<p>第一行打印「a」而第二行打印「a a], 包括了最后一个 a。a 和 <code>+</code> 之间的空白被解释为 <code>&lt;.ws&gt;</code> 调用, 所以第二个 <strong>rule</strong> 等同于:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3361,7 +3360,7 @@ say "a a" ~~ rule { a + }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>最后, 你要意识到，就像正则表达式的任何部分一样 隐式调用 <code>ws</code> 也会使你的匹配失败:</p>
+<p>最后, 你要意识到, 就像正则表达式的任何部分一样 隐式调用 <code>ws</code> 也会使你的匹配失败:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3375,10 +3374,10 @@ say "a a" ~~ rule { a + }</code></pre>
 <div class="sect2">
 <h3 id="_grammars">8.3. Grammars</h3>
 <div class="paragraph">
-<p>命名正则表达式提供了第一级抽象，但我们经常需要更多级别的抽象。大多数高级编程语言都有模块，命名空间，类，甚至全部三个来管理函数的重用和方法。</p>
+<p>命名正则表达式提供了第一级抽象, 但我们经常需要更多级别的抽象。大多数高级编程语言都有模块、命名空间、类, 甚至三者都有, 以管理函数和方法的重用。</p>
 </div>
 <div class="paragraph">
-<p>Raku 也提供了这些更高级别的抽象，并使它们可用于正则表达式中。Grammar 是一个提供了一些 用于调用正则表达式的工具的类。那么正则表达式是这个 grammar 中的方法:</p>
+<p>Raku 也提供了这些更高级别的抽象, 并使它们可用于正则表达式中。Grammar 是一个类, 它提供了一些调用正则表达式的工具。那么正则表达式是这个 grammar 中的方法:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3401,13 +3400,13 @@ if IPv4Address.parse($str) {
 </div>
 </div>
 <div class="paragraph">
-<p>第一个 grammar 用 grammar 关键字声明, 后面跟着 grammar 的名字, IPv4Address。grammar 是一种自动添加类型  <a href="https://docs.raku.org/type/Grammar">Grammar</a> 作为父类的类, 并提供几种方法,如 <code>parse</code> 和 <code>subparse</code>。</p>
+<p>第一个 grammar 用 <strong>grammar</strong> 关键字声明, 后面是 grammar 的名称 IPv4Address。grammar 是一种自动添加类型为 <a href="https://docs.raku.org/type/Grammar">Grammar</a><sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnotedef_5" title="View footnote.">5</a>]</sup> 的父类, 并提供了一些方法, 如 <code>parse</code> 和 <code>subparse</code> 等。</p>
 </div>
 <div class="paragraph">
 <p>grammar 的主体由花括号分割。 在主体里面, 我们使用 <code>regex</code> 或 <code>token</code> 关键字声明正则表达式。 注意我们省略了声明前面的 <code>my</code> 声明符, 因为现在正则表达式是作用域属于 grammar 的方法。</p>
 </div>
 <div class="paragraph">
-<p><code>parse</code> 方法调用名为 <code>TOP</code> 的正则表达式，并隐式锚定它到字符串的开头和结尾。相比之下，<code>subparse</code> 方法仅锚定到字符串的开头。<code>parse</code> 和 <code>subparse</code> 都接收一个可选的，命名参数规则，可用于调用其他正则表达式而非 <code>TOP</code>:</p>
+<p><code>parse</code> 方法调用名为 <code>TOP</code> 的正则表达式, 并隐式将其锚定到字符串的开头和结尾。相比之下, <code>subparse</code> 方法仅锚定到字符串的开头。<code>parse</code> 和 <code>subparse</code> 方法都接收一个可选的, 命名参数规则, 你可以用它来调用 <code>TOP</code> 以外的正则表达式:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3416,27 +3415,27 @@ say IPv4Address.parse($str, :rule&lt;byte&gt;);           # Output: Nil</code></
 </div>
 </div>
 <div class="paragraph">
-<p>这里 <code>IPv4Address.parse($str, :rule&lt;byte&gt;)</code> 失败了，因为正则表达式 <code>&lt;byte&gt;</code> 不能匹配整个输入字符串，并且 <code>parse</code> 隐式将正则表达式的结尾锚定到字符串的末尾。相反，<code>subparse</code> 匹配输入字符串的第一个数字。</p>
+<p>这里 <code>IPv4Address.parse($str, :rule&lt;byte&gt;)</code> 失败了, 因为正则表达式 <code>&lt;byte&gt;</code> 不能匹配整个输入字符串, 并且 <code>parse</code> 隐式将正则表达式的结尾锚定到字符串的末尾。相反, <code>subparse</code> 匹配输入字符串的第一个数字。</p>
 </div>
 <div class="paragraph">
-<p>在 grammar 内部，调用相同 grammar 的另一个正则表达式和外面一样; 带尖括号 <code>:&lt;byte&gt;</code>。但如果你想抑制捕获，你必须使用一个点代替 <code>&amp;</code> 符号:  <code>&lt;.byte&gt;</code>。这同样适用于重命名，因此 <code>&lt;octect=.byte&gt;</code> 会调用正则表达式 <code>byte</code>，但产生一个名为 <code>octect</code> 的捕获。点(<code>.</code>)的使用是类似于方法调用语法，它也使用点号。</p>
+<p>在 grammar 内部, 调用相同 grammar 的另一个正则表达式和外面一样; 带尖括号 <code>:&lt;byte&gt;</code>。但如果你想抑制捕获, 你必须使用一个点代替 <code>&amp;</code> 符号:  <code>&lt;.byte&gt;</code>。这同样适用于重命名, 因此 <code>&lt;octect=.byte&gt;</code> 会调用正则表达式 <code>byte</code>, 但产生一个名为 <code>octect</code> 的捕获。点(<code>.</code>)的使用是类似于方法调用语法, 它也使用点号。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_使用_grammars_重用代码">8.4. 使用 Grammars 重用代码</h3>
 <div class="paragraph">
-<p>Raku 提供了两种重用面向对象代码的方法:继承和角色组合。因为 grammar 实际上是类，所以这两种机制 也适用于 grammar。</p>
+<p>Raku 提供了两种重用面向对象代码的方法:继承和角色组合。因为 grammar 实际上是类, 所以这两种机制 也适用于 grammar。</p>
 </div>
 <div class="sect3">
 <h4 id="_继承">8.4.1. 继承</h4>
 <div class="paragraph">
-<p>继承是特殊化的一种形式。如果你有需要一个通用 grammar 的情况，然后想要创建一些微调过的变体，微调后的变体可以继承于更通用的变体。</p>
+<p>继承是特殊化的一种形式。如果你有需要一个通用 grammar 的情况, 然后想要创建一些微调过的变体, 微调后的变体可以继承于更通用的变体。</p>
 </div>
 <div class="paragraph">
-<p>例如，考虑 SQL 的 grammar，即 <a href="https://en.wikipedia.org/wiki/SQL">结构化查询语言</a>。这种 grammar 有标准，但有些实现是方言。一个这样的例子是 MySQL, 它使用反引号而不是双引号来引用表名和列名。然后，MySQL 方言的 grammar 将继承标准 SQL 的 grammar 并覆盖用于解析表名和列名的正则表达式。</p>
+<p>例如, 考虑 SQL 的 grammar, 即 <a href="https://en.wikipedia.org/wiki/SQL">结构化查询语言</a><sup class="footnote">[<a id="_footnoteref_6" class="footnote" href="#_footnotedef_6" title="View footnote.">6</a>]</sup>。这种 grammar 有标准, 但有些实现是方言。一个这样的例子是 MySQL, 它使用反引号而不是双引号来引用表名和列名。然后, MySQL 方言的 grammar 将继承标准 SQL 的 grammar 并覆盖用于解析表名和列名的正则表达式。</p>
 </div>
 <div class="paragraph">
-<p>为了说明这个想法，让我们只关注解析 SQL 列名。 SQL 标准规定它们是标识符或双引号字符串:</p>
+<p>为了说明这个想法, 让我们只关注解析 SQL 列名。 SQL 标准规定它们是标识符或双引号字符串:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3461,7 +3460,7 @@ say StandardSQL.parse('SELECT "monthly salary"');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这两个解析都成功了，并且它们产生了这个输出:</p>
+<p>这两个解析都成功了, 并且它们产生了这个输出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3474,7 +3473,7 @@ say StandardSQL.parse('SELECT "monthly salary"');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如前所述，MySQL 使用反引号而不是双引号来引用标识符。我们可以编写一个继承自 <code>StandardSQL</code> 并只覆盖正则表达式 <code>quoted_name</code> 的 grammar <code>MysqlSQL</code> 而不是复制整个 grammar:</p>
+<p>如前所述, MySQL 使用反引号而不是双引号来引用标识符。我们可以编写一个继承自 <code>StandardSQL</code> 并只覆盖正则表达式 <code>quoted_name</code> 的 grammar <code>MysqlSQL</code> 而不是复制整个 grammar:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3487,7 +3486,7 @@ say MysqlSQL.parse('SELECT `monthly salary`');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里 grammar 声明中的文本 "is StandardSQL" 定义了从 StandardSQL grammar 中继承。继承意味着 如果在子类中调用了正则表达式或方法，并且未在子类中定义它，则调用父类中同名的方法代替。</p>
+<p>这里 grammar 声明中的文本 "is StandardSQL" 定义了从 StandardSQL grammar 中继承。继承意味着 如果在子类中调用了正则表达式或方法, 并且未在子类中定义它, 则调用父类中同名的方法代替。</p>
 </div>
 </div>
 <div class="sect3">
@@ -3496,7 +3495,7 @@ say MysqlSQL.parse('SELECT `monthly salary`');</code></pre>
 <p>角色 - 在其他编程语言中也称为 trait - 是一块可以复制到类或 grammar 中的功能(例如方法和正则表达式)。 这种复制称为组合。</p>
 </div>
 <div class="paragraph">
-<p>角色组合非常适合从较小的, 独立的部分组合一个 grammar。例如，解析数字和引用的字符串非常普遍，在解析 SQL，JSON 和几种类型的配置文件时可能都是必需的。解析数字也适用在解析数学表达式时:</p>
+<p>角色组合非常适合从较小的, 独立的部分组合一个 grammar。例如, 解析数字和引用的字符串非常普遍, 在解析 SQL, JSON 和几种类型的配置文件时可能都是必需的。解析数字也适用在解析数学表达式时:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3534,17 +3533,17 @@ say Sum.parse('2 + -4');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此示例显示了包含正则表达式的两个角色: <code>role ParseInteger</code> 有两个 token，一个用于解析不带任何符号的整数(token  <code>unsigned</code>)，一个用于解析可能带有 <code>+</code> 或 <code>-</code> 符号的整数。 第二个角色, <code>ParseFloat</code> 通过声明 <code>does ParseInteger</code> 来使用第一个角色 。然后它声明一个 token <code>float</code> 来解析浮点数。</p>
+<p>此示例显示了包含正则表达式的两个角色: <code>role ParseInteger</code> 有两个 token, 一个用于解析不带任何符号的整数(token  <code>unsigned</code>), 一个用于解析可能带有 <code>+</code> 或 <code>-</code> 符号的整数。 第二个角色, <code>ParseFloat</code> 通过声明 <code>does ParseInteger</code> 来使用第一个角色 。然后它声明一个 token <code>float</code> 来解析浮点数。</p>
 </div>
 <div class="paragraph">
-<p>与继承不同，角色组合在编译时检测名称冲突，并迫使你解决这些冲突。这使得它安全将多个角色组合到同一个类中，或将多个角色组合到单个角色中。</p>
+<p>与继承不同, 角色组合在编译时检测名称冲突, 并迫使你解决这些冲突。这使得它安全将多个角色组合到同一个类中, 或将多个角色组合到单个角色中。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_proto_regexes">8.5. Proto Regexes</h3>
 <div class="paragraph">
-<p>假设你想为 <a href="http://json.org/">JSON</a>(也称为 JavaScript 对象表示法) 写一个 grammar。json.org 主页肯定会告诉你当解析值的时候，你期望一个字符串，数字，对象，数组或字面量字符串,true，false 或 null。没问题，你可以这样写:</p>
+<p>假设你想为 <a href="http://json.org/">JSON</a><sup class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnotedef_7" title="View footnote.">7</a>]</sup>(也称为 JavaScript 对象表示法) 写一个 grammar。json.org 主页肯定会告诉你当解析值的时候, 你期望一个字符串, 数字, 对象, 数组或字面量字符串,true, false 或 null。没问题, 你可以这样写:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3563,13 +3562,13 @@ say Sum.parse('2 + -4');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这可以工作，但可扩展性并不好。假设你想要解析扩展的 JSON 方言，例如添加 2015-12-24  之类的不带引号的字符串形式的日期类型的方言 。你可以通过继承上一个例子中暗示的 JSON grammar 做到这一点 ，写一个 token <code>date</code> 来解析日期，然后你必须覆盖 token <code>value</code>， 列出父 grammar 中的所有备选项，然后列出你自己的 grammar。</p>
+<p>这可以工作, 但可扩展性并不好。假设你想要解析扩展的 JSON 方言, 例如添加 2015-12-24 之类的不带引号的字符串形式的日期类型的方言 。你可以通过继承上一个例子中暗示的 JSON grammar 做到这一点 , 写一个 token <code>date</code> 来解析日期, 然后你必须覆盖 token <code>value</code>,  列出父 grammar 中的所有备选项, 然后列出你自己的 grammar。</p>
 </div>
 <div class="paragraph">
-<p>这种重复不仅令人烦恼且容易出错，而且还会造成对同一 grammar 进行多次修改变得不可能。如果其他人想要编写另一个扩展，以添加不同类型的新值(例如引用类型)，他们的扩展将不会知道你的，所以用户不能轻易地混合和匹配它们。</p>
+<p>这种重复不仅令人烦恼且容易出错, 而且还会造成对同一 grammar 进行多次修改变得不可能。如果其他人想要编写另一个扩展, 以添加不同类型的新值(例如引用类型), 他们的扩展将不会知道你的, 所以用户不能轻易地混合和匹配它们。</p>
 </div>
 <div class="paragraph">
-<p>Raku 提供了解决这个问题的方法: <strong>proto regexes</strong>。原型正则表达式是一个 正则表达式的集合，它们一起构成了一个很大的备选项，就好像每个备选项都是由 <code>|</code> 分隔一样。这是我们作为原型正则表达式编写的 JSON grammar 的一部分:</p>
+<p>Raku 提供了解决这个问题的方法: <strong>proto regexes</strong>。原型正则表达式是一个 正则表达式的集合, 它们一起构成了一个很大的备选项, 就好像每个备选项都是由 <code>|</code> 分隔一样。这是我们作为原型正则表达式编写的 JSON grammar 的一部分:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3587,7 +3586,7 @@ say Sum.parse('2 + -4');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>行 <code>proto token {*}</code> 引入了原型正则表达式(或 token) 名字 <code>value</code>。这指示 Raku 将有更多名字为 <code>value</code> 的正则表达式，带有一些小的补充。这些小小的补充具有以下形式: <code>sym &lt;SOMETHING&gt;</code> 并帮助你和编译器保持这些正则表达式分开。这种正则表达式的主体可以是你所知道的任何东西, 所以我们就在那里做实现,而不是从 <code>token value:sym&lt;number&gt;</code> 里面调用 token <code>number</code>:</p>
+<p>行 <code>proto token {*}</code> 引入了原型正则表达式(或 token) 名字 <code>value</code>。这指示 Raku 将有更多名字为 <code>value</code> 的正则表达式, 带有一些小的补充。这些小小的补充具有以下形式: <code>sym &lt;SOMETHING&gt;</code> 并帮助你和编译器保持这些正则表达式分开。这种正则表达式的主体可以是你所知道的任何东西, 所以我们就在那里做实现,而不是从 <code>token value:sym&lt;number&gt;</code> 里面调用 token <code>number</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3600,7 +3599,7 @@ say Sum.parse('2 + -4');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在每个候选者的内部，<code>:sym&lt;&#8230;&#8203;&gt;</code> 里面的名字可用作特殊符号 <code>&lt;sym&gt;</code>。所以不要写作:</p>
+<p>在每个候选者的内部, <code>:sym&lt;&#8230;&#8203;&gt;</code> 里面的名字可用作特殊符号 <code>&lt;sym&gt;</code>。所以不要写作:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3633,7 +3632,7 @@ say Sum.parse('2 + -4');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这是一个非常简约的 grammar，只解析 JSON 值 <code>true</code>，<code>false</code> 和 <code>null</code>。我们的扩展使其解析 ISO 8601 格式的日期, 可以是一个添加一个候选 token 的简单角色:</p>
+<p>这是一个非常简约的 grammar, 只解析 JSON 值 <code>true</code>, <code>false</code> 和 <code>null</code>。我们的扩展使其解析 ISO 8601 格式的日期, 可以是一个添加一个候选 token 的简单角色:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3645,10 +3644,10 @@ token value:sym&lt;date&gt; {
 </div>
 </div>
 <div class="paragraph">
-<p>我们不需要在角色中声明 <code>proto token value</code>，因为它将混合到包含此声明的 grammar 中。</p>
+<p>我们不需要在角色中声明 <code>proto token value</code>, 因为它将混合到包含此声明的 grammar 中。</p>
 </div>
 <div class="paragraph">
-<p>要使用 <code>DateValue</code> 扩展，我们可以基于 JSONValue 和角色生成 grammar:</p>
+<p>要使用 <code>DateValue</code> 扩展, 我们可以基于 JSONValue 和角色生成 grammar:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3660,7 +3659,7 @@ for &lt;true null 2015-12-24 42&gt; -&gt; $str {
 </div>
 </div>
 <div class="paragraph">
-<p>这使用了 JSONValue 的继承和角色组合 DateValue 生成一个新的 grammar，现在可以解析 <code>true</code>，<code>false</code>， <code>null</code> 和 <code>date</code> 值。它产生这个输出:</p>
+<p>这使用了 JSONValue 的继承和角色组合 DateValue 生成一个新的 grammar, 现在可以解析 <code>true</code>, <code>false</code>,  <code>null</code> 和 <code>date</code> 值。它产生这个输出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3671,7 +3670,7 @@ null: True
 </div>
 </div>
 <div class="paragraph">
-<p><code>?</code> 运算符在正则表达式外面外强制布尔上下文，这就是我们在输出中看到 <code>True</code> 和 <code>False</code> 而不是 Match 对象和 <code>Nil</code> 的原因。</p>
+<p><code>?</code> 运算符在正则表达式外面外强制布尔上下文, 这就是我们在输出中看到 <code>True</code> 和 <code>False</code> 而不是 Match 对象和 <code>Nil</code> 的原因。</p>
 </div>
 <div class="paragraph">
 <p>我们可以避免显式创建 grammar JSONValueWithDate 并且通过使用 <code>but</code> 运算符就地组合一个匿名的 grammar:</p>
@@ -3684,7 +3683,7 @@ null: True
 </div>
 </div>
 <div class="paragraph">
-<p><code>but</code> 运算符在左侧创建一个类型或对象的副本, 将角色应用于它，并返回结果。</p>
+<p><code>but</code> 运算符在左侧创建一个类型或对象的副本, 将角色应用于它, 并返回结果。</p>
 </div>
 <div class="paragraph">
 <p>这两种方法都可以用来为 grammar 添加多个扩展:</p>
@@ -3703,22 +3702,22 @@ for &lt;true null 2015-12-24 42&gt; -&gt; $str {
 </div>
 </div>
 <div class="paragraph">
-<p>现在 grammar 由 <code>JSONValue</code>，<code>DateValue</code> 和 <code>IntegerValue</code> 组合而来, 并且可以解析所有四个输入字符串示例。扩展角色不必考虑其他东西; 它们是可以自由组合的。</p>
+<p>现在 grammar 由 <code>JSONValue</code>, <code>DateValue</code> 和 <code>IntegerValue</code> 组合而来, 并且可以解析所有四个输入字符串示例。扩展角色不必考虑其他东西; 它们是可以自由组合的。</p>
 </div>
 <div class="paragraph">
-<p>解析 JSON 子集的示例已经从 <a href="https://github.com/moritz/json/">JSON::Tiny</a> 模块中获取，它使用<a href="https://github.com/moritz/json/blob/master/lib/JSON/Tiny/Grammar.pm">可管理的Raku grammar</a>来解析 JSON。我们越来越接近能够创造现实世界，还有用许多实际应用创建可扩展的 grammar。</p>
+<p>解析 JSON 子集的示例已经从 <a href="https://github.com/moritz/json/">JSON::Tiny</a><sup class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnotedef_8" title="View footnote.">8</a>]</sup> 模块中获取, 它使用<a href="https://github.com/moritz/json/blob/master/lib/JSON/Tiny/Grammar.pm">可管理的Raku grammar</a><sup class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnotedef_9" title="View footnote.">9</a>]</sup>来解析 JSON。我们越来越接近能够创造现实世界, 还有用许多实际应用创建可扩展的 grammar。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_总结_7">8.6. 总结</h3>
 <div class="paragraph">
-<p>Raku 提供了命名正则表达式，以便于重用。为了简化词法分析， <code>token</code> 和 <code>rule</code> 关键字禁用了回溯，<code>rule</code> 关键字还会隐式解析空白。</p>
+<p>Raku 提供了命名正则表达式, 以便于重用。为了简化词法分析,  <code>token</code> 和 <code>rule</code> 关键字禁用了回溯, <code>rule</code> 关键字还会隐式解析空白。</p>
 </div>
 <div class="paragraph">
-<p>由于正则表达式可以表现得像方法一样，因此你可以用面向对象编程的强大技术管理和重用 正则表达式。Grammars 分组正则表达式，继承和角色组合使它们可以重复使用。</p>
+<p>由于正则表达式可以表现得像方法一样, 因此你可以用面向对象编程的强大技术管理和重用 正则表达式。Grammars 分组正则表达式, 继承和角色组合使它们可以重复使用。</p>
 </div>
 <div class="paragraph">
-<p>最后，proto regexes 确保扩展可以以自然的方式发生，而不会干扰 grammar 中相同位置的其他潜在扩展。</p>
+<p>最后, proto regexes 确保扩展可以以自然的方式发生, 而不会干扰 grammar 中相同位置的其他潜在扩展。</p>
 </div>
 </div>
 </div>
@@ -3727,7 +3726,7 @@ for &lt;true null 2015-12-24 42&gt; -&gt; $str {
 <h2 id="_使用_grammar_进行解析">9. 使用 Grammar 进行解析</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Grammar 是众所周知的用于解析的瑞士军刀。</p>
+<p>Grammar 是众所周知的用于解析的瑞士军刀<sup class="footnote">[<a id="_footnoteref_10" class="footnote" href="#_footnotedef_10" title="View footnote.">10</a>]</sup>。</p>
 </div>
 <div class="paragraph">
 <p>在本章中，我们将更详细地探讨它们。最重要的是，我们将讨论如何利用它们的力量。</p>
@@ -3738,7 +3737,7 @@ for &lt;true null 2015-12-24 42&gt; -&gt; $str {
 <p>Grammar 实现了一种自上而下的解析方法。解析的入口点， 通常是正则表达式 <code>TOP</code>，了解粗粒度结构和进一步调用进入细节的正则表达式。递归也可以参与其中。例如，如果你解析数学表达式，则项可以是一对括号内的任意表达式。</p>
 </div>
 <div class="paragraph">
-<p>这是一种自上而下的结构，或者更准确地说是一种<a href="https://en.wikipedia.org/wiki/Recursive_descent_parser">递归下降解析器</a>。如果不涉及回溯，我们将其称为预测解析器，因为在字符串中的每个位置，我们确切地知道我们正在查找什么 - 我们可以预测下一个 token 将是什么(即使我们只能预测它可能是一组候选者之一)。</p>
+<p>这是一种自上而下的结构，或者更准确地说是一种<a href="https://en.wikipedia.org/wiki/Recursive_descent_parser">递归下降解析器</a><sup class="footnote">[<a id="_footnoteref_11" class="footnote" href="#_footnotedef_11" title="View footnote.">11</a>]</sup>。如果不涉及回溯，我们将其称为预测解析器，因为在字符串中的每个位置，我们确切地知道我们正在查找什么 - 我们可以预测下一个 token 将是什么(即使我们只能预测它可能是一组候选者之一)。</p>
 </div>
 <div class="paragraph">
 <p>结果匹配树在结构上对应于 grammar 中正则表达式的调用结构。让我们考虑解析一个数学表达式，仅包含运算符 <code>*</code>，<code>+</code> 和用于分组的括号:</p>
@@ -3852,7 +3851,7 @@ token operator { '*' | '+' }</code></pre>
 <p>使用第一版 grammar 解析此类表达式时， 解析树的结构表达了这种分组:它具有 - 作为顶级 - 一个 <code>sum</code>，操作数为 <code>1</code> 和 <code>2 * 5</code>。</p>
 </div>
 <div class="paragraph">
-<p>这是有代价的:每个优先级都需要一个单独的规则和名称，并且结果匹配对象的嵌套结果每个优先级别至少有一级。此外，以后添加更多优先权的水平并不是微不足道的，而且很难用通用的方式来做。如果你不愿意接受这些费用，你可以改用扁平模型 用于解析所有运算符的单个标记。如果你那么需要一个结构反映优先顺序的方法，你可以编写转换列表的代码 进了一棵树。这通常称为运算符优先级解析器。</p>
+<p>这是有代价的:每个优先级都需要一个单独的规则和名称，并且结果匹配对象的嵌套结果每个优先级别至少有一级。此外，以后添加更多优先权的水平并不是微不足道的，而且很难用通用的方式来做。如果你不愿意接受这些费用，你可以改用扁平模型 用于解析所有运算符的单个标记。如果你那么需要一个结构反映优先顺序的方法，你可以编写转换列表的代码 进了一棵树。这通常称为运算符优先级解析器<sup class="footnote">[<a id="_footnoteref_12" class="footnote" href="#_footnotedef_12" title="View footnote.">12</a>]</sup>。</p>
 </div>
 </div>
 <div class="sect3">
@@ -3995,10 +3994,11 @@ multi sub MAIN(Bool :$test!) {
 </div>
 </div>
 <div class="paragraph">
-<p>在命令行上。如果尚未安装 <code>zef</code>，请按照安装进行操作 说明吉恩国防军在 GitHub 页。</p>
+<p>在命令行上。如果尚未安装 <code>zef</code>，请按照 zef 在 GitHub 页面的安装说明进行操作<sup class="footnote">[<a id="_footnoteref_13" class="footnote" href="#_footnotedef_13" title="View footnote.">13</a>]</sup>。</p>
 </div>
 <div class="paragraph">
-<p>包含以下 <a href="https://github.com/tadzik/raku-Config-INI/blob/master/lib/Config/INI.pm">grammar</a>(稍微重新格式化):</p>
+<p>我们来看看 Tadeusz Sośnierz 开发的 <a href="https://github.com/tadzik/perl6-Config-INI">Config::INI</a><sup class="footnote">[<a id="_footnoteref_14" class="footnote" href="#_footnotedef_14" title="View footnote.">14</a>]</sup>
+包含以下 <a href="https://github.com/tadzik/perl6-Config-INI/blob/master/lib/Config/INI.pm">grammar</a><sup class="footnote">[<a id="_footnoteref_15" class="footnote" href="#_footnotedef_15" title="View footnote.">15</a>]</sup>(稍微重新格式化):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4251,7 +4251,7 @@ b= 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>花括号里面是常规(非正则表达式)Raku代码，所以我们可以 用它来操纵哈希 <code>%*SYMBOLS</code>。表达式 <code>$&lt;identifier&gt;</code> 访问变量名称的捕获。7因此，如果此规则解析a 变量a，此语句设置 <code>%*SYMBOLS{'a'} = True</code>。</p>
+<p>花括号里面是常规(非正则表达式)Raku代码，所以我们可以 用它来操纵哈希 <code>%*SYMBOLS</code>。表达式 <code>$&lt;identifier&gt;</code> 访问变量名称的捕获<sup class="footnote">[<a id="_footnoteref_16" class="footnote" href="#_footnotedef_16" title="View footnote.">16</a>]</sup>。因此，如果此规则解析a 变量a，此语句设置 <code>%*SYMBOLS{'a'} = True</code>。</p>
 </div>
 <div class="paragraph">
 <p>代码块的位置是相关的。把它放在电话前 到termlist表示当术语列表是已知的变量解析，所以它接受像a = 2，a的输入。如果我们先称之为termlist，那就是这种 输入被拒绝。</p>
@@ -4269,10 +4269,10 @@ token variable {
 </div>
 </div>
 <div class="paragraph">
-<p>你可能还记得先前的示例 <code>&lt;?{&#8230;&#8203;}&gt;</code> 执行
-一段 Raku 代码，如果返回 false 值则无法解析。如果
-<code>$&lt;identifier&gt;</code> 不在 <code>%*SYMBOLS</code> 中，这正是发生的情况。在这 时间，令牌的非回溯性质很重要。如果变量 被解析的是abc，变量a是 <code>%*SYMBOLS</code>，回溯就是 尝试 <code>&lt;identifier&gt;</code> 的较短匹配，直到它命中，然后成功。
-由于 <code>%*SYMBOLS</code> 在令牌TOP中声明，因此你必须复制它 当你尝试从外部调用除TOP以外的规则时的声明 语法。没有像我的 <code>%*SYMBOLS</code> ;这样的声明，就像这样的调用</p>
+<p>你可能还记得在前面的例子中, <code>&lt;?{&#8230;&#8203;}&gt;</code> 执行了一段 Raku 代码, 如果返回一个假值，则解析失败。如果 <code>$&lt;identifier&gt;</code> 不在 <code>%*SYMBOLS</code> 中, 就会出现这种情况。这时, <strong>token</strong> 的非回溯性就很重要了。如果被解析的变量是 abc，而变量 <strong>a</strong> 在 <code>%*SYMBOLS</code> 中，那么回溯将尝试对 <code>&lt;identifier&gt;</code> 进行更短的匹配, 直到匹配到 <strong>a</strong>, 然后成功。<sup class="footnote">[<a id="_footnoteref_17" class="footnote" href="#_footnotedef_17" title="View footnote.">17</a>]</sup></p>
+</div>
+<div class="paragraph">
+<p>因为 <code>%*SYMBOLS</code> 是在 token <strong>TOP</strong> 中声明的, 所以当你尝试从 grammar 之外调用 <strong>TOP</strong> 以外的规则时, 你必须重复这个声明。如果没有像 <code>my %*SYMBOLS;</code> 这样的声明, 那么像:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4377,8 +4377,7 @@ c = a, 5, b</code></pre>
 <p>在前两行之后，<code>%*SYMBOLS</code> 的值为 <code>{a &#8658; True，b &#8658; True}</code>。当规则块解析第三个上的开始花括号时 行，它创建 <code>%*SYMBOLS</code> 的副本。第四行的c声明</p>
 </div>
 <div class="paragraph">
-<p>将对 <code>c &#8658; True</code> 插入`%*SYMBOLS` 的副本中。规则块之后 解析最后一行的结束大括号，它成功退出，并且
-<code>%*SYMBOLS</code> 的副本超出范围。这让我们得到了早期版本 <code>%*SYMBOLS</code>(只有键a和b)，然后超出范围 当 <code>TOP</code> 退出时</p>
+<p>将对 <code>c &#8658; True</code> 插入`%*SYMBOLS` 的副本中。规则块之后 解析最后一行的结束大括号，它成功退出，并且 <code>%*SYMBOLS</code> 的副本超出范围。这让我们得到了早期版本 <code>%*SYMBOLS</code>(只有键a和b)，然后超出范围 当 <code>TOP</code> 退出时</p>
 </div>
 </div>
 <div class="sect3">
@@ -4453,7 +4452,7 @@ grammar VariableLists {
 <p>Token TOP 创建了一个类 <code>SymbolTable</code> 类的新对象，声明 调用declare方法，并且令牌变量调用方法检查 - 声明。规则块在解析语句之前调用 enter-scope 列表，然后留下范围。这有效，但仅限于语句列表 可以成功解析; 如果没有，规则块在设法调用之前就失败了 离开作用域。</p>
 </div>
 <div class="paragraph">
-<p>Raku 具有针对这种情况的安全功能:如果你在声明前添加前缀 有了 LEAVE，Raku 会在常规出又处为你调用，无论何时何地 这是可能的(即使抛出异常)。自从LEAVE 移相器。 只能在常规代码而不是正则表达式中运行，我们需要将正则表达式包装起来</p>
+<p>Raku 具有针对这种情况的安全功能:如果你在声明前添加前缀 有了 LEAVE，Raku 会在常规出又处为你调用，无论何时何地 这是可能的(即使抛出异常)。自从 LEAVE <a href="https://docs.perl6.org/language/phasers">phasers</a><sup class="footnote">[<a id="_footnoteref_18" class="footnote" href="#_footnotedef_18" title="View footnote.">18</a>]</sup>。 只能在常规代码而不是正则表达式中运行，我们需要将正则表达式包装起来</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4517,7 +4516,7 @@ rule block_wrapped {
 <div class="sect2">
 <h3 id="_action_对象">10.1. Action 对象</h3>
 <div class="paragraph">
-<p>Grammars 和匹配对象具有两个功能, 提供了更加弹性和可扩展性的数据提取方法。第一个也是比较简单的一个, 是你可以将任意数据结构附加到 <a href="https://docs.raku.org/type/Match">Match</a> 对象， 随后通过 <code>.made</code> 属性访问它:</p>
+<p>Grammars 和匹配对象具有两个功能, 提供了更加弹性和可扩展性的数据提取方法。第一个也是比较简单的一个, 是你可以将任意数据结构附加到 <a href="https://docs.raku.org/type/Match">Match</a><sup class="footnote">[<a id="_footnoteref_19" class="footnote" href="#_footnotedef_19" title="View footnote.">19</a>]</sup> 对象， 随后通过 <code>.made</code> 属性访问它:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4902,10 +4901,10 @@ say MathExpression.parse("(\n1");</code></pre>
 <p>请注意，我们通过调用替换了直接模具函数调用 自定义错误方法。这种方法有一些技巧 确定行号: <code>.target</code> 方法返回字符串 语法当前匹配，<code>self.pos</code> 提取当前 解析位置。<code>self.pos</code> 相当于 <code>$/.to</code>，除了后者仅适用于解析结束或生成捕获时。</p>
 </div>
 <div class="paragraph">
-<p>这些方法来自哪里?通过声明一个类型语法，它自动获取父类 Grammar(提供解析和 <code>subparse</code> 方法)，继而从 Cursor 继承，供应 <code>.target</code> 和 <code>.pos</code> 方法。</p>
+<p>这些方法来自哪里?通过声明一个类型语法，它自动获取父类 <a href="https://docs.raku.org/type/Grammar">Grammar</a><sup class="footnote">[<a id="_footnoteref_20" class="footnote" href="#_footnotedef_20" title="View footnote.">20</a>]</sup>(提供解析和 <code>subparse</code> 方法)，继而从 <a href="https://docs.raku.org/type/Cursor">Cursor</a><sup class="footnote">[<a id="_footnoteref_21" class="footnote" href="#_footnotedef_21" title="View footnote.">21</a>]</sup> 继承，供应 <code>.target</code> 和 <code>.pos</code> 方法。</p>
 </div>
 <div class="paragraph">
-<p><code>Str.lines</code> 方法将字符串分解为行列表包含; 在此列表上调用 <code>.elems</code> 会产生行数。为一个 没有任何换行符的字符串，这会产生数字。注意比 即使是最核心的C程序员也会从头数开始计算行数一个(不是零)，所以 <code>lines.elems</code> 中的数字符合我们作为一条线的目的数。</p>
+<p><a href="https://docs.raku.org/type/Str%23routine_lines">Str.lines</a><sup class="footnote">[<a id="_footnoteref_22" class="footnote" href="#_footnotedef_22" title="View footnote.">22</a>]</sup> 方法将字符串分解为行列表包含; 在此列表上调用 <code>.elems</code> 会产生行数。为一个 没有任何换行符的字符串，这会产生数字。注意比 即使是最核心的C程序员也会从头数开始计算行数一个(不是零)，所以 <code>lines.elems</code> 中的数字符合我们作为一条线的目的数。</p>
 </div>
 <div class="paragraph">
 <p>示例代码的输出如下: 无法解析数学表达式:第2行没有关闭')'错误报告正确地将错误报告为在线号码 2，因为输入字符串中的 <code>\n</code> 引入了换行符。</p>
@@ -4976,7 +4975,7 @@ say MathExpression.parse("(\n1");</code></pre>
 <p>就像高水位标记每次大海或更高时被推高一点河流水位达到新的记录，我们可以记录到最远的位置我们的语法达到了。我们可以通过动态变量来做到这一点。 如果 <code>self.pos</code> 大于当前的值，我们设置为 <code>self.pos</code> 变量。然后，这个高水位标记构成了我们错误位置的基础报告。</p>
 </div>
 <div class="paragraph">
-<p>这种录音的一个方便的地方是 ws 令牌，因为它是在许多地方已经被召唤过，它是原始的自然分界符令牌。每当正则表达式位置达到新的高水位时，我们就会还可以记录调用ws的规则的名称。这个信息是可以通过 callframe 内置子程序:</p>
+<p>这种录音的一个方便的地方是 ws 令牌，因为它是在许多地方已经被召唤过，它是原始的自然分界符令牌。每当正则表达式位置达到新的高水位时，我们就会还可以记录调用ws的规则的名称。这个信息是可以通过 <a href="https://docs.raku.org/type/CallFrame%23sub_callframe">callframe</a><sup class="footnote">[<a id="_footnoteref_23" class="footnote" href="#_footnotedef_23" title="View footnote.">23</a>]</sup> 内置子程序:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5090,7 +5089,7 @@ MathExpression.parse('(1');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>FAILGOAL</code> 方法的参数是正则表达式的源代码 与结束分隔符匹配的部分。该 <code>trim</code> 方法删除 周围的空白，我们输入的一个版本的输出本章前面所见的错误方法。</p>
+<p><code>FAILGOAL</code> 方法的参数是正则表达式的源代码 与结束分隔符匹配的部分。<a href="https://docs.raku.org/type/Str%23method_trim">trim</a><sup class="footnote">[<a id="_footnoteref_24" class="footnote" href="#_footnotedef_24" title="View footnote.">24</a>]</sup> 方法删除 周围的空白，我们输入的一个版本的输出本章前面所见的错误方法。</p>
 </div>
 <div class="paragraph">
 <p>输出如下:</p>
@@ -5114,10 +5113,10 @@ MathExpression.parse('(1');</code></pre>
 <p>你可能会因为在后面的例子中被推迟一章，超过一半的语法源代码现在都是专用的错误报告。但是我们开始使用非常简单的语法，它人为地减小了它的大小。</p>
 </div>
 <div class="paragraph">
-<p>此外，大多数错误报告代码都非常通用，并且可以被分解成一个角色，并在许多语法中重复使用。那是什么的 <a href="https://modules.raku.org/dist/Grammar-ErrorReporting">Grammar::ParseError</a> 个模块提供。</p>
+<p>此外，大多数错误报告代码都非常通用，并且可以被分解成一个角色，并在许多语法中重复使用。那是什么的 <a href="https://modules.raku.org/dist/Grammar-ErrorReporting">Grammar::ParseError</a><sup class="footnote">[<a id="_footnoteref_25" class="footnote" href="#_footnotedef_25" title="View footnote.">25</a>]</sup> 个模块提供。</p>
 </div>
 <div class="paragraph">
-<p>最后，我认为好的解析错误非常重要保证这种关注。</p>
+<p>最后，我认为好的解析错误非常重要保证这种关注。<sup class="footnote">[<a id="_footnoteref_26" class="footnote" href="#_footnotedef_26" title="View footnote.">26</a>]</sup></p>
 </div>
 </div>
 <div class="sect2">
@@ -6215,6 +6214,87 @@ class If {
 <p>关于正则表达式力学和技术的章节给了你了解正则表达式如何工作以及如何使用的背景知识它们用于解析常见的数据格式。语法允许你构造并重用正则表达式。动作对象机制便于访问得到的匹配，以及关于错误报告的讨论比赛失败时该怎么办。武装与前几章的背景，以及 本章的应用程序，你应该能够自己编写 语法和解析器。我会留下 Larry Wall 的一句话， Perl 创造者和 Raku 的发明者:拥有适当的乐趣!</p>
 </div>
 </div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnotedef_1">
+<a href="#_footnoteref_1">1</a>. Raku 有一个名为 <code>byte</code> 的内置类型, 所以如果省略了 <code>&amp;</code> 符号, 你会不小心引用这个类型。
+</div>
+<div class="footnote" id="_footnotedef_2">
+<a href="#_footnoteref_2">2</a>. 在 Python 中, 这个问题就更复杂了, 因为行的开头的空格是重要的, 除非是在表达式里面。
+</div>
+<div class="footnote" id="_footnotedef_3">
+<a href="#_footnoteref_3">3</a>. <code>&lt;!ww&gt;</code> 匹配除了单词内之外的任何地方
+</div>
+<div class="footnote" id="_footnotedef_4">
+<a href="#_footnoteref_4">4</a>. 记住, <code>&lt;.ws&gt;</code> 中的前导点会导致 regex 不被捕获。因为 <code>ws</code> 例程都是关于我们并不特别在意的空白, 不捕捉它的匹配是有意义的。
+</div>
+<div class="footnote" id="_footnotedef_5">
+<a href="#_footnoteref_5">5</a>. <a href="https://docs.raku.org/type/Grammar" class="bare">https://docs.raku.org/type/Grammar</a>
+</div>
+<div class="footnote" id="_footnotedef_6">
+<a href="#_footnoteref_6">6</a>. <a href="https://en.wikipedia.org/wiki/SQL" class="bare">https://en.wikipedia.org/wiki/SQL</a>
+</div>
+<div class="footnote" id="_footnotedef_7">
+<a href="#_footnoteref_7">7</a>. <a href="http://json.org/" class="bare">http://json.org/</a>
+</div>
+<div class="footnote" id="_footnotedef_8">
+<a href="#_footnoteref_8">8</a>. <a href="https://github.com/moritz/json/" class="bare">https://github.com/moritz/json/</a>
+</div>
+<div class="footnote" id="_footnotedef_9">
+<a href="#_footnoteref_9">9</a>. <a href="https://github.com/moritz/json/blob/master/lib/JSON/Tiny/Grammar.pm" class="bare">https://github.com/moritz/json/blob/master/lib/JSON/Tiny/Grammar.pm</a>
+</div>
+<div class="footnote" id="_footnotedef_10">
+<a href="#_footnoteref_10">10</a>. 就像瑞士军刀，但威力更大。
+</div>
+<div class="footnote" id="_footnotedef_11">
+<a href="#_footnoteref_11">11</a>. <a href="https://en.wikipedia.org/wiki/Recursive_descent_parser" class="bare">https://en.wikipedia.org/wiki/Recursive_descent_parser</a>
+</div>
+<div class="footnote" id="_footnotedef_12">
+<a href="#_footnoteref_12">12</a>. <a href="https://en.wikipedia.org/wiki/Operator-precedence_parser" class="bare">https://en.wikipedia.org/wiki/Operator-precedence_parser</a>
+</div>
+<div class="footnote" id="_footnotedef_13">
+<a href="#_footnoteref_13">13</a>. <a href="https://github.com/ugexe/zef" class="bare">https://github.com/ugexe/zef</a>
+</div>
+<div class="footnote" id="_footnotedef_14">
+<a href="#_footnoteref_14">14</a>. <a href="https://github.com/tadzik/perl6-Config-INI" class="bare">https://github.com/tadzik/perl6-Config-INI</a>
+</div>
+<div class="footnote" id="_footnotedef_15">
+<a href="#_footnoteref_15">15</a>. <a href="https://github.com/tadzik/perl6-Config-INI/blob/master/lib/Config/INI.pm" class="bare">https://github.com/tadzik/perl6-Config-INI/blob/master/lib/Config/INI.pm</a>
+</div>
+<div class="footnote" id="_footnotedef_16">
+<a href="#_footnoteref_16">16</a>. 在这一点上，标识符不解析其周围的空白是至关重要的。因此，令牌不关心空白的原则，以及调用这些令牌的规则解析空白。
+</div>
+<div class="footnote" id="_footnotedef_17">
+<a href="#_footnoteref_17">17</a>. 在这种情况下, 这种情况是无害的，因为没有其他的规则可以匹配到变量的其他部分, 但还是会导致解析错误。但是, 在更复杂的情况下, 这种不经意的回溯可能会导致 grammar 的维护者感到非常困惑的错误。
+</div>
+<div class="footnote" id="_footnotedef_18">
+<a href="#_footnoteref_18">18</a>. <a href="https://docs.perl6.org/language/phasers" class="bare">https://docs.perl6.org/language/phasers</a>
+</div>
+<div class="footnote" id="_footnotedef_19">
+<a href="#_footnoteref_19">19</a>. <a href="https://docs.raku.org/type/Match" class="bare">https://docs.raku.org/type/Match</a>
+</div>
+<div class="footnote" id="_footnotedef_20">
+<a href="#_footnoteref_20">20</a>. <a href="https://docs.raku.org/type/Grammar" class="bare">https://docs.raku.org/type/Grammar</a>
+</div>
+<div class="footnote" id="_footnotedef_21">
+<a href="#_footnoteref_21">21</a>. <a href="https://docs.raku.org/type/Cursor" class="bare">https://docs.raku.org/type/Cursor</a>
+</div>
+<div class="footnote" id="_footnotedef_22">
+<a href="#_footnoteref_22">22</a>. <a href="https://docs.perl6.org/type/Str#routine_lines" class="bare">https://docs.perl6.org/type/Str#routine_lines</a>
+</div>
+<div class="footnote" id="_footnotedef_23">
+<a href="#_footnoteref_23">23</a>. <a href="https://docs.raku.org/type/CallFrame#sub_callframe" class="bare">https://docs.raku.org/type/CallFrame#sub_callframe</a>
+</div>
+<div class="footnote" id="_footnotedef_24">
+<a href="#_footnoteref_24">24</a>. <a href="https://docs.raku.org/type/Str#method_trim" class="bare">https://docs.raku.org/type/Str#method_trim</a>
+</div>
+<div class="footnote" id="_footnotedef_25">
+<a href="#_footnoteref_25">25</a>. <a href="https://modules.raku.org/dist/Grammar-ErrorReporting" class="bare">https://modules.raku.org/dist/Grammar-ErrorReporting</a>
+</div>
+<div class="footnote" id="_footnotedef_26">
+<a href="#_footnoteref_26">26</a>. 可悲的是, 许多关于解析的学术文献都忽略了这一方面, 大概是因为很难量化错误信息的质量。
 </div>
 </div>
 
