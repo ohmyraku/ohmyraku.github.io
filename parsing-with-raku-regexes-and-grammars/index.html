@@ -221,7 +221,7 @@ if (theme && theme !== "1") {
 <ul class="sectlevel2">
 <li><a href="#_s_表达式">13.1. S 表达式</a></li>
 <li><a href="#_数学表达式和运算符优先级解析器">13.2. 数学表达式和运算符优先级解析器</a></li>
-<li><a href="#_pythonesque基于缩进的语言">13.3. Pythonesque，基于缩进的语言</a></li>
+<li><a href="#_pythonesque_基于缩进的语言">13.3. Pythonesque, 基于缩进的语言</a></li>
 <li><a href="#_总结_12">13.4. 总结</a></li>
 </ul>
 </li>
@@ -245,6 +245,11 @@ if (theme && theme !== "1") {
 <h4 id="_搜索">1.1.1. 搜索</h4>
 <div class="paragraph">
 <p>正则表达式的一个常见用途是在大量数据中搜索感兴趣的模式 ，例如在日志文件中查找某些消息，用于 URL， 或者用于文本中的电话号码。在撰写本文时，在我的 <code>.bash_history</code> 中约有 6% 的条目 涉及使用正则表达式进行搜索。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://imgs.xkcd.com/comics/regular_expressions.png" alt="regular_expressions">
+</div>
 </div>
 <div class="paragraph">
 <p>许多命令行工具都支持某些正则表达式方言，允许您搜索文件名，文件内容，日志，捕获的网络流量，以及您能想到的几乎所有其他内容。大多数现代编程语言也可以轻松访问正则表达式，使它们成为无处不在且不可或缺的搜索工具。</p>
@@ -275,10 +280,10 @@ if (theme && theme !== "1") {
 <div class="sect2">
 <h3 id="_正则或正则表达式">1.2. 正则或正则表达式</h3>
 <div class="paragraph">
-<p>正则表达式的理论基础来自计算机科学，它描述了形式语言和自动机或形式机的层次结构， 它可以识别这些语言。这些语言中限制最多的被称为 <a href="https://en.wikipedia.org/wiki/Regular_language">正规语言</a>。决定特定字符串是否使用常规语言需要固定的内存量和每个固定数量的计算步骤字符。</p>
+<p>正则表达式的理论基础来自计算机科学，它描述了形式语言和自动机或形式机的层次结构， 它可以识别这些语言。这些语言中限制最多的被称为 <a href="https://en.wikipedia.org/wiki/Regular_language">正规语言</a>。<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup>决定特定字符串是否使用常规语言需要固定的内存量和每个固定数量的计算步骤字符。</p>
 </div>
 <div class="paragraph">
-<p>正则表达式是编写常规语言的形式。随着从理论计算机科学的这些概念的发展，它们是简约的， 只允许字面量，替换(<code>|</code>)，括号进行分组，以及<a href="https://en.wikipedia.org/wiki/Kleene_star">克莱恩明星 (*)</a>表示零次或多次重复。</p>
+<p>正则表达式是编写常规语言的形式。随着从理论计算机科学的这些概念的发展，它们是简约的， 只允许字面量，替换(<code>|</code>)，括号进行分组，以及<a href="https://en.wikipedia.org/wiki/Kleene_star">Kleene star</a><sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup>(*)表示零次或多次重复。</p>
 </div>
 <div class="paragraph">
 <p>早期的文本处理工具，如 <code>grep</code>，<code>sed</code> 和 <code>awk</code> 都拿起了正则表达式的概念，并增加了许多便利功能， 例如能够写 <code>[az]</code> 而不是 <code>a|b|c|d|e</code> &#8230;&#8203;.他们提供了预定义的*字符类*，字符集，例如字母，数字， 空白字符，等等。他们还添加了捕获，帮助提取正则表达式匹配的特定部分的字符串。</p>
@@ -299,7 +304,7 @@ if (theme && theme !== "1") {
 <p>Raku 正则表达式清理了这个历史性的语法包袱。他们通过允许无处不在的空白，引入清晰的规则, 例如哪些字符是特殊的，哪些不是特殊的, 来改善可读性。也许最重要的是，有一个简单和可扩展的语法用来通过名字调用其他正则表达式。</p>
 </div>
 <div class="paragraph">
-<p>虽然大多数语言将正则表达式视为字符串或特殊对象，但是 Raku 正则表达式是代码; 当正则表达式在 grammar 中组合在一起时，他们就像方法。这使您可以自由地将您过去熟悉的编程语言中所有的管理和重用代码的技术应用到正则表达式中: 名称空间，类，角色，继承，等等。</p>
+<p>虽然大多数语言将正则表达式视为字符串或特殊对象，但是 Raku 正则表达式是代码; 当正则表达式在 grammar 中组合在一起时，他们就像方法。这使您可以自由地将您过去熟悉的编程语言中所有的管理和重用代码的技术应用到正则表达式中: 名称空间，类，角色<sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnotedef_3" title="View footnote.">3</a>]</sup>，继承，等等。</p>
 </div>
 <div class="paragraph">
 <p>组合正则表达式的能力使得 Raku 不仅仅能解析简单的字符串格式。你可以编写使用很多小正则表达式的 grammar 来解析复杂的文件格式。实际上，Rakudo Raku 编译器本身使用 Raku grammar 来解析 Raku 源代码。</p>
@@ -325,7 +330,7 @@ if (theme && theme !== "1") {
 <p>Rakudo Raku 编译器有两种: 编译器本身，和 Rakudo Star。后者是包含编译器、zef 模块安装程序、文档和一些模块的发行版。</p>
 </div>
 <div class="paragraph">
-<p>出于我们的目的，您需要编译器和 zef。安装 Rakudo Star 为您提供了这两种选择，但如果 Rakudo Star 安装程序不适合您， 或者你更喜欢更精简的安装，你可以只安装编译器并 <a href="https://github.com/ugexe/zef#manual">根据文档驱动 zef</a>。</p>
+<p>出于我们的目的，您需要编译器和 zef。安装 Rakudo Star 为您提供了这两种选择，但如果 Rakudo Star 安装程序不适合您， 或者你更喜欢更精简的安装，你可以只安装编译器并 <a href="https://github.com/ugexe/zef#manual">根据文档驱动 zef</a>。<sup class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnotedef_4" title="View footnote.">4</a>]</sup></p>
 </div>
 <div class="paragraph">
 <p>以下是安装 Rakudo Raku 的一些选项。</p>
@@ -339,7 +344,7 @@ if (theme && theme !== "1") {
 <div class="sect3">
 <h4 id="_二进制_linux_包">2.1.2. 二进制 Linux 包</h4>
 <div class="paragraph">
-<p><a href="https://github.com/nxadm/rakudo-pkg/releases">Rakudo OS Packages</a> 仓库包含如何在 CentOS，Debian，Fedora 和 Ubuntu 系统上获取和使用 Rakudo Raku 软件包的说明。他们带有编译器和一个用来安装 zef 的脚本; 足够满足我们的意图。</p>
+<p><a href="https://github.com/nxadm/rakudo-pkg/releases">Rakudo OS Packages</a><sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnotedef_5" title="View footnote.">5</a>]</sup> 仓库包含如何在 CentOS，Debian，Fedora 和 Ubuntu 系统上获取和使用 Rakudo Raku 软件包的说明。他们带有编译器和一个用来安装 zef 的脚本; 足够满足我们的意图。</p>
 </div>
 </div>
 <div class="sect3">
@@ -406,7 +411,7 @@ implementing Raku.c.</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果你不能使它工作起来, 你可以去 <a href="https://raku.org/community/">Raku社区</a>求助。</p>
+<p>如果你不能使它工作起来, 你可以去 <a href="https://raku.org/community/">Raku 社区</a><sup class="footnote">[<a id="_footnoteref_6" class="footnote" href="#_footnotedef_6" title="View footnote.">6</a>]</sup>求助。</p>
 </div>
 <div class="paragraph">
 <p>一旦它工作了，你可以通过运行不带参数的 <code>raku</code> 启动一个简单的交互式 shell:</p>
@@ -539,7 +544,7 @@ say %populations.values.sum;    # Output: 7553400</code></pre>
 <p>由于正则表达式作用在字符串上，我们应该更多地讨论它们。</p>
 </div>
 <div class="paragraph">
-<p>字符串是一系列 Unicode 字符。我们已经看到了一些由单引号 <code>''</code> 和双引号 <code>""</code> 包围的字符串示例。 主要区别在于双引号启用转义序列，如 <code>\n</code> 是换行符(换行)和变量插值，其中变量的名称由其值替换:</p>
+<p>字符串是一系列 Unicode 字符。<sup class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnotedef_7" title="View footnote.">7</a>]</sup>我们已经看到了一些由单引号 <code>''</code> 和双引号 <code>""</code> 包围的字符串示例。 主要区别在于双引号启用转义序列，如 <code>\n</code> 是换行符(换行)和变量插值，其中变量的名称由其值替换:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -677,10 +682,10 @@ say $p.magnitude();                  # Output: 5.3851648071345</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://www.apress.com/us/book/9781484228982">Raku 基础: 从示例，项目和案例入门</a>。这本书的作者是 Moritz Lenz (Apress Media，2017)，该书提供了一个示例驱动的探索 Raku 的方法。</p>
+<p><a href="https://www.apress.com/us/book/9781484228982">Raku 基础: 从示例，项目和案例入门</a>。<sup class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnotedef_8" title="View footnote.">8</a>]</sup>这本书的作者是 Moritz Lenz (Apress Media，2017)，该书提供了一个示例驱动的探索 Raku 的方法。</p>
 </li>
 <li>
-<p><a href="https://www.packtpub.com/application-development/perl-6-deep-dive">Raku Deep Dive</a>, 由 Andrew Shitov 编写(Packt出版，2017年)是一个更面向功能的类似主题的指南。</p>
+<p><a href="https://www.packtpub.com/application-development/perl-6-deep-dive">Raku Deep Dive</a><sup class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnotedef_9" title="View footnote.">9</a>]</sup>, 由 Andrew Shitov 编写(Packt出版，2017年)是一个更面向功能的类似主题的指南。</p>
 </li>
 <li>
 <p><a href="http://rakuintro.com/">http://rakuintro.com/</a> 是一个学习 Raku 的免费在线资源，提供多种语言版本。</p>
@@ -1018,7 +1023,7 @@ U+02029 - PARAGRAPH SEPARATOR</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><a href="https://docs.raku.org/type/Int#routine_chr">chr($c)</a> 将代码点编号 <code>$c</code> 转换为它背后的实际字符。<a href="https://docs.raku.org/type/Str#sub_sprintf">printf</a> 是根据模板打印输出格式的例程，<a href="https://docs.raku.org/type/Cool#method_uniname">uniname</a> 从 Unicode 字符数据库中返回字符的名称。</p>
+<p><a href="https://docs.raku.org/type/Int#routine_chr">chr($c)</a><sup class="footnote">[<a id="_footnoteref_10" class="footnote" href="#_footnotedef_10" title="View footnote.">10</a>]</sup> 将代码点编号 <code>$c</code> 转换为它背后的实际字符。<a href="https://docs.raku.org/type/Str#sub_sprintf">printf</a><sup class="footnote">[<a id="_footnoteref_11" class="footnote" href="#_footnotedef_11" title="View footnote.">11</a>]</sup> 是根据模板打印输出格式的例程，<a href="https://docs.raku.org/type/Cool#method_uniname">uniname</a><sup class="footnote">[<a id="_footnoteref_12" class="footnote" href="#_footnotedef_12" title="View footnote.">12</a>]</sup> 从 Unicode 字符数据库中返回字符的名称。</p>
 </div>
 <div class="sect3">
 <h4 id="_用户自定义字符类">3.4.1. 用户自定义字符类</h4>
@@ -1057,7 +1062,7 @@ U+02029 - PARAGRAPH SEPARATOR</code></pre>
 <div class="sect3">
 <h4 id="_unicode_属性">3.4.2. Unicode 属性</h4>
 <div class="paragraph">
-<p>Raku 还通过引入 <a href="http://unicode.org/reports/tr23/">Unicode 属性和类别</a>提供对字符类的访问。要在正则表达式中使用 Letter 属性，您可以写 <code>&lt;:Letter&gt;</code> 以匹配作为字母的单个字符，或 <code>&lt;:!Letter&gt;</code> 作为它的否定 - 也就是说，一个不是字母的单个字符。其中一些属性有简短形式，如 <code>&lt;:L&gt;</code> 表示 <code>&lt;:Letter&gt;</code>。</p>
+<p>Raku 还通过引入 <a href="http://unicode.org/reports/tr23/">Unicode 属性和类别</a><sup class="footnote">[<a id="_footnoteref_13" class="footnote" href="#_footnotedef_13" title="View footnote.">13</a>]</sup>提供对字符类的访问。要在正则表达式中使用 Letter 属性，您可以写 <code>&lt;:Letter&gt;</code> 以匹配作为字母的单个字符，或 <code>&lt;:!Letter&gt;</code> 作为它的否定 - 也就是说，一个不是字母的单个字符。其中一些属性有简短形式，如 <code>&lt;:L&gt;</code> 表示 <code>&lt;:Letter&gt;</code>。</p>
 </div>
 <div class="paragraph">
 <p>这些属性不限于您目前正阅读的拉丁字母，而是包括整个 Unicode 字符数据库。所以 <code>&lt;:Letter&gt;</code> 可能与希腊文，西里尔文或希伯来文字母或来自任何具有字母概念的脚本的字母相匹配 (表 3-3)。</p>
@@ -1337,7 +1342,7 @@ say 'aab' ~~ / a+ || \w+ /; # Output: ⌜aa⌟</code></pre>
 <p>到目前为止我们已经讨论过的正则表达式构造不允许你这样做，因为他们都需要消耗字符来决定他们是否匹配。</p>
 </div>
 <div class="paragraph">
-<p>零宽度断言将另一个正则表达式变为锚点，使得它们不消耗输入字符串的字符。它们有两种变体: 向前查看和向后查看断言。</p>
+<p>零宽度断言将另一个正则表达式变为锚点，使得它们不消耗输入字符串的字符。它们有两种变体: 向前查看和向后查看断言。<sup class="footnote">[<a id="_footnoteref_14" class="footnote" href="#_footnotedef_14" title="View footnote.">14</a>]</sup></p>
 </div>
 <div class="paragraph">
 <p>向前查看断言被拼写为 <code>&lt;?before regex&gt;</code> 并将正则表达式转换为锚点。因此，如果您想匹配数字后跟一个单位 (例如 KB 表示千字节或 MB 表示兆字节)，但不是单位本身，你可以用这样的正则表达式完成:</p>
@@ -1349,7 +1354,7 @@ say 'aab' ~~ / a+ || \w+ /; # Output: ⌜aa⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这里，正则表达式 <code>\s* &lt;[kMGT]&gt;? B</code> 匹配可选的空格， 然后是单位 B，KB，MB，GB 或 TB。周围的 <code>&lt;?before &#8230;&#8203;&gt;</code> 使只有当单位的正则表达式匹配时才会匹配成功。请注意，断言没有推进字符串中正则表达式的位置，因此匹配单元的字符串不包含在整个正则表达式所匹配的字符串中。</p>
+<p>在这里，正则表达式 <code>\s* &lt;[kMGT]&gt;? B</code> 匹配可选的空格， 然后是单位 B，KB，MB，GB 或 TB。周围的 <code>&lt;?before &#8230;&#8203;&gt;</code> 使只有当单位的正则表达式匹配时才会匹配成功。请注意，断言没有推进字符串中正则表达式的位置，因此匹配单元的字符串不包含在整个正则表达式所匹配的字符串中。<sup class="footnote">[<a id="_footnoteref_15" class="footnote" href="#_footnotedef_15" title="View footnote.">15</a>]</sup></p>
 </div>
 <div class="paragraph">
 <p>您可以使用 <code>!</code> 代替 <code>?</code> 来否定向前查看。所以要匹配一个数字, 其后面不是单位，你可以使用正则表达式:</p>
@@ -1419,10 +1424,10 @@ say $str ~~ /hummer/;  # Output: Nil</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果匹配失败，匹配的返回值为 <code>Nil</code>，或者如果匹配成功则返回一个<a href="https://docs.raku.org/type/Match.html">匹配对象</a>。如果在布尔值上下文中使用匹配对象 (类似于 if 语句的条件)，则它的计算结果为 <code>True</code> (而 Nil 计算为 <code>False</code>); 在字符串上下文中(或通过调用 <code>.Str</code> 方法强制它进入字符串上下文时) ，它计算为正则表达式匹配到的字符串部分 。从 <code>say</code> 输出的角括号( <code>⌜</code> 和 <code>⌟</code> ) 表示匹配对象。</p>
+<p>如果匹配失败，匹配的返回值为 <code>Nil</code>，或者如果匹配成功则返回一个<a href="https://docs.raku.org/type/Match.html">匹配对象</a>。<sup class="footnote">[<a id="_footnoteref_16" class="footnote" href="#_footnotedef_16" title="View footnote.">16</a>]</sup>如果在布尔值上下文中使用匹配对象 (类似于 if 语句的条件)，则它的计算结果为 <code>True</code> (而 Nil 计算为 <code>False</code>); 在字符串上下文中(或通过调用 <code>.Str</code> 方法强制它进入字符串上下文时) ，它计算为正则表达式匹配到的字符串部分 。从 <code>say</code> 输出的角括号( <code>⌜</code> 和 <code>⌟</code> ) 表示匹配对象。</p>
 </div>
 <div class="paragraph">
-<p>除了智能匹配，您还可以使用 <a href="https://docs.raku.org/type/Str#method_match">.match</a> 方法搜索字符串中的匹配项:</p>
+<p>除了智能匹配，您还可以使用 <a href="https://docs.raku.org/type/Str#method_match">.match</a><sup class="footnote">[<a id="_footnoteref_17" class="footnote" href="#_footnotedef_17" title="View footnote.">17</a>]</sup> 方法搜索字符串中的匹配项:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1474,7 +1479,7 @@ if m/b./ {
 <div class="sect2">
 <h3 id="_修饰符">4.3. 修饰符</h3>
 <div class="paragraph">
-<p>修饰符改变了正则表达式的工作方式。它们分为两类。如果你把正则表达式看作是编译为字节码的小程序，那么一些修饰符会影响编译，其他修饰符会影响你调用该程序的方式 。</p>
+<p>修饰符改变了正则表达式的工作方式。它们分为两类。如果你把正则表达式看作是编译为字节码<sup class="footnote">[<a id="_footnoteref_18" class="footnote" href="#_footnotedef_18" title="View footnote.">18</a>]</sup>的小程序，那么一些修饰符会影响编译，其他修饰符会影响你调用该程序的方式。</p>
 </div>
 <div class="paragraph">
 <p>例如，<code>:global</code> 修饰符(短形式 <code>:g</code>)属于后一种类别; 它指示正则表达式搜索字符串中的所有非重叠匹配:</p>
@@ -1487,7 +1492,7 @@ say $str.match(:global, /h.mm\w*/).join('|');
 </div>
 </div>
 <div class="paragraph">
-<p>第一种类别的一个例子是 <code>:ignorecase</code>(简称 <code>:i</code>)， 它指示正则表达式引擎忽略大小写，所以大写字符在正则表达式中可以匹配其小写的等效字符，反之亦然:</p>
+<p>第一种类别的一个例子是 <code>:ignorecase</code>(简称 <code>:i</code>)， 它指示正则表达式引擎忽略大小写，所以大写字符在正则表达式中可以匹配其小写的等效字符，反之亦然<sup class="footnote">[<a id="_footnoteref_19" class="footnote" href="#_footnotedef_19" title="View footnote.">19</a>]</sup>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1607,7 +1612,7 @@ say $str.match(:global, /h.mm\w*/).join('|');
 </tbody>
 </table>
 <div class="paragraph">
-<p>所有接收参数的形式(此处为 5)也可以接受变量作为他们的参数。从字符串的开头位置从零开始计数，就像使用 <a href="https://docs.raku.org/type/Str#routine_substr">substr</a> 进行字符串索引一样。</p>
+<p>所有接收参数的形式(此处为 5)也可以接受变量作为他们的参数。从字符串的开头位置从零开始计数，就像使用 <a href="https://docs.raku.org/type/Str#routine_substr">substr</a><sup class="footnote">[<a id="_footnoteref_20" class="footnote" href="#_footnotedef_20" title="View footnote.">20</a>]</sup> 进行字符串索引一样。</p>
 </div>
 <div class="paragraph">
 <p>如果你用 <code>:global</code> 搜索多个匹配项，则第二个匹配的搜索从第一个匹配结束的位置处开始。用 <code>:overlap</code>， 第二个匹配的搜索从第一个匹配的下一个字符开始，因此两个匹配的匹配字符串可以重叠。<code>:exhaustive</code> 修饰符找到所有可能的匹配，即使有几个匹配都从同一个位置开始。</p>
@@ -1619,7 +1624,7 @@ say $str.match(:global, /h.mm\w*/).join('|');
 <div class="sect2">
 <h3 id="_comb_和_split">4.4. comb 和 split</h3>
 <div class="paragraph">
-<p>如果你想找到字符串中出现的所有正则表达式，但你只是对结果字符串感兴趣(而不是对匹配对象感兴趣)，你可以使用 <a href="https://docs.raku.org/type/Str#routine_comb">comb</a> 方法找出它们:</p>
+<p>如果你想找到字符串中出现的所有正则表达式，但你只是对结果字符串感兴趣(而不是对匹配对象感兴趣)，你可以使用 <a href="https://docs.raku.org/type/Str#routine_comb">comb</a><sup class="footnote">[<a id="_footnoteref_21" class="footnote" href="#_footnotedef_21" title="View footnote.">21</a>]</sup> 方法找出它们:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1628,7 +1633,7 @@ say @numbers;       # Output: [1308 5]</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>相反，如果您对字符串中不匹配正则表达式的部分感兴趣 ，那么 <a href="https://docs.raku.org/type/Str#routine_split">split</a> 方法适合你:</p>
+<p>相反，如果您对字符串中不匹配正则表达式的部分感兴趣 ，那么 <a href="https://docs.raku.org/type/Str#routine_split">split</a><sup class="footnote">[<a id="_footnoteref_22" class="footnote" href="#_footnotedef_22" title="View footnote.">22</a>]</sup> 方法适合你:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1659,7 +1664,7 @@ say $rest;          # Output: 891.8;3671000</code></pre>
 <p>您不仅可以使用正则表达式来匹配文本，还可以对其进行转换。</p>
 </div>
 <div class="paragraph">
-<p><a href="https://docs.raku.org/type/Str#method_subst">subst</a> 方法可以用另一个字符串替换正则表达式所匹配的字符串部分。在最简单的情况下，替代者是一个字符串常量:</p>
+<p><a href="https://docs.raku.org/type/Str#method_subst">subst</a><sup class="footnote">[<a id="_footnoteref_23" class="footnote" href="#_footnotedef_23" title="View footnote.">23</a>]</sup> 方法可以用另一个字符串替换正则表达式所匹配的字符串部分。在最简单的情况下，替代者是一个字符串常量:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1906,7 +1911,7 @@ exponent: '1.0e'</code></pre>
 <p>代码块使用包含 <code>$/</code> 的特殊变量，它包含匹配(或者至少部分匹配，就其进展而言)。</p>
 </div>
 <div class="paragraph">
-<p>这些代码块纯粹是为了副作用而执行的。您可以使用 <code>&lt;?{&#8230;&#8203;}&gt;</code> 形式来影响正则表达式匹配。如果是代码在该块内部返回 <code>false</code> 值，匹配失败:</p>
+<p>这些代码块纯粹是为了副作用而执行的。您可以使用 <code>&lt;?{&#8230;&#8203;}&gt;</code> 形式来影响正则表达式匹配。如果是代码在该块内部返回 <code>false</code> 值，匹配失败<sup class="footnote">[<a id="_footnoteref_24" class="footnote" href="#_footnotedef_24" title="View footnote.">24</a>]</sup>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1973,15 +1978,15 @@ for 0, 100, 255, 256, 1000 -&gt; $num {
 <h2 id="_从正则表达式匹配中提取数据">5. 从正则表达式匹配中提取数据</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>当您使用正则表达式验证输入时，知道给定字符串是否匹配正则表达式已经足够了。在许多其他情况下，我们想要从字符串和正则表达式匹配中提取更多数据。</p>
+<p>当你使用正则表达式验证输入时，知道给定字符串是否匹配正则表达式已经足够了。在许多其他情况下，我们想要从字符串和正则表达式匹配中提取更多数据。</p>
 </div>
 <div class="paragraph">
-<p>例如，如果要解析INI文件(Microsoft Windows 上常见的配置文件格式)， 您可能感兴趣的是节标题和节内的键/值对; 然而，节标题周围的方括号那样的东西我们不感兴趣。</p>
+<p>例如，如果要解析INI文件(Microsoft Windows 上常见的配置文件格式)， 你可能感兴趣的是节标题和节内的键/值对; 然而，节标题周围的方括号那样的东西我们不感兴趣。</p>
 </div>
 <div class="sect2">
 <h3 id="_定位捕获">5.1. 定位捕获</h3>
 <div class="paragraph">
-<p>您可以通过指示正则表达式捕获一些数据来提取相关数据，即用一对括号包围一部分正则表达式。这部分正则表达式匹配的字符串随后单独可得:</p>
+<p>你可以通过指示正则表达式捕获一些数据来提取相关数据，即用一对括号包围一部分正则表达式。这部分正则表达式匹配的字符串随后单独可得:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2001,7 +2006,7 @@ for 0, 100, 255, 256, 1000 -&gt; $num {
 <div class="sect2">
 <h3 id="_匹配对象">5.2. 匹配对象</h3>
 <div class="paragraph">
-<p>每个成功的正则表达式匹配的结果是 <a href="https://docs.raku.org/type/Match.html">Match</a> 类型的对象。 当你将正则表达式与智能匹配运算符 <code>~~</code> 匹配时，正则表达式对象也可以在特殊变量 <code>$/</code> 中使用。</p>
+<p>每个成功的正则表达式匹配的结果是 <a href="https://docs.raku.org/type/Match.html">Match</a><sup class="footnote">[<a id="_footnoteref_25" class="footnote" href="#_footnotedef_25" title="View footnote.">25</a>]</sup> 类型的对象。 当你将正则表达式与智能匹配运算符 <code>~~</code> 匹配时，正则表达式对象也可以在特殊变量 <code>$/</code> 中使用。</p>
 </div>
 <div class="paragraph">
 <p>匹配对象提供有关正则表达式匹配的大量信息: <code>$/.orig</code> 包含正则表达式匹配的字符串，<code>$/.from</code> 和
@@ -2044,13 +2049,13 @@ say $1[1][0].Str;   # Output: e</code></pre>
 <p>匹配对象实际上是匹配对象树。</p>
 </div>
 <div class="paragraph">
-<p>正如您在前面的示例中所看到的那样，捕获的编号是一个嵌套级别一个编号; 该正则表达式中有五对圆括号，但其中只有两个是顶级的，因此匹配成功后只有 <code>$0</code> 和 <code>$1</code>，没有 <code>$2</code> 或更高的级别。相反，每个嵌套级别也会引入从 0 开始的匹配编号。这与 Perl 5 和 PCRE 语义相违背，它们中的匹配是连续编号的。</p>
+<p>正如你在前面的示例中所看到的那样，捕获的编号是一个嵌套级别一个编号; 该正则表达式中有五对圆括号，但其中只有两个是顶级的，因此匹配成功后只有 <code>$0</code> 和 <code>$1</code>，没有 <code>$2</code> 或更高的级别。相反，每个嵌套级别也会引入从 0 开始的匹配编号。这与 Perl 5 和 PCRE 语义相违背，它们中的匹配是连续编号的。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_量词化捕获">5.2.2. 量词化捕获</h4>
 <div class="paragraph">
-<p>当捕获受量词时，匹配对象中相应的捕获成为 Match 对象的<a href="https://docs.raku.org/type/Array">数组</a>:</p>
+<p>当捕获受量词时，匹配对象中相应的捕获成为 Match 对象的<a href="https://docs.raku.org/type/Array">数组</a><sup class="footnote">[<a id="_footnoteref_26" class="footnote" href="#_footnotedef_26" title="View footnote.">26</a>]</sup>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2061,14 +2066,14 @@ say $1[1][0].Str;   # Output: e</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>唯一的例外是 <code>?</code> 量词，它不从捕获中产生数组。相反，当它匹配一次时，它的捕获是一个 Match 对象， 如果它匹配零次则为 <code>Nil</code>。</p>
+<p>唯一的例外是 <code>?</code> 量词，它不从捕获中产生数组。<sup class="footnote">[<a id="_footnoteref_27" class="footnote" href="#_footnotedef_27" title="View footnote.">27</a>]</sup>相反，当它匹配一次时，它的捕获是一个 Match 对象， 如果它匹配零次则为 <code>Nil</code>。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_命名捕获">5.3. 命名捕获</h3>
 <div class="paragraph">
-<p>当你有超过两三个捕获时，你可能会弄错哪个编号指向哪个捕获组。为了减轻这种负担，为了使代码对重构更加健壮，您可以使用命名捕获代替:</p>
+<p>当你有超过两三个捕获时，你可能会弄错哪个编号指向哪个捕获组。为了减轻这种负担，为了使代码对重构更加健壮，你可以使用命名捕获代替:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2104,7 +2109,7 @@ if $str ~~ / ^ &lt;byte&gt; ** 4 % '.' $ / {
 </div>
 </div>
 <div class="paragraph">
-<p>这里 <code>&lt;byte&gt;</code> 调用命名正则表达式 <code>byte</code> 并自动捕获由此同名子规则 <code>byte</code> 所匹配到的字符串。您可以使用语法 <code>&lt;alias=originalname&gt;</code> 重命名捕获:</p>
+<p>这里 <code>&lt;byte&gt;</code> 调用命名正则表达式 <code>byte</code> 并自动捕获由此同名子规则 <code>byte</code> 所匹配到的字符串。你可以使用语法 <code>&lt;alias=originalname&gt;</code> 重命名捕获:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2121,7 +2126,7 @@ if $str ~~ /&lt;greeting=word&gt; ', ' &lt;audience=word&gt;/ {
 <div class="sect2">
 <h3 id="_反向引用">5.4. 反向引用</h3>
 <div class="paragraph">
-<p>反向引用允许您访问正则表达式中的捕获，匹配正则表达式捕获的的前一部分字符串。这里有几个可能有用的案例，例如搜索文本中意外重复的单词时。第一次尝试将是这样的正则表达式: <code>/ (\w+) \s+ $0 /</code> 这个正则表达式匹配一个单词(<code>\w+</code>)并将其捕获到 <code>$0</code> 中， 后跟空格(<code>\s+</code>)，后再跟原始单词(<code>$0</code>)。然而这不符合预期。用它来匹配字符串 <code>the next thing</code>，它会匹配 <code>t t</code>, 因为 <code>\w+</code> 很乐意只匹配一个字符。</p>
+<p>反向引用允许你访问正则表达式中的捕获，匹配正则表达式捕获的的前一部分字符串。这里有几个可能有用的案例，例如搜索文本中意外重复的单词时。第一次尝试将是这样的正则表达式: <code>/ (\w+) \s+ $0 /</code> 这个正则表达式匹配一个单词(<code>\w+</code>)并将其捕获到 <code>$0</code> 中， 后跟空格(<code>\s+</code>)，后再跟原始单词(<code>$0</code>)。然而这不符合预期。用它来匹配字符串 <code>the next thing</code>，它会匹配 <code>t t</code>, 因为 <code>\w+</code> 很乐意只匹配一个字符。</p>
 </div>
 <div class="paragraph">
 <p>为了使它工作，我们可以通过包括单词字边界断言: <code>/ « (\w+) \s+ $0 » /</code> (记住 « 匹配左单词边界而 » 匹配右单词边界)来限制匹配整个单词。</p>
@@ -2141,13 +2146,13 @@ if $str ~~ /&lt;greeting=word&gt; ', ' &lt;audience=word&gt;/ {
 <div class="sect3">
 <h4 id="_跑个题_带反向引用的原始性测试">5.4.1. 跑个题: 带反向引用的原始性测试</h4>
 <div class="paragraph">
-<p>本节与任何实际应用无关，但可以一窥人们用正则表达式所做的疯狂的事情。如果您仅仅出于实际原因阅读本文，你可以放心地跳过它。</p>
+<p>本节与任何实际应用无关，但可以一窥人们用正则表达式所做的疯狂的事情。如果你仅仅出于实际原因阅读本文，你可以放心地跳过它。</p>
 </div>
 <div class="paragraph">
 <p>素数是一个整数，只能被数字 1 和它本身整除。</p>
 </div>
 <div class="paragraph">
-<p>您可以使用正则表达式来测试数字是否为素数。首先我们必须通过创建同一字符的字符串来编码数字(例如 a)，其中字符串中的字符数与数值相同。因此 2 将被编码为 aa，5 将被编码为 aaaaa，依此类推。在 Raku 中，我们可以使用字符串重复运算符 <code>x</code> 来执行此操作:</p>
+<p>你可以使用正则表达式来测试数字是否为素数。<sup class="footnote">[<a id="_footnoteref_28" class="footnote" href="#_footnotedef_28" title="View footnote.">28</a>]</sup>首先我们必须通过创建同一字符的字符串来编码数字(例如 a)，其中字符串中的字符数与数值相同。因此 2 将被编码为 aa，5 将被编码为 aaaaa，依此类推。在 Raku 中，我们可以使用字符串重复运算符 <code>x</code> 来执行此操作:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2272,10 +2277,10 @@ char =&gt; ⌜c⌟</code></pre>
 <div class="sect2">
 <h3 id="_总结_4">5.6. 总结</h3>
 <div class="paragraph">
-<p>捕获允许您从成功的正则表达式匹配中提取数据。您可以通过添加一对圆括号来指示正则表达式引擎捕获数据， 通过使用 <code>$&lt;name&gt;=[&#8230;&#8203;]</code> 语法，或者通过调用命名正则表达式: <code>&lt;name&gt;</code>。</p>
+<p>捕获允许你从成功的正则表达式匹配中提取数据。你可以通过添加一对圆括号来指示正则表达式引擎捕获数据， 通过使用 <code>$&lt;name&gt;=[&#8230;&#8203;]</code> 语法，或者通过调用命名正则表达式: <code>&lt;name&gt;</code>。</p>
 </div>
 <div class="paragraph">
-<p>正则表达式匹配和捕获都产生匹配对象; 最顶层的匹配对象因此成为子匹配的树。反向引用允许您准确匹配正则表达式的前一部分的匹配，你可以滥用该功能来构建一个简单的素数测试。</p>
+<p>正则表达式匹配和捕获都产生匹配对象; 最顶层的匹配对象因此成为子匹配的树。反向引用允许你准确匹配正则表达式的前一部分的匹配，你可以滥用该功能来构建一个简单的素数测试。</p>
 </div>
 </div>
 </div>
@@ -2305,12 +2310,14 @@ char =&gt; ⌜c⌟</code></pre>
 <div class="paragraph">
 <p>一些状态被标记为接受状态。在从输入字符串读取最后一个字符之后，如果最终状态为接受状态，则匹配成功。否则，它会失败(图 6-1)。</p>
 </div>
-<div class="paragraph">
-<div class="title">Figure 6-1 一个简单的确定性有限自动机。可接受状态 A1 用两个圆标记</div>
-<p>link:https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0h/y9/mz_101004.jpg@596w_1l.jpg</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0h/y9/mz_101004.jpg@596w_1l.jpg" alt="state mechine">
+</div>
+<div class="title">Figure 1. Figure 6-1 一个简单的确定性有限自动机。可接受状态 A1 用两个圆标记</div>
 </div>
 <div class="paragraph">
-<p>考虑示例中的自动机。起始状态是 A0，从那开始它需要读取字符 a 才能进入接受状态 A1。它然后可以读取 b，然后 c 以回到接受状态，所以它接受的字符串与正则表达式 <code>/ ^ a [bc]* $ /</code> 相同。我们称这它为自动机 A。</p>
+<p>考虑示例中的自动机。起始状态是 A0，从那开始它需要读取字符 a 才能进入接受状态 A1。它然后可以读取 b，然后 c 以回到接受状态，所以它接受的字符串与正则表达式 <code>/ ^ a [bc]* $ /</code> 相同。<sup class="footnote">[<a id="_footnoteref_29" class="footnote" href="#_footnotedef_29" title="View footnote.">29</a>]</sup>我们称这它为自动机 A。</p>
 </div>
 <div class="paragraph">
 <p>对于每个状态，最多只有一个箭头携带某个特定字符离开该状态。因此，机器一次只处于一种状态，而我们称之为确定性有限自动机，或简称为 DFA。</p>
@@ -2324,9 +2331,11 @@ char =&gt; ⌜c⌟</code></pre>
 <div class="paragraph">
 <p>首先，让我们修改原始自动机以匹配 <code>/ ^ a [bca]* $ /</code> (图 6-2)。</p>
 </div>
-<div class="paragraph">
-<div class="title">图 6-2 一个简单的匹配正则表达式 / ^ a [bca]* $ / 的自动机</div>
-<p>link:https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0h/y9/pf_100956.jpg@596w_1l.jpg</p>
+<div class="imageblock">
+<div class="content">
+<img src=":https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0h/y9/pf_100956.jpg@596w_1l.jpg" alt="state mechinne">
+</div>
+<div class="title">Figure 2. 图 6-2 一个简单的匹配正则表达式 / ^ a [bca]* $ / 的自动机</div>
 </div>
 <div class="paragraph">
 <p>我们称之为自动机 B。</p>
@@ -2352,7 +2361,7 @@ char =&gt; ⌜c⌟</code></pre>
 </div>
 <div class="paragraph">
 <div class="title">图 6-7 构造完全的匹配 A 或 B 的自动机</div>
-<p>这种机制称为 <a href="https://en.wikipedia.org/wiki/Powerset_construction">幂集构造</a>，因为新的状态集合是源自动机的幂。</p>
+<p>这种机制称为 <a href="https://en.wikipedia.org/wiki/Powerset_construction">幂集构造</a><sup class="footnote">[<a id="_footnoteref_30" class="footnote" href="#_footnotedef_30" title="View footnote.">30</a>]</sup>，因为新的状态集合是源自动机的幂。</p>
 </div>
 <div class="paragraph">
 <p>在我们的例子中，得到的自动机有九个状态，而 A 和 B 每个只有三个状态。如果我们必须建立几个自动机的析取，在最坏的情况下，结果自动机中状态的数量与每个输入自动机的状态数的乘积成正比。或者换句话说，状态的数量可以与我们想要的建模的正则表达式的字符数呈指数关系增长。</p>
@@ -2387,8 +2396,10 @@ char =&gt; ⌜c⌟</code></pre>
 <p>在正则表达式引擎无法使用NFA或其他地方的情况下 了解NFA并不能提供有关正则表达式的深入见解 将匹配，了解一般正则表达式的控制流程是有用的 发动机。第一条规则是正则表达式引擎总是从字符串的开头开始并且更喜欢最左边的匹配。</p>
 </div>
 <div class="paragraph">
-<p>第二条规则是贪婪的规则:正则表达式是从中评估的 从左到右，每个部分可以匹配可变数量的字符 尝试匹配它可以使用的最长子字符串。3
-因此，如果你有正则表达式 <code>/ \w+ .* /</code> 并对字符串abcd运行它，  <code>\w+</code> 匹配整个字符串，使 <code>.*</code> 成功匹配
+<p>第二条规则是贪婪的规则: 正则表达式是从中评估的 从左到右，每个部分可以匹配可变数量的字符尝试匹配它可以使用的最长子字符串。<sup class="footnote">[<a id="_footnoteref_31" class="footnote" href="#_footnotedef_31" title="View footnote.">31</a>]</sup></p>
+</div>
+<div class="paragraph">
+<p>因此，如果你有正则表达式 <code>/ \w+ .* /</code> 并对字符串abcd运行它，  <code>\w+</code> 匹配整个字符串，使 <code>.*</code> 成功匹配
 空字符串。<code>\w+</code> 匹配第一个字符和 <code>.*</code> 的匹配项 其余的同样允许，但不会发生，因为它违反了 正则表达式最左边部分匹配的规则尽可能多。</p>
 </div>
 <div class="paragraph">
@@ -2554,7 +2565,7 @@ Nil</code></pre>
 <p>回溯有时会导致意外的匹配结果。这个之所以发生，是因为正则表达式的一部分符合您的预期，并且然后后来的部分未能匹配。然后第一部分开始回溯并且以意想不到的方式匹配。</p>
 </div>
 <div class="paragraph">
-<p>Jan Goyvaerts 在正则表达式大师博客上分享了一个例子，转述 这里适用于 Raku 正则表达式语法。当您尝试匹配一对HTML标记时，如字符串 <code>&lt;a href="&#8230;&#8203;"&gt;some text&lt;/a&gt;</code>，你可以使用这样的正则表达式:</p>
+<p>Jan Goyvaerts 在正则表达式大师博客上分享了一个<a href="http://www.regexguru.com/2008/04/unintended-backtracking-can-bite-you/">例子</a><sup class="footnote">[<a id="_footnoteref_32" class="footnote" href="#_footnotedef_32" title="View footnote.">32</a>]</sup>，这里适用于 Raku 正则表达式语法。当您尝试匹配一对 HTML 标记时，如字符串 <code>&lt;a href="&#8230;&#8203;"&gt;some text&lt;/a&gt;</code>，你可以使用这样的正则表达式:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2597,17 +2608,19 @@ say 'more text &lt;a href="..:"&gt;link text&lt;/a&gt; bla' ~~ $html-re;</code><
 <div class="sect2">
 <h3 id="_最长_token_匹配">6.6. 最长 token 匹配</h3>
 <div class="paragraph">
-<p>与|的分离或替代 更喜欢匹配的分支最长的字符串。我们称之为最长的令牌匹配。</p>
+<p>带 <code>|</code> 的离散项或替代项更喜欢与最长的字符串匹配的分支。我们称之为最长的令牌匹配。</p>
 </div>
 <div class="paragraph">
-<p>解析时这很重要，因为它与我们的方式相匹配 直观地识别自己的文字。例如，Raku表达式
-<code>&#43;&#43;$var</code> 可以解析为前缀运算符 <code>&#43;&#43;</code> (它增加了 跟随变量一个)，后跟变量 <code>$var</code>。或者它可以 被解析为 <code>&#43;&#43;$var</code>，应用前缀+运算符(转换 它的数字参数为 <code>$var</code>，然后应用相同的运算符 再次结果。Raku 语法基于正则表达式，它知道 更喜欢第一个变体(单个 <code>&#43;&#43;</code> 运算符)，因为它产生了 尝试解析前缀运算符时的最长匹配。五
-为了能够有效地匹配最长的替代品，Raku 确定正则表达式的哪些部分形成声明性前缀。然后呢 构造一个NFA以匹配此声明性前缀。一旦完成，就完成了 其余的一般正则表达式引擎启动并继续，直到下一个 声明部分被找到。
-声明性前缀仅限于NFA可以建模的元素: 文字，字符类，析取，连词和贪心 量词。在命名正则表达式调用的情况下，来自的声明性前缀 命名正则表达式从调用正则表达式合并到一个，除非它 导致递归。
-我们可以通过插入代码块 <code>{}</code> 来解释这一点(不是 声明性的)限制替代的长度(图 6-9)。</p>
+<p>这一点在解析时很重要, 因为它与我们自己直觉上识别文本的方式是一致的。例如, Raku 的表达式 <code>$var` 可以被解析为前缀运算符 `</code> (将后面的变量增量1)，后面是变量 <code>$var</code>。或者，它可以解析为 <code>+(+$var)</code>，将前缀 <code>+</code> 运算符(将其参数转换为数字)应用到 <code>$var</code>，然后再将相同的运算符应用到结果中。Raku 语法是基于 regexes，它知道更喜欢第一个变体（单个 <code>` 运算子），因为当试图解析前缀运算符时，它产生的匹配时间最长。footnote:[这是另一种你不希望回溯的情况：一旦解析器识别了 `</code> 运算符，你不希望它改变主意，把这两个字符解释为不同的运算符。]</p>
 </div>
 <div class="paragraph">
-<p>图6-9。因此，代码块{}被认为是程序性的 限制正则​​表达式的声明性前缀</p>
+<p>为了能够有效地匹配最长的替代变量，Raku 会确定一个 regex 的哪些部分构成了声明性前缀。然后构造一个 NFA 来匹配这个声明性前缀。一旦完成后，一般的regex引擎的其他部分就会启动并继续进行，直到找到下一个声明式前缀。</p>
+</div>
+<div class="paragraph">
+<p>声明性前缀被限制在NFA可以建模的元素中：字元、字符类、分词、连词、连接词和贪婪量化器。在命名的regex调用的情况下，命名的regex的声明性前缀会被合并到调用的regex中，除非它会导致递归。</p>
+</div>
+<div class="paragraph">
+<p>我们可以通过插入一个代码块 <code>{}</code>（它不是声明性的）来限制替代的长度来说明这一点（图6-9）。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2634,40 +2647,40 @@ say "abc" ~~ /ab | a {} .* /;    # Output: ⌜ab⌟</code></pre>
 <h2 id="_正则表达式技术">7. 正则表达式技术</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>前面的章节介绍了许多正则表达式构造可以用来构建你的正则表达式，并解释它们是如何工作的。但唯独没有告诉你如何组织你的正则表达式以获得最佳结果。这个章节提供了这样的指导。</p>
+<p>前面的章节介绍了许多正则表达式构造可以用来构建你的正则表达式, 并解释它们是如何工作的。但唯独没有告诉你如何组织你的正则表达式以获得最佳结果。这个章节提供了这样的指导。</p>
 </div>
 <div class="sect2">
 <h3 id="_了解你的数据格式">7.1. 了解你的数据格式</h3>
 <div class="paragraph">
-<p>这可能是显而易见的，但仍然经常被忽视。能够写出对于某些数据格式的正则表达式，您需要知道它的规则。也就是说，如果有的话是规则。如果没有，您可能需要足够的输入数据来制定规则。你自己并根据数据测试它们。然后，你需要知道验证的背景。</p>
+<p>这可能是显而易见的, 但仍然经常被忽视。能够写出对于某些数据格式的正则表达式, 你需要知道它的规则。也就是说, 如果有的话是规则。如果没有, 你可能需要足够的输入数据来制定规则。你自己并根据数据测试它们。然后, 你需要知道验证的背景。</p>
 </div>
 <div class="sect3">
 <h4 id="_明确的数据格式">7.1.1. 明确的数据格式</h4>
 <div class="paragraph">
-<p>我们先来谈谈定义数据格式的情况。即使你认为你很了解数据格式，值得阅读规范。经常有一些很少使用的边缘情况可能值得考虑。
-例如，像 johndoe 这样的字符串(没有任何 <code>@</code> 符号)是有效的电子邮件本地送货地址。如果您正在编写电子邮件地址正则表达式以进行输入验证，你应该允许吗? 答案取决于具体情况。如果你正在开发一个纯粹在公司内部使用的应用程序， 允许它可能是有意义的。在公共 Web 应用程序中，更不用说了。</p>
+<p>我们先来谈谈定义数据格式的情况。即使你认为你很了解数据格式, 值得阅读规范。经常有一些很少使用的边缘情况可能值得考虑。
+例如, 像 johndoe 这样的字符串(没有任何 <code>@</code> 符号)是有效的电子邮件本地送货地址。如果你正在编写电子邮件地址正则表达式以进行输入验证, 你应该允许吗? 答案取决于具体情况。如果你正在开发一个纯粹在公司内部使用的应用程序,  允许它可能是有意义的。在公共 Web 应用程序中, 更不用说了。</p>
 </div>
 <div class="paragraph">
-<p>保持电子邮件地址，你知道本地部分可以被引起来吗? 或者域部分可以是 IP 地址，可选地在 括号?是的，<code>"somebody"@[93.184.216.34]</code> 和一些 <code>some+body@[IPv6:2001:db8::1]</code> 都是有效的电子邮件地址。</p>
+<p>保持电子邮件地址, 你知道本地部分可以被引起来吗? 或者域部分可以是 IP 地址, 可选地在 括号?是的, <code>"somebody"@[93.184.216.34]</code> 和一些 <code>some+body@[IPv6:2001:db8::1]</code> 都是有效的电子邮件地址。</p>
 </div>
 <div class="paragraph">
-<p>某些数据格式附带其格式规范。例如 JSON 是 JavaScript Object Notation，在其主页上有解析规则。 在这种情况下，重复作者所具有的工作往往是一种务实的选择 投入创建这些规则并简单地将它们转换为 Raku 语法。</p>
+<p>某些数据格式附带其格式规范。例如 JSON 是 JavaScript Object Notation, <a href="http://json.org/">在其主页上有解析规则</a>。<sup class="footnote">[<a id="_footnoteref_33" class="footnote" href="#_footnotedef_33" title="View footnote.">33</a>]</sup> 在这种情况下, 重复作者所具有的工作往往是一种务实的选择 投入创建这些规则并简单地将它们转换为 Raku 语法。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_探索数据结构">7.1.2. 探索数据结构</h4>
 <div class="paragraph">
-<p>如果您没有现成的规格，那么您必须来遵守自己的规则。提出这些规则的最佳方式是镜像科学方法:首先你想出一个假设，然后你
-测试一下。迭代直到您对结果满意为止。</p>
+<p>如果你没有现成的规格, 那么你必须来遵守自己的规则。提出这些规则的最佳方式是镜像科学方法:首先你想出一个假设, 然后你
+测试一下。迭代直到你对结果满意为止。</p>
 </div>
 <div class="paragraph">
-<p>测试关于数据格式的假设可以采用几种形式。如果你知道另一个处理相同数据格式的程序吗?可以修改该格式的现有文件，然后用另一个加载它们程序。如果这不是一个选项，你应该尝试收集尽可能多的您可以使用相同的格式生成世界数据，然后搜索该数据语料库来检验你的假设。</p>
+<p>测试关于数据格式的假设可以采用几种形式。如果你知道另一个处理相同数据格式的程序吗?可以修改该格式的现有文件, 然后用另一个加载它们程序。如果这不是一个选项, 你应该尝试收集尽可能多的你可以使用相同的格式生成世界数据, 然后搜索该数据语料库来检验你的假设。</p>
 </div>
 <div class="paragraph">
-<p>我们假设您要编写一个解析 INI 文件的正则表达式 Microsoft Windows 平台上常用的配置格式。</p>
+<p>我们假设你要编写一个解析 INI 文件的正则表达式 Microsoft Windows 平台上常用的配置格式。</p>
 </div>
 <div class="paragraph">
-<p>在它的基本形式，它看起来像这样(例子取自<a href="https://en.wikipedia.org/wiki/INI_file#Example">维基百科 INI 文件页面</a>):</p>
+<p>在它的基本形式, 它看起来像这样(例子取自<a href="https://en.wikipedia.org/wiki/INI_file#Example">维基百科 INI 文件页面</a><sup class="footnote">[<a id="_footnoteref_34" class="footnote" href="#_footnotedef_34" title="View footnote.">34</a>]</sup>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2684,7 +2697,7 @@ file="payroll.dat"</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>规则看起来很简单: 文件由一系列节组成。每节以方括号中的节名开头，包含由等号(<code>=</code>)分隔的键/值对。空行和以分号(<code>;</code>)开头的行，将被忽略。</p>
+<p>规则看起来很简单: 文件由一系列节组成。每节以方括号中的节名开头, 包含由等号(<code>=</code>)分隔的键/值对。空行和以分号(<code>;</code>)开头的行, 将被忽略。</p>
 </div>
 <div class="paragraph">
 <p>现在是时候提出更多问题了:</p>
@@ -2692,13 +2705,13 @@ file="payroll.dat"</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>节的列表是否为空(即，为空提交有效的INI文件)?</p>
+<p>节的列表是否为空(即, 为空提交有效的INI文件)?</p>
 </li>
 <li>
 <p>节可以为空吗(不包含任何键/值对)?</p>
 </li>
 <li>
-<p>键/值对后是否允许注释?对于 例如，如果你写port = 443; 只有一个没有 被防火墙阻止，是该值的注释部分 或不?</p>
+<p>键/值对后是否允许注释?对于 例如, 如果你写port = 443; 只有一个没有 被防火墙阻止, 是该值的注释部分 或不?</p>
 </li>
 <li>
 <p>允许的空格在哪里?是[数据库]还是 port = 443有效吗?</p>
@@ -2710,40 +2723,40 @@ file="payroll.dat"</code></pre>
 <p>密钥相同。密钥中是否允许短划线( - )?</p>
 </li>
 <li>
-<p>值的规则是什么?它们是否延伸到了最后 这条线?他们是否停留在评论标记处?是吗 如果下一行不是注释，则为多行，键/值 对，或部分标记?允许空值吗?</p>
+<p>值的规则是什么?它们是否延伸到了最后 这条线?他们是否停留在评论标记处?是吗 如果下一行不是注释, 则为多行, 键/值 对, 或部分标记?允许空值吗?</p>
 </li>
 <li>
-<p>是否有任何转义序列(例如表格的 <code>\t</code>) 允许?如果是的话，在哪里?只是在价值，或在 键或节标题?</p>
+<p>是否有任何转义序列(例如表格的 <code>\t</code>) 允许?如果是的话, 在哪里?只是在价值, 或在 键或节标题?</p>
 </li>
 <li>
-<p>是否支持引用，如果是，则在哪里?</p>
+<p>是否支持引用, 如果是, 则在哪里?</p>
 </li>
 <li>
-<p>部分名称中是否允许使用非ASCII字符， 键和值?</p>
+<p>部分名称中是否允许使用非ASCII字符,  键和值?</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>这些是分析纯文本数据格式时的典型问题。当您调查这些问题的答案时，您可以转换它们进入你的正则表达式的测试用例。</p>
+<p>这些是分析纯文本数据格式时的典型问题。当你调查这些问题的答案时, 你可以转换它们进入你的正则表达式的测试用例。</p>
 </div>
 <div class="paragraph">
-<p>没有固定规格的数据格式通常有几种变化，和实现在他们接受的方面有所不同。在这种情况下，你必须决定您是仅针对一个变体，还是一个共同的子集，或者可能他们所有人的超集。</p>
+<p>没有固定规格的数据格式通常有几种变化, 和实现在他们接受的方面有所不同。在这种情况下, 你必须决定你是仅针对一个变体, 还是一个共同的子集, 或者可能他们所有人的超集。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_考虑无效输入">7.2. 考虑无效输入</h3>
 <div class="paragraph">
-<p>当你写你的正则表达式时，不要只考虑那些字符串正则表达式应该匹配。同等重视他们的字符串不应该匹配。一般来说，正则表达式有更多的字符串应该拒绝正则表达式应该接受的字符串，这使得它们都成为现实很重要，很难想到它们。</p>
+<p>当你写你的正则表达式时, 不要只考虑那些字符串正则表达式应该匹配。同等重视他们的字符串不应该匹配。一般来说, 正则表达式有更多的字符串应该拒绝正则表达式应该接受的字符串, 这使得它们都成为现实很重要, 很难想到它们。</p>
 </div>
 <div class="paragraph">
-<p>你可以做的一件事是写负面测试; 也就是说，输入测试 这不应该匹配。另一个是停下来思考更难 你会看到像 <code>*</code> 或 <code>.+</code> 这样的术语。这些是如此广泛，以至于它们最错误的时间。大多数数据格式都不包含“然后，无论如何”的条款。 例如，如果您解析运行到行尾的注释，<code>/'#' .*/</code> 是错的，因为它可以匹配过去的换行符; <code>/'#' \N* \n? /</code> 将是更好的正则表达式。如果你解析类似 C 的注释，<code>/ * &#8230;&#8203; * /</code>，正则表达式 <code>/ '/*' .* '*/'</code> 也匹配整个字符串 <code>/* abc */ de */</code>，因为 <code>.*</code> 贪婪地匹配结束注释标记 <code>*/</code> 在字符串的中间。</p>
+<p>你可以做的一件事是写负面测试; 也就是说, 输入测试 这不应该匹配。另一个是停下来思考更难 你会看到像 <code>*</code> 或 <code>.+</code> 这样的术语。这些是如此广泛, 以至于它们最错误的时间。大多数数据格式都不包含“然后, 无论如何”的条款。 例如, 如果你解析运行到行尾的注释, <code>/'#' .*/</code> 是错的, 因为它可以匹配过去的换行符; <code>/'#' \N* \n? /</code> 将是更好的正则表达式。如果你解析类似 C 的注释, <code>/ * &#8230;&#8203; * /</code>, 正则表达式 <code>/ '/*' .* '*/'</code> 也匹配整个字符串 <code>/* abc */ de */</code>, 因为 <code>.*</code> 贪婪地匹配结束注释标记 <code>*/</code> 在字符串的中间。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_使用锚点">7.3. 使用锚点</h3>
 <div class="paragraph">
-<p>如果你编写一个完全匹配字符串的正则表达式，请记住 锚定^和$以确保它与整个字符串匹配。如果没有，请想一想 关于正则表达式匹配的边界。如果你试着匹配一个单词而不是 然后是一个点(<code>.</code>)，正则表达式 <code>/\w+ &lt;!before '.'&gt; /</code> 可以匹配一个部分 字:</p>
+<p>如果你编写一个完全匹配字符串的正则表达式, 请记住 锚定^和$以确保它与整个字符串匹配。如果没有, 请想一想 关于正则表达式匹配的边界。如果你试着匹配一个单词而不是 然后是一个点(<code>.</code>), 正则表达式 <code>/\w+ &lt;!before '.'&gt; /</code> 可以匹配一个部分 字:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2753,21 +2766,21 @@ file="payroll.dat"</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里的 <code>\w+</code> 实际匹配的是一个小于实际单词的字符， 这样 <code>&lt;!before '.'&gt;</code> 可以成功匹配。
-如果这种行为不是你的想法，你可以添加一个断言，如单词边界，<code>/ \w+ » &lt;!before '.'&gt; /</code>。 因为 <code>\w+</code> 暗示一个单词的一部分已经匹配，你也可以写 <code>/ \w+ &lt;!before \w&gt; &lt;!before '.'&gt; /</code>。</p>
+<p>这里的 <code>\w+</code> 实际匹配的是一个小于实际单词的字符,  这样 <code>&lt;!before '.'&gt;</code> 可以成功匹配。
+如果这种行为不是你的想法, 你可以添加一个断言, 如单词边界, <code>/ \w+ » &lt;!before '.'&gt; /</code>。 因为 <code>\w+</code> 暗示一个单词的一部分已经匹配, 你也可以写 <code>/ \w+ &lt;!before \w&gt; &lt;!before '.'&gt; /</code>。</p>
 </div>
 <div class="paragraph">
-<p>断言的内容是正则表达式，所以在这里我们必须引用 点(或将其作为 <code>&lt;!before \.&gt;</code> 之外的其他部分)，否则点会展开它 特殊含义并匹配任何角色。</p>
+<p>断言的内容是正则表达式, 所以在这里我们必须引用 点(或将其作为 <code>&lt;!before \.&gt;</code> 之外的其他部分), 否则点会展开它 特殊含义并匹配任何角色。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_匹配引用的字符串">7.4. 匹配引用的字符串</h3>
 <div class="paragraph">
 <p>许多数据格式包括带引号的字符串。他们的定义特征是 两个(或可能更多)分隔字符之间 - 引号 - 更多 允许(通常几乎所有)字符。
-我们已经在 Raku 正则表达式本身看到了引用的字符串，其中 可能会出现在正则表达式中保留的非单词字符。 常见的数据交换格式，如 CSV，JSON 和 YAML 包含引号。CSV-逗号分隔值格式 - 具有 分隔符字符(默认为逗号(，);因此名称) 分隔表格式结构中的列。如果列值本身 包含逗号，您必须能够区分逗号 分隔符，通常通过引用来完成。</p>
+我们已经在 Raku 正则表达式本身看到了引用的字符串, 其中 可能会出现在正则表达式中保留的非单词字符。 常见的数据交换格式, 如 CSV, JSON 和 YAML 包含引号。CSV-逗号分隔值格式 - 具有 分隔符字符(默认为逗号(, );因此名称) 分隔表格式结构中的列。如果列值本身 包含逗号, 你必须能够区分逗号 分隔符, 通常通过引用来完成。</p>
 </div>
 <div class="paragraph">
-<p>一个CSV文件，包含列a，然后是b，c，最后是d(即三个 列)可以写成</p>
+<p>一个CSV文件, 包含列a, 然后是b, c, 最后是d(即三个 列)可以写成</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2775,10 +2788,10 @@ file="payroll.dat"</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>其中“b，c”是带引号的字符串。</p>
+<p>其中“b, c”是带引号的字符串。</p>
 </div>
 <div class="paragraph">
-<p>如前所述，<code>/ \" .* \" /</code> 不是一种有效的方法 解析引用的字符串，因为 <code>.*</code> 可以匹配过去的结束引号。如果 输入是</p>
+<p>如前所述, <code>/ \" .* \" /</code> 不是一种有效的方法 解析引用的字符串, 因为 <code>.*</code> 可以匹配过去的结束引号。如果 输入是</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2790,7 +2803,7 @@ file="payroll.dat"</code></pre>
 在输入中引用字符串以及它们之间的列。</p>
 </div>
 <div class="paragraph">
-<p>一种不太天真的方法是写 <code>/ \" .*? \" /</code>，这限制了引用字符串到最短的匹配。这有效，但仅限于此 没有什么能迫使正则表达式以不同的方式回溯和匹配:</p>
+<p>一种不太天真的方法是写 <code>/ \" .*? \" /</code>, 这限制了引用字符串到最短的匹配。这有效, 但仅限于此 没有什么能迫使正则表达式以不同的方式回溯和匹配:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2798,11 +2811,11 @@ file="payroll.dat"</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里的输入是一个不平衡的引用字符串，带有第三个引号 中间的人物。第一次尝试仅匹配“a，b”部分
-字符串，<code>$anchor</code> 无法匹配，因此回溯开始 并且下一次尝试匹配整个字符串。</p>
+<p>这里的输入是一个不平衡的引用字符串, 带有第三个引号 中间的人物。第一次尝试仅匹配“a, b”部分
+字符串, <code>$anchor</code> 无法匹配, 因此回溯开始 并且下一次尝试匹配整个字符串。</p>
 </div>
 <div class="paragraph">
-<p>这通常不是理想的行为。一种更强大的方法是放弃正则表达式中的点，并更加思考内部允许的内容</p>
+<p>这通常不是理想的行为。一种更强大的方法是放弃正则表达式中的点, 并更加思考内部允许的内容</p>
 </div>
 <div class="paragraph">
 <p>引用的字符串:除引号字符外的所有内容。这很容易用否定的字符类来实现:</p>
@@ -2819,9 +2832,9 @@ say '"a,b","' ~~ / ^ \" &lt;-["]&gt;* \" $ /;         # Output: Nil</code></pre>
 <div class="sect3">
 <h4 id="_引用带有转义序列的字符串">7.4.1. 引用带有转义序列的字符串</h4>
 <div class="paragraph">
-<p>我们的挑战并未在此结束。在前面的CSV示例中，我们可以 现在处理包含分隔字符的列，但自从 引用字符获得了特殊含义，你不能轻易拥有一个列 包含引号字符。
-这个问题最常见的解决方案是引入逃逸 角色，通常是反弹(\)。如果你在报价前加上反对意见 字符或反斜杠，第二个字符失去其特殊含义。 因此，如果你想要包含她在CSV中说“嘿，ho”的字符串 专栏，你必须把它写成“她说”嘿，ho“”。
-使用反斜杠作为转义字符变得更多 复杂因为反斜杠在Raku中也有特殊含义 (以及大多数其他编程语言)。所以， 在普通的字符串文字中，你必须加倍反斜杠才能产生一个 单一:</p>
+<p>我们的挑战并未在此结束。在前面的CSV示例中, 我们可以 现在处理包含分隔字符的列, 但自从 引用字符获得了特殊含义, 你不能轻易拥有一个列 包含引号字符。
+这个问题最常见的解决方案是引入逃逸 角色, 通常是反弹(\)。如果你在报价前加上反对意见 字符或反斜杠, 第二个字符失去其特殊含义。 因此, 如果你想要包含她在CSV中说“嘿, ho”的字符串 专栏, 你必须把它写成“她说”嘿, ho“”。
+使用反斜杠作为转义字符变得更多 复杂因为反斜杠在Raku中也有特殊含义 (以及大多数其他编程语言)。所以,  在普通的字符串文字中, 你必须加倍反斜杠才能产生一个 单一:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2829,8 +2842,8 @@ say '"a,b","' ~~ / ^ \" &lt;-["]&gt;* \" $ /;         # Output: Nil</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>您可以通过在前面添加大写Q来关闭Raku中的此行为
-字符串，禁用所有转义序列:</p>
+<p>你可以通过在前面添加大写Q来关闭Raku中的此行为
+字符串, 禁用所有转义序列:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2838,9 +2851,9 @@ say '"a,b","' ~~ / ^ \" &lt;-["]&gt;* \" $ /;         # Output: Nil</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>正则表达式没有这样的模式，所以你必须加倍反斜杠
+<p>正则表达式没有这样的模式, 所以你必须加倍反斜杠
 正则表达式匹配文字反斜杠。
-回到带有转义字符的引号，现在有两个 在引用的字符串中要考虑的情况:没有常规字符 任何意义和转义序列。常规字符都是字符 除了引号或反斜杠，字符类&lt; - [“\\]&gt; 描述。转义序列是反斜杠，后跟引号或a 反斜杠。在正则表达式中，那是\\ &lt;[“\\]&gt;。许多数据格式允许 反斜杠背后的其他字符，在这种情况下序列 简化为\\。(记住点匹配任何字符)。
+回到带有转义字符的引号, 现在有两个 在引用的字符串中要考虑的情况:没有常规字符 任何意义和转义序列。常规字符都是字符 除了引号或反斜杠, 字符类&lt; - [“\\]&gt; 描述。转义序列是反斜杠, 后跟引号或a 反斜杠。在正则表达式中, 那是\\ &lt;[“\\]&gt;。许多数据格式允许 反斜杠背后的其他字符, 在这种情况下序列 简化为\\。(记住点匹配任何字符)。
 结合这两个案例导致这个正则表达式:</p>
 </div>
 <div class="listingblock">
@@ -2856,8 +2869,8 @@ say '"a,b","' ~~ / ^ \" &lt;-["]&gt;* \" $ /;         # Output: Nil</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果您花一分钟或更长时间阅读正则表达式，请不要担心。这有点儿解压缩和理解，但它将是本书中涉及最多的正则表达式。 我的正则表达式引用{&#8230;&#8203;}构造声明一个名为正则表达式的
-词汇变量。稍后，我们将学习语法，我们可以省略我的语法。</p>
+<p>如果你花一分钟或更长时间阅读正则表达式, 请不要担心。这有点儿解压缩和理解, 但它将是本书中涉及最多的正则表达式。 我的正则表达式引用{&#8230;&#8203;}构造声明一个名为正则表达式的
+词汇变量。稍后, 我们将学习语法, 我们可以省略我的语法。</p>
 </div>
 </div>
 </div>
@@ -2865,11 +2878,11 @@ say '"a,b","' ~~ / ^ \" &lt;-["]&gt;* \" $ /;         # Output: Nil</code></pre>
 <h3 id="_测试正则表达式">7.5. 测试正则表达式</h3>
 <div class="paragraph">
 <p>正则表达式是代码。它们是声明性的而不是程序性的
-表示在编写正则表达式时，指定它匹配的文本，以及
-通常不怎么样。但是，它们仍然是代码，你应该编写测试
-代码，以获得他们按预期工作的信心，并能够改变
+表示在编写正则表达式时, 指定它匹配的文本, 以及
+通常不怎么样。但是, 它们仍然是代码, 你应该编写测试
+代码, 以获得他们按预期工作的信心, 并能够改变
 他们无需担心破坏使用它们的其他代码。
-Raku附带一个测试模块，可以轻松编写此类测试。 这是上一节中正则表达式的一个小测试套件:</p>
+Raku附带一个测试模块, 可以轻松编写此类测试。 这是上一节中正则表达式的一个小测试套件:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2909,12 +2922,19 @@ for @should-not-match -&gt; $s {
 </div>
 </div>
 <div class="paragraph">
-<p>让我们更详细地探讨这个问题。一开始是熟悉的宣言 正则表达式。然后代码声明并初始化两个数组变量，
- <code>@should-match</code> 和  <code>@should-not-match</code>。
-第一个包含我们期望正则表达式匹配的字符串; 第二 有正则表达式不应匹配的字符串示例。
-然后，测试开始。使用测试; 进又测试模块，3 它提供了脚本中进一步使用的一些功能。计划是 其中之一，计划6; 告诉测试模块六个测试用例 即将到来的。
-接下来是两个for循环，它检查示例字符串。好的是测试 函数，当使用真值作为其第一个参数调用时，生成一个 测试成功; 假值失败了。这里的第一个参数是a的结果 锚定的正则表达式匹配，<code>$s ~~ / ^&lt;quoted&gt;$ /</code>。第二个论点 是测试的标签。在第二个循环中，使用测试函数nok 相反，它具有来自ok的逆逻辑:它期望一个假值(如a 失败的正则表达式匹配)作为第一个参数。
-    运行脚本时，它会生成如下输出:</p>
+<p>让我们更详细地探讨这个问题。一开始是熟悉的宣言 正则表达式。然后代码声明并初始化两个数组变量,  <code>@should-match</code> 和  <code>@should-not-match</code>。</p>
+</div>
+<div class="paragraph">
+<p>第一个包含我们期望正则表达式匹配的字符串; 第二 有正则表达式不应匹配的字符串示例。</p>
+</div>
+<div class="paragraph">
+<p>然后, 测试开始。使用测试; 导入<a href="https://docs.perl6.org/language/testing">测试模块</a>,<sup class="footnote">[<a id="_footnoteref_35" class="footnote" href="#_footnotedef_35" title="View footnote.">35</a>]</sup> 它提供了脚本中进一步使用的一些功能。计划是 其中之一, <code>plan 6;</code> 告诉测试模块六个测试用例 即将到来的。</p>
+</div>
+<div class="paragraph">
+<p>接下来是两个for循环, 它检查示例字符串。好的是测试 函数, 当使用真值作为其第一个参数调用时, 生成一个 测试成功; 假值失败了。这里的第一个参数是a的结果 锚定的正则表达式匹配, <code>$s ~~ / ^&lt;quoted&gt;$ /</code>。第二个论点 是测试的标签。在第二个循环中, 使用测试函数nok 相反, 它具有来自ok的逆逻辑:它期望一个假值(如a 失败的正则表达式匹配)作为第一个参数。</p>
+</div>
+<div class="paragraph">
+<p>运行脚本时, 它会生成如下输出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2929,8 +2949,8 @@ ok 6 - Successful rejection of string "ab\\"cdef"</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果您更改前三个示例字符串之一来制作正则表达式
-匹配失败，你得到一个失败的测试输出，如下所示:</p>
+<p>如果你更改前三个示例字符串之一来制作正则表达式
+匹配失败, 你得到一个失败的测试输出, 如下所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2948,8 +2968,7 @@ ok 6 - Successful rejection of string "ab\\"cdef"
 </div>
 </div>
 <div class="paragraph">
-<p>对于文件中的许多测试，甚至许多测试文件，它都会有所帮助 得出所有测试输出的摘要。证明程序通常
-与Perl 5捆绑在一起可以理解测试的输出(在测试中) 测试任何协议格式4)并打印出一个简短的摘要:</p>
+<p>对于文件中的许多测试, 甚至许多测试文件, 它都会有所帮助 得出所有测试输出的摘要。证明程序通常与 Perl 5 捆绑在一起可以理解测试的输出(<a href="https://testanything.org/">在测试任何协议格式</a><sup class="footnote">[<a id="_footnoteref_36" class="footnote" href="#_footnotedef_36" title="View footnote.">36</a>]</sup>)并打印出一个简短的摘要:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2962,7 +2981,7 @@ Result: PASS</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果测试失败，它会关注失败的测试，以便更容易修复它们:</p>
+<p>如果测试失败, 它会关注失败的测试, 以便更容易修复它们:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2983,8 +3002,8 @@ Result: FAIL</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>证明甚至为终端输出增加了颜色，绿色表示“所有测试 成功。“和红色测试失败，使状态显而易见。
-在正式开发你的正则表达式之后，很可能你想要 将它们用于运行测试之外的其他东西。在这种情况下，你可以 将测试提取到一个子程序中，只有在你调用它时才运行它们 带有特殊命令行参数的脚本，例如&#8212;&#8203;test:</p>
+<p>证明甚至为终端输出增加了颜色, 绿色表示“所有测试 成功。“和红色测试失败, 使状态显而易见。
+在正式开发你的正则表达式之后, 很可能你想要 将它们用于运行测试之外的其他东西。在这种情况下, 你可以 将测试提取到一个子程序中, 只有在你调用它时才运行它们 带有特殊命令行参数的脚本, 例如&#8212;&#8203;test:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3036,7 +3055,7 @@ multi sub MAIN($input) {
 </div>
 </div>
 <div class="paragraph">
-<p>在这个例子中，多子MAIN引入了一个名为MAIN的子程序。Perl的 6自动为您调用子程序MAIN并转换命令行 参数为此函数的参数。多重意味着可以 是一个具有此名称的子程序。Raku称那个候选人 最适合的论点。:$测试!是一个命名的论据，凭借 前导冒号(:)和尾随感叹号(!)使其成为必需。 您只能通过传入命名参数测试来调用此候选项。
+<p>在这个例子中, 多子MAIN引入了一个名为MAIN的子程序。Perl的 6自动为你调用子程序MAIN并转换命令行 参数为此函数的参数。多重意味着可以 是一个具有此名称的子程序。Raku称那个候选人 最适合的论点。:$测试!是一个命名的论据, 凭借 前导冒号(:)和尾随感叹号(!)使其成为必需。 你只能通过传入命名参数测试来调用此候选项。
   这是它在命令行上的样子:</p>
 </div>
 <div class="listingblock">
@@ -3058,7 +3077,7 @@ Result: PASS</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>用多子MAIN($ input)声明的第二个候选者是 程序的“正常”执行路径。这需要一个位置论证， 在命令行方面，它是一个不是选项的字符串 (所以不要以减号( - )字符开头)。它检查是否 参数是带引号的字符串并相应地打印消息:</p>
+<p>用多子MAIN($ input)声明的第二个候选者是 程序的“正常”执行路径。这需要一个位置论证,  在命令行方面, 它是一个不是选项的字符串 (所以不要以减号( - )字符开头)。它检查是否 参数是带引号的字符串并相应地打印消息:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3069,19 +3088,19 @@ invalid input: no</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>shell使用了一个级别的引用，这就是为什么在第一个级别 调用我在双引号字符串周围使用单引号。这个 适用于标准POSIX shell和bash; 其他炮弹可能需要 你要做不同的引用来运行这个例子。</p>
+<p>shell使用了一个级别的引用, 这就是为什么在第一个级别 调用我在双引号字符串周围使用单引号。这个 适用于标准POSIX shell和bash; 其他炮弹可能需要 你要做不同的引用来运行这个例子。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_总结_6">7.6. 总结</h3>
 <div class="paragraph">
-<p>在为数据格式编写正则表达式时，我们经常发现我们知道这个数据格式比我们原先想象的要少。我们可以尝试找到回答我们问题的正式规范，或者我们可以使用实验方法，结合我们的问题目录关于数据格式。</p>
+<p>在为数据格式编写正则表达式时, 我们经常发现我们知道这个数据格式比我们原先想象的要少。我们可以尝试找到回答我们问题的正式规范, 或者我们可以使用实验方法, 结合我们的问题目录关于数据格式。</p>
 </div>
 <div class="paragraph">
-<p>我们还讨论了断言在什么边界的使用正则表达式应该匹配，以及巧妙地使用否定字符类即使在存在转义字符的情况下，也可以可靠地解析引用的字符串。</p>
+<p>我们还讨论了断言在什么边界的使用正则表达式应该匹配, 以及巧妙地使用否定字符类即使在存在转义字符的情况下, 也可以可靠地解析引用的字符串。</p>
 </div>
 <div class="paragraph">
-<p>测试让我们相信我们写的正则表达式不再匹配并且不亚于我们的期望，我们探索了一种简单的写作方式自动化测试。</p>
+<p>测试让我们相信我们写的正则表达式不再匹配并且不亚于我们的期望, 我们探索了一种简单的写作方式自动化测试。</p>
 </div>
 </div>
 </div>
@@ -3115,7 +3134,7 @@ say $str ~~ / ^ &lt;byte&gt; ** 4 % '.' $ /;</code></pre>
 <p>这里 <code>my regex byte { &#8230;&#8203; }</code> 声明了一个名为 <code>byte</code> 的正则表达式。<code>regex</code> 前面的关键字决定了作用域: <code>my</code> 是词法作用域的。 省略 <code>my</code> 关键字会声明一个附加到 grammar 的正则表达式。稍后会有更多介绍。</p>
 </div>
 <div class="paragraph">
-<p>Raku 中的正则表达式是代码对象, 就像子例程或方法一样。就像例程那样, 你可以通过在正则的名称前加上一个 <code>&amp;</code> 符号来引用正则表达式<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup>:</p>
+<p>Raku 中的正则表达式是代码对象, 就像子例程或方法一样。就像例程那样, 你可以通过在正则的名称前加上一个 <code>&amp;</code> 符号来引用正则表达式<sup class="footnote">[<a id="_footnoteref_37" class="footnote" href="#_footnotedef_37" title="View footnote.">37</a>]</sup>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3273,7 +3292,7 @@ say $str ~~ / ^ &lt;byte&gt; ** 4 % '.' $ /;</code></pre>
 <p>并非所有的空白都是无关紧要的。 你不想写 "Hello, World", 出来的时候确是 Hello, World。 许多语言对空白做了区分, token 之间的空白无关紧要, 但 token 里面的空白（如带引号的字符串）非常重要。</p>
 </div>
 <div class="paragraph">
-<p>然而, 这比那更微妙：在 SQL, Perl, Python, JavaScript 等语言中, 当类似单词的 token 后跟着非单词 token 时, 你可以省略空白, 或者反过来（例如 <code>a+b</code> 和 <code>a + b</code> 是相同的）。 然而, 不带任何空格连接两个类似单词的 token 是禁止的。 相反, 如果两个 token 之间存在空白, 则空白的数量无关紧要。<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup></p>
+<p>然而, 这比那更微妙：在 SQL, Perl, Python, JavaScript 等语言中, 当类似单词的 token 后跟着非单词 token 时, 你可以省略空白, 或者反过来（例如 <code>a+b</code> 和 <code>a + b</code> 是相同的）。 然而, 不带任何空格连接两个类似单词的 token 是禁止的。 相反, 如果两个 token 之间存在空白, 则空白的数量无关紧要。<sup class="footnote">[<a id="_footnoteref_38" class="footnote" href="#_footnotedef_38" title="View footnote.">38</a>]</sup></p>
 </div>
 <div class="paragraph">
 <p>例如, 下面这两个 SQL 语句生成相同的解析树：</p>
@@ -3296,10 +3315,10 @@ FROM   account;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Raku 定义了一个名为 <code>ws</code> 的正则表达式, 它是空白的缩写, 它将空白解析为之前规定的规则：任意数量的空白（空格, 制表符, 换行符, &#8230;&#8203;&#8230;&#8203;）, 但至少有一个空白, 除非它位于单词边界。 或者把它放在代码中, <code>regex ws { &lt;!ww&gt; \s* }</code> （其中  <code>&lt;!ww&gt;</code> 匹配除了单词内之外的任何地方）<sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnotedef_3" title="View footnote.">3</a>]</sup>。</p>
+<p>Raku 定义了一个名为 <code>ws</code> 的正则表达式, 它是空白的缩写, 它将空白解析为之前规定的规则：任意数量的空白（空格, 制表符, 换行符, &#8230;&#8203;&#8230;&#8203;）, 但至少有一个空白, 除非它位于单词边界。 或者把它放在代码中, <code>regex ws { &lt;!ww&gt; \s* }</code> （其中  <code>&lt;!ww&gt;</code> 匹配除了单词内之外的任何地方）<sup class="footnote">[<a id="_footnoteref_39" class="footnote" href="#_footnotedef_39" title="View footnote.">39</a>]</sup>。</p>
 </div>
 <div class="paragraph">
-<p>还有一个快捷方式可以帮助你避免在代码中的任何地方使用显式的 <code>&lt;ws&gt;</code> 或 <code>&lt;.ws&gt;</code> 调用。<sup class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnotedef_4" title="View footnote.">4</a>]</sup> 如果使用关键字 <code>rule</code> 而不是 <code>regex</code> 或 <code>token</code> 声明正则表达式, 则 Raku  会在你的正则表达式中使用空格的地方插入隐式的 <code>&lt;.ws&gt;</code> 调用。 这与在正则表达式中使用 <code>:sigspace</code> 或 <code>:s</code> 修饰符具有相同的效果。</p>
+<p>还有一个快捷方式可以帮助你避免在代码中的任何地方使用显式的 <code>&lt;ws&gt;</code> 或 <code>&lt;.ws&gt;</code> 调用。<sup class="footnote">[<a id="_footnoteref_40" class="footnote" href="#_footnotedef_40" title="View footnote.">40</a>]</sup> 如果使用关键字 <code>rule</code> 而不是 <code>regex</code> 或 <code>token</code> 声明正则表达式, 则 Raku  会在你的正则表达式中使用空格的地方插入隐式的 <code>&lt;.ws&gt;</code> 调用。 这与在正则表达式中使用 <code>:sigspace</code> 或 <code>:s</code> 修饰符具有相同的效果。</p>
 </div>
 <div class="paragraph">
 <p>由于 <code>ws</code> 的定义使用术语 <code>\s*</code>, 正则表达式中的单个空白可以匹配字符串中的任何数量的空格, 包括制表符, 空格, 垂直制表符等。</p>
@@ -3400,7 +3419,7 @@ if IPv4Address.parse($str) {
 </div>
 </div>
 <div class="paragraph">
-<p>第一个 grammar 用 <strong>grammar</strong> 关键字声明, 后面是 grammar 的名称 IPv4Address。grammar 是一种自动添加类型为 <a href="https://docs.raku.org/type/Grammar">Grammar</a><sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnotedef_5" title="View footnote.">5</a>]</sup> 的父类, 并提供了一些方法, 如 <code>parse</code> 和 <code>subparse</code> 等。</p>
+<p>第一个 grammar 用 <strong>grammar</strong> 关键字声明, 后面是 grammar 的名称 IPv4Address。grammar 是一种自动添加类型为 <a href="https://docs.raku.org/type/Grammar">Grammar</a><sup class="footnote">[<a id="_footnoteref_41" class="footnote" href="#_footnotedef_41" title="View footnote.">41</a>]</sup> 的父类, 并提供了一些方法, 如 <code>parse</code> 和 <code>subparse</code> 等。</p>
 </div>
 <div class="paragraph">
 <p>grammar 的主体由花括号分割。 在主体里面, 我们使用 <code>regex</code> 或 <code>token</code> 关键字声明正则表达式。 注意我们省略了声明前面的 <code>my</code> 声明符, 因为现在正则表达式是作用域属于 grammar 的方法。</p>
@@ -3432,7 +3451,7 @@ say IPv4Address.parse($str, :rule&lt;byte&gt;);           # Output: Nil</code></
 <p>继承是特殊化的一种形式。如果你有需要一个通用 grammar 的情况, 然后想要创建一些微调过的变体, 微调后的变体可以继承于更通用的变体。</p>
 </div>
 <div class="paragraph">
-<p>例如, 考虑 SQL 的 grammar, 即 <a href="https://en.wikipedia.org/wiki/SQL">结构化查询语言</a><sup class="footnote">[<a id="_footnoteref_6" class="footnote" href="#_footnotedef_6" title="View footnote.">6</a>]</sup>。这种 grammar 有标准, 但有些实现是方言。一个这样的例子是 MySQL, 它使用反引号而不是双引号来引用表名和列名。然后, MySQL 方言的 grammar 将继承标准 SQL 的 grammar 并覆盖用于解析表名和列名的正则表达式。</p>
+<p>例如, 考虑 SQL 的 grammar, 即 <a href="https://en.wikipedia.org/wiki/SQL">结构化查询语言</a><sup class="footnote">[<a id="_footnoteref_42" class="footnote" href="#_footnotedef_42" title="View footnote.">42</a>]</sup>。这种 grammar 有标准, 但有些实现是方言。一个这样的例子是 MySQL, 它使用反引号而不是双引号来引用表名和列名。然后, MySQL 方言的 grammar 将继承标准 SQL 的 grammar 并覆盖用于解析表名和列名的正则表达式。</p>
 </div>
 <div class="paragraph">
 <p>为了说明这个想法, 让我们只关注解析 SQL 列名。 SQL 标准规定它们是标识符或双引号字符串:</p>
@@ -3543,7 +3562,7 @@ say Sum.parse('2 + -4');</code></pre>
 <div class="sect2">
 <h3 id="_proto_regexes">8.5. Proto Regexes</h3>
 <div class="paragraph">
-<p>假设你想为 <a href="http://json.org/">JSON</a><sup class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnotedef_7" title="View footnote.">7</a>]</sup>(也称为 JavaScript 对象表示法) 写一个 grammar。json.org 主页肯定会告诉你当解析值的时候, 你期望一个字符串, 数字, 对象, 数组或字面量字符串,true, false 或 null。没问题, 你可以这样写:</p>
+<p>假设你想为 <a href="http://json.org/">JSON</a><sup class="footnote">[<a id="_footnoteref_43" class="footnote" href="#_footnotedef_43" title="View footnote.">43</a>]</sup>(也称为 JavaScript 对象表示法) 写一个 grammar。json.org 主页肯定会告诉你当解析值的时候, 你期望一个字符串, 数字, 对象, 数组或字面量字符串,true, false 或 null。没问题, 你可以这样写:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3705,7 +3724,7 @@ for &lt;true null 2015-12-24 42&gt; -&gt; $str {
 <p>现在 grammar 由 <code>JSONValue</code>, <code>DateValue</code> 和 <code>IntegerValue</code> 组合而来, 并且可以解析所有四个输入字符串示例。扩展角色不必考虑其他东西; 它们是可以自由组合的。</p>
 </div>
 <div class="paragraph">
-<p>解析 JSON 子集的示例已经从 <a href="https://github.com/moritz/json/">JSON::Tiny</a><sup class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnotedef_8" title="View footnote.">8</a>]</sup> 模块中获取, 它使用<a href="https://github.com/moritz/json/blob/master/lib/JSON/Tiny/Grammar.pm">可管理的Raku grammar</a><sup class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnotedef_9" title="View footnote.">9</a>]</sup>来解析 JSON。我们越来越接近能够创造现实世界, 还有用许多实际应用创建可扩展的 grammar。</p>
+<p>解析 JSON 子集的示例已经从 <a href="https://github.com/moritz/json/">JSON::Tiny</a><sup class="footnote">[<a id="_footnoteref_44" class="footnote" href="#_footnotedef_44" title="View footnote.">44</a>]</sup> 模块中获取, 它使用<a href="https://github.com/moritz/json/blob/master/lib/JSON/Tiny/Grammar.pm">可管理的Raku grammar</a><sup class="footnote">[<a id="_footnoteref_45" class="footnote" href="#_footnotedef_45" title="View footnote.">45</a>]</sup>来解析 JSON。我们越来越接近能够创造现实世界, 还有用许多实际应用创建可扩展的 grammar。</p>
 </div>
 </div>
 <div class="sect2">
@@ -3726,7 +3745,7 @@ for &lt;true null 2015-12-24 42&gt; -&gt; $str {
 <h2 id="_使用_grammar_进行解析">9. 使用 Grammar 进行解析</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Grammar 是众所周知的用于解析的瑞士军刀<sup class="footnote">[<a id="_footnoteref_10" class="footnote" href="#_footnotedef_10" title="View footnote.">10</a>]</sup>。</p>
+<p>Grammar 是众所周知的用于解析的瑞士军刀<sup class="footnote">[<a id="_footnoteref_46" class="footnote" href="#_footnotedef_46" title="View footnote.">46</a>]</sup>。</p>
 </div>
 <div class="paragraph">
 <p>在本章中，我们将更详细地探讨它们。最重要的是，我们将讨论如何利用它们的力量。</p>
@@ -3737,7 +3756,7 @@ for &lt;true null 2015-12-24 42&gt; -&gt; $str {
 <p>Grammar 实现了一种自上而下的解析方法。解析的入口点， 通常是正则表达式 <code>TOP</code>，了解粗粒度结构和进一步调用进入细节的正则表达式。递归也可以参与其中。例如，如果你解析数学表达式，则项可以是一对括号内的任意表达式。</p>
 </div>
 <div class="paragraph">
-<p>这是一种自上而下的结构，或者更准确地说是一种<a href="https://en.wikipedia.org/wiki/Recursive_descent_parser">递归下降解析器</a><sup class="footnote">[<a id="_footnoteref_11" class="footnote" href="#_footnotedef_11" title="View footnote.">11</a>]</sup>。如果不涉及回溯，我们将其称为预测解析器，因为在字符串中的每个位置，我们确切地知道我们正在查找什么 - 我们可以预测下一个 token 将是什么(即使我们只能预测它可能是一组候选者之一)。</p>
+<p>这是一种自上而下的结构，或者更准确地说是一种<a href="https://en.wikipedia.org/wiki/Recursive_descent_parser">递归下降解析器</a><sup class="footnote">[<a id="_footnoteref_47" class="footnote" href="#_footnotedef_47" title="View footnote.">47</a>]</sup>。如果不涉及回溯，我们将其称为预测解析器，因为在字符串中的每个位置，我们确切地知道我们正在查找什么 - 我们可以预测下一个 token 将是什么(即使我们只能预测它可能是一组候选者之一)。</p>
 </div>
 <div class="paragraph">
 <p>结果匹配树在结构上对应于 grammar 中正则表达式的调用结构。让我们考虑解析一个数学表达式，仅包含运算符 <code>*</code>，<code>+</code> 和用于分组的括号:</p>
@@ -3851,7 +3870,7 @@ token operator { '*' | '+' }</code></pre>
 <p>使用第一版 grammar 解析此类表达式时， 解析树的结构表达了这种分组:它具有 - 作为顶级 - 一个 <code>sum</code>，操作数为 <code>1</code> 和 <code>2 * 5</code>。</p>
 </div>
 <div class="paragraph">
-<p>这是有代价的:每个优先级都需要一个单独的规则和名称，并且结果匹配对象的嵌套结果每个优先级别至少有一级。此外，以后添加更多优先权的水平并不是微不足道的，而且很难用通用的方式来做。如果你不愿意接受这些费用，你可以改用扁平模型 用于解析所有运算符的单个标记。如果你那么需要一个结构反映优先顺序的方法，你可以编写转换列表的代码 进了一棵树。这通常称为运算符优先级解析器<sup class="footnote">[<a id="_footnoteref_12" class="footnote" href="#_footnotedef_12" title="View footnote.">12</a>]</sup>。</p>
+<p>这是有代价的:每个优先级都需要一个单独的规则和名称，并且结果匹配对象的嵌套结果每个优先级别至少有一级。此外，以后添加更多优先权的水平并不是微不足道的，而且很难用通用的方式来做。如果你不愿意接受这些费用，你可以改用扁平模型 用于解析所有运算符的单个标记。如果你那么需要一个结构反映优先顺序的方法，你可以编写转换列表的代码 进了一棵树。这通常称为运算符优先级解析器<sup class="footnote">[<a id="_footnoteref_48" class="footnote" href="#_footnotedef_48" title="View footnote.">48</a>]</sup>。</p>
 </div>
 </div>
 <div class="sect3">
@@ -3994,11 +4013,11 @@ multi sub MAIN(Bool :$test!) {
 </div>
 </div>
 <div class="paragraph">
-<p>在命令行上。如果尚未安装 <code>zef</code>，请按照 zef 在 GitHub 页面的安装说明进行操作<sup class="footnote">[<a id="_footnoteref_13" class="footnote" href="#_footnotedef_13" title="View footnote.">13</a>]</sup>。</p>
+<p>在命令行上。如果尚未安装 <code>zef</code>，请按照 zef 在 GitHub 页面的安装说明进行操作<sup class="footnote">[<a id="_footnoteref_49" class="footnote" href="#_footnotedef_49" title="View footnote.">49</a>]</sup>。</p>
 </div>
 <div class="paragraph">
-<p>我们来看看 Tadeusz Sośnierz 开发的 <a href="https://github.com/tadzik/perl6-Config-INI">Config::INI</a><sup class="footnote">[<a id="_footnoteref_14" class="footnote" href="#_footnotedef_14" title="View footnote.">14</a>]</sup>
-包含以下 <a href="https://github.com/tadzik/perl6-Config-INI/blob/master/lib/Config/INI.pm">grammar</a><sup class="footnote">[<a id="_footnoteref_15" class="footnote" href="#_footnotedef_15" title="View footnote.">15</a>]</sup>(稍微重新格式化):</p>
+<p>我们来看看 Tadeusz Sośnierz 开发的 <a href="https://github.com/tadzik/perl6-Config-INI">Config::INI</a><sup class="footnote">[<a id="_footnoteref_50" class="footnote" href="#_footnotedef_50" title="View footnote.">50</a>]</sup>
+包含以下 <a href="https://github.com/tadzik/perl6-Config-INI/blob/master/lib/Config/INI.pm">grammar</a><sup class="footnote">[<a id="_footnoteref_51" class="footnote" href="#_footnotedef_51" title="View footnote.">51</a>]</sup>(稍微重新格式化):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4251,7 +4270,7 @@ b= 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>花括号里面是常规(非正则表达式)Raku代码，所以我们可以 用它来操纵哈希 <code>%*SYMBOLS</code>。表达式 <code>$&lt;identifier&gt;</code> 访问变量名称的捕获<sup class="footnote">[<a id="_footnoteref_16" class="footnote" href="#_footnotedef_16" title="View footnote.">16</a>]</sup>。因此，如果此规则解析a 变量a，此语句设置 <code>%*SYMBOLS{'a'} = True</code>。</p>
+<p>花括号里面是常规(非正则表达式)Raku代码，所以我们可以 用它来操纵哈希 <code>%*SYMBOLS</code>。表达式 <code>$&lt;identifier&gt;</code> 访问变量名称的捕获<sup class="footnote">[<a id="_footnoteref_52" class="footnote" href="#_footnotedef_52" title="View footnote.">52</a>]</sup>。因此，如果此规则解析a 变量a，此语句设置 <code>%*SYMBOLS{'a'} = True</code>。</p>
 </div>
 <div class="paragraph">
 <p>代码块的位置是相关的。把它放在电话前 到termlist表示当术语列表是已知的变量解析，所以它接受像a = 2，a的输入。如果我们先称之为termlist，那就是这种 输入被拒绝。</p>
@@ -4269,7 +4288,7 @@ token variable {
 </div>
 </div>
 <div class="paragraph">
-<p>你可能还记得在前面的例子中, <code>&lt;?{&#8230;&#8203;}&gt;</code> 执行了一段 Raku 代码, 如果返回一个假值，则解析失败。如果 <code>$&lt;identifier&gt;</code> 不在 <code>%*SYMBOLS</code> 中, 就会出现这种情况。这时, <strong>token</strong> 的非回溯性就很重要了。如果被解析的变量是 abc，而变量 <strong>a</strong> 在 <code>%*SYMBOLS</code> 中，那么回溯将尝试对 <code>&lt;identifier&gt;</code> 进行更短的匹配, 直到匹配到 <strong>a</strong>, 然后成功。<sup class="footnote">[<a id="_footnoteref_17" class="footnote" href="#_footnotedef_17" title="View footnote.">17</a>]</sup></p>
+<p>你可能还记得在前面的例子中, <code>&lt;?{&#8230;&#8203;}&gt;</code> 执行了一段 Raku 代码, 如果返回一个假值，则解析失败。如果 <code>$&lt;identifier&gt;</code> 不在 <code>%*SYMBOLS</code> 中, 就会出现这种情况。这时, <strong>token</strong> 的非回溯性就很重要了。如果被解析的变量是 abc，而变量 <strong>a</strong> 在 <code>%*SYMBOLS</code> 中，那么回溯将尝试对 <code>&lt;identifier&gt;</code> 进行更短的匹配, 直到匹配到 <strong>a</strong>, 然后成功。<sup class="footnote">[<a id="_footnoteref_53" class="footnote" href="#_footnotedef_53" title="View footnote.">53</a>]</sup></p>
 </div>
 <div class="paragraph">
 <p>因为 <code>%*SYMBOLS</code> 是在 token <strong>TOP</strong> 中声明的, 所以当你尝试从 grammar 之外调用 <strong>TOP</strong> 以外的规则时, 你必须重复这个声明。如果没有像 <code>my %*SYMBOLS;</code> 这样的声明, 那么像:</p>
@@ -4452,7 +4471,7 @@ grammar VariableLists {
 <p>Token TOP 创建了一个类 <code>SymbolTable</code> 类的新对象，声明 调用declare方法，并且令牌变量调用方法检查 - 声明。规则块在解析语句之前调用 enter-scope 列表，然后留下范围。这有效，但仅限于语句列表 可以成功解析; 如果没有，规则块在设法调用之前就失败了 离开作用域。</p>
 </div>
 <div class="paragraph">
-<p>Raku 具有针对这种情况的安全功能:如果你在声明前添加前缀 有了 LEAVE，Raku 会在常规出又处为你调用，无论何时何地 这是可能的(即使抛出异常)。自从 LEAVE <a href="https://docs.perl6.org/language/phasers">phasers</a><sup class="footnote">[<a id="_footnoteref_18" class="footnote" href="#_footnotedef_18" title="View footnote.">18</a>]</sup>。 只能在常规代码而不是正则表达式中运行，我们需要将正则表达式包装起来</p>
+<p>Raku 具有针对这种情况的安全功能:如果你在声明前添加前缀 有了 LEAVE，Raku 会在常规出又处为你调用，无论何时何地 这是可能的(即使抛出异常)。自从 LEAVE <a href="https://docs.perl6.org/language/phasers">phasers</a><sup class="footnote">[<a id="_footnoteref_54" class="footnote" href="#_footnotedef_54" title="View footnote.">54</a>]</sup>。 只能在常规代码而不是正则表达式中运行，我们需要将正则表达式包装起来</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4516,7 +4535,7 @@ rule block_wrapped {
 <div class="sect2">
 <h3 id="_action_对象">10.1. Action 对象</h3>
 <div class="paragraph">
-<p>Grammars 和匹配对象具有两个功能, 提供了更加弹性和可扩展性的数据提取方法。第一个也是比较简单的一个, 是你可以将任意数据结构附加到 <a href="https://docs.raku.org/type/Match">Match</a><sup class="footnote">[<a id="_footnoteref_19" class="footnote" href="#_footnotedef_19" title="View footnote.">19</a>]</sup> 对象， 随后通过 <code>.made</code> 属性访问它:</p>
+<p>Grammars 和匹配对象具有两个功能, 提供了更加弹性和可扩展性的数据提取方法。第一个也是比较简单的一个, 是你可以将任意数据结构附加到 <a href="https://docs.raku.org/type/Match">Match</a><sup class="footnote">[<a id="_footnoteref_55" class="footnote" href="#_footnotedef_55" title="View footnote.">55</a>]</sup> 对象， 随后通过 <code>.made</code> 属性访问它:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4901,10 +4920,10 @@ say MathExpression.parse("(\n1");</code></pre>
 <p>请注意，我们通过调用替换了直接模具函数调用 自定义错误方法。这种方法有一些技巧 确定行号: <code>.target</code> 方法返回字符串 语法当前匹配，<code>self.pos</code> 提取当前 解析位置。<code>self.pos</code> 相当于 <code>$/.to</code>，除了后者仅适用于解析结束或生成捕获时。</p>
 </div>
 <div class="paragraph">
-<p>这些方法来自哪里?通过声明一个类型语法，它自动获取父类 <a href="https://docs.raku.org/type/Grammar">Grammar</a><sup class="footnote">[<a id="_footnoteref_20" class="footnote" href="#_footnotedef_20" title="View footnote.">20</a>]</sup>(提供解析和 <code>subparse</code> 方法)，继而从 <a href="https://docs.raku.org/type/Cursor">Cursor</a><sup class="footnote">[<a id="_footnoteref_21" class="footnote" href="#_footnotedef_21" title="View footnote.">21</a>]</sup> 继承，供应 <code>.target</code> 和 <code>.pos</code> 方法。</p>
+<p>这些方法来自哪里?通过声明一个类型语法，它自动获取父类 <a href="https://docs.raku.org/type/Grammar">Grammar</a><sup class="footnote">[<a id="_footnoteref_56" class="footnote" href="#_footnotedef_56" title="View footnote.">56</a>]</sup>(提供解析和 <code>subparse</code> 方法)，继而从 <a href="https://docs.raku.org/type/Cursor">Cursor</a><sup class="footnote">[<a id="_footnoteref_57" class="footnote" href="#_footnotedef_57" title="View footnote.">57</a>]</sup> 继承，供应 <code>.target</code> 和 <code>.pos</code> 方法。</p>
 </div>
 <div class="paragraph">
-<p><a href="https://docs.raku.org/type/Str%23routine_lines">Str.lines</a><sup class="footnote">[<a id="_footnoteref_22" class="footnote" href="#_footnotedef_22" title="View footnote.">22</a>]</sup> 方法将字符串分解为行列表包含; 在此列表上调用 <code>.elems</code> 会产生行数。为一个 没有任何换行符的字符串，这会产生数字。注意比 即使是最核心的C程序员也会从头数开始计算行数一个(不是零)，所以 <code>lines.elems</code> 中的数字符合我们作为一条线的目的数。</p>
+<p><a href="https://docs.raku.org/type/Str%23routine_lines">Str.lines</a><sup class="footnote">[<a id="_footnoteref_58" class="footnote" href="#_footnotedef_58" title="View footnote.">58</a>]</sup> 方法将字符串分解为行列表包含; 在此列表上调用 <code>.elems</code> 会产生行数。为一个 没有任何换行符的字符串，这会产生数字。注意比 即使是最核心的C程序员也会从头数开始计算行数一个(不是零)，所以 <code>lines.elems</code> 中的数字符合我们作为一条线的目的数。</p>
 </div>
 <div class="paragraph">
 <p>示例代码的输出如下: 无法解析数学表达式:第2行没有关闭')'错误报告正确地将错误报告为在线号码 2，因为输入字符串中的 <code>\n</code> 引入了换行符。</p>
@@ -4975,7 +4994,7 @@ say MathExpression.parse("(\n1");</code></pre>
 <p>就像高水位标记每次大海或更高时被推高一点河流水位达到新的记录，我们可以记录到最远的位置我们的语法达到了。我们可以通过动态变量来做到这一点。 如果 <code>self.pos</code> 大于当前的值，我们设置为 <code>self.pos</code> 变量。然后，这个高水位标记构成了我们错误位置的基础报告。</p>
 </div>
 <div class="paragraph">
-<p>这种录音的一个方便的地方是 ws 令牌，因为它是在许多地方已经被召唤过，它是原始的自然分界符令牌。每当正则表达式位置达到新的高水位时，我们就会还可以记录调用ws的规则的名称。这个信息是可以通过 <a href="https://docs.raku.org/type/CallFrame%23sub_callframe">callframe</a><sup class="footnote">[<a id="_footnoteref_23" class="footnote" href="#_footnotedef_23" title="View footnote.">23</a>]</sup> 内置子程序:</p>
+<p>这种录音的一个方便的地方是 ws 令牌，因为它是在许多地方已经被召唤过，它是原始的自然分界符令牌。每当正则表达式位置达到新的高水位时，我们就会还可以记录调用ws的规则的名称。这个信息是可以通过 <a href="https://docs.raku.org/type/CallFrame%23sub_callframe">callframe</a><sup class="footnote">[<a id="_footnoteref_59" class="footnote" href="#_footnotedef_59" title="View footnote.">59</a>]</sup> 内置子程序:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5089,7 +5108,7 @@ MathExpression.parse('(1');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>FAILGOAL</code> 方法的参数是正则表达式的源代码 与结束分隔符匹配的部分。<a href="https://docs.raku.org/type/Str%23method_trim">trim</a><sup class="footnote">[<a id="_footnoteref_24" class="footnote" href="#_footnotedef_24" title="View footnote.">24</a>]</sup> 方法删除 周围的空白，我们输入的一个版本的输出本章前面所见的错误方法。</p>
+<p><code>FAILGOAL</code> 方法的参数是正则表达式的源代码 与结束分隔符匹配的部分。<a href="https://docs.raku.org/type/Str%23method_trim">trim</a><sup class="footnote">[<a id="_footnoteref_60" class="footnote" href="#_footnotedef_60" title="View footnote.">60</a>]</sup> 方法删除 周围的空白，我们输入的一个版本的输出本章前面所见的错误方法。</p>
 </div>
 <div class="paragraph">
 <p>输出如下:</p>
@@ -5113,10 +5132,10 @@ MathExpression.parse('(1');</code></pre>
 <p>你可能会因为在后面的例子中被推迟一章，超过一半的语法源代码现在都是专用的错误报告。但是我们开始使用非常简单的语法，它人为地减小了它的大小。</p>
 </div>
 <div class="paragraph">
-<p>此外，大多数错误报告代码都非常通用，并且可以被分解成一个角色，并在许多语法中重复使用。那是什么的 <a href="https://modules.raku.org/dist/Grammar-ErrorReporting">Grammar::ParseError</a><sup class="footnote">[<a id="_footnoteref_25" class="footnote" href="#_footnotedef_25" title="View footnote.">25</a>]</sup> 个模块提供。</p>
+<p>此外，大多数错误报告代码都非常通用，并且可以被分解成一个角色，并在许多语法中重复使用。那是什么的 <a href="https://modules.raku.org/dist/Grammar-ErrorReporting">Grammar::ParseError</a><sup class="footnote">[<a id="_footnoteref_61" class="footnote" href="#_footnotedef_61" title="View footnote.">61</a>]</sup> 个模块提供。</p>
 </div>
 <div class="paragraph">
-<p>最后，我认为好的解析错误非常重要保证这种关注。<sup class="footnote">[<a id="_footnoteref_26" class="footnote" href="#_footnotedef_26" title="View footnote.">26</a>]</sup></p>
+<p>最后，我认为好的解析错误非常重要保证这种关注。<sup class="footnote">[<a id="_footnoteref_62" class="footnote" href="#_footnotedef_62" title="View footnote.">62</a>]</sup></p>
 </div>
 </div>
 <div class="sect2">
@@ -5157,17 +5176,16 @@ MathExpression.parse('(1');</code></pre>
 <p>Abjads或辅音字母表遵循类似的结构，但只 包含辅音。可能有也可能没有元音标记表示 在说出单词的时候应该在哪里插入元音，但是那些 标记通常不表示要插入哪个元音。阿拉伯语和希伯来语 与古代北非和西亚的一些脚本类似，属于这一类。</p>
 </div>
 <div class="paragraph">
-<p>音节是一个书写系统，其中每个音节都有自己的
-字符。一个著名的例子是平假名，日语书写系统的一个组成部分。</p>
+<p>音节是一个书写系统，其中每个音节都有自己的字符。一个著名的例子是平假名，日语书写系统的一个组成部分。</p>
 </div>
 <div class="paragraph">
 <p>相比之下，表意文字传达了一种观念或意义。他们出现在中文书写系统中，往往与语音字符相结合，总共产生数千个字符。</p>
 </div>
 <div class="paragraph">
-<p>有几个不同的书写系统会影响程序员如何处理文本处理的地方:你不能假设单词是实际上是由字母组成的。一般来说，文本分割(将文本分成单词、句子和其他单位的过程)变得相当语言特定。并非所有语言和书写系统都使用空格 分割单词，甚至划定单词。见关于文本分段的 Unicode 技术报告了解更多信息。</p>
+<p>有几个不同的书写系统会影响程序员如何处理文本处理的地方: 你不能假设单词是实际上是由字母组成的。一般来说，文本分割(将文本分成单词、句子和其他单位的过程)变得相当语言特定。并非所有语言和书写系统都使用空格分割单词，甚至划定单词。见<a href="http://unicode.org/reports/tr29/">关于文本分段的 Unicode 技术报告</a><sup class="footnote">[<a id="_footnoteref_63" class="footnote" href="#_footnotedef_63" title="View footnote.">63</a>]</sup>了解更多信息。</p>
 </div>
 <div class="paragraph">
-<p>内置字符类如 <code>\d</code> 和 <code>\w</code> 匹配来自所有书写文字的字符 ，而不仅仅是拉丁文字。这意味着如果你使用 <code>\d+</code> 来 匹配一个数字，它可以匹配 42 和 ٤٢ (这是<a href="https://en.wikipedia.org/wiki/Eastern_Arabic_numerals">东阿拉伯语 数字</a>)。虽然这可能会令人惊讶，但将字符串 "٤٢" 转换为数字与我们的"普通"阿拉伯数字相同。</p>
+<p>内置字符类如 <code>\d</code> 和 <code>\w</code> 匹配来自所有书写文字的字符 ，而不仅仅是拉丁文字。这意味着如果你使用 <code>\d+</code> 来 匹配一个数字，它可以匹配 42 和 ٤٢ (这是<a href="https://en.wikipedia.org/wiki/Eastern_Arabic_numerals">东阿拉伯语数字</a><sup class="footnote">[<a id="_footnoteref_64" class="footnote" href="#_footnotedef_64" title="View footnote.">64</a>]</sup>)。虽然这可能会令人惊讶，但将字符串 "٤٢" 转换为数字与我们的"普通"阿拉伯数字相同。</p>
 </div>
 </div>
 <div class="sect2">
@@ -5252,7 +5270,7 @@ MathExpression.parse('(1');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里 Ll 是 Lowercase_Letter 的简写。全套可能值可从<a href="https://docs.raku.org/language/regexes#Unicode_properties">官方文档</a>中获得。</p>
+<p>这里 Ll 是 Lowercase_Letter 的简写。全套可能值可从<a href="https://docs.raku.org/language/regexes#Unicode_properties">官方文档</a>中获得。<sup class="footnote">[<a id="_footnoteref_65" class="footnote" href="#_footnotedef_65" title="View footnote.">65</a>]</sup></p>
 </div>
 <div class="paragraph">
 <p>您可以查询更多类别</p>
@@ -5283,22 +5301,22 @@ say "a".uniprop('Block');          # Output: Basic Latin</code></pre>
 <h2 id="_案例学习">13. 案例学习</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>前面的章节为您提供了如何知识语法工作，关于错误报告和数据提取。</p>
+<p>前面的章节为您提供了如何知识语法工作, 关于错误报告和数据提取。</p>
 </div>
 <div class="paragraph">
 <p>让我们来看看一些真实世界的输入格式以及我们如何做解析他们。</p>
 </div>
 <div class="paragraph">
-<p>这些案例研究的主要限制是大小:解析语言 像 SQL 一样，语法非常平易近人，但由于它是一项重大任务</p>
+<p>这些案例研究的主要限制是大小:解析语言 像 SQL 一样, 语法非常平易近人, 但由于它是一项重大任务</p>
 </div>
 <div class="paragraph">
 <p>纯粹的语言浩瀚。你可能不会喜欢阅读 40页 关于它。
-我们将探索解析三种格式，重点放在不同的格式上技术。S 表达式是一种简单但相当典型的数据序列化 格式，具有少量的空白意义。然后，我们会探索解析数学表达式，但略有不同方法比前几章的例子。我们使用运算符优先级解析器保持语法平坦。最后，像 Python 一样 minilanguage 可以教我们如何解析基于缩进的格式。</p>
+我们将探索解析三种格式, 重点放在不同的格式上技术。S 表达式是一种简单但相当典型的数据序列化 格式, 具有少量的空白意义。然后, 我们会探索解析数学表达式, 但略有不同方法比前几章的例子。我们使用运算符优先级解析器保持语法平坦。最后, 像 Python 一样 minilanguage 可以教我们如何解析基于缩进的格式。</p>
 </div>
 <div class="sect2">
 <h3 id="_s_表达式">13.1. S 表达式</h3>
 <div class="paragraph">
-<p>符号表达式，更好地称为 S 表达式，是一种表示法 树作为用于 Lisp 编程语言的嵌套列表。在 S-Expressions 中，列表由括号和 a 中的元素分隔 列表由空格分隔。S 表达式</p>
+<p>符号表达式, 更好地称为 S 表达式, 是一种表示法 树作为用于 Lisp 编程语言的嵌套列表。在 S-Expressions 中, 列表由括号和 a 中的元素分隔 列表由空格分隔。S 表达式</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5314,15 +5332,15 @@ say "a".uniprop('Block');          # Output: Basic Latin</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>列表元素通常称为原子。原子可以是未引用的 标识符，通常可以包含各种标点符号。例如 (+ 1 2) 是1 + 2 的 Lisp 表达式。您可以引用包含的原子 使用双引号的空格:</p>
+<p>列表元素通常称为原子。原子可以是未引用的 标识符, 通常可以包含各种标点符号。例如 (+ 1 2) 是1 + 2 的 Lisp 表达式。您可以引用包含的原子 使用双引号的空格:</p>
 </div>
 <div class="paragraph">
-<p>大型Lisp编程语言中的大多数方言 对程序代码和数据结构都使用 S-Expressions。他们 然而，在 S-Expression 中确切允许的是什么。一些允许 浮点文字，以及其他允许的字符不同在标识符内。</p>
+<p>大型Lisp编程语言中的大多数方言 对程序代码和数据结构都使用 S-Expressions。他们 然而, 在 S-Expression 中确切允许的是什么。一些允许 浮点文字, 以及其他允许的字符不同在标识符内。</p>
 </div>
 <div class="sect3">
 <h4 id="_解析_s_表达式">13.1.1. 解析 S 表达式</h4>
 <div class="paragraph">
-<p>让我们从解析原子开始吧。原子可以是整数，如 12345，a 标识符，如 lisp，或引用的字符串“像这样”。在可扩展的语法，这样的替代品清单应该作为原型实施令牌:</p>
+<p>让我们从解析原子开始吧。原子可以是整数, 如 12345, a 标识符, 如 lisp, 或引用的字符串“像这样”。在可扩展的语法, 这样的替代品清单应该作为原型实施令牌:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5342,10 +5360,10 @@ say "a".uniprop('Block');          # Output: Basic Latin</code></pre>
 <p>匹配潜在的有符号整数非常简单。</p>
 </div>
 <div class="paragraph">
-<p>S-Expression 标识符的难点不在于如何解析它们， 但决定在他们中允许什么。这取决于Lisp方言 解析。在前面的例子中，第一个字符允许拉丁字母和 符号=，*和:; 任何后续字符也允许数字和下划线。构造为使得整数是明确的解析为这样，也不能被解析为标识符。</p>
+<p>S-Expression 标识符的难点不在于如何解析它们,  但决定在他们中允许什么。这取决于Lisp方言 解析。在前面的例子中, 第一个字符允许拉丁字母和 符号=, *和:; 任何后续字符也允许数字和下划线。构造为使得整数是明确的解析为这样, 也不能被解析为标识符。</p>
 </div>
 <div class="paragraph">
-<p>此设置不允许单个+或 - 匹配作为标识符，并且只需将其添加到第一个字符类即可创建 歧义。如果我们想要允许这个，我们可以单独处理科:</p>
+<p>此设置不允许单个+或 - 匹配作为标识符, 并且只需将其添加到第一个字符类即可创建 歧义。如果我们想要允许这个, 我们可以单独处理科:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5359,10 +5377,10 @@ say "a".uniprop('Block');          # Output: Basic Latin</code></pre>
 <p>解析字符串遵循前面章节中规定的模式:两个外部引用和中间的字符串内容。字符串此处的内容由单独的规则解析以进行数据提取 更轻松。字符串内容由“常规”允许字符组成 (除反斜杠或双引号外的所有内容)或转义序列: 反斜杠后跟一个任意字符。</p>
 </div>
 <div class="paragraph">
-<p>您可能已经注意到 perl 6 允许您使用连字符 我之前使用过的标识符中的减号字符( - ) 在类名 S-Expression 中，但不在正则表达式的名称中 string_contents。造成这种不一致的原因是角色存在潜在的歧义:&#8592;alpha-hexdigit&gt; 可能是一个否定的命名字符类 alpha-hexdigit， 或匹配既不是 alpha 也不是 hexdigit 的任何东西。perl 6 消除第一种可能性的歧义，但避免这种情况 完全看起来仍然值得。</p>
+<p>您可能已经注意到 perl 6 允许您使用连字符 我之前使用过的标识符中的减号字符( - ) 在类名 S-Expression 中, 但不在正则表达式的名称中 string_contents。造成这种不一致的原因是角色存在潜在的歧义:&#8592;alpha-hexdigit&gt; 可能是一个否定的命名字符类 alpha-hexdigit,  或匹配既不是 alpha 也不是 hexdigit 的任何东西。perl 6 消除第一种可能性的歧义, 但避免这种情况 完全看起来仍然值得。</p>
 </div>
 <div class="paragraph">
-<p>既然我们有一些语法规则，我们应该测试核心功能:</p>
+<p>既然我们有一些语法规则, 我们应该测试核心功能:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5399,16 +5417,16 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们设置了一些原子应匹配的输入字符串(<code>%atoms</code>)和 一些他们不应该匹配(<code>%not-atoms</code>)。接下来，我们迭代 这些示例，并使用示例字符串和调用 <code>S-Expression.parse</code> 相应的规则，并在对我们的那些字符串的ok调用中包装它 期望被解析，并为我们期望的字符串nok(否定ok)不配。</p>
+<p>我们设置了一些原子应匹配的输入字符串(<code>%atoms</code>)和 一些他们不应该匹配(<code>%not-atoms</code>)。接下来, 我们迭代 这些示例, 并使用示例字符串和调用 <code>S-Expression.parse</code> 相应的规则, 并在对我们的那些字符串的ok调用中包装它 期望被解析, 并为我们期望的字符串nok(否定ok)不配。</p>
 </div>
 <div class="paragraph">
-<p>对于我们期望解析失败的情况，测试代码会将调用包装起来 <code>try {&#8230;&#8203;}</code> 块中的 <code>S-Expression.parse</code>。这不是绝对必要的， 因为我们没有可能导致错误的高级错误报告被抛出的异常。但是，这样的事情可能会在以后添加，并且我们不应该通过导致测试失败来惩罚未来的改进。</p>
+<p>对于我们期望解析失败的情况, 测试代码会将调用包装起来 <code>try {&#8230;&#8203;}</code> 块中的 <code>S-Expression.parse</code>。这不是绝对必要的,  因为我们没有可能导致错误的高级错误报告被抛出的异常。但是, 这样的事情可能会在以后添加, 并且我们不应该通过导致测试失败来惩罚未来的改进。</p>
 </div>
 <div class="paragraph">
-<p>最后，而不是使用通常的计划NUMBER; 在开始时，测试代码使用完成测试; 在末尾。这减少了计算测试的需要 你自己会以降低检测我们是否能够运行的能力为代价我们计划的测试。</p>
+<p>最后, 而不是使用通常的计划NUMBER; 在开始时, 测试代码使用完成测试; 在末尾。这减少了计算测试的需要 你自己会以降低检测我们是否能够运行的能力为代价我们计划的测试。</p>
 </div>
 <div class="paragraph">
-<p>测试全部通过，因此我们可以继续更高级别的位。要解析列表，我们需要一对包含空格分隔列表的括号原子:</p>
+<p>测试全部通过, 因此我们可以继续更高级别的位。要解析列表, 我们需要一对包含空格分隔列表的括号原子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5418,7 +5436,7 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在我们也可以处理嵌套列表的情况，其中 atom 是 a 子列表:</p>
+<p>现在我们也可以处理嵌套列表的情况, 其中 atom 是 a 子列表:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5426,7 +5444,7 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>最后我们指定一个S表达式是一个表达式列表， 可选地在它之间，之前和之后有空格:</p>
+<p>最后我们指定一个S表达式是一个表达式列表,  可选地在它之间, 之前和之后有空格:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5434,7 +5452,7 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这是第一次拍摄，很可能完全不起作用。您可能已经注意到所有正则表达式都是令牌而不是规则。这是因为空白是重要的(它划定原子)并使用规则风险无意中耗尽了这个重要的空白。因此语法错过了应该允许空白的情况，但什么也没有然后在那里解析它。解决这个问题的一个好方法是编写测试和运行它们:</p>
+<p>这是第一次拍摄, 很可能完全不起作用。您可能已经注意到所有正则表达式都是令牌而不是规则。这是因为空白是重要的(它划定原子)并使用规则风险无意中耗尽了这个重要的空白。因此语法错过了应该允许空白的情况, 但什么也没有然后在那里解析它。解决这个问题的一个好方法是编写测试和运行它们:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5491,7 +5509,7 @@ not ok 24 - can parse '( () ( ) )'</code></pre>
 <div class="sect3">
 <h4 id="_数据提取">13.1.2. 数据提取</h4>
 <div class="paragraph">
-<p>对应于 S 表达式语法的动作类大多是 直截了当。只有两件事与众不同。首先是区分 S 表达式(a)和(“a”)是有用的， 换句话说，在标识符和带引号的字符串之间。保持这一点 区别，action 类从此类返回一个 Identifier 对象:</p>
+<p>对应于 S 表达式语法的动作类大多是 直截了当。只有两件事与众不同。首先是区分 S 表达式(a)和(“a”)是有用的,  换句话说, 在标识符和带引号的字符串之间。保持这一点 区别, action 类从此类返回一个 Identifier 对象:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5509,7 +5527,7 @@ not ok 24 - can parse '( () ( ) )'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>要考虑的第二件事是如何处理反斜杠转义引用字符串中的字符。似乎有一致意见 S-Expression 实现 \\ 是一个强烈反对，而“是一个双重的 引用字符; 然而，反斜杠的语义依次为另一个不同的角色未达成一致。在这里我们将简单地剥离逃避反斜杠，所以\\变为\和\ a成为:</p>
+<p>要考虑的第二件事是如何处理反斜杠转义引用字符串中的字符。似乎有一致意见 S-Expression 实现 \\ 是一个强烈反对, 而“是一个双重的 引用字符; 然而, 反斜杠的语义依次为另一个不同的角色未达成一致。在这里我们将简单地剥离逃避反斜杠, 所以\\变为\和\ a成为:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5519,7 +5537,7 @@ not ok 24 - can parse '( () ( ) )'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>整数的 action 方法将匹配转换为整数，和其他方法只是传递其捕获的 <code>.made</code> 值:</p>
+<p>整数的 action 方法将匹配转换为整数, 和其他方法只是传递其捕获的 <code>.made</code> 值:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5567,7 +5585,7 @@ is-deeply $m.made,
 </div>
 </div>
 <div class="paragraph">
-<p>让我们为此写一个简短的测试:这个测试通过了，所以是时候把它包装成一个子程序了成为 S-Expression 解析器的公共 API:</p>
+<p>让我们为此写一个简短的测试:这个测试通过了, 所以是时候把它包装成一个子程序了成为 S-Expression 解析器的公共 API:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5582,14 +5600,14 @@ is-deeply $m.made,
 </div>
 </div>
 <div class="paragraph">
-<p>为简洁起见，我们不会为此改进错误消息生成 语法; 本章讨论的任何技术11可以在这里使用</p>
+<p>为简洁起见, 我们不会为此改进错误消息生成 语法; 本章讨论的任何技术11可以在这里使用</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_数学表达式和运算符优先级解析器">13.2. 数学表达式和运算符优先级解析器</h3>
 <div class="paragraph">
-<p>“如果你拥有的只是一把锤子，那么一切看起来都像钉子一样1，“如果你合作 一个闪亮的新工具，如正则表达式和语法，你往往忽略了选项使用其他工具来解决您的问题。本着这种精神，我想重温前面的解析示例数学表达式，这次在语法上做得更少 在随附的代码中。而不是为&#8230;&#8203;引入新的解析级别 每个优先级，这个语法的迭代忽略优先级 完全简单地解析交替的术语和运算符列表。该 然后，action方法使用运算符优先级表来创建 适当的树。这称为运算符优先级解析器，也称为运算符优先级解析器 作为OPP的简称。</p>
+<p>“如果你拥有的只是一把锤子, 那么一切看起来都像钉子一样<sup class="footnote">[<a id="_footnoteref_66" class="footnote" href="#_footnotedef_66" title="View footnote.">66</a>]</sup>, “如果你合作 一个闪亮的新工具, 如正则表达式和语法, 你往往忽略了选项使用其他工具来解决您的问题。本着这种精神, 我想重温前面的解析示例数学表达式, 这次在语法上做得更少 在随附的代码中。而不是为&#8230;&#8203;引入新的解析级别 每个优先级, 这个语法的迭代忽略优先级 完全简单地解析交替的术语和运算符列表。该 然后, action方法使用运算符优先级表来创建 适当的树。这称为运算符优先级解析器, 也称为运算符优先级解析器 作为OPP的简称。</p>
 </div>
 <div class="paragraph">
 <p>这种方法有两个主要优点。它做得很多更容易在两个现有级别和平面之间插入优先级别语法结构使解析更快。</p>
@@ -5597,7 +5615,7 @@ is-deeply $m.made,
 <div class="sect3">
 <h4 id="_一个简单的算子优先级解析器">13.2.1. 一个简单的算子优先级解析器</h4>
 <div class="paragraph">
-<p>语法的核心是将表达式解析为列表的部分由中缀运算符分隔的术语2:</p>
+<p>语法的核心是将表达式解析为列表的部分由中缀运算符分隔的术语<sup class="footnote">[<a id="_footnoteref_67" class="footnote" href="#_footnotedef_67" title="View footnote.">67</a>]</sup>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5605,7 +5623,7 @@ is-deeply $m.made,
 </div>
 </div>
 <div class="paragraph">
-<p>要使中缀运算符列表可扩展，它必须是 proto 令牌:</p>
+<p>要使中缀运算符列表可扩展, 它必须是 proto 令牌:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5618,10 +5636,10 @@ token infix:sym&lt;**&gt; { &lt;sym&gt; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>除了四个常用运算符外，此列表还包括 **，即 通常用于求幂，其优先级比乘法。</p>
+<p>除了四个常用运算符外, 此列表还包括 **, 即 通常用于求幂, 其优先级比乘法。</p>
 </div>
 <div class="paragraph">
-<p>这个术语包含数字并不会让你感到惊讶，但我们也可以 解析括号中的括号中的子表达式，以及 cos(0) 等函数调用或 sqrt(4):</p>
+<p>这个术语包含数字并不会让你感到惊讶, 但我们也可以 解析括号中的括号中的子表达式, 以及 cos(0) 等函数调用或 sqrt(4):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5669,7 +5687,7 @@ grammar MathExpression does Grammar::ErrorReporting {
 </div>
 </div>
 <div class="paragraph">
-<p><code>Grammar::ErrorReporting</code> 是一个提供错误的模块花式位置输出的方法，但也安装 <code>FAILGOAL</code> 方法 当 <code>~</code> 表达式无法找到目标时触发。如果你使用 <code>moritzlenz/raku-regex-alpine</code> Docker 镜像，这个模块已经存在包括在内。否则，您可以通过运行来安装它</p>
+<p><code>Grammar::ErrorReporting</code> 是一个提供错误的模块花式位置输出的方法, 但也安装 <code>FAILGOAL</code> 方法 当 <code>~</code> 表达式无法找到目标时触发。如果你使用 <code>moritzlenz/raku-regex-alpine</code> Docker 镜像, 这个模块已经存在包括在内。否则, 您可以通过运行来安装它</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5680,7 +5698,7 @@ grammar MathExpression does Grammar::ErrorReporting {
 <p>在命令行上。</p>
 </div>
 <div class="paragraph">
-<p>这个语法现在生成一个平面分析树。例如，输入字符串 <code>1 + 2 * 5</code> 生成以下匹配对象:</p>
+<p>这个语法现在生成一个平面分析树。例如, 输入字符串 <code>1 + 2 * 5</code> 生成以下匹配对象:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5696,16 +5714,16 @@ grammar MathExpression does Grammar::ErrorReporting {
 </div>
 </div>
 <div class="paragraph">
-<p>现在我们需要编写运算符优先级解析器来转换 平面数组 <code>[1, '+', 2, '*', 5]</code> 分为按优先级分组的树，所以 <code>[1, '+', [2, '\*', 5]</code>，甚至更好 <code>['+', 1, ['*', 2, 5]]</code>。</p>
+<p>现在我们需要编写运算符优先级解析器来转换 平面数组 <code>[1, '+', 2, '*', 5]</code> 分为按优先级分组的树, 所以 <code>[1, '+', [2, '\*', 5]</code>, 甚至更好 <code>['+', 1, ['*', 2, 5]]</code>。</p>
 </div>
 <div class="paragraph">
-<p>关键是每当我们第一次看到一个操作员时， 我们不知道它的相邻操作数是否实际属于该运算符 (如2 * 5的情况)，或者下一个运算符有更高的值 优先并窃取正确的操作数。</p>
+<p>关键是每当我们第一次看到一个操作员时,  我们不知道它的相邻操作数是否实际属于该运算符 (如2 * 5的情况), 或者下一个运算符有更高的值 优先并窃取正确的操作数。</p>
 </div>
 <div class="paragraph">
-<p>我们可以通过首先放置一个运算符及其左操作数来解决这个问题在堆栈上。当我们访问下一个运营商和第二个运营商时优先级低于第一个优先级，我们可以删除之前的优先级运算符及其操作数来自堆栈，将其转换为表达式，以及然后继续将第二个操作符放在堆栈上。如果是第二个运算符具有更高的优先级，我们只需将第二个运算符放在上面堆。</p>
+<p>我们可以通过首先放置一个运算符及其左操作数来解决这个问题在堆栈上。当我们访问下一个运营商和第二个运营商时优先级低于第一个优先级, 我们可以删除之前的优先级运算符及其操作数来自堆栈, 将其转换为表达式, 以及然后继续将第二个操作符放在堆栈上。如果是第二个运算符具有更高的优先级, 我们只需将第二个运算符放在上面堆。</p>
 </div>
 <div class="paragraph">
-<p>一旦到达输入列表的末尾，我们就可以应用缩减步骤直到堆栈上只剩下一个元素。这就是算法在代码中看起来像:</p>
+<p>一旦到达输入列表的末尾, 我们就可以应用缩减步骤直到堆栈上只剩下一个元素。这就是算法在代码中看起来像:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5735,19 +5753,19 @@ grammar MathExpression does Grammar::ErrorReporting {
 </div>
 </div>
 <div class="paragraph">
-<p>方法 opp-parse 期望一个令牌列表，从一个术语开始，然后中缀运算符，依此类推，其他每个令牌都是运算符。</p>
+<p>方法 opp-parse 期望一个令牌列表, 从一个术语开始, 然后中缀运算符, 依此类推, 其他每个令牌都是运算符。</p>
 </div>
 <div class="paragraph">
-<p>第一个元素是一个子程序 opp-reduce，它实现了 减少步骤: 取最后两个术语和它们之间的运算符 从堆栈中，并将它们作为数组添加回来。因此，如果堆栈有 元素 <code>1, '+', 2, '*', 4</code>，对此函数的调用将其修改为 <code>[1, '+', ['\*', 2, 4]]</code>，第二个调用进一步将其更改为 <code>['+', 1, ['*', 2, 4]]</code>。 <code>%prec</code> 是将每个中缀运算符映射到数字的哈希优先级，其中较高的数字对应于运算符绑定他们的论点更紧密。</p>
+<p>第一个元素是一个子程序 opp-reduce, 它实现了 减少步骤: 取最后两个术语和它们之间的运算符 从堆栈中, 并将它们作为数组添加回来。因此, 如果堆栈有 元素 <code>1, '+', 2, '*', 4</code>, 对此函数的调用将其修改为 <code>[1, '+', ['\*', 2, 4]]</code>, 第二个调用进一步将其更改为 <code>['+', 1, ['*', 2, 4]]</code>。 <code>%prec</code> 是将每个中缀运算符映射到数字的哈希优先级, 其中较高的数字对应于运算符绑定他们的论点更紧密。</p>
 </div>
 <div class="paragraph">
-<p>随后，<code>@stack</code> 初始化为第一个术语(来自@)令牌[0])，然后循环遍历其余的令牌元素一次。只要堆栈至少有三个元素(和 因此，至少一个运营商)，并且当前运营商具有较低的优先权 与前一个运算符相比，代码调用了opp-reduce 函数。在任何 case，当前运算符和 term 被添加到堆栈中。</p>
+<p>随后, <code>@stack</code> 初始化为第一个术语(来自@)令牌[0]), 然后循环遍历其余的令牌元素一次。只要堆栈至少有三个元素(和 因此, 至少一个运营商), 并且当前运营商具有较低的优先权 与前一个运算符相比, 代码调用了opp-reduce 函数。在任何 case, 当前运算符和 term 被添加到堆栈中。</p>
 </div>
 <div class="paragraph">
-<p>在访问了所有初始令牌之后，剩下要做的就是重复减少步骤，直到堆栈上只剩下一个元素。这就是我们感兴趣的解析树。</p>
+<p>在访问了所有初始令牌之后, 剩下要做的就是重复减少步骤, 直到堆栈上只剩下一个元素。这就是我们感兴趣的解析树。</p>
 </div>
 <div class="paragraph">
-<p>请注意，通过在令牌术语中解析带括号的表达式，我们不会必须在运算符优先级中将括号作为运算符处理解析器。更传统的实现只使用词法分析和运算符优先级解析器，用于检查和处理括号对。其余的动作方法非常简单</p>
+<p>请注意, 通过在令牌术语中解析带括号的表达式, 我们不会必须在运算符优先级中将括号作为运算符处理解析器。更传统的实现只使用词法分析和运算符优先级解析器, 用于检查和处理括号对。其余的动作方法非常简单</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5773,10 +5791,10 @@ method identifier($/) { make $/.Str }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里唯一有趣的是表达方法。记得 那个方法反对解析希望术语与运算符交错，但是 规则表达式的匹配产生两个数组，<code>$&lt;term&gt;</code> 和 <code>$&lt;infix&gt;</code>。 我们可以自己进行交错，但 Raku 提供了更好的解决方案:</p>
+<p>这里唯一有趣的地方是表达式方法。要知道, 方法 <code>opp-parse</code> 希望项与运算符交错, 但规则 <strong>expression</strong> 的匹配会产生两个数组, <code>$&lt;term&gt;</code> 和 <code>$&lt;infix&gt;</code>。我们可以自己进行交织, 但 Raku 提供了一个更好的解决方案：<a href="https://docs.raku.org/type/Match.html%23method_caps">Match 类中的方法 caps</a><sup class="footnote">[<a id="_footnoteref_68" class="footnote" href="#_footnotedef_68" title="View footnote.">68</a>]</sup>, 按照字符串中出现的顺序返回所有的 captures, 这正是我们想要的交织顺序。该方法的 caps 返回的是被封装在 <a href="https://docs.raku.org/type/Pair">Pair</a><sup class="footnote">[<a id="_footnoteref_69" class="footnote" href="#_footnotedef_69" title="View footnote.">69</a>]</sup> 对象中的捕获, 所以我们需要调用 <code>.value</code> 来到达 match 对象, 然后调用 <code>.made</code> 来访问附加在 match 上的抽象语法树 (AST) 。<code>map</code> 方法对 <code>caps</code> 返回的所有元素都是这样做的。</p>
 </div>
 <div class="paragraph">
-<p>该类 Match 中的方法上限按照它们的顺序返回所有捕获出现在字符串中，这正是我们想要的交错顺序。该方法大写返回包含在 Pair 中的捕获 4 个对象，所以我们需要 调用 <code>.value</code> 来到达匹配对象，然后 <code>.made</code> 来访问 抽象语法树(AST)附加到匹配 <code>.map</code> 方法有对于返回上限的所有元素。同样，我们可以将对语法的调用包装成子例程:</p>
+<p>同样的, 我们可以把对语法的调用封装成一个子例程。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5805,19 +5823,19 @@ is-deeply parse-math-expression('1 + 2 * 3**4 * 5 + 6'),
 <div class="sect3">
 <h4 id="_更灵活的方法">13.2.2. 更灵活的方法</h4>
 <div class="paragraph">
-<p>前面讨论过的语法和运算符优先级解析器部分工作，但运算符优先级解析器不是很可扩展。您可以轻松应用添加另一个中缀的角色 <code>:sym&lt;something&gt;</code> 规则，但是你不能为它定义一个优先级，因为 <code>%prec</code> 是一个词法变量无法在外部访问。</p>
+<p>上一节中讨论的语法和运算符优先级解析器可以工作，但运算符优先级解析器的可扩展性不强。你可以很容易地应用一个角色，增加另一个 <code>infix:sym&lt;something&gt;</code> 规则，但你不能为它定义一个优先级，因为 <code>%prec</code> 是一个词法变量，不能在 <code>opp-parse</code> 之外访问。</p>
 </div>
 <div class="paragraph">
-<p>一个可能的解决方法是创建一种注册表，通过它扩展可以添加运算符，但问题更深入。有 我们需要更多关于运算符的元数据的几个用例。一 这种情况是解析器应该能够处理不同的关联性。 如果中缀运算符出现两次或更多(或不同的运算符出现 相同的优先级出现在同一表达式中)，表达式 1 OP 2 OP 3 可以解释为(1 OP 2)OP 3(左关联)或1 OP(2 OP 3) (右关联)。对于求和+和乘法*运算符， 优先权无关紧要。对于差异 - 和分裂/，典型的 保留了关联性，但对于取代大多数编程语言 假设正确的相关性。我们需要一种方法来存储关联性 具有运算符的优先级。</p>
+<p>一个可能的解决方法是创建一些注册表，通过这些注册表，扩展可以添加一个操作符，但问题就更深了。有几个用例，我们需要更多关于操作符的元数据。其中一个例子是，如果解析器能够处理不同的关联性。如果一个运算符出现了两次或更多（或不同的运算符出现在同一个表达式中出现了相同的前缀），那么表达式 <strong>1 OP 2 OP 3</strong> 可以被解释为 <strong>(1 OP 2) OP 3</strong> (左联动)或 <strong>1 OP (2 OP 3)</strong> (右联动)。对于求和+和乘法*运算符，优先级并不重要。对于差分-和除法/，典型的联想性是左联想，但对于指数运算，大多数编程语言都假定是右联想。我们需要一种方法来存储运算符的联想性和优先级。</p>
 </div>
 <div class="paragraph">
-<p>还有其他类型的运营商。Postfix 运营商站了起来 在(后)任期之后。例如，阶乘运算符(!)代表 所有正整数的乘积，包括它的数字如下。举例说明: <code>6!</code> 是 <code>6 * 5 * 4 * 3 * 2 * 1</code> 或 720。现在我们需要关于运算符类型的元信息，以及自后缀运算符 打破关于交替条款和运营商的规则5，运营商 优先级解析器还需要一种可靠地区分术语的方法运营商。</p>
+<p>还有其他类型的运算符。后缀运算符是出现在项的后面(post)。例如，阶乘运算符(!)代表所有正整数的乘积，直到并包括它后面的数。举例说明： 6! 是 <code>6*5*4*3*2*1</code> 或 720。现在我们需要关于运算符类型的元信息，由于后缀运算符打破了关于交替项和运算符的规则<sup class="footnote">[<a id="_footnoteref_70" class="footnote" href="#_footnotedef_70" title="View footnote.">70</a>]</sup>，所以运算符优先级解析器也需要一种方法来可靠地区分运算符和运算符。</p>
 </div>
 <div class="paragraph">
-<p>解决这些困难的常见方法是聚集所有人有关操作员进入对象的信息。然后，运营商优先级解析器可以进行类型检查以查看某些内容是否为运算符然后询问它的优先级，关联性和类型(中缀，后缀，字首)。更重要的是，不再需要成为所有人的中心位置存储类型。当您为语法创建扩展角色时，您还可以为动作类创建一个扩展角色，然后返回该角色新引入的运算符的对象。</p>
+<p>为了解决这些困难，常用的方法是收集所有的的运算符信息，将运算符的信息转化为对象。然后，算子优先级解析器可以做一个类型检查，看看某事是否是一个算子，然后询问它的优先级、关联性和类型（infix、postfix、前缀）。更重要的是，不需要再有一个中心位置来存储所有类型。当你为语法创建一个扩展角色时，你也为动作类创建了一个扩展角色，而动作类又反过来为新引入的操作符返回一个对象。</p>
 </div>
 <div class="paragraph">
-<p>极简主义的方法(尚未处理关联性或其他类型的运营商)是这样的:</p>
+<p>最小化的方法（还没有处理关联性或其他类型的操作符）是这样的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5831,7 +5849,7 @@ is-deeply parse-math-expression('1 + 2 * 3**4 * 5 + 6'),
 </div>
 </div>
 <div class="paragraph">
-<p>然后，运算符的操作方法返回 Operator 对象:</p>
+<p>然后, 运算符的操作方法返回 Operator 对象:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5842,7 +5860,7 @@ method infix:sym&lt;**&gt;($/) { make Operator.new(~$&lt;sym&gt;, 3) }
 </div>
 </div>
 <div class="paragraph">
-<p>现在，方法可以将操作符作为对象访问
+<p>现在, 方法可以将操作符作为对象访问
 因此可以直接使用它们的优先级进行比较:</p>
 </div>
 <div class="listingblock">
@@ -5856,14 +5874,14 @@ method infix:sym&lt;**&gt;($/) { make Operator.new(~$&lt;sym&gt;, 3) }
 </div>
 </div>
 <div class="paragraph">
-<p>比较 <code>$op.precedence &#8656; @stack[\*-2].precedence</code> 是 对于左关联运算符; 当你改变小于或等于 (&#8656;) 严格小于 (&lt;)，你得到右关联的行为运营商。如果您想更多地探索运算符优先级解析器， 你可以为类Operator添加一个关联属性，给出取幂运算符权限优先，并更改比较把关联性考虑在内。表达式 <code>2 <strong> 3 </strong> 4</code> 应该出来是 <code>['<strong>'2，['</strong>'，3,4]]</code>。如果您觉得真的很冒险，那么甚至可能尝试将后缀运算符添加到语法和运算符中优先解析器。</p>
+<p>比较 <code>$op.precedence &#8656; @stack[\*-2].precedence</code> 是 对于左关联运算符; 当你改变小于或等于 (&#8656;) 严格小于 (&lt;), 你得到右关联的行为运营商。如果您想更多地探索运算符优先级解析器,  你可以为类Operator添加一个关联属性, 给出取幂运算符权限优先, 并更改比较把关联性考虑在内。表达式 <code>2 <strong> 3 </strong> 4</code> 应该出来是 <code>['<strong>'2, ['</strong>', 3,4]]</code>。如果您觉得真的很冒险, 那么甚至可能尝试将后缀运算符添加到语法和运算符中优先解析器。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_pythonesque基于缩进的语言">13.3. Pythonesque，基于缩进的语言</h3>
+<h3 id="_pythonesque_基于缩进的语言">13.3. Pythonesque, 基于缩进的语言</h3>
 <div class="paragraph">
-<p>Python，YAML，CoffeeScript 以及其他编程语言和数据 格式使用缩进来编码程序或数据的结构。 例如，这个 Raku 程序:</p>
+<p>Python, YAML, CoffeeScript 以及其他编程语言和数据 格式使用缩进来编码程序或数据的结构。 例如, 这个 Raku 程序:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5884,13 +5902,13 @@ print("outside the branch")</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在以冒号(:)结尾的行之后，下一行必须更多缩进比前一个缩进。所有其他共享相同的行缩进作为第二行属于块。如果一条线路较少前导空格比前一个块，这完成了所有打开的块更多领先的空间。</p>
+<p>在以冒号(:)结尾的行之后, 下一行必须更多缩进比前一个缩进。所有其他共享相同的行缩进作为第二行属于块。如果一条线路较少前导空格比前一个块, 这完成了所有打开的块更多领先的空间。</p>
 </div>
 <div class="paragraph">
-<p>Python 或 YAML 的完整语法太多了，无法适应这一点 因此，让我们探讨解析基于缩进的背后的概念没有大多数无关复杂性的语言。</p>
+<p>Python 或 YAML 的完整语法太多了, 无法适应这一点 因此, 让我们探讨解析基于缩进的背后的概念没有大多数无关复杂性的语言。</p>
 </div>
 <div class="paragraph">
-<p>我们将在这里解析的语言是 Python 的一小部分，我已经将它命名为 Pythonesque。它由包含数字的表达式组成， 变量，常见的中缀运算符，以及 if 语句缩进的身体。if 语句可以嵌套。</p>
+<p>我们将在这里解析的语言是 Python 的一小部分, 我已经将它命名为 Pythonesque。它由包含数字的表达式组成,  变量, 常见的中缀运算符, 以及 if 语句缩进的身体。if 语句可以嵌套。</p>
 </div>
 <div class="paragraph">
 <p>以下代码是一个小的示例程序 Pythonesque:</p>
@@ -5908,7 +5926,7 @@ b= 5</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>顶级开始时为零缩进，即第一个缩进级别使用至少一个空格(此处为四个)，第二个级别必须更远缩进而不是第二个(这里是十个空格)。</p>
+<p>顶级开始时为零缩进, 即第一个缩进级别使用至少一个空格(此处为四个), 第二个级别必须更远缩进而不是第二个(这里是十个空格)。</p>
 </div>
 <div class="sect3">
 <h4 id="_pythonesque_的语法">13.3.1. Pythonesque 的语法</h4>
@@ -5931,7 +5949,7 @@ b= 5</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在现实世界的用例中，我们可能会使用 proto 令牌来表示这两个术语和运营商; 这里我们只使用最小值来解析表达式。 如果要强制运算符优先级，可以使用运算符来自前一个案例研究的优先解析器。由于空间在 Pythonesque 中很重要，所以 ws 只匹配水平空间(我们允许在令牌之间;即，你可以写一个 =1 作为 a = 1)。然而，我们只有在确保这一点时才能这样做一行开头的空格由不同的规则匹配:</p>
+<p>在现实世界的用例中, 我们可能会使用 proto 令牌来表示这两个术语和运营商; 这里我们只使用最小值来解析表达式。 如果要强制运算符优先级, 可以使用运算符来自前一个案例研究的优先解析器。由于空间在 Pythonesque 中很重要, 所以 ws 只匹配水平空间(我们允许在令牌之间;即, 你可以写一个 =1 作为 a = 1)。然而, 我们只有在确保这一点时才能这样做一行开头的空格由不同的规则匹配:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5946,7 +5964,7 @@ token statement:sym&lt;expression&gt; {
 </div>
 </div>
 <div class="paragraph">
-<p>这里的核心概念是输入线由前导组成 缩进(长度可能为零，因此为 <code>\h*</code>)，然后是声明，最后是行尾 <code>$$</code> 后跟一个或多个换行符字符。请注意，必须检查前导空格的数量。 如果它与前一行相同，一切都很好。如果它与缩进匹配 在外部范围内，必须完成内部范围。如果它不匹配这些，我们发现了一个错误。要做那个检查，我们需要一个当前的数组活动(尚未完成)缩进级别:</p>
+<p>这里的核心概念是输入线由前导组成 缩进(长度可能为零, 因此为 <code>\h*</code>), 然后是声明, 最后是行尾 <code>$$</code> 后跟一个或多个换行符字符。请注意, 必须检查前导空格的数量。 如果它与前一行相同, 一切都很好。如果它与缩进匹配 在外部范围内, 必须完成内部范围。如果它不匹配这些, 我们发现了一个错误。要做那个检查, 我们需要一个当前的数组活动(尚未完成)缩进级别:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5977,7 +5995,7 @@ method handle_indentation($match) {
 </div>
 </div>
 <div class="paragraph">
-<p>Token TOP 用零作为初始化动态变量 <code>@*INDENTATION</code> 它的第一个元素。下一步，我们将实现添加元素 数组的结尾，但是现在我们假设它包含了数字每个缩进级别的空格。当我们解析这个输入时:</p>
+<p>Token TOP 用零作为初始化动态变量 <code>@*INDENTATION</code> 它的第一个元素。下一步, 我们将实现添加元素 数组的结尾, 但是现在我们假设它包含了数字每个缩进级别的空格。当我们解析这个输入时:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5988,13 +6006,13 @@ method handle_indentation($match) {
 </div>
 </div>
 <div class="paragraph">
-<p>数组 <code>@*INDENTATION</code> 包含数字 0, 4 和 10。如果是当前数字 缩进是十个空格(由 <code>$match.Str.chars</code> 确定;更多 复杂的分析可能会对标签的重量不同于空格，或者禁止混合标签和空格)，没有任何反应。如果目前还有更多前导空格，这必定是一个错误，因为增加的缩进是只有在 if 语句后才允许。</p>
+<p>数组 <code>@*INDENTATION</code> 包含数字 0, 4 和 10。如果是当前数字 缩进是十个空格(由 <code>$match.Str.chars</code> 确定;更多 复杂的分析可能会对标签的重量不同于空格, 或者禁止混合标签和空格), 没有任何反应。如果目前还有更多前导空格, 这必定是一个错误, 因为增加的缩进是只有在 if 语句后才允许。</p>
 </div>
 <div class="paragraph">
-<p>如果当前缩进级别小于记录的最后一个级别 <code>@*INDENTATION</code>，我们必须在 <code>@*INDENTATION</code> 中搜索当前值。 这就是我的 <code>$idx = @*INDENTATION.first(:k，$current);</code> 确实。该方法 <code>first</code> 搜索与某个匹配的第一个数组元素标准，这里等于 <code>$current</code>。使用 <code>:k</code> 修饰符，它返回该数组元素的索引。如果没有找到，则会出现未定义的值返回，<code>if defined $idx</code> check 触发器，抛出异常。 如果找到，则当前缩进是先前作用域的缩进。我们然后需要关闭所有更深入缩进的内部范围，这就是什么 <code>@*INDENTATION.pop</code> 适用于每个此类范围。</p>
+<p>如果当前缩进级别小于记录的最后一个级别 <code>@*INDENTATION</code>, 我们必须在 <code>@*INDENTATION</code> 中搜索当前值。 这就是我的 <code>$idx = @*INDENTATION.first(:k, $current);</code> 确实。该方法 <a href="https://docs.raku.org/type/List%23routine_first">first</a><sup class="footnote">[<a id="_footnoteref_71" class="footnote" href="#_footnotedef_71" title="View footnote.">71</a>]</sup> 搜索与某个匹配的第一个数组元素标准, 这里等于 <code>$current</code>。使用 <code>:k</code> 修饰符, 它返回该数组元素的索引。如果没有找到, 则会出现未定义的值返回, <code>if defined $idx</code> check 触发器, 抛出异常。 如果找到, 则当前缩进是先前作用域的缩进。我们然后需要关闭所有更深入缩进的内部范围, 这就是什么 <code>@*INDENTATION.pop</code> 适用于每个此类范围。</p>
 </div>
 <div class="paragraph">
-<p>当我们解析 if 语句时，我们知道它之后的行必须 有比当前行更多的缩进，但还没有多少。 我们可以通过设置第二个变量或推送特殊变量来表示 值得注意这个事实的 <code>@*INDENTATION</code>。这个哨兵价值可以是一个不是有效缩进的值(如 -1 或 0.5)，或单独的类型:</p>
+<p>当我们解析 if 语句时, 我们知道它之后的行必须 有比当前行更多的缩进, 但还没有多少。 我们可以通过设置第二个变量或推送特殊变量来表示 值得注意这个事实的 <code>@*INDENTATION</code>。这个<a href="https://en.wikipedia.org/wiki/Sentinel_value">哨兵值</a><sup class="footnote">[<a id="_footnoteref_72" class="footnote" href="#_footnotedef_72" title="View footnote.">72</a>]</sup>可以是一个不是有效缩进的值(如 -1 或 0.5), 或单独的类型:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6037,10 +6055,10 @@ method handle_indentation($match) {
 </div>
 </div>
 <div class="paragraph">
-<p>这标志着我们的语法可以成功解析的地步在该部分开头给出的例子，同样重要的是拒绝包含无效缩进的示例。</p>
+<p>这标志着我们的语法可以成功解析的地步在该部分开头给出的例子, 同样重要的是拒绝包含无效缩进的示例。</p>
 </div>
 <div class="paragraph">
-<p>但是，如果您尝试为此语法编写操作方法，那么您将会这样做很快就会注意到这是不合理的，因为语法解析的范围开始或结束时不进行通信。就这样动作方法需要查看一开始时的空白量行，然后使用 <code>@*INDENTATION</code>(或维护自己的版本) 重建当前和外部范围的图片。这是个不幸的重复劳动和相当多的耦合对语法内部的动作方法。</p>
+<p>但是, 如果您尝试为此语法编写操作方法, 那么您将会这样做很快就会注意到这是不合理的, 因为语法解析的范围开始或结束时不进行通信。就这样动作方法需要查看一开始时的空白量行, 然后使用 <code>@*INDENTATION</code>(或维护自己的版本) 重建当前和外部范围的图片。这是个不幸的重复劳动和相当多的耦合对语法内部的动作方法。</p>
 </div>
 <div class="paragraph">
 <p>一个更清洁的解决方案是提供某种指示的API 语法进入或离开范围时的动作对象。一个很好的技巧 这是调用始终匹配零个字符作为一种标记的规则:</p>
@@ -6059,10 +6077,10 @@ token TOP {
 </div>
 </div>
 <div class="paragraph">
-<p>令牌中的 construst&lt;?&gt;是 enter_scope 和 leave_scope 的一个空零宽度断言，总是成功匹配空串。</p>
+<p>令牌中的 construst&lt;?&gt;是 enter_scope 和 leave_scope 的一个空零宽度断言, 总是成功匹配空串。</p>
 </div>
 <div class="paragraph">
-<p>除了来自令牌TOP的调用之外，我们还需要插入对self的调用。 <code>enter_scope()</code> 进入方法 <code>handle_indentation</code>，遇到它 NEW_INDENTATION sentinel，并在添加调用 <code>self.leave_scope()</code> 时 范围已完成，因此伴随着 <code>@*INDENTATION</code> 的行。<code>pop()</code> 方法:</p>
+<p>除了来自令牌TOP的调用之外, 我们还需要插入对self的调用。 <code>enter_scope()</code> 进入方法 <code>handle_indentation</code>, 遇到它 NEW_INDENTATION sentinel, 并在添加调用 <code>self.leave_scope()</code> 时 范围已完成, 因此伴随着 <code>@*INDENTATION</code> 的行。<code>pop()</code> 方法:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6088,16 +6106,16 @@ token TOP {
 </div>
 </div>
 <div class="paragraph">
-<p>现在，操作对象有一个可以挂钩的地方，允许它们通过合理的努力处理语句的嵌套。</p>
+<p>现在, 操作对象有一个可以挂钩的地方, 允许它们通过合理的努力处理语句的嵌套。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_action_对象_2">13.3.2. Action 对象</h4>
 <div class="paragraph">
-<p>当我第一次为 Pythonesque 编写动作对象时，我做了一切 array: if 语句是一个数组，其第一个元素是字符串 “如果”，第二个是条件，第三个是身体 if语句。表达式也是数组，所以第二个元素是 也是一个数组。我很快忘记了生成的 AST。</p>
+<p>当我第一次为 Pythonesque 编写动作对象时, 我做了一切 array: if 语句是一个数组, 其第一个元素是字符串 “如果”, 第二个是条件, 第三个是身体 if语句。表达式也是数组, 所以第二个元素是 也是一个数组。我很快忘记了生成的 AST。</p>
 </div>
 <div class="paragraph">
-<p>为了解决这个问题，我把表达式保存为数组，但移动了运算符， 变量和if语句分成不同的类:</p>
+<p>为了解决这个问题, 我把表达式保存为数组, 但移动了运算符,  变量和if语句分成不同的类:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6114,7 +6132,7 @@ class If {
 </div>
 </div>
 <div class="paragraph">
-<p>完成此设置后，简单语句的操作方法就是不是很奇怪:</p>
+<p>完成此设置后, 简单语句的操作方法就是不是很奇怪:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6135,7 +6153,7 @@ class If {
 </div>
 </div>
 <div class="paragraph">
-<p>注意方法语句中的If-object如何: sym&lt;if&gt;被初始化它的状况，但不是它的身体。这是因为它尚未解析在声明时:sym&lt;if&gt;运行。为了正确嵌套语句，我们需要维护一堆范围。底部元素(或索引0，当实现为数组时) 是最外面的范围，顶部元素(或索引* -1)对应于 目前的范围。当我们离开一个范围时(除了最外面的范围，也称为 “mainline”)，它属于一个if语句，if 语句是最后一个 已在下一个最外层范围内解析的语句。所以我们需要 删除堆栈的当前范围并将其设置为堆栈的主体如果声明:</p>
+<p>注意方法语句中的If-object如何: sym&lt;if&gt;被初始化它的状况, 但不是它的身体。这是因为它尚未解析在声明时:sym&lt;if&gt;运行。为了正确嵌套语句, 我们需要维护一堆范围。底部元素(或索引0, 当实现为数组时) 是最外面的范围, 顶部元素(或索引* -1)对应于 目前的范围。当我们离开一个范围时(除了最外面的范围, 也称为 “mainline”), 它属于一个if语句, if 语句是最后一个 已在下一个最外层范围内解析的语句。所以我们需要 删除堆栈的当前范围并将其设置为堆栈的主体如果声明:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6159,7 +6177,7 @@ class If {
 </div>
 </div>
 <div class="paragraph">
-<p>使用各种示例字符串对此进行测试表明这主要起作用， 但在一个有趣的角落案例中失败:如果输入的最后一行至少有 两个级别的缩进，只有第一级缩进存在于 AST。例如，这个输入:</p>
+<p>使用各种示例字符串对此进行测试表明这主要起作用,  但在一个有趣的角落案例中失败:如果输入的最后一行至少有 两个级别的缩进, 只有第一级缩进存在于 AST。例如, 这个输入:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6177,10 +6195,10 @@ class If {
 </div>
 </div>
 <div class="paragraph">
-<p>缺少第二个 if 语句及其正文。自从身体 如果在 leave_scope 调用中填充了 If-objects，那么它就是理所当然的不调用 leave_scope。将 debug say 语句添加到操作中 方法 enter_scope 和 leave_scope 确认:对于显示的输入 之前，enter_scope 被调用三次(主线一次，一次 对于每个内部范围)，但只调用一次 leave_scope。</p>
+<p>缺少第二个 if 语句及其正文。自从身体 如果在 leave_scope 调用中填充了 If-objects, 那么它就是理所当然的不调用 leave_scope。将 debug say 语句添加到操作中 方法 enter_scope 和 leave_scope 确认:对于显示的输入 之前, enter_scope 被调用三次(主线一次, 一次 对于每个内部范围), 但只调用一次 leave_scope。</p>
 </div>
 <div class="paragraph">
-<p>leave_scope 可以从两个地方调用:来自令牌TOP(其中 工作)，并从方法 handle_indentation。这使得错误更清楚: handle_indentation 只调用 leave_scope 使用小于当前的缩进调用 handle_indentation 水平。但是，当最后没有解析未缩进的行时，没有这样的调用 handle_indentation 发生了。我们可以通过插入这样一个来解决这个问题最后人为地打电话:</p>
+<p>leave_scope 可以从两个地方调用:来自令牌TOP(其中 工作), 并从方法 handle_indentation。这使得错误更清楚: handle_indentation 只调用 leave_scope 使用小于当前的缩进调用 handle_indentation 水平。但是, 当最后没有解析未缩进的行时, 没有这样的调用 handle_indentation 发生了。我们可以通过插入这样一个来解决这个问题最后人为地打电话:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6197,21 +6215,21 @@ class If {
 </div>
 </div>
 <div class="paragraph">
-<p>有了这个修复程序，所有测试都通过了，我们可以考虑这个试验成功。
-您可以查看完整的代码，包括测试(以及一些小的 增强功能，可以更轻松地测试错误条件) GitHub。</p>
+<p>有了这个修复程序, 所有测试都通过了, 我们可以考虑这个试验成功。
+您可以查看完整的代码, 包括测试(以及一些小的 增强功能, 可以更轻松地测试错误条件) <a href="https://github.com/apress/perl-6-regexes-and-grammars/blob/master/chapter-13-case-studies/pythonesque.p6">GitHub</a><sup class="footnote">[<a id="_footnoteref_73" class="footnote" href="#_footnotedef_73" title="View footnote.">73</a>]</sup>。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_总结_12">13.4. 总结</h3>
 <div class="paragraph">
-<p>本章向您展示了使用的真实解析器的元素处理现实世界的数据:递归，运算符优先级解析器和基于缩进级别解析结构。最后一个例子也是在正则表达式和代码之间的相互作用中展示了权衡。</p>
+<p>本章向您展示了使用的真实解析器的元素处理现实世界的数据:递归, 运算符优先级解析器和基于缩进级别解析结构。最后一个例子也是在正则表达式和代码之间的相互作用中展示了权衡。</p>
 </div>
 <div class="paragraph">
-<p>在本书的整个过程中，您已经了解了基础知识关于 Raku，Raku 正则表达式的构建块，如何使用 regex 和 Raku 代码交互和捕获，提供从中提取信息的方法正则表达式匹配。</p>
+<p>在本书的整个过程中, 您已经了解了基础知识关于 Raku, Raku 正则表达式的构建块, 如何使用 regex 和 Raku 代码交互和捕获, 提供从中提取信息的方法正则表达式匹配。</p>
 </div>
 <div class="paragraph">
-<p>关于正则表达式力学和技术的章节给了你了解正则表达式如何工作以及如何使用的背景知识它们用于解析常见的数据格式。语法允许你构造并重用正则表达式。动作对象机制便于访问得到的匹配，以及关于错误报告的讨论比赛失败时该怎么办。武装与前几章的背景，以及 本章的应用程序，你应该能够自己编写 语法和解析器。我会留下 Larry Wall 的一句话， Perl 创造者和 Raku 的发明者:拥有适当的乐趣!</p>
+<p>关于正则表达式力学和技术的章节给了你了解正则表达式如何工作以及如何使用的背景知识它们用于解析常见的数据格式。语法允许你构造并重用正则表达式。动作对象机制便于访问得到的匹配, 以及关于错误报告的讨论比赛失败时该怎么办。武装与前几章的背景, 以及 本章的应用程序, 你应该能够自己编写 语法和解析器。我会留下 Larry Wall 的一句话,  Perl 创造者和 Raku 的发明者:拥有适当的乐趣!</p>
 </div>
 </div>
 </div>
@@ -6219,82 +6237,223 @@ class If {
 <div id="footnotes">
 <hr>
 <div class="footnote" id="_footnotedef_1">
-<a href="#_footnoteref_1">1</a>. Raku 有一个名为 <code>byte</code> 的内置类型, 所以如果省略了 <code>&amp;</code> 符号, 你会不小心引用这个类型。
+<a href="#_footnoteref_1">1</a>. <a href="https://en.wikipedia.org/wiki/Regular_language" class="bare">https://en.wikipedia.org/wiki/Regular_language</a>
 </div>
 <div class="footnote" id="_footnotedef_2">
-<a href="#_footnoteref_2">2</a>. 在 Python 中, 这个问题就更复杂了, 因为行的开头的空格是重要的, 除非是在表达式里面。
+<a href="#_footnoteref_2">2</a>. <a href="https://en.wikipedia.org/wiki/Kleene_star" class="bare">https://en.wikipedia.org/wiki/Kleene_star</a>
 </div>
 <div class="footnote" id="_footnotedef_3">
-<a href="#_footnoteref_3">3</a>. <code>&lt;!ww&gt;</code> 匹配除了单词内之外的任何地方
+<a href="#_footnoteref_3">3</a>. 其他编程语言用 "Traits" 一词来表示 Raku 中角色的概念。
 </div>
 <div class="footnote" id="_footnotedef_4">
-<a href="#_footnoteref_4">4</a>. 记住, <code>&lt;.ws&gt;</code> 中的前导点会导致 regex 不被捕获。因为 <code>ws</code> 例程都是关于我们并不特别在意的空白, 不捕捉它的匹配是有意义的。
+<a href="#_footnoteref_4">4</a>. <a href="https://github.com/ugexe/zef" class="bare">https://github.com/ugexe/zef</a>
 </div>
 <div class="footnote" id="_footnotedef_5">
-<a href="#_footnoteref_5">5</a>. <a href="https://docs.raku.org/type/Grammar" class="bare">https://docs.raku.org/type/Grammar</a>
+<a href="#_footnoteref_5">5</a>. <a href="https://github.com/nxadm/rakudo-pkg/releases" class="bare">https://github.com/nxadm/rakudo-pkg/releases</a>
 </div>
 <div class="footnote" id="_footnotedef_6">
-<a href="#_footnoteref_6">6</a>. <a href="https://en.wikipedia.org/wiki/SQL" class="bare">https://en.wikipedia.org/wiki/SQL</a>
+<a href="#_footnoteref_6">6</a>. <a href="https://raku.org/community/" class="bare">https://raku.org/community/</a>
 </div>
 <div class="footnote" id="_footnotedef_7">
-<a href="#_footnoteref_7">7</a>. <a href="http://json.org/" class="bare">http://json.org/</a>
+<a href="#_footnoteref_7">7</a>. Raku 希望你的程序文件是 UTF-8 编码的。
 </div>
 <div class="footnote" id="_footnotedef_8">
-<a href="#_footnoteref_8">8</a>. <a href="https://github.com/moritz/json/" class="bare">https://github.com/moritz/json/</a>
+<a href="#_footnoteref_8">8</a>. www.apress.com/us/book/9781484228982
 </div>
 <div class="footnote" id="_footnotedef_9">
-<a href="#_footnoteref_9">9</a>. <a href="https://github.com/moritz/json/blob/master/lib/JSON/Tiny/Grammar.pm" class="bare">https://github.com/moritz/json/blob/master/lib/JSON/Tiny/Grammar.pm</a>
+<a href="#_footnoteref_9">9</a>. www.packtpub.com/application-development/perl-6-deep-dive
 </div>
 <div class="footnote" id="_footnotedef_10">
-<a href="#_footnoteref_10">10</a>. 就像瑞士军刀，但威力更大。
+<a href="#_footnoteref_10">10</a>. <a href="https://docs.raku.org/type/Int#routine_chr" class="bare">https://docs.raku.org/type/Int#routine_chr</a>
 </div>
 <div class="footnote" id="_footnotedef_11">
-<a href="#_footnoteref_11">11</a>. <a href="https://en.wikipedia.org/wiki/Recursive_descent_parser" class="bare">https://en.wikipedia.org/wiki/Recursive_descent_parser</a>
+<a href="#_footnoteref_11">11</a>. <a href="https://docs.raku.org/type/Str#sub_sprintf" class="bare">https://docs.raku.org/type/Str#sub_sprintf</a>
 </div>
 <div class="footnote" id="_footnotedef_12">
-<a href="#_footnoteref_12">12</a>. <a href="https://en.wikipedia.org/wiki/Operator-precedence_parser" class="bare">https://en.wikipedia.org/wiki/Operator-precedence_parser</a>
+<a href="#_footnoteref_12">12</a>. <a href="https://docs.raku.org/type/Cool#method_uniname" class="bare">https://docs.raku.org/type/Cool#method_uniname</a>
 </div>
 <div class="footnote" id="_footnotedef_13">
-<a href="#_footnoteref_13">13</a>. <a href="https://github.com/ugexe/zef" class="bare">https://github.com/ugexe/zef</a>
+<a href="#_footnoteref_13">13</a>. <a href="http://unicode.org/reports/tr23/" class="bare">http://unicode.org/reports/tr23/</a>
 </div>
 <div class="footnote" id="_footnotedef_14">
-<a href="#_footnoteref_14">14</a>. <a href="https://github.com/tadzik/perl6-Config-INI" class="bare">https://github.com/tadzik/perl6-Config-INI</a>
+<a href="#_footnoteref_14">14</a>. 严格来说, 锚点也是零宽断言, 既可以向前查看, 也可以向后查看。
 </div>
 <div class="footnote" id="_footnotedef_15">
-<a href="#_footnoteref_15">15</a>. <a href="https://github.com/tadzik/perl6-Config-INI/blob/master/lib/Config/INI.pm" class="bare">https://github.com/tadzik/perl6-Config-INI/blob/master/lib/Config/INI.pm</a>
+<a href="#_footnoteref_15">15</a>. 如果这些对你来说没有意义, 不要担心；在后面的章节中讨论了匹配对象和正则表达式技术性细节之后, 就会比较清楚了。
 </div>
 <div class="footnote" id="_footnotedef_16">
-<a href="#_footnoteref_16">16</a>. 在这一点上，标识符不解析其周围的空白是至关重要的。因此，令牌不关心空白的原则，以及调用这些令牌的规则解析空白。
+<a href="#_footnoteref_16">16</a>. <a href="https://docs.raku.org/type/Match.html" class="bare">https://docs.raku.org/type/Match.html</a>
 </div>
 <div class="footnote" id="_footnotedef_17">
-<a href="#_footnoteref_17">17</a>. 在这种情况下, 这种情况是无害的，因为没有其他的规则可以匹配到变量的其他部分, 但还是会导致解析错误。但是, 在更复杂的情况下, 这种不经意的回溯可能会导致 grammar 的维护者感到非常困惑的错误。
+<a href="#_footnoteref_17">17</a>. <a href="https://docs.raku.org/type/Str#method_match" class="bare">https://docs.raku.org/type/Str#method_match</a>
 </div>
 <div class="footnote" id="_footnotedef_18">
-<a href="#_footnoteref_18">18</a>. <a href="https://docs.perl6.org/language/phasers" class="bare">https://docs.perl6.org/language/phasers</a>
+<a href="#_footnoteref_18">18</a>. 实际上他们就是
 </div>
 <div class="footnote" id="_footnotedef_19">
-<a href="#_footnoteref_19">19</a>. <a href="https://docs.raku.org/type/Match" class="bare">https://docs.raku.org/type/Match</a>
+<a href="#_footnoteref_19">19</a>. 从技术上讲, 还有<a href="http://unicode.org/faq/casemap_charprop.html%234">标题大小写</a>, 在标题中, 每个字的第一个字母的大写时, 比如在标题中, 也有特殊规定。修饰符 :ignorecase 也可以使用标题大小写。
 </div>
 <div class="footnote" id="_footnotedef_20">
-<a href="#_footnoteref_20">20</a>. <a href="https://docs.raku.org/type/Grammar" class="bare">https://docs.raku.org/type/Grammar</a>
+<a href="#_footnoteref_20">20</a>. <a href="https://docs.raku.org/type/Str#routine_substr" class="bare">https://docs.raku.org/type/Str#routine_substr</a>
 </div>
 <div class="footnote" id="_footnotedef_21">
-<a href="#_footnoteref_21">21</a>. <a href="https://docs.raku.org/type/Cursor" class="bare">https://docs.raku.org/type/Cursor</a>
+<a href="#_footnoteref_21">21</a>. <a href="https://docs.raku.org/type/Str#routine_comb" class="bare">https://docs.raku.org/type/Str#routine_comb</a>
 </div>
 <div class="footnote" id="_footnotedef_22">
-<a href="#_footnoteref_22">22</a>. <a href="https://docs.perl6.org/type/Str#routine_lines" class="bare">https://docs.perl6.org/type/Str#routine_lines</a>
+<a href="#_footnoteref_22">22</a>. <a href="https://docs.raku.org/type/Str#routine_split" class="bare">https://docs.raku.org/type/Str#routine_split</a>
 </div>
 <div class="footnote" id="_footnotedef_23">
-<a href="#_footnoteref_23">23</a>. <a href="https://docs.raku.org/type/CallFrame#sub_callframe" class="bare">https://docs.raku.org/type/CallFrame#sub_callframe</a>
+<a href="#_footnoteref_23">23</a>. <a href="https://docs.raku.org/type/Str#method_subst" class="bare">https://docs.raku.org/type/Str#method_subst</a>
 </div>
 <div class="footnote" id="_footnotedef_24">
-<a href="#_footnoteref_24">24</a>. <a href="https://docs.raku.org/type/Str#method_trim" class="bare">https://docs.raku.org/type/Str#method_trim</a>
+<a href="#_footnoteref_24">24</a>. 或者至少它试图以不同的方式进行匹配; 详情见第六章中关于回溯的讨论。
 </div>
 <div class="footnote" id="_footnotedef_25">
-<a href="#_footnoteref_25">25</a>. <a href="https://modules.raku.org/dist/Grammar-ErrorReporting" class="bare">https://modules.raku.org/dist/Grammar-ErrorReporting</a>
+<a href="#_footnoteref_25">25</a>. <a href="https://docs.raku.org/type/Match.html" class="bare">https://docs.raku.org/type/Match.html</a>
 </div>
 <div class="footnote" id="_footnotedef_26">
-<a href="#_footnoteref_26">26</a>. 可悲的是, 许多关于解析的学术文献都忽略了这一方面, 大概是因为很难量化错误信息的质量。
+<a href="#_footnoteref_26">26</a>. <a href="https://docs.raku.org/type/Array" class="bare">https://docs.raku.org/type/Array</a>
+</div>
+<div class="footnote" id="_footnotedef_27">
+<a href="#_footnoteref_27">27</a>. Raku 的早期版本为所有量词化的捕获创建了一个数组捕获，即使是使用了 ? 量词符。这让大多数用户感到困惑。
+</div>
+<div class="footnote" id="_footnotedef_28">
+<a href="#_footnoteref_28">28</a>. 这个素数测试通常归功于 Abigail，一个多产的 Perl 黑客。例如参见 <a href="http://neilk.net/blog/2000/06/01/abigails-regex-to-test-for-prime-numbers/。" class="bare">http://neilk.net/blog/2000/06/01/abigails-regex-to-test-for-prime-numbers/。</a>
+</div>
+<div class="footnote" id="_footnotedef_29">
+<a href="#_footnoteref_29">29</a>. 有限状态机形式假定你总是想匹配整个字符串, 因此使用了锚点。如果你只想在一个字符串中搜索, 你必须在 regex 后面加上 <code>.*</code>。
+</div>
+<div class="footnote" id="_footnotedef_30">
+<a href="#_footnoteref_30">30</a>. <a href="https://en.wikipedia.org/wiki/Powerset_construction" class="bare">https://en.wikipedia.org/wiki/Powerset_construction</a>
+</div>
+<div class="footnote" id="_footnotedef_31">
+<a href="#_footnoteref_31">31</a>. 对于贪婪或节俭的量词，它试图匹配它能匹配的最短的子串。
+</div>
+<div class="footnote" id="_footnotedef_32">
+<a href="#_footnoteref_32">32</a>. <a href="http://www.regexguru.com/2008/04/unintended-backtracking-can-bite-you/" class="bare">http://www.regexguru.com/2008/04/unintended-backtracking-can-bite-you/</a>
+</div>
+<div class="footnote" id="_footnotedef_33">
+<a href="#_footnoteref_33">33</a>. <a href="http://json.org/" class="bare">http://json.org/</a>
+</div>
+<div class="footnote" id="_footnotedef_34">
+<a href="#_footnoteref_34">34</a>. <a href="https://en.wikipedia.org/wiki/INI_file#Example" class="bare">https://en.wikipedia.org/wiki/INI_file#Example</a>
+</div>
+<div class="footnote" id="_footnotedef_35">
+<a href="#_footnoteref_35">35</a>. <a href="https://docs.perl6.org/language/testing" class="bare">https://docs.perl6.org/language/testing</a>
+</div>
+<div class="footnote" id="_footnotedef_36">
+<a href="#_footnoteref_36">36</a>. <a href="https://testanything.org/" class="bare">https://testanything.org/</a>
+</div>
+<div class="footnote" id="_footnotedef_37">
+<a href="#_footnoteref_37">37</a>. Raku 有一个名为 <code>byte</code> 的内置类型, 所以如果省略了 <code>&amp;</code> 符号, 你会不小心引用这个类型。
+</div>
+<div class="footnote" id="_footnotedef_38">
+<a href="#_footnoteref_38">38</a>. 在 Python 中, 这个问题就更复杂了, 因为行的开头的空格是重要的, 除非是在表达式里面。
+</div>
+<div class="footnote" id="_footnotedef_39">
+<a href="#_footnoteref_39">39</a>. <code>&lt;!ww&gt;</code> 匹配除了单词内之外的任何地方
+</div>
+<div class="footnote" id="_footnotedef_40">
+<a href="#_footnoteref_40">40</a>. 记住, <code>&lt;.ws&gt;</code> 中的前导点会导致 regex 不被捕获。因为 <code>ws</code> 例程都是关于我们并不特别在意的空白, 不捕捉它的匹配是有意义的。
+</div>
+<div class="footnote" id="_footnotedef_41">
+<a href="#_footnoteref_41">41</a>. <a href="https://docs.raku.org/type/Grammar" class="bare">https://docs.raku.org/type/Grammar</a>
+</div>
+<div class="footnote" id="_footnotedef_42">
+<a href="#_footnoteref_42">42</a>. <a href="https://en.wikipedia.org/wiki/SQL" class="bare">https://en.wikipedia.org/wiki/SQL</a>
+</div>
+<div class="footnote" id="_footnotedef_43">
+<a href="#_footnoteref_43">43</a>. <a href="http://json.org/" class="bare">http://json.org/</a>
+</div>
+<div class="footnote" id="_footnotedef_44">
+<a href="#_footnoteref_44">44</a>. <a href="https://github.com/moritz/json/" class="bare">https://github.com/moritz/json/</a>
+</div>
+<div class="footnote" id="_footnotedef_45">
+<a href="#_footnoteref_45">45</a>. <a href="https://github.com/moritz/json/blob/master/lib/JSON/Tiny/Grammar.pm" class="bare">https://github.com/moritz/json/blob/master/lib/JSON/Tiny/Grammar.pm</a>
+</div>
+<div class="footnote" id="_footnotedef_46">
+<a href="#_footnoteref_46">46</a>. 就像瑞士军刀，但威力更大。
+</div>
+<div class="footnote" id="_footnotedef_47">
+<a href="#_footnoteref_47">47</a>. <a href="https://en.wikipedia.org/wiki/Recursive_descent_parser" class="bare">https://en.wikipedia.org/wiki/Recursive_descent_parser</a>
+</div>
+<div class="footnote" id="_footnotedef_48">
+<a href="#_footnoteref_48">48</a>. <a href="https://en.wikipedia.org/wiki/Operator-precedence_parser" class="bare">https://en.wikipedia.org/wiki/Operator-precedence_parser</a>
+</div>
+<div class="footnote" id="_footnotedef_49">
+<a href="#_footnoteref_49">49</a>. <a href="https://github.com/ugexe/zef" class="bare">https://github.com/ugexe/zef</a>
+</div>
+<div class="footnote" id="_footnotedef_50">
+<a href="#_footnoteref_50">50</a>. <a href="https://github.com/tadzik/perl6-Config-INI" class="bare">https://github.com/tadzik/perl6-Config-INI</a>
+</div>
+<div class="footnote" id="_footnotedef_51">
+<a href="#_footnoteref_51">51</a>. <a href="https://github.com/tadzik/perl6-Config-INI/blob/master/lib/Config/INI.pm" class="bare">https://github.com/tadzik/perl6-Config-INI/blob/master/lib/Config/INI.pm</a>
+</div>
+<div class="footnote" id="_footnotedef_52">
+<a href="#_footnoteref_52">52</a>. 在这一点上，标识符不解析其周围的空白是至关重要的。因此，令牌不关心空白的原则，以及调用这些令牌的规则解析空白。
+</div>
+<div class="footnote" id="_footnotedef_53">
+<a href="#_footnoteref_53">53</a>. 在这种情况下, 这种情况是无害的，因为没有其他的规则可以匹配到变量的其他部分, 但还是会导致解析错误。但是, 在更复杂的情况下, 这种不经意的回溯可能会导致 grammar 的维护者感到非常困惑的错误。
+</div>
+<div class="footnote" id="_footnotedef_54">
+<a href="#_footnoteref_54">54</a>. <a href="https://docs.perl6.org/language/phasers" class="bare">https://docs.perl6.org/language/phasers</a>
+</div>
+<div class="footnote" id="_footnotedef_55">
+<a href="#_footnoteref_55">55</a>. <a href="https://docs.raku.org/type/Match" class="bare">https://docs.raku.org/type/Match</a>
+</div>
+<div class="footnote" id="_footnotedef_56">
+<a href="#_footnoteref_56">56</a>. <a href="https://docs.raku.org/type/Grammar" class="bare">https://docs.raku.org/type/Grammar</a>
+</div>
+<div class="footnote" id="_footnotedef_57">
+<a href="#_footnoteref_57">57</a>. <a href="https://docs.raku.org/type/Cursor" class="bare">https://docs.raku.org/type/Cursor</a>
+</div>
+<div class="footnote" id="_footnotedef_58">
+<a href="#_footnoteref_58">58</a>. <a href="https://docs.perl6.org/type/Str#routine_lines" class="bare">https://docs.perl6.org/type/Str#routine_lines</a>
+</div>
+<div class="footnote" id="_footnotedef_59">
+<a href="#_footnoteref_59">59</a>. <a href="https://docs.raku.org/type/CallFrame#sub_callframe" class="bare">https://docs.raku.org/type/CallFrame#sub_callframe</a>
+</div>
+<div class="footnote" id="_footnotedef_60">
+<a href="#_footnoteref_60">60</a>. <a href="https://docs.raku.org/type/Str#method_trim" class="bare">https://docs.raku.org/type/Str#method_trim</a>
+</div>
+<div class="footnote" id="_footnotedef_61">
+<a href="#_footnoteref_61">61</a>. <a href="https://modules.raku.org/dist/Grammar-ErrorReporting" class="bare">https://modules.raku.org/dist/Grammar-ErrorReporting</a>
+</div>
+<div class="footnote" id="_footnotedef_62">
+<a href="#_footnoteref_62">62</a>. 可悲的是, 许多关于解析的学术文献都忽略了这一方面, 大概是因为很难量化错误信息的质量。
+</div>
+<div class="footnote" id="_footnotedef_63">
+<a href="#_footnoteref_63">63</a>. <a href="http://unicode.org/reports/tr29/" class="bare">http://unicode.org/reports/tr29/</a>
+</div>
+<div class="footnote" id="_footnotedef_64">
+<a href="#_footnoteref_64">64</a>. <a href="https://en.wikipedia.org/wiki/Eastern_Arabic_numerals" class="bare">https://en.wikipedia.org/wiki/Eastern_Arabic_numerals</a>
+</div>
+<div class="footnote" id="_footnotedef_65">
+<a href="#_footnoteref_65">65</a>. <a href="https://docs.raku.org/language/regexes#Unicode_properties" class="bare">https://docs.raku.org/language/regexes#Unicode_properties</a>
+</div>
+<div class="footnote" id="_footnotedef_66">
+<a href="#_footnoteref_66">66</a>. 亚伯拉罕-马斯洛之后, 1966 年。见 <a href="https://en.wikipedia.org/wiki/" class="bare">https://en.wikipedia.org/wiki/</a> Law_of_the_instrument.
+</div>
+<div class="footnote" id="_footnotedef_67">
+<a href="#_footnoteref_67">67</a>. 中缀运算符是指在两个项之间的运算符, 如 2*4 中的星号 *。
+</div>
+<div class="footnote" id="_footnotedef_68">
+<a href="#_footnoteref_68">68</a>. <a href="https://docs.raku.org/type/Match.html#method_caps" class="bare">https://docs.raku.org/type/Match.html#method_caps</a>
+</div>
+<div class="footnote" id="_footnotedef_69">
+<a href="#_footnoteref_69">69</a>. <a href="https://docs.raku.org/type/Pair" class="bare">https://docs.raku.org/type/Pair</a>
+</div>
+<div class="footnote" id="_footnotedef_70">
+<a href="#_footnoteref_70">70</a>. 例如，表达式 3! + 2 有一个项，后面是后缀运算符，再后面也是后缀运算符。
+</div>
+<div class="footnote" id="_footnotedef_71">
+<a href="#_footnoteref_71">71</a>. <a href="https://docs.raku.org/type/List#routine_first" class="bare">https://docs.raku.org/type/List#routine_first</a>
+</div>
+<div class="footnote" id="_footnotedef_72">
+<a href="#_footnoteref_72">72</a>. <a href="https://en.wikipedia.org/wiki/Sentinel_value" class="bare">https://en.wikipedia.org/wiki/Sentinel_value</a>
+</div>
+<div class="footnote" id="_footnotedef_73">
+<a href="#_footnoteref_73">73</a>. <a href="https://github.com/apress/perl-6-regexes-and-grammars/blob/master/" class="bare">https://github.com/apress/perl-6-regexes-and-grammars/blob/master/</a> chapter-13-case-studies/pythonesque.p6
 </div>
 </div>
 
