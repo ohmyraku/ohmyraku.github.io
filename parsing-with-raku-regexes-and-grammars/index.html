@@ -8,7 +8,7 @@
 
 <meta name="author" content="ohmyraku">
 <meta name="application-name" content="山川异域, 风月同天">
-<meta name="description" content="Table of Contents 1. 什么是正则表达式和 Grammars？ 1.1. 使用场景 1.2. 正则或正则表达式 1.3. Raku 正则表达式有什么特别之处   2. Raku 入门 2.1. 安装 Rakudo Raku 2.2. 使用 Rakudo Raku 2.3. 获取代码示例 2.4. Raku 第一步 2.5. 总结   3. 正则表达式构造块 3.1. 字面量 3.2. 元字符与字面量 3.3. Anchors 3.4. 预定义字符类 3.5. 量词 3.6. 析取 3.7. 连接 3.8. 零宽断言 3.9. 总结   4. 正则表达式和 Raku 代码 4.1. 智能匹配 4.2. 引号形式 4.3. 修饰符 4.4. comb 和 split 4.">
+<meta name="description" content="Table of Contents 1. 什么是正则表达式和 Grammar？ 1.1. 使用场景 1.2. 正则或正则表达式 1.3. Raku 正则表达式有什么特别之处   2. Raku 入门 2.1. 安装 Raku 2.2. 使用 Raku 2.3. 获取代码示例 2.4. 使用 Raku 的第一步 2.5. 总结   3. 正则表达式构造块 3.1. 字面量 3.2. 元字符与字面量 3.3. Anchors 3.4. 预定义字符类 3.5. 量词 3.6. 析取 3.7. 连接 3.8. 零宽断言 3.9. 总结   4. 正则表达式和 Raku 代码 4.1. 智能匹配 4.2. 引号形式 4.3. 修饰符 4.4. comb 和 split 4.">
 <meta name="robots" content="noodp"/>
 <meta name="generator" content="Hugo 0.63.2" />
 <meta name="referrer" content="no-referrer" />
@@ -22,7 +22,7 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="使用 Raku 正则表达式和 Grammars 进行解析" />
-<meta name="twitter:description" content="Table of Contents 1. 什么是正则表达式和 Grammars？ 1.1. 使用场景 1.2. 正则或正则表达式 1.3. Raku 正则表达式有什么特别之处   2. Raku 入门 2.1. 安装 Rakudo Raku 2.2. 使用 Rakudo Raku 2.3. 获取代码示例 2.4. Raku 第一步 2.5. 总结   3. 正则表达式构造块 3.1. 字面量 3.2. 元字符与字面量 3.3. Anchors 3.4. 预定义字符类 3.5. 量词 3.6. 析取 3.7. 连接 3.8. 零宽断言 3.9. 总结   4. 正则表达式和 Raku 代码 4.1. 智能匹配 4.2. 引号形式 4.3. 修饰符 4.4. comb 和 split 4." />
+<meta name="twitter:description" content="Table of Contents 1. 什么是正则表达式和 Grammar？ 1.1. 使用场景 1.2. 正则或正则表达式 1.3. Raku 正则表达式有什么特别之处   2. Raku 入门 2.1. 安装 Raku 2.2. 使用 Raku 2.3. 获取代码示例 2.4. 使用 Raku 的第一步 2.5. 总结   3. 正则表达式构造块 3.1. 字面量 3.2. 元字符与字面量 3.3. Anchors 3.4. 预定义字符类 3.5. 量词 3.6. 析取 3.7. 连接 3.8. 零宽断言 3.9. 总结   4. 正则表达式和 Raku 代码 4.1. 智能匹配 4.2. 引号形式 4.3. 修饰符 4.4. comb 和 split 4." />
 <meta name="twitter:site" content="https://ohmyraku.github.io" />
 <meta name="twitter:creator" content="ohmyraku" />
 <meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
@@ -32,7 +32,7 @@
 <meta property="og:title" content="使用 Raku 正则表达式和 Grammars 进行解析" />
 <meta property="og:url" content="https://ohmyraku.github.io" />
 <meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="Table of Contents 1. 什么是正则表达式和 Grammars？ 1.1. 使用场景 1.2. 正则或正则表达式 1.3. Raku 正则表达式有什么特别之处   2. Raku 入门 2.1. 安装 Rakudo Raku 2.2. 使用 Rakudo Raku 2.3. 获取代码示例 2.4. Raku 第一步 2.5. 总结   3. 正则表达式构造块 3.1. 字面量 3.2. 元字符与字面量 3.3. Anchors 3.4. 预定义字符类 3.5. 量词 3.6. 析取 3.7. 连接 3.8. 零宽断言 3.9. 总结   4. 正则表达式和 Raku 代码 4.1. 智能匹配 4.2. 引号形式 4.3. 修饰符 4.4. comb 和 split 4." />
+<meta property="og:description" content="Table of Contents 1. 什么是正则表达式和 Grammar？ 1.1. 使用场景 1.2. 正则或正则表达式 1.3. Raku 正则表达式有什么特别之处   2. Raku 入门 2.1. 安装 Raku 2.2. 使用 Raku 2.3. 获取代码示例 2.4. 使用 Raku 的第一步 2.5. 总结   3. 正则表达式构造块 3.1. 字面量 3.2. 元字符与字面量 3.3. Anchors 3.4. 预定义字符类 3.5. 量词 3.6. 析取 3.7. 连接 3.8. 零宽断言 3.9. 总结   4. 正则表达式和 Raku 代码 4.1. 智能匹配 4.2. 引号形式 4.3. 修饰符 4.4. comb 和 split 4." />
 <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -49,7 +49,7 @@
         "@type": "Person",
         "name": "ohmyraku"
       },
-      "description": "Table of Contents 1. 什么是正则表达式和 Grammars？ 1.1. 使用场景 1.2. 正则或正则表达式 1.3. Raku 正则表达式有什么特别之处   2. Raku 入门 2.1. 安装 Rakudo Raku 2.2. 使用 Rakudo Raku 2.3. 获取代码示例 2.4. Raku 第一步 2.5. 总结   3. 正则表达式构造块 3.1. 字面量 3.2. 元字符与字面量 3.3. Anchors 3.4. 预定义字符类 3.5. 量词 3.6. 析取 3.7. 连接 3.8. 零宽断言 3.9. 总结   4. 正则表达式和 Raku 代码 4.1. 智能匹配 4.2. 引号形式 4.3. 修饰符 4.4. comb 和 split 4.",
+      "description": "Table of Contents 1. 什么是正则表达式和 Grammar？ 1.1. 使用场景 1.2. 正则或正则表达式 1.3. Raku 正则表达式有什么特别之处   2. Raku 入门 2.1. 安装 Raku 2.2. 使用 Raku 2.3. 获取代码示例 2.4. 使用 Raku 的第一步 2.5. 总结   3. 正则表达式构造块 3.1. 字面量 3.2. 元字符与字面量 3.3. Anchors 3.4. 预定义字符类 3.5. 量词 3.6. 析取 3.7. 连接 3.8. 零宽断言 3.9. 总结   4. 正则表达式和 Raku 代码 4.1. 智能匹配 4.2. 引号形式 4.3. 修饰符 4.4. comb 和 split 4.",
       "publisher": {
         "@type": "Organization",
         "name": "https:\/\/ohmyraku.github.io",
@@ -99,7 +99,7 @@ if (theme && theme !== "1") {
 <article class="page__content" ><div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_什么是正则表达式和_grammars">1. 什么是正则表达式和 Grammars？</a>
+<li><a href="#_什么是正则表达式和_grammar">1. 什么是正则表达式和 Grammar？</a>
 <ul class="sectlevel2">
 <li><a href="#_使用场景">1.1. 使用场景</a></li>
 <li><a href="#_正则或正则表达式">1.2. 正则或正则表达式</a></li>
@@ -108,10 +108,10 @@ if (theme && theme !== "1") {
 </li>
 <li><a href="#_raku_入门">2. Raku 入门</a>
 <ul class="sectlevel2">
-<li><a href="#_安装_rakudo_raku">2.1. 安装 Rakudo Raku</a></li>
-<li><a href="#_使用_rakudo_raku">2.2. 使用 Rakudo Raku</a></li>
+<li><a href="#_安装_raku">2.1. 安装 Raku</a></li>
+<li><a href="#_使用_raku">2.2. 使用 Raku</a></li>
 <li><a href="#_获取代码示例">2.3. 获取代码示例</a></li>
-<li><a href="#_raku_第一步">2.4. Raku 第一步</a></li>
+<li><a href="#_使用_raku_的第一步">2.4. 使用 Raku 的第一步</a></li>
 <li><a href="#_总结">2.5. 总结</a></li>
 </ul>
 </li>
@@ -228,23 +228,23 @@ if (theme && theme !== "1") {
 </ul>
 </div>
 <div class="sect1">
-<h2 id="_什么是正则表达式和_grammars">1. 什么是正则表达式和 Grammars？</h2>
+<h2 id="_什么是正则表达式和_grammar">1. 什么是正则表达式和 Grammar？</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>我们接触到各种结构化数据:电话号码，电子邮件地址，邮政地址，信用卡号等。</p>
+<p>我们会接触到各种各样的结构化数据: 电话号码、电子邮件地址、邮政地址、信用卡号码等等。</p>
 </div>
 <div class="paragraph">
-<p>正则表达式是一种描述此类数据格式的声明性编程结构。正则表达式允许您搜索数据，确保输入确实是所描述的格式，甚至提取相关的组件，如邮政地址的邮政编码，或日志文件条目的时间戳。</p>
+<p>正则表达式是一种声明性的编程结构, 用来描述这些数据格式。正则表达式可以让你搜索数据, 确保输入的数据确实是真实的格式, 甚至可以提取相关的组件, 如邮政地址的邮政编码, 或日志文件条目中的时间戳。</p>
 </div>
 <div class="paragraph">
-<p>当您需要阅读和验证更复杂的结构时, 例如, 作为一种编程语言，或者像 XML 这样的标记语言，你可以 将许多正则表达式组合成 grammars。Grammars 不仅仅是简单 结合正则表达式。它们还提供基础设施以产生良好的错误消息并在分析输入文本时跟踪状态。</p>
+<p>当你需要读取和验证更复杂的结构时, 比如程序设计语言, 或者像 XML 这样的标记语言, 你可以把多个正则表达式组合成 grammar。Grammar 的作用不仅仅是简单地组合正则表达式。它们还提供生成良好的错误信息和在分析输入文本时跟踪状态的基础设施。</p>
 </div>
 <div class="sect2">
 <h3 id="_使用场景">1.1. 使用场景</h3>
 <div class="sect3">
 <h4 id="_搜索">1.1.1. 搜索</h4>
 <div class="paragraph">
-<p>正则表达式的一个常见用途是在大量数据中搜索感兴趣的模式 ，例如在日志文件中查找某些消息，用于 URL， 或者用于文本中的电话号码。在撰写本文时，在我的 <code>.bash_history</code> 中约有 6% 的条目 涉及使用正则表达式进行搜索。</p>
+<p>正则表达式的一个常见用途是在大量数据中搜索感兴趣的模式, 例如在日志文件中查找某些消息, 在 URL 中查找特定的信息, 或者在文本中查找电话号码。在写这篇文章的时候, 我的 <code>.bash_history</code> 中大约有 6% 的条目涉及到使用正则表达式进行搜索。</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -252,62 +252,62 @@ if (theme && theme !== "1") {
 </div>
 </div>
 <div class="paragraph">
-<p>许多命令行工具都支持某些正则表达式方言，允许您搜索文件名，文件内容，日志，捕获的网络流量，以及您能想到的几乎所有其他内容。大多数现代编程语言也可以轻松访问正则表达式，使它们成为无处不在且不可或缺的搜索工具。</p>
+<p>许多命令行工具都支持某些正则表达式方言, 允许你搜索文件名、文件内容、日志、捕获的网络流量以及几乎所有你能想到的东西。大多数现代编程语言也可以很容易地使用正则表达式, 使其成为一种无处不在、不可或缺的搜索工具。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_验证">1.1.2. 验证</h4>
 <div class="paragraph">
-<p>大多数应用程序面临不可信的用户输入。特别是 Web 应用程序 面对很多不受信任的输入。 在对其应用任何进一步的逻辑或将其存储在例如数据库之前, 必须验证此输入。</p>
+<p>大多数应用程序都面临着不可信的用户输入。特别是 Web 应用程序面临着大量的不可信输入。这些输入必须在应用任何进一步的逻辑或将其存储在例如数据库中之前进行验证。</p>
 </div>
 <div class="paragraph">
-<p>正则表达式是常见的第一步验证。他们使检查简单的事情，如数字，并验证输入的最小长度和最大长度变得微不足道。同时，他们允许程序员做更精确和复杂的检查。</p>
+<p>正则表达式是验证的第一步。他们使检查数字等简单的事情变得简单, 并验证输入的最小长度和最大长度。同时, 它们允许程序员进行更精确、更复杂的检查。</p>
 </div>
 <div class="paragraph">
-<p>所有 Web 应用程序程序员需要提供的是一个正则表达式并将它与输入字段相关联。然后，Web 框架可以用所有已配置的正则表达式验证表单输入并为终端用户自动生成错误消息，以便 Web 应用程序程序员不需要处理拒绝输入并重新生成表单这样的工作流程。</p>
+<p>Web 应用程序员只需要提供一个正则表达式, 并将其与输入字段关联。然后, Web 框架可以根据所有已配置的正则表达式来验证表单输入, 并自动为终端用户生成错误信息, 这样 Web 应用程序员就不需要处理拒绝输入和重新生成表单的工作流程。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_解析">1.1.3. 解析</h4>
 <div class="paragraph">
-<p>单独使用正则表达式不太适合解析复杂的输入数据。然而，Raku，添加了一些使其非常适合此任务的功能。这些扩展包括易于使用的回溯控制和通过命名正则表达式获得的可组合性。</p>
+<p>单独使用正则表达式不太适合解析复杂的输入数据。然而, Raku 添加了功能, 使其非常适合这项任务。这些扩展包括易于使用的回溯控制和通过命名正则表达式获得的可组合性。</p>
 </div>
 <div class="paragraph">
-<p>正则表达式匹配成功的结果是匹配对象，其中包含所有必要的元数据，用于从解析的文本中提取出感兴趣的部分。 还有一些功能可以很容易地将匹配对象转换为抽象语法树或 AST，它是一种适合在解析器外部使用的数据结构。</p>
+<p>一个成功的正则表达式匹配, 其结果是一个匹配对象, 它包含了所有必要的元数据, 用于从解析后的文本中提取出感兴趣的部分。 还有一些功能, 可以很容易地将匹配对象转换为抽象语法树或 AST, 一种适合在解析器之外使用的数据结构。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_正则或正则表达式">1.2. 正则或正则表达式</h3>
 <div class="paragraph">
-<p>正则表达式的理论基础来自计算机科学，它描述了形式语言和自动机或形式机的层次结构， 它可以识别这些语言。这些语言中限制最多的被称为 <a href="https://en.wikipedia.org/wiki/Regular_language">正规语言</a>。<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup>决定特定字符串是否使用常规语言需要固定的内存量和每个固定数量的计算步骤字符。</p>
+<p>正则表达式的理论基础来自于计算机科学, 它描述了一种形式语言和自动机或形式机的层次结构, 可以识别这些语言。这些语言中, 最有限的一种语言被称为<a href="https://en.wikipedia.org/wiki/Regular_language">正则语言</a>。<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup>决定特定字符串是否使用常规语言需要固定的内存量和每个固定数量的计算步骤字符。</p>
 </div>
 <div class="paragraph">
-<p>正则表达式是编写常规语言的形式。随着从理论计算机科学的这些概念的发展，它们是简约的， 只允许字面量，替换(<code>|</code>)，括号进行分组，以及<a href="https://en.wikipedia.org/wiki/Kleene_star">Kleene star</a><sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup>(*)表示零次或多次重复。</p>
+<p>正则表达式是一种编写正则语言的形式。随着从理论计算机科学中这些概念的发展, 它们是简约的, 只允许字面量, 替换(<code>|</code>), 括号进行分组, 以及<a href="https://en.wikipedia.org/wiki/Kleene_star">Kleene star</a><sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup>(*)表示零次或多次重复。</p>
 </div>
 <div class="paragraph">
-<p>早期的文本处理工具，如 <code>grep</code>，<code>sed</code> 和 <code>awk</code> 都拿起了正则表达式的概念，并增加了许多便利功能， 例如能够写 <code>[az]</code> 而不是 <code>a|b|c|d|e</code> &#8230;&#8203;.他们提供了预定义的*字符类*，字符集，例如字母，数字， 空白字符，等等。他们还添加了捕获，帮助提取正则表达式匹配的特定部分的字符串。</p>
+<p>早期的文本处理工具, 如 <code>grep</code>, <code>sed</code> 和 <code>awk</code> 都接受了正则表达式的概念, 并加入了许多方便的功能, 比如可以编写 <code>[az]</code> 而不是 <code>a|b|c|d|e</code> &#8230;&#8203;.。他们提供了预定义的*字符类*、字符集、例如字母、数字、空白字符等等。他们还增加了捕获功能, 帮助提取正则表达式匹配的特定部分的字符串。</p>
 </div>
 <div class="paragraph">
-<p>后来的实现增加了超出常规语言允许范围的功能，因此需要单独的单词。这些实现也优化易用性而不是极简主义使理论易于推理的理论构造。我们现在谈论实用(和更强大)时倾向于使用正则表达式编程语言和库中的实现。</p>
+<p>后来的实现增加了一些超出正则语言所允许的功能, 因此需要一个单独的单词。这些实现也是为了便于使用而不是理论构造的极简主义而进行优化。现在, 我们在谈论到编程语言和库中的实用(而且更强大的)实现时, 倾向于使用正则表达式。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_raku_正则表达式有什么特别之处">1.3. Raku 正则表达式有什么特别之处</h3>
 <div class="paragraph">
-<p>为了继续上一节的历史课程，Perl 是第一个将正则表达式烘焙到核心功能的通用编程语言之一  。它借用了早期正则表达式实现的语法 并以更有用的方式扩展它使正则表达式更强大。 很快，Perl 的特殊版本的正则表达式成为事实上的标准。所以很多名为兼容 Perl 的正则表达式(PCRE)的库被创建，以便其他软件可以用他们自己实现的"Perl 正则表达式"。</p>
+<p>为了继续上一节的历史课程, Perl 是最早将正则表达式纳入其核心功能的通用编程语言之一。它从早期的正则表达式实现中借鉴了语法, 并对其进行了扩展, 使正则表达式变得更加强大和有用。很快, Perl 的特殊版本的正则表达式就成为了事实上的标准。所以很多名为兼容 Perl 的正则表达式(PCRE)的库被创建出来, 这样其他软件可以在他们自己的实现中使用 "Perl 正则表达式"。</p>
 </div>
 <div class="paragraph">
-<p>不幸的是，在使正则表达式非常有用的过程中，Perl 几乎为每个 ASCII 字符都指定了特殊的的含义(字面量匹配除外)。并且，随着更新和更强大的正则表达式功能的创建， 这导致在使用时将晦涩的字符序列用于新功能， 并继续保持与现有正则表达式语法的向后兼容性。 这种字符序列的一个很好的例子是用于向后查看断言的 <code>(?&#8656;pattern)</code>。</p>
+<p>遗憾的是, 在使正则表达式如此有用的过程中, Perl 给几乎所有的 ASCII 字符都赋予了特殊的的含义(除了按字面匹配的字符)。并且, 随着更多新的、更强大的正则表达式功能被创造出来, 这就导致了在继续保持与现有的正则表达式语法向后兼容的同时, 还需要使用一些晦涩的字符序列来实现新的功能。<code>(?&#8656;pattern)</code> 就是一个很好的例子。</p>
 </div>
 <div class="paragraph">
-<p>Raku 正则表达式清理了这个历史性的语法包袱。他们通过允许无处不在的空白，引入清晰的规则, 例如哪些字符是特殊的，哪些不是特殊的, 来改善可读性。也许最重要的是，有一个简单和可扩展的语法用来通过名字调用其他正则表达式。</p>
+<p>Raku 正则表达式清理了这种历史上的语法包袱。它们通过允许无处不在的空白, 引入了关于哪些字符是特殊字符, 哪些不是特殊字符的规则, 以及最重要的是, 它们有一个简单、可扩展的语法, 可以通过名字来调用其他正则表达式, 从而提高来可读性。</p>
 </div>
 <div class="paragraph">
-<p>虽然大多数语言将正则表达式视为字符串或特殊对象，但是 Raku 正则表达式是代码; 当正则表达式在 grammar 中组合在一起时，他们就像方法。这使您可以自由地将您过去熟悉的编程语言中所有的管理和重用代码的技术应用到正则表达式中: 名称空间，类，角色<sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnotedef_3" title="View footnote.">3</a>]</sup>，继承，等等。</p>
+<p>虽然大多数语言将正则表达式视为字符串或特殊对象, 但是 Raku 正则表达式是代码; 当正则表达式在 grammar 中组合在一起时, 就像方法一样。这让你可以自由地将所有你在编程语言中习惯你的管理和重用代码的技术应用到正则表达式中: 命名空间、类、角色<sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnotedef_3" title="View footnote.">3</a>]</sup>、继承等等。</p>
 </div>
 <div class="paragraph">
-<p>组合正则表达式的能力使得 Raku 不仅仅能解析简单的字符串格式。你可以编写使用很多小正则表达式的 grammar 来解析复杂的文件格式。实际上，Rakudo Raku 编译器本身使用 Raku grammar 来解析 Raku 源代码。</p>
+<p>组合正则表达式的能力使得 Raku 不仅仅能解析简单的字符串格式。你可以写出使用许多小的正则表达式来解析复杂的文件格式的 grammar。实际上, Rakudo 编译器本身就使用了 grammar 来解析 Raku 源代码。</p>
 </div>
 </div>
 </div>
@@ -316,41 +316,41 @@ if (theme && theme !== "1") {
 <h2 id="_raku_入门">2. Raku 入门</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>您可能会从读这本书选择一些东西并理解基本概念; 但如果你的目标是流畅而且更深刻理解，您应该自己运行示例，修改它们，以及试验他们。</p>
+<p>通过阅读本书, 你可能会捡起一些东西, 了解一些基本的概念; 但如果你的目标是流畅和更深层次的理解, 你应该自己运行这些例子, 修改它们, 并进行试验。</p>
 </div>
 <div class="paragraph">
-<p>为此，您首先需要安装 Rakudo Raku 编译器， 版本为 2017.05 或更新的版本。之后，我们将讨论如何将它用于正则表达式实验。</p>
+<p>为此, 你首先需要安装 Raku 编译器, 版本为 2017.05 或更新版本。之后, 我们将讨论如何使用它进行正则表达式实验。</p>
 </div>
 <div class="paragraph">
-<p>如果您不愿在计算机上安装软件，也可以使用为您计算代码的在线服务。在撰写本文时， <a href="https://glot.io/new/raku">https://glot.io/new/raku</a> 和 <a href="https://tio.run/#raku">https://tio.run/#raku</a> 支持在浏览器中运行 Raku 代码。你也可以检查一下 <a href="https://raku.org/resources/">https://raku.org/resources/</a> 获取类似服务的最新列表。</p>
+<p>如果你不愿在计算机上安装软件, 也可以使用一个在线服务来运行你的代码。在写这篇文章的时候, <a href="https://glot.io/new/raku">https://glot.io/new/raku</a> 和 <a href="https://tio.run/#raku">https://tio.run/#raku</a> 支持在浏览器中运行 Raku 代码。你也可以在 <a href="https://raku.org/resources/">https://raku.org/resources/</a> 上查看类似服务的最新列表。</p>
 </div>
 <div class="sect2">
-<h3 id="_安装_rakudo_raku">2.1. 安装 Rakudo Raku</h3>
+<h3 id="_安装_raku">2.1. 安装 Raku</h3>
 <div class="paragraph">
-<p>Rakudo Raku 编译器有两种: 编译器本身，和 Rakudo Star。后者是包含编译器、zef 模块安装程序、文档和一些模块的发行版。</p>
+<p>Raku 编译器有两种: 编译器本身和 Rakudo Star。后者是一个包含编译器、zef 模块安装程序、文档和一些模块的发行版。</p>
 </div>
 <div class="paragraph">
-<p>出于我们的目的，您需要编译器和 zef。安装 Rakudo Star 为您提供了这两种选择，但如果 Rakudo Star 安装程序不适合您， 或者你更喜欢更精简的安装，你可以只安装编译器并 <a href="https://github.com/ugexe/zef#manual">根据文档驱动 zef</a>。<sup class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnotedef_4" title="View footnote.">4</a>]</sup></p>
+<p>出于我们的目的, 你需要编译器和 zef。安装 Rakudo Star 为你提供了这两样东西, 但如果 Rakudo Star 安装程序不适合你, 或者你更喜欢更精简的安装, 你可以只安装编译器, 并<a href="https://github.com/ugexe/zef#manual">根据文档安装 zef</a>。<sup class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnotedef_4" title="View footnote.">4</a>]</sup></p>
 </div>
 <div class="paragraph">
-<p>以下是安装 Rakudo Raku 的一些选项。</p>
+<p>以下是安装 Raku 的一些选项。</p>
 </div>
 <div class="sect3">
 <h4 id="_使用原生方式安装_rakudo_star">2.1.1. 使用原生方式安装 Rakudo Star</h4>
 <div class="paragraph">
-<p>Rakudo Star 下载页面 <a href="http://rakudo.org/downloads/star/">http://rakudo.org/downloads/star/</a> 为 Windows 和 Mac OS 提供二进制安装程序。你只需打开下载文件即可安装它们。</p>
+<p>Rakudo Star 下载页面 <a href="http://rakudo.org/downloads/star/">http://rakudo.org/downloads/star/</a> 为 Windows 和 Mac OS 提供了二进制安装程序。你只需打开下载文件即可安装它们。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_二进制_linux_包">2.1.2. 二进制 Linux 包</h4>
 <div class="paragraph">
-<p><a href="https://github.com/nxadm/rakudo-pkg/releases">Rakudo OS Packages</a><sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnotedef_5" title="View footnote.">5</a>]</sup> 仓库包含如何在 CentOS，Debian，Fedora 和 Ubuntu 系统上获取和使用 Rakudo Raku 软件包的说明。他们带有编译器和一个用来安装 zef 的脚本; 足够满足我们的意图。</p>
+<p><a href="https://github.com/nxadm/rakudo-pkg/releases">Rakudo OS Packages</a><sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnotedef_5" title="View footnote.">5</a>]</sup> 仓库包含如何在 CentOS、Debian、Fedora 和 Ubuntu 系统上获取和使用 Raku 软件包的说明。它们带有编译器和一个用来安装 zef 的脚本; 对于我们的目的来说已经足够了。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_基于_docker_的安装">2.1.3. 基于 Docker 的安装</h4>
 <div class="paragraph">
-<p>在支持 Docker 的平台上，您可以获得预先构建的包含 Rakudo Raku 编译器的轻量级镜像，以及 <code>zef</code>，只须一个命令:</p>
+<p>在支持 Docker 的平台上, 你可以通过一条命令获得一个预构建的轻量级镜像, 其中包含 Raku 编译器以及 <code>zef</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -358,10 +358,10 @@ if (theme && theme !== "1") {
 </div>
 </div>
 <div class="paragraph">
-<p>这个 Docker 镜像包含 Rakudo Raku 以及一些模块, 这使得使用正则表达式和 grammar 变得更容易。</p>
+<p>这个 Docker 镜像包含 Raku 以及一些模块, 这些模块可以让你更容易地使用正则表达式和 grammar。</p>
 </div>
 <div class="paragraph">
-<p>拉取镜像后，可以执行如下的单行程序来使用它:</p>
+<p>一旦你拉取了这个镜像, 你就可以用它来执行单行程序, 具体方法如下:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -369,7 +369,7 @@ if (theme && theme !== "1") {
 </div>
 </div>
 <div class="paragraph">
-<p>由于 Docker 容器在自己隔离的世界中运行，因此您需要采取额外步骤使脚本文件可用于容器。例如， 如果你想执行一个脚本 search.p6，你可以像这样运行它:</p>
+<p>由于 Docker 容器在自己隔离的世界中运行, 所以你需要采取额外步骤来使容器中的脚本文件可用。例如, 如果你想执行一个脚本 search.p6, 你可以像这样运行它:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -378,7 +378,7 @@ if (theme && theme !== "1") {
 </div>
 </div>
 <div class="paragraph">
-<p>这是笨拙的，所以 bash 别名(或 shell 脚本)可以帮助:</p>
+<p>这很不方便, 所以用 bash 别名(或 shell 脚本)可以帮助你:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -387,7 +387,7 @@ if (theme && theme !== "1") {
 </div>
 </div>
 <div class="paragraph">
-<p>之后，执行脚本变得更加容易:</p>
+<p>在这之后, 执行脚本就变得简单多了:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -395,14 +395,14 @@ if (theme && theme !== "1") {
 </div>
 </div>
 <div class="paragraph">
-<p>通常，本书假定存在 raku 可执行文件。如果你使用 docker 镜像，那么在所有命令中用 p6d 替换 raku。</p>
+<p>一般情况下, 本书假定存在 raku 可执行文件。如果你使用 docker 镜像, 那么在所有命令中用 p6d 替换 raku。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_使用_rakudo_raku">2.2. 使用 Rakudo Raku</h3>
+<h3 id="_使用_raku">2.2. 使用 Raku</h3>
 <div class="paragraph">
-<p>您可以通过运行 <code>raku --version</code> 来验证您的 Rakudo Raku 安装是否正常工作，应该打印这样的东西:</p>
+<p>你可以通过运行 <code>raku --version</code> 来验证你的 Raku 安装是否正常, 应该打印出类似这样的东西:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -411,10 +411,10 @@ implementing Raku.c.</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果你不能使它工作起来, 你可以去 <a href="https://raku.org/community/">Raku 社区</a><sup class="footnote">[<a id="_footnoteref_6" class="footnote" href="#_footnotedef_6" title="View footnote.">6</a>]</sup>求助。</p>
+<p>如果你自己搞不定, 可以向 <a href="https://raku.org/community/">Raku 社区</a><sup class="footnote">[<a id="_footnoteref_6" class="footnote" href="#_footnotedef_6" title="View footnote.">6</a>]</sup>寻求帮助。</p>
 </div>
 <div class="paragraph">
-<p>一旦它工作了，你可以通过运行不带参数的 <code>raku</code> 启动一个简单的交互式 shell:</p>
+<p>一旦成功了, 你可以通过运行不带参数的 <code>raku</code> 启动一个简单的交互式 shell:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -426,7 +426,7 @@ Hello, world
 </div>
 </div>
 <div class="paragraph">
-<p>在这个 shell 中，您可以键入 Raku 代码行并立即执行。这对于测试正则表达式非常有用:</p>
+<p>在这个 shell 中, 你可以输入几行 Raku 代码, 这些代码会立即被执行。这对于测试正则表达式非常有用:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -435,10 +435,10 @@ Hello, world
 </div>
 </div>
 <div class="paragraph">
-<p>(如果您还不了解这里到底发生了什么，请不要担心; 下一章将详细解释。)</p>
+<p>(如果你还不明白这里到底发生了什么, 不要担心; 下一章会详细解释。)</p>
 </div>
 <div class="paragraph">
-<p>然而如果提示符返回这样的:</p>
+<p>然而如果提示符返回这样的东西:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -450,7 +450,7 @@ To exit type 'exit' or '^D'
 </div>
 </div>
 <div class="paragraph">
-<p>您应该遵循问候消息中的建议并安装一个提到的模块。这使您能够访问和编辑你的命令历史:</p>
+<p>你应该按照问候信息中的建议, 安装它提到的一个模块。这样你就能访问和编辑你的命令的历史记录了:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -462,7 +462,7 @@ To exit type 'exit' or '^D'
 </div>
 </div>
 <div class="paragraph">
-<p>当然，您也可以使用 <code>raku</code> 来执行脚本文件，只需把脚本文件添加到命令行即可:</p>
+<p>当然, 你也可以使用 <code>raku</code> 来执行脚本文件, 只需在命令行中添加脚本文件即可:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -471,13 +471,13 @@ Hello, world</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>假设您在当前工作目录中有一个文件 <code>greet.p6</code>, 其中包含 <code>say "Hello, world";</code>。</p>
+<p>假设你在当前工作目录下有一个文件 <code>greet.p6</code>, 其中包含了 <code>say "Hello, world";</code>。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_获取代码示例">2.3. 获取代码示例</h3>
 <div class="paragraph">
-<p>GitHub 上提供了本书中使用的代码示例的源代码:</p>
+<p>本书中使用的代码示例的源代码可以在 GitHub 上找到:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -485,22 +485,22 @@ Hello, world</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果您没有可用的 git，您还可以从 <a href="https://github.com/apress/perl-6-regexes-and-grammars/archive/master.zip">https://github.com/apress/perl-6-regexes-and-grammars/archive/master.zip</a> 下载 zip 存档源代码。</p>
+<p>如果你没有 git, 你也可以从 <a href="https://github.com/apress/perl-6-regexes-and-grammars/archive/master.zip">https://github.com/apress/perl-6-regexes-and-grammars/archive/master.zip</a> 下载一个包含源代码的压缩包。</p>
 </div>
 <div class="paragraph">
-<p>我鼓励您运行这些示例脚本，修改它们并试玩它们。这是比只是读这本书学习更深入学习主题的最佳方式。</p>
+<p>我鼓励你运行这些示例脚本, 修改并运行它们。这是比单纯阅读本书更深入学习这些主题的最好方法。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_raku_第一步">2.4. Raku 第一步</h3>
+<h3 id="_使用_raku_的第一步">2.4. 使用 Raku 的第一步</h3>
 <div class="paragraph">
-<p>为了有效地使用 Raku 正则表达式，您需要了解一下他们所嵌入的语言。</p>
+<p>为了有效地使用 Raku 中是正则表达式, 你需要了解一下他们所嵌入的语言。</p>
 </div>
 <div class="paragraph">
-<p>Raku 是以自由形式为主的语言，所以你可以以你喜欢的方式缩进你的代码。然而，空白存在或空白不存在的情况很重要: <code>doit(1, 2, 3)</code> 调用带有 3 个参数的函数 <code>doit</code>，而 <code>doit (1, 2, 3)</code> 用单个参数调用同一个函数，这个参数是一个 3 个值的列表。</p>
+<p>Raku 是一门自由形式的语言, 所以你可以随意缩进你的代码。然而, 有些情况下, 是否有空格是很重要的: <code>doit(1, 2, 3)</code> 调用带有 3 个参数的函数 <code>doit</code>, 而 <code>doit (1, 2, 3)</code> 只用单个参数来调用同一个函数, 这个参数是一个 3 个值的列表。</p>
 </div>
 <div class="paragraph">
-<p>语句由分号(;)字符分隔， 你也可以在程序的最后一行放一个分号。注释以井号字符(<code>#</code>) 开头，并延伸到行尾:</p>
+<p>语句之间用分号(;)字符隔开,  你也可以在程序的最后一行放一个分号。注释以井号字符(<code>#</code>) 开头, 并一直延伸到行尾:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -511,7 +511,7 @@ say( 2 * 21 );              # Output: 42</code></pre>
 <div class="sect3">
 <h4 id="_变量和值">2.4.1. 变量和值</h4>
 <div class="paragraph">
-<p>变量用关键字 <code>my</code> 声明，并以 sigil 符号开头， 这告诉我们一些他们的一般类型:</p>
+<p>变量是用关键字 <code>my</code> 来声明的, 并以 sigil 符号开头, 这告诉我们一些关于变量的一般类型:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -525,10 +525,10 @@ my %populations =
 </div>
 </div>
 <div class="paragraph">
-<p><code>$</code> 代表标量变量 - 一个通常持有单一值的变量。作为对比，<code>@</code> 表示数组，一个允许您通过从零开始的索引来访问元素的值的线性集合。在上一个代码块的上下文中，<code>@capitals[0]</code> 返回 'Algiers'。</p>
+<p><code>$</code> 代表标量变量 - 通常是持有单一值的变量。作比之下, <code>@</code> 表示数组, 一个线性的值的集合, 可以通过一个从零开始的索引来访问元素。在上一个代码块的上下文中, <code>@capitals[0]</code> 返回 'Algiers'。</p>
 </div>
 <div class="paragraph">
-<p>哈希(其他语言把它叫做字典或映射)将键(字符串)与值相关联。您可以通过 <code>{}</code> 索引操作符查找值到键，并使用几个有用的方法:</p>
+<p>哈希(其他语言称之为字典或映射)将键(字符串)与值关联起来。你可以通过 <code>{}</code> 索引操作符来查找一个键的值, 并使用几个有用的方法:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -541,10 +541,10 @@ say %populations.values.sum;    # Output: 7553400</code></pre>
 <div class="sect3">
 <h4 id="_字符串">2.4.2. 字符串</h4>
 <div class="paragraph">
-<p>由于正则表达式作用在字符串上，我们应该更多地讨论它们。</p>
+<p>由于正则表达式作用在字符串上, 我们就应该多说说它们。</p>
 </div>
 <div class="paragraph">
-<p>字符串是一系列 Unicode 字符。<sup class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnotedef_7" title="View footnote.">7</a>]</sup>我们已经看到了一些由单引号 <code>''</code> 和双引号 <code>""</code> 包围的字符串示例。 主要区别在于双引号启用转义序列，如 <code>\n</code> 是换行符(换行)和变量插值，其中变量的名称由其值替换:</p>
+<p>字符串是由 Unicode 字符组成的序列。<sup class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnotedef_7" title="View footnote.">7</a>]</sup>我们已经看到了一些由单引号 <code>''</code> 和双引号 <code>""</code> 包围的字符串的示例。 主要区别在于, 双引号可以实现转义序列, 如 <code>\n</code> 是换行符(换行)和变量插值, 即用变量的值替换变量名:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -554,7 +554,7 @@ say 'Hello, $name';         # Output: Hello, $name</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>但是，即使在单引号内，您也可以用反斜杠转义单引号来插入单引号。出于同样的原因，在这样的字符串中必须使用双倍的反斜杠:</p>
+<p>然而, 即使在单引号内, 也可以用反斜线转义单引号来插入单引号。出于同样的原因, 在这样的字符串中必须使用双倍的反斜线:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -577,13 +577,13 @@ END
 </div>
 </div>
 <div class="paragraph">
-<p>您可以选择自己的分隔符，但习惯上将其全部大写，以便更容易找到 here-document 的结束位置。</p>
+<p>你可以选择自己的分隔符, 但习惯上将其全部大写, 以便更容易找到 here-document 的结束位置。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_控制结构">2.4.3. 控制结构</h4>
 <div class="paragraph">
-<p>控制结构如循环和分支都遵循相同的基础模式，<code>KEYWORD EXPRESSION { BLOCK }</code> 和 <code>if</code> 结构也允许附加 <code>elsif</code> 和 <code>else</code> 语句:</p>
+<p>像循环和分支这样的控制结构都遵循相同的基本模式, <code>KEYWORD EXPRESSION { BLOCK }</code>, 而且 <code>if</code> 结构也允许附加 <code>elsif</code> 和 <code>else</code> 语句:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -613,7 +613,7 @@ This runs</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在 <code>for</code> 循环块内，当前值存储在特殊变量 <code>$_</code> 中。如果要使用其他变量，可以使用以下语法，这称为尖号块:</p>
+<p>在 <code>for</code> 循环块内, 当前值存储在特殊变量 <code>$_</code> 中。如果你想使用不同的变量, 可以使用下面的语法, 这就是所谓的尖号块:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -623,7 +623,7 @@ This runs</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这适用于可以使用块的任何位置，也可以扩展到多个参数:</p>
+<p>这在任何可以使用一个块的位置都可以使用, 也可以扩展到多个参数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -635,7 +635,7 @@ say $callback(1, 2);                    # Output: 3</code></pre>
 <div class="sect3">
 <h4 id="_函数类和方法">2.4.4. 函数、类和方法</h4>
 <div class="paragraph">
-<p>甲函数或子程序是一段带有形式参数列表以及可选的返回值的代码:</p>
+<p>函数或子程序是一段带有形式参数列表以及可选的返回值的代码:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -646,10 +646,10 @@ say double(2);         # Output: 4</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果没有运行 <code>return</code> 语句，则返回值是最后一个表达式的值 ，所以我们可以把它写成 <code>sub double($x) { 2 * $x }</code> 代替。</p>
+<p>如果没有运行 <code>return</code> 语句, 那么返回值是最后一个表达式的值 , 所以我们可以把它写成 <code>sub double($x) { 2 * $x }</code>。</p>
 </div>
 <div class="paragraph">
-<p>您可以选择声明参数(和变量)的类型:</p>
+<p>你可以选择为参数(和变量)声明一个类型:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -657,7 +657,7 @@ say double(2);         # Output: 4</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>类可以有每个对象的存储，称为属性，附加到对象上的代码称为方法:</p>
+<p>类可以有每个对象的存储, 称为属性, 而代码是附加到对象上的方法:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -677,33 +677,33 @@ say $p.magnitude();                  # Output: 5.3851648071345</code></pre>
 <div class="sect3">
 <h4 id="_了解更多关于raku">2.4.5. 了解更多关于Raku</h4>
 <div class="paragraph">
-<p>有很多资源可以深入了解 Raku。</p>
+<p>有很多资源可以深入学习 Raku。</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://www.apress.com/us/book/9781484228982">Raku 基础: 从示例，项目和案例入门</a>。<sup class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnotedef_8" title="View footnote.">8</a>]</sup>这本书的作者是 Moritz Lenz (Apress Media，2017)，该书提供了一个示例驱动的探索 Raku 的方法。</p>
+<p>Moritz Lenz 的 <a href="https://www.apress.com/us/book/9781484228982">Raku 基础: 从示例, 项目和案例入门</a>。<sup class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnotedef_8" title="View footnote.">8</a>]</sup>, 提供了一种示例驱动的方法来探索 Raku。</p>
 </li>
 <li>
-<p><a href="https://www.packtpub.com/application-development/perl-6-deep-dive">Raku Deep Dive</a><sup class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnotedef_9" title="View footnote.">9</a>]</sup>, 由 Andrew Shitov 编写(Packt出版，2017年)是一个更面向功能的类似主题的指南。</p>
+<p>Andrew Shitov 的 <a href="https://www.packtpub.com/application-development/perl-6-deep-dive">Raku Deep Dive</a><sup class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnotedef_9" title="View footnote.">9</a>]</sup>, 是一本更注重功能的类似主题的指南。</p>
 </li>
 <li>
-<p><a href="http://rakuintro.com/">http://rakuintro.com/</a> 是一个学习 Raku 的免费在线资源，提供多种语言版本。</p>
+<p><a href="http://rakuintro.com/">http://rakuintro.com/</a> 是一个免费的学习 Raku 的在线资源, 有多种语言版本。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>最后但并非最不重要的，官方的 Raku 文档 <a href="https://docs.raku.org">https://docs.raku.org</a> 提供了介绍性和参考性材料的混合物，并且允许您搜索内置类型，函数，方法和运算符。</p>
+<p>最后但并非最不重要的是, Raku 的官方文档 <a href="https://docs.raku.org">https://docs.raku.org</a> 提供了介绍性和参考资料, 可以让你搜索内置的类型、函数、方法和操作符。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_总结">2.5. 总结</h3>
 <div class="paragraph">
-<p>我们已经看到了几种安装 Rakudo Raku 编译器的方法。 一旦安装完毕，就可以通过运行不带参数的 <code>raku</code> 启动交互式 Raku shell，或者 <code>raku script.p6</code> 来执行 Raku 程序。</p>
+<p>我们已经看到了几种安装 Raku 编译器的方法。 安装完毕之后, 就可以通过运行不带参数的 <code>raku</code> 启动一个交互式的 Raku shell, 或者 <code>raku script.p6</code> 来执行 Raku 程序。</p>
 </div>
 <div class="paragraph">
-<p>我们还探索了我们的第一个简单的 Raku 程序。接下来我们将写下我们的第一个正则表达式。</p>
+<p>我们还探索了我们的第一个简单的 Raku 程序。接下来我们将直接开始编写我们的第一个正则表达式。</p>
 </div>
 </div>
 </div>
