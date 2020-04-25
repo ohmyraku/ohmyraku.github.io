@@ -1406,15 +1406,15 @@ say 'aab' ~~ / a+ || \w+ /; # Output: ⌜aa⌟</code></pre>
 <h2 id="_正则表达式和_raku_代码">4. 正则表达式和 Raku 代码</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>现在您已经了解了正则表达式的基本构建块，我们将探索在 Raku 代码中使用正则表达式的不同方法。</p>
+<p>现在你已经知道了正则表达式的基本构件, 我们将探讨在 Raku 代码中使用正则表达式的不同方法。</p>
 </div>
 <div class="sect2">
 <h3 id="_智能匹配">4.1. 智能匹配</h3>
 <div class="paragraph">
-<p>智能匹配操作符 <code>~~</code> 是一个通用的比较运算符而右侧的对象决定了比较的语义。 例如，如果右侧是数字，则 <code>~~</code> 执行数值比较。如果右侧是类型，则检查左侧是否为该类型(或其子类型)。</p>
+<p>智能匹配操作符 <code>~~</code> 是一个通用的比较运算符, 它右侧的对象决定了比较的语义。 例如, 如果右侧的对象是数字, 则 <code>~~</code> 就会进行数值比较。如果右侧的对象是一个类型, 则检查左侧的对象是否为该类型(或其子类型)。</p>
 </div>
 <div class="paragraph">
-<p>我们特别感兴趣的是右侧是正则表达式的情况。 在这种情况下，智能匹配操作符将左侧解释为字符串并使用正则表达式搜索匹配:</p>
+<p>我们特别感兴趣的是, 右侧是正则表达式的情况。 在这种情况下, 智能匹配操作符将左侧解释为字符串, 并使用该正则表达式搜索匹配:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1424,10 +1424,10 @@ say $str ~~ /hummer/;  # Output: Nil</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果匹配失败，匹配的返回值为 <code>Nil</code>，或者如果匹配成功则返回一个<a href="https://docs.raku.org/type/Match.html">匹配对象</a>。<sup class="footnote">[<a id="_footnoteref_17" class="footnote" href="#_footnotedef_17" title="View footnote.">17</a>]</sup>如果在布尔值上下文中使用匹配对象 (类似于 if 语句的条件)，则它的计算结果为 <code>True</code> (而 Nil 计算为 <code>False</code>); 在字符串上下文中(或通过调用 <code>.Str</code> 方法强制它进入字符串上下文时) ，它计算为正则表达式匹配到的字符串部分 。从 <code>say</code> 输出的角括号( <code>⌜</code> 和 <code>⌟</code> ) 表示匹配对象。</p>
+<p>如果匹配失败, 则匹配的返回值为 <code>Nil</code>, 或者如果匹配成功则返回一个<a href="https://docs.raku.org/type/Match.html">匹配对象</a>。<sup class="footnote">[<a id="_footnoteref_17" class="footnote" href="#_footnotedef_17" title="View footnote.">17</a>]</sup>如果在布尔值上下文中使用匹配对象 (比如 if 语句的条件), 则它的计算结果为 <code>True</code> (而 Nil 计算为 <code>False</code>); 在字符串上下文中(或通过调用 <code>.Str</code> 方法将其强制转换为字符串上下文时), 它计算为与正则表达式匹配到的字符串部分。从 <code>say</code> 输出的角括号( <code>⌜</code> 和 <code>⌟</code> ) 表示匹配对象。</p>
 </div>
 <div class="paragraph">
-<p>除了智能匹配，您还可以使用 <a href="https://docs.raku.org/type/Str#method_match">.match</a><sup class="footnote">[<a id="_footnoteref_18" class="footnote" href="#_footnotedef_18" title="View footnote.">18</a>]</sup> 方法搜索字符串中的匹配项:</p>
+<p>除了智能匹配之外, 你还可以使用 <a href="https://docs.raku.org/type/Str#method_match">.match</a><sup class="footnote">[<a id="_footnoteref_18" class="footnote" href="#_footnotedef_18" title="View footnote.">18</a>]</sup> 方法在字符串中搜索匹配项:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1439,7 +1439,7 @@ say $str.match(/h.mm\w*/); # Output: ⌜hammer⌟</code></pre>
 <div class="sect2">
 <h3 id="_引号形式">4.2. 引号形式</h3>
 <div class="paragraph">
-<p>到目前为止，我们已经看到正则表达式由两个斜杠分隔，<code>/&#8230;&#8203;/</code>，但有编写正则表达式的其他方法。这些都是等价的:</p>
+<p>到目前为止, 我们已经看到由两个斜杠 <code>/&#8230;&#8203;/</code> 分隔的正则表达式, 但是还有其他的方法来编写正则表达式。这些都是等价的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1451,13 +1451,13 @@ regex { a.b }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果使用 <code>rx</code> 编写正则表达式，则几乎可以使用任何非单词字符作为分隔符(除了空格，冒号(<code>:</code>)， 和井号(<code>#</code>))。</p>
+<p>如果你使用 <code>rx</code> 编写正则表达式, 则可以使用几乎所有的非单词字符作为分隔符(除了空格、冒号(<code>:</code>)和井号(<code>#</code>)之外)。</p>
 </div>
 <div class="paragraph">
-<p>前面介绍的形式返回一个 regex 类型的对象，您可以将其存储在变量中，或者在智能匹配操作中使用。</p>
+<p>前面介绍的形式返回一个 regex 类型的对象, 你可以将其存储在变量中, 或者在智能匹配操作中使用。</p>
 </div>
 <div class="paragraph">
-<p>此外，还有一个使用 <code>m</code>(意为 match)而不是 <code>rx</code> 的形式。 它不是返回正则表达式对象，而是立即对特殊变量 <code>$_</code> 应用正则表达式匹配:</p>
+<p>此外, 还有一个使用 <code>m</code>(意为 match)而不是 <code>rx</code> 的形式。 它不是返回正则表达式对象, 而是立即将正则表达式与特殊变量 <code>$_</code> 匹配:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1468,7 +1468,7 @@ if m/b./ {
 </div>
 </div>
 <div class="paragraph">
-<p>由于智能匹配运算符 <code>~~</code> 自动将 <code>$_</code> 设置为表达式的左侧，所以你可以在智能匹配中使用 <code>m/&#8230;&#8203;/</code>:</p>
+<p>由于智能匹配运算符 <code>~~</code> 自动将 <code>$_</code> 设置为表达式的左侧, 所以在智能匹配中可以使用 <code>m/&#8230;&#8203;/</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1479,10 +1479,10 @@ if m/b./ {
 <div class="sect2">
 <h3 id="_修饰符">4.3. 修饰符</h3>
 <div class="paragraph">
-<p>修饰符改变了正则表达式的工作方式。它们分为两类。如果你把正则表达式看作是编译为字节码<sup class="footnote">[<a id="_footnoteref_19" class="footnote" href="#_footnotedef_19" title="View footnote.">19</a>]</sup>的小程序，那么一些修饰符会影响编译，其他修饰符会影响你调用该程序的方式。</p>
+<p>修饰符改变了正则表达式的工作方式。它们分为两类。如果你把正则表达式看作是被编译为字节码<sup class="footnote">[<a id="_footnoteref_19" class="footnote" href="#_footnotedef_19" title="View footnote.">19</a>]</sup>的小程序, 那么有些修饰符会影响编译, 有些修饰符则会影响你调用程序的方式。</p>
 </div>
 <div class="paragraph">
-<p>例如，<code>:global</code> 修饰符(短形式 <code>:g</code>)属于后一种类别; 它指示正则表达式搜索字符串中的所有非重叠匹配:</p>
+<p>例如, <code>:global</code> 修饰符(短形式 <code>:g</code>)属于后一类; 它指示正则表达式搜索字符串中所有不重叠的匹配:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1492,7 +1492,7 @@ say $str.match(:global, /h.mm\w*/).join('|');
 </div>
 </div>
 <div class="paragraph">
-<p>第一种类别的一个例子是 <code>:ignorecase</code>(简称 <code>:i</code>)， 它指示正则表达式引擎忽略大小写，所以大写字符在正则表达式中可以匹配其小写的等效字符，反之亦然<sup class="footnote">[<a id="_footnoteref_20" class="footnote" href="#_footnotedef_20" title="View footnote.">20</a>]</sup>:</p>
+<p>第一种类别的一个例子是 <code>:ignorecase</code>(简称 <code>:i</code>),  它指示正则表达式引擎忽略大小写, 因此正则表达式中的大写字符可以与小写的等效字符匹配, 反之亦然<sup class="footnote">[<a id="_footnoteref_20" class="footnote" href="#_footnotedef_20" title="View footnote.">20</a>]</sup>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1500,10 +1500,10 @@ say $str.match(:global, /h.mm\w*/).join('|');
 </div>
 </div>
 <div class="paragraph">
-<p>如前所示，影响正则表达式编译的修饰符可以在正则表达式自身里面使用。影响编译的正则表达式的行为的修饰符总是在外面。</p>
+<p>如前文所示, 影响到正则表达式编译的修饰符可以在正则表达式本身内部使用。影响编译后的正则表达式行为的修饰符总是在外部使用。</p>
 </div>
 <div class="paragraph">
-<p>由于 <code>m/&#8230;&#8203;/</code> 形式立即匹配，您也可以给它添加会影响正则表达式的运行时行为的修饰符:</p>
+<p>由于 <code>m/&#8230;&#8203;/</code> 形式是立即匹配的, 所以你也可以给它添加会影响正则表达式的运行时行为的修饰符:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1511,7 +1511,7 @@ say $str.match(:global, /h.mm\w*/).join('|');
 </div>
 </div>
 <div class="paragraph">
-<p>这里 <code>m:g/./</code> 返回一个含有三个匹配项的列表，所以 <code>.elems</code> 方法返回数字 3。(见表 4-1。)</p>
+<p>这里 <code>m:g/./</code> 返回一个含有三个匹配项的列表, 所以 <code>.elems</code> 方法返回数字 3。(见表 4-1。)</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 5. 影响正则表达式编译行为的修饰符或它的一部分</caption>
@@ -1549,13 +1549,13 @@ say $str.match(:global, /h.mm\w*/).join('|');
 </tbody>
 </table>
 <div class="paragraph">
-<p><code>:ignoremark</code> 或 <code>:m</code> 修饰符允许您只通过基础字符进行匹配，并忽略变音符号和其他装饰字符的标记。用 <code>:m</code> 实际上，<code>/a/</code> 匹配 a，à，á，â，ã，ä，å，ā 和其他 22 个字符。</p>
+<p><code>:ignoremark</code> 或 <code>:m</code> 修饰符允许你只用基本字符进行匹配, 而忽略变音符号和其他装饰字符的标记。在 <code>:m</code> 的作用下, <code>/a/</code> 可以匹配 a, à, á, â, ã, ä, å, ā 和其他 22 个字符。</p>
 </div>
 <div class="paragraph">
-<p><code>:sigspace</code>  修饰符使 grammar 匹配中的空格匹配字符串中的空格，但不一定是一对一的映射。<code>:ratchet</code> 修饰符禁用回溯，所以如果正则表达式引擎成功地以一种方式匹配字符串，它不会再以另一种不同的方式尝试匹配。我们稍后将更详细地讨论这两个修饰符。</p>
+<p><code>:sigspace</code> 修饰符使 grammar 匹配中的空格与字符串中的空格匹配, 尽管不一定是一对一的映射。<code>:ratchet</code> 修饰符禁用回溯, 所以如果正则表达式引擎成功地以一种方式匹配字符串, 它不会再尝试以另一种不同的方式匹配。我们稍后将更详细地讨论这两个修饰符。</p>
 </div>
 <div class="paragraph">
-<p>这些修饰符也可以放在正则表达式的中间，或者通过方括号组 <code>[&#8230;&#8203;]</code> 限制为正则表达式的一部分:</p>
+<p>这些修饰符也可以放在正则表达式的中间, 或者通过方括号组 <code>[&#8230;&#8203;]</code> 组来限制正则表达式的一部分:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1564,7 +1564,7 @@ say $str.match(:global, /h.mm\w*/).join('|');
 </div>
 </div>
 <div class="paragraph">
-<p>您还可以通过在冒号后面添加感叹号来禁用修饰符。所以最后一个正则表达式可以写成 <code>/:i ab :!i cd/</code>。 (见表4-2。)</p>
+<p>你还可以通过在冒号后面添加感叹号来禁用修饰符。所以最后一个正则表达式可以写成 <code>/:i ab :!i cd/</code>。 (见表4-2。)</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 6. 影响编译正则表达式运行使行为的修饰符</caption>
@@ -1612,19 +1612,19 @@ say $str.match(:global, /h.mm\w*/).join('|');
 </tbody>
 </table>
 <div class="paragraph">
-<p>所有接收参数的形式(此处为 5)也可以接受变量作为他们的参数。从字符串的开头位置从零开始计数，就像使用 <a href="https://docs.raku.org/type/Str#routine_substr">substr</a><sup class="footnote">[<a id="_footnoteref_21" class="footnote" href="#_footnotedef_21" title="View footnote.">21</a>]</sup> 进行字符串索引一样。</p>
+<p>所有接收参数的形式(此处为 5)也可以接受变量作为他们的参数。从字符串的开头位置从零开始计数, 就像使用 <a href="https://docs.raku.org/type/Str#routine_substr">substr</a><sup class="footnote">[<a id="_footnoteref_21" class="footnote" href="#_footnotedef_21" title="View footnote.">21</a>]</sup> 进行字符串索引一样。</p>
 </div>
 <div class="paragraph">
-<p>如果你用 <code>:global</code> 搜索多个匹配项，则第二个匹配的搜索从第一个匹配结束的位置处开始。用 <code>:overlap</code>， 第二个匹配的搜索从第一个匹配的下一个字符开始，因此两个匹配的匹配字符串可以重叠。<code>:exhaustive</code> 修饰符找到所有可能的匹配，即使有几个匹配都从同一个位置开始。</p>
+<p>如果你用 <code>:global</code> 搜索多个匹配项, 则第二个匹配的搜索从第一个匹配结束的地方开始。使用 <code>:overlap</code>, 第二个匹配的搜索从第一个匹配的下一个字符开始, 因此这两个匹配的匹配字符串可以重叠。<code>:exhaustive</code> 修饰符找到所有可能的匹配, 即使有几个匹配都从同一个位置开始。</p>
 </div>
 <div class="paragraph">
-<p>如果你使用不带参数的 <code>:continue</code> 和 <code>:pos</code> 修饰符，则它们默认为上一个匹配离开时的位置。</p>
+<p>如果你使用不带参数的 <code>:continue</code> 和 <code>:pos</code> 修饰符, 它们将默认为上一个匹配离开时的位置。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_comb_和_split">4.4. comb 和 split</h3>
 <div class="paragraph">
-<p>如果你想找到字符串中出现的所有正则表达式，但你只是对结果字符串感兴趣(而不是对匹配对象感兴趣)，你可以使用 <a href="https://docs.raku.org/type/Str#routine_comb">comb</a><sup class="footnote">[<a id="_footnoteref_22" class="footnote" href="#_footnotedef_22" title="View footnote.">22</a>]</sup> 方法找出它们:</p>
+<p>如果你想在一个字符串中找到正则表达式出现的所有次数, 但你只是对结果字符串感兴趣(而不是对匹配对象感兴趣), 你可以使用 <a href="https://docs.raku.org/type/Str#routine_comb">comb</a><sup class="footnote">[<a id="_footnoteref_22" class="footnote" href="#_footnotedef_22" title="View footnote.">22</a>]</sup> 方法找出它们:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1633,7 +1633,7 @@ say @numbers;       # Output: [1308 5]</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>相反，如果您对字符串中不匹配正则表达式的部分感兴趣 ，那么 <a href="https://docs.raku.org/type/Str#routine_split">split</a><sup class="footnote">[<a id="_footnoteref_23" class="footnote" href="#_footnotedef_23" title="View footnote.">23</a>]</sup> 方法适合你:</p>
+<p>相反, 如果你只对字符串中不匹配正则表达式的部分感兴趣 , 那么 <a href="https://docs.raku.org/type/Str#routine_split">split</a><sup class="footnote">[<a id="_footnoteref_23" class="footnote" href="#_footnotedef_23" title="View footnote.">23</a>]</sup> 方法适合你:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1642,7 +1642,7 @@ say $area;          # Output: 891.8</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里，正则表达式只包含一个字面量; 在这种情况下，你可以直接将字面字符串传递给 <code>split</code>，就像 'Berlin; 891.8; 3671000'.split(';'); 那样。</p>
+<p>在这里, 正则表达式只包含一个字面量; 在这种情况下, 你可以直接将字面字符串传递给 <code>split</code>, 就像 'Berlin; 891.8; 3671000'.split(';'); 那样。</p>
 </div>
 <div class="paragraph">
 <p><code>comb</code> 和 <code>split</code> 方法都接收第二个可选的参数 <code>limit</code>:</p>
@@ -1661,10 +1661,10 @@ say $rest;          # Output: 891.8;3671000</code></pre>
 <div class="sect2">
 <h3 id="_替换">4.5. 替换</h3>
 <div class="paragraph">
-<p>您不仅可以使用正则表达式来匹配文本，还可以对其进行转换。</p>
+<p>你不仅可以用正则表达式来匹配文本, 还可以用正则表达式来转换文本。</p>
 </div>
 <div class="paragraph">
-<p><a href="https://docs.raku.org/type/Str#method_subst">subst</a><sup class="footnote">[<a id="_footnoteref_24" class="footnote" href="#_footnotedef_24" title="View footnote.">24</a>]</sup> 方法可以用另一个字符串替换正则表达式所匹配的字符串部分。在最简单的情况下，替代者是一个字符串常量:</p>
+<p><a href="https://docs.raku.org/type/Str#method_subst">subst</a><sup class="footnote">[<a id="_footnoteref_24" class="footnote" href="#_footnotedef_24" title="View footnote.">24</a>]</sup> 方法可以用另一个字符串替换正则表达式所匹配的字符串部分。在最简单的情况下, 替代者是一个字符串常量:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1672,7 +1672,7 @@ say $rest;          # Output: 891.8;3671000</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果替代者是空字符串，则替换将删除匹配的字符串:</p>
+<p>如果替代者是空字符串, 则替换将删除匹配的字符串:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1680,7 +1680,7 @@ say $rest;          # Output: 891.8;3671000</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>与正则表达式匹配一样，修饰符和替换可以一块儿用。例如，<code>:global</code> 替换正则表达式匹配所有的出现(而不仅仅是第一个，即没有修饰符时):</p>
+<p>与正则表达式匹配一样, 修饰符和替换可以一块儿用。例如, <code>:global</code> 替换正则表达式匹配的所有出现过的字符串(而不仅仅是第一个, 即没有修饰符时):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1689,7 +1689,7 @@ say '1 2 3'.subst(:g, /\s+/, '');          # Output: 123</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果您希望替换字符串取决于匹配到的值，你可以传递子程序或块作为替换部分，它接收匹配对象作为其参数:</p>
+<p>如果你希望替换的字符串取决于匹配到的值, 你可以传递子程序或块作为替换部分, 它接收匹配对象作为其参数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1698,7 +1698,7 @@ say '1 2 3'.subst(:g, /\s+/, '');          # Output: 123</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这种替换的块中，匹配变量，如 <code>$0</code>，<code>$1</code> 等 (关于这个的更多内容参考下一章)不起作用，除非你明确声明匹配变量 <code>$/</code> 作为此块的参数:</p>
+<p>在这种替换块中, 像 <code>$0</code>, <code>$1</code> 等匹配变量(下一章会有更多介绍)都不起作用, 除非你明确声明匹配变量 <code>$/</code> 作为这个块的参数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1707,7 +1707,7 @@ say '1 2 3'.subst(:g, /\s+/, '');          # Output: 123</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>对于修改变量的替换，还有一个原地替换的语法变体:</p>
+<p>还有一种语法上的变体, 用于原地修改变量的替换。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1717,7 +1717,7 @@ say $var;                                  # Output: 123</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>请注意，在这种情况下，第一个和第二个斜杠(<code>/</code>)之间的部分是一个正则表达式，但第二个和第三个斜杠之间的部分是一个字符串。这意味着在第一部分中忽略了空格，但在第二部分中空格是有关的。在替换字符串中，您可以使用 <code>$0</code>，<code>$1</code>，<code>$2</code>，等等，用于引用捕获(有关捕获的更多信息，请参阅下一章):</p>
+<p>注意, 在这种情况下, 第一个斜线和第二个斜线(<code>/</code>)之间的部分是一个正则表达式, 但第二个斜线和第三个斜线之间的部分是一个字符串。这意味着在第一部分中, 空格被忽略, 但在第二部分中空格是有关的。在替换字符串内部, 你可以使用 <code>$0</code>、<code>$1</code>、<code>$2</code> 等等, 用于引用捕获(有关捕获的更多信息, 请参阅下一章):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1727,7 +1727,7 @@ say $var;           # Output: «fantastic», she said</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果您使用 <code>[&#8230;&#8203;]</code> 或 <code>{&#8230;&#8203;}</code> 来分割正则表达式，那么替换部分也可以是 Raku 表达式:</p>
+<p>如果你使用 <code>[&#8230;&#8203;]</code> 或 <code>{&#8230;&#8203;}</code> 来分隔正则表达式, 那么替换部分也可以是 Raku 表达式:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1737,10 +1737,10 @@ say $ad;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>其中 <code>$/</code> 指的是匹配对象。请注意，在这种情况下，赋值操作符在右侧之前使用。</p>
+<p>其中 <code>$/</code> 指的是匹配对象。注意, 在这种情况下, 赋值运算符是在右侧之前使用的。</p>
 </div>
 <div class="paragraph">
-<p>这会产生输出</p>
+<p>这会产生如下输出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1748,7 +1748,7 @@ say $ad;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>当您替换零宽度匹配时，替换变为插入操作:</p>
+<p>当你替换零宽度匹配时, 替换就变成了插入操作:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1763,8 +1763,8 @@ say $input;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里 <code>&lt;?before &#8230;&#8203;&gt;</code> 和 <code>&lt;?after &#8230;&#8203;&gt;</code> 将它们内部的正则表达式变成零宽度正则表达式，因此替换命令不会替换匹配的文本(如 "jump")，而是把替换部分
-插入到匹配的前面或后面:</p>
+<p>这里的 <code>&lt;?before &#8230;&#8203;&gt;</code> 和 <code>&lt;?after &#8230;&#8203;&gt;</code> 将它们内部的正则表达式变成零宽度的正则表达式, 所以替换命令并不会替换匹配的文本(如 "jump"), 而是在匹配之前或之后插入替换部分
+:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1773,7 +1773,7 @@ And then a step to the right→.</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>您可以组合正常匹配和零宽度匹配。例如，这个语句将后面跟着单位 MB 或 GB 的所有数字替换为 500:</p>
+<p>你可以把普通匹配和零宽度匹配结合起来。例如, 这个语句将后面跟着单位 MB 或 GB 的所有数字都替换为 500:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1786,10 +1786,10 @@ say $input.subst(:g, / \d+ &lt;?before &lt;[MG]&gt; B&gt;/, 500);
 <div class="sect2">
 <h3 id="_跨越代码和正则表达式边界">4.6. 跨越代码和正则表达式边界</h3>
 <div class="paragraph">
-<p>正则表达式和常规 Raku 代码编译为相同的字节代码，而你可以混合使用 Raku 代码和正则表达式。</p>
+<p>正则表达式和普通的 Raku 代码编译成相同的字节码, 而你可以将 Raku 代码和正则表达式混合使用。</p>
 </div>
 <div class="paragraph">
-<p>最明显的交互是将 regex 对象存储在变量中并在常规代码中使用它们:</p>
+<p>最明显的交互方式是将 regex 对象存储在变量, 然后在普通代码中使用它们:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1798,10 +1798,10 @@ say "Hello, world" ~~ $word-regex;    # Output: ⌜Hello⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>通过这种方式，您可以为正则表达式起个名字，还可以执行其他所有你使用变量时的操作: 将它们放入数据结构中，然后从函数中返回等。</p>
+<p>这样, 你可以为正则表达式起个名字, 同时也可以做所有其他可以用变量做的事情: 把它们放到数据结构中, 然后从函数中返回, 等等。</p>
 </div>
 <div class="paragraph">
-<p>反过来也可以。变量可以是正则表达式的一部分:</p>
+<p>反过来也可以。变量可以成为正则表达式的一部分:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1814,10 +1814,10 @@ if "Hello, world" ~~ / $greeting ', ' $audience / {
 </div>
 </div>
 <div class="paragraph">
-<p>如果一个变量包含一个字符串，它总是按字面意思匹配; 如果它包含正则表达式，则它匹配正则表达式。</p>
+<p>如果一个变量包含一个字符串, 它总是按字面意思匹配; 如果它包含正则表达式, 则作为正则表达式匹配。</p>
 </div>
 <div class="paragraph">
-<p>如果要将变量的内容解释为正则表达式，则可以将其包含在尖括号中:</p>
+<p>如果要把变量的内容解释为正则表达式, 你必须将它包含在尖括号中:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1830,10 +1830,10 @@ if "Hello, world" ~~ / $greeting ', ' &lt;$audience&gt; / {
 </div>
 </div>
 <div class="paragraph">
-<p>此示例还演示了反斜杠必须在引用的字符串中加倍 - 在这种情况下赋值给变量 <code>$audience</code> - 但不是正则表达式。在双引号字符串中，反斜杠引入了一个转义序列(例如 <code>\n</code> 表示换行符，<code>\t</code> 表示制表符)。使用语法 <code>&lt;$audience&gt;</code> 将变量 <code>$audience</code> 的内容解释为正则表达式。</p>
+<p>此示例还演示了反斜杠必须在引用的字符串中加倍 - 本例中是赋值给变量 <code>$audience</code> - 但不是正则表达式。在双引号字符串中, 反斜杠引入了一个转义序列(例如 <code>\n</code> 表示换行符, <code>\t</code> 表示制表符)。使用语法 <code>&lt;$audience&gt;</code> 可以将变量 <code>$audience</code> 的内容解释为正则表达式。</p>
 </div>
 <div class="paragraph">
-<p>在正则表达式中使用数组变量相当于匹配每个数组元素作为备选项; 因此</p>
+<p>在正则表达式中使用数组变量相当于将数组中的每个元素作为备选项进行匹配; 因此</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1850,13 +1850,13 @@ my $regex = / @numbers /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>除了一点, 使用数组变量时，更容易提供值编程。</p>
+<p>除了一点, 使用数组变量时, 用程序化的方式提供值比较容易。</p>
 </div>
 <div class="paragraph">
-<p>最后，您可以在正则表达式中包含 Raku 代码块，只需将它们嵌入到花括号中。这对于构建诸如执行正则表达式期间的符号表等结构数据时非常有用 。</p>
+<p>最后, 你可以在正则表达式中包含 Raku 代码块, 只需将其嵌入到花括号中即可。这对于在执行正则表达式时建立数据结构(如符号表)很有用 。</p>
 </div>
 <div class="paragraph">
-<p>例如，我们可以计算字符串中数字出现的次数:</p>
+<p>例如, 我们可以计算字符串中数字出现的次数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1869,10 +1869,10 @@ if $str ~~ / [ \d+ { $count++ } \D* ]+ / {
 </div>
 </div>
 <div class="paragraph">
-<p>这里块 <code>{ $count++ }</code>，给变量 $count 加一，在正则表达式的 <code>\d+</code> 部分之后执行。虽然这有点构造用例，我们将在后面的章节中看到正则表达式代码块的非常实际的应用。</p>
+<p>这里块 <code>{ $count++ }</code>, 它将变量 <code>$count</code> 增量 1, 在正则表达式的 <code>\d+</code> 部分之后执行。虽然这是一个有点构造化的用例, 我们将在后面的章节中看到正则表达式代码块的实际应用。</p>
 </div>
 <div class="paragraph">
-<p>正则表达式中块的另一个好的用例是添加用于调试的 print 语句，以查看正则表达式如何匹配。</p>
+<p>正则表达式中代码块的另一个很好的用例是添加 <code>print</code> 语句用于调试, 以查看正则表达式是如何匹配的。</p>
 </div>
 <div class="paragraph">
 <p>这里我们尝试将浮点数与正则表达式匹配:</p>
@@ -1883,7 +1883,7 @@ if $str ~~ / [ \d+ { $count++ } \D* ]+ / {
 </div>
 </div>
 <div class="paragraph">
-<p>这个正则表达式匹配失败了，看看正则表达式到底走了多远，你可以删除使片段可选的问号并添加一些代码以显示增量进度:</p>
+<p>这个正则表达式匹配失败了, 要看这个正则表达式匹配到什么程度, 你可以删除使片段可选的问号, 然后添加一些代码块来显示增量进度:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1905,13 +1905,13 @@ exponent: '1.0e'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们可以看到正则表达式的最后部分只匹配 e，而不是 e42。 仔细研究表明 <code>[e|E \d+]</code> 中的备选项扩展为 <code>\d+</code>， 这不是故意的。添加一个分组级别，<code>[ [e|E] \d+ ]</code>，修复该正则表达式。</p>
+<p>我们可以看到这个正则表达式的最后一部分只匹配了 e, 而不是 e42。 仔细观察就会发现 <code>[e|E \d+]</code> 中的备选项延伸到了 <code>\d+</code>, 而这并不是本意。添加一个分组级别, <code>[ [e|E] \d+ ]</code>, 修复该正则表达式。</p>
 </div>
 <div class="paragraph">
-<p>代码块使用包含 <code>$/</code> 的特殊变量，它包含匹配(或者至少部分匹配，就其进展而言)。</p>
+<p>这些代码块使用了特殊变量 <code>$/</code>, 它包含了匹配(或者至少是部分匹配, 就其进展而言)。</p>
 </div>
 <div class="paragraph">
-<p>这些代码块纯粹是为了副作用而执行的。您可以使用 <code>&lt;?{&#8230;&#8203;}&gt;</code> 形式来影响正则表达式匹配。如果是代码在该块内部返回 <code>false</code> 值，匹配失败<sup class="footnote">[<a id="_footnoteref_25" class="footnote" href="#_footnotedef_25" title="View footnote.">25</a>]</sup>:</p>
+<p>这些代码块的执行纯粹是为了它们的副作用。你可以使用 <code>&lt;?{&#8230;&#8203;}&gt;</code> 形式来影响正则表达式匹配。如果该代码块中的代码返回 <code>false</code> 值, 则匹配失败<sup class="footnote">[<a id="_footnoteref_25" class="footnote" href="#_footnotedef_25" title="View footnote.">25</a>]</sup>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1924,10 +1924,10 @@ for 0, 100, 255, 256, 1000 -&gt; $num {
 </div>
 </div>
 <div class="paragraph">
-<p>此示例的正则表达式匹配 0 到 255 之间的数字(例如，可能用于验证 IPv4 地址)，以及仅打印数字 0,100 和 255。</p>
+<p>此示例的正则表达式匹配 0 到 255 之间的数字(例如, 可能用于验证 IPv4 地址), 并且只打印 0、100 和 255 这些数字。</p>
 </div>
 <div class="paragraph">
-<p><code>$/.Int</code> 调用将匹配的字符串转换为整数，并且当且仅当该数字最多为 255 时比较 <code>&#8656; 255</code> 才返回 <code>True</code>。</p>
+<p><code>$/.Int</code> 调用将匹配的字符串转换为整数, 并且当且仅当该数字最多为 255 时比较 <code>&#8656; 255</code> 才返回 <code>True</code>。</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 7. 把 Raku 代码嵌入正则表达式的方法</caption>
@@ -1966,10 +1966,10 @@ for 0, 100, 255, 256, 1000 -&gt; $num {
 <div class="sect2">
 <h3 id="_总结_3">4.7. 总结</h3>
 <div class="paragraph">
-<p>在本章中，我们已经了解了如何在 Raku 代码和其他代码中使用正则表达式，反之亦然。您可以将正则表达式存储在变量中，也可以使用变量里面的正则表达式。</p>
+<p>在本章中, 我们已经看到了如何在 Raku 代码中使用正则表达式, 反之亦然。你可以将正则表达式存储在变量中, 也可以在正则表达式中使用变量。</p>
 </div>
 <div class="paragraph">
-<p>在下一章中，我们将探讨如何从正则表达式匹配中提取信息或其中的部分。</p>
+<p>在下一章中, 我们将探讨如何从正则表达式匹配中提取信息或其中的部分信息。</p>
 </div>
 </div>
 </div>
