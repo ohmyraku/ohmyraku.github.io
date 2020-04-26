@@ -141,7 +141,7 @@ if (theme && theme !== "1") {
 </li>
 <li><a href="#_从正则表达式匹配中提取数据">5. 从正则表达式匹配中提取数据</a>
 <ul class="sectlevel2">
-<li><a href="#_定位捕获">5.1. 定位捕获</a></li>
+<li><a href="#_位置捕获">5.1. 位置捕获</a></li>
 <li><a href="#_匹配对象">5.2. 匹配对象</a></li>
 <li><a href="#_命名捕获">5.3. 命名捕获</a></li>
 <li><a href="#_反向引用">5.4. 反向引用</a></li>
@@ -1978,15 +1978,15 @@ for 0, 100, 255, 256, 1000 -&gt; $num {
 <h2 id="_从正则表达式匹配中提取数据">5. 从正则表达式匹配中提取数据</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>当你使用正则表达式验证输入时，知道给定字符串是否匹配正则表达式已经足够了。在许多其他情况下，我们想要从字符串和正则表达式匹配中提取更多数据。</p>
+<p>当你使用正则表达式来验证输入时, 只要知道给定的字符串是否匹配正则表达式就可以了。在其他很多情况下, 我们想要从字符串和正则表达式匹配中提取更多的数据。</p>
 </div>
 <div class="paragraph">
-<p>例如，如果要解析INI文件(Microsoft Windows 上常见的配置文件格式)， 你可能感兴趣的是节标题和节内的键/值对; 然而，节标题周围的方括号那样的东西我们不感兴趣。</p>
+<p>比如说, 如果你想解析一个 INI 文件(Microsoft Windows 上常见的配置文件格式),  你可能会对节标题和节内的键/值对感兴趣; 但是, 节标题周围的方括号这样的东西我们就不感兴趣了。</p>
 </div>
 <div class="sect2">
-<h3 id="_定位捕获">5.1. 定位捕获</h3>
+<h3 id="_位置捕获">5.1. 位置捕获</h3>
 <div class="paragraph">
-<p>你可以通过指示正则表达式捕获一些数据来提取相关数据，即用一对括号包围一部分正则表达式。这部分正则表达式匹配的字符串随后单独可得:</p>
+<p>你可以通过指示一个正则表达式来捕获一些数据, 通过在正则表达式的一部分的周围加上一对圆括号来提取相关数据。然后, 这部分正则表达式匹配的字符串就会被单独提供:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1997,23 +1997,22 @@ for 0, 100, 255, 256, 1000 -&gt; $num {
 </div>
 </div>
 <div class="paragraph">
-<p>捕获从左到右，从零开始编号。 第一对括号中的正则表达式匹配的字符串可保存在特殊变量 <code>$0</code> 中，第二对括号中的正则表达式匹配的字符串可保存在特殊变量 <code>$1</code> 中，依此类推。</p>
+<p>捕获从左到右, 从零开始编号。 第一对括号中的正则表达式匹配的字符串可以保存在特殊变量 <code>$0</code> 中, 第二对括号中的正则表达式匹配的字符串可保存在特殊变量 <code>$1</code> 中, 以此类推。</p>
 </div>
 <div class="paragraph">
-<p>由于这些捕获的编号取决于它们在正则表达式中的相对位置, 所以我们称它们为位置捕获。</p>
+<p>由于这些捕获的编号取决于它们在正则表达式中的相对位置, 我们称它们为位置捕获。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_匹配对象">5.2. 匹配对象</h3>
 <div class="paragraph">
-<p>每个成功的正则表达式匹配的结果是 <a href="https://docs.raku.org/type/Match.html">Match</a><sup class="footnote">[<a id="_footnoteref_26" class="footnote" href="#_footnotedef_26" title="View footnote.">26</a>]</sup> 类型的对象。 当你将正则表达式与智能匹配运算符 <code>~~</code> 匹配时，正则表达式对象也可以在特殊变量 <code>$/</code> 中使用。</p>
+<p>每个成功的正则表达式匹配的结果是一个 <a href="https://docs.raku.org/type/Match.html">Match</a><sup class="footnote">[<a id="_footnoteref_26" class="footnote" href="#_footnotedef_26" title="View footnote.">26</a>]</sup> 类型的对象。 当你用智能匹配运算符 <code>~~</code> 匹配一个正则表达式时, 这个正则表达式对象也可以在特殊变量 <code>$/</code> 中使用。</p>
 </div>
 <div class="paragraph">
-<p>匹配对象提供有关正则表达式匹配的大量信息: <code>$/.orig</code> 包含正则表达式匹配的字符串，<code>$/.from</code> 和
-<code>$/.to</code> 表示匹配的开始和结束位置，并在字符串上下文中使用它(或通过在它身上显式调用 <code>.Str</code> 方法)并返回匹配的字符串。</p>
+<p>匹配对象提供了大量关于正则表达式匹配的信息: <code>$/.orig</code> 包含了正则表达式匹配的字符串, <code>$/.from</code> 和 <code>$/.to</code> 包含了匹配的开始和结束位置, 在字符串上下文中使用它(或通过在它身上显式调用 <code>.Str</code> 方法)返回匹配的字符串。</p>
 </div>
 <div class="paragraph">
-<p>但还有更多: 当你像数组一样使用匹配对象时，你可以从捕获中访问匹配项。<code>$0</code> 实际上是 <code>$/[0]</code> 的别名 ，<code>$1</code> 实际上是 <code>$/[1]</code> 的别名，等等。</p>
+<p>但还有更多: 当你像使用数组一样使用匹配对象时, 你可以从捕获中访问匹配项。<code>$0</code> 实际上是 <code>$/[0]</code> 的别名 , <code>$1</code> 实际上是 <code>$/[1]</code> 的别名, 等等。</p>
 </div>
 <div class="paragraph">
 <p>捕获本身也是 Match 对象:</p>
@@ -2033,7 +2032,7 @@ if $input ~~ /(\d+) \s+ (\w+)/ {
 <div class="sect3">
 <h4 id="_捕获嵌套">5.2.1. 捕获嵌套</h4>
 <div class="paragraph">
-<p>如果将捕获嵌套在其他捕获中，则匹配对象的结构对应于捕获的嵌套:</p>
+<p>如果在其他捕获中嵌套捕获, 则匹配对象的结构对应于捕获的嵌套:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2046,16 +2045,16 @@ say $1[1][0].Str;   # Output: e</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>匹配对象实际上是匹配对象树。</p>
+<p>匹配对象实际上是一个匹配对象的树。</p>
 </div>
 <div class="paragraph">
-<p>正如你在前面的示例中所看到的那样，捕获的编号是一个嵌套级别一个编号; 该正则表达式中有五对圆括号，但其中只有两个是顶级的，因此匹配成功后只有 <code>$0</code> 和 <code>$1</code>，没有 <code>$2</code> 或更高的级别。相反，每个嵌套级别也会引入从 0 开始的匹配编号。这与 Perl 5 和 PCRE 语义相违背，它们中的匹配是连续编号的。</p>
+<p>正如你在前面的示例中所看到的那样, 捕获的编号是按每一层嵌套的方式进行的; 在这个正则表达式中, 有五对圆括号, 但其中只有两对是顶层的, 所以匹配成功后只有 <code>$0</code> 和 <code>$1</code>, 没有 <code>$2</code> 或更高的级别。相反, 每一级的嵌套还引入了从 0 开始的匹配编号。这与 Perl 5 和 PCRE 语义不同, 在 Perl 5 和 PCRE 语义中, 匹配是连续编号的。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_量词化捕获">5.2.2. 量词化捕获</h4>
 <div class="paragraph">
-<p>当捕获受量词时，匹配对象中相应的捕获成为 Match 对象的<a href="https://docs.raku.org/type/Array">数组</a><sup class="footnote">[<a id="_footnoteref_27" class="footnote" href="#_footnotedef_27" title="View footnote.">27</a>]</sup>:</p>
+<p>当捕获受制于一个量词时, 匹配对象中对应的捕获就变成了匹配对象中的<a href="https://docs.raku.org/type/Array">数组</a><sup class="footnote">[<a id="_footnoteref_27" class="footnote" href="#_footnotedef_27" title="View footnote.">27</a>]</sup>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2066,14 +2065,14 @@ say $1[1][0].Str;   # Output: e</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>唯一的例外是 <code>?</code> 量词，它不从捕获中产生数组。<sup class="footnote">[<a id="_footnoteref_28" class="footnote" href="#_footnotedef_28" title="View footnote.">28</a>]</sup>相反，当它匹配一次时，它的捕获是一个 Match 对象， 如果它匹配零次则为 <code>Nil</code>。</p>
+<p>唯一的例外是 <code>?</code> 量词, 它不会从捕获中产生数组。<sup class="footnote">[<a id="_footnoteref_28" class="footnote" href="#_footnotedef_28" title="View footnote.">28</a>]</sup>相反, 当它匹配一次时, 它的捕获是一个匹配对象,  如果它匹配零次, 则为 <code>Nil</code>。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_命名捕获">5.3. 命名捕获</h3>
 <div class="paragraph">
-<p>当你有超过两三个捕获时，你可能会弄错哪个编号指向哪个捕获组。为了减轻这种负担，为了使代码对重构更加健壮，你可以使用命名捕获代替:</p>
+<p>当你有超过两个或三个以上的捕获时, 你可能会忘记哪个编号指向哪个捕获组。为了减轻这种负担, 并使代码在重构时更加健壮, 你可以使用命名捕获来代替:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2085,13 +2084,13 @@ if $str ~~ / $&lt;greeting&gt;=[\w+] ', ' $&lt;audience&gt;=[\w+] / {
 </div>
 </div>
 <div class="paragraph">
-<p><code>$&lt;thename&gt;</code> 引用正则表达式内部和外部的命名捕获 。在正则表达式内部，你可以分配给它一个名字，然后在正则表达式外面你可以访问相应的匹配对象。在正则表达式外部，<code>$&lt;thename&gt;</code> 实际上是一种基于名称访问匹配对象的快捷方式，<code>$/&lt;thename&gt;</code> 或 <code>$/{'thename'}</code>。这种访问命名捕获的模式遵循与访问哈希元素的语法相同的语法。</p>
+<p><code>$&lt;thename&gt;</code> 在正则表达式内部和外部都指向命名捕获。在正则表达式内部, 你可以给它分配一个名字, 然后在正则表达式外面你可以访问相应的匹配对象。在正则表达式外部, <code>$&lt;thename&gt;</code> 实际上是对匹配对象的命名访问的快捷方式, <code>$/&lt;thename&gt;</code> 或 <code>$/{'thename'}</code>。这种访问命名捕获的模式与访问哈希元素的语法相同。</p>
 </div>
 <div class="paragraph">
-<p>如果在同一个正则表达式中使用相同的名字两次(或更频繁)，那么捕获再次成为一个数组。</p>
+<p>如果在同一个正则表达式中使用了两次(或更频繁地)相同的名字, 那么捕获再次成为一个数组。</p>
 </div>
 <div class="paragraph">
-<p>在后面的章节中，我们将更详细地讨论命名正则表达式。对于现在，创建命名捕获的更简单方法是只按名称调用正则表达式就足够了:</p>
+<p>在后面的章节中, 我们将更详细地讨论命名正则表达式。对于现在, 创建命名捕获的更简单方法就是按名称调用正则表达式就足够了:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2109,7 +2108,7 @@ if $str ~~ / ^ &lt;byte&gt; ** 4 % '.' $ / {
 </div>
 </div>
 <div class="paragraph">
-<p>这里 <code>&lt;byte&gt;</code> 调用命名正则表达式 <code>byte</code> 并自动捕获由此同名子规则 <code>byte</code> 所匹配到的字符串。你可以使用语法 <code>&lt;alias=originalname&gt;</code> 重命名捕获:</p>
+<p>这里 <code>&lt;byte&gt;</code> 调用命名正则表达式 <code>byte</code>, 并自动捕获由此同名子规则 <code>byte</code> 所匹配到的字符串。你可以使用语法 <code>&lt;alias=originalname&gt;</code> 来重命名捕获:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2126,33 +2125,33 @@ if $str ~~ /&lt;greeting=word&gt; ', ' &lt;audience=word&gt;/ {
 <div class="sect2">
 <h3 id="_反向引用">5.4. 反向引用</h3>
 <div class="paragraph">
-<p>反向引用允许你访问正则表达式中的捕获，匹配正则表达式捕获的的前一部分字符串。这里有几个可能有用的案例，例如搜索文本中意外重复的单词时。第一次尝试将是这样的正则表达式: <code>/ (\w+) \s+ $0 /</code> 这个正则表达式匹配一个单词(<code>\w+</code>)并将其捕获到 <code>$0</code> 中， 后跟空格(<code>\s+</code>)，后再跟原始单词(<code>$0</code>)。然而这不符合预期。用它来匹配字符串 <code>the next thing</code>，它会匹配 <code>t t</code>, 因为 <code>\w+</code> 很乐意只匹配一个字符。</p>
+<p>反向引用允许你访问正则表达式中的捕获, 匹配正则表达式捕获的的前一部分字符串。这里有几个可能有用的案例, 例如搜索文本中意外重复的单词时。第一次尝试将是这样的正则表达式: <code>/ (\w+) \s+ $0 /</code> 这个正则表达式匹配一个单词(<code>\w+</code>)并将其捕获到 <code>$0</code> 中,  后跟空格(<code>\s+</code>), 后再跟原始单词(<code>$0</code>)。然而这不符合预期。用它来匹配字符串 <code>the next thing</code>, 它会匹配 <code>t t</code>, 因为 <code>\w+</code> 很乐意只匹配一个字符。</p>
 </div>
 <div class="paragraph">
-<p>为了使它工作，我们可以通过包括单词字边界断言: <code>/ « (\w+) \s+ $0 » /</code> (记住 « 匹配左单词边界而 » 匹配右单词边界)来限制匹配整个单词。</p>
+<p>为了使它工作, 我们可以通过包括单词字边界断言: <code>/ « (\w+) \s+ $0 » /</code> (记住 « 匹配左单词边界而 » 匹配右单词边界)来限制匹配整个单词。</p>
 </div>
 <div class="paragraph">
-<p>现在，如果你让它和 "the quick brown fox jumps over the the lazy black dog" 字符串测试，它会正确地匹配两个 "the"。</p>
+<p>现在, 如果你让它和 "the quick brown fox jumps over the the lazy black dog" 字符串测试, 它会正确地匹配两个 "the"。</p>
 </div>
 <div class="paragraph">
 <p>反向引用也适用于命名捕获; 上一个例子本来可以写成 <code>/« $&lt;word&gt;=\w+ \s+ $&lt;word&gt; »/</code>。</p>
 </div>
 <div class="paragraph">
-<p>反向引用的另一个常见用例是查找一些引号字符串那样的东西，只要两端都是相同的字符，你用不关心实际的引用的是什么字符。</p>
+<p>反向引用的另一个常见用例是查找一些引号字符串那样的东西, 只要两端都是相同的字符, 你用不关心实际的引用的是什么字符。</p>
 </div>
 <div class="paragraph">
-<p>请注意，反向引用绝对超出了常规计算机科学中定义的语言的范围; 你需要更强大的形式主义。</p>
+<p>请注意, 反向引用绝对超出了常规计算机科学中定义的语言的范围; 你需要更强大的形式主义。</p>
 </div>
 <div class="sect3">
 <h4 id="_跑个题_带反向引用的原始性测试">5.4.1. 跑个题: 带反向引用的原始性测试</h4>
 <div class="paragraph">
-<p>本节与任何实际应用无关，但可以一窥人们用正则表达式所做的疯狂的事情。如果你仅仅出于实际原因阅读本文，你可以放心地跳过它。</p>
+<p>本节与任何实际应用无关, 但可以一窥人们用正则表达式所做的疯狂的事情。如果你仅仅出于实际原因阅读本文, 你可以放心地跳过它。</p>
 </div>
 <div class="paragraph">
-<p>素数是一个整数，只能被数字 1 和它本身整除。</p>
+<p>素数是一个整数, 只能被数字 1 和它本身整除。</p>
 </div>
 <div class="paragraph">
-<p>你可以使用正则表达式来测试数字是否为素数。<sup class="footnote">[<a id="_footnoteref_29" class="footnote" href="#_footnotedef_29" title="View footnote.">29</a>]</sup>首先我们必须通过创建同一字符的字符串来编码数字(例如 a)，其中字符串中的字符数与数值相同。因此 2 将被编码为 aa，5 将被编码为 aaaaa，依此类推。在 Raku 中，我们可以使用字符串重复运算符 <code>x</code> 来执行此操作:</p>
+<p>你可以使用正则表达式来测试数字是否为素数。<sup class="footnote">[<a id="_footnoteref_29" class="footnote" href="#_footnotedef_29" title="View footnote.">29</a>]</sup>首先我们必须通过创建同一字符的字符串来编码数字(例如 a), 其中字符串中的字符数与数值相同。因此 2 将被编码为 aa, 5 将被编码为 aaaaa, 依此类推。在 Raku 中, 我们可以使用字符串重复运算符 <code>x</code> 来执行此操作:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2160,7 +2159,7 @@ if $str ~~ /&lt;greeting=word&gt; ', ' &lt;audience=word&gt;/ {
 </div>
 </div>
 <div class="paragraph">
-<p>然后，我们尝试找到一个大于 1 的因子，它能均匀分割该数值。在我们的编码字符串中，这是至少有两个字符的子字符串， 当经常重复(但至少一次)时，重新产生原始编码字符串:</p>
+<p>然后, 我们尝试找到一个大于 1 的因子, 它能均匀分割该数值。在我们的编码字符串中, 这是至少有两个字符的子字符串,  当经常重复(但至少一次)时, 重新产生原始编码字符串:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2196,16 +2195,16 @@ if $str ~~ /&lt;greeting=word&gt; ', ' &lt;audience=word&gt;/ {
 </div>
 </div>
 <div class="paragraph">
-<p>例如，如果 <code>$number</code> 为 6，则 <code>$encoded</code> 变为 "aaaaaa"。当第一组(<code>a <strong>* 2..</strong></code>)匹配时，正则表达式引擎然后找到匹配, 它匹配三个 a，即 aaa。因此，<code>$ 0+</code> 产生另外三个 a，总共六个 a。 在素数的情况下，正则表达式引擎无法找到这样的分区，导致匹配失败。</p>
+<p>例如, 如果 <code>$number</code> 为 6, 则 <code>$encoded</code> 变为 "aaaaaa"。当第一组(<code>a <strong>* 2..</strong></code>)匹配时, 正则表达式引擎然后找到匹配, 它匹配三个 a, 即 aaa。因此, <code>$ 0+</code> 产生另外三个 a, 总共六个 a。 在素数的情况下, 正则表达式引擎无法找到这样的分区, 导致匹配失败。</p>
 </div>
 <div class="paragraph">
-<p>由于 <code>**</code> 量词是贪婪的，因此正则表达式引擎首先找到最大素数因子，因此它将 5 标识为 10 的主要因子。如果将其更改为 <code>**?</code> 量词(因此正则表达式变为 <code>/ ^ (a <strong>*? 2..</strong>) $0+ $ /</code>)，它找到最小的素因子。</p>
+<p>由于 <code>**</code> 量词是贪婪的, 因此正则表达式引擎首先找到最大素数因子, 因此它将 5 标识为 10 的主要因子。如果将其更改为 <code>**?</code> 量词(因此正则表达式变为 <code>/ ^ (a <strong>*? 2..</strong>) $0+ $ /</code>), 它找到最小的素因子。</p>
 </div>
 <div class="paragraph">
-<p>请注意，这是一种测试素数的非常低效的方法，因为正则表达式引擎没有针对这种任务进行优化，所以使用非常低效的数字表示，甚至必须尝试所有可能的因子，甚至通过更智能的算法很容易排除的那些。</p>
+<p>请注意, 这是一种测试素数的非常低效的方法, 因为正则表达式引擎没有针对这种任务进行优化, 所以使用非常低效的数字表示, 甚至必须尝试所有可能的因子, 甚至通过更智能的算法很容易排除的那些。</p>
 </div>
 <div class="paragraph">
-<p>尽管如此，正则表达式引擎设法测试最多 50 个数字，几秒钟就可以了。Raku 有一种内置的方法来测试素数，它更快，占用更少的内存:</p>
+<p>尽管如此, 正则表达式引擎设法测试最多 50 个数字, 几秒钟就可以了。Raku 有一种内置的方法来测试素数, 它更快, 占用更少的内存:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2217,10 +2216,10 @@ if $str ~~ /&lt;greeting=word&gt; ', ' &lt;audience=word&gt;/ {
 <div class="sect2">
 <h3 id="_重新访问匹配对象">5.5. 重新访问匹配对象</h3>
 <div class="paragraph">
-<p>如前所述，成功的正则表达式匹配返回匹配对象。除了匹配的子串的位置和长度之外，匹配对象还存储所有位置捕获和命名捕获。要获取所有的位置捕获的列表 ，你可以调用 <code>.list`方法。同样，</code>.hash` 方法将命名捕获返回为哈希。哈希是一种数据从名称或键到值的映射结构; Python 称它为 dict 或字典，JavaScript 称之为对象。</p>
+<p>如前所述, 成功的正则表达式匹配返回匹配对象。除了匹配的子串的位置和长度之外, 匹配对象还存储所有位置捕获和命名捕获。要获取所有的位置捕获的列表 , 你可以调用 <code>.list`方法。同样, `.hash</code> 方法将命名捕获返回为哈希。哈希是一种数据从名称或键到值的映射结构; Python 称它为 dict 或字典, JavaScript 称之为对象。</p>
 </div>
 <div class="paragraph">
-<p>当使用 <code>say</code> 函数打印匹配对象时，输出为由 ⌜⌟ 分割的匹配字符串:s</p>
+<p>当使用 <code>say</code> 函数打印匹配对象时, 输出为由 ⌜⌟ 分割的匹配字符串:s</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2228,7 +2227,7 @@ if $str ~~ /&lt;greeting=word&gt; ', ' &lt;audience=word&gt;/ {
 </div>
 </div>
 <div class="paragraph">
-<p>如果正则表达式包含捕获，它们将在单独的行上打印，并缩进一个空格。从而</p>
+<p>如果正则表达式包含捕获, 它们将在单独的行上打印, 并缩进一个空格。从而</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2246,7 +2245,7 @@ if $str ~~ /&lt;greeting=word&gt; ', ' &lt;audience=word&gt;/ {
 </div>
 </div>
 <div class="paragraph">
-<p>其中 0 和 1 是捕获的索引。嵌套捕获产生更多的缩进，所以 <code>"abc" ∼∼ /.(.(.))/</code> 打印:</p>
+<p>其中 0 和 1 是捕获的索引。嵌套捕获产生更多的缩进, 所以 <code>"abc" ∼∼ /.(.(.))/</code> 打印:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2256,7 +2255,7 @@ if $str ~~ /&lt;greeting=word&gt; ', ' &lt;audience=word&gt;/ {
 </div>
 </div>
 <div class="paragraph">
-<p>因此，命名捕获仅仅通过它们的名字来区分:</p>
+<p>因此, 命名捕获仅仅通过它们的名字来区分:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2277,10 +2276,10 @@ char =&gt; ⌜c⌟</code></pre>
 <div class="sect2">
 <h3 id="_总结_4">5.6. 总结</h3>
 <div class="paragraph">
-<p>捕获允许你从成功的正则表达式匹配中提取数据。你可以通过添加一对圆括号来指示正则表达式引擎捕获数据， 通过使用 <code>$&lt;name&gt;=[&#8230;&#8203;]</code> 语法，或者通过调用命名正则表达式: <code>&lt;name&gt;</code>。</p>
+<p>捕获允许你从成功的正则表达式匹配中提取数据。你可以通过添加一对圆括号来指示正则表达式引擎捕获数据,  通过使用 <code>$&lt;name&gt;=[&#8230;&#8203;]</code> 语法, 或者通过调用命名正则表达式: <code>&lt;name&gt;</code>。</p>
 </div>
 <div class="paragraph">
-<p>正则表达式匹配和捕获都产生匹配对象; 最顶层的匹配对象因此成为子匹配的树。反向引用允许你准确匹配正则表达式的前一部分的匹配，你可以滥用该功能来构建一个简单的素数测试。</p>
+<p>正则表达式匹配和捕获都产生匹配对象; 最顶层的匹配对象因此成为子匹配的树。反向引用允许你准确匹配正则表达式的前一部分的匹配, 你可以滥用该功能来构建一个简单的素数测试。</p>
 </div>
 </div>
 </div>
@@ -6318,10 +6317,10 @@ class If {
 <a href="#_footnoteref_27">27</a>. <a href="https://docs.raku.org/type/Array" class="bare">https://docs.raku.org/type/Array</a>
 </div>
 <div class="footnote" id="_footnotedef_28">
-<a href="#_footnoteref_28">28</a>. Raku 的早期版本为所有量词化的捕获创建了一个数组捕获，即使是使用了 ? 量词符。这让大多数用户感到困惑。
+<a href="#_footnoteref_28">28</a>. Raku 的早期版本为所有量词化的捕获创建了一个数组捕获, 即使是使用了 ? 量词符。这让大多数用户感到困惑。
 </div>
 <div class="footnote" id="_footnotedef_29">
-<a href="#_footnoteref_29">29</a>. 这个素数测试通常归功于 Abigail，一个多产的 Perl 黑客。例如参见 <a href="http://neilk.net/blog/2000/06/01/abigails-regex-to-test-for-prime-numbers/。" class="bare">http://neilk.net/blog/2000/06/01/abigails-regex-to-test-for-prime-numbers/。</a>
+<a href="#_footnoteref_29">29</a>. 这个素数测试通常归功于 Abigail, 一个多产的 Perl 黑客。例如参见 <a href="http://neilk.net/blog/2000/06/01/abigails-regex-to-test-for-prime-numbers/。" class="bare">http://neilk.net/blog/2000/06/01/abigails-regex-to-test-for-prime-numbers/。</a>
 </div>
 <div class="footnote" id="_footnotedef_30">
 <a href="#_footnoteref_30">30</a>. 有限状态机形式假定你总是想匹配整个字符串, 因此使用了锚点。如果你只想在一个字符串中搜索, 你必须在 regex 后面加上 <code>.*</code>。
