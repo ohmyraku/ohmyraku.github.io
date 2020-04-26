@@ -189,6 +189,16 @@ if (theme && theme !== "1") {
 <li><a href="#_最后的调试">8.19. 最后的调试</a></li>
 </ul>
 </li>
+<li><a href="#_计算_ast">9. 计算 AST</a>
+<ul class="sectlevel2">
+<li><a href="#_从_top_开始计算">9.1. 从 top 开始计算</a></li>
+<li><a href="#_使用变量_2">9.2. 使用变量</a></li>
+<li><a href="#_字符串插值">9.3. 字符串插值</a></li>
+<li><a href="#_使用_raku_getters">9.4. 使用 Raku getters</a></li>
+<li><a href="#_到处插值">9.5. 到处插值</a></li>
+<li><a href="#_算术操作">9.6. 算术操作</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="sect1">
@@ -6360,6 +6370,901 @@ b = 1, 2, 3;</code></pre>
 </div>
 <div class="paragraph">
 <p>现在就到此为止。在这一章中，也是全书最大的一章，我们走了很远的路，将编译器从一个解释器转变为一个构建抽象语法树的机器。正如你刚才看到的那样，我们去掉了一些代码，大多时候只能依靠 grammar。尽管如此，所得到的树还是很好地表示了程序的流程，我们很快就会有效地使用它。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_计算_ast">9. 计算 AST</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在上一章中, 我们学习了如何将输入程序转化为 AST。这个树只保存了程序的实际本质信息, 而忽略了比如说源代码中的所有注释。</p>
+</div>
+<div class="paragraph">
+<p>在整个上一章的学习过程中, 编译器的输出就是一棵树。我们可以看到程序认为它要做什么, 但实际上我们并没有看到这个工作的结果。在这一章中, 我们将遍历 AST 并执行它所代表的任务。</p>
+</div>
+<div class="sect2">
+<h3 id="_从_top_开始计算">9.1. 从 top 开始计算</h3>
+<div class="paragraph">
+<p>AST 树的元素从叶子规则和令牌冒泡到 <code>TOP</code> 规则。让我们让我们的返回 AST 的 grammar。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method TOP($/) {
+    my $top = AST::TOP.new;
+
+    . . .
+
+    $/.make($top);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当我们在构建树的时候, <code>make</code> 和 <code>made</code> 这对方法给了我们传递树片段到父节点的方法。当你在 <code>TOP</code> 层使用 <code>make</code> 时, 你得到的对象是解析方法的结果。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $ast = Lingua.parse($code, :actions(LinguaActions.new));
+say $ast ?? 'OK' !! error('Error: parse failed');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们在布尔语境中使用了生成的 AST, 但这并不是我们唯一能用它做的事情。在本章中, 我们将致力于创建沿着树上行走的代码, 并执行节点要求的动作。</p>
+</div>
+<div class="paragraph">
+<p>在主脚本中, 让我们将 AST 传递给 <code>LinguaEvaluator</code> 类的一些 <code>eval</code> 方法（我们要创建它）。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use LinguaEvaluator;
+
+. . .
+
+my $eval = LinguaEvaluator.new();
+$eval.eval($ast.made);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>让我提醒一下上一章中的两个设计思路。任何一个 AST 节点都是抽象的 <code>ASTNode</code> 类的子类, 而顶层节点包含了一个语句数组中的一切。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class ASTNode {
+}
+
+class AST::TOP is ASTNode {
+    has ASTNode @.statements;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>执行一个程序意味着运行所有的节点。因此, 我们从顶层开始, 把所有的语句一个个的拿出来。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use LinguaAST;
+
+class LinguaEvaluator {
+    method eval(ASTNode $top) {
+        self.eval-node($_) for $top.statements;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于每个语句, <code>eval-node</code> 方法都会被调用。我们不需要显式地检查每个语句的真实性, 因为我们可以让Raku使用它的多重调度功能来决定对给定语句调用哪个方法。</p>
+</div>
+<div class="paragraph">
+<p>让我们从最简单的程序开始, 声明一个变量并初始化它的值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my a = 7;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 AST 中, 有一个语句是关于这个程序的。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">AST::TOP.new(
+    statements =&gt; Array[ASTNode].new(
+        AST::ScalarDeclaration.new(
+            variable-name =&gt; "a",
+            value =&gt; AST::NumberValue.new(
+                value =&gt; 7
+            )
+        )
+    )
+)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>节点的类型是 <code>AST::ScalarDeclaration</code>, 所以应该有一个多方法的 <code>eval-node</code>, 它的参数为该类型的参数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class LinguaEvaluator {
+    . . .
+
+    multi method eval-node(AST::ScalarDeclaration $node) {
+        . . .
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该方法的工作是创建一个变量, 并将值放入其中。但是, 现在你把变量存储在哪里呢？在前几章中, <code>%!var</code> 散列是 <code>LinguaActions</code> 类的一部分。现在, 我们不需要它了, 可以把哈希声明从类中删除。</p>
+</div>
+<div class="paragraph">
+<p>顺便说一下, 这是个很好的理智检查：在 <code>LinguaActions</code> 类中应该不会再有哈希的引用了。我们在 <code>LinguaActions.string</code> 方法中还剩下一个, 它是用来进行字符串插值的。让我们把它从那里删除, 并尽可能地保持动作方法的简单。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class LinguaActions {
+    . . .
+    method string($/) {
+        $/.make(AST::StringValue.new(value =&gt; ~$/[0]));
+    }
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>由于类中没有剩余的数据成员, 所以我们可以摆脱实例化, 将一个类名代替实例传递给解析器。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $ast = Lingua.parse($code, :actions(LinguaActions));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果现在一切都运行了, 那么你对 <code>LinguaActions</code> 类的定义就完全清理了。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_使用变量_2">9.2. 使用变量</h3>
+<div class="paragraph">
+<p>这些变量可以存储在 <code>LinguaEvaluator</code> 对象内部, 我们可以将我们的数据存储添加到它的内部。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class LinguaEvaluator {
+    has %!var;
+
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>使用这个散列来创建我们的第一个变量。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::ScalarDeclaration $node) {
+    %!var{$node.variable-name} =
+        $node.value ~~ AST::Null ?? 0 !! $node.value.value;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>计算器的所有信息都是从 AST 节点中获取的。在这种情况下, 它告诉我们它的类型（ <code>AST::ScalarDeclaration</code> 是标量声明）, 变量的名称（<code>$node.variety-name</code>）和变量的内容（<code>$node.value</code>）。如果没有值（<code>$node.value</code> 属性包含 <code>AST::Null</code>）, 让我们将 0 存储在变量中。否则, 只需复制值节点的 <code>value</code> 属性。</p>
+</div>
+<div class="paragraph">
+<p>为了调试, 添加几个 <code>dd</code> 调用来显示 AST 和变量存储内容。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method eval(ASTNode $top) {
+    dd $top;
+    self.eval-node($_) for $top.statements;
+    dd %!var;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>程序执行我们的第一个例子, 成功创建并初始化了变量。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Hash %!var = {:a("7")}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这都很好, 所以让程序打印出变量的值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my a = 7;
+say a;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个程序的 AST 包含两个语句。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">AST::TOP.new(
+    statements =&gt; Array[ASTNode].new(
+        AST::ScalarDeclaration.new(
+            variable-name =&gt; "a",
+            value =&gt; AST::NumberValue.new(
+                value =&gt; 7
+            )
+        ),
+        AST::FunctionCall.new(
+            function-name =&gt; "say",
+            value =&gt; AST::Variable.new(
+                variable-name =&gt; "a"
+            )
+        )
+    )
+)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第二个语句是一个 <code>AST::FunctionCall</code> 节点。它保留了函数的名称, 并在另一个 AST 节点中保留了引用变量的节点。</p>
+</div>
+<div class="paragraph">
+<p>现在计算器应该为函数调用节点找到一个 multi 方法。这里是这样的。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::FunctionCall $node) {
+    self.call-function($node.function-name, $node.value);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>由于我们预期会有不止一个函数, 而且它们的参数可能是不同类型的, 所以让我们为每个函数及其参数实现另一组多方法。对于给定的程序, 我们需要一个说函数打印一个变量。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function('say', AST::Variable $value) {
+    say %!var{$value.variable-name};
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个方法完成了最后的工作：它访问变量存储并将变量打印到输出。</p>
+</div>
+<div class="paragraph">
+<p>现在我们可以明显地看到, 如何使用 multi 方法来实现打印数字和字符串。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function('say', AST::NumberValue $value) {
+    say $value.value;
+}
+
+multi method call-function('say', AST::StringValue $value) {
+    say $value.value;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>通过这些补充, 编译器可以处理以下程序。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my a = 7;
+say a;
+
+say 8;
+say "nine";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>还可以做一些其他的步骤, 让其他的简单操作。我们从标量赋值开始。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">a = 10;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在左边有一个变量, 右边有一个 <code>NumberValue</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">AST::ScalarAssignment.new(
+    variable-name =&gt; "a",
+    rhs =&gt; AST::NumberValue.new(
+        value =&gt; 10
+    )
+)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该值可以通过 <code>$.value</code> 属性直接访问。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::ScalarAssignment $node) {
+    %!var{$node.variable-name} = $node.rhs.value;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>AST 的好处是它的节点代表了简单的操作。如变量声明或赋值等。这意味着它的实现足够简单直接。</p>
+</div>
+<div class="paragraph">
+<p>让我们教计算器创建数组和哈希值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my data[];
+my relation{};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>为了实现它, 我们必须为 <code>AST::ArrayDeclaration</code> 和 <code>AST::HashDeclaration</code> 再定义几个 multi 方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::ArrayDeclaration $node) {
+    %!var{$node.variable-name} = Array.new;
+}
+
+multi method eval-node(AST::HashDeclaration $node) {
+    %!var{$node.variable-name} = Hash.new;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>执行后, 变量存储包含了所需的对象。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Hash %!var = {:data($[]), :relation(${})}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们还需要考虑数组和哈希初始化的一个赋值, 但让我们先对单元素进行处理。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">data[3] = 4;
+color{"red"} = "#FF0000";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对数组和哈希元素的分配就是这么简单。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::ArrayItemAssignment $node) {
+    %!var{$node.variable-name}[$node.index] = $node.rhs.value;
+}
+
+multi method eval-node(AST::HashItemAssignment $node) {
+    %!var{$node.variable-name}{$node.key} = $node.rhs.value;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>接下来的逻辑步骤是实现数组和哈希分配。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">data = 7, 8, 9;
+color = "white": "#FFFFFF", "black": "#000000";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>编码, 这是关于两种更多的 multi 方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::ArrayAssignment $node) {
+    %!var{$node.variable-name} =
+        ($node.elements.map: *.value).Array;
+}
+
+multi method eval-node(AST::HashAssignment $node) {
+    %!var{$node.variable-name} = Hash.new;
+    while $node.keys {
+        %!var{$node.variable-name}.{$node.keys.shift} =
+            $node.values.shift.value;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们还没有讲到初始化, 但你会惊讶地发现, 下面的代码已经可以用了。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my array[] = 1, 3, 4;
+my h{} = "a": 1, "b": 2;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这是可能的, 因为在 AST 树中, 数组和哈希声明的初始化是由相同的 AST 节点呈现的。<code>AST::ArrayAssignment</code> 和 <code>AST::HashAsignment</code>。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_字符串插值">9.3. 字符串插值</h3>
+<div class="paragraph">
+<p>让我们以一个带字符串插值的程序为例。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my alpha = 54;
+say "The value of α is $alpha.";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果你运行它, 字符串将被按原样打印出来, 没有插值的变量。所以, 我们必须还原出这样做的代码。</p>
+</div>
+<div class="paragraph">
+<p>问题是, <code>AST::StringValue</code> 只包含一个字符串本身, 如果要进行替换, 我们需要再次解析这个字符串, 找到里面提到的所有变量。这样做的效率并不高, 最好是立即将变量的信息存储在解析器中。让我们提醒一下描述字符串的语法 token。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token string {
+    '"' ( [
+            | &lt;-["\\$]&gt;+
+            | '\\"'
+            | '\\\\'
+            | '\\$'
+            | '$' &lt;variable-name&gt;
+            ]* )
+    '"'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>变量名降落在匹配对象中。让我们在 AST 节点中为它们预留空间。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::StringValue is ASTNode {
+    has Str $.value;
+    has @.interpolations;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这个动作中, 进行一些简单的计算, 计算出变量的名称及其在字符串中的位置。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method string($/) {
+    my $match = $/[0];
+
+    my @interpolations;
+    push @interpolations, [
+            .Str,
+            .from - $match.from - 1,
+            .pos - .from + 1,
+        ] for $match&lt;variable-name&gt;;
+
+    $/.make(AST::StringValue.new(
+        value =&gt; ~$match,
+        interpolations =&gt; @interpolations
+    ));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后, 在 <code>LinguaEvaluator</code> 类中, 可以对字符串进行处理, 以替代变量。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function('say', AST::StringValue $value) {
+    say self.interpolate($value);
+}
+
+method interpolate(AST::StringValue $str) {
+    my $s = $str.value;
+
+    for $str.interpolations.reverse -&gt; $var {
+        $s.substr-rw($var[1], $var[2]) = %!var{$var[0]};
+    }
+
+    $s ~~ s:g/\\\"/"/;
+    $s ~~ s:g/\\\\/\\/;
+    $s ~~ s:g/\\\$/\$/;
+
+    return $s;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你可以对代码进行优化, 把这三个替换移到 <code>LinguaActions</code> 类中, 但要意识到变量插值必须在每次访问字符串时都要进行, 因为变量的值可能会在两次调用之间发生变化, 如下例所示。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my alpha = 54;
+say "The value of α is $alpha.";
+
+my beta;
+beta = 200;
+alpha = 100;
+say "And now it is $alpha (β = $beta).";</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_使用_raku_getters">9.4. 使用 Raku getters</h3>
+<div class="paragraph">
+<p>在上一节中, 我们创建了一个单独的方法来插值字符串中的变量。通过 <code>say</code> 函数进行插值, 效果很好。想象一下, 现在我们想把一个字符串分配给一个变量。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my date = 18;
+my month = "October";
+my year = 2018;
+
+my date = "$date $month $year";
+say date;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这段代码是不行的, 因为计算器没有进行过插值。标量声明的 <code>eval-node</code> 方法（还有初始化也是如此）是使用 <code>AST::StringValue</code> 对象的 <code>value</code> 属性。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::ScalarDeclaration $node) {
+        %!var{$node.variable-name} =
+            $node.value ~~ AST::Null ??
+                           0 !! $node.value.value;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果从 <code>$node.value.value</code> 取的字符串已经包含了一个带插值变量的字符串, 那就太好了。我们不应该静态地去做（在创建 <code>AST::StringValue</code> 节点的时候）, 因为在使用字符串之前, 变量可能会改变它们的值。</p>
+</div>
+<div class="paragraph">
+<p>幸运的是, Raku 提供了一种机制, 允许我们在不改变使用该值属性的代码的情况下改变其行为。事实上, 我们已经在使用一个同名的 <strong>getter</strong> 方法, <code>value</code>, 这个方法是 Raku 为响应类属性的声明而创建的。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::StringValue . . . {
+    has Str $.value;
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>可以用我们自己的实施方式来重新定义方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::StringValue is ASTNode {
+    has Str $.value;
+    has @.interpolations;
+
+    method value() {
+        . . .
+        return . . . ;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在, 我们可以在 <code>AST::StringValue</code> 的 <code>value</code> 方法中调用插值代码。因为它需要访问变量存储, 所以我们将其作为参数传递给它。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::StringValue is ASTNode {
+    has Str $.value;
+    has @.interpolations;
+
+    method value(%var) {
+        my $s = $!value;
+
+        for @!interpolations.reverse -&gt; $var {
+            $s.substr-rw($var[1], $var[2]) = %var{$var[0]};
+        }
+
+        . . .
+
+        return $s;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>注意 <code>%var</code> 变量是如何与方法中的 <code>$!value</code> 和 <code>@!interpolations</code> 属性一起使用的。</p>
+</div>
+<div class="paragraph">
+<p>在计算器中, 传递 <code>%!var</code> 存储。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::ScalarDeclaration $node) {
+    %!var{$node.variable-name} =
+        $node.value ~~ AST::Null ??
+                       0 !! $node.value.value(%!var);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>另一个我们可以通过重新定义 AST 节点的 <code>value</code> 方法计算值的部分是访问数组和键的项目。下面的程序是一个包含这两种情况的例子。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my a[] = 10, 20;
+my b{} = "A": "ey", "B": "bee";
+
+my index = 1;
+say a[index]; # prints 20
+
+my key = "A";
+say b{key}; # prints "ey"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>与前面的例子不同, 这里使用变量作为数组索引和散列键。</p>
+</div>
+<div class="paragraph">
+<p>让我们允许变量自己计算它们的值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::Variable is ASTNode {
+    has Str $.variable-name;
+    has $.evaluator;
+
+    method value() {
+        return $.evaluator.var{$.variable-name};
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当你建立 AST 节点时, 将计算器的引用传递给 AST 节点。对于数组项。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method array-index($/ where $&lt;variable-name&gt;) {
+    $/.make(AST::Variable.new(
+        variable-name =&gt; ~$&lt;variable-name&gt;,
+        evaluator =&gt; $!evaluator,
+    ));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>而对于哈希键值对:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method hash-index($/ where $&lt;variable-name&gt;) {
+    $/.make(AST::Variable.new(
+        variable-name =&gt; ~$&lt;variable-name&gt;,
+        evaluator =&gt; $!evaluator,
+    ));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>另外, 不要忘记标量变量。例如, 当它们在表达式中使用时, 也可以返回它们的值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method expr($/ where $&lt;variable-name&gt; &amp;&amp; !$&lt;index&gt;) {
+    $/.make(AST::Variable.new(
+        variable-name =&gt; ~$&lt;variable-name&gt;,
+        evaluator =&gt; $!evaluator,
+    ));
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_到处插值">9.5. 到处插值</h3>
+<div class="paragraph">
+<p>这时, 又出现了一个问题。我们只需要对字符串进行插值, 但 <code>eval-node</code> 方法只是对 <code>value(%!var)</code> 方法进行了一个通用调用。</p>
+</div>
+<div class="paragraph">
+<p>它在我们的测试程序中失败了, 因为三个 <code>AST::ScalarDeclaration</code> 节点中的两个节点包含了对数字的引用, 而不是字符串, 因此没有一个值方法可以接受哈希。如果你改变程序, 使其只使用字符串, 它就开始工作了。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my date = "18";
+my month = "October";
+my year = "2018";
+. . .</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们要想办法让代码对字符串和数字都正确, 但要保持简单。其中一个可能的解决方案是每次在取值的情况下, 检查 AST 节点的类型。另一种解决方案是定义一个方法, 在 <code>AST::NumberValue</code> 类中取参数。这两种方法似乎都是相当耗费行数和多余的。相反, 让我们允许 AST 节点直接访问变量。</p>
+</div>
+<div class="paragraph">
+<p>我们将计算器对象传递给 <code>LinguaActions</code> 的实例, 并在节点变量中保留一个对它的引用。主程序必须稍作修改, 在实际解析之前必须先创建一些对象。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $evaluator = LinguaEvaluator.new();
+my $actions = LinguaActions.new(:evaluator($evaluator));
+my $ast = Lingua.parse($code, :actions($actions));
+
+if $ast {
+    say 'OK';
+    $evaluator.eval($ast.made);
+}
+else {
+    error('Error: parse failed');
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们将传递一个 <code>LinguaEvaluator</code> 类型的计算器对象给 actions 类的构造函数。注意, 我们向 <code>parse</code> 方法传递了一个 <code>LinguaActions</code> 的实例, 而不仅仅是类名。</p>
+</div>
+<div class="paragraph">
+<p>因为我们愿意在计算器类之外使用变量, 所以让我们通过将其 twigil 改为点来声明它是公共的。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class LinguaEvaluator {
+    has %.var;
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>(正如我们从上一节中看到的, 在其他编程语言中会被调用的数据方法, 在 Raku 中是一个属性和 getter 方法的组合。)</p>
+</div>
+<div class="paragraph">
+<p>在 <code>LinguaActions</code> 类中, 添加一个属性, 用于保存计算器。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use LinguaEvaluator;
+
+class LinguaActions {
+    has LinguaEvaluator $.evaluator;
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们要把它传给 AST 节点, 但只有在创建 <code>AST::StringValue</code> 节点时才会传给 AST 节点。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$/.make(AST::StringValue.new(
+    evaluator =&gt; $!evaluator,
+    value =&gt; ~$match,
+    interpolations =&gt; @interpolations
+));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>其他类型的节点不需要这样的引用, 因为它们不使用计算器对象中的数据。所以, 我们只需要改变 <code>AST::StringValue</code> 类就可以了。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::StringValue is ASTNode {
+    has Str $.value;
+    has @.interpolations;
+    has $.evaluator;
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这个类中, 我们将用我们自己的方法重新定义默认 <code>value</code> getter, 该方法可以对变量进行插值, 从计算器的变量存储中获取变量。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method value() {
+    my $s = $!value;
+
+    for @!interpolations.reverse -&gt; $var {
+        $s.substr-rw($var[1], $var[2]) =
+            $.evaluator.var{$var[0]};
+    }
+
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在代码又可以工作了, 字符串可以成功地进行数字和字符串的插值。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_算术操作">9.6. 算术操作</h3>
+<div class="paragraph">
+<p>现在是时候恢复我们在编译器内的工作了, 是时候恢复我们的计算器的工作了, 实现 <code>AST::MathOperations</code> 节点的解决方案了。我们之前做的工作, 重新使用 <code>value</code> 方法带来了它的好处, 而且代码非常简单。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::MathOperations is ASTNode {
+    . . .
+    method value() {
+        my $result = @.operands.shift.value;
+
+        while @.operands {
+            $result = operation(
+                @.operators.shift,
+                $result, @.operands.shift.value);
+        }
+
+        return $result;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>实际的操作方法和我们在第三章讨论的计算器中的操作方法是一样的。把它们放到 <code>AST::MathOperations</code> 类中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation('+', $a, $b) {
+    $a + $b
+}
+
+multi sub operation('-', $a, $b) {
+    $a - $b
+}
+
+multi sub operation('*', $a, $b) {
+    $a * $b
+}
+
+multi sub operation('/', $a, $b) {
+    $a / $b
+}
+
+multi sub operation('**', $a, $b) {
+    $a ** $b
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>完成了这些, 我们可以简化 <code>say</code> 函数的实现。以前, 我们有两个多变量反应 <code>AST::NumberValue</code> 或 <code>AST::StringValue</code>。由于现在字符串本身就是插值变量, 所以我们只需要取节点的值就可以了, 不需要区分节点的类型。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function('say', ASTNode $value) {
+    say $value.value;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>不要忘记指定 <code>say</code> 函数对数组和哈希值的行为。同样, 使用正确的 <code>where</code> 子句的多重调度在这里也有帮助, 而条件则会变得有点拗口。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function('say', AST::Variable $value
+    where %!var{$value.variable-name} ~~ Array) {
+
+    say %!var{$value.variable-name}.join(', ');
+}
+
+multi method call-function('say', AST::Variable $value
+    where %!var{$value.variable-name} ~~ Hash) {
+
+    my $data = %!var{$value.variable-name};
+    my @str;
+    for $data.keys.sort -&gt; $key {
+        @str.push("$key: $data{$key}");
+    }
+    say @str.join(', ');
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于数组和散列项来说, 函数很简单。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function('say', AST::ArrayItem $item) {
+    say %!var{$item.variable-name}[$item.index.value];
+}
+
+multi method call-function('say', AST::HashItem $item) {
+    say %!var{$item.variable-name}{$item.key.value};
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>本章到这里就结束了, 我们用 AST 树来计算其节点的值, 并在最后运行程序。由于我们将一些逻辑移到了 AST 节点上, 所以所建立的计算器类非常紧凑。这让我们在纯设计和代码的复杂性之间取得了很好的平衡。</p>
 </div>
 </div>
 </div>
