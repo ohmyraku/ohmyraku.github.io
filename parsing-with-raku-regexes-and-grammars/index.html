@@ -4548,27 +4548,27 @@ rule block_wrapped {
 <h2 id="_从匹配中提取数据">10. 从匹配中提取数据</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>到目前为止，我们已经花了很大力气来解析各种文件格式，并且我们努力的结果是一个匹配对象，如果匹配失败则结果为 <code>Nil</code>。</p>
+<p>到目前为止, 我们已经花了很大力气来解析各种文件格式, 并且我们努力的结果是一个匹配对象, 如果匹配失败则结果为 <code>Nil</code>。</p>
 </div>
 <div class="paragraph">
-<p>在大多数情况下，只知道匹配是否成功只是第一步 - 我们想从成功的匹配中提取有用的数据。</p>
+<p>在大多数情况下, 知道匹配成功与否只是第一步, 我们想从成功的匹配中提取有用的数据。</p>
 </div>
 <div class="paragraph">
-<p>原则上，我们可以检查生成的匹配对象并提取所有必要的数据。如果它没有提供足够的解析度，我们可以添加捕获使其解析粒度更细。这种方法可行，但它的写法往往令人沮丧，结果也很脆弱。</p>
+<p>原则上, 我们可以检查生成的匹配对象并提取所有必要的数据。如果它没有提供足够的解析度, 我们可以添加捕获使其解析粒度更加精细化。这种方法是可行的, 但它的写法往往令人沮丧, 结果也很脆弱。</p>
 </div>
 <div class="paragraph">
-<p>但在我们窥视答案之前，让我们再谈谈这个问题。我们从成功的正则表达式匹配或 grammar 解析中获得的匹配对象是一棵<strong>解析树</strong>。它的结构直接由 grammar 的结构决定，并且在解析树中找到的信息都是关于所匹配到的字符串的，以及在输入字符串中找到的关于它们的位置的信息。</p>
+<p>但在研究解决方案之前, 我们先来谈谈这个问题。我们从一个成功的正则表达式匹配或 grammar 解析中获得的匹配对象是一棵<strong>解析树</strong>。它的结构直接由 grammar 的结构决定, 并且在解析树中找到的信息都是关于所匹配到的字符串的, 以及它们在输入字符串中的位置。</p>
 </div>
 <div class="paragraph">
-<p>我们想要解析字符串的原因通常是处理其内容。如果输入是 INI 文件，我们想要提取节(sections)和他们的键/值对; 如果是编程语言的源代码， 我们可能想检查一些特征(如 linter)，或者把它编译为较低级别的格式。通常，这个处理步骤，无论它是什么, 不应该直接绑定到解析树，而是更抽象的内容的表示。这种表示称为抽象语法树，简称 AST。</p>
+<p>我们之所以要解析一个字符串, 通常是为了对其内容进行一些处理。如果输入是一个 INI 文件, 我们想要提取节(section)和他们的键/值对; 如果是编程语言的源代码, 我们可能要检查它的一些特征(如 linter), 或者把它编译到一个较低级的格式。通常, 这个处理步骤, 不管是什么, 不应该直接绑定到解析树上, 而应该绑定到一个更抽象的内容表示。这种表示称为抽象语法树, 简称 AST。</p>
 </div>
 <div class="paragraph">
-<p>根据使用情况，AST 可能看起来非常不同。对于 JSON 解析器，AST 可以直接是已经序列化成 JSON 字符串的数据结构，所以混合了数组，散列，字符串，数字和布尔。对于编程语言，通常在你关心的捕获输入的所有方面的自定义类的集合之外构造一个 AST; 这些 AST 类通常还包含引用输入行号的注释，以便错误消息可以正确地确定错误的位置。</p>
+<p>根据使用情况, AST 的外观会有很大的不同。对于 JSON 解析器来说, AST 可以直接是被序列化成 JSON 字符串的数据结构, 所以是数组、散列、字符串、数字和布尔的混合物。对于编程语言来说, 你通常会从一个自定义类的集合中构造出一个 AST, 这些类可以捕获你所关心的输入的所有方面; 这些 AST 类通常还包含引用输入行号的注释, 这压根错误消息就可以正确地识别错误的位置。</p>
 </div>
 <div class="sect2">
 <h3 id="_action_对象">10.1. Action 对象</h3>
 <div class="paragraph">
-<p>Grammars 和匹配对象具有两个功能, 提供了更加弹性和可扩展性的数据提取方法。第一个也是比较简单的一个, 是你可以将任意数据结构附加到 <a href="https://docs.raku.org/type/Match">Match</a><sup class="footnote">[<a id="_footnoteref_56" class="footnote" href="#_footnotedef_56" title="View footnote.">56</a>]</sup> 对象， 随后通过 <code>.made</code> 属性访问它:</p>
+<p>Grammar 和匹配对象自带两个特性, 为提取数据提供了更有弹性和可扩展性的方法。第一个比较简单是, 是你可以将任意数据结构附加到 <a href="https://docs.raku.org/type/Match">Match</a><sup class="footnote">[<a id="_footnoteref_56" class="footnote" href="#_footnotedef_56" title="View footnote.">56</a>]</sup> 对象上, 随后通过 <code>.made</code> 属性访问它:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4579,7 +4579,7 @@ rule block_wrapped {
 </div>
 </div>
 <div class="paragraph">
-<p>如果匹配对象在特殊变量 <code>$/</code> 中，您也可以调用 <code>make DATA</code>:</p>
+<p>如果匹配对象在特殊变量 <code>$/</code> 中, 也可以调用 <code>make DATA</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4590,16 +4590,16 @@ rule block_wrapped {
 </div>
 </div>
 <div class="paragraph">
-<p>您可以看到它的发展方向:您可以构建一个数据结构，它将成为最终 AST 的一部分，并使用 <code>make</code> 将其附加到匹配对象上。</p>
+<p>你大概可以看到这一点: 你可以构建一个数据结构, 它将成为最终 AST 的一部分, 然后用 <code>make</code> 将其附加到匹配对象上。</p>
 </div>
 <div class="paragraph">
-<p>你在哪里这样做?一个选项是内联代码对象，<code>{ &#8230;&#8203; }</code>， 但是它将 grammar 与 AST 生成代码紧密结合在一起。 这是第二个功能的用武之地: action 对象。</p>
+<p>你要在哪里做呢? 一个选择是内联代码对象, <code>{ &#8230;&#8203; }</code>, 但这将 grammar 与 AST 生成代码紧密地耦合在一起。这就是第二个特性的用武之地: action 对象。</p>
 </div>
 <div class="paragraph">
-<p>action 对象是您传递给 grammar 上的 <code>.parse</code> 或 <code>.subparse</code> 调用的参数。从此以后，每当命名正则表达式成功匹配时， 正则表达式引擎为您调用一个方法; 它搜索和该正则表达式同名的方法，如果存在同名方法，则使用匹配对象作为参数调用它。 如果不存在这样的方法，则不会发生任何事情，也不会引发错误。</p>
+<p>action 对象是你传递给 grammar 上的 <code>.parse</code> 或 <code>.subparse</code> 调用的对象。从此以后, 每当一个命名正则表达式成功匹配时, 正则表达式引擎为你调用一个方法; 它搜索和该正则表达式同名的方法, 如果存在同名方法, 就用匹配对象作为参数调用它。 如果这样的方法不存在, 则不会发生任何事情, 也不会产生错误。</p>
 </div>
 <div class="paragraph">
-<p>以下是解析计算数学表达式的 action 示例:</p>
+<p>下面是是一个在解析数学表达式时对其进行求值的 action 示例:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4642,31 +4642,31 @@ say $match.made;       # Output: 24</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>你应该已经从前面的章节熟悉了 <code>MathExpression</code> grammar; 新的东西是另一个类, <code>MathEvalAction</code>，对于 grammar 中的每个正则表达式, 它都有一个方法与之对应。每个方法都以 <code>$/</code> 作为唯一参数， 匹配对象绑定到 <code>$/</code>。它调用 <code>make</code> 来附加内容到这个匹配对象上。</p>
+<p>你应该已经从上一章中熟悉了 <code>MathExpression</code> grammar 了; 新的东西是另一个类  <code>MathEvalAction</code>, 对于 grammar 中的每个正则表达式, 它都有一个方法与之对应。每个方法都以 <code>$/</code> 作为唯一参数, 将匹配对象绑定到 <code>$/</code>。它调用 <code>make</code> 来附加内容到这个匹配对象上。</p>
 </div>
 <div class="paragraph">
-<p>这个类的想法是每个方法都附加一个数字到当前匹配对应的当前匹配对象上。因此，如果它解析字符串 <code>2 *(1 + 4)</code>，它将数字 2 附加到解析了 2 的匹配对象上。 它对数字 1 和 4 做同样的事情，然后附加 <code>sum</code> 的结果 5，到解析了 <code>1 + 4</code> 的匹配对象上，然后再次， 把数字 5 附加到解析了 <code>(1 + 4)</code> 的匹配对象上，最后它计算 <code>product</code>，并将数字 10 附加到顶级匹配对象上。</p>
+<p>这个类的想法是, 每个方法都会给当前匹配对象附加一个与当前匹配对象对应的数字。因此, 如果它解析字符串 <code>2 *(1 + 4)</code>, 它就会将数字 2 附加到解析了 2 的匹配对象上。它对数字 1 和 4 做同样的操作, 然后将 <code>sum</code> 的结果 5 附加到解析了 <code>1 + 4</code> 的匹配对象上, 然后再次将数字 5 附加到解析了 <code>(1 + 4)</code> 的匹配对象上, 最后它对 <code>product</code> 进行求值, 并将数字 10 附加到最上面的匹配对象上。</p>
 </div>
 <div class="paragraph">
-<p>从下到上阅读，<code>number</code> 方法通过在匹配对象上调用 <code>Int</code> 方法将字符串转换为数值。它将结果整数附加到匹配对象上。匹配 <code>group</code> 只需要来自 <code>$&lt;sum&gt;</code> 的匹配的附加值，并将其附加到自己的匹配对象上。</p>
+<p>从下往上读, <code>number</code> 方法通过调用匹配对象上的 <code>Int</code> 方法将字符串转换为数字。它将得到的整数附加到匹配对象上。匹配 <code>group</code> 只需从 <code>$&lt;sum&gt;</code> 中获取匹配对象中的附加值, 并将其附加到自己的匹配对象上。</p>
 </div>
 <div class="paragraph">
-<p>术语 <code>rule</code> 与两个备选项中的一个匹配。<code>$/.values</code> 返回一个所有匹配对象的列表，它总是一个元素。<code>make $/.values[0].made</code> 因此传送来自任一匹配的附加值并把它附加到它自己的匹配对象上。</p>
+<p>术语 <code>rule</code> 与两个备选项中的一个匹配。<code>$/.values</code> 返回一个所有匹配对象的列表, 它总是一个元素。<code>make $/.values[0].made</code> 因此将从任何一个匹配中的附加值传播, 并将其附加到自己的匹配对象上。</p>
 </div>
 <div class="paragraph">
-<p>规则 <code>product</code> 解析由星号分隔的术语列表。同名的 action 方法取每个术语附带的数字并将它们相乘。<code>$&lt;term&gt;».made</code> 中的 <code>».</code> 语法在列表 <code>$&lt;term&gt;</code> 的每个元素上调用 <code>made</code> 方法, 并返回所有结果的列表。 如果您无法使用键盘编写出 <code>»</code> 字符，则可以改用 <code>&gt;&gt;</code>，所以这就变成了 <code>$&lt;term&gt;&gt;&gt;.made</code>。</p>
+<p>规则 <code>product</code> 解析由星号分隔的项的列表。同名的 action 方法取每个项的附加值, 并将它们相乘。<code>$&lt;term&gt;».made</code> 中的 <code>».</code> 语法在列表 <code>$&lt;term&gt;</code> 的每个元素上调用 <code>made</code> 方法, 并返回一个包含所有结果的列表。如果你无法用键盘打出 <code>»</code> 字符, 可以改用 <code>&gt;&gt;</code>, 这样这就变成了 <code>$&lt;term&gt;&gt;&gt;.made</code>。</p>
 </div>
 <div class="paragraph">
-<p><code>[*] LIST</code> 在 LIST 的每个元素之间插入 * 运算符， 因此计算所有这些值的乘积。</p>
+<p><code>[<strong>] LIST</code> 在 LIST 的每个元素之间插入 <code></strong></code> 运算符, 从而计算出所有这些值的乘积。</p>
 </div>
 <div class="paragraph">
-<p>由于规则 <code>sum</code> 和 <code>product</code> 具有相同的结构，所以它们的 action 方法也是如此。<code>sum</code> 使用 <code>[+]</code> 来创建所有附加到下面一级的匹配对象的数字的总和。</p>
+<p>由于规则 <code>sum</code> 和 <code>product</code> 具有相同的结构, 所以它们的 action 方法也是如此。<code>sum</code> 使用 <code>[+]</code> 来创建下一级的匹配对象的所有数字之和。</p>
 </div>
 <div class="paragraph">
-<p>最后，token <code>TOP</code> 只调用 <code>sum</code>，因此 action 类中的方法 <code>TOP</code> 就是传递附加到 <code>$&lt;sum&gt;</code> 的值。</p>
+<p>最后, token <code>TOP</code> 只是调用 <code>sum</code>, 所以 action 类中的方法 <code>TOP</code> 只是传递附加在 <code>$&lt;sum&gt;</code> 上的值。</p>
 </div>
 <div class="paragraph">
-<p>这是一个匹配树，右边的一列使用每个 <code>.made</code> 的值注解:</p>
+<p>下面是一个匹配树, 在右边的列中注解了每个 <code>.made</code> 的值:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4689,13 +4689,13 @@ say $match.made;       # Output: 24</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在每个分支中，缩进最多的匹配是其 action 方法首先被调用的匹配，所以 <code>number</code> 在 <code>term</code> 之前调用, <code>term</code> 在 <code>product</code> 之前调用, <code>product</code> 在 <code>sum</code> 之前调用。 这种排序保证了每个 action 方法都可以依赖于子匹配上的 <code>.made</code> 属性的存在。</p>
+<p>在每个分支中, 缩进最多的匹配是那些 action 方法先被调用的匹配, 所以 <code>number</code> 在 <code>term</code> 之前调用, <code>term</code> 在 <code>product</code> 之前调用, <code>product</code> 在 <code>sum</code> 之前调用。 这种排序保证了每个 action 方法都可以依赖于子匹配上的 <code>.made</code> 属性的存在。</p>
 </div>
 <div class="paragraph">
-<p>编写 action 方法只需要知道相应的正则表达式捕获的内容以及它们的 <code>.made</code> 属性包含的内容。我们不需要深入了解匹配树的嵌套结构。如果以这种方式构建 action，则可灵活应对 grammar 的变更。每当你修改正则表达式时，你都可以放心，您只需要触摸与其对应的 action 方法，并且你永远不必担心另一个 action 方法可能依赖于你正所接触的正则表达式。</p>
+<p>编写 action 方法只需要知道相应的正则表达式捕获的内容以及它们的 <code>.made</code> 属性包含的内容就可以了。在 action 中, 我们不需要深入研究匹配树的嵌套结构。如果以这种方式构建 action, 则可灵活应对 grammar 的变更。每当你修改正则表达式时, 你都可以放心, 你只需要触及与之相对应的 action 方法就可以了, 你永远不必担心另一个 action 方法会依赖于你刚才触及的正则表达式。</p>
 </div>
 <div class="paragraph">
-<p>当您为 <code>proto token</code> 编写 action 方法时，您应该注意，对于成功匹配候选者, 调用 action 方法，但不是整个原型。所以，如果你的 grammar 包含如下行:</p>
+<p>当你为 <code>proto token</code> 编写 action 方法时, 你应该注意, action 方法是针对成功匹配的候选者调用的, 但不是针对整个 proto 的。所以, 如果你的 grammar 包含了如下行:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4705,19 +4705,19 @@ token value:sym&lt;number&gt; { &lt;number&gt; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>那么 grammar 引擎可能会为你调用一个名为 <code>value:sym&lt;string&gt;</code> 或 <code>value:sym&lt;number&gt;</code> 的方法，但不是 <code>value</code> 方法。</p>
+<p>那么 grammar 引擎可能会为你调用一个名为 <code>value:sym&lt;string&gt;</code> 或 <code>value:sym&lt;number&gt;</code> 的方法, 但不是 <code>value</code> 方法。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_使用_action_对象构建_ast">10.2. 使用 Action 对象构建 AST</h3>
 <div class="paragraph">
-<p>上一节说明了 action 对象和方法的机制，它构建类似于 AST 的东西，但它不是树。因为树是解析成功的最常见结果，我想呈现另一个用于创建抽象语法的相同语法的 action 类 解析期间的树。</p>
+<p>上一节说明了 action 对象和方法的机制, 它构建一个类似于 AST 的东西, 但它不是树。因为树是解析成功后的最常见结果, 所以我想介绍另一个 action 类, 在解析过程中创建一个抽象的语法树, 同样的 grammar 类在解析过程中会创建一个抽象的语法树。</p>
 </div>
 <div class="paragraph">
-<p>为了省去编写单独树类的麻烦，我们将使用嵌套的数组表示树。树的第一个元素是运算符; 其他元素是操作数。因此，对于表达式 <code>1 + 2 + 3</code>， 结果是 <code>['+', 1, 2, 3]</code>。由于嵌套表达式由嵌套括号表示，对于一组圆括号, 我们不需要运算符: 因此表达式 <code>2 *(3 + 4)</code> 表示为 <code>['*', 2，['+', 3, 4]]</code>。</p>
+<p>为了省去单独编写一个树类的麻烦, 我们将使用一个嵌套数组来表示树。树的第一个元素是运算符; 其他元素是操作数。因此, 对于表达式 <code>1 + 2 + 3</code>, 结果是 <code>['+', 1, 2, 3]</code>。由于嵌套表达式用嵌套括号表示, 所以我们不需要运算符来表示一组圆括号: 因此, 表达式 <code>2 <strong>(3 + 4)</code> 被表示为 <code>['</strong>', 2, ['+', 3, 4]]</code>。</p>
 </div>
 <div class="paragraph">
-<p>我们来看看 action 类，以及我们如何使用它:</p>
+<p>让我们来看看 action 类, 以及如何使用它:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4755,7 +4755,7 @@ say $match.made.perl;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这段代码(以及前一节的 grammar 定义)产生如下输出:</p>
+<p>这段代码(连同上一节中的 grammar 定义)产生的输出是:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4763,7 +4763,7 @@ say $match.made.perl;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>TOP</code>，<code>term</code>，<code>group</code> 和 <code>number</code> 的 action 方法与前面讨论过的 action 类的那些是相同的。有趣的部分是 <code>sum</code> 和 <code>product</code> 的 action 方法。我们来看看后者， 代表两者:</p>
+<p><code>TOP</code>、<code>term</code>、<code>group</code> 和 <code>number</code> 的 action 方法与前面讨论的 action 类中的 action 方法相同。有趣的部分是 <code>sum</code> 和 <code>product</code> 的 action 方法。我们来看看后者, 这两个方法的代表:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4778,25 +4778,25 @@ method product($/) {
 </div>
 </div>
 <div class="paragraph">
-<p>如果我们只使用 <code>make ['*'，|$&lt;term&gt;».made]</code> 作为 <code>product</code> 方法的主体，那么 <code>1 + 2</code> 的 AST 会以 <code>['+', ['*', 1], ['*', 2]]</code> 的形式出现， 因为每个 <code>sum</code> 解析一个 <code>product</code> 表达式。我们不想要额外的单元素乘法的级别，所以我们做一个特例。如果只有一个项被解析，只返回该项。否则，返回一个由运算符组成的数组，然后是所有项的 AST。</p>
+<p>如果我们只使用 <code>make ['<strong>', |$&lt;term&gt;».made]</code> 作为 <code>product</code> 方法的主体, 那么 <code>1 + 2</code> 的 AST 会以 <code>['+', ['</strong>', 1], ['*', 2]]</code> 的形式出现, 因为每个 <code>sum</code> 都解析一个 <code>product</code> 表达式。我们不希望出现额外的单元素乘法, 所以我们做了一个特殊情况。如果只解析了一个项, 那么只返回该项。否则, 返回一个由运算符组成的数组, 然后返回所有项的 AST。</p>
 </div>
 <div class="paragraph">
-<p>由于这种特殊情况使用了两次(对于 <code>sum</code> 和 <code>product</code>)，把它分解成一个方法是有意义的，我称这个方法为 <code>reduce</code>。<code>reduce</code> 方法使用语法 <code>[$op, |@list]</code> 来创建 <code>$op</code> 与 <code>@list</code> 的元素连接在一起的数组。<code>|</code> 扁平化 <code>@list</code>; 要是我们不使用它，结果将是 <code>['+', [1, 2]]</code> 而不是 <code>['+', 1, 2]</code>。</p>
+<p>由于这种特殊情况使用了两次(对于 <code>sum</code> 和 <code>product</code>), 所以将其分解成一个方法是有意义的, 我称这个方法为 <code>reduce</code>。<code>reduce</code> 方法使用语法 <code>[$op, |@list]</code> 来创建一个数组 <code>$op</code> 与 <code>@list</code> 的元素相连接。<code>|</code> 扁平化 <code>@list</code>; 如果我们不使用它, 结果将是 <code>['+', [1, 2]]</code> 而不是 <code>['+', 1, 2]</code>。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_在_action_对象中保存状态">10.3. 在 Action 对象中保存状态</h3>
 <div class="paragraph">
-<p>上一节中的 action 类是方法的集合， 但他们不保存任何状态。有人可能会说他们不是"真正的" 对象。实际上，我们可以移除 action 类上的 <code>.new</code> 调用，并将类直接传递给 grammar，这些例子就可以像之前一样工作。状态是正在构建的 AST，它存储在匹配对象的 <code>.made</code> 属性中。</p>
+<p>上一节中的 action 类是一个方法的集合, 但他们并不保留任何状态。可以说, 它们不是"真正的"对象。实际上, 我们可以把 action 类上的 <code>.new</code> 调用移除, 直接把类传递给 grammar, 这样例子就可以像以前一样工作了。状态是正在构建的 AST, 它存储在匹配对象的 <code>.made</code> 属性中。</p>
 </div>
 <div class="paragraph">
-<p>这是一种常见的模式，但不一定是这种方式。您用作 action 对象的对象是普通的 Raku 对象，可以随心所欲地做任何事。您可以在其中存储数据，以及甚至可以在对 grammar 的 <code>.parse</code> 方法的多次调用中重用同一个 action 对象。</p>
+<p>这是一种常见的模式, 但不一定要这么做。作为 action 对象的对象是普通的 Raku 对象, 你可以用它做任何你想做的事情。你可以在它们中存储数据, 甚至可以在多次调用 grammar 的 <code>.parse</code> 方法时重用同一个 action 对象。</p>
 </div>
 <div class="paragraph">
-<p>读到这一点，你可能想知道为什么我们在前面的示例中经历了将符号表保留在动态变量中的麻烦， 而不是使用 action 对象。这里的区别是符号表影响了解析的结果; 引用未声明的变量使匹配失败。Grammar 有意独立于他们的 action 对象，以便您可以修改甚至交换 action 类不影响 grammar。</p>
+<p>读到这里, 你可能会想知道我们为什么要费尽心思地去做这些事情。在前面的例子中, 在动态变量中保存符号表, 而不是使用 action 对象。这里的区别在于, 符号表影响了解析的结果; 引用一个未声明的变量使匹配失败。Grammar 是要独立于 action 对象的, 所以你可以修改甚至交换 action 类而不影响 grammar。</p>
 </div>
 <div class="paragraph">
-<p>以下是解析单个变量赋值的 grammar 示例并把这些变量收集到哈希中:</p>
+<p>下面是 grammar 的一个例子, 它解析单个变量赋值, 并将这些变量收集到一个散列中:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4835,16 +4835,16 @@ say $actions.definitions;
 </div>
 </div>
 <div class="paragraph">
-<p>在此示例中，<code>has %.define</code> 定义了一个公共属性; 一个附着在对象上的一块状态，可以从外面访问。语法: <code>$actions</code> 是 <code>actions &#8658; $actions</code> 的简写。</p>
+<p>在这里例子中, <code>has %.define</code> 定义了一个公共属性; 一个附加在对象上的状态, 可以从外部访问。语法: <code>$actions</code> 是 <code>actions &#8658; $actions</code> 的简写。</p>
 </div>
 <div class="paragraph">
-<p>这种使用有状态 action 对象和一次一项地解析部分输入的模式对流处理非常有用; 如果你收到数据分段，需要在收到完整的输入之前访问结果，或者如果你的系统连续运行并且有一个不断的输入流。</p>
+<p>这种使用有状态的 action 对象和一次一项地解析部分输入的模式对流处理非常有用; 如果你在接收数据时, 需要在收到完整的输入之前访问结果, 或者如果你的系统连续运行, 并且有一个不断的输入流, 那么这种模式非常有用。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_总结_9">10.4. 总结</h3>
 <div class="paragraph">
-<p>如果你为 grammar 的 <code>parse</code> 调用提供一个 action 对象，那么就会调用与正则表达式同名的方法。你可以用它来从你的 grammar 构建一个抽象语法树。此外，您可以在此 action 对象中保持状态并使用此机制来解析分段但相关的输入。</p>
+<p>如果你为你的 grammar 的 <code>parse</code> 调用提供一个 action 对象, 那么就会调用与正则表达式同名的方法。你可以用它来从你的 grammar 中构建一个抽象语法树。此外, 你可以在这个 action 对象中保留状态, 并使用这种机制来解析零散但相关的输入。</p>
 </div>
 </div>
 </div>
