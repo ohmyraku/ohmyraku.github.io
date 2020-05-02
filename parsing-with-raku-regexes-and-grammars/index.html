@@ -203,9 +203,9 @@ if (theme && theme !== "1") {
 <ul class="sectlevel2">
 <li><a href="#_探索问题">11.1. 探索问题</a></li>
 <li><a href="#_断言">11.2. 断言</a></li>
-<li><a href="#_改进位置报告">11.3. 改进位置报告</a></li>
+<li><a href="#_改进后的位置报告">11.3. 改进后的位置报告</a></li>
 <li><a href="#_高水位标记">11.4. 高水位标记</a></li>
-<li><a href="#_parser_combinator_和_failgoal">11.5. Parser Combinator 和 FAILGOAL</a></li>
+<li><a href="#_解析器组合器和_failgoal">11.5. 解析器组合器和 FAILGOAL</a></li>
 <li><a href="#_使用哪种技术">11.6. 使用哪种技术?</a></li>
 <li><a href="#_总结_10">11.7. 总结</a></li>
 </ul>
@@ -4853,21 +4853,21 @@ say $actions.definitions;
 <h2 id="_生成好的解析错误消息">11. 生成好的解析错误消息</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>当正则表达式匹配或语法分析失败时，它返回 <code>Nil</code>。如果是这种情况 在没有预料到失败的地方，我们可以告知用户某种形式的输入(可能是配置文件)无效。</p>
+<p>当正则表达式匹配或 grammar 解析失败时, 它会返回 <code>Nil</code>。如果这是一个没有预期的失败, 我们可以告知用户某种形式的输入(也许是配置文件)是无效的。</p>
 </div>
 <div class="paragraph">
-<p>对于简单的输入，如电子邮件地址或 URL，这段二进制文件 信息可能令人满意。对于更大的配置或源文件， 我们真的想给用户更多信息。为什么输入无效? 如果我们不能回答，错误在哪里?</p>
+<p>对于简单的输入, 如电子邮件地址或 URL, 这部分二进制信息可能是令人满意的。而对于一个较大的配置或源文件, 我们真的希望给用户更多的信息。为什么输入是无效的？如果我们不能回答这个问题, 那么错误在哪里？</p>
 </div>
 <div class="paragraph">
-<p>或者换一种方式:当解析失败时，我们想要识别位置，可能是解析失败的原因，并产生一个好处错误信息。</p>
+<p>或者换个说法：当解析失败的时候, 我们要确定解析失败的位置, 可能是解析失败的原因, 并生成一个好的错误信息。</p>
 </div>
 <div class="sect2">
 <h3 id="_探索问题">11.1. 探索问题</h3>
 <div class="paragraph">
-<p>Raku 中没有内置的通用机制可以产生良好的解析 错误消息，我不知道怎么会有这样的机制。该原因是，即使在成功的解析运行中，个人也是正常的正则表达式和令牌失败。</p>
+<p>在 Raku 中, 没有一个通用的机制可以产生良好的解析错误信息, 我不知道怎么会有这样的机制。原因是, 即使是在成功的解析运行中, 个别的正则表达式和 token 失败也是很正常的。</p>
 </div>
 <div class="paragraph">
-<p>我们只考虑早期语法中的两行，即 VariableLists:</p>
+<p>让我们只考虑一下早期的 grammar <code>VariableLists</code> 中的两行:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4876,22 +4876,22 @@ token term     { &lt;identifier&gt; | &lt;number&gt; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>假设这匹配字符串令牌术语首先尝试匹配字符串的标识符和编号。标识符正则表达式失败; 然而，数字成功了。然后，<code>termlist</code> 本身与逗号匹配， 而它的术语又回来了。这次标识符分支成功匹配字符串，数字无法匹配。最后，termlist 尝试匹配下一个逗号，并失败，但整个 termlist 匹配成功。</p>
+<p>假设这与字符串 <strong>1,a</strong> 相匹配, token <code>term</code> 首先尝试将 <code>identifier</code> 和 <code>number</code> 与字符串匹配。<code>identifier</code> 正则表达式匹配失败了, 但是 <code>number</code> 匹配成功了。然后, <code>termlist</code> 本身匹配了逗号, 再次轮到 <code>term</code>。这一次, <code>identifier</code> 分支成功匹配了字符串 a, <code>number</code> 匹配失败了。最后, <code>termlist</code> 尝试匹配下一个逗号, 也失败了, 但整个 <code>termlist</code> 匹配成功。</p>
 </div>
 <div class="paragraph">
-<p>在这个例子中，我们已经看到三次失败的比赛是成功的一部分 比赛。那么这种“正常”失败的比赛与那场比赛的区别是什么致命导致整个解析中止?</p>
+<p>在这个例子中, 我们已经看到了三个失败的匹配作为成功匹配的一部分。那么这样的"正常"失败的匹配与致命性地导致整个解析失败的匹配有什么区别呢？</p>
 </div>
 <div class="paragraph">
-<p>从技术上讲，一个致命的失败的正则表达式是一个失败传播的正则表达式向上一直到 TOP。但这并没有帮助我们创造出好的错误消息。当它失败时，我们还不知道它是否会传播整个过程。一旦它传播到正则表达式 TOP，就为时已晚, 从失败的匹配中提取有用的信息。</p>
+<p>从技术上讲, 一个致命的失败的正则表达式是指失败后一直向上传播到 <code>TOP</code> 的正则表达式。但这并不能帮助我们创建出好的错误信息。当它失败时, 我们还不知道它是否会一直向上传播。而一旦它传播到 <code>regex TOP</code>, 就来不及从失败的匹配中提取有用的信息了。</p>
 </div>
 <div class="paragraph">
-<p>匹配失败的不同视角提供了更多洞察力。那里基本上是两种匹配可能出错的方式。一个案例就是我们 开始解析一些东西，我们只能匹配它的第一部分，但不能匹配休息。在数学表达式的情况下，这可能是一个开头 括号中没有对应的右括号，或者加号后面没有任何表达式。第二种情况是一种情况 或者更多的替代品，但没有一个匹配。例如，一个 JSON 解析器可能期望一个对象，一个数组，一个数字或一个字符串，但是输入字符是一个 <code>$-something</code>，它只是一个无效的 JSON 引用字符串。</p>
+<p>对匹配失败的不同视角可以提供更多的启示。基本上有两种情况下, 匹配会出错。一种情况是当我们开始解析某个东西时, 我们只能匹配到它的第一部分, 而不能匹配到其他部分。在数学表达式的情况下, 这可能是一个开头的括号, 而没有相应的结尾括号, 或者是没有在任何表达式后面跟加号。第二种情况是预期有一个或多个备选方案, 但都不匹配。例如, 一个 JSON 解析器可能期待一个对象、数组、数字或字符串, 但输入的字符是 <code>$</code> - 在引用的字符串以外的 JSON 中, 这个字符根本不是有效的 JSON。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_断言">11.2. 断言</h3>
 <div class="paragraph">
-<p>顺序替代方案允许您创建良好的错误消息。一般模式是这样的:</p>
+<p>顺序替代, 可以让你创造出好的错误信息。一般的模式是这样的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4902,11 +4902,13 @@ token term     { &lt;identifier&gt; | &lt;number&gt; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此正则表达式尝试匹配右括号。如果没有 工作，而不是默默地失败，它使用 <code>{&#8230;&#8203;}</code> 代码块来抛出 使用内置模具功能的异常。异常中止解析， 如果没有解析方法的调用者捕获它，程序将退出返回代码不成功。成为改善错误的有效工具报告，我们必须将相同的模式应用于更多的位置。</p>
+<p>这个正则表达式试图匹配关闭的括号。如果这样做不成功, 它不是默默地失败, 而是使用一个代码块 <code>{&#8230;&#8203;}</code> 使用内置的 <code>die</code> 函数抛出一个异常。异常会中止解析, 如果解析方法的调用者没有捕捉到异常, 程序会退出, 并返回一个匹配不成功的返回代码。为了成为改进错误报告的有效工具, 我们必须将这种模式应用到更多的地方。</p>
 </div>
 <div class="paragraph">
-<p>在最微不足道的输入中描述错误是足够的。在任何多行输入，我们需要指出错误的位置; 除此以外， 用户将很难解决问题。
-我们可以通过匹配对象 <code>$/</code> 访问该位置，并使用它计算行号。因为这是我们需要的东西 很少有地方，最好将该逻辑提取到一个方法中。然后我们可以打电话这个方法来自正则表达式，其语法与我们称之为正则表达式相同， 在参数周围添加了一对括号:</p>
+<p>只在最琐碎的输入中描述错误就足够了。在任何多行输入中, 我们需要指出错误的位置；否则, 用户将很难修复问题。</p>
+</div>
+<div class="paragraph">
+<p>我们可以通过匹配对象 <code>$/</code> 来获取位置, 然后用它来计算行号。因为这是我们在相当多的地方都会用到的东西, 所以最好把这个逻辑提取到一个方法中。然后我们可以用与调用正则表达式相同的语法来调用这个方法, 只是在参数周围加上一对括号。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4950,28 +4952,36 @@ say MathExpression.parse("(\n1");</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>请注意，我们通过调用替换了直接模具函数调用 自定义错误方法。这种方法有一些技巧 确定行号: <code>.target</code> 方法返回字符串 语法当前匹配，<code>self.pos</code> 提取当前 解析位置。<code>self.pos</code> 相当于 <code>$/.to</code>，除了后者仅适用于解析结束或生成捕获时。</p>
+<p>注意, 我们用调用自定义错误方法代替了直接调用 <code>die</code> 函数。这个方法有几个小技巧来确定行号：<code>.target</code> 方法返回 grammar 当前匹配的字符串, <code>self.pos</code> 方法提取当前的解析位置。<code>self.pos</code> 相当于 <code>$/.to</code>, 只是后者只在解析结束时, 或者是在捕获的时候才会起作用。</p>
 </div>
 <div class="paragraph">
-<p>这些方法来自哪里?通过声明一个类型语法，它自动获取父类 <a href="https://docs.raku.org/type/Grammar">Grammar</a><sup class="footnote">[<a id="_footnoteref_57" class="footnote" href="#_footnotedef_57" title="View footnote.">57</a>]</sup>(提供解析和 <code>subparse</code> 方法)，继而从 <a href="https://docs.raku.org/type/Cursor">Cursor</a><sup class="footnote">[<a id="_footnoteref_58" class="footnote" href="#_footnotedef_58" title="View footnote.">58</a>]</sup> 继承，供应 <code>.target</code> 和 <code>.pos</code> 方法。</p>
+<p>这些方法是从哪里来的？通过声明一个类型为 grammar, 它自动获得父类 <a href="https://docs.raku.org/type/Grammar">Grammar</a><sup class="footnote">[<a id="_footnoteref_57" class="footnote" href="#_footnotedef_57" title="View footnote.">57</a>]</sup>(提供 <code>parse</code> 和 <code>subparse</code> 方法), 而后者又继承自 <a href="https://docs.raku.org/type/Cursor">Cursor</a><sup class="footnote">[<a id="_footnoteref_58" class="footnote" href="#_footnotedef_58" title="View footnote.">58</a>]</sup>, Cursor 提供了 <code>.target</code> 和 <code>.pos</code> 方法。</p>
 </div>
 <div class="paragraph">
-<p><a href="https://docs.raku.org/type/Str%23routine_lines">Str.lines</a><sup class="footnote">[<a id="_footnoteref_59" class="footnote" href="#_footnotedef_59" title="View footnote.">59</a>]</sup> 方法将字符串分解为行列表包含; 在此列表上调用 <code>.elems</code> 会产生行数。为一个 没有任何换行符的字符串，这会产生数字。注意比 即使是最核心的C程序员也会从头数开始计算行数一个(不是零)，所以 <code>lines.elems</code> 中的数字符合我们作为一条线的目的数。</p>
+<p><a href="https://docs.raku.org/type/Str%23routine_lines">Str.lines</a><sup class="footnote">[<a id="_footnoteref_59" class="footnote" href="#_footnotedef_59" title="View footnote.">59</a>]</sup> 方法将一个字符串分解成一个包含行数的列表, 在这个列表上调用 <code>.elems</code> 会产生行数。对于一个没有任何行的字符串, 这个方法会产生行数。请注意, 即使是最铁杆的 C 语言程序员也会计算从 1 开始的行数(而不是0), 所以从 <code>lines.elems</code> 中的数字符合我们的行数目的。</p>
 </div>
 <div class="paragraph">
-<p>示例代码的输出如下: 无法解析数学表达式:第2行没有关闭')'错误报告正确地将错误报告为在线号码 2，因为输入字符串中的 <code>\n</code> 引入了换行符。</p>
+<p>示例代码的输出如下:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Cannot parse mathematical expression: no closing ')' at line 2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>错误报告正确地报告为第2行的错误, 因为输入字符串中的 <code>\n</code> 引入了断行。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_改进位置报告">11.3. 改进位置报告</h3>
+<h3 id="_改进后的位置报告">11.3. 改进后的位置报告</h3>
 <div class="paragraph">
-<p>我们在上一节中看到的错误方法是第一个好的方法</p>
+<p>我们在上一节中看到的 <code>error</code> 方法是一个很好的第一近似法, 但我们可以做的事情还有更多, 以提高它的精度。</p>
 </div>
 <div class="paragraph">
-<p>近似，但我们可以做更多的事情来提高其准确性。第一个很简单。在许多情况下，隐式的 <code>&lt;.ws&gt;</code> 调用可以 在 <code>[&lt;something&gt; ||</code> 之前匹配空格 <code>&lt;error(&#8230;&#8203;)&gt;]</code> 阻止。在一个 ws 可以匹配换行符的语法，这可以移动报告的错误位置向下，这与我们对如何直观理解不符我们希望报告错误位置。</p>
+<p>第一件事很简单。在许多情况下, 一个隐式的 <code>&lt;.ws&gt; ` 调用可以匹配 `[ &lt;something&gt; || &lt;error(&#8230;&#8203;)&gt;]</code> 块之前的空格。在 grammar 中, <code>ws</code> 可以匹配换行, 这可能会把报告的错误位置往下移, 这与我们对错误位置报告的直观理解不符。</p>
 </div>
 <div class="paragraph">
-<p>我们可以通过从中删除尾随空格来解决这个问题 <code>$parsed</code> string:</p>
+<p>我们可以通过删除 <code>$parsed</code> 字符串中的尾部空格来弥补这个问题:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4980,10 +4990,10 @@ say MathExpression.parse("(\n1");</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>另一个改进策略是提供一些上下文 错误信息。例如，Rakudo Raku 解析器打印源 错误位置周围的代码，并使用弹出标记错误位置 符号，⏏。</p>
+<p>另一个改进策略是在错误消息中提供一些上下文。例如, Raku 解析器会在错误位置周围打印出源代码, 并在错误位置上标记一个弹出符号 ⏏。</p>
 </div>
 <div class="paragraph">
-<p>我们可以在我们自己的语法中做同样的事情:</p>
+<p>我们在自己的 grammar 中也可以这样做。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5000,7 +5010,7 @@ say MathExpression.parse("(\n1");</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此版本的error方法构造十个上下文字符串 错误位置之前和之后的字符(尽管它使用 <code>$chars max 0</code> 防止负面指数)。它产生如下输出:</p>
+<p>这个版本的 <code>error</code> 方法构造了一个上下文字符串, 其中包含了错误位置前后的十个字符(虽然它使用 <code>$chars max 0</code> 来防止负索引)。它产生的输出是这样的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5021,13 +5031,13 @@ say MathExpression.parse("(\n1");</code></pre>
 <div class="sect2">
 <h3 id="_高水位标记">11.4. 高水位标记</h3>
 <div class="paragraph">
-<p>到目前为止讨论的技术依赖于手动插入 <code>|| &lt;error(&#8230;&#8203;)&gt;</code> 分成语法。如果你想避免这种情况在错误消息中牺牲一点清晰度 - 你可以使用另一个技术。即使没有，您也可以将它与显式错误结合使用报告。</p>
+<p>到目前为止讨论过的技术依赖于手动插入 <code>|| &lt;error(&#8230;&#8203;)&gt;</code> 片段到 grammar 中。如果你想避免这种情况 - 牺牲一点错误信息的清晰度, 你可以使用另一种技术。即使不是这样, 你也可以将它与显式错误报告结合起来使用。</p>
 </div>
 <div class="paragraph">
-<p>就像高水位标记每次大海或更高时被推高一点河流水位达到新的记录，我们可以记录到最远的位置我们的语法达到了。我们可以通过动态变量来做到这一点。 如果 <code>self.pos</code> 大于当前的值，我们设置为 <code>self.pos</code> 变量。然后，这个高水位标记构成了我们错误位置的基础报告。</p>
+<p>就像每当海平面或河流的水位达到一个新的记录时, 高水位标志就会被推高一点, 我们可以记录下我们的 grammar 达到的最远的位置。我们可以通过一个动态变量来做到这一点, 如果 <code>self.pos</code> 大于变量的当前值, 我们将其设置为 <code>self.pos</code>。这个高水位标志就构成了我们错误位置报告的基础。</p>
 </div>
 <div class="paragraph">
-<p>这种录音的一个方便的地方是 ws 令牌，因为它是在许多地方已经被召唤过，它是原始的自然分界符令牌。每当正则表达式位置达到新的高水位时，我们就会还可以记录调用ws的规则的名称。这个信息是可以通过 <a href="https://docs.raku.org/type/CallFrame%23sub_callframe">callframe</a><sup class="footnote">[<a id="_footnoteref_60" class="footnote" href="#_footnotedef_60" title="View footnote.">60</a>]</sup> 内置子程序:</p>
+<p>一个方便的地方是 <code>ws</code> token, 因为它已经在很多地方被调用了, 而且它是一个自然的原始 token 的分界符。每当正则表达式位置达到一个新的高水位标记时, 我们还可以记录下调用 <code>ws</code> 的规则名称。这些信息可以通过 <a href="https://docs.raku.org/type/CallFrame%23sub_callframe">callframe</a><sup class="footnote">[<a id="_footnoteref_60" class="footnote" href="#_footnotedef_60" title="View footnote.">60</a>]</sup> 内置的子例程获得。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5041,10 +5051,10 @@ say MathExpression.parse("(\n1");</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>callsame 函数从父类调用 ws 方法。(在语法中是语法)，传递相同的论点 收到的当前方法。换句话说，你在这里看到的 ws 方法 包装默认的 ws 正则表达式。我们可以委托任何其他命名的正则表达式这里的语法只需通过调用它，例如 <code>self.customws</code>。</p>
+<p><code>callame</code> 函数从父类(在语法中是 Grammar)调用 <code>ws</code> 方法, 传递的参数与当前收到的方法相同。换句话说, 你在这里看到的 <code>ws</code> 方法包装了默认的 <code>ws</code> 正则表达式。我们可以通过调用这里的 grammar 中的任何其他命名的正则表达式, 例如用 <code>self.customws</code> 方法来委托给 grammar 中的任何其他命名的正则表达式。</p>
 </div>
 <div class="paragraph">
-<p>这个 ws 方法假设动态变量 <code>$*HIGHWATER</code> 和 <code>$*LASTRULE</code> 已在某处宣布。如果我们在令牌 TOP 中这样做 (如前面的例子所示)，我们遇到了一个问题: 一旦解析了失败，变量不再可用于报告错误。再次一个包装器来拯救: 我们可以将所有的解析方法包装起来语法有:</p>
+<p>这个 <code>ws</code> 方法假设动态变量 <code>$*HIGHWATER</code> 和 <code>$*LASTRULE</code> 已在某处声明。如果我们在 <code>token TOP</code> 中这样做(如前面的例子所示), 我们遇到了一个问题: 一旦解析了失败, 变量不再可用于报告错误。再次一个包装器来拯救: 我们可以将所有 grammar 都有的 <code>parse</code> 方法包装起来:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5058,7 +5068,7 @@ say MathExpression.parse("(\n1");</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>签名中的语法 <code>|c</code> 捕获所有剩余的参数命名和位置。这确保了像 MathExpression 这样的调用。 解析( <code>$string，rule &#8658;'multiplication'</code> )继续工作。 然后，callsame 将相同的参数传递给原始的解析方法。关键部分是匹配失败时调用错误方法。 当然，错误方法也需要一些摆弄才能使用 <code>$*HIGHWATER</code> 和 <code>$*LASTRULE</code> 动态变量:</p>
+<p>签名中的语法 <code>|c</code> 可以捕获所有剩余的参数, 包括命名参数和位置参数。这确保了像 <code>MathExpression.parse($string, rule &#8658; 'multiplication')</code> 这样的调用可以继续工作。<code>callsame</code> 然后将相同的参数传递给原始解析方法。最关键的部分是匹配失败时调用 <code>error</code> 方法。当然, <code>error</code> 方法还需要一些摆弄才能使用 <code>$*HIGHWATER</code> 和 <code>$*LASTRULE</code> 动态变量。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5073,19 +5083,19 @@ say MathExpression.parse("(\n1");</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此错误方法使用 <code>$*HIGHWATER</code> 而不是 <code>self.pos</code> 确定解析失败的位置和 <code>$*LASTRULE</code> 报告取得进展的最后一个解析规则。这里还有另一个变化: 不是访问自己。</p>
+<p>这个 <code>error</code> 方法使用 <code>$*HIGHWATER</code> 代替 <code>self.pos</code> 来确定解析失败的位置, 而 <code>$*LASTRULE</code> 则用于报告最后一次解析规则的进展。</p>
 </div>
 <div class="paragraph">
-<p>target，error方法获取目标字符串作为参数。这个到期了到目前为止，我们已经掩盖了语法力学的细节。什么时候你调用 <code>SomeGrammar.parse(&#8230;&#8203;)</code>，这是对类型对象的方法调用 <code>SomeGrammar</code>。但语法引擎需要在某处保持状态， 所以方法解析创建了一个语法实例 - 非常相似 您可以在从正则表达式调用的方法内的self中访问的实例。 这个细节是很重要的，因为方法解析调用错误后的解析已经完成，所以实例已经消失了。试图调用 <code>self.target</code> 或者 <code>self.pos</code> 死于消息无法在中查找属性 <code>MathExpression</code> 类型对象。</p>
+<p>这里还有一个值得注意的变化：<code>error</code> 方法不是访问 <code>self.target</code>, 而是获取目标字符串作为参数。这是由于 grammar 力学中的一个细节, 我们到目前为止已经略过了。当你调用 <code>SomeGrammar.parse(&#8230;&#8203;)</code> 时, 这是对类型对象 <code>SomeGrammar</code> 的方法调用。但是 grammar 引擎需要在某个地方保留状态, 所以方法 <code>parse</code> 会创建一个 grammar 的实例 - 这与你可以在正则表达式调用的方法内部的 <code>self</code> 中访问的实例是一样的。这个细节很重要, 因为解析完成之后, 方法 <code>parse</code> 才调用 <code>error</code>, 所以实例就没有了。试图调用 <code>self.target</code> 或 <code>self.pos</code> 时, 会死掉, 并打印消息 <strong>Cannot look up attributes in a MathExpression type object</strong>。</p>
 </div>
 <div class="paragraph">
-<p>这种基于高水位标记的错误报告正确识别作为未完成的总和，<code>*</code> 作为未完成的乘法，并且(作为不完整的群体表达</p>
+<p>这种基于高水标的错误报告正确地识别了 <code>1+</code> 为未完成的和, <code>1*</code> 为未完成的乘法, 以及 <code>(1</code> 为不完整的组表达式。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_parser_combinator_和_failgoal">11.5. Parser Combinator 和 FAILGOAL</h3>
+<h3 id="_解析器组合器和_failgoal">11.5. 解析器组合器和 FAILGOAL</h3>
 <div class="paragraph">
-<p>解析匹配的分隔符对与它们之间的一些内容是足够普遍，Raku 有一个特殊的语法。而不是写作</p>
+<p>解析匹配的定界符对与它们之间的一些内容, 这很常见, 所以 Raku 有一个特殊的语法。与其这样写:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5095,7 +5105,7 @@ say MathExpression.parse("(\n1");</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>你可以写作:</p>
+<p>不如写成:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5105,10 +5115,10 @@ say MathExpression.parse("(\n1");</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>其中 <code>~</code> 是解析器组合器，重新排列后续标记。在这个例子，视觉上的好处并不大，但如果是正则表达式的话分隔的内容更长，将分隔符放在一起很好。</p>
+<p>这里的 <code>~</code> 是一个解析器组合器, 它是对下面的 token 进行重新排列。在这个例子中, 视觉上的好处并不大, 但如果分隔内容的正则表达式较长, 那么把分隔符靠得更近一些就好了。</p>
 </div>
 <div class="paragraph">
-<p>更重要的是，如果无法找到结束分隔符，则使用正则表达式 引擎调用一个名为 FAILGOAL 的方法。在默认实现中，这个刚刚失败的比赛。我们可以覆盖此方法以生成错误消息:</p>
+<p>更重要的是, 如果找不到闭合的分隔符, 正则表达式引擎会调用一个叫做 FAILGOAL 的方法。在默认的实现中, 这只是使匹配失败。我们可以覆盖这个方法来产生一个错误信息。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5141,10 +5151,10 @@ MathExpression.parse('(1');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>FAILGOAL</code> 方法的参数是正则表达式的源代码 与结束分隔符匹配的部分。<a href="https://docs.raku.org/type/Str%23method_trim">trim</a><sup class="footnote">[<a id="_footnoteref_61" class="footnote" href="#_footnotedef_61" title="View footnote.">61</a>]</sup> 方法删除 周围的空白，我们输入的一个版本的输出本章前面所见的错误方法。</p>
+<p><code>FAILGOAL</code> 方法的参数是正则表达式的源代码。匹配结束分隔符的部分。<a href="https://docs.raku.org/type/Str%23method_trim">trim</a><sup class="footnote">[<a id="_footnoteref_61" class="footnote" href="#_footnotedef_61" title="View footnote.">61</a>]</sup> 方法删除了周围的空白, 其输出结果被送入本章前面提到的 <code>error</code> 方法的一个版本中。</p>
 </div>
 <div class="paragraph">
-<p>输出如下:</p>
+<p>输出结果如下:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5156,31 +5166,31 @@ MathExpression.parse('(1');</code></pre>
 <div class="sect2">
 <h3 id="_使用哪种技术">11.6. 使用哪种技术?</h3>
 <div class="paragraph">
-<p>错误报告技术没有严格的规则用于哪种项目。唯一的规则就是那个人越多实际上使用你的语法，你应该付出更多努力错误信息好。</p>
+<p>对于哪种类型的项目应该使用哪种错误报告技术, 没有硬性规定。唯一的规则是, 实际使用你的 grammar 的人越多, 你就越应该在错误信息上下功夫。</p>
 </div>
 <div class="paragraph">
-<p>您也可以结合所有这些技巧: 使用 <code>[&lt;expected&gt; || &lt;error('&#8230;&#8203;')&gt;]</code> 模式就在你需要的地方，放一个 FAILGOAL 方法到位，并使用高水位技术得到一个在没有明确安装的情况下，错误的位置很好断言更好的错误报告。</p>
+<p>你也可以把所有这些技术结合起来：在你需要的地方使用 <code>[&lt;expected&gt; || &lt;error('&#8230;&#8203;')&gt;]</code> 模式, 在你需要的地方放一个 <code>FAILGOAL</code> 方法, 在你没有明确安装断言的情况下, 使用高水标记技术来获得一个好的错误位置, 以获得更好的错误报告。</p>
 </div>
 <div class="paragraph">
-<p>你可能会因为在后面的例子中被推迟一章，超过一半的语法源代码现在都是专用的错误报告。但是我们开始使用非常简单的语法，它人为地减小了它的大小。</p>
+<p>在本章后面的例子中, 你可能会觉得不适应, 因为在本章后面的例子中, 现在 grammar 的源码有一半以上的内容是专门用来报错的。但我们一开始就使用了一个相当简单的 grammar, 这就人为地缩小了 grammar 的规模。</p>
 </div>
 <div class="paragraph">
-<p>此外，大多数错误报告代码都非常通用，并且可以被分解成一个角色，并在许多语法中重复使用。那是什么的 <a href="https://modules.raku.org/dist/Grammar-ErrorReporting">Grammar::ParseError</a><sup class="footnote">[<a id="_footnoteref_62" class="footnote" href="#_footnotedef_62" title="View footnote.">62</a>]</sup> 个模块提供。</p>
+<p>此外, 大部分的错误报告代码都是相当通用的, 可以被分解成一个角色, 并在许多 grammar 中重复使用。这就是 <a href="https://modules.raku.org/dist/Grammar-ErrorReporting">Grammar::ParseError</a><sup class="footnote">[<a id="_footnoteref_62" class="footnote" href="#_footnotedef_62" title="View footnote.">62</a>]</sup> 模块所提供的功能。</p>
 </div>
 <div class="paragraph">
-<p>最后，我认为好的解析错误非常重要保证这种关注。<sup class="footnote">[<a id="_footnoteref_63" class="footnote" href="#_footnotedef_63" title="View footnote.">63</a>]</sup></p>
+<p>最后, 我想说的是, 好的解析错误是足够重要的, 值得这样的关注。<sup class="footnote">[<a id="_footnoteref_63" class="footnote" href="#_footnotedef_63" title="View footnote.">63</a>]</sup></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_总结_10">11.7. 总结</h3>
 <div class="paragraph">
-<p>从失败的解析过程生成良好的错误消息并不容易因为失败的正则表达式是解析的正常部分。因此，我们可以生成只有在某些时候我们决定提交解析时才会出现错误消息结果，并在该承诺没有时产生错误消息耽误。</p>
+<p>从失败的解析过程中生成良好的错误信息并不容易, 因为失败的正则表达式是解析过程中正常的一部分。因此, 只有在某一时刻, 我们决定提交一个解析结果, 并在该承诺没有成立时产生错误消息, 我们才能产生错误消息。</p>
 </div>
 <div class="paragraph">
-<p>这种承诺可以以顺序替代的形式明确在第二个分支中触发异常。或者我们可以隐含它每当规则使用高水位标记方法解析空格时。</p>
+<p>这个承诺可以是显式的, 即在其第二个分支中触发异常的顺序选择的形式。或者, 我们可以在规则解析空白时, 使用高水标记方法, 使其隐式化。</p>
 </div>
 <div class="paragraph">
-<p>最后，<code>~parser</code> 组合器允许您匹配一条输入 由分隔符包围，并提供一个钩子来改善错误关闭分隔符不匹配时的消息。</p>
+<p>最后, <code>∼</code> 解析器组合器允许你匹配一段被分隔符封住的输入, 并提供了一个钩子, 当闭合的分隔符不匹配时, 可以改善错误信息。</p>
 </div>
 </div>
 </div>
