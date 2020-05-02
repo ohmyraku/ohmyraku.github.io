@@ -213,7 +213,7 @@ if (theme && theme !== "1") {
 <li><a href="#_unicode_和自然语言">12. Unicode 和自然语言</a>
 <ul class="sectlevel2">
 <li><a href="#_书写系统">12.1. 书写系统</a></li>
-<li><a href="#_字节代码点字素_和字形">12.2. 字节，代码点，字素， 和字形</a></li>
+<li><a href="#_字节代码点字素和字形">12.2. 字节、代码点、字素和字形</a></li>
 <li><a href="#_总结_11">12.3. 总结</a></li>
 </ul>
 </li>
@@ -5199,59 +5199,59 @@ MathExpression.parse('(1');</code></pre>
 <h2 id="_unicode_和自然语言">12. Unicode 和自然语言</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>计算机处理的文本往往分为两类:旨在被人类消费的东西(如散文)，和旨在被软件消费的东西(机器代码和加密文件浮现在脑海中)。</p>
+<p>计算机处理的文本往往分为两类：一类是要被人类使用的东西(如散文)，另一类是要被软件使用的东西(机器代码和加密文件)。</p>
 </div>
 <div class="paragraph">
-<p>到目前为止，我们所看到的数据格式都属于中间:它们被软件明确地理解，但是仍然能够被人类读写。</p>
+<p>到目前为止，我们所研究的数据格式都是介于两者之间：它们被制作成可以被软件毫不含糊地理解，但仍然可以被人类读取和写入。</p>
 </div>
 <div class="paragraph">
-<p>在本章中，我们将简要介绍隐藏在自然语言领域中的复杂性 - 文本直接针对人类消费，但仍然存储为一系列字节。</p>
+<p>在这一章中，我们将简要地探讨一下隐藏在自然语言领域中的复杂性 - 文本的目的是为了人类的消费，但仍然是以一系列的字节存储。</p>
 </div>
 <div class="paragraph">
-<p>本章不是对自然语言处理的介绍; 它的意图是讨论处理多语言输入时必须注意的问题。</p>
+<p>本章不是自然语言处理的介绍，它的目的是讨论处理多语言输入时必须注意的问题。</p>
 </div>
 <div class="sect2">
 <h3 id="_书写系统">12.1. 书写系统</h3>
 <div class="paragraph">
-<p>书面英语基于字母表，通常是一组字母对应音素(口语元素)。</p>
+<p>书面英语是以字母表为基础的，通常是一组字母对应于音素(口语中的元素)。</p>
 </div>
 <div class="paragraph">
-<p>Abjads或辅音字母表遵循类似的结构，但只 包含辅音。可能有也可能没有元音标记表示 在说出单词的时候应该在哪里插入元音，但是那些 标记通常不表示要插入哪个元音。阿拉伯语和希伯来语 与古代北非和西亚的一些脚本类似，属于这一类。</p>
+<p>Abjads 或辅音字母的结构类似，但只包含辅音。可能有元音标记，也可能没有元音标记，在说单词的时候，这些标记表明元音应该插入哪里，但这些标记一般不表明应该插入哪个元音。阿拉伯语和希伯来语都属于这一类，一些古代北非和西亚的文字也是如此。</p>
 </div>
 <div class="paragraph">
-<p>音节是一个书写系统，其中每个音节都有自己的字符。一个著名的例子是平假名，日语书写系统的一个组成部分。</p>
+<p>音节表是一种书写系统，每个音节都有自己的字符。一个著名的例子是平假名，它是日语书写系统的一个组成部分。</p>
 </div>
 <div class="paragraph">
-<p>相比之下，表意文字传达了一种观念或意义。他们出现在中文书写系统中，往往与语音字符相结合，总共产生数千个字符。</p>
+<p>相比之下，表意文字传达的是一种思想或意义。在中国的书写系统中，它们往往与音节字结合在一起，形成了几千个字符。</p>
 </div>
 <div class="paragraph">
-<p>有几个不同的书写系统会影响程序员如何处理文本处理的地方: 你不能假设单词是实际上是由字母组成的。一般来说，文本分割(将文本分成单词、句子和其他单位的过程)变得相当语言特定。并非所有语言和书写系统都使用空格分割单词，甚至划定单词。见<a href="http://unicode.org/reports/tr29/">关于文本分段的 Unicode 技术报告</a><sup class="footnote">[<a id="_footnoteref_64" class="footnote" href="#_footnotedef_64" title="View footnote.">64</a>]</sup>了解更多信息。</p>
+<p>不同的书写系统有几个地方会影响到程序员如何处理文字处理：你不能认为文字实际上是由字母组成的。一般来说，文本分割(将文本分割成单词、句子和其他单位的过程)是针对特定语言的。并非所有语言和书写系统都使用空格来分隔单词，甚至根本就不使用空格来分隔单词。有关更多信息，请参阅 <a href="http://unicode.org/reports/tr29/">Unicode 技术报告中关于文本分割的内容</a><sup class="footnote">[<a id="_footnoteref_64" class="footnote" href="#_footnotedef_64" title="View footnote.">64</a>]</sup>。</p>
 </div>
 <div class="paragraph">
-<p>内置字符类如 <code>\d</code> 和 <code>\w</code> 匹配来自所有书写文字的字符 ，而不仅仅是拉丁文字。这意味着如果你使用 <code>\d+</code> 来 匹配一个数字，它可以匹配 42 和 ٤٢ (这是<a href="https://en.wikipedia.org/wiki/Eastern_Arabic_numerals">东阿拉伯语数字</a><sup class="footnote">[<a id="_footnoteref_65" class="footnote" href="#_footnotedef_65" title="View footnote.">65</a>]</sup>)。虽然这可能会令人惊讶，但将字符串 "٤٢" 转换为数字与我们的"普通"阿拉伯数字相同。</p>
+<p>内置的字符类如 <code>\d</code> 和 <code>\w</code> 可以匹配所有脚本中的字符，而不仅仅是拉丁文脚本。这意味着，如果你使用 <code>\d+</code> 来匹配一个数字，它可以匹配 42 和 ٤٢(这是<a href="https://en.wikipedia.org/wiki/Eastern_Arabic_numerals">东阿拉伯语数字</a><sup class="footnote">[<a id="_footnoteref_65" class="footnote" href="#_footnotedef_65" title="View footnote.">65</a>]</sup>)。虽然这可能会让人感到惊讶，但将字符串 "٤٢" 转换为数字就像我们的"正常"阿拉伯数字一样。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_字节代码点字素_和字形">12.2. 字节，代码点，字素， 和字形</h3>
+<h3 id="_字节代码点字素和字形">12.2. 字节、代码点、字素和字形</h3>
 <div class="paragraph">
-<p>计算机将文本存储为一系列字节。编码，如 UTF-8， UTF-32 或 ISO-8859-1 描述了字节或字节序列如何映射到代码点。</p>
+<p>计算机将文本存储为一系列的字节。UTF-8、UTF-32 或 ISO-8859-1 等编码描述了一个字节或一串字节如何映射到一个代码点。</p>
 </div>
 <div class="paragraph">
-<p>代码点是 Unicode 联盟对字符的描述,因为它用于人类语言。它由零和大约 110 万之间的数字组成，以及使用大写 ASCII 字符的描述，如 GREEK SMALL LETTER OMICRON。Unicode 属性数据库记录更多信息，例如字符是否一个字母，一个小写字母，通常是从左到右书写的一部分，依此类推。</p>
+<p>代码点是 Unicode 联盟对人类语言中使用的字符的描述。它由一个介于 0 到约 110 万之间的数字，以及使用大写 ASCII 字符的字符描述组成，如 GREEK SMALL LETTER OMICRON。Unicode 属性数据库还记录了更多的信息，如该字符是否是字母、小写字母、是典型的从左至右书写的一部分等等。</p>
 </div>
 <div class="sect3">
 <h4 id="_字素簇">12.2.1. 字素簇</h4>
 <div class="paragraph">
-<p>并非每个代码点都对应一个完整的字符。有些语言允许基本字符与组合字符的自由组合。你可能会熟悉法语中使用的重音符和抑音符，如"née" (出生)或 "après"(之后)。为了与其他遗留编码兼容， 字符 é 和 è 作为独立的代码点存在，即所谓的预组合字符。但它们也可以写成基本字符 e，后面跟着 <strong>COMBINING ACUTE ACCENT</strong> 或 <strong>COMBINING GRAVE ACCENT</strong>。</p>
+<p>不是每个代码码点都对应于一个完整的字符。有些语言允许基数字与组合字符自由组合。您可能对法语中使用的尖音符和重音符很熟悉，如 "née"(出生)或 "après"(后)。为了与其他传统的编码兼容，é 和 è 字符作为独立的代码点存在，也就是所谓的预组合字符。但它们也可以写成基本字符 e，后面跟着 <strong>COMBINING ACUTE ACCENT</strong> 或 <strong>COMBINING GRAVE ACCENT</strong>。</p>
 </div>
 <div class="paragraph">
-<p>在法语中，重音符和抑音符只作用在几个基础字符上 ，但在其他书写系统中，此类限制不适用。对于梵文文字中的一个例子，在印度次大陆很常见， 元音可以写成应用于辅音基础字符的组合字符。在这种情况下，并非所有可能的基本字符的组合和组合字符作为预先组合的 Unicode 代码点存在。</p>
+<p>在法语中，尖音和重音只作用在几个基础字符上，但在其他书写系统中，这种限制并不适用。例如，在印度次大陆常见的梵文文字中，元音可以写成组合字，应用到辅音基音上。在这种情况下，并非所有可能的基音和组合字符的组合都是作为 Unicode 编码的预组合点存在。</p>
 </div>
 <div class="paragraph">
-<p>这意味着读者会认为某个字符可能会被存储为多个代码点 - 通常是基本字符后跟一个或多个组合字符 。我们称之为字素簇，或简称为字素。</p>
+<p>这意味着，读者可以将一个字符识别为一个字符的东西可能会被存储为多个代码点 - 通常是一个基础字符和一个或多个组合字符。我们称其为字素簇，或简称为字素。</p>
 </div>
 <div class="paragraph">
-<p>在 Raku 中，字符串的基本单位是字素簇。如果你通过调用其 <code>chars</code> 方法问一个字符串中的字符数，答案是字素簇的数量:</p>
+<p>在 Raku中，字符串的基本单位是字素簇。如果你通过调用字符串的 <code>chars</code> 方法来询问字符串的字符数，答案就是字素簇的数量:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5259,13 +5259,13 @@ MathExpression.parse('(1');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>\c[NAME]</code> 语法按名称将代码点插入到双引号字符串中。</p>
+<p><code>\c[NAME]</code> 语法在一个双引号的字符串中插入了一个按名字命名的代码点。</p>
 </div>
 <div class="paragraph">
-<p>在这种情况下，碰巧存在预组合字符，但事实并非如此 Raku 必须将其视为单个字素; 因此，如果你选择了 <code>x</code> 作为基字符，不存在预组合字符，而 Raku 仍然存在将其归类为单个字符。</p>
+<p>在这种情况下，恰好有一个预组合字符存在，但这对 Raku 来说并不是必须的，因为它被认为是一个单个字素；因此，如果你选择 <code>x</code> 作为基础字符，就不存在预组合字符，Raku 仍然把它归类为单个字符。</p>
 </div>
 <div class="paragraph">
-<p>在正则表达式中它没有什么不同: 任何可以匹配单个字符的构造, 如字符类, 都可以匹配字素簇:</p>
+<p>在正则表达式中也不例外：任何能够匹配单个字符的构造，如字符类，都可以匹配一个字素簇。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5275,37 +5275,37 @@ MathExpression.parse('(1');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>当渲染文本时，无论是打印还是在屏幕上显示，渲染引擎可以选择将几个字素簇组合成单个字形(可以显示的形状)。例如，在英语中， 字母 f 和 i 的序列可以呈现为连字，单个字形包含两个字符，这通常分别比两个字符窄。</p>
+<p>当文本被渲染时，无论是为了打印或在屏幕上显示，渲染引擎可以选择将多个字母组组合成单个字形(可以显示的形状)。例如，在英语中，字母 f 和 i 的序列可能会被渲染成一个字形，这是一个包含两个字符的单字形，通常比两个字符分开的字形要窄。</p>
 </div>
 <div class="paragraph">
-<p>要在匹配正则表达式时忽略组合字符，您可以使用 <code>:ignoremark</code> 修饰符; <code>:m</code> 是简称。因此，<code>/:ignoremark uber/</code> 匹配字符串 "über"。当您怀疑用户可能难以输入变音符号，但仍想给他们包括这样的标记的搜索结果时, 这很有用。</p>
+<p>要在匹配正则表达式时忽略组合字符，可以使用 <code>:ignoremark</code> 修饰符; 简称为 <code>:m</code>。因此， <code>/:ignoremark uber/</code> 匹配字符串 "über"。当你怀疑用户在输入二进制符号时可能会有问题，但仍然想给他们提供包含这些符号的搜索结果时，这个方法很有用。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_字形">12.2.2. 字形</h4>
 <div class="paragraph">
-<p>在渲染期间选择字形的过程高度依赖输出媒体和字体，因此 Raku 不提供处理字形级别的字符串的内置功能。</p>
+<p>渲染过程中选择字形的过程与输出介质和字体有很大的关系，因此 Raku 在字形层面上没有提供内置的字符串处理。</p>
 </div>
 <div class="paragraph">
-<p>你应该知道即使是等宽字体，中文，日语和韩语不符合单个常规字符的空间，而是占用两倍水平空间。全角字符是(通常为拉丁文)字符拉伸到与中文相同的宽度字符。在解析缩进块或水平对齐的表时您可能需要考虑字符的宽度。</p>
+<p>你应该知道，即使在单间距字体中，中文、日文和韩文也不能装进一个正体字的空间，而是要占用两倍的水平空间。全宽字是指（典型的拉丁文）字符被拉伸到与汉字相同的宽度。在解析缩进块或水平对齐的表格时，你可能需要考虑字符的宽度。</p>
 </div>
 <div class="paragraph">
-<p>主要的内容是，即使有字素簇和等宽字体，你不能假设一个渲染的宽度字符。</p>
+<p>主要的启示是，即使是使用字素簇和单间距字体，你也不能对字符的宽度做太多的假设。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_unicode_属性_2">12.2.3. Unicode 属性</h4>
 <div class="paragraph">
-<p>Unicode 中庞大的字符库使其不切实际且错误 - 容易枚举任何给定类别中的所有字符，如字母， 数字，标点符号，数学符号等。相反，你可以指定您希望匹配给定类别的字符。这些是由 Unicode 联盟定义的字符类。</p>
+<p>Unicode 中的字元数量庞大，因此在任何指定的类別中，如字母、数字、标点、数学符号等，要列举出所有的字元是不切实际和容易出错的。相反，你可以指定你要匹配一个给定类别中的字符。这些是由 Unicode 联盟定义的字符类。</p>
 </div>
 <div class="paragraph">
-<p>Unicode 属性使用冒号(<code>:</code>)后跟尖括号内的属性名称。例如，<code>&lt;:Letter&gt;</code> 匹配任何字母 - 在撰写本文时，共有 63409 个代码点。一个新的 Unicode 版本可以进一步扩展该总数。</p>
+<p>Unicode 属性是用冒号(:)来写的，后面的属性名称放在角括号内。例如，<code>&lt;:Letter&gt;</code> 可以匹配任何字母 - 在编写时，总共有 63409 个代码点。新的 Unicode 版本可以进一步扩大这个总数。</p>
 </div>
 <div class="paragraph">
-<p>您可以使用 <code>+</code> 和 <code>-</code> 自由组合 Unicode 属性 <code>&lt;:Letter+:Digit&gt;</code> 匹配字母或数字。你也可以将基于属性的字符类与枚举相结合。如果你想为了匹配没有字符 e 的单词，你可以用正则表达式 <code>/&lt;:Letter-[eE]&gt;+/</code> 来做到这一点。</p>
+<p>您可以通过使用 <code>+</code> 和 <code>-</code> 自由组合 Unicode 属性，因此 <code>&lt;:Letter+:Digit&gt;</code> 可以匹配一个字母或一个数字。你还可以将基于属性的字符类与枚举结合起来。如果你想匹配一个没有 e 的单词，你可以用正则表达式 <code>/&lt;:Letter-[eE]&gt;+/</code> 来实现。</p>
 </div>
 <div class="paragraph">
-<p>字母，数字，标点符号等字符的分类是称为常规类别，您可以使用 <code>uniprop</code> 方法进行查询字符所属的 Unicode 类别:</p>
+<p>字母、数字、标点符号等字符的分类称为常规类别，您可以使用 <code>uniprop</code> 方法查询字符所属的 Unicode 类别:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5313,10 +5313,10 @@ MathExpression.parse('(1');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里 Ll 是 Lowercase_Letter 的简写。全套可能值可从<a href="https://docs.raku.org/language/regexes#Unicode_properties">官方文档</a>中获得。<sup class="footnote">[<a id="_footnoteref_66" class="footnote" href="#_footnotedef_66" title="View footnote.">66</a>]</sup></p>
+<p>这里 Ll 是 Lowercase_Letter 的简写。全部可能的值都可以在<a href="https://docs.raku.org/language/regexes#Unicode_properties">官方文档</a>中找到。<sup class="footnote">[<a id="_footnoteref_66" class="footnote" href="#_footnotedef_66" title="View footnote.">66</a>]</sup></p>
 </div>
 <div class="paragraph">
-<p>您可以查询更多类别</p>
+<p>还有更多的类别可以查询:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5325,17 +5325,20 @@ say "a".uniprop('Block');          # Output: Basic Latin</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>类别和属性的相同组合可用于正则表达式;  ` /&lt;:Block('Basic Latin'&gt;)&gt;/ ` 匹配来自"基本拉丁语"块的任何字符 。</p>
+<p>类别和属性的相同组合可以在一个正则表达式中使用；<code>/&lt;:Block('Basic Latin'&gt;)&gt;/</code> 匹配 "Basic Latin" 块中的任何字符。</p>
 </div>
 <div class="paragraph">
-<p>在字素簇的情况下，无论是 <code>uniprop</code> 方法还是对属性的正则表达式匹配适用于基本字符，因此 字符串 <code>x\c[COMBINING TILDE]</code> 可以成功匹配 <code>&lt;:Letter&gt;</code>，但不是 <code>&lt;:Mark&gt;</code>，标识组合标记代码点的类别。</p>
+<p>在字素簇的情况下，<code>uniprop</code> 方法和正则表达式匹配的属性都适用于基础字符，因此,字符串 <code>x\c[COMBINING TILDE]</code> 可以成功地被 <code>&lt;:Letter&gt;</code> 匹配，但不能被 <code>&lt;:Mark&gt;</code> 匹配，因为 <code>&lt;:Mark&gt;</code> 是标识组合标记代码点的类别。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_总结_11">12.3. 总结</h3>
 <div class="paragraph">
-<p>各种各样的自然语言和书写系统意味着许多我们(通常含蓄地)对语言做出的假设并不成立:不是每个逻辑字符或视觉字符都是一个代码点，而不是所有的单词都是由字母组成，并不是所有单词都用空格分隔，仅举几例。Raku 通过将字素簇作为单一字符来提供一些缓解 ，并通过字符类里面的 Unicode 属性提供可靠的匹配支持。</p>
+<p>自然语言和书写系统的多样性意味着我们对语言的许多假设（通常是隐含的）并不成立：不是每一个逻辑或视觉字符都是一个单一的代码点，不是所有的单词都是由字母组成的，也不是所有的单词都是由空格分隔的，这只是其中的几个例子。</p>
+</div>
+<div class="paragraph">
+<p>Raku 提供了一些安慰，它将字素簇作为单个字符来处理，并在字符类中提供了对 Unicode 属性匹配的支持。</p>
 </div>
 </div>
 </div>
