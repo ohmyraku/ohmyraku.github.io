@@ -221,7 +221,7 @@ if (theme && theme !== "1") {
 <ul class="sectlevel2">
 <li><a href="#_s_表达式">13.1. S 表达式</a></li>
 <li><a href="#_数学表达式和运算符优先级解析器">13.2. 数学表达式和运算符优先级解析器</a></li>
-<li><a href="#_pythonesque_基于缩进的语言">13.3. Pythonesque, 基于缩进的语言</a></li>
+<li><a href="#_pythonesque_一种基于缩进的语言">13.3. Pythonesque, 一种基于缩进的语言</a></li>
 <li><a href="#_总结_12">13.4. 总结</a></li>
 </ul>
 </li>
@@ -5347,22 +5347,21 @@ say "a".uniprop('Block');          # Output: Basic Latin</code></pre>
 <h2 id="_案例学习">13. 案例学习</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>前面的章节为您提供了如何知识语法工作, 关于错误报告和数据提取。</p>
+<p>前面几章已经让大家掌握了 grammar 的工作原理、关于错误报告和数据提取的知识。</p>
 </div>
 <div class="paragraph">
-<p>让我们来看看一些真实世界的输入格式以及我们如何做解析他们。</p>
+<p>让我们来看看一些现实世界中的输入格式，以及我们如何解析它们。</p>
 </div>
 <div class="paragraph">
-<p>这些案例研究的主要限制是大小:解析语言 像 SQL 一样, 语法非常平易近人, 但由于它是一项重大任务</p>
+<p>这些案例研究的主要限制是大小：用 grammar 分析像 SQL 这样的语言是相当平易近人的，但由于语言的浩瀚无边，是个大任务。你很可能不会喜欢读 40 页关于它的文章。</p>
 </div>
 <div class="paragraph">
-<p>纯粹的语言浩瀚。你可能不会喜欢阅读 40页 关于它。
-我们将探索解析三种格式, 重点放在不同的格式上技术。S 表达式是一种简单但相当典型的数据序列化 格式, 具有少量的空白意义。然后, 我们会探索解析数学表达式, 但略有不同方法比前几章的例子。我们使用运算符优先级解析器保持语法平坦。最后, 像 Python 一样 minilanguage 可以教我们如何解析基于缩进的格式。</p>
+<p>我们将探讨三种格式的解析，重点是不同的技巧。S-表达式是一种简单但相当典型的数据序列化格式，有少量的whitepace意义。然后，我们将探讨解析数学表达式，但方法与前面章节的例子略有不同。我们使用一个运算符优先级解析器来保持 grammar 的平面化。最后，一个类似于 Python 的微型语言可以教我们如何解析基于缩进的格式。</p>
 </div>
 <div class="sect2">
 <h3 id="_s_表达式">13.1. S 表达式</h3>
 <div class="paragraph">
-<p>符号表达式, 更好地称为 S 表达式, 是一种表示法 树作为用于 Lisp 编程语言的嵌套列表。在 S-Expressions 中, 列表由括号和 a 中的元素分隔 列表由空格分隔。S 表达式</p>
+<p>符号表达式(Symbolic Expressions)，也就是 S-Expressions，是 Lisp 程序设计语言中使用的一种树形嵌套列表的记号。在 S-表达式中，列表是用括号分隔的，列表中的元素用空格分隔。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5370,7 +5369,7 @@ say "a".uniprop('Block');          # Output: Basic Latin</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>对应于 Raku 数据结构</p>
+<p>对应于 Raku 数据结构:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5378,15 +5377,15 @@ say "a".uniprop('Block');          # Output: Basic Latin</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>列表元素通常称为原子。原子可以是未引用的 标识符, 通常可以包含各种标点符号。例如 (+ 1 2) 是1 + 2 的 Lisp 表达式。您可以引用包含的原子 使用双引号的空格:</p>
+<p>列表元素通常被称为原子。原子可以是一个未引用的标识符，通常可以包含各种标点符号。例如 <code>(+ 1 2)</code> 就是 <code>1+2</code> 的 Lisp 表达式。你可以使用双引号来引用包含空格的原子。</p>
 </div>
 <div class="paragraph">
-<p>大型Lisp编程语言中的大多数方言 对程序代码和数据结构都使用 S-Expressions。他们 然而, 在 S-Expression 中确切允许的是什么。一些允许 浮点文字, 以及其他允许的字符不同在标识符内。</p>
+<p>在 Lisp 编程语言大家庭中的大多数方言中，大多数方言都使用 S-表达式来处理程序代码和数据结构。但是，它们在 S-表达式中允许的内容是不同的。有的允许使用浮点字面量，有的则在标识符中允许使用哪些字符。</p>
 </div>
 <div class="sect3">
 <h4 id="_解析_s_表达式">13.1.1. 解析 S 表达式</h4>
 <div class="paragraph">
-<p>让我们从解析原子开始吧。原子可以是整数, 如 12345, a 标识符, 如 lisp, 或引用的字符串“像这样”。在可扩展的语法, 这样的替代品清单应该作为原型实施令牌:</p>
+<p>让我们从解析原子开始。原子可以是一个整数，比如 12345，一个标识符，比如 lisp，或者是一个引号字符串"像这样"。在一个可扩展的 grammar 中，这样的备选列表应该作为一个 <code>proto token</code> 来实现。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5403,13 +5402,13 @@ say "a".uniprop('Block');          # Output: Basic Latin</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>匹配潜在的有符号整数非常简单。</p>
+<p>匹配一个潜在的有符号整数是非常简单的。</p>
 </div>
 <div class="paragraph">
-<p>S-Expression 标识符的难点不在于如何解析它们,  但决定在他们中允许什么。这取决于Lisp方言 解析。在前面的例子中, 第一个字符允许拉丁字母和 符号=, *和:; 任何后续字符也允许数字和下划线。构造为使得整数是明确的解析为这样, 也不能被解析为标识符。</p>
+<p>S-表达式标识符的难点不在于如何解析它们，而在于决定在其中允许什么。这取决于被解析的 Lisp 方言。在前面的例子中，第一个字符允许使用拉丁字母和符号 <code>=</code>, <code>*</code>, 和 <code>:</code>；后面的任何字符也允许使用数字和下划线。这样的构造使得整数可以毫不含糊地被解析为整数，并且不能作为标识符来解析。</p>
 </div>
 <div class="paragraph">
-<p>此设置不允许单个+或 - 匹配作为标识符, 并且只需将其添加到第一个字符类即可创建 歧义。如果我们想要允许这个, 我们可以单独处理科:</p>
+<p>这种设置不允许单一的 <code>+</code> 或 <code>-</code> 作为标识符来匹配，如果简单地将其添加到第一个字符类中，就会产生歧义。如果我们想允许这样做，我们可以把它作为一个单独的分支来处理。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5420,13 +5419,17 @@ say "a".uniprop('Block');          # Output: Basic Latin</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>解析字符串遵循前面章节中规定的模式:两个外部引用和中间的字符串内容。字符串此处的内容由单独的规则解析以进行数据提取 更轻松。字符串内容由“常规”允许字符组成 (除反斜杠或双引号外的所有内容)或转义序列: 反斜杠后跟一个任意字符。</p>
+<p>解析字符串遵循前面一章中的模式：外面的两个引号和中间的字符串内容。这里的字符串内容是通过一个单独的规则来解析的，以使数据提取更容易。字符串内容包括"常规"允许的字符（除了反斜线或双引号之外的所有字符），或者是一个转义序列：一个反斜线之后是一个单一的任意字符。</p>
 </div>
 <div class="paragraph">
-<p>您可能已经注意到 perl 6 允许您使用连字符 我之前使用过的标识符中的减号字符( - ) 在类名 S-Expression 中, 但不在正则表达式的名称中 string_contents。造成这种不一致的原因是角色存在潜在的歧义:&#8592;alpha-hexdigit&gt; 可能是一个否定的命名字符类 alpha-hexdigit,  或匹配既不是 alpha 也不是 hexdigit 的任何东西。perl 6 消除第一种可能性的歧义, 但避免这种情况 完全看起来仍然值得。</p>
+<p>你可能已经注意到 Raku 允许你在标识符中使用连字符或减号(<code>-</code>)，我之前在类名 S-Expression 中使用过，但在正则表达式 string_contents 的名称中没有使用。
+<code>-</code> 字符有一个潜在的歧义。<code>&#8592;alpha-hexdigit&gt;</code> 可能是一个被否定的字符类 alpha-hexdigit，或者匹配任何既不是 alpha 也不是 hexdigit 的东西。</p>
 </div>
 <div class="paragraph">
-<p>既然我们有一些语法规则, 我们应该测试核心功能:</p>
+<p>Raku 消除了第一种可能性中的歧义，但完全避免这种情况似乎仍然值得</p>
+</div>
+<div class="paragraph">
+<p>现在我们有了一些语法规则，我们应该测试一下核心功能。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5463,16 +5466,16 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们设置了一些原子应匹配的输入字符串(<code>%atoms</code>)和 一些他们不应该匹配(<code>%not-atoms</code>)。接下来, 我们迭代 这些示例, 并使用示例字符串和调用 <code>S-Expression.parse</code> 相应的规则, 并在对我们的那些字符串的ok调用中包装它 期望被解析, 并为我们期望的字符串nok(否定ok)不配。</p>
+<p>我们设置了一些原子应该匹配的输入字符串(<code>%atoms</code>)和一些不应该匹配的字符串(<code>%not-atoms</code>)。接下来，我们对这些例子进行迭代，然后用例子字符串和相应的规则调用 <code>S-Expression.parse</code>，并对我们期望被解析的字符串调用 <code>ok</code>，对我们期望不匹配的字符串调用 <code>nok</code>(ok的否定)。</p>
 </div>
 <div class="paragraph">
-<p>对于我们期望解析失败的情况, 测试代码会将调用包装起来 <code>try {&#8230;&#8203;}</code> 块中的 <code>S-Expression.parse</code>。这不是绝对必要的,  因为我们没有可能导致错误的高级错误报告被抛出的异常。但是, 这样的事情可能会在以后添加, 并且我们不应该通过导致测试失败来惩罚未来的改进。</p>
+<p>对于我们期望解析失败的情况，测试代码将 <code>S-Expression.parse</code> 的调用封装在一个 <code>try {&#8230;&#8203;}</code> 块中。这并不是绝对必要的，因为我们没有高级错误报告功能，不会导致抛出异常。然而，这样的东西可能会在以后添加，我们不应该通过导致测试失败来惩罚未来的改进。</p>
 </div>
 <div class="paragraph">
-<p>最后, 而不是使用通常的计划NUMBER; 在开始时, 测试代码使用完成测试; 在末尾。这减少了计算测试的需要 你自己会以降低检测我们是否能够运行的能力为代价我们计划的测试。</p>
+<p>最后，测试代码不是在开始时使用通常的 <code>plan NUMBER;</code>，而是在结束时使用 <code>done-testing;</code>。这就减轻了我们自己计算测试的需要，但代价是降低了检测能力，如果我们计划中的任何测试失败了，我们就可以进行检测。</p>
 </div>
 <div class="paragraph">
-<p>测试全部通过, 因此我们可以继续更高级别的位。要解析列表, 我们需要一对包含空格分隔列表的括号原子:</p>
+<p>测试都通过了，我们就可以进入更高级别的部分了。要解析一个列表，我们需要一对括号，其中包含一个有空格分隔的原子列表。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5482,7 +5485,7 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在我们也可以处理嵌套列表的情况, 其中 atom 是 a 子列表:</p>
+<p>现在我们也可以处理嵌套列表的情况, 其中 <code>atom</code> 是一个子列表:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5490,7 +5493,7 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>最后我们指定一个S表达式是一个表达式列表,  可选地在它之间, 之前和之后有空格:</p>
+<p>最后我们指定一个 S-表达式是一个表达式列表, 可选择在中间、前面和后面留有空格:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5498,7 +5501,7 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这是第一次拍摄, 很可能完全不起作用。您可能已经注意到所有正则表达式都是令牌而不是规则。这是因为空白是重要的(它划定原子)并使用规则风险无意中耗尽了这个重要的空白。因此语法错过了应该允许空白的情况, 但什么也没有然后在那里解析它。解决这个问题的一个好方法是编写测试和运行它们:</p>
+<p>这是第一枪，很可能并不完全有效。你可能已经注意到，所有的正则表达式都是 <strong>token</strong> 而不是 <strong>rule</strong>。这是因为空白是重要的(它可以分隔原子)，而使用 rule 有可能会不经意间用掉这个重要的空白。因此，这个 grammar 错过了应该允许使用空格的情况，但里面还没有任何东西可以解析。解决这个问题的好方法是编写测试并运行它们。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5511,7 +5514,7 @@ for @tests -&gt; $t {
 </div>
 </div>
 <div class="paragraph">
-<p>这使两个测试失败:</p>
+<p>这使两个测试失败了:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5520,7 +5523,7 @@ not ok 24 - can parse '( () ( ) )'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们可以通过向表达式添加更多的空格分析来解决这个问题 token:</p>
+<p>我们可以通过在表达式 token 中添加更多的空白解析来解决这个问题:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5530,7 +5533,7 @@ not ok 24 - can parse '( () ( ) )'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这是完整的 grammar:</p>
+<p>下面是 grammar 的全部内容:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5557,13 +5560,16 @@ not ok 24 - can parse '( () ( ) )'</code></pre>
 <div class="paragraph">
 <p>对应于 S 表达式语法的动作类大多是 直截了当。只有两件事与众不同。首先是区分 S 表达式(a)和(“a”)是有用的,  换句话说, 在标识符和带引号的字符串之间。保持这一点 区别, action 类从此类返回一个 Identifier 对象:</p>
 </div>
+<div class="paragraph">
+<p>与 S-表达式 grammar 对应的 action 类大多是直截了当的。只是有两点有点出格。第一个是区分 S-表达式 (a) 和 ("a")，换句话说，就是区分标识符和引号字符串是有用的。为了保持这种区分，action 类从这个类中返回一个 <code>Identifier</code> 对象:</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">class Identifier { has $.str }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这可以通过这样的 action 方法来完成:</p>
+<p>这可以通过这样的 action 方法来实现:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5573,7 +5579,7 @@ not ok 24 - can parse '( () ( ) )'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>要考虑的第二件事是如何处理反斜杠转义引用字符串中的字符。似乎有一致意见 S-Expression 实现 \\ 是一个强烈反对, 而“是一个双重的 引用字符; 然而, 反斜杠的语义依次为另一个不同的角色未达成一致。在这里我们将简单地剥离逃避反斜杠, 所以\\变为\和\ a成为:</p>
+<p>第二个要考虑的问题是如何处理引号字符串中的反斜线字符。在 S-Expression 的实现中似乎有一个共识，即 <code>\\</code> 是一个反斜线，而 <code>\"</code> 是一个双引号字符；但是，反斜线后面有另一个不同的字符，其语义上并没有达成一致。在这里，我们将简单地去掉反斜线，所以 <code>\\</code> 变成 <code>\</code>，<code>\a</code> 变成 a:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5583,7 +5589,7 @@ not ok 24 - can parse '( () ( ) )'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>整数的 action 方法将匹配转换为整数, 和其他方法只是传递其捕获的 <code>.made</code> 值:</p>
+<p>用于整数的 action 方法将匹配转换为整数，而其他方法只是传递其捕获的 <code>.made</code> 值:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5615,7 +5621,7 @@ class S-Actions {
 </div>
 </div>
 <div class="paragraph">
-<p>我们给它写一个简短的测试:</p>
+<p>我们来写一个简短的测试:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5631,7 +5637,7 @@ is-deeply $m.made,
 </div>
 </div>
 <div class="paragraph">
-<p>让我们为此写一个简短的测试:这个测试通过了, 所以是时候把它包装成一个子程序了成为 S-Expression 解析器的公共 API:</p>
+<p>这个测试通过了，所以是时候把它封装成一个子例程了，这个子例程将成为 S-Expression 解析器的公共 API:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5646,22 +5652,25 @@ is-deeply $m.made,
 </div>
 </div>
 <div class="paragraph">
-<p>为简洁起见, 我们不会为此改进错误消息生成 语法; 本章讨论的任何技术11可以在这里使用</p>
+<p>为了简洁起见，我们不会为这个 grammar 改进错误消息的生成；第十一章中讨论的任何技术都可以在这里使用。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_数学表达式和运算符优先级解析器">13.2. 数学表达式和运算符优先级解析器</h3>
 <div class="paragraph">
-<p>“如果你拥有的只是一把锤子, 那么一切看起来都像钉子一样<sup class="footnote">[<a id="_footnoteref_67" class="footnote" href="#_footnotedef_67" title="View footnote.">67</a>]</sup>, “如果你合作 一个闪亮的新工具, 如正则表达式和语法, 你往往忽略了选项使用其他工具来解决您的问题。本着这种精神, 我想重温前面的解析示例数学表达式, 这次在语法上做得更少 在随附的代码中。而不是为&#8230;&#8203;引入新的解析级别 每个优先级, 这个语法的迭代忽略优先级 完全简单地解析交替的术语和运算符列表。该 然后, action方法使用运算符优先级表来创建 适当的树。这称为运算符优先级解析器, 也称为运算符优先级解析器 作为OPP的简称。</p>
+<p>如果你拥有的只是一把锤子，那么一切看起来都像钉子一样<sup class="footnote">[<a id="_footnoteref_67" class="footnote" href="#_footnotedef_67" title="View footnote.">67</a>]</sup>。 如果你在工作中使用一个闪亮的新工具，比如正则表达式和 grammar，你往往会忽略了使用其他工具来解决问题的选项。</p>
 </div>
 <div class="paragraph">
-<p>这种方法有两个主要优点。它做得很多更容易在两个现有级别和平面之间插入优先级别语法结构使解析更快。</p>
+<p>本着这种精神，我想重温一下之前的数学表达式解析的例子，这次在 grammar 中做的少一些，更多的部分在随附的代码中。Grammar 的这次迭代并没有为每个优先级引入一个新的解析级别，而是完全忽略了优先级，只是简单地解析了一个备选项和运算符的列表。然后，action 方法使用运算符优先级表来创建相应的树。这被称为运算符优先级解析器，也简称为 OPP。</p>
+</div>
+<div class="paragraph">
+<p>这种方法有两个主要的优点。它使得在两个现有的级别之间插入一个优先级更容易，而且 grammar 的扁平化结构使得解析速度更快。</p>
 </div>
 <div class="sect3">
-<h4 id="_一个简单的算子优先级解析器">13.2.1. 一个简单的算子优先级解析器</h4>
+<h4 id="_一个简单的运算符优先级解析器">13.2.1. 一个简单的运算符优先级解析器</h4>
 <div class="paragraph">
-<p>语法的核心是将表达式解析为列表的部分由中缀运算符分隔的术语<sup class="footnote">[<a id="_footnoteref_68" class="footnote" href="#_footnotedef_68" title="View footnote.">68</a>]</sup>:</p>
+<p>Grammar 的核心部分是将表达式解析为一个由项组成的列表，并以中缀运算符<sup class="footnote">[<a id="_footnoteref_68" class="footnote" href="#_footnotedef_68" title="View footnote.">68</a>]</sup>分隔:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5669,7 +5678,7 @@ is-deeply $m.made,
 </div>
 </div>
 <div class="paragraph">
-<p>要使中缀运算符列表可扩展, 它必须是 proto 令牌:</p>
+<p>要使中缀运算符列表具有可扩展性, 它必须是一个 <code>proto token</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5682,10 +5691,10 @@ token infix:sym&lt;**&gt; { &lt;sym&gt; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>除了四个常用运算符外, 此列表还包括 **, 即 通常用于求幂, 其优先级比乘法。</p>
+<p>除了常见的四种运算符外，这个列表中还包括了 <code>**</code>，它常用于求幂，而且比起乘法，它的优先级更高。</p>
 </div>
 <div class="paragraph">
-<p>这个术语包含数字并不会让你感到惊讶, 但我们也可以 解析括号中的括号中的子表达式, 以及 cos(0) 等函数调用或 sqrt(4):</p>
+<p><code>term</code> 包括了数字，这不会让你感到惊讶，但我们也可以解析 <code>term</code> 中括号内的子表达式，以及像 <code>cos(0)</code> 或 <code>sqrt(4)</code> 这样的函数调用。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5703,7 +5712,7 @@ token identifier { &lt;[a..z]&gt;+ }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>是时候将他们合在一块儿了:</p>
+<p>是时候把这一切合在一块儿了:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5733,7 +5742,7 @@ grammar MathExpression does Grammar::ErrorReporting {
 </div>
 </div>
 <div class="paragraph">
-<p><code>Grammar::ErrorReporting</code> 是一个提供错误的模块花式位置输出的方法, 但也安装 <code>FAILGOAL</code> 方法 当 <code>~</code> 表达式无法找到目标时触发。如果你使用 <code>moritzlenz/raku-regex-alpine</code> Docker 镜像, 这个模块已经存在包括在内。否则, 您可以通过运行来安装它</p>
+<p><code>Grammar::ErrorReporting</code> 是一个模块，它提供了一个具有花哨的位置输出的错误方法，同时还安装了一个 FAILGOAL 方法，当 <code>~</code> 表达式失败时，会触发 FAILGOAL 方法。如果你使用的是 moritzlenz/perl6-regex-alpine Docker 镜像，这个模块已经包含了。否则，你可以通过在命令行上运行如下命令来安装它:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5741,10 +5750,7 @@ grammar MathExpression does Grammar::ErrorReporting {
 </div>
 </div>
 <div class="paragraph">
-<p>在命令行上。</p>
-</div>
-<div class="paragraph">
-<p>这个语法现在生成一个平面分析树。例如, 输入字符串 <code>1 + 2 * 5</code> 生成以下匹配对象:</p>
+<p>这个 grammar 现在可以产生一个扁平化的解析树。例如，输入字符串 <code>1 + 2 * 5</code> 产生以下匹配对象:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5760,16 +5766,16 @@ grammar MathExpression does Grammar::ErrorReporting {
 </div>
 </div>
 <div class="paragraph">
-<p>现在我们需要编写运算符优先级解析器来转换 平面数组 <code>[1, '+', 2, '*', 5]</code> 分为按优先级分组的树, 所以 <code>[1, '+', [2, '\*', 5]</code>, 甚至更好 <code>['+', 1, ['*', 2, 5]]</code>。</p>
+<p>现在，我们需要编写一个运算符优先级解析器，将平面数组 <code>[1, '+', 2, '<strong>', 5]</code> 变成一个按优先级分组的树，所以是 <code>[1, '+', [2, '</strong>', 5]</code>, 或者更好的是 <code>['+', 1, ['*', 2, 5]]</code>。</p>
 </div>
 <div class="paragraph">
-<p>关键是每当我们第一次看到一个操作员时,  我们不知道它的相邻操作数是否实际属于该运算符 (如2 * 5的情况), 或者下一个运算符有更高的值 优先并窃取正确的操作数。</p>
+<p>问题的关键是，每当我们第一次看到一个运算符时，我们不知道它相邻的运算符是否真的属于这个运算符（就像 <code>2*5</code> 的情况一样），或者下一个运算符的优先级更高，并且偷了右边的操作数。</p>
 </div>
 <div class="paragraph">
-<p>我们可以通过首先放置一个运算符及其左操作数来解决这个问题在堆栈上。当我们访问下一个运营商和第二个运营商时优先级低于第一个优先级, 我们可以删除之前的优先级运算符及其操作数来自堆栈, 将其转换为表达式, 以及然后继续将第二个操作符放在堆栈上。如果是第二个运算符具有更高的优先级, 我们只需将第二个运算符放在上面堆。</p>
+<p>我们可以通过先把一个运算符和它左边的操作数放到堆栈中来解决这个问题。当我们访问下一个运算符时，如果第二个运算符的优先级比第一个运算符低，我们可以把上一个运算符和它的操作数从栈中删除，把它变成一个表达式，然后继续把第二个运算符放在栈中。</p>
 </div>
 <div class="paragraph">
-<p>一旦到达输入列表的末尾, 我们就可以应用缩减步骤直到堆栈上只剩下一个元素。这就是算法在代码中看起来像:</p>
+<p>如果第二个运算符的优先级较高，我们只需将第二个运算符放在堆栈上即可。当输入列表结束后，我们可以应用还原步骤，直到堆栈上只剩下一个元素。这就是这个算法在代码中的样子。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5799,19 +5805,25 @@ grammar MathExpression does Grammar::ErrorReporting {
 </div>
 </div>
 <div class="paragraph">
-<p>方法 opp-parse 期望一个令牌列表, 从一个术语开始, 然后中缀运算符, 依此类推, 其他每个令牌都是运算符。</p>
+<p>方法 <code>opp-parse</code> 期待一个 token 列表，从一个项目(term)开始，然后是一个中缀运算符，以此类推，其他每一个 token 都是一个运算符。</p>
 </div>
 <div class="paragraph">
-<p>第一个元素是一个子程序 opp-reduce, 它实现了 减少步骤: 取最后两个术语和它们之间的运算符 从堆栈中, 并将它们作为数组添加回来。因此, 如果堆栈有 元素 <code>1, '+', 2, '*', 4</code>, 对此函数的调用将其修改为 <code>[1, '+', ['\*', 2, 4]]</code>, 第二个调用进一步将其更改为 <code>['+', 1, ['*', 2, 4]]</code>。 <code>%prec</code> 是将每个中缀运算符映射到数字的哈希优先级, 其中较高的数字对应于运算符绑定他们的论点更紧密。</p>
+<p>第一个元素是一个子程序 <code>opp-reduce</code>，它实现了简化步骤：从堆栈中取出最后两个项和它们之间的运算符，然后将它们作为数组添加回来。因此，如果堆栈中的元素有 <code>1, '+', 2, '<strong>', 4</code>，那么调用这个函数将其修改为 <code>[1，'+'，['+'，['</strong>'，2，4]]]</code>，第二次调用将其进一步修改为 <code>['+'，1，['*'，2，4]]]</code>。</p>
 </div>
 <div class="paragraph">
-<p>随后, <code>@stack</code> 初始化为第一个术语(来自@)令牌[0]), 然后循环遍历其余的令牌元素一次。只要堆栈至少有三个元素(和 因此, 至少一个运营商), 并且当前运营商具有较低的优先权 与前一个运算符相比, 代码调用了opp-reduce 函数。在任何 case, 当前运算符和 term 被添加到堆栈中。</p>
+<p><code>%`prec</code> 是一个哈希值，它将每个中缀运算符映射到一个数字优先级，其中较高的数字对应的运算符与参数的绑定更紧密。</p>
 </div>
 <div class="paragraph">
-<p>在访问了所有初始令牌之后, 剩下要做的就是重复减少步骤, 直到堆栈上只剩下一个元素。这就是我们感兴趣的解析树。</p>
+<p>随后，<code>@stack</code> 被初始化为第一个项（来自 <code>@tokens[0]</code>），然后循环运行在其余的 token 上，每次运行两个元素。只要堆栈至少有三个元素（因此至少有一个运算符），并且当前运算符的优先级比前一个运算符低，代码就会调用  <code>opp-reduce</code> 函数。在任何情况下，当前运算符和项都会被添加到堆栈中。</p>
 </div>
 <div class="paragraph">
-<p>请注意, 通过在令牌术语中解析带括号的表达式, 我们不会必须在运算符优先级中将括号作为运算符处理解析器。更传统的实现只使用词法分析和运算符优先级解析器, 用于检查和处理括号对。其余的动作方法非常简单</p>
+<p>当所有的初始 token 都被访问过后，剩下的就是重复简化步骤，直到堆栈上只剩下一个元素。这就是我们感兴趣的解析树。</p>
+</div>
+<div class="paragraph">
+<p>注意，通过解析 token term 中的括号表达式，我们不需要把括号作为运算符优先级解析器中的运算符来处理。更多的传统实现只需要使用词法分析和运算符优先级解析器来检查和处理小括号对。</p>
+</div>
+<div class="paragraph">
+<p>相比之下，其余的 action 方法都相当直接。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5837,10 +5849,10 @@ method identifier($/) { make $/.Str }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里唯一有趣的地方是表达式方法。要知道, 方法 <code>opp-parse</code> 希望项与运算符交错, 但规则 <strong>expression</strong> 的匹配会产生两个数组, <code>$&lt;term&gt;</code> 和 <code>$&lt;infix&gt;</code>。我们可以自己进行交织, 但 Raku 提供了一个更好的解决方案：<a href="https://docs.raku.org/type/Match.html%23method_caps">Match 类中的方法 caps</a><sup class="footnote">[<a id="_footnoteref_69" class="footnote" href="#_footnotedef_69" title="View footnote.">69</a>]</sup>, 按照字符串中出现的顺序返回所有的 captures, 这正是我们想要的交织顺序。该方法的 caps 返回的是被封装在 <a href="https://docs.raku.org/type/Pair">Pair</a><sup class="footnote">[<a id="_footnoteref_70" class="footnote" href="#_footnotedef_70" title="View footnote.">70</a>]</sup> 对象中的捕获, 所以我们需要调用 <code>.value</code> 来到达 match 对象, 然后调用 <code>.made</code> 来访问附加在 match 上的抽象语法树 (AST) 。<code>map</code> 方法对 <code>caps</code> 返回的所有元素都是这样做的。</p>
+<p>这里唯一有趣的地方是表达式方法。记住，方法 <code>opp-parse</code> 希望项与运算符交错，但规则 <strong>expression</strong> 的匹配会产生两个数组，<code>$&lt;term&gt;</code> 和 <code>$&lt;infix&gt;</code>。我们可以自己做交织，但 Raku 提供了一个更好的解决方案: <a href="https://docs.raku.org/type/Match.html%23method_caps">Match 类中的方法 caps</a><sup class="footnote">[<a id="_footnoteref_69" class="footnote" href="#_footnotedef_69" title="View footnote.">69</a>]</sup> 会按照字符串中出现的顺序返回所有的捕获，这正是我们想要的交错顺序。该方法的 caps 返回的是封装在 <a href="https://docs.raku.org/type/Pair">Pair</a><sup class="footnote">[<a id="_footnoteref_70" class="footnote" href="#_footnotedef_70" title="View footnote.">70</a>]</sup> 对象中的捕获，所以我们需要调用 <code>.value</code> 来到达 match 对象，然后调用 <code>.made</code> 来访问附加在 match 上的抽象语法树 (AST)。 <code>map</code> 方法对 <code>cap</code> 返回的所有元素都是这样做的。</p>
 </div>
 <div class="paragraph">
-<p>同样的, 我们可以把对语法的调用封装成一个子例程。</p>
+<p>同样的，我们可以把对 grammar 的调用封装成一个子例程。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5853,7 +5865,7 @@ method identifier($/) { make $/.Str }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>并写一些测试。这里只是一个:</p>
+<p>并写一些测试。这里仅举一个例子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5869,19 +5881,16 @@ is-deeply parse-math-expression('1 + 2 * 3**4 * 5 + 6'),
 <div class="sect3">
 <h4 id="_更灵活的方法">13.2.2. 更灵活的方法</h4>
 <div class="paragraph">
-<p>上一节中讨论的语法和运算符优先级解析器可以工作，但运算符优先级解析器的可扩展性不强。你可以很容易地应用一个角色，增加另一个 <code>infix:sym&lt;something&gt;</code> 规则，但你不能为它定义一个优先级，因为 <code>%prec</code> 是一个词法变量，不能在 <code>opp-parse</code> 之外访问。</p>
+<p>一个可能的解决方法是创建某种注册表，通过它，扩展可以添加一个运算符，但问题就更深了。有几个用例，我们需要更多关于运算符的元数据。其中一个例子是，如果解析器能够处理不同的关联性。如果一个运算符出现两次或更多（或者在同一个表达式中出现了相同优先级的不同运算符），那么表达式 <strong>1 OP 2 OP 3</strong> 可以被解释为 <strong>(1 OP 2) OP 3</strong> (左结合)或 <strong>1 OP (2 OP 3)</strong> (右结合)。对于求和 <code>+</code> 和乘法 <code>*</code> 运算符，优先级不重要。对于减法 <code>-</code> 和除法 <code>/</code>，典型的结合性是左结合，但对于指数运算，大多数编程语言都假定为右结合。我们需要一种方法来存储运算符的结合性和优先级。</p>
 </div>
 <div class="paragraph">
-<p>一个可能的解决方法是创建一些注册表，通过这些注册表，扩展可以添加一个操作符，但问题就更深了。有几个用例，我们需要更多关于操作符的元数据。其中一个例子是，如果解析器能够处理不同的关联性。如果一个运算符出现了两次或更多（或不同的运算符出现在同一个表达式中出现了相同的前缀），那么表达式 <strong>1 OP 2 OP 3</strong> 可以被解释为 <strong>(1 OP 2) OP 3</strong> (左联动)或 <strong>1 OP (2 OP 3)</strong> (右联动)。对于求和+和乘法*运算符，优先级并不重要。对于差分-和除法/，典型的联想性是左联想，但对于指数运算，大多数编程语言都假定是右联想。我们需要一种方法来存储运算符的联想性和优先级。</p>
+<p>还有其他类型的运算符。后缀运算符站在（后）项之后。例如，阶乘运算符(<code>!</code>)代表所有正整数的乘积，直到并包括它后面的数字。举例说明一下。<code>6!</code> 是 <code>6*5*4*3*2*1</code> 或 720。现在，我们需要关于运算符类型的元信息，而且由于后缀运算符打破了关于交替项和运算符的规则<sup class="footnote">[<a id="_footnoteref_71" class="footnote" href="#_footnotedef_71" title="View footnote.">71</a>]</sup>，所以运算符优先级解析器也需要一种方法来可靠地区分运算符和项。</p>
 </div>
 <div class="paragraph">
-<p>还有其他类型的运算符。后缀运算符是出现在项的后面(post)。例如，阶乘运算符(!)代表所有正整数的乘积，直到并包括它后面的数。举例说明： 6! 是 <code>6*5*4*3*2*1</code> 或 720。现在我们需要关于运算符类型的元信息，由于后缀运算符打破了关于交替项和运算符的规则<sup class="footnote">[<a id="_footnoteref_71" class="footnote" href="#_footnotedef_71" title="View footnote.">71</a>]</sup>，所以运算符优先级解析器也需要一种方法来可靠地区分运算符和运算符。</p>
+<p>为了解决这些困难，常用的方法是将所有关于运算符的信息收集到一个对象中。然后，运算符优先级解析器可以做一个类型检查，看看某物是否是一个运算符，然后询问它的优先级、结合性和类型（中缀、后缀和前缀）。更重要的是，不需要再有一个中心位置来存储所有类型。当你为 grammar 创建一个扩展角色时，你也为 action 类创建了一个扩展角色，而 action 类又反过来为新引入的运算符返回一个对象。</p>
 </div>
 <div class="paragraph">
-<p>为了解决这些困难，常用的方法是收集所有的的运算符信息，将运算符的信息转化为对象。然后，算子优先级解析器可以做一个类型检查，看看某事是否是一个算子，然后询问它的优先级、关联性和类型（infix、postfix、前缀）。更重要的是，不需要再有一个中心位置来存储所有类型。当你为语法创建一个扩展角色时，你也为动作类创建了一个扩展角色，而动作类又反过来为新引入的操作符返回一个对象。</p>
-</div>
-<div class="paragraph">
-<p>最小化的方法（还没有处理关联性或其他类型的操作符）是这样的。</p>
+<p>最小化的方法(还没有处理结合性或其他类型的运算符)是这样的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5895,7 +5904,7 @@ is-deeply parse-math-expression('1 + 2 * 3**4 * 5 + 6'),
 </div>
 </div>
 <div class="paragraph">
-<p>然后, 运算符的操作方法返回 Operator 对象:</p>
+<p>然后, 运算符的 action 方法返回 <code>Operator</code> 对象:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5906,8 +5915,7 @@ method infix:sym&lt;**&gt;($/) { make Operator.new(~$&lt;sym&gt;, 3) }
 </div>
 </div>
 <div class="paragraph">
-<p>现在, 方法可以将操作符作为对象访问
-因此可以直接使用它们的优先级进行比较:</p>
+<p><code>opp-parse</code> 方法现在可以作为对象访问运算符，因此可以直接使用它们的优先级进行比较:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5920,14 +5928,14 @@ method infix:sym&lt;**&gt;($/) { make Operator.new(~$&lt;sym&gt;, 3) }
 </div>
 </div>
 <div class="paragraph">
-<p>比较 <code>$op.precedence &#8656; @stack[\*-2].precedence</code> 是 对于左关联运算符; 当你改变小于或等于 (&#8656;) 严格小于 (&lt;), 你得到右关联的行为运营商。如果您想更多地探索运算符优先级解析器,  你可以为类Operator添加一个关联属性, 给出取幂运算符权限优先, 并更改比较把关联性考虑在内。表达式 <code>2 <strong> 3 </strong> 4</code> 应该出来是 <code>['<strong>'2, ['</strong>', 3,4]]</code>。如果您觉得真的很冒险, 那么甚至可能尝试将后缀运算符添加到语法和运算符中优先解析器。</p>
+<p>比较 <code>$op.precedence &#8656; @stack[*-2].precedence</code> 是针对左结合性的运算符的；当你把小于或等于(<code>&#8656;</code>)改为严格的小于(<code>&lt;</code>)时，你会得到右结合性运算符的行为。如果你想更多的探索运算符优先级解析器, 你可以在 <code>Operator</code> 类中添加一个结合属性，给指数运算符以右优先级，并改变比较方式来考虑结合性。表达式 <code>2 <strong> 3 </strong> 4</code> 应该是 <code>['<strong>' 2, ['</strong>', 3, 4]]]</code>。如果你觉得很冒险，你甚至可以尝试在 grammar 和运算符优先级解析器中添加后缀运算符。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_pythonesque_基于缩进的语言">13.3. Pythonesque, 基于缩进的语言</h3>
+<h3 id="_pythonesque_一种基于缩进的语言">13.3. Pythonesque, 一种基于缩进的语言</h3>
 <div class="paragraph">
-<p>Python, YAML, CoffeeScript 以及其他编程语言和数据 格式使用缩进来编码程序或数据的结构。 例如, 这个 Raku 程序:</p>
+<p>Python、YAML、CoffeeScript 等编程语言和数据格式都使用缩进的方式来编码程序或数据的结构。例如，这个 Raku 程序:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5938,7 +5946,7 @@ say "outside the branch";</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在 Python 3 中看起来像这样:</p>
+<p>在 Python 3 中会是这样的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5948,16 +5956,16 @@ print("outside the branch")</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在以冒号(:)结尾的行之后, 下一行必须更多缩进比前一个缩进。所有其他共享相同的行缩进作为第二行属于块。如果一条线路较少前导空格比前一个块, 这完成了所有打开的块更多领先的空间。</p>
+<p>在一个以冒号(:)结束的行之后，下一行必须比上一行缩进更多。所有与第二行有相同缩进的行都属于这个块。如果一行的前导空格比前一个区块少，那么这就完成了所有开放的区块的前导空格较多的区块。</p>
 </div>
 <div class="paragraph">
-<p>Python 或 YAML 的完整语法太多了, 无法适应这一点 因此, 让我们探讨解析基于缩进的背后的概念没有大多数无关复杂性的语言。</p>
+<p>Python 或 YAML 的完整 grammar 在这本书中会有太多的内容，所以让我们来探讨解析基于缩进的语言背后的概念，而不需要考虑大多数不相关的复杂问题。</p>
 </div>
 <div class="paragraph">
-<p>我们将在这里解析的语言是 Python 的一小部分, 我已经将它命名为 Pythonesque。它由包含数字的表达式组成,  变量, 常见的中缀运算符, 以及 if 语句缩进的身体。if 语句可以嵌套。</p>
+<p>我们在这里要解析的语言是 Python 的一个小子集，我给它取名 Pythonesque。它包含了包含数字、变量和常用的中缀运算符的表达式，以及带有缩进体的 <code>if</code> 语句。if 语句可以嵌套。</p>
 </div>
 <div class="paragraph">
-<p>以下代码是一个小的示例程序 Pythonesque:</p>
+<p>下面的代码是用 Pythonesque 编写的一个小程序示例。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5972,12 +5980,12 @@ b= 5</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>顶级开始时为零缩进, 即第一个缩进级别使用至少一个空格(此处为四个), 第二个级别必须更远缩进而不是第二个(这里是十个空格)。</p>
+<p>最上层开始时缩进为零，第一层缩进至少使用了一个空格（这里是四个空格），第二层必须比第二层进一步缩进（这里是十个空格）。</p>
 </div>
 <div class="sect3">
 <h4 id="_pythonesque_的语法">13.3.1. Pythonesque 的语法</h4>
 <div class="paragraph">
-<p>我们将保持表达式解析非常简约:</p>
+<p>我们会把表达式解析得相当简约:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5995,7 +6003,10 @@ b= 5</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在现实世界的用例中, 我们可能会使用 proto 令牌来表示这两个术语和运营商; 这里我们只使用最小值来解析表达式。 如果要强制运算符优先级, 可以使用运算符来自前一个案例研究的优先解析器。由于空间在 Pythonesque 中很重要, 所以 ws 只匹配水平空间(我们允许在令牌之间;即, 你可以写一个 =1 作为 a = 1)。然而, 我们只有在确保这一点时才能这样做一行开头的空格由不同的规则匹配:</p>
+<p>在现实世界的用例中，我们很可能会对项和运算符都使用 <code>proto token</code>；在这里，我们只使用最低限度的解析表达式。如果你想强制执行运算符优先级，你可以使用前面案例研究中的运算符优先级解析器。</p>
+</div>
+<div class="paragraph">
+<p>因为在 Pythonesque 中，空白是重要的，所以 <code>ws</code> 只匹配水平空白（我们允许在 token 之间匹配；也就是说，你可以把 a=1 写成 <code>a = 1</code>）。尽管如此，我们只能在确保行的起始处的空白被不同的规则匹配时才能做到这一点。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6010,7 +6021,7 @@ token statement:sym&lt;expression&gt; {
 </div>
 </div>
 <div class="paragraph">
-<p>这里的核心概念是输入线由前导组成 缩进(长度可能为零, 因此为 <code>\h*</code>), 然后是声明, 最后是行尾 <code>$$</code> 后跟一个或多个换行符字符。请注意, 必须检查前导空格的数量。 如果它与前一行相同, 一切都很好。如果它与缩进匹配 在外部范围内, 必须完成内部范围。如果它不匹配这些, 我们发现了一个错误。要做那个检查, 我们需要一个当前的数组活动(尚未完成)缩进级别:</p>
+<p>这里的核心概念是，一行的输入包括前导缩进（长度可能为 0，因此用 <code>\h*</code>），然后是一个语句，最后是行末 <code>$$</code>，后面是一个或多个换行符。需要注意的是，必须检查前导空格的数量。如果与前一行相同，那么一切都没有问题。如果符合外侧作用域的缩进量，内侧作用域必须完成。如果都不匹配，那就说明我们发现了一个错误。要做这个检查，我们需要一个当前活动的（尚未完成的）缩进级数组。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6041,7 +6052,7 @@ method handle_indentation($match) {
 </div>
 </div>
 <div class="paragraph">
-<p>Token TOP 用零作为初始化动态变量 <code>@*INDENTATION</code> 它的第一个元素。下一步, 我们将实现添加元素 数组的结尾, 但是现在我们假设它包含了数字每个缩进级别的空格。当我们解析这个输入时:</p>
+<p>token <code>TOP</code> 初始化一个动态变量 <code>@*INDENTATION</code>，以 0 作为其第一个元素。下一步，我们将实现向数组的末尾添加元素，但现在我们只假设它包含每个缩进级的空格数。当我们解析这个输入时:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6052,13 +6063,13 @@ method handle_indentation($match) {
 </div>
 </div>
 <div class="paragraph">
-<p>数组 <code>@*INDENTATION</code> 包含数字 0, 4 和 10。如果是当前数字 缩进是十个空格(由 <code>$match.Str.chars</code> 确定;更多 复杂的分析可能会对标签的重量不同于空格, 或者禁止混合标签和空格), 没有任何反应。如果目前还有更多前导空格, 这必定是一个错误, 因为增加的缩进是只有在 if 语句后才允许。</p>
+<p>数组 <code>@*INDENTATION</code> 包含数字 0、4和10。如果当前的缩进是10个空格（由 <code>$match.Str.chars</code> 决定；更复杂的分析可能会将制表符的权重与空格的权重不同，或者禁止混合制表符和空格），则不会发生任何事情。如果当前有更多的前导空格，这一定是一个错误，因为只有在 <code>if</code> 语句之后才允许增加缩进。</p>
 </div>
 <div class="paragraph">
-<p>如果当前缩进级别小于记录的最后一个级别 <code>@*INDENTATION</code>, 我们必须在 <code>@*INDENTATION</code> 中搜索当前值。 这就是我的 <code>$idx = @*INDENTATION.first(:k, $current);</code> 确实。该方法 <a href="https://docs.raku.org/type/List%23routine_first">first</a><sup class="footnote">[<a id="_footnoteref_72" class="footnote" href="#_footnotedef_72" title="View footnote.">72</a>]</sup> 搜索与某个匹配的第一个数组元素标准, 这里等于 <code>$current</code>。使用 <code>:k</code> 修饰符, 它返回该数组元素的索引。如果没有找到, 则会出现未定义的值返回, <code>if defined $idx</code> check 触发器, 抛出异常。 如果找到, 则当前缩进是先前作用域的缩进。我们然后需要关闭所有更深入缩进的内部范围, 这就是什么 <code>@*INDENTATION.pop</code> 适用于每个此类范围。</p>
+<p>如果当前的缩进程度小于 <code>@*INDENTATION</code> 中记录的最后一个缩进程度，我们必须在 <code>@*INDENTATION</code> 中搜索当前值。这就是 <code>my $idx = @*INDENTATION.first(:k, $current);</code> 的作用。<a href="https://docs.raku.org/type/List%23routine_first">first</a><sup class="footnote">[<a id="_footnoteref_72" class="footnote" href="#_footnotedef_72" title="View footnote.">72</a>]</sup> 方法首先搜索第一个符合某个标准的数组元素，这里的标准是等于 <code>$current</code>。用 <code>:k</code> 修饰符，它返回该数组元素的索引。如果没有找到，则返回一个未定义的值，<code>if defined $idx</code> 检查触发，抛出一个异常。如果找到了，当前的缩进值就是前一个作用域的缩进值。我们然后需要关闭所有更深的缩进的内部作用域，这就是 <code>@*INDENTATION.pop</code> 对每个这样的作用域所做的。</p>
 </div>
 <div class="paragraph">
-<p>当我们解析 if 语句时, 我们知道它之后的行必须 有比当前行更多的缩进, 但还没有多少。 我们可以通过设置第二个变量或推送特殊变量来表示 值得注意这个事实的 <code>@*INDENTATION</code>。这个<a href="https://en.wikipedia.org/wiki/Sentinel_value">哨兵值</a><sup class="footnote">[<a id="_footnoteref_73" class="footnote" href="#_footnotedef_73" title="View footnote.">73</a>]</sup>可以是一个不是有效缩进的值(如 -1 或 0.5), 或单独的类型:</p>
+<p>当我们解析一个 if 语句时，我们知道它之后的行必须比当前的行有更多的缩进，但还不知道缩进多少。我们可以通过设置第二个变量，或者通过将一个特殊的值推送到 <code>@*INDENTATION</code> 中，来提示这个事实。这个<a href="https://en.wikipedia.org/wiki/Sentinel_value">哨兵值</a><sup class="footnote">[<a id="_footnoteref_73" class="footnote" href="#_footnotedef_73" title="View footnote.">73</a>]</sup>可以是一个非有效的缩进值（比如-1或0.5），或者是一个单独的类型。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6073,7 +6084,7 @@ rule statement:sym&lt;if&gt; {
 </div>
 </div>
 <div class="paragraph">
-<p>现在我们必须在方法中处理 NEW_INDENTATION 的情况</p>
+<p>现在我们要在方法 <code>handle_indentation</code> 中处理 NEW_INDENTATION 的情况:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6101,13 +6112,14 @@ method handle_indentation($match) {
 </div>
 </div>
 <div class="paragraph">
-<p>这标志着我们的语法可以成功解析的地步在该部分开头给出的例子, 同样重要的是拒绝包含无效缩进的示例。</p>
+<p>这标志着我们的 grammar 可以成功解析本节开始时给出的例子，同样重要的是，拒绝解析包含无效缩进的例子。</p>
 </div>
 <div class="paragraph">
-<p>但是, 如果您尝试为此语法编写操作方法, 那么您将会这样做很快就会注意到这是不合理的, 因为语法解析的范围开始或结束时不进行通信。就这样动作方法需要查看一开始时的空白量行, 然后使用 <code>@*INDENTATION</code>(或维护自己的版本) 重建当前和外部范围的图片。这是个不幸的重复劳动和相当多的耦合对语法内部的动作方法。</p>
+<p>然而，如果你尝试着为这个 grammar 编写 action 方法，你很快就会发现，这是个不合理的困难，因为这个 grammar 并不传达一个解析过的作用域何时开始或结束。因此，action 方法需要查看一行开始时的空白量，然后使用 <code>@*INDENTATION</code> (或维护自己的版本) 以重构当前和外部作用域的图像。这是一个令人遗憾的重复工作，也是一个相当高的耦合量。
+的动作方法到语法的内部。</p>
 </div>
 <div class="paragraph">
-<p>一个更清洁的解决方案是提供某种指示的API 语法进入或离开范围时的动作对象。一个很好的技巧 这是调用始终匹配零个字符作为一种标记的规则:</p>
+<p>一个更干净的解决方案是提供某种 API，在 grammar 进入或离开作用域时向 action 对象指示。要做到这一点，一个很好的技巧是调用总是匹配零字符的规则作为一种标记。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6123,10 +6135,10 @@ token TOP {
 </div>
 </div>
 <div class="paragraph">
-<p>令牌中的 construst&lt;?&gt;是 enter_scope 和 leave_scope 的一个空零宽度断言, 总是成功匹配空串。</p>
+<p>token <code>enter_scope</code> 和 <code>leave_scope</code> 中的 <code>construst&lt;?&gt;</code> 是一个空的零字符断言，它总是成功地匹配空字符串。</p>
 </div>
 <div class="paragraph">
-<p>除了来自令牌TOP的调用之外, 我们还需要插入对self的调用。 <code>enter_scope()</code> 进入方法 <code>handle_indentation</code>, 遇到它 NEW_INDENTATION sentinel, 并在添加调用 <code>self.leave_scope()</code> 时 范围已完成, 因此伴随着 <code>@*INDENTATION</code> 的行。<code>pop()</code> 方法:</p>
+<p>除了 token TOP 的调用外，我们还需要在方法 <code>handle_indentation</code> 中插入一个调用 <code>self.enter_scope()</code>，在它遇到 NEW_INDENTATION 标记的地方，当一个作用域完成后，再加上一个调用 <code>self.leave_scope()</code>，这样就伴随着执行 <code>@*indentation.pop()</code> 的行。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6152,16 +6164,16 @@ token TOP {
 </div>
 </div>
 <div class="paragraph">
-<p>现在, 操作对象有一个可以挂钩的地方, 允许它们通过合理的努力处理语句的嵌套。</p>
+<p>现在 action 对象有了一个可以挂接的地方，让它们可以合理地处理语句嵌套。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_action_对象_2">13.3.2. Action 对象</h4>
 <div class="paragraph">
-<p>当我第一次为 Pythonesque 编写动作对象时, 我做了一切 array: if 语句是一个数组, 其第一个元素是字符串 “如果”, 第二个是条件, 第三个是身体 if语句。表达式也是数组, 所以第二个元素是 也是一个数组。我很快忘记了生成的 AST。</p>
+<p>当我第一次为 Pythonesque 写 action 对象时，我把所有的东西都做成了数组：if 语句是一个数组，第一个元素是字符串 "if"，第二个元素是条件，第三个元素是 if 语句的主体。表达式也是数组，所以第二个元素也是一个数组。我很快就把生成的 AST 给弄丢了。</p>
 </div>
 <div class="paragraph">
-<p>为了解决这个问题, 我把表达式保存为数组, 但移动了运算符,  变量和if语句分成不同的类:</p>
+<p>为了解决这个问题，我把表达式保存为数组，但把操作符、变量和 if 语句移到单独的类中。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6178,7 +6190,7 @@ class If {
 </div>
 </div>
 <div class="paragraph">
-<p>完成此设置后, 简单语句的操作方法就是不是很奇怪:</p>
+<p>这样的设置完成后，简单语句的 action 方法就不会很奇怪了。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6199,7 +6211,13 @@ class If {
 </div>
 </div>
 <div class="paragraph">
-<p>注意方法语句中的If-object如何: sym&lt;if&gt;被初始化它的状况, 但不是它的身体。这是因为它尚未解析在声明时:sym&lt;if&gt;运行。为了正确嵌套语句, 我们需要维护一堆范围。底部元素(或索引0, 当实现为数组时) 是最外面的范围, 顶部元素(或索引* -1)对应于 目前的范围。当我们离开一个范围时(除了最外面的范围, 也称为 “mainline”), 它属于一个if语句, if 语句是最后一个 已在下一个最外层范围内解析的语句。所以我们需要 删除堆栈的当前范围并将其设置为堆栈的主体如果声明:</p>
+<p>注意方法语句 <code>:sym&lt;if&gt;</code> 中的 if 对象是如何用条件初始化的，而不是用主体初始化的。这是因为在 <code>statement:sym&lt;if&gt;</code> 运行时，它还没有被解析。</p>
+</div>
+<div class="paragraph">
+<p>为了使语句的嵌套正确，我们需要维护一个作用域的堆栈。最底层的元素（或索引0，如果以数组的形式实现）是最外层的作用域，最上面的元素（或索引 <code>*-1</code>）对应于当前的作用域。</p>
+</div>
+<div class="paragraph">
+<p>当我们离开一个作用域（除了最外层的作用域，也称为"主线"）时，它属于一个 <code>if</code> 语句，而这个 <code>if</code> 语句是最外层的作用域中最后一个被解析的语句。所以我们需要将当前的作用域去掉堆栈的作用域，并将其设置为 <code>if</code> 语句的主体。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6223,7 +6241,7 @@ class If {
 </div>
 </div>
 <div class="paragraph">
-<p>使用各种示例字符串对此进行测试表明这主要起作用,  但在一个有趣的角落案例中失败:如果输入的最后一行至少有 两个级别的缩进, 只有第一级缩进存在于 AST。例如, 这个输入:</p>
+<p>用不同的例子字符串进行测试，发现这一点大部分情况下都是可行的，但是在一个有趣的角落里失败了：如果输入的最后一行至少有两层缩进，那么在 AST 中只有第一层的缩进。比如说，这个输入:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6241,10 +6259,10 @@ class If {
 </div>
 </div>
 <div class="paragraph">
-<p>缺少第二个 if 语句及其正文。自从身体 如果在 leave_scope 调用中填充了 If-objects, 那么它就是理所当然的不调用 leave_scope。将 debug say 语句添加到操作中 方法 enter_scope 和 leave_scope 确认:对于显示的输入 之前, enter_scope 被调用三次(主线一次, 一次 对于每个内部范围), 但只调用一次 leave_scope。</p>
+<p>其中缺少第二个 <code>if</code> 语句及其主体。由于 <code>if-objects</code> 的主体在 <code>leave_scope</code> 调用中被填充了，所以 <code>leave_scope</code> 没有被调用是合理的。在 action 方法 <code>enter_scope</code> 和 <code>leave_scope</code> 中添加调试 <code>say</code> 语句就证实了这一点：对于前面的输入，<code>enter_scope</code> 被调用了三次（主线和内部作用域各调用一次），而 <code>leave_scope</code> 只被调用一次。</p>
 </div>
 <div class="paragraph">
-<p>leave_scope 可以从两个地方调用:来自令牌TOP(其中 工作), 并从方法 handle_indentation。这使得错误更清楚: handle_indentation 只调用 leave_scope 使用小于当前的缩进调用 handle_indentation 水平。但是, 当最后没有解析未缩进的行时, 没有这样的调用 handle_indentation 发生了。我们可以通过插入这样一个来解决这个问题最后人为地打电话:</p>
+<p><code>leave_scope</code> 可以从两个地方被调用：从 token TOP（有效）和方法 <code>handle_indentation</code> 调用。这样错误就更清楚了：只有在调用 <code>handle_indentation</code> 的时候，才会调用 <code>leave_scope</code>，而当调用 <code>handle_indentation</code> 的缩进值小于当前级别时，才会调用 <code>leave_scope</code>。但是，当末尾没有未缩进的行被解析时，就不会发生这样的调用  <code>handle_indentation</code>。我们可以通过在结尾处人为地插入这样的调用来修复这个 bug。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6261,21 +6279,23 @@ class If {
 </div>
 </div>
 <div class="paragraph">
-<p>有了这个修复程序, 所有测试都通过了, 我们可以考虑这个试验成功。
-您可以查看完整的代码, 包括测试(以及一些小的 增强功能, 可以更轻松地测试错误条件) <a href="https://github.com/apress/perl-6-regexes-and-grammars/blob/master/chapter-13-case-studies/pythonesque.p6">GitHub</a><sup class="footnote">[<a id="_footnoteref_74" class="footnote" href="#_footnotedef_74" title="View footnote.">74</a>]</sup>。</p>
+<p>有了这个修复，所有的测试都通过了，我们可以认为这个实验是成功的。你可以在 <a href="https://github.com/apress/perl-6-regexes-and-grammars/blob/master/chapter-13-case-studies/pythonesque.p6">GitHub</a><sup class="footnote">[<a id="_footnoteref_74" class="footnote" href="#_footnotedef_74" title="View footnote.">74</a>]</sup> 上查看完整的代码，包括测试（以及一些小的改进，使错误条件的测试更加容易）。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_总结_12">13.4. 总结</h3>
 <div class="paragraph">
-<p>本章向您展示了使用的真实解析器的元素处理现实世界的数据:递归, 运算符优先级解析器和基于缩进级别解析结构。最后一个例子也是在正则表达式和代码之间的相互作用中展示了权衡。</p>
+<p>本章已经向你展示了现实世界中用于处理现实世界数据的解析器的元素：递归、运算符优先级解析器，以及基于缩进级别的结构解析。最后一个例子还展示了在递归和代码之间的相互作用中的取舍。</p>
 </div>
 <div class="paragraph">
-<p>在本书的整个过程中, 您已经了解了基础知识关于 Raku, Raku 正则表达式的构建块, 如何使用 regex 和 Raku 代码交互和捕获, 提供从中提取信息的方法正则表达式匹配。</p>
+<p>在本书的整个过程中，你已经了解了关于  Raku 的基本知识，Raku 正则表达式的构建模块，正则表达式和 Raku 代码如何相互作用，以及捕获，它提供了一种从正则表达式匹配中提取信息的方法。</p>
 </div>
 <div class="paragraph">
-<p>关于正则表达式力学和技术的章节给了你了解正则表达式如何工作以及如何使用的背景知识它们用于解析常见的数据格式。语法允许你构造并重用正则表达式。动作对象机制便于访问得到的匹配, 以及关于错误报告的讨论比赛失败时该怎么办。武装与前几章的背景, 以及 本章的应用程序, 你应该能够自己编写 语法和解析器。我会留下 Larry Wall 的一句话,  Perl 创造者和 Raku 的发明者:拥有适当的乐趣!</p>
+<p>本书中关于正则表达式机制和技巧的章节已经让你了解了正则表达式的工作原理，以及如何使用它们来解析常见的数据格式。语法允许你结构化和重用重构 grammar。action 对象机制方便了对结果匹配的访问，而关于错误报告的讨论则说明了当匹配失败时该怎么做。</p>
+</div>
+<div class="paragraph">
+<p>有了前几章的背景知识和本章的应用，你应该能够编写自己的 grammar 和解析器了。在此，我想用 Perl 的创造者、Perl 6 的发明者 Larry Wall 的一句话来告诫大家：要有适量的乐趣！在这里，我想说的是，你应该能在本章中找到自己的乐趣。</p>
 </div>
 </div>
 </div>
