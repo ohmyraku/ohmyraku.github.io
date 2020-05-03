@@ -8,7 +8,7 @@
 
 <meta name="author" content="ohmyraku">
 <meta name="application-name" content="山川异域, 风月同天">
-<meta name="description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结   3. 格式化数独字谜 3.1. 让数独变得可玩 3.2. 便捷,常量和更多便捷写法 3.3. IO 和其它悲剧 3.4. 获得创造性 3.5. 总结 3.6. 使用库 3.7. DateTime 格式化 3.8. 寻找其他途径 3.9. 处理时间 3.10. 系好你的安全带 3.11. MAIN 魔法 3.12. 总结   4. 测试 say 4.">
+<meta name="description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结   3. 格式化数独字谜 3.1. 让数独变得可玩 3.2. 捷径、常量和更多的捷径 3.3. IO 和其它悲剧 3.4. 获得创造性 3.5. 总结   4. 日期时间转换命令行 4.1. 使用库 4.2. DateTime 格式化 4.3. 寻找其他途径 4.4. 处理时间 4.5. 系好你的安全带 4.6. MAIN 魔法 4.7. 总结   5.">
 <meta name="robots" content="noodp"/>
 <meta name="generator" content="Hugo 0.63.2" />
 <meta name="referrer" content="no-referrer" />
@@ -22,7 +22,7 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Raku 基础" />
-<meta name="twitter:description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结   3. 格式化数独字谜 3.1. 让数独变得可玩 3.2. 便捷,常量和更多便捷写法 3.3. IO 和其它悲剧 3.4. 获得创造性 3.5. 总结 3.6. 使用库 3.7. DateTime 格式化 3.8. 寻找其他途径 3.9. 处理时间 3.10. 系好你的安全带 3.11. MAIN 魔法 3.12. 总结   4. 测试 say 4." />
+<meta name="twitter:description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结   3. 格式化数独字谜 3.1. 让数独变得可玩 3.2. 捷径、常量和更多的捷径 3.3. IO 和其它悲剧 3.4. 获得创造性 3.5. 总结   4. 日期时间转换命令行 4.1. 使用库 4.2. DateTime 格式化 4.3. 寻找其他途径 4.4. 处理时间 4.5. 系好你的安全带 4.6. MAIN 魔法 4.7. 总结   5." />
 <meta name="twitter:site" content="https://ohmyraku.github.io" />
 <meta name="twitter:creator" content="ohmyraku" />
 <meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
@@ -32,7 +32,7 @@
 <meta property="og:title" content="Raku 基础" />
 <meta property="og:url" content="https://ohmyraku.github.io" />
 <meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结   3. 格式化数独字谜 3.1. 让数独变得可玩 3.2. 便捷,常量和更多便捷写法 3.3. IO 和其它悲剧 3.4. 获得创造性 3.5. 总结 3.6. 使用库 3.7. DateTime 格式化 3.8. 寻找其他途径 3.9. 处理时间 3.10. 系好你的安全带 3.11. MAIN 魔法 3.12. 总结   4. 测试 say 4." />
+<meta property="og:description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结   3. 格式化数独字谜 3.1. 让数独变得可玩 3.2. 捷径、常量和更多的捷径 3.3. IO 和其它悲剧 3.4. 获得创造性 3.5. 总结   4. 日期时间转换命令行 4.1. 使用库 4.2. DateTime 格式化 4.3. 寻找其他途径 4.4. 处理时间 4.5. 系好你的安全带 4.6. MAIN 魔法 4.7. 总结   5." />
 <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -49,7 +49,7 @@
         "@type": "Person",
         "name": "ohmyraku"
       },
-      "description": "Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结   3. 格式化数独字谜 3.1. 让数独变得可玩 3.2. 便捷,常量和更多便捷写法 3.3. IO 和其它悲剧 3.4. 获得创造性 3.5. 总结 3.6. 使用库 3.7. DateTime 格式化 3.8. 寻找其他途径 3.9. 处理时间 3.10. 系好你的安全带 3.11. MAIN 魔法 3.12. 总结   4. 测试 say 4.",
+      "description": "Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结   3. 格式化数独字谜 3.1. 让数独变得可玩 3.2. 捷径、常量和更多的捷径 3.3. IO 和其它悲剧 3.4. 获得创造性 3.5. 总结   4. 日期时间转换命令行 4.1. 使用库 4.2. DateTime 格式化 4.3. 寻找其他途径 4.4. 处理时间 4.5. 系好你的安全带 4.6. MAIN 魔法 4.7. 总结   5.",
       "publisher": {
         "@type": "Organization",
         "name": "https:\/\/ohmyraku.github.io",
@@ -120,51 +120,55 @@ if (theme && theme !== "1") {
 <li><a href="#_格式化数独字谜">3. 格式化数独字谜</a>
 <ul class="sectlevel2">
 <li><a href="#_让数独变得可玩">3.1. 让数独变得可玩</a></li>
-<li><a href="#_便捷常量和更多便捷写法">3.2. 便捷,常量和更多便捷写法</a></li>
+<li><a href="#_捷径常量和更多的捷径">3.2. 捷径、常量和更多的捷径</a></li>
 <li><a href="#_io_和其它悲剧">3.3. IO 和其它悲剧</a></li>
 <li><a href="#_获得创造性">3.4. 获得创造性</a></li>
 <li><a href="#_总结_3">3.5. 总结</a></li>
-<li><a href="#_使用库">3.6. 使用库</a></li>
-<li><a href="#_datetime_格式化">3.7. DateTime 格式化</a></li>
-<li><a href="#_寻找其他途径">3.8. 寻找其他途径</a></li>
-<li><a href="#_处理时间">3.9. 处理时间</a></li>
-<li><a href="#_系好你的安全带">3.10. 系好你的安全带</a></li>
-<li><a href="#_main_魔法">3.11. MAIN 魔法</a></li>
-<li><a href="#_总结_4">3.12. 总结</a></li>
 </ul>
 </li>
-<li><a href="#_测试_say">4. 测试 say</a>
+<li><a href="#_日期时间转换命令行">4. 日期时间转换命令行</a>
 <ul class="sectlevel2">
-<li><a href="#_总结_5">4.1. 总结</a></li>
-<li><a href="#_异步运行命令">4.2. 异步运行命令</a></li>
-<li><a href="#_实现超时">4.3. 实现超时</a></li>
-<li><a href="#_more_on_promises">4.4. More on Promises</a></li>
-<li><a href="#_可能的扩展">4.5. 可能的扩展</a></li>
-<li><a href="#_重构和自动化测试">4.6. 重构和自动化测试</a></li>
-<li><a href="#_总结_6">4.7. 总结</a></li>
+<li><a href="#_使用库">4.1. 使用库</a></li>
+<li><a href="#_datetime_格式化">4.2. DateTime 格式化</a></li>
+<li><a href="#_寻找其他途径">4.3. 寻找其他途径</a></li>
+<li><a href="#_处理时间">4.4. 处理时间</a></li>
+<li><a href="#_系好你的安全带">4.5. 系好你的安全带</a></li>
+<li><a href="#_main_魔法">4.6. MAIN 魔法</a></li>
+<li><a href="#_总结_4">4.7. 总结</a></li>
 </ul>
 </li>
-<li><a href="#_有状态的_silent_cron">5. 有状态的 Silent Cron</a>
+<li><a href="#_测试_say">5. 测试 say</a>
 <ul class="sectlevel2">
-<li><a href="#_持久化存储">5.1. 持久化存储</a></li>
-<li><a href="#_开发存储后端">5.2. 开发存储后端</a></li>
-<li><a href="#_使用存储后端">5.3. 使用存储后端</a></li>
-<li><a href="#_发展的空间">5.4. 发展的空间</a></li>
-<li><a href="#_总结_7">5.5. 总结</a></li>
-<li><a href="#_变量和作用域">5.6. 变量和作用域</a></li>
-<li><a href="#_子例程">5.7. 子例程</a></li>
-<li><a href="#_类和对象">5.8. 类和对象</a></li>
-<li><a href="#_并发">5.9. 并发</a></li>
-<li><a href="#_展望">5.10. 展望</a></li>
-<li><a href="#_正则表达式基础">5.11. 正则表达式基础</a></li>
-<li><a href="#_解析_ini_原语">5.12. 解析 INI 原语</a></li>
-<li><a href="#_把东西组装起来">5.13. 把东西组装起来</a></li>
-<li><a href="#_回溯">5.14. 回溯</a></li>
-<li><a href="#_grammars">5.15. Grammars</a></li>
-<li><a href="#_从匹配中提取数据">5.16. 从匹配中提取数据</a></li>
-<li><a href="#_生成好的错误信息">5.17. 生成好的错误信息</a></li>
-<li><a href="#_编写你自己的_grammars">5.18. 编写你自己的 Grammars</a></li>
-<li><a href="#_总结_8">5.19. 总结</a></li>
+<li><a href="#_总结_5">5.1. 总结</a></li>
+<li><a href="#_异步运行命令">5.2. 异步运行命令</a></li>
+<li><a href="#_实现超时">5.3. 实现超时</a></li>
+<li><a href="#_more_on_promises">5.4. More on Promises</a></li>
+<li><a href="#_可能的扩展">5.5. 可能的扩展</a></li>
+<li><a href="#_重构和自动化测试">5.6. 重构和自动化测试</a></li>
+<li><a href="#_总结_6">5.7. 总结</a></li>
+</ul>
+</li>
+<li><a href="#_有状态的_silent_cron">6. 有状态的 Silent Cron</a>
+<ul class="sectlevel2">
+<li><a href="#_持久化存储">6.1. 持久化存储</a></li>
+<li><a href="#_开发存储后端">6.2. 开发存储后端</a></li>
+<li><a href="#_使用存储后端">6.3. 使用存储后端</a></li>
+<li><a href="#_发展的空间">6.4. 发展的空间</a></li>
+<li><a href="#_总结_7">6.5. 总结</a></li>
+<li><a href="#_变量和作用域">6.6. 变量和作用域</a></li>
+<li><a href="#_子例程">6.7. 子例程</a></li>
+<li><a href="#_类和对象">6.8. 类和对象</a></li>
+<li><a href="#_并发">6.9. 并发</a></li>
+<li><a href="#_展望">6.10. 展望</a></li>
+<li><a href="#_正则表达式基础">6.11. 正则表达式基础</a></li>
+<li><a href="#_解析_ini_原语">6.12. 解析 INI 原语</a></li>
+<li><a href="#_把东西组装起来">6.13. 把东西组装起来</a></li>
+<li><a href="#_回溯">6.14. 回溯</a></li>
+<li><a href="#_grammars">6.15. Grammars</a></li>
+<li><a href="#_从匹配中提取数据">6.16. 从匹配中提取数据</a></li>
+<li><a href="#_生成好的错误信息">6.17. 生成好的错误信息</a></li>
+<li><a href="#_编写你自己的_grammars">6.18. 编写你自己的 Grammars</a></li>
+<li><a href="#_总结_8">6.19. 总结</a></li>
 </ul>
 </li>
 </ul>
@@ -401,13 +405,17 @@ hi</code></pre>
 <h2 id="_格式化数独字谜">3. 格式化数独字谜</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>作为对Raku的温和介绍，让我们考虑一下我最近在追求自己的兴趣爱好时遇到的一项小任务。
-数独是一个数字放置拼图，在9×9单元格的网格上进行，细分为3×3的块（图3-1）。 一些单元格填充了1到9的数字，有些是空的。 游戏的目标是填充空单元格，以便在每行，每列和3×3块中，从1到9的每个数字恰好出现一次。</p>
+<p>作为 Raku 的温柔介绍，让我们考虑一下我最近在追求自己的一个爱好时遇到的一个小任务。</p>
+</div>
+<div class="paragraph">
+<p>数独是在一个 9×9 的网格上玩的一种数字放置谜题，它被细分为 3×3 的方块（图3-1）。有的单元格里填上1到9的数字，有的单元格是空的。游戏的目的是填空单元格，使每一行、每一列和每一个 3×3 的单元格中，从1到9的每一个数字都刚好出现一次。</p>
 </div>
 <div class="paragraph">
 <div class="title">未解的数独字谜</div>
-<p>数独的有效存储格式只是一个81个字符的字符串，空单元格为0，预填充单元格为1到9。 我想要解决的任务是将其变为更友好的格式。
-输入可以是</p>
+<p>一个有效的数独的存储格式简单来说就是一个81个字符的字符串，0代表空单元格，数字1到9代表预填充单元格。我想解决的任务是把它变成一种更友好的格式。</p>
+</div>
+<div class="paragraph">
+<p>输入的格式可以是:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -415,7 +423,7 @@ hi</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>关于我们的第一个Raku计划：</p>
+<p>接下来是我们的第一个 Raku 程序。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -428,7 +436,7 @@ for 0..8 -&gt; $line-number {
 </div>
 </div>
 <div class="paragraph">
-<p>你可以像这样运行它：</p>
+<p>你可以这样运行:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -445,7 +453,7 @@ for 0..8 -&gt; $line-number {
 </div>
 </div>
 <div class="paragraph">
-<p>那里没有多少魔法，但让我们一次一行地查看代码。 第一行以＃开头，是一条延伸到行尾的注释。</p>
+<p>这里面没有什么神奇的地方，但让我们逐行看一下代码。第一行，以 <code>#</code> 开头，是一个注释，一直延伸到行尾。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -453,7 +461,7 @@ for 0..8 -&gt; $line-number {
 </div>
 </div>
 <div class="paragraph">
-<p>这条线并非绝对必要，但无论如何都是好的做法。 它声明你正在使用的Perl版本，这里是v6; 换句话说，任何版本的Raku语言。 我们可以更具体一点，并说使用v6.c来完全要求这里讨论的版本。 如果你不小心通过Perl 5运行Raku程序，你会很高兴你包含这一行，因为它会告诉你以下内容：</p>
+<p>这一行并不是严格意义上的必须，但也是很好的做法。它声明了你所使用的 Perl 版本，这里是 <code>v6</code>；换句话说，就是任何版本的  Raku  语言。我们可以说得更具体一些，使用 <code>v6.c</code> 来要求使用这里讨论的版本。如果你不小心用 Perl 5 运行了 Raku 程序，你会很高兴你包含了这一行，因为它会告诉你以下内容。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -462,7 +470,7 @@ Perl v6.0.0 required--this is only v5.22.1, stopped at sudoku.p6 line 1. BEGIN f
 </div>
 </div>
 <div class="paragraph">
-<p>而不是更加神秘</p>
+<p>而不是更隐晦的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -471,7 +479,7 @@ Execution of sudoku.p6 aborted due to compilation errors.</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>第一个有趣的路线是</p>
+<p>第一行有趣的是:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -479,10 +487,16 @@ Execution of sudoku.p6 aborted due to compilation errors.</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我声明了一个词汇变量。 从声明的角度到当前作用域的结尾是可见的，这意味着要么是由大括号分隔的当前块的末尾，要么是在文件的末尾，如果它在任何块之外，就像在此 例。
-变量以sigil开头，这里是$。 Sigil让Perl成为线噪声的声誉，但噪音中却有信号。 $看起来像一个S，代表标量。 如果你知道一些数学，你知道标量只是一个值，而不是矢量甚至矩阵。
-这个变量的生命没有空，因为它旁边有一个初始化。 它开头的值是一个字符串文字，如引号所示。
-请注意，除了sigil暗示的非常模糊的“它是一个标量”之外，没有必要声明变量的类型。 如果我们想要，我们可以添加一个类型约束：</p>
+<p><code>my</code> 声明了一个词法变量，它从声明点到当前作用域的末尾都是可见的。它从声明点开始到当前作用域的末尾都是可见的，也就是说，它可以是当前区块的末尾，如果它在任何区块之外，则是文件的末尾，就像本例中的情况一样。</p>
+</div>
+<div class="paragraph">
+<p>变量的开头是一个 sigil，这里是 <code>$</code>，sigil 是 Perl 的名词，它让 Perl 有了行噪声的名声，但噪声中也有信号。这个 <code>$</code> 看起来像一个 S，代表标量。如果你懂得一些数学知识，你会知道标量只是一个单一的值，而不是向量甚至是矩阵。</p>
+</div>
+<div class="paragraph">
+<p>这个变量开始时并不是空的，因为在它的旁边有一个初始化。它开始时的值是一个字符串的字段，如引号所示。</p>
+</div>
+<div class="paragraph">
+<p>需要注意的是，除了"它是一个标量"这个非常模糊的符号所暗示的"它是一个标量 "之外，我们不需要声明变量的类型。如果我们愿意，我们可以添加一个类型约束。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -490,8 +504,10 @@ Execution of sudoku.p6 aborted due to compilation errors.</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>但是当快速进行原型设计时，我倾向于放弃类型约束，因为我经常不知道代码究竟会如何运作。
-实际逻辑发生在下一行，通过迭代0到8行：</p>
+<p>但在快速原型设计时，我往往会放弃类型约束，因为我往往还不知道代码到底会如何运行。</p>
+</div>
+<div class="paragraph">
+<p>实际的逻辑发生在接下来的几行中，通过迭代0到8的行数来实现。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -501,12 +517,16 @@ Execution of sudoku.p6 aborted due to compilation errors.</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>for循环具有ITERABLE BLOCK的一般结构。这里的iterable是一个范围，1并且该块是一个尖的块。该块以 - &gt;开头，它引入了签名。签名告诉编译器块期望什么参数，这里是一个名为$ line-number的标量。</p>
+<p>for 循环具有 ITERABLE BLOCK 的一般结构。这里的 iterable 是一个范围<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup>，块是一个尖号块。该块以 <code>&#8594;</code> 开头，引入了一个签名。这个签名告诉编译器这个块期望有哪些参数，这里是一个单一的标量，叫做 <code>$line-number</code>。</p>
 </div>
 <div class="paragraph">
-<p>Raku允许使用破折号 - 或单引号&#8217;将多个简单标识符连接到更大的标识符。这意味着只要下面的字符是字母或下划线，您就可以在标识符中使用它们。
-同样，类型约束是可选的。如果你选择包含它们，它将是 <code>for 0..8 &#8594; Int $line-number { &#8230;&#8203; }</code>。
-$ line-number也是一个词法变量，在签名后的块内可见。块由花括号分隔。</p>
+<p>Raku 允许使用破折号 <code>-</code> 或单引号 <code>'</code> 将多个简单的标识符连接成一个大的标识符。这意味着只要下面的字符是字母或下划线，就可以在标识符中使用。</p>
+</div>
+<div class="paragraph">
+<p>同样，类型约束是可选的。如果你选择了包含它们，它会是 <code>for 0..8 &#8594; Int $line-number { &#8230;&#8203; }</code>。</p>
+</div>
+<div class="paragraph">
+<p><code>$line-number</code> 又是一个词法变量，在签名后的块中可见。块由大括号分隔。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -514,10 +534,16 @@ $ line-number也是一个词法变量，在签名后的块内可见。块由花�
 </div>
 </div>
 <div class="paragraph">
-<p>say2和substr3都是Raku标准库提供的功能。
-substr（$ string，$ from，$ num-chars）从$ string中提取子字符串。它从基于零的索引$ from开始，并获取$ num-chars指定的字符数。哦，在Raku中，一个字符确实是一个字符，即使它由多个代码点组成，如带有重音的罗马字母。
-然后打印这个子串，然后换行。
-从示例中可以看出，函数调用不需要括号，但如果需要，可以添加它们：</p>
+<p>say<sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnotedef_3" title="View footnote.">3</a>]</sup> 和 substr<sup class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnotedef_4" title="View footnote.">4</a>]</sup> 都是 Raku 标准库提供的函数。</p>
+</div>
+<div class="paragraph">
+<p><code>substr($string, $from, $num-chars)</code> 从 <code>$string</code> 中提取一个子字符串。它从一个基于零的索引 <code>$from</code> 开始，取 <code>$num-chars</code> 指定的字符数。哦，在 Raku 中，一个字符是真正的一个字符，即使它是由多个代码点组成的，比如重音罗马字母。</p>
+</div>
+<div class="paragraph">
+<p><code>say</code> 然后打印出这个子字符串，然后是一个断行符。</p>
+</div>
+<div class="paragraph">
+<p>从这个例子中可以看到，函数调用不需要括号，不过如果你想的话，可以加括号。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -525,7 +551,7 @@ substr（$ string，$ from，$ num-chars）从$ string中提取子字符串。�
 </div>
 </div>
 <div class="paragraph">
-<p>或甚至</p>
+<p>或甚至:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -535,8 +561,10 @@ substr（$ string，$ from，$ num-chars）从$ string中提取子字符串。�
 <div class="sect2">
 <h3 id="_让数独变得可玩">3.1. 让数独变得可玩</h3>
 <div class="paragraph">
-<p>由于我们脚本的输出现在已经存在，即使您将它打印在纸上，也无法播放生成的数独。 所有那些讨厌的零都妨碍了实际输入你精心推断的数字！
-所以，让我们用空白替换每个0，这样你就可以解决这个难题：</p>
+<p>就像我们现在的脚本输出一样，即使你把它印在纸上，也不能玩出数独的结果。所有这些讨厌的零都会妨碍你真正输入你精心推导出来的数字!</p>
+</div>
+<div class="paragraph">
+<p>所以，让我们把每个0换成空白，这样你就可以解开谜题了。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -550,9 +578,13 @@ for 0..8 -&gt; $line-number {
 </div>
 </div>
 <div class="paragraph">
-<p>trans是Str类的一种方法。 它的参数是一个Pair.5创建一个Pair的无聊方式是Pair.new（'0'，''），但由于它是如此常用，所以有一个胖箭头形式的快捷方式，&#8658;。 方法trans将对的键的每次出现替换为对的值，并返回结果字符串。
-说到快捷方式，您还可以缩短 <code>$sudoku = $sudoku. trans(&#8230;&#8203;) to $sudoku.=trans(&#8230;&#8203;)</code>。 这是一种通用模式，可以将返回结果的方法转换为mutators。
-使用新的字符串替换，结果是可玩的，但丑陋：</p>
+<p>trans<sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnotedef_5" title="View footnote.">5</a>]</sup> 是 Str 类中的一个方法，它的参数是一个 Pair<sup class="footnote">[<a id="_footnoteref_6" class="footnote" href="#_footnotedef_6" title="View footnote.">6</a>]</sup>。创建一个 Pair 的方法是 <code>Pair.new('0', ' ')</code>，但是因为它很常用，所以有一个快捷方式，就是用胖箭头形式，<code>&#8658;</code>。方法 <code>trans</code> 将每一次出现的 pair 的键替换成 pair 的值，然后返回生成的字符串。</p>
+</div>
+<div class="paragraph">
+<p>说到快捷方式，你还可以把 <code>$sudoku.trans(&#8230;&#8203;)</code> 缩短为 <code>$sudoku.=$sudoku.trans(&#8230;&#8203;)</code>。这是一个通用的模式，将返回结果的方法变成了 mutator。</p>
+</div>
+<div class="paragraph">
+<p>用新的字符串替换，结果是可以玩的，但很难看。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -569,7 +601,7 @@ for 0..8 -&gt; $line-number {
 </div>
 </div>
 <div class="paragraph">
-<p>一点点ASCII艺术让它变得可以忍受：</p>
+<p>一点点 ASCII 艺术让它变得可以忍受：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -589,7 +621,7 @@ for 0..8 -&gt; $line-number {
 </div>
 </div>
 <div class="paragraph">
-<p>要获得垂直分割线，我们需要将线细分为更小的块。 因为我们已经有一次将字符串分成固定大小的较小字符串，所以是时候将它封装到一个函数中：</p>
+<p>为了得到垂直的分割线，我们需要将这些线细分为更小的块。而既然我们已经有了一次将字符串分成固定大小的小字符串的机会，那么我们就需要将其封装成一个函数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -604,7 +636,7 @@ for chunks($sudoku, 9) -&gt; $line {
 </div>
 </div>
 <div class="paragraph">
-<p>输出为</p>
+<p>输出为:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -621,8 +653,10 @@ for chunks($sudoku, 9) -&gt; $line {
 </div>
 </div>
 <div class="paragraph">
-<p>但是它是如何工作的？ 那么，sub（SIGNATURE）BLOCK声明一个子例程，short sub。 在这里我声明它采用两个参数，因为我倾向于将参数的顺序混淆我调用的函数，我添加了类型约束以使Raku很可能为我捕获错误。
-聚集在一起创造一份清单。 gather是入口点，每次执行take都会在列表中添加一个元素。 所以</p>
+<p>但是，它是怎么做到的呢？嗯，<code>sub (SIGNATURE) BLOCK</code> 声明了一个子例程，简称 sub。在这里我声明它要接收两个参数，由于我很容易混淆我调用函数的参数顺序，所以我添加了类型约束，使 Raku 很有可能为我捕捉到这个错误。</p>
+</div>
+<div class="paragraph">
+<p><code>gather</code> 和 <code>take</code> 一起工作是为了创建一个列表， <code>gather</code> 是入口点，每执行一次 <code>take</code> 就会在列表中增加一个元素。所以:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -633,10 +667,16 @@ for chunks($sudoku, 9) -&gt; $line {
 </div>
 </div>
 <div class="paragraph">
-<p>将返回列表1,2。此处聚集充当语句前缀，这意味着它从循环内收集所有内容。
-循环语句采用表单循环（INITIAL，CONDITION，POST）BLOCK，并且像C语言和相关语言中的for循环一样工作。 它首先执行INITIAL，然后当CONDITION为true时，首先是BLOCK然后是POST。
-子例程返回最后一个表达式的值，6这里是上面讨论的聚集循环&#8230;&#8203;构造。
-回到程序，for循环现在看起来像这样：</p>
+<p>将返回列表 <code>1, 2</code>。这里 <code>gather</code> 作为语句前缀，意味着它收集了循环中的所有取值。</p>
+</div>
+<div class="paragraph">
+<p><code>loop</code> 语句的形式为 <code>loop (INITIAL, CONDITION, POST) BLOCK</code>，其工作原理类似于 C 语言和相关语言中的 for 循环。它首先执行 INITIAL，然后在 CONDITION 为真时，先执行 BLOCK，然后执行 POST。</p>
+</div>
+<div class="paragraph">
+<p>一个子例程返回最后一个表达式<sup class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnotedef_7" title="View footnote.">7</a>]</sup>的值，这里是上面讨论的 <code>gather loop &#8230;&#8203;</code> 构造。</p>
+</div>
+<div class="paragraph">
+<p>再回到程序中，现在的 for 循环看起来是这样的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -646,8 +686,10 @@ for chunks($sudoku, 9) -&gt; $line {
 </div>
 </div>
 <div class="paragraph">
-<p>首先，程序将完整的Sudoku字符串切换成9个字符的行，然后对于每行将其再次切换成三个字符串的列表，每个字符串长度为三个字符。 join方法7将其转换回字符串，但在块之间插入管道符号。
-在行的开头和结尾处仍然缺少垂直条，通过更改最后一行可以很容易地对其进行硬编码：</p>
+<p>首先，程序会将整个数独字符串切成 9 个字符的行，然后将每一行切成 3 个字符串，每个字符串的长度为 3 个字符。join<sup class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnotedef_8" title="View footnote.">8</a>]</sup> 方法把它变成了一个字符串，但在块之间插入了管道符号。</p>
+</div>
+<div class="paragraph">
+<p>在这一行的开头和结尾还缺少竖直条，这可以通过改变最后一行来很容易地进行硬编码。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -655,7 +697,7 @@ for chunks($sudoku, 9) -&gt; $line {
 </div>
 </div>
 <div class="paragraph">
-<p>现在输出是</p>
+<p>现在输出是:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -671,7 +713,7 @@ for chunks($sudoku, 9) -&gt; $line {
 </div>
 </div>
 <div class="paragraph">
-<p>只缺少水平线，这些线不太难添加：</p>
+<p>现在, 缺少的只是横线，这并不是太难添加:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -707,9 +749,11 @@ say $separator;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里有一些新的方面：if条件，在结构上非常类似for循环，和divisibility运算符，%%。 从其他编程语言中你可能知道％为modulo，但是因为$ number
-％$ divisor == 0是这样一种常见模式，$ number %% $ divisor是Raku的快捷方式。
-最后，您可能从编程语言（如C或Perl 5）中了解++ postfix运算符。它将变量递增1，但返回旧值，因此</p>
+<p>这里有一些新的方面：<code>if</code> 条件，这在结构上很像 <code>for</code> 循环，还有整除运算符 <code>%%</code> 。在其他编程语言中，你可能知道 <code>%</code> 代表取模，但由于 <code>$number
+% $divisor == 0</code> 是一个常见的模式，所以 <code>$number %% $divisor</code> 是 Raku 对它的快捷方式。</p>
+</div>
+<div class="paragraph">
+<p>最后，你可能在 C 语言或 Perl 5 等编程语言中知道 <code>++</code> 后缀运算符，它可以将变量增量 1，但返回旧值，所以:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -723,10 +767,16 @@ say $x;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_便捷常量和更多便捷写法">3.2. 便捷,常量和更多便捷写法</h3>
+<h3 id="_捷径常量和更多的捷径">3.2. 捷径、常量和更多的捷径</h3>
 <div class="paragraph">
 <p>Raku是以人类语言为模型的，人类语言内置了某种压缩方案，常用的单词往往很短，常见的结构有快捷方式。
 因此，有很多方法可以更简洁地编写代码。 第一个基本上是作弊，因为子块可以用Str类中的内置方法替换，comb：</p>
+</div>
+<div class="paragraph">
+<p>Raku 是以人类语言为蓝本，人类语言内置了某种压缩方案，其中常用的单词往往比较短，常用的构造物也有快捷键。</p>
+</div>
+<div class="paragraph">
+<p>因此，有很多方法可以把代码写得更简洁。第一种方法基本上是作弊，因为 <code>sub chunks</code> 可以用 Str 类中的内置方法 `comb`<sup class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnotedef_9" title="View footnote.">9</a>]</sup> 代替：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -747,7 +797,7 @@ say $separator;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>if条件可以作为语句后缀应用：</p>
+<p><code>if</code> 条件可以作为语句后缀应用:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -755,8 +805,7 @@ say $separator;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>除了初始化之外，变量$ index只使用一次，所以有
-不需要给它起个名字。 是的，Raku有匿名变量：</p>
+<p>除了初始化之外，变量 <code>$index</code> 只使用一次，所以不需要给它起名字。是的，Raku 有匿名变量。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -774,6 +823,15 @@ say $separator;</code></pre>
 <p>如果你想降低线路噪声因子，你也可以放弃这个sigil，所以恒定的separator ='&#8230;&#8203;'。
 最后，有一个带参数的方法调用的另一种语法：而不是$ obj.method（args），你可以说$ obj.method：args，它将我们带到了小型数独格式化程序的惯用形式：</p>
 </div>
+<div class="paragraph">
+<p>因为 <code>$separator</code> 是一个常数，所以我们可以把它声明为一个常数。</p>
+</div>
+<div class="paragraph">
+<p>如果你想降低行噪声系数，也可以放弃 sigil，所以常量 <code>separator='&#8230;&#8203;'</code>。</p>
+</div>
+<div class="paragraph">
+<p>最后，对于带参数的方法调用，还有另一种语法：你可以使用 <code>$obj.method: args</code> 代替 <code>$obj.method(args)</code>，这就给我们引出了成语形式的数独格式化。</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku"># file sudoku.p6
@@ -781,28 +839,34 @@ use v6;
 
 my $sudoku = '000000075000080094000500600010000200000900057006003040 001000023080000006063240000';
 $sudoku = $sudoku.trans: '0' =&gt; ' ';
-constant separator = '+---+---+---+'; for $sudoku.comb(9) -&gt; $line {
-say separator if $++ %% 3;
+
+constant separator = '+---+---+---+';
+for $sudoku.comb(9) -&gt; $line {
+    say separator if $++ %% 3;
     say '|', $line.comb(3).join('|'), '|';
 }
 say separator;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Raku代码的这些更改使输出保持不变。</p>
+<p>这些对 Raku 代码的修改，输出的内容没有变化。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_io_和其它悲剧">3.3. IO 和其它悲剧</h3>
 <div class="paragraph">
-<p>实用脚本不将其输入包含为硬编码字符串文字，而是从命令行，标准输入或文件中读取它。
-如果要从命令行读取Sudoku，可以声明一个名为MAIN的子例程，该子例程获取传入的所有命令行参数：</p>
+<p>一个实用的脚本不会把输入作为硬编码的字符串字段，而是从命令行、标准输入或文件中读取。</p>
+</div>
+<div class="paragraph">
+<p>如果你想从命令行读取数独，你可以声明一个叫 MAIN 的子程序，它可以获取所有传入的命令行参数。</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku"># file sudoku.p6
 use v6;
+
 constant separator = '+---+---+---+';
+
 sub MAIN($sudoku) {
     my $substituted = $sudoku.trans: '0' =&gt; ' ';
 
@@ -840,7 +904,7 @@ sub MAIN($sudoku) {
 </div>
 </div>
 <div class="paragraph">
-<p>如果您错误地使用它，您甚至可以免费获得一条用法消息，例如省略参数：</p>
+<p>而且，如果你用错了，甚至可以免费得到一个使用信息，比如省略了参数，就可以得到一个使用信息:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -850,17 +914,24 @@ Usage:
 </div>
 </div>
 <div class="paragraph">
-<p>您可能已经注意到，最后一个示例对替换的Sudoku字符串使用单独的变量。 这是因为默认情况下，函数参数（也就是签名中声明的变量）是只读的。 我可以编写子MAIN（$ sudoku是副本）{&#8230;&#8203;}而不是创建一个新变量。
-经典的UNIX程序，例如cat和wc，遵循从命令行中给出的文件名读取输入的惯例，或者如果在命令行上没有给出文件名，则从标准输入读取输入。
-如果您希望程序遵循此约定，则lines（）提供来自以下任一源的行流：</p>
+<p>你可能已经注意到，最后一个例子中的替换数独字符串使用了一个单独的变量。这是因为函数参数（签名中声明的变量）默认是只读的。与其创建一个新的变量，我还可以写成 <code>sub MAIN($sudoku is copy) { &#8230;&#8203;}</code>.</p>
+</div>
+<div class="paragraph">
+<p>经典的 UNIX 程序，如 cat 和 wc，都遵循了从命令行中给出的文件名中读取输入的惯例，如果命令行中没有给出文件名，则从标准输入中读取。</p>
+</div>
+<div class="paragraph">
+<p>如果你想让你的程序遵循这个惯例， <code>lines()</code> 提供了一个从这两个来源中的任何一个来源读取行的流。</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku"># file sudoku.p6
 use v6;
+
 constant separator = '+---+---+---+';
+
 for lines() -&gt; $sudoku {
     my $substituted = $sudoku.trans: '0' =&gt; ' ';
+
     for $substituted.comb(9) -&gt; $line {
         say separator if $++ %% 3;
         say '|', $line.comb(3).join('|'), '|';
@@ -873,9 +944,13 @@ for lines() -&gt; $sudoku {
 <div class="sect2">
 <h3 id="_获得创造性">3.4. 获得创造性</h3>
 <div class="paragraph">
-<p>你不会从读书中学习编程语言; 你必须实际使用它，修补它。 如果您想扩展前面讨论的示例，我建议您尝试以不同的输出格式生成Sudokus。
-SVG9是一种基于文本的矢量图形格式，提供渲染数独所需的所有基元：矩形，线条，文本等等。 如果您想轻松获得相对较好的输出，可以使用它。
-这是数独的SVG文件的粗略骨架：</p>
+<p>你不会从书本上学习一门编程语言，你必须实际使用它，修修补补它。如果你想在前面讨论的例子基础上进行扩展，我鼓励你尝试用不同的输出格式来制作数独。</p>
+</div>
+<div class="paragraph">
+<p>SVG<sup class="footnote">[<a id="_footnoteref_10" class="footnote" href="#_footnotedef_10" title="View footnote.">10</a>]</sup> 是一种基于文本的矢量图形格式，它提供了渲染数独所需的所有原语：矩形、线条、文本等等。如果你想用较少的精力获得相对较好的输出，你可以使用它。</p>
+</div>
+<div class="paragraph">
+<p>这是一个数独的 SVG 文件的粗略骨架。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -897,17 +972,23 @@ SVG9是一种基于文本的矢量图形格式，提供渲染数独所需的所�
 </div>
 </div>
 <div class="paragraph">
-<p>如果您有Firefox或Chrome浏览器或专用矢量图形程序（如Inkscape，10），您可以使用它来打开SVG文件（图3-2）。</p>
+<p>如果你有 Firefox 或 Chrome 浏览器或专用的矢量图形程序如 Inkscape<sup class="footnote">[<a id="_footnoteref_11" class="footnote" href="#_footnotedef_11" title="View footnote.">11</a>]</sup>，你可以用它来打开 SVG 文件（图3-2）。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_总结_3">3.5. 总结</h3>
 <div class="paragraph">
-<p>第一个Raku示例引入了文字，变量和控制流。
-您还看到了基本的输入和输出原语，以及MAIN子例程
-这使您可以轻松接受命令行参数。
-== 日期时间转换命令行</p>
+<p>第一个 Raku 的例子介绍了字素、变量和控制流。</p>
 </div>
+<div class="paragraph">
+<p>你也看到了基本的输入和输出原语，以及 MAIN 子程序，它可以让你轻松地接受命令行参数。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_日期时间转换命令行">4. 日期时间转换命令行</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>我偶尔会在数据库中存储 UNIX 时间戳, 即从 1970-01-01 开始的秒数。我在按照日期查询数据库中的数据时, 需要将 UNIX 时间戳转换为人类可读的时间, 所以我写了个很小的工具来帮助我在 UNIX  时间戳和日期/时间之间来回转换:</p>
 </div>
@@ -923,9 +1004,8 @@ $ autotime 1450956180
 2015-12-24 11:23:00</code></pre>
 </div>
 </div>
-</div>
 <div class="sect2">
-<h3 id="_使用库">3.6. 使用库</h3>
+<h3 id="_使用库">4.1. 使用库</h3>
 <div class="paragraph">
 <p>Raku 的 [DateTime](<a href="https://docs.raku.org/type/DateTime" class="bare">https://docs.raku.org/type/DateTime</a>) 和 [Date](<a href="https://docs.raku.org/type/Date" class="bare">https://docs.raku.org/type/Date</a>) 模块会做实际的转换。
 <code>DateTime.new</code> 构造函数有一个接收单个整数作为 UNIX 时间戳的变体:</p>
@@ -1065,7 +1145,7 @@ else {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_datetime_格式化">3.7. DateTime 格式化</h3>
+<h3 id="_datetime_格式化">4.2. DateTime 格式化</h3>
 <div class="paragraph">
 <p>如果时间戳没有被解析为整天, 那么当前我们的脚本的输出就会像这样:</p>
 </div>
@@ -1144,7 +1224,7 @@ sub MAIN(Int $timestamp) {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_寻找其他途径">3.8. 寻找其他途径</h3>
+<h3 id="_寻找其他途径">4.3. 寻找其他途径</h3>
 <div class="paragraph">
 <p>现在, 从时间戳到日期和时间的转换工作的很好, 让我们看另一种途径。
 我们的小工具需要解析输入, 并决定输入的是时间戳还是日期和可选的时间。</p>
@@ -1263,7 +1343,7 @@ $ ./autotime 1450915200
 </div>
 </div>
 <div class="sect2">
-<h3 id="_处理时间">3.9. 处理时间</h3>
+<h3 id="_处理时间">4.4. 处理时间</h3>
 <div class="paragraph">
 <p>剩下要实现的功能是把日期和时间转换为时间戳。换句话说, 我们想这样调用 <code>autotime 2015-12-24 11:23:00</code>:</p>
 </div>
@@ -1312,7 +1392,7 @@ $ ./autotime 1450915200
 </div>
 </div>
 <div class="sect2">
-<h3 id="_系好你的安全带">3.10. 系好你的安全带</h3>
+<h3 id="_系好你的安全带">4.5. 系好你的安全带</h3>
 <div class="paragraph">
 <p>Raku 的隐式变量或主题变量:</p>
 </div>
@@ -1417,7 +1497,7 @@ multi sub MAIN(Str $date where { try Date.new($_) }, Str $time?) {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_main_魔法">3.11. MAIN 魔法</h3>
+<h3 id="_main_魔法">4.6. MAIN 魔法</h3>
 <div class="paragraph">
 <p>为我们调用 <code>sub MAIN</code> 的魔法还为我们提供了一个自动化的用法消息, 如果我们用不匹配任何 <code>multi</code> 的参数调用 MAIN, 例如调用时不提供参数:</p>
 </div>
@@ -1460,7 +1540,7 @@ Usage:
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_4">3.12. 总结</h3>
+<h3 id="_总结_4">4.7. 总结</h3>
 <div class="paragraph">
 <p>我们已经看到了一些 Date 和 DateTime 算法, 但令人兴奋的部分是 multi dispatch, 命名参数,带有 where 从句的子类型约束, given/ when 和 隐式 $_ 变量, 以及一些魔法, 当涉及到 MAIN subs 时。</p>
 </div>
@@ -1468,7 +1548,7 @@ Usage:
 </div>
 </div>
 <div class="sect1">
-<h2 id="_测试_say">4. 测试 say</h2>
+<h2 id="_测试_say">5. 测试 say</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>在上一章中，我更改了一些代码，以便它不会产生输出，而是在MAIN子中输出，这很方便地进行了测试。
@@ -1653,7 +1733,7 @@ ok 1 - doublespeak works</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_5">4.1. 总结</h3>
+<h3 id="_总结_5">5.1. 总结</h3>
 <div class="paragraph">
 <p>我们已经看到say（）使用动态范围的变量$ * OUT作为其输出文件句柄。 出于测试目的，我们可以将其替换为我们制作的对象，这使我们偶然发现了在Raku中如何编写类的第一眼。
 == Silent-Cron, 一个 Cron 包裹器</p>
@@ -1672,7 +1752,7 @@ $ silent-cron --timeout=5 -- command-that-might-hang</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_异步运行命令">4.2. 异步运行命令</h3>
+<h3 id="_异步运行命令">5.2. 异步运行命令</h3>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">当你想运行外部命令时，Raku基本上有两个选择：run，2是一个简单的同步接口; 和Proc </dt>
@@ -1820,7 +1900,7 @@ exit $exitcode;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_实现超时">4.3. 实现超时</h3>
+<h3 id="_实现超时">5.3. 实现超时</h3>
 <div class="paragraph">
 <p>在Raku中实现超时的惯用方法是将Promise.anyof组合器与计时器一起使用：</p>
 </div>
@@ -1908,7 +1988,7 @@ else {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_more_on_promises">4.4. More on Promises</h3>
+<h3 id="_more_on_promises">5.4. More on Promises</h3>
 <div class="paragraph">
 <p>如果您使用过其他语言的并发或并行程序，则可能遇到了线程，锁，互斥体和其他低级构造。 这些也存在于Raku中，但不鼓励直接使用它们。
 这种低级原语的问题在于它们不能很好地构成。 您可以拥有两个使用线程的库，并且可以自行运行，但在同一个程序中组合时会导致死锁。 或者不同的组件可能会自己启动线程，当多个这样的组件在同一个进程中聚集在一起时，这会导致太多的线程和高内存消耗。</p>
@@ -1990,18 +2070,18 @@ say @approximations.map({.result}).sum / @approximations;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_可能的扩展">4.5. 可能的扩展</h3>
+<h3 id="_可能的扩展">5.5. 可能的扩展</h3>
 <div class="paragraph">
 <p>如果你想使用silent-cron，你可以添加一个重试机制。 如果命令因外部依赖性（如API或NFS共享）而失败，则外部依赖关系可能需要一段时间才能恢复。 因此，您应该添加二次或指数退避; 也就是说，重试之间的等待时间应以二次方式（1,2,4,9,16 &#8230;&#8203;&#8230;&#8203;）或指数方式（1,2,4,8,16,32 &#8230;&#8203;&#8230;&#8203;）增加。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_重构和自动化测试">4.6. 重构和自动化测试</h3>
+<h3 id="_重构和自动化测试">5.6. 重构和自动化测试</h3>
 <div class="paragraph">
 <p>在我们在下一章中更多地扩展silent-cron之前，是时候重构一下并为它编写一些测试。</p>
 </div>
 <div class="sect3">
-<h4 id="_重构">4.6.1. 重构</h4>
+<h4 id="_重构">5.6.1. 重构</h4>
 <div class="paragraph">
 <p>作为一个简短的提醒，这是程序的样子：</p>
 </div>
@@ -2082,7 +2162,7 @@ method exitcode() { $!exitcode }</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_模拟和测试">4.6.2. 模拟和测试</h4>
+<h4 id="_模拟和测试">5.6.2. 模拟和测试</h4>
 <div class="paragraph">
 <p>既然我们有一种方便的方法从假设的子程序中返回多个值，那么让我们看看这个子程序可能是什么样子：</p>
 </div>
@@ -2299,7 +2379,7 @@ method start {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_提高稳定性和测定时间">4.6.3. 提高稳定性和测定时间</h4>
+<h4 id="_提高稳定性和测定时间">5.6.3. 提高稳定性和测定时间</h4>
 <div class="paragraph">
 <p>依靠测试中的时间总是没有吸引力。 如果时间太短（或者太慢），则可能会在缓慢或负载较重的机器上出现零星的测试失败风险。 如果使用更保守的时间间隔测试，测试可能变得非常慢。
 有一个模块（不与Rakudo一起分发）来减轻这种痛苦：Test :: Scheduler15提供了一个具有虚拟化时间的线程调度程序，允许您编写如下测试：</p>
@@ -2329,7 +2409,7 @@ isa-ok $result, ExecutionResult; # more tests here</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_安装模块">4.6.4. 安装模块</h4>
+<h4 id="_安装模块">5.6.4. 安装模块</h4>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">如果您想试用Test </dt>
@@ -2357,7 +2437,7 @@ $ zef install Test::Scheduler</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_6">4.7. 总结</h3>
+<h3 id="_总结_6">5.7. 总结</h3>
 <div class="paragraph">
 <p>我们已经看到了一个用于运行外部程序的异步API以及如何使用Promises来实现超时。 我们还讨论了如何通过调度程序将promise分发给线程，允许您启动任意数量的promise而不会使计算机过载。
 在测试期间，我们已经看到了带有访问器，三元运算符和匿名类的属性。 已经讨论了线程代码的测试，以及第三方模块可以提供帮助的方式。 最后，我们对模块安装程序zef进行了一次非常小的一瞥。</p>
@@ -2366,7 +2446,7 @@ $ zef install Test::Scheduler</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_有状态的_silent_cron">5. 有状态的 Silent Cron</h2>
+<h2 id="_有状态的_silent_cron">6. 有状态的 Silent Cron</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>在上一章中，我们查看了silent-cron，它是一个外部程序的包装器，在它们的退出状态为零时使它们静音。 但为了使它真正实用，它也应该使偶尔的失败沉默。
@@ -2374,7 +2454,7 @@ $ zef install Test::Scheduler</code></pre>
 要实现此功能，silent-cron需要在不同的运行之间存储持久状态。 它需要记录当前运行的结果，然后确定故障历史是否符合“偶尔”的条件。</p>
 </div>
 <div class="sect2">
-<h3 id="_持久化存储">5.1. 持久化存储</h3>
+<h3 id="_持久化存储">6.1. 持久化存储</h3>
 <div class="paragraph">
 <p>存储后端需要编写和检索结构化数据，并通过锁定保护对状态文件的并发访问。 这种存储后端的一个很好的库是SQLite，1是一个零维护的SQL引擎，可以作为C库使用。 它是公共领域的软件，并且在大多数主流浏览器，操作系统甚至是一些航空公司中使用
 Raku允许您通过DBIish访问SQLite的功能，3这是一个通用数据库接口，具有SQLite，MySQL，PostgreSQL的后端驱动程序，
@@ -2416,7 +2496,7 @@ $sth.finish;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_开发存储后端">5.2. 开发存储后端</h3>
+<h3 id="_开发存储后端">6.2. 开发存储后端</h3>
 <div class="paragraph">
 <p>我们不应该只将所有存储处理代码填充到子MAIN中; 我们应该仔细考虑为存储后端创建有用的API。 首先，我们只需要两个功能：插入作业执行的结果，并检索最新的结果。
 由于silent-cron可以用于保护同一台机器上的多个cron作业，因此我们可能需要一些东西来区分不同的作业，这样它们中的一个成功就不会阻止错误报告一个不断失败的作业。 为此，我们引入了一个作业名称，它可以默认为正在执行的命令（包括参数），但可以在命令行中显式设置。
@@ -2555,7 +2635,7 @@ $ sth.allrows（&#8230;&#8203;）是懒惰的，之后的.map调用也是如此�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_使用存储后端">5.3. 使用存储后端</h3>
+<h3 id="_使用存储后端">6.3. 使用存储后端</h3>
 <div class="paragraph">
 <p>有了存储API，就可以使用它了：</p>
 </div>
@@ -2587,14 +2667,14 @@ MAINsubroutine使用构造$ var // = EXPR。// standfor defined-OR，如果它�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_发展的空间">5.4. 发展的空间</h3>
+<h3 id="_发展的空间">6.4. 发展的空间</h3>
 <div class="paragraph">
 <p>必须调查cron作业失败原因的系统管理员可能对该作业的历史感兴趣。 您可以实现一个命令，列出上次作业运行，成功或失败，退出代码或可能的运行时等等。
 或者你可以研究一个不同的后端。 如果要将状态存储在JSON文件而不是SQLite中，该怎么办？ 或启用两者？ （提示：您可以使用JSON :: Tiny5或JSON :: Fast6模块。）</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_7">5.5. 总结</h3>
+<h3 id="_总结_7">6.5. 总结</h3>
 <div class="paragraph">
 <p>我们已经讨论过DBIish，一个带有可插拔后端的数据库API，并探讨了如何将它与SQLite一起用来存储持久数据。 在这个过程中，我们还遇到了懒惰列表和一种名为heredocs的新形式的字符串文字。
 == 回顾 Raku 基础知识</p>
@@ -2604,7 +2684,7 @@ MAINsubroutine使用构造$ var // = EXPR。// standfor defined-OR，如果它�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_变量和作用域">5.6. 变量和作用域</h3>
+<h3 id="_变量和作用域">6.6. 变量和作用域</h3>
 <div class="paragraph">
 <p>在Raku中，变量名由sigil，$，@，％或＆组成，后跟标识符。 sigil意味着类型约束，其中$是最常见的约束
 （默认情况下没有限制），@表示数组，％表示哈希（关联数组/映射），＆表示代码对象。
@@ -2614,7 +2694,7 @@ MAINsubroutine使用构造$ var // = EXPR。// standfor defined-OR，如果它�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_子例程">5.7. 子例程</h3>
+<h3 id="_子例程">6.7. 子例程</h3>
 <div class="paragraph">
 <p>子程序或简称子程序是一段具有自己范围的代码，通常也是一个名称。 它有一个签名，指定在调用时必须传递的值：</p>
 </div>
@@ -2716,7 +2796,7 @@ multi subs是几个具有相同名称但签名不同的子程序。 编译器在
 </div>
 </div>
 <div class="sect2">
-<h3 id="_类和对象">5.8. 类和对象</h3>
+<h3 id="_类和对象">6.8. 类和对象</h3>
 <div class="paragraph">
 <p>类声明遵循与子例程声明相同的语法模式：关键字class，后跟名称，后跟大括号中的主体：</p>
 </div>
@@ -2779,7 +2859,7 @@ say $c.lines; # Output: [42]</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_并发">5.9. 并发</h3>
+<h3 id="_并发">6.9. 并发</h3>
 <div class="paragraph">
 <p>Raku为并发和并行执行提供了高级原语。 我们鼓励您使用start运行计算，而不是显式生成新线程，它返回Promise.1。这是一个承诺未来计算将产生结果的对象。 因此，状态可以是Planned，Kept或Broken。 您可以链接承诺，组合它们并等待它们。
 在后台，调度程序将此类计算分发到操作系统级线程。 默认调度程序是一个线程池调度程序，其中包含可供使用的线程数的上限。
@@ -2788,7 +2868,7 @@ map，grep，throttle或者延迟，并使用他们的</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_展望">5.10. 展望</h3>
+<h3 id="_展望">6.10. 展望</h3>
 <div class="paragraph">
 <p>当您了解本章中讨论的主题并深入了解内置类型时，您应该熟悉Raku的基础知识并能够编写自己的程序。
 接下来，我们将研究Raku的优势之一：解析，通过正则表达式和语法。
@@ -2830,7 +2910,7 @@ my %hash = Config::INI::parse($ini_string);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_正则表达式基础">5.11. 正则表达式基础</h3>
+<h3 id="_正则表达式基础">6.11. 正则表达式基础</h3>
 <div class="paragraph">
 <p>正则表达式是一段代码，用作具有共同结构的字符串的模式。 它源于计算机科学概念中的正则表达式，但比纯正则表达式提供了更多的构造, 允许并扩展了一些功能，使它们更容易使用。</p>
 </div>
@@ -2867,7 +2947,7 @@ multi sub MAIN('test') {
 <p>通常，所有非单词字符都保留用于“特殊”语法，你必须用引号引起它们或用反斜杠转义它们以获得其字面含义。 例如正则表达式中的 <code>\&lt;</code> 或 <code>'&lt;'</code> 匹配小于号。 引用可以应用于多个字符，因此正则表达式中的 <code>'a+b'</code> 与 a 匹配，后跟加号 <code>+</code>，后跟 b。单词字符（字母，数字和下划线）总是按字面意思匹配。</p>
 </div>
 <div class="sect3">
-<h4 id="_字符类">5.11.1. 字符类</h4>
+<h4 id="_字符类">6.11.1. 字符类</h4>
 <div class="paragraph">
 <p>除了文字之外，字符类是正则表达式的常见构建块。 有许多预定义的字符类，以反斜杠的形式后跟一个小写的单个字母; 例如，<code>\d</code> 匹配一个数字。 它的反转使用大写字母，所以`\D` 匹配任何不是数字的字符。</p>
 </div>
@@ -2954,7 +3034,7 @@ multi sub MAIN('test') {
 </table>
 </div>
 <div class="sect3">
-<h4 id="_量词">5.11.2. 量词</h4>
+<h4 id="_量词">6.11.2. 量词</h4>
 <div class="paragraph">
 <p>只匹配一个重复的东西很无聊，所以正则表达式提供量词。 量词表示前一个正则表达式必须匹配的频率。</p>
 </div>
@@ -2991,7 +3071,7 @@ multi sub MAIN('test') {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_备选分支">5.11.3. 备选分支</h4>
+<h4 id="_备选分支">6.11.3. 备选分支</h4>
 <div class="paragraph">
 <p>任何一个或者备选分支由垂直条分隔。 例如，<code>\d+ | x</code> 匹配一个或多个数字的序列或字符 x。</p>
 </div>
@@ -3001,7 +3081,7 @@ multi sub MAIN('test') {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_解析_ini_原语">5.12. 解析 INI 原语</h3>
+<h3 id="_解析_ini_原语">6.12. 解析 INI 原语</h3>
 <div class="paragraph">
 <p>回到 INI 解析，我们必须考虑值内允许的字符。列出允许的字符似乎是徒劳的，因为我们很可能忘记一些。相反，我们应该考虑值中不允许的内容。换行当然不是，因为它们引入了下一个键/值对或节标题。也不允许使用分号，因为它们引入了注释。</p>
 </div>
@@ -3139,7 +3219,7 @@ ok "[a\nb]\n"  !~~ /^ &lt;header&gt; $/, 'No newlines inside headers';</code></p
 </div>
 </div>
 <div class="sect2">
-<h3 id="_把东西组装起来">5.13. 把东西组装起来</h3>
+<h3 id="_把东西组装起来">6.13. 把东西组装起来</h3>
 <div class="paragraph">
 <p>INI 文件的 <strong>section</strong> 是标题，后跟一些键/值对或注释行：</p>
 </div>
@@ -3199,7 +3279,7 @@ ok $ini ~~ /^&lt;inifile&gt;$/, 'Can parse a full INI file';</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_回溯">5.14. 回溯</h3>
+<h3 id="_回溯">6.14. 回溯</h3>
 <div class="paragraph">
 <p>对许多程序员来说，正则表达式匹配似乎很神奇。 您只需说明模式，正则表达式引擎就会确定字符串是否与模式匹配。 虽然实现正则表达式引擎是一项棘手的业务，但基础知识并不难理解。
 正则表达式引擎从左到右遍历正则表达式的各个部分，尝试匹配正则表达式的每个部分。 它跟踪到目前为止它在光标中匹配的字符串部分。 如果正则表达式的一部分找不到匹配项，则正则表达式引擎会尝试更改上一个匹配项以占用更少的字符，然后在新位置重试失败的匹配项。
@@ -3250,7 +3330,7 @@ my token inifile { &lt;block&gt; &lt;section&gt;* }</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_grammars">5.15. Grammars</h3>
+<h3 id="_grammars">6.15. Grammars</h3>
 <div class="paragraph">
 <p>这组解析INI文件的正则表达式并不是封装和可重用性的顶峰。
 因此，我们将探索语法，一种将正则表达式组合成类结构的功能，以及如何从成功匹配中提取结构化数据。
@@ -3300,7 +3380,7 @@ my token inifile { &lt;block&gt; &lt;section&gt;* }</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_从匹配中提取数据">5.16. 从匹配中提取数据</h3>
+<h3 id="_从匹配中提取数据">6.16. 从匹配中提取数据</h3>
 <div class="paragraph">
 <p>到目前为止，IniFile语法仅检查给定输入是否与语法匹配。 但是，当它匹配时，我们真的希望解析结果在一个易于使用的数据结构中。 例如，我们可以翻译这个示例INI文件：</p>
 </div>
@@ -3492,14 +3572,14 @@ my $result = IniFile.parse-ini($text);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_生成好的错误信息">5.17. 生成好的错误信息</h3>
+<h3 id="_生成好的错误信息">6.17. 生成好的错误信息</h3>
 <div class="paragraph">
 <p>良好的错误消息对任何产品的用户体验都至关重要。 解析器也不例外。 考虑第5行的消息Square括号[在第3行用花括号封闭}，而不是Python的惰性和泛型SyntaxError：无效语法。
 除了文本消息之外，了解解析错误的位置有助于找出错误的原因。
 我们将使用我们的INI文件解析器作为示例，探索如何从Raku语法生成更好的解析错误消息。</p>
 </div>
 <div class="sect3">
-<h4 id="_failure_is_normal">5.17.1. Failure Is Normal</h4>
+<h4 id="_failure_is_normal">6.17.1. Failure Is Normal</h4>
 <div class="paragraph">
 <p>在我们开始之前，重要的是要意识到在基于语法的解析器中，正则表达式无法匹配是正常的，即使在整体成功的解析中也是如此。
 让我们回想一下解析器的一部分：</p>
@@ -3563,7 +3643,7 @@ other=stuff</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_检测有害失败">5.17.2. 检测有害失败</h4>
+<h4 id="_检测有害失败">6.17.2. 检测有害失败</h4>
 <div class="paragraph">
 <p>要生成良好的解析错误消息，您必须区分预期和意外的解析失败。 如前所述，单个正则表达式或令牌的匹配失败通常不表示输入格式错误。 但是你可以找到你知道的点，一旦正则表达式引擎到达这一点，其余的匹配必须成功。
 如果你记得对：</p>
@@ -3619,7 +3699,7 @@ other=stuff</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_提供上下文">5.17.3. 提供上下文</h4>
+<h4 id="_提供上下文">6.17.3. 提供上下文</h4>
 <div class="paragraph">
 <p>对于较大的输入，我们确实要打印行号。 为了计算，我们
 需要获取目标字符串，该字符串可通过方法目标获得：</p>
@@ -3692,7 +3772,7 @@ method error($msg) {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_解析匹配对的缺点">5.17.4. 解析匹配对的缺点</h4>
+<h4 id="_解析匹配对的缺点">6.17.4. 解析匹配对的缺点</h4>
 <div class="paragraph">
 <p>由于它是如此常见的任务，Raku语法具有特殊的目标匹配语法，用于将一对分隔符与它们之间的某些内容进行匹配。 在INI文件示例中，这是一对括号，它们之间有一个节头。
 我们可以改变</p>
@@ -3729,7 +3809,7 @@ method error($msg) {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_编写你自己的_grammars">5.18. 编写你自己的 Grammars</h3>
+<h3 id="_编写你自己的_grammars">6.18. 编写你自己的 Grammars</h3>
 <div class="paragraph">
 <p>解析是一项必须学习的技能，大多与您的普通编程技能不同。 所以我鼓励你从一些小的东西开始，比如CSV的解析器或逗号分隔的值.9很容易一次性写出一个完整的语法，但我建议从解析一些原子开始（就像一个单元格的 两个逗号之间的数据），测试它，然后才进入下一个逗号。
 即使在像CSV这样看似简单的东西中，也会出现一些复杂性。 例如，您可以允许引用的字符串本身可以包含分隔符，以及一个转义字符，允许您在引用的字符串中使用引号字符。
@@ -3737,7 +3817,7 @@ method error($msg) {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_8">5.19. 总结</h3>
+<h3 id="_总结_8">6.19. 总结</h3>
 <div class="paragraph">
 <p>Raku允许正则表达式重用，将它们视为一等公民，允许它们像普通例程一样被命名和调用。 通过允许正则表达式内的空白来消除进一步的混乱。
 这些功能允许您编写正则表达式来解析正确的文件格式甚至编程语言。 语法允许您构建，重用和封装正则表达式。
@@ -4591,6 +4671,36 @@ you learn enough to perform most programming tasks in Raku, and more importantly
 <hr>
 <div class="footnote" id="_footnotedef_1">
 <a href="#_footnoteref_1">1</a>. <a href="http://gcc.gnu.org/" class="bare">http://gcc.gnu.org/</a>
+</div>
+<div class="footnote" id="_footnotedef_2">
+<a href="#_footnoteref_2">2</a>. <a href="https://docs.raku.org/type/Range.html" class="bare">https://docs.raku.org/type/Range.html</a>
+</div>
+<div class="footnote" id="_footnotedef_3">
+<a href="#_footnoteref_3">3</a>. <a href="https://docs.raku.org/routine/say#(IO)_sub_say" class="bare">https://docs.raku.org/routine/say#(IO)_sub_say</a>
+</div>
+<div class="footnote" id="_footnotedef_4">
+<a href="#_footnoteref_4">4</a>. <a href="https://docs.raku.org/type/Str#routine_substr" class="bare">https://docs.raku.org/type/Str#routine_substr</a>
+</div>
+<div class="footnote" id="_footnotedef_5">
+<a href="#_footnoteref_5">5</a>. <a href="https://docs.raku.org/type/Str.html#method_trans" class="bare">https://docs.raku.org/type/Str.html#method_trans</a>
+</div>
+<div class="footnote" id="_footnotedef_6">
+<a href="#_footnoteref_6">6</a>. <a href="https://docs.raku.org/type/Pair" class="bare">https://docs.raku.org/type/Pair</a>
+</div>
+<div class="footnote" id="_footnotedef_7">
+<a href="#_footnoteref_7">7</a>. 也可以使用返回表达式来返回一个值，并立即退出子程序。
+</div>
+<div class="footnote" id="_footnotedef_8">
+<a href="#_footnoteref_8">8</a>. <a href="https://docs.raku.org/type/List#routine_join" class="bare">https://docs.raku.org/type/List#routine_join</a>
+</div>
+<div class="footnote" id="_footnotedef_9">
+<a href="#_footnoteref_9">9</a>. <a href="https://docs.raku.org/type/Str#routine_comb" class="bare">https://docs.raku.org/type/Str#routine_comb</a>
+</div>
+<div class="footnote" id="_footnotedef_10">
+<a href="#_footnoteref_10">10</a>. <a href="https://en.wikipedia.org/wiki/Scalable_Vector_Graphics" class="bare">https://en.wikipedia.org/wiki/Scalable_Vector_Graphics</a>
+</div>
+<div class="footnote" id="_footnotedef_11">
+<a href="#_footnoteref_11">11</a>. <a href="https://inkscape.org/" class="bare">https://inkscape.org/</a>
 </div>
 </div>
 
