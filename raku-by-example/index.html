@@ -169,15 +169,19 @@ if (theme && theme !== "1") {
 <li><a href="#_类和对象">8.3. 类和对象</a></li>
 <li><a href="#_并发">8.4. 并发</a></li>
 <li><a href="#_展望">8.5. 展望</a></li>
-<li><a href="#_正则表达式基础">8.6. 正则表达式基础</a></li>
-<li><a href="#_解析_ini_原语">8.7. 解析 INI 原语</a></li>
-<li><a href="#_把东西组装起来">8.8. 把东西组装起来</a></li>
-<li><a href="#_回溯">8.9. 回溯</a></li>
-<li><a href="#_grammars">8.10. Grammars</a></li>
-<li><a href="#_从匹配中提取数据">8.11. 从匹配中提取数据</a></li>
-<li><a href="#_生成好的错误信息">8.12. 生成好的错误信息</a></li>
-<li><a href="#_编写你自己的_grammars">8.13. 编写你自己的 Grammars</a></li>
-<li><a href="#_总结_8">8.14. 总结</a></li>
+</ul>
+</li>
+<li><a href="#_使用正则表达式和_grammars_解析_ini_文件">9. 使用正则表达式和 Grammars 解析 INI 文件</a>
+<ul class="sectlevel2">
+<li><a href="#_正则表达式基础">9.1. 正则表达式基础</a></li>
+<li><a href="#_解析_ini_原语">9.2. 解析 INI 原语</a></li>
+<li><a href="#_把东西组装起来">9.3. 把东西组装起来</a></li>
+<li><a href="#_回溯">9.4. 回溯</a></li>
+<li><a href="#_grammars">9.5. Grammars</a></li>
+<li><a href="#_从匹配中提取数据">9.6. 从匹配中提取数据</a></li>
+<li><a href="#_生成好的错误信息">9.7. 生成好的错误信息</a></li>
+<li><a href="#_编写你自己的_grammars">9.8. 编写你自己的 Grammars</a></li>
+<li><a href="#_总结_8">9.9. 总结</a></li>
 </ul>
 </li>
 </ul>
@@ -2950,22 +2954,27 @@ method !create-schema() {
 <h2 id="_回顾_raku_基础知识">8. 回顾 Raku 基础知识</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>在前面的章节中，我们讨论了一些与Raku机制相互交叉的例子，这些例子使它们起作用。 在这里，我想总结和深化我们迄今为止所涉及的Raku知识，从原始示例中删除。</p>
+<p>在前几章中，我们讨论了一些例子与 Perl 6 的机理交错的例子，这些例子的作用。在这里，我想把我们到目前为止所接触到的 Perl 6 的知识进行总结和深化，脱离了原来的例子，在这里，我想对这些知识进行总结和深化。</p>
 </div>
 <div class="sect2">
 <h3 id="_变量和作用域">8.1. 变量和作用域</h3>
 <div class="paragraph">
-<p>在Raku中，变量名由sigil，$，@，％或＆组成，后跟标识符。 sigil意味着类型约束，其中$是最常见的约束
-（默认情况下没有限制），@表示数组，％表示哈希（关联数组/映射），＆表示代码对象。
-标识符可以包含 - 和&#8217;字符，只要它后面的字符是字母。 标识符必须以字母或下划线开头。
-用我声明的子程序和变量是词法范围的。 从声明到当前{} -enclosed块（或当前文件，如果声明在块外）的结尾，它们是可见的。 子程序参数在子程序的签名和块中可见。
-在印记和标识符之间的可选树枝可以影响范围。 * twigil标记一个动态范围的变量; 因此，在当前调用堆栈中执行查找。！ 标记属性，即附加到对象的每实例变量。</p>
+<p>在 Perl 6 中，变量名由一个符号，<code>$</code>、<code>@</code>、<code>%</code> 或 <code>&amp;</code> 组成，后面是标识符。sigil 意味着一个类型约束，其中 <code>$</code> 是最一般的类型约束。(默认没有限制)，<code>@</code> 代表数组，<code>%</code> 代表散列(关联数组/映射)，<code>&amp;</code> 代表代码对象。</p>
+</div>
+<div class="paragraph">
+<p>标识符可以包含 <code>-</code> 和 <code>'</code> 字符，只要后面的字符是字母就可以。标识符必须以字母或下划线开头。</p>
+</div>
+<div class="paragraph">
+<p>用 <code>my</code> 声明的子程序和变量是词法作用域的。它们从声明的点到当前 <code>{}</code>-闭合块儿（或当前文件，如果声明在 block 之外）的块的结尾都是可见的。子例程参数在子例程的签名和块中是可见的。</p>
+</div>
+<div class="paragraph">
+<p>在 sigil 和标识符之间的可选的 twigil 可以影响作用域。twigil 标志着一个动态作用域的变量；因此，查找是在当前调用栈中进行的。<code>!</code> 标志着属性，也就是说，每个实例中的变量被附加到一个对象上。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_子例程">8.2. 子例程</h3>
 <div class="paragraph">
-<p>子程序或简称子程序是一段具有自己范围的代码，通常也是一个名称。 它有一个签名，指定在调用时必须传递的值：</p>
+<p>子程序，简称 <code>sub</code>，是一段有自己的作用域的代码，通常也有一个名字。它有一个签名，指定你在调用它的时候要传入什么样的值。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2979,8 +2988,10 @@ method !create-schema() {
 </div>
 </div>
 <div class="paragraph">
-<p>签名中使用的变量称为参数，而我们调用您在参数中传递的值。
-要在不调用子程序的情况下引用子程序，请在它前面放一个与号（＆），如下所示：</p>
+<p>签名中使用的变量被称为参数，而我们调用你在参数中传递的值。</p>
+</div>
+<div class="paragraph">
+<p>如果要引用一个子程序而不调用它，可以在它前面加上一个句号(<code>&amp;</code>)，比如这样:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2988,8 +2999,7 @@ method !create-schema() {
 </div>
 </div>
 <div class="paragraph">
-<p>要调用它，只需使用其名称，然后使用参数列表即可
-可选择在括号中：</p>
+<p>要调用它，只需使用它的名字，后面是参数列表，参数可以放在一对圆括号中:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2998,7 +3008,7 @@ say chunks('abcd', 2); # Output: (ab cd)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果某些其他构造会干扰子例程调用，则只需要括号。 因此，如果你打算写</p>
+<p>只有在其他构造会干扰子例程调用的情况下，你才需要括号。因此，如果你打算这样写:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3006,7 +3016,7 @@ say chunks('abcd', 2); # Output: (ab cd)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>你遗漏了一对内括号</p>
+<p>而省略了内侧的括号:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3014,7 +3024,7 @@ say chunks('abcd', 2); # Output: (ab cd)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>然后所有参数都转到join函数，只剩下一个参数给chunks函数。 另一方面，可以省略外部括号并写入</p>
+<p>那么所有的参数都会进入 <code>join</code> 函数，只留下一个参数给 <code>chunks</code> 函数。另一方面，省略了外面的一对括号，写成:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3022,9 +3032,10 @@ say chunks('abcd', 2); # Output: (ab cd)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>因为这里没有歧义。
-值得注意的一个案例是，如果你调用一个没有参数的子程序
-if条件或for循环（或类似结构）的块，你必须包括括号，因为否则该块被解析为函数的参数。</p>
+<p>因为这里没有任何歧义。</p>
+</div>
+<div class="paragraph">
+<p>一个值得注意的情况是，如果你调用一个没有参数的子例程作为 <code>if</code> 条件或 <code>for</code> 循环（或类似的构造）的块，你必须包含括号，因为否则这个块会被解析为函数的参数。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3044,7 +3055,7 @@ if random-choice {
 </div>
 </div>
 <div class="paragraph">
-<p>如果你碰巧犯了这个错误，Raku编译器会非常努力地检测它。 在前面的例子中，它说</p>
+<p>如果你碰巧犯了这个错误，Raku 编译器会尽力去检测它。在前面的例子中，它打印出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3052,7 +3063,7 @@ if random-choice {
 </div>
 </div>
 <div class="paragraph">
-<p>当它试图解析if语句的块时，它找不到一个：</p>
+<p>而当它试图解析 <code>if-statement</code> 的块时，它没有找到一个。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3060,14 +3071,16 @@ if random-choice {
 </div>
 </div>
 <div class="paragraph">
-<p>当你有一个名为MAIN的子程序时，Raku使用它的签名来解析命令行参数并将这些命令行参数传递给MAIN。
-multi subs是几个具有相同名称但签名不同的子程序。 编译器在运行时根据参数和参数之间的最佳匹配来决定它调用哪个候选项。</p>
+<p>当你有一个叫 MAIN 的子程序时，Raku 会使用它的签名来解析命令行参数，并将这些命令行参数传递给 MAIN。</p>
+</div>
+<div class="paragraph">
+<p><strong>multi</strong> 子例程是指几个名字相同但签名不同的子程序。编译器在运行时根据参数和参数之间的最佳匹配度来决定调用哪个子程序。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_类和对象">8.3. 类和对象</h3>
 <div class="paragraph">
-<p>类声明遵循与子例程声明相同的语法模式：关键字class，后跟名称，后跟大括号中的主体：</p>
+<p>类声明遵循与子程序声明相同的语法模式：关键字 <code>class</code>，后面是名称，后面是花括号中的主体:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3083,7 +3096,7 @@ multi subs是几个具有相同名称但签名不同的子程序。 编译器在
 </div>
 </div>
 <div class="paragraph">
-<p>默认情况下，类型名称的范围限定为当前名称空间; 但是，你可以通过在课堂前面添加一个我的词汇来限定词法：</p>
+<p>默认情况下，类型名称被覆盖到当前的命名空间；但是，你可以通过在 <code>class</code> 前面添加一个 <code>my</code> 来使其变成词法作用域的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3091,7 +3104,7 @@ multi subs是几个具有相同名称但签名不同的子程序。 编译器在
 </div>
 </div>
 <div class="paragraph">
-<p>创建新实例通常通过在类型对象上调用new方法来工作。 新方法继承自所有类型获得的隐式父类Any：</p>
+<p>创建一个新的实例一般通过在类型对象上调用 <code>new</code> 方法来实现。<code>new</code> 方法继承自所有类型都会得到的隐式父类 <code>Any</code>。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3099,7 +3112,7 @@ multi subs是几个具有相同名称但签名不同的子程序。 编译器在
 </div>
 </div>
 <div class="paragraph">
-<p>每个实例状态存储在属性中，这些属性使用has关键字声明，如前面的has @！行所示。 属性总是私有的，如下所示！twigil。 如果你使用点。 声明中的twigil相反，你有私有属性@！行和一个公共的只读访问器方法：</p>
+<p>每个实例的状态都存储在属性中，用 <code>has</code> 关键字声明，如前面的 <code>has @!</code> 行所示。属性始终是私有的，正如 <code>!</code> twigil 所表示的那样。如果你在声明中使用点 <code>.twigil</code>，你就同时拥有了私有属性 <code>@!line</code> 和只读的公共访问器方法。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3120,29 +3133,44 @@ say $c.lines; # Output: [42]</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>使用点twigil声明属性时，还可以通过命名参数从构造函数初始化属性，如OutputCapture中所示。 new（lines &#8658; [42]）。
-私人方法始于！并且只能从类体内部调用self！private-method。
-方法基本上只是子程序，有两个不同之处。首先是
-他们得到一个名为self的隐式参数，它包含调用该方法的对象（我们称之为调用者）。第二个是，如果调用子例程，编译器将在当前词法范围以及外部范围中搜索此子例程。另一方面，方法调用仅在对象及其超类的类中查找。
-子例程查找可以在编译时进行，因为词法作用域在运行时是不可变的，因此编译器具有所有词法符号的知识。但是，即使存在类型约束，编译器也无法知道对象的类型是否可能是类型约束的子类型，这意味着必须将方法查找推迟到运行时。</p>
+<p>当你用点 twigil 声明属性时，你也可以通过命名参数从构造函数中初始化属性，如 <code>OutputCapture.new( lines &#8658; [42] )</code>。</p>
+</div>
+<div class="paragraph">
+<p>私有方法以 <code>!</code> 开始，只能在类体内部以 <code>self!private-method</code> 的形式调用。</p>
+</div>
+<div class="paragraph">
+<p>方法基本上只是子程序，有两个区别。第一个区别是, 它们会得到一个名为 <code>self</code> 的隐式参数，其中包含方法被调用的对象（我们称之为调用者）。二是如果调用一个子程序，编译器会在当前的词法作用域以及外部作用域中搜索这个子程序。另一方面，方法调用只在对象的类和超类中查找。</p>
+</div>
+<div class="paragraph">
+<p>子程序的查找可以在编译时进行，因为词法作用域在运行时是不可更改的，所以编译器对所有的词法符号都有知识。但是，即使在类型约束的情况下，编译器也无法知道对象的类型是否可能是类型约束的子类型，这意味着方法查找必须推迟到运行时进行。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_并发">8.4. 并发</h3>
 <div class="paragraph">
-<p>Raku为并发和并行执行提供了高级原语。 我们鼓励您使用start运行计算，而不是显式生成新线程，它返回Promise.1。这是一个承诺未来计算将产生结果的对象。 因此，状态可以是Planned，Kept或Broken。 您可以链接承诺，组合它们并等待它们。
-在后台，调度程序将此类计算分发到操作系统级线程。 默认调度程序是一个线程池调度程序，其中包含可供使用的线程数的上限。
-并行计算之间的通信应该通过线程安全的数据结构进行。 其中最重要的是Channel2（线程安全队列）和Supply3（Raku的Observer Pattern4实现）。 耗材非常强大，因为您可以使用诸如此类的方法对其进行转换
-map，grep，throttle或者延迟，并使用他们的</p>
+<p>Raku 为并发和并行执行提供了高级原语。我们鼓励你用 <code>start</code> 来运行计算，而不是显式地催生新的线程，它返回一个 Promise。<sup class="footnote">[<a id="_footnoteref_48" class="footnote" href="#_footnotedef_48" title="View footnote.">48</a>]</sup> 这是一个对象，它承诺未来的计算会产生一个结果。因此，状态可以是 Planned, Kept, 或 Broken。你可以将承诺串联起来，将它们组合起来，然后等待它们。</p>
+</div>
+<div class="paragraph">
+<p>在后台，一个调度器将这些计算分配给操作系统级线程。默认的调度器是一个线程池调度器，对可使用的线程数量有一个上限。</p>
+</div>
+<div class="paragraph">
+<p>并行计算之间的通信应该通过线程安全的数据结构来进行。其中最重要的是 Channel<sup class="footnote">[<a id="_footnoteref_49" class="footnote" href="#_footnotedef_49" title="View footnote.">49</a>]</sup>（线程安全队列）和 Supply<sup class="footnote">[<a id="_footnoteref_50" class="footnote" href="#_footnotedef_50" title="View footnote.">50</a>]</sup>（Raku 对观察者模式<sup class="footnote">[<a id="_footnoteref_51" class="footnote" href="#_footnotedef_51" title="View footnote.">51</a>]</sup>的实现）。Supply 是非常强大的，因为你可以用诸如 <code>map</code>、<code>grep</code>、<code>throttle</code> 或 <code>delayed</code>，并使用它们的 actor 语义<sup class="footnote">[<a id="_footnoteref_52" class="footnote" href="#_footnotedef_52" title="View footnote.">52</a>]</sup>来确保消费者一次只在一个线程中运行。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_展望">8.5. 展望</h3>
 <div class="paragraph">
-<p>当您了解本章中讨论的主题并深入了解内置类型时，您应该熟悉Raku的基础知识并能够编写自己的程序。
-接下来，我们将研究Raku的优势之一：解析，通过正则表达式和语法。
-== 使用正则表达式和 Grammars 解析 INI 文件</p>
+<p>当你了解了本章讨论的主题，并对内置的类型有了一定的了解，你应该已经熟悉了 Raku 的基础知识，并能够编写自己的程序了。</p>
 </div>
+<div class="paragraph">
+<p>接下来，我们将探讨 Raku 的一个优点：通过 regexes 和 grammar 来解析。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_使用正则表达式和_grammars_解析_ini_文件">9. 使用正则表达式和 Grammars 解析 INI 文件</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>你之前可能已经见过 <code>.ini</code> 文件; 它们在微软 Windows 平台上很常见, 但是在其它地方也有发现, 例如 ODBC 配置文件, <a href="http://docs.ansible.com/ansible/intro_inventory.html">Ansible 的清单文件</a>, 等等。</p>
 </div>
@@ -3177,9 +3205,8 @@ my %hash = Config::INI::parse($ini_string);</code></pre>
 <div class="paragraph">
 <p>它在底层使用了正则表达式和 grammars。这里我们会探索怎样写一个自己的 INI 解析器。</p>
 </div>
-</div>
 <div class="sect2">
-<h3 id="_正则表达式基础">8.6. 正则表达式基础</h3>
+<h3 id="_正则表达式基础">9.1. 正则表达式基础</h3>
 <div class="paragraph">
 <p>正则表达式是一段代码，用作具有共同结构的字符串的模式。 它源于计算机科学概念中的正则表达式，但比纯正则表达式提供了更多的构造, 允许并扩展了一些功能，使它们更容易使用。</p>
 </div>
@@ -3216,7 +3243,7 @@ multi sub MAIN('test') {
 <p>通常，所有非单词字符都保留用于“特殊”语法，你必须用引号引起它们或用反斜杠转义它们以获得其字面含义。 例如正则表达式中的 <code>\&lt;</code> 或 <code>'&lt;'</code> 匹配小于号。 引用可以应用于多个字符，因此正则表达式中的 <code>'a+b'</code> 与 a 匹配，后跟加号 <code>+</code>，后跟 b。单词字符（字母，数字和下划线）总是按字面意思匹配。</p>
 </div>
 <div class="sect3">
-<h4 id="_字符类">8.6.1. 字符类</h4>
+<h4 id="_字符类">9.1.1. 字符类</h4>
 <div class="paragraph">
 <p>除了文字之外，字符类是正则表达式的常见构建块。 有许多预定义的字符类，以反斜杠的形式后跟一个小写的单个字母; 例如，<code>\d</code> 匹配一个数字。 它的反转使用大写字母，所以`\D` 匹配任何不是数字的字符。</p>
 </div>
@@ -3303,7 +3330,7 @@ multi sub MAIN('test') {
 </table>
 </div>
 <div class="sect3">
-<h4 id="_量词">8.6.2. 量词</h4>
+<h4 id="_量词">9.1.2. 量词</h4>
 <div class="paragraph">
 <p>只匹配一个重复的东西很无聊，所以正则表达式提供量词。 量词表示前一个正则表达式必须匹配的频率。</p>
 </div>
@@ -3340,7 +3367,7 @@ multi sub MAIN('test') {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_备选分支">8.6.3. 备选分支</h4>
+<h4 id="_备选分支">9.1.3. 备选分支</h4>
 <div class="paragraph">
 <p>任何一个或者备选分支由垂直条分隔。 例如，<code>\d+ | x</code> 匹配一个或多个数字的序列或字符 x。</p>
 </div>
@@ -3350,7 +3377,7 @@ multi sub MAIN('test') {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_解析_ini_原语">8.7. 解析 INI 原语</h3>
+<h3 id="_解析_ini_原语">9.2. 解析 INI 原语</h3>
 <div class="paragraph">
 <p>回到 INI 解析，我们必须考虑值内允许的字符。列出允许的字符似乎是徒劳的，因为我们很可能忘记一些。相反，我们应该考虑值中不允许的内容。换行当然不是，因为它们引入了下一个键/值对或节标题。也不允许使用分号，因为它们引入了注释。</p>
 </div>
@@ -3488,7 +3515,7 @@ ok "[a\nb]\n"  !~~ /^ &lt;header&gt; $/, 'No newlines inside headers';</code></p
 </div>
 </div>
 <div class="sect2">
-<h3 id="_把东西组装起来">8.8. 把东西组装起来</h3>
+<h3 id="_把东西组装起来">9.3. 把东西组装起来</h3>
 <div class="paragraph">
 <p>INI 文件的 <strong>section</strong> 是标题，后跟一些键/值对或注释行：</p>
 </div>
@@ -3548,7 +3575,7 @@ ok $ini ~~ /^&lt;inifile&gt;$/, 'Can parse a full INI file';</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_回溯">8.9. 回溯</h3>
+<h3 id="_回溯">9.4. 回溯</h3>
 <div class="paragraph">
 <p>对许多程序员来说，正则表达式匹配似乎很神奇。 您只需说明模式，正则表达式引擎就会确定字符串是否与模式匹配。 虽然实现正则表达式引擎是一项棘手的业务，但基础知识并不难理解。
 正则表达式引擎从左到右遍历正则表达式的各个部分，尝试匹配正则表达式的每个部分。 它跟踪到目前为止它在光标中匹配的字符串部分。 如果正则表达式的一部分找不到匹配项，则正则表达式引擎会尝试更改上一个匹配项以占用更少的字符，然后在新位置重试失败的匹配项。
@@ -3599,7 +3626,7 @@ my token inifile { &lt;block&gt; &lt;section&gt;* }</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_grammars">8.10. Grammars</h3>
+<h3 id="_grammars">9.5. Grammars</h3>
 <div class="paragraph">
 <p>这组解析INI文件的正则表达式并不是封装和可重用性的顶峰。
 因此，我们将探索语法，一种将正则表达式组合成类结构的功能，以及如何从成功匹配中提取结构化数据。
@@ -3649,7 +3676,7 @@ my token inifile { &lt;block&gt; &lt;section&gt;* }</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_从匹配中提取数据">8.11. 从匹配中提取数据</h3>
+<h3 id="_从匹配中提取数据">9.6. 从匹配中提取数据</h3>
 <div class="paragraph">
 <p>到目前为止，IniFile语法仅检查给定输入是否与语法匹配。 但是，当它匹配时，我们真的希望解析结果在一个易于使用的数据结构中。 例如，我们可以翻译这个示例INI文件：</p>
 </div>
@@ -3841,14 +3868,14 @@ my $result = IniFile.parse-ini($text);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_生成好的错误信息">8.12. 生成好的错误信息</h3>
+<h3 id="_生成好的错误信息">9.7. 生成好的错误信息</h3>
 <div class="paragraph">
 <p>良好的错误消息对任何产品的用户体验都至关重要。 解析器也不例外。 考虑第5行的消息Square括号[在第3行用花括号封闭}，而不是Python的惰性和泛型SyntaxError：无效语法。
 除了文本消息之外，了解解析错误的位置有助于找出错误的原因。
 我们将使用我们的INI文件解析器作为示例，探索如何从Raku语法生成更好的解析错误消息。</p>
 </div>
 <div class="sect3">
-<h4 id="_failure_is_normal">8.12.1. Failure Is Normal</h4>
+<h4 id="_failure_is_normal">9.7.1. Failure Is Normal</h4>
 <div class="paragraph">
 <p>在我们开始之前，重要的是要意识到在基于语法的解析器中，正则表达式无法匹配是正常的，即使在整体成功的解析中也是如此。
 让我们回想一下解析器的一部分：</p>
@@ -3912,7 +3939,7 @@ other=stuff</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_检测有害失败">8.12.2. 检测有害失败</h4>
+<h4 id="_检测有害失败">9.7.2. 检测有害失败</h4>
 <div class="paragraph">
 <p>要生成良好的解析错误消息，您必须区分预期和意外的解析失败。 如前所述，单个正则表达式或令牌的匹配失败通常不表示输入格式错误。 但是你可以找到你知道的点，一旦正则表达式引擎到达这一点，其余的匹配必须成功。
 如果你记得对：</p>
@@ -3968,7 +3995,7 @@ other=stuff</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_提供上下文">8.12.3. 提供上下文</h4>
+<h4 id="_提供上下文">9.7.3. 提供上下文</h4>
 <div class="paragraph">
 <p>对于较大的输入，我们确实要打印行号。 为了计算，我们
 需要获取目标字符串，该字符串可通过方法目标获得：</p>
@@ -4041,7 +4068,7 @@ method error($msg) {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_解析匹配对的缺点">8.12.4. 解析匹配对的缺点</h4>
+<h4 id="_解析匹配对的缺点">9.7.4. 解析匹配对的缺点</h4>
 <div class="paragraph">
 <p>由于它是如此常见的任务，Raku语法具有特殊的目标匹配语法，用于将一对分隔符与它们之间的某些内容进行匹配。 在INI文件示例中，这是一对括号，它们之间有一个节头。
 我们可以改变</p>
@@ -4078,7 +4105,7 @@ method error($msg) {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_编写你自己的_grammars">8.13. 编写你自己的 Grammars</h3>
+<h3 id="_编写你自己的_grammars">9.8. 编写你自己的 Grammars</h3>
 <div class="paragraph">
 <p>解析是一项必须学习的技能，大多与您的普通编程技能不同。 所以我鼓励你从一些小的东西开始，比如CSV的解析器或逗号分隔的值.9很容易一次性写出一个完整的语法，但我建议从解析一些原子开始（就像一个单元格的 两个逗号之间的数据），测试它，然后才进入下一个逗号。
 即使在像CSV这样看似简单的东西中，也会出现一些复杂性。 例如，您可以允许引用的字符串本身可以包含分隔符，以及一个转义字符，允许您在引用的字符串中使用引号字符。
@@ -4086,7 +4113,7 @@ method error($msg) {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_8">8.14. 总结</h3>
+<h3 id="_总结_8">9.9. 总结</h3>
 <div class="paragraph">
 <p>Raku允许正则表达式重用，将它们视为一等公民，允许它们像普通例程一样被命名和调用。 通过允许正则表达式内的空白来消除进一步的混乱。
 这些功能允许您编写正则表达式来解析正确的文件格式甚至编程语言。 语法允许您构建，重用和封装正则表达式。
@@ -5078,6 +5105,21 @@ you learn enough to perform most programming tasks in Raku, and more importantly
 </div>
 <div class="footnote" id="_footnotedef_47">
 <a href="#_footnoteref_47">47</a>. <a href="https://github.com/timo/json_fast" class="bare">https://github.com/timo/json_fast</a>
+</div>
+<div class="footnote" id="_footnotedef_48">
+<a href="#_footnoteref_48">48</a>. <a href="https://docs.raku.org/type/Promise" class="bare">https://docs.raku.org/type/Promise</a>
+</div>
+<div class="footnote" id="_footnotedef_49">
+<a href="#_footnoteref_49">49</a>. <a href="https://docs.raku.org/type/Channel" class="bare">https://docs.raku.org/type/Channel</a>
+</div>
+<div class="footnote" id="_footnotedef_50">
+<a href="#_footnoteref_50">50</a>. <a href="https://docs.raku.org/type/Supply" class="bare">https://docs.raku.org/type/Supply</a>
+</div>
+<div class="footnote" id="_footnotedef_51">
+<a href="#_footnoteref_51">51</a>. <a href="https://en.wikipedia.org/wiki/Observer_pattern" class="bare">https://en.wikipedia.org/wiki/Observer_pattern</a>
+</div>
+<div class="footnote" id="_footnotedef_52">
+<a href="#_footnoteref_52">52</a>. <a href="https://docs.raku.org/type/Supply#method_act" class="bare">https://docs.raku.org/type/Supply#method_act</a>
 </div>
 </div>
 
