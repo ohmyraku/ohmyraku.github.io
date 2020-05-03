@@ -158,22 +158,26 @@ if (theme && theme !== "1") {
 <li><a href="#_持久化存储">7.1. 持久化存储</a></li>
 <li><a href="#_开发存储后端">7.2. 开发存储后端</a></li>
 <li><a href="#_使用存储后端">7.3. 使用存储后端</a></li>
-<li><a href="#_发展的空间">7.4. 发展的空间</a></li>
+<li><a href="#_扩展空间">7.4. 扩展空间</a></li>
 <li><a href="#_总结_7">7.5. 总结</a></li>
-<li><a href="#_变量和作用域">7.6. 变量和作用域</a></li>
-<li><a href="#_子例程">7.7. 子例程</a></li>
-<li><a href="#_类和对象">7.8. 类和对象</a></li>
-<li><a href="#_并发">7.9. 并发</a></li>
-<li><a href="#_展望">7.10. 展望</a></li>
-<li><a href="#_正则表达式基础">7.11. 正则表达式基础</a></li>
-<li><a href="#_解析_ini_原语">7.12. 解析 INI 原语</a></li>
-<li><a href="#_把东西组装起来">7.13. 把东西组装起来</a></li>
-<li><a href="#_回溯">7.14. 回溯</a></li>
-<li><a href="#_grammars">7.15. Grammars</a></li>
-<li><a href="#_从匹配中提取数据">7.16. 从匹配中提取数据</a></li>
-<li><a href="#_生成好的错误信息">7.17. 生成好的错误信息</a></li>
-<li><a href="#_编写你自己的_grammars">7.18. 编写你自己的 Grammars</a></li>
-<li><a href="#_总结_8">7.19. 总结</a></li>
+</ul>
+</li>
+<li><a href="#_回顾_raku_基础知识">8. 回顾 Raku 基础知识</a>
+<ul class="sectlevel2">
+<li><a href="#_变量和作用域">8.1. 变量和作用域</a></li>
+<li><a href="#_子例程">8.2. 子例程</a></li>
+<li><a href="#_类和对象">8.3. 类和对象</a></li>
+<li><a href="#_并发">8.4. 并发</a></li>
+<li><a href="#_展望">8.5. 展望</a></li>
+<li><a href="#_正则表达式基础">8.6. 正则表达式基础</a></li>
+<li><a href="#_解析_ini_原语">8.7. 解析 INI 原语</a></li>
+<li><a href="#_把东西组装起来">8.8. 把东西组装起来</a></li>
+<li><a href="#_回溯">8.9. 回溯</a></li>
+<li><a href="#_grammars">8.10. Grammars</a></li>
+<li><a href="#_从匹配中提取数据">8.11. 从匹配中提取数据</a></li>
+<li><a href="#_生成好的错误信息">8.12. 生成好的错误信息</a></li>
+<li><a href="#_编写你自己的_grammars">8.13. 编写你自己的 Grammars</a></li>
+<li><a href="#_总结_8">8.14. 总结</a></li>
 </ul>
 </li>
 </ul>
@@ -2693,20 +2697,21 @@ $ zef install Test::Scheduler</code></pre>
 <h2 id="_有状态的_silent_cron">7. 有状态的 Silent Cron</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>在上一章中，我们查看了silent-cron，它是一个外部程序的包装器，在它们的退出状态为零时使它们静音。 但为了使它真正实用，它也应该使偶尔的失败沉默。
-外部API失败，网络变得拥挤，并且发生其他阻止作业成功的事情，因此需要某种重试机制。 在cron工作的情况下，cron已经负责定期重试工作，因此silent-cron应该只是抑制偶然的错误。 另一方面，如果作业一致失败，这通常是管理员或开发人员应该研究的内容，因此这是一个值得报告的问题。
-要实现此功能，silent-cron需要在不同的运行之间存储持久状态。 它需要记录当前运行的结果，然后确定故障历史是否符合“偶尔”的条件。</p>
+<p>在上一章中，我们看了一下 <code>silent-cron</code>，它是一个包裹外部程序的封装器，可以在外部程序退出状态为零的情况下使其静音。但为了使其真正实用，它还应该对偶尔发生的故障进行静音。</p>
+</div>
+<div class="paragraph">
+<p>外部 API 失败，网络拥塞，以及其他事情的发生会使作业无法成功，所以某种重试机制是可取的。如果是 cron 作业，cron 已经负责定期重试作业，所以 <code>silent-cron</code> 应该只是抑制偶尔的错误。另一方面，如果一个作业持续失败，这通常是管理员或开发人员应该研究的事情，所以这是一个值得报告的问题。</p>
+</div>
+<div class="paragraph">
+<p>为了实现这个功能，<code>silent-cron</code> 需要在独立运行之间存储持久状态。它需要记录当前运行的结果，然后决定故障历史记录是否符合 "偶然性"。</p>
 </div>
 <div class="sect2">
 <h3 id="_持久化存储">7.1. 持久化存储</h3>
 <div class="paragraph">
-<p>存储后端需要编写和检索结构化数据，并通过锁定保护对状态文件的并发访问。 这种存储后端的一个很好的库是SQLite，1是一个零维护的SQL引擎，可以作为C库使用。 它是公共领域的软件，并且在大多数主流浏览器，操作系统甚至是一些航空公司中使用
-Raku允许您通过DBIish访问SQLite的功能，3这是一个通用数据库接口，具有SQLite，MySQL，PostgreSQL的后端驱动程序，
-和Oracle DB。 要使用它，首先要确保安装了SQLite3，包括其头文件。 例如，在基于Debian的Linux系统上，您可以使用apt-get install libsqlite3-dev实现此目的。 如果您使用的是Rakudo Star发行版，则DBIish已经可用。 如果没有，您可以使用其中一个模块安装程序来检索和安装它：zef install DBIish。</p>
+<p>存储后端需要写入和检索结构化数据，并通过锁定保护状态文件的并发访问。对于这样的存储后端来说，一个很好的库是 SQLite，<sup class="footnote">[<a id="_footnoteref_42" class="footnote" href="#_footnotedef_42" title="View footnote.">42</a>]</sup>它是一个零维护的 SQL 引擎，以 C 语言库的形式提供。它是公共领域的软件，在大多数主流的浏览器、操作系统，甚至一些飞机上<sup class="footnote">[<a id="_footnoteref_43" class="footnote" href="#_footnotedef_43" title="View footnote.">43</a>]</sup>都有使用。</p>
 </div>
 <div class="paragraph">
-<p>要使用DBIish的SQLite后端，首先必须创建一个数据库
-通过选择后端并提供连接信息来处理：</p>
+<p>Raku 通过 DBIish<sup class="footnote">[<a id="_footnoteref_44" class="footnote" href="#_footnotedef_44" title="View footnote.">44</a>]</sup> 提供了 SQLite 的功能，它是一个通用的数据库接口，带有 SQLite、MySQL、PostgreSQL 和 Oracle DB 的后端驱动。要使用它，首先确保 SQLite3 已经安装好，包括头文件。例如，在基于 Debian 的 Linux 系统中，你可以通过 <code>apt-get install libsqlite3-dev</code> 来实现。如果你使用的是 Rakudo Star 发行版，DBIish 已经可用。如果不是，你可以使用其中一个模块安装程序来获取并安装它：<code>zef install DBIish</code>。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2715,8 +2720,7 @@ my $dbh = DBIish.connect('SQLite', :database('database-file.sqlite3'));</code></
 </div>
 </div>
 <div class="paragraph">
-<p>连接到尚不存在的数据库文件会创建该文件。
-一次性SQL语句可以直接在数据库句柄上执行：</p>
+<p>要使用 DBIish 的 SQLite 后端，首先必须通过选择后端并提供连接信息来创建数据库句柄。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2724,8 +2728,10 @@ my $dbh = DBIish.connect('SQLite', :database('database-file.sqlite3'));</code></
 </div>
 </div>
 <div class="paragraph">
-<p>的？ 在SQL中是一个占位符，它作为do方法的单独参数传递到带外，这可以避免SQL注入漏洞等潜在错误。
-查询倾向于首先准备一个返回语句句柄的语句。 您可以执行一次或多次语句，并在每次执行调用后检索结果行：</p>
+<p>SQL中的 <code>?</code> 是一个占位符，作为独立的参数传递给 <code>do</code> 方法的带外参数，这样可以避免 SQL 注入漏洞等潜在的错误。</p>
+</div>
+<div class="paragraph">
+<p>查询的工作方式往往是先准备一个语句，返回一个语句句柄。你可以一次或多次执行一条语句，每次执行调用后都可以检索结果行。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2742,9 +2748,13 @@ $sth.finish;</code></pre>
 <div class="sect2">
 <h3 id="_开发存储后端">7.2. 开发存储后端</h3>
 <div class="paragraph">
-<p>我们不应该只将所有存储处理代码填充到子MAIN中; 我们应该仔细考虑为存储后端创建有用的API。 首先，我们只需要两个功能：插入作业执行的结果，并检索最新的结果。
-由于silent-cron可以用于保护同一台机器上的多个cron作业，因此我们可能需要一些东西来区分不同的作业，这样它们中的一个成功就不会阻止错误报告一个不断失败的作业。 为此，我们引入了一个作业名称，它可以默认为正在执行的命令（包括参数），但可以在命令行中显式设置。
-存储后端的API可能如下所示：</p>
+<p>我们不应该把所有的存储处理代码都塞到子例程 MAIN 中，而是应该仔细考虑为存储后端创建一个有用的 API。起初，我们只需要两块功能：插入一个作业执行的结果，以及检索最近的结果。</p>
+</div>
+<div class="paragraph">
+<p>因为 silent-cron 可以用来守护同一台机器上的多个 cron 作业，所以我们可能需要一些东西来区分不同的作业，以便其中一个成功的作业不会阻止一个不断失败的作业报错。为此，我们引入了一个作业名称，它可以默认为正在执行的命令（包括参数），但可以在命令行中明确设置。</p>
+</div>
+<div class="paragraph">
+<p>存储后端的 API 可以看成是这样的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2757,8 +2767,10 @@ my @last-results = $repo.tail(5);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此API并非特定于SQLite后端; 与纯文本文件一起使用的存储后端可以具有完全相同的API。
-我们来实现这个API。 首先，我们需要从前面的用法示例中显而易见的类和两个属性：</p>
+<p>这个 API 完全不是 SQLite 后端特有的，一个使用纯文本文件的存储后端也可以有完全相同的 API。</p>
+</div>
+<div class="paragraph">
+<p>让我们来实现这个 API。首先我们需要类和两个属性，这两个属性在前面的使用示例中应该很明显。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2769,7 +2781,7 @@ my @last-results = $repo.tail(5);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>要实现insert方法，我们需要连接到数据库并创建相关表（如果它尚不存在）。</p>
+<p>为了实现 <code>insert</code> 方法，我们需要连接到数据库并创建相关的表，如果表还不存在的话，那么我们需要连接到数据库并创建相关的表。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2782,9 +2794,13 @@ my @last-results = $repo.tail(5);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此代码使用私有属性$！db来缓存数据库句柄和私有方法！db来创建句柄（如果它还不存在）。
-私有方法声明为普通方法，但名称以感叹号开头。 要调用一个，请用方法调用点替换感叹号; 换句话说，使用self！db（）而不是self.db（）。
-！db方法还调用下一个私有方法！create-schema，它创建存储表和一些索引：</p>
+<p>这段代码使用一个私有属性 <code>$!db</code> 来缓存数据库句柄，如果还不存在，则使用一个私有方法 <code>!db</code> 来创建句柄。</p>
+</div>
+<div class="paragraph">
+<p>私有方法的声明与普通方法一样，只是名称以感叹号开始。要调用一个方法，用方法调用点代替感叹号；换句话说，用 <code>self!db()</code> 代替 <code>self.db()</code>。</p>
+</div>
+<div class="paragraph">
+<p><code>!db</code> 方法还调用下一个私有方法，即 <code>!create-schema</code>，它创建了存储表和一些索引。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2813,7 +2829,7 @@ method !create-schema() {
 </div>
 </div>
 <div class="paragraph">
-<p>多行字符串文字最好用heredoc4语法编写。 qq：to / DELIMITER /告诉Raku完成解析当前行，这样你仍然可以关闭方法调用括号并添加语句结束分号。 下一行开始字符串文字，直到Raku自己在一行上找到分隔符。 从字符串文字的每一行中删除前导空格的次数与缩进的结尾分隔符一样多。</p>
+<p>多行字符串字符最好用 heredoc<sup class="footnote">[<a id="_footnoteref_45" class="footnote" href="#_footnotedef_45" title="View footnote.">45</a>]</sup>语法来写。  <code>qq:to/DELIMITER/</code> 告诉 Raku 要完成对当前行的解析，这样你仍然可以关闭方法调用的小括号，并添加语句结束分号。下一行开始字符串字面量，一直到 Raku 在一行上找到分界符为止。字符串字段的每一行的前导空格都会被剥去，缩进的分界符越多越好。</p>
 </div>
 <div class="paragraph">
 <p>因此:</p>
@@ -2827,7 +2843,7 @@ method !create-schema() {
 </div>
 </div>
 <div class="paragraph">
-<p>产生如下输出</p>
+<p>产生如下输出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2836,7 +2852,7 @@ method !create-schema() {
 </div>
 </div>
 <div class="paragraph">
-<p>现在我们有了一个有效的数据库连接并且知道数据库表存在，插入新记录变得容易：</p>
+<p>现在我们有了一个工作的数据库连接，知道了数据库表的存在，插入一条新记录就变得简单了。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2849,8 +2865,7 @@ method !create-schema() {
 </div>
 </div>
 <div class="paragraph">
-<p>选择最近的记录是一项更多的工作，部分原因是因为我们
-需要将表行转换为对象：</p>
+<p>选择最近的记录比较麻烦，部分原因是我们需要将表的行转换为对象。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2874,14 +2889,16 @@ method !create-schema() {
 </div>
 </div>
 <div class="paragraph">
-<p>尾部方法中的最后一个语句值得特别关注。 $ sth.allrows（：hash-of-hash）产生了数据库，其中包含了数据。 这个列表是懒惰的，也就是说，它是按需生成的。 惰性列表是一个非常方便的功能，因为它们允许您使用具有相同API的迭代器和列表。 例如，你可以在每个文件中找到$ handle.lines  - &gt; $ line {&#8230;&#8203;}，而你的方法也不会将整个文件记录到内存中; 相反，它可以在访问时读取一行。
-$ sth.allrows（&#8230;&#8203;）是懒惰的，之后的.map调用也是如此。 map通过调用传递给它的代码对象，一次转换一个列表。 这也是懒惰的。 因此，当实际访问结果列表的元素时，SQLite仅从数据库文件中检索行。</p>
+<p>尾部方法中的最后一条语句值得注意一下。<code>$sth.allrows(:array-of-hash)</code> 将数据库中的记录生成为一个散列值列表。这个列表是惰性的，也就是说，它是按需生成的。懒人列表是一个非常方便的功能，因为它允许你用相同的 API 使用迭代器和列表。例如，当读取文件中的 <code>lines</code> 时，你可以写 <code>$handle.lines &#8594; $line { &#8230;&#8203; }</code>，行方法不需要将整个文件加载到内存中，而是可以在访问时读取一行。</p>
+</div>
+<div class="paragraph">
+<p><code>$sth.allrows(&#8230;&#8203;)</code> 是惰性的，后面的 <code>.map</code> 调用也是惰性的，<code>map</code> 通过调用传递给它的代码对象来变换一个个元素。而这也是懒惰地完成的。所以 SQLite 只有在实际访问结果列表中的元素时，才会从数据库文件中检索行。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_使用存储后端">7.3. 使用存储后端</h3>
 <div class="paragraph">
-<p>有了存储API，就可以使用它了：</p>
+<p>有了存储 API，就该用了:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2906,29 +2923,37 @@ $ sth.allrows（&#8230;&#8203;）是懒惰的，之后的.map调用也是如此�
 </div>
 </div>
 <div class="paragraph">
-<p>现在，成功几次然后连续两次失败的作业不会产生任何错误输出; 只有连续执行的第三次失败才会产生输出。 您可以使用&#8212;&#8203;tries = 5在命令行上覆盖它。
-MAINsubroutine使用构造$ var // = EXPR。// standfor defined-OR，如果它有一个定义的值，它返回左侧。 否则，它会计算并返回EXPR的值。 结合赋值运算符，仅在变量未定义时才评估右侧，然后将表达式的值存储在变量中。 这是确保变量获取值的简便方法，甚至是编写缓存的简短方法。</p>
+<p>现在，一个作业如果连续成功几次，然后连续失败两次，就不会产生任何错误输出；只有连续第三次执行失败，才会产生输出。你可以在命令行中用 <code>--tries=5</code> 来覆盖。</p>
+</div>
+<div class="paragraph">
+<p>MAIN 子例程使用构造 <code>$var //= EXPR</code>。 <code>//</code> 代表 <strong>defined-OR,</strong>，所以如果有定义的值，它会返回左侧的值。否则，它计算并返回 EXPR 的值。结合赋值运算符，只有在变量未定义的情况下，它才会对右边的值进行计算，然后将表达式的值存储在变量中。这是一个确保变量得到一个值的方便方法，甚至可以说是写缓存的一个简短方法。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_发展的空间">7.4. 发展的空间</h3>
+<h3 id="_扩展空间">7.4. 扩展空间</h3>
 <div class="paragraph">
-<p>必须调查cron作业失败原因的系统管理员可能对该作业的历史感兴趣。 您可以实现一个命令，列出上次作业运行，成功或失败，退出代码或可能的运行时等等。
-或者你可以研究一个不同的后端。 如果要将状态存储在JSON文件而不是SQLite中，该怎么办？ 或启用两者？ （提示：您可以使用JSON :: Tiny5或JSON :: Fast6模块。）</p>
+<p>一个系统管理员如果要调查一个 cron 作业失败的原因，可能会对该作业的历史记录感兴趣。你可以实现一个命令，列出最后的作业运行情况、成功或失败、退出代码，或者可能是运行时间等等。</p>
+</div>
+<div class="paragraph">
+<p>或者你可以研究一个不同的后端。如果你想把状态存储在 JSON 文件而不是 SQLite 中呢？或者两者都启用呢？(提示：你可以使用JSON::Tiny<sup class="footnote">[<a id="_footnoteref_46" class="footnote" href="#_footnotedef_46" title="View footnote.">46</a>]</sup>或JSON::Fast<sup class="footnote">[<a id="_footnoteref_47" class="footnote" href="#_footnotedef_47" title="View footnote.">47</a>]</sup>模块)。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_总结_7">7.5. 总结</h3>
 <div class="paragraph">
-<p>我们已经讨论过DBIish，一个带有可插拔后端的数据库API，并探讨了如何将它与SQLite一起用来存储持久数据。 在这个过程中，我们还遇到了懒惰列表和一种名为heredocs的新形式的字符串文字。
-== 回顾 Raku 基础知识</p>
+<p>我们已经讨论过 DBIish，这是一个具有可插拔后端的数据库 API，并探讨了用它和 SQLite 来存储持久化数据。在这个过程中，我们还接触到了惰性列表和一种新形式的字符串字库，叫做 heredocs。</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_回顾_raku_基础知识">8. 回顾 Raku 基础知识</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>在前面的章节中，我们讨论了一些与Raku机制相互交叉的例子，这些例子使它们起作用。 在这里，我想总结和深化我们迄今为止所涉及的Raku知识，从原始示例中删除。</p>
 </div>
-</div>
 <div class="sect2">
-<h3 id="_变量和作用域">7.6. 变量和作用域</h3>
+<h3 id="_变量和作用域">8.1. 变量和作用域</h3>
 <div class="paragraph">
 <p>在Raku中，变量名由sigil，$，@，％或＆组成，后跟标识符。 sigil意味着类型约束，其中$是最常见的约束
 （默认情况下没有限制），@表示数组，％表示哈希（关联数组/映射），＆表示代码对象。
@@ -2938,7 +2963,7 @@ MAINsubroutine使用构造$ var // = EXPR。// standfor defined-OR，如果它�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_子例程">7.7. 子例程</h3>
+<h3 id="_子例程">8.2. 子例程</h3>
 <div class="paragraph">
 <p>子程序或简称子程序是一段具有自己范围的代码，通常也是一个名称。 它有一个签名，指定在调用时必须传递的值：</p>
 </div>
@@ -3040,7 +3065,7 @@ multi subs是几个具有相同名称但签名不同的子程序。 编译器在
 </div>
 </div>
 <div class="sect2">
-<h3 id="_类和对象">7.8. 类和对象</h3>
+<h3 id="_类和对象">8.3. 类和对象</h3>
 <div class="paragraph">
 <p>类声明遵循与子例程声明相同的语法模式：关键字class，后跟名称，后跟大括号中的主体：</p>
 </div>
@@ -3103,7 +3128,7 @@ say $c.lines; # Output: [42]</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_并发">7.9. 并发</h3>
+<h3 id="_并发">8.4. 并发</h3>
 <div class="paragraph">
 <p>Raku为并发和并行执行提供了高级原语。 我们鼓励您使用start运行计算，而不是显式生成新线程，它返回Promise.1。这是一个承诺未来计算将产生结果的对象。 因此，状态可以是Planned，Kept或Broken。 您可以链接承诺，组合它们并等待它们。
 在后台，调度程序将此类计算分发到操作系统级线程。 默认调度程序是一个线程池调度程序，其中包含可供使用的线程数的上限。
@@ -3112,7 +3137,7 @@ map，grep，throttle或者延迟，并使用他们的</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_展望">7.10. 展望</h3>
+<h3 id="_展望">8.5. 展望</h3>
 <div class="paragraph">
 <p>当您了解本章中讨论的主题并深入了解内置类型时，您应该熟悉Raku的基础知识并能够编写自己的程序。
 接下来，我们将研究Raku的优势之一：解析，通过正则表达式和语法。
@@ -3154,7 +3179,7 @@ my %hash = Config::INI::parse($ini_string);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_正则表达式基础">7.11. 正则表达式基础</h3>
+<h3 id="_正则表达式基础">8.6. 正则表达式基础</h3>
 <div class="paragraph">
 <p>正则表达式是一段代码，用作具有共同结构的字符串的模式。 它源于计算机科学概念中的正则表达式，但比纯正则表达式提供了更多的构造, 允许并扩展了一些功能，使它们更容易使用。</p>
 </div>
@@ -3191,7 +3216,7 @@ multi sub MAIN('test') {
 <p>通常，所有非单词字符都保留用于“特殊”语法，你必须用引号引起它们或用反斜杠转义它们以获得其字面含义。 例如正则表达式中的 <code>\&lt;</code> 或 <code>'&lt;'</code> 匹配小于号。 引用可以应用于多个字符，因此正则表达式中的 <code>'a+b'</code> 与 a 匹配，后跟加号 <code>+</code>，后跟 b。单词字符（字母，数字和下划线）总是按字面意思匹配。</p>
 </div>
 <div class="sect3">
-<h4 id="_字符类">7.11.1. 字符类</h4>
+<h4 id="_字符类">8.6.1. 字符类</h4>
 <div class="paragraph">
 <p>除了文字之外，字符类是正则表达式的常见构建块。 有许多预定义的字符类，以反斜杠的形式后跟一个小写的单个字母; 例如，<code>\d</code> 匹配一个数字。 它的反转使用大写字母，所以`\D` 匹配任何不是数字的字符。</p>
 </div>
@@ -3278,7 +3303,7 @@ multi sub MAIN('test') {
 </table>
 </div>
 <div class="sect3">
-<h4 id="_量词">7.11.2. 量词</h4>
+<h4 id="_量词">8.6.2. 量词</h4>
 <div class="paragraph">
 <p>只匹配一个重复的东西很无聊，所以正则表达式提供量词。 量词表示前一个正则表达式必须匹配的频率。</p>
 </div>
@@ -3315,7 +3340,7 @@ multi sub MAIN('test') {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_备选分支">7.11.3. 备选分支</h4>
+<h4 id="_备选分支">8.6.3. 备选分支</h4>
 <div class="paragraph">
 <p>任何一个或者备选分支由垂直条分隔。 例如，<code>\d+ | x</code> 匹配一个或多个数字的序列或字符 x。</p>
 </div>
@@ -3325,7 +3350,7 @@ multi sub MAIN('test') {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_解析_ini_原语">7.12. 解析 INI 原语</h3>
+<h3 id="_解析_ini_原语">8.7. 解析 INI 原语</h3>
 <div class="paragraph">
 <p>回到 INI 解析，我们必须考虑值内允许的字符。列出允许的字符似乎是徒劳的，因为我们很可能忘记一些。相反，我们应该考虑值中不允许的内容。换行当然不是，因为它们引入了下一个键/值对或节标题。也不允许使用分号，因为它们引入了注释。</p>
 </div>
@@ -3463,7 +3488,7 @@ ok "[a\nb]\n"  !~~ /^ &lt;header&gt; $/, 'No newlines inside headers';</code></p
 </div>
 </div>
 <div class="sect2">
-<h3 id="_把东西组装起来">7.13. 把东西组装起来</h3>
+<h3 id="_把东西组装起来">8.8. 把东西组装起来</h3>
 <div class="paragraph">
 <p>INI 文件的 <strong>section</strong> 是标题，后跟一些键/值对或注释行：</p>
 </div>
@@ -3523,7 +3548,7 @@ ok $ini ~~ /^&lt;inifile&gt;$/, 'Can parse a full INI file';</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_回溯">7.14. 回溯</h3>
+<h3 id="_回溯">8.9. 回溯</h3>
 <div class="paragraph">
 <p>对许多程序员来说，正则表达式匹配似乎很神奇。 您只需说明模式，正则表达式引擎就会确定字符串是否与模式匹配。 虽然实现正则表达式引擎是一项棘手的业务，但基础知识并不难理解。
 正则表达式引擎从左到右遍历正则表达式的各个部分，尝试匹配正则表达式的每个部分。 它跟踪到目前为止它在光标中匹配的字符串部分。 如果正则表达式的一部分找不到匹配项，则正则表达式引擎会尝试更改上一个匹配项以占用更少的字符，然后在新位置重试失败的匹配项。
@@ -3574,7 +3599,7 @@ my token inifile { &lt;block&gt; &lt;section&gt;* }</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_grammars">7.15. Grammars</h3>
+<h3 id="_grammars">8.10. Grammars</h3>
 <div class="paragraph">
 <p>这组解析INI文件的正则表达式并不是封装和可重用性的顶峰。
 因此，我们将探索语法，一种将正则表达式组合成类结构的功能，以及如何从成功匹配中提取结构化数据。
@@ -3624,7 +3649,7 @@ my token inifile { &lt;block&gt; &lt;section&gt;* }</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_从匹配中提取数据">7.16. 从匹配中提取数据</h3>
+<h3 id="_从匹配中提取数据">8.11. 从匹配中提取数据</h3>
 <div class="paragraph">
 <p>到目前为止，IniFile语法仅检查给定输入是否与语法匹配。 但是，当它匹配时，我们真的希望解析结果在一个易于使用的数据结构中。 例如，我们可以翻译这个示例INI文件：</p>
 </div>
@@ -3816,14 +3841,14 @@ my $result = IniFile.parse-ini($text);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_生成好的错误信息">7.17. 生成好的错误信息</h3>
+<h3 id="_生成好的错误信息">8.12. 生成好的错误信息</h3>
 <div class="paragraph">
 <p>良好的错误消息对任何产品的用户体验都至关重要。 解析器也不例外。 考虑第5行的消息Square括号[在第3行用花括号封闭}，而不是Python的惰性和泛型SyntaxError：无效语法。
 除了文本消息之外，了解解析错误的位置有助于找出错误的原因。
 我们将使用我们的INI文件解析器作为示例，探索如何从Raku语法生成更好的解析错误消息。</p>
 </div>
 <div class="sect3">
-<h4 id="_failure_is_normal">7.17.1. Failure Is Normal</h4>
+<h4 id="_failure_is_normal">8.12.1. Failure Is Normal</h4>
 <div class="paragraph">
 <p>在我们开始之前，重要的是要意识到在基于语法的解析器中，正则表达式无法匹配是正常的，即使在整体成功的解析中也是如此。
 让我们回想一下解析器的一部分：</p>
@@ -3887,7 +3912,7 @@ other=stuff</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_检测有害失败">7.17.2. 检测有害失败</h4>
+<h4 id="_检测有害失败">8.12.2. 检测有害失败</h4>
 <div class="paragraph">
 <p>要生成良好的解析错误消息，您必须区分预期和意外的解析失败。 如前所述，单个正则表达式或令牌的匹配失败通常不表示输入格式错误。 但是你可以找到你知道的点，一旦正则表达式引擎到达这一点，其余的匹配必须成功。
 如果你记得对：</p>
@@ -3943,7 +3968,7 @@ other=stuff</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_提供上下文">7.17.3. 提供上下文</h4>
+<h4 id="_提供上下文">8.12.3. 提供上下文</h4>
 <div class="paragraph">
 <p>对于较大的输入，我们确实要打印行号。 为了计算，我们
 需要获取目标字符串，该字符串可通过方法目标获得：</p>
@@ -4016,7 +4041,7 @@ method error($msg) {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_解析匹配对的缺点">7.17.4. 解析匹配对的缺点</h4>
+<h4 id="_解析匹配对的缺点">8.12.4. 解析匹配对的缺点</h4>
 <div class="paragraph">
 <p>由于它是如此常见的任务，Raku语法具有特殊的目标匹配语法，用于将一对分隔符与它们之间的某些内容进行匹配。 在INI文件示例中，这是一对括号，它们之间有一个节头。
 我们可以改变</p>
@@ -4053,7 +4078,7 @@ method error($msg) {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_编写你自己的_grammars">7.18. 编写你自己的 Grammars</h3>
+<h3 id="_编写你自己的_grammars">8.13. 编写你自己的 Grammars</h3>
 <div class="paragraph">
 <p>解析是一项必须学习的技能，大多与您的普通编程技能不同。 所以我鼓励你从一些小的东西开始，比如CSV的解析器或逗号分隔的值.9很容易一次性写出一个完整的语法，但我建议从解析一些原子开始（就像一个单元格的 两个逗号之间的数据），测试它，然后才进入下一个逗号。
 即使在像CSV这样看似简单的东西中，也会出现一些复杂性。 例如，您可以允许引用的字符串本身可以包含分隔符，以及一个转义字符，允许您在引用的字符串中使用引号字符。
@@ -4061,7 +4086,7 @@ method error($msg) {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_8">7.19. 总结</h3>
+<h3 id="_总结_8">8.14. 总结</h3>
 <div class="paragraph">
 <p>Raku允许正则表达式重用，将它们视为一等公民，允许它们像普通例程一样被命名和调用。 通过允许正则表达式内的空白来消除进一步的混乱。
 这些功能允许您编写正则表达式来解析正确的文件格式甚至编程语言。 语法允许您构建，重用和封装正则表达式。
@@ -5035,6 +5060,24 @@ you learn enough to perform most programming tasks in Raku, and more importantly
 </div>
 <div class="footnote" id="_footnotedef_41">
 <a href="#_footnoteref_41">41</a>. <a href="https://github.com/jnthn/p6-test-scheduler/issues/1" class="bare">https://github.com/jnthn/p6-test-scheduler/issues/1</a>
+</div>
+<div class="footnote" id="_footnotedef_42">
+<a href="#_footnoteref_42">42</a>. <a href="https://www.sqlite.org/" class="bare">https://www.sqlite.org/</a>
+</div>
+<div class="footnote" id="_footnotedef_43">
+<a href="#_footnoteref_43">43</a>. <a href="http://www.sqlite.org/famous.html" class="bare">http://www.sqlite.org/famous.html</a>
+</div>
+<div class="footnote" id="_footnotedef_44">
+<a href="#_footnoteref_44">44</a>. <a href="https://github.com/perl6/DBIish/" class="bare">https://github.com/perl6/DBIish/</a>
+</div>
+<div class="footnote" id="_footnotedef_45">
+<a href="#_footnoteref_45">45</a>. <a href="https://docs.raku.org/language/quoting#Heredocs:_:to" class="bare">https://docs.raku.org/language/quoting#Heredocs:_:to</a>
+</div>
+<div class="footnote" id="_footnotedef_46">
+<a href="#_footnoteref_46">46</a>. <a href="https://github.com/moritz/json" class="bare">https://github.com/moritz/json</a>
+</div>
+<div class="footnote" id="_footnotedef_47">
+<a href="#_footnoteref_47">47</a>. <a href="https://github.com/timo/json_fast" class="bare">https://github.com/timo/json_fast</a>
 </div>
 </div>
 
