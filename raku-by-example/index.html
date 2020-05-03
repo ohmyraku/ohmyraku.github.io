@@ -141,35 +141,39 @@ if (theme && theme !== "1") {
 <li><a href="#_测试_say">5. 测试 say</a>
 <ul class="sectlevel2">
 <li><a href="#_总结_5">5.1. 总结</a></li>
-<li><a href="#_异步运行命令">5.2. 异步运行命令</a></li>
-<li><a href="#_实现超时">5.3. 实现超时</a></li>
-<li><a href="#_more_on_promises">5.4. More on Promises</a></li>
-<li><a href="#_可能的扩展">5.5. 可能的扩展</a></li>
-<li><a href="#_重构和自动化测试">5.6. 重构和自动化测试</a></li>
-<li><a href="#_总结_6">5.7. 总结</a></li>
 </ul>
 </li>
-<li><a href="#_有状态的_silent_cron">6. 有状态的 Silent Cron</a>
+<li><a href="#_silent_cron_一个_cron_包裹器">6. Silent-Cron, 一个 Cron 包裹器</a>
 <ul class="sectlevel2">
-<li><a href="#_持久化存储">6.1. 持久化存储</a></li>
-<li><a href="#_开发存储后端">6.2. 开发存储后端</a></li>
-<li><a href="#_使用存储后端">6.3. 使用存储后端</a></li>
-<li><a href="#_发展的空间">6.4. 发展的空间</a></li>
-<li><a href="#_总结_7">6.5. 总结</a></li>
-<li><a href="#_变量和作用域">6.6. 变量和作用域</a></li>
-<li><a href="#_子例程">6.7. 子例程</a></li>
-<li><a href="#_类和对象">6.8. 类和对象</a></li>
-<li><a href="#_并发">6.9. 并发</a></li>
-<li><a href="#_展望">6.10. 展望</a></li>
-<li><a href="#_正则表达式基础">6.11. 正则表达式基础</a></li>
-<li><a href="#_解析_ini_原语">6.12. 解析 INI 原语</a></li>
-<li><a href="#_把东西组装起来">6.13. 把东西组装起来</a></li>
-<li><a href="#_回溯">6.14. 回溯</a></li>
-<li><a href="#_grammars">6.15. Grammars</a></li>
-<li><a href="#_从匹配中提取数据">6.16. 从匹配中提取数据</a></li>
-<li><a href="#_生成好的错误信息">6.17. 生成好的错误信息</a></li>
-<li><a href="#_编写你自己的_grammars">6.18. 编写你自己的 Grammars</a></li>
-<li><a href="#_总结_8">6.19. 总结</a></li>
+<li><a href="#_异步运行命令">6.1. 异步运行命令</a></li>
+<li><a href="#_实现超时">6.2. 实现超时</a></li>
+<li><a href="#_more_on_promises">6.3. More on Promises</a></li>
+<li><a href="#_可能的扩展">6.4. 可能的扩展</a></li>
+<li><a href="#_重构和自动化测试">6.5. 重构和自动化测试</a></li>
+<li><a href="#_总结_6">6.6. 总结</a></li>
+</ul>
+</li>
+<li><a href="#_有状态的_silent_cron">7. 有状态的 Silent Cron</a>
+<ul class="sectlevel2">
+<li><a href="#_持久化存储">7.1. 持久化存储</a></li>
+<li><a href="#_开发存储后端">7.2. 开发存储后端</a></li>
+<li><a href="#_使用存储后端">7.3. 使用存储后端</a></li>
+<li><a href="#_发展的空间">7.4. 发展的空间</a></li>
+<li><a href="#_总结_7">7.5. 总结</a></li>
+<li><a href="#_变量和作用域">7.6. 变量和作用域</a></li>
+<li><a href="#_子例程">7.7. 子例程</a></li>
+<li><a href="#_类和对象">7.8. 类和对象</a></li>
+<li><a href="#_并发">7.9. 并发</a></li>
+<li><a href="#_展望">7.10. 展望</a></li>
+<li><a href="#_正则表达式基础">7.11. 正则表达式基础</a></li>
+<li><a href="#_解析_ini_原语">7.12. 解析 INI 原语</a></li>
+<li><a href="#_把东西组装起来">7.13. 把东西组装起来</a></li>
+<li><a href="#_回溯">7.14. 回溯</a></li>
+<li><a href="#_grammars">7.15. Grammars</a></li>
+<li><a href="#_从匹配中提取数据">7.16. 从匹配中提取数据</a></li>
+<li><a href="#_生成好的错误信息">7.17. 生成好的错误信息</a></li>
+<li><a href="#_编写你自己的_grammars">7.18. 编写你自己的 Grammars</a></li>
+<li><a href="#_总结_8">7.19. 总结</a></li>
 </ul>
 </li>
 </ul>
@@ -1754,9 +1758,13 @@ ok 2 - from-date-string</code></pre>
 <h2 id="_测试_say">5. 测试 say</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>在上一章中，我更改了一些代码，以便它不会产生输出，而是在MAIN子中输出，这很方便地进行了测试。
-更改代码以使其更容易测试是合法的做法。 但是如果你必须通过调用say来测试产生输出的代码，那么你可以使用一个小技巧：比如在文件句柄上工作，你可以换掉连接到标准输出的默认文件句柄。 您可以在其位置放置一个虚拟文件句柄来捕获发给它的低级命令，而不是默认值，并记录下来进行测试。
-有一个现成的模块，IO :: String，1但是为了学习我们将看看它是如何工作的：</p>
+<p>在上一章中，我修改了一些代码，让它不产生输出，而是在 MAIN 子例程中做了输出，方便的是没有测试。</p>
+</div>
+<div class="paragraph">
+<p>改变代码以使其更容易测试是一种合理的做法。但如果你确实要测试通过调用 <code>say</code> 来产生输出的代码，有一个小技巧你可以使用：<code>say</code> 在一个文件句柄上工作，你可以把默认的文件句柄换掉，这个句柄是连接到标准输出的。你可以在它的位置上放一个假文件句柄来代替默认的文件句柄，捕捉向它发出的低级命令，并记录下来，供测试用。</p>
+</div>
+<div class="paragraph">
+<p>这里有一个现成的模块，IO:::String<sup class="footnote">[<a id="_footnoteref_22" class="footnote" href="#_footnotedef_22" title="View footnote.">22</a>]</sup>,但为了学习的缘故，我们来看看它是如何工作的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1789,10 +1797,16 @@ is $output, "4242\n", 'doublespeak works';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>使用~string concatenation运算符连接自己的参数。 结果传递给说。
-在引擎盖下，说做一些格式化，然后查找变量$ * OUT。 在sigil之后的*将其标记为动态变量。 动态变量的查找通过调用堆栈，并在每个堆栈框架中查找变量的声明，取其找到的第一个。 然后说在该对象上调用方法print。
-通常，$ * OUT包含IO :: Handle类型的对象，但是say函数并不真正关心它，只要它可以在该对象上调用print方法即可。 这叫做鸭子打字：我们并不关心对象的类型，只要它像鸭子一样嘎嘎叫。 或者在这种情况下，像鸭子一样打印。
-然后加载测试模块，3然后声明要运行多少个测试：</p>
+<p>这段代码的第一部分是我们要测试的函数 -  <code>sub doublespeak</code>。它用 <code>∼</code> 字符串连接运算符将其参数与自身进行连接。结果被传递给 <code>say</code>。</p>
+</div>
+<div class="paragraph">
+<p>在引擎盖下，<code>say</code> 会做一些格式化处理，然后查找变量 <code>$<strong>OUT</code>。sigil 后面的 <code></strong></code> 标志着它是一个动态变量。对动态变量的查找会通过调用栈，在每个栈帧中查找变量的声明，并在每个栈帧中选择第一个找到的变量。</p>
+</div>
+<div class="paragraph">
+<p>通常情况下，<code>$*OUT</code> 包含一个类型为 <code>IO:::Handle`<sup class="footnote">[<a id="_footnoteref_23" class="footnote" href="#_footnotedef_23" title="View footnote.">23</a>]</sup> 的对象，但 `say</code> 函数其实并不关心这个，只要能在这个对象上调用 <code>print</code> 方法就可以了。这就是所谓的鸭子类型化：我们其实并不关心对象的类型，只要它能像鸭子一样呱呱叫就可以了。或者在这个例子中，像鸭子一样打印。</p>
+</div>
+<div class="paragraph">
+<p>然后是测试模块的加载<sup class="footnote">[<a id="_footnoteref_24" class="footnote" href="#_footnotedef_24" title="View footnote.">24</a>]</sup>，接下来就是声明要运行多少个测试。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1801,8 +1815,10 @@ plan 1;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>您可以省略第二行，而是在测试后调用完成测试。 但是，如果测试代码本身可能存在错误，并且没有运行测试，那么最好先预先确定预期测试的数量，以便测试模块或测试工具能够捕获这些错误。
-该示例的下一部分是我们可以用来模拟IO :: Handle的类型的声明：</p>
+<p>你可以省略第二行，在测试之后调用 <code>one-testing</code>。但是，如果测试代码本身有可能出现 bug，没有运行它应该运行的测试，那么事先声明一下预期的测试数量是很好的，这样测试模块或者测试线束就可以抓住这样的错误。</p>
+</div>
+<div class="paragraph">
+<p>接下来的例子是声明一个类型，我们可以用这个类型来模拟 <code>IO::Handle</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1818,9 +1834,13 @@ plan 1;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>class引入了一个类，我的前缀使得名称具有词法作用，就像在我的$ var声明中一样。
-has @！lines声明一个属性，即为OutputCapture类的每个实例单独存在的变量。 的！ 将其标记为属性。 我们可以把它排除在外，但是把它放在那里意味着你总是知道在阅读更大的课程时这个名字的来源。
-@！行的属性以@开头，而不是我们到目前为止看到的其他变量。 @是数组变量的符号。</p>
+<p><code>class</code> 引入了一个类，而 <code>my</code> 前缀使得名称在词法上有了作用域，就像在 <code>my $var</code> 声明中一样。</p>
+</div>
+<div class="paragraph">
+<p><code>has @!</code> 行声明了一个属性，也就是说，对于类 <code>OutputCapture</code> 的每个实例来说，它是一个单独存在的变量。<code>!</code> 标志着它是一个属性。我们可以把它省略掉，但把它放在那里意味着当你读取一个大类时，你总是知道这个名字来自哪里。</p>
+</div>
+<div class="paragraph">
+<p>属性 <code>@!</code> 行是以 <code>@</code> 开头的，而不是像我们到目前为止看到的其他变量那样以 <code>$</code> 开头。<code>@</code> 是数组变量的标志。</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -1863,7 +1883,7 @@ has @！lines声明一个属性，即为OutputCapture类的每个实例单独存
 </tbody>
 </table>
 <div class="paragraph">
-<p>您现在可能会看到一个趋势：变量或属性名称的第一个字符表示其粗略类型（标量，数组，＆用于例程，稍后我们将学习哈希值的％），如果第二个字符不是 信，它指明了它的范围。 我们将这第二个角色称为两个角色。 到目前为止，我们已经看到了*动态变量和！ 对于属性。 还有更多：</p>
+<p>你现在可能会看到一个趋势：变量或属性名称的第一个字符表示它的粗略类型（scalar、数组、<code>&amp;</code> 表示例程，稍后我们会了解到 <code>%</code> 表示散列），如果第二个字符不是字母，则表示它的范围。我们把这个第二个字符称为 twigil。到目前为止，我们已经看到了动态变量的 <code>*</code> 和属性的 <code>!</code>。还有更多:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -1902,7 +1922,7 @@ has @！lines声明一个属性，即为OutputCapture类的每个实例单独存
 </tbody>
 </table>
 <div class="paragraph">
-<p>我们的例子的倒数第二个块是这样的：</p>
+<p>我们的例子的倒数第二个块是这样的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1914,11 +1934,14 @@ has @！lines声明一个属性，即为OutputCapture类的每个实例单独存
 </div>
 </div>
 <div class="paragraph">
-<p>do {&#8230;&#8203;}只执行花括号内的代码并返回最后一个语句的值。 与Raku中的所有代码块一样，它还引入了一个新的词法范围。
-新的范围在下一行中派上用场，我的$ * OUT声明了一个新的动态变量$ * OUT，但是它只在块的范围内有效。 它是使用OutputCapture.new初始化的，这是前面声明的类的新实例。 new不是魔术，它只是继承自OutputCapture的超类。 我们没有声明一个，但默认情况下，类的类型为Any4
-一个超类，它提供（除其他外）new方法作为构造函数。
-对doublespeak调用的调用说，然后调用$ * OUT.print。 由于$ * OUT是此动态范围中OutputCapture的一个实例，因此传递的字符串表示在OutputCapture的属性@！行中着陆，其中$ * OUT。 捕获可以再次访问它。
-最后一行，</p>
+<p><code>do { &#8230;&#8203; }</code> 只是执行大括号内的代码，并返回最后一条语句的值。和 Raku 中的所有代码块一样，它也引入了一个新的词法作用域。
+新的作用域在下一行中派上了用场，<code>my $*OUT</code> 声明了一个新的动态变量 <code>$*OUT</code>，但是它只在块的作用域中有效。它是用 <code>OutputCapture.new</code> 来初始化的，它是前面声明的类的一个新实例。<code>new</code> 并不是什么神奇的东西，它只是从 <code>OutputCapture</code> 的超级类中继承过来的。我们没有声明一个，但默认情况下，类会得到类型为 Any<sup class="footnote">[<a id="_footnoteref_25" class="footnote" href="#_footnotedef_25" title="View footnote.">25</a>]</sup> 的超级类，它提供了（除此之外）方法 <code>new</code> 作为构造函数。</p>
+</div>
+<div class="paragraph">
+<p>调用 <code>doublepeak</code> 调用 <code>say</code>，<code>say</code> 又会调用 <code>$*OUT.print</code>。而由于 <code>$*OUT</code> 是这个动态作用域中的 <code>OutputCapture</code> 的一个实例，所以传递给 <code>say</code> 的字符串会落在 <code>OutputCapture</code> 的属性 <code>@!line</code> 中，在这里 <code>$*OUT.captured</code> 可以再次访问它。</p>
+</div>
+<div class="paragraph">
+<p>最后一行:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1926,8 +1949,10 @@ has @！lines声明一个属性，即为OutputCapture类的每个实例单独存
 </div>
 </div>
 <div class="paragraph">
-<p>从Test模块调用is函数。
-在旧的测试传统中，这产生了TAP格式的输出：</p>
+<p>调用测试模块中的 <code>is</code> 函数。</p>
+</div>
+<div class="paragraph">
+<p>在良好的测试传统中，这将产生 TAP 格式的输出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1938,9 +1963,14 @@ ok 1 - doublespeak works</code></pre>
 <div class="sect2">
 <h3 id="_总结_5">5.1. 总结</h3>
 <div class="paragraph">
-<p>我们已经看到say（）使用动态范围的变量$ * OUT作为其输出文件句柄。 出于测试目的，我们可以将其替换为我们制作的对象，这使我们偶然发现了在Raku中如何编写类的第一眼。
-== Silent-Cron, 一个 Cron 包裹器</p>
+<p>我们已经看到，<code>say()</code> 使用一个动态作用域变量 <code>$*OUT</code> 作为它的输出文件句柄。为了测试的目的，我们可以用一个我们自己制作的对象来代替，这让我们偶然发现了 Raku 中类是如何编写的。</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_silent_cron_一个_cron_包裹器">6. Silent-Cron, 一个 Cron 包裹器</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>在Linux和类UNIX系统上，名为cron1的程序会在后台定期执行用户定义的命令。 它用于系统维护任务，例如刷新或删除缓存，旋转和删除旧日志文件等。
 如果这样的命令产生任何输出，cron通常会发送一个包含输出的电子邮件，以便管理员可以查看它并判断是否需要某些操作。
@@ -1953,9 +1983,8 @@ ok 1 - doublespeak works</code></pre>
 $ silent-cron --timeout=5 -- command-that-might-hang</code></pre>
 </div>
 </div>
-</div>
 <div class="sect2">
-<h3 id="_异步运行命令">5.2. 异步运行命令</h3>
+<h3 id="_异步运行命令">6.1. 异步运行命令</h3>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">当你想运行外部命令时，Raku基本上有两个选择：run，2是一个简单的同步接口; 和Proc </dt>
@@ -2103,7 +2132,7 @@ exit $exitcode;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_实现超时">5.3. 实现超时</h3>
+<h3 id="_实现超时">6.2. 实现超时</h3>
 <div class="paragraph">
 <p>在Raku中实现超时的惯用方法是将Promise.anyof组合器与计时器一起使用：</p>
 </div>
@@ -2191,7 +2220,7 @@ else {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_more_on_promises">5.4. More on Promises</h3>
+<h3 id="_more_on_promises">6.3. More on Promises</h3>
 <div class="paragraph">
 <p>如果您使用过其他语言的并发或并行程序，则可能遇到了线程，锁，互斥体和其他低级构造。 这些也存在于Raku中，但不鼓励直接使用它们。
 这种低级原语的问题在于它们不能很好地构成。 您可以拥有两个使用线程的库，并且可以自行运行，但在同一个程序中组合时会导致死锁。 或者不同的组件可能会自己启动线程，当多个这样的组件在同一个进程中聚集在一起时，这会导致太多的线程和高内存消耗。</p>
@@ -2273,18 +2302,18 @@ say @approximations.map({.result}).sum / @approximations;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_可能的扩展">5.5. 可能的扩展</h3>
+<h3 id="_可能的扩展">6.4. 可能的扩展</h3>
 <div class="paragraph">
 <p>如果你想使用silent-cron，你可以添加一个重试机制。 如果命令因外部依赖性（如API或NFS共享）而失败，则外部依赖关系可能需要一段时间才能恢复。 因此，您应该添加二次或指数退避; 也就是说，重试之间的等待时间应以二次方式（1,2,4,9,16 &#8230;&#8203;&#8230;&#8203;）或指数方式（1,2,4,8,16,32 &#8230;&#8203;&#8230;&#8203;）增加。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_重构和自动化测试">5.6. 重构和自动化测试</h3>
+<h3 id="_重构和自动化测试">6.5. 重构和自动化测试</h3>
 <div class="paragraph">
 <p>在我们在下一章中更多地扩展silent-cron之前，是时候重构一下并为它编写一些测试。</p>
 </div>
 <div class="sect3">
-<h4 id="_重构">5.6.1. 重构</h4>
+<h4 id="_重构">6.5.1. 重构</h4>
 <div class="paragraph">
 <p>作为一个简短的提醒，这是程序的样子：</p>
 </div>
@@ -2365,7 +2394,7 @@ method exitcode() { $!exitcode }</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_模拟和测试">5.6.2. 模拟和测试</h4>
+<h4 id="_模拟和测试">6.5.2. 模拟和测试</h4>
 <div class="paragraph">
 <p>既然我们有一种方便的方法从假设的子程序中返回多个值，那么让我们看看这个子程序可能是什么样子：</p>
 </div>
@@ -2582,7 +2611,7 @@ method start {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_提高稳定性和测定时间">5.6.3. 提高稳定性和测定时间</h4>
+<h4 id="_提高稳定性和测定时间">6.5.3. 提高稳定性和测定时间</h4>
 <div class="paragraph">
 <p>依靠测试中的时间总是没有吸引力。 如果时间太短（或者太慢），则可能会在缓慢或负载较重的机器上出现零星的测试失败风险。 如果使用更保守的时间间隔测试，测试可能变得非常慢。
 有一个模块（不与Rakudo一起分发）来减轻这种痛苦：Test :: Scheduler15提供了一个具有虚拟化时间的线程调度程序，允许您编写如下测试：</p>
@@ -2612,7 +2641,7 @@ isa-ok $result, ExecutionResult; # more tests here</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_安装模块">5.6.4. 安装模块</h4>
+<h4 id="_安装模块">6.5.4. 安装模块</h4>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">如果您想试用Test </dt>
@@ -2640,7 +2669,7 @@ $ zef install Test::Scheduler</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_6">5.7. 总结</h3>
+<h3 id="_总结_6">6.6. 总结</h3>
 <div class="paragraph">
 <p>我们已经看到了一个用于运行外部程序的异步API以及如何使用Promises来实现超时。 我们还讨论了如何通过调度程序将promise分发给线程，允许您启动任意数量的promise而不会使计算机过载。
 在测试期间，我们已经看到了带有访问器，三元运算符和匿名类的属性。 已经讨论了线程代码的测试，以及第三方模块可以提供帮助的方式。 最后，我们对模块安装程序zef进行了一次非常小的一瞥。</p>
@@ -2649,7 +2678,7 @@ $ zef install Test::Scheduler</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_有状态的_silent_cron">6. 有状态的 Silent Cron</h2>
+<h2 id="_有状态的_silent_cron">7. 有状态的 Silent Cron</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>在上一章中，我们查看了silent-cron，它是一个外部程序的包装器，在它们的退出状态为零时使它们静音。 但为了使它真正实用，它也应该使偶尔的失败沉默。
@@ -2657,7 +2686,7 @@ $ zef install Test::Scheduler</code></pre>
 要实现此功能，silent-cron需要在不同的运行之间存储持久状态。 它需要记录当前运行的结果，然后确定故障历史是否符合“偶尔”的条件。</p>
 </div>
 <div class="sect2">
-<h3 id="_持久化存储">6.1. 持久化存储</h3>
+<h3 id="_持久化存储">7.1. 持久化存储</h3>
 <div class="paragraph">
 <p>存储后端需要编写和检索结构化数据，并通过锁定保护对状态文件的并发访问。 这种存储后端的一个很好的库是SQLite，1是一个零维护的SQL引擎，可以作为C库使用。 它是公共领域的软件，并且在大多数主流浏览器，操作系统甚至是一些航空公司中使用
 Raku允许您通过DBIish访问SQLite的功能，3这是一个通用数据库接口，具有SQLite，MySQL，PostgreSQL的后端驱动程序，
@@ -2699,7 +2728,7 @@ $sth.finish;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_开发存储后端">6.2. 开发存储后端</h3>
+<h3 id="_开发存储后端">7.2. 开发存储后端</h3>
 <div class="paragraph">
 <p>我们不应该只将所有存储处理代码填充到子MAIN中; 我们应该仔细考虑为存储后端创建有用的API。 首先，我们只需要两个功能：插入作业执行的结果，并检索最新的结果。
 由于silent-cron可以用于保护同一台机器上的多个cron作业，因此我们可能需要一些东西来区分不同的作业，这样它们中的一个成功就不会阻止错误报告一个不断失败的作业。 为此，我们引入了一个作业名称，它可以默认为正在执行的命令（包括参数），但可以在命令行中显式设置。
@@ -2838,7 +2867,7 @@ $ sth.allrows（&#8230;&#8203;）是懒惰的，之后的.map调用也是如此�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_使用存储后端">6.3. 使用存储后端</h3>
+<h3 id="_使用存储后端">7.3. 使用存储后端</h3>
 <div class="paragraph">
 <p>有了存储API，就可以使用它了：</p>
 </div>
@@ -2870,14 +2899,14 @@ MAINsubroutine使用构造$ var // = EXPR。// standfor defined-OR，如果它�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_发展的空间">6.4. 发展的空间</h3>
+<h3 id="_发展的空间">7.4. 发展的空间</h3>
 <div class="paragraph">
 <p>必须调查cron作业失败原因的系统管理员可能对该作业的历史感兴趣。 您可以实现一个命令，列出上次作业运行，成功或失败，退出代码或可能的运行时等等。
 或者你可以研究一个不同的后端。 如果要将状态存储在JSON文件而不是SQLite中，该怎么办？ 或启用两者？ （提示：您可以使用JSON :: Tiny5或JSON :: Fast6模块。）</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_7">6.5. 总结</h3>
+<h3 id="_总结_7">7.5. 总结</h3>
 <div class="paragraph">
 <p>我们已经讨论过DBIish，一个带有可插拔后端的数据库API，并探讨了如何将它与SQLite一起用来存储持久数据。 在这个过程中，我们还遇到了懒惰列表和一种名为heredocs的新形式的字符串文字。
 == 回顾 Raku 基础知识</p>
@@ -2887,7 +2916,7 @@ MAINsubroutine使用构造$ var // = EXPR。// standfor defined-OR，如果它�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_变量和作用域">6.6. 变量和作用域</h3>
+<h3 id="_变量和作用域">7.6. 变量和作用域</h3>
 <div class="paragraph">
 <p>在Raku中，变量名由sigil，$，@，％或＆组成，后跟标识符。 sigil意味着类型约束，其中$是最常见的约束
 （默认情况下没有限制），@表示数组，％表示哈希（关联数组/映射），＆表示代码对象。
@@ -2897,7 +2926,7 @@ MAINsubroutine使用构造$ var // = EXPR。// standfor defined-OR，如果它�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_子例程">6.7. 子例程</h3>
+<h3 id="_子例程">7.7. 子例程</h3>
 <div class="paragraph">
 <p>子程序或简称子程序是一段具有自己范围的代码，通常也是一个名称。 它有一个签名，指定在调用时必须传递的值：</p>
 </div>
@@ -2999,7 +3028,7 @@ multi subs是几个具有相同名称但签名不同的子程序。 编译器在
 </div>
 </div>
 <div class="sect2">
-<h3 id="_类和对象">6.8. 类和对象</h3>
+<h3 id="_类和对象">7.8. 类和对象</h3>
 <div class="paragraph">
 <p>类声明遵循与子例程声明相同的语法模式：关键字class，后跟名称，后跟大括号中的主体：</p>
 </div>
@@ -3062,7 +3091,7 @@ say $c.lines; # Output: [42]</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_并发">6.9. 并发</h3>
+<h3 id="_并发">7.9. 并发</h3>
 <div class="paragraph">
 <p>Raku为并发和并行执行提供了高级原语。 我们鼓励您使用start运行计算，而不是显式生成新线程，它返回Promise.1。这是一个承诺未来计算将产生结果的对象。 因此，状态可以是Planned，Kept或Broken。 您可以链接承诺，组合它们并等待它们。
 在后台，调度程序将此类计算分发到操作系统级线程。 默认调度程序是一个线程池调度程序，其中包含可供使用的线程数的上限。
@@ -3071,7 +3100,7 @@ map，grep，throttle或者延迟，并使用他们的</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_展望">6.10. 展望</h3>
+<h3 id="_展望">7.10. 展望</h3>
 <div class="paragraph">
 <p>当您了解本章中讨论的主题并深入了解内置类型时，您应该熟悉Raku的基础知识并能够编写自己的程序。
 接下来，我们将研究Raku的优势之一：解析，通过正则表达式和语法。
@@ -3113,7 +3142,7 @@ my %hash = Config::INI::parse($ini_string);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_正则表达式基础">6.11. 正则表达式基础</h3>
+<h3 id="_正则表达式基础">7.11. 正则表达式基础</h3>
 <div class="paragraph">
 <p>正则表达式是一段代码，用作具有共同结构的字符串的模式。 它源于计算机科学概念中的正则表达式，但比纯正则表达式提供了更多的构造, 允许并扩展了一些功能，使它们更容易使用。</p>
 </div>
@@ -3150,7 +3179,7 @@ multi sub MAIN('test') {
 <p>通常，所有非单词字符都保留用于“特殊”语法，你必须用引号引起它们或用反斜杠转义它们以获得其字面含义。 例如正则表达式中的 <code>\&lt;</code> 或 <code>'&lt;'</code> 匹配小于号。 引用可以应用于多个字符，因此正则表达式中的 <code>'a+b'</code> 与 a 匹配，后跟加号 <code>+</code>，后跟 b。单词字符（字母，数字和下划线）总是按字面意思匹配。</p>
 </div>
 <div class="sect3">
-<h4 id="_字符类">6.11.1. 字符类</h4>
+<h4 id="_字符类">7.11.1. 字符类</h4>
 <div class="paragraph">
 <p>除了文字之外，字符类是正则表达式的常见构建块。 有许多预定义的字符类，以反斜杠的形式后跟一个小写的单个字母; 例如，<code>\d</code> 匹配一个数字。 它的反转使用大写字母，所以`\D` 匹配任何不是数字的字符。</p>
 </div>
@@ -3237,7 +3266,7 @@ multi sub MAIN('test') {
 </table>
 </div>
 <div class="sect3">
-<h4 id="_量词">6.11.2. 量词</h4>
+<h4 id="_量词">7.11.2. 量词</h4>
 <div class="paragraph">
 <p>只匹配一个重复的东西很无聊，所以正则表达式提供量词。 量词表示前一个正则表达式必须匹配的频率。</p>
 </div>
@@ -3274,7 +3303,7 @@ multi sub MAIN('test') {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_备选分支">6.11.3. 备选分支</h4>
+<h4 id="_备选分支">7.11.3. 备选分支</h4>
 <div class="paragraph">
 <p>任何一个或者备选分支由垂直条分隔。 例如，<code>\d+ | x</code> 匹配一个或多个数字的序列或字符 x。</p>
 </div>
@@ -3284,7 +3313,7 @@ multi sub MAIN('test') {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_解析_ini_原语">6.12. 解析 INI 原语</h3>
+<h3 id="_解析_ini_原语">7.12. 解析 INI 原语</h3>
 <div class="paragraph">
 <p>回到 INI 解析，我们必须考虑值内允许的字符。列出允许的字符似乎是徒劳的，因为我们很可能忘记一些。相反，我们应该考虑值中不允许的内容。换行当然不是，因为它们引入了下一个键/值对或节标题。也不允许使用分号，因为它们引入了注释。</p>
 </div>
@@ -3422,7 +3451,7 @@ ok "[a\nb]\n"  !~~ /^ &lt;header&gt; $/, 'No newlines inside headers';</code></p
 </div>
 </div>
 <div class="sect2">
-<h3 id="_把东西组装起来">6.13. 把东西组装起来</h3>
+<h3 id="_把东西组装起来">7.13. 把东西组装起来</h3>
 <div class="paragraph">
 <p>INI 文件的 <strong>section</strong> 是标题，后跟一些键/值对或注释行：</p>
 </div>
@@ -3482,7 +3511,7 @@ ok $ini ~~ /^&lt;inifile&gt;$/, 'Can parse a full INI file';</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_回溯">6.14. 回溯</h3>
+<h3 id="_回溯">7.14. 回溯</h3>
 <div class="paragraph">
 <p>对许多程序员来说，正则表达式匹配似乎很神奇。 您只需说明模式，正则表达式引擎就会确定字符串是否与模式匹配。 虽然实现正则表达式引擎是一项棘手的业务，但基础知识并不难理解。
 正则表达式引擎从左到右遍历正则表达式的各个部分，尝试匹配正则表达式的每个部分。 它跟踪到目前为止它在光标中匹配的字符串部分。 如果正则表达式的一部分找不到匹配项，则正则表达式引擎会尝试更改上一个匹配项以占用更少的字符，然后在新位置重试失败的匹配项。
@@ -3533,7 +3562,7 @@ my token inifile { &lt;block&gt; &lt;section&gt;* }</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_grammars">6.15. Grammars</h3>
+<h3 id="_grammars">7.15. Grammars</h3>
 <div class="paragraph">
 <p>这组解析INI文件的正则表达式并不是封装和可重用性的顶峰。
 因此，我们将探索语法，一种将正则表达式组合成类结构的功能，以及如何从成功匹配中提取结构化数据。
@@ -3583,7 +3612,7 @@ my token inifile { &lt;block&gt; &lt;section&gt;* }</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_从匹配中提取数据">6.16. 从匹配中提取数据</h3>
+<h3 id="_从匹配中提取数据">7.16. 从匹配中提取数据</h3>
 <div class="paragraph">
 <p>到目前为止，IniFile语法仅检查给定输入是否与语法匹配。 但是，当它匹配时，我们真的希望解析结果在一个易于使用的数据结构中。 例如，我们可以翻译这个示例INI文件：</p>
 </div>
@@ -3775,14 +3804,14 @@ my $result = IniFile.parse-ini($text);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_生成好的错误信息">6.17. 生成好的错误信息</h3>
+<h3 id="_生成好的错误信息">7.17. 生成好的错误信息</h3>
 <div class="paragraph">
 <p>良好的错误消息对任何产品的用户体验都至关重要。 解析器也不例外。 考虑第5行的消息Square括号[在第3行用花括号封闭}，而不是Python的惰性和泛型SyntaxError：无效语法。
 除了文本消息之外，了解解析错误的位置有助于找出错误的原因。
 我们将使用我们的INI文件解析器作为示例，探索如何从Raku语法生成更好的解析错误消息。</p>
 </div>
 <div class="sect3">
-<h4 id="_failure_is_normal">6.17.1. Failure Is Normal</h4>
+<h4 id="_failure_is_normal">7.17.1. Failure Is Normal</h4>
 <div class="paragraph">
 <p>在我们开始之前，重要的是要意识到在基于语法的解析器中，正则表达式无法匹配是正常的，即使在整体成功的解析中也是如此。
 让我们回想一下解析器的一部分：</p>
@@ -3846,7 +3875,7 @@ other=stuff</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_检测有害失败">6.17.2. 检测有害失败</h4>
+<h4 id="_检测有害失败">7.17.2. 检测有害失败</h4>
 <div class="paragraph">
 <p>要生成良好的解析错误消息，您必须区分预期和意外的解析失败。 如前所述，单个正则表达式或令牌的匹配失败通常不表示输入格式错误。 但是你可以找到你知道的点，一旦正则表达式引擎到达这一点，其余的匹配必须成功。
 如果你记得对：</p>
@@ -3902,7 +3931,7 @@ other=stuff</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_提供上下文">6.17.3. 提供上下文</h4>
+<h4 id="_提供上下文">7.17.3. 提供上下文</h4>
 <div class="paragraph">
 <p>对于较大的输入，我们确实要打印行号。 为了计算，我们
 需要获取目标字符串，该字符串可通过方法目标获得：</p>
@@ -3975,7 +4004,7 @@ method error($msg) {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_解析匹配对的缺点">6.17.4. 解析匹配对的缺点</h4>
+<h4 id="_解析匹配对的缺点">7.17.4. 解析匹配对的缺点</h4>
 <div class="paragraph">
 <p>由于它是如此常见的任务，Raku语法具有特殊的目标匹配语法，用于将一对分隔符与它们之间的某些内容进行匹配。 在INI文件示例中，这是一对括号，它们之间有一个节头。
 我们可以改变</p>
@@ -4012,7 +4041,7 @@ method error($msg) {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_编写你自己的_grammars">6.18. 编写你自己的 Grammars</h3>
+<h3 id="_编写你自己的_grammars">7.18. 编写你自己的 Grammars</h3>
 <div class="paragraph">
 <p>解析是一项必须学习的技能，大多与您的普通编程技能不同。 所以我鼓励你从一些小的东西开始，比如CSV的解析器或逗号分隔的值.9很容易一次性写出一个完整的语法，但我建议从解析一些原子开始（就像一个单元格的 两个逗号之间的数据），测试它，然后才进入下一个逗号。
 即使在像CSV这样看似简单的东西中，也会出现一些复杂性。 例如，您可以允许引用的字符串本身可以包含分隔符，以及一个转义字符，允许您在引用的字符串中使用引号字符。
@@ -4020,7 +4049,7 @@ method error($msg) {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_8">6.19. 总结</h3>
+<h3 id="_总结_8">7.19. 总结</h3>
 <div class="paragraph">
 <p>Raku允许正则表达式重用，将它们视为一等公民，允许它们像普通例程一样被命名和调用。 通过允许正则表达式内的空白来消除进一步的混乱。
 这些功能允许您编写正则表达式来解析正确的文件格式甚至编程语言。 语法允许您构建，重用和封装正则表达式。
@@ -4934,6 +4963,18 @@ you learn enough to perform most programming tasks in Raku, and more importantly
 </div>
 <div class="footnote" id="_footnotedef_21">
 <a href="#_footnoteref_21">21</a>. <a href="https://docs.perl6.org/language/control#with,_orwith,_without" class="bare">https://docs.perl6.org/language/control#with,_orwith,_without</a>
+</div>
+<div class="footnote" id="_footnotedef_22">
+<a href="#_footnoteref_22">22</a>. <a href="http://modules.raku.org/dist/IO::String" class="bare">http://modules.raku.org/dist/IO::String</a>
+</div>
+<div class="footnote" id="_footnotedef_23">
+<a href="#_footnoteref_23">23</a>. <a href="https://docs.raku.org/type/IO::Handle" class="bare">https://docs.raku.org/type/IO::Handle</a>
+</div>
+<div class="footnote" id="_footnotedef_24">
+<a href="#_footnoteref_24">24</a>. <a href="https://docs.raku.org/language/testing.html" class="bare">https://docs.raku.org/language/testing.html</a>
+</div>
+<div class="footnote" id="_footnotedef_25">
+<a href="#_footnoteref_25">25</a>. <a href="https://docs.raku.org/type/Any" class="bare">https://docs.raku.org/type/Any</a>
 </div>
 </div>
 
