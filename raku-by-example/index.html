@@ -8,7 +8,7 @@
 
 <meta name="author" content="ohmyraku">
 <meta name="application-name" content="山川异域, 风月同天">
-<meta name="description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结   3. 格式化数独字谜 3.1. 让数独变得可玩 3.2. 捷径、常量和更多的捷径 3.3. IO 和其它悲剧 3.4. 获得创造性 3.5. 总结   4. 日期时间转换命令行 4.1. 使用库 4.2. DateTime 格式化 4.3. 寻找其他途径 4.4. 处理时间 4.5. 系好你的安全带 4.6. MAIN 魔法 4.7. 总结   5.">
+<meta name="description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结   3. 格式化数独字谜 3.1. 让数独变得可玩 3.2. 捷径、常量和更多的捷径 3.3. IO 和其它悲剧 3.4. 获得创造性 3.5. 总结   4. 日期时间转换命令行 4.1. 使用库 4.2. DateTime 格式化 4.3. 寻找其他途径 4.4. 处理时间 4.5. 系好你的安全带 4.6. MAIN 魔法 4.7. 自动化测试 4.">
 <meta name="robots" content="noodp"/>
 <meta name="generator" content="Hugo 0.63.2" />
 <meta name="referrer" content="no-referrer" />
@@ -22,7 +22,7 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Raku 基础" />
-<meta name="twitter:description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结   3. 格式化数独字谜 3.1. 让数独变得可玩 3.2. 捷径、常量和更多的捷径 3.3. IO 和其它悲剧 3.4. 获得创造性 3.5. 总结   4. 日期时间转换命令行 4.1. 使用库 4.2. DateTime 格式化 4.3. 寻找其他途径 4.4. 处理时间 4.5. 系好你的安全带 4.6. MAIN 魔法 4.7. 总结   5." />
+<meta name="twitter:description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结   3. 格式化数独字谜 3.1. 让数独变得可玩 3.2. 捷径、常量和更多的捷径 3.3. IO 和其它悲剧 3.4. 获得创造性 3.5. 总结   4. 日期时间转换命令行 4.1. 使用库 4.2. DateTime 格式化 4.3. 寻找其他途径 4.4. 处理时间 4.5. 系好你的安全带 4.6. MAIN 魔法 4.7. 自动化测试 4." />
 <meta name="twitter:site" content="https://ohmyraku.github.io" />
 <meta name="twitter:creator" content="ohmyraku" />
 <meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
@@ -32,7 +32,7 @@
 <meta property="og:title" content="Raku 基础" />
 <meta property="og:url" content="https://ohmyraku.github.io" />
 <meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结   3. 格式化数独字谜 3.1. 让数独变得可玩 3.2. 捷径、常量和更多的捷径 3.3. IO 和其它悲剧 3.4. 获得创造性 3.5. 总结   4. 日期时间转换命令行 4.1. 使用库 4.2. DateTime 格式化 4.3. 寻找其他途径 4.4. 处理时间 4.5. 系好你的安全带 4.6. MAIN 魔法 4.7. 总结   5." />
+<meta property="og:description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结   3. 格式化数独字谜 3.1. 让数独变得可玩 3.2. 捷径、常量和更多的捷径 3.3. IO 和其它悲剧 3.4. 获得创造性 3.5. 总结   4. 日期时间转换命令行 4.1. 使用库 4.2. DateTime 格式化 4.3. 寻找其他途径 4.4. 处理时间 4.5. 系好你的安全带 4.6. MAIN 魔法 4.7. 自动化测试 4." />
 <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -49,7 +49,7 @@
         "@type": "Person",
         "name": "ohmyraku"
       },
-      "description": "Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结   3. 格式化数独字谜 3.1. 让数独变得可玩 3.2. 捷径、常量和更多的捷径 3.3. IO 和其它悲剧 3.4. 获得创造性 3.5. 总结   4. 日期时间转换命令行 4.1. 使用库 4.2. DateTime 格式化 4.3. 寻找其他途径 4.4. 处理时间 4.5. 系好你的安全带 4.6. MAIN 魔法 4.7. 总结   5.",
+      "description": "Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结   3. 格式化数独字谜 3.1. 让数独变得可玩 3.2. 捷径、常量和更多的捷径 3.3. IO 和其它悲剧 3.4. 获得创造性 3.5. 总结   4. 日期时间转换命令行 4.1. 使用库 4.2. DateTime 格式化 4.3. 寻找其他途径 4.4. 处理时间 4.5. 系好你的安全带 4.6. MAIN 魔法 4.7. 自动化测试 4.",
       "publisher": {
         "@type": "Organization",
         "name": "https:\/\/ohmyraku.github.io",
@@ -134,7 +134,8 @@ if (theme && theme !== "1") {
 <li><a href="#_处理时间">4.4. 处理时间</a></li>
 <li><a href="#_系好你的安全带">4.5. 系好你的安全带</a></li>
 <li><a href="#_main_魔法">4.6. MAIN 魔法</a></li>
-<li><a href="#_总结_4">4.7. 总结</a></li>
+<li><a href="#_自动化测试">4.7. 自动化测试</a></li>
+<li><a href="#_总结_4">4.8. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_测试_say">5. 测试 say</a>
@@ -990,25 +991,34 @@ for lines() -&gt; $sudoku {
 <h2 id="_日期时间转换命令行">4. 日期时间转换命令行</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>我偶尔会在数据库中存储 UNIX 时间戳, 即从 1970-01-01 开始的秒数。我在按照日期查询数据库中的数据时, 需要将 UNIX 时间戳转换为人类可读的时间, 所以我写了个很小的工具来帮助我在 UNIX  时间戳和日期/时间之间来回转换:</p>
+<p>我偶尔会在工作中使用数据库，它将日期和时间存储为 UNIX 时间戳，也就是 1970-01-01 午夜后的秒数。与数据库的原作者和周围的代码不同，我无法在脑子里进行 UNIX 时间戳和人类可读的日期格式之间的转换，所以我为此写了一些工具。</p>
+</div>
+<div class="paragraph">
+<p>我们这里的目标是写一个小工具，在 UNIX 时间戳和日期/时间之间来回转换。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">$ autotime 2015-12-24
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ autotime 2015-12-24
 1450915200
 $ autotime 2015-12-24 11:23:00
 1450956180
 $ autotime 1450915200
 2015-12-24
 $ autotime 1450956180
-2015-12-24 11:23:00</code></pre>
+2015-12-24 11:23:00
+----</code></pre>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_使用库">4.1. 使用库</h3>
 <div class="paragraph">
-<p>Raku 的 [DateTime](<a href="https://docs.raku.org/type/DateTime" class="bare">https://docs.raku.org/type/DateTime</a>) 和 [Date](<a href="https://docs.raku.org/type/Date" class="bare">https://docs.raku.org/type/Date</a>) 模块会做实际的转换。
-<code>DateTime.new</code> 构造函数有一个接收单个整数作为 UNIX 时间戳的变体:</p>
+<p>日期和时间算术是很难搞好的，同时又很无聊，所以我很乐意把这部分工作交给库来做。</p>
+</div>
+<div class="paragraph">
+<p>Raku 的核心库中包含了 DateTime<sup class="footnote">[<a id="_footnoteref_12" class="footnote" href="#_footnotedef_12" title="View footnote.">12</a>]</sup> (有点受 Perl 5 的同名模块的启发)和 Date<sup class="footnote">[<a id="_footnoteref_13" class="footnote" href="#_footnotedef_13" title="View footnote.">13</a>]</sup> (主要是从 Perl 5 的 Date:::Simple 模块中偷来的)。这两个模块将处理实际的转换。我们的重点将是为转换的输入和输出创建一个友好的用户体验。</p>
+</div>
+<div class="paragraph">
+<p>对于从 UNIX 时间戳到日期或时间的转换，<code>DateTime.new</code> 构造函数就派上了用场。它有一个变体，可以接受一个整数作为 UNIX 时间戳。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1017,7 +1027,7 @@ $ autotime 1450956180
 </div>
 </div>
 <div class="paragraph">
-<p>看起来我们已经完成了一个方向的转换,对吗?</p>
+<p>看来我们这个方向就快结束了，对吧？</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1032,14 +1042,14 @@ sub MAIN (Int $timestamp) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">$ autotime 1450915200
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ autotime 1450915200
 Invalid DateTime string '1450915200'; use an ISO 8601 timestamp (yyyy-mm-ddThh:mm:ssZ or yyyy-mm-ddThh:mm:ss+01:00) instead
   in sub MAIN at autotime line 2
   in block &lt;unit&gt; at autotime line 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>发生了什么？看起来 <code>DateTime</code> 构造函数把参数当作了字符串, 尽管 <code>sub MAIN</code> 的参数被声明为 <code>Int</code>。怎么会变成那样呢? 我们添加一些调试输出:</p>
+<p>哦，不对，怎么了？似乎 <code>DateTime</code> 构造函数把参数看作是一个字符串，尽管 <code>sub MAIN</code> 的参数声明为 <code>Int</code>，怎么会这样呢？让我们来补充一些调试输出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1051,18 +1061,18 @@ sub MAIN(Int $timestamp) {
 </div>
 </div>
 <div class="paragraph">
-<p>打印出:</p>
+<p>现在用和之前一样的调用运行它，在错误之前多了一行输出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">IntStr</code></pre>
+<pre class="highlight"><code class="language-txt" data-lang="txt">IntStr</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>$thing.^name</code> 是 $thing 所属类的名字。 [IntStr](<a href="https://docs.raku.org/type/IntStr" class="bare">https://docs.raku.org/type/IntStr</a>) 是 <code>Int</code> 和 <code>Str</code> 类的子类, 这就是为什么 <code>DateTime</code> 构造函数正常地认为 $timestamp 是一个 <code>Str</code> 的原因。</p>
+<p><code>$thing.ˆname</code> 是对 <code>$thing</code> 的元类的一个方法的调用，<code>name</code> 请求它的名称（换句话说，就是类的名称）。IntStr<sup class="footnote">[<a id="_footnoteref_14" class="footnote" href="#_footnotedef_14" title="View footnote.">14</a>]</sup>是 Int 和 Str 的一个子类，这就是为什么 <code>DateTime</code> 构造函数合法地认为它是 Str 的原因。在命令行参数传递给 MAIN 之前，解析命令行参数的机制是将命令行中的字符串转换为 IntStr 而不是 Str，以避免在我们想把它当作字符串的时候丢失信息。</p>
 </div>
 <div class="paragraph">
-<p>长话短说, 我们可以在参数前添加一个 <code>+</code> 前缀使参数强制为 "真" 整数, 这也是将字符串转为数值的通用机制:</p>
+<p>长话短说，我们可以通过加一个 <code>+</code> 前缀来强行将参数转化为"实数"整数，这是一般的数值转换机制。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1073,16 +1083,16 @@ sub MAIN(Int $timestamp) {
 </div>
 </div>
 <div class="paragraph">
-<p>这一次它真的工作了:</p>
+<p>快速测试后发现，现在可以用了:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">$ ./autotime-01.p6 1450915200
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ ./autotime-01.p6 1450915200
 2015-12-24T00:00:00Z</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>输出是 ISO 8601 样式的时间戳格式, 对眼睛不太友好。对于小时,分钟和秒数都为 0 的日期, 我们真正想要的只有日期:</p>
+<p>输出的是 ISO 8601 时间戳格式<sup class="footnote">[<a id="_footnoteref_15" class="footnote" href="#_footnotedef_15" title="View footnote.">15</a>]</sup>，这可能不是最容易看懂的。对于一个日期（时、分、秒为零时），我们真的只需要日期。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1108,7 +1118,7 @@ sub MAIN(Int $timestamp) {
 </div>
 </div>
 <div class="paragraph">
-<p>但是上面那种三个比较都为 0 的写法实在太丑了, 如果是 4 个, 5 个, 6 个&#8230;&#8203; 那就是又丑又长。Raku 有一个 <code>all</code> Junction:</p>
+<p>但是，这个条件就有点笨拙了。真的，写三个和0进行比较的表达式吗？Raku 有一个很好的小功能，可以让你写得更紧凑。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1118,10 +1128,10 @@ sub MAIN(Int $timestamp) {
 </div>
 </div>
 <div class="paragraph">
-<p><code>all(&#8230;&#8203;)</code> 创建了一个 [Junction](<a href="https://docs.raku.org/type/Junction" class="bare">https://docs.raku.org/type/Junction</a>), 它是几个其他值的组合值, 它也存储了一个逻辑模式。当你比较一个 junction 和其他值的时候, 那个比较会自动地应用到该 junction 中的所有值上。<code>if</code> 语句在布尔上下文中对该 junction 进行求值, 在这个例子中, 当所有的比较为 <code>True</code> 时, if 也返回 <code>True</code>。</p>
+<p><code>all(&#8230;&#8203;)</code> 创建了一个 Junction<sup class="footnote">[<a id="_footnoteref_16" class="footnote" href="#_footnotedef_16" title="View footnote.">16</a>]</sup>, 一个由其他几个值组成的复合值，它也存储了一个逻辑模式。当你将一个 Junction 与另一个值进行比较时，这个比较会自动应用到 Junction 中的所有值上。<code>if</code> 语句在布尔语境中对 Junction 进行求值，在这种情况下，只有当所有的比较都返回 <code>True</code> 时，才会返回 <code>True</code>。</p>
 </div>
 <div class="paragraph">
-<p>其他类型的 junction 还有 <code>any</code>, <code>all</code>, <code>none</code>。考虑到在布尔上下文中, 0 是唯一一个求值为 false 的整数, 我们甚至可以把上面的例子写为:</p>
+<p>其他类型的 Junction 还有：<code>any</code>、<code>all</code>、<code>none</code> 和 <code>one</code>。考虑到0是唯一一个在布尔语境中为 <code>false</code> 的整数，我们甚至可以把前面的语句写成:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1131,7 +1141,10 @@ sub MAIN(Int $timestamp) {
 </div>
 </div>
 <div class="paragraph">
-<p>但是也可能没有必要搞得那么复杂,  如果 <code>$dt</code> 这个 Datetime 对象转换为 <code>Date</code>  然后再转换为 DateTime 而不丢失信息, 那么它肯定是一个 Date:</p>
+<p>很好，对吗？</p>
+</div>
+<div class="paragraph">
+<p>但你不一定需要花哨的语言构造来写出简洁的程序。在这种情况下，从一个略微不同的角度来处理这个问题，会产生更短更清晰的代码。如果 <code>DateTime</code> 对象在不丢失信息的情况下往返转换到 <code>Date</code> 和返回到 <code>DateTime</code>，那它显然是一个 <code>Date</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1147,7 +1160,7 @@ else {
 <div class="sect2">
 <h3 id="_datetime_格式化">4.2. DateTime 格式化</h3>
 <div class="paragraph">
-<p>如果时间戳没有被解析为整天, 那么当前我们的脚本的输出就会像这样:</p>
+<p>对于一个没有解析为一整天的时间戳，我们的脚本的输出目前看起来像这样:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1155,10 +1168,15 @@ else {
 </div>
 </div>
 <div class="paragraph">
-<p>其中的 "Z" 表示 UTC 或 "Zulu" 时区。</p>
+<p>其中的 "Z" 表示 UTC 或 "Zulu" 时区。相反，我希望它是:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">2015-12-24 00:00:01</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p><code>DateTime</code> 类支持自定义格式化, 所以我们来写一个:</p>
+<p><code>DateTime</code> 类支持自定义格式化，所以我们来写一个:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1187,11 +1205,16 @@ else {
 </div>
 </div>
 <div class="paragraph">
-<p>语法 <code>formatter &#8658; &#8230;&#8203;</code> 在参数上下文中表示具名参数。
-这样的代码我不喜欢, 因为在 <code>DateTime.new</code> 调用中它是内联的, 这并不清晰。</p>
+<p>如果你想以不同的格式输出，比如 <code>DD.MM.YYY</code>，你可以用你自己的格式字符串替换格式字符串。</p>
 </div>
 <div class="paragraph">
-<p>我们来单独写一个例程:</p>
+<p>语法 <code>formatter &#8658; &#8230;&#8203;</code> 在参数的上下文中表示一个命名的参数，这意味着名称而不是参数列表中的位置决定了要绑定到哪个参数。如果有一堆参数的话，这个很方便。</p>
+</div>
+<div class="paragraph">
+<p>我不喜欢这样的代码了，因为 <code>formatter</code> 是在 <code>DateTime.new(&#8230;&#8203;)</code> 调用中内联的，我觉得不清楚。</p>
+</div>
+<div class="paragraph">
+<p>让我们把这个作为一个单独的例程吧:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1213,24 +1236,22 @@ sub MAIN(Int $timestamp) {
 </div>
 </div>
 <div class="paragraph">
-<p>是的, 你可以把一个子例程声明放在另一个子例程声明的正文中; 子例程只是一个普通的词法符号,就像一个用 <code>my</code> 声明的变量。</p>
+<p>是的，你可以把一个子例程声明放在另一个子例程声明的正文中；子例程只是一个普通的词法符号，就像用 <code>my</code> 声明的变量一样。</p>
 </div>
 <div class="paragraph">
-<p>在行 <code>my $dt = DateTime.new(+$timestamp,formatter &#8658; &amp;formatter);</code> 中, 语法 <code>&amp;formatter</code> 引用子例程作为一个对象,而不调用它。</p>
+<p>在这行中，<code>my $dt = DateTime.new(+$timestamp, formatter &#8658; &amp;formatter);</code>，语法中的 <code>&amp;formatter</code> 指的是将子例程作为一个对象，而不是调用它。</p>
 </div>
 <div class="paragraph">
-<p>这是 Raku, <code>formatter &#8658; &amp;formatter</code> 有一个简写: <code>&amp;formatter</code>。
-作为一般规则,如果要填充一个名称为变量名称并且其值为变量值的命名参数, 可以通过写入 <code>:$variable</code> 创建它。 作为扩展, <code>:thing</code> 是 <code>thing &#8658; True</code> 的缩写。</p>
+<p>在 Raku 中，<code>formatter &#8658; &amp;formatter</code> 有一个快捷方式： <code>:&amp;formatter</code>。一般来说，如果你想填充一个命名参数，其名称是变量的名称，而其值是变量的值，你可以通过写 <code>:$variable</code> 来创建它。而引申一下，<code>:thing</code> 是 <code>thing &#8658; True</code> 的简写。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_寻找其他途径">4.3. 寻找其他途径</h3>
 <div class="paragraph">
-<p>现在, 从时间戳到日期和时间的转换工作的很好, 让我们看另一种途径。
-我们的小工具需要解析输入, 并决定输入的是时间戳还是日期和可选的时间。</p>
+<p>现在，从时间戳到日期和时间的转换工作已经很顺利了，我们来看看另一个方向。我们的小工具需要对输入进行解析，并决定输入是时间戳还是日期，以及可选的时间。</p>
 </div>
 <div class="paragraph">
-<p>一种无聊的方式是使用条件:</p>
+<p>无聊的方法就是使用条件转换。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1246,14 +1267,10 @@ sub MAIN(Int $timestamp) {
 </div>
 </div>
 <div class="paragraph">
-<p>但我讨厌无聊, 所以我想看看一个更令人兴奋的（端可扩展）方法。</p>
+<p>但我讨厌无聊，所以我想看看更刺激（和可扩展）的方法。</p>
 </div>
 <div class="paragraph">
-<p>Raku 支持多重分派。这意味着您可以有多个具有相同名称但不同签名的子例程。
-Raku 自动决定要调用哪一个。 您必须通过编写 <code>multi sub</code> 而不是 <code>sub</code> 来显式地启用此功能, 以便 Raku 可以捕获意外的重新声明。</p>
-</div>
-<div class="paragraph">
-<p>让我们看看它在实际中的运用:</p>
+<p>Raku 支持多重分派。这意味着你可以有多个名字相同，但签名不同的子程序。而 Raku 会自动决定调用哪个子程序。你必须通过写`multi sub` 而不是 <code>sub</code> 来显式地启用这个功能，这样 Raku 就能为你捕获意外的重声明。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1281,7 +1298,7 @@ multi sub MAIN(Str $date) {
 </div>
 </div>
 <div class="paragraph">
-<p>我们看一下效果:</p>
+<p>让我们来看看它的表现吧:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1295,11 +1312,10 @@ Ambiguous call to 'MAIN'; these signatures all match:
 </div>
 </div>
 <div class="paragraph">
-<p>不是我所想象的。问题又是整数参数自动被转换为了 <code>IntStr</code>, Int 和 Str <code>multi</code>（或候选）都接受它作为参数。</p>
+<p>不太符合我的设想。问题又来了，整数参数被自动转换为 IntStr，而 Int 和 Str multi（或候选）都接受这个参数。</p>
 </div>
 <div class="paragraph">
-<p>避免这种错误的最简单的方法是缩小 Str 候选者接受的字符串的种类。
-经典的方法是用一个正则表达式粗略验证传入的参数:</p>
+<p>要避免这个错误，最简单的方法是缩小 Str 候选者接受的字符串种类。经典的方法是使用一个可以大致验证传入参数的 regex。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1309,8 +1325,7 @@ Ambiguous call to 'MAIN'; these signatures all match:
 </div>
 </div>
 <div class="paragraph">
-<p>它确实能工作, 但为什么重复 Date.new 已经有用于验证日期字符串的逻辑？
-如果你传递一个看起来不像日期的字符串参数,你会得到这样的错误：</p>
+<p>事实上，它确实有效，但为什么要重复 <code>Date.new</code> 已经有的验证日期字符串的逻辑？如果你传递一个看起来不像日期的字符串参数，你会得到这样的错误。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1318,7 +1333,7 @@ Ambiguous call to 'MAIN'; these signatures all match:
 </div>
 </div>
 <div class="paragraph">
-<p>我们可以使用这种行为约束 <code>MAIN multi</code> 候选者的字符串参数：</p>
+<p>我们可以用这种行为来约束 <code>MAIN multi</code> 候选者的字符串参数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1328,10 +1343,10 @@ Ambiguous call to 'MAIN'; these signatures all match:
 </div>
 </div>
 <div class="paragraph">
-<p>在这里额外的 <code>try</code> 是因为子类型约束后面的 <code>where</code> 不应该抛出异常, 而只是返回一个假值。</p>
+<p>这里额外的 <code>try</code> 是因为 <code>where</code> 后面的子类型约束不应该抛出一个异常，只是返回一个假值。</p>
 </div>
 <div class="paragraph">
-<p>现在它的工作得像预期的一样:</p>
+<p>而现在它的工作原理和预期的一样:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1345,7 +1360,7 @@ $ ./autotime 1450915200
 <div class="sect2">
 <h3 id="_处理时间">4.4. 处理时间</h3>
 <div class="paragraph">
-<p>剩下要实现的功能是把日期和时间转换为时间戳。换句话说, 我们想这样调用 <code>autotime 2015-12-24 11:23:00</code>:</p>
+<p>唯一需要实现的功能就是将日期和时间转换为时间戳。换句话说，我们要处理像 <code>autotime 2015-12-24 11:23:00</code> 这样的调用:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1362,7 +1377,7 @@ $ ./autotime 1450915200
 </div>
 </div>
 <div class="paragraph">
-<p>凭借尾部的?, 新的第二个参数是可选的 。 如果存在第二个参数, 我们用冒号将时间字符串分割成小时,分钟和秒。 我写的第一个本能是使用较短的变量名称, <code>my($h, $m, $s) = $time.split(':')</code>, 但然后调用 <code>DateTime</code> 构造函数看起来像这样：</p>
+<p>因为后面的 <code>?</code> 的存在, 新的第二个参数是可选的。我们在冒号上拆分时间字符串，得到小时、分钟和秒。在写这段代码的时候，我的第一直觉是使用更短的变量名, <code>my ($h, $m, $s) = $time.split(':')</code>, 但这样对 <code>DateTime</code> 构造函数的调用就会是这样的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1370,10 +1385,10 @@ $ ./autotime 1450915200
 </div>
 </div>
 <div class="paragraph">
-<p>所以构造函数的命名参数使我选择更多的自解释变量名。</p>
+<p>所以，构造函数的命名参数让我选择了更多的自解释变量名。</p>
 </div>
 <div class="paragraph">
-<p>所以, 这个可以工作:</p>
+<p>所以，这样就成功了:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1382,7 +1397,7 @@ $ ./autotime 1450915200
 </div>
 </div>
 <div class="paragraph">
-<p>而且我们还可以检测它的原形:</p>
+<p>而且我们还可以检测它的往返:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1394,7 +1409,10 @@ $ ./autotime 1450915200
 <div class="sect2">
 <h3 id="_系好你的安全带">4.5. 系好你的安全带</h3>
 <div class="paragraph">
-<p>Raku 的隐式变量或主题变量:</p>
+<p>现在程序的功能已经完成了，我们应该努力去掉一些杂乱无章的东西，再去探索一下 Raku 的一些很棒的功能。</p>
+</div>
+<div class="paragraph">
+<p>我想利用的第一个特性是隐式变量或主题的特性。快速演示一下:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1414,7 +1432,7 @@ $ ./autotime 1450915200
 </div>
 </div>
 <div class="paragraph">
-<p>这个例子中没有显式的迭代变量, 所以 Perl 隐式地把当前循环的值绑定给叫做 <code>$<em></code> 的变量。方法调用 <code>.say</code> 是 <code>$</em>.say</code> 的缩写。由于我们有一个子例程在同一个变量上调用了 6 个方法, 所以使用 <code>$_</code> 会有很好的可视效果:</p>
+<p>没有显式的迭代变量，所以 Raku 隐式地将循环的当前值绑定到一个叫 <code>$_</code> 的变量上。方法调用 <code>.say</code> 是 <code>$_.say</code> 的一个快捷方式。而且由于有一个子例程在同一个变量上调用了六个方法，所以在这里使用 <code>$_</code> 是一个很好的视觉优化:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1426,7 +1444,7 @@ $ ./autotime 1450915200
 </div>
 </div>
 <div class="paragraph">
-<p>如果你不想求助于函数定义在词法作用域中设置 <code>$_</code>, 那么你可以使用 <code>given VALUE BLOCK</code> 结构:</p>
+<p>如果你想在一个词法范围内设置 <code>$_</code>，而不需要借助于函数定义，你可以使用 <code>given VALUE BLOCK</code> 构造:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1441,7 +1459,7 @@ $ ./autotime 1450915200
 </div>
 </div>
 <div class="paragraph">
-<p>Raku 还提供了对 <code>$_</code> 变量的条件语句的快捷方式,可以用作一个通用的switch语句：</p>
+<p>而且 Raku 还提供了一个对 <code>$_</code> 变量的条件语句的快捷方式，可以作为一个通用的 <code>switch</code> 语句来使用:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1452,7 +1470,7 @@ $ ./autotime 1450915200
 </div>
 </div>
 <div class="paragraph">
-<p>如果你有一个只读的变量或参数, 那么你可以不使用 <code>$</code> 符号, 虽然你可以在声明时使用反斜线:</p>
+<p>如果你有一个只读变量或参数，你可以不用 <code>$</code> sigil， 虽然你必须在声明时使用反斜线:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1465,7 +1483,7 @@ $ ./autotime 1450915200
 </div>
 </div>
 <div class="paragraph">
-<p>所以现在完整的代码看起来像这样:</p>
+<p>所以现在完整的代码看起来是这样的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1499,7 +1517,7 @@ multi sub MAIN(Str $date where { try Date.new($_) }, Str $time?) {
 <div class="sect2">
 <h3 id="_main_魔法">4.6. MAIN 魔法</h3>
 <div class="paragraph">
-<p>为我们调用 <code>sub MAIN</code> 的魔法还为我们提供了一个自动化的用法消息, 如果我们用不匹配任何 <code>multi</code> 的参数调用 MAIN, 例如调用时不提供参数:</p>
+<p>如果我们在调用 <code>sub MAIN</code> 的时候，如果我们用不符合任何 <code>multi</code> 参数的参数来调用它，那么调用 <code>sub MAIN</code> 的魔力也会给我们提供一个自动的使用信息；比如说调用时不提供参数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1510,7 +1528,7 @@ Usage:
 </div>
 </div>
 <div class="paragraph">
-<p>我们可以通过在 MAIN subs 之前添加语义注释来为这些用法行添加简短描述:</p>
+<p>我们可以通过在 <code>MAIN subs</code> 之前添加语义注释，为这些用法信息添加一个简短的描述:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1540,9 +1558,194 @@ Usage:
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_4">4.7. 总结</h3>
+<h3 id="_自动化测试">4.7. 自动化测试</h3>
 <div class="paragraph">
-<p>我们已经看到了一些 Date 和 DateTime 算法, 但令人兴奋的部分是 multi dispatch, 命名参数,带有 where 从句的子类型约束, given/ when 和 隐式 $_ 变量, 以及一些魔法, 当涉及到 MAIN subs 时。</p>
+<p>我们已经看到一些代码经过了几次重构的迭代。没有自动测试的重构往往会让我感到不安，所以我其实有一个小的 shell 脚本，用几个不同的参数组合来调用正在开发的脚本，并将其与预期的结果进行比较。</p>
+</div>
+<div class="paragraph">
+<p>现在让我们来看看在 Raku 本身中编写测试代码的方法。</p>
+</div>
+<div class="paragraph">
+<p>在 Perl 社区中，将逻辑移到模块中，以便于使用外部测试脚本进行测试是很常见的。在 Raku 中，这仍然很常见，但对于像这样的小工具，我更喜欢用一个包含代码和测试的单一文件，并通过单独的测试命令来运行测试。</p>
+</div>
+<div class="paragraph">
+<p>为了让测试更容易，我们先把 I/O 和应用逻辑分开:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env perl6
+sub from-timestamp(Int \timestamp) {
+    sub formatter($_) {
+        sprintf '%04d-%02d-%02d %02d:%02d:%02d',
+            .year, .month, .day,
+            .hour, .minute, .second,
+    }
+    given DateTime.new(+timestamp, :&amp;formatter) {
+        when .Date.DateTime == $_ { return .Date }
+        default { return $_ }
+    }
+}
+
+sub from-date-string(Str $date, Str $time?) {
+    my $d = Date.new($date);
+    if $time {
+        my ( $hour, $minute, $second ) = $time.split(':');
+        return DateTime.new(date =&gt; $d, :$hour, :$minute, :$second);
+    } else {
+        return $d.DateTime;
+    }
+}
+
+#| Convert timestamp to ISO date
+multi sub MAIN(Int \timestamp) {
+    say from-timestamp(+timestamp);
+}
+
+#| Convert ISO date to timestamp
+multi sub MAIN(Str $date where { try Date.new($_) }, Str $time?) {
+    say from-date-string($date, $time).posix;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个小的重构没了，我们来补充一些测试:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">#| Run internal tests
+multi sub MAIN('test') {
+    use Test;
+    plan 4;
+    is-deeply from-timestamp(1450915200), Date.new('2015-12-24'), 'Timestamp to Date';
+
+    my $dt = from-timestamp(1450915201);
+    is $dt, "2015-12-24 00:00:01", 'Timestamp to DateTime with string formatting';
+    is from-date-string('2015-12-24').posix, 1450915200, 'from-date-string, one argument';
+    is from-date-string('2015-12-24', '00:00:01').posix, 1450915201, 'from-date-string, two arguments';
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你可以运行它:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">./autotime test
+1..4
+ok 1 - Timestamp to Date
+ok 2 - Timestamp to DateTime with string formatting
+ok 3 - from-date-string, one argument
+ok 4 - from-date-string, two arguments</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>输出格式是 Test Anything Protocol (TAP)<sup class="footnote">[<a id="_footnoteref_17" class="footnote" href="#_footnotedef_17" title="View footnote.">17</a>]</sup>，这是 Perl 社区中的实际标准<sup class="footnote">[<a id="_footnoteref_18" class="footnote" href="#_footnotedef_18" title="View footnote.">18</a>]</sup>， 但现在其他社区也在使用。对于较大的输出字符串，通过测试套件来运行测试是个好主意。对于我们的四行测试输出来说，这还不是必要的，但如果你想这样做，你可以使用 Perl 5 自带的 <code>prove</code> 程序。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ prove -e "" "./autotime test"
+./autotime-tested.p6 test .. ok</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">All tests successful.
+Files=1, Tests=4, 0 wallclock secs ( 0.02 usr 0.01 sys + 0.23 cusr 0.02 csys = 0.28 CPU)
+Result: PASS</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在终端中，这甚至会将 "All tests successful" 输出的颜色标注为绿色，这样更容易被发现。而测试失败则用红色标记。</p>
+</div>
+<div class="paragraph">
+<p>测试是如何工作的？第一行代码使用了一个我们还没有看到的新功能。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN('test') {</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>那是什么，在子程序签名中用字面值代替参数？</p>
+</div>
+<div class="paragraph">
+<p>没错，就是这个。它是下面这段代码的简写:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN(Str $anon where {$anon eq 'test'}) {</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>除了它没有声明变量 <code>$anon</code>。所以它是一个 <code>multi</code> 候选项，只能通过提供字符串 'test' 作为唯一参数来调用。</p>
+</div>
+<div class="paragraph">
+<p>下一行，<code>use Test;</code>，加载 Raku 附带的测试模块<sup class="footnote">[<a id="_footnoteref_19" class="footnote" href="#_footnotedef_19" title="View footnote.">19</a>]</sup>。它还会将 <code>Test</code> 默认导出的所有符号导入到当前的词法作用域中。这包括后面要用到的函数 <code>plan</code>、<code>is</code>、和 <code>is-deeply</code>。</p>
+</div>
+<div class="paragraph">
+<p><code>plan 4;</code> 声明我们要运行四个测试。这对于检测测试代码中的无计划、提前退出，或者测试代码中的循环逻辑错误导致运行的测试量比计划中的少，是很有用的。如果你不忍心提前计算测试，可以省去 <code>plan</code> 调用，而是在测试完成后再调用 <code>done-testing</code>。</p>
+</div>
+<div class="paragraph">
+<p><code>is-deeply</code> 和 <code>is</code> 都是把要测试的值作为第一个参数，预期值作为第二个参数，第三个参数是可选的测试标签字符串。不同的是， <code>is</code> 是将前两个参数作为字符串进行比较，而 <code>is-deeply</code> 使用的是使用 <code>eqv</code> 操作符<sup class="footnote">[<a id="_footnoteref_20" class="footnote" href="#_footnotedef_20" title="View footnote.">20</a>]</sup>的深度相等比较逻辑。</p>
+</div>
+<div class="paragraph">
+<p>还有更多的测试函数可以使用，比如 <code>ok()</code>，它对真参数成功，而 <code>nok()</code>，它对假参数的期望值是假的。你也可以用 <code>subtest</code> 来嵌套测试:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">#| Run internal tests
+multi sub MAIN('test') {
+    use Test; plan 2;
+
+    subtest 'timestamp', {
+        plan 2;
+        is-deeply from-timestamp(1450915200), Date.new('2015-12-24'), 'Date';;
+
+        my $dt = from-timestamp(1450915201);
+        is $dt, "2015-12-24 00:00:01", 'DateTime with string formatting';
+    };
+
+    subtest 'from-date-string', {
+        plan 2;
+        is from-date-string('2015-12-24').posix, 1450915200, 'one argument';
+        is from-date-string('2015-12-24', '00:00:01').posix, 1450915201, 'two arguments';
+    };
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>每一次对 <code>subtest</code> 的调用都算作一次对外部测试运行的测试，所以 <code>plan 4;</code> 变成了 <code>plan 2;</code>。<code>subtest</code> 测试的调用本身就有一个测试标签，然后在一个 <code>subtest</code> 测试内部，你又有一个 <code>plan</code>，并调用测试函数，如下图所示。这在编写自定义测试函数时非常有用，因为它可以执行不同数量的单独测试。</p>
+</div>
+<div class="paragraph">
+<p>嵌套测试的输出看起来是这样的:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">1..2
+    1..2
+    ok 1 - Date
+    ok 2 - DateTime with string formatting
+ok 1 - timestamp
+    1..2
+    ok 1 - one argument
+    ok 2 - two arguments
+ok 2 - from-date-string</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，测试套件只报告两个顶级测试的运行（和通过的）测试数量。是的，你可以在子测试中嵌套子测试，如果你真的想这么做的话。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_总结_4">4.8. 总结</h3>
+<div class="paragraph">
+<p>我们已经看到了一些 Date 和 DateTime 的算术，但最精彩的部分是多重分派、命名参数、带 where 子句的子类型约束、 given/when 和隐式的 <code>$_</code> 变量，以及当涉及到 <code>MAIN</code> 子句时，一些严肃的魔法。</p>
+</div>
+<div class="paragraph">
+<p>最后，我们学习了使用 Raku 自带的 <code>Test</code> 模块进行自动测试。</p>
+</div>
+<div class="paragraph">
+<p>花点时间阅读一下你到目前为止使用过的文档。看看你是否能在你的代码中找到一个地方把 <code>if</code> 换成 <code>where</code> 语句<sup class="footnote">[<a id="_footnoteref_21" class="footnote" href="#_footnotedef_21" title="View footnote.">21</a>]</sup>。一定要利用好 <code>where</code> 引入的词法作用域。</p>
 </div>
 </div>
 </div>
@@ -4701,6 +4904,36 @@ you learn enough to perform most programming tasks in Raku, and more importantly
 </div>
 <div class="footnote" id="_footnotedef_11">
 <a href="#_footnoteref_11">11</a>. <a href="https://inkscape.org/" class="bare">https://inkscape.org/</a>
+</div>
+<div class="footnote" id="_footnotedef_12">
+<a href="#_footnoteref_12">12</a>. <a href="https://docs.raku.org/type/DateTime" class="bare">https://docs.raku.org/type/DateTime</a>
+</div>
+<div class="footnote" id="_footnotedef_13">
+<a href="#_footnoteref_13">13</a>. <a href="https://docs.raku.org/type/Date" class="bare">https://docs.raku.org/type/Date</a>
+</div>
+<div class="footnote" id="_footnotedef_14">
+<a href="#_footnoteref_14">14</a>. <a href="https://docs.raku.org/type/IntStr" class="bare">https://docs.raku.org/type/IntStr</a>
+</div>
+<div class="footnote" id="_footnotedef_15">
+<a href="#_footnoteref_15">15</a>. <a href="https://www.iso.org/iso-8601-date-and-time-format.html" class="bare">https://www.iso.org/iso-8601-date-and-time-format.html</a>
+</div>
+<div class="footnote" id="_footnotedef_16">
+<a href="#_footnoteref_16">16</a>. <a href="https://docs.raku.org/type/Junction" class="bare">https://docs.raku.org/type/Junction</a>
+</div>
+<div class="footnote" id="_footnotedef_17">
+<a href="#_footnoteref_17">17</a>. <a href="https://testanything.org/" class="bare">https://testanything.org/</a>
+</div>
+<div class="footnote" id="_footnotedef_18">
+<a href="#_footnoteref_18">18</a>. <a href="http://testanything.org/testing-with-tap/perl.html" class="bare">http://testanything.org/testing-with-tap/perl.html</a>
+</div>
+<div class="footnote" id="_footnotedef_19">
+<a href="#_footnoteref_19">19</a>. <a href="https://docs.raku.org/language/testing" class="bare">https://docs.raku.org/language/testing</a>
+</div>
+<div class="footnote" id="_footnotedef_20">
+<a href="#_footnoteref_20">20</a>. <a href="https://docs.perl6.org/routine/eqv" class="bare">https://docs.perl6.org/routine/eqv</a>
+</div>
+<div class="footnote" id="_footnotedef_21">
+<a href="#_footnoteref_21">21</a>. <a href="https://docs.perl6.org/language/control#with,_orwith,_without" class="bare">https://docs.perl6.org/language/control#with,_orwith,_without</a>
 </div>
 </div>
 
