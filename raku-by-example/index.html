@@ -8,7 +8,7 @@
 
 <meta name="author" content="ohmyraku">
 <meta name="application-name" content="山川异域, 风月同天">
-<meta name="description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 为什么我应该使用 Raku 1.4. 总结 1.5. 安装器 1.6. Docker 1.7. 从源代码创建 1.8. 测试你的 Rakudo Star 安装 1.9. 文档 1.10. 总结 1.11. 让数独变得可玩 1.12. 便捷,常量和更多便捷写法 1.13. IO 和其它悲剧 1.14. 获得创造性 1.15. 总结 1.16. 使用库 1.17. DateTime 格式化 1.18. 寻找其他途径 1.19. 处理时间 1.20. 系好你的安全带 1.21. MAIN 魔法 1.22. 总结   2. 测试 say 2.1. 总结 2.2. 异步运行命令 2.3. 实现超时 2.4. More on Promises 2.">
+<meta name="description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结 2.7. 让数独变得可玩 2.8. 便捷,常量和更多便捷写法 2.9. IO 和其它悲剧 2.10. 获得创造性 2.11. 总结 2.12. 使用库 2.13. DateTime 格式化 2.14. 寻找其他途径 2.15. 处理时间 2.16. 系好你的安全带 2.17. MAIN 魔法 2.18. 总结   3. 测试 say 3.1. 总结 3.">
 <meta name="robots" content="noodp"/>
 <meta name="generator" content="Hugo 0.63.2" />
 <meta name="referrer" content="no-referrer" />
@@ -22,7 +22,7 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Raku 基础" />
-<meta name="twitter:description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 为什么我应该使用 Raku 1.4. 总结 1.5. 安装器 1.6. Docker 1.7. 从源代码创建 1.8. 测试你的 Rakudo Star 安装 1.9. 文档 1.10. 总结 1.11. 让数独变得可玩 1.12. 便捷,常量和更多便捷写法 1.13. IO 和其它悲剧 1.14. 获得创造性 1.15. 总结 1.16. 使用库 1.17. DateTime 格式化 1.18. 寻找其他途径 1.19. 处理时间 1.20. 系好你的安全带 1.21. MAIN 魔法 1.22. 总结   2. 测试 say 2.1. 总结 2.2. 异步运行命令 2.3. 实现超时 2.4. More on Promises 2." />
+<meta name="twitter:description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结 2.7. 让数独变得可玩 2.8. 便捷,常量和更多便捷写法 2.9. IO 和其它悲剧 2.10. 获得创造性 2.11. 总结 2.12. 使用库 2.13. DateTime 格式化 2.14. 寻找其他途径 2.15. 处理时间 2.16. 系好你的安全带 2.17. MAIN 魔法 2.18. 总结   3. 测试 say 3.1. 总结 3." />
 <meta name="twitter:site" content="https://ohmyraku.github.io" />
 <meta name="twitter:creator" content="ohmyraku" />
 <meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
@@ -32,7 +32,7 @@
 <meta property="og:title" content="Raku 基础" />
 <meta property="og:url" content="https://ohmyraku.github.io" />
 <meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 为什么我应该使用 Raku 1.4. 总结 1.5. 安装器 1.6. Docker 1.7. 从源代码创建 1.8. 测试你的 Rakudo Star 安装 1.9. 文档 1.10. 总结 1.11. 让数独变得可玩 1.12. 便捷,常量和更多便捷写法 1.13. IO 和其它悲剧 1.14. 获得创造性 1.15. 总结 1.16. 使用库 1.17. DateTime 格式化 1.18. 寻找其他途径 1.19. 处理时间 1.20. 系好你的安全带 1.21. MAIN 魔法 1.22. 总结   2. 测试 say 2.1. 总结 2.2. 异步运行命令 2.3. 实现超时 2.4. More on Promises 2." />
+<meta property="og:description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结 2.7. 让数独变得可玩 2.8. 便捷,常量和更多便捷写法 2.9. IO 和其它悲剧 2.10. 获得创造性 2.11. 总结 2.12. 使用库 2.13. DateTime 格式化 2.14. 寻找其他途径 2.15. 处理时间 2.16. 系好你的安全带 2.17. MAIN 魔法 2.18. 总结   3. 测试 say 3.1. 总结 3." />
 <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -49,7 +49,7 @@
         "@type": "Person",
         "name": "ohmyraku"
       },
-      "description": "Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 为什么我应该使用 Raku 1.4. 总结 1.5. 安装器 1.6. Docker 1.7. 从源代码创建 1.8. 测试你的 Rakudo Star 安装 1.9. 文档 1.10. 总结 1.11. 让数独变得可玩 1.12. 便捷,常量和更多便捷写法 1.13. IO 和其它悲剧 1.14. 获得创造性 1.15. 总结 1.16. 使用库 1.17. DateTime 格式化 1.18. 寻找其他途径 1.19. 处理时间 1.20. 系好你的安全带 1.21. MAIN 魔法 1.22. 总结   2. 测试 say 2.1. 总结 2.2. 异步运行命令 2.3. 实现超时 2.4. More on Promises 2.",
+      "description": "Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结 2.7. 让数独变得可玩 2.8. 便捷,常量和更多便捷写法 2.9. IO 和其它悲剧 2.10. 获得创造性 2.11. 总结 2.12. 使用库 2.13. DateTime 格式化 2.14. 寻找其他途径 2.15. 处理时间 2.16. 系好你的安全带 2.17. MAIN 魔法 2.18. 总结   3. 测试 say 3.1. 总结 3.",
       "publisher": {
         "@type": "Organization",
         "name": "https:\/\/ohmyraku.github.io",
@@ -103,60 +103,64 @@ if (theme && theme !== "1") {
 <ul class="sectlevel2">
 <li><a href="#_perl5_老天鹅">1.1. Perl5, 老天鹅</a></li>
 <li><a href="#_库的可用性">1.2. 库的可用性</a></li>
-<li><a href="#_为什么我应该使用_raku">1.3. 为什么我应该使用 Raku</a></li>
+<li><a href="#_我为什么要使用_raku">1.3. 我为什么要使用 Raku?</a></li>
 <li><a href="#_总结">1.4. 总结</a></li>
-<li><a href="#_安装器">1.5. 安装器</a></li>
-<li><a href="#_docker">1.6. Docker</a></li>
-<li><a href="#_从源代码创建">1.7. 从源代码创建</a></li>
-<li><a href="#_测试你的_rakudo_star_安装">1.8. 测试你的 Rakudo Star 安装</a></li>
-<li><a href="#_文档">1.9. 文档</a></li>
-<li><a href="#_总结_2">1.10. 总结</a></li>
-<li><a href="#_让数独变得可玩">1.11. 让数独变得可玩</a></li>
-<li><a href="#_便捷常量和更多便捷写法">1.12. 便捷,常量和更多便捷写法</a></li>
-<li><a href="#_io_和其它悲剧">1.13. IO 和其它悲剧</a></li>
-<li><a href="#_获得创造性">1.14. 获得创造性</a></li>
-<li><a href="#_总结_3">1.15. 总结</a></li>
-<li><a href="#_使用库">1.16. 使用库</a></li>
-<li><a href="#_datetime_格式化">1.17. DateTime 格式化</a></li>
-<li><a href="#_寻找其他途径">1.18. 寻找其他途径</a></li>
-<li><a href="#_处理时间">1.19. 处理时间</a></li>
-<li><a href="#_系好你的安全带">1.20. 系好你的安全带</a></li>
-<li><a href="#_main_魔法">1.21. MAIN 魔法</a></li>
-<li><a href="#_总结_4">1.22. 总结</a></li>
 </ul>
 </li>
-<li><a href="#_测试_say">2. 测试 say</a>
+<li><a href="#_运行_raku">2. 运行 Raku</a>
 <ul class="sectlevel2">
-<li><a href="#_总结_5">2.1. 总结</a></li>
-<li><a href="#_异步运行命令">2.2. 异步运行命令</a></li>
-<li><a href="#_实现超时">2.3. 实现超时</a></li>
-<li><a href="#_more_on_promises">2.4. More on Promises</a></li>
-<li><a href="#_可能的扩展">2.5. 可能的扩展</a></li>
-<li><a href="#_重构和自动化测试">2.6. 重构和自动化测试</a></li>
-<li><a href="#_总结_6">2.7. 总结</a></li>
+<li><a href="#_安装器">2.1. 安装器</a></li>
+<li><a href="#_docker">2.2. Docker</a></li>
+<li><a href="#_从源代码创建">2.3. 从源代码创建</a></li>
+<li><a href="#_测试你的_rakudo_star_安装">2.4. 测试你的 Rakudo Star 安装</a></li>
+<li><a href="#_文档">2.5. 文档</a></li>
+<li><a href="#_总结_2">2.6. 总结</a></li>
+<li><a href="#_让数独变得可玩">2.7. 让数独变得可玩</a></li>
+<li><a href="#_便捷常量和更多便捷写法">2.8. 便捷,常量和更多便捷写法</a></li>
+<li><a href="#_io_和其它悲剧">2.9. IO 和其它悲剧</a></li>
+<li><a href="#_获得创造性">2.10. 获得创造性</a></li>
+<li><a href="#_总结_3">2.11. 总结</a></li>
+<li><a href="#_使用库">2.12. 使用库</a></li>
+<li><a href="#_datetime_格式化">2.13. DateTime 格式化</a></li>
+<li><a href="#_寻找其他途径">2.14. 寻找其他途径</a></li>
+<li><a href="#_处理时间">2.15. 处理时间</a></li>
+<li><a href="#_系好你的安全带">2.16. 系好你的安全带</a></li>
+<li><a href="#_main_魔法">2.17. MAIN 魔法</a></li>
+<li><a href="#_总结_4">2.18. 总结</a></li>
 </ul>
 </li>
-<li><a href="#_有状态的_silent_cron">3. 有状态的 Silent Cron</a>
+<li><a href="#_测试_say">3. 测试 say</a>
 <ul class="sectlevel2">
-<li><a href="#_持久化存储">3.1. 持久化存储</a></li>
-<li><a href="#_开发存储后端">3.2. 开发存储后端</a></li>
-<li><a href="#_使用存储后端">3.3. 使用存储后端</a></li>
-<li><a href="#_发展的空间">3.4. 发展的空间</a></li>
-<li><a href="#_总结_7">3.5. 总结</a></li>
-<li><a href="#_变量和作用域">3.6. 变量和作用域</a></li>
-<li><a href="#_子例程">3.7. 子例程</a></li>
-<li><a href="#_类和对象">3.8. 类和对象</a></li>
-<li><a href="#_并发">3.9. 并发</a></li>
-<li><a href="#_展望">3.10. 展望</a></li>
-<li><a href="#_正则表达式基础">3.11. 正则表达式基础</a></li>
-<li><a href="#_解析_ini_原语">3.12. 解析 INI 原语</a></li>
-<li><a href="#_把东西组装起来">3.13. 把东西组装起来</a></li>
-<li><a href="#_回溯">3.14. 回溯</a></li>
-<li><a href="#_grammars">3.15. Grammars</a></li>
-<li><a href="#_从匹配中提取数据">3.16. 从匹配中提取数据</a></li>
-<li><a href="#_生成好的错误信息">3.17. 生成好的错误信息</a></li>
-<li><a href="#_编写你自己的_grammars">3.18. 编写你自己的 Grammars</a></li>
-<li><a href="#_总结_8">3.19. 总结</a></li>
+<li><a href="#_总结_5">3.1. 总结</a></li>
+<li><a href="#_异步运行命令">3.2. 异步运行命令</a></li>
+<li><a href="#_实现超时">3.3. 实现超时</a></li>
+<li><a href="#_more_on_promises">3.4. More on Promises</a></li>
+<li><a href="#_可能的扩展">3.5. 可能的扩展</a></li>
+<li><a href="#_重构和自动化测试">3.6. 重构和自动化测试</a></li>
+<li><a href="#_总结_6">3.7. 总结</a></li>
+</ul>
+</li>
+<li><a href="#_有状态的_silent_cron">4. 有状态的 Silent Cron</a>
+<ul class="sectlevel2">
+<li><a href="#_持久化存储">4.1. 持久化存储</a></li>
+<li><a href="#_开发存储后端">4.2. 开发存储后端</a></li>
+<li><a href="#_使用存储后端">4.3. 使用存储后端</a></li>
+<li><a href="#_发展的空间">4.4. 发展的空间</a></li>
+<li><a href="#_总结_7">4.5. 总结</a></li>
+<li><a href="#_变量和作用域">4.6. 变量和作用域</a></li>
+<li><a href="#_子例程">4.7. 子例程</a></li>
+<li><a href="#_类和对象">4.8. 类和对象</a></li>
+<li><a href="#_并发">4.9. 并发</a></li>
+<li><a href="#_展望">4.10. 展望</a></li>
+<li><a href="#_正则表达式基础">4.11. 正则表达式基础</a></li>
+<li><a href="#_解析_ini_原语">4.12. 解析 INI 原语</a></li>
+<li><a href="#_把东西组装起来">4.13. 把东西组装起来</a></li>
+<li><a href="#_回溯">4.14. 回溯</a></li>
+<li><a href="#_grammars">4.15. Grammars</a></li>
+<li><a href="#_从匹配中提取数据">4.16. 从匹配中提取数据</a></li>
+<li><a href="#_生成好的错误信息">4.17. 生成好的错误信息</a></li>
+<li><a href="#_编写你自己的_grammars">4.18. 编写你自己的 Grammars</a></li>
+<li><a href="#_总结_8">4.19. 总结</a></li>
 </ul>
 </li>
 </ul>
@@ -165,41 +169,60 @@ if (theme && theme !== "1") {
 <h2 id="_什么是_raku">1. 什么是 Raku</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Raku是一种编程语言。它旨在让人们轻松学习，阅读和书写，并受到自然语言的启发。它允许初学者用“婴儿Perl”写作，同时为经验丰富的程序员提供表达自由，从简洁到诗意。
-Raku逐渐打字。它主要遵循动态类型语言的范例，因为它接受在编译期间无法保证类型安全的程序。但是，与许多动态语言不同，它接受并强制执行类型约束。在可能的情况下，编译器使用类型注释在编译时做出决策，否则只能在运行时进行。
-许多编程范例都影响了Raku.您可以在Raku中编写命令式，面向对象和功能的程序。声明式编程通过多调度，子类型以及正则表达式和语法引擎等功能得到支持。
-Raku中的大多数查找都是词汇，并且语言避免了全局状态。这使得程序的并行和并发执行变得更容易，Raku也专注于高级并发原语。如果您不希望仅限于一个CPU核心，而不是考虑线程和锁定，则倾向于考虑承诺和消息队列。
-Raku作为一种语言并不是关于是否应编译或解释Raku程序的观点。 Rakudo Raku  - 主要实现 - 动态预编译模块并解释脚本。</p>
+<p>Raku 是一种编程语言。它以自然语言为灵感，设计成易学、易读、易写的语言。它让初学者可以编写 "婴儿Perl"，同时也让有经验的程序员可以自由表达，从简练到诗意。</p>
+</div>
+<div class="paragraph">
+<p>Raku 是渐近类型的。它主要遵循了动态类型化语言的范式，即接受那些在编译过程中无法保证类型安全的程序。然而，与许多动态语言不同的是，它接受并执行类型约束。在可能的情况下，编译器使用类型注解来在编译时做出决定，否则只有在运行时才有可能。</p>
+</div>
+<div class="paragraph">
+<p>许多编程范式都影响了 Raku 。你可以在 Raku 中编写命令式、面向对象和函数式的程序。声明式编程的功能，如多重分派、子类型、regex 和 grammar 引擎等，都支持声明式编程。</p>
+</div>
+<div class="paragraph">
+<p>在 Raku 中，大部分的查询都是词法查询，而且语言避免了全局状态。这使得程序的并行和并发执行更加容易，Raku 对高级并发原语的关注也是如此。当你不希望被限制在一个 CPU 内核上时，你会考虑 Promise 和消息队列, 而不是考虑线程和锁。</p>
+</div>
+<div class="paragraph">
+<p>Raku 作为一门语言，对于 Raku 程序应该被编译还是被解释的问题，Raku 是没有主见的。Raku 作为一种主要的实现, 可以快速编译模块并解释脚本。</p>
 </div>
 <div class="sect2">
 <h3 id="_perl5_老天鹅">1.1. Perl5, 老天鹅</h3>
 <div class="paragraph">
-<p>在2000年左右，Perl 5开发面临着来自冲突的发展愿望并保持向后兼容性的主要压力。
-Raku是释放这种张力的阀门。 所有需要中断向后兼容性的扩展提议都被引入到Raku中，使其处于梦幻状态，一切皆有可能并且没有任何修复。 经过几年的艰苦努力才能进入一个更加稳固的状态。</p>
+<p>在 2000 年左右，Perl 5 的发展面临着巨大的压力，面临着既要发展又要保持向后兼容的矛盾。</p>
 </div>
 <div class="paragraph">
-<p>在此期间，Perl 5也进化了，两种语言不同，大多数Perl 5开发人员不再认为Raku是一个自然的升级路径，Raku并没有试图淘汰Perl 5（至少没有 不仅仅是试图淘汰任何其他编程语言:-)，而2015年Raku的第一个稳定版本并未表明支持Perl 5的任何失误。
-Perl 5由一个独立的爱好者社区开发，他们密切关注Raku以找到值得采用Perl 5的功能。因此，虽然Perl 5和Raku社区有一定的重叠并相互通信，但两者都大多独立地发展。</p>
+<p>Raku 是释放这种压力的阀门。所有需要打破向后兼容性的扩展建议都被引导到了 Raku 中，使其处于梦幻般的状态，一切皆有可能，没有任何东西是固定的。经过几年的努力，Raku 才进入了一个比较稳固的状态。</p>
+</div>
+<div class="paragraph">
+<p>在这段时间里，Perl 5 也在不断发展，这两种语言的差异性足够大，以至于大多数 Perl 5 的开发者不再认为 Raku 是一条自然的升级之路，以至于 Raku 并没有试图让 Perl 5 过时（至少不会比它试图让任何其他编程语言过时的程度更高：-），2015 年第一次稳定发布的 Raku 并没有表明对 Perl 5 的支持失效。</p>
+</div>
+<div class="paragraph">
+<p>Perl 5 是由一个独立的爱好者社区开发的，他们一直关注着 Raku，寻找值得采纳到 Perl 5 中的功能，所以虽然 Perl 5 和 Raku 社区有一定的重叠和交流，但两者都是独立发展的。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_库的可用性">1.2. 库的可用性</h3>
 <div class="paragraph">
-<p>作为一种相对年轻的语言，Raku缺乏Perl 5和Python等语言提供的成熟模块生态系统。
-为了弥补这一差距，存在允许您调用用C，Python，Perl 5和Ruby编写的库的接口。 Perl 5和Python接口非常复杂，你可以编写一个Raku类，它用两种语言编写类的子类，反之亦然。
-因此，如果您喜欢特定的Python库，您可以通过Inline :: Python模块将其加载到Raku程序中。</p>
+<p>作为一种相对年轻的语言，Raku 缺乏像 Perl 5 和 Python 这样的语言所提供的成熟的模块生态系统。</p>
+</div>
+<div class="paragraph">
+<p>为了弥补这个差距，就有了接口，你可以调用用 C、Python、Perl 5 和 Ruby 编写的库。Perl 5 和 Python 的接口足够复杂，你可以编写一个 Raku 的类，它可以子类化用这两种语言编写的类，反之亦然。</p>
+</div>
+<div class="paragraph">
+<p>因此，如果你喜欢某个特定的 Python 库，你可以通过 <code>Inline::Python</code> 模块将其加载到你的 Raku 程序中。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_为什么我应该使用_raku">1.3. 为什么我应该使用 Raku</h3>
+<h3 id="_我为什么要使用_raku">1.3. 我为什么要使用 Raku?</h3>
 <div class="paragraph">
-<p>如果您喜欢动态类型编程语言的快速原型制作经验，但您也需要足够的安全功能来构建大型，可靠的应用程序，Raku非常适合您。它的逐步输入允许您编写代码而无需全面了解所涉及的类型，然后引入类型约束以防止将来滥用您的内部和外部API。
-Perl有很长的历史，通过正则表达式（正则表达式）进行文本处理非常容易，但更复杂的正则表达式获得了声誉
-难以阅读和维护。 Raku通过将regex放在与代码相同的级别来解决这个问题，允许您将它们命名为子例程，甚至使用类继承和角色组合等面向对象的功能来管理代码和正则表达式重用。由此产生的语法非常强大且易于阅读。事实上，Rakudo Raku编译器使用Raku语法解析Raku源代码！
-说到文本，Raku具有惊人的Unicode支持。如果您向用户询问一个号码，并且他们输入的数字不是ASCII范围内的阿拉伯数字，那么Raku仍然可以覆盖您。如果您处理不能表示为单个Unicode代码点的字素，Raku仍会将其表示为单个字符。</p>
+<p>如果你喜欢动态类型化的编程语言所带来的快速原型开发体验，同时又希望有足够的安全功能来构建大型的、可靠的应用程序，那么 Raku 是个不错的选择。它的渐进式类型让你可以在没有完全了解所涉及的类型的情况下编写代码，以后还可以引入类型约束，防止将来内部和外部 API 被滥用。</p>
 </div>
 <div class="paragraph">
-<p>我可以列出更多的技术优势，但更重要的是，该语言的设计使用起来很有趣。 一个重要的方面是良好的错误消息。 您是否曾经因为通常只给出SyntaxError而烦恼于Python：当出现问题时语法无效？ 例如，这个错误可能来自忘记一个右括号。 在这种情况下，Raku编译器说</p>
+<p>Perl 在通过正则表达式(regexes)来处理文本的历史悠久，但比较复杂的 regexes 却有一个很难读和维护的名声。Raku 解决了这一问题，它将 regex 与代码放在同一层次上，允许你把它们像子程序一样命名，甚至可以使用类继承和角色组成等面向对象的特性来管理代码和 regex 重用。由此产生的 grammar 非常强大，也很容易读懂。事实上，Raku 编译器就是用 Raku 的 grammar 来解析 Raku 的源码的!</p>
+</div>
+<div class="paragraph">
+<p>说到文本，Raku 有惊人的 Unicode 支持。如果你要求用户输入一个数字，而他们输入的数字不是 ASCII 范围内的阿拉伯数字，那么 Raku 仍然可以满足你的要求。如果你处理的是不能用一个单一的 Unicode 代码点来表示的字素，Raku 仍然可以将其作为一个单一的字符来表示。</p>
+</div>
+<div class="paragraph">
+<p>有更多的技术优势，我可以列举出来，但更重要的是，这套语言的设计是为了让用户使用起来更有趣。其中一个重要的方面就是良好的错误信息。你是否曾对 Python 感到恼火过，因为当出现错误时，通常只给出了 SyntaxError: invalid syntaxError: invalid syntax 语法。例如，这个错误可能来自于忘记了结尾的括号。在这种情况下，Raku 编译器会打印出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -207,17 +230,23 @@ Perl有很长的历史，通过正则表达式（正则表达式）进行文本�
 </div>
 </div>
 <div class="paragraph">
-<p>这实际上告诉你什么是错的。 但这只是冰山一角。 编译器捕获常见错误并指出可能的解决方案，并且
-甚至建议修复拼写错误。 Raku社区认为错误消息不是很棒，很短的LTA，值得bug报告，并且花了很多精力来提高错误消息的标准。
-最后，Raku使您能够以不同的方式和不同的编程范例自由地表达您的问题域和解决方案。 如果核心语言提供的选项不够，那么它在设计时考虑了可扩展性，允许您为面向对象的代码和新语法引入新的语义。</p>
+<p>这实际上告诉你什么是错的。但这只是冰山一角。编译器可以捕捉到常见的错误，并指出可能的解决方案，甚至还建议对拼写错误进行修复。Raku 社区认为那些 <strong>less than awesome,</strong> 的错误信息，即 LTA，是值得报告的错误信息，并在提高错误信息的标准上花了很多精力。</p>
+</div>
+<div class="paragraph">
+<p>最后，Raku 给了你自由，可以用不同的方式和不同的编程范式来表达你的问题域和解决方案。如果核心语言提供的选项还不够多，那么它在设计时就考虑到了可扩展性，让你既可以引入新的面向对象代码的语义，也可以引入新的语法。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_总结">1.4. 总结</h3>
 <div class="paragraph">
-<p>Raku是一种灵活的编程语言，为初学者和专家提供了许多酷炫便捷的功能。 它提供灵活性，类型检查以及强大的Unicode和文本处理支持。
-== 运行 Raku</p>
+<p>Raku 是一种灵活的编程语言，它为初学者和专家提供了许多酷炫而方便的功能。它提供了灵活性，类型检查，以及强大的 Unicode 和文本处理支持。</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_运行_raku">2. 运行 Raku</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>在我们开始探索Raku之前，您应该拥有一个环境
 可以运行Raku代码。所以你需要安装Rakudo Raku，这是目前唯一一个积极开发的Raku编译器。或者更好的是，安装Rakudo Star，这是一个包含Rakudo本身的分发版，一些有用的模块，以及一个可以帮助您安装更多模块的工具。
@@ -226,9 +255,8 @@ Perl有很长的历史，通过正则表达式（正则表达式）进行文本�
 以下部分讨论了安装Rakudo Star的几个选项。选择适合你的任何东西。
 本书中的示例使用Rakudo 2017.04.03或Rakudo Star 2017.04（建立在Rakudo 2017.04.03之上）并且应该使用此版本或任何更新版本的Rakudo，只要它支持Raku版本6.c.</p>
 </div>
-</div>
 <div class="sect2">
-<h3 id="_安装器">1.5. 安装器</h3>
+<h3 id="_安装器">2.1. 安装器</h3>
 <div class="paragraph">
 <p>您可以从 <a href="https://rakudo.raku.org/downloads/star/" class="bare">https://rakudo.raku.org/downloads/star/</a> Mac OS（.dmg）和 Windows（.msi）下载安装程序。 下载后，您可以启动它们，它们将引导您完成安装过程。
 预装的Linux软件包可从https://github.com/nxadm/rakudo-pkg/releases/ 获得，适用于Debian，Ubuntu，CentOS和Fedora。
@@ -240,7 +268,7 @@ Perl有很长的历史，通过正则表达式（正则表达式）进行文本�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_docker">1.6. Docker</h3>
+<h3 id="_docker">2.2. Docker</h3>
 <div class="paragraph">
 <p>在支持Docker的平台上，您可以从docker hub中提取现有的Docker容器：</p>
 </div>
@@ -289,7 +317,7 @@ hi</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_从源代码创建">1.7. 从源代码创建</h3>
+<h3 id="_从源代码创建">2.3. 从源代码创建</h3>
 <div class="paragraph">
 <p>要从源代码构建Rakudo Star，您需要安装make，GNU C Compiler1（GCC）或clang和Perl 5。 此示例安装在$ HOME / opt / rakudo-star中：</p>
 </div>
@@ -315,7 +343,7 @@ $ make install</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_测试你的_rakudo_star_安装">1.8. 测试你的 Rakudo Star 安装</h3>
+<h3 id="_测试你的_rakudo_star_安装">2.4. 测试你的 Rakudo Star 安装</h3>
 <div class="paragraph">
 <p>您现在应该能够从命令行运行Raku程序并询问Rakudo的版本：</p>
 </div>
@@ -335,14 +363,14 @@ hi</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_文档">1.9. 文档</h3>
+<h3 id="_文档">2.5. 文档</h3>
 <div class="paragraph">
 <p>Rakudo本身几乎没有文档，因为大多数有趣的材料都是关于Raku语言的。 但是Rakudo会提供命令行选项的摘要，您可以通过调用raku --help来访问它们。
 Raku语言文档的官方位置是https：// docs。 raku.org/，旨在提供参考和教程式材料。 其他好的资源列在https://raku.org/resources/，其中许多是由Raku社区的成员创建和维护的。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_2">1.10. 总结</h3>
+<h3 id="_总结_2">2.6. 总结</h3>
 <div class="paragraph">
 <p>在大多数平台上，您可以从预构建的二进制安装程序安装Rakudo Star。 如果这不起作用，可以使用Docker镜像。 最后，Rakudo Star可以从它的来源建造。
 == 格式化数独字谜</p>
@@ -481,7 +509,7 @@ substr（$ string，$ from，$ num-chars）从$ string中提取子字符串。�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_让数独变得可玩">1.11. 让数独变得可玩</h3>
+<h3 id="_让数独变得可玩">2.7. 让数独变得可玩</h3>
 <div class="paragraph">
 <p>由于我们脚本的输出现在已经存在，即使您将它打印在纸上，也无法播放生成的数独。 所有那些讨厌的零都妨碍了实际输入你精心推断的数字！
 所以，让我们用空白替换每个0，这样你就可以解决这个难题：</p>
@@ -671,7 +699,7 @@ say $x;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_便捷常量和更多便捷写法">1.12. 便捷,常量和更多便捷写法</h3>
+<h3 id="_便捷常量和更多便捷写法">2.8. 便捷,常量和更多便捷写法</h3>
 <div class="paragraph">
 <p>Raku是以人类语言为模型的，人类语言内置了某种压缩方案，常用的单词往往很短，常见的结构有快捷方式。
 因此，有很多方法可以更简洁地编写代码。 第一个基本上是作弊，因为子块可以用Str类中的内置方法替换，comb：</p>
@@ -741,7 +769,7 @@ say separator;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_io_和其它悲剧">1.13. IO 和其它悲剧</h3>
+<h3 id="_io_和其它悲剧">2.9. IO 和其它悲剧</h3>
 <div class="paragraph">
 <p>实用脚本不将其输入包含为硬编码字符串文字，而是从命令行，标准输入或文件中读取它。
 如果要从命令行读取Sudoku，可以声明一个名为MAIN的子例程，该子例程获取传入的所有命令行参数：</p>
@@ -819,7 +847,7 @@ for lines() -&gt; $sudoku {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_获得创造性">1.14. 获得创造性</h3>
+<h3 id="_获得创造性">2.10. 获得创造性</h3>
 <div class="paragraph">
 <p>你不会从读书中学习编程语言; 你必须实际使用它，修补它。 如果您想扩展前面讨论的示例，我建议您尝试以不同的输出格式生成Sudokus。
 SVG9是一种基于文本的矢量图形格式，提供渲染数独所需的所有基元：矩形，线条，文本等等。 如果您想轻松获得相对较好的输出，可以使用它。
@@ -849,7 +877,7 @@ SVG9是一种基于文本的矢量图形格式，提供渲染数独所需的所�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_3">1.15. 总结</h3>
+<h3 id="_总结_3">2.11. 总结</h3>
 <div class="paragraph">
 <p>第一个Raku示例引入了文字，变量和控制流。
 您还看到了基本的输入和输出原语，以及MAIN子例程
@@ -873,7 +901,7 @@ $ autotime 1450956180
 </div>
 </div>
 <div class="sect2">
-<h3 id="_使用库">1.16. 使用库</h3>
+<h3 id="_使用库">2.12. 使用库</h3>
 <div class="paragraph">
 <p>Raku 的 [DateTime](<a href="https://docs.raku.org/type/DateTime" class="bare">https://docs.raku.org/type/DateTime</a>) 和 [Date](<a href="https://docs.raku.org/type/Date" class="bare">https://docs.raku.org/type/Date</a>) 模块会做实际的转换。
 <code>DateTime.new</code> 构造函数有一个接收单个整数作为 UNIX 时间戳的变体:</p>
@@ -1013,7 +1041,7 @@ else {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_datetime_格式化">1.17. DateTime 格式化</h3>
+<h3 id="_datetime_格式化">2.13. DateTime 格式化</h3>
 <div class="paragraph">
 <p>如果时间戳没有被解析为整天, 那么当前我们的脚本的输出就会像这样:</p>
 </div>
@@ -1092,7 +1120,7 @@ sub MAIN(Int $timestamp) {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_寻找其他途径">1.18. 寻找其他途径</h3>
+<h3 id="_寻找其他途径">2.14. 寻找其他途径</h3>
 <div class="paragraph">
 <p>现在, 从时间戳到日期和时间的转换工作的很好, 让我们看另一种途径。
 我们的小工具需要解析输入, 并决定输入的是时间戳还是日期和可选的时间。</p>
@@ -1211,7 +1239,7 @@ $ ./autotime 1450915200
 </div>
 </div>
 <div class="sect2">
-<h3 id="_处理时间">1.19. 处理时间</h3>
+<h3 id="_处理时间">2.15. 处理时间</h3>
 <div class="paragraph">
 <p>剩下要实现的功能是把日期和时间转换为时间戳。换句话说, 我们想这样调用 <code>autotime 2015-12-24 11:23:00</code>:</p>
 </div>
@@ -1260,7 +1288,7 @@ $ ./autotime 1450915200
 </div>
 </div>
 <div class="sect2">
-<h3 id="_系好你的安全带">1.20. 系好你的安全带</h3>
+<h3 id="_系好你的安全带">2.16. 系好你的安全带</h3>
 <div class="paragraph">
 <p>Raku 的隐式变量或主题变量:</p>
 </div>
@@ -1365,7 +1393,7 @@ multi sub MAIN(Str $date where { try Date.new($_) }, Str $time?) {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_main_魔法">1.21. MAIN 魔法</h3>
+<h3 id="_main_魔法">2.17. MAIN 魔法</h3>
 <div class="paragraph">
 <p>为我们调用 <code>sub MAIN</code> 的魔法还为我们提供了一个自动化的用法消息, 如果我们用不匹配任何 <code>multi</code> 的参数调用 MAIN, 例如调用时不提供参数:</p>
 </div>
@@ -1408,7 +1436,7 @@ Usage:
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_4">1.22. 总结</h3>
+<h3 id="_总结_4">2.18. 总结</h3>
 <div class="paragraph">
 <p>我们已经看到了一些 Date 和 DateTime 算法, 但令人兴奋的部分是 multi dispatch, 命名参数,带有 where 从句的子类型约束, given/ when 和 隐式 $_ 变量, 以及一些魔法, 当涉及到 MAIN subs 时。</p>
 </div>
@@ -1416,7 +1444,7 @@ Usage:
 </div>
 </div>
 <div class="sect1">
-<h2 id="_测试_say">2. 测试 say</h2>
+<h2 id="_测试_say">3. 测试 say</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>在上一章中，我更改了一些代码，以便它不会产生输出，而是在MAIN子中输出，这很方便地进行了测试。
@@ -1601,7 +1629,7 @@ ok 1 - doublespeak works</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_5">2.1. 总结</h3>
+<h3 id="_总结_5">3.1. 总结</h3>
 <div class="paragraph">
 <p>我们已经看到say（）使用动态范围的变量$ * OUT作为其输出文件句柄。 出于测试目的，我们可以将其替换为我们制作的对象，这使我们偶然发现了在Raku中如何编写类的第一眼。
 == Silent-Cron, 一个 Cron 包裹器</p>
@@ -1620,7 +1648,7 @@ $ silent-cron --timeout=5 -- command-that-might-hang</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_异步运行命令">2.2. 异步运行命令</h3>
+<h3 id="_异步运行命令">3.2. 异步运行命令</h3>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">当你想运行外部命令时，Raku基本上有两个选择：run，2是一个简单的同步接口; 和Proc </dt>
@@ -1768,7 +1796,7 @@ exit $exitcode;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_实现超时">2.3. 实现超时</h3>
+<h3 id="_实现超时">3.3. 实现超时</h3>
 <div class="paragraph">
 <p>在Raku中实现超时的惯用方法是将Promise.anyof组合器与计时器一起使用：</p>
 </div>
@@ -1856,7 +1884,7 @@ else {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_more_on_promises">2.4. More on Promises</h3>
+<h3 id="_more_on_promises">3.4. More on Promises</h3>
 <div class="paragraph">
 <p>如果您使用过其他语言的并发或并行程序，则可能遇到了线程，锁，互斥体和其他低级构造。 这些也存在于Raku中，但不鼓励直接使用它们。
 这种低级原语的问题在于它们不能很好地构成。 您可以拥有两个使用线程的库，并且可以自行运行，但在同一个程序中组合时会导致死锁。 或者不同的组件可能会自己启动线程，当多个这样的组件在同一个进程中聚集在一起时，这会导致太多的线程和高内存消耗。</p>
@@ -1938,18 +1966,18 @@ say @approximations.map({.result}).sum / @approximations;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_可能的扩展">2.5. 可能的扩展</h3>
+<h3 id="_可能的扩展">3.5. 可能的扩展</h3>
 <div class="paragraph">
 <p>如果你想使用silent-cron，你可以添加一个重试机制。 如果命令因外部依赖性（如API或NFS共享）而失败，则外部依赖关系可能需要一段时间才能恢复。 因此，您应该添加二次或指数退避; 也就是说，重试之间的等待时间应以二次方式（1,2,4,9,16 &#8230;&#8203;&#8230;&#8203;）或指数方式（1,2,4,8,16,32 &#8230;&#8203;&#8230;&#8203;）增加。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_重构和自动化测试">2.6. 重构和自动化测试</h3>
+<h3 id="_重构和自动化测试">3.6. 重构和自动化测试</h3>
 <div class="paragraph">
 <p>在我们在下一章中更多地扩展silent-cron之前，是时候重构一下并为它编写一些测试。</p>
 </div>
 <div class="sect3">
-<h4 id="_重构">2.6.1. 重构</h4>
+<h4 id="_重构">3.6.1. 重构</h4>
 <div class="paragraph">
 <p>作为一个简短的提醒，这是程序的样子：</p>
 </div>
@@ -2030,7 +2058,7 @@ method exitcode() { $!exitcode }</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_模拟和测试">2.6.2. 模拟和测试</h4>
+<h4 id="_模拟和测试">3.6.2. 模拟和测试</h4>
 <div class="paragraph">
 <p>既然我们有一种方便的方法从假设的子程序中返回多个值，那么让我们看看这个子程序可能是什么样子：</p>
 </div>
@@ -2247,7 +2275,7 @@ method start {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_提高稳定性和测定时间">2.6.3. 提高稳定性和测定时间</h4>
+<h4 id="_提高稳定性和测定时间">3.6.3. 提高稳定性和测定时间</h4>
 <div class="paragraph">
 <p>依靠测试中的时间总是没有吸引力。 如果时间太短（或者太慢），则可能会在缓慢或负载较重的机器上出现零星的测试失败风险。 如果使用更保守的时间间隔测试，测试可能变得非常慢。
 有一个模块（不与Rakudo一起分发）来减轻这种痛苦：Test :: Scheduler15提供了一个具有虚拟化时间的线程调度程序，允许您编写如下测试：</p>
@@ -2277,7 +2305,7 @@ isa-ok $result, ExecutionResult; # more tests here</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_安装模块">2.6.4. 安装模块</h4>
+<h4 id="_安装模块">3.6.4. 安装模块</h4>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">如果您想试用Test </dt>
@@ -2305,7 +2333,7 @@ $ zef install Test::Scheduler</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_6">2.7. 总结</h3>
+<h3 id="_总结_6">3.7. 总结</h3>
 <div class="paragraph">
 <p>我们已经看到了一个用于运行外部程序的异步API以及如何使用Promises来实现超时。 我们还讨论了如何通过调度程序将promise分发给线程，允许您启动任意数量的promise而不会使计算机过载。
 在测试期间，我们已经看到了带有访问器，三元运算符和匿名类的属性。 已经讨论了线程代码的测试，以及第三方模块可以提供帮助的方式。 最后，我们对模块安装程序zef进行了一次非常小的一瞥。</p>
@@ -2314,7 +2342,7 @@ $ zef install Test::Scheduler</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_有状态的_silent_cron">3. 有状态的 Silent Cron</h2>
+<h2 id="_有状态的_silent_cron">4. 有状态的 Silent Cron</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>在上一章中，我们查看了silent-cron，它是一个外部程序的包装器，在它们的退出状态为零时使它们静音。 但为了使它真正实用，它也应该使偶尔的失败沉默。
@@ -2322,7 +2350,7 @@ $ zef install Test::Scheduler</code></pre>
 要实现此功能，silent-cron需要在不同的运行之间存储持久状态。 它需要记录当前运行的结果，然后确定故障历史是否符合“偶尔”的条件。</p>
 </div>
 <div class="sect2">
-<h3 id="_持久化存储">3.1. 持久化存储</h3>
+<h3 id="_持久化存储">4.1. 持久化存储</h3>
 <div class="paragraph">
 <p>存储后端需要编写和检索结构化数据，并通过锁定保护对状态文件的并发访问。 这种存储后端的一个很好的库是SQLite，1是一个零维护的SQL引擎，可以作为C库使用。 它是公共领域的软件，并且在大多数主流浏览器，操作系统甚至是一些航空公司中使用
 Raku允许您通过DBIish访问SQLite的功能，3这是一个通用数据库接口，具有SQLite，MySQL，PostgreSQL的后端驱动程序，
@@ -2364,7 +2392,7 @@ $sth.finish;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_开发存储后端">3.2. 开发存储后端</h3>
+<h3 id="_开发存储后端">4.2. 开发存储后端</h3>
 <div class="paragraph">
 <p>我们不应该只将所有存储处理代码填充到子MAIN中; 我们应该仔细考虑为存储后端创建有用的API。 首先，我们只需要两个功能：插入作业执行的结果，并检索最新的结果。
 由于silent-cron可以用于保护同一台机器上的多个cron作业，因此我们可能需要一些东西来区分不同的作业，这样它们中的一个成功就不会阻止错误报告一个不断失败的作业。 为此，我们引入了一个作业名称，它可以默认为正在执行的命令（包括参数），但可以在命令行中显式设置。
@@ -2503,7 +2531,7 @@ $ sth.allrows（&#8230;&#8203;）是懒惰的，之后的.map调用也是如此�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_使用存储后端">3.3. 使用存储后端</h3>
+<h3 id="_使用存储后端">4.3. 使用存储后端</h3>
 <div class="paragraph">
 <p>有了存储API，就可以使用它了：</p>
 </div>
@@ -2535,14 +2563,14 @@ MAINsubroutine使用构造$ var // = EXPR。// standfor defined-OR，如果它�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_发展的空间">3.4. 发展的空间</h3>
+<h3 id="_发展的空间">4.4. 发展的空间</h3>
 <div class="paragraph">
 <p>必须调查cron作业失败原因的系统管理员可能对该作业的历史感兴趣。 您可以实现一个命令，列出上次作业运行，成功或失败，退出代码或可能的运行时等等。
 或者你可以研究一个不同的后端。 如果要将状态存储在JSON文件而不是SQLite中，该怎么办？ 或启用两者？ （提示：您可以使用JSON :: Tiny5或JSON :: Fast6模块。）</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_7">3.5. 总结</h3>
+<h3 id="_总结_7">4.5. 总结</h3>
 <div class="paragraph">
 <p>我们已经讨论过DBIish，一个带有可插拔后端的数据库API，并探讨了如何将它与SQLite一起用来存储持久数据。 在这个过程中，我们还遇到了懒惰列表和一种名为heredocs的新形式的字符串文字。
 == 回顾 Raku 基础知识</p>
@@ -2552,7 +2580,7 @@ MAINsubroutine使用构造$ var // = EXPR。// standfor defined-OR，如果它�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_变量和作用域">3.6. 变量和作用域</h3>
+<h3 id="_变量和作用域">4.6. 变量和作用域</h3>
 <div class="paragraph">
 <p>在Raku中，变量名由sigil，$，@，％或＆组成，后跟标识符。 sigil意味着类型约束，其中$是最常见的约束
 （默认情况下没有限制），@表示数组，％表示哈希（关联数组/映射），＆表示代码对象。
@@ -2562,7 +2590,7 @@ MAINsubroutine使用构造$ var // = EXPR。// standfor defined-OR，如果它�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_子例程">3.7. 子例程</h3>
+<h3 id="_子例程">4.7. 子例程</h3>
 <div class="paragraph">
 <p>子程序或简称子程序是一段具有自己范围的代码，通常也是一个名称。 它有一个签名，指定在调用时必须传递的值：</p>
 </div>
@@ -2664,7 +2692,7 @@ multi subs是几个具有相同名称但签名不同的子程序。 编译器在
 </div>
 </div>
 <div class="sect2">
-<h3 id="_类和对象">3.8. 类和对象</h3>
+<h3 id="_类和对象">4.8. 类和对象</h3>
 <div class="paragraph">
 <p>类声明遵循与子例程声明相同的语法模式：关键字class，后跟名称，后跟大括号中的主体：</p>
 </div>
@@ -2727,7 +2755,7 @@ say $c.lines; # Output: [42]</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_并发">3.9. 并发</h3>
+<h3 id="_并发">4.9. 并发</h3>
 <div class="paragraph">
 <p>Raku为并发和并行执行提供了高级原语。 我们鼓励您使用start运行计算，而不是显式生成新线程，它返回Promise.1。这是一个承诺未来计算将产生结果的对象。 因此，状态可以是Planned，Kept或Broken。 您可以链接承诺，组合它们并等待它们。
 在后台，调度程序将此类计算分发到操作系统级线程。 默认调度程序是一个线程池调度程序，其中包含可供使用的线程数的上限。
@@ -2736,7 +2764,7 @@ map，grep，throttle或者延迟，并使用他们的</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_展望">3.10. 展望</h3>
+<h3 id="_展望">4.10. 展望</h3>
 <div class="paragraph">
 <p>当您了解本章中讨论的主题并深入了解内置类型时，您应该熟悉Raku的基础知识并能够编写自己的程序。
 接下来，我们将研究Raku的优势之一：解析，通过正则表达式和语法。
@@ -2778,7 +2806,7 @@ my %hash = Config::INI::parse($ini_string);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_正则表达式基础">3.11. 正则表达式基础</h3>
+<h3 id="_正则表达式基础">4.11. 正则表达式基础</h3>
 <div class="paragraph">
 <p>正则表达式是一段代码，用作具有共同结构的字符串的模式。 它源于计算机科学概念中的正则表达式，但比纯正则表达式提供了更多的构造, 允许并扩展了一些功能，使它们更容易使用。</p>
 </div>
@@ -2815,7 +2843,7 @@ multi sub MAIN('test') {
 <p>通常，所有非单词字符都保留用于“特殊”语法，你必须用引号引起它们或用反斜杠转义它们以获得其字面含义。 例如正则表达式中的 <code>\&lt;</code> 或 <code>'&lt;'</code> 匹配小于号。 引用可以应用于多个字符，因此正则表达式中的 <code>'a+b'</code> 与 a 匹配，后跟加号 <code>+</code>，后跟 b。单词字符（字母，数字和下划线）总是按字面意思匹配。</p>
 </div>
 <div class="sect3">
-<h4 id="_字符类">3.11.1. 字符类</h4>
+<h4 id="_字符类">4.11.1. 字符类</h4>
 <div class="paragraph">
 <p>除了文字之外，字符类是正则表达式的常见构建块。 有许多预定义的字符类，以反斜杠的形式后跟一个小写的单个字母; 例如，<code>\d</code> 匹配一个数字。 它的反转使用大写字母，所以`\D` 匹配任何不是数字的字符。</p>
 </div>
@@ -2902,7 +2930,7 @@ multi sub MAIN('test') {
 </table>
 </div>
 <div class="sect3">
-<h4 id="_量词">3.11.2. 量词</h4>
+<h4 id="_量词">4.11.2. 量词</h4>
 <div class="paragraph">
 <p>只匹配一个重复的东西很无聊，所以正则表达式提供量词。 量词表示前一个正则表达式必须匹配的频率。</p>
 </div>
@@ -2939,7 +2967,7 @@ multi sub MAIN('test') {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_备选分支">3.11.3. 备选分支</h4>
+<h4 id="_备选分支">4.11.3. 备选分支</h4>
 <div class="paragraph">
 <p>任何一个或者备选分支由垂直条分隔。 例如，<code>\d+ | x</code> 匹配一个或多个数字的序列或字符 x。</p>
 </div>
@@ -2949,7 +2977,7 @@ multi sub MAIN('test') {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_解析_ini_原语">3.12. 解析 INI 原语</h3>
+<h3 id="_解析_ini_原语">4.12. 解析 INI 原语</h3>
 <div class="paragraph">
 <p>回到 INI 解析，我们必须考虑值内允许的字符。列出允许的字符似乎是徒劳的，因为我们很可能忘记一些。相反，我们应该考虑值中不允许的内容。换行当然不是，因为它们引入了下一个键/值对或节标题。也不允许使用分号，因为它们引入了注释。</p>
 </div>
@@ -3087,7 +3115,7 @@ ok "[a\nb]\n"  !~~ /^ &lt;header&gt; $/, 'No newlines inside headers';</code></p
 </div>
 </div>
 <div class="sect2">
-<h3 id="_把东西组装起来">3.13. 把东西组装起来</h3>
+<h3 id="_把东西组装起来">4.13. 把东西组装起来</h3>
 <div class="paragraph">
 <p>INI 文件的 <strong>section</strong> 是标题，后跟一些键/值对或注释行：</p>
 </div>
@@ -3147,7 +3175,7 @@ ok $ini ~~ /^&lt;inifile&gt;$/, 'Can parse a full INI file';</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_回溯">3.14. 回溯</h3>
+<h3 id="_回溯">4.14. 回溯</h3>
 <div class="paragraph">
 <p>对许多程序员来说，正则表达式匹配似乎很神奇。 您只需说明模式，正则表达式引擎就会确定字符串是否与模式匹配。 虽然实现正则表达式引擎是一项棘手的业务，但基础知识并不难理解。
 正则表达式引擎从左到右遍历正则表达式的各个部分，尝试匹配正则表达式的每个部分。 它跟踪到目前为止它在光标中匹配的字符串部分。 如果正则表达式的一部分找不到匹配项，则正则表达式引擎会尝试更改上一个匹配项以占用更少的字符，然后在新位置重试失败的匹配项。
@@ -3198,7 +3226,7 @@ my token inifile { &lt;block&gt; &lt;section&gt;* }</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_grammars">3.15. Grammars</h3>
+<h3 id="_grammars">4.15. Grammars</h3>
 <div class="paragraph">
 <p>这组解析INI文件的正则表达式并不是封装和可重用性的顶峰。
 因此，我们将探索语法，一种将正则表达式组合成类结构的功能，以及如何从成功匹配中提取结构化数据。
@@ -3248,7 +3276,7 @@ my token inifile { &lt;block&gt; &lt;section&gt;* }</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_从匹配中提取数据">3.16. 从匹配中提取数据</h3>
+<h3 id="_从匹配中提取数据">4.16. 从匹配中提取数据</h3>
 <div class="paragraph">
 <p>到目前为止，IniFile语法仅检查给定输入是否与语法匹配。 但是，当它匹配时，我们真的希望解析结果在一个易于使用的数据结构中。 例如，我们可以翻译这个示例INI文件：</p>
 </div>
@@ -3440,14 +3468,14 @@ my $result = IniFile.parse-ini($text);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_生成好的错误信息">3.17. 生成好的错误信息</h3>
+<h3 id="_生成好的错误信息">4.17. 生成好的错误信息</h3>
 <div class="paragraph">
 <p>良好的错误消息对任何产品的用户体验都至关重要。 解析器也不例外。 考虑第5行的消息Square括号[在第3行用花括号封闭}，而不是Python的惰性和泛型SyntaxError：无效语法。
 除了文本消息之外，了解解析错误的位置有助于找出错误的原因。
 我们将使用我们的INI文件解析器作为示例，探索如何从Raku语法生成更好的解析错误消息。</p>
 </div>
 <div class="sect3">
-<h4 id="_failure_is_normal">3.17.1. Failure Is Normal</h4>
+<h4 id="_failure_is_normal">4.17.1. Failure Is Normal</h4>
 <div class="paragraph">
 <p>在我们开始之前，重要的是要意识到在基于语法的解析器中，正则表达式无法匹配是正常的，即使在整体成功的解析中也是如此。
 让我们回想一下解析器的一部分：</p>
@@ -3511,7 +3539,7 @@ other=stuff</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_检测有害失败">3.17.2. 检测有害失败</h4>
+<h4 id="_检测有害失败">4.17.2. 检测有害失败</h4>
 <div class="paragraph">
 <p>要生成良好的解析错误消息，您必须区分预期和意外的解析失败。 如前所述，单个正则表达式或令牌的匹配失败通常不表示输入格式错误。 但是你可以找到你知道的点，一旦正则表达式引擎到达这一点，其余的匹配必须成功。
 如果你记得对：</p>
@@ -3567,7 +3595,7 @@ other=stuff</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_提供上下文">3.17.3. 提供上下文</h4>
+<h4 id="_提供上下文">4.17.3. 提供上下文</h4>
 <div class="paragraph">
 <p>对于较大的输入，我们确实要打印行号。 为了计算，我们
 需要获取目标字符串，该字符串可通过方法目标获得：</p>
@@ -3640,7 +3668,7 @@ method error($msg) {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_解析匹配对的缺点">3.17.4. 解析匹配对的缺点</h4>
+<h4 id="_解析匹配对的缺点">4.17.4. 解析匹配对的缺点</h4>
 <div class="paragraph">
 <p>由于它是如此常见的任务，Raku语法具有特殊的目标匹配语法，用于将一对分隔符与它们之间的某些内容进行匹配。 在INI文件示例中，这是一对括号，它们之间有一个节头。
 我们可以改变</p>
@@ -3677,7 +3705,7 @@ method error($msg) {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_编写你自己的_grammars">3.18. 编写你自己的 Grammars</h3>
+<h3 id="_编写你自己的_grammars">4.18. 编写你自己的 Grammars</h3>
 <div class="paragraph">
 <p>解析是一项必须学习的技能，大多与您的普通编程技能不同。 所以我鼓励你从一些小的东西开始，比如CSV的解析器或逗号分隔的值.9很容易一次性写出一个完整的语法，但我建议从解析一些原子开始（就像一个单元格的 两个逗号之间的数据），测试它，然后才进入下一个逗号。
 即使在像CSV这样看似简单的东西中，也会出现一些复杂性。 例如，您可以允许引用的字符串本身可以包含分隔符，以及一个转义字符，允许您在引用的字符串中使用引号字符。
@@ -3685,7 +3713,7 @@ method error($msg) {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_8">3.19. 总结</h3>
+<h3 id="_总结_8">4.19. 总结</h3>
 <div class="paragraph">
 <p>Raku允许正则表达式重用，将它们视为一等公民，允许它们像普通例程一样被命名和调用。 通过允许正则表达式内的空白来消除进一步的混乱。
 这些功能允许您编写正则表达式来解析正确的文件格式甚至编程语言。 语法允许您构建，重用和封装正则表达式。
