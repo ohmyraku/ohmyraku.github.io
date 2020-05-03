@@ -147,7 +147,7 @@ if (theme && theme !== "1") {
 <ul class="sectlevel2">
 <li><a href="#_异步运行命令">6.1. 异步运行命令</a></li>
 <li><a href="#_实现超时">6.2. 实现超时</a></li>
-<li><a href="#_more_on_promises">6.3. More on Promises</a></li>
+<li><a href="#_更多关于承诺的信息">6.3. 更多关于承诺的信息</a></li>
 <li><a href="#_可能的扩展">6.4. 可能的扩展</a></li>
 <li><a href="#_重构和自动化测试">6.5. 重构和自动化测试</a></li>
 <li><a href="#_总结_6">6.6. 总结</a></li>
@@ -1972,10 +1972,16 @@ ok 1 - doublespeak works</code></pre>
 <h2 id="_silent_cron_一个_cron_包裹器">6. Silent-Cron, 一个 Cron 包裹器</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>在Linux和类UNIX系统上，名为cron1的程序会在后台定期执行用户定义的命令。 它用于系统维护任务，例如刷新或删除缓存，旋转和删除旧日志文件等。
-如果这样的命令产生任何输出，cron通常会发送一个包含输出的电子邮件，以便管理员可以查看它并判断是否需要某些操作。
-但并非所有命令行程序都是为了与cron一起使用而编写的。 例如，即使成功执行，它们也可能产生输出，并通过非零退出代码指示失败。 或者他们可能会挂起或以其他方式行为不端。
-为了处理这些命令，我们将开发一个名为silent-cron的小程序，它包含这些命令并在退出代码为零时抑制输出。 它还允许您指定一个超时，如果它耗时太长则会终止包装程序：</p>
+<p>在 Linux 和类似 UNIX 的系统中，一个名为 cron<sup class="footnote">[<a id="_footnoteref_26" class="footnote" href="#_footnotedef_26" title="View footnote.">26</a>]</sup> 的程序会在后台定期执行用户定义的命令。它用于系统维护任务，如刷新或删除缓存、旋转和删除旧的日志文件等。</p>
+</div>
+<div class="paragraph">
+<p>如果这样的命令产生任何输出，cron 通常会发送一封包含输出的电子邮件，以便管理员查看，判断是否需要采取一些行动。</p>
+</div>
+<div class="paragraph">
+<p>但是，并不是所有的命令行程序都是为使用 cron 编写的。例如，它们可能在成功执行时也会产生输出，并通过非零的退出代码表示失败。或者它们可能会挂起，或者其他方面的错误行为。</p>
+</div>
+<div class="paragraph">
+<p>为了处理这类命令，我们将开发一个名为 silent-cron 的小程序，它可以封装这类命令，并在退出代码为0时抑制输出。它还允许你指定一个超时，如果时间过长，就会杀死被包装的程序。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1985,13 +1991,8 @@ $ silent-cron --timeout=5 -- command-that-might-hang</code></pre>
 </div>
 <div class="sect2">
 <h3 id="_异步运行命令">6.1. 异步运行命令</h3>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">当你想运行外部命令时，Raku基本上有两个选择：run，2是一个简单的同步接口; 和Proc </dt>
-<dd>
-<p>Async，3是一个异步且稍微复杂的选项。 即使我们在第一次迭代中省略了超时，我们也需要注意在异步接口中实现超时更容易，所以我们将使用它：</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>当你想运行外部命令时，Raku 基本上给你两个选择：run<sup class="footnote">[<a id="_footnoteref_27" class="footnote" href="#_footnotedef_27" title="View footnote.">27</a>]</sup>,是一个简单的同步接口；Proc::Async<sup class="footnote">[<a id="_footnoteref_28" class="footnote" href="#_footnotedef_28" title="View footnote.">28</a>]</sup>,是一个异步的、稍微复杂一点的选项。尽管我们在第一次迭代中会省略超时，但我们需要注意的是，在异步接口中实现超时是比较容易的，所以我们将使用这个接口。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2015,7 +2016,7 @@ sub MAIN(*@cmd) {
 </div>
 </div>
 <div class="paragraph">
-<p>这里有很多新的功能和概念，所以让我们一点一点地浏览代码。</p>
+<p>这里面有一大块新的功能和概念，让我们一点一点地去看一下代码。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2023,26 +2024,21 @@ sub MAIN(*@cmd) {
 </div>
 </div>
 <div class="paragraph">
-<p>你应该注意的第一件事是* @ cmd。 变量前面的*表示一个slurpy参数.4它之所以如此命名是因为它会冒出任意数量的参数。 <strong>仅在参数声明中需要。
-因此</strong> @ cmd收集数组变量@cmd中的所有命令行参数，其中第一个元素是要执行的命令，并且任何其他元素是传递给此命令的参数。</p>
+<p>首先你应该注意的是 <code><strong>@cmd</code>。变量前面的 <code></strong></code> 表示的是一个 slurpy 参数<sup class="footnote">[<a id="_footnoteref_29" class="footnote" href="#_footnotedef_29" title="View footnote.">29</a>]</sup>，它之所以这样命名，是因为它可以吞噬任何数量的参数。这个 <code>*</code> 只需要在参数声明中使用。</p>
+</div>
+<div class="paragraph">
+<p>所以 <code>*@cmd</code> 收集了所有的命令行参数，在数组变量 <code>@cmd</code> 中，第一个元素是要执行的命令，其他元素是传递给这个命令的参数。</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $proc = Proc::Async.new(|@cmd);</code></pre>
 </div>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">下一行使用传入的命令创建一个新的Proc </dt>
-<dd>
-<p>Async实例，但尚未运行任何内容。 Proc :: Async.new不期望我们</p>
-</dd>
-<dt class="hdlist1">传递数组，但它希望我们传递任意数量的值作为参数。 因此我们使用| @cmd之前的垂直bar5以展平我们的数组，以便我们发送Proc </dt>
-<dd>
-<p>Async.new多个值而不是一个数组值。
-对于我们的程序，我们需要捕获$ proc的所有输出; 因此我们捕获STDOUT和STDERR流的输出（Linux上的文件句柄1和2），并将它组合成一个字符串。 在异步API中，STDOUT和STDERR被建模为Supply，6类型的对象，因此是事件流。 由于耗材可以并行发出事件，我们需要一个线程安全的数据结构来收集结果，Raku可以方便地为它提供一个Channel：</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>下一行用传入的命令创建了一个新的 <code>Proc::Async</code> 实例，但还没有运行任何东西。<code>Proc::Async.new</code> 并不期望我们传送一个数组，但它希望我们传递任意数量的值作为参数。因此，我们在 <code>@cmd</code> 之前使用 <code>|</code> 竖条<sup class="footnote">[<a id="_footnoteref_30" class="footnote" href="#_footnotedef_30" title="View footnote.">30</a>]</sup>将数组扁平化，这样我们就可以向 <code>Proc::Async.new</code> 发送多个值，而不是一个数组值。</p>
+</div>
+<div class="paragraph">
+<p>对于我们的程序，我们需要捕获来自 <code>$proc</code> 的所有输出；因此我们捕获 STDOUT 和 STDERR 流的输出（Linux上的文件句柄1和2），并将其合并为一个字符串。在异步 API 中，STDOUT 和 STDERR 被建模为 Supply 类型的对象<sup class="footnote">[<a id="_footnoteref_31" class="footnote" href="#_footnotedef_31" title="View footnote.">31</a>]</sup> ，因此是事件流。由于 Supplies 可以并行地发出事件，因此我们需要一个线程安全的数据结构来收集结果，而 Raku 为此提供了一个 Channel。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2050,8 +2046,7 @@ sub MAIN(*@cmd) {
 </div>
 </div>
 <div class="paragraph">
-<p>要实际从程序中获取输出，我们需要进入
-STDOUT和STDERR流：</p>
+<p>为了实际得到程序的输出，我们需要切入 STDOUT 和 STDERR 流:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2061,8 +2056,10 @@ STDOUT和STDERR流：</p>
 </div>
 </div>
 <div class="paragraph">
-<p>每个 <code>$supply</code> executesthe block <code>{ $collector.send($_) }</code> 它收到的foreachstring。 如果流被缓冲，则字符串可以是字符，行或更大的字符串。 我们所做的就是通过send方法将字符串放入channel $ collector中。
-请注意，前面的代码相当于</p>
+<p>每个 <code>$supply</code> 都会对它接收到的每一个字符串执行块 <code>{ $collector.send($_) }</code>。这个字符串可以是一个字符、一行，如果流是缓冲的，也可以是更大的东西。我们所要做的就是通过 <code>send</code> 方法将字符串放入通道 <code>$collector</code> 中。</p>
+</div>
+<div class="paragraph">
+<p>请注意，前面的代码相当于:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2071,23 +2068,21 @@ $proc.stderr.tap: { $collector.send($_) }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>运行简单脚本时，您经常会看到正常输出和错误输出一起打印到终端。 我们的代码将STDOUT和STDERR输出交错到$ collector几乎相同的方式。
-既然已经将数据流分流并连接到我们的收集器，我们就可以启动该程序并等待它完成：</p>
+<p>在运行一个简单的脚本时，你经常会看到正常输出和错误输出一起打印到终端上。我们的代码是将 STDOUT 和 STDERR 输出交错到 <code>$collector</code> 中，其方式基本相同。</p>
+</div>
+<div class="paragraph">
+<p>现在这些数据流已经被分接出来，并连接到我们的收集器，我们可以启动程序，等待程序完成:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $result = $proc.start.result;</code></pre>
 </div>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Proc </dt>
-<dd>
-<p>Async.start执行外部进程并返回一个Promise.7一个promise包装了一段可能在另一个线程上运行的代码，
-状态（计划，保持或破碎），一旦完成，结果。 访问结果会自动等待包装的代码完成。 这里的代码是运行外部程序的代码，结果是Proc8类型的对象（它恰好与同步接口的run（）函数相同）。
-在这一行之后，我们可以确定外部命令已经终止，因此不再有来自$ proc.stdout和$ proc.stderr的输出。 因此，我们可以安全地关闭频道并通过Channel.list访问其所有元素：</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p><code>Proc::Async.start</code> 执行外部进程并返回一个 <code>Promise</code>。<sup class="footnote">[<a id="_footnoteref_32" class="footnote" href="#_footnotedef_32" title="View footnote.">32</a>]</sup> <code>Promise</code> 包装了一段可能在另一个线程上运行的代码，有一个状态(<code>Planned</code>、<code>Kept</code> 或 <code>Broken</code>)，一旦完成，就会有一个结果。访问结果会自动等待被包装的代码完成。这里的代码是运行外部程序的代码，结果是 Proc<sup class="footnote">[<a id="_footnoteref_33" class="footnote" href="#_footnotedef_33" title="View footnote.">33</a>]</sup> 类型的对象（恰好和同步接口中的 <code>run()</code> 函数一样）。</p>
+</div>
+<div class="paragraph">
+<p>在这一行之后，我们可以确定外部命令已经终止，因此不会再有 <code>$proc.stdout</code> 和 <code>$proc.stderr</code> 的输出。因此，我们可以安全地关闭通道，并通过 <code>Channel.list</code> 访问它的所有元素:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2096,8 +2091,10 @@ my $output = $collector.list.join;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>最后，是时候检查外部命令是否成功了
-检查其退出代码 - 并使用命令的退出代码退出包装器：</p>
+<p>最后，是检查外部命令是否成功的时候了。</p>
+</div>
+<div class="paragraph">
+<p>检查其退出代码 - 并以命令的退出代码退出包装程序:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2118,9 +2115,10 @@ exit $exitcode;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>变量$ exitcode是内插的，也就是说，它的名称被替换为
-它在运行时的价值。 这种情况发生在双引号字符串中，“&#8230;&#8203;”，但不是单引号字符串，'&#8230;&#8203;'。 只有标量变量以“&#8230;&#8203;&#8230;&#8203;”插值; 其他变量（数组，散列，代码对象）仅在它们跟随某种包围构造时进行插值。 这就是为什么@cmd后跟[]，我们称之为Zen切片。 返回多个值的数组或哈希索引通常称为切片; 例如，@ cmd [0,1]返回前两个值。 将索引保留为空将返回整个数组。
-实现插值的另一种方法是向以括号结尾的变量添加方法调用，因此它也可以写为</p>
+<p>变量 <code>$exitcode</code> 被内插，也就是说，它的名字在运行时被替换为其值。这在双引号字符串"&#8230;&#8203; "中会发生，但在单引号字符串'&#8230;&#8203;'中不会。只有标量变量在"&#8230;&#8203; "中才会被插值；其他变量（数组、哈希值、代码对象）只有在后面有某种括号结构时才会被插值。这就是为什么 <code>@cmd</code> 后面有 <code>[]</code> 的原因，我们称其为 Zen slice。返回多个值的数组或哈希索引一般称为切片；例如，<code>@cmd[0，1]</code> 返回前两个值。将索引留空则返回整个数组。</p>
+</div>
+<div class="paragraph">
+<p>另一种实现插值的方法是在变量上添加一个以括号结尾的方法调用，所以也可以写成:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2128,13 +2126,13 @@ exit $exitcode;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>有关“..”的更深入信息，请参阅文档插值。</p>
+<p>有关"&#8230;&#8203; "插值的更多深入信息，请参见文档。<sup class="footnote">[<a id="_footnoteref_34" class="footnote" href="#_footnotedef_34" title="View footnote.">34</a>]</sup></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_实现超时">6.2. 实现超时</h3>
 <div class="paragraph">
-<p>在Raku中实现超时的惯用方法是将Promise.anyof组合器与计时器一起使用：</p>
+<p>在 Raku 中实现超时的常用方法是使用 <code>Promise.anyof</code> 组合器和定时器:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2149,11 +2147,12 @@ exit $exitcode;</code></pre>
     my $waitfor = $promise;
     $waitfor = Promise.anyof(Promise.in($timeout), $promise)
         if $timeout;
-    await $waitfor;</code></pre>
+    await $waitfor;
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>$proc的初始化没有改变。 但不是访问$ proc。 start.result，我们存储从$ proc.start返回的promise。 如果用户指定了超时，我们运行这段代码：</p>
+<p><code>$proc</code> 的初始化没有改变。但我们不访问 <code>$proc.start.result</code>，而是存储从 <code>$proc.start</code> 返回的承诺。如果用户指定了超时，我们运行这段代码:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2161,10 +2160,13 @@ exit $exitcode;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Promise.in（$ seconds）返回一个将在$ seconds秒内完成的承诺。它基本上就是启动{sleep $ seconds}，但是关于不为睡眠分配整个线程可能会更聪明一些。
-Promise.anyof（$ p1，$ p2）返回一个承诺，只要其中一个参数（也应该是承诺）得到满足，它就会被履行。 因此，我们等待外部程序完成，或者直到完成睡眠承诺。
-等待$ waitfor; 该计划等待履行承诺
-（或破碎）。 在这种情况下，我们不能像以前一样简单地访问$promise.result，因为在超时的情况下，$promise（这是外部程序的承诺）可能无法实现。 所以我们必须首先检查承诺的状态，然后才能安全地访问$ promise.result：</p>
+<p><code>Promise.in($seconds)</code> 返回一个将在 <code>$seconds</code> 秒内实现的承诺，它基本上和 <code>start { sleep $seconds }</code> 是一样的，但是调度器可以更聪明一点，不要只分配一整条线程来休眠。</p>
+</div>
+<div class="paragraph">
+<p><code>Promise.anyof($p1,$p2)</code> 返回一个承诺，只要其中一个参数(也应该是承诺)被实现，就会返回一个承诺。所以，我们要么等待外部程序完成，要么等待 <code>sleep</code> 承诺实现。</p>
+</div>
+<div class="paragraph">
+<p>使用 <code>await $waitfor;</code> 程序等待承诺被实现（或被打破）。在这种情况下，我们不能像以前那样简单地访问 <code>$promise.result</code>，因为在超时的情况下，<code>$promise</code>(即外部程序的承诺)可能无法实现。所以我们必须先检查承诺的状态，只有这样我们才能安全地访问 <code>$promise.result</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2184,10 +2186,10 @@ else {
 </div>
 </div>
 <div class="paragraph">
-<p>表达式$ promise.status ~~ Kept使用~~智能匹配运算符来检查promise状态是否为常量Kept。 智能匹配是一个非常通用的运算符，语义依赖于表达式的右侧。 对于右侧的数字，比较是数字的。 对于右侧的类型，它是类型检查。 有关更多信息，请参阅官方文档10。</p>
+<p>表达式 <code>$promise.status ~~ Kept</code> 使用智能匹配运算符来检查承诺状态是否与常数 <code>Kept</code> 的状态相同。智能匹配是一个非常通用的运算符，其语义取决于表达式的右侧。对于右侧的数，比较的是数值。对于右侧的类型，则是类型检查。更多内容请参考官方文档。<sup class="footnote">[<a id="_footnoteref_35" class="footnote" href="#_footnotedef_35" title="View footnote.">35</a>]</sup></p>
 </div>
 <div class="paragraph">
-<p>在else {&#8230;&#8203;}分支中，我们需要处理超时情况。 这可能就像打印发生超时的语句一样简单，并且当silent-cron立即退出时，这可能是可以接受的。 但是我们可能希望将来做得更多，所以我们应该杀掉外部程序。 如果程序在友方终止信号之后没有终止，它应该收到kill（9），在UNIX系统上强制终止该程序：</p>
+<p>在 <code>else { &#8230;&#8203; }</code> 分支中，我们需要处理超时的情况。这可能就像打印出一条超时的语句一样简单，当 silent-cron 之后立即退出时，这可能是可以接受的。但是我们可能将来要做更多的事情，所以我们应该杀死外部程序。而如果程序在发出友好的 <code>kill</code> 信号后没有终止，就应该收到一个 <code>kill(9)</code>，在 UNIX 系统中，这个 <code>kill(9)</code> 会强行终止程序。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2201,8 +2203,10 @@ else {
 </div>
 </div>
 <div class="paragraph">
-<p>等待$ promise返回承诺的结果; 这里是一个Proc对象。 Proc具有内置的安全功能，如果使用非零退出代码返回的命令，则在void上下文中评估对象会引发异常。
-由于我们在代码中显式处理非零退出代码，因此我们可以通过将await的返回值赋给虚拟变量来抑制此异常的生成：</p>
+<p><code>await $promise</code> 返回承诺的结果；这里是一个 <code>Proc</code> 对象。Proc 内置了一个安全特性，如果命令返回的返回值为非零的退出代码，那么在 void 上下文中计算该对象会抛出一个异常。</p>
+</div>
+<div class="paragraph">
+<p>由于我们在代码中显式处理了非零退出代码，所以我们可以通过将 <code>await</code> 的返回值分配给一个哑变量来抑制这个异常的产生:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2210,8 +2214,7 @@ else {
 </div>
 </div>
 <div class="paragraph">
-<p>由于我们不需要该值，因此我们也可以将其指定为匿名
-变量而不是：</p>
+<p>因为我们不需要这个值，所以我们也可以把它分配给一个匿名变量代替:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2220,14 +2223,18 @@ else {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_more_on_promises">6.3. More on Promises</h3>
+<h3 id="_更多关于承诺的信息">6.3. 更多关于承诺的信息</h3>
 <div class="paragraph">
-<p>如果您使用过其他语言的并发或并行程序，则可能遇到了线程，锁，互斥体和其他低级构造。 这些也存在于Raku中，但不鼓励直接使用它们。
-这种低级原语的问题在于它们不能很好地构成。 您可以拥有两个使用线程的库，并且可以自行运行，但在同一个程序中组合时会导致死锁。 或者不同的组件可能会自己启动线程，当多个这样的组件在同一个进程中聚集在一起时，这会导致太多的线程和高内存消耗。</p>
+<p>如果你在其他语言中处理过并发或并行程序，你可能会遇到线程、锁、mutexes 和其他低级构造。这些东西在 Raku 中也有，但不鼓励直接使用它们。</p>
 </div>
 <div class="paragraph">
-<p>Raku提供更高级的原语。 您不必生成线程，而是使用start来异步运行代码，并且调度程序决定在哪个线程上运行它。 如果发生更多的启动调用请求线程安排事情，一些将连续运行。
-这是在后台运行计算的一个非常简单的示例：</p>
+<p>这些低级原语的问题在于它们不能很好地编译。你可以有两个使用线程的库，它们本身工作得很好，但在同一个程序中组合起来就会导致死锁。或者不同的组件可能会单独启动线程，当几个这样的组件在同一个进程中组合在一起时，可能会导致线程太多，内存消耗大。</p>
+</div>
+<div class="paragraph">
+<p>Raku 提供了更高级别的原语。你可以使用 <code>start</code> 来异步地运行代码，而不是催生一个线程，由调度器决定在哪个线程上运行。如果有更多的 <code>start</code> 调用请求线程来调度的事情发生了，那么有些线程就会串行运行。</p>
+</div>
+<div class="paragraph">
+<p>这里有一个非常简单的例子，就是在后台运行计算。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2251,8 +2258,10 @@ say $p.result;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>你可以看到主要的执行线在开始调用后继续，$ p立即有一个值 - 承诺，状态为Planned。
-正如我们之前看到的那样，有承诺的组合者，无论是任何还是全部。 您还可以使用then方法将操作链接到promise：</p>
+<p>你可以看到，在启动调用后，主线继续执行，<code>$p</code> 立即有一个值 - 承诺，状态为 <code>Planned</code>。</p>
+</div>
+<div class="paragraph">
+<p>正如我们之前看到的那样，承诺有组合器，<code>anyof</code> 和 <code>allof</code>。你也可以使用 <code>then</code> 方法将动作链接到一个承诺上:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2266,11 +2275,14 @@ await $p2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果在异步执行代码中抛出异常，则promise的状态将变为Broken，并且调用其.result方法将重新抛出异常。
-为了演示调度程序分配任务，让我们考虑一个小的蒙特卡罗模拟来计算π的近似值。 蒙特卡罗模拟只是一个程序，它使用随机数来探索可能值的空间并进入确定性输出（图6-1）。</p>
+<p>如果在异步执行代码内部抛出异常，那么承诺的状态就会变成 <code>Broken</code>，调用它的 <code>.result</code> 方法重抛出异常。</p>
 </div>
 <div class="paragraph">
-<p>我们生成一对0到1之间的随机数，并将它们解释为正方形中的点。 半径为1的四分之一圆覆盖π/ 4的面积，因此如果我们使用足够的点，则四分之一圆内随机放置的点与总点数的比率接近π/ 4。</p>
+<p>为了演示调度器分配任务，让我们考虑一个小的蒙特卡洛模拟来计算 π 的近似值，蒙特卡洛模拟只是一个程序，用随机数来探索一个可能值的空间，得出一个确定性的输出（图6-1）。</p>
+</div>
+<div class="paragraph">
+<div class="title">在一个正方形中随机放置点时，四分之一圆内的点数与总点数的比值接近 π/4 时</div>
+<p>我们生成一对0到1之间的随机数，将其解释为正方形中的点。一个半径为1的四分之一圆的面积为 π/4，因此，如果我们使用足够多的点，那么四分之一圆内随机放置的点与点的总数之比接近 π/4。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2290,7 +2302,7 @@ say @approximations.map({.result}).sum / @approximations;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序异步启动一千个计算，但是如果你在运行时查看系统监视工具，你将只观察到16个线程正在运行。 这个神奇的数字来自默认的线程调度程序，我们可以通过在前面的代码之上提供我们自己的调度程序实例来覆盖它：</p>
+<p>该程序异步启动一千次计算，但如果你在运行的时候看一下系统监控工具，你会观察到只有 16 个线程在运行。这个神奇的数字来自于默认的线程调度器，我们可以通过在前面的代码上面提供自己的调度器实例来覆盖它:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2298,24 +2310,24 @@ say @approximations.map({.result}).sum / @approximations;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>对于像这种蒙特卡罗模拟这样的CPU绑定任务，最好将线程数大致限制为（可能是虚拟的）CPU内核的数量; 如果许多线程卡在等待I / O，则更多线程可以产生更好的性能。</p>
+<p>对于像这种蒙特卡洛仿真这样的 CPU 绑定任务，将线程数大致限制在 CPU 内核的数量（可能是虚拟的）上是个好主意；如果很多线程被卡住等待 I/O，那么更高的线程数可以获得更好的性能。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_可能的扩展">6.4. 可能的扩展</h3>
 <div class="paragraph">
-<p>如果你想使用silent-cron，你可以添加一个重试机制。 如果命令因外部依赖性（如API或NFS共享）而失败，则外部依赖关系可能需要一段时间才能恢复。 因此，您应该添加二次或指数退避; 也就是说，重试之间的等待时间应以二次方式（1,2,4,9,16 &#8230;&#8203;&#8230;&#8203;）或指数方式（1,2,4,8,16,32 &#8230;&#8203;&#8230;&#8203;）增加。</p>
+<p>如果你想玩 silent-cron，可以增加一个重试机制。如果一个命令因为外部依赖（如API或NFS共享）而失败，那么这个外部依赖可能需要时间来恢复。因此，你应该添加一个二次幂或指数型的重试机制；也就是说，重试之间的等待时间应该以二次幂（1，2，4，9，16，16，&#8230;&#8203;）或指数型（1，2，4，8，16，32，&#8230;&#8203;）的方式增加。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_重构和自动化测试">6.5. 重构和自动化测试</h3>
 <div class="paragraph">
-<p>在我们在下一章中更多地扩展silent-cron之前，是时候重构一下并为它编写一些测试。</p>
+<p>在我们在下一章中对 silent-cron 进行更多的扩展之前，是时候重构一下它，并为它写一些测试了。</p>
 </div>
 <div class="sect3">
 <h4 id="_重构">6.5.1. 重构</h4>
 <div class="paragraph">
-<p>作为一个简短的提醒，这是程序的样子：</p>
+<p>在此简单提醒一下，程序是这样的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2354,9 +2366,10 @@ sub MAIN(*@cmd, :$timeout) {
 </div>
 </div>
 <div class="paragraph">
-<p>在那里也存在用于执行具有超时的外部程序的逻辑
-作为处理两种可能结果的逻辑。 在可测试性和未来扩展方面，将外部程序的执行分解为子例程是有意义的。 此代码的结果不是单个值; 我们可能对它产生的输出，退出代码以及是否遇到超时感兴趣。
-我们可以编写一个返回列表或这些值的哈希值的子例程，但在这里我选择编写一个小类，新的子例程将返回：</p>
+<p>这里面有执行外部程序超时的逻辑，也有处理两种可能的结果的逻辑。从可测试性和未来扩展的角度来看，将外部程序的执行情况计入子程序中是有意义的。这段代码的结果不是一个单一的值，我们可能感兴趣的是它产生的输出，退出代码，以及是否超时。</p>
+</div>
+<div class="paragraph">
+<p>我们可以写一个子例程，返回一个列表或者是这些值的哈希值，但是在这里我选择写一个小类来代替，新的子例程将返回:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2371,7 +2384,7 @@ sub MAIN(*@cmd, :$timeout) {
 </div>
 </div>
 <div class="paragraph">
-<p>我们之前见过类，但这个有一些新功能。 使用.twigil声明的属性会自动获得一个访问器方法，所以</p>
+<p>我们以前见过类，但这个类有一些新的功能。用 <code>.twigil</code> 声明的属性会自动获得一个访问器方法，所以:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2379,7 +2392,7 @@ sub MAIN(*@cmd, :$timeout) {
 </div>
 </div>
 <div class="paragraph">
-<p>大致相同于</p>
+<p>大致等价于:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2388,15 +2401,21 @@ method exitcode() { $!exitcode }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>它允许类的用户从外部访问属性中的值。 作为奖励，您还可以将它从标准构造函数初始化为命名参数ExecutionResult.new（exitcode &#8658; 42）。 退出代码不是必需属性，因为我们无法知道已超时的程序的退出代码。 因此，对于Int $ .exitcode = -1，我们给它一个默认值，如果该属性尚未初始化，则应用该默认值。
-输出是必需属性，因此我们将其标记为必需属性。 这是一个特点。 特征是修改其他事物行为的代码片段，这里是一个属性。 它们会在几个地方出现，例如子程序签名（复制参数），变量声明和类。 如果您尝试在不指定输出的情况下调用ExecutionResult.new（），则会出现如下错误：
-属性'$！output&#8217;是必需的，但您没有为它提供值。</p>
+<p>它允许类的用户从外部访问属性中的值。作为奖励，你还可以从标准构造函数中初始化它，作为一个命名参数，<code>ExecutionResult.new( exitcode &#8658; 42 )</code>。退出代码并不是一个必须的属性，因为我们无法知道一个已经超时的程序的退出代码。所以我们给它一个默认值，如果属性还没有被初始化，我们就给它一个默认值。</p>
+</div>
+<div class="paragraph">
+<p>输出是一个必填属性，所以我们用 <code>is required</code> 标记为必填属性。这就是一个 trait。trait 是修改其他事物的行为的代码，这里指的是属性的行为。它们会出现在很多地方，例如子程序签名（在参数上复制）、变量声明和类中。如果你试图调用 <code>ExecutionResult.new()</code> 而不指定输出，你会得到这样的错误:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">The attribute '$!output' is required, but you did not provide a value for it.</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_模拟和测试">6.5.2. 模拟和测试</h4>
 <div class="paragraph">
-<p>既然我们有一种方便的方法从假设的子程序中返回多个值，那么让我们看看这个子程序可能是什么样子：</p>
+<p>现在我们有了一个从假设子例程中返回多个值的方便方法，让我们来看看这个子例程可能是什么样子的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2435,14 +2454,11 @@ method exitcode() { $!exitcode }</code></pre>
 }</code></pre>
 </div>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Proc </dt>
-<dd>
-<p>Async11的用法保持不变，但是当发生错误时，例程不再生成输出，而是返回ExecutionResult对象。
-这简化了MAIN sub：</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>Proc::Async<sup class="footnote">[<a id="_footnoteref_36" class="footnote" href="#_footnotedef_36" title="View footnote.">36</a>]</sup> 的用法没有变化，但例程不再是在错误发生时产生输出，而是返回 <code>ExecutionResult</code> 对象。</p>
+</div>
+<div class="paragraph">
+<p>这大大简化了 MAIN 子例程:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2461,22 +2477,25 @@ method exitcode() { $!exitcode }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里新的语法特征是三元运算符CONDITION ?? 真正的分支!! FALSE-BRANCH，你可以从其他编程语言知识中了解到可能的问题吗？ 真正的分支：错误的分支。
-最后，逻辑定义 - 或运算符LEFT // RIGHT返回左侧（如果已定义），如果不定义，则运行右侧并返回其值。 它像||一样工作 和/或中缀运算符，除了那些检查左边的布尔值，而不是它们是否被定义。</p>
+<p>这里的一个新的语法特征是三元运算符，<code>CONDITION ?? TRUE-BRANCH !! FALSE-BRANCH</code>，你可能会从其他编程语言如 C 或 Perl5 中知道 <code>CONDITION ? TRUE-BRANCH : FALSE-BRANCH</code>。</p>
 </div>
 <div class="paragraph">
-<p>几种内置类型覆盖了他们认为是真实的。 在布尔上下文中等于0的数字评估为False，空字符串和空容器（如数组，散列和集）也是如此。
-另一方面，只有内置类型Failure12覆盖定义。
-您可以通过实现Bool方法覆盖自定义类型的真值（
-应该返回True或False），并使用定义的方法定义。</p>
+<p>最后，逻辑上的 defined-or 操作符 <code>LEFT // RIGHT</code>， 如果定义了，则返回 LEFT 边，如果没有，则运行 RIGHT 边并返回其值。它的工作原理与 <code>||</code> 和 <code>or</code> 中缀运算符一样，只是这些操作符会检查左边的布尔值，而不是检查它们是否被定义。</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">我们可以通过编写具有已定义特征（输出，运行时，退出代码）的自定义外部命令来开始测试sub-with-timeout，但这是以可靠，跨平台的方式进行的相当繁琐。 所以我想用模拟实现替换Proc </dt>
-<dd>
-<p>Async，并给sub一个方法来注入：</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>在 Raku 中，我们区分了定义值和真值。默认情况下，所有的实例都是在布尔语境中，所有类型对象都是 true 和有定义的，而所有类型对象都是 false 和未定义的。</p>
+</div>
+<div class="paragraph">
+<p>几个内置的类型覆盖了它们认为是真的东西。在布尔语境中，等于0的数字会被计算为 False，空字符串和空容器如数组、散列和集合也是如此。</p>
+</div>
+<div class="paragraph">
+<p>另一方面，只有内置的 Failure<sup class="footnote">[<a id="_footnoteref_37" class="footnote" href="#_footnotedef_37" title="View footnote.">37</a>]</sup> 类型才会重写定义性。</p>
+</div>
+<div class="paragraph">
+<p>你可以通过实现一个方法 Bool（应该返回 True 或 False），用定义的方法覆盖自定义类型的真值，用定义的方法覆盖定义性。</p>
+</div>
+<div class="paragraph">
+<p>我们可以通过编写具有定义特性（输出、运行时间、退出代码）的自定义外部命令来开始测试 <code>sub run-with-timeout</code>，但这是相当繁琐的，要想以可靠的、跨平台的方式来做，那是相当麻烦的。因此，我想用一个模拟实现来代替 Proc::Async，并给子例程注入一个方法:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2485,13 +2504,8 @@ method exitcode() { $!exitcode }</code></pre>
     # rest as before</code></pre>
 </div>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">通过sub run-with-timeout，我们可以快速列出存根Proc </dt>
-<dd>
-<p>Async实现所需的方法：stdout，stderr，start和kill。 stdout和stderr都需要返回一个Supply.13最简单的事情就是返回一个只发出一个值的Supply：</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>通过查看子例程 run-with-timeout，我们可以快速列出 Proc::Async 实现所需要的方法：<code>stdout</code>、<code>stderr</code>、<code>start</code> 和 <code>kill</code>。<code>stdout</code> 和 <code>stderr</code> 都需要返回一个 Supply.<sup class="footnote">[<a id="_footnoteref_38" class="footnote" href="#_footnotedef_38" title="View footnote.">38</a>]</sup> 最简单的方法就是返回一个只发出一个值的 Supply。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2507,10 +2521,10 @@ method exitcode() { $!exitcode }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Supply.from-list14返回一个Supply，它将发出传递给它的所有参数; 所以这里只是一个字符串。</p>
+<p>Supply.from-list<sup class="footnote">[<a id="_footnoteref_39" class="footnote" href="#_footnotedef_39" title="View footnote.">39</a>]</sup> 返回一个 Supply，它将发出所有传递给它的参数；所以这里只是一个字符串。</p>
 </div>
 <div class="paragraph">
-<p>kill最简单的实现方法就是什么都不做：</p>
+<p>最简单的 <code>kill</code> 实现，就是什么都不做:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2518,8 +2532,10 @@ method exitcode() { $!exitcode }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>$？ 签名是一个没有名称的可选参数（$ foo？）。
-只剩下一种需要存根的方法：开始。 它应该返回一个Promise，它在一个确定的秒数后返回一个Proc对象或它的模拟。 由于代码只调用exitcode方法，因此编写存根很容易：</p>
+<p>签名中的 <code>$?</code> 是一个没有名字的可选参数（$foo?)</p>
+</div>
+<div class="paragraph">
+<p>只剩下一个方法需要存根：<code>start</code>。它应该是返回一个 Promise，在定义的秒数后，返回一个 Proc 对象或其模拟对象。由于代码只调用 <code>exitcode</code> 方法，所以为它写一个存根很容易:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2535,8 +2551,10 @@ method start {
 </div>
 </div>
 <div class="paragraph">
-<p>由于我们不需要其他任何地方的模拟过程类，我们甚至不需要给它起一个名字。 class {&#8230;&#8203;}创建一个匿名类，并且对它的.new调用会从中创建一个新对象。
-如前所述，具有非零退出代码的Proc在void上下文中进行计算时抛出异常，或者在我们在Raku中调用它时接收上下文。我们可以通过稍微扩展匿名类来模拟此行为：</p>
+<p>因为我们在其他地方不需要 mock Proc 类，我们甚至不需要给它起个名字。<code>class { &#8230;&#8203; }</code> 创建了一个匿名类，对它的 <code>.new</code> 调用会从它中创建一个新对象。</p>
+</div>
+<div class="paragraph">
+<p>如前所述，当在 void 上下文中，或者我们在 Raku 中称其为 sink 上下文时，一个带有非零退出代码的 Proc 会抛出一个异常。我们可以通过扩展匿名类来模拟这种行为。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2549,7 +2567,7 @@ method start {
 </div>
 </div>
 <div class="paragraph">
-<p>通过所有这些准备工作，我们终于可以编写一些测试：</p>
+<p>有了这些准备工作，我们终于可以写一些测试了:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2607,14 +2625,16 @@ method start {
 </div>
 </div>
 <div class="paragraph">
-<p>这将运行两个方案，一个配置超时但未使用（因为模拟的外部程序首先退出），以及超时生效的一个方案。</p>
+<p>这将通过两种情况来运行，一种是配置了超时，但没有使用（因为模拟外部程序先退出），另一种是超时生效。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_提高稳定性和测定时间">6.5.3. 提高稳定性和测定时间</h4>
+<h4 id="_提高可靠性和测定时间">6.5.3. 提高可靠性和测定时间</h4>
 <div class="paragraph">
-<p>依靠测试中的时间总是没有吸引力。 如果时间太短（或者太慢），则可能会在缓慢或负载较重的机器上出现零星的测试失败风险。 如果使用更保守的时间间隔测试，测试可能变得非常慢。
-有一个模块（不与Rakudo一起分发）来减轻这种痛苦：Test :: Scheduler15提供了一个具有虚拟化时间的线程调度程序，允许您编写如下测试：</p>
+<p>依靠测试中的计时总是没有吸引力。如果时间太短（或一起太慢），你就有在慢的或重载的机器上出现零星测试失败的风险。如果你使用更保守的测试时间间隔，测试会变得非常慢。</p>
+</div>
+<div class="paragraph">
+<p>有一个模块（不与 Rakudo 一起分发）可以减轻这种痛苦。Test::Scheduler<sup class="footnote">[<a id="_footnoteref_40" class="footnote" href="#_footnotedef_40" title="View footnote.">40</a>]</sup>提供了一个具有虚拟化时间的线程调度器，让你可以这样写测试。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2631,24 +2651,14 @@ $*SCHEDULER.advance-by(5); $result = $result.result;
 isa-ok $result, ExecutionResult; # more tests here</code></pre>
 </div>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">这将安装自定义调度程序，$ * SCHEDULER.advance-by（5）指示它将虚拟时间提前5秒，而不必等待五秒钟。 在撰写本文时（2016年12月），Test </dt>
-<dd>
-<p>Scheduler是一个相当新的模块，并且有一个错误，阻止第二个测试用例以这种方式工作。</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>这样安装了一个自定义的调度器，<code>$*SCHEDULER.advance-by(5)</code> 指示它将虚拟时间提前5秒，而不需要等待5秒的实际时间。在写这篇文章的时候（2016年12月）， <code>Test::Scheduler</code> 是一个相当新的模块，有一个 bug，导致第二个测试用例不能这样工作。<sup class="footnote">[<a id="_footnoteref_41" class="footnote" href="#_footnotedef_41" title="View footnote.">41</a>]</sup></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_安装模块">6.5.4. 安装模块</h4>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">如果您想试用Test </dt>
-<dd>
-<p>Scheduler，则需要先安装它。 如果您运行Rakudo Star，它已经为您提供了zef模块安装程序。 您可以使用它为您下载并安装模块：</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>如果你想试用 <code>Test::Scheduler</code>，你需要先安装它。如果你运行 Rakudo Star，它已经为你提供了 zef 模块安装程序。你可以用它来下载并安装这个模块。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2656,7 +2666,7 @@ isa-ok $result, ExecutionResult; # more tests here</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果您没有可用的zef，可以下载，引导和使用它：</p>
+<p>如果您没有可用的 zef，可以下载，驱动并使用它：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2671,8 +2681,10 @@ $ zef install Test::Scheduler</code></pre>
 <div class="sect2">
 <h3 id="_总结_6">6.6. 总结</h3>
 <div class="paragraph">
-<p>我们已经看到了一个用于运行外部程序的异步API以及如何使用Promises来实现超时。 我们还讨论了如何通过调度程序将promise分发给线程，允许您启动任意数量的promise而不会使计算机过载。
-在测试期间，我们已经看到了带有访问器，三元运算符和匿名类的属性。 已经讨论了线程代码的测试，以及第三方模块可以提供帮助的方式。 最后，我们对模块安装程序zef进行了一次非常小的一瞥。</p>
+<p>我们已经看到了一个运行外部程序的异步 API，以及如何使用 Promises 来实现超时。我们还讨论了如何通过调度器将承诺分配给线程，让你可以启动任意数量的承诺，而不会让计算机超载。</p>
+</div>
+<div class="paragraph">
+<p>在测试中，我们看到了属性与访问器、三元操作符和匿名类。对线程代码的测试，以及第三方模块的帮助方式也进行了讨论。最后，我们对模块安装程序zef有了一个非常小的窥视。</p>
 </div>
 </div>
 </div>
@@ -4975,6 +4987,54 @@ you learn enough to perform most programming tasks in Raku, and more importantly
 </div>
 <div class="footnote" id="_footnotedef_25">
 <a href="#_footnoteref_25">25</a>. <a href="https://docs.raku.org/type/Any" class="bare">https://docs.raku.org/type/Any</a>
+</div>
+<div class="footnote" id="_footnotedef_26">
+<a href="#_footnoteref_26">26</a>. <a href="https://en.wikipedia.org/wiki/Cron" class="bare">https://en.wikipedia.org/wiki/Cron</a>
+</div>
+<div class="footnote" id="_footnotedef_27">
+<a href="#_footnoteref_27">27</a>. <a href="https://docs.raku.org/routine/run" class="bare">https://docs.raku.org/routine/run</a>
+</div>
+<div class="footnote" id="_footnotedef_28">
+<a href="#_footnoteref_28">28</a>. <a href="https://docs.raku.org/type/Proc::Async" class="bare">https://docs.raku.org/type/Proc::Async</a>
+</div>
+<div class="footnote" id="_footnotedef_29">
+<a href="#_footnoteref_29">29</a>. <a href="https://docs.raku.org/type/Signature#Slurpy_(A.K.A._variadic)_parameters" class="bare">https://docs.raku.org/type/Signature#Slurpy_(A.K.A._variadic)_parameters</a>
+</div>
+<div class="footnote" id="_footnotedef_30">
+<a href="#_footnoteref_30">30</a>. <a href="https://docs.raku.org/type/Signature#index-entry-parameter_|-Capture_parameters" class="bare">https://docs.raku.org/type/Signature#index-entry-parameter_|-Capture_parameters</a>
+</div>
+<div class="footnote" id="_footnotedef_31">
+<a href="#_footnoteref_31">31</a>. <a href="https://docs.raku.org/type/Supply" class="bare">https://docs.raku.org/type/Supply</a>
+</div>
+<div class="footnote" id="_footnotedef_32">
+<a href="#_footnoteref_32">32</a>. <a href="https://docs.raku.org/type/Promise" class="bare">https://docs.raku.org/type/Promise</a>
+</div>
+<div class="footnote" id="_footnotedef_33">
+<a href="#_footnoteref_33">33</a>. <a href="https://docs.raku.org/type/Proc" class="bare">https://docs.raku.org/type/Proc</a>
+</div>
+<div class="footnote" id="_footnotedef_34">
+<a href="#_footnoteref_34">34</a>. <a href="https://docs.raku.org/language/quoting#Interpolation:_qq" class="bare">https://docs.raku.org/language/quoting#Interpolation:_qq</a>
+</div>
+<div class="footnote" id="_footnotedef_35">
+<a href="#_footnoteref_35">35</a>. <a href="https://docs.raku.org/language/operators#infix_~~" class="bare">https://docs.raku.org/language/operators#infix_~~</a>
+</div>
+<div class="footnote" id="_footnotedef_36">
+<a href="#_footnoteref_36">36</a>. <a href="https://docs.raku.org/type/Proc::Async" class="bare">https://docs.raku.org/type/Proc::Async</a>
+</div>
+<div class="footnote" id="_footnotedef_37">
+<a href="#_footnoteref_37">37</a>. <a href="https://docs.raku.org/type/Failure" class="bare">https://docs.raku.org/type/Failure</a>
+</div>
+<div class="footnote" id="_footnotedef_38">
+<a href="#_footnoteref_38">38</a>. <a href="https://docs.raku.org/type/Supply" class="bare">https://docs.raku.org/type/Supply</a>
+</div>
+<div class="footnote" id="_footnotedef_39">
+<a href="#_footnoteref_39">39</a>. <a href="https://docs.raku.org/type/Supply#method_from-list" class="bare">https://docs.raku.org/type/Supply#method_from-list</a>
+</div>
+<div class="footnote" id="_footnotedef_40">
+<a href="#_footnoteref_40">40</a>. <a href="https://github.com/jnthn/p6-test-scheduler" class="bare">https://github.com/jnthn/p6-test-scheduler</a>
+</div>
+<div class="footnote" id="_footnotedef_41">
+<a href="#_footnoteref_41">41</a>. <a href="https://github.com/jnthn/p6-test-scheduler/issues/1" class="bare">https://github.com/jnthn/p6-test-scheduler/issues/1</a>
 </div>
 </div>
 
