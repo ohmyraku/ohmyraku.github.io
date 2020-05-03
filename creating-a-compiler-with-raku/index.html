@@ -199,6 +199,13 @@ if (theme && theme !== "1") {
 <li><a href="#_算术操作">9.6. 算术操作</a></li>
 </ul>
 </li>
+<li><a href="#_测试套件">10. 测试套件</a>
+<ul class="sectlevel2">
+<li><a href="#_测试_runner">10.1. 测试 runner</a></li>
+<li><a href="#_测试">10.2. 测试</a></li>
+<li><a href="#_功能覆盖">10.3. 功能覆盖</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="sect1">
@@ -7265,6 +7272,608 @@ multi method call-function('say', AST::HashItem $item) {
 </div>
 <div class="paragraph">
 <p>本章到这里就结束了, 我们用 AST 树来计算其节点的值, 并在最后运行程序。由于我们将一些逻辑移到了 AST 节点上, 所以所建立的计算器类非常紧凑。这让我们在纯设计和代码的复杂性之间取得了很好的平衡。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_测试套件">10. 测试套件</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>编译器变得越来越大，我们要给 Lingua 语言增加更多的语法。这是一个很好的时机，让编译器的开发停顿一下，保证一些稳定性。在这一章中，我们将创建一个测试套件，这样可以让我们在扩展语言的时候发现实现中的问题，防止出现新的 bug。</p>
+</div>
+<div class="paragraph">
+<p>Raku 的测试套件本身就是一组用 Raku 编写的文件。他们使用的测试模块与我们在第3章中所做的类似。这很好，但要运行这些测试，你需要一个能解析的编译器。对于我们的目的，这种方法是一种开销，所以让我们想出自己的解决方案。</p>
+</div>
+<div class="paragraph">
+<p>我们的目标是测试 Lingua 的所有功能，所以我们必须为变量声明 - 包括标量、数组、散列和散列 - 赋值、不同的表达式的不同运算符、字符串插值等创建测试实例。在接下来的章节中，我们将增加条件项和函数，所以我们也要为它们创建测试。</p>
+</div>
+<div class="paragraph">
+<p>前面几章我们都在做什么，看看编译器是否正常工作？我们看的是 AST，看变量存储的内容，以及输出的内容。这三个部分都告诉了我们编译器的健康状况。测试所有这些都是一个困难的任务。让我们限制一下自己，只检查测试程序输出的内容。语法树的结构对终端用户来说并不是那么重要，所以我们可以根据需要不时地手动检查。变量存储更重要，但我们总是可以将变量打印出来，从而将第二个任务转化为检查输出。</p>
+</div>
+<div class="paragraph">
+<p>所以，我们最终的目标是让描述我们想要的输出的方式，并创建一个程序，运行实例并比较输出的正确值。</p>
+</div>
+<div class="sect2">
+<h3 id="_测试_runner">10.1. 测试 runner</h3>
+<div class="paragraph">
+<p>让我们从一个简单的程序开始，创建一个变量并给它分配一个数值。我们至少有两种方法可以做到这一点。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my a;
+a = 10;
+my b = 20;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个程序不打印任何东西，所以我们再加上几个 <code>say</code> 的调用。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my a;
+a = 10;
+say a;
+
+my b = 20;
+say b;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>将测试保存在一个文件中，例如，<code>variable-declaration.t</code>，保存在专门的目录 <code>t</code> 中，然后运行它。它生成的结果与我们之前添加到编译器中的一些测试输出混合在一起（例如，一个完整的 AST 和 <code>%!var</code> 散列的转储）。由于我们仍然要在编译器上工作，所以让我们保留帮助器输出，但将其过滤到 <code>/dev/null</code>。好在 Rakudo 的 <code>dd</code> 例程将其输出打印到 STDERR，而不是 STDOUT。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ ./lingua t/variable-declaration.t 2&gt;/dev/null
+OK
+10
+20</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这样看起来很干净，我们甚至可以通过使用 <code>note</code> 函数来省略 OK 这一行，而不是传统的 <code>say</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">if $ast {
+    note 'OK';
+    $evaluator.eval($ast.made);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，所有的帮助器输出到 <code>STDERR</code>，程序的有效载荷通过 <code>STDOUT</code> 打印出来。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ ./lingua t/variable-declaration.t 2&gt;/dev/null
+10
+20</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个输出，就是我们要对比的结果是正确的。最简单的方法就是把它保存在另一个文件中，只需要比较一下文件就可以了。另一种方法是在测试程序本身的注释中输入答案。为了让标准注释，也就是用户解释程序的注释，让我们介绍一下我们的特殊类型的注释，带有双哈希符号。它仍然被编译器忽略，但对测试框架来说是可见的。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my a;
+a = 10;
+say a; ## 10
+
+my b = 20;
+say b; ## 20</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在的任务很简单。我们需要创建一个脚本，运行t目录中的所有文件，提取其中的注释，并将预期的数据与实际输出的数据进行比较。为了进一步简化任务，让我们假设测试文件都是小程序，所以如果出了问题，你可以很容易发现错误发生的行。</p>
+</div>
+<div class="paragraph">
+<p>让我们创建另一个可执行程序，<code>run-tests</code>。它扫描 <code>t</code> 目录，并逐一运行测试。我们使用的是测试模块，在第三章中介绍过的 <code>Test</code> 模块。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env perl6
+
+use Test;
+
+test-file($_) for dir('t').sort;
+
+done-testing;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>运行一个单一的测试是非常简单的。下面的函数使用内置的 <code>run</code> 函数完成了这项工作，它将 <code>STDOUT</code> 和 <code>STDERR</code> 的输出放到返回对象的 <code>out</code> 和 <code>err</code> 属性中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub test-file($file) {
+    my $path = $file.path;
+
+    my $proc = run('./lingua', $path, :out, :err);
+
+    is(expected($path), $proc.out.slurp, $path);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>输出中的转义序列会添加颜色，这样你可以立即看到红色的 <code>FAIL`s 或绿色的 `OK</code>。</p>
+</div>
+<div class="paragraph">
+<p>测试失败有两种可能：要么文件没有被解析，要么生成的输出与期望值不同。预期的输出字符串是从 <code>##</code> 注释中提取出来的。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub expected($path) {
+    my $expected;
+    for $path.IO.lines -&gt; $line {
+        $line ~~ /'##'\s*(\N*)/;
+        next unless $0;
+        $expected ~= "$0\n";
+    }
+
+    return $expected;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>运行程序，你应该会看到下面的输出。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">ok 1 - t/array-creation.t
+ok 2 - t/expressions.t
+ok 3 - t/expressions2.t
+ok 4 - t/hash-creation.t
+ok 5 - t/hashes.t
+ok 6 - t/numbers.t
+ok 7 - t/print.t
+ok 8 - t/string-escaping.t
+ok 9 - t/string-index.t
+ok 10 - t/string-interpolation.t
+ok 11 - t/string.t
+ok 12 - t/variable-as-index.t
+ok 13 - t/variable-declaration.t
+1..13</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，我们可以添加更多的测试来覆盖 Lingua 的更多功能。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_测试">10.2. 测试</h3>
+<div class="paragraph">
+<p>准备好了测试运行程序后，是时候在 <code>t</code> 目录中填充许多具有语言不同方面特征的文件了。其中一个测试文件，<code>variable-declaration.t</code> 已经在那里了。</p>
+</div>
+<div class="sect3">
+<h4 id="_数字">10.2.1. 数字</h4>
+<div class="paragraph">
+<p>以不同格式创建数字。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my int = 42;
+say int; ## 42
+
+my float = 3.14;
+say float; ## 3.14
+
+my sci = 3E14;
+say sci; ## 300000000000000
+
+my negative = -1.2;
+say negative; ## -1.2
+
+my zero = 0;
+say zero; ## 0
+
+my half = .5;
+say half; ## 0.5
+
+my minus_n = -.3;
+say minus_n; ## -0.3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意，没有整数部分的浮点数字在小数点前以0打印，因此你应该期望 <code>0.5</code> 而不是 <code>.5</code>。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_字符串_2">10.2.2. 字符串</h4>
+<div class="paragraph">
+<p>对于字符串，我们先来测试一下简单的初始化和赋值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my s1;
+s1 = "Hello, World!";
+say s1; ## Hello, World!
+
+my s2 = "Another string";
+say s2; ## Another string
+
+my s3 = ""; # Empty string
+say s3; ##</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在另外一个文件中，让我们测试一下字符串插值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my i = 10;
+my f = -1.2;
+my c = 1E-2;
+my s = "word";
+
+my str = "i=$i, f=$f, c=$c, s=$s";
+say str; ## i=10, f=-1.2, c=0.01, s=word</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们还允许转义三个字符(<code>\</code>、<code>"</code> 和 <code>$</code>)。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "\\"; ## \
+say "\\\\"; ## \\
+say "\$"; ## $
+say "\""; ## "</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_表达式">10.2.3. 表达式</h4>
+<div class="paragraph">
+<p>我们在第三章中已经看到了很多不同的算术表达式的测试。把它们收集在一起，连同答案一起放到 <code>t/expression.t</code> 中（或者最好是两三个不同的文件中）。我们应该按照不同的顺序来测试这五个运算符，这样我们就可以检查优先级和括号。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_数组和散列_2">10.2.4. 数组和散列</h4>
+<div class="paragraph">
+<p>聚类数据类型对于语言来说是非常重要的，所以我们也来测试一下。首先是一些创建和打印数组的一些琐碎的测试用例。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my a[];
+a = 3, 4, 5;
+say a; ## 3, 4, 5
+
+my b[] = 7, 8, 9;
+say b; ## 7, 8, 9</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>还有散列。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my h{};
+say h; ##
+
+my g{} = "a": "b", "c": "d";
+say g; ## a: b, c: d</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>然后尝试使用变量作为数组索引或散列键。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my a[] = 2, 4, 6, 8, 10;
+my i = 3;
+say a[i]; ## 8
+
+my b{} = "a": 1, "b": 2;
+my j = "b";
+say b{j}; ## 2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个测试的效果很好。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_发现错误">10.2.5. 发现错误</h4>
+<div class="paragraph">
+<p>上面的测试都通过了，但是让我们试试简单的字符串索引。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">not ok 17 - t/string-index.t
+# Failed test 't/string-index.t'
+# at ./run-tests line 14
+# expected: 'a
+# d
+# f
+# '
+#      got: 'abcdef'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们不打印单个字符，而是打印整个字符串（而且只打印一次）。让我们修改一下程序，让它在测试失败时打印出错误。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">is(expected($path), $proc.out.slurp, $path)
+    or say $proc.err.slurp;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在错误信息中，你会看到一些来自于 Raku 的解释。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># Index out of range. Is: 3, should be in 0..0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们把索引拧了，不是没有正确保存在 AST 节点中，就是后来没有使用。下面是前两个打印指令对应的树的片段。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">AST::FunctionCall.new(
+    function-name =&gt; "say",
+    value =&gt; AST::ArrayItem.new(
+        variable-name =&gt; "abc",
+        index =&gt; AST::NumberValue.new(
+            value =&gt; 0
+        )
+    )
+),
+AST::FunctionCall.new(
+    function-name =&gt; "say",
+    value =&gt; AST::ArrayItem.new(
+        variable-name =&gt; "abc",
+        index =&gt; AST::NumberValue.new(
+            value =&gt; 3
+        )
+    )
+),</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第一个假设没有得到证实，因为我们看到索引是存储在 AST 节点的相应属性中的。让我们切换到计算器，看看那里的值是如何使用的。我们的候选者是一个取数组项的多方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function('say', AST::ArrayItem $item) {
+    say %!var{$item.variable-name}[$item.index.value];
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>解析器将代码理解为数组索引，而 <code>call-function</code> 方法将字符串视为数组。当索引为0的时候就可以了，因为在 Raku 中，你总是可以"索引"一个标量值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ raku
+To exit type 'exit' or '^D'
+&gt; my $x = 10;
+10
+&gt; say $x[0];
+10</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果索引为非零，就会弹出上述的错误。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">&gt; say $x[3];
+Index out of range. Is: 3, should be in 0..0
+  in block &lt;unit&gt; at &lt;unknown file&gt; line 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>确实，有一个表达式 <code>abc[3]</code>，你怎么知道变量 <code>abc</code> 是数组还是字符串？为了让语言更干净，我们去掉了任何 sigil，但现在如果能把它们找回来就好了。有了 sigil，区分 <code>$abc</code> 和 <code>@abc</code> 就更容易了。你可以更进一步，使用某种匈牙利语符号来让编译器知道变量的类型。比如说，<code>$s_abc</code> 只存储字符串，而 <code>$i_abc</code> 只存储整数。虽然这样做对编译器有帮助，但对终端用户来说，这样做会让语言变得更重。</p>
+</div>
+<div class="paragraph">
+<p>让我们在运行时要求计算机检查变量的类型。我们已经为多函数的替代变量做了。下面是只处理字符串的更新版本。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function('say', AST::ArrayItem $item
+    where %!var{$item.variable-name} ~~ Str) {
+    say %!var{$item.variable-name}.substr($item.index.value, 1);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>运行测试套件，你会确认测试通过了。不幸的是，另一个测试，<code>t/variable-as-index.t</code>，发生故障了。</p>
+</div>
+<div class="paragraph">
+<p>这个例子展示了测试的帮助。如果没有测试，你可以在编译器中改变一些东西，而不注意到其他的东西开始错误地工作。幸运的是，我们很快就发现了这个问题，解决的方法就是返回之前修改过的多方法，覆盖了缺失的代码。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function('say', AST::ArrayItem $item
+    where %!var{$item.variable-name} ~~ Array) {
+    say %!var{$item.variable-name}[$item.index.value];
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>测试套件现在报告的都很好。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_功能覆盖">10.3. 功能覆盖</h3>
+<div class="paragraph">
+<p>重要的是，要为语言的每一个特性，并为尽可能多的潜在用例创建测试。例如，我们测试了简单的标量赋值，比如 <code>i = 10</code>，但没有尝试让数组项在方程的右侧有一个数组项。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my a[] = 3, 5, 7;
+my x = a[1];
+say x;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>出乎意料的是，这并没有起到任何作用，并产生错误信息。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">No such method 'value' for invocant of type 'AST::ArrayItem'.
+Did you mean 'values'?
+  in method eval-node at /Users/ash/lingua/LinguaEvaluator.rakumod
+  (LinguaEvaluator) line 17
+  in method eval at /Users/ash/lingua/LinguaEvaluator.rakumod
+  (LinguaEvaluator) line 9
+  in block &lt;unit&gt; at ./lingua line 21</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>问题就出在了赋值的行上。AST 树的建立是正确的。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">. . .
+AST::ScalarDeclaration.new(
+    variable-name =&gt; "x",
+    value =&gt; AST::ArrayItem.new(
+      variable-name =&gt; "a",
+      index =&gt; AST::NumberValue.new(
+        value =&gt; 1
+    )
+  )
+),
+. . .</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>让我们检查一下计算器（顺便说一下，错误信息中明确提到了它）。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::ScalarDeclaration $node) {
+    %!var{$node.variable-name} =
+        $node.value ~~ AST::Null ?? 0 !! $node.value.value;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里一切都很好，但是我们没有 <code>AST::ArrayItem</code> 节点的值，因此我们必须实现它。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::ArrayItem is ASTNode {
+    has Str $.variable-name;
+    has ASTNode $.index;
+    has $.evaluator;
+
+    method value() {
+        return $.evaluator.var{$!variable-name}[$!index.value];
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你可能也注意到我们在 <code>AST::HashItem</code> 类中没有这样的方法。把它也加入进来。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::HashItem is ASTNode {
+    has Str $.variable-name;
+    has ASTNode $.key;
+    has $.evaluator;
+
+    method value() {
+        return $.evaluator.var{$!variable-name}{$!key.value};
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在动作类中构建 AST 节点时，不要忘记传递一个计算器（在 <code>LinguaActions.rakumod</code> 文件中不止一个地方）。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$/.make(AST::ArrayItem.new(
+    . . .
+    evaluator =&gt; $!evaluator,
+));
+
+. . .
+
+$/.make(AST::HashItem.new(
+    . . .
+    evaluator =&gt; $!evaluator,
+));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们应该为数组和散列数都添加测试。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my g{} = "a": "b", "c": "d";
+
+say g{"a"}; ## b
+
+my x = g{"a"};
+say x; ## b</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>就这样（几乎）结束了这一章。所有的测试都通过了!</p>
+</div>
+<div class="sect3">
+<h4 id="_这永远是不够的">10.3.1. 这永远是不够的</h4>
+<div class="paragraph">
+<p>在进行下一步之前，让我们先把前面介绍的一个小要素解决掉。考虑一下下面的赋值与表达式。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my x = 10;
+my y = 2 * x;
+my z = x * 2;
+
+say "$x, $y, $z";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>分配给 <code>y</code> 和 <code>z</code> 的值应该没有区别，但 <code>parse</code> 方法拒绝接受第二个表达式 <code>x*2</code>。这种情况发生在语法中一个变量被控制的地方。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule value {
+    | &lt;variable-name&gt; &lt;index&gt;?
+    | &lt;expression&gt;
+    | &lt;string&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>其实，既然我们现在有了 AST，那么让变量成为表达式的一部分就可以了，我们可以放心地去掉那个备选。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule value {
+    | &lt;expression&gt;
+    | &lt;string&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个小改动恢复了解析器，<code>2*x</code> 和 <code>x*2</code>，以及 <code>x*x</code> 现在都可以解析了。</p>
+</div>
+<div class="paragraph">
+<p>在这种情况下，不仅要修复语法、动作或计算器，还需要建立一个回归测试，避免将来出现同样的 bug。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my x = 10;
+my y = 2 * x;
+my z = x * 2;
+my q = x * x;
+my d = 2 * 2;
+
+say "$x, $y, $z"; ## 10, 20, 20
+say "$q, $d"; ## 100, 4</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
