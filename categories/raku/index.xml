@@ -100,7 +100,7 @@
       <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
       <author>ohmyraku@outlook.com (ohmyraku)</author>
       <guid>https://ohmyraku.github.io/raku-deep-dive/</guid>
-      <description>Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. Raku 资源 1.4. 编译器 1.5. 使用 Rakudo Star 1.6. 写出我们的 Hello, World 程序 1.7. 总结   2. 写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. 移相器 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4. 使用运算符 4.1. 运算符分类 4.2. Raku 中的运算符 4.3. Raku 中的元运算符 4.</description>
+      <description>Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. 移相器 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4.</description>
     </item>
     
     <item>

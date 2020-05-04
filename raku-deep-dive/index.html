@@ -8,7 +8,7 @@
 
 <meta name="author" content="ohmyraku">
 <meta name="application-name" content="山川异域, 风月同天">
-<meta name="description" content="Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. Raku 资源 1.4. 编译器 1.5. 使用 Rakudo Star 1.6. 写出我们的 Hello, World 程序 1.7. 总结   2. 写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. 移相器 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4. 使用运算符 4.1. 运算符分类 4.2. Raku 中的运算符 4.3. Raku 中的元运算符 4.">
+<meta name="description" content="Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. 移相器 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4.">
 <meta name="robots" content="noodp"/>
 <meta name="generator" content="Hugo 0.63.2" />
 <meta name="referrer" content="no-referrer" />
@@ -22,7 +22,7 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Raku 深入研究" />
-<meta name="twitter:description" content="Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. Raku 资源 1.4. 编译器 1.5. 使用 Rakudo Star 1.6. 写出我们的 Hello, World 程序 1.7. 总结   2. 写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. 移相器 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4. 使用运算符 4.1. 运算符分类 4.2. Raku 中的运算符 4.3. Raku 中的元运算符 4." />
+<meta name="twitter:description" content="Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. 移相器 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4." />
 <meta name="twitter:site" content="https://ohmyraku.github.io" />
 <meta name="twitter:creator" content="ohmyraku" />
 <meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
@@ -32,7 +32,7 @@
 <meta property="og:title" content="Raku 深入研究" />
 <meta property="og:url" content="https://ohmyraku.github.io" />
 <meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. Raku 资源 1.4. 编译器 1.5. 使用 Rakudo Star 1.6. 写出我们的 Hello, World 程序 1.7. 总结   2. 写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. 移相器 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4. 使用运算符 4.1. 运算符分类 4.2. Raku 中的运算符 4.3. Raku 中的元运算符 4." />
+<meta property="og:description" content="Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. 移相器 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4." />
 <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -49,7 +49,7 @@
         "@type": "Person",
         "name": "ohmyraku"
       },
-      "description": "Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. Raku 资源 1.4. 编译器 1.5. 使用 Rakudo Star 1.6. 写出我们的 Hello, World 程序 1.7. 总结   2. 写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. 移相器 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4. 使用运算符 4.1. 运算符分类 4.2. Raku 中的运算符 4.3. Raku 中的元运算符 4.",
+      "description": "Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. 移相器 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4.",
       "publisher": {
         "@type": "Organization",
         "name": "https:\/\/ohmyraku.github.io",
@@ -103,11 +103,17 @@ if (theme && theme !== "1") {
 <ul class="sectlevel2">
 <li><a href="#_raku_起源">1.1. Raku 起源</a></li>
 <li><a href="#_与_perl_5_的区别">1.2. 与 Perl 5 的区别</a></li>
-<li><a href="#_raku_资源">1.3. Raku 资源</a></li>
-<li><a href="#_编译器">1.4. 编译器</a></li>
-<li><a href="#_使用_rakudo_star">1.5. 使用 Rakudo Star</a></li>
-<li><a href="#_写出我们的_hello_world_程序">1.6. 写出我们的 Hello, World 程序</a></li>
-<li><a href="#_总结">1.7. 总结</a></li>
+<li><a href="#_类">1.3. 类</a></li>
+<li><a href="#_与_perl_5_的兼容性">1.4. 与 Perl 5 的兼容性</a></li>
+<li><a href="#_raku_资源">1.5. Raku 资源</a></li>
+<li><a href="#_文档">1.6. 文档</a></li>
+<li><a href="#_测试套件">1.7. 测试套件</a></li>
+<li><a href="#_std_pm">1.8. STD.pm</a></li>
+<li><a href="#_社区">1.9. 社区</a></li>
+<li><a href="#_编译器">1.10. 编译器</a></li>
+<li><a href="#_使用_rakudo_star">1.11. 使用 Rakudo Star</a></li>
+<li><a href="#_命令行选项">1.12. 命令行选项</a></li>
+<li><a href="#_总结">1.13. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_写代码">2. 写代码</a>
@@ -280,10 +286,10 @@ if (theme && theme !== "1") {
 <h2 id="_什么是_raku">1. 什么是 Raku</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>在本章中，我们将研究 Raku 出现的原因并追寻语言发展的历史。您将看到一些从 Perl 5 开始具有变化的示例，你将学习如何下载和使用编译器，在哪里查找文档，以及如何在 Raku 中运行您的第一个程序。</p>
+<p>在这一章中，我们将研究 Raku 出现的原因，并跟踪了解 Perl 语言的发展历史。你会看到一些自 Perl 5 以来发生的变化，你会看到一些例子，你会学习如何下载和使用编译器，在哪里找到文档，以及如何在 Raku 中运行你的第一个程序。</p>
 </div>
 <div class="paragraph">
-<p>在本章中，我们将介绍以下主题:</p>
+<p>在这一章中，我们将介绍以下内容:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -291,7 +297,7 @@ if (theme && theme !== "1") {
 <p>Raku 的起源</p>
 </li>
 <li>
-<p>与 Perl 5 的不同之处</p>
+<p>与 Perl 5 的区别</p>
 </li>
 <li>
 <p>Raku 资源</p>
@@ -310,36 +316,36 @@ if (theme && theme !== "1") {
 <div class="sect2">
 <h3 id="_raku_起源">1.1. Raku 起源</h3>
 <div class="paragraph">
-<p>Raku 是 Perl 系列的编程语言。Perl 本身出现于 1987 年, 从那开始，它不断发展: 它目前的稳定版本是于 2017 年 5 月发布的 5.26，2000 年, Perl 的创建者 Larry Wall 提议开始研究语言的下一个版本 - 即 Raku。</p>
+<p>Raku 是 Perl 家族中的一种编程语言。Perl 本身出现于 1987 年，从那时起，它就在不断发展：目前的稳定版本是 2017年5月发布的5.26。2000年，Perl 的创造者 Larry Wall 提出要开始研究该语言的下一个版本- Raku 。</p>
 </div>
 <div class="paragraph">
-<p>这有几个原因。首先，语言应该继续发展以反映开发人员的新要求。其次，它可能会改变非 Perl 社区的人们对 Perl 的看法 。Perl 5.0 出现在 1993 年，尽管如此，该语言还在继续发展。Perl 的主版本号仍然是 5，在许多人的眼中，这意味着自 1993 年以来 Perl 一直处于停滞状态。新的主要版本更新将会刷新这个感知。</p>
+<p>这有几个原因。首先，一种语言应该继续发展，以反映开发者的新要求。第二，它可能会改变非 Perl 社区对 Perl 的看法。5.0 版本出现在 1993 年，尽管如此，Perl 语言仍在继续发展。当时的主要版本号仍然是 5，在很多人看来，这意味着 Perl 从 1993 年开始就停滞不前了。新的主要版本更新会刷新人们的认知。</p>
 </div>
 <div class="paragraph">
-<p>这个想法是让 Raku 成为"Perl 社区的重写"。拉里要求社区分享他们想要改变的 Perl 的部分。变更请求导致了 361 份 RFC (请求评论)文档，这些文档公布在 <a href="https://raku.org/archive/rfc" class="bare">https://raku.org/archive/rfc</a> 中。这些文件仅具有历史意义。</p>
+<p>这个想法是让 Raku 成为"Perl 社区的重写"。拉里要求社区分享他们想要改变的 Perl 的部分。变更请求导致了 361 份 RFC (请求评论)文档，这些文档发布在 <a href="https://raku.org/archive/rfc" class="bare">https://raku.org/archive/rfc</a> 中。这些文件仅具有历史意义。</p>
 </div>
 <div class="paragraph">
-<p>随后，系统地分析了各种提案，并通过将类似的主题组合在一起并作为一系列概要发布。这些文档背后的命名和编号原则是为了保留 Programming Perl 书籍章节的结构。</p>
+<p>随后，人们对各种提案进行了系统的分析，按相似的主题进行了分组，并作为一系列概要发布。这些文档背后的命名和编号原则是为了保持 Programming Perl 一书的章节结构。</p>
 </div>
 <div class="paragraph">
-<p>后来，在一组名为启示录和解释的文件中再次总结和解释了概要。所有这些论文今天都在 <a href="http://design.raku.org，但同样，它们不是语言的最终规范，只是一个历史文档的集合。" class="bare">http://design.raku.org，但同样，它们不是语言的最终规范，只是一个历史文档的集合。</a></p>
+<p>后来，概要再次被归纳和解释为一组名为 Apocalypses 和 Exegeses 的文档。所有这些文件今天都可以在 <a href="http://design.raku.org" class="bare">http://design.raku.org</a> 上找到，但同样的，它们并不是语言的最终规范，只是历史文献的集合。</p>
 </div>
 <div class="paragraph">
-<p>关于 Raku 的另一个重要思想是关于编译器的创建方式。在 Perl 5 中， 语言规则由单个可用编译器间接定义。一些错误，或编译器的不明显行为，可能被视为语言标准的一部分。在 Raku 中，决定有一个清晰的语言规范，没有参考编译器。 可以有多个编译器。他们的主要要求是实现规范并通过一组测试。</p>
+<p>关于 Raku 的另一个重要想法是关于编译器的创建方式。在 Perl 5 中，语言规则是由单一可用的编译器间接定义的。一些 bug，或者是编译器的不明显的行为，可能会被认为是语言标准的一部分。在 Raku 中，决定有一个明确的语言规范，没有参考编译器。可以有不止一个编译器。对它们的主要要求是实现规范并通过测试集。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_与_perl_5_的区别">1.2. 与 Perl 5 的区别</h3>
 <div class="paragraph">
-<p>让我们简单地看一下在 Raku 的路上发生的一些变化。在以下部分中，您将看到 Perl 5 和 Raku 中的一些代码示例。有关 Perl 5 如何转换为 Raku 的一般理解，但您并不期望了解它的每一点。关于 Raku 语法的所有细节将在本书的后面解释。</p>
+<p>让我们简单地看一下在通往 Raku 的路上发生的一些变化。在下面的章节中，你会看到一些 Perl 5 和 Raku 中的代码示例。这些例子的目的是为了让你对 Perl 5 到 Raku 的转变有一个大致的了解，但你不需要了解其中的每一个细节。所有关于 Raku 语法的细节将在本书的后面讲解。</p>
 </div>
 <div class="sect3">
 <h4 id="_符号">1.2.1. 符号</h4>
 <div class="paragraph">
-<p>Perl 新手最困难的事情之一就是符号。符号是 Perl 变量名前面的一个字符，表示变量的结构类型。例如，<code>$</code> 表示标量值，<code>@</code> 表示数组，<code>%</code> 表示哈希。</p>
+<p>对于初学 Perl 的人来说，最难的一个东西就是 sigil。sigil 是 Perl 中变量名称前面的一个字符，表示变量的结构类型。例如，<code>$</code> 代表标量值，<code>@</code> 代表数组，<code>%</code> 代表散列。</p>
 </div>
 <div class="paragraph">
-<p>访问数组或散列的元素时会出现问题。让我们考虑一下以下 Perl 5代码, 数组的前几个数是波那契数:</p>
+<p>当你访问数组或散列的元素时，问题就出现了。让我们以下面这几行 Perl 5 斐波那契数组的前几个数为例。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -348,10 +354,10 @@ print $fibonacci[4];</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>首先，创建一个 <code>@fibonacci</code> 数组。变量的名称包含 <code>@</code> 字符作为符号。在第二行中，我们访问该数组的一个元素, 这一次使用另一个符号 <code>$</code>。这是因为数组中的单个元素是标量，而标量使用 <code>$</code> 作为符号。 对于那些学习 Perl 的人来说，这个小小的变化是理解该语言基础知识的一个大问题。</p>
+<p>首先，创建一个 <code>@fibonacci</code> 数组。变量的名称中包含了 <code>@</code> 字符作为标志。在第二行中，我们访问该数组中的一个元素，这次我们使用另一个标号 <code>$</code>。这是因为数组中的单个元素是标量，而标量使用 <code>$</code> 作为符号。对于学习 Perl 的人来说，符号的这个小变化对理解 Perl 语言的基础知识是个大问题。</p>
 </div>
 <div class="paragraph">
-<p>在 Raku 中，符号是统一的，是变量名的一部分。你不用单独改变它，无论是访问数组的元素还是整个数组。前面的例子在 Raku 中将如下所示:</p>
+<p>在 Raku 中，符号是统一的，是变量名的一部分。无论你是访问数组中的一个元素，还是访问整个数组，都不能单独改变它。上面的例子在 Raku 中是这样的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -360,438 +366,713 @@ print @fibonacci[4];</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这两行中，<code>@fibonacci</code> 数组和它的 <code>@fibonacci[4]</code> 元素使用同一个符号。这种方法更加一致，对初学者更容易。</p>
+<p>在这两行中，<code>@fibonacci</code> 数组和它的 <code>@fibonacci[4]</code> 元素都使用了相同的符号。这种方法对于初学者来说，更加一致，也更容易。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_签名">1.2.2. 签名</h4>
 <div class="paragraph">
-<p>在Perl 5中，您必须使用自己提取函数参数的值 内置移位功能，或默认的@_数组。
-让我们在下面的例子中看到这个，用一个函数来计算它们的总和 参数。在Perl 5中，你必须做一些额外的工作来获得实际的传递 参数。
-首先，在Perl 5中获取带有shift的参数值:</p>
+<p>在 Perl 5 中，你必须通过使用内置的 <code>shift</code> 函数或者从默认的 @_ 数组中提取函数的参数值。</p>
+</div>
+<div class="paragraph">
+<p>让我们用下面的例子来看看，一个计算两个参数之和的函数。在 Perl 5 中，你必须做一些额外的工作来获取实际传递的参数。</p>
+</div>
+<div class="paragraph">
+<p>首先，用 Perl 5 中的 <code>shift</code> 来获取参数值:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-perl" data-lang="perl">sub add {
+    my $x = shift;
+    my $y = shift;
+    return $x + $y;
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>然后，通过使用@_数组:</p>
+<p>然后，通过使用 @_ 数组:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-perl" data-lang="perl">sub add {
+    my ($x, $y) = @_;
+    return $x + $y;
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>与许多其他编程语言不同，无法声明列表 函数的形式参数直接。例如，这是你用C或C ++做的:</p>
+<p>与许多其他编程语言不同的是，不可能直接声明一个函数的形式参数列表。例如，你在 C 语言或 <code>C++</code> 中就是这样做的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">int add(int x, int y) {
+    return x + y;
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在Perl 5中，可以限制参数的数量及其结构类型 原型的帮助。在那里使用Sigil来告诉Perl参数的类型。该 用于添加的前置函数在Perl 5中可能如下所示:</p>
+<p>在 Perl 5 中，可以借助于原型来限制参数的数量和结构类型。这里的符号是用来告诉 Perl 参数的类型。上面的加法函数在 Perl 5 中可能是这样的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub add($$) {
+    my ($x, $y) = @_;
+    return $x + $y;
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>使用函数原型将使编译器在使用函数时发出抱怨
-不同数量的参数(比如，一个或三个而不是两个)，但你仍然必须这样做
-自己获得他们的价值观
-Perl 5.20引入了功能签名。所以，现在，你可以从声明中获益 争论一气呵成。以下代码给出了此类方法的示例。$ x和</p>
+<p>使用函数原型会使编译器在使用不同数量的参数（例如，一个或三个参数而不是两个）时产生抱怨，但你仍然需要自己获取它们的值。</p>
+</div>
+<div class="paragraph">
+<p>Perl 5.20 引入了函数签名。所以，现在，你可能会从一次性声明参数中受益。下面的代码给出了这样一个例子。<code>$x</code> 和 <code>$y</code> 参数都在函数头中声明:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-perl" data-lang="perl">use v5.20;
+
+use feature qw(signatures);
+no warnings qw(experimental::signatures);
+
+sub add($x, $y) {
+    return $x + $y;
+}
+
+say add(4,5);</code></pre>
 </div>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">使用特征qw(签名); 没有警告qw(experimental </dt>
-<dd>
-<p>signature);</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>你会注意到，你需要在脚本中提到 Perl 5.20 的最小版本号来指示 Perl 使用 Perl 5.20 的功能。你还会注意到，你必须通过单独的指令激活相应的功能。但是，更重要的是，由于签名是一个实验性的功能，你必须手动关闭警告信息，才能得到一个干净的输出。</p>
+</div>
+<div class="paragraph">
+<p>在 Raku 中，函数签名从一开始就被允许使用，所以你可以直接使用它。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku"># This is  Raku
+sub add($x, $y) {
+    return $x + $y;
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>您会注意到，您需要通过提及指示Perl使用Perl 5.20的功能 脚本中的最小版本号。您还会注意到必须激活</p>
-</div>
-<div class="paragraph">
-<p>相是应一的个功实能验由性单功独能的，指您令必。须但手是动，禁更用多警，告因消为息签才名能获得 清洁输出。</p>
-</div>
-<div class="paragraph">
-<p>在Raku中，从一开始就允许使用函数签名，因此您可以直接使用它:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>实际上，Perl 5.20中的签名是从Raku到Perl的向后移植功能的一个示例 因此，尽管Raku本身就是Perl 5的下一个版本，但Perl 5仍然可以实现 Raku中设计的一些元素使Perl更好。
-类
-为了让用户体验更好，让我们来看看另一个重要的例子 Perl的语法在Raku中有所改变。
-传统上，面向对象的编程是在Perl 5中借助所谓的 祝福哈希。对象的数据成员是哈希的元素，并且是有福的 对该哈希的引用可用于在类的实例上调用方法。该 下面的示例演示如何定义类并在Perl中创建它的实例</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>到目前为止，名为MyClass的类有两个方法 - new，用于创建新实例，以及inc， 增加计数器并返回新值。在处理Perl 5的课程时，请不要这样做 忘记在模块的末尾返回一个真值，这就是最后一个1的目标
-文件的行。</p>
-</div>
-<div class="paragraph">
-<p>在主程序中，您可以通过创建实例并调用方法来使用MyClass
-变量如下:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>在Perl 5中实现面向对象的东西是另一个障碍 可能有过使用其他语言课程的新人 但他们对Perl 5创建它们的方式感到困惑。
-Raku中的类对于使用其他对象的开发人员来说更为熟悉 - 面向编程语言。
-这是你在Raku中定义同一个类的方法，如上例所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>如您所见，整个类在一对大括号中定义。它的数据成员是 使用has关键字显式声明，并且不需要在结尾处返回1 文件。
-现在，创建一个类的对象并增加内部计数器三次，就像我们一样 在之前的Perl 5例子中做过。这就是你在Raku中的表现:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>不要关注细节，因为它将在后面的章节中解释。 到目前为止，我们已经看到了三个需要改进Perl 5语法的例子。</p>
-</div>
-<div class="paragraph">
-<p>要查看Perl 5和Raku之间更改的更多示例，您可以参考一些文章 在Raku的文档中，标题为“Perl 5 to Raku guide” HTTPS:/ /
-文档。 raku。组织/语言。HTML，专门针对该特定主题:
-5to6-nutshell Perl 5到Raku，简而言之 - 我如何做我以前做的事情?
-5to6-perlfunc Perl 5到Raku指南功能 5to6-perlop得到 Perl 5到Raku指导操作员
-      5to6-perlsyn 5to6-perlvar
-Perl 5到Raku指南语法
-Perl 5到Raku指南 - 特殊变量
-  与Perl 5的兼容性
-现有的Raku编译器无法在没有修改的情况下执行Perl 5程序 源代码。Perl 5和Raku有时被称为姐妹语言。两者都有相同之处 Perl的精神，在很多情况下，可以将程序从Perl 5转换为Raku。
-Perl 5的最大优势之一是CPAN(Comprehensive Perl Archive 网络)。它包含大量无数模块，适用于众多领域。最 可能，你的任务已经由一些CPAN的作者解决了。使用这个有用的遗产 在你的Raku程序中，你可能想要使用Inline :: Perl5模块 允许使用现有的Perl 5模块而无需修改源代码。
-例如，让我们采用Perl 5中最流行的模块之一，Text :: CSV，然后嵌入它 在我们的Raku程序中。</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">启用Inline </dt>
-<dd>
-<p>Perl5后，:from &lt;Perl5&gt;后缀将加载Text :: CSV模块 来自Perl 5模块目录。该模块必须作为常规Perl 5模块安装 来自CPAN。</p>
-</dd>
-<dt class="hdlist1">程序的其余部分使用$ csv对象，它是Text </dt>
-<dd>
-<p>CSV的一个实例。注意
-你必须遵循Raku语法，所以，例如，而不是创建对象</p>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>这同样适用于调用parse方法:in
-Perl 5将是$ csv&#8594; parse()，而在Raku中你使用dot:$ csv.parse()。工作 第8章介绍了Raku中的对象，面向对象的编程。</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">幸运的是，Raku已经有了一个模块Text </dt>
-<dd>
-<p>CSV。你可以找到它 <a href="http://modules.raku.org页面。使用Inline" class="bare">http://modules.raku.org页面。使用Inline</a> :: Perl5对那些非常有用 CPAN上的模块，它们还没有等效或替换，用Raku编写 例如，以下从模块文档中获取的示例显示了如何操作 连接到数据库(当然，您需要安装PostgreSQL来测试示例):</p>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
+<p>事实上，Perl 5.20 中的签名是将 Raku 的功能从 Raku 中移植到 Perl 5 中的一个例子，所以尽管 Raku 是 Perl 5 的下一个版本，但 Perl 5 中的一些元素在 Raku 中仍然得到了一些设计上的元素，使 Perl 变得更好。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_raku_资源">1.3. Raku 资源</h3>
+<h3 id="_类">1.3. 类</h3>
 <div class="paragraph">
-<p>Raku历史悠久，在此期间创建了许多文档，例如
-语言思想，草案规范和编译器文档。许多爱好者写道
-有关Raku的文章和博客文章。其中一些已过时，并未反映当前的情况 语言的状态。在本章中，我将向您简要介绍最新的材料。 在您使用Raku的练习中应该使用的日期。
-文档
-文档Raku编程语言的主要入又点是
-Raku网站的文档部分(HTTP:/ /文档raku组织。)。它包含几个部分 全面描述了类型，运算符和内置类
-在Raku中可用。由于语言仍处于开发阶段，您有时可能会在其中找到位置 文档中它不反映语言的当前状态。在这种情况下， 您可以咨询语言开发人员社区或检查测试中的文件
-套房。</p>
+<p>为了让用户体验更好，让我们来看看另一个重要的例子，看看 Raku 中 Perl 语法的变化在哪里。</p>
 </div>
 <div class="paragraph">
-<p>什么是Raku? 测试套件
-Raku的的测试套件，名为烤，可以在仓库中被发现在/:HTTPS。/ GitHub的COM / raku /烤。它包含数以千计的测试，涵盖了Raku的许多角落。测试套件是
-如果你想看看在Raku中编写程序的方法，也是一个好看的地方。它可能会 有时是长时间阅读，但许多测试都是从所有可能的角度检查功能。
-在Roast中，测试分组在名称为S32-io的目录中。这些名字 对应于概要的编号，并分成专题部分。对于 例如，对于概要11&#8217;编译单元'，存在三个目录 tests-S11-compunits，S11-modules和S11-repository。</p>
+<p>传统上，在 Perl 5 中，面向对象编程是借助于所谓的被祝福的散列来完成的。对象中的数据成员是散列的元素，而这个散列的被祝福的引用可以用来调用类的实例上的方法。下面的例子告诉你如何在 Perl 5 中定义一个类并创建一个类的实例。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">package MyClass;
+
+sub new {
+    my ($class) = @_;
+    my $this = {
+        counter =&gt; 0
+    };
+    bless $this, $class;
+    return $this;
+}
+
+sub inc {
+    my ($this) = @_;
+    $this-&gt;{counter}++;
+    return $this-&gt;{counter};
+}
+
+1;</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>STD.pm
-STD.pm是一个描述正式Raku语法的巨大文件。Raku的语法是 用Raku本身编写。的存储库的https:/。/ GitHub的COM / raku / STD包含
-语法和将语法翻译成Perl 5代码的viv实用程序。我们有 提到了STD.pm语法，因为对于那些想要的读者来说这可能很有意思 深入研究语法的内部结构。在本书的其余部分，我们将
-基于Raku中的代码示例解释语法。
-社区
-Raku的开发人员传统上使用IRC进行通信。你也可以加入 #raku频道询问有关语言的问题或在线执行Raku。
-要加入频道，请遵循列出的说明HTTPS:/。/ raku组织/社区/ 页。
-如果要在IRC中运行代码，请参阅rakudo bot，如下所示: &lt;me&gt; rakudo:说“你好，世界!”
-&lt;+ camelia&gt; rakudo-moar cb8fa0:OUTPUT:«Hello，World!␤» 在输出中，您可以看到Rakudo默认使用MoarVM后端。字符串
-   程序打印的内容显示在OUTPUT关键字之后。</p>
+<p>到目前为止，名为 <code>MyClass</code> 的类有两个方法 - <code>new</code>，用于创建一个新的实例，和 <code>inc</code>，用于递增计数器并返回新值。在处理 Perl 5 的类时，不要忘了在模块的末尾返回一个真值，这就是文件最后一行中的1的目标。</p>
 </div>
 <div class="paragraph">
-<p>请谨慎使用此功能，因为整个房间都可以看到您的要求 也被记录。最好的用例是在找到时显示编译器的行为 错误或当您看到与文档中所述内容不同的结果时。Raku 开发人员总是出现在IRC频道中，并会就错误或意愿提出建议 旨在修复错误并使文档正确。
-如果您在Facebook上，请访问Raku小组: HTTPS:/。。/ WWW Facebook的COM /组/ 1595443877388632 /
-在离线状态下，您会看到很多在各种会议上都喜欢Raku的人。去吧 Perl Conference(以前称为YAPC，(又一个Perl会议))，其中 每年在欧洲和美国举办。您可能会发现更多关于他们的http:/ /
-theperlconference，组织和HTTP:/。。/ WWW YAPC欧盟。多年来，Perl都有工作 OSCON和FOSDEM等大型开源会议的展位。还有很多
-当地会议，研讨会和当地小组会议。找到离您最近的群组 位置在 HTTP:/ /下午组织。。</p>
+<p>在主程序中，你可以通过创建一个实例并在变量上调用方法来使用 <code>MyClass</code>，方法如下:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use MyClass;
+
+my $var = MyClass-&gt;new;
+
+print $var-&gt;inc, "\n";
+print $var-&gt;inc, "\n";
+print $var-&gt;inc, "\n";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 Perl 5 中实现面向对象的东西是另一个障碍，因为对于新手来说，他们可能有过在其他语言中使用类的经验，但对 Perl 5 创建类的方式感到困惑。</p>
+</div>
+<div class="paragraph">
+<p>对于使用过其他面向对象编程语言的开发人员来说，Raku 中的类对他们来说更加熟悉。</p>
+</div>
+<div class="paragraph">
+<p>这就是在 Raku 中定义同样的类的方法，如上例所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class MyClass {
+    has $!counter;
+
+    method inc() {
+        $!counter++;
+        return $!counter;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如你所见，整个类是在这对花括号内定义的。它的数据成员是用 <code>has</code> 关键字显式声明的，不需要在文件的最后返回 1。</p>
+</div>
+<div class="paragraph">
+<p>现在，创建一个类的对象，然后像我们之前在 Perl 5 中的例子一样，将内部计数器增量三次。在 Raku 中就是这样做的。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $var = MyClass.new;
+
+say $var.inc;
+say $var.inc;
+say $var.inc;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>暂时不要把注意力放在细节上，因为这一切都会在后面的章节中解释。</p>
+</div>
+<div class="paragraph">
+<p>到目前为止，我们已经看到了三个例子，希望改进 Perl 5 的语法。</p>
+</div>
+<div class="paragraph">
+<p>要查看更多关于 Perl 5 和 Raku 之间的变化的例子，你可以参考 Raku 的文档  <a href="docs.raku.org/language.html" class="bare">docs.raku.org/language.html</a>，其中有几篇文章以 "Perl 5 到 Raku 指南"为标题，专门讨论这个主题。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5to6-nutshell</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Perl 5 到 Raku 指南 - 一言以蔽之,我怎么做我以前做的事?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5to6-perlfunc</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Perl 5 到 Raku 指南 — 函数</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5to6-perlop</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Perl 5 到 Raku 指南 - 操作符</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5to6-perlsyn</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Perl 5 到 Raku 指南 - 语法</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5to6-perlvar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Perl 5 到 Raku 指南 - 特殊变量</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_与_perl_5_的兼容性">1.4. 与 Perl 5 的兼容性</h3>
+<div class="paragraph">
+<p>现有的 Raku 编译器在不修改源代码的情况下，无法执行 Perl 5 程序。Perl 5 和 Raku 有时被称为姐妹语言。两者有着相同的 Perl 精神，在很多情况下，可以将程序从 Perl 5 转换为 Raku。</p>
+</div>
+<div class="paragraph">
+<p>Perl 5 的最大优势之一是 <strong>CPAN(Perl 综合档案网络)</strong>。它包含了无数的模块，适用于大量的领域。最有可能的是，你的任务已经被 CPAN 的一些作者解决了。要想在 Raku 中使用这些有用的遗产，你可能想使用 <code>Inline::Perl5</code> 模块，它允许在不修改源代码的情况下使用现有的 Perl 5 模块。</p>
+</div>
+<div class="paragraph">
+<p>例如，让我们以 Perl 5 中最流行的模块之一 <code>Text::CSV</code> 为例，将其嵌入到 Raku 中:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Inline::Perl5;
+use Text::CSV:from&lt;Perl5&gt;;
+
+my $csv = Text::CSV.new;
+
+$csv.parse('First name,Last name');
+say $csv.fields.join("\t");
+
+$csv.parse('Astrid,Lindgren');
+say $csv.fields.join("\t");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 <code>Inline::Perl5</code> 启用后， <code>:from&lt;Perl5&gt;</code> 后缀将从 Perl 5 模块目录中加载 <code>Text::CSV</code> 模块。这个模块必须作为一个普通的 Perl 5 模块从 CPAN 中安装。</p>
+</div>
+<div class="paragraph">
+<p>程序的其余部分使用 <code>$csv</code> 对象，它是 <code>Text::CSV</code> 的一个实例。注意，你必须遵循 Raku 的语法，因此，比如说，不要用  <code>Text::CSV&#8594;new</code> 来创建对象，而是用 <code>Text::CSV.new</code>。调用解析方法也是一样的：在 Perl 5 中是 <code>$csv&#8594;parse()</code> ，而在 Raku 中则是用点号: <code>$csv.parse()</code> 。在 Raku 中如何处理对象，请看第八章的"面向对象的编程"。</p>
+</div>
+<div class="paragraph">
+<p>幸运的是，在 Raku 中已经有一个 <code>Text::CSV</code> 模块。你可以在 <a href="http://modules.raku.org" class="bare">http://modules.raku.org</a> 页面上找到它。使用  <code>Inline::Perl5</code> 对于那些在 CPAN 上还没有等价物或替代物的模块，使用 <code>Inline::Perl5</code> 可以非常有用。例如，下面的例子来自于模块文档中的例子显示了如何连接到数据库(当然，你需要安装 PostgreSQL 来测试这个例子):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Inline::Perl5;
+use DBI:from&lt;Perl5&gt;;
+
+my $dbh = DBI.connect('dbi:Pg:database=test');
+my $products = $dbh.selectall_arrayref(
+    'select * from products', {Slice =&gt; {}}
+);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>Inline::Perl5</code> 模块可在 <a href="https:/​/​github.​com/​niner/​Inline-Perl5" class="bare">https:/​/​github.​com/​niner/​Inline-Perl5</a> 上找到。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_编译器">1.4. 编译器</h3>
+<h3 id="_raku_资源">1.5. Raku 资源</h3>
 <div class="paragraph">
-<p>在Raku开发过程中，创建了许多编译器。一些 他们只是一个测试一些想法的游乐场，而有些则更为成熟。其中 最重要的是，我们应该提到以下四个项目:
-鹦鹉 哈巴狗
-Perlito Rakudo
-有更多的尝试来创建一个不太成功或更少的Raku编译器 完成。我们将通过前面的列表来查看每个项目的亮点 然后专注于Rakudo，这是你今天应该使用的编译器。</p>
-</div>
-<div class="paragraph">
-<p>Parrot是第一个旨在成为Raku编译器基础的虚拟机。最初的 该语言的设计建议将源代码编译为字节码，即 由虚拟机执行。Parrot的目标是创建一个适合的虚拟机 处理Raku的所有需求，从简单的数据类型，如整数，到更多 复杂的结构，例如类，能够在对象上调用方法 遵循对象层次结构。
-该项目可在parrot.org上获得。过了一段时间，Parrot开始支持其他人 编程语言，如Lua或Python，虚拟机变得越来越少
-专注于Raku本身。例如，Ponie项目是尝试创建编译器 那将使用Parrot执行Perl 5程序。
-Parrot成为另一个项目Rakudo中的虚拟机之一。但是，之前 我们去Rakudo，让我们沿着历史的道路谈谈Pugs。
-哈巴狗
-Pugs(Perl User&#8217;s Golfing System)是一个用Haskell编写的Raku编译器。它开始于 2005年由一名独立开发人员很快吸引了更多人加入该团队。哈巴狗是最多的 其时间的复杂编译器。编译它是困难且非常耗时的 项目，执行速度低，但编译的质量和覆盖范围
-Raku规格非常出色。</p>
-</div>
-<div class="paragraph">
-<p>帕格斯今天在Raku中的主要角色是庞大的测试套件。它是为了测试帕格斯本身而创建的， 但事实证明它是Raku的官方测试套件。一个声称自称为Perl的编译器 6编译器必须通过测试套件测试。
-哈巴狗不发展了，但它的源代码可以在GitHub上的HTTPS:/ / github上。的COM / raku /哈巴狗。HS 。
-Perlito
-Perlito是构建Raku编译器项目的另一个非常有趣的例子。它是
-旨在将Perl 5或Raku交叉编译为其中一种语言&#8212;&#8203;JavaScript，Java，Go， Python，Ruby或Lisp。您可以找到该项目的存储库/:HTTPS。/ GitHub的COM /
-fglock / Perlito 。</p>
-</div>
-<div class="paragraph">
-<p>Perlito提供了一个Web界面，用于在浏览器中编译Raku的子集。它汇编了
-将Raku中的代码编写为JavaScript并立即执行。该网页的网址是HTTP:/ / fglock。 github上。IO / Perlito / perlito / perlito6。HTML。该项目涵盖了Raku
-规范仅部分，但它仍可用于创建各种在线教育 Perl 5和6的系统。</p>
+<p>Raku 有着悠久的历史，在那段时间里，有很多文档被创造出来，比如语言的想法、规范草案、编译器文档等。很多爱好者写了很多关于 Raku 的文章和博文。其中有些已经过时了，并不能反映语言的现状。在这一章中，我将给大家列举一些最新的资料，这些资料都是最新的，也是大家在使用 Raku 的实践中应该用到的。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_使用_rakudo_star">1.5. 使用 Rakudo Star</h3>
+<h3 id="_文档">1.6. 文档</h3>
 <div class="paragraph">
-<p>Rakudo是最初构建在Parrot虚拟机上的编译器。后来，它开始使用了 Java虚拟机(JVM)，但最终，Parrot的开发人员创建了自己的 虚拟机，MoarVM(上运行虚拟机元模型(www.moarvm.org))。 目前，JVM的支持有限，主虚拟机是MoarVM。
-Rakudo本身就是一个Raku编译器。对我们来说，最有用的编译器是Rakudo Star，它是 包括编译器以及许多Raku模块和一些模块的发行版 命令行工具，例如模块安装程序。在本书中，我们将使用Rakudo Star
-编译器在Raku中运行程序。
-Rakudo的网站是 rakudo.org。
-与Rakudo Star合作
-Rakudo是目前最完整的编译器。它支持最大的子集
-Raku语言，并且说Rakudo是你唯一的编译器并不是一个错误 应该用来学习Raku。下载并安装Rakudo Star</p>
+<p>Raku 编程语言文档的主要入口是 Raku 网站的文档部分(<a href="http:/​/​docs.raku.​org" class="bare">http:/​/​docs.raku.​org</a>)。它包含了几个部分，全面地描述了 Raku 中的类型、操作符和内置类。由于 Raku 语言还在发展中，有时你可能会发现文档中有些地方没有反映出语言的现状。在这种情况下，你可以咨询语言开发者社区或者从测试套件中查看文件。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_测试套件">1.7. 测试套件</h3>
+<div class="paragraph">
+<p>Raku 的测试套件，叫做 Roast，可以在  <a href="perl6/roast" class="bare">perl6/roast</a> 仓库中找到。它包含了成千上万的测试，涵盖了 Raku 的许多角落。如果你想了解用 Raku 编写程序的方法，这个测试套件也是个不错的地方。它有时可能是一个长篇大论，但很多测试都是从各个可能的角度来检查功能。</p>
 </div>
 <div class="paragraph">
-<p>有几种方法可以在您的计算机上安装Rakudo Star。你可以下载 源代码并编译或下载适用于您的平台的安装程序。Rakudo Star是
-适用于所有主要平台，即Windows(32位和64位版本)，Mac OS X和Linux。
-Rakudo星的主下载页面是HTTP:/ / raku组织/下载。。在那页上， 你会找到最新版本的Rakudo Star发行版的链接 平台和如何安装它们的说明。
-在Windows上，该过程非常简单。只需下载最新版本的 MSI安装程序，运行它，并按照说明进行操作。</p>
+<p>在 Roast 中，这些测试被归类到目录中，目录中的名称如 S32-io 等。这些名称对应着 Synopses 的编号，并被分成了主题部分。例如，对于 Synopses 11 "编译单元"，测试中存在三个目录- S11-compunits、S11-modules 和 S11-repository。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_std_pm">1.8. STD.pm</h3>
+<div class="paragraph">
+<p>STD.pm 是一个巨大的文件，描述了正式的 Raku 的 grammar。 Raku 的 grammar 是用 Raku 本身编写的。在资源库中包含了这个语法和 viv 工具，它可以将语法翻译成 Perl 5 的代码。我们之所以提到 STD.pm 语法，是因为对于那些想深入挖掘语法内部结构的读者来说，可能会有兴趣。在本书的其余部分，我们将以 Raku 中的代码实例为基础来解释这个语法。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_社区">1.9. 社区</h3>
+<div class="paragraph">
+<p>Raku 的开发者们传统上使用IRC进行交流。你也可以加入 #raku 频道，在线询问有关该语言的问题或执行 Raku 的某个片段。
+要加入该频道，请按照  页面上列出的说明进行操作。</p>
 </div>
 <div class="paragraph">
-<p>什么是Raku?
-在Mac OS X上，您可以下载.dmg安装程序，也可以使用brew管理器，如图所示
-这里:
-$ brew安装rakudo-star 在Linux上，您必须从源文件安装Rakudo Star。
-安装Rakudo Star后，您会在其bin中找到raku可执行文件 目录。确保将该目录的路径添加到系统范围的PATH变量中
-这样你就可以从任何位置输入raku。 在本书的其余部分，我们将假设已安装Rakudo Star，我们将使用
-raku可执行文件来运行程序。 命令行选项
-Rakudo Star的Raku编译器接受一些命令行选项。我们来看看吧 他们中有一些。
--c命令
--c命令行检查程序的语法并退出。它还运行BEGIN 和程序中的CHECK块，在Phasers of部分中讨论 第2章， 编写本书后面的代码。如果您只想这样，此命令行选项很有用 检查代码中是否存在语法错误，并且不想执行它 异常是BEGIN和CHECK代码块中的代码。
-在正确编程的情况下，它打印以下输出:
-语法OK 如果存在编译时错误，则编译将在第一个错误处停止并显示
-它在控制台上，提到发现错误的行号。
-错误消息包含错误的描述并指示错误的位置
-代码借助弹出字符()。如果您的控制台支持颜色，则片段
-弹出字符前的代码为绿色，其余部分为红色。</p>
-</div>
-<div class="paragraph">
-<p>下面是一个错过字符串结束语的程序示例: 问好;
-什么是Raku?</p>
+<p>如果你想在 IRC 中运行代码，请参考 rakudo bot 如下。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-txt" data-lang="txt">&lt;me&gt; rakudo: say "Hello, World!"
+&lt;+camelia&gt; rakudo-moar cb8fa0: OUTPUT: «Hello, World!␤»</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>程序没有编译，这就是编译器打印的内容:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
+<p>在输出中，可以看到 Rakudo 默认使用 MoarVM 后端。字符串 程序打印出来的数据会显示在 OUTPUT 关键字之后。</p>
 </div>
 <div class="paragraph">
-<p>双引号 术语
---doc命令 --doc(注意双连字符)命令行从中提取文档
-编程并打印出来。这里，所谓的Pod文档就是这个意思。我们将介绍 Pod语法 第 2 章，编写代码。
-让我们看看包含内部文档的小程序:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
+<p>慎重使用这个功能，因为你的请求结果会被整个房间的人看到，也会被记录下来。最好的用例是当你发现 bug 或看到与文档中所说的不同的结果时，显示编译器的行为。 Raku 的开发者们总是在IRC频道中，他们会给你提供建议，指出错误的地方，或者会致力于修复 bug，并使文档正确。</p>
 </div>
 <div class="paragraph">
-<p>说“你好，世界!”; 使用&#8212;&#8203;doc命令行选项运行它，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
+<p>如果你在 Facebook 上，请访问 Raku 小组。</p>
 </div>
 <div class="paragraph">
-<p>它只会打印部分文档。代码本身不会被执行:
-你好，世界节目 *此程序打印“Hello，World!”
--e命令 -e选项允许您在命令行中传递整个程序。这很有用
-执行一些操作的简短程序，或者例如，当您检查时如何进行小测试 事情在Raku中起作用。</p>
+<p>在线下，你会在各种会议上看到很多热爱 Raku 的人。去参加 Perl 大会(以前叫YAPC，(Yet Another Perl Conference))，它
+每年都会在欧洲和美国举行。你可以在  <a href="theperlconference.org" class="bare">theperlconference.org</a> 和脸书上找到更多关于他们的信息。多年来，在 OSCON 和 FOSDEM 等大型开源会议上都有 Perl 的工作展位。还有很多地方性的会议、研讨会和当地的小组会议。在脸书上找到离你所在的地方最近的小组。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_编译器">1.10. 编译器</h3>
+<div class="paragraph">
+<p>在 Raku 的开发过程中，产生了许多编译器。其中有的只是一个测试一些想法的游乐场，有的则是比较成熟的。其中最重要的，我们应该提到以下四个项目。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Parrot</p>
+</li>
+<li>
+<p>Pugs</p>
+</li>
+<li>
+<p>Perlito</p>
+</li>
+<li>
+<p>Rakudo</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>使用引号括起来的程序运行它:</p>
+<p>之前有更多的人尝试过创建 Raku 编译器，但都不太成功，或者说不太完善。我们先看前面的列表，看看每个项目的亮点，然后重点介绍一下Rakudo，也就是今天应该使用的编译器。</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
+<div class="sect3">
+<h4 id="_parrot">1.10.1. Parrot</h4>
+<div class="paragraph">
+<p>Parrot是第一个旨在成为 Raku 编译器基础的虚拟机。该语言最初的设计建议是将源代码编译成字节码，由虚拟机执行。Parrot的目标是创建一个适合处理 Raku 的所有需求的虚拟机，从简单的数据类型（如整数），到更复杂的结构（如类），都可以在对象上调用方法并遵循对象层次结构。</p>
 </div>
 <div class="paragraph">
-<p>这是您将看到的结果:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
+<p>这个项目可以在 <a href="parrot.org" class="bare">parrot.org</a> 上找到。过了一段时间后，Parrot 开始支持其他编程语言，比如 Lua 或 Python，虚拟机也变得不那么专注于 Raku 本身。例如，Ponie 项目就是试图创建一个可以使用 Parrot 执行 Perl 5 程序的编译器。</p>
 </div>
 <div class="paragraph">
-<p>例如，它可能是一个单行实用程序，用于打印字符串的第一个字母 STDIN输入:</p>
+<p>Parrot 成为另一个项目 Rakudo 内部的虚拟机之一。不过，在说 Rakudo 之前，让我们沿着历史的轨迹来谈谈 Pugs。</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
 </div>
+<div class="sect3">
+<h4 id="_pugs">1.10.2. Pugs</h4>
+<div class="paragraph">
+<p>Pugs(Perl 用户高尔夫系统)是一个用 Haskell 编写的 Raku 编译器。它由一个单独的开发者在 2005 年开始，很快就吸引了更多的人加入到团队中来。Pugs 是当时最成熟的编译器。这个项目的编译难度很大，非常耗时，执行速度很低，但编译质量和 Raku 规范的覆盖面都很突出。</p>
 </div>
 <div class="paragraph">
-<p>它将打印由file.txt中行的第一个字符组成的行。
--p命令 -p命令行选项的作用与前面介绍的-n选项相同，但它也会打印
-每行末尾的默认变量$ _的值。我们将看到的意义 以下章节中的默认变量。
--I和-M命令 -I和-M选项用于将模块加载到程序中。该模块的名称是
-传递给-M选项，如果需要，模块的路径应该传递给 - 我选择。</p>
+<p>到今天为止，Pugs 在 Raku 中的主要作用是庞大的测试套件。它最初是为了测试 Pugs 本身而创建的，但后来变成了 Raku 的官方测试套件。一个自称是 Raku 编译器的编译器必须通过测试套件的测试。</p>
 </div>
 <div class="paragraph">
-<p>什么是Raku? -v和&#8212;&#8203;version命令
--v和&#8212;&#8203;version选项打印当前Raku编译器的版本，如下所示: $ raku -v
-在撰写本文时，我正在使用Rakudo Star版本2017.01，这就是输出 好像:
-这是基于MoarVM 2017.01版实施的Rakudo 2017.01版本 Raku.c.
-除了版本本身之外，重要的是用于的虚拟机
-执行Raku(MoarVM，如前所示)和Raku语言的版本 规范(在本例中为6.c)。
-Rakudo Star版本控制方案使用了发布日期的年份和月份 分配。Rakudo正在迅速发展，所以检查一下rakudo.org网站定期获取 更新。
---stagestats命令 --stagestats是一个命令行选项，比其他选项更具有Rakudo特性
-我们之前已经描述过。它打印编译器在不同阶段花费的时间
-编译和执行程序。
-输出因您运行程序还是检查其语法而异 使用-c命令行选项。让我们先来看看-c时打印的内容 选项用于:
-$ raku --stagestats -c hello.pl
-输出如下:
-阶段开始:0.000 阶段解析:0.107 阶段语法检查:语法确定
-如果没有-c选项，您将看到更多统计信息，因为该程序不仅仅是 编译但也执行，如下所示:
- $ raku --stagestats hello.pl</p>
+<p>Pugs 已经不再开发了，但它的源代码可以在 GitHub 上找到： <a href="github.com/perl6/Pugs.hs" class="bare">github.com/perl6/Pugs.hs</a>。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_perlito">1.10.3. Perlito</h4>
+<div class="paragraph">
+<p>Perlito 是另一个非常有趣的例子，它是一个构建 Raku 编译器的项目。它的目标是将 Perl 5 或 Raku 交叉编译到这些语言中的一种 - JavaScript、Java、Go、Python、Ruby 或 Lisp。你可以在  <a href="fglock/Perlito" class="bare">fglock/Perlito</a> 中找到这个项目的版本库。</p>
 </div>
 <div class="paragraph">
-<p>该程序的常规输出打印:</p>
+<p>Perlito 提供了一个 Web 接口，可以在浏览器中编译 Raku 的子集。它将 Raku 中的代码编译成 JavaScript，并立即执行。这个页面可以在 <a href="fglock.github.io/Perlito/perlito/perlito6.html" class="bare">fglock.github.io/Perlito/perlito/perlito6.html</a> 中找到。这个项目只涵盖了 Raku 的部分规范，但它仍然可以用来创建各种在线教育系统，包括 Perl 5 和 Raku 。</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+</div>
+<div class="sect3">
+<h4 id="_rakudo">1.10.4. Rakudo</h4>
+<div class="paragraph">
+<p>Rakudo 是一个最初建立在 Parrot 虚拟机上的编译器。后来，它开始使用 Java 虚拟机(JVM)，但最后 Parrot 的开发者创建了自己的虚拟机 MoarVM(Metamodel on a Runtime Virtual Machine(<a href="www.moarvm.org" class="bare">www.moarvm.org</a>))。目前，JVM 的支持有限，主要的虚拟机是 MoarVM。</p>
+</div>
+<div class="paragraph">
+<p>Rakudo 本身就是一个 Raku 编译器。对我们来说，最有用的编译器是 Rakudo Star，它是一个包括编译器以及一些 Raku 模块和一些命令行工具（如模块安装程序）的发行版。本书中，我们将使用 Rakudo Star 编译器来运行 Raku 中的程序。</p>
+</div>
+<div class="paragraph">
+<p>Rakudo 的网站是 <a href="rakudo.org" class="bare">rakudo.org</a>。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_写出我们的_hello_world_程序">1.6. 写出我们的 Hello, World 程序</h3>
+<h3 id="_使用_rakudo_star">1.11. 使用 Rakudo Star</h3>
 <div class="paragraph">
-<p>到目前为止，由于我们已经安装了Rakudo Star编译器，现在是时候创建第一个了
-Raku中的程序。它将打印Hello，World!并退出。 该计划非常简单。你需要的只是一行，只有一个指令来调用
-内置说功能。它接受字符串，将其打印到控制台，然后在其后面添加一个新行。
-这是整个程序的外观:
-说&#8217;你好，世界!' 将代码保存到文件中，比如hello.pl，并将其传递给编译器，如下所示:</p>
+<p>Rakudo 是目前最完整的编译器。它支持 Raku 语言中最大的子集，如果说 Rakudo 是学习 Raku 的唯一编译器，那是不会错的。</p>
+</div>
+<div class="sect3">
+<h4 id="_下载和安装_rakudo_star">1.11.1. 下载和安装 Rakudo Star</h4>
+<div class="paragraph">
+<p>在电脑上安装乐酷星有几种方法。您可以下载源码并编译它，或者下载一个安装程序为您的平台。Rakudo Star 适用于所有主要平台，即 Windows（32位和64位版本）、Mac OS X 和Linux。</p>
+</div>
+<div class="paragraph">
+<p>Rakudo Star 的主要下载页面是 。在该页面上，您将找到不同平台的 Rakudo Star 发行版的最新版本的链接，以及关于如何安装的说明。</p>
+</div>
+<div class="paragraph">
+<p>在 Windows 上，这个过程非常简单。只需下载最新版本的 MSI 安装程序，运行它，并按照说明进行操作。</p>
+</div>
+<div class="paragraph">
+<p>在 Mac OS X 上，你可以下载一个 .dmg 安装程序，或者使用 brew 管理器，如下所示。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ brew install rakudo-star</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>它将编译程序并立即执行它。结果是所需的字符串
-屏幕:
-你好，世界!
-请注意，输出以新行结束。这是内置说法的行为
-功能。或者，我们可以使用另一种打印输出的方法
-打印内置功能。不像说，它不会在输出的末尾添加新行，所以 你必须通过添加特殊符号来自己完成\ n:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
+<p>在 Linux 上，你必须从源文件中安装 Rakudo Star。</p>
 </div>
 <div class="paragraph">
-<p>请注意，这次使用了一对双引号。双引号处理特殊字符 例如\ n与单引号不同。在双引号内，\ n转换为a 换行符。这不会发生在单引号中，在这种情况下，\ n将出现 在屏幕上显示为两个字符的序列，并且\ n。</p>
+<p>安装完 Rakudo Star 后，你会在其 bin 目录下找到 perl6 可执行文件。确保将该目录的路径添加到你的系统范围内的 PATH 变量中，这样你就可以从任何位置输入 perl6。</p>
 </div>
 <div class="paragraph">
-<p>因为程序只包含一行代码，所以不必以a结尾
-分号。但是，您始终可以这样做:
-说“你好，世界!”; 该程序产生与以前完全相同的输出。</p>
+<p>在本书的其余部分中，我们将假设 Rakudo Star 已经安装了，我们将使用 perl6 可执行文件来运行程序。</p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结">1.7. 总结</h3>
+<h3 id="_命令行选项">1.12. 命令行选项</h3>
 <div class="paragraph">
-<p>在本章中，我们简要介绍了Raku的编程语言是什么以及如何使用</p>
+<p>Rakudo Star 的 Raku 编译器接受了一些命令行选项。让我们来看一下其中的一些选项。</p>
+</div>
+<div class="sect3">
+<h4 id="_c_命令">1.12.1. -c 命令</h4>
+<div class="paragraph">
+<p>-c 命令行检查程序的语法并退出。它还可以运行程序中的 BEGIN 和 CHECK 块，这在本书后面的第2章 "编写代码"一节 "Phasers" 中讨论过。如果你只想检查代码中是否有语法错误而不想执行，这个命令行选项是很有用的，BEGIN 和 CHECK 代码块中的代码是个例外。</p>
 </div>
 <div class="paragraph">
-<p>它与其姐妹语言Perl 5不同。我们查看了Raku的历史和不同的历史
-Raku编译器的项目。最后，我们安装了Rakudo Star，它是最好的编译工具 今天又创造了第一个&#8217;Hello，World!' 程序。
-在下一章中，我们将介绍如何在程序中组织代码。</p>
+<p>在正确编程的情况下，它会打印出以下输出。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Syntax OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果有编译时错误，编译将在第一个错误处停止，并在控制台中显示，并提到发现错误的行号。</p>
+</div>
+<div class="paragraph">
+<p>错误信息包含了错误的描述，并通过弹出字符()表示代码中的确切位置。如果你的控制台支持颜色，那么在弹出字符之前的代码片段是绿色的，其余部分是红色的。</p>
+</div>
+<div class="paragraph">
+<p>下面是一个程序漏掉了字符串的结尾引号的例子。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "Hello;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>运行它来检查语法，如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ perl6 -c err.pl</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>程序没有编译，编译器打印出来的结果是这样的。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">===SORRY!=== Error while compiling /Users/ash/code/err.pl
+Unable to parse expression in double quotes; couldn't find final '"' at /Users/ash/code/err.pl:2
+------&gt; &lt;BOL&gt; &lt;EOL&gt;
+       expecting any of:
+           argument list
+           double quotes
+           term</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_doc命令">1.12.2. --doc命令</h4>
+<div class="paragraph">
+<p>--doc（注意是双连字符）命令行提取程序中的文档并打印出来。这里指的是所谓的 Pod 文档。我们将在第二章"编写代码"中介绍 Pod 的语法。</p>
+</div>
+<div class="paragraph">
+<p>让我们来看看这个包含了文档的小程序。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">=begin pod
+=head1 Hello, World program
+=item This program prints "Hello, World!"
+=end pod
+
+say "Hello, World!";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>用 --doc 命令行选项运行它，如下所示。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ perl6 --doc pod.pl</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它将只打印文档的部分内容。代码本身不会被执行。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Hello, World program
+      * This program prints "Hello, World!"</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_e_命令">1.12.3. -e 命令</h4>
+<div class="paragraph">
+<p>-e 选项允许你在命令行中传递整个程序。这对于只做几个动作的短程序很有用，或者是在检查 Raku 中的工作原理时进行小测试。</p>
+</div>
+<div class="paragraph">
+<p>用引号中包含的程序运行它。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ perl6 -e'say "Hello"'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>而这就是你会看到的结果。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Hello</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_h_和_help_命令">1.12.4. -h 和 --help 命令</h4>
+<div class="paragraph">
+<p>-h 和 --help 命令会打印出包含可用命令行选项列表的文本。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_n_命令">1.12.5. -n 命令</h4>
+<div class="paragraph">
+<p>命令行选项 -n 会创建一个循环，这样程序就会对每一行提交到程序输入的文本执行一次。</p>
+</div>
+<div class="paragraph">
+<p>例如，它可以是一个单行的实用程序，从 STDIN 输入中打印出字符串的第一个字母。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">perl6 -n -e'print $_.substr(0, 1)' &lt; file.txt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它将打印出由 file.txt 中行的第一个字符组成的行。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_p_命令">1.12.6. -p 命令</h4>
+<div class="paragraph">
+<p>-p 命令行选项的作用与前面描述的 -n 选项类似，但它也会在每行的末尾打印出默认变量 $_ 的值。我们将在下面的章节中看到默认变量的含义。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_i_和_m_命令">1.12.7. -I 和 -M 命令</h4>
+<div class="paragraph">
+<p>-I 和 -M 选项用于将模块加载到程序中。模块的名称被传递到 -M 选项中，如果需要的话，模块的路径应该在 -I 选项中传递。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_v_和_version_命令">1.12.8. -v 和 --version 命令</h4>
+<div class="paragraph">
+<p>-v 和 --version 选项可以打印出当前 Raku 编译器的版本，如下所示。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ perl6 -v</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在写这篇文章的时候，我使用的是 Rakudo Star 2017.01 版，输出是这个样子的。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">This is Rakudo version 2017.01 built on MoarVM version 2017.01 implementing  Raku .c.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里除了版本本身之外，重要的是用来执行 Raku 的虚拟机(MoarVM，如前文所示)和 Raku 语言规范的版本（本例中是6.c）。</p>
+</div>
+<div class="paragraph">
+<p>Rakudo Star 的版本方案使用的是发行版的年月日。Rakudo 正在快速发展，所以定期检查 <a href="rakudo.org" class="bare">rakudo.org</a> 网站以获得更新。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_stagestats_命令">1.12.9. --stagestats 命令</h4>
+<div class="paragraph">
+<p>--stagestats 是一个命令行选项，它比我们前面描述的其他命令行选项更具有 Rakudo 的特性。它打印了编译器在编译和执行程序的不同阶段所花费的时间。</p>
+</div>
+<div class="paragraph">
+<p>输出结果的不同，取决于你是在运行程序还是用 -c 命令行选项检查它的语法。让我们先来看看当使用 -c 选项时打印出了什么。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ perl6 --stagestats -c hello.pl</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>产出情况如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Stage start : 0.000
+Stage parse : 0.107
+Stage syntaxcheck: Syntax OK</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果没有 -c 选项，你会看到更多的统计数据，因为程序不仅会被编译，还会被执行，如图所示。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ perl6 --stagestats hello.pl</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>程序的常规输出被打印出来:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Stage start       : 0.000
+Stage parse       : 0.327
+Stage syntaxcheck : 0.000
+Stage ast         : 0.000
+Stage optimize    : 0.003
+Stage mast        : 0.008
+Stage mbc         : 0.000
+Stage moar        : 0.000
+Hello, World!</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_编写我们的_hello_world_程序">1.12.10. 编写我们的 "Hello World" 程序</h4>
+<div class="paragraph">
+<p>至此，由于我们已经安装了 Rakudo Star 编译器，现在是时候在 Raku 中创建第一个程序了。它将打印出 Hello, World！并退出。</p>
+</div>
+<div class="paragraph">
+<p>这个程序其实很简单。你所需要的只是一行，唯一的指令就是调用内置的 <code>say</code> 函数。它获取字符串，将其打印到控制台，并在后面添加一行新的指令。</p>
+</div>
+<div class="paragraph">
+<p>这就是整个程序的样子。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'Hello, World!'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>将代码保存到文件中，比如说 hello.pl，然后将其传递给编译器，如下所示。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ perl6 hello.pl</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它将编译程序并立即执行。结果就是在屏幕上显示出想要的字符串。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Hello, World!</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意，输出结束时有新的一行。这就是内置的 <code>say</code> 函数的行为。另外，我们还可以使用另一种方法来打印输出，使用内置的 <code>print</code> 函数。与 <code>say</code> 不同的是，它不会在输出的结尾添加新的行，所以你必须通过添加特殊符号 <code>\n</code> 来完成。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">print "Hello, World!"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>注意，这次使用了一对双引号。与单引号相比，双引号对特殊字符（如 <code>\n</code>）的处理方式不同。在双引号内，<code>\n</code> 会转换为一个新的行字符。这在单引号中是不会发生的，在这种情况下，<code>\n</code> 将作为两个字符的序列出现在屏幕上，\ 和 n。</p>
+</div>
+<div class="paragraph">
+<p>因为程序只包含一行代码，所以没有必要用分号结束。不过，你可以一直这样做。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "Hello, World!";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个程序所产生的输出与之前完全一样。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_总结">1.13. 总结</h3>
+<div class="paragraph">
+<p>在这一章中，我们简单地了解了 Raku 是一种什么样的编程语言，以及它与它的姐妹语言 Perl 5 的区别。我们了解了 Raku 的历史，以及 Raku 编译器的不同项目。最后，我们安装了当今最好的编译工具 Rakudo Star，并创建了第一个 "Hello, World!" 程序。
+在下面的章节中，我们将研究如何组织程序中的代码。</p>
 </div>
 </div>
 </div>
