@@ -182,6 +182,11 @@ if (theme && theme !== "1") {
 <li><a href="#_生成好的错误信息">9.7. 生成好的错误信息</a></li>
 <li><a href="#_编写你自己的_grammar">9.8. 编写你自己的 Grammar</a></li>
 <li><a href="#_总结_8">9.9. 总结</a></li>
+<li><a href="#_代码点字符集和字节">9.10. 代码点、字符集和字节</a></li>
+<li><a href="#_数字">9.11. 数字</a></li>
+<li><a href="#_其它_unicode_属性">9.12. 其它 Unicode 属性</a></li>
+<li><a href="#_排序">9.13. 排序</a></li>
+<li><a href="#_总结_9">9.14. 总结</a></li>
 </ul>
 </li>
 </ul>
@@ -4606,130 +4611,250 @@ Functional programming offers techniques for extracting common logic into separa
 Raku supports functional programming by making functions first class, so you can pass them around as ordinary objects. It also offers closures (access to outer lexical variables from functions) and various shortcuts that make it more pleasant to write short functions.</p>
 </div>
 <div class="paragraph">
-<p>Every so often, I have to identify or research some Unicode characters. There’s a tool called uni1 in the Perl 5 distribution App::Uni,2 developed by Audrey Tang and Ricardo Signes.
-Let’s reimplement its basic functionality in a few lines of Raku code and use that as an occasion to talk about Unicode support in Raku.
-If you give it one character on the command line, it prints out a description of the following character:
-$ uni њ
-њ - U+0045a - CYRILLIC SMALL LETTER NJE
-If you give it a longer string instead, it searches in the list of Unicode character names and prints out the same information for each character whose description matches the search string:
-$ uni third|head -n3
-1⁄3 - U+02153 - VULGAR FRACTION ONE THIRD 2⁄3 - U+02154 - VULGAR FRACTION TWO THIRDS ↉ - U+02189 - VULGAR FRACTION ZERO THIRDS
-Each line corresponds to what Unicode calls a “code point,” which is usually a character on its own, but occasionally also something like U+00300-COMBINING GRAVE ACCENT, which, combined with a-U+00061-LATIN SMALL LETTER A makes the character à.
-Raku offers a method uniname in both the classes Str and Int that produces the Unicode code point name for a given character, either in its direct character</p>
+<p>每隔一段时间，我都要对一些 Unicode 字符进行识别或研究。在 Perl 5 发行版 App:::Uni<sup class="footnote">[<a id="_footnoteref_62" class="footnote" href="#_footnotedef_62" title="View footnote.">62</a>]</sup> 中有一个叫 uni<sup class="footnote">[<a id="_footnoteref_63" class="footnote" href="#_footnotedef_63" title="View footnote.">63</a>]</sup> 的工具，由 Audrey Tang 和 Ricardo Signes 开发。</p>
 </div>
 <div class="paragraph">
-<p>form, or in the form of its code point number. With that, the first part of uni’s
-desired functionality looks like this:
-#!/usr/bin/env raku
+<p>让我们用几行 Raku 代码来重新实现它的基本功能，并以此为契机来谈谈 Raku 中对 Unicode 的支持。</p>
+</div>
+<div class="paragraph">
+<p>如果你在命令行中给它一个字符，它就会打印出下面的字符描述。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ uni њ
+њ - U+0045a - CYRILLIC SMALL LETTER NJE</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果你给它一个较长的字符串，它将在 Unicode 字符名列表中搜索，并为每个描述与搜索字符串匹配的字符打印出相同的信息。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ uni third|head -n3
+1⁄3 - U+02153 - VULGAR FRACTION ONE THIRD
+2⁄3 - U+02154 - VULGAR FRACTION TWO THIRDS
+↉  - U+02189 - VULGAR FRACTION ZERO THIRDS</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>每一行都对应于 Unicode 所说的 "代码点"，通常是一个字符本身，但偶尔也会有像 U+00300-COMBINING GRAVE ACCENT 这样的字符，它与一个 U+00061-LATIN SMALL LETTER A 结合起来，就形成了字符 à。</p>
+</div>
+<div class="paragraph">
+<p>Raku 在 Str 和 Int 类中都提供了一个 <code>uniname</code> 方法，它可以为给定的字符生成 Unicode 代码点名称，可以是直接的字符形式，也可以是代码点编号的形式。 有了这个，第一部分 uni 所需的功能看起来是这样的:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
 use v6;
-sub format-codepoint(Int $codepoint) { sprintf "%s - U+%05x - %s\n",
+sub format-codepoint(Int $codepoint) {
+    sprintf "%s - U+%05x - %s\n",
         $codepoint.chr,
         $codepoint,
         $codepoint.uniname;
 }
-multi sub MAIN(Str $x where .chars == 1) { print format-codepoint($x.ord);
-}</p>
+
+multi sub MAIN(Str $x where .chars == 1) {
+    print format-codepoint($x.ord);
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Let’s look at it in action:</p>
+<p>让我们来看看实际操作:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ uni ø
+ø - U+000f8 - LATIN SMALL LETTER O WITH STROKE</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>$ uni ø
-ø - U+000f8 - LATIN SMALL LETTER O WITH STROKE
-The chr method turns a code point number into the character and ord is the reverse: in other words, from character to code point number.
-The second part, searching in all Unicode character names, works by brute- force enumerating all possible characters and searching through their uniname:
-multi sub MAIN($search is copy) { $search.=uc;
-for 1..0x10FFFF &#8594; $codepoint {
-if $codepoint.uniname.contains($search) {
+<p><code>chr</code> 方法将代码点编号转化为字符，<code>ord</code> 方法则相反：换句话说，从字符到代码点编号。</p>
+</div>
+<div class="paragraph">
+<p>第二部分，在所有 Unicode 字符名中进行搜索，其工作原理是通过粗暴地枚举所有可能的字符，并通过它们的 <code>uniname</code> 进行搜索:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN($search is copy) {
+    $search.=uc;
+    for 1..0x10FFFF -&gt; $codepoint {
+        if $codepoint.uniname.contains($search) {
             print format-codepoint($codepoint);
         }
-} }
-Since all character names are in uppercase, the search term is first converted to uppercase with $search.=uc, which is short for $search = $search.uc. By default, parameters are read-only, which is why its declaration here uses is
-copy to prevent that.
-Instead of this rather imperative style, we can also formulate it in a more functional style. We could think of it as a list of all characters, which we whittle</p>
+    }
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>down to those characters that interest us, to finally format them the way we
-want :
-multi sub MAIN($search is copy) { $search.=uc;
+<p>因为所有的字符名都是大写的，所以搜索项首先用 <code>$search.=uc</code> 来转换为大写，也就是 <code>$search = $search.uc</code> 的简称。默认情况下，参数是只读的，这也是为什么它的声明在这里使用了 <code>is copy</code> 来防止这种情况。</p>
+</div>
+<div class="paragraph">
+<p>我们也可以用一种更函数式的风格来表述它，而不是这种相当命令式的风格。我们可以把它看成是所有字符的列表，我们将其细化到我们感兴趣的字符，最后按照我们想要的方式格式化它们:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN($search is copy) {
+    $search.=uc;
     print (1..0x10FFFF).grep(*.uniname.contains($search))
                        .map(&amp;format-codepoint)
-.join;
-}
-To make it easier to identify (rather than search for) a string of more than one character, an explicit option can help disambiguate:
-multi sub MAIN($x, Bool :$identify!) {
-print $x.ords.map(&amp;format-codepoint).join;
-}
-Str.ords returns the list of code points that make up the string. With this
-multi candidate of sub MAIN in place, we can do something like
-$ uni --identify øre
+                       .join;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>为了更容易识别（而不是搜索）一个以上字符的字符串，一个显式选项可以帮助消除歧义:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN($x, Bool :$identify!) {
+    print $x.ords.map(&amp;format-codepoint).join;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>Str.ords</code> 返回组成该字符串的代码点列表。有了这个多候选的子例程 MAIN，我们可以做这样的事情，例如:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ uni --identify øre
 ø - U+000f8 - LATIN SMALL LETTER O WITH STROKE
 r - U+00072 - LATIN SMALL LETTER R
-e - U+00065 - LATIN SMALL LETTER E</p>
+e - U+00065 - LATIN SMALL LETTER E</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_代码点字符集和字节">9.10. 代码点、字符集和字节</h3>
+<div class="paragraph">
+<p>正如前面提到的，并非所有的代码点都是完全成熟的字符。或者换个说法，有些东西，我们在视觉上认为是一个字符，实际上是由几个代码点组成的。Unicode 将这种由一个基本字符和可能的几个组合字符组成的序列称为字符集。</p>
 </div>
 <div class="paragraph">
-<p>11.1 Code Points, Grapheme Clusters, and Bytes
-As alluded to in the preceding, not all code points are fully fledged characters
-on their own. Or put another way, some things that we visually identify as a single character are actually made up of several code points. Unicode calls such sequences of one base character and potentially several combining characters as a grapheme cluster.
-Strings in Raku are based on these grapheme clusters. If you get a list
-of characters in a string with $str.comb, or extract a substring with $str. substr(0, 4), match a regex against a string, determine the length, or do any other operation on a string, the unit is always the grapheme cluster. This best fits our intuitive understanding of what a character is and avoids accidentally tearing apart a logical character through a substr, comb, or similar operation:
-my $s = "ø\c[COMBINING TILDE]"; say $s; # Output: ø̃
-say $s.chars; # Output: 1</p>
+<p>Raku 中的字符串就是基于这些字符集。如果你用 <code>$str.comb</code> 得到一个字符串中的字符列表，或者用 <code>$str.substr.substr(0,4)</code> 提取一个子串，对一个字符串进行正则表达式匹配，确定长度，或者对一个字符串进行任何其他操作，那么这个单位总是字符集。这最符合我们对字符的直观理解，避免了通过 <code>substr</code>、<code>comb</code> 或类似的操作不小心撕开一个逻辑字符。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $s = "ø\c[COMBINING TILDE]"; say $s; # Output: ø̃
+say $s.chars; # Output: 1</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>The Uni3 type is akin to a string and represents a sequence of codepoints. It is useful in edge cases, but doesn’t support the same wealth of operations as Str.4 The typical way to go from Str to a Uni value is to use one of the NFC, NFD, NFKC, or NFKD methods, which yield a Uni value in the normalization form of the same name.
-Below the Uni level, you can also represent strings as bytes by choosing an encoding. If you want to get from the string to the byte level, call the encode5 method:
-my $bytes = 'Raku'.encode('UTF-8'); # utf8:0x&lt;50 65 72 6c 20 36&gt;
-UTF-8 is the default encoding and also the one Raku assumes when reading source files. The result is something that does the Blob6 role: you can access individual bytes with positional indexing, such as $bytes[0]. The decode method7 helps you convert a Blob to a Str.
-If you print out a Blob with say(), you get a string representation of the bytes in hexadecimal. Accessing individual bytes produces an integer, and thus will typically be printed in decimal.
-If you want to print out the raw bytes of a blob, you can use the write method of an I/O handle:
-$*OUT.write('Raku'.encode('UTF-8'));</p>
+<p>Uni<sup class="footnote">[<a id="_footnoteref_64" class="footnote" href="#_footnotedef_64" title="View footnote.">64</a>]</sup> 类型类似于字符串，代表了一个代码点的序列。它在边缘情况下很有用，但不支持与 Str<sup class="footnote">[<a id="_footnoteref_65" class="footnote" href="#_footnotedef_65" title="View footnote.">65</a>]</sup> 一样丰富的操作。从 Str 转为 Uni 值的典型方法是使用 NFC、NFD、NFKC 或 NFKD 方法中的一种，这些方法会产生同名的归一化形式的 Uni 值。</p>
 </div>
 <div class="paragraph">
-<p>11.2 Numbers
-Number literals in Raku aren’t limited to the Arabic digits we are so used to in the English-speaking part of the world. All Unicode code points that have the Decimal_Number (short Nd) property are allowed, so you can for example use Eastern Arabic numerals,8 or from many other scripts:
-say ٤٢; # 42
-The same holds true for string-to-number conversions:
-say "٤٢".Int; # 42</p>
+<p>在 Uni 值下面，你还可以通过选择一个编码来表示字符串作为字节。如果你想从字符串到字节级，可以调用 encode<sup class="footnote">[<a id="_footnoteref_66" class="footnote" href="#_footnotedef_66" title="View footnote.">66</a>]</sup> 方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $bytes = 'Raku'.encode('UTF-8'); # utf8:0x&lt;50 65 72 6c 20 36&gt;</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>For other numeric code points, you can use the unival method to obtain its
-numeric value:
-say "\c[TIBETAN DIGIT HALF ZERO]".unival;
-which produces the output –0.5 and also illustrates how to use a codepoint by
-name inside a string literal.
-11.3 Other Unicode Properties
-The uniprop method9 in type Str returns the general category by default: say "ø".uniprop; # Ll
-say "\c[TIBETAN DIGIT HALF ZERO]".uniprop; # No
-The return value needs some Unicode knowledge in order to make sense of it, or one could read Unicode’s Technical Report 4410 for the gory details. Ll stands for Letter_Lowercase, No is Other_Number. This is what Unicode calls the General Category, but you can ask the uniprop (or uniprop-bool method if you’re only interested in a boolean result) for other properties as well:
-say "a".uniprop-bool('ASCII_Hex_Digit');
-say "ü".uniprop-bool('Numeric_Type');
-say ".".uniprop("Word_Break");
-11.4 Collation
-# True
-# False
-# MidNumLet
-Sorting strings starts to become complicated when you’re not limited to ASCII characters. Raku’s sort method uses the cmp infix operator, which does a pretty standard lexicographic comparison based on the codepoint number.
-If you need to use a more sophisticated collation algorithm, Rakudo 2017.02 and newer offer the Unicode Collation Algorithm11 as an experimental feature:
-my @list = &lt;a ö ä Ä o ø&gt;;
-say @list.sort; # (a o Ä ä ö ø)
+<p>UTF-8 是默认的编码，也是 Raku 读取源文件时假定的编码。其结果是做 Blob<sup class="footnote">[<a id="_footnoteref_67" class="footnote" href="#_footnotedef_67" title="View footnote.">67</a>]</sup> 的作用：你可以通过位置索引访问单个字节，比如 <code>$bytes[0]</code>。<code>decode</code> 方法<sup class="footnote">[<a id="_footnoteref_68" class="footnote" href="#_footnotedef_68" title="View footnote.">68</a>]</sup>可以帮助你将 Blob 转换为 Str。</p>
+</div>
+<div class="paragraph">
+<p>如果你用 <code>say()</code> 打印出一个 <code>Blob</code>，你会得到一个十六进制字节的字符串表示。访问单个字节会产生一个整数，因此通常会以十进制的形式打印出来。</p>
+</div>
+<div class="paragraph">
+<p>如果你想打印出 blob 的原始字节，你可以使用 I/O 句柄的 <code>write</code> 方法:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$*OUT.write('Raku'.encode('UTF-8'));</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_数字">9.11. 数字</h3>
+<div class="paragraph">
+<p>Raku 中的数字字面值并不限于我们在英语国家习惯的阿拉伯数字。所有的 Unicode 代码点都允许使用 Decimal_Number(简称 Nd)属性，所以你可以使用东方阿拉伯数字<sup class="footnote">[<a id="_footnoteref_69" class="footnote" href="#_footnotedef_69" title="View footnote.">69</a>]</sup>、或其他许多脚本中的数字:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say ٤٢; # 42</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于字符串与数字之间的转换也是如此:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "٤٢".Int; # 42</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于其他的数字代码点，可以用 <code>unival</code> 方法获得其数值:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "\c[TIBETAN DIGIT HALF ZERO]".unival;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它输出了 <code>-0.5</code>，同时也说明了如何在字符串字面值中使用代码点的名称。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_其它_unicode_属性">9.12. 其它 Unicode 属性</h3>
+<div class="paragraph">
+<p>类型 Str 中的 `uniprop`<sup class="footnote">[<a id="_footnoteref_70" class="footnote" href="#_footnotedef_70" title="View footnote.">70</a>]</sup> 方法默认返回一般类别:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "ø".uniprop;                           # Ll
+say "\c[TIBETAN DIGIT HALF ZERO]".uniprop; # No</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>返回值需要一定的 Unicode 知识才能理解，或者可以阅读 Unicode 的技术报告44<sup class="footnote">[<a id="_footnoteref_71" class="footnote" href="#_footnotedef_71" title="View footnote.">71</a>]</sup>来了解一下具体的细节。Ll 代表 Letter_Lowercase，No 是 Other_Number。这就是 Unicode 所说的 General Category，但是你也可以用 uniprop（或者 uniprop-bool 方法，如果你只对布尔结果感兴趣的话）询问其他属性:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "a".uniprop-bool('ASCII_Hex_Digit'); # True
+say "ü".uniprop-bool('Numeric_Type');    # False
+say ".".uniprop("Word_Break");           # MidNumLet</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_排序">9.13. 排序</h3>
+<div class="paragraph">
+<p>当你不限于 ASCII 字符时，字符串的排序就开始变得复杂了。Raku 的排序方法使用 <code>cmp</code> 中缀运算符，它基于代码点编号做一个相当标准的按字母顺序的比较。</p>
+</div>
+<div class="paragraph">
+<p>如果您需要使用更复杂的整理算法，Rakudo 2017.02 和更新版本提供了 Unicode 排序算法<sup class="footnote">[<a id="_footnoteref_72" class="footnote" href="#_footnotedef_72" title="View footnote.">72</a>]</sup> 作为实验性功能。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @list = &lt;a ö ä Ä o ø&gt;;
+say @list.sort;                    # (a o Ä ä ö ø)
+
 use experimental :collation;
-say @list.collate; # (a ä Ä o ö ø)</p>
+say @list.collate;                 # (a ä Ä o ö ø)
+
+$*COLLATION.set(:tertiary(False));
+say @list.collate;                 # (a Ä ä o ö ø)</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>$*COLLATION.set(:tertiary(False));
-say @list.collate; # (a Ä ä o ö ø)
-The default sort considers any character with diacritics to be larger than ASCII characters, because that’s how they appear in the code point list. On the other hand, collate knows that characters with diacritics belong directly after their base character, which is not perfect in every language, but internally a good compromise.
-For Latin-based scripts, the primary sorting criterion is alphabetic, the secondary is diacritics, and the third is case. $*COLLATION.set(:tertiary(False)) thus makes .collate ignore case, so it doesn’t force lowercase characters to come before uppercase characters anymore.
-At the time of writing, language-specific collation has not yet been implemented in Raku.</p>
+<p>默认的 <code>sort</code> 认为任何带标点符号的字符都比 ASCII 字符大，因为它们在代码点列表中就是这样出现的。另一方面，<code>collate</code> 知道带标点符号的字符直接属于其基本字符之后，这在每一种语言中并不完美，但在内部是一个很好的折中方案。</p>
 </div>
 <div class="paragraph">
-<p>11.5 Summary</p>
+<p>对于基于拉丁文的脚本，主要的排序标准是字母表，其次的是变音符号，第三种是大小写。因此，<code>$*COLLATION.set(:tertiary(False))</code> 使得 <code>.collate</code> 忽略了大小写，不再强制小写字符排在大写字符之前。</p>
 </div>
 <div class="paragraph">
-<p>Raku takes languages other than English very seriously, and goes to great lengths to facilitate working with them and the characters they use.
-This includes basing strings on grapheme clusters rather than code points, support for non-Arabic digits in numbers, and access to large parts of the Unicode database through built-in methods.
-Occasionally I come across git repositories where I want to know how active they are and who the main developers are.
+<p>在写这篇文章的时候，Raku 还没有实现特定语言的排序。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_总结_9">9.14. 总结</h3>
+<div class="paragraph">
+<p>Raku 非常重视英语以外的其他语言，并不遗余力地帮助用户使用这些语言和它们所使用的字符。</p>
+</div>
+<div class="paragraph">
+<p>这包括将字符串建立在字符集而不是代码点上，支持数字中的非阿拉伯数字，以及通过内置方法访问 Unicode 数据库的大部分内容。</p>
+</div>
+<div class="paragraph">
+<p>Occasionally I come across git repositories where I want to know how active they are and who the main developers are.
 Let’s develop a script that plots the commit history, and explore how to use Python modules in Raku.
 12.1 Extracting the Stats
 We want to plot the number of commits by author and date. We can get this information easily by passing some options to git log:
@@ -5212,6 +5337,39 @@ you learn enough to perform most programming tasks in Raku, and more importantly
 </div>
 <div class="footnote" id="_footnotedef_61">
 <a href="#_footnoteref_61">61</a>. <a href="https://en.wikipedia.org/wiki/Comma-separated_values" class="bare">https://en.wikipedia.org/wiki/Comma-separated_values</a>
+</div>
+<div class="footnote" id="_footnotedef_62">
+<a href="#_footnoteref_62">62</a>. <a href="https://metacpan.org/release/App-Uni" class="bare">https://metacpan.org/release/App-Uni</a>
+</div>
+<div class="footnote" id="_footnotedef_63">
+<a href="#_footnoteref_63">63</a>. <a href="https://metacpan.org/pod/uni" class="bare">https://metacpan.org/pod/uni</a>
+</div>
+<div class="footnote" id="_footnotedef_64">
+<a href="#_footnoteref_64">64</a>. <a href="https://docs.raku.org/type/Uni" class="bare">https://docs.raku.org/type/Uni</a>
+</div>
+<div class="footnote" id="_footnotedef_65">
+<a href="#_footnoteref_65">65</a>. <a href="https://docs.raku.org/type/Str" class="bare">https://docs.raku.org/type/Str</a>
+</div>
+<div class="footnote" id="_footnotedef_66">
+<a href="#_footnoteref_66">66</a>. <a href="https://docs.raku.org/type/Str#method_encode" class="bare">https://docs.raku.org/type/Str#method_encode</a>
+</div>
+<div class="footnote" id="_footnotedef_67">
+<a href="#_footnoteref_67">67</a>. <a href="https://docs.raku.org/type/Blob.html" class="bare">https://docs.raku.org/type/Blob.html</a>
+</div>
+<div class="footnote" id="_footnotedef_68">
+<a href="#_footnoteref_68">68</a>. <a href="https://docs.raku.org/type/Blob.html#method_decode" class="bare">https://docs.raku.org/type/Blob.html#method_decode</a>
+</div>
+<div class="footnote" id="_footnotedef_69">
+<a href="#_footnoteref_69">69</a>. <a href="https://en.wikipedia.org/wiki/Eastern_Arabic_numerals" class="bare">https://en.wikipedia.org/wiki/Eastern_Arabic_numerals</a>
+</div>
+<div class="footnote" id="_footnotedef_70">
+<a href="#_footnoteref_70">70</a>. <a href="https://docs.raku.org/type/Str#(Cool)_method_uniprop" class="bare">https://docs.raku.org/type/Str#(Cool)_method_uniprop</a>
+</div>
+<div class="footnote" id="_footnotedef_71">
+<a href="#_footnoteref_71">71</a>. <a href="http://unicode.org/reports/tr44/#Properties" class="bare">http://unicode.org/reports/tr44/#Properties</a>
+</div>
+<div class="footnote" id="_footnotedef_72">
+<a href="#_footnoteref_72">72</a>. <a href="http://unicode.org/reports/tr10/" class="bare">http://unicode.org/reports/tr10/</a>
 </div>
 </div>
 
