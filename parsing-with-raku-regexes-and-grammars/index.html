@@ -2872,7 +2872,7 @@ say '"a,b","' ~~ / ^ \" &lt;-["]&gt;* \" $ /;         # Output: Nil</code></pre>
 <p>正则表达式没有这种模式, 所以你必须在正则表达式中使用双倍的反斜线来匹配字面的反斜线。</p>
 </div>
 <div class="paragraph">
-<p>说到带转义字符的引号, 现在有两种情况需要考虑在引号字符串中使用: 无意义的常规字符和转义序列。常规字符是指除了引号或反斜线以外的所有字符, 字符类 <code>&#8592;["\\]&gt;</code> 描述了这一点。转义序列是一个反斜杠, 后面是引号或反斜线。用正则表达式的术语来说, 那就是 <code>\\ &lt;["\\]&gt;</code>。许多数据格式也允许在反斜线后面加上其他字符, 在这种情况下, 序列简化为 <code>\\</code>。(记住, 点可以匹配任何字符)。</p>
+<p>说到带转义字符的引号, 现在有两种情况需要考虑在引号字符串中使用: 无意义的常规字符和转义序列。常规字符是指除了引号或反斜线以外的所有字符, 字符类 &lt;-["\\]&gt; 描述了这一点。转义序列是一个反斜杠, 后面是引号或反斜线。用正则表达式的术语来说, 那就是 \\ &lt;["\\]&gt;。许多数据格式也允许在反斜线后面加上其他字符, 在这种情况下, 序列简化为 <code>\\</code>。(记住, 点可以匹配任何字符)。</p>
 </div>
 <div class="paragraph">
 <p>将这两种情况结合在一起, 就可以得到这样的字符序列:</p>
@@ -3833,7 +3833,7 @@ say MathExpression.parse('2 + 4 * 5 * (1 + 3)');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果你想知道某个特定的数字是如何解析的, 可以按照路径回溯, 查找当前行上面少缩进的行, 比如说, 数字 1 是通过 token <code>number</code> 解析的,  从 <code>term</code> 调用, 从 <code>product</code> 调用, 以此类推。</p>
+<p>如果你想知道某个特定的数字是如何解析的, 可以按照路径回溯, 查找当前行上面少缩进的行, 比如说, 数字 1 是通过 token <code>number</code> 解析的, 从 <code>term</code> 调用, 从 <code>product</code> 调用, 以此类推。</p>
 </div>
 <div class="paragraph">
 <p>我们可以通过从 token <code>number</code> 中引发异常来验证:</p>
@@ -4123,22 +4123,22 @@ EOF</code></pre>
 <p>所以我们已经知道正则表达式 <code>key</code> 匹配了整行 <code>c:d\n</code>, 但是由于后面没有等号(<code>=</code>), token <code>keyval</code> 无法解析这一行。由于没有其他的正则表达式(特别是没有 <code>header</code>)与之匹配, 这就是匹配失败的地方。</p>
 </div>
 <div class="paragraph">
-<p>从这个例子中我们可以看到，尽管我们必须仔细查看它的输出来定位，但 <code>Grammar::Tracer</code> 可以让我们确定解析失败的位置。当你在终端上运行它时，你会自动得到彩色的输出，FAIL 是红色的，MATCH 是绿色的，而 token 名则是白色的(而不是通常的灰色)输出。这使得从底部(失败的匹配通常会留下红色的 FAIL)到后面的成功匹配，然后在匹配和失败之间的边界附近寻找。</p>
+<p>从这个例子中我们可以看到, 尽管我们必须仔细查看它的输出来定位, 但 <code>Grammar::Tracer</code> 可以让我们确定解析失败的位置。当你在终端上运行它时, 你会自动得到彩色的输出, FAIL 是红色的, MATCH 是绿色的, 而 token 名则是白色的(而不是通常的灰色)输出。这使得从底部(失败的匹配通常会留下红色的 FAIL)到后面的成功匹配, 然后在匹配和失败之间的边界附近寻找。</p>
 </div>
 <div class="paragraph">
-<p>由于调试会带来很大的心理负担，而且 <code>Grammar::Tracer</code> 的输出往往会迅速增长，所以一般建议将失败的输入减少到最小的样本。在前面描述的案例中，我们可以删除输入字符串的第一行，并保存十行 <code>Grammar::Tracer</code> 的输出来查看。</p>
+<p>由于调试会带来很大的心理负担, 而且 <code>Grammar::Tracer</code> 的输出往往会迅速增长, 所以一般建议将失败的输入减少到最小的样本。在前面描述的案例中, 我们可以删除输入字符串的第一行, 并保存十行 <code>Grammar::Tracer</code> 的输出来查看。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_解析空白和注释">9.5. 解析空白和注释</h3>
 <div class="paragraph">
-<p>如前所述，解析不重要的空白的常用方法是调用 <code>&lt;.ws&gt;</code>，通常是通过在规则中使用空白处来隐式地解析。默认的 <code>ws</code> 实现，<code>&lt;!ww&gt;s*</code>，适用于多种语言, 但它有其局限性。</p>
+<p>如前所述, 解析不重要的空白的常用方法是调用 <code>&lt;.ws&gt;</code>, 通常是通过在规则中使用空白处来隐式地解析。默认的 <code>ws</code> 实现, <code>&lt;!ww&gt;s*</code>, 适用于多种语言, 但它有其局限性。</p>
 </div>
 <div class="paragraph">
-<p>在很多文件格式和计算机语言中，有大量的空白空间会被 <code>&lt;.ws&gt;</code> 占据。这些文件包括 INI 文件(其中换行通常表示一个新的键/值对)、Python 和 YAML(其中缩进用于分组)、CSV(其中换行表示新的记录)和 Makefile(其中缩进需要使用制表符)。</p>
+<p>在很多文件格式和计算机语言中, 有大量的空白空间会被 <code>&lt;.ws&gt;</code> 占据。这些文件包括 INI 文件(其中换行通常表示一个新的键/值对)、Python 和 YAML(其中缩进用于分组)、CSV(其中换行表示新的记录)和 Makefile(其中缩进需要使用制表符)。</p>
 </div>
 <div class="paragraph">
-<p>在这些情况下，最好的做法是在自己的 grammar 中覆盖 <code>ws</code>，只匹配不重要的空白。让我们来看看第二个最小化的 INI 解析器，它是在上一节中描述的基础上独立开发的。</p>
+<p>在这些情况下, 最好的做法是在自己的 grammar 中覆盖 <code>ws</code>, 只匹配不重要的空白。让我们来看看第二个最小化的 INI 解析器, 它是在上一节中描述的基础上独立开发的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4179,10 +4179,10 @@ password: s3kr1t</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>请注意这个 grammar 是如何使用两个路径来解析空白的: 一个自定义的 <code>ws</code> token，它只匹配水平的空白和制表符，另一个单独的 token <code>eol</code>，它匹配(重要的)断行符。<code>eol</code> token 也会吞噬其他仅由空格组成的行。</p>
+<p>请注意这个 grammar 是如何使用两个路径来解析空白的: 一个自定义的 <code>ws</code> token, 它只匹配水平的空白和制表符, 另一个单独的 token <code>eol</code>, 它匹配(重要的)断行符。<code>eol</code> token 也会吞噬其他仅由空格组成的行。</p>
 </div>
 <div class="paragraph">
-<p>如果一种语言支持注释，而你不希望它们出现在你的解析树中，你可以在你的 <code>ws</code> 标记中，或者在 <code>eol</code>(或你的等价物)中解析它们。具体是哪一种，要看注释在什么地方被允许。在 INI 文件中，它们只允许在键/值对之后或单独的一行中出现，所以 <code>eol</code> 是最合适的地方。相比之下，SQL 允许在每一个允许空格的地方都有注释，所以在 <code>ws</code> 中解析它们是很自然的。</p>
+<p>如果一种语言支持注释, 而你不希望它们出现在你的解析树中, 你可以在你的 <code>ws</code> 标记中, 或者在 <code>eol</code>(或你的等价物)中解析它们。具体是哪一种, 要看注释在什么地方被允许。在 INI 文件中, 它们只允许在键/值对之后或单独的一行中出现, 所以 <code>eol</code> 是最合适的地方。相比之下, SQL 允许在每一个允许空格的地方都有注释, 所以在 <code>ws</code> 中解析它们是很自然的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4197,7 +4197,7 @@ token eol { [ [ &lt;[#;]&gt; \N* ]? \n ]+ }</code></pre>
 <div class="sect2">
 <h3 id="_保存状态">9.6. 保存状态</h3>
 <div class="paragraph">
-<p>一些比较有趣的数据格式和语言需要解析器来存储东西（至少是暂时的），以便能够正确解析它们。C 语言和其他受其语法启发的语言(如 C++ 和 Java)就是一个例子。这些语言允许变量声明的形式为变量=初始值，就像这样。</p>
+<p>一些比较有趣的数据格式和语言需要解析器来存储东西（至少是暂时的）, 以便能够正确解析它们。C 语言和其他受其语法启发的语言(如 C++ 和 Java)就是一个例子。这些语言允许变量声明的形式为变量=初始值, 就像这样。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4213,13 +4213,13 @@ token eol { [ [ &lt;[#;]&gt; \N* ]? \n ]+ }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>从这些例子中可以清楚地看出, 解析器必须有一个它所知道的所有类型的记录。因为用户也可以在代码文件中声明类型，所以解析器必须能够更新这个记录。</p>
+<p>从这些例子中可以清楚地看出, 解析器必须有一个它所知道的所有类型的记录。因为用户也可以在代码文件中声明类型, 所以解析器必须能够更新这个记录。</p>
 </div>
 <div class="paragraph">
-<p>许多语言还要求在引用符号(变量、类型和函数)之前必须声明这些符号。这也需要 grammar 来记录哪些符号已经声明了，哪些没有声明。这条记录了什么已经声明了什么（以及什么是类型或不是类型，可能还有其他的元信息）的记录被称为符号表。</p>
+<p>许多语言还要求在引用符号(变量、类型和函数)之前必须声明这些符号。这也需要 grammar 来记录哪些符号已经声明了, 哪些没有声明。这条记录了什么已经声明了什么（以及什么是类型或不是类型, 可能还有其他的元信息）的记录被称为符号表。</p>
 </div>
 <div class="paragraph">
-<p>与其解析完整的 C 语言编程语言，不如让我们考虑一个最小化的语言，它只允许对数字列表和变量进行赋值。</p>
+<p>与其解析完整的 C 语言编程语言, 不如让我们考虑一个最小化的语言, 它只允许对数字列表和变量进行赋值。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4245,7 +4245,7 @@ c = a, 5, b</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在我们要求只有在变量被赋值后才能使用，那么下面的输入将是无效的，因为 b 在第二行中没有声明，但在第二行中使用了 b。</p>
+<p>现在我们要求只有在变量被赋值后才能使用, 那么下面的输入将是无效的, 因为 b 在第二行中没有声明, 但在第二行中使用了 b。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4255,7 +4255,7 @@ b= 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>为了维护一个符号表，我们需要三个新的元素：符号表的声明，一些代码，当赋值被解析后，将变量名添加到符号表中，最后是检查我们在术语表中遇到变量时，是否已经声明了变量。</p>
+<p>为了维护一个符号表, 我们需要三个新的元素: 符号表的声明, 一些代码, 当赋值被解析后, 将变量名添加到符号表中, 最后是检查我们在术语表中遇到变量时, 是否已经声明了变量。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4283,10 +4283,10 @@ b= 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在 token <code>TOP</code> 中， <code>:my %<strong>SYMBOLS</code> 声明了一个变量。正则表达式中的声明以冒号(:)开始，以分号(;)结束。在这之间，它们看起来就像 Raku 中的普通声明一样。<code>%sigil</code> 表示变量是一个散列 - 字符串键与值之间的映射。而 <code></strong></code> 使它成为一个动态变量 - 一个不限于当前作用域的变量，也可以被当前作用域中调用的代码(或者是正则表达式，也是代码)看到。因为这是一个非常大的作用域，所以习惯上选择大写字母的变量。</p>
+<p>在 token <code>TOP</code> 中, <code>:my %<strong>SYMBOLS</code> 声明了一个变量。正则表达式中的声明以冒号(:)开始, 以分号(;)结束。在这之间, 它们看起来就像 Raku 中的普通声明一样。<code>%sigil</code> 表示变量是一个散列 - 字符串键与值之间的映射。而 <code></strong></code> 使它成为一个动态变量 - 一个不限于当前作用域的变量, 也可以被当前作用域中调用的代码(或者是正则表达式, 也是代码)看到。因为这是一个非常大的作用域, 所以习惯上选择大写字母的变量。</p>
 </div>
 <div class="paragraph">
-<p>第二部分，将符号添加到符号表中，在规则语句中发生。</p>
+<p>第二部分, 将符号添加到符号表中, 在规则语句中发生。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4299,13 +4299,13 @@ b= 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在花括号里面是普通(非正则表达式)的 Raku 代码，所以我们可以用它来处理 <code>%*SYMBOLS</code> 这个散列。表达式 <code>$&lt;identifier&gt;</code> 访问变量名称的捕获<sup class="footnote">[<a id="_footnoteref_53" class="footnote" href="#_footnotedef_53" title="View footnote.">53</a>]</sup>。因此，如果这条规则解析了变量 a，那么这条语句将 <code>%*SYMBOLS{ 'a'}</code> 设置为 <code>%*SYMBOLS{ 'a'}。= True</code>。</p>
+<p>在花括号里面是普通(非正则表达式)的 Raku 代码, 所以我们可以用它来处理 <code>%*SYMBOLS</code> 这个散列。表达式 <code>$&lt;identifier&gt;</code> 访问变量名称的捕获<sup class="footnote">[<a id="_footnoteref_53" class="footnote" href="#_footnotedef_53" title="View footnote.">53</a>]</sup>。因此, 如果这条规则解析了变量 a, 那么这条语句将 <code>%*SYMBOLS{'a'}</code> 设置为 <code>%*SYMBOLS{'a'}。= True</code>。</p>
 </div>
 <div class="paragraph">
-<p>代码块的位置是相关的。把它放在 <code>termlist</code> 调用之前，意味着在解析 <code>termlist</code> 时已经知道这个变量，所以它接受像 a = 2, a 这样的输入，如果我们先调用 <code>termlist</code>，这样的输入会被拒绝。</p>
+<p>代码块的位置是相关的。把它放在 <code>termlist</code> 调用之前, 意味着在解析 <code>termlist</code> 时已经知道这个变量, 所以它接受像 a = 2, a 这样的输入, 如果我们先调用 <code>termlist</code>, 这样的输入会被拒绝。</p>
 </div>
 <div class="paragraph">
-<p>说到拒绝，这部分发生在 token <code>variable</code> 中，<code>term</code> 现在调用新的 token <code>variable</code>(之前直接调用 <code>identifier</code>)，变量验证之前已经声明了标识符。</p>
+<p>说到拒绝, 这部分发生在 token <code>variable</code> 中, <code>term</code> 现在调用新的 token <code>variable</code>(之前直接调用 <code>identifier</code>), 变量验证之前已经声明了标识符。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4317,10 +4317,10 @@ token variable {
 </div>
 </div>
 <div class="paragraph">
-<p>你可能还记得在前面的例子中，<code>&lt;?{&#8230;&#8203;}&gt;</code> 执行了一段 Raku 代码，如果返回的值为 false，则解析失败。如果 <code>$&lt;identifier&gt;</code> 不在 <code>%*SYMBOLS</code> 中，就会出现这种情况。这时，token 的非回溯性就很重要了。如果被解析的变量是 abc，而变量 a 在 <code>%*SYMBOLS</code> 中，那么回溯将尝试对 <code>&lt;identifier&gt;</code> 进行更短的匹配，直到匹配到 a，然后成功。<sup class="footnote">[<a id="_footnoteref_54" class="footnote" href="#_footnotedef_54" title="View footnote.">54</a>]</sup></p>
+<p>你可能还记得在前面的例子中, <code>&lt;?{&#8230;&#8203;}&gt;</code> 执行了一段 Raku 代码, 如果返回的值为 false, 则解析失败。如果 <code>$&lt;identifier&gt;</code> 不在 <code>%*SYMBOLS</code> 中, 就会出现这种情况。这时, token 的非回溯性就很重要了。如果被解析的变量是 abc, 而变量 a 在 <code>%*SYMBOLS</code> 中, 那么回溯将尝试对 <code>&lt;identifier&gt;</code> 进行更短的匹配, 直到匹配到 a, 然后成功。<sup class="footnote">[<a id="_footnoteref_54" class="footnote" href="#_footnotedef_54" title="View footnote.">54</a>]</sup></p>
 </div>
 <div class="paragraph">
-<p>因为 <code>%*SYMBOLS</code> 是在 token <code>TOP</code> 中声明的，所以当你尝试从 grammar 之外调用 <code>TOP</code> 以外的规则时，你必须重复这个声明。如果没有像 <code>my %*SYMBOLS;</code> 这样的声明，那么像:</p>
+<p>因为 <code>%*SYMBOLS</code> 是在 token <code>TOP</code> 中声明的, 所以当你尝试从 grammar 之外调用 <code>TOP</code> 以外的规则时, 你必须重复这个声明。如果没有像 <code>my %*SYMBOLS;</code> 这样的声明, 那么像:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4341,10 +4341,10 @@ token variable {
 <p>许多编程语言都具有词法作用域的概念。作用域是指程序中可以看到一个符号的区域。如果作用域完全由文本的结构决定(而不是程序的运行时特征), 我们称作用域为词法范围。</p>
 </div>
 <div class="paragraph">
-<p>作用域通常是可以嵌套的。在一个作用域中声明的变量在这个作用域中，以及所有内部的、嵌套的作用域中都是可见的（除非一个内部的作用域声明了一个同名的变量，在这种情况下，内部的声明隐藏了外部的变量）。</p>
+<p>作用域通常是可以嵌套的。在一个作用域中声明的变量在这个作用域中, 以及所有内部的、嵌套的作用域中都是可见的（除非一个内部的作用域声明了一个同名的变量, 在这种情况下, 内部的声明隐藏了外部的变量）。</p>
 </div>
 <div class="paragraph">
-<p>回到列表和赋值的玩具语言，我们可以引入一对大括号来表示一个新的作用域，这样就有效了。</p>
+<p>回到列表和赋值的玩具语言, 我们可以引入一对大括号来表示一个新的作用域, 这样就有效了。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4368,7 +4368,7 @@ c = a, 5, b</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>为了在 grammar 中实现这些规则，我们可以利用一个重要的观察：grammar 中的动态作用域对应于它所解析的文本中的词法作用域。如果我们有一个正则表达式块，它既可以解析一个作用域的分界符，也可以解析该作用域内的东西，那么它的动态作用域就被限制在它所调用的所有正则表达式(直接和间接)，这也是它在输入文本中匹配的词法作用域。</p>
+<p>为了在 grammar 中实现这些规则, 我们可以利用一个重要的观察: grammar 中的动态作用域对应于它所解析的文本中的词法作用域。如果我们有一个正则表达式块, 它既可以解析一个作用域的分界符, 也可以解析该作用域内的东西, 那么它的动态作用域就被限制在它所调用的所有正则表达式(直接和间接), 这也是它在输入文本中匹配的词法作用域。</p>
 </div>
 <div class="paragraph">
 <p>下面我们来看看如何实现动态作用域。</p>
@@ -4410,13 +4410,13 @@ c = a, 5, b</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这个 grammar 的前一个版本有一些变化：规则 <code>statement</code> 已重命名为 <code>declaration</code>, ，新的规则语句解析声明或块。</p>
+<p>这个 grammar 的前一个版本有一些变化: 规则 <code>statement</code> 已重命名为 <code>declaration</code>, 新的规则语句解析声明或块。</p>
 </div>
 <div class="paragraph">
-<p>所有有趣的部分都发生在块规则中。这一行 <code>:my %*SYMBOLS = CALLERS::&lt;%*SYMBOLS&gt;;</code> ` 声明了一个新的动态变量 <code>%*SYMBOLS</code>，并以该变量的前一个值初始化它。<code>CALLERS::&lt;%*SYMBOLS&gt;</code> 通过调用者，以及调用者的调用者等查找变量 <code>%*SYMBOLS</code>，从而查找与外域对应的值。初始化会创建一个散列的副本，这样对一个副本的改变不会影响到其他副本。</p>
+<p>所有有趣的部分都发生在块规则中。这一行 <code>:my %*SYMBOLS = CALLERS::&lt;%*SYMBOLS&gt;;</code> 声明了一个新的动态变量 <code>%*SYMBOLS</code>, 并以该变量的前一个值初始化它。<code>CALLERS::&lt;%*SYMBOLS&gt;</code> 通过调用者, 以及调用者的调用者等查找变量 <code>%*SYMBOLS</code>, 从而查找与外域对应的值。初始化会创建一个散列的副本, 这样对一个副本的改变不会影响到其他副本。</p>
 </div>
 <div class="paragraph">
-<p>让我们来看看当这个 grammar 解析下面的输入时，会发生什么情况。</p>
+<p>让我们来看看当这个 grammar 解析下面的输入时, 会发生什么情况。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4427,16 +4427,16 @@ c = a, 5, b</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在前两行之后，<code>%*SYMBOLS</code> 的值为 <code>{a &#8658; True, b &#8658; True}</code>。当规则块解析第三行的开头的大括号时，它创建了一个 <code>%*SYMBOLS</code> 的副本。第四行的 <code>c</code> 的声明将 <code>c &#8658; True</code> 插入到 <code>%*SYMBOLS</code> 的副本中。在规则块解析了最后一行的结尾大括号之后，它成功地退出了，<code>%*SYMBOLS</code> 的副本也退出了范围。这样，我们就剩下了早期版本的 <code>%*SYMBOLS</code> (只有键 a 和 b)，当 <code>TOP</code> 退出时，它就会超出作用域。</p>
+<p>在前两行之后, <code>%*SYMBOLS</code> 的值为 {a =&gt; True, b =&gt; True}。当规则块解析第三行的开头的大括号时, 它创建了一个 <code>%*SYMBOLS</code> 的副本。第四行的 <code>c</code> 的声明将 <code>c &#8658; True</code> 插入到 <code>%*SYMBOLS</code> 的副本中。在规则块解析了最后一行的结尾大括号之后, 它成功地退出了, <code>%*SYMBOLS</code> 的副本也退出了作用域。这样, 我们就剩下了早期版本的 <code>%*SYMBOLS</code> (只有键 a 和 b), 当 <code>TOP</code> 退出时, 它就会超出作用域。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_通过显式符号表确定作用域">9.6.2. 通过显式符号表确定作用域</h4>
 <div class="paragraph">
-<p>使用动态变量来管理符号表通常效果很好，但在某些边缘情况下，使用更明确的方法效果更好。这样的边缘情况包括那些有很多符号，以至于复制成本过高，或者必须检查最上面的范围以上的符号表，或者由于其他原因复制符号表是不切实际的。</p>
+<p>使用动态变量来管理符号表通常效果很好, 但在某些边缘情况下, 使用更明确的方法效果更好。这样的边缘情况包括那些有很多符号, 以至于复制成本过高, 或者必须检查最上面的范围以上的符号表, 或者由于其他原因复制符号表是不切实际的。</p>
 </div>
 <div class="paragraph">
-<p>因此，你可以为你的符号表写一个类(在最简单的情况下，它使用一个数组作为作用域的堆栈)，并在进入和离开作用域时、声明变量时以及检查作用域中的变量是否为已知变量时，显式地调用它的方法。</p>
+<p>因此, 你可以为你的符号表写一个类(在最简单的情况下, 它使用一个数组作为作用域的堆栈), 并在进入和离开作用域时、声明变量时以及检查作用域中的变量是否为已知变量时, 显式地调用它的方法。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4493,16 +4493,16 @@ grammar VariableLists {
 </div>
 </div>
 <div class="paragraph">
-<p>类 <code>SymbolTable</code> 有一个私有数组属性 <code>@!scopes</code>，它被初始化为一个包含单个空散列 <code>{}</code> 的列表。进入一个作用域意味着在这个数组之上推送一个空的散列，离开作用域时，通过调用 <code>pop</code> 方法再次将其删除。变量声明将其名称添加到最上面的散列中，<code>@!scopes[*-1]</code>。</p>
+<p>类 <code>SymbolTable</code> 有一个私有数组属性 <code>@!scopes</code>, 它被初始化为一个包含单个空散列 <code>{}</code> 的列表。进入一个作用域意味着在这个数组之上推送一个空的散列, 离开作用域时, 通过调用 <code>pop</code> 方法再次将其删除。变量声明将其名称添加到最上面的散列中, <code>@!scopes[*-1]</code>。</p>
 </div>
 <div class="paragraph">
-<p>检查变量的存在，不能只考虑最上面的散列，因为变量是继承到内部作用域的。这里，我们按相反的顺序，从最内侧的作用域到最外侧的作用域，遍历所有的作用域。遍历的顺序对于一个简单的布尔检查来说并不相关，但是如果你需要查询与变量相关的信息，一定要坚持这个顺序来引用正确的变量。</p>
+<p>检查变量的存在, 不能只考虑最上面的散列, 因为变量是继承到内部作用域的。这里, 我们按相反的顺序, 从最内侧的作用域到最外侧的作用域, 遍历所有的作用域。遍历的顺序对于一个简单的布尔检查来说并不相关, 但是如果你需要查询与变量相关的信息, 一定要坚持这个顺序来引用正确的变量。</p>
 </div>
 <div class="paragraph">
-<p>Token <code>TOP</code> 创建一个类 <code>SymbolTable</code> 的新对象，声明调用 <code>declare</code> 方法，token 变量调用方法 <code>check-declared</code>。规则块在解析语句列表之前调用 <code>enter-scope</code>，之后调用 <code>left-scope</code>。这样做是可行的，但前提是语句列表能够解析成功；如果不能，规则块在调用 <code>leave-scope</code> 之前就会失败。</p>
+<p>Token <code>TOP</code> 创建一个类 <code>SymbolTable</code> 的新对象, 声明调用 <code>declare</code> 方法, token 变量调用方法 <code>check-declared</code>。规则块在解析语句列表之前调用 <code>enter-scope</code>, 之后调用 <code>left-scope</code>。这样做是可行的, 但前提是语句列表能够解析成功；如果不能, 规则块在调用 <code>leave-scope</code> 之前就会失败。</p>
 </div>
 <div class="paragraph">
-<p>Raku 对这种情况有一个安全特性：如果你在语句前缀上加上 LEAVE，Raku 会在例程退出时为你调用它，在所有可能的情况下(即使抛出异常)。由于 LEAVE <a href="https://docs.perl6.org/language/phasers">phasers</a><sup class="footnote">[<a id="_footnoteref_55" class="footnote" href="#_footnotedef_55" title="View footnote.">55</a>]</sup> 只在正则代码中起作用，而不在正则表达式中起作用，所以我们需要将正则表达式封装在方法中。</p>
+<p>Raku 对这种情况有一个安全特性: 如果你在语句前缀上加上 LEAVE, Raku 会在例程退出时为你调用它, 在所有可能的情况下(即使抛出异常)。由于 LEAVE <a href="https://docs.perl6.org/language/phasers">phasers</a><sup class="footnote">[<a id="_footnoteref_55" class="footnote" href="#_footnotedef_55" title="View footnote.">55</a>]</sup> 只在正则代码中起作用, 而不在正则表达式中起作用, 所以我们需要将正则表达式封装在方法中。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4520,26 +4520,26 @@ rule block_wrapped {
 </div>
 </div>
 <div class="paragraph">
-<p>现在，我们拥有与动态变量的方法一样的健壮性，并且有了更多的灵活性，可以在符号表中添加额外的代码，但代价是要付出更多的代码和更多的努力。</p>
+<p>现在, 我们拥有与动态变量的方法一样的健壮性, 并且有了更多的灵活性, 可以在符号表中添加额外的代码, 但代价是要付出更多的代码和更多的努力。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_总结_8">9.7. 总结</h3>
 <div class="paragraph">
-<p>Raku 的 grammar 是一种声明性的方式，可以写出递归下降的解析器。在没有回溯的情况下，它们是预测性的；在每一个点上，我们都知道该期待什么样的 token 表。</p>
+<p>Raku 的 grammar 是一种声明性的方式, 可以写出递归下降的解析器。在没有回溯的情况下, 它们是预测性的；在每一个点上, 我们都知道该期待什么样的 token 表。</p>
 </div>
 <div class="paragraph">
-<p>Grammar 的递归性质带来了左递归的风险，这种情况下，递归路径不消耗任何字符，因此会导致无限循环。</p>
+<p>Grammar 的递归性质带来了左递归的风险, 这种情况下, 递归路径不消耗任何字符, 因此会导致无限循环。</p>
 </div>
 <div class="paragraph">
-<p>尽管 grammar 的自上而下的性质，但编写 grammar 通常是自下而上：从词法分析开始，然后再往上解析更大的结构。</p>
+<p>尽管 grammar 的自上而下的性质, 但编写 grammar 通常是自下而上: 从词法分析开始, 然后再往上解析更大的结构。</p>
 </div>
 <div class="paragraph">
 <p>复杂的语言需要额外的状态来实现成功和精确的解析。我们已经看到了如何使用动态变量来保存状态。</p>
 </div>
 <div class="paragraph">
-<p>在 grammar 中，它们的作用域如何与输入中的词法作用域相对应，以及如何编写符号表并将其集成到 grammar 中。</p>
+<p>在 grammar 中, 它们的作用域如何与输入中的词法作用域相对应, 以及如何编写符号表并将其集成到 grammar 中。</p>
 </div>
 </div>
 </div>
@@ -5423,7 +5423,7 @@ say "a".uniprop('Block');          # Output: Basic Latin</code></pre>
 </div>
 <div class="paragraph">
 <p>你可能已经注意到 Raku 允许你在标识符中使用连字符或减号(<code>-</code>)，我之前在类名 S-Expression 中使用过，但在正则表达式 string_contents 的名称中没有使用。
-<code>-</code> 字符有一个潜在的歧义。<code>&#8592;alpha-hexdigit&gt;</code> 可能是一个被否定的字符类 alpha-hexdigit，或者匹配任何既不是 alpha 也不是 hexdigit 的东西。</p>
+<code>-</code> 字符有一个潜在的歧义。&lt;-alpha-hexdigit&gt; 可能是一个被否定的字符类 alpha-hexdigit，或者匹配任何既不是 alpha 也不是 hexdigit 的东西。</p>
 </div>
 <div class="paragraph">
 <p>Raku 消除了第一种可能性中的歧义，但完全避免这种情况似乎仍然值得</p>
