@@ -187,6 +187,9 @@ if (theme && theme !== "1") {
 <li><a href="#_其它_unicode_属性">9.12. 其它 Unicode 属性</a></li>
 <li><a href="#_排序">9.13. 排序</a></li>
 <li><a href="#_总结_9">9.14. 总结</a></li>
+<li><a href="#_扩展你的代码库">9.15. 扩展你的代码库</a></li>
+<li><a href="#_打包你的应用">9.16. 打包你的应用</a></li>
+<li><a href="#_结尾感想">9.17. 结尾感想</a></li>
 </ul>
 </li>
 </ul>
@@ -5106,49 +5109,109 @@ results in a type error.
 12.7 Summary
 We’ve explored several ways to represent commit occurrence in plots and utilized Inline::Python to interface with a Python-based plotting library.
 A bit of Raku metaprogramming allowed us to emulate different kinds of Python APIs pretty directly in Raku code, allowing a fairly direct translation of the original library’s documentation into Raku code.
-If you got this far reading this book, you likely have a solid grasp on the basics of Raku by now.
-The examples and discussions have touched on a wide variety of topics. We started with what Raku is, and how you can run Raku programs. Next up were the basic lexical structure of Raku programs, variables, control flow, and I/O. The more advanced topics include object orientation, persistence, regexes and grammars, Unicode support, concurrency, and finally the use of foreign libraries through Inline::Python.
-But there’s more to writing successful Raku code than learning about the language itself. In this final chapter, I want to hint at some topics that you might want to pursue to help you keep your code base maintainable, and to get it successfully in front of users.
-13.1 Scaling Your Code Base
-When your code base grows, it is often advisable to split it into separate files. You can create modules that contain your logic, organized by namespace and functionality. The scripts then tend to become shallow entry points that parse the command-line arguments, load the modules, and then call a function or method from a method to do the actual work.
-In this scenario, tests are written as separate scripts, usually in a directory named t, that load and test the same modules.
-The official documentation at <a href="https://docs.raku.org/language/modules" class="bare">https://docs.raku.org/language/modules</a> explains how you can write modules, as well as the standard directory layout and metadata that the module installer zef (and other tooling) relies on.
-As your code base grows, type annotations can help you to keep track
-of what arguments routines accept, and what they return. I tend to use type annotations mostly in signatures that are part of a public API. With “public” I mean routines that can be accessed from outside the module they are in. Inside the routines, I tend to omit them for brevity and flexibility.</p>
+如果你读了这本书，你很可能现在已经对 Raku 的基本知识有了扎实的掌握。</p>
 </div>
 <div class="paragraph">
-<p>To make type constraints more reusable, you can define create subset types.
-For example we’ve seen an example with an ad hoc–type constraint:
-multi sub MAIN(Str $date where /^ \d+ \- \d+ \- \d+ $ /) { &#8230;&#8203; } Instead you could create a subset type, and use it several times:
-subset DateStr of Str where /^ \d+ \- \d+ \- \d+ $ /; multi sub MAIN(DateStr $date) { &#8230;&#8203; }
-sub parse-date(DateStr) returns Date { &#8230;&#8203; }
-You can collect several of these types in a module, and import them
-wherever you need them.
-13.2 Packaging Your Application
-In order to deploy your application to users, you typically put it in some kind of self-contained archive or package.
-Independent of the desired distribution format, the starting point is always the directory layout and metadata that the zef module installer uses, which is described at <a href="https://docs.raku.org/language/modules" class="bare">https://docs.raku.org/language/modules</a>.
-Raku packaging is still in active development, so instead of giving recipes, I want to briefly mention some options that you might find worth exploring.
-13.2.1 Packaging as a Traditional Raku Module
-Traditionally, Raku modules and software are distributed as tar archives1 that contain the source code and some metadata, like a META6.json file.
-Users need to have a Raku binary and zef installed. They can then unpack the archive, go into the newly created directory, and install the software with zef install.
-If your software is open source, you can add it to the official Raku ecosystem by sending a pull request against the Raku ecosystem git repository on GitHub.2 In this pull request, you simply add a link to your META6.json file by editing
-the file META.list in said repository. After the pull request is accepted (which typically only takes a few hours or minutes), users can install your software through zef without having to download any package themselves.</p>
+<p>本书的例子和讨论涉及到了各种各样的主题。我们从什么是 Raku 开始，以及如何运行 Raku 程序。接下来是 Raku 程序的基本词法结构、变量、控制流和 I/O。更高级的主题包括面向对象、持久化、正则表达式和 grammar、Unicode 支持、并发，最后是通过 <code>Inline::Python</code> 使用外部库。</p>
 </div>
 <div class="paragraph">
-<p>13.2.2 Deploying with Docker
-Traditional Raku module distribution relies on a preinstalled Rakudo Raku compiler, which might not be available on all platforms.
-If you choose to distribute your application in a Docker image, you can base your image on the rakudo-star image, and simply zef install your application into the Docker container.
-This is the most basic Dockerfile that builds on a preexisting image and installs that Raku application from the current working directory:
-FROM rakudo-star:2017.04
+<p>但要写出成功的 Raku 代码，除了学习语言本身，还有更多的内容。在这最后一章中，我想暗示一些你可能想要学习的主题，以帮助你保持你的代码库的可维护性，并让它成功地呈现在用户面前。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_扩展你的代码库">9.15. 扩展你的代码库</h3>
+<div class="paragraph">
+<p>当你的代码库增长时，通常建议你把它拆成单独的文件。你可以创建包含你的逻辑的模块，按命名空间和功能来组织。然后这些脚本往往会成为浅层次的入口，解析命令行参数，加载模块，然后调用一个函数或方法来完成实际工作。</p>
+</div>
+<div class="paragraph">
+<p>在这种情况下，测试被写成单独的脚本，通常在一个名为 <code>t</code> 的目录下，加载和测试相同的模块。</p>
+</div>
+<div class="paragraph">
+<p>在 <a href="https://docs.raku.org/language/modules">https://docs.raku.org/language/modules</a> 的官方文档中解释了如何编写模块，以及模块安装程序 zef（和其他工具）所依赖的标准目录布局和元数据。</p>
+</div>
+<div class="paragraph">
+<p>随着你的代码库的增长，类型注解可以帮助你跟踪例程接受哪些参数，以及它们返回哪些参数。我倾向于在公共 API 的签名中使用类型注解。我所说的"公共"指的是可以从模块外访问的例程。在例程中，为了简洁和灵活，我倾向于省略它们。</p>
+</div>
+<div class="paragraph">
+<p>为了使类型约束更可重用，你可以定义创建 <code>subset</code> 类型。例如，我们已经看到了一个临时类型约束的例子。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN(Str $date where /^ \d+ \- \d+ \- \d+ $ /) { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>相反，你可以创建一个 <code>subset</code> 类型，并多次使用它:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">subset DateStr of Str where /^ \d+ \- \d+ \- \d+ $ /;
+
+multi sub MAIN(DateStr $date) { ... }
+sub parse-date(DateStr) returns Date { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你可以在一个模块中收集几个这样的类型，并在你需要的地方导入。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_打包你的应用">9.16. 打包你的应用</h3>
+<div class="paragraph">
+<p>为了向用户部署你的应用程序，你通常会把它放在某种自带的存档或包中。</p>
+</div>
+<div class="paragraph">
+<p>与所需的发布格式无关，起始点总是 zef 模块安装程序所使用的目录布局和元数据，在 <a href="https://docs.raku.org/language/modules">https://docs.raku.org/language/modules</a> 可以找到描述。</p>
+</div>
+<div class="paragraph">
+<p>Raku 打包还在积极开发中，所以我想简单地提到一些你可能会发现值得探索的选项，而不是给出食谱。</p>
+</div>
+<div class="sect3">
+<h4 id="_打包为传统的_raku_模块">9.16.1. 打包为传统的 Raku 模块</h4>
+<div class="paragraph">
+<p>传统上，Raku 模块和软件是以 tar 文件<sup class="footnote">[<a id="_footnoteref_73" class="footnote" href="#_footnotedef_73" title="View footnote.">73</a>]</sup>的形式发布的，其中包含源代码和一些元数据，如 META6.json 文件。</p>
+</div>
+<div class="paragraph">
+<p>用户需要安装了 Raku 二进制文件和 zef。然后他们可以解压压缩包，进入新创建的目录，用 <code>zef install</code> 安装软件。</p>
+</div>
+<div class="paragraph">
+<p>如果你的软件是开源的，你可以通过在 GitHub 上的 Raku 生态系统 git 仓库中发送一个 pull 请求，将其添加到官方的 Raku 生态系统中。拉取请求被接受后（通常只需要几小时或几分钟），用户可以通过 zef 安装您的软件，而不需要自己下载任何软件包。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_使用_docker_进行部署">9.16.2. 使用 Docker 进行部署</h4>
+<div class="paragraph">
+<p>传统的 Raku 模块分发依赖于预装的 Raku 编译器，这可能不是所有平台上都有的。</p>
+</div>
+<div class="paragraph">
+<p>如果你选择用 Docker 镜像分发你的应用，你可以基于 rakudo-star 镜像，只需 zef 将你的应用安装到 Docker 容器中即可。</p>
+</div>
+<div class="paragraph">
+<p>这是最基本的 Docker 文件，它建立在预先存在的映像上，并从当前工作目录中安装该 Raku 应用程序。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">FROM rakudo-star:2017.04
 COPY myapp /tmp/install
 RUN zef install /tmp/install
-ENTRYPOINT ["/usr/share/raku/site/bin/myapp"]
-Running docker build -t myapp . creates a Docker image myapp, which you can then distribute, with all dependencies included.
-13.2.3 Windows Installers
-The module App::InstallerMaker::WiX3 can help you create a Windows .msi installer that creates a build of Rakudo, zef, and your application. It requires the Microsoft Visual C++ build tools and WiX.4 You create a YAML file that describes your application, and then run the script make-raku-wix-installer to create a stand-alone .msi file.
-13.3 Closing Thoughts
-Raku is a big language, embedded in an even bigger community and ecosystem. A book such as this one cannot cover everything, but hopefully it helped
-you learn enough to perform most programming tasks in Raku, and more importantly, got you excited and motivated to explore, and to learn more.</p>
+ENTRYPOINT ["/usr/share/raku/site/bin/myapp"]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>运行 <code>docker build -t myapp .</code> 创建一个 Docker 镜像 myapp，然后你可以将其分发，并包含所有的依赖项。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_windows_安装程序">9.16.3. Windows 安装程序</h4>
+<div class="paragraph">
+<p>模块 App::InstallerMaker::WiX<sup class="footnote">[<a id="_footnoteref_74" class="footnote" href="#_footnotedef_74" title="View footnote.">74</a>]</sup>可以帮助你创建一个 Windows 的 .msi 安装程序，它可以创建一个 Rakudo、zef和你的应用程序的构建。它需要 Microsoft Visual C++ 构建工具和 WiX。<sup class="footnote">[<a id="_footnoteref_75" class="footnote" href="#_footnotedef_75" title="View footnote.">75</a>]</sup>，你可以创建一个描述您的应用程序的 YAML 文件，然后运行脚本 <code>make-raku-wix-installer</code> 来创建一个独立的 .msi 文件。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_结尾感想">9.17. 结尾感想</h3>
+<div class="paragraph">
+<p>Raku 是一门很大的语言，嵌入了一个更大的社区和生态系统。一本这样的书不可能涵盖所有的东西，但希望它能帮助你学习到足够多的编程任务，更重要的是，它能让你兴奋并有动力去探索和学习更多的东西。</p>
 </div>
 </div>
 </div>
@@ -5370,6 +5433,15 @@ you learn enough to perform most programming tasks in Raku, and more importantly
 </div>
 <div class="footnote" id="_footnotedef_72">
 <a href="#_footnoteref_72">72</a>. <a href="http://unicode.org/reports/tr10/" class="bare">http://unicode.org/reports/tr10/</a>
+</div>
+<div class="footnote" id="_footnotedef_73">
+<a href="#_footnoteref_73">73</a>. <a href="https://github.com/perl6/ecosystem" class="bare">https://github.com/perl6/ecosystem</a>
+</div>
+<div class="footnote" id="_footnotedef_74">
+<a href="#_footnoteref_74">74</a>. <a href="https://modules.raku.org/dist/App::InstallerMaker::WiX" class="bare">https://modules.raku.org/dist/App::InstallerMaker::WiX</a>
+</div>
+<div class="footnote" id="_footnotedef_75">
+<a href="#_footnoteref_75">75</a>. <a href="http://wixtoolset.org/releases/" class="bare">http://wixtoolset.org/releases/</a>
 </div>
 </div>
 
