@@ -241,7 +241,7 @@ if (theme && theme !== "1") {
 <li><a href="#_grammars">12. Grammars</a>
 <ul class="sectlevel2">
 <li><a href="#_创建_grammar">12.1. 创建 grammar</a></li>
-<li><a href="#_使用_rules_和_tokens">12.2. 使用 rules 和 tokens</a></li>
+<li><a href="#_使用_rule_和_token">12.2. 使用 rule 和 token</a></li>
 <li><a href="#_使用_actions">12.3. 使用 actions</a></li>
 <li><a href="#_使用抽象语法树">12.4. 使用抽象语法树</a></li>
 <li><a href="#_使用_action_类">12.5. 使用 action 类</a></li>
@@ -13418,10 +13418,10 @@ say $date;</code></pre>
 <h2 id="_grammars">12. Grammars</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Raku 带来了一个非常有用和强大的机制来实现正则表达式—grammars。</p>
+<p>Raku 带来了一个非常有用和强大的机制来实现正则表达式—grammar。</p>
 </div>
 <div class="paragraph">
-<p>Grammars 是 Raku 中的一种迷你语言, 允许你描述其他语言的规则(包括 Raku 本身)。使用 grammars, 创建解析器、翻译器或领域特定语言(DSL)或编程语言的编译器, 甚至是人类语言的解析器都非常容易。</p>
+<p>Grammar 是 Raku 中的一种迷你语言, 允许你描述其他语言的规则(包括 Raku 本身)。使用 grammar, 创建解析器、翻译器或领域特定语言(DSL)或编程语言的编译器, 甚至是人类语言的解析器都非常容易。</p>
 </div>
 <div class="paragraph">
 <p>在本章中, 我们将通过为其创建 Raku 编译器的子集来学习 Raku 的 grammar。本章将介绍以下主题:</p>
@@ -13457,10 +13457,10 @@ say $date;</code></pre>
 <div class="sect2">
 <h3 id="_创建_grammar">12.1. 创建 grammar</h3>
 <div class="paragraph">
-<p>与正则表达式一样, grammar 定义了一些从给定文本中提取信息的规则。一个典型的正则表达式应用是在文本块中找到片段并将它们分成有意义的片段, 例如, 查找电子邮件或检查其格式是否正确。 Grammar 有一个更大的目标 - 他们的任务通常是阅读全文并理解它所有的内容。例如, 如果将 grammar 应用于以某些编程语言编写的源代码 , 则 grammar 必须检查其有效性并创建该程序的语法树。这种差异仍然是一种约定 - grammar 可以解析小文本部分, 正如正则表达式可用于分析大文本部分。</p>
+<p>与正则表达式一样, grammar 定义了一些规则来从给定的文本中提取信息。正则表达式的一个典型应用是在文本块中找到片段, 并将其分分割成有意义的片段, 例如, 查找电子邮件或检查其格式是否正确。 Grammar 有一个更大的目标 - 他们的任务通常是阅读整个文本并理解所有的内容。例如, 如果将 grammar 应用于以某种编程语言编写的源代码 , grammar 必须检查其有效性, 并创建该程序的语法树。这种区别仍然是一种约定 - grammar 可以解析小的文本部分, 就像正则表达式可以用来分析大的文本部分一样。</p>
 </div>
 <div class="paragraph">
-<p>Raku 中 grammar 的语法就像定义一个类。grammar 从 <strong>grammar</strong> 关键字开始:</p>
+<p>Raku 中 grammar 的语法就像定义一个类一样。Grammar 从 <strong>grammar</strong> 关键字开始:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13469,10 +13469,10 @@ say $date;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此 grammar 为空, 无法应用于文本。我们必须添加起始规则, 它将是 grammar 的入口点。</p>
+<p>这个 grammar 是空的, 无法应用到文本中。我们必须添加起始规则, 这将是 grammar 的入口点。</p>
 </div>
 <div class="paragraph">
-<p>Grammar 包含 <strong>rule</strong> 和 <strong>token</strong>。我们将在本章中更详细地讨论它们, 但目前我们需要创建主规则, 这是 grammar 的应用于文本的第一条规则:</p>
+<p>Grammar 包含了 <strong>rule</strong> 和 <strong>token</strong>。我们将在本章中详细讨论它们, 但目前我们需要创建主规则, 也就是 grammar 应用于文本的第一个规则:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13484,10 +13484,10 @@ say $date;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如你所见, 规则类似于类中的方法。与方法不同, 规则在主体块中包含正则表达式。此示例中的 <code>TOP</code> 规则匹配模式 <code>.*</code>,  它实际上匹配任何东西。现在这已经足够了, 首先我们必须创建一个最小的 grammar, 以了解如何将其应用于文本。<code>TOP</code> 是预定义的名字, 你可以将其赋予 grammar 中的第一条规则。</p>
+<p>如你所见, 规则类似于类中的方法。与方法不同的是, 规则在其主体块中包含了正则表达式。此示例中的 <code>TOP</code> 规则匹配了模式 <code>.*</code>,  它实际上匹配了所有的东西。这就足够了, 首先我们要创建一个最小的 grammar, 看看如何将其应用到文本上。<code>TOP</code> 是一个预定义的名字, 你可以给 grammar 中的第一个规则起一个名字。</p>
 </div>
 <div class="paragraph">
-<p>正如本章开头所提到的, 我们将为小型 Raku 子集(为简单起见, 我们将忽略真实 Raku grammar 中的一些边缘情况)创建一个解析器。因此, 我们 grammar 要解析的第一个文本, 可能如下所示:</p>
+<p>正如本章开头提到的, 我们将为Raku 的小型子集创建一个解析器(为了简单起见, 我们将忽略真正的 Raku grammar 中的一些边缘情况)。因此, 我们的第一个 grammar 要解析的文本可能是这样的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13495,7 +13495,7 @@ say $date;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>要使用我们的 grammar <code>G</code> 解析 <code>$text</code>, 请在其上调用 <code>parse</code> 方法:</p>
+<p>要使用我们的 grammar <code>G</code> 来解析 <code>$text</code>, 可以调用 <code>parse</code> 方法对其进行解析:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13504,7 +13504,7 @@ say $result;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>结果是一个复杂的 grammar 对象, 其中包含所匹配的文本。在我们这个简单的例子中, <code>TOP</code> 规则消耗整个文本, 字符串化的值如下所示:</p>
+<p>其结果是一个复杂的 grammar 对象, 其中包含了被匹配的文本。在我们这个简单的例子中, <code>TOP</code> 规则消耗了整个文本, 字符串化的值看起来像这样:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13512,15 +13512,15 @@ say $result;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>应用 grammar 至少有三个目标:</p>
+<p>应用一个 grammar 至少有三个目标:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>检查源文本是否在文法上正确。</p>
+<p>检查源文本在文法上是否正确。</p>
 </li>
 <li>
-<p>将文本拆分为语法元素。</p>
+<p>将文本分割成语法元素。</p>
 </li>
 <li>
 <p>根据语言规则执行 action。</p>
@@ -13528,12 +13528,12 @@ say $result;</code></pre>
 </ol>
 </div>
 <div class="paragraph">
-<p>在本章中, 我们将编写所有这三个部分, 但我们的第一个任务是学习如何检查文本是否与 grammar 一致。</p>
+<p>在本章中, 我们将对这三个部分进行编程, 但我们的第一个任务是学习如何检查文本是否与 grammar 匹配。</p>
 </div>
 <div class="sect3">
 <h4 id="_匹配_grammar">12.1.1. 匹配 grammar</h4>
 <div class="paragraph">
-<p>我们的示例程序将在本章的其余部分逐行解析, 看起来像这样:</p>
+<p>我们的示例程序将在后面的章节中逐行解析, 看起来是这样的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13551,10 +13551,10 @@ say $z; # 10</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这是一个有效的 Raku 程序, 我们必须创建解析和执行它的 grammar。</p>
+<p>这是一个有效的 Raku 程序, 我们必须创建解析和执行这个程序的 grammar。</p>
 </div>
 <div class="paragraph">
-<p>让我们将参考程序保存在一个单独的文件中, 比如, <code>refer.pl</code>, 并使用 <code>parsefile</code> 方法而不是 <code>parse</code> 方法:</p>
+<p>让我们把参考程序保存在一个单独的文件中, 比如说 <code>refer.pl</code>, 使用 <code>parsefile</code> 方法而不是 <code>parse</code> 方法来解析它:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13563,7 +13563,7 @@ say $result;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此程序打印文件的全部内容, 因为此 <code>TOP</code> 规则仍然匹配它得到的一切。为了确保 grammar 解析整个文件, 让我们添加锚点以绑定文本的开头和结尾:</p>
+<p>这个程序打印了整个文件的内容, 因为此 <code>TOP</code> 规则仍然匹配它得到的一切。为了确保 grammar 解析整个文件, 让我们添加锚点来绑定文本的开头和结尾:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13587,10 +13587,10 @@ say $result;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>下一个子目标是单独解析代码的每一行。确切地说, grammar 不应该解析源文本的行, 而是解析用分号分隔的指令。解析器不应该依赖于代码添加了多少空格和换行符。</p>
+<p>下一个子目标是分别解析每一行代码。准确地说, grammar 不应该解析源文本的行, 而应该解析用分号分隔的指令。解析器不应该依赖于代码中添加了多少个空格和换行符。</p>
 </div>
 <div class="paragraph">
-<p>现在我们必须使用 grammar 形式化刚才所说的内容。源程序是一个用分号分隔的语句的列表。让我们修改 <code>TOP</code> 规则来表达:</p>
+<p>现在我们要用 grammar 来形式化刚才所说的内容。源程序是一个用分号分隔的语句列表。让我们修改一下 <code>TOP</code> 规则来表达:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13612,7 +13612,7 @@ say $x;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果你查看打印 <code>$result</code> 的程序的输出, 你会看到整个文件的内容后跟单独的指令, 如下所示:</p>
+<p>如果你查看打印 <code>$result</code> 的程序的输出, 你会看到整个文件的内容, 后面是像这样的单独指令:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13627,10 +13627,10 @@ say $x;⌋;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>输出有点乱, 但我们可以看到源文件中的每个语句都被放到了 <code>$result</code> 的一个单独元素中, 类似于 <strong>Match</strong> 对象包含正则表达式匹配字符串的一部分的结果。</p>
+<p>输出结果有点乱, 但我们可以看到, 源文件中的每一条语句都被放到了 <code>$result</code> 中的一个单独的元素中, 这与 <strong>Match</strong> 对象是如何包含匹配字符串与正则表达式匹配的部分相似。</p>
 </div>
 <div class="paragraph">
-<p>提取的片段包含前导空格, 我们可以在 grammar 中允许他们, 很容易地抑制它们:</p>
+<p>提取的片段包含了前导空格, 我们可以通过在 grammar 中允许它们的存在, 从而很容易地将其抑制:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13642,7 +13642,7 @@ say $x;⌋;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>为避免不必要的捕获, 使用方括号。现在输出看起来更清晰:</p>
+<p>为避免不必要的捕获, 使用了方括号。现在的输出看起来更清晰了:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13655,7 +13655,7 @@ say $x;⌋
 </div>
 </div>
 <div class="paragraph">
-<p>引用程序的所有语句都被捕获; 我们只需要让 grammar 忽略注释:</p>
+<p>引用程序中的所有语句都被捕获了; 我们只需要让 grammar 忽略注释就可以了:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13667,20 +13667,20 @@ say $x;⌋
 </div>
 </div>
 <div class="paragraph">
-<p>正则表达式的附加部分 <code>['#' &#8592;[\n]&gt;* ]?</code> 找到可选的以井字符开始, 直到行尾(换句话说, 它们包含非 <code>\n</code> 字符)的子字符串。</p>
+<p>正则表达式的附加部分 <code>['<mark>' &#8592;[\n]&gt;* ]?</code> 可以找到以 <code></mark></code> 字符开头的可选子字符串, 并一直到行尾(换句话说, 它们包含非 <code>\n</code> 字符)。</p>
 </div>
 <div class="paragraph">
-<p><code>TOP</code> 规则的正则表达式变得越来越复杂, 因此是时候将它分成几部分了, 以使整个 grammar 更具可读性和可维护性。</p>
+<p><code>TOP</code> 规则的正则表达式越来越复杂, 所以是时候把它分成几个部分了, 以使整个 grammar 更具可读性和可维护性。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_使用_rules_和_tokens">12.2. 使用 rules 和 tokens</h3>
+<h3 id="_使用_rule_和_token">12.2. 使用 rule 和 token</h3>
 <div class="paragraph">
-<p>Raku 中的 grammar 提供了一种将 grammar 元素分成几部分的非常有用的方法。让我们用它来澄清 grammar 元素。</p>
+<p>Raku 中的 grammar 提供了一种非常有用的方法, 可以将 grammar 元素分成若干部分。让我们用它来说明 grammar 元素。</p>
 </div>
 <div class="paragraph">
-<p>复杂的正则表达式 <code>\s* (.<strong>? ';') ['#' &#8592;[\n]&gt;</strong> ]?</code> 包含两个部分 - 提取语句的正则表达式和用于注释的正则表达式。我们将它们提取为单独的规则。 单个 <strong>rule</strong> 描述了一小段 grammar, 可以引用其他规则。检查以下示例:</p>
+<p>复杂的正则表达式 \s* (.*? ';') ['#' &lt;-[\n]&gt;* ]? 包含两个部分 - 提取语句的正则表达式和用于注释的正则表达式。我们将它们提取成单独的规则。 单个 <strong>rule</strong> 描述了 grammar 中的一小部分, 可以引用其他规则。请看下面的例子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13700,10 +13700,10 @@ say $x;⌋
 </div>
 </div>
 <div class="paragraph">
-<p>现在 <code>TOP</code> 规则更加清晰, 你会立即看到该程序是一个语句序列, 其后带有可选注释(我们的 grammar 不允许不带语句的注释)。</p>
+<p>现在 <code>TOP</code> 规则更加清晰了, 你马上就能看到程序是一连串的语句, 后面有可选的注释(我们的 grammar 不允许没有语句的注释)。</p>
 </div>
 <div class="paragraph">
-<p>到目前为止, grammar 完全解析了 <code>refer.pl</code> 文件, 但我们可以更进一步。我们可以提取语句, 接下来的任务就是理解它们。现在让我们按行解析该文件, 添加新行以及可以解析语句的 grammar 规则。 你可以通过将源文本嵌入到我们的主文件中来实现:</p>
+<p>到目前为止, grammar 已经完全解析了 <code>refer.pl</code> 文件, 但我们可以更进一步。我们可以提取语句, 接下来的任务是理解它们。现在让我们逐行解析文件, 添加新的行和可以解析语句的 grammar 规则一起加入到文件中。 你可以通过将源文本嵌入到我们的主文件中来完成:</p>
 </div>
 <div class="listingblock">
 <div class="content">
