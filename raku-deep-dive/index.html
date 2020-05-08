@@ -242,8 +242,8 @@ if (theme && theme !== "1") {
 <ul class="sectlevel2">
 <li><a href="#_创建_grammar">12.1. 创建 grammar</a></li>
 <li><a href="#_使用_rule_和_token">12.2. 使用 rule 和 token</a></li>
-<li><a href="#_使用_actions">12.3. 使用 actions</a></li>
-<li><a href="#_使用抽象语法树">12.4. 使用抽象语法树</a></li>
+<li><a href="#_使用_action">12.3. 使用 action</a></li>
+<li><a href="#_使用抽象语法树属性">12.4. 使用抽象语法树属性</a></li>
 <li><a href="#_使用_action_类">12.5. 使用 action 类</a></li>
 <li><a href="#_完整的程序">12.6. 完整的程序</a></li>
 <li><a href="#_总结_15">12.7. 总结</a></li>
@@ -13716,7 +13716,7 @@ say $result;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>第一行 <code>my $x</code> 包含一个变量声明语句。当我们开始 grammar 时, 它只能解析变量声明, 这里是修改后的 <code>statement</code> 规则:</p>
+<p>第一行 <code>my $x</code> 包含一个变量声明语句。由于我们从只能解析变量声明的 grammar 开始, 这里是修改后的 <code>statement</code> 规则:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13726,7 +13726,7 @@ say $result;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>变量声明是一系列的 <code>my</code> 关键字和变量:</p>
+<p>变量声明是由 <code>my</code> 关键字和变量组成的序列:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13736,10 +13736,10 @@ say $result;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此 <code>variable-declaration</code> 规则包含两个部分 - 文字字符串 <code>'my'</code> 和对另一个规则 <code>&lt;variable&gt;</code> 的引用。关于这两部分之间的任何空格我们没有明说。Raku 中的规则关心那些空格。因此, 规则可以解析在 <code>my</code> 和变量之间包含一个, 两个或多个空格的变量声明。 即使是以下字符串也可以正确解析 - <code>my$x</code>。</p>
+<p>这个 <code>variable-declaration</code> 规则包含两个部分, 一个是字面字符串 <code>'my'</code>, 另一个是对规则 <code>&lt;variable&gt;</code> 的引用。我们没有明文规定这两部分之间的空格。Raku 中的规则会关心这些空格。因此, 规则可以解析在 <code>my</code> 和变量之间包含一个、两个或多个空格的变量声明。 即使是以下字符串也可以被正确解析 - <code>my$x</code>。</p>
 </div>
 <div class="paragraph">
-<p>为了描述变量, 我们创建一个 <strong>token</strong>。token 就像规则但他们的元素之间不允许空格。所以有效的变量名应该是不带空格的字符串:</p>
+<p>为了描述一个变量, 我们创建一个 <strong>token</strong>。token 就像 <strong>rule</strong> 一样, 但不允许元素之间有空格。所以一个有效的变量名应该是一个没有空格的字符串:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13749,7 +13749,7 @@ say $result;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>sigil 要么是标量 sigil <code>$</code>, 要么是数组 sigil <code>@</code>。虽然在本章开头的示例程序中我们没有任何数组, 让我们准备将来要使用的 grammar:</p>
+<p>sigil 既可以是标量 sigil <code>$</code>, 也可以是数组 sigil <code>@</code>。虽然在本章开头的示例程序中我们没有数组, 但让我们在后面要用的 grammar 中先准备一下, 以便在以后的工作中使用这些标量和数组:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13769,10 +13769,10 @@ say $result;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在该 grammar 描述的语言中, 标识符是以字母开头的字母数字字符序列。</p>
+<p>在这个 grammar 描述的语言中, 标识符是以字母开头的字母数字字符序列。</p>
 </div>
 <div class="paragraph">
-<p>使用先前列出的 rule 和 token, grammar 解析我们的引用程序的第一行, 它看起来长这样:</p>
+<p>使用前面列出的 <strong>rule</strong> 和 <strong>token</strong>, grammar 解析我们的引用程序的第一行, 它看起来长这样:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13788,10 +13788,10 @@ say $result;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>输出显示该程序的分析树。缩进有助于更好地理解结构。在顶层, 我们看到程序 <code>my $x</code> 包含一个语句 <code>my $x</code>, 这是一个变量声明。变量是 <code>$x</code>, 它包含一个符号 <code>$</code> 和一个以字母 x 开头的标识符 <code>x</code>。</p>
+<p>输出显示了这个程序的解析树。缩进有助于更好地理解结构。在最上层, 我们看到程序 <code>my $x</code> 包含了一个语句 <code>my $x</code>, 它是一个变量声明。变量是 <code>$x</code>, 它包括一个符号 <code>$</code> 和一个以字母 x 开头的标识符 <code>x</code>。</p>
 </div>
 <div class="paragraph">
-<p>对于更长的变量名, 例如 <code>@array</code>, 解析树将包含与 <code>identifier</code> 规则的 <code>&lt;alnum&gt;*</code> 部分匹配的所有字母:</p>
+<p>对于更长的变量名, 比如 <code>@array</code>, 解析树将包含所有与 <code>identifier</code> 规则中的 <code>&lt;alnum&gt;*</code> 部分匹配的字母:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13807,7 +13807,7 @@ say $result;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>让我们解析文件的第二行, 其中包含赋值:</p>
+<p>让我们解析文件的第二行, 其中包含了赋值:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13818,7 +13818,7 @@ END</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>assignment</code> 也是一个 <code>statement</code>, 因此要解析它, <strong>statement</strong> 规则必须知道 <strong>assignment</strong> 是什么:</p>
+<p><code>assignment</code> 也是一个 <code>statement</code>, 所以要解析它, <strong>statement</strong> 规则必须知道什么是 <strong>assignment</strong>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13832,7 +13832,7 @@ END</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>新规则包含由垂直条分隔的备选列表; 一对方括号将备选项分组而不捕获文本。实际上, 第一个垂直条不是必须的, 但加上它可以使代码看起来更结构化。</p>
+<p>新的规则包含了由竖直条分隔的备选项列表; 一对方括号将备选项分组, 但不捕获文本。实际上, 第一个竖直条不是必须的, 但加上它可以使代码看起来更有条理。</p>
 </div>
 <div class="paragraph">
 <p><code>assignment</code> 规则的第一种方法仅包括数值赋值:</p>
@@ -13851,7 +13851,7 @@ token number {
 </div>
 </div>
 <div class="paragraph">
-<p>此时, grammar 解析以下程序:</p>
+<p>这时, grammar 解析的程序如下:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13860,7 +13860,7 @@ $x = 100;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>第二个语句根据 grammar 进行解析, 并形成以下解析树:</p>
+<p>第二个语句根据 grammar 进行解析, 形成了以下解析树:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13879,7 +13879,7 @@ $x = 100;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序的第三行是 <code>say $x;</code>。让我们称这种语句为 <code>say-function</code>,  并为它实现规则:</p>
+<p>这个程序的第三行是 <code>say $x;</code>。让我们把这种语句称为 <code>say-function</code>,  并为它实现规则:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13889,7 +13889,7 @@ $x = 100;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如你所见, 这非常简单, 因为我们已经有一个解析变量的规则了。最后, 必须将此新规则添加到 <code>statement</code> 规则中的备选列表中:</p>
+<p>如你所见, 这非常简单, 因为我们已经有了一个解析变量的规则。最后, 必须将这个新的规则添加到 <code>statement</code> 规则中的备选列表中:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13918,13 +13918,13 @@ $x = 100;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在让我们休息一下, 教我们的编译器不仅要解析程序, 还要执行它。在这里, action 应运而生了。</p>
+<p>现在我们休息一下, 让我们的编译器不仅可以解析程序, 还可以执行程序。这里, action 就应运而生了。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_使用_actions">12.3. 使用 actions</h3>
+<h3 id="_使用_action">12.3. 使用 action</h3>
 <div class="paragraph">
-<p>Grammar 本身不只是解析源文本还从中提取数据。要使程序执行代码, 需要 actions。Grammar 中的 action 是 grammar 成功解析 rule 或 token 时触发的 Raku 代码片段。</p>
+<p>Grammar 本身并不只是解析源文本还从中提取数据片段。要使程序执行代码, 需要 action。Grammar 中的 action 是 Raku 中的代码片段, 当 grammar 成功地解析了一条 rule 或一个 token 时, 就会触发 action。</p>
 </div>
 <div class="paragraph">
 <p>让我们看一下 <code>variable-declaration</code> 规则:</p>
@@ -13937,7 +13937,7 @@ $x = 100;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>当 grammar 在源文本中找到序列 <code>my $x</code> 时, 该规则就满足了。此时, 你可以添加一个 action:</p>
+<p>当 grammar 找到源文本中的序列 <code>my $x</code> 时, 该规则就满足了。这时, 你可以添加一个 action:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13947,13 +13947,13 @@ $x = 100;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>action 可以是这样的简单警报, 但它也可能是更复杂的将作为对变量声明的反应所执行的代码。</p>
+<p>action 可以是这样的简单警报, 但它也可能是更复杂的代码, 作为对变量声明的反应而执行。</p>
 </div>
 <div class="paragraph">
-<p>为了使 action 正常, 它需要知道变量的类型(它是否包含 <code>$</code> 或 <code>@</code> 符号)及其名字。Action 可以访问反应解析片段的当前状态的 <strong>Match</strong> 对象。可以在 <strong>Match</strong> 对象中按名字找到命名子规则; 例如, <code>$&lt;variable&gt;</code> 返回字符串 <code>$x</code>。</p>
+<p>为了使 action 正常执行, 它需要知道变量的类型(是否包含 <code>$</code> 或 <code>@</code> 符号)和它的名称。Action 可以访问反应解析片段的当前状态的 <strong>Match</strong> 对象。可以在 <strong>Match</strong> 对象中通过名称找到命名子规则; 例如, <code>$&lt;variable&gt;</code> 返回字符串 <code>$x</code>。</p>
 </div>
 <div class="paragraph">
-<p>要深入挖掘, 请使用 <strong>Match</strong> 对象的嵌套元素:</p>
+<p>要深入挖掘, 就拿 <strong>Match</strong> 对象中的嵌套元素来说吧:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13969,7 +13969,7 @@ $x = 100;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>运行带两个变量声明的程序的代码:</p>
+<p>运行带有两个变量声明的程序的代码:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13982,7 +13982,7 @@ G.parse($prog);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>它打印如下:</p>
+<p>它打印了以下内容:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13991,10 +13991,10 @@ Declaring an array "array"</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这证明 grammar 理解程序并且 action 得到了正确的变量名和变量类型。</p>
+<p>这证明了 grammar 理解了程序, action 得到了正确的变量名和变量类型。</p>
 </div>
 <div class="paragraph">
-<p>只要我们可以区分标量和数组, 我们就可以保存它们的值以在未来使用。为此, 定义两个全局变量:</p>
+<p>只要我们能够区分标量和数组, 我们就可以把它们的值保存下来, 以便在未来使用。为此, 定义两个全局变量:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14003,7 +14003,7 @@ my %array;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这些哈希的键对应于变量名。我们将在 grammar 的 action 中填充存储:</p>
+<p>这些散列的键对应于变量名。我们将在 grammar 的 action 中填充存储:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14022,7 +14022,7 @@ my %array;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在程序结束之前, 让我们打印变量存储的内容:</p>
+<p>在程序结束之前, 我们先来打印一下变量存储的内容:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14031,7 +14031,7 @@ say %array;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>输出告诉我们成功找到了变量, 并在存储中为它们创建插槽:</p>
+<p>输出告诉我们变量被成功找到, 并在存储中为它们创建了插槽:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14040,7 +14040,7 @@ say %array;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>想想下一步。当然, 将值赋给变量会很棒。 在上面的代码中, 我们使用 <code>given/when</code> 选择器分隔标量代码和数组代码。如果我们想添加对哈希的支持该怎么办? 添加一个新的 <code>when</code> 分支没问题, 但是我们必须在所有与变量一起使用的 action 中做出类似的分支。</p>
+<p>思考下一步的问题。自然, 把值赋给变量就好了。 在上面的代码中, 我们使用 <code>given/when</code> 选择器将标量代码和数组代码分开。如果我们想添加对散列的支持呢? 添加一个新的 <code>when</code> 分支是没问题的, 但是我们必须在所有与变量相关的 action 中添加类似的分支。</p>
 </div>
 <div class="paragraph">
 <p>其中一个解决方案是要求 grammar 区分变量的类型:</p>
@@ -14060,7 +14060,7 @@ token array-variable {
 </div>
 </div>
 <div class="paragraph">
-<p>另一个解决方案是把变量存储成为单个变量 <code>%var</code> 并将其用作两维哈希:</p>
+<p>另一个解决方案是把变量存储成为单个变量 <code>%var</code>, 并将其用作二维散列:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14075,7 +14075,7 @@ rule variable-declaration {
 </div>
 </div>
 <div class="paragraph">
-<p>有了这个, <code>%var</code> 容器将获得以下内容:</p>
+<p>这样, <code>%var</code> 容器将得到以下内容:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14083,7 +14083,7 @@ rule variable-declaration {
 </div>
 </div>
 <div class="paragraph">
-<p>要为变量赋值, 应该写一个 action。Grammar 已经有了赋值规则, 因此添加 action 是一项简单的任务:</p>
+<p>要给一个变量赋值, 应该写一个 action。Grammar 已经有了赋值规则, 因此添加一个 action 是一件很容易的事情:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14096,10 +14096,10 @@ rule variable-declaration {
 </div>
 </div>
 <div class="paragraph">
-<p>在 action 内部赋值的左侧, 我们看到相同的代码, 我们已经用它访问 <code>%var</code> 存储中的变量。右侧的表达式需要额外注意。</p>
+<p>在 action 内部赋值的左侧, 我们看到的代码和我们之前已经在 <code>%var</code> 存储中访问变量的代码一样。右侧的表达式需要额外注意。</p>
 </div>
 <div class="paragraph">
-<p>裸的 <code>$&lt;value&gt;</code> 当前包含 <code>G</code> 类型的对象。要使它成为字符串, 使用字符串强制运算符(前缀 <code>~</code>)。因此, 它将被字符串化并且变量得到我们想要在那里保存的值:</p>
+<p>目前裸的 <code>$&lt;value&gt;</code> 包含了 <code>G</code> 类型的对象。要使它成为字符串, 需要使用字符串强制操作符(前缀 <code>~</code>)。这样, 它将被字符串化, 变量得到我们想要保存在那里的值:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14107,7 +14107,7 @@ rule variable-declaration {
 </div>
 </div>
 <div class="paragraph">
-<p>为了确认所有工作都按预期工作, 让我们解析一个使用两个标量变量的程序:</p>
+<p>为了确认一切正常, 让我们解析一个使用两个标量变量的程序:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14126,7 +14126,7 @@ say %var; # {$ =&gt; {alpha =&gt; 50, beta =&gt; 60}}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在让我们将注意力转移到实现 <code>say</code> 函数上。这个任务应该不难, 因为我们已经拥有其他规则和 action 中的所有代码片段。把它们组合起来:</p>
+<p>现在, 让我们把注意力转移到实现 <code>say</code> 函数上。这个任务应该不难, 因为我们已经在其他规则和 action 中拥有了所有的代码片段。只要把它们组合在一起就可以了:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14138,16 +14138,16 @@ say %var; # {$ =&gt; {alpha =&gt; 50, beta =&gt; 60}}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在, 编译器理解三种语法结构 - 声明变量, 赋值, 并打印标量变量的内容。作为家庭作业, 你可以实现程序想要使用未声明的变量或仍包含未定义的值时的错误处理。</p>
+<p>现在, 编译器理解了三种语法结构 - 声明一个变量, 给变量赋值, 以及打印标量变量的内容。作为功课, 你可以实现错误处理, 当程序想使用一个未声明的变量或仍然包含未定义的值的变量时, 能处理错误。</p>
 </div>
 <div class="paragraph">
-<p>这个 grammar 已经相当复杂, 但给它添加越来越多的功能并不是很困难。每个新功能通常需要修改现有规则和 action 或添加新的规则和 action。</p>
+<p>这个 grammar 已经相当完善了, 但要给它添加越来越多的功能并不是很困难。每个新功能通常需要修改现有规则和 action, 或者添加新的规则和 action。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_使用抽象语法树">12.4. 使用抽象语法树</h3>
+<h3 id="_使用抽象语法树属性">12.4. 使用抽象语法树属性</h3>
 <div class="paragraph">
-<p>目前, <code>G</code> grammar 仅在将整数值赋值给变量时解析构造:</p>
+<p>目前, <code>G</code> grammar 只有当整数值被赋值给一个变量时才会解析构造:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14155,7 +14155,7 @@ say %var; # {$ =&gt; {alpha =&gt; 50, beta =&gt; 60}}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>让我们看看如何添加对以下赋值的支持:</p>
+<p>让我们来看看如何为下面的赋值添加支持:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14163,7 +14163,7 @@ say %var; # {$ =&gt; {alpha =&gt; 50, beta =&gt; 60}}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>解析 <code>$x = 100</code> 等结构的规则使用了以下规则:</p>
+<p>像 <code>$x = 100</code> 这样的结构解析规则使用了以下规则:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14173,10 +14173,10 @@ say %var; # {$ =&gt; {alpha =&gt; 50, beta =&gt; 60}}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在等号的右侧, 我们看到一个 <code>value</code>, 我们可以用更一般的项, <code>expression</code> 代替。最后, 表达式可以是任何语言理解的表达式, 例如 <code>10</code>, <code>$x</code>, <code>10 + 3</code> 或 <code>$x + $y</code> 等等。让我们一步一步地接近这一点。首先, 介绍 <code>expression</code> 规则。问题是我们必须将表达式的值返回给进行赋值的 action。</p>
+<p>在等号的右侧, 我们看到一个 <code>value</code>, 我们可以用一个更一般的项, 即 <code>expression</code> 来代替。最后, 表达式可以是任何一种语言所能理解的表达式, 比如 <code>10</code>, <code>$x</code>, <code>10 + 3</code> 或者 <code>$x + $y</code> 等等。让我们一步一步地接近这一点。首先, 介绍一下 <code>expression</code> 规则。问题是, 我们要把表达式的值返回给进行赋值的 action。</p>
 </div>
 <div class="paragraph">
-<p>为了保留临时值, Raku grammar 提供了<strong>抽象语法树的属性(AST)</strong>。要保存该值, 请使用 <code>$/.make</code> 方法。要获得该值, 请使用 <code>$/.made</code> 或 <code>$/.ast</code> 方法(他们是同义词):</p>
+<p>为了保存临时值, Raku grammar 提供了<strong>抽象语法树(AST)的属性</strong>。要保存这个值, 可以使用 <code>$/.make</code> 方法。要获得该值, 请使用 <code>$/.made</code> 或 <code>$/.ast</code> 方法(他们是同义词):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14197,13 +14197,13 @@ rule expression {
 </div>
 </div>
 <div class="paragraph">
-<p>我们使用 <code>$/.make</code> 方法传递的值是附加到解析树节点的属性。执行 action 后, 这些值不会消失, 并且其他规则的 action 通过 <code>$/</code> 变量仍然可以访问该值。</p>
+<p>我们使用 <code>$/.make</code> 方法传递的值是附加在解析树的节点上的属性。这些值不会在执行 action 后消失, 其他规则的 action 通过 <code>$/</code> 变量仍然可以访问该值。</p>
 </div>
 <div class="paragraph">
-<p>例如, 在前面的代码中, <code>expression</code> 规则的第一个分支中解析的字符串化值被附加到相应的节点 - <code>$/.make(~$ &lt;value&gt;)</code>。随后, 此值用于 <code>assignment</code> action <code>$&lt;expression&gt;.made</code>。我们在第 11 章, 正则表达式中已经见过, 即 <code>$&lt;expression&gt;</code> 是完整表达式 <code>$/&lt;expression&gt;</code> 的简写形式。</p>
+<p>例如, 在前面的代码中, <code>expression</code> 规则的第一个分支中解析的字符串化值被附加到相应的节点 - <code>$/.make(~$&lt;value&gt;)</code>。随后, 这个值被用于 <code>assignment</code> action <code>$&lt;expression&gt;.made</code> 中。我们在第 11 章"正则表达式"中已经看到, <code>$&lt;expression&gt;</code> 是完整表达式 <code>$/&lt;expression&gt;</code> 的简称。</p>
 </div>
 <div class="paragraph">
-<p>当 grammar 符合诸如 <code>$x = $y</code> 的赋值时, 表达式规则的第二个分支变为活动状态。在这种情况下, 它从 <code>%var</code> 存储获取变量的值并将其放在 AST 属性中。此时, 我们的编译器可以处理以下程序:</p>
+<p>当 grammar 遇到像 <code>$x = $y</code> 这样的赋值时, 表达式规则的第二个分支变为活动状态。在这种情况下, 它从 <code>%var</code> 存储中获取变量的值, 并将其放到 AST 属性中。这时, 我们的编译器可以处理下面的程序:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14218,10 +14218,10 @@ say $y; # 100</code></pre>
 <div class="sect3">
 <h4 id="_处理表达式">12.4.1. 处理表达式</h4>
 <div class="paragraph">
-<p>在许多旨在用不同编程语言解析源代码的 grammar 中, 其中一个核心部分是处理表达式。我们已经介绍了 <code>expression</code> 规则, 它可以理解简单的表达式, 如 <code>100</code> 或 <code>$x</code>。</p>
+<p>在很多以解析不同编程语言的源代码为目的的 grammar 中, 其中一个核心部分就是处理表达式。我们已经介绍了 <code>expression</code> 规则, 它可以理解简单的表达式, 如 <code>100</code> 或 <code>$x</code>。</p>
 </div>
 <div class="paragraph">
-<p>让我们继续使用表达式并教导编译器使用 <code>+</code> 运算符解析和计算表达式。我们将从一个简单的情况开始, 即当两个操作数都是整数字面量时:</p>
+<p>下面我们继续介绍表达式规则, 教编译器用 <code>+</code> 运算符来解析和计算表达式。我们先从一个简单的情况开始, 当两个操作数都是整数字面量时:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14239,10 +14239,10 @@ say $y; # 100</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该规则得到了一个新的分支 <code>&lt;value&gt; '+' &lt;value&gt;</code>, 它使用了两个相同的规则名。在 action 中, 这两个操作数是从数组的两个元素的 <code>ast</code>(或 <code>make</code>)属性中提取的 - 即 <code>$&lt;value&gt;[0]</code> 和 <code>$&lt;value&gt;[1]</code>。</p>
+<p>该规则得到了一个新的分支 <code>&lt;value&gt; '+' &lt;value&gt;</code>, 它使用了两个同名的规则。在这个 action 中, 这两个操作数是从数组的两个元素 - <code>$&lt;value&gt;[0]</code> 和 <code>$&lt;value&gt;[1]</code> 的 <code>ast</code>(或 <code>make</code>)属性中提取出来的。</p>
 </div>
 <div class="paragraph">
-<p>应该在 <code>value</code> token 中进行另一个更改。到现在为止, 我们还没有在 AST 中保存任何内容。如果你不这样做, 那么进一步的解析将不得不处理复杂的结构而不是简单的值。所以只需将其添加到树中:</p>
+<p>另一个变化应该是在 <code>value</code> token 中进行的。到现在为止, 我们还没有在 AST 中保存任何东西。如果不这样做的话, 那么进一步的解析将不得不处理复杂的结构而不是简单的值。所以直接把它添加到树上就可以了:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14252,13 +14252,13 @@ say $y; # 100</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此处使用前缀 <code>+</code> 将值转换为数字类型。</p>
+<p>这里的前缀 <code>+</code> 用于将值转换为数值类型。</p>
 </div>
 <div class="paragraph">
-<p>下一步是允许变量, 以便我们可以解析 <code>3 + $x</code> 等表达式。</p>
+<p>下一步是允许变量, 这样我们就可以解析像 <code>3 + $x</code> 这样的表达式了。</p>
 </div>
 <div class="paragraph">
-<p>正如我们之前看到的, <code>expression</code> 规则可以表示变量的值。那么, 让我们把 <code>expression</code> 规则中的第二个 <code>value</code> 替换为 <code>expression</code>:</p>
+<p>正如我们之前看到的那样, <code>expression</code> 规则可以表示变量的值。所以, 让我们用它来代替 <code>expression</code> 规则中的第二个 <code>value</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14288,7 +14288,7 @@ say $y; # 100</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这就是将变量用作 <code>+</code> 运算符的第二个操作数所需的全部内容。该 grammar 现在解析这个程序:</p>
+<p>这就是将变量用作 <code>+</code> 运算符的第二个操作数所需的全部内容。现在的 grammar 是这样解析程序的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14302,7 +14302,7 @@ say $y; # 7</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>允许 <code>+</code> 运算符左侧的变量有点困难。到目前为止, 我们已经在我们可能期望变量的地方使用了 <code>expression</code> 规则:</p>
+<p>在 <code>+</code> 运算符左侧允许变量是比较困难的。问题是, 到目前为止, 我们在可能期待变量的地方使用了 <code>expression</code> 规则:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14324,7 +14324,7 @@ say $y; # 7</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这种更改导致无限递归 - 要表达式是什么你需要解析解析表达式, 它是表达式加表达式等等。一种可能的解决方案是隐式列出第一个可以是操作数的选项:</p>
+<p>这种变化导致了无限递归 - 要了解表达式是什么, 你需要解析解析表达式, 它是表达式加表达式, 以此类推。一种可能的解决方案是隐式列出第一个可以是操作数的选项:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14345,7 +14345,7 @@ say $y; # 7</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>更好的方法是引入另一个规则, <code>term</code>, 可以是 <code>value</code> 或 <code>variable</code>:</p>
+<p>更好的方法是引入另一个规则, 即 <code>term</code>, 既可以是 <code>value</code> 也可以是 <code>variable</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14367,7 +14367,7 @@ rule term {
 </div>
 </div>
 <div class="paragraph">
-<p>目前可以做些什么?  微小的(已经相当复杂的)Raku 语言的子集程序可以解析和执行了:</p>
+<p>目前可以做些什么呢? 可以用 Raku 语言的微小子集中的(已经相当复杂的)程序进行解析和执行:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14388,7 +14388,7 @@ say $a; # 15</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>作为奖励, 程序还可以解析涉及 <code>+</code> 运算符的复杂表达式:</p>
+<p>作为奖励, 该程序还可以解析涉及 <code>+</code> 运算符的复杂表达式:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14398,20 +14398,20 @@ say $b; # 42</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们没有做任何特别的事情来允许它工作, 但 grammar 将表达式分割为简单的表达式, 如 <code>$a + $x</code>, 计算值, 然后更进一步。伴随着每一个步骤, 执行具有两个操作数的简单运算。</p>
+<p>我们没有做任何特别的事情来让这一点得以实现, 但 grammar 将表达式拆分成简单的表达式, 比如 <code>$a + $x</code>, 计算出值, 然后更进一步。每走一步, 就会执行具有两个操作数的简单运算。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_使用_action_类">12.5. 使用 action 类</h3>
 <div class="paragraph">
-<p>Grammar 越复杂, action 就越复杂。我们当前 grammar 中几乎所有 rule 或 token 有一个 action。即使大多数 action 只是一两行代码, Raku 代码与 grammar 语言混合的事实让阅读代码变得很困难。格式化代码也成为一项艰巨的任务, 因为你需要添加更多空格以正确缩进代码。在本节中, 我们将看到 Raku 提供了什么来解决这个问题。</p>
+<p>Grammar 越复杂, action 就越复杂。在我们目前的 grammar 中, 几乎每一个 <strong>rule</strong> 或 <strong>token</strong> 都有一个 action。即使大多数的 action 只是一两行代码, 但由于 Raku 的代码与 grammar 语言混合在一起, 使得阅读代码变得困难重重。对代码进行格式化也成为了一个难题, 因为你需要添加更多的空格来正确地缩进代码。在本节中, 我们将看看 Raku 提供了哪些方法来解决这个问题。</p>
 </div>
 <div class="paragraph">
-<p>所有的 action 都可以移动到单独的类中。因此, 完整的 grammar 包含一个 grammar 本身和 action 类。grammar 的 rule 与 token 之间的对应关系是通过简单地为 action 类给出相同的名字来实现的。让我们将 grammar 转换为使用拆分方法。</p>
+<p>所有的 action 都可以移动到一个单独的类中。因此, 完整的 grammar 包含一个 grammar 本身和一个 action 类。Grammar 的 rule 与 token 之间的对应关系, 只需给 action 类的方法起相同的名字就可以实现。让我们将 grammar 转换为使用拆分的方法。</p>
 </div>
 <div class="paragraph">
-<p>首先, 为 action 创建一个类并将其传递给解析器:</p>
+<p>首先, 为 action 创建一个类, 并将其传递给解析器:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14427,10 +14427,10 @@ G.parse($prog, :actions(A));</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在, 将 action 代码从 grammar 的 rule 或 token 中移动到单独的 action 类的方法中。</p>
+<p>现在, 将 action 代码从 grammar 的 rule 或 token 中移动到 action 类的单独方法中。</p>
 </div>
 <div class="paragraph">
-<p>举例来说, <strong>variable</strong> 规则:</p>
+<p>以 <strong>variable</strong> 规则为例:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14442,7 +14442,7 @@ G.parse($prog, :actions(A));</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此代码应分为 grammar 规则和 action:</p>
+<p>这个代码应分成 grammar 规则和 action 两个部分:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14463,13 +14463,13 @@ class A {
 </div>
 </div>
 <div class="paragraph">
-<p>由于代码现在放在 grammar 之外, 我们必须传递 <code>$/</code> 变量作为方法的参数。可以为此参数使用任何其他名称, 但 <code>$/</code> 似乎是最常见和最常规的选择。</p>
+<p>由于代码现在被放置在 grammar 之外, 我们必须传递 <code>$/</code> 变量作为方法的参数。这个参数可以使用任何其他的名称, 但 <code>$/</code> 似乎是最常见和最常规的选择。</p>
 </div>
 <div class="paragraph">
-<p>以相同的方式, 可以提取其他 action 并将其放入 action 类中。我们不会花时间描述那些重复的代码更改(你可以在本章的最后看到最终代码)但我们将直接查看具有备选项的规则。此 grammar 中有两个这样的规则, 即 <code>expression</code> 和 <code>term</code>。</p>
+<p>用同样的方式, 其他的 action 也可以被提取出来并放到 action 类中。我们不会花时间来描述那些重复的代码变化(你可以在本章末尾看到最终的代码), 而是直接看一下具有备选项的规则。这个 grammar 中有两个这样的规则, 即 <code>expression</code> 和 <code>term</code>。</p>
 </div>
 <div class="paragraph">
-<p>考虑 <strong>term</strong> 规则:</p>
+<p>考虑一下 <strong>term</strong> 规则:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14480,10 +14480,10 @@ class A {
 </div>
 </div>
 <div class="paragraph">
-<p>我们在这里有两个不同的 action, 但我们只能在 action 类中添加一个方法。</p>
+<p>这里我们有两个不同的 action, 但我们只能在 action 类中添加一个方法。</p>
 </div>
 <div class="paragraph">
-<p>至少有三种解决方案。首先, 该规则可以分为两个规则, 因此分为两个单独的 action。其次, 我们可以分析 <code>$/</code> 变量的内容并执行其中的一个分支:</p>
+<p>至少有三种解决方法。第一, 可以把这个规则拆分成两个规则, 从而产生两个不同的 action。第二, 我们可以分析 <code>$/</code> 变量的内容, 并执行其中的一个分支:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14498,7 +14498,7 @@ class A {
 </div>
 </div>
 <div class="paragraph">
-<p>但是 Raku 为我们提供了更好的选择 - 使用 <code>multi</code> 方法并使它们对 <code>$/</code> 参数中接收到的数据变得敏感:</p>
+<p>但是 Raku 给了我们一个更好的选择 - 使用 <code>multi</code> 方法并使其对 <code>$/</code> 参数中的数据敏感:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14511,10 +14511,10 @@ multi method term($/ where $/&lt;variable&gt;) {
 </div>
 </div>
 <div class="paragraph">
-<p>在方法的签名中, 创建子类型。<code>multi</code> 方法的每个变体都是响应规则的不同分支的匹配而调用。我们在第 6 章的 Multi subs 中用了这个技巧。</p>
+<p>在方法的签名中, 创建了一个子类型。<code>multi</code> 方法的每个变体都会根据不同分支的匹配规则来调用。我们在第 6 章的 Multi subs 中用了这个技巧。</p>
 </div>
 <div class="paragraph">
-<p>在将所有的 action 移动到单独的类中之后, 移动全局变量 <code>%var</code> 到类中也是明智的。目前, 整个程序的骨架如下所示:</p>
+<p>在把所有的 action 移动单独的类中后, 把全局变量 <code>%var</code> 移到类中也是明智的做法。目前, 整个程序的骨架看起来是这样的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14531,7 +14531,7 @@ G.parse($prog, :actions(A));</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>%var</code> 存储现在是类属性 - 它属于类, 而不属于它的实例。 实际上, 我们不创建 <code>A</code> 的任何实例-<code>G.parse</code> 方法接收类的名字。这可能适用于某些应用程序, 但要确保变量存储不保留先前运行的解析器的值, 最好使 <code>%var</code> 变为私有属性:</p>
+<p>现在的 <code>%var</code> 存储是类属性, 它属于类, 而不属于类的实例。 实际上, 我们并没有创建任何 <code>A</code> 的实例, <code>G.parse</code> 方法接收的是类的名字。这对于某些应用来说可能没有问题, 但是为了确保变量存储不保留之前运行的解析器的值, 最好是把 <code>%var</code> 作为私有属性:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14542,7 +14542,7 @@ G.parse($prog, :actions(A));</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该类需要首先实例化。否则, 将不会为 <code>%var</code> 属性分配内存。<code>parse</code> 方法还接受 <code>action</code> 类的实例:</p>
+<p>类需要先被实例化。否则, 就不会为 <code>%var</code> 属性分配内存。<code>parse</code> 方法也接受 <code>action</code> 类的实例:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14553,10 +14553,10 @@ G.parse($prog, :actions(A));</code></pre>
 <div class="sect2">
 <h3 id="_完整的程序">12.6. 完整的程序</h3>
 <div class="paragraph">
-<p>通过了解 Raku 中的 grammar, 我们取得了很多成就。想象一下我们所创建的程序可以解析用 Raku 编写的另一个程序!</p>
+<p>通过学习 Raku 中的 grammar, 我们取得了很多收获。试想一下, 我们创建的程序可以解析另一个用 Raku 编写的程序!</p>
 </div>
 <div class="paragraph">
-<p>仍有很大的改进空间, 但你一定能做到这一点。例如, 你可以从实现对数组的支持开始。</p>
+<p>虽然还有很多需要改进的地方, 但你一定能做到。例如, 你可以从实现对数组的支持开始。</p>
 </div>
 <div class="paragraph">
 <p>以下是我们在本章中创建的编译器的完整代码:</p>
@@ -14675,10 +14675,10 @@ G.parse($prog, :actions(A.new));</code></pre>
 <div class="sect2">
 <h3 id="_总结_15">12.7. 总结</h3>
 <div class="paragraph">
-<p>在本章中, 我们讨论了 grammar, 这是 Raku 领先的新功能。Grammar 允许为你自己的特定领域的语言构建解析器, 并且已经内置在语言中, 因此无需外部模块即可开始使用它们。</p>
+<p>在本章中, 我们讨论了 grammar, 这是 Raku 领先的新功能。Grammar 允许为自己的特定领域的语言构建解析器, 并且已经内置在语言中, 因此不需要外部模块就可以开始使用。</p>
 </div>
 <div class="paragraph">
-<p>使用 Raku 子集的编译器示例, 我们创建了一个 grammar 并查看了它的元素 - rule 和 token。后来我们用 action 更新了 grammar, 最后将 action 移动到一个单独的类中, 以使代码更易于维护和清理。</p>
+<p>使用 Raku 子集的编译器的例子, 我们创建了一个 grammar, 并查看了它的元素 - rule 和 token。后来我们用 action 对 grammar 进行了更新, 最后将 action 移到一个单独的类中, 使代码更易于维护、更干净。</p>
 </div>
 <div class="paragraph">
 <p>在接下来的章节中, 我们将讨论 Raku 中的并发, 反应式和函数式编程。</p>
