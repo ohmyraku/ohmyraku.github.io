@@ -1071,8 +1071,10 @@ Hello, World!</code></pre>
 <div class="sect2">
 <h3 id="_总结">1.13. 总结</h3>
 <div class="paragraph">
-<p>在这一章中，我们简单地了解了 Raku 是一种什么样的编程语言，以及它与它的姐妹语言 Perl 5 的区别。我们了解了 Raku 的历史，以及 Raku 编译器的不同项目。最后，我们安装了当今最好的编译工具 Rakudo Star，并创建了第一个 "Hello, World!" 程序。
-在下面的章节中，我们将研究如何组织程序中的代码。</p>
+<p>在这一章中，我们简单地了解了 Raku 是一种什么样的编程语言，以及它与它的姐妹语言 Perl 5 的区别。我们了解了 Raku 的历史，以及 Raku 编译器的不同项目。最后，我们安装了当今最好的编译工具 Rakudo Star，并创建了第一个 "Hello, World!" 程序。</p>
+</div>
+<div class="paragraph">
+<p>在下面的章节中，我们将研究如何组织程序中的代码。</p>
 </div>
 </div>
 </div>
@@ -11420,10 +11422,10 @@ message方法，以便异常处理程序可以打印错误消息。
 <h2 id="_正则表达式">11. 正则表达式</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>正则表达式是 Perl 最有价值的功能之一。在 Raku 中, 正则表达式经过重新设计, 使它们更加规则和强大。这个词也变了, 正则表达式现在更多地被简称为<strong>正则</strong>。在这一章当中,  我们将介绍正则表达式语法的所有元素。</p>
+<p>正则表达式是 Perl 中最有价值的功能之一。在 Raku 中, 正则表达式被重新设计, 使其更加规范和强大。这个术语也发生了变化, 正则表达式现在更多的时候被称为<strong>regexes</strong>。在这一章当中,  我们将对 regexes 的语法元素进行全面的梳理。</p>
 </div>
 <div class="paragraph">
-<p>本章将介绍以下主题:</p>
+<p>本章将涉及以下主题:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -11471,16 +11473,16 @@ message方法，以便异常处理程序可以打印错误消息。
 <div class="sect2">
 <h3 id="_与正则表达式匹配">11.1. 与正则表达式匹配</h3>
 <div class="paragraph">
-<p>正则表达式描述文本模式。他们为我们提供了一种语言, 我们可以在其中表达文本的结构。</p>
+<p>正则表达式描述了文本的模式。它们为我们提供了一种语言, 我们可以在其中表达文本的结构。</p>
 </div>
 <div class="paragraph">
-<p>考虑一个例子。电话号码是一系列数字。短语 <strong>sequence of digits</strong> 可以写成 <code>\d+</code>。如果我们考虑到电话号码可能用空格和短划线写的事实, 那么我们不得不说电话号码是用空格或破折号分隔的数字序列。这已经是一个更复杂的正则表达式了, 根据我们的严格程度, 可以用不同的方式编写, 例如, 如果我们允许两个空格在一起或者如果一个短划线可以跟一个空格, 或者一组数字可以由一个数字组成的话。</p>
+<p>请看一个例子。电话号码是一个数字序列。<strong>sequence of digits</strong> 这个短语可以写成 <code>\d+</code>。如果我们考虑到电话号码可以用空格和破折号来写, 那么我们不得不说, 电话号码是用空格或破折号分隔的数字序列。这已经是一个比较复杂的正则表达式了, 可以有不同的写法, 根据我们的严格程度, 比如说我们是否允许两个空格写在一起, 或者破折号后面可以跟一个空格, 或者一组数字可以由一个数字组成。</p>
 </div>
 <div class="paragraph">
-<p>让我们从最不严格开始, 并将其形式化为 <code>(\d || \s || \-)+</code>, 即多个数字(<code>\d</code>)或空格(<code>\s</code>)或短划线(<code>\-</code>)。双垂直条在这里代表"<strong>或</strong>", <code>+</code> 意味着<strong>不止一个</strong>。最后, 国际电话号码可以带有一个前缀 <code>+</code> 号字符, 这是可选的。那么, 我们的最终电话号码正则表达式是 <code>+? (\d || \s || \-)+</code>。</p>
+<p>让我们把它形式化为 (\d || \s || \-), 也就是不止一个数字(<code>\d</code>)或空格(<code>\s</code>)或破折号(<code>\-</code>)。这里的双竖直条在这里代表"<strong>或</strong>", <code>+</code> 意味着<strong>不止一个</strong>。最后, 国际电话号码可以用 <code>+</code> 号作为前缀, 这个是可选的。所以, 我们最终的电话号码的正则表达式是 \+? (\d || \s || \-)。</p>
 </div>
 <div class="paragraph">
-<p>这个正则表达式并不完美。在本章的后面部分, 我们将努力使其变得更好, 更强大。但是, 让我们从那个正则开始, 并进行第一次<strong>匹配</strong>。字符串与正则表达式相比较在 Perl 中称为匹配。为了匹配正则表达式, 使用双波浪形运算符。正则表达式本身放在一对斜杠中:</p>
+<p>这个正则表达式并不完美。在本章的后面, 我们将努力使它变得更好, 更稳健。但是, 让我们从这个开始, 进行第一次<strong>匹配</strong>。在 Perl 中, 字符串与正则表达式相比较被称为匹配。要与一个正则表达式进行匹配, 需要使用双波浪线运算符。正则表达式本身被放置在一对斜线中:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11488,7 +11490,7 @@ message方法，以便异常处理程序可以打印错误消息。
 </div>
 </div>
 <div class="paragraph">
-<p>此程序打印 OK, 这意味着带有电话号码的字符串匹配该正则表达式。让我们尝试一些文本:</p>
+<p>这个程序打印出 OK, 这意味着带有电话号码的字符串与该正则表达式匹配。让我们尝试一些文本:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11496,10 +11498,10 @@ message方法，以便异常处理程序可以打印错误消息。
 </div>
 </div>
 <div class="paragraph">
-<p>在这个字符串中, 没有正则表达式需要的任何字符, 程序什么也没有打印。此正则表达式不匹配。</p>
+<p>在这个字符串中, 没有正则表达式需要的任何字符, 程序也没有打印出任何字符。此正则表达式不匹配。</p>
 </div>
 <div class="paragraph">
-<p>字符串和正则表达式都可以放在变量中, 它们会彼此匹配:</p>
+<p>字符串和正则表达式都可以放在变量中, 这两个变量将被相互匹配:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11509,18 +11511,18 @@ say 'OK' if $phone ~~ $re;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>除了 <code>/ &#8230;&#8203; /</code> 之外, 正则表达式可以使用其他围绕的符号。如果正则表达式包含许多斜杠, 例如用于解析 URL 的正则表达式, 这可能是有用的。在这种情况下, 你需要在正则表达式之前加上 <code>m</code> 或 <code>rx</code> 前缀。以下所有例子是等价的:</p>
+<p>除了 <code>/ &#8230;&#8203; /</code> 之外, 正则表达式可以使用其他围绕的符号。如果正则表达式包含许多斜线, 例如用于解析 URL 的正则表达式, 这可能很有用。在这种情况下, 你需要在正则表达式之前加上前缀字符 <code>m</code> 或 <code>rx</code> 。下面的例子都是等效的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"> / \d+ /
+<pre class="highlight"><code class="language-raku" data-lang="raku">/ \d+ /
 m/ \d+ /
 m{ \d+ }
 m| \d+ |</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>要创建将放入变量的正则表达式, 请使用 <code>rx</code>:</p>
+<p>要创建一个将被放入变量中的正则表达式, 请使用 <code>rx</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11530,7 +11532,7 @@ say 'OK' if $phone ~~ $re;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>分隔符可以是不同的, 例如, 一对花括号:</p>
+<p>分隔符可以不一样, 例如, 一对花括号:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11538,7 +11540,7 @@ say 'OK' if $phone ~~ $re;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>使用 <code>m</code> 或 <code>rx</code> 创建直接在匹配中使用的正则表达式:</p>
+<p>使用 <code>m</code> 或 <code>rx</code> 创建一个直接在匹配中使用的正则表达式:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11546,7 +11548,7 @@ say 'OK' if $phone ~~ $re;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>为了否定匹配的结果, Raku 提供了一个不同的运算符, <code>!~~</code>。选择使整个结构更容易理解的那个。</p>
+<p>为了否定匹配的结果, Raku 提供了一个不同的运算符, <code>!~~</code>。请选择一个更容易理解的运算符。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11554,10 +11556,10 @@ say 'OK' if $phone ~~ $re;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>从前两个例子可以看出, <code>unless</code> 和 <code>~~</code> 的组合相当于 <code>if</code> 和 <code>!~~</code>。</p>
+<p>从前两个例子可以看到, <code>unless</code> 和 <code>~~</code> 的组合相当于 <code>if</code> 和 <code>!~~</code>。</p>
 </div>
 <div class="paragraph">
-<p>现在, 因为我们知道如何匹配字符串与正则表达式, 并制作我们的第一个正则表达式, 让我们详细了解一下正则表达式。</p>
+<p>现在, 既然我们知道了如何将字符串与正则表达式匹配, 并制作了我们的第一个正则表达式, 让我们详细学习一下正则表达式。</p>
 </div>
 </div>
 <div class="sect2">
@@ -13667,7 +13669,7 @@ say $x;⌋
 </div>
 </div>
 <div class="paragraph">
-<p>正则表达式的附加部分 <code>['<mark>' &#8592;[\n]&gt;* ]?</code> 可以找到以 <code></mark></code> 字符开头的可选子字符串, 并一直到行尾(换句话说, 它们包含非 <code>\n</code> 字符)。</p>
+<p>正则表达式的附加部分 ['#' &lt;-[\n]&gt;* ]? 可以找到以 <code>#</code> 字符开头的可选子字符串, 并一直到行尾(换句话说, 它们包含非 <code>\n</code> 字符)。</p>
 </div>
 <div class="paragraph">
 <p><code>TOP</code> 规则的正则表达式越来越复杂, 所以是时候把它分成几个部分了, 以使整个 grammar 更具可读性和可维护性。</p>

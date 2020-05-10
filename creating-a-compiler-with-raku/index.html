@@ -206,6 +206,14 @@ if (theme && theme !== "1") {
 <li><a href="#_功能覆盖">10.3. 功能覆盖</a></li>
 </ul>
 </li>
+<li><a href="#_控制流">11. 控制流</a>
+<ul class="sectlevel2">
+<li><a href="#_实现_if">11.1. 实现 <code>if</code></a></li>
+<li><a href="#_实现_else">11.2. 实现 <code>else</code></a></li>
+<li><a href="#_实现循环">11.3. 实现循环</a></li>
+<li><a href="#_实现_while_循环">11.4. 实现 <code>while</code> 循环</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="sect1">
@@ -7873,6 +7881,923 @@ my d = 2 * 2;
 say "$x, $y, $z"; ## 10, 20, 20
 say "$q, $d"; ## 100, 4</code></pre>
 </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_控制流">11. 控制流</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>我们在第8章开始时，尝试实现了 <code>if</code> 关键字。在逐行执行代码的解释器中，这样做是很棘手的。引入 AST 允许在不执行程序的情况下解析程序，所以我们可以先建立节点，只有在条件为真的情况下，才会运行它后面的代码。</p>
+</div>
+<div class="sect2">
+<h3 id="_实现_if">11.1. 实现 <code>if</code></h3>
+<div class="paragraph">
+<p>我们首先要实现的语言结构是前缀 <code>if</code> 子句，在下面的例子中演示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my flag = 42;
+if flag say "Depends";
+say "Always";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>if</code> 关键字后面是一个值(也就是条件)和一个语句。值是我们 grammar 意义上的 <code>value</code>，因此它可以是一个变量，也可以是一个字符串，或者是一个表达式。语句可以是 <code>statement</code> 规则所认可的任何构造。</p>
+</div>
+<div class="paragraph">
+<p>将 <code>if</code> 子句嵌入到 grammar 中很简单，因为我们将所有的 <code>statement</code> 定义都包含在一条规则中:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule condition {
+    'if' &lt;value&gt;
+}
+
+rule statement {
+    &lt;condition&gt; ? [
+        | &lt;statement=variable-declaration&gt;
+        | &lt;statement=assignment&gt;
+        | &lt;statement=function-call&gt;
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>前面我们已经看到，在知道条件是否为真之前，我们不应该执行语句。在 AST 的世界里，我们可以从树上挑出语句节点，把它放到条件节点的属性上。之后，计算器决定是否执行该语句节点。所以，我们需要一种新的 AST 节点:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::Condition is ASTNode {
+    has ASTNode $.value;
+    has ASTNode $.statement;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 action 类中，响应于解析的语句而触发的方法现在应该被分成两个分支。当没有 <code>if</code> 子句时，一切都保持原样。当有这样一个子句时，语句节点通过代理 <code>AST::Condition</code> 节点进入树中:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method statement($/ where !$&lt;condition&gt;) {
+    $/.make($&lt;statement&gt;.made);
+}
+
+multi method statement($/ where $&lt;condition&gt;) {
+    $/.make(AST::Condition.new(
+        value =&gt; $/&lt;condition&gt;&lt;value&gt;.made,
+        statement =&gt; $/&lt;statement&gt;.made,
+    ));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>测试程序的整个 AST 绘制如下:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/03/diag8-1200x942.png" alt="diag8 1200x942">
+</div>
+</div>
+<div class="paragraph">
+<p>看一下 <code>say</code> 的两个调用。第一个调用是 <code>AST::Condition</code> 节点的子节点。第二个(图中的右侧)位于 TOP 的 <code>@.statement</code> 数组里面的顶层。</p>
+</div>
+<div class="paragraph">
+<p>这个树已经准备好了，我们可以对它进行计算了。<code>LinguaEvaluator</code> 类需要一种方法来响应 <code>AST::Condition</code> 类型的 AST 节点。<code>If</code> 应该检查条件值，并在需要时进一步传递执行。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::Condition $node) {
+    if $node.value.value {
+        self.eval-node($node.statement);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>就这些了! 用标志变量的不同值来测试程序，看看程序的反应如何。</p>
+</div>
+<div class="paragraph">
+<p>为了完成实现，在 <code>t</code> 目录下添加一个测试:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my flag = 1;
+if flag say "Printed"; ## Printed
+
+flag = 0;
+if flag say "Ignored";
+
+say "Done"; ## Done</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_实现_else">11.2. 实现 <code>else</code></h3>
+<div class="paragraph">
+<p>合乎逻辑的下一步是实现 <code>else</code> 子句。让我们扩展一下测试程序:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my flag = 0;
+if flag say "Depends" else say "Otherwise";
+say "Always";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>else</code> 关键字只能在之前有一个 <code>if</code> 的情况下出现。在我们目前的 grammar 中，在语句后添加 <code>else</code> 块是很棘手的。最好的办法是重新组织 grammar，使 <code>statement</code> 规则只包含不同的语句变体。</p>
+</div>
+<div class="paragraph">
+<p>让我们在顶层允许使用 <code>if</code>-<code>else</code> 构造:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
+    [
+        | &lt;one-line-comment&gt;
+        | &lt;statement=conditional-statement&gt; ';'
+        | &lt;statement&gt; ';'
+    ]*
+}
+
+rule conditional-statement {
+    'if' &lt;value&gt; &lt;statement&gt;
+    [
+        'else' &lt;statement&gt;
+    ]?
+}
+
+rule statement {
+    | &lt;statement=variable-declaration&gt;
+    | &lt;statement=assignment&gt;
+    | &lt;statement=function-call&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意，在 <code>TOP</code> 规则中，新的备选项被赋予了一个别名，<code>statement</code>，这让我们在相应的 action 中保持相同的循环:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method TOP($/) {
+    . . .
+    for $&lt;statement&gt; -&gt; $statement {
+        $top.statements.push($statement.made);
+    }
+    . . .
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>好了，我们现在可以在条件构造中拥有一个或两个语句了。<code>AST::Conditional</code> 节点得到第二个属性:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::Condition is ASTNode {
+    has ASTNode $.value;
+    has ASTNode $.statement;
+    has ASTNode $.antistatement;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>新的属性用 <code>AST::Null</code>(如果没有 <code>else</code> 子句)或者用 <code>AST::Statement</code> 节点来填充:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method conditional-statement($/) {
+    $/.make(AST::Condition.new(
+        value =&gt; $/&lt;value&gt;.made,
+        statement =&gt; $/&lt;statement&gt;[0].made,
+        antistatement =&gt; $/&lt;statement&gt;[1] ??
+                         $/&lt;statement&gt;[1].made !! AST::Null,
+    ));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>statement</code> action 现在可以还原为单一的方法，并有一个琐碎的主体:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method statement($/) {
+    $/.make($&lt;statement&gt;.made);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后，计算器必须决定执行哪条语句:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::Condition $node) {
+    if $node.value.value {
+        self.eval-node($node.statement);
+    }
+    else {
+        self.eval-node($node.antistatement);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们也要实现 <code>AST::Null</code> 节点的不操作行为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::Null) {
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>else</code> 关键字已经准备好了，并开始运行，必须在仓库中加入一个测试 <code>t/else.t</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">if 1 say "A" else say "B"; ## A
+if 0 say "A" else say "B"; ## B
+
+my x;
+if 1 x = 10 else x = 20;
+say x; ## 10
+
+if 0 x = 30 else x = 40;
+say x; ## 40</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_实现循环">11.3. 实现循环</h3>
+<div class="paragraph">
+<p>让我们在 <code>Lingua</code> 语言中实现一个循环。目前，让我们把它简单化，只允许使用 <code>loop</code> 关键字，并允许编译器对 <code>counter</code> 变量进行递减。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my n = 5;
+loop n say n;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个程序会打印出从5到1的值，然后停止。</p>
+</div>
+<div class="paragraph">
+<p><code>loop</code> 子句的语法与我们在本章中看到的 <code>if</code> 条件类似，也可以嵌入到 grammar 的顶层:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
+    [
+        | &lt;one-line-comment&gt;
+        | &lt;statement=conditional-statement&gt; ';'
+        | &lt;statement=loopped-statement&gt; ';'
+        | &lt;statement&gt; ';'
+    ]*
+}
+
+rule loopped-statement {
+    'loop' &lt;variable-name&gt; &lt;statement&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>接下来，我们需要一个新的 AST 节点类型:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::Loop is ASTNode {
+    has ASTNode $.variable;
+    has ASTNode $.statement;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>语法的选择方式是这样的，所以你必须为循环提供一个已经存在的变量。在这种情况下，我们不需要创建一个临时循环变量。在 action 方法中，变量的引用被保存在 <code>AST::Variable</code> 节点中:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method loopped-statement($/) {
+    $/.make(AST::Loop.new(
+        variable =&gt; AST::Variable.new(
+            variable-name =&gt; ~$/&lt;variable-name&gt;
+        ),
+        statement =&gt; $/&lt;statement&gt;.made,
+    ));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>自减计数器是在计算器中进行的:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::Loop $node) {
+    while %!var{$node.variable.variable-name} {
+        self.eval-node($node.statement);
+        %!var{$node.variable.variable-name}--;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>稍微重写一下停止条件，可能会更安全:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">while %!var{$node.variable.variable-name} &gt; 0 {
+    . . .</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>例如，当初始值不是整数时，可以避免无限循环:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my n = 5.5;
+loop n say n;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>让我们把成就保存在测试套件中。由于循环打印了几行，所以应该把它们全部添加到测试文件中:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my n = 3;
+loop n say n;
+## 3
+## 2
+## 1</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_语句块">11.3.1. 语句块</h4>
+<div class="paragraph">
+<p>直到现在，<code>if</code> 和 <code>else</code> 构造都只能包含一条语句。当然，如果你需要不止一条，你总是可以在每条语句中添加一个 <code>if</code> 子句，但如果能实现对代码块的支持，那就更好了，这在很多其他语言中都有。本节的目标是用 <code>if-else</code> 和 <code>loop</code> 两个代码块来指导执行下面的程序:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my c = 0;
+if c {
+    say "c = $c";
+    say "IF block";
+}
+else {
+    say "c = $c";
+    say "ELSE block";
+}
+
+my n = 5;
+loop n {
+    say n;
+    say 2 * n;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>让我们第一次尝试用一个新定义的 <code>block</code> 来替换 <code>statement</code>。如果块中包含一条指令，那么花括号是可选的:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule block {
+    | '{' ~ '}' &lt;statement&gt;* %% ';'
+    | &lt;statement&gt; ';'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Raku中的 <code>'{' ~ '}' &lt;X&gt;</code> 构造相当于 <code>'{' &lt;X&gt; '}'</code>，但它往往看起来更干净，特别是当 <code>X</code> 是由一大块代码代表的时候。</p>
+</div>
+<div class="paragraph">
+<p>从概念层面上看，我们必须允许 grammar 中允许语句的代码块。从实际的角度来说，我们要考虑到语句末尾的分号。</p>
+</div>
+<div class="paragraph">
+<p>例如，在 <code>else</code> 关键字之前不允许使用分号:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">if 1 say "A"; else say "B";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>问题是，它还是站在 grammar 中的语句之后。所以，我们应该区分 <code>if</code> 分句中的语句有无 <code>else</code> 分句。</p>
+</div>
+<div class="paragraph">
+<p>另外，我们不应该坚持在结尾花括号后加分号:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">loop n {
+    say n;
+    say 2 * n;
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后，在结尾括号前加一个分号，可以声明为可选:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">loop n {
+    say n;
+    say 2 * n
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>为了满足上面列出的所有条件，让我们告诉 grammar 中哪里需要分号，哪里不需要分号。我们可以引入两个 <code>block</code> 规则的多义词规则(记得我们在 grammar 中为计算器的方法添加参数的时候，我们是如何添加参数的吗)。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi rule block() {
+    | '{' ~ '}' &lt;statement&gt;* %% ';'
+    | &lt;statement&gt;
+}
+
+multi rule block(';') {
+    | '{' ~ '}' &lt;statement&gt;* %% ';'
+    | &lt;statement&gt; ';'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>通过这样做，我们不增加一个新的规则名称。现在，我们可以重写条件规则，并初步引入 <code>while</code> 循环(我们将在本章末尾返回):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule conditional-statement {
+    | 'if' &lt;value&gt; &lt;block()&gt; 'else' &lt;block(';')&gt;
+    | 'if' &lt;value&gt; &lt;block(';')&gt;
+}
+
+rule loopped-statement {
+    'while' &lt;variable-name&gt; &lt;block(';')&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>注意，在 <code>conditional-statement</code> 规则中，也可以用方括号来提取共性部分:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule conditional-statement {
+    'if' &lt;value&gt; [
+        | &lt;block()&gt; 'else' &lt;block(';')&gt;
+        | &lt;block(';')&gt;
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你可以选择二者中的一个；我个人倾向于使用两个分支相继出现的形式:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">| 'if' &lt;value&gt; &lt;block()&gt; 'else' &lt;block(';')&gt;
+| 'if' &lt;value&gt; &lt;block(';')&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后，调整 <code>TOP</code> 规则，将其中多余的分号去掉:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
+    [
+        | &lt;one-line-comment&gt;
+        | &lt;statement=conditional-statement&gt;
+        | &lt;statement=loopped-statement&gt;
+        | &lt;statement&gt; ';'
+    ]*
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在说到 action 部分。首先，让我们改变条件构造的 action，在那里使用块:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method conditional-statement($/) {
+    $/.make(AST::Condition.new(
+        value =&gt; $/&lt;value&gt;.made,
+        statement =&gt; $/&lt;block&gt;[0]&lt;statement&gt;[0].made,
+        antistatement =&gt; $/&lt;block&gt;[1] ??
+            $/&lt;block&gt;[1]&lt;statement&gt;[0].made !! AST::Null,
+    ));
+}
+
+method loopped-statement($/) {
+    $/.make(AST::Loop.new(
+        variable =&gt; AST::Variable.new(
+            variable-name =&gt; ~$/&lt;variable-name&gt;
+        ),
+        statement =&gt; $/&lt;block&gt;&lt;statement&gt;[0].made,
+    ));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>虽然结果中包含了匹配对象的键和索引的长链，如 <code>$/&lt;block&gt;[1]&lt;statement&gt;[0]</code> 等，但转换过程简单易懂。你可以对程序进行测试，它将执行每个花括号块中的第一个语句。</p>
+</div>
+<div class="paragraph">
+<p>下一步就是修改 AST，让它保留一个以上的语句，凡是允许一个块的地方，都可以保留一个以上的语句。我们必须要保留所有的语句，所以让我们用数组来代替标量:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::Condition is ASTNode {
+    has ASTNode $.value;
+    has ASTNode @.statements;
+    has ASTNode @.antistatements;
+}
+
+class AST::Loop is ASTNode {
+    has ASTNode $.variable;
+    has ASTNode @.statements;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>相应的动作应该是创建新的 AST 节点，并将所有的语句从代码块中传递过来。在接下来的片段中，我们使用 <code>map</code> 来循环这些语句:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method conditional-statement($/) {
+    $/.make(AST::Condition.new(
+        value =&gt; $/&lt;value&gt;.made,
+        statements =&gt; ($/&lt;block&gt;[0]&lt;statement&gt;.map: *.made),
+        antistatements =&gt; $/&lt;block&gt;[1] ??
+            ($/&lt;block&gt;[1]&lt;statement&gt;.map: *.made) !! (AST::Null),
+    ));
+}
+
+method loopped-statement($/) {
+    $/.make(AST::Loop.new(
+        variable =&gt; AST::Variable.new(
+            variable-name =&gt; ~$/&lt;variable-name&gt;
+        ),
+        statements =&gt; ($/&lt;block&gt;&lt;statement&gt;.map: *.made),
+    ));
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ast_中的块儿">11.3.2. AST 中的块儿</h4>
+<div class="paragraph">
+<p>OK，我们可以返回到 AST 中，当看到花括号中的块时，我们可以让节点保留语句数组。</p>
+</div>
+<div class="paragraph">
+<p>让我们仔细看一下上面的例子中的循环:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">loop n {
+    say n;
+    say 2 * n;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 AST 的形式下，这个片段的形状如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">AST::Loop.new(
+    variable =&gt; AST::Variable.new(
+        . . .
+    ),
+    statements =&gt; Array[ASTNode].new(
+        AST::FunctionCall.new(
+            . . .
+        ),
+        AST::FunctionCall.new(
+            . . .
+        )
+    )
+)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>再次，抽象语法树的抽象性在这里得到了证明。虽然我们在语法中加入了 <code>block</code> 规则，但在树中没有任何痕迹。这两个 <code>say</code> 调用立即作为 <code>statements</code> 数组属性的元素出现在 <code>AST::Loop</code> 节点内的 <code>statements</code> 数组属性中。</p>
+</div>
+<div class="paragraph">
+<p>我们需要的是对计算器中的语句进行循环:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::Condition $node) {
+    if $node.value.value {
+        self.eval-node($_) for $node.statements;
+    }
+    else {
+        self.eval-node($_) for $node.antistatements;
+    }
+}
+
+multi method eval-node(AST::Loop $node) {
+    while %!var{$node.variable.variable-name} &gt; 0 {
+        self.eval-node($_) for $node.statements;
+        %!var{$node.variable.variable-name}--;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>就是这样! 引入 <code>{ }</code> 块是一个相对简单的任务。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_一个现实生活中的测试">11.3.3. 一个现实生活中的测试</h4>
+<div class="paragraph">
+<p>如果你运行这个循环，你很快就会看到一个错误:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">5
+10
+4
+Cannot shift from an empty Array[ASTNode]
+  in method value at /Users/ash/lingua/LinguaAST.rakumod
+  (LinguaAST) line 112</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>前三行显示的是预期的开始结果，但随后，一切突然停止了。从错误信息中可以了解到，这是因为我们在计算表达式时使用了 <code>shift</code>，所以才会出现这种情况。在循环中，表达式是可以重复使用的，所以我们不应该改变它们。让我们把所有的 <code>shift</code> 改成循环。在我们的代码中，有两个这样的地方。第一个是在 <code>AST::MathOperations</code> 类中:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method value() {
+    my $result = @.operands[0].value;
+
+    for 1 .. @.operands.elems - 1 -&gt; $i {
+        $result = operation(@.operators[$i - 1],
+                  $result, @.operands[$i].value);
+    }
+
+    return $result;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第二个是计算器的 multi 方法中的一个:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::HashAssignment $node) {
+    %!var{$node.variable-name} = Hash.new;
+    for 0 .. $node.keys.elems - 1 -&gt; $i {
+        %!var{$node.variable-name}.{$node.keys[$i]} =
+            $node.values[$i].value;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>测试代码现在可以用了。让我们用类似的指令来修复测试中的行为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my n = 5;
+loop n {
+    my n2 = n * n;
+    say "n = $n, n2 = $n2";
+}
+## n = 5, n2 = 25
+## n = 4, n2 = 16
+## n = 3, n2 = 9
+## n = 2, n2 = 4
+## n = 1, n2 = 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>不要忘记测试 <code>if</code> 和 <code>else</code> 块。程序应该能够执行其中的所有语句。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_条件运算符">11.3.4. 条件运算符</h4>
+<div class="paragraph">
+<p>到目前为止，<code>if</code> 子句只能检查值是否为 0。让我们把它变得更强大，允许条件运算符和布尔运算符:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">|  &amp;  &lt;  &lt;=  &gt;  &gt;=  ==  !=</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这里我们不介绍布尔数据类型，而是在现有的表达式中加入运算符。它使得 <code>3+n</code> 和 <code>x&lt;y</code> 都是有效的表达式，可以作为 <code>if</code> 测试中的条件。</p>
+</div>
+<div class="paragraph">
+<p>以上列出的运算符都是二元运算符，其优先级低于算术运算符 <code>+</code> 和 <code>-</code>。其中，<code>&amp;</code> 的优先级较高。所以，我们必须更新 grammar 中的运算符，并添加新的运算符:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi token op(1) {
+    | '|'
+    | '&lt;'  | '&gt;'
+    | '&lt;=' | '&gt;='
+    | '==' | '!='
+}
+
+multi token op(2) {
+    '&amp;'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>更新其余的部分，明确给予优先级:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi token op(3) {
+    '+' | '-'
+}
+
+multi token op(4) {
+    '*' | '/'
+}
+
+multi token op(5) {
+    '**'
+}
+
+multi rule expr(6) {
+    | &lt;number&gt;
+    | &lt;variable-name&gt; &lt;index&gt;?
+    | '(' &lt;expression&gt; ')'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>将函数添加到 <code>AST::MathOperations</code> 类中:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation('|', $a, $b) {
+    $a || $b
+}
+
+multi sub operation('&amp;', $a, $b) {
+    $a &amp;&amp; $b
+}
+
+multi sub operation('&lt;', $a, $b) {
+    $a &lt; $b
+}
+
+multi sub operation('&lt;=', $a, $b) {
+    $a &lt;= $b
+}
+
+multi sub operation('&gt;', $a, $b) {
+    $a &gt; $b
+}
+
+multi sub operation('&gt;=', $a, $b) {
+    $a &gt;= $b
+}
+
+multi sub operation('!=', $a, $b) {
+    $a != $b
+}
+
+multi sub operation('==', $a, $b) {
+    $a == $b
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们在这里依靠 Raku 的运算符。另一种选择是只产生1或0，比如说:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation('&lt;', $a, $b) {
+    $a &lt; $b ?? 1 !! 0
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在测试中，尝试不同的运算符及其组合:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my x = 10;
+my y = 20;
+
+if x &gt; y say "&gt;" else say "&lt;"; ## &lt;
+if x &lt; y say "&gt;" else say "&lt;"; ## &gt;
+
+if x != y say "!=" else say "=="; ## !=
+if x != x say "!=" else say "=="; ## ==
+
+if x == y say "==" else say "!="; ## !=
+if x == x say "==" else say "!="; ## ==
+
+if 5 &lt;= 5 say "5 &lt;= 5"; ## 5 &lt;= 5
+if 5 &lt;= 6 say "5 &lt;= 6"; ## 5 &lt;= 6
+
+if 5 &gt;= 5 say "5 &gt;= 5"; ## 5 &gt;= 5
+if 6 &gt;= 5 say "6 &gt;= 5"; ## 6 &gt;= 5
+
+if (10 &gt; 1) &amp; (5 &lt; 50) say "OK 1"; ## OK 1
+if (10 &lt; 1) | (5 &lt; 50) say "OK 2"; ## OK 2</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_实现_while_循环">11.4. 实现 <code>while</code> 循环</h3>
+<div class="paragraph">
+<p>在本章结束之前，让我们先来实现一下 <code>while</code> 关键字，下面的代码说明了这一点:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my n = 1;
+while n &lt;= 5 {
+    say n;
+    n = n + 1
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>循环体被运行，直到条件停止为真为止。</p>
+</div>
+<div class="paragraph">
+<p>从语法和语义上看，<code>while</code> 循环与我们之前的 <code>loop</code> 循环非常接近。实现它主要是一个复制粘贴的工作。</p>
+</div>
+<div class="paragraph">
+<p>在 grammar 中:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
+    [
+        . . .
+        | &lt;statement=loopped-statement&gt;
+        | &lt;statement=while-statement&gt;
+        . . .
+    ]*
+}
+
+rule while-statement {
+    'while' &lt;value&gt; &lt;block(';')&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>定义了一个新的 AST 节点:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::While is ASTNode {
+    has ASTNode $.value;
+    has ASTNode @.statements;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 action 中:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method while-statement($/) {
+    $/.make(AST::While.new(
+        value =&gt; $/&lt;value&gt;.made,
+        statements =&gt; ($/&lt;block&gt;&lt;statement&gt;.map: *.made),
+    ));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在计算器中:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::While $node) {
+    while $node.value.value {
+        self.eval-node($_) for $node.statements;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>实现了 <code>while</code> 构造。增加一个测试，然后转入下一章。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my n = 1;
+while n &lt;= 5 {
+    say n;
+    n = n + 1
+}
+## 1
+## 2
+## 3
+## 4
+## 5
+
+my k = 1;
+while k &lt; 10 k = k + 1;
+say k; ## 10</code></pre>
 </div>
 </div>
 </div>
