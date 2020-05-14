@@ -11565,7 +11565,7 @@ say 'OK' if $phone ~~ $re;</code></pre>
 <div class="sect2">
 <h3 id="_字面量">11.2. 字面量</h3>
 <div class="paragraph">
-<p>正则表达式的语法是 Raku 中的一种小语言。因为有很多东西需要表达,  它使用某些字符来表达意思。字母, 数字和下划线代表它们自身, 没有任何特殊意义。这些字符可以按原样使用, 如下面的示例所示:</p>
+<p>正则表达式的语法是 Raku 中的一种小语言。由于要表达的东西很多, 所以它使用一些字符来传达意思。字母、数字和下划线代表它们自身, 没有任何特殊意义。这些字符可以按原样使用, 如下面的例子所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11577,7 +11577,7 @@ say 'OK' if $id ~~ /534/; # OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果正则表达式中的字符串包含其他字符, 例如空格, 则应该小心它们。其中一种可能性是引用整个字符串:</p>
+<p>如果正则表达式中的字符串包含其他字符, 比如说空格, 则应该小心处理。其中一种可能是引用整个字符串:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11589,7 +11589,7 @@ say 'Junior' if $last-name ~~ /' Jr'/; # Junior</code></pre>
 <p>正则表达式中的文字字符串 <code>' Jr'</code> 包含一个必须存在于变量 <code>$name</code> 中的空格。</p>
 </div>
 <div class="paragraph">
-<p>另一种方法是使用特殊字符, 前缀为反斜杠。使用 <code>\s</code> 匹配空格:</p>
+<p>另一种方法是使用特殊字符, 用反斜线作为前缀。使用 <code>\s</code> 匹配空格:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11598,7 +11598,7 @@ say 'Junior' if $name ~~ /\sJr/; # Junior</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>默认情况下, Raku 的正则表达式中的空格被忽略。这个事实可以被利用来添加一些<strong>空气</strong>到正则表达式中。比较我们之前使用的没有空格的正则表达式和与之等价的为清晰起见使用空格的正则表达式:</p>
+<p>Raku 中的空格在默认情况下是被忽略的。这个事实可以被利用来为正则表达式添加一些<strong>空气</strong>。对比一下我们之前使用的不使用空格的正则表达式, 和使用空格的正则表达式的等价物:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -11640,12 +11640,12 @@ say 'Junior' if $name ~~ /\sJr/; # Junior</code></pre>
 <div class="sect2">
 <h3 id="_字符类">11.3. 字符类</h3>
 <div class="paragraph">
-<p>正则表达式中的字符类是一个特殊的序列, 它匹配某些给定集合中的字符。例如, 在上一节中, 我们已经使用了一个字符类 <code>\s</code>, 它匹配 ASCII 空格以及其他一些空白字符, 例如制表符。让我们探索Raku 的正则表达式中的字符类。</p>
+<p>正则表达式中的字符类是一个特殊的序列, 它可以匹配某些给定的字符集中的字符。例如, 在上一节中, 我们已经使用了一个字符类 <code>\s</code>, 它与 ASCII 空格以及其一些其他的空白字符(例如制表符)匹配。让我们来探讨一下 Raku 正则表达式中的字符类。</p>
 </div>
 <div class="sect3">
 <h4 id="_点字符">11.3.1. .(点)字符</h4>
 <div class="paragraph">
-<p>一个非常简单的字符, 只有一个点, 可以匹配字符串中的任何字符。当你不关心两个部分之间的某些特征时经常使用它。例如, 以下代码将匹配 <code>a</code> 和 <code>d</code> 之间具有任意两个字符的字符串:</p>
+<p>一个非常简单的字符, 只是一个点, 可以和字符串中的任何字符匹配。当你不关心两个部分之间的某些字符时, 通常会使用这种方法。例如, 下面的代码将与一个字符串中 a 和 d 之间有任意两个字符的字符串进行匹配:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11655,13 +11655,13 @@ say 'OK' if 'a*^d' ~~ / a . . d /; # OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在前两个示例中, 每个点都匹配其中一个字母。在第三个示例中, 两个点都匹配一个特殊字符。</p>
+<p>在前两个例子中, 每个点都与其中一个字母匹配。在第三个例子中, 两个点都匹配一个空白字符。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_反斜线字符类">11.3.2. 反斜线字符类</h4>
 <div class="paragraph">
-<p>有一组预定义的字符类, 以反斜杠开头, 后跟一个小写或大写的字母。大写版本与其小写版本语义相反, 其否定字符集匹配的字符集。下表包含反斜线字符类的概述:</p>
+<p>有一组预定义的字符类, 它们以反斜线开头, 后跟一个小写或大写的字母。大写字母的版本与小写字母语义相反, 并且否定了与字符类匹配的字符集。下表包含了反斜线字符类的概述:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -11713,13 +11713,13 @@ say 'OK' if 'a*^d' ~~ / a . . d /; # OK</code></pre>
 </tbody>
 </table>
 <div class="paragraph">
-<p>现在我们将详细测试所有字符类。</p>
+<p>现在我们就来详细考察一下所有的字符类。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_s_和_s_字符">11.3.3. \s 和 \S 字符</h4>
 <div class="paragraph">
-<p>我们已经看到这个字符类的一个示例-用于匹配空格字符。它的大写对应, <code>\S</code>, 意义相反 - 它与除空格之外的任何字符匹配。 我们来看一个例子:</p>
+<p>我们已经看到了这个字符类的一个例子- <code>\s</code>, 用于匹配空格字符。它的大写字母对应的字符类, <code>\S</code>, 则与之相反 - 它与除了空格以外的任何字符匹配。 让我们来看一个例子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11729,16 +11729,16 @@ say 'OK' if $str ~~ / Hello\S /;  # OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>两个正则表达式都匹配。第一个正则中的 <code>\s</code> 与单词之间的空格匹配。第二个示例中的 <code>\S</code> 与逗号匹配。</p>
+<p>两个正则表达式都是匹配的。第一个例子中的 <code>\s</code> 与单词之间的空格匹配。第二个例子中的 <code>\S</code> 与逗号匹配。</p>
 </div>
 <div class="paragraph">
-<p>字符类 <code>\s</code> 是其它空格字符类的组合 - <code>\h</code> 和 <code>\v</code>,  这些将在以下部分中介绍。这些字符类还包括单独的诸如 <code>\t</code> (水平制表符, 0x09)或 <code>\r</code> (换行, 0x0A)等字符。</p>
+<p>字符类 <code>\s</code> 是其它空格字符类的组合 - <code>\h</code> 和 <code>\v</code> 组合而成的, 在下面的章节中会介绍。这些字符类还包括单个字符, 如 <code>\t</code> (水平制表符, 0x09)或 <code>\r</code>(换行, 0x0A)。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_t_和_t_字符">11.3.4. \t 和 \T 字符</h4>
 <div class="paragraph">
-<p><code>\t</code> 和 <code>\T</code> 分别与制表符和非制表符匹配。想象一下你有一行制表符分隔的数据, 你想把它放到一个数组中。以下代码会为你做到:</p>
+<p><code>\t</code> 和 <code>\T</code> 分别与制表符和非制表符匹配。想象一下， 你有一行用制表符分隔的数据, 你想把它放到一个数组中。下面的代码可以帮你完成:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11753,10 +11753,10 @@ OUT</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这里, 我们在 <code>$data</code> 字符串上调用 <code>split</code> 方法并将其传递给包含单个 <code>\t</code> 字符类的正则表达式, 这应该与制表符匹配。因此, 它将源数据行拆分成三部分并将它们放入 <code>@data</code> 数组中。</p>
+<p>在这里, 我们在 <code>$data</code> 字符串上调用 <code>split</code> 方法, 并传递给它一个包含单个 <code>\t</code> 字符类的正则表达式, 它应该与制表符匹配。这样, 它将源数据行分成三部分, 并把它们放到 <code>@data</code> 数组中。</p>
 </div>
 <div class="paragraph">
-<p><code>qq:to/OUT/</code> 结构是 heredoc 的开始, 它在第二次出现的标签 <code>OUT</code> 处结束。双 <code>qq</code> 需要在 heredoc 内部进行变量插值。 这种方法可以更容易地准备模板以输出所需的数据布局:</p>
+<p><code>qq:to/OUT/</code> 构造是 heredoc 的开始, 它在第二次出现的标签 <code>OUT</code> 处结束。双 <code>qq</code> 需要在 heredoc 内部进行变量插值。 这种方法可以更容易地准备模板, 以便按照所需的布局输出数据:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11770,13 +11770,13 @@ Year of birth = 1970</code></pre>
 <div class="sect3">
 <h4 id="_h_和_h_字符">11.3.5. \h 和 \H 字符</h4>
 <div class="paragraph">
-<p>这些字符类的小写版本与水平空格匹配(并且, 大写版本分别否定匹配结果)。</p>
+<p>这些字符类的小写版本与水平空格相匹配(大写版本分别否定匹配结果)。</p>
 </div>
 <div class="paragraph">
-<p>在常见的空格和制表字符中, 还有许多其他的水平空格, 例如, 在 HTML 中被标记为 <code>&nbsp;</code> 的不换行空格。</p>
+<p>在常见的空格和制表字符中, 还有许多其他的水平空格, 例如, 在 HTML 中被标记为 <code>&nbsp;</code> 的非换行空格。</p>
 </div>
 <div class="paragraph">
-<p>下表列出了属于此字符类的所有当前定义的字符:</p>
+<p>下表列出了当前定义的所有属于该字符类的字符:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -11867,13 +11867,13 @@ Year of birth = 1970</code></pre>
 </tbody>
 </table>
 <div class="paragraph">
-<p>此表中有许多字符, 你可能永远不会使用这些字符, 而是查看表格。 你可以想象 Raku 对于 Unicode 和空格有多么谨慎。</p>
+<p>这张表中有很多字符, 你可能从来没有用过, 但看了这张表, 你可以想象到 Raku 对于 Unicode 和空格的要求是多么严格。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_v_和_v_字符">11.3.6. \v 和 \V 字符</h4>
 <div class="paragraph">
-<p>\v 和 \V 字符类表示垂直空格和字符的字符, 这不是垂直空格。与水平空格集相比, Raku 对垂直空格的了解要少得多, 但仍然覆盖不同 Unicode 符号的整个范围, 如下面的列表所示:</p>
+<p>\v 和 \V 字符类代表了垂直空格和非垂直空格的字符。与水平空格集相比, Raku 知道的垂直空格要少得多, 但它仍然涵盖了整个不同的 Unicode 符号, 如下列所示:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -11919,13 +11919,13 @@ Year of birth = 1970</code></pre>
 <div class="sect3">
 <h4 id="_n_和_n_字符">11.3.7. \n 和 \N 字符</h4>
 <div class="paragraph">
-<p><code>\n</code> 字符匹配逻辑新行。<code>\N</code> 字符与之相反, 匹配任何不是新行的字符。</p>
+<p><code>\n</code> 字符与逻辑上的新行匹配。<code>\N</code> 字符则相反, 它与任何不是新行的字符匹配。</p>
 </div>
 <div class="paragraph">
-<p>匹配新行很棘手, 因为不同操作系统中逻辑行的分离的有不同的约定。在类 Unix 系统上, 行由单个 <code>\r</code> 字符(代码为0x0A)分隔。在 Windows 中创建的文件中, 新行分隔符是 CARRIAGE RETURN(0x0A) 和 LINE FEED(0x0D) 两个字符的组合。Raku 的 <code>\n</code> 字符匹配其中任何一个。</p>
+<p>匹配新行是很棘手的, 因为在不同的操作系统中, 不同的逻辑行之间有不同的约定。在类 Unix 系统中, 行之间由单个 <code>\r</code> 字符(代码为0x0A)分隔。在 Windows 中创建的文件中, 新行分隔符是 CARRIAGE RETURN(0x0A) 和 LINE FEED(0x0D) 两个字符的组合。Raku 的 <code>\n</code> 字符可以匹配其中的任何一个。</p>
 </div>
 <div class="paragraph">
-<p>让我们在以下示例中演示:</p>
+<p>让我们通过下面的例子来证明这一点:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11940,7 +11940,7 @@ say @windows-lines.join('//');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里有两个带不同新行分隔符的字符串。然后, 我们用相同的正则表达式 <code>/\n/</code> 将这两行分开。程序的输出显示行被分割成了相同的部分:</p>
+<p>这里, 有两个带有不同新行分隔符的字符串。然后, 我们用相同的正则表达式 <code>/\n/</code> 将这两行拆分开。程序的输出结果显示, 这两行被分割成了相同的部分:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11952,18 +11952,18 @@ Hello,//World!</code></pre>
 <div class="sect3">
 <h4 id="_d_和_d_字符">11.3.8. \d 和 \D 字符</h4>
 <div class="paragraph">
-<p><code>\d</code> 字符类与数字匹配。这里的数字被理解为 <code>Number</code> 类别中 Unicode 字符。在传统的阿拉伯数字 <code>0-9</code> 中, 有来自其他字母和脚本的数字。这些字符的整个列表令人筋疲力尽, 但是让我们举几个其他数字的例子:</p>
+<p><code>\d</code> 字符类与一个数字匹配。这里的数字被理解为 <code>Number</code> 类别中 Unicode 字符。在传统的阿拉伯数字 <code>0-9</code> 中, 还有来自其他字母和脚本的数字。这些字符的整个列表是详尽的, 但让我们举几个其他数字的例子:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>阿拉伯语-印度语: ٠ ١ ٢ ٣ ٤ ٥ ٦</p>
+<p>阿拉伯文-印度文: ٠ ١ ٢ ٣ ٤ ٥ ٦</p>
 </li>
 <li>
-<p>Nko (来自西非的从右到左的字母表): 梵文 (印度和尼泊尔): ० १ २ ३ ४</p>
+<p>Nko (来自西非的从右到左的字母): 梵文 (印度和尼泊尔): ० १ २ ३ ४</p>
 </li>
 <li>
-<p>孟加拉: ০ ১ ২ ৩ ৪</p>
+<p>孟加拉语: ০ ১ ২ ৩ ৪</p>
 </li>
 <li>
 <p>数学粗体: 𝟎 𝟏 𝟐 𝟑 𝟒</p>
@@ -11974,7 +11974,7 @@ Hello,//World!</code></pre>
 </ul>
 </div>
 <div class="paragraph">
-<p>这些数字的任何一个都将匹配 <code>\d</code>:</p>
+<p>这些数字中的任何一个数字都会与 <code>\d</code> 匹配:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11986,10 +11986,10 @@ OK</code></pre>
 <div class="sect3">
 <h4 id="_w_和_w_字符">11.3.9. \w 和 \W 字符</h4>
 <div class="paragraph">
-<p><code>\w</code> 字符类与可以是单词的一部分的字符匹配, 即和字母, 数字与下划线符号匹配。<code>\W</code> 与其他所有除字面、数字和下划线的字符匹配。字母在这里是以 Unicode 意义理解的 - 这些是 <code>Letter</code> 类别中的字符。</p>
+<p><code>\w</code> 字符类与可以作为单词的一部分的字符匹配, 即字母、数字和下划线符号匹配。<code>\W</code> 与其他所有除字面、数字和下划线的字符匹配。这里的字母在是在 Unicode 意义上理解的 - 这些是 <code>Letter</code> 类别中的字符。</p>
 </div>
 <div class="paragraph">
-<p>例如, <code>\w</code> 将始终与任何希腊字母匹配:</p>
+<p>例如, <code>\w</code> 总是与任何希腊字母匹配:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11998,16 +11998,16 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>与我们在上一节中介绍的数字一样, 你必须准备好 <code>\w</code> 将根据你所熟悉的语言与你可能期望的更多字符匹配。</p>
+<p>就像我们在上一节中提到的数字一样, 你必须准备好 <code>\w</code> 将与你所熟悉的语言中的许多字符匹配。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_字符类_2">11.3.10. 字符类</h4>
 <div class="paragraph">
-<p>字符类是一种请求与给定字符列表匹配的机制。例如, 要匹配十六进制数字, 我们需要匹配一个带十进制数字 0 到 9 和六个字母 a 到 f(也包括它们的大写变体 A 到 F)的字符。</p>
+<p>字符类是一种请求与给定字符列表进行匹配的机制。例如, 要匹配十六进制数字, 我们需要匹配一个十进制数字 0 到 9 和六个字母 a 到 f(也包括它们的大写变体 A 到 F)的字符。</p>
 </div>
 <div class="paragraph">
-<p>在 Raku 正则表达式中, 这可以写为字符类 <code>&lt;[0..9 a..f A..F]&gt;</code>。让我们将此正则表达式应用于大写拉丁字母列表:</p>
+<p>在 Raku 的正则表达式中, 这可以写成一个字符类 &lt;[0..9 a..f A..F]&gt;。让我们把这个正则表达式应用到大写的拉丁字母列表中:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12017,10 +12017,10 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这将打印字符串 <code>ABCDEF</code>, 其中包含与给定正则表达式匹配的字母。</p>
+<p>这将打印出字符串 <code>ABCDEF</code>, 其中包含与给定的正则表达式匹配的字母。</p>
 </div>
 <div class="paragraph">
-<p>字符类还可以包括反斜杠序列。在电话号码正则表达式中, 我们可以使用与数字, 空格或连字符匹配的字符类:</p>
+<p>字符类也可以包括反斜线序列。在电话号码正则表达式中, 我们可以使用一个字符类来匹配数字、空格或连字符:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12028,13 +12028,13 @@ OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>让我们继续使用 Raku 正则表达式引擎中内置的其他字符类。</p>
+<p>让我们继续 Raku 正则表达式引擎中内置的其他字符类。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_预定义的子规则">11.3.11. 预定义的子规则</h4>
 <div class="paragraph">
-<p>Raku 中的正则表达式包括一些预定义的<strong>子规则</strong>, 它们也是字符类并且与反斜杠字符类部分相交。从句法上讲, 子规则是尖括号中的名字。下表总结了它们:</p>
+<p>Raku 中的正则表达式包括一些预定义的<strong>子规则</strong>, 这些子规则也是字符类, 并与反斜线字符类部分相交。语法上, 子规则是角括号中的名字。下表总结了这些子规则:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -12093,7 +12093,7 @@ OK</code></pre>
 </tbody>
 </table>
 <div class="paragraph">
-<p>预定义的子规则是 Raku 正则表达式中的有效部分, 可以在正则表达式与其他字面量字符类一起的任何地方使用。在以下示例中, 我们检查字符串是否包含一个数字后跟一个字母:</p>
+<p>在 Raku 中, 预定义子规则是正则表达式的有效部分, 可以和其他字面量字符类一起使用在正则表达式的任何地方。在下面的例子中, 我们检查字符串是否包含一个数字后跟一个字母:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12105,19 +12105,19 @@ say 'No match' if 678 !~~ $regex;    # No match</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>前面提到的子规则不是根据它们的 Unicode 属性选择字符的唯一方法 。在下一节中, 我们将了解如何直接使用 Unicode 类别。</p>
+<p>前面提到的命名子规则并不是唯一根据 Unicode 属性选择字符的方法 。在下一节中, 我们将看到如何直接使用 Unicode 类别。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_使用_unicode_属性">11.3.12. 使用 Unicode 属性</h4>
 <div class="paragraph">
-<p>Unicode 字符属于不同的类别, 例如字母或数字, 或标点。类别可能具有额外级别的详细信息, 例如字母可以是小写或大写。</p>
+<p>Unicode 中的字符属于不同的类别, 例如字母或数字或标点符号。类别可以有额外的细化级别, 例如字母可以是小写或大写。</p>
 </div>
 <div class="paragraph">
-<p>Raku 中的正则表达式为我们提供了基于 Unicode 类别的字符类机制 。要创建这样的类, 请使用一对包含冒号的尖括号, 后跟首字母大写的类别名称。要指定子类别, 请添加相应的小写字母。</p>
+<p>Raku 中的正则表达式为我们提供了一个基于 Unicode 类别的字符类机制 。要创建这样的一个类, 请使用一对包含冒号的角括号, 后面是类别名称的大写字母。要指定子类别, 请添加相应的小写字母。</p>
 </div>
 <div class="paragraph">
-<p>例如, 匹配字母的字符类是 <code>&lt;:L&gt;</code>, 而匹配大写字母的字符类是 <code>&lt;:Lu&gt;</code>。在下面的示例中, 我们把几个字母与这些字符类相匹配:</p>
+<p>例如, 匹配字母的字符类是 <code>&lt;:L&gt;</code>, 而匹配大写字母的字符类是 <code>&lt;:Lu&gt;</code>。在下面的例子中, 我们将几个字母与这些字符类进行匹配:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12128,7 +12128,7 @@ say 'No match' if 678 !~~ $regex;    # No match</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此代码循环遍历一个有不同字符的列表, 并报告它们是否匹配 <code>&lt;:L&gt;</code> 或 <code>&lt;:Lu&gt;</code>:</p>
+<p>这段代码循环遍历一个有不同字符的列表, 并报告它们是否匹配 <code>&lt;:L&gt;</code> 或 <code>&lt;:Lu&gt;</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12144,10 +12144,10 @@ b ~~ &lt;:L&gt;
 </div>
 </div>
 <div class="paragraph">
-<p>从输出中可以看出, 所有字母都通过了 <code>&lt;:L&gt;</code> 过滤器, 只有大写字母匹配了 <code>&lt;:Lu&gt;</code> 字符类, 并且非字母字符与其中任何一个测试都不匹配。</p>
+<p>从输出中可以看到, 所有的字母都通过了 <code>&lt;:L&gt;</code> 过滤器, 大写字母与 <code>&lt;:Lu&gt;</code> 字符类相匹配, 非字母字符在两个测试中都不匹配。</p>
 </div>
 <div class="paragraph">
-<p>与 Unicode 相关的字符类在 Raku 中有两个名称, 短名称和长名称, 可以互换使用。可以像这样使用长名称编写相同的代码:</p>
+<p>在 Raku 中, 与 Unicode 相关的字符类有两个名称, 分别是短名称和长名称, 可以互换。可以像这样使用长名称编写相同的代码:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12158,7 +12158,7 @@ b ~~ &lt;:L&gt;
 </div>
 </div>
 <div class="paragraph">
-<p>下表列出了与 Unicode 类别对应的所有字符类。在此表中, 单字母类别后面是两个字母的子类别。请注意一些字母组合不能从完整的类别名称中直接扣除; 例如, <code>Punctuation</code> 字符类, <code>Open</code> 类别的字符类在 Unicode 中称为 <code>Ps</code>, 因此它在 Raku 中是 <code>&lt;:Ps&gt;</code>:</p>
+<p>下表列出了所有与 Unicode 类别对应的字符类。在此表中, 单字母类别后面是两个字母的子类别。请注意, 有些字母组合不能直接从类别名称中扣除; 例如, Unicode 中的 <code>Punctuation</code> 字符类, <code>Open</code> 类别的字符类被称为 <code>Ps</code>, 因此它在 Raku 中是 <code>&lt;:Ps&gt;</code>:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -12404,10 +12404,10 @@ b ~~ &lt;:L&gt;
 <div class="sect3">
 <h4 id="_字符类算术">11.3.13. 字符类算术</h4>
 <div class="paragraph">
-<p>Raku 提供了强大的功能, 允许你使用集合运算创建新的字符类。这些是 - 用于并集的 <code>+</code> 或 <code>|</code>,  用于差集的 <code>-</code>, 用于交集的 <code>&amp;</code>, 用于异或运算的 <code>^</code>。此外, 可以使用 <code>-</code> 或 <code>!</code> 来否定字符类。</p>
+<p>Raku 提供了强大的功能, 允许你使用集合运算创建新的字符类。这些是 - 用于并集的 <code>+</code> 或 <code>|</code>,  用于差集的 <code>-</code>, 用于交集的 <code>&amp;</code>, 用于异或运算的 <code>^</code>。此外, 还可以使用 <code>-</code> 或 <code>!</code> 来否定字符类。</p>
 </div>
 <div class="paragraph">
-<p>让我们看看例子。首先, 创建与小写字母和数字都匹配的连接类:</p>
+<p>让我们来看一些例子。首先, 创建一个同时匹配小写字母和数字的连接类:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12418,7 +12418,7 @@ b ~~ &lt;:L&gt;
 </div>
 </div>
 <div class="paragraph">
-<p>此程序打印匹配字符 <code>a</code> 和 <code>3</code>。大写字母 A 不匹配, 因为它既不是小写字母也不是数字。</p>
+<p>该程序打印匹配的字符 <code>a</code> 和 <code>3</code>。大写的 A 不匹配, 因为它既不是小写字母也不是数字。</p>
 </div>
 <div class="paragraph">
 <p>在另一个例子中, 我们通过从所有字母的集合中减去小写字母来重新发明大写字母:</p>
@@ -12431,7 +12431,7 @@ b ~~ &lt;:L&gt;
 </div>
 </div>
 <div class="paragraph">
-<p>现在, 取所有小写字母并删除所有元音:</p>
+<p>现在, 取所有的小写字母并去掉所有的元音:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12441,10 +12441,10 @@ b ~~ &lt;:L&gt;
 </div>
 </div>
 <div class="paragraph">
-<p>(如果你想尝试使用其他语言, 请小心这种方法, 因为 <code>&lt;:Ll&gt;</code> 包括英文字母外的字母。)</p>
+<p>(如果你想用其他语言做实验, 请注意这个方法, 因为 <code>&lt;:Ll&gt;</code> 包括英文字母以外的字母。)</p>
 </div>
 <div class="paragraph">
-<p>如果你需要匹配除给定字符之外的任何字符, 差集是有用的。例如, 这就是你如何匹配英语字母表中, 不是原始拉丁语, 不包含一些现代英文字母的任何内容:</p>
+<p>如果你需要匹配除给定字符以外的任何字符, 差集是有用的。例如, 这就是你如何匹配英语字母表中, 不是原始拉丁语, 不包含一些现代英文字母的任何内容:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12454,7 +12454,7 @@ b ~~ &lt;:L&gt;
 </div>
 </div>
 <div class="paragraph">
-<p>要否定一个字符类, 在它之前加一个减号:</p>
+<p>要否定一个字符类, 在其前面加上一个减号:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12462,7 +12462,7 @@ b ~~ &lt;:L&gt;
 </div>
 </div>
 <div class="paragraph">
-<p>可以使用感叹号否定 Unicode 预定义字符类:</p>
+<p>可以使用感叹号来否定 Unicode 预定义字符类:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12470,7 +12470,7 @@ b ~~ &lt;:L&gt;
 </div>
 </div>
 <div class="paragraph">
-<p>字符类本身匹配单个字符。为了使正则表达式更强大, 让我们检查量词。</p>
+<p>字符类本身匹配单个字符。为了使正则表达式更强大, 让我们研究一下量词。</p>
 </div>
 </div>
 </div>
@@ -12480,17 +12480,16 @@ b ~~ &lt;:L&gt;
 <p>量词修饰它前面的原子并要求特定次数的重复。<strong>原子</strong>是一个字符或字符类, 或字符串字面量或组(我们稍后将在本章的"使用捕获提取子字符串”一节中讨论组)。</p>
 </div>
 <div class="paragraph">
-<p><code>+</code> 量词允许前一个原子重复一次或多次。例如, 正则表达式 <code>/a+/</code> 与单个字符 a 匹配, 以及与包含两个字符的 aa 字符串匹配 , 或三个 a 或更多-aaaaaa。但是, 它不会与根本不包含 a 字符的字符串匹配。</p>
+<p><code>+</code> 量词允许前一个原子重复一次或多次。例如, 正则表达式 <code>/a+/</code> 与单个字符 a 匹配, 以及与包含两个字符的 aa 字符串匹配 , 或三个 a 或更多-aaaaaa。但是, 它不会与完全不包含 a 字符的字符串匹配。</p>
 </div>
 <div class="paragraph">
-<p><code>\*</code> 量词允许任意数量的重复, 包括零次。所以, <code>/a*/</code> 正则表达式与 bdef, abc 或 baad 等字符串匹配。当然, 单个 <code>/a*/</code> 可能不是那么有有; <code>*</code> 量词的更自然的用例是在其他子串之间, 例如 <code>/ ab*c/</code>。 此正则表达式与 ac, abc 或 abbc 匹配。</p>
+<p>* 量词允许任意数量的重复, 包括零次。所以, /a*/ 正则表达式与 bdef、abc 或 baad 等字符串匹配。当然, 单个 /a*/ 可能不是那么有用; <code>*</code> 量词的更自然的用例是在其他子字符串之间, 例如 <code>/ab*c/</code>。 这个正则表达式与 ac、abc 或 abbc 匹配。</p>
 </div>
 <div class="paragraph">
-<p><code>?</code> 量词需要一个原子出现一次或不存在。考虑正则表达式 <code>/colou?r/</code>, 它与英式和美式拼写单词 colour 和 color 相匹配。</p>
+<p><code>?</code> 量词需要一个原子要么出现一次, 要么不出现。考虑正则表达式 <code>/colou?r/</code>, 它与英式和美式拼写中的单词 colour 和 color 相匹配。</p>
 </div>
 <div class="paragraph">
-<p>也可以使用后面跟着重复次数或范围的 <code>*\*</code> 量词来请求给定的重复次数。例如, <code>/ 'a' 'b' <strong> 3..4 'c' /</code> 匹配包含 bbb 或 bbbb 子串的字符串, 例如, abbbc 匹配, 但不匹配
-abbc 或 abbbbbbbc。在 <code>^</code> 的帮助下, 可以排除范围的边缘 - <code>/'a' 'b' \</strong> 3..^10 'c'/</code> 将与包含 3 到 9 个字母 a 的序列的子串匹配。开区间, 例如 <code>b <strong>* ^10</code>(0 到 9 个 b)或 <code>b \</strong>* 3..*</code> (三次或更多次) 也允许。</p>
+<p>也可以使用后面跟着重复次数或范围的 ** 量词来请求给定的重复次数。例如, <code>/'a' 'b' ** 3..4 'c' /</code> 匹配包含 bbb 或 bbbb 的子字符串, 例如, abbbc 匹配, 但不匹配 abbc 或 abbbbbbbc。在 <code>^</code> 的帮助下, 可以排除范围的边缘 - /'a' 'b' ** 3..^10 'c'/ 将与包含 3 到 9 个后续字母 a 的子字符串匹配。开区间, 例如 b ** ^10(0 到 9 个 b)或 b ** 3..* (三次或三次以上) 也是允许的。</p>
 </div>
 <div class="paragraph">
 <p>还有另一对量词, <code>%</code> 和 <code>%%</code>, 它们的使用方式略有不同。他们与 <code>+</code>, <code>?</code>, <code>*</code> 和 <code>**</code> 量词一起工作, 请求通过 <code>%</code> 或 <code>%%</code> 右侧提到的分隔符分割的重复序列。在 <code>%%</code> 的情况下, 分隔符也可能出现在最后一个重复元素之后。请考虑以下示例:</p>
@@ -12503,21 +12502,21 @@ say 1 if 'a,b,c,d' ~~ / \w ** 2..3 %% ',' /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此代码与第一种情况-a, b, c, d 中的所有四个字母都匹配, 第二种情况匹配前三个字母-a, b, c。在最后一种情况下, 只有三个字母匹配, 但是 c 和 d 之间的逗号也将被消耗-<code>a, b, c,</code>。</p>
+<p>该代码与第一种情况下的所有四个字母-a, b, c, d 匹配, 与第二种情况下的前三个字母-a, b, c 匹配。在最后一种情况下, 只匹配三个字母, 但是 c 和 d 之间的逗号也会被消耗掉-<code>a, b, c,</code>。</p>
 </div>
 <div class="sect3">
 <h4 id="_贪婪">11.4.1. 贪婪</h4>
 <div class="paragraph">
-<p>上述量词默认表现为<strong>贪婪</strong>。这意味着他们从源字符串中匹配尽可能多的字符。例如, 在匹配 <code>'bbb' ~~ /b*/</code> 中, 正则表达式将始终消耗这三个字符。同样, <code>+</code> 量词尝试尽可能多地消耗重复字符。</p>
+<p>上面描述的量词默认情况下是<strong>贪婪的</strong>。这意味着他们会尽可能多地匹配源字符串中的字符。例如, 在匹配 <code>'bbb' ~~ /b*/</code> 中, 所有的三个字符都会被正则表达式消耗掉。同样的, <code>+</code> 量词也会尽可能多的消耗重复字符。</p>
 </div>
 <div class="paragraph">
-<p>有时候这种行为是不可取的。考虑从 HTML 标签中选择属性的正则表达式 。从给定的字符串 <code>&lt;a href="index.html" class="menu"&gt;</code> 中, 我们想要提取除属性的值, 即引号中的字符串。试图创建这样一个正则表达式, 如 <code>/ \" .* \" /</code> 将取在第一个引号和最后一个引号之间的整个子串- <code>"index.html" class="menu"</code>。这是因为 <code>*</code> 量词不想停在第一个属性值的末尾并继续消耗字符。</p>
+<p>有时候这种行为并不理想。考虑一个从 HTML 标签中选择属性的正则表达式。从给定的字符串 <code>&lt;a href="index.html" class="menu"&gt;</code> 中, 我们想要提取除属性的值, 即引号内的字符串。试图创建这样一个正则表达式, 如 / \" .* \" / 将提取第一个引号和最后一个引号之间的整个子串- 即 <code>"index.html" class="menu"</code>。这是因为 <code>*</code> 量词不想在第一个属性值的末尾停止, 而是继续消耗字符。</p>
 </div>
 <div class="paragraph">
-<p>它更进一步, 甚至通过最后一个引号和结束角括号。在那之后, 没有剩下更多的字符, 但正则表达式希望与双引号匹配。所以正则表达式引擎执行回溯, 将消耗的字符<strong>返回</strong>给字符串, 直到正则表达式被满足或者失败。</p>
+<p>它更进一步, 甚至通过最后一个引号和闭合角括号。在这之后, 没有剩下任何字符了, 但正则表达式希望与双引号匹配。所以, 正则表达式引擎会执行回溯, 将消耗的字符<strong>返回</strong>给字符串, 直到正则表达式被满足或者失败。</p>
 </div>
 <div class="paragraph">
-<p>为防止量词的贪婪性质, 请在其后添加一个问号:</p>
+<p>为了防止量词的贪婪性, 请在其后添加一个问号:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12528,7 +12527,7 @@ say 1 if 'a,b,c,d' ~~ / \w ** 2..3 %% ',' /;</code></pre>
 <p>现在, 它只匹配第一个属性值(包括引号) - <code>"index.html"</code>。</p>
 </div>
 <div class="paragraph">
-<p>请注意, 在正则表达式中, "字符应该被转义 - \"。正如我们在*字面量*一节中学到的那样, 只有字母数字字符和下划线符号匹配他们自身。或者, 我们可以通过把双引号放置在一对单引号中来创建一个引用字符串:</p>
+<p>注意, 在正则表达式中, "字符应该被转义 - \"。正如我们在*字面量*一节中学到的那样, 只有字母数字字符和下划线符号与他们自身匹配。另外, 我们也可以通过在一对单引号内放入双引号来创建一个引号字符串:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12536,22 +12535,22 @@ say 1 if 'a,b,c,d' ~~ / \w ** 2..3 %% ',' /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>反贪婪行为可以应用于任何量词, 甚至可以应用于 <code>?</code> 一。在那种情况下, 如果可能, 修改量词 <code>??</code> 将尝试不匹配任何东西。因此, 如果是字符串 abc 针对 <code>/ab?/</code> 正则表达式进行测试, 那么它的子串会被匹配。使用非贪婪的 <code>/ab??/</code> 正则表达式, 只有 <code>a</code> 会匹配。当然, 如果我们以这种方式修改正则表达式, 那么 <code>b??</code> 必须与某些东西相匹配, 如 <code>/ab??c/</code>, 然后它会这样做。</p>
+<p>反贪婪行为可以应用于任何量词, 甚至可以应用于 <code>?</code>。在这种情况下, 如果可能的话, 修改后的量词 <code>??</code> 将尝试不匹配任何东西。因此, 如果是字符串 abc 针对 <code>/ab?/</code> 正则表达式进行测试, 那么它的子串 ab 将被匹配。对于非贪婪的 <code>/ab??/</code> 正则表达式, 只有 <code>a</code> 会匹配。当然, 如果我们修改正则表达式, 使 <code>b??</code> 必须与某些东西匹配, 就像 <code>/ab??c/</code> 那样, 那么它就会这样做。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_使用捕获提取子字符串">11.5. 使用捕获提取子字符串</h3>
 <div class="paragraph">
-<p>只匹配正则表达式是不够的。如果不能提取与正则表达式一致的子串, 那么正则表达式的真正力量不完整的。 将字符串的一部分保存在特殊变量中称为<strong>捕获</strong>。</p>
+<p>只匹配正则表达式还不够。如果没有提取出与正则表达式模式一致的子字符串的能力, 那么正则表达式的真正力量不完整的。 将字符串的一部分保存在特殊变量中, 这就是所谓的<strong>捕获</strong>。</p>
 </div>
 <div class="sect3">
 <h4 id="_捕获组">11.5.1. 捕获组</h4>
 <div class="paragraph">
-<p>在 Raku 中, 通过将正则表达式的一部分放在圆括号中来实现捕获。圆括号在正则表达式中具有双重含义。我们已经在电话号码中分组备选项中看过圆括号的用法了。</p>
+<p>在 Raku 中, 捕获是通过将正则表达式的一部分放到圆括号中来实现的。圆括号在正则表达式中具有双重含义。我们已经看到了在电话号码中用括号来分组的用法。</p>
 </div>
 <div class="paragraph">
-<p>让我们继续提取 HTML 属性值的示例。我们现在想要把值打印出来。因此, 我们需要创建一个正则表达式并标记我们想要提取的数据边界。捕获的数据被放入变量 <code>$0</code>, <code>$1</code> 等等。数字索引从零开始, 对应于正则表达式中捕获括号的顺序编号:</p>
+<p>让我们继续以提取 HTML 属性的值为例。我们现在要打印出这些值。所以, 我们需要创建一个正则表达式并标记出我们想要提取的数据的边界。将捕获的数据被放入变量 <code>$0</code>, <code>$1</code> 等变量中。数字索引从零开始, 对应于正则表达式中捕获括号的顺序编号:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12562,7 +12561,7 @@ say $1;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>运行此代码并查看它打印的内容:</p>
+<p>运行这段代码, 看看它打印出了什么:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12571,10 +12570,10 @@ say $1;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>实际上, 我们获得了我们想要的 HTML 属性的值。它们包含那些 <code>$str</code> 变量与圆括号中的正则表达式 - <code>(.*?)</code> 部分匹配的子字符串。因为它们出现了两次, 所以有两个变量被填充。</p>
+<p>的确, 我们得到了我们想要的 HTML 属性的值。它们包含了 <code>$str</code> 变量的子字符串, 这些子字符串与圆括号中的正则表达式 - <code>(.*?)</code> 中的部分相匹配。因为它们出现了两次, 所以有两个变量被填充了。</p>
 </div>
 <div class="paragraph">
-<p>作为旁注, 此时我们可以说非贪婪量词并不是表达意思的唯一方式。而不是说"取双引号之前的尽可能少的字符", 我们可以要求"取尽可能多的不是引号的字符"并使用否定字符类:</p>
+<p>作为一个侧面的说明, 此时我们可以说, 非贪婪量词并不总是唯一的表达方式。而不是说"在双引号前尽量少取一些字符", 我们可以要求"尽量夺取一些不是引号的字符", 并使用否定字符类:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12585,17 +12584,16 @@ say $1;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>同样, 必须转义引号, 即使在字符类中也是如此。</p>
+<p>同样, 即使是在字符类内部, 引号也必须转义。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_match_对象">11.5.2. Match 对象</h4>
 <div class="paragraph">
-<p>你可能已经注意到, 在前面示例的输出中, 实际的子字符串是显示在一对角括号之间。这是因为变量 <code>$0</code> 和 <code>$1</code> 的内容不是裸字符串, 而是 <strong>Match</strong> 类型的对象。在使用 <code>say</code> 或 <code>print</code> 函数打印时, <strong>Match</strong> 对象以这种方式格式化。</p>
+<p>你可能已经注意到, 在前面的例子的输出中, 真实的子字符串显示在一对方角括号之间。这是因为变量 <code>$0</code> 和 <code>$1</code> 的内容不是一个裸字符串, 而是一个 <strong>Match</strong> 类型的对象。在使用 <code>say</code> 或 <code>print</code> 函数打印时, <strong>Match</strong> 对象也是以这种方式格式化的。</p>
 </div>
 <div class="paragraph">
-<p><code>$0</code>, <code>$1</code> 等变量实际上是完整形式 <code>$/[0]</code>, <code>$/[1]</code> 等等的快捷方式变体。<code>$/</code> 变量是 <strong>Match 对象</strong>。它是接收正则表达式匹配结果的默认变量。它包含所有的捕获字符串, 以及
-与整个正则表达式匹配的整个子字符串。要获取单独的捕获, 使用诸如 <code>$/[1]</code> 或 <code>$1</code> 的索引。</p>
+<p><code>$0</code>, <code>$1</code> 等变量实际上是完整形式 <code>$/[0]</code>, <code>$/[1]</code> 等快捷方式的变体。<code>$/</code> 变量就是 <strong>Match 对象</strong>。它是接收正则表达式匹配结果的默认变量。它包含了所有的捕获字符串, 以及与整个正则表达式匹配的子字符串。要获取单独的捕获, 需要使用诸如 <code>$/[1]</code> 或 <code>$1</code> 的索引。</p>
 </div>
 <div class="paragraph">
 <p>那么, 让我们打印上一个例子中 <code>$/</code> 的值:</p>
@@ -12618,10 +12616,10 @@ say $/;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>第一部分 ⌈"index.html" class="menu"⌋ 包含正则表达式匹配的整个子字符串。接下来是一些与捕获圆括号匹配的索引元素。</p>
+<p>第一部分 ⌈"index.html" class="menu"⌋ 包含了正则表达式匹配的整个子字符串。接下来是一些与捕获圆括号相匹配的索引元素。</p>
 </div>
 <div class="paragraph">
-<p>当匹配对象在字符串内被插值时, 它们打印时不带括号:</p>
+<p>当匹配对象在字符串内插值时, 打印时不加括号:</p>
 </div>
 <div class="listingblock">
 <div class="content">
