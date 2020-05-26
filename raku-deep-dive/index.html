@@ -12117,7 +12117,7 @@ say 'No match' if 678 !~~ $regex;    # No match</code></pre>
 <p>Raku 中的正则表达式为我们提供了一个基于 Unicode 类别的字符类机制 。要创建这样的一个类, 请使用一对包含冒号的角括号, 后面是类别名称的大写字母。要指定子类别, 请添加相应的小写字母。</p>
 </div>
 <div class="paragraph">
-<p>例如, 匹配字母的字符类是 <code>&lt;:L&gt;</code>, 而匹配大写字母的字符类是 <code>&lt;:Lu&gt;</code>。在下面的例子中, 我们将几个字母与这些字符类进行匹配:</p>
+<p>例如, 匹配字母的字符类是 <code>&lt;:L&gt;</code>, 而匹配大写字母的字符类是 <code>&lt;:Lu&gt;</code>。在下面的例子中, 我们用这些字符类来匹配几个字母:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12407,7 +12407,7 @@ b ~~ &lt;:L&gt;
 <p>Raku 提供了强大的功能, 允许你使用集合运算创建新的字符类。这些是 - 用于并集的 <code>+</code> 或 <code>|</code>,  用于差集的 <code>-</code>, 用于交集的 <code>&amp;</code>, 用于异或运算的 <code>^</code>。此外, 还可以使用 <code>-</code> 或 <code>!</code> 来否定字符类。</p>
 </div>
 <div class="paragraph">
-<p>让我们来看一些例子。首先, 创建一个同时匹配小写字母和数字的连接类:</p>
+<p>让我们来看一些例子。首先, 创建一个同时匹配小写字母和数字的合并类:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12441,10 +12441,10 @@ b ~~ &lt;:L&gt;
 </div>
 </div>
 <div class="paragraph">
-<p>(如果你想用其他语言做实验, 请注意这个方法, 因为 <code>&lt;:Ll&gt;</code> 包括英文字母以外的字母。)</p>
+<p>(如果你想用其他语言做实验, 请小心这个方法, 因为 <code>&lt;:Ll&gt;</code> 包括了英文字母以外的字母。)</p>
 </div>
 <div class="paragraph">
-<p>如果你需要匹配除给定字符以外的任何字符, 差集是有用的。例如, 这就是你如何匹配英语字母表中, 不是原始拉丁语, 不包含一些现代英文字母的任何内容:</p>
+<p>如果你需要匹配除给定字符以外的任何字符, 减法就很有用了。例如, 这就是你如何匹配英语字母表中, 不是原始拉丁语, 不包含一些现代英文字母的任何内容:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12480,19 +12480,19 @@ b ~~ &lt;:L&gt;
 <p>量词修饰它前面的原子并要求特定次数的重复。<strong>原子</strong>是一个字符或字符类, 或字符串字面量或组(我们稍后将在本章的"使用捕获提取子字符串”一节中讨论组)。</p>
 </div>
 <div class="paragraph">
-<p><code>+</code> 量词允许前一个原子重复一次或多次。例如, 正则表达式 <code>/a+/</code> 与单个字符 a 匹配, 以及与包含两个字符的 aa 字符串匹配 , 或三个 a 或更多-aaaaaa。但是, 它不会与完全不包含 a 字符的字符串匹配。</p>
+<p><code>+</code> 量词允许前一个原子被重复一次或多次。例如, 正则表达式 <code>/a+/</code> 可以与单个字符 a 匹配, 也可以与包含两个字符 aa, 或三个字符 aaa 或更多的字符 aaaaaa 的字符串匹配。但是, 它不会与完全不包含 a 字符的字符串匹配。</p>
 </div>
 <div class="paragraph">
-<p>* 量词允许任意数量的重复, 包括零次。所以, /a*/ 正则表达式与 bdef、abc 或 baad 等字符串匹配。当然, 单个 /a*/ 可能不是那么有用; <code>*</code> 量词的更自然的用例是在其他子字符串之间, 例如 <code>/ab*c/</code>。 这个正则表达式与 ac、abc 或 abbc 匹配。</p>
+<p>* 量词允许任意数量的重复, 包括零次。因此, /a*/ 正则表达式与诸如 bdef、abc 或 baad 等字符串匹配。当然, 单个 /a*/ 可能没有那么好用; <code>*</code> 量词的更自然的用例是在其他子字符串之间, 比如 <code>/ab*c/</code>。这个正则表达式与 ac、abc 或 abbc 匹配。</p>
 </div>
 <div class="paragraph">
-<p><code>?</code> 量词需要一个原子要么出现一次, 要么不出现。考虑正则表达式 <code>/colou?r/</code>, 它与英式和美式拼写中的单词 colour 和 color 相匹配。</p>
+<p><code>?</code> 量词要求一个原子要么出现一次, 要么不出现。考虑正则表达式 <code>/colou?r/</code>, 它与英式和美式拼写中的单词 colour 和 color 相匹配。</p>
 </div>
 <div class="paragraph">
-<p>也可以使用后面跟着重复次数或范围的 ** 量词来请求给定的重复次数。例如, <code>/'a' 'b' ** 3..4 'c' /</code> 匹配包含 bbb 或 bbbb 的子字符串, 例如, abbbc 匹配, 但不匹配 abbc 或 abbbbbbbc。在 <code>^</code> 的帮助下, 可以排除范围的边缘 - /'a' 'b' ** 3..^10 'c'/ 将与包含 3 到 9 个后续字母 a 的子字符串匹配。开区间, 例如 b ** ^10(0 到 9 个 b)或 b ** 3..* (三次或三次以上) 也是允许的。</p>
+<p>也可以使用后面跟着重复次数或范围的 ** 量词来要求给定的重复次数。例如, <code>/'a' 'b' ** 3..4 'c' /</code> 匹配包含 bbb 或 bbbb 的子字符串, 例如, abbbc 匹配, 但不匹配 abbc 或 abbbbbbbc。在 <code>^</code> 的帮助下, 可以排除范围的边缘 - /'a' 'b' ** 3..^10 'c'/ 将与包含 3 到 9 个后续字母 a 的子字符串匹配。开区间, 例如 b ** ^10(0 到 9 个 b)或 b ** 3..* (三次或三次以上) 也是允许的。</p>
 </div>
 <div class="paragraph">
-<p>还有另一对量词, <code>%</code> 和 <code>%%</code>, 它们的使用方式略有不同。他们与 <code>+</code>, <code>?</code>, <code>*</code> 和 <code>**</code> 量词一起工作, 请求通过 <code>%</code> 或 <code>%%</code> 右侧提到的分隔符分割的重复序列。在 <code>%%</code> 的情况下, 分隔符也可能出现在最后一个重复元素之后。请考虑以下示例:</p>
+<p>还有另一对量词, <code>%</code> 和 <code>%%</code>, 它们的使用方式有点不同。他们与 <code>+</code>, <code>?</code>, * 和 ** 量词一起工作, 并要求在重复的序列中用一个分隔符来分隔, 分隔符出现在 <code>%</code> 或 <code>%%</code> 的右边。在 <code>%%</code> 的情况下, 分隔符也可以出现在最后一个重复元素之后。请看下面的例子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12502,7 +12502,7 @@ say 1 if 'a,b,c,d' ~~ / \w ** 2..3 %% ',' /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该代码与第一种情况下的所有四个字母-a, b, c, d 匹配, 与第二种情况下的前三个字母-a, b, c 匹配。在最后一种情况下, 只匹配三个字母, 但是 c 和 d 之间的逗号也会被消耗掉-<code>a, b, c,</code>。</p>
+<p>该代码与第一种情况下的所有四个字母-a, b, c, d 匹配, 与第二种情况下的前三个字母-a,b,c 匹配。在最后一种情况下, 只匹配三个字母, 但是 c 和 d 之间的逗号也会被消耗掉-<code>a,b,c,</code>。</p>
 </div>
 <div class="sect3">
 <h4 id="_贪婪">11.4.1. 贪婪</h4>
@@ -12510,10 +12510,10 @@ say 1 if 'a,b,c,d' ~~ / \w ** 2..3 %% ',' /;</code></pre>
 <p>上面描述的量词默认情况下是<strong>贪婪的</strong>。这意味着他们会尽可能多地匹配源字符串中的字符。例如, 在匹配 <code>'bbb' ~~ /b*/</code> 中, 所有的三个字符都会被正则表达式消耗掉。同样的, <code>+</code> 量词也会尽可能多的消耗重复字符。</p>
 </div>
 <div class="paragraph">
-<p>有时候这种行为并不理想。考虑一个从 HTML 标签中选择属性的正则表达式。从给定的字符串 <code>&lt;a href="index.html" class="menu"&gt;</code> 中, 我们想要提取除属性的值, 即引号内的字符串。试图创建这样一个正则表达式, 如 / \" .* \" / 将提取第一个引号和最后一个引号之间的整个子串- 即 <code>"index.html" class="menu"</code>。这是因为 <code>*</code> 量词不想在第一个属性值的末尾停止, 而是继续消耗字符。</p>
+<p>有时候这种行为并不理想。考虑一个用于从 HTML 标签中选择属性的正则表达式。从给定的字符串 <code>&lt;a href="index.html" class="menu"&gt;</code> 中, 我们要提取属性的值, 即引号内的字符串。试图创建这样一个正则表达式, 如 / \" .* \" / 将提取第一个引号和最后一个引号之间的整个子串- 即 <code>"index.html" class="menu"</code>。这是因为 <code>*</code> 量词不想在第一个属性值的末尾停止, 而是继续消耗字符。</p>
 </div>
 <div class="paragraph">
-<p>它更进一步, 甚至通过最后一个引号和闭合角括号。在这之后, 没有剩下任何字符了, 但正则表达式希望与双引号匹配。所以, 正则表达式引擎会执行回溯, 将消耗的字符<strong>返回</strong>给字符串, 直到正则表达式被满足或者失败。</p>
+<p>它更进一步, 甚至通过最后一个引号和闭合角括号。在这之后, 就不会剩下任何字符了, 但正则表达式希望与双引号匹配。所以, 正则表达式引擎会执行回溯, 将消耗的字符<strong>返回</strong>到字符串中, 直到正则表达式被满足或者失败。</p>
 </div>
 <div class="paragraph">
 <p>为了防止量词的贪婪性, 请在其后添加一个问号:</p>
@@ -12527,7 +12527,7 @@ say 1 if 'a,b,c,d' ~~ / \w ** 2..3 %% ',' /;</code></pre>
 <p>现在, 它只匹配第一个属性值(包括引号) - <code>"index.html"</code>。</p>
 </div>
 <div class="paragraph">
-<p>注意, 在正则表达式中, "字符应该被转义 - \"。正如我们在*字面量*一节中学到的那样, 只有字母数字字符和下划线符号与他们自身匹配。另外, 我们也可以通过在一对单引号内放入双引号来创建一个引号字符串:</p>
+<p>注意, 在正则表达式中, " 字符应该被转义 - \"。正如我们在*字面量*一节中学到的那样, 只有字母数字字符和下划线符号与他们自身匹配。另外, 我们也可以通过在一对单引号内放入双引号来创建一个引号字符串:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12634,7 +12634,7 @@ say "Year is $0";</code></pre>
 <div class="sect3">
 <h4 id="_命名捕获">11.5.3. 命名捕获</h4>
 <div class="paragraph">
-<p>当正则表达式具有不止一到两个捕获组以及正则表达式中有备选项时, 捕获变得更加棘手。例如, 请考虑以下正则表达式:</p>
+<p>当正则表达式有一个或两个以上的捕获组, 并且如果正则表达式中存在着其他的备选项时, 那么捕获就会变得更加棘手。例如, 考虑以下正则表达式:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12642,7 +12642,7 @@ say "Year is $0";</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这包含两个备选项, 但是每个分支中捕获组的编号不同。(备选分支将在下一节中详细介绍。)</p>
+<p>它包含两个备选项, 但每个分支中的捕获组的编号是不同的。(下一节将详细描述备选分支。)</p>
 </div>
 <div class="paragraph">
 <p>现在, 提供与 <code>&lt;[a..z]+&gt;</code> 或与 <code>&lt;[A..Z]&gt;\d</code> 正则表达式匹配的字符串:</p>
@@ -12654,7 +12654,10 @@ say "Year is $0";</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>第一次匹配后, 将只定义 <code>$0</code>。打印 <code>$1</code> 将给 <code>Nil</code>。在第二例子中, 两个变量都将包含一个值。也不容易推断每种情况下正则表达式匹配的是哪一部分。如果两个备选项都具有相同数量的捕获, 则直接检查有定义的变量的数量的方法不起作用。</p>
+<p>第一次匹配后, 将只定义 <code>$0</code>。打印 <code>$1</code> 将得到 <code>Nil</code>。在第二例子中, 两个变量都会将包含一个值。也不容易推断出每种情况下正则表达式匹配的是哪一部分。如果两个备选项的捕获数量相同, 那么直接检查有定义的变量的数量的方法就不起作用了。</p>
+</div>
+<div class="paragraph">
+<p>Raku 允许你给捕获起名字。下面的例子显示了用于命名捕获的语法。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12670,10 +12673,10 @@ say $/;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这个例子中, 我们还看到了格式化长正则表达式的方法, 使其更容易和更有逻辑性。</p>
+<p>在这个例子中, 我们还看到了格式化长正则表达式的方法, 使其更容易阅读, 更符号逻辑。</p>
 </div>
 <div class="paragraph">
-<p>检查输出:</p>
+<p>检查一下输出结果:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12685,7 +12688,7 @@ say $/;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>你会看到 <strong>Match</strong> 对象现在具有命名对而不是数字索引。如果你把 <code>$/</code> 变量视为哈希, 也可以使用名字:</p>
+<p>你可以看到, <strong>Match</strong> 对象现在有了命名对, 而不是数字索引。这些名称也可以像把 <code>$/</code> 变量当作散列一样使用:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12713,16 +12716,16 @@ say $&lt;size&gt;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>垂直条在圆括号中分隔组内的不同变体。它可以是 <code>\d</code>, 或 <code>\s</code>, 或 <code>\-</code> 。在正则表达式上下文中, 这叫做<strong>备选</strong>。相应地, 不同的变体称为<strong>备选项</strong>。</p>
+<p>圆括号内的竖直条将组内的不同变体分开。它可以是 <code>\d</code>, 或者是 <code>\s</code>, 或者是 <code>\-</code> 。在正则表达式上下文中, 这就是所谓的<strong>备选</strong>。相应地, 不同的变体也被称为<strong>备选项</strong>。</p>
 </div>
 <div class="paragraph">
-<p>在 Raku 中, 正则表达式中有两种形式的备选分隔符-单个垂直条 <code>|</code> 和双垂直条 <code>||</code>。使用单个垂直条, 最长的变体总是匹配成功。随着双垂直条, 第一个匹配的备选项匹配成功。</p>
+<p>在 Raku 中, 正则表达式中有两种形式的备选分隔符-单个竖直条 <code>|</code> 和双竖直条 <code>||</code>。使用单个竖直条, 最长的变体总是获胜。在双竖直条中, 第一个匹配的备选项获胜。</p>
 </div>
 <div class="paragraph">
-<p>在电话号码示例中, 每个备选项只有一个符号的长度。所以, 没有 <code>|</code> 和 <code>||</code> 之间没有区别。在其他情况下, 运算符的选择可能会非常大地改变结果。</p>
+<p>在电话号码的例子中, 每个备选项的长度正好是一个符号。所以, 在这里, <code>|</code> 和 <code>||</code> 之间没有任何区别。在其他情况下, 运算符的选择可能会大大改变结果。</p>
 </div>
 <div class="paragraph">
-<p>例如, 从以下示例中获取两个正则表达式并匹配形容词 <code>bug</code> 的比较级形式:</p>
+<p>例如, 拿下面的例子中的两个正则表达式为例, 将形容词 <code>big</code> 的形式与它们进行匹配:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12738,7 +12741,7 @@ say $&lt;size&gt;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序的输出如下:</p>
+<p>这个程序的输出是:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12754,10 +12757,10 @@ Testing 'biggest'
 </div>
 </div>
 <div class="paragraph">
-<p>分析输出, 我们可以看到带单个垂直条的正则表达式, 每次都选择最长的备选项 - <code>big, bigger, biggest</code>。使用另一个带双竖条的正则表达式, 第一个匹配总是胜利 - <code>big</code>, 所有其他变种都不尝试。 你可以玩玩代码并更改正则表达式中备选项的顺序以查看它如何改变这个程序的行为。</p>
+<p>分析输出, 我们可以看到, 使用单个竖直条的正则表达式, 每次都选择最长的备选项 - big、bigger、biggest。使用另一个带双竖条的正则表达式, 第一个匹配的总是胜出 - <code>big</code>, 其他所有的变体都没有尝试过。你可以玩一个这个代码, 改变正则表达式中备选项的顺序, 看看它是如何改变这个程序的行为的。</p>
 </div>
 <div class="paragraph">
-<p>例如, 如果按照其长度的相反顺序列出变体, 则两个正则表达式的输出将类似:</p>
+<p>例如, 如果你把变体按长度的相反顺序列出, 那么两个正则表达式的输出都是类似的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12769,13 +12772,13 @@ say $/;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>备选项通常只是正则表达式的一部分。在我们的例子中, 有一个序列 <code>\+?</code> 匹配电话号码中的可选加号。这不是备选项列表的一部分。 要标记备选的边界, 请使用括号。</p>
+<p>备选项通常只是正则表达式的一部分。在我们的例子中, 有一个序列 <code>\+?</code> 用于匹配电话号码中的可选加号。这并不属于备选项列表的一部分。为例标记备选的边界, 请使用括号。</p>
 </div>
 <div class="paragraph">
-<p>括号还会创建一个原子, 随后由 <code>+</code> 量词修饰, 它应用于括号内的正则表达式的整个部分。</p>
+<p>括号也会创建一个原子, 这个原子随后被 <code>+</code> 量词修饰, 它被应用于括号内的正则表达式的整个部分。</p>
 </div>
 <div class="paragraph">
-<p>如果括号仅用于分组而不需要捕获, 请使用方括号:</p>
+<p>当括号只用于分组而不需要捕获时, 请使用方括号:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12788,21 +12791,21 @@ say 'Healthy' if $phrase ~~ / [ apple || pear ] /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里, 第一个例子提取 <code>$parse</code> 中提到的水果, 而第二个匹配仅检查字符串是否包含两个所需单词之一并且不在任何地方保存它。第二次匹配后, <code>$0</code> 变量将包含 <code>Nil</code>。</p>
+<p>这里, 第一个例子提取了 <code>$parse</code> 中提到的水果, 而第二个匹配只检查字符串中是否包含两个想要的单词中的一个, 并不保存在任何地方。第二个匹配之后, <code>$0</code> 变量将包含 <code>Nil</code>。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_用锚点定位正则表达式">11.7. 用锚点定位正则表达式</h3>
 <div class="paragraph">
-<p>在许多情况下, 正则表达式必须以其开头与字符串的开头重合的方式应用于字符串。例如, 如果电话号码包含 <code>+</code> 字符, 它只能出现在第一个位置。</p>
+<p>在许多情况下, 必须在字符串中应用一个正则表达式, 使其开头与字符串的开头重合。例如, 如果电话号码中包含 <code>+</code> 字符, 它只能出现在第一个位置。</p>
 </div>
 <div class="paragraph">
-<p>Raku 正则表达式具有所谓的锚点-特殊字符, 它将正则表达式锚定到字符串或逻辑行的开头或结尾。</p>
+<p>Raku 正则表达式具有所谓的锚点-特殊字符, 它可以将正则表达式锚定到字符串或逻辑行的开头或结尾。</p>
 </div>
 <div class="sect3">
 <h4 id="_匹配行或字符串的开头和末尾">11.7.1. 匹配行或字符串的开头和末尾</h4>
 <div class="paragraph">
-<p>让我们修改电话号码正则表达式, 以强制正则表达式与包含潜在电话号码的字符串整体匹配:</p>
+<p>让我们修改一下电话号码的正则表达式, 使其与包含潜在电话号码的整个字符串匹配:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12810,10 +12813,10 @@ say 'Healthy' if $phrase ~~ / [ apple || pear ] /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里, <code>^</code> 是匹配字符串开头的锚点, 它不会消耗任何字符。在正则表达式的另一边, <code>$</code> 要求正则表达式的结尾匹配字符串的结尾。因此, 有效的电话号码, 例如 <code>+49 20 102-14-25</code> 将通过过滤器,  而诸如 <code>124 + 35 - 36</code> 这样的数学表达则不会。</p>
+<p>这里, <code>^</code> 是匹配字符串开头的锚点, 它不会消耗任何字符。在正则表达式的另一端, <code>$</code> 要求正则表达式的结尾与字符串的结尾匹配。因此, 一个有效的电话号码, 比如说 <code>+49 20 102-14-25</code> 会通过过滤器,  而像 <code>124 + 35 - 36</code> 这样的数学表达式则不会。</p>
 </div>
 <div class="paragraph">
-<p>为了获得更好的可见性, 可以把锚点写在代码的不同行上:</p>
+<p>为了提高可见性, 可以在代码中把锚点写在单独的行中:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12832,7 +12835,7 @@ say 'Not OK' if '124 + 35 - 36'   !~~ $rx; # Not OK</code></pre>
 <p><code>^</code> 和 <code>$</code> 都匹配字符串的边界(字符串作为变量)。如果你需要匹配逻辑行(如果字符串包含由 <code>\n</code> 分隔的几行), 请使用另一对锚点 - <code>^^</code> 和 <code>$$</code>。</p>
 </div>
 <div class="paragraph">
-<p>在下一个示例中, 我们要选择菠萝的颜色:</p>
+<p>在下一个示例中, 我们要选择一个菠萝的颜色:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12843,7 +12846,7 @@ say $0;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此代码打印 <code>green</code>, 因为 <code>(\w+)</code> 与菠萝行中的该字符匹配。行尾锚点 <code>` 匹配在行的末尾。结果不依赖于水果清单中的行的顺序。如果使用单个 `$` 而不是 `</code>, 那么只有 <code>green pineapple</code> 位于整个字符串的末尾, 正则表达式才匹配。</p>
+<p>这个代码打印 <code>green</code>, 因为 <code>(\w+)</code> 与菠萝行中的那个单词匹配。行尾锚点 <code>` 匹配到了那一行的末尾。这个结果不取决于水果清单中的行的顺序。如果使用单个 `$` 而不是 `</code>, 那么只有当 <code>green pineapple</code> 位于整个字符串的末尾时, 正则表达式才会匹配。</p>
 </div>
 </div>
 <div class="sect3">
@@ -12879,10 +12882,10 @@ say $0;</code></pre>
 <p>这些锚点匹配单词的边界, 不消耗字符。例如,  <code>/&lt;|w&gt; apple /</code> 匹配 <code>apple</code> 但是不匹配 <code>pineapple</code>。</p>
 </div>
 <div class="paragraph">
-<p><code>&lt;|w&gt;</code> 锚点有与之相反的对, <code>&lt;!|w&gt;</code>, 它与任何不是单词边界的东西匹配。这个锚点也不消耗字符, 所以 <code>/ o &lt;!|w&gt; p /</code> 匹配 <code>opera</code>。</p>
+<p><code>&lt;|w&gt;</code> 锚点有一个与之相反的对, <code>&lt;!|w&gt;</code>, 它与任何不是单词边界的东西匹配。这个锚点也不消耗字符, 所以 <code>/ o &lt;!|w&gt; p /</code> 匹配 <code>opera</code>。</p>
 </div>
 <div class="paragraph">
-<p>要更精确地指定边界, 请使用 <code>&lt;&lt;</code> 或 <code>&gt;&gt;</code>:</p>
+<p>要更精确地指定边界, 可以使用 <code>&lt;&lt;</code> 或 <code>&gt;&gt;</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12894,17 +12897,17 @@ say +@words;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这些示例中, 第一个匹配将找到两个单词, 而在第二个尝试中, 仅找到一个以 <code>four</code> 结尾的单词。</p>
+<p>在这些例子中, 第一个匹配会找到两个单词, 而在第二个尝试中, 只找到一个以 <code>four</code> 结尾的单词。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_使用断言进行向前查看和向后查看">11.8. 使用断言进行向前查看和向后查看</h3>
 <div class="paragraph">
-<p>操纵正则表达式流的另一个主题是<strong>断言</strong>。在匹配过程中, 该模式不消耗源字符串的字符。断言有助于在当前位置不吃字符而进行一些检查。</p>
+<p>操纵正则表达式流的另一个主题是<strong>断言</strong>。在匹配过程中, 该模式不消耗源字符串的字符。断言有助于在当前位置做一些检查, 而不会吃掉字符。</p>
 </div>
 <div class="paragraph">
-<p>Raku 正则表达式中有两种类型的断言 - <strong>向前查看</strong>和<strong>向后查看</strong>。这两个都有否定形式。在下表中, 列出了所有可能的组合:</p>
+<p>在 Raku 的正则表达式中有两种类型的断言 - <strong>向前查看</strong>和<strong>向后查看</strong>。每一种都可以被否定。在下面的表格中, 列出了所有可能的组合:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -12931,7 +12934,7 @@ say +@words;</code></pre>
 </tbody>
 </table>
 <div class="paragraph">
-<p>被放置在正则表达式中, 向前查看断言 <code>&lt;?before X&gt;</code> 检查在这个位置后面跟着的字符是否是 <code>X</code>。如果是, 那么断言成功, 正则表达式引擎继续工作。其他断言的行为遵循相同的逻辑考虑, 例如:</p>
+<p>被放置在正则表达式中, 向前查看断言 <code>&lt;?before X&gt;</code> 检查在这个位置后面跟着的字符是否是 <code>X</code>。如果是这样, 那么断言就成功了, 正则表达式引擎继续工作。其他断言的行为遵循相同的逻辑考虑, 例如:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12950,7 +12953,7 @@ say $/;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>讨论中的单词分为两部分。该规则在 <code>e</code> 处分开, 其后是 <code>qu</code>。 <code>qu</code> 这两个字符已被第一个 <code>.*?</code> 捕获块消耗掉但向前查看断言仍然能够查看源字符串以查看那里是否存在序列 <code>qu</code>。</p>
+<p>讨论中的单词被拆成两部分。该规则在 <code>e</code> 处分开, 其后是 <code>qu</code>。 <code>qu</code> 这两个字符已被第一个 <code>.*?</code> 捕获块消耗掉了, 但向前查看断言仍然能够查看源字符串中是否有 <code>qu</code> 这个序列存在。</p>
 </div>
 </div>
 <div class="sect2">
@@ -12967,10 +12970,10 @@ say $/;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>请注意, 当副词应用于整个正则表达式时, 如本例所示, 需要一个 <code>m</code> 或 <code>rx</code>。或者, 副词可以放在正则表达式中。在这种情况下, 它从它出现的位置开始起作用。这在下一个关于 <code>:i</code> 副词的部分例子中得到证明。</p>
+<p>注意, 在这个例子中, 当副词应用于整个正则表达式时, 需要使用 <code>m</code> 或 <code>rx</code>。另外, 副词可以放在正则表达式里面。在这种情况下, 它从它出现的位置开始起作用。这在下一个关于 <code>:i</code> 副词的例子中得到了证明。</p>
 </div>
 <div class="paragraph">
-<p>下表列出了所有副词:</p>
+<p>下表列出了所有的副词:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -13027,12 +13030,12 @@ say $/;</code></pre>
 </tbody>
 </table>
 <div class="paragraph">
-<p>让我们浏览列表并检查每个副词。</p>
+<p>让我们浏览列表并逐一检查每个副词。</p>
 </div>
 <div class="sect3">
 <h4 id="_iignorecase">11.9.1. i(:ignorecase)</h4>
 <div class="paragraph">
-<p>这是最简单的正则表达式副词。它允许正则表达式与大小写无关。因此, <code>m:i/X/</code> 和 <code>m:i /x/</code> 这两个正则表达式中的每一个都将成功匹配 <code>x</code> 和 <code>X</code>:</p>
+<p>这是最简单的正则表达式副词。它可以使正则表达式与大小写无关。因此, <code>m:i/X/</code> 和 <code>m:i /x/</code> 这两个正则表达式副词中的每一个都将成功匹配 <code>x</code> 和 <code>X</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13041,7 +13044,7 @@ say 'Matches' if 'Hello, World!' ~~ $rx;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>当 <code>:i</code> 副词在正则表达式里面时, 只有其后面的部分是大小写不敏感的:</p>
+<p>当 <code>:i</code> 副词在正则表达式里面时, 只有其后面的部分是不区分大小写的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13050,7 +13053,7 @@ say 'Matches'  if 'HeLLO, World!'  ~~ /He :i llo/;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>要停掉该副词的行为, 请使用否定副词:</p>
+<p>要停掉该副词的行为, 请使用否定形式:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13058,7 +13061,7 @@ say 'Matches'  if 'HeLLO, World!'  ~~ /He :i llo/;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>捕获括号和非捕获括号限制副词的作用域:</p>
+<p>捕获括号和非捕获括号限制了副词的作用域:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13067,16 +13070,16 @@ say 'OK' if $str ~~ / [:i hello]\, \s World /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这些示例中, <code>:i</code> 只影响第一个单词。</p>
+<p>在这些例子中, <code>:i</code> 只影响第一个单词。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_ssigspace">11.9.2. :s(:sigspace)</h4>
 <div class="paragraph">
-<p>我们已经多次看到在正则表达式中忽略了额外的空格, 空格通常用于使正则表达式更具可读性。但是, 在某些情况下, 特别是在正则表达式与带空格的字符串匹配时, 最好禁用此功能并要求匹配空格字面量。</p>
+<p>我们已经多次看到, 在正则表达式中, 额外的空格会被忽略, 而且它们经常被用来使正则表达式更易读。但是在某些情况下, 特别是当正则表达式应该与带空格的字符串匹配时, 最好禁用这个特性, 要求空格按照字面意思匹配。</p>
 </div>
 <div class="paragraph">
-<p>在以下示例中, 我们从日期中提取出天, 月份和年份这三个部分。 由于原始的面向人的字符串中有空格, 我们需要在正则表达式中注意它们。默认情况下, 空格被忽略, 正则表达式应该在位置中预计会有空格的地方包含 <code>\s</code>:</p>
+<p>在下面的例子中, 我们从日期中提取出天、月份和年份这三个部分。 由于原始的面向人的字符串中存在空格, 所以我们需要在正则表达式中对其进行处理。默认情况下, 空格是被忽略的, 在正则表达式中应该在预计有空格的地方包含 <code>\s</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13087,7 +13090,7 @@ say "Year = $2, month = $1, day = $0";</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>使用 <code>:s</code> 副词, 正则表达式中的字面值空格将与字符串匹配:</p>
+<p>使用 <code>:s</code> 副词, 正则表达式里面的字面值空格将与字符串匹配:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13098,13 +13101,13 @@ say "Year = $2, month = $1, day = $0";</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Raku 好的部分(有些可能令人困惑)是正则表达式周围的空格仍被忽略。在上面的例子中, 我们看到第一个斜线后面和最后一个斜线前面有空格。那些空格不需要匹配。</p>
+<p>Raku 的好处是(有些可能令人困惑), 正则表达式周围的空格仍然会被忽略。在上面的例子中, 我们看到第一个斜线后面和最后一个斜线前面都有空格。这些空格不需要匹配。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_ppos">11.9.3. :p(:pos)</h4>
 <div class="paragraph">
-<p>带有 <code>:p</code> 或 <code>:pos</code> 副词的正则表达式从副词的参数指定的位置匹配字符串。从以下示例可以清楚地看到该行为。</p>
+<p>带有 <code>:p</code> 或 <code>:pos</code> 副词的正则表达式从副词的参数指定的位置匹配字符串。从下面的例子中可以清楚地看到这个行为。</p>
 </div>
 <div class="paragraph">
 <p>默认情况下, 正则表达式从字符串的开头开始匹配:</p>
@@ -13116,7 +13119,7 @@ say $0; # pineapple</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>由于 <code>\w+</code> 的贪婪性, 整个字符串被消耗和匹配。让我们试试跳过几个字符并将正则表达式应用于相同的字符串:</p>
+<p>由于 <code>\w+</code> 的贪婪性, 整个字符串会被消耗掉并匹配。让我们试试跳过几个字符, 并将正则表达式应用到相同的字符串上:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13125,10 +13128,10 @@ say $0; # apple</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这次, 只匹配 <code>apple</code> 子串。</p>
+<p>这个时候, 只匹配 <code>apple</code> 子串。</p>
 </div>
 <div class="paragraph">
-<p><code>:p</code> 副词的索引也表现得像锚点。类似于 <code>^</code> 如何将正则表达式绑定到字符串的开头, <code>:p(N)</code> 副词将正则表达式绑定到给定的位置。比较以下两个匹配:</p>
+<p><code>:p</code> 副词的索引也表现得像锚点。类似于 <code>^</code> 将正则表达式绑定到字符串的开头, <code>:p(N)</code> 副词将正则表达式绑定到给定的位置。比较下面的两个匹配:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13137,16 +13140,16 @@ say $0; # apple</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>他们中的第一个成功, 因为它在字符串的第四个位置找到了 <code>a</code>。第二个匹配, 当它在第三个位置看到 <code>e</code> 时立即失败了。</p>
+<p>其中第一个成功了, 因为它在字符串的第四个位置找到了 <code>a</code>。第二个匹配, 当它在第三个位置看到 <code>e</code> 时立即失败了。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_gglobal">11.9.4. :g(:global)</h4>
 <div class="paragraph">
-<p><code>:g</code> 副词用于全局匹配。正则表达式将应用于字符串几次, 每次从上一个匹配停止的位置开始。</p>
+<p><code>:g</code> 副词用于全局匹配。正则表达式将应用到字符串上几次, 每次从上一个匹配停止的位置开始。</p>
 </div>
 <div class="paragraph">
-<p>例如, 让我们将一个句子分成单独的单词:</p>
+<p>例如, 让我们把一个句子分成单独的单词:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13155,7 +13158,7 @@ say join ';', @words; # Hello;World</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>请记住从本章的 Match 对象一节中提取 HTML 属性的示例 。要获得两个值, 正则表达式包含同一模式的两个相同的副本:</p>
+<p>还记得本章的 Match 对象一节中提取 HTML 属性的例子吗? 为例得到两个值, 这个正则表达式包含两个相同模式的副本:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13164,7 +13167,7 @@ $str ~~ / \" (.*?) \" .* \" (.*?) \" /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>要避免这种情况并使正则表达式更通用, 请使用全局匹配:</p>
+<p>为了避免这种情况, 并使正则表达式更通用, 可以使用全局匹配:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13174,7 +13177,7 @@ say ~$/;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序打印 "index.html" "menu", 它们是从字符串中提取的两个匹配的元素。<code>~$/</code> 语法对 <strong>Match</strong> 对象进行字符串化; 这个动作相当于在双引号字符串中插值对象, 就像我们之前做的那样。</p>
+<p>这个程序会打印出 "index.html" "menu", 它们是从字符串中提取的两个匹配元素。<code>~$/</code> 语法对 <strong>Match</strong> 对象进行了字符串化; 这个动作相当于在双引号字符串中对对象进行插值, 就像我们之前所做的那样。</p>
 </div>
 <div class="paragraph">
 <p>与 <code>:i</code> 修饰符不同, 你不能把 <code>:g</code> 放在正则表达式里面。</p>
@@ -13183,10 +13186,10 @@ say ~$/;</code></pre>
 <div class="sect3">
 <h4 id="_ccontinue">11.9.5. :c(:continue)</h4>
 <div class="paragraph">
-<p><code>:c</code> 副词请求从最后一个位置继续。</p>
+<p><code>:c</code> 副词要求从上一个位置继续。</p>
 </div>
 <div class="paragraph">
-<p>考虑上一节关于 <code>:g</code> 副词的例子。我们可以只匹配几次, 而不是全局匹配:</p>
+<p>考虑一下上一节中关于 <code>:g</code> 副词的例子。我们可以只匹配几次, 而不是全局匹配:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13200,10 +13203,10 @@ say ~$/;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果没有 <code>:c</code>, 第二个匹配将从字符串的开头开始, 它将会返回与第一个匹配相同的结果。使用 <code>:c</code>, 它使用相同的字符串继续匹配, 所以第二个属性将被捕获。</p>
+<p>如果没有 <code>:c</code>, 第二个匹配将从字符串的开头开始, 它将会返回与第一个匹配相同的结果。如果有了 <code>:c</code>, 它将以相同的字符串继续匹配, 所以第二个属性将被捕获。</p>
 </div>
 <div class="paragraph">
-<p>这个副词可以将索引作为参数。在这种情况下, 相应的正则表达式匹配将从给定位置开始。以下示例演示了这一点:</p>
+<p>这个副词可以接收一个索引作为参数。在这种情况下, 相应的正则表达式匹配将从给定位置开始。这在下面的例子中得到了证明:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13213,7 +13216,7 @@ say ~$/;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>正则表达式应用于从第 10 个字符开始的字符串。在这种情况下, 跳过第一个潜在匹配, 程序找到第二个类:</p>
+<p>正则表达式被应用于从第 10 个字符开始的字符串。在这种情况下, 第一个潜在的匹配被跳过, 程序找到第二个类:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13224,10 +13227,10 @@ say ~$/;</code></pre>
 <div class="sect3">
 <h4 id="_rracate">11.9.6. :r(:racate)</h4>
 <div class="paragraph">
-<p>此副词禁用正则表达式中的回溯。在贪婪一节中, 我们已经看到了一个贪婪量词消耗了太多的字符后, 正则表达式引擎如何回滚以用较少的字符尝试另一次匹配。<code>:r</code> 副词不会让回滚发生。它解释了名称`:ratchet` - 它只管前进。</p>
+<p>这个副词在正则表达式中禁用回溯。在贪婪一节中, 我们已经看到, 当一个贪婪量词消耗了太多字符后, 正则表达式引擎是如何回滚的, 以便用更少的字符再做一次尝试。<code>:r</code> 副词不会让这种情况发生。它解释了 <code>:ratchet</code> 这个名字的含义 - 它只会往前走。</p>
 </div>
 <div class="paragraph">
-<p>例如, 在下一个示例中, 创建正则表达式以查找以零结尾的所有数字:</p>
+<p>例如, 在下一个例子中, 创建的正则表达式是为了查找所有以零结尾的数字:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13237,16 +13240,16 @@ say ~$/;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此代码打印数字 10,20, 依此类推。如果使用 <code>:r</code>, 则不会打印任何内容, 因为 <code>\d+</code> 消耗数字中的所有数字, 并且 <code>:r</code> 没有留下匹配 0 的空间。</p>
+<p>这个代码打印出 10、20 等四舍五入的数字。如果使用 <code>:r</code>, 什么都不会被打印出来, 因为 <code>\d+</code> 会消耗掉数字中的所有数字, 而且 <code>:r</code> 没有留下与 0 匹配的空间。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_ovoverlap">11.9.7. :ov(:overlap)</h4>
 <div class="paragraph">
-<p><code>:ov</code> 副词改变正则表达式应用于字符串的方式, 以便找出每个位置上最长匹配的所有重叠匹配。</p>
+<p><code>:ov</code> 副词改变了正则表达式应用于字符串的方式, 这样, 所有重叠的、在每个位置上最长的匹配都会被找到。</p>
 </div>
 <div class="paragraph">
-<p>让我们在查找 <code>pi</code> 值内的所有数字子序列的任务中说明这一点,  以 1 开头和结尾:</p>
+<p>让我们以查找 <code>pi</code> 的值内的所有以 1 开头和结尾的所有数字为例来说明这个问题:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13257,7 +13260,7 @@ say ~@a;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此代码打印以下值:</p>
+<p>该代码打印的值如下:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13265,10 +13268,10 @@ say ~@a;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>你可能会注意到它在原始值的不同部分中找到了序列, 它们是不相交的。</p>
+<p>你可能会注意到, 它在原始值的不同部分中找到了序列, 而且它们是不相交的。</p>
 </div>
 <div class="paragraph">
-<p>现在, 让我们添加 <code>:ov</code> 副词。要将另一个副词添加到已有副词的正则表达式中,  只需将其附加到上一个:</p>
+<p>现在, 让我们添加 <code>:ov</code> 副词。要在一个已经有副词的正则表达式中添加另一个副词, 只需将其附加到前一个副词上即可:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13279,7 +13282,7 @@ say ~@a;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这一次, 输出是不同的:</p>
+<p>这一次的输出是不一样的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13287,10 +13290,10 @@ say ~@a;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>每个下一个值与前一个值共享相同的字符 1。结果包含所有来自前一个示例的值, 但也包括介于两者之间的值, 它因为匹配模式 <code>1.*?1</code>。</p>
+<p>每个下一个值与前一个值共享相同的字符 1。结果包含了前一个例子中的所有值, 但也包括介于两者之间的值, 这些值也匹配 <code>1.*?1</code> 模式。</p>
 </div>
 <div class="paragraph">
-<p>如果我们删除反贪婪量词, 那么 <code>:ov</code> 副词的性质会更可见。在这种情况下, 正则表达式 <code>m:g:ov/1.*1/</code> 返回每个位置的最长匹配, 它在那里看到 1。当它到达字符串的末尾时, 子匹配变得越来越短:</p>
+<p>如果我们去掉反贪婪量词, 那么 <code>:ov</code> 副词的性质会更加明显。在这种情况下, 正则表达式 <code>m:g:ov/1.*1/</code> 在每一个位置返回最长的匹配, 其中它看到的是 1。当它到达字符串的末尾时, 子匹配会越来越短:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13298,7 +13301,7 @@ say ~@a;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果我们将模式更改为此模式会怎么样?</p>
+<p>如果我们把模式改为这个模式呢?</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13306,7 +13309,7 @@ say ~@a;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>将它应用到 <code>$pi</code> 后, 程序将打印以下行:</p>
+<p>将它应用到 <code>$pi</code> 后, 程序打印出以下行:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13314,16 +13317,16 @@ say ~@a;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这一次, 重叠甚至更强 - 例如, 字符串 <code>1592</code> 完全包含在第一个匹配 <code>141592</code> 中。</p>
+<p>这一次, 重叠性更强 - 比如说 <code>1592</code> 这个字符串, 完全包含在第一个匹配 <code>141592</code> 中。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_exexhaustive">11.9.8. :ex(:exhaustive)</h4>
 <div class="paragraph">
-<p>这个副词尽可能多地找到子串, 考虑到每个可能性, 包括不同长度的重叠值和子串。这部分类似具有 <code>:ov</code> 副词的正则表达式的行为, 但不选择最长匹配。</p>
+<p>这个副词尽会尽可能多的找到子串, 考虑到所有的可能性, 包括重叠值和不同长度的子串。这在一定程度上类似于 <code>:ov</code> 副词的正则表达式行为, 但不选择最长的匹配。</p>
 </div>
 <div class="paragraph">
-<p>让我们在 <code>pi</code> 值上用相同的模式 <code>/1.*1/</code> 来测试这个副词(但是这一次, 我们会取较短的字符串):</p>
+<p>让我们用同样的模式 <code>/1.*1/</code> 在 <code>pi</code> 值上测试这个副词(但是这一次, 我们将取一个较短的字符串):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13333,7 +13336,7 @@ say ~@a;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们取了较短的版本来节省一些输出空间:</p>
+<p>为了节省一点输出空间, 我们采取了一个较短的版本:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13341,17 +13344,17 @@ say ~@a;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>作为练习, 使用带非贪婪量词 <code>m:g:ex/1.*?1/</code> 的另一个正则表达式尝试相同的值。</p>
+<p>作为练习, 使用另一个具有非贪婪量词 <code>m:g:ex/1.*?1/</code> 的正则表达式尝试相同的值。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_使用正则表达式替换和修改字符串">11.10. 使用正则表达式替换和修改字符串</h3>
 <div class="paragraph">
-<p>使用正则表达式匹配字符串通常会从给定数据中提取一些信息。另一个常见的任务是用不同的字符替换部分文本。在 Raku 中, <code>s</code> 内置函数就是这样。</p>
+<p>使用正则表达式来匹配字符串, 通常可以从给定的数据中提取一些信息。另一个常见的任务是用不同的字符替换文本中的部分内容。在 Raku 中, <code>s</code> 内置函数就可以完成这个任务。</p>
 </div>
 <div class="paragraph">
-<p>它需要两个参数, 正则表达式和替换。将正则表达式应用于源字符串并且模式匹配时, 匹配的字符串部分被替换为第二个参数。</p>
+<p>它需要两个参数, 即一个正则表达式和一个替换。将正则表达式应用于源字符串, 并且模式被匹配时, 匹配的字符串部分会被替换为第二个参数。</p>
 </div>
 <div class="paragraph">
 <p>考虑一个简单的例子:</p>
@@ -13364,10 +13367,10 @@ say $str; # Its length is 10 millimeters</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里的正则表达式 <code>/<a href="#mm">[mm]</a>/</code> 与单词 <code>mm</code> 匹配。第二部分是说要使用测量单位的全名替换它 。替换就地发生并且原始字符串被修改。</p>
+<p>这里的正则表达式 <code>/<a href="#mm">[mm]</a>/</code> 与单词 <code>mm</code> 匹配。第二部分告诉我们要用测量单位的全名来替换它 。替换就地发生, 并且修改了原始字符串。</p>
 </div>
 <div class="paragraph">
-<p>传统上, <code>s</code> 使用斜杠作为分隔符, 但可以使用不同的字符。看着与前面的代码进行相同替换的示例:</p>
+<p>传统上, <code>s</code> 使用斜线作为分隔符, 但也可以使用不同的字符。请看前面的代码中的替换示例:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13376,7 +13379,7 @@ $str ~~ s;&lt;&lt;mm&gt;&gt;;millimeters;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在第二个例子中, 最后两个分号表示不同的东西 - 其中一个是正则表达式和替换的分隔符, 而另一个是 Raku 的表达式分隔符。</p>
+<p>在第二个例子中, 最后两个分号的意思是不同的 - 其中一个是正则表达式和替换部分的分隔符, 而另一个是 Raku 的表达式的分隔符。</p>
 </div>
 <div class="paragraph">
 <p>在替换部分中, 替换文本可以使用变量插值:</p>
@@ -13400,16 +13403,16 @@ say $date;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>s</code> 中的正则表达式将日期分为年, 月和日部分, 并在替换模式中按不同顺序将它们组合起来。</p>
+<p><code>s</code> 中的正则表达式将日期分割为年、月、日三部分, 并以不同的顺序组合成不同的替换模式。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_总结_14">11.11. 总结</h3>
 <div class="paragraph">
-<p>在本章中, 我们讨论了 Raku 中的正则表达式。他们和 Perl 5 中的正则表达式有很多通用之处, 但也提供了许多引人入胜的新东西。我们检查了构建正则表达式和匹配文本的方法, 学会了如何通过编写自定义字符类或内置字符类来扩展正则表达式引擎的能力。我们也看了 Raku 在 Match 对象中存储结果的方法, 以及如何使用正则表达式替换字符串。</p>
+<p>在本章中, 我们讨论了 Raku 中的正则表达式。它们与 Perl 5 中的正则表达式有许多共通之处, 但也提供了许多令人着迷的新东西。我们研究了构建正则表达式和匹配文本的方法, 学会了如何通过编写自定义字符类或内置字符类来扩展正则表达式引擎的功能。我们还研究了 Raku 在 Match 对象中存储结果的方法, 以及如何使用正则表达式在字符串中进行替换。</p>
 </div>
 <div class="paragraph">
-<p>在下一章中, 我们将会遇到一个非常强大的工具, 它可以极大地扩展正则表达式, 即 grammar。</p>
+<p>在下一章中, 我们将会遇到一个更强大的工具, 它极大地扩展了正则表达式, 即 grammar。</p>
 </div>
 </div>
 </div>
@@ -14690,10 +14693,10 @@ G.parse($prog, :actions(A.new));</code></pre>
 <h2 id="_并发编程">13. 并发编程</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Raku 是一种完全在二十一世纪创建的语言。这并不奇怪, 它内置了对一些基本概念的支持，这使得它易于创建支持并行和并发编程的应用程序。</p>
+<p>Raku 是一种完全在二十一世纪创造的语言。它自带对一些基本概念的支持并不奇怪, 这使得创建支持并行和并发编程的应用程序变得很容易。</p>
 </div>
 <div class="paragraph">
-<p>在本章中，我们将介绍以下主题。</p>
+<p>在本章中, 我们将介绍以下内容。</p>
 </div>
 <div class="ulist">
 <ul>
@@ -14714,10 +14717,10 @@ G.parse($prog, :actions(A.new));</code></pre>
 <div class="sect2">
 <h3 id="_junction">13.1. Junction</h3>
 <div class="paragraph">
-<p>Junction 是 Raku 可以并行工作的最简单的例子之一。在编写本书时可用的 Rakudo 版本中，此功能尚未完全实现。</p>
+<p>Junction 是 Raku 可以并行工作的最简单的例子之一。在编写本书时的 Rakudo 版本中, 这个功能还没有完全实现。</p>
 </div>
 <div class="paragraph">
-<p>Junction 是一个可以同时保留多个值的值。检查以下代码：</p>
+<p>Junction 是一个可以同时保留许多值的值。考察一下下面的代码：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14727,7 +14730,7 @@ say 'Not OK' if $j != 2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>变量 <code>$j</code> 是一个持有三个奇数，<code>1</code>, <code>3</code> 和 <code>5</code> 的 junction。你可以将 <code>$j</code> 与整数进行比较，如果该值是 junction 所存储的值之一，则得到布尔值 <code>True</code>。在与 3 进行比较时，结果为 <code>True</code>，而与 <code>2</code> 的第二个比较则失败了。</p>
+<p>变量 <code>$j</code> 是一个 junction, 它持有三个奇数, <code>1</code>, <code>3</code> 和 <code>5</code>。你可以将 <code>$j</code> 与整数进行比较, 如果该值是 junction 所存储的值之一, 那么可以得到布尔值 <code>True</code>。在与 3 进行比较时, 结果是 <code>True</code>, 而与 <code>2</code> 的第二个比较则失败了。</p>
 </div>
 <div class="sect3">
 <h4 id="_自动线程化">13.1.1. 自动线程化</h4>
@@ -14746,10 +14749,10 @@ say 'Not OK' if f(1 | 3 | 5) != 2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该函数的行为直观易懂 - 分别对 junction 的每个值执行该函数。然后，该函数的返回值将用作 junction 的值。</p>
+<p>这个行为很容易理解 - 分别对 junction 的每个值执行该函数。然后, 该函数的返回值将用作 junction 的值。</p>
 </div>
 <div class="paragraph">
-<p>上面的代码与以下代码的作用相同，其中函数接收单个标量值：</p>
+<p>前面的代码的工作原理与下面的代码相同, 其中函数接收单个标量值：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14758,17 +14761,17 @@ say 'Not OK' if f(1) | f(3) | f(5) != 2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>把 junction 操作移动到函数参数外面被称作<strong>自动线程化</strong>。理论上，最后一个例子的代码可以并行执行。</p>
+<p>把 junction 操作移动到函数参数外面被称作<strong>自动线程化</strong>。理论上, 最后一个例子的代码可以并行执行。</p>
 </div>
 <div class="paragraph">
-<p>现在，让我们转到下一个主题，看看我们如何明确地创建线程。</p>
+<p>现在, 让我们转到下一个主题, 看看我们如何明确地创建线程。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_线程">13.2. 线程</h3>
 <div class="paragraph">
-<p>在 Raku 中，有 <code>Thread</code> 类，它负责创建和运行线程。要查看你当前在哪个线程中，请使用 <code>$*THREAD</code> 伪常量：</p>
+<p>在 Raku 中, 有一个 <code>Thread</code> 类, 它负责创建和运行线程。要查看你现在在哪个线程中, 请使用 <code>$*THREAD</code> 伪常量：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14776,7 +14779,7 @@ say 'Not OK' if f(1) | f(3) | f(5) != 2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>它返回一个 <code>Thread</code> 类的值，并且它的默认字符串化表示形式为包含标识符和线程名称的字符串：</p>
+<p>它返回一个 <code>Thread</code> 类的值, 并且它的默认字符串化表示是一个包含标识符和线程名称的字符串：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14784,15 +14787,15 @@ say 'Not OK' if f(1) | f(3) | f(5) != 2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>不要依赖线程标识符的特定值，因为即使对于主线程，标识符也可能不同。</p>
+<p>不要依赖线程标识符的特定值, 因为即使是主线程, 标识符也可能不一样。</p>
 </div>
 <div class="sect3">
 <h4 id="_开启线程">13.2.1. 开启线程</h4>
 <div class="paragraph">
-<p>在本节和以下小节中，我们将研究 <code>Thread</code> 类的方法。但是，我们将从 <code>start</code> 方法开始，该方法创建一个线程并开始执行。</p>
+<p>在本节和下面的章节中, 我们将研究 <code>Thread</code> 类的方法。但是, 我们将从 <code>start</code> 方法开始, 它创建一个线程并开始执行。</p>
 </div>
 <div class="paragraph">
-<p>在以下示例中，创建了三个线程。他们每个都接收一个名字和一个代码块。在每个线程中代码块做相同的工作，并且只打印 <code>$*THREAD</code> 变量的值，这个变量的值在不同的线程中是不同的：</p>
+<p>在下面的例子中, 我们创建了三个线程。每个线程都接收一个名字和一个代码块。代码块在每个线程中做同样的工作, 并且只打印 <code>$*THREAD</code> 变量的值, 这个变量的值在不同的线程中是不同的：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14808,7 +14811,7 @@ say $t3.WHAT;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>运行该程序，看看它打印的内容。你的输出可能与以下片段不同：</p>
+<p>运行该程序, 看看它打印出了什么。你的输出可能与下面的片段不同：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14822,16 +14825,16 @@ Thread #6 (Test 3)
 </div>
 </div>
 <div class="paragraph">
-<p>如你所见，程序从四个不同的线程中打印 - <strong>初始线程 <code>#1</code></strong> 和我们创建的三个线程。他们获得标识符 <code>3</code>, <code>4</code> 和 <code>5</code>。Rakudo 开发人员告诉我，<strong>线程 <code>#2</code></strong> 可能由虚拟机在启动期间使用。再强调一下，这些数字的主要特性是它们是唯一的，但不一定按顺序排列。</p>
+<p>如你所见, 程序从四个不同的线程中打印 - <strong>初始线程 <code>#1</code></strong> 和我们创建的三个线程。他们得到标识符 <code>3</code>、<code>4</code> 和 <code>5</code>。Rakudo 开发人员告诉我, <strong>线程 <code>#2</code></strong> 可能是在启动时被虚拟机使用的。同样, 这些数字的主要属性是唯一的, 但不一定按顺序排列。</p>
 </div>
 <div class="paragraph">
-<p>还要注意不同线程的输出是重叠的。多次运行程序很有可能产生不同的结果。</p>
+<p>另外注意, 不同线程的输出是重叠的。多运行这个程序几次, 很有可能会得到不同的结果。</p>
 </div>
 <div class="paragraph">
-<p>线程是在调用 <code>Thread.start</code> 时创建的，然后执行返回到主线程。最简单的查看方法是在用作线程代码块的子例程中嵌入不同的延迟。</p>
+<p>线程是在调用 <code>Thread.start</code> 时创建的, 然后执行时又回到主线程。最简单的查看方法是在用作线程代码块的子例程中嵌入不同的延迟。</p>
 </div>
 <div class="paragraph">
-<p>在以下程序中，创建了三个匿名线程（在某种意义上它们不保存在变量中）。他们的名字不同，还有它们在主体中产生的延迟和输出也不同：</p>
+<p>在下面的程序中, 创建了三个匿名(意思是不保存在变量中)的线程。它们的名字不同, 在它们的主体中也有不同的延迟和输出：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14866,7 +14869,7 @@ Thread.start(
 </div>
 </div>
 <div class="paragraph">
-<p>运行它，这是你将在控制台中得到的：</p>
+<p>运行它, 这就是你将在控制台中得到的东西：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14880,10 +14883,10 @@ Thread #6 (Sleep 1 second)
 </div>
 </div>
 <div class="paragraph">
-<p>程序开始后立即打印了前四行，而其余的延迟打印 - 每个数字在延迟 1 秒后打印。因此，<code>Thread.start</code> 创建一个线程并退出，而该线程与主程序（以及其他线程）并行地执行。</p>
+<p>在程序启动后, 立即打印了前四行, 而其余的延迟打印 - 每个数字在延迟 1 秒后打印。所以, <code>Thread.start</code> 创建一个线程并退出, 而该线程与主程序（以及其他线程）并行地执行。</p>
 </div>
 <div class="paragraph">
-<p>由于线程并行工作，因此无法预测它们将产生副作用的顺序（例如打印到控制台）。查看创建两个线程的程序，每个线程打印五个数字。第一个线程打印从 1 到 5 的数字，而第二个线程打印从 11 到 15 的数字：</p>
+<p>由于线程是并行工作的, 所以无法预测它们会以何种顺序产生副作用(例如打印到控制台)。看看这个程序, 它创建了两个线程, 每个线程打印五个数字。第一个线程打印从 1 到 5 的数字, 而第二个线程打印从 11 到 15 的数字：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14897,10 +14900,10 @@ Thread.start(sub {
 </div>
 </div>
 <div class="paragraph">
-<p>两个线程都是并行执行的。 语言规范中没有定义实际的实现，无论代码是分发到处理器的不同内核上还是通过为线程分配专用的时间原子来初始化线程，因此在 Raku 中创建线程时，您不应指望这两种实现。</p>
+<p>两个线程都是并行执行的。实际的实现, 无论是将代码分布到处理器的不同核上, 还是通过为线程分配专用的时间原子来初始化线程, 语言规范中没有定义, 所以在 Raku 中创建线程时, 不要指望这两种实现。</p>
 </div>
 <div class="paragraph">
-<p>运行该程序几次，可以看到每次结果都是不同的：</p>
+<p>将这个程序运行几次, 可以看到每次结果都是不一样的：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14917,7 +14920,7 @@ Thread.start(sub {
 </div>
 </div>
 <div class="paragraph">
-<p>第二个线程也可能在第一个线程之前开始打印：</p>
+<p>第二个线程也可能比第一个线程先开始打印：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14934,13 +14937,13 @@ Thread.start(sub {
 </div>
 </div>
 <div class="paragraph">
-<p>使用 <code>Thread.start</code> 方法很简单，但在某些情况下，你可能希望更好地控制线程的创建和运行。</p>
+<p>使用 <code>Thread.start</code> 方法很容易, 但在某些情况下, 你可能希望对线程的创建和运行有更精细的控制。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_创建并运行新线程">13.2.2. 创建并运行新线程</h4>
 <div class="paragraph">
-<p>要创建线程对象，请使用 <code>Thread</code> 类的构造函数。它以相应的命名参数 <code>name</code> 和 <code>code</code> 接收线程名称和代码块：</p>
+<p>要创建一个线程对象, 请使用 <code>Thread</code> 类的构造函数。它以相应的命名参数 <code>name</code> 和 <code>code</code> 接收线程名称和代码块：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14953,7 +14956,7 @@ Thread.start(sub {
 </div>
 </div>
 <div class="paragraph">
-<p>线程现在已创建但未激活。要运行它，必须调用 <code>run</code> 方法：</p>
+<p>该线程现在已创建, 但没有激活。要运行它, 必须调用 <code>run</code> 方法：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14961,7 +14964,7 @@ Thread.start(sub {
 </div>
 </div>
 <div class="paragraph">
-<p>执行以下示例并检查屏幕上行的显示顺序：</p>
+<p>执行下面的例子, 检查一下屏幕上出现的行的顺序：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14980,7 +14983,7 @@ say 'After';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>一旦线程运行起来, 它打印两条信息, <code>Start</code> 和 <code>End</code>, 两者之间有 2 秒的延迟:</p>
+<p>线程一运行, 它就会打印出 <code>Start</code> 和 <code>End</code> 这两条消息, 两者之间有 2 秒的延迟:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14991,7 +14994,7 @@ End</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>可以推迟主程序，直到线程完成其工作。使用 <code>finish</code> 方法:</p>
+<p>可以将主程序推迟到线程完成工作后再进行。使用 <code>finish</code> 方法:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15002,7 +15005,7 @@ say 'After';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>程序将一直等待直到线程代码块完成其工作，然后才从下一条指令继续:</p>
+<p>程序会等到线程代码块完成工作后, 才从下一条指令开始继续执行:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15013,13 +15016,13 @@ After</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>finish</code> 方法有一个同义词 <code>join</code> - <code>$t.join()</code>，它与 <code>$t.finish()</code> 完全相同。</p>
+<p><code>finish</code> 方法有一个同义词 <code>join</code> - <code>$t.join()</code>, 它的作用与 <code>$t.finish()</code> 完全相同。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_id_和_name_方法">13.2.3. id 和 name 方法</h4>
 <div class="paragraph">
-<p>在"开启新线程"一节中，我们已经看到了一些标识符被分配给新线程的示例。在 <code>Thread</code> 类中，有一个返回 <code>id</code> 的方法:</p>
+<p>在"启动新线程"一节中, 我们已经看到了一些关于如何给新线程分配标识符的例子。在 <code>Thread</code> 类中, 有一个方法可以返回 <code>id</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15035,7 +15038,7 @@ say $t3.id();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序的可能输出之一是:</p>
+<p>该程序可能的输出之一是这样的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15045,10 +15048,10 @@ say $t3.id();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>例如，如果要在主线程中保留一些跟踪信息，可以使用线程标识符。</p>
+<p>如果你想在主线程中保留一些跟踪信息, 比如说, 可以使用线程标识符。</p>
 </div>
 <div class="paragraph">
-<p>识别线程的另一种方法是使用名字。名字是你通过 <code>name</code> 参数创建线程时指定的字符串标签:</p>
+<p>另一种识别线程的方法是使用名字。名字是你在创建线程时通过 <code>name</code> 参数给线程分配的字符串标签:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15074,13 +15077,13 @@ My thread three</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>名字不必是唯一的，因此你可以自由选择任何你想要的名字。</p>
+<p>名字不必是唯一的, 所以你可以自由选择任何你想要的任何名字。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_将线程对象打印为字符串">13.2.4. 将线程对象打印为字符串</h4>
 <div class="paragraph">
-<p>当通过 <code>say</code> 函数打印线程对象时，<code>Thread</code> 类的 <code>Str</code> 方法定义了线程对象的行为:</p>
+<p>当通过 <code>say</code> 函数打印线程对象时, <code>Thread</code> 类的 <code>Str</code> 方法定义了线程对象的行为:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15095,7 +15098,7 @@ say $t3;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>默认字符串包含线程的编号及其名字(如果已定义)。</p>
+<p>默认字符串包含线程的编号及其名字(如果定义了的话)。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15106,14 +15109,14 @@ Thread #5 (My thread three)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在此示例中，所有线程都具有不同的ID(它们始终不同)且不同的名字(由程序员定义)。</p>
+<p>在这个例子中, 所有的线程都具有不同的 ID(它们总是不同的)和不同的名字(这是由程序员定义的)。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_终身线程">13.3. 终身线程</h3>
 <div class="paragraph">
-<p>创建新线程时，可以设置 <code>app_lifetime</code> 属性，请求该线程一直存在，直到主程序结束。否则它会在其主体执行后终止。要添加此标志，请将其添加为 <code>:app_lifetime</code> 或通过显式将 <code>True</code> 值传递给构造函数-<code>app_lifetime &#8658; True</code>:</p>
+<p>在创建一个新线程时, 可以设置 <code>app_lifetime</code> 属性, 请求该线程活到主程序结束。否则它会在其主体执行完后被终止。要添加这个标志, 可以将其添加为 <code>:app_lifetime</code> 或者通过显式传递 <code>True</code> 值给构造函数-<code>app_lifetime &#8658; True</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15129,15 +15132,15 @@ say 'Done';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>等待线程很重要(使用 <code>finish</code> 或 <code>join</code> 方法)。否则主线程可能会在该线程返回之前停止执行。</p>
+<p>重要的是等待线程(使用 <code>finish</code> 或 <code>join</code> 方法)。否则, 主线程可能会在该线程返回之前停止执行。</p>
 </div>
 <div class="sect3">
 <h4 id="_在_raku_中使用锁">13.3.1. 在 Raku 中使用锁</h4>
 <div class="paragraph">
-<p>Raku 提供了一种确保代码的特定部分仅由单个线程执行的机制。如果有其他线程想从此代码中访问变量，他们应该等到它解锁。</p>
+<p>Raku 提供了一种机制, 确保代码的特定部分只由单个线程执行。如果有其他线程想从这段代码中访问变量, 应该等到它被解锁后再执行。</p>
 </div>
 <div class="paragraph">
-<p>要包含关键代码，请使用 <code>Lock</code> 类的 <code>protect</code> 方法。检查一下以下来自 Raku 文档的示例:</p>
+<p>要封存关键代码, 请使用 <code>Lock</code> 类的 <code>protect</code> 方法。请看下面这个例子, 看看 Raku 文档中的例子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15152,25 +15155,25 @@ say $x; # OUTPUT: «10␤»</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们将在本章后面的工厂方法一节中讨论 <code>await</code> 函数。</p>
+<p>我们将在本章后面的工厂方法一节中讲到 <code>await</code> 函数。</p>
 </div>
 <div class="paragraph">
-<p>关键代码以这种方式受到保护，每次只有一个线程可以访问 <code>$x</code> 计数器。</p>
+<p>关键代码的保护方式是, 每次只能有一个线程访问 <code>$x</code> 计数器。</p>
 </div>
 <div class="paragraph">
-<p>建议不要直接使用锁，因为它们提供的接口太低级。 相反，使用承诺，通道和供应。我们稍后会在本章中讨论前两个概念，供应将在第十五章的反应式编程中讨论。</p>
+<p>建议不要直接使用锁, 因为它们提供的接口太低级。 相反, 使用 Promise、Channel 和 Supply。我们会在本章后面讨论前两个概念, 而 Supply 将在第十五章的"反应式编程"中讨论。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_promise">13.4. Promise</h3>
 <div class="paragraph">
-<p>在上一节中，我们创建了一些并行运行的代码块。 承诺有助于了解这种块的完成状态。在 Raku 中，承诺由 <code>Promise</code> 类处理。</p>
+<p>在上一节中, 我们创建了一些并行运行的代码块。 承诺有助于了解这种块的完成状态。在 Raku 中, 承诺由 <code>Promise</code> 类处理。</p>
 </div>
 <div class="sect3">
 <h4 id="_创造一个承诺">13.4.1. 创造一个承诺</h4>
 <div class="paragraph">
-<p>要创建一个承诺，只需调用 <code>Promise</code> 类的构造函数:</p>
+<p>要创建一个承诺, 只需调用 <code>Promise</code> 类的构造函数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15178,13 +15181,13 @@ say $x; # OUTPUT: «10␤»</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>创建好的对象什么也没做。在本章后面的工厂方法一节中，我们将看到如何创建执行某些代码的承诺。同时，让我们看看承诺所具有的属性。</p>
+<p>创建好的对象什么也没做。在本章后面的工厂方法一节中, 我们将看到如何创建执行某些代码的承诺。同时, 让我们看看承诺所具有的属性。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_承诺的状态">13.4.2. 承诺的状态</h4>
 <div class="paragraph">
-<p>承诺的力量是它们可以被保留或破坏，你可以跟踪他们。通过调用 <code>Promise.new</code> 创建的新承诺既不保留也不破坏。它的状态是 <code>Planned</code>。要查看状态，请调用 <code>status</code> 方法:</p>
+<p>承诺的力量是它们可以被保留或破坏, 你可以跟踪他们。通过调用 <code>Promise.new</code> 创建的新承诺既不保留也不破坏。它的状态是 <code>Planned</code>。要查看状态, 请调用 <code>status</code> 方法:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15193,7 +15196,7 @@ say $promise.status(); # Planned</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>Promise</code> 类还为我们提供了一对方法，<code>keep</code> 和 <code>break</code>，这些方法把承诺的状态更改为 <code>Kept</code> 或 <code>Broken</code>。这在以下示例中进行了演示，其中一个承诺被标记为保留，而第二个承诺被强制破坏:</p>
+<p><code>Promise</code> 类还为我们提供了一对方法, <code>keep</code> 和 <code>break</code>, 这些方法把承诺的状态更改为 <code>Kept</code> 或 <code>Broken</code>。这在以下示例中进行了演示, 其中一个承诺被标记为保留, 而第二个承诺被强制破坏:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15217,13 +15220,13 @@ Broken</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在，在我们知道如何更改承诺的状态以及如何读取它之后，我们将使用承诺并行地执行代码。</p>
+<p>现在, 在我们知道如何更改承诺的状态以及如何读取它之后, 我们将使用承诺并行地执行代码。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_工厂方法">13.4.3. 工厂方法</h4>
 <div class="paragraph">
-<p>让我们从一个简单的程序开始，该程序使用打印某些东西然后退出的代码块创建一个承诺。<code>Promise.start</code> 方法创建一个块并返回一个承诺。 请注意，返回的值是一个承诺，而不是线程。使用 <code>await</code> 函数等待直到该承诺的代码块完成:</p>
+<p>让我们从一个简单的程序开始, 该程序使用打印某些东西然后退出的代码块创建一个承诺。<code>Promise.start</code> 方法创建一个块并返回一个承诺。 请注意, 返回的值是一个承诺, 而不是线程。使用 <code>await</code> 函数等待直到该承诺的代码块完成:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15242,7 +15245,7 @@ await $promise;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在前面的示例中，<code>start</code> 例程作为 <code>Promise</code> 类的方法调用。 或者，可以通过独立的 <code>start</code> 函数创建承诺:</p>
+<p>在前面的示例中, <code>start</code> 例程作为 <code>Promise</code> 类的方法调用。 或者, 可以通过独立的 <code>start</code> 函数创建承诺:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15253,13 +15256,13 @@ await $promise;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>请注意，代码块周围没有圆括号。</p>
+<p>请注意, 代码块周围没有圆括号。</p>
 </div>
 <div class="paragraph">
-<p>让我们修改前面的例子并创建一个只能睡一秒钟的承诺。创建承诺后，立即首次打印其状态。这里的一秒延迟是重要的，以确保在我们检查下一行的承诺的状态之前承诺没有完成它的工作。</p>
+<p>让我们修改前面的例子并创建一个只能睡一秒钟的承诺。创建承诺后, 立即首次打印其状态。这里的一秒延迟是重要的, 以确保在我们检查下一行的承诺的状态之前承诺没有完成它的工作。</p>
 </div>
 <div class="paragraph">
-<p>然后，<code>await</code> 等待直到承诺的代码完成，并第二次检查承诺的状态:</p>
+<p>然后, <code>await</code> 等待直到承诺的代码完成, 并第二次检查承诺的状态:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15282,7 +15285,7 @@ Kept</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>为了处理时间，可以使用另一个工厂方法 <code>Promise.in</code> 而不是使用 <code>start</code> 和 <code>sleep</code> 的组合。它创造了一种在给定的秒数后状态变为保留的承诺:</p>
+<p>为了处理时间, 可以使用另一个工厂方法 <code>Promise.in</code> 而不是使用 <code>start</code> 和 <code>sleep</code> 的组合。它创造了一种在给定的秒数后状态变为保留的承诺:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15293,13 +15296,13 @@ say $promise.status; # Kept</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序创建并等待承诺。2 秒后，承诺状态变为保留，程序继续。承诺的状态在此之后变为 <code>Kept</code> 状态。</p>
+<p>该程序创建并等待承诺。2 秒后, 承诺状态变为保留, 程序继续。承诺的状态在此之后变为 <code>Kept</code> 状态。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_承诺的结果">13.4.4. 承诺的结果</h4>
 <div class="paragraph">
-<p>承诺的另一个有趣特征是它们可以返回结果。结果是由代码块计算，最后计算的值是返回值。考虑一下以下示例:</p>
+<p>承诺的另一个有趣特征是它们可以返回结果。结果是由代码块计算, 最后计算的值是返回值。考虑一下以下示例:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15313,10 +15316,10 @@ say $promise.result;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里，代码块返回一个字符串 <code>Result</code>，然后在 <code>$promise</code> 变量上调用 <code>result</code> 打印承诺的结果。</p>
+<p>这里, 代码块返回一个字符串 <code>Result</code>, 然后在 <code>$promise</code> 变量上调用 <code>result</code> 打印承诺的结果。</p>
 </div>
 <div class="paragraph">
-<p>从逻辑上讲，结果仅在保留承诺后才可用。在之前的例子中，使用了明确的 <code>await</code>。实际上，它是多余的，因为 <code>result</code> 方法的调用将等到代码完成。因此，代码可以简化为如下:</p>
+<p>从逻辑上讲, 结果仅在保留承诺后才可用。在之前的例子中, 使用了明确的 <code>await</code>。实际上, 它是多余的, 因为 <code>result</code> 方法的调用将等到代码完成。因此, 代码可以简化为如下:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15332,10 +15335,10 @@ say $promise.result; # waits</code></pre>
 <div class="sect3">
 <h4 id="_组合承诺">13.4.5. 组合承诺</h4>
 <div class="paragraph">
-<p>在实际的程序中，可以使用多个承诺。结合不同的承诺可以提供非常有表现力的方法来编码代码的不同部分之间的复杂关系。</p>
+<p>在实际的程序中, 可以使用多个承诺。结合不同的承诺可以提供非常有表现力的方法来编码代码的不同部分之间的复杂关系。</p>
 </div>
 <div class="paragraph">
-<p>让我们从一个简单的例子开始，使用独立的 <code>start</code> 函数创建三个承诺:</p>
+<p>让我们从一个简单的例子开始, 使用独立的 <code>start</code> 函数创建三个承诺:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15348,7 +15351,7 @@ say 'Done';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>目标是暂停程序，直到保留所有承诺。正如你从这个例子中看到的那样，<code>await</code> 函数接受一个承诺列表并等待直到所有承诺都完成。程序的输出如下所示:</p>
+<p>目标是暂停程序, 直到保留所有承诺。正如你从这个例子中看到的那样, <code>await</code> 函数接受一个承诺列表并等待直到所有承诺都完成。程序的输出如下所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15360,7 +15363,7 @@ Done</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>每个承诺创建一个单独的线程，通过打印 <code>$*THREAD</code> 变量可以清楚地看到它:</p>
+<p>每个承诺创建一个单独的线程, 通过打印 <code>$*THREAD</code> 变量可以清楚地看到它:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15384,7 +15387,7 @@ Thread #4</code></pre>
 <div class="sect3">
 <h4 id="_保留过破坏承诺后执行代码">13.4.6. 保留过破坏承诺后执行代码</h4>
 <div class="paragraph">
-<p><code>Promise</code> 类有 <code>then</code> 方法，可用于绑定承诺被保留或被破坏后将要执行的代码。实际上，这种方法创建并返回一个新的承诺，它将在初始承诺状态更改后运行:</p>
+<p><code>Promise</code> 类有 <code>then</code> 方法, 可用于绑定承诺被保留或被破坏后将要执行的代码。实际上, 这种方法创建并返回一个新的承诺, 它将在初始承诺状态更改后运行:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15396,16 +15399,16 @@ await $next;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序在启动一秒后打印 <code>Done</code>。第一个承诺，保存在 <code>$promise</code> 变量中，在给定的时间延迟后状态变为保留。然后，<code>then</code> 创建另一个承诺，它保存在 <code>$next</code> 变量中。要连接到主程序，有必要等到 <code>$next</code> 打印输出，从而完成。</p>
+<p>该程序在启动一秒后打印 <code>Done</code>。第一个承诺, 保存在 <code>$promise</code> 变量中, 在给定的时间延迟后状态变为保留。然后, <code>then</code> 创建另一个承诺, 它保存在 <code>$next</code> 变量中。要连接到主程序, 有必要等到 <code>$next</code> 打印输出, 从而完成。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_anyof_和_allof_方法">13.4.7. anyof 和 allof 方法</h4>
 <div class="paragraph">
-<p><code>Promise</code> 类中的两个方法，<code>anyof</code> 和 <code>allof</code>，创建了一个新的保留的承诺, 当承诺的任何一个或所有承诺都被保留时。这两个方法接受一个承诺列表。</p>
+<p><code>Promise</code> 类中的两个方法, <code>anyof</code> 和 <code>allof</code>, 创建了一个新的保留的承诺, 当承诺的任何一个或所有承诺都被保留时。这两个方法接受一个承诺列表。</p>
 </div>
 <div class="paragraph">
-<p>让我们在下面的例子中说明 <code>anyof</code> 方法的运作，它检查长时间运行的代码是否执行时间过长:</p>
+<p>让我们在下面的例子中说明 <code>anyof</code> 方法的运作, 它检查长时间运行的代码是否执行时间过长:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15422,22 +15425,22 @@ say 'Continuing';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这创造了两个承诺。<code>$timeout</code> 这个在创建承诺后保存了2 秒。<code>$long_code</code> 模仿代码的缓慢部分，执行时间比计时器能等待的时间更长 。然后，这两个承诺都传递给 <code>Promise.anyof</code> 方法，该方法返回另一个承诺，在发生超时或执行长时间运行的代码时其承诺状态变为保留。</p>
+<p>这创造了两个承诺。<code>$timeout</code> 这个在创建承诺后保存了2 秒。<code>$long_code</code> 模仿代码的缓慢部分, 执行时间比计时器能等待的时间更长 。然后, 这两个承诺都传递给 <code>Promise.anyof</code> 方法, 该方法返回另一个承诺, 在发生超时或执行长时间运行的代码时其承诺状态变为保留。</p>
 </div>
 <div class="paragraph">
-<p>使用不同的延迟组合运行此程序，并查看此程序的不同输出结果。</p>
+<p>使用不同的延迟组合运行此程序, 并查看此程序的不同输出结果。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_通道">13.5. 通道</h3>
 <div class="paragraph">
-<p>通道是一种可用于从一段代码到另一段代码传递数据的通信方式。关于通道的好处是它们是线程兼容的，因此它可以让不同的线程相互通信。在本节中，我们将学习如何使用 Raku 中的通道。</p>
+<p>通道是一种可用于从一段代码到另一段代码传递数据的通信方式。关于通道的好处是它们是线程兼容的, 因此它可以让不同的线程相互通信。在本节中, 我们将学习如何使用 Raku 中的通道。</p>
 </div>
 <div class="sect3">
 <h4 id="_基本用例">13.5.1. 基本用例</h4>
 <div class="paragraph">
-<p>通道由 <code>Channel</code> 类定义。要创建新的通道变量，请调用构造函数:</p>
+<p>通道由 <code>Channel</code> 类定义。要创建新的通道变量, 请调用构造函数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15460,7 +15463,7 @@ say $value;</code></pre>
 <p>这个程序做了很小的事情 - 它把值发送到通道中并立即读取它。该程序通过通道打印值 <code>42</code>。</p>
 </div>
 <div class="paragraph">
-<p>现在，让我们修改程序并在其中引入第二个线程，以便通道填充在该线程中，结果在主程序中读取:</p>
+<p>现在, 让我们修改程序并在其中引入第二个线程, 以便通道填充在该线程中, 结果在主程序中读取:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15474,10 +15477,10 @@ say $value;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>执行的结果与之前相同，打印出了 42，而传递值的逻辑完全不同。</p>
+<p>执行的结果与之前相同, 打印出了 42, 而传递值的逻辑完全不同。</p>
 </div>
 <div class="paragraph">
-<p><code>receive</code> 方法一直等待直到通道有足够的数据要读取。如果我们给线程代码添加延迟，然后程序将暂停，直到线程将数据发送到通道:</p>
+<p><code>receive</code> 方法一直等待直到通道有足够的数据要读取。如果我们给线程代码添加延迟, 然后程序将暂停, 直到线程将数据发送到通道:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15498,10 +15501,10 @@ say $value;</code></pre>
 <div class="sect3">
 <h4 id="_等或者不等">13.5.2. 等或者不等?</h4>
 <div class="paragraph">
-<p>正如我们在上一节中看到的那样，如果通道中没有数据， 那么 <code>Channel</code> 类的 <code>receive</code> 方法会停止。</p>
+<p>正如我们在上一节中看到的那样, 如果通道中没有数据, 那么 <code>Channel</code> 类的 <code>receive</code> 方法会停止。</p>
 </div>
 <div class="paragraph">
-<p><code>poll</code> 方法也从通道读取但不阻止程序的执行。如果没有要读取的内容，则立即返回空值。让我们再稍微修改下上一个例子并用 <code>poll</code> 调用之间的一秒的延迟读取通道五次:</p>
+<p><code>poll</code> 方法也从通道读取但不阻止程序的执行。如果没有要读取的内容, 则立即返回空值。让我们再稍微修改下上一个例子并用 <code>poll</code> 调用之间的一秒的延迟读取通道五次:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15532,13 +15535,13 @@ for 1..5 {
 </div>
 </div>
 <div class="paragraph">
-<p>前三次尝试无法获得任何值，因为没有任何内容发送到 <code>$channel</code>， 因为它之前有三秒的延迟。在第四次迭代中，该值可用且可以被阅读。在读取之后，该值将从通道中删除，从而 <code>poll</code> 的下一次调用再次返回一个空值。</p>
+<p>前三次尝试无法获得任何值, 因为没有任何内容发送到 <code>$channel</code>, 因为它之前有三秒的延迟。在第四次迭代中, 该值可用且可以被阅读。在读取之后, 该值将从通道中删除, 从而 <code>poll</code> 的下一次调用再次返回一个空值。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_关闭通道">13.5.3. 关闭通道</h4>
 <div class="paragraph">
-<p><code>close</code> 方法关闭一个通道。这意味着不会再添加任何数据到通道中。要检查通道是否关闭，调用 <code>close</code> 方法:</p>
+<p><code>close</code> 方法关闭一个通道。这意味着不会再添加任何数据到通道中。要检查通道是否关闭, 调用 <code>close</code> 方法:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15550,7 +15553,7 @@ say 'Closed' if $channel.closed();   # Closed</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>close</code> 方法的返回值不是布尔值。相反，该方法返回一个承诺，在通道关闭后该承诺变为保留状态:</p>
+<p><code>close</code> 方法的返回值不是布尔值。相反, 该方法返回一个承诺, 在通道关闭后该承诺变为保留状态:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15562,7 +15565,7 @@ say $channel.closed().status(); # Kept</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>例如，可以使用承诺来响应关闭通道来运行一些代码，如下例所示:</p>
+<p>例如, 可以使用承诺来响应关闭通道来运行一些代码, 如下例所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15589,7 +15592,7 @@ Channel is closed</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>因为承诺是在一个单独的线程中执行的，所以这些行可能是不可预测的以不同的顺序打印。如果我们在主线程中打印字符串之前添加一个小延迟，我们就可以看到它了:</p>
+<p>因为承诺是在一个单独的线程中执行的, 所以这些行可能是不可预测的以不同的顺序打印。如果我们在主线程中打印字符串之前添加一个小延迟, 我们就可以看到它了:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15600,7 +15603,7 @@ say 'After calling close()';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这种情况下，<code>$promise</code> 的代码将在第二个 <code>say</code> 指令之前完成:</p>
+<p>在这种情况下, <code>$promise</code> 的代码将在第二个 <code>say</code> 指令之前完成:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15613,10 +15616,10 @@ After calling close()</code></pre>
 <div class="sect3">
 <h4 id="_通道作为队列">13.5.4. 通道作为队列</h4>
 <div class="paragraph">
-<p>当多个值发送到通道中时，它们实际上变成队列。所以第一个添加到通道中的值将是从通道中接收到的第一个值。</p>
+<p>当多个值发送到通道中时, 它们实际上变成队列。所以第一个添加到通道中的值将是从通道中接收到的第一个值。</p>
 </div>
 <div class="paragraph">
-<p>由于通道是线程安全的，没有人限制我们关于线程的数量，我们打算写入到通道中或从通道中读取。以下示例演示了如何在几个线程之间共享一个通道。</p>
+<p>由于通道是线程安全的, 没有人限制我们关于线程的数量, 我们打算写入到通道中或从通道中读取。以下示例演示了如何在几个线程之间共享一个通道。</p>
 </div>
 <div class="paragraph">
 <p>该程序打印从 0 到 10 的数字的平方。首先发送数字到这个通道中:</p>
@@ -15629,7 +15632,7 @@ $channel.close;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>发送完所有数字之后，该通道将关闭。在下一阶段，通过调用 <code>start</code> 函数创建三个线程(不要忘记这个函数间接地通过创造承诺创建一个线程)。在每个线程中，无限循环尝试从相同的通道中接收值:</p>
+<p>发送完所有数字之后, 该通道将关闭。在下一阶段, 通过调用 <code>start</code> 函数创建三个线程(不要忘记这个函数间接地通过创造承诺创建一个线程)。在每个线程中, 无限循环尝试从相同的通道中接收值:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15646,10 +15649,10 @@ for 1..3 {
 </div>
 </div>
 <div class="paragraph">
-<p>此处使用非阻塞的 <code>poll</code> 方法从通道读取值。如果队列被消费了并且返回值为空，则循环中断并且线程完成。</p>
+<p>此处使用非阻塞的 <code>poll</code> 方法从通道读取值。如果队列被消费了并且返回值为空, 则循环中断并且线程完成。</p>
 </div>
 <div class="paragraph">
-<p>在退出主程序之前，我们必须等到所有承诺都变为保留状态:</p>
+<p>在退出主程序之前, 我们必须等到所有承诺都变为保留状态:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15675,14 +15678,14 @@ for 1..3 {
 </div>
 </div>
 <div class="paragraph">
-<p>运行程序几次，看它产生不同的输出。当然，每次运行都产生相同的计算值，但输出行的顺序可能会变化。该通道以和我们将数字发送给它的相同的顺序返回数字。线程是并发的，所以他们中的一些打印他们的结果并在其他线程之前选择下一个值。 尽管线程的工作顺序，但通道只给出数字一次。</p>
+<p>运行程序几次, 看它产生不同的输出。当然, 每次运行都产生相同的计算值, 但输出行的顺序可能会变化。该通道以和我们将数字发送给它的相同的顺序返回数字。线程是并发的, 所以他们中的一些打印他们的结果并在其他线程之前选择下一个值。 尽管线程的工作顺序, 但通道只给出数字一次。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_总结_16">13.6. 总结</h3>
 <div class="paragraph">
-<p>在本章中，我们简要地讨论了 junction 的并行性质，其余时间我们深入地研究了线程，承诺和通道 - Raku 中实现并行和并发功能的机制。开发人员使用它们非常容易并且不需要任何手动操作底层机制以确保线程执行的时候不会发生冲突。</p>
+<p>在本章中, 我们简要地讨论了 junction 的并行性质, 其余时间我们深入地研究了线程, 承诺和通道 - Raku 中实现并行和并发功能的机制。开发人员使用它们非常容易并且不需要任何手动操作底层机制以确保线程执行的时候不会发生冲突。</p>
 </div>
 </div>
 </div>
