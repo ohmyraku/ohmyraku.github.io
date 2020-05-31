@@ -12673,7 +12673,7 @@ say $/;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这个例子中, 我们还看到了格式化长正则表达式的方法, 使其更容易阅读, 更符号逻辑。</p>
+<p>在这个例子中, 我们还看到了格式化长正则表达式的方法, 使其更容易阅读, 更符合逻辑。</p>
 </div>
 <div class="paragraph">
 <p>检查一下输出结果:</p>
@@ -12772,7 +12772,7 @@ say $/;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>备选项通常只是正则表达式的一部分。在我们的例子中, 有一个序列 <code>\+?</code> 用于匹配电话号码中的可选加号。这并不属于备选项列表的一部分。为例标记备选的边界, 请使用括号。</p>
+<p>备选项通常只是正则表达式的一部分。在我们的例子中, 有一个序列 <code>\+?</code> 用于匹配电话号码中的可选加号。这并不属于备选项列表的一部分。为了标记备选的边界, 请使用括号。</p>
 </div>
 <div class="paragraph">
 <p>括号也会创建一个原子, 这个原子随后被 <code>+</code> 量词修饰, 它被应用于括号内的正则表达式的整个部分。</p>
@@ -12791,7 +12791,7 @@ say 'Healthy' if $phrase ~~ / [ apple || pear ] /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里, 第一个例子提取了 <code>$parse</code> 中提到的水果, 而第二个匹配只检查字符串中是否包含两个想要的单词中的一个, 并不保存在任何地方。第二个匹配之后, <code>$0</code> 变量将包含 <code>Nil</code>。</p>
+<p>在这里, 第一个例子提取了 <code>$parse</code> 中提到的水果, 而第二个匹配只检查字符串中是否包含两个想要的单词中的一个, 并不保存在任何地方。在第二个匹配之后, <code>$0</code> 变量将包含 <code>Nil</code>。</p>
 </div>
 </div>
 <div class="sect2">
@@ -12832,10 +12832,10 @@ say 'Not OK' if '124 + 35 - 36'   !~~ $rx; # Not OK</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>^</code> 和 <code>$</code> 都匹配字符串的边界(字符串作为变量)。如果你需要匹配逻辑行(如果字符串包含由 <code>\n</code> 分隔的几行), 请使用另一对锚点 - <code>^^</code> 和 <code>$$</code>。</p>
+<p><code>^</code> 和 <code>$</code> 都匹配字符串的边界(字符串作为变量)。如果你需要匹配逻辑行(如果字符串中包含几行由 <code>\n</code> 分隔的行), 请使用另一对锚点 - <code>^^</code> 和 <code>$$</code>。</p>
 </div>
 <div class="paragraph">
-<p>在下一个示例中, 我们要选择一个菠萝的颜色:</p>
+<p>在下一个例子中, 我们要选择一个菠萝的颜色:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12879,7 +12879,7 @@ say $0;</code></pre>
 </tbody>
 </table>
 <div class="paragraph">
-<p>这些锚点匹配单词的边界, 不消耗字符。例如,  <code>/&lt;|w&gt; apple /</code> 匹配 <code>apple</code> 但是不匹配 <code>pineapple</code>。</p>
+<p>这些锚点匹配单词的边界, 不消耗字符。例如, <code>/&lt;|w&gt; apple /</code> 匹配 <code>apple</code> 但是不匹配 <code>pineapple</code>。</p>
 </div>
 <div class="paragraph">
 <p><code>&lt;|w&gt;</code> 锚点有一个与之相反的对, <code>&lt;!|w&gt;</code>, 它与任何不是单词边界的东西匹配。这个锚点也不消耗字符, 所以 <code>/ o &lt;!|w&gt; p /</code> 匹配 <code>opera</code>。</p>
@@ -12904,10 +12904,10 @@ say +@words;</code></pre>
 <div class="sect2">
 <h3 id="_使用断言进行向前查看和向后查看">11.8. 使用断言进行向前查看和向后查看</h3>
 <div class="paragraph">
-<p>操纵正则表达式流的另一个主题是<strong>断言</strong>。在匹配过程中, 该模式不消耗源字符串的字符。断言有助于在当前位置做一些检查, 而不会吃掉字符。</p>
+<p>操纵正则表达式流的另一个主题是<strong>断言</strong>。在匹配过程中, 该模式不消耗源字符串中的字符。断言有助于在当前位置做一些检查, 而不会吃掉字符。</p>
 </div>
 <div class="paragraph">
-<p>在 Raku 的正则表达式中有两种类型的断言 - <strong>向前查看</strong>和<strong>向后查看</strong>。每一种都可以被否定。在下面的表格中, 列出了所有可能的组合:</p>
+<p>在 Raku 的正则表达式中有两种类型的断言 - <strong>向前查看</strong>和<strong>向后查看</strong>。每一种断言都可以被否定。在下面的表格中, 列出了所有可能的组合:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -12970,7 +12970,7 @@ say $/;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>注意, 在这个例子中, 当副词应用于整个正则表达式时, 需要使用 <code>m</code> 或 <code>rx</code>。另外, 副词可以放在正则表达式里面。在这种情况下, 它从它出现的位置开始起作用。这在下一个关于 <code>:i</code> 副词的例子中得到了证明。</p>
+<p>注意, 在这个例子中, 当副词应用于整个正则表达式时, 需要使用 <code>m</code> 或 <code>rx</code>。另外, 副词可以放在正则表达式里面。在这种情况下, 它从它出现的位置开始起作用。这在下一节中关于 <code>:i</code> 副词的例子中得到了证明。</p>
 </div>
 <div class="paragraph">
 <p>下表列出了所有的副词:</p>
@@ -13035,7 +13035,7 @@ say $/;</code></pre>
 <div class="sect3">
 <h4 id="_iignorecase">11.9.1. i(:ignorecase)</h4>
 <div class="paragraph">
-<p>这是最简单的正则表达式副词。它可以使正则表达式与大小写无关。因此, <code>m:i/X/</code> 和 <code>m:i /x/</code> 这两个正则表达式副词中的每一个都将成功匹配 <code>x</code> 和 <code>X</code>:</p>
+<p>这是最简单的正则表达式副词。它可以让正则表达式不区分大小写。因此, <code>m:i/X/</code> 和 <code>m:i/x/</code> 这两个正则表达式副词中的每一个都会成功地与 <code>x</code> 和 <code>X</code> 匹配:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13079,7 +13079,7 @@ say 'OK' if $str ~~ / [:i hello]\, \s World /;</code></pre>
 <p>我们已经多次看到, 在正则表达式中, 额外的空格会被忽略, 而且它们经常被用来使正则表达式更易读。但是在某些情况下, 特别是当正则表达式应该与带空格的字符串匹配时, 最好禁用这个特性, 要求空格按照字面意思匹配。</p>
 </div>
 <div class="paragraph">
-<p>在下面的例子中, 我们从日期中提取出天、月份和年份这三个部分。 由于原始的面向人的字符串中存在空格, 所以我们需要在正则表达式中对其进行处理。默认情况下, 空格是被忽略的, 在正则表达式中应该在预计有空格的地方包含 <code>\s</code>:</p>
+<p>在下面的例子中, 我们从日期中提取出天、月份和年份这三个部分。由于原始的面向人的字符串中存在空格, 所以我们需要在正则表达式中对其进行处理。默认情况下, 空格是被忽略的, 在正则表达式中应该在预计有空格的地方包含 <code>\s</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13101,7 +13101,7 @@ say "Year = $2, month = $1, day = $0";</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Raku 的好处是(有些可能令人困惑), 正则表达式周围的空格仍然会被忽略。在上面的例子中, 我们看到第一个斜线后面和最后一个斜线前面都有空格。这些空格不需要匹配。</p>
+<p>Raku 的好处是(有些可能令人困惑), 正则表达式周围的空格仍然会被忽略。在上面的例子中, 我们看到第一个斜线之后和最后一个斜线之前都有空格。这些空格不需要匹配。</p>
 </div>
 </div>
 <div class="sect3">
@@ -13128,7 +13128,7 @@ say $0; # apple</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这个时候, 只匹配 <code>apple</code> 子串。</p>
+<p>这次, 只匹配 <code>apple</code> 子串。</p>
 </div>
 <div class="paragraph">
 <p><code>:p</code> 副词的索引也表现得像锚点。类似于 <code>^</code> 将正则表达式绑定到字符串的开头, <code>:p(N)</code> 副词将正则表达式绑定到给定的位置。比较下面的两个匹配:</p>
@@ -13146,7 +13146,7 @@ say $0; # apple</code></pre>
 <div class="sect3">
 <h4 id="_gglobal">11.9.4. :g(:global)</h4>
 <div class="paragraph">
-<p><code>:g</code> 副词用于全局匹配。正则表达式将应用到字符串上几次, 每次从上一个匹配停止的位置开始。</p>
+<p><code>:g</code> 副词用于全局匹配。正则表达式将被应用到字符串上几次, 每次从上一次匹配停止的位置开始。</p>
 </div>
 <div class="paragraph">
 <p>例如, 让我们把一个句子分成单独的单词:</p>
@@ -13158,7 +13158,7 @@ say join ';', @words; # Hello;World</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>还记得本章的 Match 对象一节中提取 HTML 属性的例子吗? 为例得到两个值, 这个正则表达式包含两个相同模式的副本:</p>
+<p>还记得本章的 Match 对象一节中提取 HTML 属性的例子吗? 为了得到两个值, 这个正则表达式包含两个相同模式的副本:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13203,7 +13203,7 @@ say ~$/;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果没有 <code>:c</code>, 第二个匹配将从字符串的开头开始, 它将会返回与第一个匹配相同的结果。如果有了 <code>:c</code>, 它将以相同的字符串继续匹配, 所以第二个属性将被捕获。</p>
+<p>如果没有 <code>:c</code>, 第二个匹配将从字符串的开头开始, 它会返回与第一个匹配相同的结果。如果有了 <code>:c</code>, 它将以相同的字符串继续匹配, 所以第二个属性将被捕获。</p>
 </div>
 <div class="paragraph">
 <p>这个副词可以接收一个索引作为参数。在这种情况下, 相应的正则表达式匹配将从给定位置开始。这在下面的例子中得到了证明:</p>
@@ -13230,7 +13230,7 @@ say ~$/;</code></pre>
 <p>这个副词在正则表达式中禁用回溯。在贪婪一节中, 我们已经看到, 当一个贪婪量词消耗了太多字符后, 正则表达式引擎是如何回滚的, 以便用更少的字符再做一次尝试。<code>:r</code> 副词不会让这种情况发生。它解释了 <code>:ratchet</code> 这个名字的含义 - 它只会往前走。</p>
 </div>
 <div class="paragraph">
-<p>例如, 在下一个例子中, 创建的正则表达式是为了查找所有以零结尾的数字:</p>
+<p>例如, 在下一个例子中, 创建的正则表达式是为了查找所有以 0 结尾的数字:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13293,7 +13293,7 @@ say ~@a;</code></pre>
 <p>每个下一个值与前一个值共享相同的字符 1。结果包含了前一个例子中的所有值, 但也包括介于两者之间的值, 这些值也匹配 <code>1.*?1</code> 模式。</p>
 </div>
 <div class="paragraph">
-<p>如果我们去掉反贪婪量词, 那么 <code>:ov</code> 副词的性质会更加明显。在这种情况下, 正则表达式 <code>m:g:ov/1.*1/</code> 在每一个位置返回最长的匹配, 其中它看到的是 1。当它到达字符串的末尾时, 子匹配会越来越短:</p>
+<p>如果我们去掉反贪婪量词, 那么 <code>:ov</code> 副词的性质就更加明显了。在这种情况下, 正则表达式 <code>m:g:ov/1.*1/</code> 在每一个位置都会返回最长的匹配, 在这里它看到的是 1。当它到达字符串的末尾时, 子匹配会越来越短:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13301,7 +13301,7 @@ say ~@a;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果我们把模式改为这个模式呢?</p>
+<p>如果我们把模式改成这个模式呢?</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13323,10 +13323,10 @@ say ~@a;</code></pre>
 <div class="sect3">
 <h4 id="_exexhaustive">11.9.8. :ex(:exhaustive)</h4>
 <div class="paragraph">
-<p>这个副词尽会尽可能多的找到子串, 考虑到所有的可能性, 包括重叠值和不同长度的子串。这在一定程度上类似于 <code>:ov</code> 副词的正则表达式行为, 但不选择最长的匹配。</p>
+<p>这个副词尽会尽可能多的找到子串, 考虑到所有的可能性, 包括重叠值和不同长度的子串。这在一定程度上类似于 <code>:ov</code> 副词的正则表达式行为, 但并不选择最长的匹配。</p>
 </div>
 <div class="paragraph">
-<p>让我们用同样的模式 <code>/1.*1/</code> 在 <code>pi</code> 值上测试这个副词(但是这一次, 我们将取一个较短的字符串):</p>
+<p>让我们用同样的模式 <code>/1.*1/</code> 在 <code>pi</code> 值上测试这个副词(但这次我们将取一个较短的字符串):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13367,7 +13367,7 @@ say $str; # Its length is 10 millimeters</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里的正则表达式 <code>/<a href="#mm">[mm]</a>/</code> 与单词 <code>mm</code> 匹配。第二部分告诉我们要用测量单位的全名来替换它 。替换就地发生, 并且修改了原始字符串。</p>
+<p>这里的正则表达式 <code>/<a href="#mm">[mm]</a>/</code> 与单词 <code>mm</code> 匹配。第二部分告诉我们要用测量单位的全名来替换它。替换就地发生, 并且修改了原始字符串。</p>
 </div>
 <div class="paragraph">
 <p>传统上, <code>s</code> 使用斜线作为分隔符, 但也可以使用不同的字符。请看前面的代码中的替换示例:</p>
@@ -13379,7 +13379,7 @@ $str ~~ s;&lt;&lt;mm&gt;&gt;;millimeters;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在第二个例子中, 最后两个分号的意思是不同的 - 其中一个是正则表达式和替换部分的分隔符, 而另一个是 Raku 的表达式的分隔符。</p>
+<p>在第二个例子中, 最后两个分号的意思是不同的 - 其中一个是正则表达式和替换部分的分隔符, 而另一个是 Raku 表达式的分隔符。</p>
 </div>
 <div class="paragraph">
 <p>在替换部分中, 替换文本可以使用变量插值:</p>
@@ -13412,7 +13412,7 @@ say $date;</code></pre>
 <p>在本章中, 我们讨论了 Raku 中的正则表达式。它们与 Perl 5 中的正则表达式有许多共通之处, 但也提供了许多令人着迷的新东西。我们研究了构建正则表达式和匹配文本的方法, 学会了如何通过编写自定义字符类或内置字符类来扩展正则表达式引擎的功能。我们还研究了 Raku 在 Match 对象中存储结果的方法, 以及如何使用正则表达式在字符串中进行替换。</p>
 </div>
 <div class="paragraph">
-<p>在下一章中, 我们将会遇到一个更强大的工具, 它极大地扩展了正则表达式, 即 grammar。</p>
+<p>在下一章中, 我们会遇到一个更强大的工具, 它极大地扩展了正则表达式, 即 grammar。</p>
 </div>
 </div>
 </div>
