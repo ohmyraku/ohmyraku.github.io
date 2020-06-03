@@ -16047,7 +16047,7 @@ for 1..3 {
 <h2 id="_函数式编程">14. 函数式编程</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Raku 是一种多范式编程语言。在前几章中，我们主要使用了传统的命令式编程。在这一章中，我们将讨论 Raku 的函数式编程风格。</p>
+<p>Raku 是一种多范式编程语言。在前几章中, 我们主要使用了传统的命令式编程。在这一章中, 我们将讨论 Raku 的函数式编程风格。</p>
 </div>
 <div class="paragraph">
 <p>本章将介绍这些主题:</p>
@@ -16064,7 +16064,7 @@ for 1..3 {
 <p>化简操作</p>
 </li>
 <li>
-<p>高阶函数，lambda 和 whatever 代码块</p>
+<p>高阶函数, lambda 和 whatever 代码块</p>
 </li>
 <li>
 <p>使用 Feed 运算符管道输送数据</p>
@@ -16078,18 +16078,18 @@ for 1..3 {
 </ul>
 </div>
 <div class="paragraph">
-<p>在详细介绍之前，我们先谈谈什么是函数式编程。</p>
+<p>在详细介绍之前, 我们先谈谈什么是函数式编程。</p>
 </div>
 <div class="sect2">
 <h3 id="_什么是函数式编程">14.1. 什么是函数式编程</h3>
 <div class="paragraph">
-<p>函数式编程是使用一系列函数进行计算的方式。这里所说的函数是指从数学意义上的函数，而不是 Raku 中的子例程。函数式编程的一个非常重要的原则是, 函数必须没有副作用。特别是，这意味着变量必须是不可变的 - 禁止指定一个新的值。</p>
+<p>函数式编程是使用一系列函数进行计算的方式。这里所说的函数是指从数学意义上的函数, 而不是 Raku 中的子例程。函数式编程的一个非常重要的原则是, 函数必须没有副作用。特别是, 这意味着变量必须是不可变的 - 禁止指定一个新的值。</p>
 </div>
 <div class="paragraph">
-<p>本章中我们将讨论的所有主题都是前面的限制的结果。重要的是要认识到，比如说，lambda 函数并不是函数式编程的核心本质，它只是遵循无副作用这一主要原则的方式之一，比如说改变一些影响函数结果的全局变量。</p>
+<p>本章中我们将讨论的所有主题都是前面的限制的结果。重要的是要认识到, 比如说, lambda 函数并不是函数式编程的核心本质, 它只是遵循无副作用这一主要原则的方式之一, 比如说改变一些影响函数结果的全局变量。</p>
 </div>
 <div class="paragraph">
-<p>让我们取一个函数 <code>f($x)</code>， 用同样的参数调用它两次。第二次调用会不会和第一次调用的结果相同一样呢? 在函数式编程中，要求一个函数如果用相同的参数调用，总是返回相同的结果。</p>
+<p>让我们取一个函数 <code>f($x)</code>, 用同样的参数调用它两次。第二次调用会不会和第一次调用的结果相同一样呢? 在函数式编程中, 要求一个函数如果用相同的参数调用, 总是返回相同的结果。</p>
 </div>
 <div class="paragraph">
 <p>下面是这样一个函数的例子, 返回 <code>$x + 1</code>:</p>
@@ -16107,7 +16107,7 @@ say f(5) == f(5); # True</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>两个调用都返回相同的结果。同时，比较 <code>f(5) == f(5)</code> 结果为 <code>True</code>。这个程序可能已经被认为是用函数式风格编写的程序。</p>
+<p>两个调用都返回相同的结果。同时, 比较 <code>f(5) == f(5)</code> 结果为 <code>True</code>。这个程序可能已经被认为是用函数式风格编写的程序。</p>
 </div>
 <div class="paragraph">
 <p>引入一个变量并不违背原则:</p>
@@ -16130,7 +16130,7 @@ say f($a) == f($a); # True</code></pre>
 <p><code>$a</code> 变量在初始化期间只获得一次值。之后就再也不会改变。</p>
 </div>
 <div class="paragraph">
-<p>现在，让我们修改函数的参数(你需要使用 <code>is rw</code> trait):</p>
+<p>现在, 让我们修改函数的参数(你需要使用 <code>is rw</code> trait):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16141,7 +16141,7 @@ say f($a) == f($a); # True</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>第一次调用具有相同原始值 <code>$a</code> 的函数将返回与以前相同的结果。虽然在函数调用后, <code>$a</code> 的值发生了变化，第二次调用 <code>f($a)</code> 无法返回相同的结果。 条件 <code>f($a) == f($a)</code> 已经不再是 True 了：</p>
+<p>第一次调用具有相同原始值 <code>$a</code> 的函数将返回与以前相同的结果。虽然在函数调用后, <code>$a</code> 的值发生了变化, 第二次调用 <code>f($a)</code> 无法返回相同的结果。 条件 <code>f($a) == f($a)</code> 已经不再是 True 了：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16154,7 +16154,7 @@ say f($a) == f($a); # False</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这里，函数产生了一个修改参数的副作用，这是由于它被声明为可读可写的参数，改变了主代码中变量的值。</p>
+<p>在这里, 函数产生了一个修改参数的副作用, 这是由于它被声明为可读可写的参数, 改变了主代码中变量的值。</p>
 </div>
 <div class="paragraph">
 <p>另一种产生副作用的方法是在函数内部使用全局变量。考察下面这个函数:</p>
@@ -16170,10 +16170,10 @@ sub f($x) {
 </div>
 </div>
 <div class="paragraph">
-<p>现在函数的参数没有变化，但是函数被调用两次后, 返回的结果不一样。</p>
+<p>现在函数的参数没有变化, 但是函数被调用两次后, 返回的结果不一样。</p>
 </div>
 <div class="paragraph">
-<p>现在，仔细看一下 <code>f</code> 函数的三个变体。在第一个变体中，函数的主体没有涉及到赋值。在第二个和第三个例子中，函数参数或全局变量被重新赋值了。虽然没有显式地使用 <code>=</code> 运算符，但 <code>$x += 1</code> 和 <code>$step++</code> 结构相当于下面的赋值:</p>
+<p>现在, 仔细看一下 <code>f</code> 函数的三个变体。在第一个变体中, 函数的主体没有涉及到赋值。在第二个和第三个例子中, 函数参数或全局变量被重新赋值了。虽然没有显式地使用 <code>=</code> 运算符, 但 <code>$x += 1</code> 和 <code>$step++</code> 结构相当于下面的赋值:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16182,7 +16182,7 @@ $step = $step + 1;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这两种情况下，这就是打破 <code>f($a) == f($a)</code> 条件的根源。</p>
+<p>在这两种情况下, 这就是打破 <code>f($a) == f($a)</code> 条件的根源。</p>
 </div>
 <div class="paragraph">
 <p>函数本身不一定会改变一个全局值。在函数的两次调用之间, 全局值可以被其他代码修改:</p>
@@ -16201,7 +16201,7 @@ say f(5); # 7</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>虽然函数似乎是可预测的，但它的工作环境影响着它的工作。从某种意义上说，变量重新赋值在程序中引入了时间的概念。在不同时间里, 同样的调用 <code>f(5)</code> 会返回不同的结果:</p>
+<p>虽然函数似乎是可预测的, 但它的工作环境影响着它的工作。从某种意义上说, 变量重新赋值在程序中引入了时间的概念。在不同时间里, 同样的调用 <code>f(5)</code> 会返回不同的结果:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16213,13 +16213,13 @@ say $t1 == $t2; # False</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Raku 并不禁止设置变量的新值，但在用函数式编程风格编写程序时，应该只对变量进行一次初始化，并应避免任何新的赋值。在下一节中，你将看到如何修改传的统程序, 以遵循函数式编程的原则。</p>
+<p>Raku 并不禁止设置变量的新值, 但在用函数式编程风格编写程序时, 应该只对变量进行一次初始化, 并应避免任何新的赋值。在下一节中, 你将看到如何修改传的统程序, 以遵循函数式编程的原则。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_使用递归">14.2. 使用递归</h3>
 <div class="paragraph">
-<p>本章中我们的下一个程序是一个简单的循环，可以打印从 10 到 15 的数字并计算出他们的总和。我们先打印一下数字。正如我们在第 5 章《控制流》中看到的那样，在 Raku 中, 有不同的循环方式。在它们之间进行选择, 可以把我们已经引导到函数式编程的方向上了。</p>
+<p>本章中我们的下一个程序是一个简单的循环, 可以打印从 10 到 15 的数字并计算出他们的总和。我们先打印一下数字。正如我们在第 5 章《控制流》中看到的那样, 在 Raku 中, 有不同的循环方式。在它们之间进行选择, 可以把我们已经引导到函数式编程的方向上了。</p>
 </div>
 <div class="paragraph">
 <p><code>loop</code> 循环需要一个 <code>loop</code> 计数器:</p>
@@ -16234,7 +16234,7 @@ say $sum; # 75</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这个程序中, 有两个变量会改变它们的值 - <code>$n</code> 和 <code>$sum</code>。很容易摆脱 <code>$n</code> 计数器，从而给它重新分配一个值:</p>
+<p>在这个程序中, 有两个变量会改变它们的值 - <code>$n</code> 和 <code>$sum</code>。很容易摆脱 <code>$n</code> 计数器, 从而给它重新分配一个值:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16246,7 +16246,7 @@ say $sum;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在，我们使用 <code>$_</code> 变量代替 <code>$n</code>，实际上 <code>for</code> 循环可以使用显式循环变量:</p>
+<p>现在, 我们使用 <code>$_</code> 变量代替 <code>$n</code>, 实际上 <code>for</code> 循环可以使用显式循环变量:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16258,10 +16258,10 @@ say $sum;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这段代码和带 <code>loop</code> 的程序的区别在于, 现在变量 <code>$n</code> 只存在于一次循环迭代中。它在进入循环主体之前被赋值，在循环运行后被撤回。在第一个例子中，它在每一次迭代中都在递增。</p>
+<p>这段代码和带 <code>loop</code> 的程序的区别在于, 现在变量 <code>$n</code> 只存在于一次循环迭代中。它在进入循环主体之前被赋值, 在循环运行后被撤回。在第一个例子中, 它在每一次迭代中都在递增。</p>
 </div>
 <div class="paragraph">
-<p>其中一项赋值消失了。那么我们如何避免修改 <code>$sum</code> 变量呢? 由于它的性质, 它看起来是不可避免的-它应该在循环数字的同时累积总和。答案是 - 使用递归。递归给我们提供了和我们刚才看到的 <code>$n</code> 变量一样的技巧。与其使用一个单一的全局 <code>$sum</code> 变量来保存程序的状态，不如在每次改变总和的时候创建一个新的变量。更有甚者，还可以完全去掉那个变量，如下面的例子所示:</p>
+<p>其中一项赋值消失了。那么我们如何避免修改 <code>$sum</code> 变量呢? 由于它的性质, 它看起来是不可避免的-它应该在循环数字的同时累积总和。答案是 - 使用递归。递归给我们提供了和我们刚才看到的 <code>$n</code> 变量一样的技巧。与其使用一个单一的全局 <code>$sum</code> 变量来保存程序的状态, 不如在每次改变总和的时候创建一个新的变量。更有甚者, 还可以完全去掉那个变量, 如下面的例子所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16278,13 +16278,13 @@ say sum(10, 15); # 75</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>让我们仔细看一下这个程序。首先，这里没有保存状态的变量 - 没有循环计数器 <code>$n</code>，也没有保存中间结果的 <code>$sum</code> 变量。我们不创建一个关于如何计算和的指令-从这个数字开始，而是假设这是一个和；递增这个数字，把它加到之前的和上；我们描述一下和的实际含义-和就是当前的数字加上之前所有数字的总和。</p>
+<p>让我们仔细看一下这个程序。首先, 这里没有保存状态的变量 - 没有循环计数器 <code>$n</code>, 也没有保存中间结果的 <code>$sum</code> 变量。我们不创建一个关于如何计算和的指令-从这个数字开始, 而是假设这是一个和；递增这个数字, 把它加到之前的和上；我们描述一下和的实际含义-和就是当前的数字加上之前所有数字的总和。</p>
 </div>
 <div class="paragraph">
-<p><code>sum</code> 函数调用自身，每次调用的参数都不一样。当然，在某个时候停止递归是很重要的，这就是为什么有测试 <code>$min == $max - 1</code>，当值是我们想要相加的最后两个值时，它就变成了 True。这个程序已经是一个函数式的程序了：它对和的定义进行了编码，它不保留状态，它使用函数来实现目标。</p>
+<p><code>sum</code> 函数调用自身, 每次调用的参数都不一样。当然, 在某个时候停止递归是很重要的, 这就是为什么有测试 <code>$min == $max - 1</code>, 当值是我们想要相加的最后两个值时, 它就变成了 True。这个程序已经是一个函数式的程序了：它对和的定义进行了编码, 它不保留状态, 它使用函数来实现目标。</p>
 </div>
 <div class="paragraph">
-<p>最后，让我们使用一些 Raku 的语法元素，使程序更加紧凑:</p>
+<p>最后, 让我们使用一些 Raku 的语法元素, 使程序更加紧凑:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16298,7 +16298,7 @@ say sum(10, 15);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>另外，这里不需要 <code>return</code> 关键字，因为 Raku 会取函数中的最后一个计算值。最后一个分号也可以省略:</p>
+<p>另外, 这里不需要 <code>return</code> 关键字, 因为 Raku 会取函数中的最后一个计算值。最后一个分号也可以省略:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16320,13 +16320,13 @@ say sum(10, 15);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>让我们就此打住，看看 Raku 还能给我们带来哪些令人着迷的选择。</p>
+<p>让我们就此打住, 看看 Raku 还能给我们带来哪些令人着迷的选择。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_使用化简">14.3. 使用化简</h3>
 <div class="paragraph">
-<p>在上一节中，我们计算了 10 到 15 之间的数字之和。这个程序, 经过一些变换，就变成了下面这个程序的等价物:</p>
+<p>在上一节中, 我们计算了 10 到 15 之间的数字之和。这个程序, 经过一些变换, 就变成了下面这个程序的等价物:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16334,10 +16334,10 @@ say sum(10, 15);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里的每一对括号对应于 <code>sum</code> 函数的递归调用。函数的调用在这里用它的实现来代替。这也是无状态方法限制的后果之一。如果函数依赖于程序的状态，那么在不知道反射不同时刻的状态值的情况下，就不可能用函数调用替换成它的实现。</p>
+<p>这里的每一对括号对应于 <code>sum</code> 函数的递归调用。函数的调用在这里用它的实现来代替。这也是无状态方法限制的后果之一。如果函数依赖于程序的状态, 那么在不知道反射不同时刻的状态值的情况下, 就不可能用函数调用替换成它的实现。</p>
 </div>
 <div class="paragraph">
-<p>因为这里的括号不会改变任何执行顺序，所以我们把它们去掉:</p>
+<p>因为这里的括号不会改变任何执行顺序, 所以我们把它们去掉:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16374,7 +16374,7 @@ say [+] @a; # 2223</code></pre>
 <p>刚才我们在上一节中看到的 <code>[+]</code> 化简运算符就是根据需要执行 <code>+</code> 运算符的动作, 将提供的数据中的所有元素加相加。</p>
 </div>
 <div class="paragraph">
-<p>在 Raku 中，有另外一种进行化简操作的方法。有一个内置的函数 <code>reduce</code>, 期望有一个代码块来执行这个操作。首先，我们将使用我们在第二章《编写代码》中所创建的函数 <code>add($a, $b)</code>:</p>
+<p>在 Raku 中, 有另外一种进行化简操作的方法。有一个内置的函数 <code>reduce</code>, 期望有一个代码块来执行这个操作。首先, 我们将使用我们在第二章《编写代码》中所创建的函数 <code>add($a, $b)</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16386,13 +16386,13 @@ say reduce &amp;add, 10..15;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>reduce</code> 函数将函数的引用作为第一个参数, 并展平值的列表。在 <code>&amp;add</code> 中，函数名称前面的 <code>&amp;</code> 符号告诉 Raku 这不是函数调用，而是对函数的代码引用。</p>
+<p><code>reduce</code> 函数将函数的引用作为第一个参数, 并展平值的列表。在 <code>&amp;add</code> 中, 函数名称前面的 <code>&amp;</code> 符号告诉 Raku 这不是函数调用, 而是对函数的代码引用。</p>
 </div>
 <div class="paragraph">
-<p><code>reduce</code> 函数是高阶函数的一个例子。它的一个参数是另一个函数。在 Raku 中，函数是一等对象，这意味着可以像常规变量一样, 将其作为参数传递给其他函数, 就像你用常规变量一样简单。从高阶函数中调用的函数有时也称为回调函数。</p>
+<p><code>reduce</code> 函数是高阶函数的一个例子。它的一个参数是另一个函数。在 Raku 中, 函数是一等对象, 这意味着可以像常规变量一样, 将其作为参数传递给其他函数, 就像你用常规变量一样简单。从高阶函数中调用的函数有时也称为回调函数。</p>
 </div>
 <div class="paragraph">
-<p>由于 <code>add</code> 函数只在 <code>reduce</code> 函数中使用，所以可以内联, 直接在需要它的地方创建它:</p>
+<p>由于 <code>add</code> 函数只在 <code>reduce</code> 函数中使用, 所以可以内联, 直接在需要它的地方创建它:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16400,7 +16400,7 @@ say reduce &amp;add, 10..15;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在很明显的是，<code>add</code> 的名称没有添加任何值，可以省略, 从而使该函数成为匿名函数:</p>
+<p>现在很明显的是, <code>add</code> 的名称没有添加任何值, 可以省略, 从而使该函数成为匿名函数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16408,10 +16408,10 @@ say reduce &amp;add, 10..15;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这种情况下，匿名函数也被称为 lambda 函数。它具有普通子例程的所有属性，只是它既没有名字, 也不能从程序中的其它地方调用。整个函数的定义是内联的。</p>
+<p>在这种情况下, 匿名函数也被称为 lambda 函数。它具有普通子例程的所有属性, 只是它既没有名字, 也不能从程序中的其它地方调用。整个函数的定义是内联的。</p>
 </div>
 <div class="paragraph">
-<p>现在让我们看看 Raku 如何在语法上帮助简化创建 lambda。 首先，<code>sub</code> 块可以用尖号块来代替:</p>
+<p>现在让我们看看 Raku 如何在语法上帮助简化创建 lambda。 首先, <code>sub</code> 块可以用尖号块来代替:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16419,10 +16419,10 @@ say reduce &amp;add, 10..15;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>匿名函数的参数列在 <code>&#8594;</code> 箭头之后列出，你不需要用括号括起来。另外要注意的是，使用尖号块时，不能使用 <code>return</code> 关键字(编译器会产生一个错误: Attempt to return outside of any Routine)。实际上，根本不需要 <code>return</code>，因为函数要做的就是计算一个表达式，其结果就是函数的结果。</p>
+<p>匿名函数的参数列在 <code>&#8594;</code> 箭头之后列出, 你不需要用括号括起来。另外要注意的是, 使用尖号块时, 不能使用 <code>return</code> 关键字(编译器会产生一个错误: Attempt to return outside of any Routine)。实际上, 根本不需要 <code>return</code>, 因为函数要做的就是计算一个表达式, 其结果就是函数的结果。</p>
 </div>
 <div class="paragraph">
-<p>此外，即使是参数也不是这种函数的必要元素。它们可以用花括号内的占位符变量来代替(参见第六章《子例程》中的参数占位符一节):</p>
+<p>此外, 即使是参数也不是这种函数的必要元素。它们可以用花括号内的占位符变量来代替(参见第六章《子例程》中的参数占位符一节):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16441,7 +16441,7 @@ say reduce &amp;add, 10..15;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>grep</code> 函数也为每个元素调用它的回调，但只复制那些回调函数返回 <code>True</code> 值的元素:</p>
+<p><code>grep</code> 函数也为每个元素调用它的回调, 但只复制那些回调函数返回 <code>True</code> 值的元素:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16449,10 +16449,10 @@ say reduce &amp;add, 10..15;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这两个例子中，都使用了 $_ 变量: 对于 <code>map</code>，它是隐式的, 因为为 <code>.uc</code> 是 <code>$_.uc</code> 的快捷方式。</p>
+<p>在这两个例子中, 都使用了 $_ 变量: 对于 <code>map</code>, 它是隐式的, 因为为 <code>.uc</code> 是 <code>$_.uc</code> 的快捷方式。</p>
 </div>
 <div class="paragraph">
-<p>对于 <code>sort</code> 函数，就有点复杂了，因为回调函数需要两个参数。最简单的方法是使用占位符:</p>
+<p>对于 <code>sort</code> 函数, 就有点复杂了, 因为回调函数需要两个参数。最简单的方法是使用占位符:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16465,10 +16465,10 @@ say reduce &amp;add, 10..15;</code></pre>
 <div class="sect3">
 <h4 id="_whatevercode_块">14.4.1. WhateverCode 块</h4>
 <div class="paragraph">
-<p>现在，因为我们已经使用了 <code>sort</code>，<code>grep</code>，<code>map</code> 和 <code>reduce</code> 代码块，所以是时候使用 Raku 中所谓的 <code>WhateverCode</code> 类型了。它涉及(*)星号并创建一个代码块，可以用作我们之前使用的任何代码块。</p>
+<p>现在, 既然我们已经使用了 <code>sort</code>, <code>grep</code>, <code>map</code> 和 <code>reduce</code> 等代码块, 那么现在是时候使用 Raku 中所谓的 <code>WhateverCode</code> 类型了。它涉及到了(<code>*</code>)星号并创建一个代码块, 可以和我们之前使用的任何代码块一样使用。</p>
 </div>
 <div class="paragraph">
-<p>例如，您可以编写 <code>*.uc</code> 代替 <code>{.uc}</code>。以下两行代码是等价的:</p>
+<p>例如, 您可以编写 <code>*.uc</code> 代替 <code>{.uc}</code>。下面的两行代码是等价的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16477,7 +16477,7 @@ say map *.uc, 'a'..'d';  # (A B C D)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>类似地，这就是 <code>WhateverCode</code> 块可以用来替换 <code>grep</code> 和 <code>sort</code> 示例中匿名代码的方式:</p>
+<p>同理, 这就是 <code>WhateverCode</code> 块可以用来替换 <code>grep</code> 和 <code>sort</code> 示例中的匿名代码的方式:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16487,20 +16487,20 @@ say sort * &lt;=&gt; *, &lt;11 12 10 13 15 14&gt;; # (10 11 12 13 14 15)</code><
 </div>
 </div>
 <div class="paragraph">
-<p>在第二个例子中，有两个星号，分别对应于前面使用的 <code>$^a</code> 和 <code>$^b</code> 占位符参数。使用 * 时，不需要花括号来创建块。</p>
+<p>在第二个例子中, 有两个星号, 分别对应于前面使用的 <code>$^a</code> 和 <code>$^b</code> 占位符参数。使用 <code>*</code> 时, 不需要用花括号来创建一个块。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_管道数据和_feed_运算符">14.5. 管道数据和 feed 运算符</h3>
 <div class="paragraph">
-<p><code>grep</code>，<code>map</code>，<code>reduce</code> 和 <code>sort</code> 函数功能强大且易于使用(与其他类似的用户定义的高阶函数一起使用)他们可以处理许多实际的传统命令式编程通过循环组织它们的那些领域的任务。</p>
+<p><code>grep</code>, <code>map</code>, <code>reduce</code> 和 <code>sort</code> 函数是如此的强大和简单易用, 以至于(和其他类似的用户定义的高阶函数一起), 它们可以在传统的命令式编程中通过循环来组织的领域中处理许多实际任务。</p>
 </div>
 <div class="paragraph">
-<p>通常，您需要调用另一个函数返回的结果中的一个函数。考虑一个街道上房屋清单的例子。其中一些房子必须是漆过的，但你只需要选择街道的一侧，它有红色的外墙，五年多前进行了翻新。任务是你要知道需要多少油漆。</p>
+<p>通常情况下, 你需要在另一个函数返回的结果上调用其中的一个函数。考虑一个例子, 用街道上的房屋列表来举例。其中有些房子需要粉刷, 但你只需要选择那些在街道的偶数一侧的房子, 这些房子的外墙是红色的, 是五年前装修过的。这个任务就是要知道自己需要多少油漆。</p>
 </div>
 <div class="paragraph">
-<p>让我们假设有关房屋属性的信息包含在像这样的结构的数据中:</p>
+<p>让我们假设房子的属性信息都包含在这样的数据结构中:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16525,7 +16525,7 @@ say sort * &lt;=&gt; *, &lt;11 12 10 13 15 14&gt;; # (10 11 12 13 14 15)</code><
 </div>
 </div>
 <div class="paragraph">
-<p>显然应该创建某种过滤器。它应该检查每个房子并确定它是否通过了所有条件，或者它可以逐步过滤匹配的房屋,一次一个条件。例如，让我们从选定的偶数一侧的房屋开始:</p>
+<p>很明显, 应该创建某种过滤器。要么它应该检查每一栋房子, 并决定它是否通过了所有的条件, 要么它可以一步一步地筛选出符合条件的房子。比如说, 让我们从所选取的双数边的房子开始:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16533,11 +16533,10 @@ say sort * &lt;=&gt; *, &lt;11 12 10 13 15 14&gt;; # (10 11 12 13 14 15)</code><
 </div>
 </div>
 <div class="paragraph">
-<p><code>grep</code> 函数逐个接收 <code>@street</code> 数组的所有元素。在每次迭代中，元素可以通过 $_ 主题变量访问。在计算 <code>$_&lt;number&gt; %% 2</code> 条件后，只返回那些非零结果元素传递给
- <code>@houses-to-paint</code> 数组。</p>
+<p><code>grep</code> 函数逐一接收 <code>@street</code> 数组中的所有元素。在每次迭代中, 元素可以通过 $_ 主题变量访问。只有那些在计算 <code>$_&lt;number&gt; %% 2</code> 条件后返回非零结果的元素才会被传递给 <code>@houses-to-paint</code> 数组。</p>
 </div>
 <div class="paragraph">
-<p>同样，可以添加基于颜色和翻新年份的过滤:</p>
+<p>同样, 可以添加基于颜色和装修年份的过滤:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16549,10 +16548,10 @@ say sort * &lt;=&gt; *, &lt;11 12 10 13 15 14&gt;; # (10 11 12 13 14 15)</code><
 </div>
 </div>
 <div class="paragraph">
-<p>不要被第一个 <code>grep</code> 中的巧合对 <code>&gt; &lt;</code> 迷惑。每个角括号都有它自己的功能，编译器完全理解它。</p>
+<p>不要被第一个 <code>grep</code> 中的巧合对 <code>&gt; &lt;</code> 所迷惑。每个角括号都有自己的功能, 编译器完全可以理解。</p>
 </div>
 <div class="paragraph">
-<p>最后，我们需要计算表面积，以了解需要多少油漆。让我们假设每平方米需要 0.7 升油漆和每层楼高度为 3 米:</p>
+<p>最后, 我们需要计算出表面积, 以了解需要多少油漆。假设每平方米需要 0.7 升油漆, 每层楼高 3 米:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16560,10 +16559,10 @@ say sort * &lt;=&gt; *, &lt;11 12 10 13 15 14&gt;; # (10 11 12 13 14 15)</code><
 </div>
 </div>
 <div class="paragraph">
-<p><code>map</code> 函数用于将房屋转换为其表面积。<code>[+]</code> 化简运算符将所有值相加以获得总结果。</p>
+<p>这里用 <code>map</code> 函数来换算房子的表面积。用 <code>[+]</code> 化简运算符将所有的值相加, 得到总的结果。</p>
 </div>
 <div class="paragraph">
-<p>我们现在可以将所有代码组合在一个语句中:</p>
+<p>现在我们可以把所有的代码合并到一条语句中:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16581,7 +16580,7 @@ say sort * &lt;=&gt; *, &lt;11 12 10 13 15 14&gt;; # (10 11 12 13 14 15)</code><
 <p>你可以在这里提出自己的缩进方式。</p>
 </div>
 <div class="paragraph">
-<p>如果房屋存放在对象而不是哈希中，那就更好了:</p>
+<p>如果房子是用对象来存储, 而不是用散列来存储, 那就更好了:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16615,7 +16614,7 @@ my @street = (
 </div>
 </div>
 <div class="paragraph">
-<p>在这种情况下，<code>map</code> 和 <code>grep</code> 函数的代码块可能看起来更简单:</p>
+<p>在这种情况下, <code>map</code> 和 <code>grep</code> 函数的代码块可能看起来更简单:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16630,10 +16629,10 @@ my @street = (
 </div>
 </div>
 <div class="paragraph">
-<p>现在它看起来完成了。在一分钟内，我们将使它变得更好，但现在再一次注意到，没有赋值操作符来更改变量的值。其实，整个程序中的变量并不多。</p>
+<p>现在看起来已经大功告成了。一会儿我们会把它做得更好, 但现在要再次注意, 没有任何赋值操作符可以改变变量的值。实际上, 整个程序中的变量并不多。</p>
 </div>
 <div class="paragraph">
-<p>最后一个带有链式 <code>map</code> 和 <code>grep</code> 的示例中的数据流从下到上发生。 首先，过滤 <code>@street</code> 以查找具有偶数的房屋，然后挑选红房子，然后只选择旧房子，然后计算他们的表面积。Raku 允许我们以这样的方式组织代码，使用 <code>=&#8658;</code> 从上到下阅读以及 <code>&#8656;=</code> 运算符。在第四章的《使用运算符》中的数据管道运算符一节中简要介绍了 feed 运算符。这是你如何使用它们重新编写链:</p>
+<p>上一个例子中的数据流是由下而上的链式 <code>map</code> 和 <code>grep</code>。 首先, <code>@street</code> 被过滤, 找到双数的房子, 然后挑选红色的房子, 然后只挑选老房子, 然后计算他们的表面积。Raku 允许我们用 <code>=&#8658;</code> 和 <code>&#8656;=</code> 运算符以从上到下的方式来组织代码。在第四章《使用运算符》中的数据管道运算符一节中简要介绍了 feed 运算符。这是你如何使用它们重写链的方法:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16646,10 +16645,10 @@ my @street = (
 </div>
 </div>
 <div class="paragraph">
-<p>反转的 <code>&#8656;=</code> 运算符会更改数据流。</p>
+<p>反向 <code>&#8656;=</code> 运算符改变了数据的流向。</p>
 </div>
 <div class="paragraph">
-<p>在此示例中，链的结果是数字。如果你得到数组，你甚至可以在链的末尾定义变量。例如，代替传统的赋值(这里需要圆括号):</p>
+<p>在这个例子中, 链的结果是一个数。如果你得到数组, 你甚至可以在链的末端定义变量。例如, 代替传统的赋值(这里需要圆括号):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16658,7 +16657,7 @@ my @street = (
 </div>
 </div>
 <div class="paragraph">
-<p>把 <code>my</code> 声明放在最后:</p>
+<p>把 <code>my</code> 声明放在末尾:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16667,7 +16666,7 @@ grep {.colour eq 'red'} ==&gt; my @even-red-houses;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>要减少花括号的数量，可以使用 <code>Whatever</code> 块:</p>
+<p>为了减少花括号的数量, 可以使用 <code>Whatever</code> 块:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16676,24 +16675,24 @@ grep *.colour eq 'red' ==&gt; my @even-red-houses;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>正如我们所见，Raku 提供了多种不同的方式来尽可能地表达您的想法。</p>
+<p>正如我们已经看到的那样, Raku 提供了许多不同的方法来尽可能地表达你的想法。</p>
 </div>
 <div class="paragraph">
-<p>再次，您看到没有涉及变量，但这并不意味着变量在函数式编程风格中是被禁止的。不希望的只是修改他们。在下一节中，我们将讨论我们可以用变量做些什么。</p>
+<p>再次, 你看到没有涉及到变量, 但这并不意味着函数式编程中禁止使用变量。所不希望的只是修改它们。在下一节中, 我们将谈一谈我们还能用变量做什么。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_操作作用域">14.6. 操作作用域</h3>
 <div class="paragraph">
-<p>在本节中，我们将学习三种可以改变变量作用域的技术。这些是闭包，柯里化和动态作用域。</p>
+<p>在本节中, 我们将学习三种可以改变变量作用域的技术。它们是闭包、柯里化和动态作用域。</p>
 </div>
 <div class="sect3">
 <h4 id="_闭包">14.6.1. 闭包</h4>
 <div class="paragraph">
-<p>在 Raku 中，词法变量存在于其作用域内。闭包是可以扩展该作用域并让你访问词法值的函数，这些值在闭包定义之处可以访问。让我们考虑在变量中保持当前状态的计数器的示例。</p>
+<p>在 Raku 中, 词法变量存在于其作用域内。闭包是可以扩展这个作用域的函数, 让你访问词法值, 而这些值在定义闭包的地方是可用的。让我们考虑一个将当前状态保存在变量中的计数器的例子。</p>
 </div>
 <div class="paragraph">
-<p>首先，不涉及任何闭包。计数器值保存在全局变量中:</p>
+<p>首先, 不涉及闭包。计数器的值被保存在一个全局变量中:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16709,10 +16708,10 @@ say next-number(); # 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>每次调用 <code>next-number</code> 函数时，都会返回一个递增的整数。</p>
+<p>每次调用 <code>next-number</code> 函数时, 都会返回一个递增的整数。</p>
 </div>
 <div class="paragraph">
-<p>现在，目标是隐藏 <code>$counter</code> 变量，以便用户无法直接访问 <code>next-number</code>。这是一个闭包。首先，变量和函数都放在另一个函数中，这为它们创建了一个词法作用域:</p>
+<p>现在, 我们的目标是隐藏 <code>$counter</code> 变量, 使其不能直接被 <code>next-number</code> 的用户访问。这就有了闭包。首先, 将变量和函数都放在另一个函数里面, 这样就为它们创建了一个词法作用域:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16726,10 +16725,10 @@ say next-number(); # 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在无法从 <code>new-counter</code> 函数外部访问 <code>$counter</code>， 虽然它仍然可以在 <code>next-number</code> 子例程中访问。<code>$counter</code> 变量和 <code>next-number</code> 子例程是本地的，它们的作用域等于 <code>new-counter</code> 的主体。</p>
+<p>现在不能在 <code>new-counter</code> 函数之外访问 <code>$counter</code>, 而在 <code>next-number</code> 子例程中仍然可以访问。<code>$counter</code> 变量和 <code>next-number</code> 子例程都是本地的, 它们的作用域等于 <code>new-counter</code> 的主体。</p>
 </div>
 <div class="paragraph">
-<p>虽然，<code>new-counter</code> 子例程返回 <code>next-number</code> 子例程并且它可以保存在变量中:</p>
+<p>虽然, <code>new-counter</code> 子例程返回的是 <code>next-number</code> 子例程, 并且它可以保存在一个变量中:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16755,7 +16754,7 @@ say $c(); # 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>每次调用都会更改在闭包内捕获的 <code>$counter</code> 变量，因此 <code>$c()</code> 的调用按预期返回递增的数字。</p>
+<p>每次调用都会改变闭包内捕获的 <code>$counter</code> 变量, 因此 <code>$c()</code> 的调用会像预期的那样返回递增的数字。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16770,7 +16769,7 @@ say $a(); # 1</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>您可以创建另一个独立的计数器，它将在内部包含另一个 <code>$counter</code> 容器:</p>
+<p>你可以创建另一个独立的计数器, 它的内部将包含另一个容器, 为它的 <code>$counter</code> 提供另一个容器:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16779,10 +16778,10 @@ say $c;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如您所见，<code>$a</code> 和 <code>$b</code> 计数器保存调用之间的状态，不会彼此影响。</p>
+<p>如你所见, <code>$a</code> 和 <code>$b</code> 计数器保存调用之间的状态, 互不影响。</p>
 </div>
 <div class="paragraph">
-<p>在前面的代码中，子例程保存在标量变量中，前缀为 <code>$</code> sigil。如果你这样做，你总是需要添加圆括号来表示函数调用。如果不带圆括号，则会打印内存中的函数地址:</p>
+<p>在前面的代码中, 子例程被保存在标量变量中, 前缀为 <code>$</code> sigil。如果这样做, 总是要添加圆括号来表示函数调用。如果不带圆括号, 就会打印内存中的函数地址:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16790,7 +16789,7 @@ say $c;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这是你在输出中得到的:</p>
+<p>这就是你在输出中得到的结果:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16798,7 +16797,7 @@ say $c;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如您所知，对于常规函数可以省略空的圆括号，比如说 <code>new-counter</code>:</p>
+<p>大家都知道, 对于普通函数可以省略空括号, 比如说 <code>new-counter</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16808,7 +16807,7 @@ say $cntr(); # 1</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Raku 有一个单独的 sigil，<code>&amp;</code>，用于保存实现 <code>Callable</code> 接口的值的容器。我们在此不再详述，如果您有兴趣，请参考 link:https:/​/​docs.​raku.​org/​type/​Callable。带有 <code>&amp;</code> sigil 的变量被编译器视为可以调用的对象，所以空的圆括号甚至是 sigil 本身可以省略，如下一个程序所示:</p>
+<p>Raku 有一个单独的 sigil, <code>&amp;</code>, 用于保存实现 <code>Callable</code> 接口的值的容器。这里就不细说了, 如果你有兴趣, 请参考 <a href="https:/​/​docs.​raku.​org/​type/​Callable">文档</a>。编译器会把带有 <code>&amp;</code> sigil 的变量被当作可以调用的对象来处理, 所以空的圆括号甚至是 sigil 本身都可以省略掉, 如下一个程序所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16819,10 +16818,10 @@ say d;    # 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>裸的 <code>d</code> 和 <code>d()</code> 以及完整形式的 <code>&amp;d()</code> 都是相同的调用。</p>
+<p>裸的 <code>d</code> 和 <code>d()</code> 和完整形式的 <code>&amp;d()</code> 都是一样的调用。</p>
 </div>
 <div class="paragraph">
-<p>最后的注释是关于如何从 <code>new-counter</code> 函数中返回子例程。如果更严格，可以使用引用隐式返回，如下一个片段所示:</p>
+<p>最后要说明的是关于 <code>new-counter</code> 函数中的子例程是如何返回的。说得更严格一点, 可以用引用隐式返回, 如下面的片段所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16843,10 +16842,10 @@ say d;    # 2</code></pre>
 <div class="sect3">
 <h4 id="_柯里化">14.6.2. 柯里化</h4>
 <div class="paragraph">
-<p>柯里华是一种通过创建一个用于替换原始函数的某些预定义值的包装函数以减少函数参数数量的技术 。</p>
+<p>柯里化是一种减少函数参数数量的技术, 它通过创建一个封装函数来代替原来函数的一些预定义值来减少函数的参数数量。</p>
 </div>
 <div class="paragraph">
-<p>让我们看一下一个带有两个参数的简单函数的例子:</p>
+<p>让我们看看一个简单函数的例子, 这个函数带有两个参数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16856,7 +16855,7 @@ say d;    # 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在假设我们要选择默认问候语; 函数调用将包含重复的参数:</p>
+<p>假设现在我们要选择一个默认的问候语; 函数调用将包含重复的参数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16866,7 +16865,7 @@ say greet('Hello', 'Carl');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>可以通过创建一个单独的函数 <code>hello</code> 来解决问题，它正好用所需的参数调用 <code>greet</code>:</p>
+<p>可以通过创建一个单独的函数 <code>hello</code> 来解决这个问题, 只需调用需要的参数 <code>greet</code> 即可:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16884,7 +16883,7 @@ say greet('Hello', 'Carl');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>assume</code> 方法创建一个新的可调用子例程实际上是一个带有给定的第一个参数的 <code>greet</code> 子例程。现在，<code>hello</code> 是一个新的可调用对象的名称，它接受一个参数并且可以用作函数:</p>
+<p><code>assuming</code> 方法创建了一个新的可调用子例程, 实际上是一个带有给定的第一个参数的 <code>greet</code> 子例程。现在, <code>hello</code> 是一个新的可调用对象的名称, 它接受一个参数, 可以作为函数使用:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16894,7 +16893,7 @@ say hello('Carl');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>柯里化在某种程度上类似于使用子例程的默认参数，但主要有两个差异。首先，默认参数只能出现在签名的末尾。第二， 通过柯里化，可以创建多个默认值。例如，可以从同一个 <code>greet</code> 函数创建另一个替代问候语:</p>
+<p>柯里化在某种程度上类似于使用子例程的默认参数, 但有两个主要区别。首先, 默认参数只能出现在签名的末尾。第二, 使用柯里化, 可以创建多个默认参数。例如, 可以从同一个 <code>greet</code> 函数中创建另一个替代问候语:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16906,7 +16905,7 @@ say hi('Carl');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在让我们看看如何处理带有命名参数的函数。这是一个修改过的 <code>greet</code> 函数的版本:</p>
+<p>现在让我们来看看如何处理一个带有命名参数的函数。下面是一个修改后的 <code>greet</code> 函数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16916,7 +16915,7 @@ say hi('Carl');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>创建特定的 <code>hello</code> 版本很简单:</p>
+<p>创建特定的 <code>hello</code> 版本很容易:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16926,7 +16925,7 @@ say hi('Carl');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>因此，<code>:$type</code> 参数获取预定义值-<code>:type('Hello')</code>，而第二个参数 <code>:$name</code> 直接使用其原始名称传递。结果是连接了问候语的字符串:</p>
+<p>因此, <code>:$type</code> 参数得到预定义的值-<code>:type('Hello')</code>, 而第二个参数 <code>:$name</code> 则直接使用其原始名称传递。结果是一个连接了问候语的字符串:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16934,13 +16933,13 @@ say hi('Carl');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>最后，让我们看看扩展变量作用域的另一种方法。</p>
+<p>最后, 让我们再来看看另一种扩展变量作用域的方法。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_动态作用域">14.6.3. 动态作用域</h4>
 <div class="paragraph">
-<p>动态作用域使用 <code>*</code> twigil，例如，动态标量变量 <code>$*a</code>。不像常规局部变量，动态变量可以在函数中使用，从变量的当前作用域中调用。看下面这个例子:</p>
+<p>动态作用域使用 <code>*</code> twigil, 例如, 动态标量变量 <code>$*a</code>。与普通的局部变量不同, 动态变量可以在函数中使用, 它可以从变量的当前作用域中调用。看下面这个例子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16954,10 +16953,10 @@ say $*a; # 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里，<code>$*a</code> 是主程序中的动态变量。它的初始值为 1。 <code>f</code> 函数在被调用时会改变同一个变量的值，因此该程序打印 2。事实是 <code>$*a</code> 未在 <code>f</code> 函数内声明。编译器会在函数被调用的作用域内搜索此名称。</p>
+<p>这里, <code>$*a</code> 是主程序中的一个动态变量。它的初始化值为 1。 当 <code>f</code> 函数被调用时, 会改变同一个变量的值, 因此该程序打印出 2。问题是 <code>$*a</code> 并没有在 <code>f</code> 函数内部声明。编译器会在函数被调用的作用域中搜索这个名称。</p>
 </div>
 <div class="paragraph">
-<p>在前面的示例中，可以使用简单的全局变量而不是动态变量:</p>
+<p>在前面的例子中, 可以用一个简单的全局变量来代替动态变量:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16971,7 +16970,7 @@ sub f() {
 </div>
 </div>
 <div class="paragraph">
-<p>使用动态变量，您可以在不同的上下文中访问不同的容器。例如，如果从另一个函数中调用 <code>f</code> 函数怎么办?</p>
+<p>使用动态变量, 你可以在不同的上下文中访问不同的容器。例如, 如果从另一个函数中调用 <code>f</code> 函数怎么办?</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16983,7 +16982,7 @@ sub f() {
 </div>
 </div>
 <div class="paragraph">
-<p>在这种情况下，<code>f</code> 将修改 <code>g</code> 中初始化的变量。在作用域中包含动态变量的任何其他调用都会遇到同样的情况:</p>
+<p>在这种情况下, <code>f</code> 将修改在 <code>g</code> 中初始化的变量。同样的情况也会发生在该作用域内包含动态变量的任何其他调用上:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17009,14 +17008,14 @@ g(); # 11</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在下一节中，我们将讨论如何创建更高级的函数，例如迭代器。</p>
+<p>在下一节中, 我们将讨论创建更高级的函数, 例如迭代器。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_创建并使用迭代器">14.7. 创建并使用迭代器</h3>
 <div class="paragraph">
-<p>迭代器是一种强大的技术，可按需提供数据并避免手动计数。这些函数每次调用都返回某个序列的下一个元素。在上一节中，我们已经创建了迭代器 <code>new-counter</code>，它生成递增的整数。让我们做一些更复杂的事情:</p>
+<p>迭代器是一种强大的技术, 可按需提供数据, 避免手动计数。这些函数每次调用时, 都会返回某个序列的下一个元素。在上一节中, 我们已经创建了迭代器 <code>new-counter</code>, 它可以生成递增的整数。让我们做一个更复杂的东西:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17036,7 +17035,7 @@ say iter; # orange</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>make-iter</code> 函数获取一个数组，将 <code>$index</code> 位置安装为零并返回一个将用作迭代器的子例程。下次调用 <code>iter</code> 对象时，它返回当前位置的值并将内部指针移动到下一个元素。数据耗尽之后，会返回 <code>Nil</code>。</p>
+<p><code>make-iter</code> 函数得到一个数组, 将 <code>$index</code> 位置安装为 0, 并返回一个子例程作为迭代器。下次调用 <code>iter</code> 对象时, 它返回当前位置的值, 并将内部指针移动到下一个元素。当数据用完后, 会返回 <code>Nil</code>。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17055,36 +17054,38 @@ say iter for 1..5;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>迭代器也可以根据某些规则生成序列。例如，这是一个每次调用时返回下一个阶乘数的迭代器:</p>
+<p>迭代器也可以根据一定的规则生成序列。例如, 这里有一个迭代器, 每次调用它时, 都会返回下一个阶乘数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-scala" data-lang="scala">sub make-factorial-iter() {
-       my $n = 1;
-my $f = 1;
-       sub {
-           $f *= $n++;
-return $f; }
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub make-factorial-iter() {
+    my $n = 1;
+    my $f = 1;
+
+    sub {
+        $f *= $n++;
+        return $f;
+    }
 }
-   my &amp;iter = make-factorial-iter();
-   say iter for 1..5;</code></pre>
+
+my &amp;iter = make-factorial-iter();
+say iter for 1..5;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序打印 5 个数字 - 阶乘1到5。请注意，算法没有使用递归或循环，只需要最少的必要操作来计算下一个值。它始终使用先前计算的 <code>$n - 1</code> 的值。</p>
+<p>该程序会打印出 5 个数字 - 1 到 5 的阶乘数。注意, 该算法没有使用递归或循环, 只需要最少的必要操作来计算下一个值。它总是使用之前计算出的 <code>$n - 1</code> 的值。</p>
 </div>
 <div class="paragraph">
-<p>现在我们来谈另一个话题，惰性计算的数据。</p>
+<p>现在我们再来说说另一个话题, 惰性计算的数据。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_惰性和无限列表">14.8. 惰性和无限列表</h3>
 <div class="paragraph">
-<p>只要电脑的内存限制允许，带有阶乘的示例就可以生成数字。虽然我们可能想要计算，比如 100 的阶乘，在我们真正需要值之前，这个程序不会计算。如果结果还不需要，那么就不需要计算资源
-。这是惰性计算背后的想法。</p>
+<p>这个带阶乘的例子, 只要计算机的内存限制允许, 就可以生成数字。虽然我们可能想计算, 比如说 100 的阶乘, 但程序会在我们真正需要这个值的时候才会进行计算。如果结果还不需要, 就不会花费任何计算资源。这就是惰性计算背后的思想。</p>
 </div>
 <div class="paragraph">
-<p>在 Raku 中，<code>&#8230;&#8203;</code> 运算符创建一个序列。最简单的情况看起来类似于范围创建的方式。将在下一个示例中创建常规数组:</p>
+<p>在 Raku 中, <code>&#8230;&#8203;</code> 操作符可以创建一个序列。最简单的情况看起来与创建序列的方法类似。在下一个例子中, 我们将创建一个普通的数组:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17093,7 +17094,7 @@ say @a.elems;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>@a</code> 数组被立即创建，它获取所有 100 个元素，即从 1 到 100 的整数:</p>
+<p><code>@a</code> 数组被立即创建, 它得到了所有的 100 个元素, 即从 1 到 100 的整数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17105,7 +17106,7 @@ say @a[99]; # 100</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>相反，使用 <code>lazy</code> 关键字创建的惰性序列不会填充数组:</p>
+<p>相反, 使用 <code>lazy</code> 关键字创建的惰性序列, 不会填充数组:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17113,7 +17114,7 @@ say @a[99]; # 100</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>试图通过调用 <code>@b.elems</code> 来获取它的大小，会导致错误:</p>
+<p>试图通过调用 <code>@b.elems</code> 来获取它的大小, 会产生一个错误:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17121,7 +17122,7 @@ say @a[99]; # 100</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>虽然可以获取此数组的元素:</p>
+<p>虽然可以获取这个数组的元素:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17130,7 +17131,7 @@ say @b[1]; # 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在数组末尾请求元素也将生成相应的值:</p>
+<p>在数组末尾请求元素也会生成相应的值:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17139,7 +17140,7 @@ say @b[99]; # 100</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>最后，当数组结束并请求一个额外的元素时，返回空值 <code>Any</code>。此时，数组不再是惰性的，<code>elems</code> 方法返回数组大小。 要检查数组是否是惰性的，请使用 <code>is-lazy</code> 方法:</p>
+<p>最后, 当数组结束, 请求一个额外的元素时, 返回空值 <code>Any</code>。此时, 数组不再是惰性的, <code>elems</code> 方法返回数组的大小。要检查一个数组是否是惰性的, 可以使用 <code>is-lazy</code> 方法:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17151,7 +17152,7 @@ say @b.is-lazy; # False</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Raku 还允许我们创建序列，其上边界是无限的:</p>
+<p>Raku 还允许我们创建序列, 其上边界是无限的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17162,10 +17163,10 @@ say @c[1000]; # 1001</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>由于无法达到这样一个序列的末尾，<code>@c.is-lazy</code> 将始终保持为 <code>True</code>。</p>
+<p>由于无法到达这样的序列的末尾, 所以 <code>@c.is-lazy</code> 将始终保持为 <code>True</code>。</p>
 </div>
 <div class="paragraph">
-<p><code>&#8230;&#8203;</code> 序列运算符在你提供算术或几何级数时可以生成更复杂的序列:</p>
+<p>当你给它提供一个算术或几何级数的例子时, <code>&#8230;&#8203;</code> 序列运算符可以生成更复杂的序列:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17180,7 +17181,7 @@ say @float; # [3.14 3.15 3.16 3.17 3.18 3.19]</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>要创建无限序列，请使用 <code>Inf</code> 或 <code>*</code> 作为序列的右端:</p>
+<p>要创建一个无限序列, 请使用 <code>Inf</code> 或 <code>*</code> 作为序列的右端:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17189,10 +17190,10 @@ say @inf[0..5]; # (1 2 3 4 5 6)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序立即打印其结果，而不必等到数组充满无限列表。</p>
+<p>这个程序立即打印出结果, 而不需要等到数组被无限列表填满。</p>
 </div>
 <div class="paragraph">
-<p>最后，可以使用自定义生成器来计算下一个值:</p>
+<p>最后, 可以使用自定义的生成器来计算下一个值:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17201,16 +17202,16 @@ say @cubes[0..5]; # (1 8 27 64 125 216)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>生成代码块使用 <code>state</code> 变量来跟踪数字产生。</p>
+<p>生成代码块是利用 <code>state</code> 变量来记录生成的数字的。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_总结_17">14.9. 总结</h3>
 <div class="paragraph">
-<p>在本章中，我们讨论的是函数式编程。Raku，虽然不是函数式编程语言，包括可以实现许多这样的语言功能的元素。我们谈到了关于高阶函数的递归和化简， lambda 函数和 WhateverCode 代码块(那些使用 <code>*</code> 来要求 Raku 做事的代码块)。我们创建了许多使用数据管道，闭包，柯里化和动态作用域的例子。最后，我们讨论了无限列表和惰性列表，以及如何生成它们。</p>
+<p>在本章中, 我们讨论的是函数式编程。Raku, 虽然不是函数式编程语言, 但它包括的元素可以实现这类语言的许多特性。我们讨论了递归和化简, 讨论了高阶函数、lambda 函数和 WhateverCode 代码块(那些使用 <code>*</code> 来要求 Raku 做你想要的事情的代码块)。我们创建了一些使用使用数据管道、闭包、柯里化和动态作用域的例子。最后, 我们谈到了无限列表和惰性列表, 以及如何生成它们。</p>
 </div>
 <div class="paragraph">
-<p>下一章的主题是反应式编程，这是另一种 Raku 支持的编程范式。</p>
+<p>下一章的主题是反应式编程, 这是 Raku 支持的另一种编程范式。</p>
 </div>
 </div>
 </div>
