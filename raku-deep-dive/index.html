@@ -255,7 +255,7 @@ if (theme && theme !== "1") {
 <li><a href="#_线程">13.2. 线程</a></li>
 <li><a href="#_终身线程">13.3. 终身线程</a></li>
 <li><a href="#_promise">13.4. Promise</a></li>
-<li><a href="#_通道">13.5. 通道</a></li>
+<li><a href="#_channel">13.5. Channel</a></li>
 <li><a href="#_总结_16">13.6. 总结</a></li>
 </ul>
 </li>
@@ -15046,7 +15046,7 @@ G.parse($prog, :actions(A.new));</code></pre>
 <h2 id="_并发编程">13. 并发编程</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Raku 是一种完全在二十一世纪创造的语言。它自带对一些基本概念的支持并不奇怪, 这使得创建支持并行和并发编程的应用程序变得很容易。</p>
+<p>Raku 是一种完全在二十一世纪创造的语言。它自带对一些基本概念的内置支持并不奇怪, 这使得创建支持并行和并发编程的应用程序变得很容易。</p>
 </div>
 <div class="paragraph">
 <p>在本章中, 我们将介绍以下内容。</p>
@@ -15063,7 +15063,7 @@ G.parse($prog, :actions(A.new));</code></pre>
 <p>Promise</p>
 </li>
 <li>
-<p>通道</p>
+<p>Channel</p>
 </li>
 </ul>
 </div>
@@ -15083,7 +15083,7 @@ say 'Not OK' if $j != 2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>变量 <code>$j</code> 是一个 junction, 它持有三个奇数, <code>1</code>, <code>3</code> 和 <code>5</code>。你可以将 <code>$j</code> 与整数进行比较, 如果该值是 junction 所存储的值之一, 那么可以得到布尔值 <code>True</code>。在与 3 进行比较时, 结果是 <code>True</code>, 而与 <code>2</code> 的第二个比较则失败了。</p>
+<p>变量 <code>$j</code> 是一个 junction, 它持有三个奇数, <code>1</code>, <code>3</code> 和 <code>5</code>。你可以将 <code>$j</code> 与整数进行比较, 如果该值是 junction 所存储的值之一, 那么可以得到布尔值 <code>True</code>。在与 3 进行比较时, 结果是 <code>True</code>, 而与 <code>2</code> 进行的第二个比较则失败了。</p>
 </div>
 <div class="sect3">
 <h4 id="_自动线程化">13.1.1. 自动线程化</h4>
@@ -15114,10 +15114,10 @@ say 'Not OK' if f(1) | f(3) | f(5) != 2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>把 junction 操作移动到函数参数外面被称作<strong>自动线程化</strong>。理论上, 最后一个例子的代码可以并行执行。</p>
+<p>把 junction 操作移动到函数参数之外, 称作<strong>自动线程化</strong>。从理论上讲, 上一个例子中的代码可以并行执行。</p>
 </div>
 <div class="paragraph">
-<p>现在, 让我们转到下一个主题, 看看我们如何明确地创建线程。</p>
+<p>现在, 让我们进入下一个主题, 看看如何显式地创建线程。</p>
 </div>
 </div>
 </div>
@@ -15145,10 +15145,10 @@ say 'Not OK' if f(1) | f(3) | f(5) != 2;</code></pre>
 <div class="sect3">
 <h4 id="_开启线程">13.2.1. 开启线程</h4>
 <div class="paragraph">
-<p>在本节和下面的章节中, 我们将研究 <code>Thread</code> 类的方法。但是, 我们将从 <code>start</code> 方法开始, 它创建一个线程并开始执行。</p>
+<p>在本节和下面的章节中, 我们将研究 <code>Thread</code> 类的方法。不过, 我们将从 <code>start</code> 方法开始, 它创建一个线程并开始执行。</p>
 </div>
 <div class="paragraph">
-<p>在下面的例子中, 我们创建了三个线程。每个线程都接收一个名字和一个代码块。代码块在每个线程中做同样的工作, 并且只打印 <code>$*THREAD</code> 变量的值, 这个变量的值在不同的线程中是不同的：</p>
+<p>在下面的例子中, 我们创建了三个线程。每个线程都接收一个名称和一个代码块。代码块在每个线程中做同样的工作, 并且只打印 <code>$*THREAD</code> 变量的值, 这个变量的值在不同的线程中是不同的：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15181,13 +15181,13 @@ Thread #6 (Test 3)
 <p>如你所见, 程序从四个不同的线程中打印 - <strong>初始线程 <code>#1</code></strong> 和我们创建的三个线程。他们得到标识符 <code>3</code>、<code>4</code> 和 <code>5</code>。Rakudo 开发人员告诉我, <strong>线程 <code>#2</code></strong> 可能是在启动时被虚拟机使用的。同样, 这些数字的主要属性是唯一的, 但不一定按顺序排列。</p>
 </div>
 <div class="paragraph">
-<p>另外注意, 不同线程的输出是重叠的。多运行这个程序几次, 很有可能会得到不同的结果。</p>
+<p>另外注意, 不同线程的输出是重叠的。多运行这个程序几次, 很可能会得到不同的结果。</p>
 </div>
 <div class="paragraph">
-<p>线程是在调用 <code>Thread.start</code> 时创建的, 然后执行时又回到主线程。最简单的查看方法是在用作线程代码块的子例程中嵌入不同的延迟。</p>
+<p>线程是在 <code>Thread.start</code> 被调用的那一刻创建的, 然后执行时又回到主线程。最简单的查看方法是在用作线程代码块的子例程中嵌入不同的延迟。</p>
 </div>
 <div class="paragraph">
-<p>在下面的程序中, 创建了三个匿名(意思是不保存在变量中)的线程。它们的名字不同, 在它们的主体中也有不同的延迟和输出：</p>
+<p>在下面的程序中, 创建了三个匿名(意思是不保存在变量中)的线程。它们的名字不同, 以及它们的延迟和在它们的主体中产生的输出也不同：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15253,7 +15253,7 @@ Thread.start(sub {
 </div>
 </div>
 <div class="paragraph">
-<p>两个线程都是并行执行的。实际的实现, 无论是将代码分布到处理器的不同核上, 还是通过为线程分配专用的时间原子来初始化线程, 语言规范中没有定义, 所以在 Raku 中创建线程时, 不要指望这两种实现。</p>
+<p>这两个线程都是并行执行的。实际的实现, 无论是将代码分布到处理器的不同核上, 还是通过为线程分配专用的时间原子来初始化线程, 语言规范中都没有定义, 所以在 Raku 中创建线程时, 不应该指望这两种实现。</p>
 </div>
 <div class="paragraph">
 <p>将这个程序运行几次, 可以看到每次结果都是不一样的：</p>
@@ -15309,7 +15309,7 @@ Thread.start(sub {
 </div>
 </div>
 <div class="paragraph">
-<p>该线程现在已创建, 但没有激活。要运行它, 必须调用 <code>run</code> 方法：</p>
+<p>该线程现在已经创建, 但没有激活。要运行它, 必须调用 <code>run</code> 方法：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15336,7 +15336,7 @@ say 'After';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>线程一运行, 它就会打印出 <code>Start</code> 和 <code>End</code> 这两条消息, 两者之间有 2 秒的延迟:</p>
+<p>线程一运行, 它就会打印出 <code>Start</code> 和 <code>End</code> 这两条消息, 间隔 2 秒的延迟:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15375,7 +15375,7 @@ After</code></pre>
 <div class="sect3">
 <h4 id="_id_和_name_方法">13.2.3. id 和 name 方法</h4>
 <div class="paragraph">
-<p>在"启动新线程"一节中, 我们已经看到了一些关于如何给新线程分配标识符的例子。在 <code>Thread</code> 类中, 有一个方法可以返回 <code>id</code>:</p>
+<p>在《启动新线程》一节中, 我们已经看到了一些关于如何给新线程分配标识符的例子。在 <code>Thread</code> 类中, 有一个方法可以返回 <code>id</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15404,7 +15404,7 @@ say $t3.id();</code></pre>
 <p>如果你想在主线程中保留一些跟踪信息, 比如说, 可以使用线程标识符。</p>
 </div>
 <div class="paragraph">
-<p>另一种识别线程的方法是使用名字。名字是你在创建线程时通过 <code>name</code> 参数给线程分配的字符串标签:</p>
+<p>另一种识别线程的方法是使用名称。名称是你在创建线程时通过 <code>name</code> 参数给线程分配的字符串标签:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15419,7 +15419,7 @@ say $t3.name();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>主线程的名字是 <code>Initial thread</code>:</p>
+<p>主线程的名称是 <code>Initial thread</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15430,13 +15430,13 @@ My thread three</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>名字不必是唯一的, 所以你可以自由选择任何你想要的任何名字。</p>
+<p>名称不需要是唯一的, 所以你可以自由选择任何你想要的任何名称。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_将线程对象打印为字符串">13.2.4. 将线程对象打印为字符串</h4>
 <div class="paragraph">
-<p>当通过 <code>say</code> 函数打印线程对象时, <code>Thread</code> 类的 <code>Str</code> 方法定义了线程对象的行为:</p>
+<p><code>Thread</code> 类的 <code>Str</code> 方法通过 <code>say</code> 函数定义了当线程对象被打印时的行为:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15451,7 +15451,7 @@ say $t3;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>默认字符串包含线程的编号及其名字(如果定义了的话)。</p>
+<p>默认字符串包含线程的编号及其名称(如果定义了的话)。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15462,14 +15462,14 @@ Thread #5 (My thread three)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这个例子中, 所有的线程都具有不同的 ID(它们总是不同的)和不同的名字(这是由程序员定义的)。</p>
+<p>在这个例子中, 所有的线程都有不同的 ID(它们总是不同的)和不同的名称(这是由程序员定义的)。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_终身线程">13.3. 终身线程</h3>
 <div class="paragraph">
-<p>在创建一个新线程时, 可以设置 <code>app_lifetime</code> 属性, 请求该线程活到主程序结束。否则它会在其主体执行完后被终止。要添加这个标志, 可以将其添加为 <code>:app_lifetime</code> 或者通过显式传递 <code>True</code> 值给构造函数-<code>app_lifetime &#8658; True</code>:</p>
+<p>在创建一个新线程时, 可以设置 <code>app_lifetime</code> 属性, 要求该线程活到主程序结束。否则, 它会在其主体执行完后被终止。要添加这个标志, 可以将其添加为 <code>:app_lifetime</code> 或者通过显式传递 <code>True</code> 值给构造函数-<code>app_lifetime &#8658; True</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15493,7 +15493,7 @@ say 'Done';</code></pre>
 <p>Raku 提供了一种机制, 确保代码的特定部分只由单个线程执行。如果有其他线程想从这段代码中访问变量, 应该等到它被解锁后再执行。</p>
 </div>
 <div class="paragraph">
-<p>要封存关键代码, 请使用 <code>Lock</code> 类的 <code>protect</code> 方法。请看下面这个例子, 看看 Raku 文档中的例子:</p>
+<p>要封存关键代码, 请使用 <code>Lock</code> 类的 <code>protect</code> 方法。请看下面这个 Raku 文档中的例子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15514,19 +15514,19 @@ say $x; # OUTPUT: «10␤»</code></pre>
 <p>关键代码的保护方式是, 每次只能有一个线程访问 <code>$x</code> 计数器。</p>
 </div>
 <div class="paragraph">
-<p>建议不要直接使用锁, 因为它们提供的接口太低级。 相反, 使用 Promise、Channel 和 Supply。我们会在本章后面讨论前两个概念, 而 Supply 将在第十五章的"反应式编程"中讨论。</p>
+<p>不建议直接使用锁, 因为它们提供了太低级的接口。 相反, 使用 Promise、Channel 和 Supply。我们会在本章后面讨论前两个概念, 而 Supply 将在第十五章的《反应式编程》中讨论。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_promise">13.4. Promise</h3>
 <div class="paragraph">
-<p>在上一节中, 我们创建了一些并行运行的代码块。 承诺有助于了解这种块的完成状态。在 Raku 中, 承诺由 <code>Promise</code> 类处理。</p>
+<p>在上一节中, 我们创建了一些并行运行的代码块。 <code>Promise</code> 有助于查看这些代码块的完成状态。在 Raku 中, 承诺是由 <code>Promise</code> 类处理的。</p>
 </div>
 <div class="sect3">
 <h4 id="_创造一个承诺">13.4.1. 创造一个承诺</h4>
 <div class="paragraph">
-<p>要创建一个承诺, 只需调用 <code>Promise</code> 类的构造函数:</p>
+<p>要创建一个承诺, 只需调用 <code>Promise</code> 类的构造函数即可:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15534,13 +15534,13 @@ say $x; # OUTPUT: «10␤»</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>创建好的对象什么也没做。在本章后面的工厂方法一节中, 我们将看到如何创建执行某些代码的承诺。同时, 让我们看看承诺所具有的属性。</p>
+<p>创建好的对象什么也还没有做。在本章后面的工厂方法一节中, 我们将看到如何创建一个执行一些代码的承诺。同时, 让我们看看承诺所拥有的属性。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_承诺的状态">13.4.2. 承诺的状态</h4>
 <div class="paragraph">
-<p>承诺的力量是它们可以被保留或破坏, 你可以跟踪他们。通过调用 <code>Promise.new</code> 创建的新承诺既不保留也不破坏。它的状态是 <code>Planned</code>。要查看状态, 请调用 <code>status</code> 方法:</p>
+<p>承诺的力量在于, 它们既可以被遵守, 也可以或破坏, 你可以跟踪他们。通过调用 <code>Promise.new</code> 创建的新承诺, 既不会被遵守也不会被破坏。它的状态是 <code>Planned</code>。要查看状态, 请调用 <code>status</code> 方法:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15549,7 +15549,7 @@ say $promise.status(); # Planned</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>Promise</code> 类还为我们提供了一对方法, <code>keep</code> 和 <code>break</code>, 这些方法把承诺的状态更改为 <code>Kept</code> 或 <code>Broken</code>。这在以下示例中进行了演示, 其中一个承诺被标记为保留, 而第二个承诺被强制破坏:</p>
+<p><code>Promise</code> 类还为我们提供了一对方法, <code>keep</code> 和 <code>break</code>, 可以把承诺的状态更改为 <code>Kept</code> 或 <code>Broken</code>。这在下面的例子中得到了证明, 其中一个承诺被标记为 <strong>Kept</strong>, 而第二个承诺被强制为 <strong>Broken</strong>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15573,13 +15573,13 @@ Broken</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在, 在我们知道如何更改承诺的状态以及如何读取它之后, 我们将使用承诺并行地执行代码。</p>
+<p>现在, 在我们知道如何改变承诺的状态以及如何读取状态之后, 我们要用承诺来并行地执行代码。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_工厂方法">13.4.3. 工厂方法</h4>
 <div class="paragraph">
-<p>让我们从一个简单的程序开始, 该程序使用打印某些东西然后退出的代码块创建一个承诺。<code>Promise.start</code> 方法创建一个块并返回一个承诺。 请注意, 返回的值是一个承诺, 而不是线程。使用 <code>await</code> 函数等待直到该承诺的代码块完成:</p>
+<p>让我们从一个简单的程序开始, 用一个代码块创建一个承诺，打印出一些东西并退出。<code>Promise.start</code> 方法创建了一个代码块并返回一个承诺。 注意, 返回的值是一个承诺, 而不是一个线程。使用 <code>await</code> 函数等待直到该承诺的代码块完成:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15590,7 +15590,7 @@ await $promise;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序等待直到代码块打印消息并退出:</p>
+<p>这个程序会等待, 直到代码块打印出消息,然后退出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15598,7 +15598,7 @@ await $promise;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在前面的示例中, <code>start</code> 例程作为 <code>Promise</code> 类的方法调用。 或者, 可以通过独立的 <code>start</code> 函数创建承诺:</p>
+<p>在前面的例子中, <code>start</code> 例程作为 <code>Promise</code> 类的一个方法被调用。 另外, 也可以通过一个独立的 <code>start</code> 函数来创建承诺:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15609,13 +15609,13 @@ await $promise;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>请注意, 代码块周围没有圆括号。</p>
+<p>注意, 代码块周围没有圆括号。</p>
 </div>
 <div class="paragraph">
-<p>让我们修改前面的例子并创建一个只能睡一秒钟的承诺。创建承诺后, 立即首次打印其状态。这里的一秒延迟是重要的, 以确保在我们检查下一行的承诺的状态之前承诺没有完成它的工作。</p>
+<p>让我们修改一下前面的例子, 创建一个只是休眠一秒钟的承诺。承诺被创建后, 首次立即打印其状态。这里的一秒延迟是很重要的, 以确保在我们在下一行检查承诺的状态之前, 承诺没有完成它的工作。</p>
 </div>
 <div class="paragraph">
-<p>然后, <code>await</code> 等待直到承诺的代码完成, 并第二次检查承诺的状态:</p>
+<p>然后, <code>await</code> 等待, 直到承诺的代码完成后, 第二次检查承诺的状态:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15638,7 +15638,7 @@ Kept</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>为了处理时间, 可以使用另一个工厂方法 <code>Promise.in</code> 而不是使用 <code>start</code> 和 <code>sleep</code> 的组合。它创造了一种在给定的秒数后状态变为保留的承诺:</p>
+<p>对于时间的处理, 有另一个工厂方法, <code>Promise.in</code>, 可以用它来代替 <code>start</code> 和 <code>sleep</code> 的组合。它创建了一个承诺, 在给定的秒数之后, 这个承诺的状态就变为保留:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15649,13 +15649,13 @@ say $promise.status; # Kept</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序创建并等待承诺。2 秒后, 承诺状态变为保留, 程序继续。承诺的状态在此之后变为 <code>Kept</code> 状态。</p>
+<p>这个程序创建并等待一个承诺。2 秒后, 承诺状态变为保留, 程序继续运行。之后, 承诺的状态就会变成 <code>Kept</code>。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_承诺的结果">13.4.4. 承诺的结果</h4>
 <div class="paragraph">
-<p>承诺的另一个有趣特征是它们可以返回结果。结果是由代码块计算, 最后计算的值是返回值。考虑一下以下示例:</p>
+<p>承诺的另一个有趣的特性是, 它们可以返回一个结果。这个结果是由代码块计算出来的, 最后计算出来的值就是返回的结果。考虑一下下面的例子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15669,10 +15669,10 @@ say $promise.result;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里, 代码块返回一个字符串 <code>Result</code>, 然后在 <code>$promise</code> 变量上调用 <code>result</code> 打印承诺的结果。</p>
+<p>这里, 代码块返回一个字符串, 即 <code>Result</code>, 然后在 <code>$promise</code> 变量上调用 <code>result</code> 打印出承诺的结果。</p>
 </div>
 <div class="paragraph">
-<p>从逻辑上讲, 结果仅在保留承诺后才可用。在之前的例子中, 使用了明确的 <code>await</code>。实际上, 它是多余的, 因为 <code>result</code> 方法的调用将等到代码完成。因此, 代码可以简化为如下:</p>
+<p>从逻辑上讲, 只有在承诺被遵守后, 结果才是可用的。在前面的例子中, 使用了显式的 <code>await</code>。实际上, 这是多余的, 因为 <code>result</code> 方法要等到代码完成后再调用。因此, 代码可以简化成下面这样:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15688,7 +15688,7 @@ say $promise.result; # waits</code></pre>
 <div class="sect3">
 <h4 id="_组合承诺">13.4.5. 组合承诺</h4>
 <div class="paragraph">
-<p>在实际的程序中, 可以使用多个承诺。结合不同的承诺可以提供非常有表现力的方法来编码代码的不同部分之间的复杂关系。</p>
+<p>在实际的程序中, 可以使用不止一个承诺。将不同的承诺组合在一起, 可以给出非常有表现力的方式来编码不同部分代码之间的复杂关系。</p>
 </div>
 <div class="paragraph">
 <p>让我们从一个简单的例子开始, 使用独立的 <code>start</code> 函数创建三个承诺:</p>
@@ -15704,7 +15704,7 @@ say 'Done';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>目标是暂停程序, 直到保留所有承诺。正如你从这个例子中看到的那样, <code>await</code> 函数接受一个承诺列表并等待直到所有承诺都完成。程序的输出如下所示:</p>
+<p>目标是暂停程序, 直到所有的承诺都被遵守。从这个例子中可以看到, <code>await</code> 函数接受一个承诺列表, 然后等待, 直到所有的承诺都完成。程序的输出看起来是这样的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15716,7 +15716,7 @@ Done</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>每个承诺创建一个单独的线程, 通过打印 <code>$*THREAD</code> 变量可以清楚地看到它:</p>
+<p>每个承诺都会创建一个单独的线程, 通过打印 <code>$*THREAD</code> 变量可以清楚地看到:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15727,7 +15727,7 @@ Done</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>每个 <code>start</code> 创建它自己的线程:</p>
+<p>每个 <code>start</code> 都创建了它自己的线程:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15738,9 +15738,9 @@ Thread #4</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_保留过破坏承诺后执行代码">13.4.6. 保留过破坏承诺后执行代码</h4>
+<h4 id="_承诺被遵守或被破坏后执行代码">13.4.6. 承诺被遵守或被破坏后执行代码</h4>
 <div class="paragraph">
-<p><code>Promise</code> 类有 <code>then</code> 方法, 可用于绑定承诺被保留或被破坏后将要执行的代码。实际上, 这种方法创建并返回一个新的承诺, 它将在初始承诺状态更改后运行:</p>
+<p><code>Promise</code> 类有 <code>then</code> 方法, 可以用来绑定承诺被遵守或被破坏后要执行的代码。实际上, 这种方法会创建并返回一个新的承诺, 在初始承诺状态改变后, 这个新的承诺会被运行:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15752,16 +15752,16 @@ await $next;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序在启动一秒后打印 <code>Done</code>。第一个承诺, 保存在 <code>$promise</code> 变量中, 在给定的时间延迟后状态变为保留。然后, <code>then</code> 创建另一个承诺, 它保存在 <code>$next</code> 变量中。要连接到主程序, 有必要等到 <code>$next</code> 打印输出, 从而完成。</p>
+<p>这个程序在启动 1 秒后打印出 <code>Done</code>。第一个承诺, 保存在 <code>$promise</code> 变量中, 在给定的时间延迟后状态变为保留。然后, <code>then</code> 创建另一个承诺, 它保存在 <code>$next</code> 变量中。要加入到主程序中, 需要等待 <code>$next</code> 打印输出, 这样就完成了。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_anyof_和_allof_方法">13.4.7. anyof 和 allof 方法</h4>
 <div class="paragraph">
-<p><code>Promise</code> 类中的两个方法, <code>anyof</code> 和 <code>allof</code>, 创建了一个新的保留的承诺, 当承诺的任何一个或所有承诺都被保留时。这两个方法接受一个承诺列表。</p>
+<p><code>Promise</code> 类中的两个方法, <code>anyof</code> 和 <code>allof</code>, 在任何一个承诺被遵守或全部被遵守时, 都会创建一个新的承诺。这两个方法接受一个承诺列表。</p>
 </div>
 <div class="paragraph">
-<p>让我们在下面的例子中说明 <code>anyof</code> 方法的运作, 它检查长时间运行的代码是否执行时间过长:</p>
+<p>让我们用下面的例子来说明一下 <code>anyof</code> 方法的工作, 该方法是检查长期运行的代码是否执行时间过长:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15778,22 +15778,22 @@ say 'Continuing';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这创造了两个承诺。<code>$timeout</code> 这个在创建承诺后保存了2 秒。<code>$long_code</code> 模仿代码的缓慢部分, 执行时间比计时器能等待的时间更长 。然后, 这两个承诺都传递给 <code>Promise.anyof</code> 方法, 该方法返回另一个承诺, 在发生超时或执行长时间运行的代码时其承诺状态变为保留。</p>
+<p>这创造了两个承诺。<code>$timeout</code> 这个在创建承诺 2 秒后被遵守。<code>$long_code</code> 模仿慢的那部分代码, 执行时间比计时器能等待的时间更长。然后, 这两个承诺会被传递给 <code>Promise.anyof</code> 方法, 该方法会返回另一个承诺, 在发生超时或执行长时间运行的代码时, 这个承诺会被遵守。</p>
 </div>
 <div class="paragraph">
-<p>使用不同的延迟组合运行此程序, 并查看此程序的不同输出结果。</p>
+<p>用不同的延迟组合运行这个程序, 看看这个程序的不同结果。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_通道">13.5. 通道</h3>
+<h3 id="_channel">13.5. Channel</h3>
 <div class="paragraph">
-<p>通道是一种可用于从一段代码到另一段代码传递数据的通信方式。关于通道的好处是它们是线程兼容的, 因此它可以让不同的线程相互通信。在本节中, 我们将学习如何使用 Raku 中的通道。</p>
+<p><code>Channel</code> 是一种通信手段，可以用来将数据从一段代码传递给另一段代码。Channel 的好处在于它是线程兼容的，因此不同的线程之间可以相互对话。在本节中，我们将学习如何在 Raku 中使用 Channel。</p>
 </div>
 <div class="sect3">
 <h4 id="_基本用例">13.5.1. 基本用例</h4>
 <div class="paragraph">
-<p>通道由 <code>Channel</code> 类定义。要创建新的通道变量, 请调用构造函数:</p>
+<p>Channel 是由 <code>Channel</code> 类定义的。要创建新的通道变量, 请调用构造函数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15801,7 +15801,7 @@ say 'Continuing';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在我们可以使用 <code>send</code> 方法把数据发送到通道中并使用 <code>receive</code> 方法接收它:</p>
+<p>现在我们可以用 <code>send</code> 方法向通道发送数据, 用 <code>receive</code> 方法接收数据:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15813,10 +15813,10 @@ say $value;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这个程序做了很小的事情 - 它把值发送到通道中并立即读取它。该程序通过通道打印值 <code>42</code>。</p>
+<p>这个程序做了一件小事 - 它把值发送到通道中, 并立即读取它。该程序打印出了通过通道的值 <code>42</code>。</p>
 </div>
 <div class="paragraph">
-<p>现在, 让我们修改程序并在其中引入第二个线程, 以便通道填充在该线程中, 结果在主程序中读取:</p>
+<p>现在, 让我们修改一下程序, 在程序中引入第二个线程, 这样, 通道被填充到这个线程中, 结果在主程序中读取:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15830,17 +15830,17 @@ say $value;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>执行的结果与之前相同, 打印出了 42, 而传递值的逻辑完全不同。</p>
+<p>执行的结果和以前一样, 打印出了 42, 而传递值的逻辑完全不同。</p>
 </div>
 <div class="paragraph">
-<p><code>receive</code> 方法一直等待直到通道有足够的数据要读取。如果我们给线程代码添加延迟, 然后程序将暂停, 直到线程将数据发送到通道:</p>
+<p><code>receive</code> 方法一直等待, 直到通道有足够的数据可以读取。如果我们给线程代码添加一个延迟, 那么程序将暂停, 直到线程向通道发送数据:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $channel = Channel.new();
 start {
     sleep 1;
-       $channel.send(42);
+    $channel.send(42);
 };
 
 my $value = $channel.receive;
@@ -15848,16 +15848,16 @@ say $value;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>最后两个例子的唯一区别是在调用 <code>$channel.send</code> 方法之前的延迟。</p>
+<p>上两个例子的唯一区别在于调用 <code>$channel.send</code> 方法之前的延迟。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_等或者不等">13.5.2. 等或者不等?</h4>
+<h4 id="_等还是不等">13.5.2. 等还是不等?</h4>
 <div class="paragraph">
-<p>正如我们在上一节中看到的那样, 如果通道中没有数据, 那么 <code>Channel</code> 类的 <code>receive</code> 方法会停止。</p>
+<p>我们在上一节中已经看到, 如果通道中没有数据, 那么 <code>Channel</code> 类的 <code>receive</code> 方法就会停滞。</p>
 </div>
 <div class="paragraph">
-<p><code>poll</code> 方法也从通道读取但不阻止程序的执行。如果没有要读取的内容, 则立即返回空值。让我们再稍微修改下上一个例子并用 <code>poll</code> 调用之间的一秒的延迟读取通道五次:</p>
+<p><code>poll</code> 方法也从通道中读取数据, 但不会阻塞程序的执行。如果没有任何数据可读取, 那么它就会立即返回一个空值。让我们再修改下上一个例子, 从通道中读取 5 次, <code>poll</code> 调用之间有 1 秒的延迟:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15876,7 +15876,7 @@ for 1..5 {
 </div>
 </div>
 <div class="paragraph">
-<p>该程序打印以下输出:</p>
+<p>该程序打印出以下输出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15888,13 +15888,13 @@ for 1..5 {
 </div>
 </div>
 <div class="paragraph">
-<p>前三次尝试无法获得任何值, 因为没有任何内容发送到 <code>$channel</code>, 因为它之前有三秒的延迟。在第四次迭代中, 该值可用且可以被阅读。在读取之后, 该值将从通道中删除, 从而 <code>poll</code> 的下一次调用再次返回一个空值。</p>
+<p>前三次尝试无法获得任何值, 因为之前有一个 3 秒的延迟, 所以没有任何值被发送到 <code>$channel</code>。在第四次迭代时, 值是可用的, 可以被读取。在被读取之后, 该值被从通道中删除, 因此下一次的 <code>poll</code> 调用再次返回一个空值。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_关闭通道">13.5.3. 关闭通道</h4>
 <div class="paragraph">
-<p><code>close</code> 方法关闭一个通道。这意味着不会再添加任何数据到通道中。要检查通道是否关闭, 调用 <code>close</code> 方法:</p>
+<p><code>close</code> 方法关闭一个通道。这意味着不会再向它添加任何数据。要检查通道是否关闭, 请调用 <code>close</code> 方法:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15906,7 +15906,7 @@ say 'Closed' if $channel.closed();   # Closed</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>close</code> 方法的返回值不是布尔值。相反, 该方法返回一个承诺, 在通道关闭后该承诺变为保留状态:</p>
+<p><code>close</code> 方法的返回值不是布尔值。相反, 该方法返回一个承诺, 在通道关闭后, 这个承诺会被遵守:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15918,7 +15918,7 @@ say $channel.closed().status(); # Kept</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>例如, 可以使用承诺来响应关闭通道来运行一些代码, 如下例所示:</p>
+<p>例如, 可以使用承诺来运行一些响应于关闭通道的代码, 如下例所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15935,7 +15935,7 @@ say 'After calling close()';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>运行此程序其输出可能如下所示:</p>
+<p>运行这个程序的输出可能是这样的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15945,7 +15945,7 @@ Channel is closed</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>因为承诺是在一个单独的线程中执行的, 所以这些行可能是不可预测的以不同的顺序打印。如果我们在主线程中打印字符串之前添加一个小延迟, 我们就可以看到它了:</p>
+<p>因为承诺是在一个单独的线程中执行的, 所以可能会不可预知地以不同的顺序打印行。如果我们在主线程中打印字符串之前添加一个小的延迟, 就可以看到这一点了:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15969,13 +15969,13 @@ After calling close()</code></pre>
 <div class="sect3">
 <h4 id="_通道作为队列">13.5.4. 通道作为队列</h4>
 <div class="paragraph">
-<p>当多个值发送到通道中时, 它们实际上变成队列。所以第一个添加到通道中的值将是从通道中接收到的第一个值。</p>
+<p>当多个值被送入通道时, 它们实际上成为队列。所以第一个添加到通道中的值将是从通道中接收到的第一个值。</p>
 </div>
 <div class="paragraph">
-<p>由于通道是线程安全的, 没有人限制我们关于线程的数量, 我们打算写入到通道中或从通道中读取。以下示例演示了如何在几个线程之间共享一个通道。</p>
+<p>由于通道是线程安全的, 所以没有人限制我们要向通道写入或从通道中读取的线程数量。下面的例子演示了通道是如何在几个线程之间共享的。</p>
 </div>
 <div class="paragraph">
-<p>该程序打印从 0 到 10 的数字的平方。首先发送数字到这个通道中:</p>
+<p>该程序打印出从 0 到 10 的数字的平方。这些数字首先被发送到通道中:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15985,7 +15985,7 @@ $channel.close;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>发送完所有数字之后, 该通道将关闭。在下一阶段, 通过调用 <code>start</code> 函数创建三个线程(不要忘记这个函数间接地通过创造承诺创建一个线程)。在每个线程中, 无限循环尝试从相同的通道中接收值:</p>
+<p>发送完所有数字之后, 通道就关闭了。在下一阶段, 通过调用 <code>start</code> 函数创建三个线程(别忘了, 这个函数通过创建一个承诺间接创建一个线程)。在每个线程中, 无限循环尝试从同一个通道中接收值:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16002,10 +16002,10 @@ for 1..3 {
 </div>
 </div>
 <div class="paragraph">
-<p>此处使用非阻塞的 <code>poll</code> 方法从通道读取值。如果队列被消费了并且返回值为空, 则循环中断并且线程完成。</p>
+<p>这里使用的是非阻塞的 <code>poll</code> 方法, 从通道读取值。如果队列被消费掉, 返回的值为空, 则循环被打破, 线程完成。</p>
 </div>
 <div class="paragraph">
-<p>在退出主程序之前, 我们必须等到所有承诺都变为保留状态:</p>
+<p>在退出主程序之前, 我们必须等待所有的承诺都被遵守:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16013,7 +16013,7 @@ for 1..3 {
 </div>
 </div>
 <div class="paragraph">
-<p>每个线程计算它可以从通道中读取的值的平方:</p>
+<p>每个线程都会计算出它能从通道中读取的值的平方:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16031,14 +16031,14 @@ for 1..3 {
 </div>
 </div>
 <div class="paragraph">
-<p>运行程序几次, 看它产生不同的输出。当然, 每次运行都产生相同的计算值, 但输出行的顺序可能会变化。该通道以和我们将数字发送给它的相同的顺序返回数字。线程是并发的, 所以他们中的一些打印他们的结果并在其他线程之前选择下一个值。 尽管线程的工作顺序, 但通道只给出数字一次。</p>
+<p>将程序程序几次, 看看它产生的输出值是否不同。当然, 每次运行时计算出的数值都是一样的, 但输出行的顺序可能会有所不同。该通道以和我们将数字发送给它的相同的顺序返回数字。线程是并发的, 所以有些线程会先于其他线程打印出结果，并选取下一个值。 尽管线程的工作顺序不同, 但该通道只打印出数字一次。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_总结_16">13.6. 总结</h3>
 <div class="paragraph">
-<p>在本章中, 我们简要地讨论了 junction 的并行性质, 其余时间我们深入地研究了线程, 承诺和通道 - Raku 中实现并行和并发功能的机制。开发人员使用它们非常容易并且不需要任何手动操作底层机制以确保线程执行的时候不会发生冲突。</p>
+<p>在这一章中, 我们简要地讨论了 junction 的并行性, 其余的时间我们深入研究了线程、承诺和通道 - Raku 中实现并行和并发特性的机制。使用它们对于开发人员是相当容易的, 并且不需要手动操作底层机制来确保线程执行时不会发生冲突。</p>
 </div>
 </div>
 </div>
