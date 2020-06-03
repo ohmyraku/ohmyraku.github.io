@@ -276,7 +276,7 @@ if (theme && theme !== "1") {
 <ul class="sectlevel2">
 <li><a href="#_什么是反应式编程">15.1. 什么是反应式编程</a></li>
 <li><a href="#_按需供应">15.2. 按需供应</a></li>
-<li><a href="#_现场供应">15.3. 现场供应</a></li>
+<li><a href="#_实时供应">15.3. 实时供应</a></li>
 <li><a href="#_总结_18">15.4. 总结</a></li>
 </ul>
 </li>
@@ -17220,10 +17220,10 @@ say @cubes[0..5]; # (1 8 27 64 125 216)</code></pre>
 <h2 id="_反应式编程">15. 反应式编程</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>在前一章中，我们讨论了函数式编程。Raku 内置支持多范式。在本章中，我们讨论反应式 编程，也称为函数反应式编程或事件驱动编程。 同样，Raku 的核心支持这种风格的编程, 开箱即用。</p>
+<p>在上一章中, 我们讨论了函数式编程。Raku 是一种多范式的语言, 它内置了对这方面的支持。在这一章中, 我们讨论了反应式编程, 也称为函数反应式编程或事件驱动编程。 同样, Raku 的内核也支持这种风格的编程, 开箱即用。</p>
 </div>
 <div class="paragraph">
-<p>本章将介绍以下主题:</p>
+<p>本章将讨论以下主题:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -17231,7 +17231,7 @@ say @cubes[0..5]; # (1 8 27 64 125 216)</code></pre>
 <p>反应式编程的概念</p>
 </li>
 <li>
-<p>按需供应和现场供应</p>
+<p>按需供应和实时供应</p>
 </li>
 <li>
 <p>过滤和转换数据流</p>
@@ -17241,7 +17241,7 @@ say @cubes[0..5]; # (1 8 27 64 125 216)</code></pre>
 <div class="sect2">
 <h3 id="_什么是反应式编程">15.1. 什么是反应式编程</h3>
 <div class="paragraph">
-<p>在过程式编程中，程序列出了变量的指令和变量 获取特定值的时间，或代码块执行的时间。例如，一个变量将另外两个整数变量值的和作为它的值:</p>
+<p>在过程式编程中, 程序列出了变量的指令, 当变量得到一个特定的值, 或者说当一个代码块被执行时, 程序就会列出指令。例如, 一个变量将另外两个整数变量值的和作为它的值:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17249,7 +17249,7 @@ say @cubes[0..5]; # (1 8 27 64 125 216)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果在该赋值后更改了 <code>$x</code> 或 <code>$y</code>，则 <code>$z</code> 的值不会发生任何变化。另一个例子 - 函数返回值被赋给一个变量:</p>
+<p>如果 <code>$x</code> 或 <code>$y</code> 在这个赋值后被改变, 那么 <code>$z</code> 的值就不会改变。另一个例子 - 函数返回值被赋值给一个变量:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17257,22 +17257,22 @@ say @cubes[0..5]; # (1 8 27 64 125 216)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>虽然从代码中可以清楚地看到它用给定的半径计算圆的面积，如果更改 <code>$r</code> 变量，则必须手动更新 <code>$area</code> 的值。</p>
+<p>虽然从代码中可以清楚地看到, 它计算出了给定半径的圆的面积, 但如果改变了 <code>$r</code> 变量, 就必须手动更新 <code>$area</code> 的值。</p>
 </div>
 <div class="paragraph">
-<p>反应式编程旨在改变依赖值的“静态”行为。 许多计算机程序和网页的交互式界面是一个很好的反应式方法的例子 。想象一下在线计算器，您可以在其中键入两个值并 立即在页面上的另一个地方得到结果。或者输入半径, 圆的面积 被重新计算并显示。让我们看看 Raku 如何处理反应式编程。</p>
+<p>而反应式编程的目的就是要改变这种依赖值的"静态"行为。许多计算机程序和网页的交互式界面就是反应式编程的很好的例子。想象一下一个在线计算器, 你输入两个值, 在页面上的另一个地方立即得到结果。或者, 你输入一个半径, 圆的面积就会被重新计算并显示出来。让我们看看 Raku 是如何处理这个问题的。</p>
 </div>
 <div class="paragraph">
-<p>有两个主类可以处理反应式编程所需的大部分内容-<code>Supply</code>，它是一个异步数据流，以及 <code>Supplier</code>，它是供应的变体之一的工厂，即现场供应(<strong>live supplies</strong>)。还存在- 按需供应(<strong>on-demand supplies</strong>)，我们会先说说它。</p>
+<p>有两个主类可以处理大部分你所需要的反应式编程所需要的东西-<code>Supply</code>, 这是一个异步数据流, 以及 <code>Supplier</code>, 这是一个工厂, 用于供应的变体之一, 即实时供应(<strong>live supplies</strong>)。还存在- 按需供应(<strong>on-demand supplies</strong>), 我们先来介绍一下。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_按需供应">15.2. 按需供应</h3>
 <div class="paragraph">
-<p>供应的数据流包含两个部分 - 发数据的供应者和接收数据的阀门。Raku 的反应式编程模型是一个线程安全的观察者设计模式实现。</p>
+<p>供应的数据流包含两个部分 - 发出数据的供应者和接收数据的阀门。Raku 的反应式编程模型是一个线程安全的观察者设计模式实现。</p>
 </div>
 <div class="paragraph">
-<p>让我们使用 <code>supply</code> 关键字创建我们的第一个按需供应:</p>
+<p>让我们使用 <code>supply</code> 关键字创建第一个按需供应:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17282,7 +17282,7 @@ say @cubes[0..5]; # (1 8 27 64 125 216)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里有 <code>supply</code>，但它没有发出任何数据，因为没有需求。如果你向循环添加打印指令，则很容易看到这个:</p>
+<p>这里有 <code>supply</code>, 但它还没有发出任何数据, 因为没有需求。如果你在循环中添加一条打印指令, 就可以很容易看到这一点:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17296,10 +17296,10 @@ sleep 2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序在 2 秒后静默退出。</p>
+<p>这个程序在 2 秒后就默默地退出了。</p>
 </div>
 <div class="paragraph">
-<p>为了使供应者生成数据，我们需要创建一个 <code><strong>tap</strong></code>。<code>supply</code> 块返回一个  <code>Supply</code> 类型的值，您可以在其上调用 <code>tap</code> 方法来传递将要执行的代码以响应发出的数据:</p>
+<p>为了使供应者产生数据, 我们需要创建一个 <code><strong>tap</strong></code>。<code>supply</code> 块返回一个 <code>Supply</code> 类型的值, 你可以在上面调用 <code>tap</code> 方法来传递响应于发出的数据将被执行的代码:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17311,7 +17311,7 @@ sleep 2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这次，程序打印几行从 <code>a</code> 到 <code>e</code> 的字母。让我们在我们的“调试器”程序中打开一个阀门，看到它确实执行了发射块:</p>
+<p>这一次, 程序打印出了几行从 <code>a</code> 到 <code>e</code> 的字母。让我们在"调试器"程序中打开一个阀门, 看到它是否真的执行了发射块:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17326,7 +17326,7 @@ sleep 2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>实际上，现在两个 <code>say</code> 函数都被调用了:</p>
+<p>实际上, 现在两个 <code>say</code> 函数都被调用了:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17343,7 +17343,7 @@ Tap received e</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>将多个阀门连接到供应者也不是问题。他们每一个都会收到相同的数据:</p>
+<p>在一个供应者上连接一个以上的分接头是没有问题的。每一个分接头都能接收到相同的数据:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17361,7 +17361,7 @@ $supply.tap({
 </div>
 </div>
 <div class="paragraph">
-<p>与通道不同(见第13章, 并发编程)，tap 不竞争以得到发送的值。根据需要，供应者可以提供任意数量的阀门。请注意，这也意味着 tap 不能作为并行进程。如果给第一个 tap 添加一个小的延迟，这就变得清晰可见了:</p>
+<p>与通道不同(见第十三章,《并发编程》), 分接头不会竞争获得发送的值。根据需要, 供应者可以提供任意数量的分接头。注意, 这也意味着分接头不作为并行进程工作。如果给第一个分接头添加一个小的延迟, 就可以清楚地看到这一点了:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17375,7 +17375,7 @@ $supply.tap({
 </div>
 </div>
 <div class="paragraph">
-<p>在输出中，您将看到从a到e的所有值将首先到达第一个 tap，然后第二个才被服务:</p>
+<p>在输出中你会看到, 从 a 到 e 的所有值将会先到达第一个分接头, 然后再送达第二个分接头:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17392,9 +17392,9 @@ Tap 2 got e</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_用_suppiles_生成数据">15.2.1. 用 suppiles 生成数据</h4>
+<h4 id="_用_suppile_生成数据">15.2.1. 用 suppile 生成数据</h4>
 <div class="paragraph">
-<p>在上一节中，使用 emit 方法将值发送到供应。对于每个数据 项，单独调用。供应可以自己生成数据。Supply 类的 interval 方法以给定的间隔发出数据。在下一个示例中，它会每 300 毫秒生成递增的数字:</p>
+<p>在上一节中, 使用 <code>emit</code> 方法将值发送到供应。对于每一个数据项, 都要进行单独的调用。供应可以自己生成数据。<code>Supply</code> 类的 <code>interval</code> 方法会以给定的时间间隔发出数据。在下面的例子中, 它每隔 300 毫秒就会生成一个不断递增的数字:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17405,11 +17405,13 @@ sleep 5;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>每次触发 tap 时，它都会获得一个递增的整数。第一个值是 0.因此， 上面的程序将打印0到16之间的数字。
-这里需要调用 sleep 函数才能看到 tap 的接收到的头几个结果。没有它，程序会立即停止。</p>
+<p>每当触发一个分接时, 都会得到一个不断递增的整数。第一个值是 0。因此, 上面的程序将打印出从 0 到 16 的数字。</p>
 </div>
 <div class="paragraph">
-<p>顺便说一句，如果你想使用一个命名变量而不是 $_，请使用带有一个尖号块的参数:</p>
+<p>这里需要调用 <code>sleep</code> 函数, 可以看到分接接收到的头几个结果。如果不调用它, 程序就会立即停止。</p>
+</div>
+<div class="paragraph">
+<p>顺便说一下, 如果你想用一个命名变量代替 $_, 就用一个带参数的尖号块:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17418,7 +17420,7 @@ sleep 2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>interval 方法也接受第二个参数，即在第一个数据项发出之前以秒为单位的延迟:</p>
+<p><code>interval</code> 方法也接受第二个参数, 即第一个数据项发出前的延迟, 单位为秒:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17429,8 +17431,10 @@ sleep 4;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在程序在2秒后开始打印数字。初始延迟不会影响 供应产生的顺序。该程序也从0开始打印(并结束 在1，因为当程序有一个工作 tap 时，sleep 函数允许2秒。
-tap 可以随时关闭。Tap 是 <code>Tap</code> 类的对象，它具有 <code>close</code> 方法。它的用法在以下程序中证明:</p>
+<p>现在程序在 2 秒后开始打印数字。初始延迟并不影响供应产生的序列。这个程序也是从 0 开始打印(并以 1 结束, 因为当程序有一个工作的分接时, <code>sleep</code> 函数允许 2 秒的休眠)。</p>
+</div>
+<div class="paragraph">
+<p>分接可以随时关闭。分接是 <code>Tap</code> 类的对象, 它具有 <code>close</code> 方法。它的用法在下面的程序中可以证明:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17445,8 +17449,10 @@ sleep 2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在第一秒打印前几个数字后，关闭 tap，之后该程序只需等待几秒钟即可打印。
-如果没有 tap，则供应不会生成新数据。让我们在以下示例中创建 tap 之前暂停以查看其中的行为:</p>
+<p>在第一秒内打印完前几个数字后, 分接被关闭, 之后该程序只需再等待几秒钟, 就什么也不打印了。</p>
+</div>
+<div class="paragraph">
+<p>如果没有分接, 则供应不会产生新的数据。让我们在下面的例子中创建分接之前暂停, 以查看其中的行为:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17460,10 +17466,10 @@ sleep 2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>tap 连接之前的延迟比潜在数据生成之间的间隔长。在2秒内，可能会生成一些数字，但程序仍然从从0开始打印数字。</p>
+<p>分接连接前的延迟比潜在数据生成的间隔时间长。在 2 秒内, 可能会生成一些数字, 但程序仍然打印出从 0 开始的数字。</p>
 </div>
 <div class="paragraph">
-<p>当 tap 连接到已经为另一个 tap 生成数据的供应时，该原理也有效:</p>
+<p>当一个分接连接到已经在为另一个分接生成数据的供应上时, 这个原理也是有效的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17486,7 +17492,7 @@ sleep 3;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这两个 tap 在这里独立工作。这就是程序输出的样子:</p>
+<p>这里的两个分接器是独立工作的。这就是程序输出的样子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17511,7 +17517,7 @@ _______________
 </div>
 </div>
 <div class="paragraph">
-<p>两个 tap 都接收从零开始的序列。 interval 方法是一种创建按需供应的工厂方法:</p>
+<p>这两个分接器都接收从零开始的序列。 <code>interval</code> 方法是一种创建按需供应的工厂方法:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17520,13 +17526,13 @@ say $supply.WHAT; # (Supply)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>有一种创建供应的替代语法 - 我们将在下一节中讨论它。</p>
+<p>在创建供应时, 有一个替代的语法 - 我们将在下一节讨论。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_react_和_whenever_关键字">15.2.2. react 和 whenever 关键字</h4>
 <div class="paragraph">
-<p>在 Raku 中，有一些特殊的关键字用于按需供应。使用 react 关键字代替显式创建 Supply 类的对象。在这种情况下，用 <code>whenever</code> 块替换创建 tap:</p>
+<p>在 Raku 中, 有一些特殊的关键字用于按需供应。不用显式地创建 <code>Supply</code> 类的对象, 而是使用  <code>react</code> 关键字。在这种情况下, 用 <code>whenever</code> 块来代替创建分接器:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17538,10 +17544,10 @@ say $supply.WHAT; # (Supply)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序每0.5秒打印一次数字。注意与以前的例子的主要区别。通过 react，无需调用 sleep 或在创建 tap 后以某种方式控制程序的生命周期。该程序无限运行，直到你使用 Ctrl + C 退出.</p>
+<p>该程序每隔 0.5 秒打印一次数字。注意到与前面的例子的主要区别。使用 <code>react</code>, 在创建一个分接器后, 不需要调用 <code>sleep</code> 或以某种方式控制程序的生命周期。该程序会无限运行, 直到你用 <code>Ctrl + C</code> 退出。</p>
 </div>
 <div class="paragraph">
-<p>要以编程方式中断循环，请调用 <code>done</code> 函数:</p>
+<p>要以编程的方式打破循环, 可以调用 <code>done</code> 函数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17554,13 +17560,13 @@ say $supply.WHAT; # (Supply)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这次，程序只打印几秒钟的数字。</p>
+<p>这次, 程序只打印出几秒钟的数字。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_使用列表作为_supply_数据的源">15.2.3. 使用列表作为 supply 数据的源</h4>
+<h4 id="_使用列表作为_supply_数据的来源">15.2.3. 使用列表作为 supply 数据的来源</h4>
 <div class="paragraph">
-<p>Supply 类提供了一个特殊的方法, <code>from-list</code>, 它接收一个列表并从该列表中发送元素作为发出的数据项:</p>
+<p><code>Supply</code> 类提供了一个特殊的方法, <code>from-list</code>, 它接收一个列表, 并从该列表中发送元素作为发出的数据项:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17571,7 +17577,7 @@ $supply.tap({
 </div>
 </div>
 <div class="paragraph">
-<p>或者，可以使用 react-whenever 结构:</p>
+<p>或者, 可以使用 <code>react-whenever</code> 结构:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17583,10 +17589,10 @@ $supply.tap({
 </div>
 </div>
 <div class="paragraph">
-<p>在这两种情况下，程序立即将所有元素流式传输到 tap 来打印它们。</p>
+<p>在这两种情况下, 程序会立即将所有的元素流向分接器, 由分接器打印出这些元素。</p>
 </div>
 <div class="paragraph">
-<p>与 interval 方法类似，from-list 创建一个供应对象:</p>
+<p>与 <code>interval</code> 方法类似, <code>from-list</code> 创建了一个供应对象:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17595,17 +17601,17 @@ say $supply.WHAT; # (Supply)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在是时候谈论另一种类型的供应了，即现场供应。</p>
+<p>现在是时候说说另一种类型的供应了, 即实时供应。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_现场供应">15.3. 现场供应</h3>
+<h3 id="_实时供应">15.3. 实时供应</h3>
 <div class="paragraph">
-<p>无论 tap 数量多少，现场供应都会生成数据。与按需供应不同，如果没有打开 tap，仍然会生成发射的数据，只是它会消失。只要打开了 tap，它从那一刻开始接收数据; 所有的历史都丢失了。</p>
+<p>无论有多少个分接器, 实时供应都会产生数据。与按需供应不同的是, 如果没有打开的分接器, 发射的数据仍然会产生, 只是它会消失。只要打开分接器, 它就会从那一刻开始接收数据; 所有的历史记录都会丢失。</p>
 </div>
 <div class="paragraph">
-<p>要创建现场供应，请调用 <code>Supplier</code> 类的构造函数。必须在供应上连接 tap，由 <code>Supply</code> 工厂方法返回。这一切都在下面的例子中显示:</p>
+<p>要创建一个实时供应, 请调用 <code>Supplier</code> 类的构造函数。必须在供应上连接一个分接器, 由 <code>Supply</code> 工厂方法返回。这些都在下面的例子中显示了:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17619,10 +17625,10 @@ $supplier.emit($_) for 'a'..'e';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>您可能会对 <code>Supply</code> 和 <code>Supplier</code> 类的存在感到困惑。<code>Supplier</code> 类是生产现场供应的工厂。</p>
+<p>您可能会对 <code>Supply</code> 和 <code>Supplier</code> 类的存在感到困惑。<code>Supplier</code> 类是生产实时供应的工厂。</p>
 </div>
 <div class="paragraph">
-<p>让我们看看现场供应如何流式传输数据以及没有 tap 打开时会发生什么。在在下面的程序中，现场供应在由 <code>start</code> 关键字创建的单独线程中生成数据。实际上，<code>start</code> 创造了一个承诺(见第13章，并发编程)，因此它伴随着 <code>await</code> 关键字，等待一切都完成:</p>
+<p>让我们看看实时供应是如何流式传输数据的, 以及在没有打开分接器的情况下会发生什么。在下面的程序中, 实时供应在由 <code>start</code> 关键字创建的独立线程中生成数据。实际上, <code>start</code> 创造了一个承诺(见第十三章, 《并发编程》), 因此它伴随着 <code>await</code> 关键字等待, 直到全部完成:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17644,10 +17650,10 @@ await $emitter;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>$emitter</code> 承诺在程序开始后每秒从 'a'&#8230;&#8203;'e' 范围发布其数据。tap 在 3 秒后创建。从那一刻起，tap 开始从供应中获取值，程序打印 c，d 和 e。前三个数据片丢失(没有打开的 tap 接收它们)。请注意，供应和 tap 都没有排队历史。</p>
+<p><code>$emitter</code> 承诺在程序开始后每隔一秒就会发布一次从 'a'&#8230;&#8203;'e' 范围的数据。3 秒后, 分接器被创建。从那一刻起, 分接开始从供应中获取值, 程序打印出 c、b 和 e。前三个数据片丢失了(没有打开的分接器接收它们)。请注意, 无论是供应还是分接器都没有排队记录历史数据。</p>
 </div>
 <div class="paragraph">
-<p>如果有超过一个 tap 连接，现场供应以及按需供应会平均分配数据:</p>
+<p>如果有一个以上的分接器连接, 实时供应和按需供应都会平均分配数据:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17667,7 +17673,7 @@ $supplier.emit(10.rand);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序发出两个随机数，这两个随机数都会落在这两个 tap 中:</p>
+<p>这个程序发出两个随机数, 这两个随机数都会落在这两个分接器中:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17678,7 +17684,7 @@ Tap 2 got 0.196464185630715</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Raku 中的反应式编程是线程安全的。例如，让我们创建一个程序， 其中所有的供应和 tap 都在它们自己的线程中执行:</p>
+<p>Raku 中的反应式编程是线程安全的。例如, 让我们创建一个程序, 在这个程序中, 所有的供应和分接器都在各自的线程中执行:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17705,7 +17711,7 @@ sleep 2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>它完美地工作 - 两个 tap 都接收供应发出的值:</p>
+<p>它完美地工作 - 两个分接器都接收到供应发出的值:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17714,7 +17720,7 @@ Tap 1 got 42</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>只要我们有线程并且它们并行地工作，那么程序的输出就可能是不同的，这取决于哪个 tap 首先得到它的数据:</p>
+<p>只要我们有线程, 并且它们并行地工作, 那么程序的输出可能会有所不同, 这取决于哪个分接器先得到数据:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17723,12 +17729,12 @@ Tap 1 got 42</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>要了解有关 <code>Supply</code> 和 <code>Supplier</code> 类方法的更多信息，请参阅 <a href="docs.raku.org" class="bare">docs.raku.org</a> 网站的有关文档。</p>
+<p>要了解更多关于 <code>Supply</code> 和 <code>Supplier</code> 类方法的信息, 请参阅 <a href="docs.raku.org" class="bare">docs.raku.org</a> 网站的文档。</p>
 </div>
 <div class="sect3">
 <h4 id="_过滤和转换数据流">15.3.1. 过滤和转换数据流</h4>
 <div class="paragraph">
-<p><code>Supply</code> 类的对象具有 <code>grep</code> 和 <code>map</code> 方法，可用于过滤流的数据, 这类似于同名的内置函数。<code>grep</code> 和 <code>map</code> 方法都创建一个新的 <code>Supply</code> 对象，你可以在它上面连接 tap。</p>
+<p><code>Supply</code> 类的对象具有 <code>grep</code> 和 <code>map</code> 方法, 可以用来过滤流中的数据, 类似于同名的内置函数。<code>grep</code> 和 <code>map</code> 方法都会创建一个新的 <code>Supply</code> 对象, 你可以在它上面连接分接器。</p>
 </div>
 <div class="paragraph">
 <p>请考虑以下示例:</p>
@@ -17747,13 +17753,13 @@ sleep 3;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们之前在按需供应一节中有类似的程序。这一次，另一个供应，<code>$filtered</code>，嵌入在数据流中。它由在原始的 <code>$supply</code> 身上调用的 <code>grep</code> 方法创建。</p>
+<p>我们在前面的按需供应一节中有一个类似的程序。这一次, 另一个供应, <code>$filtered</code>, 被嵌入到数据流中。它是由在原始的 <code>$supply</code> 上调用的 <code>grep</code> 方法创建的。</p>
 </div>
 <div class="paragraph">
-<p>过滤器本身由 <code>WhateverCode</code> 块 <code>* %% 2</code> 实现。现在只有偶数从 <code>$supply</code> 传递到 <code>$filtered</code>。</p>
+<p>过滤器本身是由 <code>WhateverCode</code> 块 <code>* %% 2</code> 实现的。现在只有奇数才会从 <code>$supply</code> 传递到 <code>$filtered</code>。</p>
 </div>
 <div class="paragraph">
-<p>对于其他，<code>$supply</code> 和 <code>$filtered</code> 对象都是常规的按需供应，而且你可以根据需要附加任意数量的 tap:</p>
+<p>对于其他的, <code>$supply</code> 和 <code>$filtered</code> 对象都是常规的按需供应, 你可以根据需要给它们附加任意数量的分接器:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17776,7 +17782,7 @@ sleep 3;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序生成以下输出，其中包含来自所有三个 tap 的反应:</p>
+<p>该程序会生成以下输出, 其中包含所有三个分接器的反应:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17803,10 +17809,10 @@ Unfiltered tap got 9</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如您所见，发出的数字是递增的，过滤后的供应只接收偶数值。</p>
+<p>正如你所看到的, 发出的数字是递增的, 而过滤后的供应只接收偶数值。</p>
 </div>
 <div class="paragraph">
-<p>另一个方法是 <code>map</code>，转换数据并返回变换后的流的新供应。请考虑以下示例，其中由 <code>interval</code> 供应所生成的所有数字都转换为2次方:</p>
+<p>另一个方法是 <code>map</code>, 对数据进行变换, 并返回变换后的流的新供应。考虑一下下面的例子, 将 <code>interval</code> 供应所生成的所有数字都转换为2次方:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17815,7 +17821,7 @@ sleep 2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里，两个 <code>*</code> 是为了简洁。如果您更喜欢冗长的样式，请使用 <code>$_</code> 变量:</p>
+<p>这里, 为了简洁起见, 使用了两个 <code>*</code>。如果你喜欢更冗长的风格, 可以使用 <code>$_</code> 变量:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17829,26 +17835,26 @@ sleep 2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序按预期打印前几个整数的平方。</p>
+<p>这个程序会按预期的那样, 打印出前几个整数的平方。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_总结_18">15.4. 总结</h3>
 <div class="paragraph">
-<p>在本章中，我们讨论的是 Raku 中的反应式编程。这个范式有语言核心的支持，因此无需外部模块即可开始编程。供应是本章的主角 - 我们介绍了它们的两种不同类型， 按需供应和现场供应。我们有许多将 tap 连接到供应上的例子，并且看到了如何组织数据流以及如何过滤数据流。</p>
+<p>在本章中, 我们讨论了 Raku 中的反应式编程。这种范式在语言核心中得到了支持, 所以不需要外部模块就可以开始编程。供应是本章的主角 - 我们涵盖了两种不同类型的供应, 按需供应和实时供应。我们有许多将分接器连接到供应上的例子, 看到了数据流是如何组织的, 也看到了数据流是如何过滤的。</p>
 </div>
 <div class="paragraph">
-<p>这是本书的最后一章。在 15 章中，我们从 Raku 的基础知识出发， 通过面向对象的方法和并发编程到更高阶的功能， 例如函数式编程和反应式编程。Raku 自然地嵌入了所有这些范式。毫无疑问，超过 15 年的开发增加了质量和成熟度。</p>
+<p>这是本书的最后一章。在十五章中, 我们从最基础 Raku 知识出发, 通过面向对象的方法和并发编程到更高阶的功能, 例如函数式编程和反应式编程。Raku 自然地嵌入了所有这些范式。毫无疑问, 15 年多的发展历程, 为整个语言的质量和成熟度增加了不少价值。</p>
 </div>
 <div class="paragraph">
-<p>本书大约花费了半年时间，Rakudo 发布了 3 个主版本。我不得不承认编译器的质量是如此之高， 在过去的2到3年里，从未经历过任何崩溃或奇怪的行为。在各种 Perl 会议上的与会者，我注意到越来越多的人对 Raku 感兴趣并说现在一切正常。您可以下载编译器，它开箱即用，提供了 Raku 所具有的大量功能。</p>
+<p>本书大约花费了半年时间, Rakudo 发布了 3 个主要的版本。不得不承认, 编译器的质量非常高, 在过去的2到3年时间里, 我从来没遇到过崩溃或怪异的行为。在和各种 Perl 会议的与会者聊天时, 我发现越来越多的人对 Raku 感兴趣, 说现在一切都好用了。你可以下载编译器, 它开箱即用, 提供了 Raku 所拥有的大量功能。</p>
 </div>
 <div class="paragraph">
-<p>语言本身的当前版本是 6.c. 字母 c 代表圣诞节。很长一段时间，人们宣布 Raku 将在圣诞节前准备好，而不提及它会发生在哪一年。最后，6.c 标准在圣诞节期间成为现实。 2015 年晚些时候或2018 年初，将发布该语言的新版本。你可以在 Larry Wall 的主题演讲中找到更多细节，他在 2002 年的 Perl 会议上发表了主题演讲 <a href="https://youtube/E5t8qaAGw9w" class="bare">https://youtube/E5t8qaAGw9w</a>。</p>
+<p>现在语言本身的版本是 6.c. 字母 c 在这里代表圣诞节。有很长一段时间, 有人宣布 Raku 将在圣诞节前完成, 但没有提到具体的年份。终于, 6.c 标准在 2015 年的圣诞节前成为了现实。2017 年晚些时候或 2018 年初, 新版本的语言将发布。你可以在 Larry Wall 在 2017年8月阿姆斯特丹 Perl 大会上发表的主题演讲中找到更多细节 - <a href="https://youtube/E5t8qaAGw9w" class="bare">https://youtube/E5t8qaAGw9w</a>。</p>
 </div>
 <div class="paragraph">
-<p>作为本书的作者，我希望我的读者能够喜欢这种语言并开始在他们的语言中实践使用它。您使用该语言的次数越多，您就越了解其潜力有多大。我们现在正处于 Raku 新时代的开端。</p>
+<p>作为本书的作者, 我希望我的读者能喜欢这门语言, 并开始在实践中使用这门语言。你使用这门语言越多, 你就越了解它的潜力是多么巨大。现在, 我们正处于 Raku 新时代的开端。</p>
 </div>
 </div>
 </div>
