@@ -264,7 +264,7 @@ if (theme && theme !== "1") {
 <li><a href="#_什么是函数式编程">14.1. 什么是函数式编程</a></li>
 <li><a href="#_使用递归">14.2. 使用递归</a></li>
 <li><a href="#_使用化简">14.3. 使用化简</a></li>
-<li><a href="#_高阶函数和_lambdas">14.4. 高阶函数和 lambdas</a></li>
+<li><a href="#_高阶函数和_lambda">14.4. 高阶函数和 lambda</a></li>
 <li><a href="#_管道数据和_feed_运算符">14.5. 管道数据和 feed 运算符</a></li>
 <li><a href="#_操作作用域">14.6. 操作作用域</a></li>
 <li><a href="#_创建并使用迭代器">14.7. 创建并使用迭代器</a></li>
@@ -16047,7 +16047,7 @@ for 1..3 {
 <h2 id="_函数式编程">14. 函数式编程</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Raku 是一种多范式编程语言。在前面的章节中，我们主要使用传统的命令式编程。在本章中，我们将讨论 Raku 的函数式编程风格。</p>
+<p>Raku 是一种多范式编程语言。在前几章中，我们主要使用了传统的命令式编程。在这一章中，我们将讨论 Raku 的函数式编程风格。</p>
 </div>
 <div class="paragraph">
 <p>本章将介绍这些主题:</p>
@@ -16078,21 +16078,21 @@ for 1..3 {
 </ul>
 </div>
 <div class="paragraph">
-<p>在我们详细讨论前面列出的主题之前，让我们先谈谈什么是函数式编程。</p>
+<p>在详细介绍之前，我们先谈谈什么是函数式编程。</p>
 </div>
 <div class="sect2">
 <h3 id="_什么是函数式编程">14.1. 什么是函数式编程</h3>
 <div class="paragraph">
-<p>函数式编程是使用一系列函数进行计算的方式。在这里，函数是从数学意义上理解的，而不是 Raku 中的子例程的含义。函数式编程的一个重要原则是函数必须没有副作用。 特别是，这意味着变量必须是不可变的 - 禁止分配新值。</p>
+<p>函数式编程是使用一系列函数进行计算的方式。这里所说的函数是指从数学意义上的函数，而不是 Raku 中的子例程。函数式编程的一个非常重要的原则是, 函数必须没有副作用。特别是，这意味着变量必须是不可变的 - 禁止指定一个新的值。</p>
 </div>
 <div class="paragraph">
-<p>我们将在本章中讨论的所有主题都是上述限制的结果。重要的是要意识到，例如，lambda 函数不是函数式编程的核心要素，而只是遵循无副作用这一主要原则的方式之一，例如更改一些影响函数结果的全局变量。</p>
+<p>本章中我们将讨论的所有主题都是前面的限制的结果。重要的是要认识到，比如说，lambda 函数并不是函数式编程的核心本质，它只是遵循无副作用这一主要原则的方式之一，比如说改变一些影响函数结果的全局变量。</p>
 </div>
 <div class="paragraph">
-<p>让我们取一个函数 <code>f($x)</code> 并用相同的参数调用它两次。请问第二次调用返回的结果与第一次调用返回的结果相同吗? 在函数式编程中，要求使用相同的参数调用函数时始终返回相同的结果。</p>
+<p>让我们取一个函数 <code>f($x)</code>， 用同样的参数调用它两次。第二次调用会不会和第一次调用的结果相同一样呢? 在函数式编程中，要求一个函数如果用相同的参数调用，总是返回相同的结果。</p>
 </div>
 <div class="paragraph">
-<p>这是一个返回 <code>$x + 1</code> 的函数示例:</p>
+<p>下面是这样一个函数的例子, 返回 <code>$x + 1</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16107,10 +16107,10 @@ say f(5) == f(5); # True</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>两个调用都返回相同的结果。此外，比较 <code>f(5) == f(5)</code> 结果为 <code>True</code>。这个程序可能已被视为以函数式风格编写的程序。</p>
+<p>两个调用都返回相同的结果。同时，比较 <code>f(5) == f(5)</code> 结果为 <code>True</code>。这个程序可能已经被认为是用函数式风格编写的程序。</p>
 </div>
 <div class="paragraph">
-<p>引入变量并不违反原则:</p>
+<p>引入一个变量并不违背原则:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16127,7 +16127,7 @@ say f($a) == f($a); # True</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>$a</code> 变量仅在初始化期间获取一次值。在那之后它永远不会改变。</p>
+<p><code>$a</code> 变量在初始化期间只获得一次值。之后就再也不会改变。</p>
 </div>
 <div class="paragraph">
 <p>现在，让我们修改函数的参数(你需要使用 <code>is rw</code> trait):</p>
@@ -16136,11 +16136,12 @@ say f($a) == f($a); # True</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub f($x is rw) {
     $x += 1;
-return $x; }</code></pre>
+    return $x;
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>第一次调用具有相同原始值 <code>$a</code> 的函数将返回与以前相同的结果。 尽管在函数调用之后 <code>$a</code> 的值被更改，并且第二个调用 <code>f($a)</code> 无法返回相同的结果。 条件 <code>f($a) == f($a)</code> 不再为 True：</p>
+<p>第一次调用具有相同原始值 <code>$a</code> 的函数将返回与以前相同的结果。虽然在函数调用后, <code>$a</code> 的值发生了变化，第二次调用 <code>f($a)</code> 无法返回相同的结果。 条件 <code>f($a) == f($a)</code> 已经不再是 True 了：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16153,10 +16154,10 @@ say f($a) == f($a); # False</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这里，函数创建了修改其参数的副作用，这是由于它被声明为可读可写的参数，改变了主代码中变量的值。</p>
+<p>在这里，函数产生了一个修改参数的副作用，这是由于它被声明为可读可写的参数，改变了主代码中变量的值。</p>
 </div>
 <div class="paragraph">
-<p>另一种产生副作用的方法是在函数内部使用全局变量。检查一下以下函数:</p>
+<p>另一种产生副作用的方法是在函数内部使用全局变量。考察下面这个函数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16169,10 +16170,10 @@ sub f($x) {
 </div>
 </div>
 <div class="paragraph">
-<p>函数的参数现在没有改变，但当它被调用两次时函数返回不同的结果。</p>
+<p>现在函数的参数没有变化，但是函数被调用两次后, 返回的结果不一样。</p>
 </div>
 <div class="paragraph">
-<p>现在，仔细查看 <code>f</code> 函数的三个变体。在第一个变体中，函数主体中没有涉及到赋值。在第二个和第三个例子中， 函数参数或全局变量被重新赋值了。虽然没有显式地使用 = 运算符，<code>$x += 1</code> 和 <code>$step++</code> 结构等效于以下赋值:</p>
+<p>现在，仔细看一下 <code>f</code> 函数的三个变体。在第一个变体中，函数的主体没有涉及到赋值。在第二个和第三个例子中，函数参数或全局变量被重新赋值了。虽然没有显式地使用 <code>=</code> 运算符，但 <code>$x += 1</code> 和 <code>$step++</code> 结构相当于下面的赋值:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16181,10 +16182,10 @@ $step = $step + 1;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这两种情况下，这都是打破 <code>f($a) == f($a)</code> 条件的根源。</p>
+<p>在这两种情况下，这就是打破 <code>f($a) == f($a)</code> 条件的根源。</p>
 </div>
 <div class="paragraph">
-<p>函数本身不一定会改变全局值。全局值可以被两个函数调用之间的其他代码修改:</p>
+<p>函数本身不一定会改变一个全局值。在函数的两次调用之间, 全局值可以被其他代码修改:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16200,7 +16201,7 @@ say f(5); # 7</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>虽然函数似乎是可预测的，但其环境会影响其工作。在某种感觉中，变量重新赋值在程序中引入了时间的概念。在不同时间对 <code>f(5)</code> 的同一次调用会返回不同的结果:</p>
+<p>虽然函数似乎是可预测的，但它的工作环境影响着它的工作。从某种意义上说，变量重新赋值在程序中引入了时间的概念。在不同时间里, 同样的调用 <code>f(5)</code> 会返回不同的结果:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16212,13 +16213,13 @@ say $t1 == $t2; # False</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Raku 不禁止设置变量的新值，而是在编写函数式程序时，你应该只初始化变量一次，应该避免任何新的赋值。在下一节中，您将看到如何修改传统程序以遵循函数式编程原则。</p>
+<p>Raku 并不禁止设置变量的新值，但在用函数式编程风格编写程序时，应该只对变量进行一次初始化，并应避免任何新的赋值。在下一节中，你将看到如何修改传的统程序, 以遵循函数式编程的原则。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_使用递归">14.2. 使用递归</h3>
 <div class="paragraph">
-<p>本章的下一个程序是一个简单的循环，可以打印 10 到 15 之间的数字并计算他们的总和。我们先打印一下数字。正如我们在第 5 章控制流中看到的那样，在 Raku 中有不同的循环方式。在它们之间进行选择可以引导我们已经在功能编程的方向上了。</p>
+<p>本章中我们的下一个程序是一个简单的循环，可以打印从 10 到 15 的数字并计算出他们的总和。我们先打印一下数字。正如我们在第 5 章《控制流》中看到的那样，在 Raku 中, 有不同的循环方式。在它们之间进行选择, 可以把我们已经引导到函数式编程的方向上了。</p>
 </div>
 <div class="paragraph">
 <p><code>loop</code> 循环需要一个 <code>loop</code> 计数器:</p>
@@ -16233,7 +16234,7 @@ say $sum; # 75</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这个程序中有两个变量可以改变它们的值 - <code>$n</code> 和 <code>$sum</code>。这很容易摆脱 <code>$n</code> 计数器，从而重新赋值:</p>
+<p>在这个程序中, 有两个变量会改变它们的值 - <code>$n</code> 和 <code>$sum</code>。很容易摆脱 <code>$n</code> 计数器，从而给它重新分配一个值:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16245,7 +16246,7 @@ say $sum;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在，我们使用 <code>$_</code> 变量而不是 <code>$n</code>，实际上 <code>for</code> 循环可以使用显式循环变量:</p>
+<p>现在，我们使用 <code>$_</code> 变量代替 <code>$n</code>，实际上 <code>for</code> 循环可以使用显式循环变量:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16257,10 +16258,10 @@ say $sum;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这个代码和带 <code>loop</code> 的程序之间的区别在于现在变量 <code>$n</code> 仅存在于一个循环迭代中。它在进入循环体之前被赋值，运行后被撤回。在第一个示例中，它在每次迭代时递增。</p>
+<p>这段代码和带 <code>loop</code> 的程序的区别在于, 现在变量 <code>$n</code> 只存在于一次循环迭代中。它在进入循环主体之前被赋值，在循环运行后被撤回。在第一个例子中，它在每一次迭代中都在递增。</p>
 </div>
 <div class="paragraph">
-<p>其中一项赋值消失了。我们怎样才能避免修改 <code>$sum</code> 变量呢? 它看起来不可避免，因为它的性质 - 它应该在循环数字时积累总和。答案是 - 使用递归。递归给了我们与我们相同的技巧 刚看到 <code>$n</code> 变量。而不是保持一个全局 <code>$sum</code> 变量程序的状态，每次更改总和时创建一个新变量。更重要的是，它可以完全摆脱那个变量，如下一个例子所示:</p>
+<p>其中一项赋值消失了。那么我们如何避免修改 <code>$sum</code> 变量呢? 由于它的性质, 它看起来是不可避免的-它应该在循环数字的同时累积总和。答案是 - 使用递归。递归给我们提供了和我们刚才看到的 <code>$n</code> 变量一样的技巧。与其使用一个单一的全局 <code>$sum</code> 变量来保存程序的状态，不如在每次改变总和的时候创建一个新的变量。更有甚者，还可以完全去掉那个变量，如下面的例子所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16272,19 +16273,18 @@ say $sum;</code></pre>
         return $min + sum($min + 1, $max);
     }
 }
+
 say sum(10, 15); # 75</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>让我们仔细看看这个程序。首先，这里没有保存状态的变量 - 没有循环计数器 <code>$n</code>，也没有保存中间结果的 <code>$sum</code> 变量。代替创建一个关于如何求和的指令，以该数字开始, 假设这是一个总和; 增加数字，将其加到前一个总和上; 我们实际描述了总和的意思 - 数字的和是当前数字加上所有先前数字的总和。</p>
+<p>让我们仔细看一下这个程序。首先，这里没有保存状态的变量 - 没有循环计数器 <code>$n</code>，也没有保存中间结果的 <code>$sum</code> 变量。我们不创建一个关于如何计算和的指令-从这个数字开始，而是假设这是一个和；递增这个数字，把它加到之前的和上；我们描述一下和的实际含义-和就是当前的数字加上之前所有数字的总和。</p>
 </div>
 <div class="paragraph">
-<p><code>sum</code> 函数调用自身，每次使用不同的参数。当然，在某个时候停止递归很重要，这就是测试 <code>$min == $max - 1</code> 存在的原因，当值是我们想要加起来的最后两个值时，它变为 <code>True</code>。
-这个程序已经是一个功能程序:它编码一个总和的定义，它没有
-保持状态，它使用功能来实现目标。</p>
+<p><code>sum</code> 函数调用自身，每次调用的参数都不一样。当然，在某个时候停止递归是很重要的，这就是为什么有测试 <code>$min == $max - 1</code>，当值是我们想要相加的最后两个值时，它就变成了 True。这个程序已经是一个函数式的程序了：它对和的定义进行了编码，它不保留状态，它使用函数来实现目标。</p>
 </div>
 <div class="paragraph">
-<p>最后，让我们使用一些Raku语法元素来使程序更紧凑:</p>
+<p>最后，让我们使用一些 Raku 的语法元素，使程序更加紧凑:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16293,11 +16293,12 @@ say sum(10, 15); # 75</code></pre>
         ?? $min + $max
         !! $min + sum($min + 1, $max);
 }
+
 say sum(10, 15);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此外，此处不需要 <code>return</code> 关键字，因为 Raku 将采用函数最后一个计算的值。最后一个分号也可以省略:</p>
+<p>另外，这里不需要 <code>return</code> 关键字，因为 Raku 会取函数中的最后一个计算值。最后一个分号也可以省略:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16309,7 +16310,7 @@ say sum(10, 15);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>另一个转换是从两个表达式中移出类似的部分:</p>
+<p>另一个转换是将相似的部分从两个表达式中移出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16319,13 +16320,13 @@ say sum(10, 15);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>让我们到此为止，看看 Raku 为我们提供了哪些其他令人着迷的选择。</p>
+<p>让我们就此打住，看看 Raku 还能给我们带来哪些令人着迷的选择。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_使用化简">14.3. 使用化简</h3>
 <div class="paragraph">
-<p>在上一节中，我们计算了 10 到 15 之间的数字之和。 经过一些转换后，该程序变得等同于以下程序:</p>
+<p>在上一节中，我们计算了 10 到 15 之间的数字之和。这个程序, 经过一些变换，就变成了下面这个程序的等价物:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16333,10 +16334,10 @@ say sum(10, 15);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里的每对括号对应于 <code>sum</code> 函数的递归调用。函数的调用在这里用它的实现替换。这是无状态方法的限制后果之一。函数是否取决于程序状态， 在不同时刻，如果不知道值反射状态，那么用它的实现替换函数调用是不可能的。</p>
+<p>这里的每一对括号对应于 <code>sum</code> 函数的递归调用。函数的调用在这里用它的实现来代替。这也是无状态方法限制的后果之一。如果函数依赖于程序的状态，那么在不知道反射不同时刻的状态值的情况下，就不可能用函数调用替换成它的实现。</p>
 </div>
 <div class="paragraph">
-<p>由于括号在此处不会更改任何执行顺序，因此我们将其删除:</p>
+<p>因为这里的括号不会改变任何执行顺序，所以我们把它们去掉:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16344,7 +16345,7 @@ say sum(10, 15);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们在这里看到的是由 <code>+</code> 运算符分隔的 10 到 15 之间的所有值的列表。 我们已经在第4章的使用运算符的化简元运算符一节中遇到过。整个结构可以用简单的代码替换:</p>
+<p>我们在这里看到的是一个由 <code>+</code> 运算符分隔的 10 到 15 之间的所有值的列表。我们已经在第四章《使用运算符》中的化简元运算符一节中见过了。整个结构可以用下面这个简单的代码来代替:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16352,10 +16353,10 @@ say sum(10, 15);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这也是一个函数式风格的程序。比较一下它和上一节示例中的其中之一的大小。</p>
+<p>这也是一个函数式风格的程序。比较一下它和前文中的一个例子的大小。</p>
 </div>
 <div class="paragraph">
-<p>化简运算符 <code>[+]</code> 也可以与任意数组完美配合:</p>
+<p>化简运算符 <code>[+]</code> 在任意数组中也能完美地工作:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16364,16 +16365,16 @@ say [+] @a; # 2223</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们现在越来越接近函数式编程中的另一个重要概念，高阶函数。</p>
+<p>现在, 我们已经接近了函数式编程中的另一个重要概念-高阶函数。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_高阶函数和_lambdas">14.4. 高阶函数和 lambdas</h3>
+<h3 id="_高阶函数和_lambda">14.4. 高阶函数和 lambda</h3>
 <div class="paragraph">
-<p>我们刚刚在上一节中看到的 <code>[+]</code> 化简运算符可以根据需要多次执行 <code>+</code> 运算符的动作以把所提供数据的所有元素加起来。</p>
+<p>刚才我们在上一节中看到的 <code>[+]</code> 化简运算符就是根据需要执行 <code>+</code> 运算符的动作, 将提供的数据中的所有元素加相加。</p>
 </div>
 <div class="paragraph">
-<p>在 Raku 中，还有一种进行化简操作的替代方法。有一个内置的函数 <code>reduce</code> 需要一个会执行操作的代码块。首先，我们将使用我们在第 2 章编写代码中所创建的函数 <code>add($a, $b)</code>:</p>
+<p>在 Raku 中，有另外一种进行化简操作的方法。有一个内置的函数 <code>reduce</code>, 期望有一个代码块来执行这个操作。首先，我们将使用我们在第二章《编写代码》中所创建的函数 <code>add($a, $b)</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16385,13 +16386,13 @@ say reduce &amp;add, 10..15;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>reduce</code> 函数将函数的引用作为第一个参数并展平值的列表。在 <code>&amp;add</code> 中，函数名称前面的 <code>&amp;</code> 符号告诉 Raku 这不是函数调用，而是对函数的代码引用。</p>
+<p><code>reduce</code> 函数将函数的引用作为第一个参数, 并展平值的列表。在 <code>&amp;add</code> 中，函数名称前面的 <code>&amp;</code> 符号告诉 Raku 这不是函数调用，而是对函数的代码引用。</p>
 </div>
 <div class="paragraph">
-<p><code>reduce</code> 函数是高阶函数的一个例子。参数的其中之一是另一个函数。在 Raku 中，函数是一等对象，这意味着它们可以作为参数传递给其他函数，就像使用常规变量一样容易。从高阶函数调用的函数有时也称为回调函数。</p>
+<p><code>reduce</code> 函数是高阶函数的一个例子。它的一个参数是另一个函数。在 Raku 中，函数是一等对象，这意味着可以像常规变量一样, 将其作为参数传递给其他函数, 就像你用常规变量一样简单。从高阶函数中调用的函数有时也称为回调函数。</p>
 </div>
 <div class="paragraph">
-<p>由于 <code>add</code> 函数仅用于 <code>reduce</code> 函数，因此可以内联并在它需要的地方直接创建:</p>
+<p>由于 <code>add</code> 函数只在 <code>reduce</code> 函数中使用，所以可以内联, 直接在需要它的地方创建它:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16399,7 +16400,7 @@ say reduce &amp;add, 10..15;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在很明显，<code>add</code> 名称没有添加任何值，因此可以省略使函数匿名:</p>
+<p>现在很明显的是，<code>add</code> 的名称没有添加任何值，可以省略, 从而使该函数成为匿名函数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16407,10 +16408,10 @@ say reduce &amp;add, 10..15;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在此上下文中，匿名函数也称为 lambda 函数。它有常规子例程的所有属性，除了它既没有名字也不能从程序中的其它地方调用。整个函数定义是内联的。</p>
+<p>在这种情况下，匿名函数也被称为 lambda 函数。它具有普通子例程的所有属性，只是它既没有名字, 也不能从程序中的其它地方调用。整个函数的定义是内联的。</p>
 </div>
 <div class="paragraph">
-<p>现在让我们看看 Raku 如何在语法上帮助简化创建 lambdas。 首先，<code>sub</code> 块可以用尖号块替换:</p>
+<p>现在让我们看看 Raku 如何在语法上帮助简化创建 lambda。 首先，<code>sub</code> 块可以用尖号块来代替:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16418,10 +16419,10 @@ say reduce &amp;add, 10..15;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>匿名函数的参数列在 <code>&#8594;</code> 箭头后面，你不需要用括号括起来。另请注意，使用尖号块，<code>return</code> 关键字无法使用(编译器将生成错误:Attempt to return outside of any Routine)。实际上，根本不需要 <code>return</code>，因为函数所要做的所有事情就是计算一个表达式，其结果将是函数的结果。</p>
+<p>匿名函数的参数列在 <code>&#8594;</code> 箭头之后列出，你不需要用括号括起来。另外要注意的是，使用尖号块时，不能使用 <code>return</code> 关键字(编译器会产生一个错误: Attempt to return outside of any Routine)。实际上，根本不需要 <code>return</code>，因为函数要做的就是计算一个表达式，其结果就是函数的结果。</p>
 </div>
 <div class="paragraph">
-<p>此外，即使是参数也不是这种函数的强制性要素。他们可以用花括号中代码块内的占位符变量替换(参见第六章《子程序》中的参数占位符一节):</p>
+<p>此外，即使是参数也不是这种函数的必要元素。它们可以用花括号内的占位符变量来代替(参见第六章《子例程》中的参数占位符一节):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16429,10 +16430,10 @@ say reduce &amp;add, 10..15;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Raku 中有更多内置函数可以充当高阶函数。这些是，<code>map</code>，<code>grep</code> 和 <code>sort</code>。他们每个都可以接收一个可选的代码块或对现有函数的引用作为第一个参数。让我们看几个例子。</p>
+<p>在 Raku 中, 有更多的内置函数可以作为高阶函数。这些函数有 <code>map</code>、<code>grep</code> 和 <code>sort</code>。它们中的每个函数都可以接收一个可选的代码块或对现有函数的引用作为第一个参数。让我们来看几个例子。</p>
 </div>
 <div class="paragraph">
-<p><code>map</code> 函数为序列的每个元素启动回调。结果是新的包含使用回调函数代码的每个元素的单独映射的列表:</p>
+<p><code>map</code> 函数为序列中的每个元素发起一个回调。其结果是一个新的列表, 其中包含了使用回调函数的代码对每个元素的单独映射:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16440,7 +16441,7 @@ say reduce &amp;add, 10..15;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>grep</code> 函数还为每个元素调用它的回调，但只复制那些回调返回 <code>True</code> 值的元素:</p>
+<p><code>grep</code> 函数也为每个元素调用它的回调，但只复制那些回调函数返回 <code>True</code> 值的元素:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16448,10 +16449,10 @@ say reduce &amp;add, 10..15;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这两个例子中，使用了 $_ 变量: 对于 <code>map</code>，它是隐式的, 因为为 <code>.uc</code> 是 <code>$_.uc</code> 的快捷方式。</p>
+<p>在这两个例子中，都使用了 $_ 变量: 对于 <code>map</code>，它是隐式的, 因为为 <code>.uc</code> 是 <code>$_.uc</code> 的快捷方式。</p>
 </div>
 <div class="paragraph">
-<p>使用 <code>sort</code> 函数，它有点复杂，因为回调函数需要两个参数。最简单的方法是使用占位符:</p>
+<p>对于 <code>sort</code> 函数，就有点复杂了，因为回调函数需要两个参数。最简单的方法是使用占位符:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16459,7 +16460,7 @@ say reduce &amp;add, 10..15;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此代码块允许以相反的顺序对数字进行排序。</p>
+<p>该代码块允许将数字按相反的顺序进行排序。</p>
 </div>
 <div class="sect3">
 <h4 id="_whatevercode_块">14.4.1. WhateverCode 块</h4>
