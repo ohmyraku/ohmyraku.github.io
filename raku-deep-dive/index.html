@@ -8,7 +8,7 @@
 
 <meta name="author" content="ohmyraku">
 <meta name="application-name" content="山川异域, 风月同天">
-<meta name="description" content="Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. 移相器 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4.">
+<meta name="description" content="Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 编写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. phaser 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4.">
 <meta name="robots" content="noodp"/>
 <meta name="generator" content="Hugo 0.63.2" />
 <meta name="referrer" content="no-referrer" />
@@ -22,7 +22,7 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Raku 深入研究" />
-<meta name="twitter:description" content="Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. 移相器 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4." />
+<meta name="twitter:description" content="Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 编写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. phaser 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4." />
 <meta name="twitter:site" content="https://ohmyraku.github.io" />
 <meta name="twitter:creator" content="ohmyraku" />
 <meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
@@ -32,7 +32,7 @@
 <meta property="og:title" content="Raku 深入研究" />
 <meta property="og:url" content="https://ohmyraku.github.io" />
 <meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. 移相器 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4." />
+<meta property="og:description" content="Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 编写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. phaser 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4." />
 <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -49,7 +49,7 @@
         "@type": "Person",
         "name": "ohmyraku"
       },
-      "description": "Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. 移相器 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4.",
+      "description": "Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 编写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. phaser 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4.",
       "publisher": {
         "@type": "Organization",
         "name": "https:\/\/ohmyraku.github.io",
@@ -116,12 +116,12 @@ if (theme && theme !== "1") {
 <li><a href="#_总结">1.13. 总结</a></li>
 </ul>
 </li>
-<li><a href="#_写代码">2. 写代码</a>
+<li><a href="#_编写代码">2. 编写代码</a>
 <ul class="sectlevel2">
 <li><a href="#_使用_unicode">2.1. 使用 Unicode</a></li>
 <li><a href="#_空白和反空白">2.2. 空白和反空白</a></li>
 <li><a href="#_注释">2.3. 注释</a></li>
-<li><a href="#_移相器">2.4. 移相器</a></li>
+<li><a href="#_phaser">2.4. phaser</a></li>
 <li><a href="#_总结_2">2.5. 总结</a></li>
 </ul>
 </li>
@@ -1080,13 +1080,13 @@ Hello, World!</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_写代码">2. 写代码</h2>
+<h2 id="_编写代码">2. 编写代码</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>本章将为你编写 Raku 代码做好准备。在我们检查变量，数据类型，面向对象和其他重要主题之前，让我们多了解一下在 Raku 中是如何组织源代码的。有许多元素与其他编程语言不同，值得花时间习惯它。</p>
+<p>本章将为你编写 Raku 代码做好准备。在我们研究变量、数据类型、面向对象和其他重要主题之前, 让我们先来了解一下 Raku 中的源代码是如何组织的。这里有很多与其他编程语言不同的元素, 值得我们花时间去熟悉它。</p>
 </div>
 <div class="paragraph">
-<p>在本章中，我们将介绍以下主题:</p>
+<p>在本章中, 我们将涵盖以下主题:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1094,7 +1094,7 @@ Hello, World!</code></pre>
 <p>使用 Unicode</p>
 </li>
 <li>
-<p>空格和空格</p>
+<p>空白和反空白</p>
 </li>
 <li>
 <p>注释</p>
@@ -1113,10 +1113,10 @@ Hello, World!</code></pre>
 <div class="sect2">
 <h3 id="_使用_unicode">2.1. 使用 Unicode</h3>
 <div class="paragraph">
-<p>默认假设是 Raku 程序的源代码使用 UTF-8。它给你了整个字符的力量，而不用担心它是否会起作用。在 Perl 5 中，例如，你必须在源代码中添加特殊说明才能通知解释器你正使用非 ASCII 字符。在 Raku 中，这更容易了。</p>
+<p>默认的假设是 Raku 程序的源代码使用 UTF-8。它给你了整个字符的力量, 而不用担心它是否会起作用。例如, 在 Perl 5 中, 你必须添加一些特殊的指令来通知解释器你在源代码中使用了非 ASCII 字符。在 Raku 中, 这就简单多了。</p>
 </div>
 <div class="paragraph">
-<p>首先，Unicode 字符可以在字符串中自由地使用。例如，让我们尝试一些希腊语和中文字素，如下面的代码行所示:</p>
+<p>首先, 在字符串中可以自由地使用 Unicode 字符。例如, 让我们尝试一下希腊语和中文的一些词组, 如下面的代码行所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1125,8 +1125,7 @@ say '日 + 月 = 明'; # 'Sun' and 'Moon' give 'bright'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>s
-前两行代码将按预期打印相应的字符串:</p>
+<p>前面的两行代码会按照预期打印出相应的字符串:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1135,23 +1134,23 @@ say '日 + 月 = 明'; # 'Sun' and 'Moon' give 'bright'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>或者，可以通过名字来引用 Unicode 代码点。例如， 考虑以下代码行:</p>
+<p>另外, 也可以用它们的名字来引用 Unicode 代码点。例如, 考虑下面这行代码:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "Raku is c[FLEXED BICEPS]";</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "Raku is \c[FLEXED BICEPS]";</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>上一行代码使用肌肉表情符号打印以下输出:</p>
+<p>前面这行代码用肌肉表情符号打印出以下输出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-txt" data-lang="txt">Raku is</code></pre>
+<pre class="highlight"><code class="language-txt" data-lang="txt">Raku is 💪</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在 Raku 中使用 Unicode 不仅限于字符串，仅限内容。ASCII 外面的字符可以用在变量和函数的名中。让我们回到第一章“Raku 是什么”中的 <code>add($x, $y)</code> 函数这个例子，并使用希腊字符重命名它和它的参数:</p>
+<p>在 Raku 中使用 Unicode 并不限于字符串、内容。变量和函数的名称中也可以使用 ASCII 以外的字符。让我们回到第一章《什么是 Raku》中的 <code>add($x, $y)</code> 函数的例子, 用希腊字母重命名它和它的参数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1163,24 +1162,24 @@ say Σ(8, 9); # 17</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此外，一些 Unicode 字符可用于表示简单的操作而不是更传统的代码。例如，以下是具有有理分数的字符:</p>
+<p>此外, 一些 Unicode 字符可以用来表达简单的操作, 而不是更多的常规代码。例如, 这里是有理分数的字符:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say 1⁄2;       # prints 0.5
-say 1⁄2 + 1⁄4; # 0.75</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say ½;     # prints 0.5
+say ½ + ¼; # 0.75</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>也允许使用非 ASCII Unicode 数字，但在没有特殊需求的常规代码中使用它们可能不是一个好主意:</p>
+<p>非 ASCII Unicode 数字也是允许的, 但是在没有特殊需求的情况下, 在普通代码中使用这些数字也许不是一个好主意:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say ୪૨; # Prints 42</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say ୪૨; # prints 42</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>可以使用诸如 ² 或 ³ 的上标而不是调用函数来计算数字的幂，如下面的代码行所示:</p>
+<p>可以用诸如 ² 或 ³ 这样的上标而不是调用函数来计算数字的幂, 如下面的几行代码所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1189,10 +1188,10 @@ say 2⁷; # 128</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>使用 Unicode 字符的另一个例子是集合上的数学运算符，例如 ε 或 ∪。</p>
+<p>另一个使用 Unicode 字符的例子是集合上的数学运算符, 例如 ∈ 或 ∪。</p>
 </div>
 <div class="paragraph">
-<p>在下一个示例中，将使用 Unicode 版本的简单算术运算符而不是传统使用的常规 <code>*</code> 和 <code>/</code> 字符:</p>
+<p>在下一个例子中, 我们使用了 Unicode 版本的简单算术运算符, 而不是传统上使用的常规 <code>*</code> 和 <code>/</code> 字符:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1201,10 +1200,10 @@ say 100 ÷ 4; # 25</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在 Raku 程序中，你可能经常会看到一些其他 Unicode 字符。我们来看看其中最常见的一些。</p>
+<p>在 Raku 程序中, 你可能经常会看到一些其他 Unicode 字符。我们来看一下其中最常见的几个。</p>
 </div>
 <div class="paragraph">
-<p>可以使用法语引号 <code>« »</code> 代替一对引号来创建列表。例如，在下面的代码中，<code>@array</code> 获取斐波纳契数的序列。我们已经在第一章中的 Raku 是什么的例子中看到了这一点。让我们首先更新它以使用引用语法来创建数组，如以下代码行所示:</p>
+<p>法语引号 <code>« »</code> 可以用来代替一对引号来创建列表。例如, 在下面的代码中, <code>@array</code> 可以得到斐波纳契数的序列。我们已经在第一章《Raku 是什么》中看到过这个例子。让我们先把它更新为使用引用语法来创建数组, 如下面的几行代码所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1213,7 +1212,7 @@ say @fibonacci[4]; # 3</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们将在第三章中的使用变量和内置数据类型中详细介绍这种语法，但是，让我们现在看看如何使用法语引号括起值列表:</p>
+<p>我们将在第三章《处理变量和内置数据类型》中详细介绍这种语法, 不过, 现在让我们来看看如何使用法语引号来包围值列表:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1222,7 +1221,7 @@ say @fibonacci[4]; # 3</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>对于单行(主要在 <code>-e</code> 命令行选项中执行的短程序)，Unicode 引号可能非常有用，因为它们有助于避免嵌套的单引号问题。你可以在以下示例中查看它的工作原理:</p>
+<p>对于单行程序(主要在 <code>-e</code> 命令行选项中执行的短程序), Unicode 引号可能会很有帮助, 因为它们有助于避免嵌套单引号的问题。你可以在下面的例子中看到它是如何工作的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1230,10 +1229,10 @@ say @fibonacci[4]; # 3</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里使用一对 Unicode 引号(‘ 和 ’)而不是单引号(')。</p>
+<p>这里用一对 Unicode 引号(‘ 和 ’)来代替单引号(')。</p>
 </div>
 <div class="paragraph">
-<p>使用正则表达式和 grammar 时(我们将在第十一章的正则表达式和第十二章的 grammar 中讨论它们)，你经常会看到一对方形尖括号，你可以在代码中自由地使用它来引用字符串，如以下代码所示:</p>
+<p>在使用正则表达式和 grammar 时(我们将在第十一章《正则表达式》和第十二章《Grammar》中讨论它们), 你经常会看到一对方角括号, 你可以在代码中自由地使用它来引用字符串, 如下面的代码所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1241,7 +1240,7 @@ say @fibonacci[4]; # 3</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在 Raku 中，语言的元素可以用 Unicode 字符表示，它和用 ASCII 形式编写的等价。ASCII 字符有时被称为德克萨斯字符。下表列出了 Unicode 和 ASCII 最常见结构版本之间的对应关系:</p>
+<p>在 Raku 中, 可以用 Unicode 字符来表示语言的元素, 它和用 ASCII 形式编写的等价。这些 ASCII 字符有时被称为德克萨斯字符。下表列出了 Unicode 和 ASCII 版本中最常见的结构的对应关系:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -1258,32 +1257,32 @@ say @fibonacci[4]; # 3</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">« »</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt; &gt;&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">这些引起一组数组元素, 也用于超运算符中(参考第四章的使用运算符)。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">这些引用一组数组元素, 也用于超运算符中(参见第四章,《使用运算符》)。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">‘’ “„”</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">' ' " " "</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">这些单引号和双引号用于引起字符串。诸如 n 这样的特殊字符在双引号中被插值。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">这些单引号和双引号用于引用字符串。诸如 n 这样的特殊字符在双引号中被插值。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">⌈ ⌋</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Q/ /</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">这个语法用于创建不带插值的字符串</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">这个语法用于创建不带插值的字符串。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">× ÷</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">* /</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">这些是乘法和除法算数运算符</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">这些是乘法和除法的算术运算符。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">−</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">减号, 用作运算符, 例如(注意 Unicode <code>0写212</code> 代码有一个单独的 <code>MINUS SIGN</code> 字符)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">例如, 减号, 用作运算符(注意, Unicode 中有一个单独的 <code>MINUS SIGN</code> 字符, 其代码为 0x2212)。</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>对于数学计算有一些预定义的常数 - <code>π</code>，<code>e`和 `τ</code>。有一个单独的符号表示无穷大-<code>∞</code>。所有这些符号也有对应的 ASCII 表示:</p>
+<p>有几个预定义的数学计算常数 - <code>π</code>, <code>e`和 `τ</code>。还有一个单独的符号来表示无穷大 <code>∞</code>。所有这些符号在 ASCII 表示法中也有对应的符号:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -1303,30 +1302,30 @@ say @fibonacci[4]; # 3</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">π</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">pi</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">这是 π 的值(3.14159&#8230;&#8203;)。</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">e</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">𝑒</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">e</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">这是 e 的值(2.71828)。注意它的 Unicode 表示是 0x1D452 字符, 不是 ASCII 字符 e。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">这是 𝑒 的值(2.71828)。注意它的 Unicode 表示是 0x1D452 字符, 而不是 ASCII 字符 e。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">τ</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">tau</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">τ 的值是 2π(6.283185&#8230;&#8203;)。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">τ 的值为 2π(6.283185&#8230;&#8203;)。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">∞</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Inf</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">无限大总是比任何数大</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">无穷大总是比任何数都大</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>键入 Unicode 字符可能是一项单独的任务。当然，你可以随时复制来自 Google 或维基百科的字符，但在这种情况下你会失去生产力。参考 Raku 在线文档 link:docs.raku.org/language/unicode_entry 输入 Unicode 字符页面。它包含有关如何在不同的编辑器和 IDE 中输入 Unicode 字符的详细说明。</p>
+<p>键入 Unicode 字符可能是一项单独的任务。当然, 你可以随时从谷歌或维基百科上复制字符, 但在这种情况下, 你会失去效率。请参考 Raku 在线文档 <a href="docs.raku.org/language/unicode_entry" class="bare">docs.raku.org/language/unicode_entry</a> 中输入 Unicode 字符的页面。它包含了如何在不同的编辑器和 IDE 中输入 Unicode 字符的详细说明。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_空白和反空白">2.2. 空白和反空白</h3>
 <div class="paragraph">
-<p>正如我们刚刚看到的那样，Raku 程序可以在传统的 ASCII 集外部强烈地使用 Unicode 字符。这也适用于空白。空白就是那些程序元素之间的缝隙，传统上由空格表示(ASCII 代码 0x20)，制表符(0x09)和换行符(Unix 中的单行换行符 0x0A 和一系列两个字符，回车符 0x0D，以及 Windows 中的换行符 0x0A)。Raku 扩展了空白的概念，并在代码允许常规空白的每个地方接受 Unicode 空格。当你使用现有代码时要小心，原因是，填充了 Unicode 字符。</p>
+<p>正如我们刚才看到的那样, Raku 程序可以在传统的 ASCII 集之外集中使用 Unicode 字符。这也适用于空白。空白是指程序元素之间的空隙, 传统上用空格(ASCII 代码 0x20)、制表符(0x09)和换行符(在 Unix 中是一个单一的换行符 0x0A, 在 Windows 中是一系列的两个字符, 回车符 0x0D 和换行符 0x0A)来表示。Raku 扩展了空白的概念, 在代码的每一个允许使用普通空白的地方都接受 Unicode 空白。当你使用现有的代码时要小心, 因为某些原因, 这些代码中充满了 Unicode 字符。</p>
 </div>
 <div class="paragraph">
 <p>Raku 中的空白字符集包含具有如下 Unicode 属性之一的字符:</p>
@@ -1334,30 +1333,30 @@ say @fibonacci[4]; # 3</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Zs: Separator, Space</p>
+<p>Zs: 分隔符, 空白</p>
 </li>
 <li>
-<p>Zl: Separator, Line</p>
+<p>Zl: 分隔符, 行</p>
 </li>
 <li>
-<p>Zp: Separator, Paragraph</p>
+<p>Zp: 分隔符, 段落</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>你可以在 https:/​/​en. wikipedia.​org/​wiki/​Whitespace_​character 页面列出的类别中找到完整的字符列表。其中有一个常规空白，垂直和水平制表符，换行符，换行符，不间断空格和瘦空白。</p>
+<p>你可以在 <a href="https:/​/​en.wikipedia.​org/​wiki/​Whitespace_​character" class="bare">https:/​/​en.wikipedia.​org/​wiki/​Whitespace_​character</a> 页面列出的类别中找到完整的字符列表。其中有普通空白、垂直和水平制表符、换行符, 不可分空格和窄空格。</p>
 </div>
 <div class="paragraph">
-<p>在更大的范围内，Raku 允许程序按照程序员的需要进行格式化。 另一方面，关于空白可能出现的地方，有一些规则，在编写 Raku 程序时应该遵循这些规则。</p>
+<p>在更大的范围内, Raku 允许程序按照程序员的要求进行格式化。另一方面, 关于空白可能出现的地方, 有一些规则, 在编写 Raku 程序时应该遵循这些规则。</p>
 </div>
 <div class="paragraph">
-<p>如果语言禁止在代码中的特定位置有空格，但是你希望格式化程序以使其更宽敞，你可以添加所谓的 <strong>unspace</strong>。这是一个以一个反斜杠开始的序列，紧接在前一段代码之后后跟一个或多个空格字符。它类似于 Unix 命令行指令末尾用于继续下一行的反斜杠。</p>
+<p>如果语言不允许在代码中的某个特定位置有空格, 但是你希望将程序格式化, 使其更宽敞, 你可以添加所谓的 <strong>unspace</strong>。这是一个以反斜杠开始的序列, 紧接在前一段代码之后, 后面是一个或多个空格字符。它类似于 Unix 命令行指令末尾的反斜杠, 用于继续下一行。</p>
 </div>
 <div class="paragraph">
-<p>让我们来看看有关空白的语言规则的最重要的情况，可能与你的习惯发生冲突。</p>
+<p>让我们来看看最重要的情况, 语言中关于空白的规则很严格, 可能与你的习惯相冲突。</p>
 </div>
 <div class="paragraph">
-<p>第一个例子是函数调用。在 Raku 中，函数的参数周围不需要圆括号，但只要你使用它们，函数名和左开口圆括号之间不能有空格 。检查以下三个调用:</p>
+<p>第一个例子是函数调用。在 Raku 中, 函数的参数周围不需要圆括号, 但只要你使用括号, 函数名和左开口圆括号之间就不能有空格。检查下面的三个调用:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1367,7 +1366,7 @@ say add (6, 7); # Error</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>前两行是正确的，而最后一行产生编译时错误，如下所示:</p>
+<p>前两行是正确的, 而最后一行产生了编译时错误, 如下所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1375,10 +1374,10 @@ say add (6, 7); # Error</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>错误消息可能听起来有误导性，但请记住，在 Raku 中，你可以传递数组给函数。在这种情况下，编译器不能保证它理解程序员的正确意图。<code>add (6, 7)</code> 结构可以解释为使用单个参数的函数是一个双元素数组 - (6,7) 来调用函数。</p>
+<p>这个错误消息听起来可能会有误导性, 但请记住, 在 Raku 中, 你可以向函数传递数组。在这种情况下, 编译器不能保证正确理解程序员的意图。<code>add (6, 7)</code> 结构可以解释为调用一个带单一参数的函数, 这个参数是一个双元素数组——<code>(6,7)</code>。</p>
 </div>
 <div class="paragraph">
-<p>如果你仍然希望在视觉上分割参数列表和函数名，请在它们之间放置一个空格:</p>
+<p>如果你仍然喜欢将参数列表和函数名称直观地分开, 可以在它们之间放置一个 unspace, 如下所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1386,7 +1385,7 @@ say add (6, 7); # Error</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在它正在编译，没有任何抱怨。还允许在反空格内部使用换行符; 考虑以下示例:</p>
+<p>现在它正在编译, 没有任何抱怨。在 unspace 内部使用换行符也是允许的; 考虑以下例子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1395,7 +1394,7 @@ say add (6, 7); # Error</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>也可以不同地格式化代码，让开口圆括号与函数名保持在同一行上，如下所示:</p>
+<p>也可以采用不同的格式化方式, 将开口圆括号与函数名留在同一行, 如下所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1405,7 +1404,7 @@ say add (6, 7); # Error</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>当你需要传递许多参数时，这种方法可能很方便，例如，给每个参数添加注释:</p>
+<p>当你需要传递许多参数时, 这种方法可能会很方便, 例如, 给每个参数添加注释:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1416,30 +1415,30 @@ say add (6, 7); # Error</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们将在第六章的子例程中更多地讨论函数。但是，现在，让我们回到组织源代码的方法中。</p>
+<p>我们将在第六章的《子例程》中更多地讨论函数。不过, 现在, 让我们回到组织源代码的方法上。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_注释">2.3. 注释</h3>
 <div class="paragraph">
-<p>在第一章 Raku是什么中我们已经看到了两种编写程序的方法 - 通过把它传递给 <code>-e</code> 命令行选项或将其保存在文件中。当然，所有大型程序都存储起来在文件中。在本节中，我们将看到 Perl 如何通过添加注释帮助程序员更好地组织代码。</p>
+<p>在第一章《Raku 是什么》中, 我们已经看到了两种编写程序的方法 - 一是在 <code>-e</code> 命令行选项中传递, 二是将代码保存在文件中。当然, 所有大型程序都是保存在文件中。在本节中, 我们将看到 Raku 如何通过添加注释来帮助程序员更好地组织代码。</p>
 </div>
 <div class="paragraph">
-<p>注释是源代码的一部分，编译器会忽略它们。注释旨在提供有关该程序本身的其他信息。好的注释的例子是对所用算法，或变量的目的，或函数输入参数的描述的解释。</p>
+<p>注释是源代码的一部分, 编译器会忽略这些内容。注释的目的是为了提供有关该程序本身的额外信息。好的注释的例子是对所用算法的解释, 或变量的目的, 或函数的输入参数的描述。</p>
 </div>
 <div class="paragraph">
-<p>Raku 通过使用注释和所谓的 Pod 提供了两种在源代码中保存额外的面向人类信息的方法。首先，我们将检查注释。</p>
+<p>Raku 提供了两种方法, 通过使用注释和所谓的 Pod 来保存源代码中面向人类的额外信息。首先, 我们来研究一下注释。</p>
 </div>
 <div class="paragraph">
-<p>注释是编译器不认为是直接的源代码片段 执行指令。在 Raku 中，有三种方式留下注释:</p>
+<p>注释是源代码中的片段, 编译器不会将其视为直接执行的指令。在 Raku 中, 有三种方式可以留下注释:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>单行注释，</p>
+<p>单行注释,</p>
 </li>
 <li>
-<p>多行注释，</p>
+<p>多行注释,</p>
 </li>
 <li>
 <p>嵌入式注释。</p>
@@ -1447,29 +1446,29 @@ say add (6, 7); # Error</code></pre>
 </ul>
 </div>
 <div class="paragraph">
-<p>我们来详细研究它们。</p>
+<p>让我们来详细研究一下它们。</p>
 </div>
 <div class="sect3">
 <h4 id="_单行注释">2.3.1. 单行注释</h4>
 <div class="paragraph">
-<p>使用 # 字符将单行注释与程序源代码分开。# 符号后面的所有内容都被编译器跳过，直到当前行结束。</p>
+<p>使用 <code><mark></code> 字符将单行注释与程序源代码分开。编译器会跳过 <code></mark></code> 符号后面的所有内容, 直到当前行结束。</p>
 </div>
 <div class="paragraph">
-<p>在下面的例子中，我们采用第一章的什么是 Raku 中的 'Hello，World!' 程序，并添加一行注释:</p>
+<p>在下面的例子中, 我们把第一章的《Raku 是什么》中的 'Hello, World!' 程序作为例子, 并在其中添加了一个单行注释:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say 'Hello, World!'; # Prints 'Hello, World!'</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'Hello, World!'; # prints 'Hello, World!'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这是一个完全正确的 Raku 程序。它有一个内置 <code>say</code> 函数和一个关于它的作用的注释。字符串的一部分，从 # 字符开始，是一个单行注释。</p>
+<p>这是一个完全正确的 Raku 程序。它有一个内置的 <code>say</code> 函数的调用和一个关于它的注释。字符串中从 <code>#</code> 字符开始的部分是一个单行注释。</p>
 </div>
 <div class="paragraph">
-<p>如果你运行该程序，它会打印 <code>Hello，World!</code>。仅此而已。它和没有注释的程序的作用完全相同。</p>
+<p>如果你运行这个程序, 它会打印出 <code>Hello, World!</code>。仅此而已。它和没有注释的程序的作用完全一样。</p>
 </div>
 <div class="paragraph">
-<p>单行注释也可能占用一行单独的代码。例如，让我们对同一程序添加更多的注释:</p>
+<p>单行注释也可以占用单独的一行代码。例如, 让我们在同一程序中添加更多的注释:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1485,10 +1484,10 @@ say 'Hello, World!'; # it prints the string
 </div>
 </div>
 <div class="paragraph">
-<p>这也是一个完全有效的 Raku 程序。从业务逻辑的角度来看，与前面的例子一样，程序没有改变，但是从未来维护的角度来看，它变得更好，因为它解释了它的作用。</p>
+<p>这也是一个完全有效的 Raku 程序。从业务逻辑的角度来看, 与前面的例子一样, 程序没有变化, 但是从以后维护的角度来看, 它变得更好了, 因为它解释了它的作用。</p>
 </div>
 <div class="paragraph">
-<p>使用单行注释的另一种常见做法是暂时隐藏代码段。例如，在调试过程中，你要禁用某些操作。代替删除代码行，你可以通过在行的开头添加#字符来注释掉它。考虑下面的代码行为例:</p>
+<p>使用单行注释的另一种常见做法是暂时隐藏代码段。例如, 在调试过程中, 你想禁用某些操作。你可以通过在这行代码的开头加上 <code>#</code> 字符来代替删除这行代码。以下面几行代码为例:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1497,10 +1496,10 @@ say 'Hello, World!'; # it prints the string
 </div>
 </div>
 <div class="paragraph">
-<p>有时，你执行相反的操作 - 向程序添加其他打印指令来查看不同变量的值，并在代码生产就之前注释这些指令。</p>
+<p>有时, 你会做相反的事情, 即在程序中添加额外的打印指令, 以查看不同变量的值, 并在代码生产就绪之前注释掉这些指令。</p>
 </div>
 <div class="paragraph">
-<p>以下是如何打印传递给函数的值的示例。我使用了来自第一章的什么是 Raku 的附加示例:</p>
+<p>下面是一个例子, 说明你如何打印传递给函数的值。我使用了第一章《什么是 Raku》中的加法例子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1511,7 +1510,7 @@ say 'Hello, World!'; # it prints the string
 </div>
 </div>
 <div class="paragraph">
-<p>这个程序只是打印加法的结果，但如果你取消注释子例程代码中的第一行，它还会以人类可读的格式打印 <code>$x</code> 和 <code>$y</code> 变量的值。如下代码所示:</p>
+<p>这个程序只是简单地打印了加法的结果, 但如果你取消了子例程代码的第一行注释, 它也会以人类可读的格式打印出 <code>$x</code> 和 <code>$y</code> 变量的值。如下面的代码所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1523,14 +1522,13 @@ say 'Hello, World!'; # it prints the string
 <div class="sect3">
 <h4 id="_多行注释">2.3.2. 多行注释</h4>
 <div class="paragraph">
-<p>尽管可以使用单行注释来提供大量文档，但在每行中放置 # 字符会使注释本身难以维护。例如，如果你修改注释的文本，你可能还想重新整理整个注释段落，以便所有行的长度大致相同，整个注释在
-视觉上更吸引人。</p>
+<p>虽然单行注释可以用来提供大块的文档, 但必须在每行中放置 <code>#</code> 字符会使注释本身难以维护。例如, 如果你修改了注释的文本, 你可能也想把整个段落重新整理, 使所有行的都差不多长, 使整个注释在视觉上更有吸引力。</p>
 </div>
 <div class="paragraph">
-<p>在 Raku 中，支持多行注释。多行注释的语法是这样的。它从 #` 序列开始(#字符，与单行注释相同， 然后是一个反引号符号)。然后是带有注释的正文部分。它必须用一对括号括起来。</p>
+<p>在 Raku 中, 支持多行注释。多行注释的语法如下。它从 <mark>` 序列开始(与单行注释中的 <code></mark></code> 字符相同, 后面是一个反引号符号)。然后注释的主体部分进入。它必须用一对括号括起来。</p>
 </div>
 <div class="paragraph">
-<p>例如，花括号可以像这样使用:</p>
+<p>例如, 可以这样使用花括号:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1541,10 +1539,10 @@ say 'Hello, World!';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里，注释位于源代码的两行中，但不需要每一行都用 # 字符标记。</p>
+<p>这里, 注释位于源代码的两行中, 但没有必要用 <code>#</code> 字符标记每一行。</p>
 </div>
 <div class="paragraph">
-<p>可以使用其他环绕字符。例如，圆括号或方括号:</p>
+<p>还可以使用其它的环绕字符对。例如, 圆括号或方括号:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1556,13 +1554,13 @@ this time in square brackets]</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>虽然这些注释最初是由人类阅读的，但编译器必须了解注释的开始和结束位置。在前面的例子中，注释主体的结束字符由 #` 序列后面的相应字符定义。</p>
+<p>虽然注释的目的首先是为了让人类阅读, 但编译器必须理解注释的起始和结束的位置。在前面的例子中, 注释正文的结束字符是由 #` 序列后的相应字符定义的。</p>
 </div>
 <div class="paragraph">
-<p>如果它是一个左花括号(<code>{</code>)，则编译器扫描以下文本并查找此示例中闭合的对应的 <code>}</code> 字符。这也意味着你不能在注释文本中使用闭合花括号，因为它将被视为注释的结尾。</p>
+<p>如果它是一个开口花括号(<code>{</code>), 那么编译器就会扫描下面的文本, 并寻找对应的闭合字符, 也就是本例中的 <code>}</code> 字符。这也意味着你不能在注释的文本中使用闭合花括号, 因为它将被视为注释的结尾。</p>
 </div>
 <div class="paragraph">
-<p>在注释中使用这样一个字符的方法之一是使用另一对闭合符号。例如，如果整个注释嵌入在一对圆括号中，然后在该注释的正文中使用结束花括号是安全的，如下所示:</p>
+<p>在注释中使用这样的字符的方法之一是使用不同的括号对。例如, 如果整个注释被嵌入在一对圆括号中, 那么在该注释的正文中使用闭合花括号是安全的, 如下所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1572,7 +1570,7 @@ it)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此外，如果使用相同字符的平衡字符对，则不会出现问题。例如，考虑以下代码块:</p>
+<p>另外, 如果使用相同字符的平衡字符对也不会有问题。例如, 考虑一下下面这段代码:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1584,13 +1582,13 @@ sub add($x, $y) {
 </div>
 </div>
 <div class="paragraph">
-<p>这里，注释使用 #`(&#8230;&#8203;) 括号对，但它里面包含另一对括号: `add(x，y)`。在这种情况下，程序是正确的，它应该根据程序员的意图结束注释。</p>
+<p>这里, 注释使用的是 #`(...) 括号对, 但它里面又包含了另一对括号: <code>add(x, y)</code>。在这种情况下, 程序是正确的, 它会根据程序员的意图结束注释。</p>
 </div>
 <div class="paragraph">
-<p>在注释中允许相同字符的第二种方法是使用多个字符序列以标记注释。</p>
+<p>第二种允许在注释中使用相同字符的方法是使用一个以上的字符序列来标记注释。</p>
 </div>
 <div class="paragraph">
-<p>例如，一对双括号将如下工作:</p>
+<p>例如, 一对双括号就可以这样操作:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1600,7 +1598,7 @@ example}}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>另一个好的选择是使用不同字符的组合。闭合字符序列应该镜像开口字符序列，如下所示:</p>
+<p>另一个好的方法是使用不同字符的组合。闭合字符序列应该与开口字符序列相仿, 如下所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1609,7 +1607,7 @@ a closing ] character inside the comment])</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>最后，单行注释可能出现在多行注释中。在这种情况下，他们将只是其中的一部分，如以下示例所示:</p>
+<p>最后, 单行注释可能出现在多行注释里面。在这种情况下, 他们将只是其中的一部分, 如下面的例子所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1623,10 +1621,10 @@ and uncomment it.}</code></pre>
 <div class="sect3">
 <h4 id="_嵌入式注释">2.3.3. 嵌入式注释</h4>
 <div class="paragraph">
-<p>Raku 中的嵌入式注释是使用多行注释语法的注释，但是放在主代码中。与单行注释不同，嵌入式注释不会传播直到行尾，并可能由闭合字符终止。</p>
+<p>Raku 中的嵌入式注释是使用多行注释的语法, 但放在主代码内部的注释。与单行注释不同的是, 嵌入式注释不会传播直到行尾, 并且可以由闭合字符结束。</p>
 </div>
 <div class="paragraph">
-<p>让我们演示一个关于 <code>add</code> 函数的嵌入式注释的示例，如下所示:</p>
+<p>让我们以 <code>add</code> 函数中的嵌入式注释为例进行演示, 如下所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1636,31 +1634,31 @@ and uncomment it.}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>#`(this is numeric addition) 注释通知读者 `+` 运算符期望它的操作数(示例中的变量 <code>$x</code> 和 <code>$y</code> )是数值(例如，不像字符串的连接)。整个注释嵌入到 <code>$x + $y</code> 表达式中。注释结束后，常规代码流继续。编译器忽略注释，因此，该行在语法上保持正确。</p>
+<p>#`(this is numeric addition) 注释告诉读者, <code>+</code> 运算符希望它的操作数(例子中的变量 <code>$x</code> 和 <code>$y</code> )是数字值(例如, 与字符串的连接不同)。整个注释被嵌入到 <code>$x + $y</code> 表达式中。注释结束后, 普通代码流继续进行。编译器会忽略注释, 因此, 该行在语法上仍然是正确的。</p>
 </div>
 <div class="paragraph">
-<p>嵌入式注释应尽可能短，以使整个代码更易于阅读。使用它来提供小的解释或在调试程序期间禁用代码片段。</p>
+<p>嵌入式注释应该尽可能简短, 以使整个代码更容易阅读。在调试程序的过程中, 用它来给出一些小的解释, 或者在调试程序的过程中暂时停用某个代码片段。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_创建_pod_文档">2.3.4. 创建 Pod 文档</h4>
 <div class="paragraph">
-<p><strong>Pod</strong> 是 Raku 中用于编写文档的子语言。它可以被视为注释的扩展版本，允许表达内容的更多功能。Raku 中的 Pod 是 Perl 5 中 POD (普通旧文档)的演变。在 Raku 中， 名字不是缩写，因此不是大写的。在本节中，我们将研究 Pod 标记语言的语法。</p>
+<p><strong>Pod</strong> 是 Raku 中的子语言, 用于编写文档。它可以被认为是注释的扩展版本, 它允许表达内容的功能更多。Raku 中的 Pod 是由 Perl 5 中 POD(Plain Old Documentation)演变而来。在 Raku 中, Pod 这个名字不是缩写, 因此不需要大写。在本节中, 我们将研究 Pod 标记语言的语法。</p>
 </div>
 <div class="paragraph">
-<p>Pod 内容与 Raku 程序本身放在同一个源文件中。一个 Pod 小节是包含一些文本信息的一系列行。在看到 Pod 部分的开始和结束标记时，编译器切换解析 Pod 和 Raku。Pod 语法旨在表达文档的语义并帮助以更有条理的方式组织它。</p>
+<p>Pod 内容与 Raku 程序本身放在同一个源文件中。一个 Pod 小节是一系列包含一些文本信息的行。编译器在看到 Pod 部分的开始和结束标记时, 会在解析 Pod 和 Raku 之间进行切换。Pod 语法是为了表达文档的语义而设计的, 也是为了帮助将文档组织得更有条理一些。</p>
 </div>
 <div class="paragraph">
-<p>我们来看看如何创建 Pod 块。有几种类型的 Pod 块，以及一些创造 Pod 的方法。</p>
+<p>我们来看看如何创建一个 Pod 块。有几种类型的 Pod 块, 也有几种创造 Pod 块的方法。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_begin_end_pod块">2.3.5. `=begin / =end Pod块</h4>
+<h4 id="_begin_end_pod_块">2.3.5. =begin / =end Pod 块</h4>
 <div class="paragraph">
-<p>Pod 块以 <code>=</code> 符号开头，该符号应该是该行中的第一个非空格字符 (因此，你无法启动 Pod 块，因为你在代码旁边执行单行注释 )。</p>
+<p>Pod 块以 <code>=</code> 符号开始, 该符号应该是该行中的第一个非空格字符(因此, 你不能像在同一行中的单行注释-下一个代码一样开始一个 Pod 块)。</p>
 </div>
 <div class="paragraph">
-<p>该块用一对 <code>=begin</code> 和 <code>=end</code> 指令标记，每个指令必须后跟一个 Raku 标识符，描述 Pod 块中包含的数据类型。 有一些预定义的标识符，它们是完全小写的或完全大写的。 考虑一些最有用的 Pod 块的例子。</p>
+<p>这个块用 <code>=begin</code> 和 <code>=end</code> 指令来标记, 每个指令必须有一个 Raku 标识符来描述 Pod 块中的数据类型。有几个预定义的标识符, 它们可以完全小写, 也可以完全大写。请看几个最有用的 Pod 块的例子。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1672,10 +1670,10 @@ say 'Hello, World!'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里，Pod 块以 <code>=begin pod</code> 开头，并以 <code>=end pod</code> 结束。块外面的一切是一个常规的 Raku 程序。</p>
+<p>这里, Pod 块以 <code>=begin pod</code> 开头, 并以 <code>=end pod</code> 结束。块之外的所有内容都是一个普通的 Raku 程序。</p>
 </div>
 <div class="paragraph">
-<p>如果只是运行程序，则忽略 Pod。将程序保存在文件中并运行它来自命令行如下:</p>
+<p>如果只是运行程序, 那么 Pod 块就会被忽略。将程序保存到一个文件中, 然后用命令运行, 方法如下:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1684,7 +1682,7 @@ Hello, World!</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在第一章的什么是 Raku 中我们查看了 Rakudo Star 编译器支持的不同命令行选项。现在是时候使用其中的一个了 <code>--doc</code> 来查看编译器如何提取来自程序的 Pod 文档并在不执行程序的情况下打印它本身:</p>
+<p>在第一章《什么是 Raku》中我们考察了 Rakudo Star 编译器支持的不同命令行选项。现在是时候使用其中的一个 <code>--doc</code> 来看看编译器是如何从程序中提取出 Pod 文档, 并在不执行程序本身的情况下打印出来的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1693,7 +1691,7 @@ This program is the first program in Raku.</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在前面的示例中，块的类型是 <code>pod</code>。还有其他类型的 Pod 块。</p>
+<p>在前面的例子中, 块的类型是 <code>pod</code>。还有其他类型的 Pod 块。</p>
 </div>
 <div class="paragraph">
 <p><code>table</code> 类型创建一个带有表的 Pod:</p>
@@ -1710,7 +1708,7 @@ This program is the first program in Raku.</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>你可以自己在源代码中对表进行一些最小的格式化，但是 Pod 解析器和格式化程序(在我们的例子中是 Rakudo 的一部分)执行一些额外的工作来很好地显示表。如果使用 <code>--pod</code> 命令行选项运行程序，这就是表的外观:</p>
+<p>你可以自己在源代码中对表做一些最低限度的格式化, 但是 Pod 解析器和格式化程序(我们的例子中是 Rakudo 的一部分)会做一些额外的工作来很好地显示表。如果你用 <code>--pod</code> 命令行选项运行程序, 表格就会是这样:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1723,10 +1721,10 @@ Raku    2000</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>请注意，缩进会丢失，并且表行从行的开头打印。另一个变化是列之间有两个空格，而我们在源代码中有更多空格。</p>
+<p>请注意, 缩进丢失了, 并且表的行从行的开头打印。另一个变化是列之间有两个空格, 而我们在源代码中有更多空格。</p>
 </div>
 <div class="paragraph">
-<p>该表可以选择包含一个标题，你可以使用所谓的副词语法将其放在 <code>=begin</code> 行中，如以下示例所示:</p>
+<p>该表可以选择包含一个标题, 你可以使用所谓的副词语法将其放在 <code>=begin</code> 行中, 如下面的例子所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1740,7 +1738,7 @@ Raku      2000
 </div>
 </div>
 <div class="paragraph">
-<p>标题将打印在表格上方:</p>
+<p>标题将被打印在表格的上方:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1754,7 +1752,7 @@ Raku    2000</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在我们进一步研究 Raku 中的其他类型的 Pod 块之前，让我们学习另一种语法来声明 Pod 块:</p>
+<p>在我们进一步研究 Raku 中其他类型的 Pod 块之前, 让我们先来学习一下其他类型的 Pod 块的声明语法:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1767,10 +1765,10 @@ Raku    2000</code></pre>
 </ul>
 </div>
 <div class="paragraph">
-<p>在缩写块中，开头 <code>=</code> 符号后面紧跟着 Pod 块类型的名字。不再需要闭合的 <code>=end</code> 指令，Pod 块的结尾将是由空行或另一个 Pod 块的开头指示。</p>
+<p>在缩写块中, 开头 <code>=</code> 符号后面紧跟着 Pod 块类型的名字。不再需要闭合的 <code>=end</code> 指令, Pod 块的结尾将以空行或另一个 Pod 块的开始来表示。</p>
 </div>
 <div class="paragraph">
-<p>以下是具有缩写语法的表块的另一个示例:</p>
+<p>下面是另一个使用缩写语法的表块的例子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1785,13 +1783,13 @@ say 'Ok';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>带有表格的 Pod 块在空行之前结束。之后，编译器切换回解析 Raku 代码。</p>
+<p>带有表格的 Pod 块在空行之前结束。在这之后, 编译器又切换回解析 Raku 代码。</p>
 </div>
 <div class="paragraph">
-<p>在段落块中，使用 <code>=for</code> 指令启动 Pod 部分，后面是标识符。因此，最后一个示例可以以 <code>=table</code> 或 <code>=table</code> 开头。</p>
+<p>在段落块中, 使用 <code>=for</code> 指令开始 Pod 部分, 后面是标识符。因此, 最后一个例子可能以 <code>=table</code> 或 <code>=table</code> 开始。</p>
 </div>
 <div class="paragraph">
-<p>对于内容通常很短的其他类型的 Pod 块，这种语法更自然。例如，标题或列表项。在这些情况下，块的内容是在同一行，紧接在开口指令之后，如下例所示，这反映了当前章节的部分内容:</p>
+<p>这种语法对于内容通常较短的其他类型的 Pod 块来说比较自然。例如, 标题或列表项。在这种情况下, 块的内容会在同一行中提供, 紧接在开口指令之后, 就像下面的例子所示, 它反映了当前章节的部分内容:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1803,7 +1801,7 @@ say 'Ok';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>使用 <code>--doc</code> 命令行选项提取文档会生成以下输出:</p>
+<p>使用 <code>--doc</code> 命令行选项提取文档, 会产生以下输出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1815,20 +1813,20 @@ say 'Ok';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>它包含两个级别的标题和一个简单的项目符号列表。</p>
+<p>它包含了两层标题和一个简单的项目列表。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_移相器">2.4. 移相器</h3>
+<h3 id="_phaser">2.4. phaser</h3>
 <div class="paragraph">
-<p>在 Raku 中创建程序时，了解控制程序流程比简单地遵循代码指令要复杂一些非常重要。编译器在编译和执行过程的不同阶段自动调用特殊类型的代码块。这些块称为 <strong>phasers</strong>。</p>
+<p>在 Raku 中创建程序时, 要明白控制程序的流程比简单地按照代码指令来执行要麻烦一些。有一些特殊类型的代码块会在编译器在编译和执行过程的不同阶段自动调用。这些代码块称为 <strong>phaser</strong>。</p>
 </div>
 <div class="paragraph">
-<p>当我们谈到编译器的 <code>-c</code> 命令行选项时，我们在第一章中的 Raku 是什么中提到了其中两个，<code>BEGIN</code> 和 <code>CHECK</code>。现在，我们来看看其余部分。</p>
+<p>我们在第一章《Raku 是什么》中谈论编译器的 <code>-c</code> 命令行选项时提到了其中两个, <code>BEGIN</code> 和 <code>CHECK</code>。现在, 我们来看看剩下的部分。</p>
 </div>
 <div class="paragraph">
-<p>从语法上讲，移相器是花括号中的代码块，其前面是移相器名字。下表总结了 Raku 中存在的不同移相器。一些移相器在编译和执行程序的其余部分之前在编译时执行。一些在运行时调用。</p>
+<p>从语法上讲, phaser 是用花括号括起来的代码块, 其前面是 phaser 的名称。下表总结了 Raku 中存在的不同的 phaser。有些 phaser 是在编译时执行, 然后再编译和执行程序的其余部分。有些是在运行时调用的。</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -1845,27 +1843,27 @@ say 'Ok';</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">BEGIN</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">编译时</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">该块在主程序被编译之前调用</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">该块是在主程序编译之前调用的</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CHECK</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">编译时</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">该块在编译完成后执行, 并且编译时阶段会停止</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">该块是在编译完成后, 编译阶段即将停止时调用的</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">INIT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">运行时</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">该块在程序编译时调用并准备运行</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">该块是在程序编译完成并准备运行时调用的</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">END</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">运行时</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">该块在程序执行后调用并且准备退出</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">该块是在程序执行完毕, 准备退出时调用的</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>让我们扩展 'Hello, World!' 程序并为它添加一些移相器:</p>
+<p>让我们扩展一下 'Hello, World!' 程序并为它添加一些 phaser:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1889,7 +1887,7 @@ INIT {
 </div>
 </div>
 <div class="paragraph">
-<p>这段代码产生如下输出:</p>
+<p>这段代码产生以下输出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1902,24 +1900,24 @@ END</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这个例子中，请注意相位器块的几个特征。这里有两个 <code>BEGIN</code> 块，它们按照它们在源代码中出现的顺序执行。此外，块的实际位置并不总是重要的。例如，<code>END</code> 块位于主程序之前，但在它之后执行。同样，第二个 <code>BEGIN</code> 块和 <code>CHECK</code> 和 <code>INIT</code> 块位于主程序之后但是在其之前调用它。</p>
+<p>在这个例子中, 请注意 phaser 块的几个特点。这里有两个 <code>BEGIN</code> 块, 它们是按照它们在源代码中出现的顺序执行的。另外, 块的实际位置并不是很重要。例如, <code>END</code> 块位于主程序之前, 但在主程序之后执行。同样, 第二个 <code>BEGIN</code> 块和 <code>CHECK</code> 和 <code>INIT</code> 块位于主程序之后, 但在主程序之前被调用。</p>
 </div>
 <div class="paragraph">
-<p>当程序即将开始时，Phasers 是可以做一些工作的好候选者。例如，你可以检查程序是否正确运行在带有 <code>BEGIN</code> 块的环境中。在 <code>END</code> 块中，你可以关闭所有打开的文件或在程序退出前打印某些东西到日志中。</p>
+<p>Phaser 是很好的候选者, 它可以在程序即将开始或结束时做一些工作。例如, 你可以用 <code>BEGIN</code> 块检查程序是否在正确的环境中运行。在 <code>END</code> 块中, 你可以在程序退出前关闭所有打开的文件或打印一些东西到日志中。</p>
 </div>
 <div class="paragraph">
-<p>在第十章中的使用异常中，我们将使用另外两个移相器-<code>CATCH</code> 和 <code>CONTROL</code>。</p>
+<p>在第十章《处理异常》中, 我们将使用另外两个 phaser-<code>CATCH</code> 和 <code>CONTROL</code>。</p>
 </div>
 <div class="paragraph">
-<p>Raku 中有更多的阶段，有助于在程序执行期间组织钩子，例如当程序流进入或离开代码块时调用的 <code>ENTER</code> 和 <code>LEAVE</code>。有关这些移相器的详细说明，请参阅文档页面 docs.raku.org/language/phasers。</p>
+<p>在 Raku 中还有很多 phaser, 它们在程序执行过程中帮助组织钩子, 比如当程序流进入或离开某个代码块时, 会调用 <code>ENTER</code> 和 <code>LEAVE</code>。关于这些 phaser 的详细描述, 请参考文档页面 <a href="docs.raku.org/language/phasers" class="bare">docs.raku.org/language/phasers</a>。</p>
 </div>
 <div class="sect3">
 <h4 id="_简单的输入和输出">2.4.1. 简单的输入和输出</h4>
 <div class="paragraph">
-<p>在前面的例子中，我们使用内置的 <code>print</code> 和 <code>say</code> 函数来打印一些东西到控制台中(更严格地讲，附加到程序的标准输出中)。在本节中，你将学习如何从标准输入执行基本读取。这基本上是程序如何获得你在控制台上键入的内容。</p>
+<p>在前面的例子中, 我们使用内置的 <code>print</code> 和 <code>say</code> 函数将一些东西打印到控制台(说得更严格一点, 是指程序附带的标准输出)。在本节中, 你将学习如何从标准输入中执行基本的读取。这基本上是程序如何把你输入的东西拿到控制台上。</p>
 </div>
 <div class="paragraph">
-<p>要读取输入，可以直接使用一些函数而无需加载任何模块。它们列在下表中:</p>
+<p>为了读取输入, 可以直接使用一些函数而无需加载任何模块。它们列在下面的表格中:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -1933,23 +1931,23 @@ END</code></pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">get</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">这将从输入中读取一行并返回它</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">这是从输入中读取一行并返回</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">lines</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">这将返回包含来自标准输入的数据行的行的列表</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">这将返回包含来自于标准输入的数据行的行的列表</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">slurp</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">这将返回包含整个输入的字符串</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">这将返回一个包含整个输入的字符串</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>当你需要按行解析输入数据时，可以使用 <code>get</code> 和 <code>line</code> 函数。例如，如果你知道输入的结构，请根据需要调用 <code>get</code>，或创建一个循环并迭代 <code>lines</code> 返回的数组。</p>
+<p>当你需要逐行解析输入数据时, 可以使用 <code>get</code> 和 <code>line</code> 函数。例如, 如果你知道输入的结构, 你可以根据需要调用 <code>get</code>, 或者创建一个循环并迭代 <code>lines</code> 返回的数组。</p>
 </div>
 <div class="paragraph">
-<p><code>slurp</code> 函数一次完成工作。例如，你可以使用它来复制从输入到输出的所有内容。这是执行该操作的程序:</p>
+<p><code>slurp</code> 函数可以一次完成工作。比如说, 你可以用它把所有东西从输入复制到输出。下面这个程序就是这样做的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1957,10 +1955,10 @@ END</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>还有另一个有用的函数: <code>prompt</code>。用它一次做两个动作: 在屏幕上打印文本消息并返回用户输入的字符串的函数。这个函数块阻止程序的执行，直到用户用新行完成输入。</p>
+<p>还有另一个有用的函数: <code>prompt</code>。使用它可以同时进行两个操作: 该函数在屏幕上打印一个文本信息, 并返回用户输入的字符串。这个函数可以阻止程序的执行, 直到用户用换行完成输入。</p>
 </div>
 <div class="paragraph">
-<p>让我们用 <code>prompt</code> 函数演示一个计算圆周的示例程序。以下程序从用户请求半径然后打印结果。</p>
+<p>让我们用一个计算圆的周长的例子程序来演示一下 <code>prompt</code> 函数的工作。下面的程序向用户请求半径, 然后打印出结果。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1969,7 +1967,7 @@ END</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>程序首先打印提示消息 <code>Enter the radius &gt;</code> 并等待直到用户键入一个数字并按 Enter 键。然后，<code>say</code> 函数打印另一个消息，<code>The circumference is,</code>，并附加它乘以后获得的输入值 τ，正如我们在本章的使用 Unicode 部分中看到的那样，等于 2π。我们可以在以下代码中看到:</p>
+<p>程序首先打印出提示消息 <code>Enter the radius &gt;</code>, 然后等待用户输入一个数字并按 Enter 键。然后, <code>say</code> 函数会打印出另一条消息, <code>The circumference is,</code>, 并把输入值乘以 τ 后得到的值加在后面, 正如我们本章的使用 Unicode 部分中看到的那样, 等于 2π。我们可以在下面的代码中看到:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1979,18 +1977,20 @@ The circumference is 75.398223686155</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们故意没有引入任何变量(我们将在后面的第三章的使用变量和内置数据类型中讨论它们)。请注意，实际输出从右到左发生:首先，来自 <code>prompt</code> 的消息，然后通过 <code>say</code> 打印文本。
-我们将在第九章的输入和输出中讨论更复杂的输入和输出，以及处理文件。</p>
+<p>我们故意没有引入任何变量(我们将在后面的第三章《使用变量和内置数据类型》中讨论)。请注意, 实际输出是从右到左: 首先是来自 <code>prompt</code> 的消息, 然后是 <code>say</code> 打印的文本。</p>
+</div>
+<div class="paragraph">
+<p>更复杂的输入和输出, 以及文件的处理, 我们将在第九章《输入和输出》中讨论。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_总结_2">2.5. 总结</h3>
 <div class="paragraph">
-<p>在本章中，我们研究了 Raku 程序的组织方式。源代码是用 Unicode 编写的，并且语言的语法中有许多 Unicode 元素，可用于使程序更具表现力。我们还研究了如何创建和使用从单行注释到可能包含的较大 Pod 块的注释，有关该计划的文档。我们查看了源代码部分可能的方式，被放置在不同的阶段，以改变程序的流程。最后，你学到了一个从用户获取输入的方法。</p>
+<p>在本章中, 我们研究了 Raku 程序的组织方式。源代码是用 Unicode 编写的, 在语言的语法中, 有很多 Unicode 元素可用来使程序更有表现力。我们还研究了如何创建和使用注释, 从单行注释到可能包含程序文档的更大的 Pod 块。我们还研究了如何将源代码中的部分放在不同的 phaser 来改变程序的流程。最后, 你还学会了一种获取用户输入的方法。</p>
 </div>
 <div class="paragraph">
-<p>现在，我们准备创建真正的 Raku 程序。在下一章中，我们将讨论 Raku 中的数据类型以及如何使用变量。</p>
+<p>现在, 我们准备创建真正的 Raku 程序了。在下一章中, 我们将讨论 Raku 中的数据类型以及如何使用变量。</p>
 </div>
 </div>
 </div>
