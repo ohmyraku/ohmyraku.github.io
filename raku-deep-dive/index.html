@@ -8,7 +8,7 @@
 
 <meta name="author" content="ohmyraku">
 <meta name="application-name" content="山川异域, 风月同天">
-<meta name="description" content="Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 编写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. phaser 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4.">
+<meta name="description" content="Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 编写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. phaser 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结   4.">
 <meta name="robots" content="noodp"/>
 <meta name="generator" content="Hugo 0.63.2" />
 <meta name="referrer" content="no-referrer" />
@@ -22,7 +22,7 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Raku 深入研究" />
-<meta name="twitter:description" content="Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 编写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. phaser 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4." />
+<meta name="twitter:description" content="Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 编写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. phaser 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结   4." />
 <meta name="twitter:site" content="https://ohmyraku.github.io" />
 <meta name="twitter:creator" content="ohmyraku" />
 <meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
@@ -32,7 +32,7 @@
 <meta property="og:title" content="Raku 深入研究" />
 <meta property="og:url" content="https://ohmyraku.github.io" />
 <meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 编写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. phaser 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4." />
+<meta property="og:description" content="Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 编写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. phaser 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结   4." />
 <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -49,7 +49,7 @@
         "@type": "Person",
         "name": "ohmyraku"
       },
-      "description": "Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 编写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. phaser 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结 3.5. 总结   4.",
+      "description": "Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 编写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. phaser 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结   4.",
       "publisher": {
         "@type": "Organization",
         "name": "https:\/\/ohmyraku.github.io",
@@ -131,7 +131,6 @@ if (theme && theme !== "1") {
 <li><a href="#_使用简单的内置数据类型">3.2. 使用简单的内置数据类型</a></li>
 <li><a href="#_操作日期和时间的数据类型">3.3. 操作日期和时间的数据类型</a></li>
 <li><a href="#_总结_3">3.4. 总结</a></li>
-<li><a href="#_总结_4">3.5. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_使用运算符">4. 使用运算符</a>
@@ -140,7 +139,7 @@ if (theme && theme !== "1") {
 <li><a href="#_raku_中的运算符_2">4.2. Raku 中的运算符</a></li>
 <li><a href="#_raku_中的元运算符">4.3. Raku 中的元运算符</a></li>
 <li><a href="#_用户定义的运算符">4.4. 用户定义的运算符</a></li>
-<li><a href="#_总结_5">4.5. 总结</a></li>
+<li><a href="#_总结_4">4.5. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_控制流">5. 控制流</a>
@@ -151,7 +150,7 @@ if (theme && theme !== "1") {
 <li><a href="#_只执行代码一次">5.4. 只执行代码一次</a></li>
 <li><a href="#_用_gather_和_take_收集数据">5.5. 用 gather 和 take 收集数据</a></li>
 <li><a href="#_用_given_设置主题">5.6. 用 given 设置主题</a></li>
-<li><a href="#_总结_6">5.7. 总结</a></li>
+<li><a href="#_总结_5">5.7. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_子例程">6. 子例程</a>
@@ -167,7 +166,7 @@ if (theme && theme !== "1") {
 <li><a href="#_multi_subs">6.9. Multi Subs</a></li>
 <li><a href="#_一个例子">6.10. 一个例子</a></li>
 <li><a href="#_嵌套的子程序">6.11. 嵌套的子程序</a></li>
-<li><a href="#_总结_7">6.12. 总结</a></li>
+<li><a href="#_总结_6">6.12. 总结</a></li>
 <li><a href="#_创建和调用子例程">6.13. 创建和调用子例程</a></li>
 <li><a href="#_类型约束_2">6.14. 类型约束</a></li>
 <li><a href="#_multi_subs_2">6.15. Multi subs</a></li>
@@ -175,7 +174,7 @@ if (theme && theme !== "1") {
 <li><a href="#_创建运算符">6.17. 创建运算符</a></li>
 <li><a href="#_传递函数作为参数">6.18. 传递函数作为参数</a></li>
 <li><a href="#_匿名子例程">6.19. 匿名子例程</a></li>
-<li><a href="#_总结_8">6.20. 总结</a></li>
+<li><a href="#_总结_7">6.20. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_模块">7. 模块</a>
@@ -184,7 +183,7 @@ if (theme && theme !== "1") {
 <li><a href="#_使用模块">7.2. 使用模块</a></li>
 <li><a href="#_内省">7.3. 内省</a></li>
 <li><a href="#_使用_zef">7.4. 使用 zef</a></li>
-<li><a href="#_总结_9">7.5. 总结</a></li>
+<li><a href="#_总结_8">7.5. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_面向对象编程">8. 面向对象编程</a>
@@ -198,7 +197,7 @@ if (theme && theme !== "1") {
 <li><a href="#_使用角色添加对象和类">8.7. 使用角色添加对象和类</a></li>
 <li><a href="#_使用内省学习更多">8.8. 使用内省学习更多</a></li>
 <li><a href="#_方法后缀运算符">8.9. 方法后缀运算符</a></li>
-<li><a href="#_总结_10">8.10. 总结</a></li>
+<li><a href="#_总结_9">8.10. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_输入和输出">9. 输入和输出</a>
@@ -209,7 +208,7 @@ if (theme && theme !== "1") {
 <li><a href="#_使用文件和目录">9.4. 使用文件和目录</a></li>
 <li><a href="#_从流中读取_2">9.5. 从流中读取</a></li>
 <li><a href="#_写入流">9.6. 写入流</a></li>
-<li><a href="#_总结_11">9.7. 总结</a></li>
+<li><a href="#_总结_10">9.7. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_异常">10. 异常</a>
@@ -219,8 +218,8 @@ if (theme && theme !== "1") {
 <li><a href="#_exception_对象">10.3. Exception 对象</a></li>
 <li><a href="#_failure_对象">10.4. Failure 对象</a></li>
 <li><a href="#_创建自定义异常">10.5. 创建自定义异常</a></li>
-<li><a href="#_总结_12">10.6. 总结</a></li>
-<li><a href="#_总结_13">10.7. 总结</a></li>
+<li><a href="#_总结_11">10.6. 总结</a></li>
+<li><a href="#_总结_12">10.7. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_正则表达式">11. 正则表达式</a>
@@ -235,7 +234,7 @@ if (theme && theme !== "1") {
 <li><a href="#_使用断言进行向前查看和向后查看">11.8. 使用断言进行向前查看和向后查看</a></li>
 <li><a href="#_使用副词修饰正则表达式">11.9. 使用副词修饰正则表达式</a></li>
 <li><a href="#_使用正则表达式替换和修改字符串">11.10. 使用正则表达式替换和修改字符串</a></li>
-<li><a href="#_总结_14">11.11. 总结</a></li>
+<li><a href="#_总结_13">11.11. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_grammars">12. Grammars</a>
@@ -246,7 +245,7 @@ if (theme && theme !== "1") {
 <li><a href="#_使用抽象语法树属性">12.4. 使用抽象语法树属性</a></li>
 <li><a href="#_使用_action_类">12.5. 使用 action 类</a></li>
 <li><a href="#_完整的程序">12.6. 完整的程序</a></li>
-<li><a href="#_总结_15">12.7. 总结</a></li>
+<li><a href="#_总结_14">12.7. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_并发编程">13. 并发编程</a>
@@ -256,7 +255,7 @@ if (theme && theme !== "1") {
 <li><a href="#_终身线程">13.3. 终身线程</a></li>
 <li><a href="#_promise">13.4. Promise</a></li>
 <li><a href="#_channel">13.5. Channel</a></li>
-<li><a href="#_总结_16">13.6. 总结</a></li>
+<li><a href="#_总结_15">13.6. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_函数式编程">14. 函数式编程</a>
@@ -269,7 +268,7 @@ if (theme && theme !== "1") {
 <li><a href="#_操作作用域">14.6. 操作作用域</a></li>
 <li><a href="#_创建并使用迭代器">14.7. 创建并使用迭代器</a></li>
 <li><a href="#_惰性和无限列表">14.8. 惰性和无限列表</a></li>
-<li><a href="#_总结_17">14.9. 总结</a></li>
+<li><a href="#_总结_16">14.9. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_反应式编程">15. 反应式编程</a>
@@ -277,7 +276,7 @@ if (theme && theme !== "1") {
 <li><a href="#_什么是反应式编程">15.1. 什么是反应式编程</a></li>
 <li><a href="#_按需供应">15.2. 按需供应</a></li>
 <li><a href="#_实时供应">15.3. 实时供应</a></li>
-<li><a href="#_总结_18">15.4. 总结</a></li>
+<li><a href="#_总结_17">15.4. 总结</a></li>
 </ul>
 </li>
 </ul>
@@ -1999,11 +1998,10 @@ The circumference is 75.398223686155</code></pre>
 <h2 id="_变量和内置数据类型">3. 变量和内置数据类型</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Raku 是一种渐进类型的语言。这意味着你无需指明创建的变量的类型：您可以自由地使用同一个变量来存储
-不同类型的数据。但是，您也可以创建一个类型变量，在这种情况下，编译器将检查该变量的用法，并确保该变量仅在该类型允许的操作中使用。</p>
+<p>Raku 是一种渐进类型的语言。这意味着你不需要指明你所创建的变量的类型：你可以自由地使用同一个变量来存储不同类型的数据。但是，你也可以创建一个类型变量，在这种情况下，编译器会检查该变量的用法，并确保该变量只用于该类型允许的操作。</p>
 </div>
 <div class="paragraph">
-<p>在本章中，我们将首先介绍 Raku 的内置类型，然后学习如何操作变量：</p>
+<p>在这一章中，我们将先了解 Raku 的内置类型，然后再学习如何使用变量:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2017,7 +2015,7 @@ The circumference is 75.398223686155</code></pre>
 <p>变量</p>
 </li>
 <li>
-<p>标量，数组和散列</p>
+<p>标量、数组和散列</p>
 </li>
 <li>
 <p>数据类型的面向对象属性</p>
@@ -2030,15 +2028,15 @@ The circumference is 75.398223686155</code></pre>
 <div class="sect2">
 <h3 id="_使用变量">3.1. 使用变量</h3>
 <div class="paragraph">
-<p>在任何编程语言中，变量都被命名为内存块，可用于存储和检索值。 在 Raku 中，变量是一个容器，可以容纳一种类型的值，这些值可以是语言内置的，也可以是由用户创建的。</p>
+<p>在任何编程语言中，变量都被命名为内存块，可用于存储和检索值。 在 Raku 中，变量是一个容器，可以容纳一种类型的值，这些值可以是语言中内置的，也可以是用户创建的。</p>
 </div>
 <div class="sect3">
 <h4 id="_声明变量">3.1.1. 声明变量</h4>
 <div class="paragraph">
-<p>在程序中使用每个变量之前必须对其进行声明。 您无需在程序的开头声明所有变量。 从实际的角度来看，声明的位置可以（并且应该）尽可能靠近第一次使用它的位置。 这样做的最实际原因是使变量的可见性更好-如果声明得太早，则迫使程序的读者考虑变量的目的； 另一方面，如果您在代码中进行了更改，那么如果变量声明不位于使用位置附近，则很有可能忘记删除该变量声明。</p>
+<p>每一个变量在程序中使用之前都必须先声明。你不需要在程序开始时就声明所有的变量。从实际的角度来看，声明的位置可以(也应该)尽可能地靠近它第一次使用的地方。这样做的最实际的原因是为了让变量的可见性更好&#8212;&#8203;如果你过早地声明，就会迫使程序的读者去思考这个变量的用途；另一方面，如果你在代码中做了修改，如果变量声明的位置不靠近它使用的地方，就有很大的几率会忘记去掉。</p>
 </div>
 <div class="paragraph">
-<p>要声明变量，请使用 <code>my</code> 关键字，如下所示：</p>
+<p>要声明一个变量，请使用 <code>my</code> 关键字，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2046,7 +2044,7 @@ The circumference is 75.398223686155</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>可以在声明变量的同时初始化：</p>
+<p>可以在初始化的同时声明一个变量:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2054,7 +2052,7 @@ The circumference is 75.398223686155</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Raku 还定义了常量的概念。这些变量的值只能在初始化器中设置一次。要创建常量，请使用 <code>constant</code> 关键字，如下所示:</p>
+<p>Raku 还定义了常量的概念。这些变量的值只能在初始化器中设置一次。要创建一个常量，请使用 <code>constant</code> 关键字，如下所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2062,34 +2060,34 @@ The circumference is 75.398223686155</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>无法为常量指定新值。</p>
+<p>不能给常量指定一个新的值。</p>
 </div>
 <div class="paragraph">
-<p>现在，让我们看看 Raku 中有哪些变量可用。</p>
+<p>现在，让我们来看看 Raku 中都有哪些变量可用。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_raku_中的变量容器">3.1.2. Raku 中的变量容器</h4>
 <div class="paragraph">
-<p>变量容器有三种基本类型:标量，数组和散列。首先，你会学习如何在代码中使用它们的基础知识。然后，在本章后面的"使用内置数据类型"一节中，我们将深入研究该语言中可用的数据类型。</p>
+<p>变量容器有三种基本类型: 标量、数组和散列。首先，你将学习如何在代码中使用它们的基础知识。然后，在本章后面的《使用内置数据类型》一节中，我们将深入了解该语言中可用的数据类型。</p>
 </div>
 <div class="paragraph">
-<p>容器的结构类型由称为 <strong>sigil</strong> 的特殊字符表示。它永远在变量名之前，在许多情况下，可以认为它是变量名的一部分。</p>
+<p>容器的结构类型由一个特殊的字符 <strong>sigil</strong> 表示。它总是在变量名之前，在很多情况下，它可以被认为是变量名的一部分。</p>
 </div>
 <div class="paragraph">
-<p>变量名是标识符。标识符是一串字母字符， 数字，下划线字符和连字符。第一个字符不能是数字或连字符。字母数字字符是 Unicode 意义上的，因此，与连字符一起使用，可以创建非常富有表现力的变量名。标识符是大小写敏感的。</p>
+<p>变量名是一个标识符。标识符是由字母字符、数字、下划线字符和连字符组成的字符串。第一个字符不能是数字或连字符。字母数字字符是 Unicode 意义上的，因此，与连字符一起使用，可以创建非常有表现力的变量名。标识符是区分大小写的。</p>
 </div>
 <div class="paragraph">
-<p>在以下小节中，您将看到命名变量的示例。注意变量总是以 sigil 开头，而裸标识符可以是函数名或类名， 正如我们将在本书的其他章节中看到的那样。</p>
+<p>在下面的章节中，你将看到关于变量命名的例子。注意, 变量总是以 sigil 开头，而裸标识符可以是函数名或类名，我们将在本书的其他章节中看到。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_标量">3.1.3. 标量</h4>
 <div class="paragraph">
-<p>标量是一个可以保留像整数，字符串或对象这种单个值的容器。</p>
+<p>标量是一个可以保留单个值的容器，例如整数、字符串或对象。</p>
 </div>
 <div class="paragraph">
-<p>标量变量使用 <code>$</code> sigil。我们在前面的章节中已经看到过一些例子，这里还有一些。请注意，如果没有显式声明 数据类型，同一个标量变量可以在不同时刻托管不同类型的值:</p>
+<p>标量变量使用 <code>$</code> sigil。我们在前面的章节中已经看到过一些例子，这里再举几个例子。注意，同一个标量变量，如果没有显式地声明数据类型，可以在不同时刻托管不同类型的值:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2103,10 +2101,10 @@ say $x;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>(当然，最好不要在程序流中更改数据类型。)</p>
+<p>(当然，在程序流中最好不要改变数据的类型。)</p>
 </div>
 <div class="paragraph">
-<p>在双引号中的字符串内部，标量变量被内插并由它们替换当前值。在以下程序中，将计算方程的过程打印为字符串:</p>
+<p>在双引号中的字符串内部，标量变量被插值, 并以其当前值代替。在下面的程序中，将一个方程的计算过程以字符串的形式打印出来:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2119,7 +2117,7 @@ say "then the hypotenuse is $c.";</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此代码打印以下输出:</p>
+<p>此代码打印出以下输出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2127,19 +2125,19 @@ say "then the hypotenuse is $c.";</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在，让我们继续讨论下一种变量类型-数组。</p>
+<p>现在，让我们进入下一个类型的变量-数组。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_数组">3.1.4. 数组</h4>
 <div class="paragraph">
-<p>数组变量可以托管多个值。值可以是相同类型，也可以是不同类型。数组通常用于保存数据项列表。</p>
+<p>数组变量可以托管多个值。这些值可以是相同类型的，也可以是不同类型的。数组通常用来保存数据项的列表。</p>
 </div>
 <div class="paragraph">
-<p>Raku 中的数组以 <code>@</code> sigil 为前缀。要访问数组的元素，请使用一对方括号后缀。例如，<code>@a</code> 数组的第二个元素是 <code>@a[1]</code>。 请注意，索引从零开始。</p>
+<p>在 Raku 中, 数组的前缀是 <code>@</code> sigil。要访问数组中的元素，需要使用方括号的后缀对儿。例如，<code>@a</code> 数组的第二个元素是 <code>@a[1]</code>。 注意，索引从 0 开始。</p>
 </div>
 <div class="paragraph">
-<p>我们来看看如何创建整数数组:</p>
+<p>我们来看看如何创建一个整数数组:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2147,7 +2145,7 @@ say "then the hypotenuse is $c.";</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>或者，您可以使用圆括号或尖括号。以下两个数组与前一个相同:</p>
+<p>另外，也可以使用圆括号或角括号。下面的两个数组与前一个数组相同:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2156,15 +2154,15 @@ my @array3 = &lt;1 3 5 7 9 11&gt;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>使用 <code>say</code> 内置函数打印时，Raku 会打印出数组的内容，带上方括号，如下所示:</p>
+<p>当使用 <code>say</code> 内置的函数打印时，Raku 将数组的内容用方括号打印出来，如下所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say @odd_numbers; [1 3 5 7 9 11]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say @odd_numbers; # [1 3 5 7 9 11]</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>以下是包含混合类型数据的数组的另一个示例:</p>
+<p>下面是另一个包含混合类型数据的数组的例子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2172,7 +2170,7 @@ my @array3 = &lt;1 3 5 7 9 11&gt;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里的所有元素都是不同的类型(整数，字符串和浮点值)，但是可以通过索引轻松访问它们:</p>
+<p>这里所有的元素都是不同类型的(整数、字符串和浮点值)，但是通过索引可以很容易地访问它们:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2182,15 +2180,15 @@ say @array[2]; # 0.03</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>让我们进一步了解 Raku 中提供的数组可能性。</p>
+<p>让我们进一步了解一下 Raku 中数组提供的可能性。</p>
 </div>
 <div class="sect4">
-<h5 id="_array_类型的方法">Array 类型的方法</h5>
+<h5 id="_数组类型的方法">数组类型的方法</h5>
 <div class="paragraph">
-<p>Raku 中的数组实际上是 Array 类的一个对象。使用类是第八章中面向对象编程的一个主题。到目前为止，我们将讨论如何访问 Raku 程序中数组的不同属性。</p>
+<p>Raku 中的数组实际上是 Array 类的一个对象。使用类是第八章《面向对象编程》中的一个主题。到目前为止，我们将讨论如何在 Raku 程序中访问数组的不同属性。</p>
 </div>
 <div class="paragraph">
-<p>要获取数组的长度，请调用 <code>elems</code> 方法，如下所示:</p>
+<p>要获取数组的长度，可以调用 <code>elems</code> 方法，如下所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2199,7 +2197,7 @@ say @a.elems; # 3</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>push</code>，<code>pop</code> 和 <code>append</code> 这三个方法修改数组: <code>push</code> 添加一个新元素到数组的末尾; <code>pop</code> 获取最后一个元素，将其从数组中删除，然后返回它; <code>append</code> 在最后添加新元素，与 <code>push</code> 不同，可以添加多个新元素。让我们检查以下程序的输出:</p>
+<p><code>push</code>，<code>pop</code> 和 <code>append</code> 这三个方法修改数组: <code>push</code> 在数组的末尾添加一个新元素; <code>pop</code> 获取最后一个元素，将其从数组中删除，然后返回它; <code>append</code> 在末尾添加新元素，与 <code>push</code> 不同的是，<code>append</code> 可以添加多个新元素。让我们来看看下面这个程序的输出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2217,7 +2215,7 @@ say @a; # [1 3 5 9 11]</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>或者，您可以使用函数而不是方法。前面的程序可以用不同的方式编写，如下所示:</p>
+<p>另外，也可以使用函数代替方法。前面的程序可以用不同的方式来编写，如下所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2234,7 +2232,7 @@ say @a; # [1 3 5 9 11]</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>下一组，<code>unshift</code>，<code>shift`和 `prepend</code>，是 <code>push</code>，<code>pop</code> 和 <code>append</code> 方法的补集。<code>unshift</code> 方法将一个元素添加到数组的开头; <code>shift</code> 删除并返回第一个元素; <code>prepend</code> 在开头添加新元素。 以下代码块演示了使用这些方法的效果:</p>
+<p>接下来的一组，<code>unshift</code>、<code>shift`和 `prepend</code>，是与 <code>push</code>、<code>pop</code> 和 <code>append</code> 相辅相成的三种方法。<code>unshift</code> 方法将一个元素添加到数组的开头; <code>shift</code> 方法删除并返回第一个元素; <code>prepend</code> 方法将新元素添加到开头。下面的代码块演示了使用这些方法的效果:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2252,7 +2250,7 @@ say @a; # [9 11 1 3 5]</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>splice</code> 方法将数组切割成三个部分，并使用一个新的列表可选择地替换中间的部分。<code>splice</code> 方法的前两个参数是将被删除或替换的第一个元素的索引以及该片段的长度。例如， 考虑以下代码:</p>
+<p><code>splice</code> 方法将数组切割成三部分，并有选择地用新的列表可替换中间的部分。<code>splice</code> 方法的前两个参数是将被删除或替换的第一个元素的索引和该片段的长度。例如，考虑一下下面的代码:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2262,10 +2260,10 @@ say @even; # [2 4 6 8 16 18 20]</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里，将从原始数组中移除具有索引4,5和6的三个元素。</p>
+<p>这里，将从原始数组中删除三个索引为 4、5 和 6 的元素。</p>
 </div>
 <div class="paragraph">
-<p>在下一个示例中，相同的元素将替换为值100和200:</p>
+<p>在下一个例子中，同样的元素被替换为值 100 和 200:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2275,16 +2273,17 @@ say @even; # [2 4 6 8 100 200 16 18 20]</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>替换的长度不必与移除部分的长度相同。</p>
+<p>替换的长度不需要与被删除部分的长度相同。</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_散列">散列</h5>
+</div>
+<div class="sect3">
+<h4 id="_散列">3.1.5. 散列</h4>
 <div class="paragraph">
-<p>在数组中，索引是从零开始的整数。散列是 Raku 中另一种结构的数据类型，可以视为索引为字符串的数组。</p>
+<p>在数组中，索引是从 0 开始的整数。在 Raku 中, 散列是另一种结构类型的数据，它可以视为数组, 其索引是字符串。</p>
 </div>
 <div class="paragraph">
-<p>散列使用 <code>%</code> sigil。来自各种编程语言的散列的其他名称是关联数组，字典或词典以及映射。散列在您需要保存一些值时非常有用。例如，请查看以下代码段:</p>
+<p>散列使用 <code>%</code> sigil。不同编程语言中的散列的其他名称还有关联数组、字典或词典以及映射。当你需要把几个值放在一起时, 散列是非常有用的。例如，看看下面的代码片段:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2298,10 +2297,10 @@ say @even; # [2 4 6 8 100 200 16 18 20]</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>散列的元素是对，它们又是两个东西 - 键和值。在这个例子中，<code>%city</code> 散列的键是 <code>name</code>，<code>country</code> 等，它们的值是 <code>London`和 `gb</code>。</p>
+<p>散列的元素是对儿，反过来又是两个东西 - 键和值。在这个例子中，<code>%city</code> 散列的键是 <code>name</code>、<code>country</code> 等，它们的值是 <code>London`和 `gb</code>。</p>
 </div>
 <div class="paragraph">
-<p>可以更改此类赋值中的代码布局以对齐键和值，你可以在这里看到:</p>
+<p>在这种赋值中，代码的布局可以改变，使键和值对齐，就像你在这里看到的那样:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2315,7 +2314,7 @@ say @even; # [2 4 6 8 100 200 16 18 20]</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在赋值中，散列对可以用括号括起来，如下所示:</p>
+<p>在赋值中，可以用括号将散列对包围起来，如下所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2328,7 +2327,7 @@ say @even; # [2 4 6 8 100 200 16 18 20]</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>当打印散列(<code>say %city</code>)时，它会显示在一对花括号中，如以下代码行所示:</p>
+<p>当印散被打印出来(<code>say %city</code>)时，它会显示在一对花括号中，如下面的几行代码所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2336,7 +2335,7 @@ say @even; # [2 4 6 8 100 200 16 18 20]</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果有相同名称的键，则最后一个获胜。考虑以下散列的创建:</p>
+<p>如果有相同名称的键，那么最后一个键获胜。考虑一下下面的散列创建:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2347,844 +2346,1234 @@ say %city;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序只打印 <code>{name &#8658; Paris}</code>。</p>
+<p>这个程序只打印 <code>{name &#8658; Paris}</code>。</p>
 </div>
 <div class="paragraph">
-<p>本节中的信息足以继续学习 Raku 中的类型。</p>
+<p>本节的信息已经足够我们继续学习 Raku 中的类型。</p>
 </div>
+<div class="sect4">
+<h5 id="_散列类的方法">散列类的方法</h5>
+<div class="paragraph">
+<p>我们来看看散列有哪些方法。</p>
+</div>
+<div class="paragraph">
+<p>首先，<code>keys</code> 和 <code>values</code> 这两个方法，返回包含了散列的所有键和值的列表(严格来说是序列)。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my %capitals =
+    Spain =&gt; 'Madrid',
+    Italy =&gt; 'Rome',
+    France =&gt; 'Paris';
+
+my @countries = %capitals.keys;
+my @cities = %capitals.values;
+
+say @countries; # [France Italy Spain]
+say @cities;    # [Paris Rome Madrid]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>kv</code> 方法返回的是一个包含键和值的列表:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say %capitals.kv; # (France Paris Italy
+                  #  Rome Spain Madrid)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>类似的方法是 <code>pairs</code>，返回一个对儿的列表(对儿是包含一个键和一个值的数据类型):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say %capitals.pairs; # (France =&gt; Paris
+                     #  Italy =&gt; Rome
+                     #  Spain =&gt; Madrid)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>要反转这些对儿，使用 <code>antipairs</code> 方法，如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say %capitals.antipairs; # (Paris =&gt; France
+                         #  Rome =&gt; Italy
+                         #  Madrid =&gt; Spain)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>散列的大小，实际上就是其中的对儿的数量，由 <code>elems</code> 方法返回, 如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say %capitals.elems; # 3</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_命名约定">3.1.6. 命名约定</h4>
+<div class="paragraph">
+<p>Raku 并没有强迫用户遵循任何特定的变量命名规则。不过，最好还是遵循一般的常识性方法。变量名可能只有一个字母那么短，但也可以是描述性的，并且包含很多单词。</p>
+</div>
+<div class="paragraph">
+<p>在循环中，或者在一些计算中，单字母名称是最好的选择，因为在循环中，所有提到的变量都是紧凑的，并且在屏幕上可以清楚地看到。当然，单字母名称可以使用小写字母和大写字母。虽然在 Raku 中没有标准，但在文档中常量和伪常量都使用大写的名字；例如，请查看 link:https:/​/​docs.​perl6.​org/​language/ variables#Compile-​time_​variables[]。</p>
+</div>
+<div class="paragraph">
+<p>下面是一些单字母名称的例子:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">constant $N = 100;
+my $n = prompt('Enter a number: ');
+
+say "You entered $n";
+say 'This number is too big' if $n &gt; $N;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于较长的名字，有几种选择。要么以小写字母或大写字母开头，要么整个名字大写。同样，大写的名字，比如 <code>$MAXIMUM</code>，即使你不使用 <code>constant</code> 关键字，也最好用大写的名字来表示常量。一般来说，更偏爱小写的名字。让我们重写前面的程序，使其使用较长的变量名:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">constant $MAXIMUM = 100;
+my $value = prompt('Enter a number: ');
+say "You entered $value";
+say 'This number is too big' if $value &gt; $MAXIMUM;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在很多情况下，甚至需要更长的名字。在这种情况下，有几种方法可以用两个或更多的单词来构造名称。首先，可以使用所谓的驼峰式的大小写名称，例如 <code>$userValue</code> 或 <code>$valueFromInput</code>。其次，下划线字符是一个很好的候选者，可以将名字中的部分连接起来-<code>$user_value</code> 或 <code>$value_from_input</code>；这种风格被称为 snake case。最后，Raku 允许用破折号来表示多余的名字，例如 <code>$user-value</code> 或 <code>$MAXIMUM-VALUE</code>(kebab case)。在这种情况下，<code>-</code> 字符不是减号运算符，而是名称的一部分。所以，<code>$uservalue</code>、<code>$userValue</code>、<code>$user_value</code>、<code>$user_value</code>、<code>$user-value</code> 是四个不同的名字。考虑一下下面的代码片段:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">constant $MAXIMUM-VALUE = 100;
+my $entered-value = prompt('Enter a number: ');
+say "You entered $entered-value";
+say 'This number is too big'
+    if $entered-value &gt; $MAXIMUM-VALUE;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>选择自己的风格，并尽量在整个程序中保持一致。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_类型化的变量">3.1.7. 类型化的变量</h4>
+<div class="paragraph">
+<p>在前面的例子中，托管在变量容器中的内容类型是由分配给变量的值来定义的:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x;      # Declaring a variable as a container.
+$x = 2;     # Now it contains an integer.
+$x = 'Two'; # But now it keeps a string.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Raku 允许你通过将变量容器的类型与变量声明一起指定，使变量容器的类型变得严格:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Int $x = 2;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里，<code>$x</code> 变量只能接受整数。例如，如果试图将其分配给一个字符串，会导致以下错误:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$x = 'Two'; # Type check failed in assignment to $x;
+            # expected Int but got Str ("Two")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>同样，Raku 允许在同一个数组中使用不同类型的元素:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @a = (1, 'two', 3.0);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>声明一个带类型的数组，会使其元素成为带类型的值。这意味着你不能给它分配另一种类型的值，如下面的例子所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Int @a;
+@a = 1, 2, 3;
+say @a;
+@a[2] = 'Two';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后的赋值会导致类型检查错误:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Type check failed in assignment to @a; expected Int
+but got Str ("Two")
+in block &lt;unit&gt; at typed-arr.pl line 7</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>类型化的变量可以使用任何内置类型或用户定义的类。在下一节中，我们将讨论 Raku 中默认的数据类型。在第八章《面向对象编程》中，你将学习如何创建自己的类。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_使用简单的内置数据类型">3.2. 使用简单的内置数据类型</h3>
+<div class="paragraph">
+<p>Raku 自带了许多不同的内置类型，这些类型涵盖了一些常见的东西，如布尔、整数、字符串等，但也提供了一些不常见的数据类型。我们将在本节中介绍这些类型。为了演示这些内置类型，我们将使用 <code>say</code> 函数将它们打印到控制台，就像我们在 'Hello, World! 例子中所做的那样。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/g3/e8_290655.jpg@596w_1l.jpg" alt="e8 290655.jpg@596w 1l">
+</div>
+</div>
+<div class="paragraph">
+<p>层次结构是用两种类型的项来建立的：角色和类。角色是用椭圆画的，而类是矩形框。角色类似于某些编程语言中的接口。在本章中，我们不会重点讨论什么是角色或类的细节。你可以在第八章《面向对象编程》中详细了解。现在，我们将假设你对面向对象编程有了一些基本的理解，并且能够理解数据类型的层次结构。</p>
+</div>
+<div class="paragraph">
+<p>在本章下面的章节中，我们将对你在实践中可能会用到的主要数据类型进行梳理。</p>
+</div>
+<div class="sect3">
+<h4 id="_整数数据类型">3.2.1. 整数数据类型</h4>
+<div class="paragraph">
+<p>在 Raku 中，<code>Int</code> 类型的值是一个整数值。该值可以容纳正数和负数，也可以容纳零，而且语言不限制数值的大小。它可以小到一个字节，例如，看看下面的例子:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 42;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它也可以是任意精度的，如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 239874637819093248768900298372340;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在前面的例子中，使用了普通的十进制符号。Raku 允许使用其他的基数；例如，十六进制的值可以使用 16。要创建一个除 10 以外的整数基数，可以使用所谓的副词记号，如下例所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say :16&lt;D0CF11E&gt;;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这将打印出 <code>218951966</code>，这是 <code>:16&lt;D0CF11E&gt;</code> 整数的十进制表示。</p>
+</div>
+<div class="paragraph">
+<p>以同样的方式，你将用其他基数创建值。考虑一下下面的例子:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say :8&lt;755&gt;;
+say :2&lt;10101&gt;;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>前面的两行代码会分别打印出 <code>493</code> 和 <code>21</code>。</p>
+</div>
+<div class="paragraph">
+<p>基数值不一定是 2 的次方。其他在 2 到 36 之间的整数值也是允许的，例如，考虑以下几行代码:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say :5&lt;342&gt;;
+say :30&lt;102spqr&gt;;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在第一个例子中，基数是 5，因此，在表示数的时候可以用 0 到 4 的数字来表示。值 <code>:5&lt;342&gt;</code> 对应于十进制形式的 <code>97</code>。</p>
+</div>
+<div class="paragraph">
+<p>在第二个例子中，我们可以自由使用更多的"数位"，即 30 位。这些数字是常规的阿拉伯数字 0 到 9，后面是 20 个从 a 到 t 的拉丁字母。<code>:30&lt;102spqr&gt;</code> 的十进制值是 <code>731399307</code>。</p>
+</div>
+<div class="paragraph">
+<p>你可能已经注意到，在前面的例子中，有些字母数字是大写的，有些是小写的。对于 Raku 来说，没有什么区别；当整数数字包含字母字符时，不区分大小写。所以，<code>:16&lt;D0CF11E&gt;</code> 和 <code>:16&lt;d0cf11e&gt;</code>，以及 <code>:30&lt;102spqr&gt;</code> 和 <code>:30&lt;102spqr&gt;</code> 是等价的。</p>
+</div>
+<div class="paragraph">
+<p>大小写不敏感间接地定义了整数允许的基数范围；由于我们有 10 个阿拉伯数字和 26 个拉丁字母，因此它们的组合给出了 36 个不同的字符。</p>
+</div>
+<div class="paragraph">
+<p>在 Raku 中，长整型数值(也就是有很多位数的整数)可以用下划线字符来拼写成数字组。该功能最直接的目的是提供了将数字分割成三位数组的方法。例如，考虑一下下面这行代码:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 75_926_028;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这里，<code>75_926_028</code> 的记号，无非是给出了 <code>75926028</code> 这个数字，但它让我们清楚地看到这个数字是 7500 万，926 个千，加上 28。对于编译器来说，没有什么区别，两个数字同样容易读懂。而对于人类来说，把一个数字拆成一组，就更容易读懂了。</p>
+</div>
+<div class="paragraph">
+<p>严格来说，你不受限于拆分数字的方式。也就是说，下面的格式在形式上是正确的:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 2_12_85_06;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这种格式可能适用于电话号码，但不适用于普通整数。</p>
+</div>
+<div class="paragraph">
+<p>但是，你不能在一行中出现两个下划线。数字也不能以下划线开头或结尾。下面的三次尝试将无法编译:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 20__17;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>此代码将产生编译器错误:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Only isolated underscores are allowed inside numbers</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say _2017;
+say 2017_;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这两种情况下的错误信息比较短，编译器只是这样说的:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Confused</code></pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_int_类型的方法">Int 类型的方法</h5>
+<div class="paragraph">
+<p>Raku 中的数据类型由许多内置类表示，这意味着可以对这些类的对象调用方法。语言的面向对象的特性在第八章《面向对象编程》中已经介绍过了，但是，暂时还不能回避其中的一些元素。</p>
+</div>
+<div class="paragraph">
+<p>在本节中，将只列出最有趣的方法。可以在文档页面 <a href="https:/​/​docs.raku.​org/​type/​Int" class="bare">https:/​/​docs.raku.​org/​type/​Int</a> 上获得完整的可能性列表。</p>
+</div>
+<div class="paragraph">
+<p>现在最基本的是，最重要的是，方法的调用是使用值本身或包含相应类型值的变量上的点来调用。在下一节中，你会看到方法的调用方式，马上就可以看到。</p>
+</div>
+<div class="sect5">
+<h6 id="_使用_chr_方法转换为字符">使用 chr 方法转换为字符</h6>
+<div class="paragraph">
+<p>可以将整数值转换为相应的字符。其对应关系由 Unicode 代码点定义。</p>
+</div>
+<div class="paragraph">
+<p>如果是 256 以下的值，则与 ASCII 表一致。考虑一下下面的代码片段:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 65.chr; # prints A</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>更高的值会从 Unicode 表中产生字符，如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 8594.chr; # →</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>使用十六进制表示法也可以得到同样的结果，如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 0x2192.chr; # →</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_检查数字是否为质数">检查数字是否为质数</h6>
+<div class="paragraph">
+<p><code>is-prime</code> 方法返回一个布尔值，告诉我们这个数是否是质数，如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 10.is-prime; # False
+say 11.is-prime; # True</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在大数上执行 <code>is-prime</code> 方法可能会很慢。</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_生成一个随机数">生成一个随机数</h6>
+<div class="paragraph">
+<p><code>rand</code> 方法返回一个介于 0 和给定值之间的随机数。请注意，这个方法是从 <code>Real</code> 角色继承而来的(请参考《使用简单的内置数据类型》一章中开头的图表)，而返回值是一个浮点数:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 100.rand;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>运行这段代码几次后，会打印出不同的值，就像你在这里看到的那样:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">70.1530942429978
+57.2150256026057
+13.7542877975353
+94.6395293813437</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_获取值的符号">获取值的符号</h6>
+<div class="paragraph">
+<p><code>sign</code> 方法(也继承自 <code>Real</code> 角色)返回 <code>-1</code> 或 <code>1</code>，这取决于值的符号。考虑一下下面的代码片段:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 42.sign;  # 1
+say -42.sign; # -1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 0 上调用该方法的结果是 0，如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 0.sign; # 0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>sign</code> 方法也适用于无穷大的值:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say Inf.sign;  # 1
+say (-∞).sign; # -1</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_计算值的平方根">计算值的平方根</h6>
+<div class="paragraph">
+<p>要计算值的平方根，请在其上调用 <code>sqrt</code> 方法:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 9.sqrt; # 3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个例程在 Raku 中也被定义为一个独立的内置函数。考虑一下下面的代码片段:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say sqrt(9); # 3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>由于 <code>sqrt</code> 方法继承自 <code>Numeric</code> 角色，所以结果是一个浮点值:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 10.sqrt; # 3.16227766016838</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_获取下一个值和前一个值">获取下一个值和前一个值</h6>
+<div class="paragraph">
+<p><code>pred</code> 和 <code>succ</code> 这两个方法分别返回整数参数的前一个值和下一个值:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 42.pred; # 41
+say 42.succ; # 43</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个方法也适用于非整数值的加减法，当它们加减 1 时，如下一个片段所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say pi.pred;    # 2.14159265358979
+say (3/4).succ; # 1.75</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这些方法的名称来自于 predecessor 和 successor 这两个单词。</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_获取绝对值">获取绝对值</h6>
+<div class="paragraph">
+<p><code>abs</code> 方法返回绝对值。在下面的例子中，该方法是在一个变量上调用的:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = -42;
+say $x.abs; # 42</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>要在一个值上调用它，需要在负值上加上括号。否则，将对调用 <code>abs</code> 方法的结果应用一元减法运算符(详见第四章《使用运算符》)。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_rat_类型">3.2.2. Rat 类型</h4>
+<div class="paragraph">
+<p>在 Raku 中，有一个特殊的 <code>Rat</code> 类型来存储有理数。在很多情况下，当你处理浮点数时，<code>Rat</code> 会被使用。在内部，<code>Rat</code> 值由一对整数表示, 即分子和分母。因此，任何 <code>Rat</code> 数都是一个等于除法 <code>N/D</code> 的有理数。整数的分子部分是一个可以任意长的值。分母部分是一个 64 位的整数。</p>
+</div>
+<div class="paragraph">
+<p>只要你有一个带小数点的常数，没有指数部分就会出现 <code>Rat</code> 值。请考虑下面的例子:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 3.14;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>3.14</code> 这个字面值在这里创建了一个 <code>Rat</code> 值。</p>
+</div>
+<div class="paragraph">
+<p>还有另一种语法来创建 <code>Rat</code> 值：像除法那样使用斜线, 并且可以选择在一对角括号中加上一个数字，如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 1/2;
+say &lt;1/2&gt;;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>另外，你可以用 Unicode 字符来表示分数。例如，下面这一行将创建一个等于 0.5 的 Rat 数:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say ½;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>Rat</code> 值的内部结构为精确计算提供了一种奇妙的能力。与许多其他语言不同的是，在 Raku 中，浮点运算使用的是精度有限的 IEEE 数字，而在 Raku 中， <code>Rat</code> 数的使用有助于避免在处理小数时出现四舍五入的错误，或者是在处理两个数字非常接近的数字时，无法使用 IEEE 表示法进行精确比较。</p>
+</div>
+<div class="paragraph">
+<p>在下面的例子中，我们将使用 <code>Rat</code> 数:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 1/2 + 1/4 + 1/8 + 1/16;
+say 0.1 + 0.2 - 0.3;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后一个例子很有意思，因为它在 Raku 中打印出了 0。Raku 使用 <code>Rat</code> 进行计算，并在内部将这些值处理为 <code>1/10</code>、<code>2/10</code> 和 <code>3/10</code>。因此，<code>0.1 + 0.2 - 0.3</code> 的总和等于 <code>1/10 + 2/10 - 3/10</code>，结果 <code>Rat</code> 值为 <code>0/10</code>，也就是 0。在其他许多使用浮点数的语言中，包括 Perl 5，同样的计算不会产生 0。结果会很小，但仍然不是零；例如，<code>5.55111512312578e-17</code>。</p>
+</div>
+<div class="paragraph">
+<p>使用 <code>Rat</code> 进行精确计算的优势是显而易见的。例如，在财务计算中，你可以使用 <code>Rat</code> 数来避免四舍五入的错误。(不过，在很多情况下，在财务计算中，你可以使用整数，并以分值为单位进行计算；因此，不要把 9.99 欧元作为浮点数，而是用 999 分来操作。)</p>
+</div>
+<div class="sect4">
+<h5 id="_rat_类型的方法">Rat 类型的方法</h5>
+<div class="paragraph">
+<p><code>Rat</code> 方法有一些特定的方法和一些从其基类或角色继承的方法，如 <code>Real</code> 或 <code>Numeric</code>。其中一些方法已经在 <code>Int</code> 类型的方法一节中讨论过了。</p>
+</div>
+<div class="sect5">
+<h6 id="_获取值的_raku_表示法">获取值的 Raku 表示法</h6>
+<div class="paragraph">
+<p><code>raku</code> 方法返回一个可以表示 <code>Rat</code> 值的字符串，这个字符串可以表示 Raku 在源码中的理解。结果可以包含一个小数点或斜线，这取决于哪种方法更有利于精确地表示值。</p>
+</div>
+<div class="paragraph">
+<p>考虑一下几个例子，就能体现出前面的想法:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 1/3;
+say $x.perl; # &lt;1/3&gt;
 
+my $y = 1/2;
+say $y.perl; # 0.5</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>更有甚者，下面的代码是有效的 Raku 代码:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 10/20.raku; # 0.5</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_转换为_int_值">转换为 Int 值</h6>
+<div class="paragraph">
+<p>要将 <code>Rat</code> 值转换为整数值，调用 <code>Int</code> 方法。这就是类型转换的一般原理：数据类型定义的方法，其名称重复了其他数据类的名称。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 10/3;
+say $x.Int; # 3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这个程序中，<code>$x.Int</code> 的结果是3，但你要记住，赋值中的 <code>10/3</code> 不是除法，而是表示 <code>Rat</code> 数的一种方法。同样的，也可以用更明确的形式来表达，如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = &lt;10/3&gt;;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_获取分子和分母">获取分子和分母</h6>
+<div class="paragraph">
+<p>要得到一个 <code>Rat</code> 值的两部分，可以使用 <code>numerator</code> 和 <code>denominator</code> 方法。我们来看看上一节中的值的例子，看看它们是如何工作的:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 10/3;
+say $x.numerator;   # 10
+say $x.denominator; # 3</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_四舍五入的方法">四舍五入的方法</h6>
+<div class="paragraph">
+<p>有四种不同的方法可以将 <code>Rat</code> 值转换为整数：<code>round</code>、<code>ceiling</code>、<code>floor</code> 和 <code>truncate</code>。</p>
+</div>
+<div class="paragraph">
+<p><code>round</code> 方法根据数学定义对数值进行四舍五入：数值向最接近的整数进位。我们可以从下面的代码片段中看到:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 3.14.round; # 3
+say 2.71.round; # 3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>(注意，第一个小点分隔了数字的小数部分，而第二个小点是方法调用)。</p>
+</div>
+<div class="paragraph">
+<p>负值也会被四舍五入，使结果是最接近的整数。我们可以在下面的代码片段中看到:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say (-3.14).round; # -3
+say (-2.71).round; # -3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>truncate</code> 方法只是将小数部分切掉，不考虑符号，如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 3.14.truncate; # 3
+say 2.71.truncate; # 2
+
+say (-3.14).truncate; # -3
+say (-2.71).truncate; # -2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后，<code>ceiling</code> 和 <code>floor</code> 方法将数字四舍五入到下一个或上一个整数，如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 3.14.ceiling; # 4
+say 3.14.floor;   # 3
+
+say (-2.71).ceiling; # -2
+say (-2.71).floor;   # -3</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_方法_pred_和_succ">方法 pred 和 succ</h6>
+<div class="paragraph">
+<p>这两种方法的工作原理与它们对整数值的工作原理类似。整数部分返回、递增或递减，而浮点部分保持不变，如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 3.14.pred; # 2.14
+say 3.14.succ; # 4.14</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_numeric_数据类型">3.2.3. Numeric 数据类型</h4>
+<div class="paragraph">
+<p><code>Num</code> 类型用于存储浮点值。它对应于 C 语言中的双精度。</p>
+</div>
+<div class="paragraph">
+<p>注意，在 Raku 中，只有当数值字面值用科学符号拼写时，<code>Num</code> 值才会被创建。也就是说，值的 <code>E</code> 部分必须存在。</p>
+</div>
+<div class="paragraph">
+<p>因此，在下面的例子中，只有小数点的数字将是 <code>Rat</code> 类型的:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 3.14;    # Rat
+say 123.456; # Rat
+say 0.9;     # Rat</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>下面的数字表示相同的值，但都属于 <code>Num</code> 类型，因为它们在定义中使用了指数部分:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 3.14E0;    # Num
+say 1.23456E2; # Num
+say 9E-1;      # Num</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请记住，<code>Num</code> 值使用的是 IEEE 的二进制格式，所以它们的精度是有限的，而 <code>Rat</code> 类型的数字将其分子和分母为保存为两个整数。</p>
+</div>
+<div class="paragraph">
+<p>在 <code>Num</code> 值中，有一个突出的 <code>NaN</code> 值，它代表的是 Not a Number。</p>
+</div>
+<div class="sect4">
+<h5 id="_num_与_numeric_和_real_的比较">Num 与 Numeric 和 Real 的比较</h5>
+<div class="paragraph">
+<p>正如你在类型层次结构图中看到的那样，有些节点被放置在椭圆中而不是矩形框中。这些都是角色。角色提供了一些继承于类的接口。我们将在第八章《面向对象编程》中更详细地讨论角色。</p>
+</div>
+<div class="paragraph">
+<p><code>Numeric</code> 角色为我们提供的一些方法有: <code>Real</code>、<code>Int</code>、<code>Rat</code>、<code>Num</code> 和 <code>Bool</code>，用于将值转换为其他数据类型；<code>log</code>、<code>log10</code>、<code>exp</code>、<code>roots</code>、<code>abs</code> 和 <code>sqrt</code> 用于相应的数学计算；以及 <code>prec</code> 和 <code>succ</code> 对。</p>
+</div>
+<div class="paragraph">
+<p><code>Real</code> 角色类给了我们以下方法: <code>rand</code>、<code>sign</code>、<code>round</code>、<code>floor</code>、<code>ceiling</code> 和 <code>truncate</code>。</p>
+</div>
+<div class="paragraph">
+<p>如果你想深入挖掘并查看所有类之间的联系，请参考文档页面 <a href="https:/​/​docs.raku.​org/​type.​html" class="bare">https:/​/​docs.raku.​org/​type.​html</a>。</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_枚举">3.2.4. 枚举</h4>
+<div class="paragraph">
+<p>枚举是用于定义数据类型，例如，某些概念的可能值。例如，交通灯的颜色有三个值:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">enum TrafficLight &lt;red yellow green&gt;;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这些值的名字在 Raku 中会被知道，因此你可以直接在程序中使用它们。例如:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say red;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这段代码会打印出该值的名称:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">red</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这个例子中，red、yellow 和 green 的实际值对我们来说并不重要，但 Raku 会给它们分配递增的整数值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say red + yellow + green; # 6</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个程序相当于 <code>say `0 + 1 + 2</code>。</p>
+</div>
+<div class="paragraph">
+<p>当这些值很重要的时候，那么你可以显式指定它们，就像我们在下一个例子中所做的那样:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">enum Floors (
+    garage =&gt; -1, ground-floor =&gt; 0,
+    first =&gt; 1, second =&gt; 2);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们将在下一节中看到 Raku 中 <code>Boolean</code> 类型定义中的枚举的一个例子。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_boolean_数据类型">3.2.5. Boolean 数据类型</h4>
+<div class="paragraph">
+<p><code>Bool</code> 是一个布尔数据类型，提供两个值。<code>True</code> 和 <code>False</code>。从技术上讲，这是一个枚举的两个值:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">enum Bool &lt;True False&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>布尔类型的用法很简单。我们将在第五章《控制流》中看到更多布尔数据类型的用法。</p>
+</div>
+<div class="sect4">
+<h5 id="_布尔类型的方法">布尔类型的方法</h5>
+<div class="paragraph">
+<p><code>Bool</code> 类型有一些方法，我们已经看到了 <code>Int</code> 和 <code>Rat</code> 数据的使用，但它们的行为可能略有不同。</p>
+</div>
+<div class="sect5">
+<h6 id="_使用_pred_和_succ">使用 pred 和 succ</h6>
+<div class="paragraph">
+<p><code>pred</code> 和 <code>succ</code> 这两种方法有一个特点，就是可用值的范围非常有限。你不应该期望值是循环的。这些方法的结果显示在下面这段代码的注释中:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say True.pred;  # False
+say True.succ;  # True
+
+say False.pred; # False
+say False.succ; # True</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_生成随机布尔值的方法">生成随机布尔值的方法</h6>
+<div class="paragraph">
+<p>有两个方法，<code>pick</code> 和 <code>roll</code>，这两个方法都可以用或不用参数来调用。这些方法必须对类名本身进行调用，而不是对它的值或变量进行调用。</p>
+</div>
+<div class="paragraph">
+<p>当调用 <code>pick</code> 或 <code>roll</code> 没有参数时，它们会返回一个随机值，要么是 <code>True</code>，要么是 <code>False</code>。我们可以在下面的代码片段中看到这一点:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say Bool.pick;
+say Bool.roll;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当用整数参数调用这些方法时，会生成一个随机值的列表。整数参数定义了列表中元素的数量，但在此基础上，<code>pick</code> 方法增加了它的限制，只返回唯一的值，对于 <code>Bool</code> 类来说，这个值不超过两个。比较类似的调用结果，如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say Bool.pick(4); # (False True) or (True False)
+say Bool.roll(4); # e.g. (False True False False)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_字符串数据类型">3.2.6. 字符串数据类型</h4>
+<div class="paragraph">
+<p>在 Raku 中，字符串由 <code>Str</code> 数据类型表示。一个字符串是一个 Unicode 字符的序列。考虑到下面的代码片段:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = 'Hello, World!';
+say $str;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>让我们直接进入 <code>Str</code> 类的方法。</p>
+</div>
+<div class="sect4">
+<h5 id="_str_类的方法">Str 类的方法</h5>
+<div class="paragraph">
+<p>重要的是要始终记住，所有的语义都与 Unicode 的规则一致。例如，这意味着，将一个字符串转换为大写字母将改变相应的字符，即使它们需要超过一个字节的内存。</p>
+</div>
+<div class="sect5">
+<h6 id="_转换寄存器">转换寄存器</h6>
+<div class="paragraph">
+<p>有很多方法可以改变字符串中字母的寄存器。第一组包含简单的 <code>lc</code> 和 <code>uc</code>，它将所有字符转换为小写或大写。考虑下面的代码片段:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'String'.lc; # string
+say 'String'.uc; # STRING</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>其他四个方法比较复杂。</p>
+</div>
+<div class="paragraph">
+<p><code>fc</code> 方法将一个字符串转换为所谓的折叠大小写。它的目的是用于字符串比较。例如，将这三种方法在字符串上调用的输出与德文字母 ß 进行比较，ß 的大写字母是 SS，但在折叠大小写中被转换为 ss。请考虑以下代码片段:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'Hello, Straße!'.lc; # hello, straße!
+say 'Hello, Straße!'.uc; # HELLO, STRASSE!
+say 'Hello, Straße!'.fc; # hello, strasse!</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>(请记住，自2017年6月起，德语正式有了 ß 的大写版本，我们可以在这里 link:https:/​/​en.​wikipedia.​org/​wiki/​Capital_ %E1%BA%9E[] 了解一下。方法的行为可能会改变。)</p>
+</div>
+<div class="paragraph">
+<p><code>tc</code> 方法将一个字符串转换为所谓的标题大小写，其中字符串的第一个字母是大写。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'hey, you'.tc; # Hey, you</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意，如果字符串中已经包含了大写字母，它们将保持原样。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'dear Mr. Johnson'.tc; # Dear Mr. Johnson</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>使用 <code>tclc</code> 方法将所有其他字母转换为小写:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'HI THERE!'.tclc; # Hi there!</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>wordcase</code> 方法将每个单词的第一个字母大写，其余的字母小写:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'hello WORLD'.wordcase; # Hello World</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_切割字符串的方法">切割字符串的方法</h6>
+<div class="paragraph">
+<p>这两种方法-<code>chop</code> 和 <code>chomp</code>-有相似的名字，但对它们所处理的字符有不同的敏感性。<code>chop</code> 方法切断了字符串的最后一个字符。只有当最后一个字符是换行符时，<code>chomp</code> 方法才会将其切掉。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say "Text\n".chomp; # Text
+say "Text\n".chop; # Text
+
+say "Text".chomp; # Text
+say "Text".chop; # Tex</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>另一组方法-<code>trim</code>、<code>trim-leading</code> 和 <code>trim-trailing</code>-切断字符串开头和/或结尾的空格。请看下面的代码片段:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $s = ' word '.trim;
+say "[$s]"; # [word]
+
+$s = ' word '.trim-leading;
+say "[$s]"; # [word ]
+
+$s = ' word '.trim-trailing;
+say "[$s]"; # [ word]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_检查字符串内容的方法">检查字符串内容的方法</h6>
+<div class="paragraph">
+<p><code>Str</code> 类定义了一对方法-<code>starts-with</code> 和 <code>ends-with</code>-检查字符串的开头或结尾是否包含一个给定的子串，并返回一个布尔值。考虑下面的例子，它显示了这些方法的行为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'Hello, World'.starts-with('Hello'); # True
+say 'Hello, World'.starts-with('World'); # False
+say 'Hello, World'.ends-with('Hello');   # False
+say 'Hello, World'.ends-with('World');   # True</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>可以使用正则表达式来代替 <code>starts-with</code> 和 <code>ends-with</code>; 详情请参考第十一章,《正则表达式》。</p>
+</div>
+<div class="paragraph">
+<p>另一组函数-<code>index</code>、<code>rindex</code> 和 <code>indices</code>-查找子串并返回它的位置。<code>index</code> 方法找到子串最左边的出现，<code>rindex</code> 从字符串的末尾开始搜索，而 <code>index</code> 则返回子串所有出现的索引列表。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $town = 'Baden-Baden';
+
+say $town.index('Baden');   # 0
+say $town.rindex('Baden');  # 6
+say $town.indices('Baden'); # (0 6)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>值得注意的是，虽然 <code>rindex</code> 方法是从字符串的末尾搜索，但它返回的是一个从左到右计算的字符索引。</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_字符串的长度">字符串的长度</h6>
+<div class="paragraph">
+<p>要获得字符串的长度，像下面这样调用 <code>chars</code> 方法:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'Düsseldorf'.chars; # 10</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_翻转字符串">翻转字符串</h6>
+<div class="paragraph">
+<p><code>flip</code> 方法返回的字符串中，所有字符的顺序都是相反的，如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'Rose'.flip; # esoR</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_复数">3.2.7. 复数</h4>
+<div class="paragraph">
+<p>在 Raku 中，有 <code>Complex</code> 内置类型来呈现复数。</p>
+</div>
+<div class="paragraph">
+<p>复数有两个部分，实数和虚数，并使用以下语法:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 3+4i;
+my $y = -5i;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它不需要明确地写出实数部分，但输出总是包含它:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $x; # 3+4i
+say $y; # -0-5i
+say $z; # 0+1i</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>创建 <code>Complex</code> 数的另一种方法是调用构造函数(我们将在第八章，《面向对象编程》中讨论构造函数)，如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = Complex.new(4, 5);
+say $n; # 4+5i</code></pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_复数数据类型的方法">复数数据类型的方法</h5>
+<div class="paragraph">
+<p>其中有些方法我们已经很熟悉了。这些方法是 <code>round</code>、<code>ceiling</code>、<code>floor</code> 和 <code>truncate</code>，它们同时改变了复数值的实部和虚部。让我们简单地看一下其他的方法。</p>
+</div>
+<div class="sect5">
+<h6 id="_获取实部和虚部">获取实部和虚部</h6>
+<div class="paragraph">
+<p>这两个方法-<code>re</code> 和 <code>im</code>-返回复数的实部和虚部，如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $z = 4+5i;
+
+say $z.re; # 4
+say $z.im; # 5</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>虚数部分的返回不包含变量 <code>i</code>。</p>
+</div>
+<div class="paragraph">
+<p><code>reals</code> 方法返回一个包含这两个值的列表，如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $z = 4+5i;
+say $z.reals; # (4 5)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_操作日期和时间的数据类型">3.3. 操作日期和时间的数据类型</h3>
+<div class="paragraph">
+<p>Raku 提供了对日期和时间的内置支持，这非常方便，因为日期-时间的计算并不容易(你需要考虑闰年、额外的秒数、时区、日历校正等)。</p>
+</div>
+<div class="paragraph">
+<p>我们将涉及两个类: <code>Date</code> 和 <code>DateTime</code>。</p>
+</div>
+<div class="sect3">
+<h4 id="_使用_date_类">3.3.1. 使用 Date 类</h4>
+<div class="paragraph">
+<p><code>Date</code> 类表示日期-由年、月和日这三个数字组成的集合。要创建一个新的日期，使用这三个值调用一个构造函数:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $date = Date.new(2017, 7, 19);
+say $date; # 2017-07-19</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>要创建一个基于今天日期的变量, 使用 <code>today</code> 方法, 如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $today = Date.today;
+say $today; # 2017-07-17</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>要克隆一个日期，调用 <code>clone</code>，如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $date2 = $today.clone;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>日期的各个部分可以从日期的明确命名方法中获得，如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $date.year;  # 2017
+say $date.month; # 7
+say $date.day;   # 19</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>另外(这已经是一个很好的奖励了)，<code>Date</code> 可以计算一周的哪一天(周一是 1，周日是 7):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $date.day-of-week; # 3 (Wednesday)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>还有 <code>day-of-month</code> 和 <code>day-of-year</code> 方法:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $date.day-of-month; # 19 (same as $date.day)
+say $date.day-of-year;  # 20</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>有一些方法可以帮助计算周数:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $date.week;        # (2017 29)
+say $date.week-number; # 29
+say $date.week-year;   # 2017</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于一月的周数，<code>week</code> 和 <code>week-year</code> 方法返回的年份可能是上一年或下一年，这取决于这一天属于哪一周。例如，以 2019 年的最后一天和 2020 年的第一天为例。2019年12月31日是星期二，2020年1月1日是星期三。两天都属于同一周，所以 <code>week-year</code> 方法返回 2020。检查下面程序的输出，以了解该方法的工作原理:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $d1 = Date.new(2019, 12, 31);
+say $d1.day-of-week; # 3
+say $d1.year; # 2019
+say $d1.week-year; # 2020
 
+my $d2 = Date.new(2020, 1, 1);
+say $d2.day-of-week; # 4
+say $d2.year; # 2020
+say $d2.week-year; # 2020</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>有一个有趣的 <code>weekday-of-month</code> 方法，可以返回这个月在给定日期之前的这个星期的这一天的出现次数。例如，2017年7月19日是2017年7月的第三个星期三:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $date.weekday-of-month; # 3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 <code>earlier</code> 和 <code>later</code> 方法的帮助下，日期计算非常简单:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $today.later(days =&gt; 2);   # 2017-07-19
+say $today.later(months =&gt; 2); # 2017-07-21</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>要得到昨天和明天的日期，使用 <code>pred</code> 和 <code>succ</code> 方法，我们已经在数字数据类型中看到过:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $today.pred; # 2017-07-18
+say $today.succ; # 2017-07-20</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_使用_datetime_数据类型">3.3.2. 使用 DateTime 数据类型</h4>
+<div class="paragraph">
+<p><code>DateTime</code> 数据类型的使用与 <code>Date</code> 类型的工作非常相似。在 <code>DateTime</code> 对象中，出现了处理时间的新字段。我们可以在下面的代码片段中看到:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $dt = DateTime.new(
+    year =&gt; 2017,
+    month =&gt; 7,
+    day =&gt; 19,
+    hour =&gt; 1,
+    minute =&gt; 46,
+    second =&gt; 48);
+
+say $dt;        # 2017-07-19T01:46:48Z
+
+say $dt.year;   # 2017
+say $dt.month;  # 7
+say $dt.day;    # 19
+
+say $dt.hour;   # 1
+say $dt.minute; # 46
+say $dt.second; # 48</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>要创建一个新的 <code>DateTime</code> 对象并将其设置为当前时刻，使用 <code>now</code> 构造函数，如这里所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $dt = DateTime.now;
+say $dt; # 2017-07-19T01:44:00.301537+02:00</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>hh-mm-ss</code> 和 <code>yyyy-mm-dd</code> 方法为时间和日期生成格式化的字符串：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $dt.yyyy-mm-dd; # 2017-07-19
+say $dt.hh-mm-ss;   # 01:45:44</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>打印秒数时要小心。<code>second</code> 方法返回一个包含分数秒的浮点数。要获得一个整数值，请使用 `whole-second ` 方法。</p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_总结_3">3.4. 总结</h3>
 <div class="paragraph">
-<p>Hash类的方法 让我们看看哈希有哪些方法可用。
-首先，两个方法，键和值，返回包含所有的列表(序列，严格)
-哈希的键和值。</p>
+<p>在本章中，我们看了 Raku 中内置数据类型的概述，并学习了如何使用变量。最重要的事实是，Raku 中的变量是不同的内置数据类型类的实例。这些类的细节位于第八章《面向对象编程》中，但要在 Raku 中成功创建和使用变量，需要一些面向对象编程的元素。</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>类似的方法，对，返回一对对的列表(对是包含键和a的数据类型 值):</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>散列的大小，实际上是其中的对数，由elems返回 方法，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>命名约定
-Raku不强制用户遵循变量名的任何特定命名约定。 不过，最好遵循一般的常识方法。变量名称可以是 简短的一个字母，但它们也可以是描述性的，包含许多单词。
-单字母名称是循环中的最佳选择，或者在某些计算中所有的 变量的提及位置紧凑，在屏幕上清晰可见。单- 当然，字母名称可以使用小写和大写字母。虽然没有
-Raku中的标准，大写名称用于常量和伪常量
-文件; 例如</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>以下是单字母名称的一些示例: 常数$ N = 100;</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre> 使用变量和内置数据类型 说“你进入$ n”;
-如果$ n&gt; $ N，说“这个数字太大了”;
-对于更长的名字，有一些替代品。要么是以小写或大写字母开头， 或者整个名称都是大写的。同样，大写名称如$ MAXIMUM更好 表示常量，即使您不使用常量关键字。一般来说，小写</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>名字是可取的。让我们重写之前的程序，以便它使用更长的变量
-名称:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>在许多情况下，甚至需要更长的名称。在这种情况下，有几种方法可以构建 使用两个或多个单词的名称。首先，您可以使用所谓的驼峰案例名称 例如，$ userValue或$ valueFromInput。其次，下划线字符很好 用于连接name- $ user_value或$ value_from_input的部分的候选者; 这种风格叫做蛇案。最后，Raku允许带有破折号的奢侈名称
-例如，$ user-value或$ MAXIMUM-VALUE(烤肉串案例)。 - 字符不是减号 在这种情况下，运算符，并且是名称的一部分。那么，$ uservalue，$ userValue，
-$ user_value和$ user-value名称是四个不同的名称。考虑以下 代码段:
-常数$ MAXIMUM-VALUE = 100;</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>选择自己的风格，并尝试在整个计划中始终如一地使用它。
-键入的变量
-在前面的示例中，托管在变量容器中的内容类型是
-由分配给变量的值定义:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>使用变量和内置数据类型
-Raku允许您通过一起指定变量容器的类型 带有变量声明:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>这里，$ x变量只能接受整数。尝试将其分配给字符串，
-例如，将导致以下错误:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>类似地，Raku允许在同一个数组中使用不同类型的元素:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>声明具有类型的数组会使其元素类型值。这意味着你不能
-为其分配另一种类型的值，如下一个示例所示: 我的Int @a;</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>最后一个分配导致类型检查错误:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>类型化变量可以使用任何内置类型或用户定义的类。在下一节中， 我们将在默认情况下讨论Raku中可用的数据类型。在第8章，面向对象 编程，您将学习如何创建自己的类。
-使用简单的内置数据类型
-Raku带有许多内置类型，涵盖了常见的范围 诸如布尔值，整数和字符串之类的东西，但也提供不寻常的数据类型。我们会 在本节中介绍它们。为了演示内置类型，我们将它们打印到 使用say函数的控制台，正如我们在&#8217;Hello，World!'中所做的那样 例。</p>
-</div>
-<div class="paragraph">
-<p>层次结构使用两种类型的项构建:角色和类。角色以椭圆形绘制， 类是矩形框。角色类似于某些编程中的接又 语言。在本章中，我们不会关注什么是角色或类的细节。您可以 详细了解 第8章，面向对象的编程。现在，我们将假设 你对面向对象编程有一些基本的了解，并且能够 了解数据类型的层次结构。
-在本章的以下部分中，我们将介绍您的主要数据类型
-可以在你的练习中使用。
- 使用变量和内置数据类型
-整数数据类型
-Int类型的值是Raku中的整数值。该值可以包含正数和 负数，以及零，语言不限制数字的大小。它 可以小到一个字节，例如，看看下面的例子:
-说42; 它也可以是任意精度，如下所示:
-比如239874637819093248768900298372340;
-在前面的例子中，使用了通用的十进制表示法。Raku允许使用其他 基地; 例如，16表示十六进制值。使用除以外的基数创建整数 10，使用所谓的状语表示法，如下例所示:
-说:16 &lt;D0CF11E&gt;; 这将打印218951966，这是十进制表示
-:16 &lt;D0CF11E&gt;整数。 以同样的方式，您将使用其他基础创建值。考虑以下</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>基值不一定是2的幂。2之间的其他整数值 例如，允许36，考虑以下代码行:
-说:5 &lt;342&gt;; 说:30 &lt;102spqr&gt;;
-在第一个例子中，基数是5，因此，数字0到4在表示中可用 一个号码。值:5 &lt;342&gt;对应于十进制形式的97。
-在第二个例子中，我们可以自由使用更多的“数字”，即30个。那些数字是 常规的阿拉伯数字0到9，后跟拉丁字母的20个字母，它们是a到t。 十进制值:30 &lt;102spqr&gt;是731399307。</p>
-</div>
-<div class="paragraph">
-<p>您可能已经注意到，在前面的示例中，一些字母数字是大写的 有些是小写的。对于Raku，没有区别; 它们的整数位数 包括字母字符，不区分大小写。所以，数字:16 &lt;D0CF11E&gt;和
-:16 &lt;d0cf11e&gt;，以及:30 &lt;102spqr&gt;和:30 &lt;102SPQR&gt;是等效的。 不区分大小写会间接定义允许的整数基数范围; 就像我们一样
-10个阿拉伯数字和26个拉丁字母，它们的组合提供36种不同的字符。
-在Raku中，长整数值(即具有多个数字的整数)可以拼写为 使用下划线字符将数字组视觉分离。最多 该功能的直接目标是提供将数字拆分为的方法 三位数组。例如，请考虑以下代码行:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>在这里，75_926_028的符号只不过是给出75926028的数字， 但它让我们清楚地看到这个数字是7500万，926千和28 编译器，没有区别，两个数字同样易于阅读。对于人类而言 更容易阅读分成组的数字。
-从技术上讲，您不仅限于分割数字的方式。这意味着
-以下格式正式正确:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>此格式可能适用于电话号码，但不适用于常规整数。
-但是，您不能连续两个下划线。数字也不能开始或结束
-用它。以下三次尝试将无法编译:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>此代码将生成编译器错误:</p>
-</div>
-<div class="paragraph">
-<p>数字内部只允许使用隔离的下划线</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>这两种情况下的错误消息有点短，编译器只是说它是:
-困惑
-使用变量和内置数据类型
-Int类型的方法
-Raku中的数据类型由许多内置类表示，这意味着 可以在这些类的对象上调用方法。面向对象的特性 语言在第8章中描述，面向对象的编程，但是，现在，它不是 可以避免它的一些元素。
-在本节中，仅列出最有趣的方法。完整的可能性列表 可以在文档页面上获得(HTTPS:/。。/文档raku组织/类型/诠释)。
-现在最重要的是使用点调用方法
-在值本身或包含相应类型值的变量上。
-您将在下一节中看到立即调用方法的方法。
-使用chr方法转换为字符 整数值可以转换为相应的字符。通信是
-由Unicode代码点定义。 在值低于256的情况下，它与ASCII表一致。考虑以下因素
-代码段:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>较高的值会从Unicode表中生成字符，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>使用十六进制表示可以获得相同的结果，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>检查数字是否为素数
-is-prime方法返回一个布尔值，告诉我们该数字是否为素数 数字与否，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>对大数字执行is-prime方法可能很慢。</p>
-</div>
-<div class="paragraph">
-<p>生成随机数
-rand方法返回零和给定值之间的随机数。请注意 此方法继承自Real角色(请参阅开头的图表 在使用简单的内置的数据类型部分)，并且返回值是一个浮点数:
-说100.rand; 运行此代码几次会导致打印不同的值，如下所示:
-70.1530942429978 57.2150256026057 13.7542877975353 94.6395293813437
-获得价值的标志
-sign方法(也从Real角色继承)返回-1或1，具体取决于 价值的标志。请考虑以下代码段:
-说42.sign; #1 说-42.sign; #-1
-调用方法为零的结果为0，如下所示: 说0.sign; #0
-符号方法也适用于无穷大: 说Inf.sign; #1
-说(-∞).sign; #-1 计算值的平方根
-要计算值的平方根，请在其上调用sqrt方法: 说9.sqrt; #3
-该例程在Raku中也被定义为独立的内置函数。考虑一下 以下代码段:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>获取下一个和以前的值
-pred和succ这两个方法相应地返回上一个和下一个值 对于整数参数:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>当它们加1或减1时，此方法也适用于非整数值，如图所示 下一个片段:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>方法的名称来自前任和后继。
-获得绝对价值
-abs方法返回绝对值。在以下示例中，调用该方法 在变量上:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>要在值上调用它，负值需要括号。否则，一元 减运算符(参见更多 第4章，使用运算符)将应用于结果 调用abs方法:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Rational数据类型
-在Raku中，存在一种特殊类型的Rat来存储有理数。在很多情况下，老鼠会 在处理浮点数时使用。在内部，表示Rat值 由一对整数值，分子和分母组成。因此，任何Rat数都是a 理性值等于划分N / D. 整数分子部分是可以的值 任意长。分母部分是64位整数。
-只要您有一个带小数点的常量而没有一个，就会出现鼠值
-指数部分。请考虑以下示例:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre> 使用变量和内置数据类型 3.14文字在这里创建了一个Rat值。
-还有另一种创建Rat值的语法:在除法中使用斜杠，可选地， 在一对尖括号中包含一个数字，如下所示:</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>此外，您可以为分数使用Unicode字符。例如，以下行将 创建一个等于0.5的Rat数:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Rat值的内部结构为精确计算提供了极好的能力。 与许多其他语言不同，浮点运算使用IEEE数字 精度有限，在Raku中，使用Rat数字有助于避免舍入误差 使用较小的数字时，或者例如两个数字如此接近 另外，他们无法使用IEEE表示法进行精确比较。
-在以下示例中，我们将使用Rat编号: 比如1/2 + 1/4 + 1/8 + 1/16;
-比如0.1 + 0.2 - 0.3;
-最后一个例子很有趣，因为它在Raku中打印0.Raku使用Rat进行计算， 并在内部将值视为1 / 10,2 / 10和3/10。因此，0.1 + 0.2 - 0.3的总和是 相当于1/10 + 2/10 - 3/10，这导致Rat值为0/10，为零。在很多 其他使用浮点数的语言，包括Perl 5，相同的计算方法 不产生零。结果很小，但仍然不为零; 对于 例如，5.55111512312578e-17。
-使用Rat进行精确计算的优势显而易见。例如，在财务方面 计算时，您可以使用鼠标数字来避免舍入错误。(但在很多情况下，在 财务计算，您可以使用整数并计算美分; 所以，而不是保持 9.99欧元作为浮点数，代替999美分。)
-大鼠类型的方法
-Rat方法有一些特定的方法和许多遗传的方法 来自其基类或角色，例如Real或Numeric。其中一些方法已经存在 讨论，在Int类型的方法部分。</p>
-</div>
-<div class="paragraph">
-<p>获取值的Perl表示
-Perl方法返回一个字符串，可以表示Raku理解的Rat值 在源代码中。结果可以包含小数点或斜杠，具体取决于</p>
-</div>
-<div class="paragraph">
-<p>什么是更好的精确表示价值。
-考虑一些显示上述想法的示例:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>更多，以下代码是有效的Raku代码:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>转换为Int值
-要将Rat值转换为整数值，请调用Int方法。这是一般的 类型转换的原则:数据类型定义名称重复名称的方法 其他数据类。</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>在这个程序中，$ x.Int的结果是3，但是你应该记住10/3 赋值不是一个除法，而是一种表达大鼠数字的方法。同样可以做到 使用更明确的表单，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>要获得Rat值的两个部分，请使用分子和分母方法。让我们 看看它们如何处理上一节中的值的示例:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>舍入值的方法
-有四种不同的方法可以将Rat值转换为整数:round，ceiling， 地板，并截断。
-round方法根据数学定义舍入值:值为 四舍五入到最接近的整数。我们可以在以下代码片段中看到:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>(请注意，第一个点分隔数字的小数部分，而第二个点是a</p>
-</div>
-<div class="paragraph">
-<p>负值也会舍入，以便结果是最接近的整数。我们可以看到
-在以下代码段中:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>截断方法只是删除小数部分，无论符号如何，如下所示: 比如3.14.truncate; #3</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>最后，这对天花板和地板方法将数字四舍五入到下一个或前一个
-整数，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>这两种方法的工作方式类似于它们处理整数值的方式。整数部分是
-返回，递增或递减，而浮动部分不变，如图所示
-如下:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>使用变量和内置数据类型
-数字数据类型
-Num类型用于存储浮点值。它对应于双精度 C。
-请注意，在Raku中，仅在数字文字拼写为a时创建Num值 科学计数法。也就是说，值的E部分必须存在。
-因此，在以下示例中，仅具有小数点的数字将是Rat 类型:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>以下数字表示相同的值，但属于Num类型，因为它们使用 其定义中的指数部分:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>请记住，Num值使用打包的IEEE二进制格式，因此它们受限制 精度，而Rat数字将分子和分母保持为两个整数
-数字。
-在Num值中，有一个突出的NaN值，代表Not a 数。
-Num与Numeric vs. Real
-正如您在类型层次结构图中看到的，某些节点位于椭圆形中 而不是矩形框。那些是角色。角色为类提供了一些接又 是从他们继承而来的。我们将在更详细地讨论角色第8章，对象 - 面向编程。
-Numeric角色为我们提供的一些方法是:Real，Int，Rat，Num， 和Bool将值转换为其他数据类型; log，log10，exp，roots，abs和sqrt 用于相应的数学计算; 这对和prec和succ。
-除其他外，Real角色类为我们提供了以下方法:rand，sign，round， 地板，天花板和截断。</p>
-</div>
-<div class="paragraph">
-<p>使用变量和内置数据类型 如果你想深入挖掘并查看类之间的所有连接，请参阅
- 列出的文档页面 HTTPS:/。。/文档raku组织/ HTML类型。。 枚举
-枚举是用于定义某些可能值的数据类型
-概念。例如，交通灯颜色有三个值:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Raku已知这些值的名称，因此您可以直接在a中使用它们
-程序，例如:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>此代码打印值的名称:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>在此示例中，红色，黄色和绿色名称的实际值并不重要 对于我们而言，Raku会为它们分配增加的整数值。
-说红+黄+绿; #6 这个程序相当于</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>当值很重要时，您可以明确指定它们，就像我们下一步那样
-例:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>我们将在布尔类型的定义中看到枚举的一个例子
-Raku在下一节中。 布尔数据类型
-Bool是一种布尔数据类型，它提供两个值:True和False。从技术上讲，这是 具有两个值的枚举:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>使用变量和内置数据类型 布尔类型的使用非常简单。我们将看到更多的用法
-布尔数据类型 第5章，控制流程。 Bool类型的方法
-Bool类型有一些方法，我们已经看到使用Int和 大鼠数据，但他们的行为可能略有不同。
-使用pred和succ
- 这两种方法，pred和succ，都有一个由非常有限的范围引起的特征 可用值。您不应期望值循环。方法的结果 显示在以下代码段的注释中:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>生成随机布尔值的方法
-有两种方法，pick和roll，这两种方法都可以调用或不调用 论点。必须在类名本身上调用这些方法，而不是在它的值或a上调用 变量。
-如果在没有参数的情况下调用pick或roll，它们也会返回一个随机值 对或错。我们可以在以下代码片段中看到:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>使用整数参数调用方法时，随机值列表为
-产生。整数参数定义列表中的元素数量，但最重要的是 因此，pick方法添加其限制并仅返回唯一值，在这种情况下 Bool类，不超过两个。比较类似调用的结果，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre> 使用变量和内置数据类型
-字符串数据类型
-字符串由Raku中的Str数据类型表示。字符串是Unicode序列 字符。考虑以下代码段:</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>让我们直接看看Str类的方法。 Str类的方法
-重要的是要始终牢记所有语义都符合规则 Unicode格式。这意味着，例如，将字符串转换为大写将会改变 相应的字符，即使它们需要多个字节的内存。
-转换寄存器
-有许多方法可以更改字符串中字母的寄存器。第一集 包含简单的lc和uc，它将所有字符转换为小写或大写。考虑 以下代码段:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>其他四种方法更复杂。
-fc方法将字符串转换为所谓的fold case。它旨在用于字符串 比较。例如，比较字符串上调用的三个方法的输出 德语字母ß，拼写为SS大写，但在折叠中转换为ss- 案件。请考虑以下代码段:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>(请记住，自2017年6月起，德语正式上版 ß，我们可以在这里知道 HTTPS:/。。/ EN维基百科组织/维基/ Capital_</p>
-</div>
-<div class="paragraph">
-<p>方法的行为可能会改变。)
- 使用变量和内置数据类型
-tc方法将字符串转换为所谓的标题大小写，其中字符串的第一个字母 是资本。</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>wordcase方法将每个单词的第一个字符大写，然后完成其余的单词
-小写:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>另一组方法 - 修剪，修剪前导和修剪 - 尾随 - 削减空间 在字符串的开头和/或结尾。请考虑以下代码段:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>检查字符串内容的方法
-Str类定义了一对方法 - starts-with和ends-with-check 字符串是否在其开头或结尾包含给定的子字符串，并返回a 布尔值。请考虑以下示例，该示例显示了这些行为
-方法:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>可以使用正则表达式而不是start-with和end-with; 参考章节 11 ，Regexes，详情。
-另一组函数index，rindex和indices-查找子字符串并返回它 位置。索引方法查找子串的最左侧出现rindex 从字符串末尾搜索，索引返回所有出现的索引列表 子串。</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>值得注意的是，虽然rindex方法从字符串的末尾搜索，但它 返回从左到右计数的字符的索引。
-字符串的长度
-要获取字符串的长度，请按如下方式调用chars方法: 说&#8217;杜塞尔多夫'.chars; #10
-反转一个字符串
-flip方法返回字符串，其中所有字符的顺序相反，如 如下:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>复数
-在Raku中，有一个Complex内置类型来表示复数。 复数有两个部分，实数和虚数，并使用以下语法:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>没有必要明确拼出实部，但输出总是包含它:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>创建复数的另一种方法是调用构造函数(我们将讨论 第8章，面向对象编程中的构造函数，如下:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>复杂数据类型的方法
-我们已经熟悉了一些方法。这些是圆形，天花板，地板和
-truncate，它改变复数值的实部和虚部。让我们来 简要介绍一下其他方法。
-获得真实和虚构的部分
-这两个方法 - 重新和即时 - 返回复数的实部和虚部，如 如下:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>在没有变量i的情况下返回虚部。
-reals方法返回包含两个值的列表，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>用于操纵日期和时间的数据类型</p>
-</div>
-<div class="paragraph">
-<p>Raku提供内置支持以处理日期和时间。这非常方便，因为日期 - 时间计算并不容易(你需要考虑闰年，额外的秒数，时间
-区域，日历更正等)。 我们将介绍两个类:Date和DateTime。
-使用Date类
-Date类表示日期 - 三个数字，年，月和日的集合
-这个月。要创建新日期，请使用以下三个值调用构造函数:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>要根据今天的日期创建变量，请使用today方法，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>要克隆日期，请调用clone，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>日期的单独部分可以从日期明确命名的方法中获得，如
-如下:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>另外(这已经是一个很好的奖励)，Date类可以计算出的日期 周(周一是1，周日是7):</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>使用变量和内置数据类型 一些方法有助于计算周数:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>对于1月份的几周，可以通过周和周年方法返回的年份 要么是前一年，要么是下一年，具体取决于当天属于哪一周。对于 以2019年的最后一天和2020年的第一天为例。2019年12月31日是</p>
-</div>
-<div class="paragraph">
-<p>2020年1月1日星期二和1月1日是星期三。两天都属于同一周，所以 周 - 年方法返回2020.检查以下程序的输出
-了解该方法的工作原理:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>有一个有趣的工作日的方法可以返回出现的次数 在给定日期之前的这个月的这一天的这一天。例如，2017年7月19日是 2017年7月第三个星期三:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>要获得昨天和明天的日期，请使用我们拥有的pred和succ方法 已经在数值数据类型中看到:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>使用DateTime数据类型 DateTime数据类型的使用与使用Date类型非常相似。在里面
-DateTime对象，处理时间的新字段出现。我们可以在下面看到 代码段:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
 <div class="paragraph">
-<p>要创建新的DateTime对象并将其设置为当前时刻，请使用now构造函数， 如下图所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>hh-mm-ss和yyyy-mm-dd方法生成时间和日期的格式化字符串:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>打印秒钟时要小心。第二种方法返回一个浮点数
-含有一秒的分数。要获取整数值，请使用全秒方法:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
+<p>在本章的第一部分，你学习了变量容器的三种结构类型-标量、数组和散列，并研究了它们的主要方法。在第二部分中，我们深入了解了不同的数据类型，如整数、有理数、浮点数、字符串、日期和时间。</p>
 </div>
-<div class="sect2">
-<h3 id="_总结_4">3.5. 总结</h3>
 <div class="paragraph">
-<p>在本章中，我们查看了Raku中内置数据类型的概述并进行了学习 如何使用变量。最重要的事实是Raku中的变量是实例 不同的内置数据类型类。这些课程的详细信息位于章节
-8 ，面向对象编程，但是面向对象编程的一些元素是 需要在Raku中成功创建和使用变量。
-在本章的第一部分中，您学习了三种结构类型的变量
-容器 - 标量，数组和散列 - 并检查它们的主要方法。在第二 部分，我们深入研究了不同的数据类型，例如整数，有理数，浮点数 - 点数，字符串，日期和时间。
-在下一章中，我们将继续观察Raku程序中的流控制。</p>
+<p>在下一章中，我们将继续研究 Raku 程序中的流程控制。</p>
 </div>
 </div>
 </div>
@@ -5512,7 +5901,7 @@ Raku允许创建新的运算符。例如，与C +不同，新的运算符不是 
 
 </div>
 <div class="sect2">
-<h3 id="_总结_5">4.5. 总结</h3>
+<h3 id="_总结_4">4.5. 总结</h3>
 <div class="paragraph">
 <p>在这一长篇章节中，我们讨论了Raku中的运算符。有几类 运算符，例如infix，prefix，postfix，circumfix和postcircumfix。我们讨论过 每个小组的运算符。然后，我们研究了元运算符和超运算符 根据内置的操作符创建新的操作符。最后，您学习了如何创建用户 - 定义的运算符，它们将自然地嵌入到程序的语言中。
 到目前为止，我们已经涵盖了Raku语法的所有基础知识。在下一章中，我们将会 使用子程序进入下一级组织代码。</p>
@@ -6165,7 +6554,7 @@ if-else链。在Raku中，我们使用给定和何时。可以重写上面的代
 
 </div>
 <div class="sect2">
-<h3 id="_总结_6">5.7. 总结</h3>
+<h3 id="_总结_5">5.7. 总结</h3>
 <div class="paragraph">
 <p>在本章中，我们介绍了控制流程，Raku为传统程序提供了控制流程 节目。我们谈到了执行代码块并使用 关键字if，else和elsif。我们还讨论了不同的循环 - 基本循环 循环，重复，直到和循环具有前置条件或后置条件。 然后我们研究了使用gather-take对来收集数据以及Raku的工作方式 主题在给定和关键字的帮助下。
 Raku不仅能够使用过程编程风格。你会找到 关于其他范例的更多信息 第13章，并发编程，第1章
@@ -7146,7 +7535,7 @@ $ f参数的类型是Sub; 我们可以为子签名添加一个类型约束 强�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_7">6.12. 总结</h3>
+<h3 id="_总结_6">6.12. 总结</h3>
 <div class="paragraph">
 <p>期望2个参数但在子签名中得到0
 子程序或子程序是Raku的基石之一。在本章中，您学习了如何使用它 创建和使用子程序。我们详细检查了子参数的属性， 例如通过复制传递参数，允许读写参数，定义 默认值，或提供可选参数。你看着邋.. 参数和展平数组，学会了如何约束两个参数的类型，
@@ -7190,7 +7579,7 @@ $ f参数的类型是Sub; 我们可以为子签名添加一个类型约束 强�
 
 </div>
 <div class="sect2">
-<h3 id="_总结_8">6.20. 总结</h3>
+<h3 id="_总结_7">6.20. 总结</h3>
 
 </div>
 </div>
@@ -8178,7 +8567,7 @@ class XML::XPath {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_9">7.5. 总结</h3>
+<h3 id="_总结_8">7.5. 总结</h3>
 <div class="paragraph">
 <p>在本章中, 我们经历了使用模块工作的主要步骤。首先, 我们看到了如何创建一个模块, 以及如何告诉编译器在哪里可以找到它。然后, 我们研究了加载模块和导入模块名称的不同方法。最后, 我们来到了 Rakudo 专用的模块管理工具 zef, 用它来安装和卸载模块, 并考察了 Rakudo 用于保存模块到磁盘上的内部存储。</p>
 </div>
@@ -10011,7 +10400,7 @@ say $o.*n(); # ()</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_10">8.10. 总结</h3>
+<h3 id="_总结_9">8.10. 总结</h3>
 <div class="paragraph">
 <p>在本章中，我们学习了 Raku 中的面向对象支持。我们经历了创建一个类，为其添加属性和方法，以及使方法和类数据为公共或私有。然后，我们讨论了类的层次结构和使用角色的另一种方法，以及如何使用 Raku 的内置设施来内省对象。在一组例子中，我们考察了许多处理复杂对象的技巧。最后，我们还列出了后缀方法操作符，利用这些操作符，你可以创建更多的通用和健壮的程序。</p>
 </div>
@@ -11187,7 +11576,7 @@ supplied</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_11">9.7. 总结</h3>
+<h3 id="_总结_10">9.7. 总结</h3>
 <div class="paragraph">
 <p>在本章中，我们讨论了 Raku 中提供的输入和输出功能。 <code>IO::Handle</code> 类提供了使用标准输入和输出流的通用方法以及使用相同接口的文件。我们讨论了如何创建文件和
 如何测试文件和目录的不同属性并检查各种读写方法。</p>
@@ -11237,7 +11626,7 @@ supplied</code></pre>
 
 </div>
 <div class="sect2">
-<h3 id="_总结_12">10.6. 总结</h3>
+<h3 id="_总结_11">10.6. 总结</h3>
 <div class="paragraph">
 <p>试块
 让我们从一个最简单的例外开始，除以零。运行以下一项 - 衬垫:</p>
@@ -11764,7 +12153,7 @@ message方法，以便异常处理程序可以打印错误消息。
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_13">10.7. 总结</h3>
+<h3 id="_总结_12">10.7. 总结</h3>
 <div class="paragraph">
 <p>在本章中，我们学习了如何在Raku中处理异常。我们详细研究过 通过使用不同的机制来抛出，捕获和隐藏异常的方法 语言尝试块和CATCH移相器。我们谈到了软故障 推迟的异常只有在真的不可避免时才被抛出。我们也是 演示了如何使用面向对象的方法来处理不同的异常 类型以及如何创建自定义异常。</p>
 </div>
@@ -13760,7 +14149,7 @@ say $date;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_14">11.11. 总结</h3>
+<h3 id="_总结_13">11.11. 总结</h3>
 <div class="paragraph">
 <p>在本章中, 我们讨论了 Raku 中的正则表达式。它们与 Perl 5 中的正则表达式有许多共通之处, 但也提供了许多令人着迷的新东西。我们研究了构建正则表达式和匹配文本的方法, 学会了如何通过编写自定义字符类或内置字符类来扩展正则表达式引擎的功能。我们还研究了 Raku 在 Match 对象中存储结果的方法, 以及如何使用正则表达式在字符串中进行替换。</p>
 </div>
@@ -15029,7 +15418,7 @@ G.parse($prog, :actions(A.new));</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_15">12.7. 总结</h3>
+<h3 id="_总结_14">12.7. 总结</h3>
 <div class="paragraph">
 <p>在本章中, 我们讨论了 grammar, 这是 Raku 领先的新功能。Grammar 允许为自己的特定领域的语言构建解析器, 并且已经内置在语言中, 因此不需要外部模块就可以开始使用。</p>
 </div>
@@ -16036,7 +16425,7 @@ for 1..3 {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_16">13.6. 总结</h3>
+<h3 id="_总结_15">13.6. 总结</h3>
 <div class="paragraph">
 <p>在这一章中, 我们简要地讨论了 junction 的并行性, 其余的时间我们深入研究了线程、承诺和通道 - Raku 中实现并行和并发特性的机制。使用它们对于开发人员是相当容易的, 并且不需要手动操作底层机制来确保线程执行时不会发生冲突。</p>
 </div>
@@ -17206,7 +17595,7 @@ say @cubes[0..5]; # (1 8 27 64 125 216)</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_17">14.9. 总结</h3>
+<h3 id="_总结_16">14.9. 总结</h3>
 <div class="paragraph">
 <p>在本章中, 我们讨论的是函数式编程。Raku, 虽然不是函数式编程语言, 但它包括的元素可以实现这类语言的许多特性。我们讨论了递归和化简, 讨论了高阶函数、lambda 函数和 WhateverCode 代码块(那些使用 <code>*</code> 来要求 Raku 做你想要的事情的代码块)。我们创建了一些使用使用数据管道、闭包、柯里化和动态作用域的例子。最后, 我们谈到了无限列表和惰性列表, 以及如何生成它们。</p>
 </div>
@@ -17840,7 +18229,7 @@ sleep 2;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_18">15.4. 总结</h3>
+<h3 id="_总结_17">15.4. 总结</h3>
 <div class="paragraph">
 <p>在本章中, 我们讨论了 Raku 中的反应式编程。这种范式在语言核心中得到了支持, 所以不需要外部模块就可以开始编程。供应是本章的主角 - 我们涵盖了两种不同类型的供应, 按需供应和实时供应。我们有许多将分接器连接到供应上的例子, 看到了数据流是如何组织的, 也看到了数据流是如何过滤的。</p>
 </div>
