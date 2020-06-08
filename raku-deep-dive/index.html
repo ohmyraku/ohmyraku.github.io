@@ -143,13 +143,12 @@ if (theme && theme !== "1") {
 </li>
 <li><a href="#_控制流">5. 控制流</a>
 <ul class="sectlevel2">
-<li><a href="#_理解代码块和变量作用域">5.1. 理解代码块和变量作用域</a></li>
-<li><a href="#_条件检查">5.2. 条件检查</a></li>
+<li><a href="#_了解代码块和变量作用域">5.1. 了解代码块和变量作用域</a></li>
+<li><a href="#_有条件的检查">5.2. 有条件的检查</a></li>
 <li><a href="#_使用循环">5.3. 使用循环</a></li>
-<li><a href="#_只执行代码一次">5.4. 只执行代码一次</a></li>
-<li><a href="#_用_gather_和_take_收集数据">5.5. 用 gather 和 take 收集数据</a></li>
-<li><a href="#_用_given_设置主题">5.6. 用 given 设置主题</a></li>
-<li><a href="#_总结_5">5.7. 总结</a></li>
+<li><a href="#_执行代码一次">5.4. 执行代码一次</a></li>
+<li><a href="#_使用_gather_和_take_收集数据">5.5. 使用 gather 和 take 收集数据</a></li>
+<li><a href="#_总结_5">5.6. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_子例程">6. 子例程</a>
@@ -6305,24 +6304,48 @@ say 5Factorial; # 120</code></pre>
 <h2 id="_控制流">5. 控制流</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>在本章中，我们将讨论控制流量的主要因素
-Raku中的程序。大多数程序不仅仅是一个指令列表，而是它们 对用户输入做出反应，根据计算的数据做出决策，等等。
-在本章中，我们将介绍以下主题:
-代码块和do关键字 有条件的检查
-循环
-打破循环体 使用收集和收集来收集数据 设置主题
-仅执行一次代码</p>
+<p>在本章中, 我们将讨论 Raku 中控制程序流的主要内容。大多数程序不只是一个指令列表, 而是应该对用户的输入做出反应, 根据计算出的数据做出决策等等。</p>
+</div>
+<div class="paragraph">
+<p>在本章中, 我们将涉及以下主题:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>代码块和 do 关键字</p>
+</li>
+<li>
+<p>有条件的检查</p>
+</li>
+<li>
+<p>循环</p>
+</li>
+<li>
+<p>中断循环体</p>
+</li>
+<li>
+<p>使用 gather 和 take 方法收集数据</p>
+</li>
+<li>
+<p>设定主题</p>
+</li>
+<li>
+<p>只执行一次代码</p>
+</li>
+</ul>
 </div>
 <div class="sect2">
-<h3 id="_理解代码块和变量作用域">5.1. 理解代码块和变量作用域</h3>
+<h3 id="_了解代码块和变量作用域">5.1. 了解代码块和变量作用域</h3>
 <div class="paragraph">
-<p>理解代码块和变量 作用域
-在上一章中，我们讨论了变量，这些变量是您在a中使用的命名实体 程序。与许多编程语言一样，在Raku中，名称在其内部可见 范围而不是它之外。
-举一个简单的程序，其中$ name变量只使用一次，如 如下:</p>
+<p>在上一章中, 我们讨论了变量, 它们是你在程序中使用的命名实体。与许多编程语言一样, 在 Raku 中, 名字在其作用域内可见, 而在作用域外则不可见。</p>
+</div>
+<div class="paragraph">
+<p>以一个简单的程序为例, <code>$name</code> 变量只使用一次, 如下所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $name = 'Mark';
+say "Hello, $name!";</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6330,130 +6353,230 @@ Raku中的程序。大多数程序不仅仅是一个指令列表，而是它们 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $name = 'Mark';
+say "Hello, $name!";
+
+$name = 'Carl';
+say "Hello, $name!";</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这是有效的，因为两个打印语句都位于相同的范围和
-$ name变量在那里可见。
-阿块在Raku是一段代码，其位于一对大括号内。一个街区
-创造自己的范围。因此，块中声明的变量只能在其中可见。
-以下程序将无法编译:</p>
+<p>这样做的原因是两个打印语句都位于同一个作用域中, 而且 <code>$name</code> 变量在那里是可见的。</p>
+</div>
+<div class="paragraph">
+<p>在 Raku 中, 块是位于一对大括号内的一段代码。一个代码块可以创建自己的作用域。因此, 在代码块中声明的变量只有在它内部可见。</p>
+</div>
+<div class="paragraph">
+<p>下面的程序将无法编译:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">{
+    my $name = 'Mark';
+    say "Hello, $name!";
+}
+
+$name = 'Carl'; # Error here
+say "Hello, $name!";</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>以下错误消息通知我们，在$ name分配给新的位置 value，未声明具有该名称的变量:</p>
+<p>下面的错误信息告诉我们, 在 <code>$name</code> 被分配给一个新值的地方, 没有声明这个名字的变量:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">===SORRY!=== Error while compiling /Users/ash/code/control-flow/3.pl
+Variable '$name' is not declared
+at /Users/ash/code/control-flow/3.pl:6
+------&gt; &lt;BOL&gt;   $name = 'Carl';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>要使名称再次可见，请在外部作用域中声明它，如下所示:</p>
+<p>为了使名称再次可见, 在外层作用域中声明如下:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $name;
+
+{
+    $name = 'Mark';
+    say "Hello, $name!";
+}
+
+$name = 'Carl';
+say "Hello, $name!";</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在本演示中，创建单独的代码块没有多大意义。我们会 当我们谈论时，例如关于条件，看到更多有用的代码块应用程序， 本章稍后或在 第6章，子程序，其中代码块用于保存 用户定义函数的主体。
-do关键字 do关键字用于执行代码块。上一节的例子可以
-以下列方式重写:</p>
+<p>在这个演示中, 创建单独的代码块没有太大的意义。当我们在本章后面讲到例如条件时, 或者在第六章子程序时, 我们会看到代码块的更多有用的应用, 代码块是用来保存用户定义函数的主体。</p>
+</div>
+<div class="sect3">
+<h4 id="_do_关键字">5.1.1. do 关键字</h4>
+<div class="paragraph">
+<p><code>do</code> 关键字用于执行一个代码块。上一节的例子可以按以下方式重写:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $name;
+
+do {
+    $name = 'Mark';
+    say "Hello, $name!";
+}
+
+$name = 'Carl';
+say "Hello, $name!";</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>当代码块不能是a时，显式使用关键字的必要性是显而易见的 单独的表达式，如下一个示例所示:</p>
+<p>当代码块不能成为一个独立的表达式时, 显式使用关键字的必要性是显而易见的, 如下一个例子所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $name;
+$name = 'Carl';
+$name and do {say "Hello, $name!"};</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这里，在关键字的帮助下(见第4章)，与运营商合作)，
-程序检查是否定义了$ name，如果是，则打印问候语。</p>
+<p>在这里, 借助于 <code>and</code> 关键字(见第四章,《使用运算符), 程序会检查 <code>$name</code> 是否被定义, 如果是, 则打印出问候语。</p>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_有条件的检查">5.2. 有条件的检查</h3>
 <div class="paragraph">
-<p>有条件的检查
-根据条件做出决策是编程的基本需求之一。该
-if关键字是否会更改程序的流程，具体取决于布尔测试的结果。 考虑以下代码:</p>
+<p>根据条件进行决策是编程中的基本需求之一。<code>if</code> 关键字会根据布尔测试的结果, 改变程序的流程。请看以下代码:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 5;
+if $x &lt; 10 {
+    say "$x &lt; 10"; # 5 &lt; 10
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在此示例中，您可以看到if关键字使用的语法。关注关键字 通过布尔条件$ x &lt;10，然后是花括号中的代码块。不像 Perl 5，没有必要围绕条件括起来。
-只有在条件评估为True时才会执行代码块。 if语句可以由else分支完成，该分支将在何时进行控制</p>
+<p>在这个例子中, 你可以看到使用 <code>if</code> 关键字的语法。关键字后面是一个布尔条件 <code>$x &lt; 10</code>, 后面是花括号中的代码块。与 Perl 5 不同的是, 条件周围的圆括号是不必要的。</p>
+</div>
+<div class="paragraph">
+<p>只有当条件值为 <code>True</code> 时, 这段代码才会被执行。</p>
+</div>
+<div class="paragraph">
+<p><code>if</code> 语句可以由 <code>else</code> 分支来完成, 当条件为 <code>False</code> 时, 该分支将接管控制权:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 11;
+if $x &lt; 10 {
+    say "$x &lt; 10";
+}
+else {
+    say "$x &gt;= 10"; # 11 &gt;= 10
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>使用给定的$ x值，程序执行代码后跟else块。
-当您需要更精细的分支时，可以链接if-else检查。在这里，联合 elsif关键字出来:</p>
+<p>在给定值 <code>$x</code> 的情况下, 程序执行代码, 然后是 <code>else</code> 块。</p>
+</div>
+<div class="paragraph">
+<p>当你需要更细化的分支时, 可以将 <code>if-else</code> 检查链接起来。这里, 连带的 <code>elsif</code> 关键字就派上用场了:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 10;
+if $x &lt; 10 {
+    say "$x &lt; 10";
+}
+elsif $x == 10 {
+    say "$x == 10"; # 10 == 10
+} else {
+    say "$x &gt; 10";
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>控制流 elsif分支包含另一个布尔表达式，将在检查时进行检查
-第一个if测试的条件是False。 可以使用不同的布尔测试组合重写相同的程序
-例子:</p>
+<p><code>elsif</code> 分支包含另一个布尔表达式, 当第一个 <code>if</code> 测试的条件为 <code>False</code> 时, 将对其进行检查。</p>
+</div>
+<div class="paragraph">
+<p>同一程序可以使用不同的布尔测试组合重新编写, 举例说明:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 10;
+if $x &lt; 10 {
+    say "$x &lt; 10";
+}
+elsif $x &gt; 10 {
+    say "$x &gt; 10";
+} else {
+    say "$x == 10";
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>你必须要小心，不要错误地输入if而不是elsif。如果您这样做，则创建 两个独立的if检查，两者都可以触发它们，如下所示
-例。
-以下代码检查变量是否小于5或小于10:</p>
+<p>你必须小心不要误写成 <code>if</code> 而不是 <code>elsif</code>。如果你这样做, 你会创建两个独立的 <code>if</code> 检查, 这两个检查都可以触发它们的, 如下面的例子所示。</p>
+</div>
+<div class="paragraph">
+<p>下面这段代码检查变量是否小于5或小于10:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 3;
+if $x &lt; 5 {
+    say 'x &lt; 5';
+}
+elsif $x &lt; 10 {
+    say 'x &lt; 10';
+} else {
+    say 'x &gt;= 10';
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>第一个条件$ x &lt;5为True，因此只执行第一个代码块和程序
-打印x &lt;5。 现在，让我们用if替换elsif:</p>
+<p>第一个条件 <code>$x &lt; 5</code> 为 <code>True</code>, 所以只执行第一个代码块, 程序打印 <code>x &lt; 5</code>。</p>
+</div>
+<div class="paragraph">
+<p>现在, 让我们用 <code>if</code> 代替 <code>elsif</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 3;
+if $x &lt; 5 {
+    say 'x &lt; 5';
+}
+if $x &lt; 10 {
+    say 'x &lt; 10';
+}
+else {
+    say 'x &gt;= 10';
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这种情况下，有两个if块。else块仅存在于第二个if。都 条件，$ x &lt;5和$ x &lt;10，现在都是True，因此，程序打印出来 以下两行:</p>
+<p>在这种情况下, 有两个 <code>if</code> 块。<code>else</code> 块只存在于第二个 <code>if</code> 中。这两个条件, <code>$x &lt; 5</code> 和 <code>$x &lt; 10</code>, 现在都是 <code>True</code>, 因此, 程序打印下面两行:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-txt" data-lang="txt">x &lt; 5
+x &lt; 10</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>另外，如果关键字而不是单个elsif，请确保不要使用其他两个 你需要一个if-elsif-else链。Raku会抱怨，因为它希望找到 else关键字后面的代码块:</p>
+<p>另外, 确保在需要 <code>if-elsif-else</code> 链的地方不要使用两个 <code>else if</code> 关键字而不是一个 <code>elsif</code>。Raku 会抱怨, 因为它希望在 <code>else</code> 关键字之后找到代码块:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 3;
+if $x &lt; 5 {
+    say 'x &lt; 5';
+}
+else if $x &lt; 10 {
+    say 'x &lt; 10';
+}
+else {
+    say 'x &gt;= 10';
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6461,498 +6584,749 @@ if关键字是否会更改程序的流程，具体取决于布尔测试的结果
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">===SORRY!=== Error while compiling /Users/ash/ifelseif.pl
+In Raku, please use "elsif" instead of "else if"</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在Raku中，请使用“elsif”而不是“else if”
-当然，也可以使用嵌套的if-else语句解决问题 你可以看到，有点难看并引入另一层次的嵌套代码，这是不必要的 在以下示例中:</p>
+<p>当然, 也可以使用嵌套的 <code>if-else</code> 语句来解决这个问题, 这可能有点丑, 而且还引入了另一层没有必要的嵌套代码, 在下面的例子中可以看到:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 3;
+if $x &lt; 5 {
+    say 'x &lt; 5';
+}
+else {
+    if $x &lt; 10 {
+        say 'x &lt; 10';
+    }
+    else {
+        say 'x &gt;= 10';
+    }
+}</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>使用循环
-循环结构有助于组织重复的操作。Perl中有几个不同的选项 6用于创建循环。让我们从与C风格的传统循环类似的那个开始。
-循环周期
-loop关键字需要三个元素来控制循环的数量或重复 身体。请考虑以下代码段:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>在此示例中，$ c是循环迭代的计数器。声明了这个变量 在循环关键字-my $ c = 0之后立即初始化。循环的主体是 如果条件$ c &lt;5为True，则执行。在迭代之后，$ c ++语句是 执行，使计数器递增，循环重复。一旦$ c变得平等 到五，条件不再是真，循环停止。所以，整个程序打印出来 数字从0到4，包括4。
-可以省略循环头中的一些或甚至所有部分。例如，如果是计数器
-变量在循环之前初始化，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>如果增量发生在体内。我们可以考虑以下代码:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>请注意，尽管缺少部件，仍然需要使用分号。</p>
-</div>
-<div class="paragraph">
-<p>最后，如果没有给出参数，循环变得无限，你有责任
-停下来，如图所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>使用空标题时，不需要分号，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>循环头部分可以包含多个用逗号分隔的指令。
-例如，这是一个包含两个变量的循环:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>该程序递增$ x变量并递减$ y。输出如下所示:
-0 10 19 28 37 46
-现在，让我们继续讨论for循环。</p>
-</div>
-<div class="paragraph">
-<p>for循环 for循环可以说是一种更简洁的组织循环方式。它不需要
-计数器并迭代数据列表。
-考虑一个例子。这里，列表是一个奇数整数数组:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>$ _变量是默认变量，也称为主题。它需要其中一个的价值 当前迭代中的元素。因此，for循环打印@data中的数字 阵列。
-您可以使用前面的程序执行两项重要的修改。
-首先，如果循环体是单个语句，则可以在后缀中重写循环
-表格，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>这里，内置函数说$ _作为参数。也可以调用方法 在主题上使用相同的名称:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>可以省略默认变量以使程序更短，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>这是真正的Raku的一个例子。
-第二个更改明确地引入了主题变量。在这种情况下，您给出一个名称
-它。语法很简单，可以从以下示例中理解:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>变量在 - &gt;箭头后声明。您不必在此处使用my关键字。 这种格式有一个优点; 因此，它可能需要来自@data的多个值。对于
-例如，要在每次迭代中获取两个值，请声明两个变量，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>该程序打印三个总和，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>控制流 在奇数个元素的情况下，将触发异常，如下所示:
-通过的位置太少; 预期2个参数但得到1
-带箭头的构造(在下面的代码中)称为尖块。它是 相当于采用命名参数的匿名函数，这就是原因 错误消息中提到了参数。我们将在第6章中看到更多相关内容， 子程序。
-要正确处理缺失的数据，可以按如下方式使用默认值:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>在这种情况下，在最后一次迭代中，$ y值将设置为-1，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>使用while，until和repeat
-使用三个关键字，while，until和repeat，您可以创建循环 重复多次由某些条件定义。让我们从最简单的情况开始</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>只要条件$ letter ne&#8217;d'，while循环的主体就会重复
-真正。这里，对变量的控制是在循环体中完成的，同时是它的标题 只控制条件。如果在进入循环之前条件为False，那么正文将会
-不执行，如以下示例所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>until关键字的行为与while相反。执行循环体直到 条件变为真。</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>在前三次迭代中，$ letter eq&#8217;d&#8217;条件为False，因此正文为
-执行。一旦$ letter变为d，循环就会停止。
-如您所见，无法保证循环体将被执行 一旦。如果条件为False(在while的情况下)或True(在until的情况下)最初， 然后跳过循环体的代码。
-repeat关键字将条件的检查移动到正文的末尾，因此它将是 至少执行一次。此关键字与while和until一起使用。</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>该循环打印字母a，b和c。while子句中的条件为False 3 时间，之后变为真。
-现在，让我们修改变量的条件和初始值并运行循环</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>这次，打印字母t。与裸while循环不同，重复while循环 在检查条件之前执行它的主体。</p>
-</div>
-<div class="paragraph">
-<p>请注意，while子句可以放在代码块之前，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>在这种情况下，postfix while子句没有区别。
-同样，until关键字可以与repeat一起使用。重复直到循环是 至少执行一次。如果条件为False，则继续运行代码块直到 条件变为真。</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>或者，使用后缀形式。请考虑以下代码段:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>两个程序都打印a，b和c。选择一个用于定位条件的变体 试着在实践中坚持下去，或者至少在项目中坚持下去。
-打破循环
-循环的执行不仅可以通过初始条件控制，还可以通过初始条件控制 循环体本身。有三个关键字 - next，last和redo。他们成为 使用if时与条件检查一起使用时更有用。</p>
-</div>
-<div class="paragraph">
-<p>最后一个关键字只会打破循环。让我们考虑一个循环的例子
-它打印的值大于某个预定义的阈值:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>请注意，如果在此处使用后缀形式 - 它的行为与以下代码相同:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>前几次迭代像往常一样执行，但是当$ x的当前值变为50时， 这使得$ x&gt; 42条件为True，循环停止并执行 循环后的代码(如果有的话)。该程序打印以下行:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>请注意，代码块中的代码也位于最后一条指令之后 在if条件变为True之前执行。只要$ x变量获得值 50，循环被打破。
-接下来，另一个关键字跳过循环体的其余部分并开始另一次迭代。对于 让我们在1到10之间打印偶数:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>如果条件$ x%2为1，则此循环不会打印数字，这将转换为True。它 偶数发生，因此，只说接收通过滤波器的奇数，如 你可以在下面的输出中看到:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>最后，redo关键字从当前位置重新启动循环。像下一个和最后一个， 它会跳过循环体的其余部分，但不会影响循环计数器。</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>这个简单的程序演示了redo关键字的用法。该程序生成 0到1之间的随机数，只有在数字大于0.5时才使用它。在所有
-在其他情况下，循环迭代重新启动。
-使用标签
-让我们考虑一个嵌套循环的例子:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>该程序打印产品表中的数字从1到5.如果，在某些时候，
-我们想跳过给定$ x的表的其余部分，并继续下一个值 $ X?在$ y中循环使用next只会影响内部循环。要做
-确保下一个语句正在修改外部循环的执行，使用X_LOOP:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>这里的标签是大写的标识符X_LOOP，后跟冒号。它在提到 下一个语句，因此编译器理解下一次迭代应该从 循环标有X_LOOP。
-标签也可以与其他类型的循环一起使用，例如，使用
-直到和循环。</p>
-</div>
-<div class="paragraph">
-<p>执行一次代码
-在Raku中，有趣的是，只能执行一次身体的一部分。例如，在 下一个循环，应该完成四次迭代，但第一条消息将仅打印:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>上面的代码打印以下输出:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>once关键字后面的代码块只执行一次。 这也适用于其他类型的循环，例如，循环周期。考虑到
-以下代码段:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>请注意，如果只有一条指令要执行，则不需要花括号
-一旦。
-once关键字不仅适用于循环。它可以用于任何其他部分 代码，例如，子程序内部。我们将在下一章详细讨论子程序
-第6章，子程序。现在，这是一个打印整数平方的简单示例 在第一次调用函数f时问候我们:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>控制流 程序输出如下:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>收集和采集数据</p>
-</div>
-<div class="paragraph">
-<p>使用Perl中的一对关键字可以非常有条理地组织数据列表 6聚集并采取。了解其工作原理的最简单方法是查看 以下示例:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>gather关键字后面的代码块返回保存在@data中的序列 阵列。序列的元素由take关键字提供。所以，会有 @data中的两个元素，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>让我们考虑一个更大的例子。它包含一个整数二维矩阵 和一份说明清单。说明是四个方向 - 左，右，上和
-下来，并采取命令。你应该从矩阵的中心开始，然后移动
-根据指令当前位置，如果指令则拿起数字
-告诉你。</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>代码的主要部分是gather关键字的代码块。它包含一个循环
-@instructions，并且，根据当前命令，它要么改变 当前位置的坐标或使用take关键字获取数字，如下所示:
-拿@matrix [$ y] [$ x] 代码完成后，@result数组将包含三个数字
-根据给定的@instructions。
-用给定的主题设置主题
-在上一节的示例中，我们使用了链式if-elsif结构。让我们 再看看这个:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>可以清楚地看到，所有分支都包含相同的代码，用于比较当前的代码 $ step变量的值与其中一个预定义值。虽然很简单
-直截了当，这不是进行这种比较的最优雅的方式。</p>
-</div>
-<div class="paragraph">
-<p>控制流
-在某些语言(如C和C ++)中，switch和case关键字有助于重新组织
-if-else链。在Raku中，我们使用给定和何时。可以重写上面的代码 以下方式:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>这里发生的是给定$ step变量并使其成为当前主题。 这意味着它现在可通过默认变量$ _获得。你可以清楚地看到它 在给定的代码块内打印，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>在内部时，主题变量与给定值智能匹配，换句话说，何时 'up&#8217;相当于if _ _ ~~'up'。
-找到匹配后的第一个关键字后，其余的未经过测试。例如，尝试打印
-最后一个关键字之前的东西，如下所示:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>只有在没有任何方向命令时才会访问打印指令
-抓住了，你可以在这里看到:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>由于when关键字执行智能匹配操作，因此有更多方法可以创建 条件。例如，可以直接测试变量的类型，如下所示 以下代码:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>在这个程序中，@ data数组包含不同类型的元素 - 整数和字符串。 两个when语句根据类型名称测试主题并打印其中一个 以下两个字符串:
-1是整数 两个是一个字符串 3是整数 四是一个字符串
-1 2是别的东西
-如果没有触发when块，则执行可选的默认块。 您可能已经注意到，在上一个示例中没有给定关键字。这是因为
-该主题已由for循环设置，无需再次设置。 相反，正如您所看到的，可以单独使用给定的关键字来设置默认变量</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_条件检查">5.2. 条件检查</h3>
-
 </div>
 <div class="sect2">
 <h3 id="_使用循环">5.3. 使用循环</h3>
-
-</div>
-<div class="sect2">
-<h3 id="_只执行代码一次">5.4. 只执行代码一次</h3>
-
-</div>
-<div class="sect2">
-<h3 id="_用_gather_和_take_收集数据">5.5. 用 gather 和 take 收集数据</h3>
-
-</div>
-<div class="sect2">
-<h3 id="_用_given_设置主题">5.6. 用 given 设置主题</h3>
-
-</div>
-<div class="sect2">
-<h3 id="_总结_5">5.7. 总结</h3>
 <div class="paragraph">
-<p>在本章中，我们介绍了控制流程，Raku为传统程序提供了控制流程 节目。我们谈到了执行代码块并使用 关键字if，else和elsif。我们还讨论了不同的循环 - 基本循环 循环，重复，直到和循环具有前置条件或后置条件。 然后我们研究了使用gather-take对来收集数据以及Raku的工作方式 主题在给定和关键字的帮助下。
-Raku不仅能够使用过程编程风格。你会找到 关于其他范例的更多信息 第13章，并发编程，第1章
-14 ，功能编程，和第15章，反应式编程。
-同时，在下一章中，我们将讨论组织代码的另一个层次
-子程序。</p>
+<p>循环结构有助于组织重复的操作。在 Raku 中, 有几个不同的选项可以用来创建循环。让我们从类似于传统的 C 风格的循环开始。</p>
+</div>
+<div class="sect3">
+<h4 id="_循环周期">5.3.1. 循环周期</h4>
+<div class="paragraph">
+<p><code>loop</code> 关键字期望有三个元素来控制循环体的数量或重复次数。请看下面的代码片段:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">loop (my $c = 0; $c &lt; 5; $c++) {
+    say $c;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在本例中, <code>$c</code> 是循环迭代的计数器。这个变量是在循环关键字-<code>my $c = 0</code> 之后立即声明并初始化的, 如果条件 <code>$c &lt; 5</code> 为 <code>True</code>, 则执行循环的主体。循环迭代后, 执行 <code>$c++</code> 语句, 使计数器递增, 循环重复。只要 <code>$c</code> 等于 5, 条件就不再是 <code>True</code> 了, 循环就停止了。所以, 整个程序打印从0一直到4的数字, 包括 4。</p>
+</div>
+<div class="paragraph">
+<p>循环头中的某些甚至全部部分可能会被省略。例如, 如果在循环前初始化计数器变量, 如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $c = 0;
+loop (; $c &lt; 5; $c++) {
+    say $c;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果增量发生在主体内部。我们可以考虑以下代码:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $c = 0;
+loop (; $c &lt; 5; ) {
+    say $c;
+    $c++;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意, 尽管缺失了部分, 但还是需要分号。</p>
+</div>
+<div class="paragraph">
+<p>最后, 如果没有给出参数, 循环就会变成无限循环, 你有责任停止它, 如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $c = 0;
+loop (;;) {
+    say $c;
+    $c++;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果是空头, 则不需要分号, 如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $c = 0;
+loop {
+    say $c;
+    $c++;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>循环头的各部分可以包含多条指令, 用逗号分隔。例如, 这里是一个有两个变量的循环:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">loop (my $x = 0, my $y = 10; $x &lt; 5 &amp;&amp; $y &gt; 5; $x++, $y--) {
+    say "$x $y";
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个程序将 <code>$x</code> 变量递增, 并将 <code>$y</code> 递减。输出结果是这样的:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">0 10
+1 9
+2 8
+3 7
+4 6</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在, 让我们进入 <code>for</code> 循环。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_for_循环">5.3.2. for 循环</h4>
+<div class="paragraph">
+<p><code>for</code> 循环可以说是一种比较 Perlish 的组织循环的方式。它不需要计数器, 并且在一个数据列表上进行迭代。</p>
+</div>
+<div class="paragraph">
+<p>看一个例子。这里, 列表是一个奇数整数的数组:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @data = 1, 3, 5, 7, 9, 11;
+for @data {
+    say $_;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>$_ 变量是默认变量, 也叫主题。它取当前迭代中的一个元素的值。因此, <code>for</code> 循环会打印 <code>@data</code> 数组中的数字。</p>
+</div>
+<div class="paragraph">
+<p>你可以对前面的程序执行两个重要的修改。</p>
+</div>
+<div class="paragraph">
+<p>首先, 如果循环的主体是一条语句, 可以用后缀形式重写循环, 如这里所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @data = 1, 3, 5, 7, 9, 11;
+say $_ for @data;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里, 内置函数 <code>say</code> 以 $_ 为参数。也可以在主题上调用一个同名的方法:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$_.say for @data;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如你所见, 可以省略默认变量, 使程序更短:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say for @data;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这是一个真实的 Raku 的例子。</p>
+</div>
+<div class="paragraph">
+<p>第二个变化是明确地引入了主题变量。在这种情况下, 你给它起了一个名字。语法很简单, 可以从下面的例子中理解:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @data = 1, 3, 5, 7, 9, 11;
+for @data -&gt; $x {
+    say $x;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>变量是在 <code>&#8594;</code> 箭头后面声明的。你不需要在这里使用 <code>my</code> 关键字。这种格式有一个优点, 就是它可以从 <code>@data</code> 中取多个值。例如, 如果要在每次迭代时取两个值, 可以像下面这样声明两个变量:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @data = 1, 3, 5, 7, 9, 11;
+for @data -&gt; $x, $y {
+    say "$x + $y = ", $x + $y;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如你所见, 这个程序可以打印出三个和:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">1 + 3 = 4
+5 + 7 = 12
+9 + 11 = 20</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在元素数量为奇数的情况下, 会出现异常, 如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Too few positionals passed; expected 2 arguments but got 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>带箭头的结构(在下面的代码中)被称为尖号块。它相当于一个匿名函数, 接受命名参数, 这就是为什么在错误信息中提到参数的原因。我们将在第六章《子程序》中看到更多的内容。</p>
+</div>
+<div class="paragraph">
+<p>为了正确处理缺失的数据, 可以使用如下的默认值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @data = 1, 3, 5, 7, 9, 11, 13;
+for @data -&gt; $x, $y = -1 {
+    say "$x, $y";
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如你所见, 在这种情况下, 在最后一次迭代时, <code>$y</code> 的值将被设置为 <code>-1</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">1, 3
+5, 7
+9, 11
+13, -1</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_使用_whileuntil_和_repeat">5.3.3. 使用 while、until 和 repeat</h4>
+<div class="paragraph">
+<p>通过 <code>while</code>、<code>until</code> 和 <code>repeat</code> 这三个关键字, 你可以创建由一定条件定义的重复次数的循环。我们先从最简单的情况开始, 用一个裸关键字 <code>while</code> 和 <code>until</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $letter = 'a';
+while $letter ne 'd' {
+    say $letter;
+    $letter++;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>只要条件 <code>$letter ne 'd'</code> 为 <code>True</code>, 就会重复执行 <code>while</code> 循环的主体。在这里, 对变量的控制是在循环的主体中完成的, 而其头部只控制条件。如果在进入循环前条件为 <code>False</code>, 则不会执行主体, 如下例所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $letter = 't';
+while $letter le 'd' { # 't' is not less or equal then 'd';
+    say $letter;       # body is not executed.
+    $letter++;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>until</code> 关键字的行为与 <code>while</code> 相反。循环体被执行, 直到条件变为 <code>True</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $letter = 'a';
+until $letter eq 'd' {
+    say $letter;
+    $letter++;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在前三次迭代过程中, <code>$letter eq 'd'</code> 条件为 <code>False</code>, 所以主体被执行。只要 <code>$letter</code> 变成 <code>d</code>, 循环就会停止。</p>
+</div>
+<div class="paragraph">
+<p>正如你所看到的, 并不能保证循环的主体会被执行哪怕一次。如果条件最初是 <code>False</code>(在 <code>while</code> 的情况下)或 <code>True</code>(在 <code>until</code> 的情况下), 那么循环主体的代码就会被跳过。</p>
+</div>
+<div class="paragraph">
+<p><code>repeat</code> 关键字将条件检查移动到主体的末尾, 因此它将至少被执行一次。这个关键字与 <code>while</code> 和 <code>until</code> 一起使用。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $letter = 'a';
+repeat {
+    say $letter;
+    $letter++;
+} while $letter ne 'd';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个循环打印出字母 a、b、c, <code>while</code> 子句中的条件为 <code>False</code> 三次, 之后变为 <code>True</code>。</p>
+</div>
+<div class="paragraph">
+<p>现在, 让我们同时修改条件和变量的初始值, 然后再次运行这个循环:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $letter = 't';
+repeat {
+    say $letter;
+    $letter++;
+} while $letter le 'd';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这次打印的是字母 <code>t</code>。与裸 <code>while</code> 循环不同的是, <code>repeat while</code> 循环在检查条件之前执行其主体。</p>
+</div>
+<div class="paragraph">
+<p>注意, <code>while</code> 子句可以放在代码块之前, 如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $letter = 't';
+repeat while $letter le 'd' {
+    say $letter;
+    $letter++;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这种情况下, 与后缀 <code>while</code> 子句没有区别。</p>
+</div>
+<div class="paragraph">
+<p>同样, <code>unit</code> 关键字也可以和 <code>repeat</code> 一起使用。<code>repeat until</code> 循环至少执行一次。如果条件为 <code>False</code>, 则继续运行代码块, 直到条件变为 <code>True</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $letter = 'a';
+repeat until $letter eq 'd' {
+    say $letter;
+    $letter++;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>或者, 使用后缀形式。请看下面的代码片段:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $letter = 'a';
+repeat {
+    say $letter;
+    $letter++;
+} until $letter eq 'd';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这两个程序都会打印出a、b、c, 选择其中一个定位条件的变体, 并在实践中尝试坚持使用, 至少在项目里面是这样。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_中断循环">5.3.4. 中断循环</h4>
+<div class="paragraph">
+<p>循环的执行不仅可以用初始条件控制, 还可以从循环体本身控制。有三个关键字-<code>next</code>、<code>last</code> 和 <code>redo</code>。当它们与使用 <code>if</code> 的条件检查一起使用时, 会变得更加有用。</p>
+</div>
+<div class="paragraph">
+<p><code>last</code> 关键字只是中断循环。让我们看一个例子, 在打印一个大于某个预定义阈值的值后, 循环就会中断:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @data = 3, 1, 7, 12, 50, 2, 14;
+for @data -&gt; $x {
+    last if $x &gt; 42;
+    say $x;
+}
+say 'Done.';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意, 这里的 <code>if</code> 是以后缀的形式使用的-它的行为和下面的代码一样:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">if $x &gt; 42 {
+    last;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>前几次迭代照常执行, 但当 <code>$x</code> 的当前值变成 50, 使得 <code>$x &gt; 42</code> 的条件为 <code>True</code> 时, 循环停止, 执行到循环后的代码(如果有的话)。程序打印出以下几行:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">3
+1
+7
+12 Done.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>注意, 代码块中位于最后一条指令之后的代码, 也是在 <code>if</code> 条件变为 <code>True</code> 之前执行的。只要 <code>$x</code> 变量得到 50 的值, 循环就会被中断。</p>
+</div>
+<div class="paragraph">
+<p>另一个关键字 <code>next</code>, 跳过循环体的其余部分, 开始另一次迭代。例如, 让我们打印1到10之间的偶数:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for 1..10 -&gt; $x {
+    next if $x % 2;
+    say $x;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果条件 <code>$x % 2</code> 是 1, 这个循环不会打印一个数字, 而这个条件是转换为 <code>True</code> 的。它发生在偶数上, 因此, <code>say</code> 只接收通过过滤器的奇数, 正如你可以在下面的输出中看到的那样:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">2
+4
+6
+8
+10</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后, <code>redo</code> 关键字从当前位置重新启动循环。与 <code>next</code> 和 <code>last</code> 一样, 它跳过循环主体的其余部分, 但不影响循环计数器。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for 1..5 -&gt; $n {
+    my $r = rand;
+    say "Trying $r";
+    redo if $r &lt; 0.5;
+
+    say $n + $r;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个简单的程序演示了 <code>redo</code> 关键字的用法。程序会生成一个0和1之间的随机数, 只有当这个数大于0.5时才会使用它。在所有其他情况下, 循环迭代会重新开始。</p>
+</div>
+<div class="sect4">
+<h5 id="_使用标签">使用标签</h5>
+<div class="paragraph">
+<p>让我们考虑一个嵌套循环的例子:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for 1..5 -&gt; $x {
+    for 1..5 -&gt; $y {
+        say "$x * $y = ", $x * $y;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个程序打印了1到5的数字的乘法表。如果在某些时候, 我们想跳过给定的 <code>$x</code> 的表的其余部分, 继续计算 <code>$x</code> 的下一个值, 怎么办？直接在循环内使用 <code>next</code> 对 <code>$y</code> 的使用, 只会影响到内循环。为了确保 <code>next</code> 语句是修改外循环的执行, 使用 <code>X_LOOP</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">X_LOOP: for 1..5 -&gt; $x {
+    for 1..5 -&gt; $y {
+        next X_LOOP if $y == $x;
+        say "$x $y = ", $x $y;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里的标签是一个大写的标识符 <code>X_LOOP</code>, 后面是冒号。它在下一条语句中被提及, 所以编译器明白下一次迭代应该从标有 <code>X_LOOP</code> 的循环开始。</p>
+</div>
+<div class="paragraph">
+<p>标签也可以用于其他类型的循环, 例如, 用于 <code>until</code> 和 <code>while</code> 循环。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_执行代码一次">5.4. 执行代码一次</h3>
+<div class="paragraph">
+<p>在 Raku 中, 有趣的是, 可以只执行部分主体一次。例如, 在下一个循环中, 应该有四次迭代完成, 但第一条消息只打印一次:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for 1, 2, 3, 4 {
+    once {
+        say 'Looping from 1 to 4';
+    }
+    say "Current value is $_";
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>上面的代码打印了以下输出:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Looping from 1 to 4
+Current value is 1
+Current value is 2
+Current value is 3
+Current value is 4</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>once</code> 关键字后的代码块只执行了一次。</p>
+</div>
+<div class="paragraph">
+<p>这也适用于其他类型的循环, 例如, <code>loop</code> 循环。看一下下面的代码片段:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">loop (my $c = 1; $c != 5; $c++) {
+    once say 'Looping from 1 to 4';
+    say "Current value is $c";
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意, 如果你只有一条指令要执行一次, 就不需要花括号。</p>
+</div>
+<div class="paragraph">
+<p><code>once</code> 关键字不仅适用于循环。它可以用在代码的任何其他部分, 例如, 在子程序内部。我们将在下一章第六章《子程序》中详细讨论子程序。现在, 这里有一个简单的例子, 它可以打印整数的平方, 并在函数 <code>f</code> 的第一次调用时向我们问好:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub f($x) {
+    once say 'Hi!';
+    say $x * $x;
+}
+
+f(1);
+f(2);
+f(3);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>程序的输出如下:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Hi!
+1
+4
+9</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_使用_gather_和_take_收集数据">5.5. 使用 gather 和 take 收集数据</h3>
+<div class="paragraph">
+<p>用 Raku 中的一对关键字-<code>gather</code> 和 <code>take</code> 就可以很有表现力地组织数据列表的准备工作。要了解其工作原理, 最简单的方法就是看看下面的例子:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @data = gather {
+    take 'a';
+    take 'b';
+}
+
+say @data;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>gather</code> 关键字后的代码块返回一个序列, 保存在 <code>@data</code> 数组中。序列中的元素由 <code>take</code> 关键字提供。所以, 在 <code>@data</code> 中会有两个元素, 如你所见:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">[a b]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>让我们考虑一个更大的例子。它包含一个二维整数矩阵和一个指令列表。指令是 <code>left</code>、<code>right</code>、<code>up</code> 和 <code>down</code> 四个方向, 还有一个命令-<code>take-it</code>。你应该从矩阵的中心开始, 然后根据指令移动当前的位置, 如果指令告诉你, 你就应该拾取数字。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @matrix = (
+    [ 8, 10, 3, 16, 11],
+    [ 4, 13, 5, 1, 6],
+    [20, 9, 0, 15, 19],
+    [14, 2, 24, 7, 23],
+    [21, 17, 18, 12, 22],
+);
+
+my ($x, $y) = 2, 2; # Starting position
+my @instructions = &lt;down down take-it
+                    left up up take-it
+                     right right up up take-it&gt;;
+
+my @result = gather {
+    for @instructions -&gt; $step {
+        if $step eq 'up'         {$y--}
+        elsif $step eq 'down'    {$y++}
+        elsif $step eq 'right'   {$x++}
+        elsif $step eq 'left'    {$x--}
+        elsif $step eq 'take-it' {take @matrix[$y][$x]}
+    }
+}
+
+say @result; # [18 9 16]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>代码的主要部分是 <code>gather</code> 关键字的代码块。它包含了对 <code>@instructions</code> 的循环, 根据当前的命令, 它要么改变当前位置的坐标, 要么使用 <code>take</code> 关键字取数, 如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">take @matrix[$y][$x]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>代码完成后, <code>@result</code> 数组将包含根据给定的 <code>@instructions</code> 选择的三个数字。</p>
+</div>
+<div class="sect3">
+<h4 id="_用_given_设置主题">5.5.1. 用 given 设置主题</h4>
+<div class="paragraph">
+<p>在上一节的例子中, 我们使用了链式 <code>if-elsif</code> 结构。让我们再看一次:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">if $step eq 'up'         {$y--}
+elsif $step eq 'down'    {$y++}
+elsif $step eq 'right'   {$x++}
+elsif $step eq 'left'    {$x--}
+elsif $step eq 'take-it' {take @matrix[$y][$x]}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>可以清楚地看到, 所有的分支都包含相同的代码, 将 <code>$step</code> 变量的当前值与预定义的值进行比较。虽然简单明了, 但这并不是进行这种比较的最优雅方式。</p>
+</div>
+<div class="paragraph">
+<p>在一些语言中, 如 C和 <code>C++</code>, <code>switch</code> 和 <code>case</code> 关键字有助于重新组织 <code>if-else</code> 链。在 Raku 中, 我们使用 <code>given</code> 和 <code>when</code>。前面的代码可以用下面的方式重写:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">given $step {
+    when 'up'      {$y--}
+    when 'down'    {$y++}
+    when 'right'   {$x++}
+    when 'left'    {$x--}
+    when 'take-it' {take @matrix[$y][$x]}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里发生的事情是, <code>given</code> 将 <code>$step</code> 变量作为当前主题。这意味着它现在可以通过默认变量 $_ 使用。如果你在给定的代码块中打印, 你可以清楚地看到它, 如这里所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">given $step {
+    say $_;
+
+    when 'up' {$y--}
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 <code>when</code> 里面, 主题变量与给定的值进行智能匹配, 换句话说, <code>when 'up'</code> 相当于 <code>if $_ ~~ 'up'</code>。</p>
+</div>
+<div class="paragraph">
+<p>在第一个关键字 <code>when</code> 找到匹配后, 其他的就不测试了。例如, 尝试在最后一个关键字 <code>when</code> 之前打印一些东西, 如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">given $step {
+    when 'up'    {$y--}
+    when 'down'  {$y++}
+    when 'right' {$x++}
+    when 'left'  {$x--}
+    say "Can only be 'take-it': $step";
+    when 'take-it' {take @matrix[$y][$x]}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如你所见, 打印指令只有在没有一个方向指令被捕获时才会被访问:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Can only be 'take-it': take-it
+Can only be 'take-it': take-it
+Can only be 'take-it': take-it
+[18 9 16]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>由于 <code>when</code> 关键字执行的是智能匹配操作, 所以创建条件的方法比较多。例如, 可以直接测试变量的类型, 如下一段代码所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @data = 1, 'two', 3, 'four', [1, 2];
+for @data {
+    when Int {
+        say "$_ is an integer";
+    }
+    when Str {
+        say "$_ is a string";
+    }
+    default {
+        say "$_ is something else"
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这个程序中, <code>@data</code> 数组包含不同类型的元素-整数和字符串。两个 <code>when</code> 语句根据类型名测试主题, 并打印出下面两个字符串中的一个。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">1 is an integer
+two is a string
+3 is an integer
+four is a string
+1 2 is something else</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果没有触发任何一个 <code>when</code> 块, 则会执行可选的默认块。</p>
+</div>
+<div class="paragraph">
+<p>你可能已经注意到, 在最后一个例子中没有 <code>given</code> 关键字。这是因为主题已经被 <code>for</code> 循环设置了, 没有必要再设置一次。</p>
+</div>
+<div class="paragraph">
+<p>相反, 如你所见, <code>given</code> 关键字可以单独用来设置默认变量:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">given 'John' {
+    .say # prints $_, which is 'John'
+}
+
+given 'John' {
+    say "Hello, $_"; # prints 'Hello, John'
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_总结_5">5.6. 总结</h3>
+<div class="paragraph">
+<p>在本章中, 我们介绍了 Raku 为传统的程序化编程提供的控制流。我们谈到了执行代码块, 并使用关键字 <code>if</code>、<code>elsif</code> 和 <code>elsif</code> 进行决策。我们还谈到了不同的循环-基本循环、<code>for</code> 循环、以及带有前置条件或后置条件的 <code>repeat</code>、<code>until</code> 和 <code>while</code> 循环。然后, 我们看了使用 <code>gather-take</code> 对来收集数据, 以及 Raku 借助 <code>given</code> 和 <code>when</code> 关键字来处理主题的方式。</p>
+</div>
+<div class="paragraph">
+<p>Raku 不仅仅能够使用程序化的编程风格。你将在第十三章《并发编程》、第十四章《函数式编程》和第十五章《反应式编程》中找到更多关于其他范式的信息。</p>
+</div>
+<div class="paragraph">
+<p>同时, 在下一章中, 我们将讨论组织代码和子程序的另一个层次。</p>
 </div>
 </div>
 </div>
