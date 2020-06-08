@@ -189,13 +189,11 @@ if (theme && theme !== "1") {
 </li>
 <li><a href="#_输入和输出">9. 输入和输出</a>
 <ul class="sectlevel2">
-<li><a href="#_从流中读取">9.1. 从流中读取</a></li>
-<li><a href="#_写出到流">9.2. 写出到流</a></li>
-<li><a href="#_标准输入和输出">9.3. 标准输入和输出</a></li>
-<li><a href="#_使用文件和目录">9.4. 使用文件和目录</a></li>
-<li><a href="#_从流中读取_2">9.5. 从流中读取</a></li>
-<li><a href="#_写入流">9.6. 写入流</a></li>
-<li><a href="#_总结_9">9.7. 总结</a></li>
+<li><a href="#_标准输入和输出">9.1. 标准输入和输出</a></li>
+<li><a href="#_使用文件和目录">9.2. 使用文件和目录</a></li>
+<li><a href="#_从流中读取">9.3. 从流中读取</a></li>
+<li><a href="#_写入流">9.4. 写入流</a></li>
+<li><a href="#_总结_9">9.5. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_异常">10. 异常</a>
@@ -11260,11 +11258,10 @@ say $o.*n(); # ()</code></pre>
 <h2 id="_输入和输出">9. 输入和输出</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>本章专门介绍输入和输出，主要基于 Raku 中的 <code>IO::Handle</code> 类。计算机程序通常与用户通信。它可能是控制台应用程序中的输入和输出，或读取配置文件或保存
-结果到磁盘上的文件。在本章中，我们将讨论 Raku 中的输入和输出设施。</p>
+<p>本章主要介绍输入和输出，这主要是基于 Raku 中的 <code>IO::Handle</code> 类。一般计算机程序都会与用户进行通信。它可能是控制台应用程序中的输入和输出，或者是读取配置文件，或者是将结果保存在磁盘的文件中。在本章中，我们将讲述 Raku 中的输入和输出设施。</p>
 </div>
 <div class="paragraph">
-<p>本章将介绍以下主题:</p>
+<p>本章将涉及以下主题:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -11281,7 +11278,7 @@ say $o.*n(); # ()</code></pre>
 <p>读取输入流的方法</p>
 </li>
 <li>
-<p>写到输出流的方法</p>
+<p>写入输出流的方法</p>
 </li>
 <li>
 <p>格式化输出</p>
@@ -11289,17 +11286,9 @@ say $o.*n(); # ()</code></pre>
 </ul>
 </div>
 <div class="sect2">
-<h3 id="_从流中读取">9.1. 从流中读取</h3>
-
-</div>
-<div class="sect2">
-<h3 id="_写出到流">9.2. 写出到流</h3>
-
-</div>
-<div class="sect2">
-<h3 id="_标准输入和输出">9.3. 标准输入和输出</h3>
+<h3 id="_标准输入和输出">9.1. 标准输入和输出</h3>
 <div class="paragraph">
-<p>在前面的章节中，我们创建了许多可以打印到控制台并从控制台读取的程序。让我们刷新一些第二章中编写代码的知识，并创建一个询问用户的名字并问候他们程序:</p>
+<p>在前面的章节中，我们已经创建了许多打印到控制台并从中读取数据的程序。让我们温习一下第二章《编写代码》中的一些知识，创建一个询问用户姓名并向用户问好的程序:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11309,16 +11298,16 @@ note "Greeted $name at " ~ time;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里，<code>prompt</code> 函数打印消息并等待用户输入字符串。该字符串被保存在 <code>$name</code> 变量中，稍后被插值到双引号字符串中。<code>note</code> 函数打印调试消息并记录受到欢迎的时间。</p>
+<p>在这里，<code>prompt</code> 函数会打印消息，并等待用户输入一个字符串。该字符串被保存在 <code>$name</code> 变量中，之后用双引号插值在一个字符串中。<code>note</code> 函数打印调试信息，并记录向人问好的时间。</p>
 </div>
 <div class="paragraph">
-<p>在这个程序中，Raku 使用两个标准通信通道，即标准输入流(简称 stdin)和标准输出流(stdout)。这些是接收用户输入并接受程序打印内容的默认流。另一个通道，我们在第二章的编写代码中已经提到过，是打印错误消息和警告的流，即标准错误输出(stderr)。</p>
+<p>在这个程序中，Raku 使用了两个标准的通信通道，即标准输入流(简称 stdin)和标准输出流(stdout)。这些都是默认的流，它们接收用户的输入并接受程序打印的内容。另一个通道，我们在第二章《编写代码》中已经提到过，是用于打印错误信息和警告的流，即标准错误输出(stderr)。</p>
 </div>
 <div class="paragraph">
-<p>在 Linux 系统上，POSIX 标准确定文件描述符编号为数字 0, 1 和 2 分别是 stdout，stdin 和 stderr。在 Raku 中，有三个具有动态作用域的特殊变量，<code>$*OUT</code>，<code>$*IN</code> 和 <code>$*ERR</code>， 它们默认附加到这些通道上。</p>
+<p>在 Linux 系统中，POSIX 标准决定了文件描述符的数字为 0、1、2 的分别是 stdout、stdin 和 stderr。在 Raku 中，有三个具有动态作用域的特殊变量，<code>$*OUT</code>、<code>$*IN</code> 和 <code>$*ERR</code>，默认情况下是附加在这些通道上的。</p>
 </div>
 <div class="paragraph">
-<p><code>print</code> 和 <code>warn</code> 等内置函数使用 <code>$*OUT</code>，<code>$*IN</code> 和 <code>$*ERR</code> 的值。 下表显示了函数和通道之间的对应关系:</p>
+<p><code>print</code> 和 <code>warn</code> 等内置函数使用的是 <code>$*OUT</code>、<code>$*IN</code> 和 <code>$*ERR</code> 的值。下表显示了函数和通道之间的对应关系:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -11365,24 +11354,23 @@ note "Greeted $name at " ~ time;</code></pre>
 </tbody>
 </table>
 <div class="paragraph">
-<p><code>$*OUT</code>，<code>$*IN</code> 和 <code>$*ERR</code> 变量是 <code>IO::Handle</code> 类的实例。让我们来探索它。</p>
+<p><code>$*OUT</code>，<code>$*IN</code> 和 <code>$*ERR</code> 变量是 <code>IO::Handle</code> 类的实例。让我们来探索一下它。</p>
 </div>
 <div class="paragraph">
-<p><code>IO::Handle</code> 类表示打开的文件或输入/输出流。在 Raku 中，这个类实现了 <code>IO</code> 角色。在本节中，我们将讨论 <code>IO::Handle</code> 类和 <code>IO</code> 角色赋予程序员的最有用的方法。</p>
+<p><code>IO::Handle</code> 类代表一个打开的文件或一个输入/输出流。在 Raku 中，这个类实现了 <code>IO</code> 角色。在本节中，我们将讨论 <code>IO::Handle</code> 类和 <code>IO</code> 角色给予程序员的最有用的方法。</p>
 </div>
 <div class="paragraph">
-<p>我们将学习的内容适用于标准输入/输出流和使用文件。</p>
+<p>我们将学习的内容既适用于标准输入/输出流，也适用于处理文件。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_使用文件和目录">9.4. 使用文件和目录</h3>
+<h3 id="_使用文件和目录">9.2. 使用文件和目录</h3>
 <div class="paragraph">
-<p>和很多其它语言一样，在 Raku 中使用文件是通过文件句柄来完成的。 打开文件后立即获得文件句柄; 稍后，你使用该句柄写入文件或者从中读取。所有其他操作，例如刷新缓冲区或关闭文件，也都是通过句柄执行的。</p>
+<p>在 Raku 中，以及在许多其他语言中，都是通过文件句柄来处理文件的。当你打开一个文件时，你就会得到文件句柄；之后，你就会使用句柄向文件写入或从文件中读取。所有其他的操作，如刷新缓冲区或关闭文件，也都是通过句柄来完成的。
+==== 打开文件</p>
 </div>
-<div class="sect3">
-<h4 id="_打开文件">9.4.1. 打开文件</h4>
 <div class="paragraph">
-<p>要打开文件，请使用 <code>open</code> 函数(它由 <code>IO</code> 角色提供，但可以用作简单的内置函数)。它接收一个文件路径和许多可选参数。 返回值是文件句柄，如下所示:</p>
+<p>要打开一个文件，使用 <code>open</code> 函数(它由 <code>IO</code> 角色提供，但也可以作为一个简单的内置函数使用)。它接收文件的路径和一些可选的参数。返回值是一个文件句柄，如下所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11390,7 +11378,7 @@ note "Greeted $name at " ~ time;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>默认情况下，文件以只读模式打开。可以显式地使用命名参数传递模式名称。以上示例等同于以下代码:</p>
+<p>默认情况下，文件是以只读模式打开的。可以显式地使用命名参数传递模式名称。上面的例子相当于下面的代码:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11429,7 +11417,7 @@ note "Greeted $name at " ~ time;</code></pre>
 </tbody>
 </table>
 <div class="paragraph">
-<p>根据打开文件的模式，<code>IO::Handle</code> 类中的一组方法将可用。例如，你无法写入使用 <code>:r</code> 选项打开的文件，即使文件句柄仍然是通用的 <code>IO::Handle</code> 类的实例。在这种情况下将抛出 <code>X::AdHoc</code> 异常:</p>
+<p>根据打开文件的模式，<code>IO::Handle</code> 类中的一组方法将可用。例如，即使文件句柄仍然是通用的 <code>IO::Handle</code> 类的实例, 你也不能向一个使用 <code>:r</code> 选项打开的文件写入。在这种情况下, 将抛出一个 <code>X::AdHoc</code> 异常:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11459,19 +11447,18 @@ say $!.^name;         # X::AdHoc, see details in Chapter 10, Exceptions</code></
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">:enc('encoding')</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">给文件关联给定的编码。查看写入到流一节中的例子。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">给文件关联给定的编码。请看写入到流一节中的例子。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">:chomp</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">如果 :chomp 被设置为真，那么按行读取时，新行符会被截断(请参阅从流中读取一节)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果 :chomp 被设置为 True，那么按行读取时，新行符会被截断(参见从流中读取一节)</p></td>
 </tr>
 </tbody>
 </table>
-</div>
 <div class="sect3">
-<h4 id="_关闭文件">9.4.2. 关闭文件</h4>
+<h4 id="_关闭文件">9.2.1. 关闭文件</h4>
 <div class="paragraph">
-<p>要关闭文件，请在文件句柄上调用 <code>close</code> 方法:</p>
+<p>要关闭一个文件，调用文件句柄上的 <code>close</code> 方法:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11482,9 +11469,9 @@ $fh.close;</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_测试文件和目录属性">9.4.3. 测试文件和目录属性</h4>
+<h4 id="_测试文件和目录属性">9.2.2. 测试文件和目录属性</h4>
 <div class="paragraph">
-<p><code>IO</code> 角色提供了许多单字母方法来检查文件和目录的不同指标。返回值是布尔值。下表中列出了这些方法:</p>
+<p><code>IO</code> 角色提供了一些单字母方法来检查文件和目录的不同指标。返回值为布尔值。下表中列出了这些方法:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -11543,10 +11530,10 @@ $fh.close;</code></pre>
 </tbody>
 </table>
 <div class="paragraph">
-<p>将这些方法视为示例。由于方法是在 <code>IO</code> 角色中定义的，我们必须首先在可以表示路径的变量上调用 <code>IO</code> 方法来访问它们。例如，它可以是文字字符串或包含文件或目录路径的变量。还有，你可以在文件句柄上调用 <code>IO</code> 方法。</p>
+<p>以这些方法为例。由于这些方法是在 <code>IO</code> 角色中定义的，我们要访问它们，首先要对变量调用 <code>IO</code> 方法，变量可以代表路径。例如，它可以是一个字面字符串或包含文件或目录路径的变量。另外，你也可以在文件句柄上调用 <code>IO</code> 方法。</p>
 </div>
 <div class="paragraph">
-<p>我们来看几个例子。检查文件是存在:</p>
+<p>我们来看几个例子。检查文件是否存在:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11565,7 +11552,7 @@ say "File $path exists" if $path.IO.e;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>请注意，<code>d</code> 方法仅适用于目录。如果路径存在但它是一个文件，那么该方法返回 <code>False</code>:</p>
+<p>请注意，<code>d</code> 方法只适用于目录。如果路径存在, 但它是一个文件，那么该方法返回 <code>False</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11573,7 +11560,7 @@ say "File $path exists" if $path.IO.e;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>要检查路径是否存在，请使用 <code>e</code> 方法。结果不取决于路径是目录还是文件:</p>
+<p>要检查路径是否存在，使用 <code>e</code> 方法。其结果不取决于路径是目录还是文件:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11581,7 +11568,7 @@ say "File $path exists" if $path.IO.e;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>用于测试文件和目录属性的所有上述方法都可以与使用智能匹配运算符和以冒号开头的副词结构的不同语法一起使用，例如 <code>:e</code>。以下示例介绍了如何执行此操作; 两行代码都是一样的:</p>
+<p>前面所有测试文件和目录属性的方法都可以使用不同的语法，使用智能匹配运算符和副词结构-以冒号开头的结构，如 <code>:e</code>。下面的例子给出了一个如何做到这一点的想法；两行代码都是一样的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11591,12 +11578,12 @@ say 'Exists' if 'data.txt'.IO ~~ :e;</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_操纵文件">9.4.4. 操纵文件</h4>
+<h4 id="_操纵文件">9.2.3. 操纵文件</h4>
 <div class="paragraph">
-<p>可用于 <code>IO::Handle</code> 类型的对象的 <code>path</code> 方法返回 <code>IO::Path</code> 对象，这对于处理磁盘上的物理文件很方便。<code>IO::Path</code> 类为程序员提供了一些重命名，移动或删除文件的方法。这些方法也作为内置函数存在，因此你无需获取或创建 <code>IO::Path</code> 对象来操纵磁盘上的文件。成功后，他们会返回 <code>True</code> 值。如果有错误， 可能会抛出异常。</p>
+<p><code>path</code> 方法, 可用于 <code>IO::Handle</code> 类型的对象, 返回一个 <code>IO::Path</code> 对象，这对于处理磁盘上的物理文件很方便。<code>IO::Path</code> 类为程序员提供了一些方法来重命名、移动或删除文件。这些方法也是作为内置函数存在的，因此你不需要获取或创建 一个 <code>IO::Path</code> 对象来操纵磁盘上的文件。成功后，它们会返回 <code>True</code> 值。如果出现错误，可能会抛出一个异常。</p>
 </div>
 <div class="paragraph">
-<p>在下表中，我们总结了操纵路径最常用的函数:</p>
+<p>在下面的表格中，我们总结了最常用的处理文件路径的函数:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -11627,7 +11614,7 @@ say 'Exists' if 'data.txt'.IO ~~ :e;</code></pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">unlink</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">删除文件(不像move，它不复制文件)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">删除文件(与 move 不同，它不复制文件)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">unlink 'secret.txt';</p></td>
 </tr>
 <tr>
@@ -11643,10 +11630,10 @@ say 'Exists' if 'data.txt'.IO ~~ :e;</code></pre>
 </tbody>
 </table>
 <div class="paragraph">
-<p>拥有 <code>IO</code> 对象后，你可能会获得该文件的许多特征。我们来简单地看看。</p>
+<p>有了 <code>IO</code> 对象，你可能会获得该文件的一些特征。我们来简单研究一下它们。</p>
 </div>
 <div class="paragraph">
-<p><code>mode</code> 方法返回路径的访问模式位。考虑一个例子:</p>
+<p><code>mode</code> 方法返回路径的访问模式位。看一个例子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11654,8 +11641,7 @@ say 'Exists' if 'data.txt'.IO ~~ :e;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此代码打印诸如 <code>0644</code> 之类的值。请注意，此方法返回 <code>IntStr</code> 类型的对象，到目前为止我们没有在本书中介绍过这种类型。这是一个双重值，在
-字符串上下文中它包含八进制值 "0644" 的字符串表示形式，而在整数上下文它是一个整数值 420，如以下示例所示:</p>
+<p>这段代码打印出的值如 0644。请注意，这个方法返回的是一个 <code>IntStr</code> 类型的对象，我们在本书中至今没有涉及。这是一个双值，在字符串上下文中，它包含了八进制值 "0644" 的字符串表示，而在整数上下文中，它是一个整数值 420，如下例所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11664,7 +11650,7 @@ say '/etc/passwd'.IO.mode.Int; # 420</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>其他三种方法，<code>modified</code>，<code>accessed</code> 和 <code>changed</code>，返回相应路径的时间属性。返回值是 <code>Instant</code> 类型的对象。得到纪元值或 <code>Date</code> 对象，另外调用 <code>Int</code> 或 <code>Date</code> 方法，如以下示例所示:</p>
+<p>其他三个方法，<code>modified</code>，<code>accessed</code> 和 <code>changed</code>，返回路径的相应时间属性。返回值是一个 <code>Instant</code> 类型的对象。如果要得到纪元值或 <code>Date</code> 对象，另外调用 <code>Int</code> 或 <code>Date</code> 方法，如下面的例子所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11675,12 +11661,12 @@ say '/etc/passwd'.IO.modified.Date; # 2013-10-30</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_使用目录">9.4.5. 使用目录</h4>
+<h4 id="_使用目录">9.2.4. 使用目录</h4>
 <div class="paragraph">
-<p><code>IO::Path</code> 类有一些处理目录的方法。我们将在这一节中讨论它们。同样，例程可以作为方法和独立子例程访问。</p>
+<p><code>IO::Path</code> 类有一些处理目录的方法。我们将在本节中讨论它们。同样，这些例程可以作为方法和独立的子例程访问。</p>
 </div>
 <div class="paragraph">
-<p><code>chdir</code> 函数更改当前工作目录。可以从 <code>$*CWD</code> 变量读取当前路径。该值是 <code>IO</code> 类型。要获取字符串，请使用 <code>Str</code> 方法或添加 <code>~</code> 前缀将其字符串化，如下面的代码所示:</p>
+<p><code>chdir</code> 函数改变当前的工作目录。当前路径可以从 <code>$*CWD</code> 变量中读取。该值是 <code>IO</code> 类型的。要想得到字符串，可以使用 <code>Str</code> 方法或添加 <code>~</code> 前缀将其进行字符串化，如下面的代码所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11690,7 +11676,7 @@ say ~$*CWD;    # /tmp</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>创建和删除目录是通过 <code>mkdir</code> 和 `rmdir 例程完成的。创建目录时，可以传递可选参数以设置权限模式:</p>
+<p>创建和删除目录是通过 <code>mkdir</code> 和 `rmdir 例程完成的。在创建目录时，可以通过一个可选的参数来设置权限模式:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11699,7 +11685,7 @@ mkdir 'data/secret', 0o400;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>目录为空时 <code>rmdir</code> 例程才有效。</p>
+<p><code>rmdir</code> 例程只有在目录为空的情况下才起作用:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11709,7 +11695,7 @@ rmdir 'temp';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>dir</code> 函数将目录的内容作为 <code>IO</code> 对象的列表返回。这是你列出当前的工作目录的方法:</p>
+<p><code>dir</code> 函数以 <code>IO</code> 对象列表的形式返回目录的内容。这就是你可以列出当前工作目录的方法:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11718,7 +11704,7 @@ say $_.Str for @dir;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>要指定目录的路径，请将其作为参数传递，或者在字符串上创建 <code>IO</code> 对象:</p>
+<p>要指定目录的路径，可以将其作为参数传递，或者用字符串创建一个 <code>IO</code> 对象:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11727,22 +11713,22 @@ my @temp_dir = '/tmp'.IO.dir;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在，我们知道如何使用文件和目录，我们移到读写数据的方法。</p>
+<p>现在，我们知道了如何处理文件和目录，我们继续讨论读写数据的方法。</p>
 </div>
 <div class="paragraph">
-<p>在下一节中，我们将讨论 <code>IO::Handle</code> 类中读写数据的方法。为简单起见，许多代码示例都使用标准输入和输出。虽然，它们将使用 <code>open</code> 函数返回的 <code>$fh</code> 文件句柄。</p>
+<p>在接下来的章节中，我们将讨论 <code>IO::Handle</code> 类中读写数据的方法。为简单起见，许多代码示例都使用标准的输入和输出。虽然，它们将与 <code>open</code> 函数返回的 <code>$fh</code> 文件句柄一起工作。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_从流中读取_2">9.5. 从流中读取</h3>
+<h3 id="_从流中读取">9.3. 从流中读取</h3>
 <div class="paragraph">
-<p><code>IO::Handle</code> 类提供了许多不同的方法供我们读取流。我们已经在第二章的编写代码中的简单的输入和输出一节中看到过一些。在这里，我们将详细讨论它们并查看其他替代方案。</p>
+<p><code>IO::Handle</code> 类为我们提供了许多不同的方法来读取流。我们已经在第二章《编写代码》中的"简单的输入和输出"一节中看到了一些。在这里，我们将详细讨论它们，并看到其他的替代方法。</p>
 </div>
 <div class="sect3">
-<h4 id="_读取一行">9.5.1. 读取一行</h4>
+<h4 id="_读取一行">9.3.1. 读取一行</h4>
 <div class="paragraph">
-<p>我们从 <code>get</code> 方法开始，该方法从输入流中读取一行。例如，从标准输入读取一行，在 <code>$*IN</code> 实例上调用方法，如下面的例子所示:</p>
+<p>我们从 <code>get</code> 方法开始，该方法从输入流中读取一行。例如，要从标准输入中读取一行，调用 <code>$*IN</code> 实例上的方法，如下面的例子所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11751,7 +11737,7 @@ say $line;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>程序等待你输入一些文本。该行完成并按下 'Enter' 键后，<code>get</code> 方法将控制返回给程序，然后将行打印到屏幕。或者，你可以使用命令行解释程序的基础设施来重定向输入流并将文件的内容传递给程序:</p>
+<p>程序等待你输入一些文本。当这一行完成并按下 'Enter' 键后，<code>get</code> 方法将控制权返回给程序，然后将这一行打印到屏幕上。另外，你也可以使用命令行解释器的设施来重定向输入流，并将文件的内容传递给程序:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11760,10 +11746,10 @@ my $line = $*IN.get;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这次，程序打印出程序自身的第一行。</p>
+<p>这个时候，程序就会打印出自己的第一行。</p>
 </div>
 <div class="paragraph">
-<p>代码中的 <code>$*IN.get</code> 构造等同于 <code>get</code> 的裸调用:</p>
+<p>代码中的 <code>$*IN.get</code> 结构相当于 <code>get</code> 的裸调用:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11772,7 +11758,7 @@ say $line;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>使用文件时，请以与我们刚刚使用 <code>$*IN</code> 相同的方式打开文件句柄:</p>
+<p>当你对一个文件进行处理时，使用打开文件的文件句柄，就像我们刚才对 <code>$*IN</code> 进行的处理一样:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11782,7 +11768,7 @@ say $line;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在运行此程序之前，请创建一个新文件 <code>data.txt</code> 并在其中放入一些文本。如果是文件不存在，<code>$fh</code> 句柄将被设置为 <code>Failure</code> 对象，并且 <code>get</code> 方法的以下调用会引发错误(请在第十章的使用异常中查看更多关于异常和失败的错误):</p>
+<p>在运行这个程序之前，先创建一个新的文件 <code>data.txt</code>，并在其中放入一些文本。如果文件不存在，<code>$fh</code> 句柄将被设置为 <code>Failure</code> 对象，下面对 <code>get</code> 方法的调用将引发一个错误(更多关于异常和失败的内容，请参见第十章《异常的处理》):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11792,7 +11778,7 @@ say $line;</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_读取字符">9.5.2. 读取字符</h4>
+<h4 id="_读取字符">9.3.2. 读取字符</h4>
 <div class="paragraph">
 <p>要获取单个字符，请使用 <code>getc</code> 方法:</p>
 </div>
@@ -11803,7 +11789,7 @@ say $ch;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>getc</code> 方法阻止程序执行，直到字符出现在流中。如果流中没有剩余字符，则返回空值 <code>Any</code>。在布尔值上下文中，它是假的，所以它可以用在循环条件中。让我们创建一个按字符读取其输入字符的程序，并在单独的行上打印它们。</p>
+<p><code>getc</code> 方法阻止程序执行，直到流中出现一个字符。如果流中没有剩余的字符，则返回一个 <code>Any</code> 的空值。在布尔上下文中，它是 <code>False</code>，所以它可以用于循环的条件。让我们创建一个程序，逐个读取输入的字符，并将它们分别打印在单独的一行上。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11813,7 +11799,7 @@ say $ch;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>当处理 Unicode 字符时，<code>getc</code> 方法非常智能。为了展示这个行为，让我们创建一个文本文件 <code>text.txt</code>，并在其中放入一个 <code>u</code> 字符。然后， 将文件传递给程序并读取字符:</p>
+<p><code>getc</code> 方法在处理 Unicode 字符时非常聪明。为了演示这种行为，让我们创建一个文本文件 <code>text.txt</code>，并在其中放入一个 <code>u</code> 字符。然后，将文件传给程序并读取该字符:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11822,7 +11808,7 @@ u</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这是一个带有 ASCII 子空间字符的单字节。现在，让我们使用另一种字符，比方说，拉脱维亚语你(u)上面有一个横线: ū。在 Unicode 中，此字符称为 <code>LATIN SMALL LETTER U WITH MACRON</code>，其码位号为 <code>0x016B</code>。在 UTF-8 编码中，该字符由两个字节组成: <code>0xC5</code> 和 <code>0xAB</code>。所以，如果你把该字符保存在文件中，它的大小将是两个字节。现在针对此文件运行程序:</p>
+<p>这是一个单字节的字符，来自 ASCII 子空间。现在，让我们使用一个不同的字符，比如说，拉脱维亚语u，上面有一个横线: ū。在 Unicode 中，这个字符被称为 LATIN SMALL LETTER U WITH MACRON，代码点编号为 0x016B。在 UTF-8 编码中，这个字符由两个字节组成：0xC5 和 0xAB。所以，如果你把这个字符保存在文件中，它的大小将是两个字节。现在针对这个文件运行程序:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11831,13 +11817,13 @@ ū</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>正如我们所见，Raku 设法理解这个以两个字节表示开头单个 UTF-8 字符的文件。</p>
+<p>正如我们所见，Raku 设法理解文件的开头是两个字节代表一个 UTF-8 字符。</p>
 </div>
 <div class="paragraph">
-<p>现在，<code>getc</code> 的任务有点复杂。这次我们将使用该字符的分解版本。在 UTF 编码中，诸如 ū 之类的字符可以被替代地存储为两个元素的序列: 代码位为 <code>0x0075</code>(与在 ASCII 中相同)的 <code>LATIN SMALL LETTER U</code>，和 <code>COMBINING MACRON</code>(0x0304)。</p>
+<p>现在，<code>getc</code> 的任务更复杂一些。这次我们将使用字符的分解版本。在 UTF 编码中，像 ū 这样的字符可以存储为两个元素的序列: 代码为 <code>0x0075</code>(与在 ASCII 中相同)的 <code>LATIN SMALL LETTER U</code>，和 <code>COMBINING MACRON</code>(0x0304)。</p>
 </div>
 <div class="paragraph">
-<p>我们将它保存在一个文件中。其中一种方法是使用 Raku，打印相应的字节，并将输出重定向到文件。这就是你用单行做的方法:</p>
+<p>让我们把它保存在一个文件中。其中一种方法是使用 Raku，打印相应的字节，并将输出结果重定向到一个文件中。这就是用单行程序来实现的方法:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11845,7 +11831,7 @@ ū</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>要打印字符而不是整数值，请调用 <code>chr</code> 方法: <code>0x0304.chr</code>。 该文件现在包含三个字节: <code>75 CC 84</code>。将其传递给我们的程序:</p>
+<p>要打印字符而不是整数值，调用 <code>chr</code> 方法。<code>0x0304.chr</code>。 现在该文件包含三个字节：<code>75 CC 84</code>。把它传给我们的程序:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11854,10 +11840,10 @@ ū</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>程序中只有一次 <code>getc</code> 调用，它会打印出正确的字符。Raku 在它看到一个有效的 ASCII 字符后不立即停止，但试图验证后面的字节是否仍然是组合字符的 Unicode 表示的一部分。</p>
+<p>程序中只有一次对 <code>getc</code> 的调用，而且它打印出了正确的字符。Raku 在看到一个有效的 ASCII 字符 u 后并没有立即停止，而是试图验证下面的字节是否仍然是组合字符 Unicode 表示的一部分。</p>
 </div>
 <div class="paragraph">
-<p>现在，我们让这项工作变得更加复杂，并构建一个不存在的字符， 假设 u 上面有一个双重波浪号，下面是一个“逗号”。此字符在 Unicode 中没有代码点，但它仍然可以用三个元素构造 - <code>COMBINING ALMOST EQUAL TO ABOVE (0x034C)</code> 和 <code>COMBINING CEDILLA (0x0327)</code>。准备文本文件:</p>
+<p>现在，让我们把工作做得更复杂，构造一个不存在的字符，比如说 u 上面有一个双波浪线，下面有一个"逗号"。在 Unicode 中没有这个字符的代码点，但它仍然可以用三个元素来构造-字母本身和两个组合部分-<code>COMBINING ALMOST EQUAL TO ABOVE (0x034C)</code> 和 <code>COMBINING CEDILLA (0x0327)</code>。准备文本文件:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11865,7 +11851,7 @@ ū</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这三个元素现在位于 UTF-8 编码-<code>75 CD 8C CC A7</code> 中的五个字节中。仍然，Raku 将其作为单个字符读取，因为你可以再次通过运行程序来验证:</p>
+<p>现在，这三个元素以 UTF-8 编码的形式存在于五个字节中-<code>75 CD 8C CC A7</code>。不过，Raku 还是把它当作一个字符来读，你可以通过再次运行程序来证明:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11874,7 +11860,7 @@ u̧͌</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>要一次读取多个字符，请使用 <code>readchars</code> 方法。它的工作原理类似于 <code>getc</code> 方法但返回一个包含字符的字符串。要读取的最大字符数作为参数传递:</p>
+<p>要一次读取多个字符，请使用 <code>readchars</code> 方法。它的工作原理类似于 <code>getc</code> 方法，但返回的是一个包含字符的字符串。读取的最大字符数是作为参数传递的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11883,16 +11869,16 @@ say $str;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>请注意，要重现本节中的示例，你需要一个支持的 Unicode 的终端。</p>
+<p>注意，要重现本节中的示例，你需要一个支持 Unicode 的终端。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_惰性读取">9.5.3. 惰性读取</h4>
+<h4 id="_惰性读取">9.3.3. 惰性读取</h4>
 <div class="paragraph">
-<p><code>IO::Handle</code> 类定义了一些惰性读取的方法。这里的惰性意味着，当程序确实需要另一部分时，Raku 才实际执行读取数据。所以它不应该立即读取整个文件。</p>
+<p><code>IO::Handle</code> 类定义了一些惰性读取的方法。这里的惰性是指 Raku 应该在程序真正需要另一部分数据的时候执行实际的读取。所以它不应该立即读取整个文件。</p>
 </div>
 <div class="paragraph">
-<p><code>lines</code> 方法返回一个行列表。这是一个把输入复制为输出的短程序的例子:</p>
+<p><code>lines</code> 方法返回一个行的列表。下面是一个将其输入复制到输出的短程序的例子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11900,7 +11886,7 @@ say $str;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这可以使用更传统的语法以不同的形式重写:</p>
+<p>这可以用更传统的语法重新写成另一种形式:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11910,7 +11896,7 @@ say $str;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>$*IN.lines</code> 的调用返回一个输入行的数组。我们可以直接将它保存在变量中，并用于打印:</p>
+<p>调用 <code>$*IN.lines</code> 会返回一个输入行的数组。例如我们可以直接将其保存在一个变量中，然后用于打印:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11919,10 +11905,10 @@ say $str;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>重要的是 <code>lines</code> 方法删除末尾的换行符。因此，如果你需要重现它，请使用 <code>say</code> 函数在输出的结尾打印换行。</p>
+<p>一个重要的事情是, <code>lines</code> 方法会从行尾删除换行符。所以，如果你需要重现它，请使用 <code>say</code> 函数在输出的末尾打印换行。</p>
 </div>
 <div class="paragraph">
-<p><code>lines</code> 方法接受一个整数参数来指示要读取的最大行数:</p>
+<p><code>lines</code> 方法接受一个整数参数来表示要读取的最大行数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11930,7 +11916,7 @@ say $str;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>从输入流中读取逻辑数据的另一种方法是使用 <code>words</code> 方法。它类似于前面描述的 <code>lines</code> 方法，但是将输入拆分为单词而不是行。分隔符是一系列空格。考虑一个例子:</p>
+<p>另一种从输入流中读取逻辑数据的方法是使用 <code>words</code> 方法。它的工作原理与前面描述的 <code>lines</code> 方法类似，但将输入拆分成单词而不是行。分隔符是一连串的空格。考虑一个例子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11938,7 +11924,7 @@ say $str;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序在单独的行上打印输入中的每个单词。</p>
+<p>这个程序将输入的每个单词打印在单独的一行上。</p>
 </div>
 <div class="paragraph">
 <p><code>split</code> 方法概括了一种读取逻辑元素的方法，并允许我们指定一个用于分隔元素的拆分器。例如，下面这段代码教你如何用冒号分隔输入:</p>
@@ -11949,7 +11935,7 @@ say $str;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在，例如，从 <code>/etc/passwd</code> 文件提供一行，程序会将它的各个部分打印出来:</p>
+<p>现在，提供一行来自 <code>/etc/passwd</code> 文件的内容，例如, 程序会将它的各个部分打印出来:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11964,7 +11950,7 @@ Unprivileged User
 </div>
 </div>
 <div class="paragraph">
-<p><code>comb</code> 方法返回它在输入流中找到的所有匹配项的列表。对于匹配，使用正则表达式。我们将在第十一章的正则表达式一节中讨论正则，但这是一个从输入中提取所有数字的简单示例:</p>
+<p><code>comb</code> 方法会返回一个列表, 列出所有在输入流中找到的匹配结果。对于匹配，使用的是正则表达式。我们将在第十一章《正则表达式》中讨论正则表达式，但这里有一个从输入中提取所有数字的简单例子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11973,7 +11959,7 @@ say @numbers.join(', ');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>以下输入演示了此程序的工作原理。输入文本后，程序打印它找到的以逗号分隔的整数列表。粗体的行是你的输入:</p>
+<p>下面的输入演示了这个程序是如何工作的。在你输入文本后，程序会打印出一个逗号分隔的列表，其中包括它找到的整数。粗体字的一行是你输入的内容:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11985,9 +11971,9 @@ and 5 points in a star.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_eof_方法">9.5.4. eof 方法</h4>
+<h4 id="_eof_方法">9.3.4. eof 方法</h4>
 <div class="paragraph">
-<p>只有当数据存在时，才能从文件中读取数据。检查文件或流是否仍然包含数据，请使用 <code>eof</code> 方法，当到达文件结尾时返回 <code>False</code>:</p>
+<p>只有当文件中还有数据时，从文件中读取才有意义。要检查文件或流是否还包含数据，可以使用 <code>eof</code> 方法，当到达文件末尾时，该方法返回 <code>False</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12001,12 +11987,12 @@ if $fh &amp;&amp; !$fh.eof { # Only if file exists and has something to read
 </div>
 </div>
 <div class="sect2">
-<h3 id="_写入流">9.6. 写入流</h3>
+<h3 id="_写入流">9.4. 写入流</h3>
 <div class="paragraph">
 <p>在本节中，我们将研究 <code>IO::Handle</code> 类为写入流提供的方法。</p>
 </div>
 <div class="sect3">
-<h4 id="_print_函数">9.6.1. print 函数</h4>
+<h4 id="_print_函数">9.4.1. print 函数</h4>
 <div class="paragraph">
 <p>我们将从简单的 <code>print</code> 函数开始。基本上，它的用法很明显。它把文本打印到流。在标准输出的情况下，使用裸的 <code>print</code> 函数或 <code>$*IN.print</code> 方法。如果使用文件，请使用其文件句柄。</p>
 </div>
@@ -12104,7 +12090,7 @@ say 'OK?';</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_say_方法">9.6.2. say 方法</h4>
+<h4 id="_say_方法">9.4.2. say 方法</h4>
 <div class="paragraph">
 <p>乍一看，<code>say</code> 方法与 <code>print</code> 方法类似，并在末尾添加一个换行符。但这不是全部的真相。在内部，<code>say</code> 在对象上调用 <code>gist</code> 方法以获得它的文本表示。</p>
 </div>
@@ -12140,7 +12126,7 @@ say %hash;          # {alpha =&gt; 1, beta =&gt; 2, gamma =&gt; 3}</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_使用_gist_方法的示例">9.6.3. 使用 gist 方法的示例</h4>
+<h4 id="_使用_gist_方法的示例">9.4.3. 使用 gist 方法的示例</h4>
 <div class="paragraph">
 <p>对于用户定义的类，可以创建一个准备按预期输出的 <code>gist</code> 方法。让我们在下面的例子中尝试这个。</p>
 </div>
@@ -12201,7 +12187,7 @@ Chemical<i class="conum" data-value="140226845929704"></i><b>(140226845929704)</
 </div>
 </div>
 <div class="sect3">
-<h4 id="_printf_方法">9.6.4. printf 方法</h4>
+<h4 id="_printf_方法">9.4.4. printf 方法</h4>
 <div class="paragraph">
 <p><code>printf</code> 方法以给定格式打印值。它大部分都与来自 C 和 C++ 标准库的 <code>printf</code> 函数相同。这个方法的第一个参数是描述格式的字符串，其余参数是将要替换为指令的值
 ，从格式字符串中的 <code>%</code> 字符开始。</p>
@@ -12221,7 +12207,7 @@ say "Temperature is $temperature °C";</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_字符和字符串">9.6.5. 字符和字符串</h4>
+<h4 id="_字符和字符串">9.4.5. 字符和字符串</h4>
 <div class="paragraph">
 <p>我们从打印文本数据开始:</p>
 </div>
@@ -12274,7 +12260,7 @@ String Hello, World</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_整数">9.6.6. 整数</h4>
+<h4 id="_整数">9.4.6. 整数</h4>
 <div class="paragraph">
 <p>有几个用于以不同格式打印整数的不同指令:</p>
 </div>
@@ -12344,7 +12330,7 @@ Directive u not applicable for type Int</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_浮点数字">9.6.7. 浮点数字</h4>
+<h4 id="_浮点数字">9.4.7. 浮点数字</h4>
 <div class="paragraph">
 <p>对于浮点数，请使用以下格式之一:</p>
 </div>
@@ -12422,7 +12408,7 @@ supplied</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_9">9.7. 总结</h3>
+<h3 id="_总结_9">9.5. 总结</h3>
 <div class="paragraph">
 <p>在本章中，我们讨论了 Raku 中提供的输入和输出功能。 <code>IO::Handle</code> 类提供了使用标准输入和输出流的通用方法以及使用相同接口的文件。我们讨论了如何创建文件和
 如何测试文件和目录的不同属性并检查各种读写方法。</p>
