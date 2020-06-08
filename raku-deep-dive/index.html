@@ -11989,15 +11989,15 @@ if $fh &amp;&amp; !$fh.eof { # Only if file exists and has something to read
 <div class="sect2">
 <h3 id="_写入流">9.4. 写入流</h3>
 <div class="paragraph">
-<p>在本节中，我们将研究 <code>IO::Handle</code> 类为写入流提供的方法。</p>
+<p>在本节中，我们将研究 <code>IO::Handle</code> 类提供的流写入方法。</p>
 </div>
 <div class="sect3">
 <h4 id="_print_函数">9.4.1. print 函数</h4>
 <div class="paragraph">
-<p>我们将从简单的 <code>print</code> 函数开始。基本上，它的用法很明显。它把文本打印到流。在标准输出的情况下，使用裸的 <code>print</code> 函数或 <code>$*IN.print</code> 方法。如果使用文件，请使用其文件句柄。</p>
+<p>我们将从简单的 <code>print</code> 函数开始。基本上，它的用法很明显。它把文本打印到流中。如果是标准输出，使用裸的 <code>print</code> 函数或 <code>$*IN.print</code> 方法。如果你对一个文件进行操作，请使用其文件句柄。</p>
 </div>
 <div class="paragraph">
-<p>以下程序创建一个名为 <code>hello.txt</code> 的文件，并写入字符串:</p>
+<p>下面的程序创建了一个名为 <code>hello.txt</code> 的文件，并将一个字符串写入其中:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12007,7 +12007,7 @@ $fh.close;                     # Close the file so that the data is saved</code>
 </div>
 </div>
 <div class="paragraph">
-<p>如果文件已存在，则将重写该文件，之前的所有内容都将丢失。如果需要将新输出附加到现有文件，则使用 <code>:a</code> 追加模式:</p>
+<p>如果文件已存在，则将重写该文件，之前的所有内容都将丢失。如果需要将新的输出附加到现有文件中，请使用 <code>:a</code> 追加模式:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12017,10 +12017,10 @@ $fh.close;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>close</code> 方法关闭文件。实际上，不需要手动关闭文件，因为一旦文件句柄超出其作用域，Raku 将立即关闭该文件。</p>
+<p><code>close</code> 方法关闭文件。实际上，这并不需要手动完成，因为一旦文件句柄离开了它的作用域，Raku 就会立即关闭文件。</p>
 </div>
 <div class="paragraph">
-<p><code>open</code> 函数的 <code>:enc</code> 命名参数设置文件的编码。考虑一下以下代码。它打开两个文件并打印相同的字符串:</p>
+<p><code>open</code> 函数的 <code>:enc</code> 命名参数设置文件的编码。看一下下面的代码。它打开了两个文件并打印出相同的字符串:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12036,7 +12036,7 @@ $fh2.close;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在，查看该程序创建的文件的文件大小:</p>
+<p>现在，看看这个程序创建的文件的大小:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12046,7 +12046,7 @@ $fh2.close;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>正如所料，其中一个文件是用 Latin-1 编码编写的。ä 字符很适合这种编码，所以文件内容是一个带有字符代码的单字节:</p>
+<p>正如预期的那样，其中一个文件是用 Latin-1 编码编写的。ä 字符在这种编码中很适合，所以文件内容是一个带有该字符代码的单字节:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12066,7 +12066,7 @@ $fh2.close;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在前面的示例中，两种编码都能够表示写入到文件的字符。如果所选编码不支持，则会发生运行时错误。在下一个程序中，我们尝试将 Unicode 笑脸以 Latin-1 编码写入打开的文件中:</p>
+<p>在前面的例子中，两种编码都能够表示写入到文件的字符。如果所选的编码不能支持，就会出现运行时错误。在下一个程序中，我们试图将一个 Unicode 笑脸写到以 Latin-1 编码打开的文件中:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12077,7 +12077,7 @@ say 'OK?';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>程序在尝试写入文件时退出，而程序的其余部分则不会执行:</p>
+<p>程序在尝试向文件写入时退出，程序的其它部分没有执行:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12086,16 +12086,16 @@ say 'OK?';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>请注意，在之前的程序中，使用了两种不同的语法选项来为函数的命名参数传递值-<code>enc &#8658; 'UTF-8'</code> 和 <code>:enc('Latin1')</code>。 两种形式都是等同的; 你可以选择你喜欢的那个。</p>
+<p>请注意，在前面的程序中，使用了两种不同的语法选项来为函数的命名参数传递值-<code>enc &#8658; 'UTF-8'</code> 和 <code>:enc('Latin1')</code>。两种形式都是等价的; 你可以选择你更喜欢的一种。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_say_方法">9.4.2. say 方法</h4>
 <div class="paragraph">
-<p>乍一看，<code>say</code> 方法与 <code>print</code> 方法类似，并在末尾添加一个换行符。但这不是全部的真相。在内部，<code>say</code> 在对象上调用 <code>gist</code> 方法以获得它的文本表示。</p>
+<p>乍一看，<code>say</code> 方法的工作原理和 <code>print</code> 方法一样，在末尾添加一个换行符。但这不是全部的真相。在内部，<code>say</code> 会调用打印对象上的 <code>gist</code> 方法来获得它的文本表示。</p>
 </div>
 <div class="paragraph">
-<p>对于字符串和整数等数据类型，它们的文本形式很简单。在下面的例子中，<code>print</code> 和 <code>say</code> 的输出没有区别:</p>
+<p>对于字符串和整数等数据类型，它们的文本形式是直接的。在下面的例子中，<code>print</code> 和 <code>say</code> 的输出不会有什么区别:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12109,7 +12109,7 @@ say $int;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>对于更复杂的数据结构，这两种方法的行为是不同的。该程序的输出显示在注释中:</p>
+<p>对于比较复杂的数据结构，这两种方法的行为是不同的。该程序的输出显示在注释中:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12126,12 +12126,12 @@ say %hash;          # {alpha =&gt; 1, beta =&gt; 2, gamma =&gt; 3}</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_使用_gist_方法的示例">9.4.3. 使用 gist 方法的示例</h4>
+<h4 id="_gist_方法的使用示例">9.4.3. gist 方法的使用示例</h4>
 <div class="paragraph">
-<p>对于用户定义的类，可以创建一个准备按预期输出的 <code>gist</code> 方法。让我们在下面的例子中尝试这个。</p>
+<p>对于用户定义的类，可以创建一个 <code>gist</code> 方法, 按需要准备输出。让我们在下面的例子中尝试一下。</p>
 </div>
 <div class="paragraph">
-<p>我们创建了一个用于存储化学公式的类。目标是允许以纯 ASCII 格式制造化学公式，然后打印它，以使数字索引显示为下标。</p>
+<p>我们创建了一个存储化学公式的类。我们的目标是允许创建一个纯 ASCII 格式的化学公式，然后将其打印出来，使数字索引显示为下标。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12146,7 +12146,7 @@ say %hash;          # {alpha =&gt; 1, beta =&gt; 2, gamma =&gt; 3}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>Chemical</code> 类有一个数据成员 <code>$.formula</code>，它将原始 ASCII 公式保留为字符串。<code>gist</code> 方法将其转换为带有下标的字符串。我们用正则表达式做替换。正则表达式在第十一章的正则表达式一节中有详细介绍。现在，只需知道以下代码行将从 0 到 9 的数字替换为其下标版本就足够了。要获取下标数字的代码值，用公式中数字值加上 <code>SUBSCRIPT ZERO</code> Unicode 字符的代码点值:</p>
+<p><code>Chemical</code> 类有一个数据成员 <code>$.formula</code>，它将原始的 ASCII 公式保存为一个字符串。<code>gist</code> 方法将其转换为带有下标的字符串。我们用正则表达式进行替换。正则表达式在第十一章《正则表达式》中有详细介绍。现在，只要知道下面这行代码将从 0 到 9 的所有数字替换为它的下标版本就足够了。为了得到下标数字的代码值，请用公式中数字值加上 <code>SUBSCRIPT ZERO</code> Unicode 字符的代码点值:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12154,7 +12154,7 @@ say %hash;          # {alpha =&gt; 1, beta =&gt; 2, gamma =&gt; 3}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在，是时候使用这个类了。在循环中，创建了几个实例来测试不同的情况: 简单的公式，带括号的公式和带两位数字索引的公式:</p>
+<p>现在，是时候使用这个类了。在循环中，创建了几个实例来测试不同的情况: 一个简单的公式、一个带括号的公式和一个带两位数字索引的公式:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12165,11 +12165,13 @@ say %hash;          # {alpha =&gt; 1, beta =&gt; 2, gamma =&gt; 3}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序给出以下输出:</p>
+<p>程序的输出如下:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">H₂O
+Al₂(SO₄)₃
+Al₆O₁₃Si₂</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -12183,17 +12185,16 @@ Chemical<i class="conum" data-value="140226845929704"></i><b>(140226845929704)</
 </div>
 </div>
 <div class="paragraph">
-<p>此输出包含类的名称和内存中变量位置的地址。要使输出对最终用户更有用，请为其类定义 <code>gist</code> 方法并使用 <code>say</code> 函数来 'print' 对象。</p>
+<p>这个输出包含了类的名称和变量在内存中的位置地址。为了使输出对最终用户更有用，请为其类定义 <code>gist</code> 方法, 并使用 <code>say</code> 函数来"打印"对象。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_printf_方法">9.4.4. printf 方法</h4>
 <div class="paragraph">
-<p><code>printf</code> 方法以给定格式打印值。它大部分都与来自 C 和 C++ 标准库的 <code>printf</code> 函数相同。这个方法的第一个参数是描述格式的字符串，其余参数是将要替换为指令的值
-，从格式字符串中的 <code>%</code> 字符开始。</p>
+<p><code>printf</code> 方法以给定的格式打印值。它与 C 和 <code>C++</code> 标准库的中的 <code>printf</code> 函数大多相同。这个方法的第一个参数是一个描述格式的字符串，其余的参数是以格式字符串中的 <code>%</code> 字符为起点，代替指令的值。</p>
 </div>
 <div class="paragraph">
-<p>在许多情况下，可以通过字符串插值来实现格式化。例如，以下两行产生相同的输出:</p>
+<p>在很多情况下，可以通过字符串插值来代替实现格式化。例如，下面两行会产生相同的输出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12209,7 +12210,7 @@ say "Temperature is $temperature °C";</code></pre>
 <div class="sect3">
 <h4 id="_字符和字符串">9.4.5. 字符和字符串</h4>
 <div class="paragraph">
-<p>我们从打印文本数据开始:</p>
+<p>我们先从打印文本数据开始:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -12227,7 +12228,7 @@ say "Temperature is $temperature °C";</code></pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">%c</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">一个 字符</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">一个字符</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">%s</p></td>
@@ -12236,7 +12237,7 @@ say "Temperature is $temperature °C";</code></pre>
 </tbody>
 </table>
 <div class="paragraph">
-<p>下面是一些上述表格中的指令的例子:</p>
+<p>下面是一些上表中一些指令的例子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12246,7 +12247,7 @@ printf "String %s\n", 'Hello, World';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序打印如下行:</p>
+<p>该程序打印出如下行:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12256,13 +12257,13 @@ String Hello, World</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>注意 <code>%c</code> 指令把对应的参数当作字符, 而不是当作整数。</p>
+<p>注意 <code>%c</code> 指令将相应的参数作为一个字符, 而不是当作一个整数。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_整数">9.4.6. 整数</h4>
 <div class="paragraph">
-<p>有几个用于以不同格式打印整数的不同指令:</p>
+<p>有几个不同的指令用于不同格式的整数:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -12301,7 +12302,7 @@ String Hello, World</pre>
 </tbody>
 </table>
 <div class="paragraph">
-<p>让我们以不同的格式打印相同的数字:</p>
+<p>让我们用不同的格式打印相同的数字:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12310,7 +12311,7 @@ printf "Hexadecimal: %x, uppercased: %X\n", 10, 10;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序的输出看起来像这样:</p>
+<p>该程序的输出是这样的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12319,7 +12320,7 @@ Hexadecimal: a, uppercased: A</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>%u</code> 指令需要一个无符号整数，因此如果看到一个负数，编译器则会引发错误:</p>
+<p><code>%u</code> 指令期望的是一个无符号整数，所以编译器如果看到负数就会引发错误:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12358,12 +12359,12 @@ Directive u not applicable for type Int</code></pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">%g</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">%e 或 %f(以较好者为准)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%e 或 %f(取其一)</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>在以下示例中，<code>pi</code> 的值以不同的格式打印:</p>
+<p>在下面的例子中，<code>pi</code> 的值是以不同的格式打印的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12372,7 +12373,7 @@ printf "%f, %g\n", pi, pi;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>结果是这样:</p>
+<p>结果就是这个样子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12381,7 +12382,7 @@ printf "%f, %g\n", pi, pi;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>%g</code> 格式是最“人性化”的 - 它显示精度有限的浮点数，切换到非常大和非常小的科学记数法数字:</p>
+<p><code>%g</code> 格式是最"以人为本"的格式 - 它以有限的精度显示浮点数，并在显示非常大和非常小的数字时切换到科学记数法:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12393,7 +12394,7 @@ printf "%g\n", 10000000; # 1e+07</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>格式化字符串后传递的参数数量必须与其指令的数量一致 。否则会发生 <code>X::Str::Sprintf::Directives::BadType</code> 异常:</p>
+<p>在格式化字符串后传递的参数数量必须与其中的指令数量一致。否则会发生 <code>X::Str::Sprintf::Directives::BadType</code> 异常:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12403,18 +12404,18 @@ supplied</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>有关格式化字符串的详细说明，请参阅以下文档页面的内容: docs.raku.org/type/Str#sub_sprintf。</p>
+<p>有关格式化字符串的详细描述，请参阅以下文档页面: <a href="docs.raku.org/type/Str#sub_sprintf" class="bare">docs.raku.org/type/Str#sub_sprintf</a>。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_总结_9">9.5. 总结</h3>
 <div class="paragraph">
-<p>在本章中，我们讨论了 Raku 中提供的输入和输出功能。 <code>IO::Handle</code> 类提供了使用标准输入和输出流的通用方法以及使用相同接口的文件。我们讨论了如何创建文件和
-如何测试文件和目录的不同属性并检查各种读写方法。</p>
+<p>在本章中，我们讨论了 Raku 中可用的输入和输出设施。<code>IO::Handle</code> 类提供了处理标准输入和输出流以及使用相同接口的文件的通用方法。我们讨论了如何创建文件以及
+如何测试文件和目录的不同属性, 并研究了各种读写方法。</p>
 </div>
 <div class="paragraph">
-<p>处理文件时，你有时可能会遇到异常情况; 我们已经在本章中看到了一些例子。在下一章中，我们将详细地讨论 Raku 中的异常。</p>
+<p>在处理文件时，有时可能会遇到特殊情况; 我们已经在本章中看到了一些例子。在下一章，我们将详细地讨论 Raku 中的异常。</p>
 </div>
 </div>
 </div>
