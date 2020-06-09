@@ -171,25 +171,44 @@ if (theme && theme !== "1") {
 <li><a href="#_展望">8.5. 展望</a></li>
 </ul>
 </li>
-<li><a href="#_使用正则表达式和_grammars_解析_ini_文件">9. 使用正则表达式和 Grammars 解析 INI 文件</a>
+<li><a href="#_使用正则表达式和_grammar_解析_ini_文件">9. 使用正则表达式和 Grammar 解析 INI 文件</a>
 <ul class="sectlevel2">
 <li><a href="#_正则表达式基础">9.1. 正则表达式基础</a></li>
 <li><a href="#_解析_ini_原语">9.2. 解析 INI 原语</a></li>
 <li><a href="#_把东西组装起来">9.3. 把东西组装起来</a></li>
 <li><a href="#_回溯">9.4. 回溯</a></li>
-<li><a href="#_grammars">9.5. Grammars</a></li>
+<li><a href="#_grammar">9.5. Grammar</a></li>
 <li><a href="#_从匹配中提取数据">9.6. 从匹配中提取数据</a></li>
 <li><a href="#_生成好的错误信息">9.7. 生成好的错误信息</a></li>
 <li><a href="#_编写你自己的_grammar">9.8. 编写你自己的 Grammar</a></li>
 <li><a href="#_总结_8">9.9. 总结</a></li>
-<li><a href="#_代码点字符集和字节">9.10. 代码点、字符集和字节</a></li>
-<li><a href="#_数字">9.11. 数字</a></li>
-<li><a href="#_其它_unicode_属性">9.12. 其它 Unicode 属性</a></li>
-<li><a href="#_排序">9.13. 排序</a></li>
-<li><a href="#_总结_9">9.14. 总结</a></li>
-<li><a href="#_扩展你的代码库">9.15. 扩展你的代码库</a></li>
-<li><a href="#_打包你的应用">9.16. 打包你的应用</a></li>
-<li><a href="#_结尾感想">9.17. 结尾感想</a></li>
+</ul>
+</li>
+<li><a href="#_文件和目录使用状态图">10. 文件和目录使用状态图</a>
+<ul class="sectlevel2">
+<li><a href="#_reading_file_sizes">10.1. Reading File Sizes</a></li>
+</ul>
+</li>
+<li><a href="#_unicode_搜索工具">11. Unicode 搜索工具</a>
+<ul class="sectlevel2">
+<li><a href="#_代码点字符集和字节">11.1. 代码点、字符集和字节</a></li>
+<li><a href="#_数字">11.2. 数字</a></li>
+<li><a href="#_其它_unicode_属性">11.3. 其它 Unicode 属性</a></li>
+<li><a href="#_排序">11.4. 排序</a></li>
+<li><a href="#_总结_9">11.5. 总结</a></li>
+</ul>
+</li>
+<li><a href="#_使用_inine_python和matplotlib画图">12. 使用 Inine-Python和Matplotlib画图</a>
+<ul class="sectlevel2">
+<li><a href="#_提取状态">12.1. 提取状态</a></li>
+<li><a href="#_总结_10">12.2. 总结</a></li>
+</ul>
+</li>
+<li><a href="#_接下来是什么">13. 接下来是什么</a>
+<ul class="sectlevel2">
+<li><a href="#_扩展你的代码库">13.1. 扩展你的代码库</a></li>
+<li><a href="#_打包你的应用">13.2. 打包你的应用</a></li>
+<li><a href="#_结尾感想">13.3. 结尾感想</a></li>
 </ul>
 </li>
 </ul>
@@ -3177,7 +3196,7 @@ say $c.lines; # Output: [42]</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_使用正则表达式和_grammars_解析_ini_文件">9. 使用正则表达式和 Grammars 解析 INI 文件</h2>
+<h2 id="_使用正则表达式和_grammar_解析_ini_文件">9. 使用正则表达式和 Grammar 解析 INI 文件</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>你之前可能已经见过 <code>.ini</code> 文件; 它们在微软 Windows 平台上很常见, 但是在其它地方也有发现, 例如 ODBC 配置文件, Ansible 的库文件,<sup class="footnote">[<a id="_footnoteref_53" class="footnote" href="#_footnotedef_53" title="View footnote.">53</a>]</sup> 等等。</p>
@@ -3650,7 +3669,7 @@ my token inifile { &lt;block&gt; &lt;section&gt;* }</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_grammars">9.5. Grammars</h3>
+<h3 id="_grammar">9.5. Grammar</h3>
 <div class="paragraph">
 <p>这种解析 INI 文件的正则表达式的集合，并不是封装和重用的巅峰之作。</p>
 </div>
@@ -4191,11 +4210,22 @@ method error($msg) {
 <div class="paragraph">
 <p>为了从解析器中生成良好的错误信息，需要区分预期的匹配失败和意外的匹配失败。顺序替换 <code>||</code> 是一个工具，你可以通过从替换的第二个分支中提出一个异常来将意外匹配失败变成错误消息。</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_文件和目录使用状态图">10. 文件和目录使用状态图</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>You bought a shiny new 2TB disk just a short while ago and you’re already getting low disk space warnings. What’s taking up all that space?
-To answer this question, and experiment a bit with data visualization, let’s write a small tool that visualizes which files use up how much disk space. We also get to explore some functional programming concepts in the process.
-10.1 Reading File Sizes
-To visualize file usage, we must first recursively read all directories and files in a given directory, and record their sizes. To get a listing of all elements in a directory, we can use the dir1 function, which returns a lazy list of IO::Path2 objects.
+<p>You bought a shiny new 2TB disk just a short while ago and you’re already getting low disk space warnings. What’s taking up all that space?</p>
+</div>
+<div class="paragraph">
+<p>To answer this question, and experiment a bit with data visualization, let’s write a small tool that visualizes which files use up how much disk space. We also get to explore some functional programming concepts in the process.</p>
+</div>
+<div class="sect2">
+<h3 id="_reading_file_sizes">10.1. Reading File Sizes</h3>
+<div class="paragraph">
+<p>To visualize file usage, we must first recursively read all directories and files in a given directory, and record their sizes. To get a listing of all elements in a directory, we can use the dir1 function, which returns a lazy list of IO::Path2 objects.
 We distinguish between directories, which can have child entries, and files, which can’t. Both can have a direct size, and in the case of directories also a total size, which includes files and subdirectories, recursively:
 class File { has $.name;
 has $.size;
@@ -4613,6 +4643,12 @@ the logic for sizing rectangles from the logic for placing the rectangles?
 Functional programming offers techniques for extracting common logic into separate functions. The desired differences in behavior can be encoded in more functions that you pass in as arguments to other functions.
 Raku supports functional programming by making functions first class, so you can pass them around as ordinary objects. It also offers closures (access to outer lexical variables from functions) and various shortcuts that make it more pleasant to write short functions.</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_unicode_搜索工具">11. Unicode 搜索工具</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>每隔一段时间，我都要对一些 Unicode 字符进行识别或研究。在 Perl 5 发行版 App:::Uni<sup class="footnote">[<a id="_footnoteref_62" class="footnote" href="#_footnotedef_62" title="View footnote.">62</a>]</sup> 中有一个叫 uni<sup class="footnote">[<a id="_footnoteref_63" class="footnote" href="#_footnotedef_63" title="View footnote.">63</a>]</sup> 的工具，由 Audrey Tang 和 Ricardo Signes 开发。</p>
 </div>
@@ -4725,9 +4761,8 @@ r - U+00072 - LATIN SMALL LETTER R
 e - U+00065 - LATIN SMALL LETTER E</code></pre>
 </div>
 </div>
-</div>
 <div class="sect2">
-<h3 id="_代码点字符集和字节">9.10. 代码点、字符集和字节</h3>
+<h3 id="_代码点字符集和字节">11.1. 代码点、字符集和字节</h3>
 <div class="paragraph">
 <p>正如前面提到的，并非所有的代码点都是完全成熟的字符。或者换个说法，有些东西，我们在视觉上认为是一个字符，实际上是由几个代码点组成的。Unicode 将这种由一个基本字符和可能的几个组合字符组成的序列称为字符集。</p>
 </div>
@@ -4767,7 +4802,7 @@ say $s.chars; # Output: 1</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_数字">9.11. 数字</h3>
+<h3 id="_数字">11.2. 数字</h3>
 <div class="paragraph">
 <p>Raku 中的数字字面值并不限于我们在英语国家习惯的阿拉伯数字。所有的 Unicode 代码点都允许使用 Decimal_Number(简称 Nd)属性，所以你可以使用东方阿拉伯数字<sup class="footnote">[<a id="_footnoteref_69" class="footnote" href="#_footnotedef_69" title="View footnote.">69</a>]</sup>、或其他许多脚本中的数字:</p>
 </div>
@@ -4797,7 +4832,7 @@ say $s.chars; # Output: 1</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_其它_unicode_属性">9.12. 其它 Unicode 属性</h3>
+<h3 id="_其它_unicode_属性">11.3. 其它 Unicode 属性</h3>
 <div class="paragraph">
 <p>类型 Str 中的 `uniprop`<sup class="footnote">[<a id="_footnoteref_70" class="footnote" href="#_footnotedef_70" title="View footnote.">70</a>]</sup> 方法默认返回一般类别:</p>
 </div>
@@ -4819,7 +4854,7 @@ say ".".uniprop("Word_Break");           # MidNumLet</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_排序">9.13. 排序</h3>
+<h3 id="_排序">11.4. 排序</h3>
 <div class="paragraph">
 <p>当你不限于 ASCII 字符时，字符串的排序就开始变得复杂了。Raku 的排序方法使用 <code>cmp</code> 中缀运算符，它基于代码点编号做一个相当标准的按字母顺序的比较。</p>
 </div>
@@ -4849,18 +4884,27 @@ say @list.collate;                 # (a Ä ä o ö ø)</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_9">9.14. 总结</h3>
+<h3 id="_总结_9">11.5. 总结</h3>
 <div class="paragraph">
 <p>Raku 非常重视英语以外的其他语言，并不遗余力地帮助用户使用这些语言和它们所使用的字符。</p>
 </div>
 <div class="paragraph">
 <p>这包括将字符串建立在字符集而不是代码点上，支持数字中的非阿拉伯数字，以及通过内置方法访问 Unicode 数据库的大部分内容。</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_使用_inine_python和matplotlib画图">12. 使用 Inine-Python和Matplotlib画图</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Occasionally I come across git repositories where I want to know how active they are and who the main developers are.
-Let’s develop a script that plots the commit history, and explore how to use Python modules in Raku.
-12.1 Extracting the Stats
-We want to plot the number of commits by author and date. We can get this information easily by passing some options to git log:
+Let’s develop a script that plots the commit history, and explore how to use Python modules in Raku.</p>
+</div>
+<div class="sect2">
+<h3 id="_提取状态">12.1. 提取状态</h3>
+<div class="paragraph">
+<p>We want to plot the number of commits by author and date. We can get this information easily by passing some options to git log:
 my $proc = run :out, &lt;git log --date=short --pretty=format:%ad!%an&gt;; my (%total, %by-author, %dates);
 for $proc.out.lines &#8594; $line {
 my ( $date, $author ) = $line.split: '!', 2; %total{$author}; %by-author{$author}{$date}; %dates{$date}++;
@@ -5105,11 +5149,23 @@ Raku space:
 sub plot-histogram(PythonModule['matplotlib.pyplot'], @data) { # implementation here
 }
 Passing in any wrapped Python module other than matplotlib.pyplot
-results in a type error.
-12.7 Summary
-We’ve explored several ways to represent commit occurrence in plots and utilized Inline::Python to interface with a Python-based plotting library.
-A bit of Raku metaprogramming allowed us to emulate different kinds of Python APIs pretty directly in Raku code, allowing a fairly direct translation of the original library’s documentation into Raku code.
-如果你读了这本书，你很可能现在已经对 Raku 的基本知识有了扎实的掌握。</p>
+results in a type error.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_总结_10">12.2. 总结</h3>
+<div class="paragraph">
+<p>We’ve explored several ways to represent commit occurrence in plots and utilized Inline::Python to interface with a Python-based plotting library.
+A bit of Raku metaprogramming allowed us to emulate different kinds of Python APIs pretty directly in Raku code, allowing a fairly direct translation of the original library’s documentation into Raku code.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_接下来是什么">13. 接下来是什么</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>如果你读了这本书，你很可能现在已经对 Raku 的基本知识有了扎实的掌握。</p>
 </div>
 <div class="paragraph">
 <p>本书的例子和讨论涉及到了各种各样的主题。我们从什么是 Raku 开始，以及如何运行 Raku 程序。接下来是 Raku 程序的基本词法结构、变量、控制流和 I/O。更高级的主题包括面向对象、持久化、正则表达式和 grammar、Unicode 支持、并发，最后是通过 <code>Inline::Python</code> 使用外部库。</p>
@@ -5117,9 +5173,8 @@ A bit of Raku metaprogramming allowed us to emulate different kinds of Python AP
 <div class="paragraph">
 <p>但要写出成功的 Raku 代码，除了学习语言本身，还有更多的内容。在这最后一章中，我想暗示一些你可能想要学习的主题，以帮助你保持你的代码库的可维护性，并让它成功地呈现在用户面前。</p>
 </div>
-</div>
 <div class="sect2">
-<h3 id="_扩展你的代码库">9.15. 扩展你的代码库</h3>
+<h3 id="_扩展你的代码库">13.1. 扩展你的代码库</h3>
 <div class="paragraph">
 <p>当你的代码库增长时，通常建议你把它拆成单独的文件。你可以创建包含你的逻辑的模块，按命名空间和功能来组织。然后这些脚本往往会成为浅层次的入口，解析命令行参数，加载模块，然后调用一个函数或方法来完成实际工作。</p>
 </div>
@@ -5156,7 +5211,7 @@ sub parse-date(DateStr) returns Date { ... }</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_打包你的应用">9.16. 打包你的应用</h3>
+<h3 id="_打包你的应用">13.2. 打包你的应用</h3>
 <div class="paragraph">
 <p>为了向用户部署你的应用程序，你通常会把它放在某种自带的存档或包中。</p>
 </div>
@@ -5167,7 +5222,7 @@ sub parse-date(DateStr) returns Date { ... }</code></pre>
 <p>Raku 打包还在积极开发中，所以我想简单地提到一些你可能会发现值得探索的选项，而不是给出食谱。</p>
 </div>
 <div class="sect3">
-<h4 id="_打包为传统的_raku_模块">9.16.1. 打包为传统的 Raku 模块</h4>
+<h4 id="_打包为传统的_raku_模块">13.2.1. 打包为传统的 Raku 模块</h4>
 <div class="paragraph">
 <p>传统上，Raku 模块和软件是以 tar 文件<sup class="footnote">[<a id="_footnoteref_73" class="footnote" href="#_footnotedef_73" title="View footnote.">73</a>]</sup>的形式发布的，其中包含源代码和一些元数据，如 META6.json 文件。</p>
 </div>
@@ -5179,7 +5234,7 @@ sub parse-date(DateStr) returns Date { ... }</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_使用_docker_进行部署">9.16.2. 使用 Docker 进行部署</h4>
+<h4 id="_使用_docker_进行部署">13.2.2. 使用 Docker 进行部署</h4>
 <div class="paragraph">
 <p>传统的 Raku 模块分发依赖于预装的 Raku 编译器，这可能不是所有平台上都有的。</p>
 </div>
@@ -5202,14 +5257,14 @@ ENTRYPOINT ["/usr/share/raku/site/bin/myapp"]</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_windows_安装程序">9.16.3. Windows 安装程序</h4>
+<h4 id="_windows_安装程序">13.2.3. Windows 安装程序</h4>
 <div class="paragraph">
 <p>模块 App::InstallerMaker::WiX<sup class="footnote">[<a id="_footnoteref_74" class="footnote" href="#_footnotedef_74" title="View footnote.">74</a>]</sup>可以帮助你创建一个 Windows 的 .msi 安装程序，它可以创建一个 Rakudo、zef和你的应用程序的构建。它需要 Microsoft Visual C++ 构建工具和 WiX。<sup class="footnote">[<a id="_footnoteref_75" class="footnote" href="#_footnotedef_75" title="View footnote.">75</a>]</sup>，你可以创建一个描述您的应用程序的 YAML 文件，然后运行脚本 <code>make-raku-wix-installer</code> 来创建一个独立的 .msi 文件。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_结尾感想">9.17. 结尾感想</h3>
+<h3 id="_结尾感想">13.3. 结尾感想</h3>
 <div class="paragraph">
 <p>Raku 是一门很大的语言，嵌入了一个更大的社区和生态系统。一本这样的书不可能涵盖所有的东西，但希望它能帮助你学习到足够多的编程任务，更重要的是，它能让你兴奋并有动力去探索和学习更多的东西。</p>
 </div>
