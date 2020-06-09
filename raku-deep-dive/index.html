@@ -199,12 +199,12 @@ if (theme && theme !== "1") {
 <li><a href="#_异常">10. 异常</a>
 <ul class="sectlevel2">
 <li><a href="#_try_块">10.1. try 块</a></li>
-<li><a href="#_catch_phaser">10.2. CATCH phaser</a></li>
-<li><a href="#_exception_对象">10.3. Exception 对象</a></li>
-<li><a href="#_failure_对象">10.4. Failure 对象</a></li>
-<li><a href="#_创建自定义异常">10.5. 创建自定义异常</a></li>
-<li><a href="#_总结_10">10.6. 总结</a></li>
-<li><a href="#_总结_11">10.7. 总结</a></li>
+<li><a href="#_软故障">10.2. 软故障</a></li>
+<li><a href="#_catch_phaser">10.3. CATCH phaser</a></li>
+<li><a href="#_exception_对象">10.4. Exception 对象</a></li>
+<li><a href="#_failure_对象">10.5. Failure 对象</a></li>
+<li><a href="#_创建自定义异常">10.6. 创建自定义异常</a></li>
+<li><a href="#_总结_10">10.7. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_正则表达式">11. 正则表达式</a>
@@ -219,7 +219,7 @@ if (theme && theme !== "1") {
 <li><a href="#_使用断言进行向前查看和向后查看">11.8. 使用断言进行向前查看和向后查看</a></li>
 <li><a href="#_使用副词修饰正则表达式">11.9. 使用副词修饰正则表达式</a></li>
 <li><a href="#_使用正则表达式替换和修改字符串">11.10. 使用正则表达式替换和修改字符串</a></li>
-<li><a href="#_总结_12">11.11. 总结</a></li>
+<li><a href="#_总结_11">11.11. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_grammars">12. Grammars</a>
@@ -230,7 +230,7 @@ if (theme && theme !== "1") {
 <li><a href="#_使用抽象语法树属性">12.4. 使用抽象语法树属性</a></li>
 <li><a href="#_使用_action_类">12.5. 使用 action 类</a></li>
 <li><a href="#_完整的程序">12.6. 完整的程序</a></li>
-<li><a href="#_总结_13">12.7. 总结</a></li>
+<li><a href="#_总结_12">12.7. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_并发编程">13. 并发编程</a>
@@ -240,7 +240,7 @@ if (theme && theme !== "1") {
 <li><a href="#_终身线程">13.3. 终身线程</a></li>
 <li><a href="#_promise">13.4. Promise</a></li>
 <li><a href="#_channel">13.5. Channel</a></li>
-<li><a href="#_总结_14">13.6. 总结</a></li>
+<li><a href="#_总结_13">13.6. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_函数式编程">14. 函数式编程</a>
@@ -253,7 +253,7 @@ if (theme && theme !== "1") {
 <li><a href="#_操作作用域">14.6. 操作作用域</a></li>
 <li><a href="#_创建并使用迭代器">14.7. 创建并使用迭代器</a></li>
 <li><a href="#_惰性和无限列表">14.8. 惰性和无限列表</a></li>
-<li><a href="#_总结_15">14.9. 总结</a></li>
+<li><a href="#_总结_14">14.9. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_反应式编程">15. 反应式编程</a>
@@ -261,7 +261,7 @@ if (theme && theme !== "1") {
 <li><a href="#_什么是反应式编程">15.1. 什么是反应式编程</a></li>
 <li><a href="#_按需供应">15.2. 按需供应</a></li>
 <li><a href="#_实时供应">15.3. 实时供应</a></li>
-<li><a href="#_总结_16">15.4. 总结</a></li>
+<li><a href="#_总结_15">15.4. 总结</a></li>
 </ul>
 </li>
 </ul>
@@ -12424,571 +12424,826 @@ supplied</code></pre>
 <h2 id="_异常">10. 异常</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>在前两章中，我们讨论了面向对象的编程和关于 输入和输出，使用对象实现。在本章中，我们将继续努力 与对象和将讨论Raku中的另一个领域，其实现广泛使用 类和具有庞大的层次结构。</p>
+<p>在前两章中, 我们谈到了面向对象的编程, 以及使用对象实现的输入和输出。在这一章中, 我们继续与对象打交道, 并将讨论 Raku 中的另一个领域, 它的实现广泛使用了类, 并且具有庞大的层次结构。</p>
 </div>
 <div class="paragraph">
-<p>例外情况是程序进入无法进一步运行的状态。 一些例外是由程序设计中的缺陷引起的，其他例外是​​由于
-外部因素，例如磁盘故障或与数据库的连接断开。在这种情况下，一个
-异常并不是一种非常特殊的东西，它必须停止程序，而是一种处理方式
-错误并继续执行。
-在本章中，我们将讨论程序可能面临的异常情况。
-此外，我们还将看到程序员可以预防后果的方法
-特殊时刻。
-本章将介绍以下主题:
-试块 使用CATCH阶段块捕获异常 异常类
-投掷和重新抛出异常 Failure类和软故障 使用类型化异常 创建自定义例外</p>
+<p>异常是指程序进入到无法继续运行的状态的情况。有些异常是由程序设计中的缺陷引起的, 有些则是由于外部因素引起的, 如磁盘故障或与数据库的连接中断。在这种情况下, 异常并不是什么非同寻常的事情, 必须停止程序, 而是一种处理错误并继续执行的方法。</p>
+</div>
+<div class="paragraph">
+<p>在本章中, 我们将讨论程序可能面临的异常情况。此外, 我们还将看到程序员如何防止异常情况的发生。</p>
+</div>
+<div class="paragraph">
+<p>本章将涉及以下主题:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>try</code> 块</p>
+</li>
+<li>
+<p>用 <code>CATCH</code> phase 块捕捉异常</p>
+</li>
+<li>
+<p><code>Exception</code> 类</p>
+</li>
+<li>
+<p>抛出和再抛出的例外情况</p>
+</li>
+<li>
+<p><code>Failure</code> 类和软故障</p>
+</li>
+<li>
+<p>使用类型化异常</p>
+</li>
+<li>
+<p>创建自定义异常</p>
+</li>
+</ul>
 </div>
 <div class="sect2">
 <h3 id="_try_块">10.1. try 块</h3>
+<div class="paragraph">
+<p>我们先说一个最简单的异常, 除零。运行下面的单行程序:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 1 / 0;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>程序中断并打印出以下错误信息:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Attempt to divide 1 by zero using div
+  in block &lt;unit&gt; at zero-div.pl line 1
 
+Actually thrown at:
+  in block &lt;unit&gt; at zero-div.pl line 1</code></pre>
 </div>
-<div class="sect2">
-<h3 id="_catch_phaser">10.2. CATCH phaser</h3>
+</div>
+<div class="paragraph">
+<p>我们不能被零除。注意, 错误信息还包含了程序的堆栈跟踪。由于我们没有使用任何模块或有任何函数调用, 堆栈跟踪很短。</p>
+</div>
+<div class="paragraph">
+<p>现在, 让我们在有除法的行之前和之后做一些其他的操作, 它失败了:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'Going to divide 1 by 0';
+say 1 / 0;
+say 'Division is done';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在运行时, 因为除零而出现异常。所以, 程序执行第一行并打印第一条信息。然后, 发生异常, 程序终止。没有更多的东西会被执行, 而且永远不会到达最后一行。</p>
+</div>
+<div class="paragraph">
+<p>现在让我们通过从外部输入值来改变内置值。让用户输入要除的数字:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = prompt 'Enter dividend &gt; ';
+my $b = prompt 'Enter divisor &gt; ';
+my $c = $a / $b;
+say "The result of $a / $b is $c.";
+say 'Done.';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果你运行这个程序, 它会要求输入两个数字, 然后打印出它们的除法结果。用一些非零的值试试:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku division.pl
+Enter dividend &gt; 10
+Enter divisor &gt; 2
+The result of 10 / 2 is 5.
+Done.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在尝试输入 0 作为除数。马上, 你会得到一个异常:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">$ perl6 division.pl
+Enter dividend &gt; 10
+Enter divisor &gt; 0
+Attempt to divide 10 by zero using div
+  in block &lt;unit&gt; at division.pl line 4
 
+Actually thrown at:
+  in block &lt;unit&gt; at division.pl line 4</code></pre>
 </div>
-<div class="sect2">
-<h3 id="_exception_对象">10.3. Exception 对象</h3>
+</div>
+<div class="paragraph">
+<p>这种行为可能不是程序最想要的结果。我们应该让程序更加稳定, 这样它就不会依赖来自外部的错误数字。</p>
+</div>
+<div class="paragraph">
+<p>在 Raku 中, 代码中有问题的部分可能会被放到 <code>try</code> 块中。在我们的例子中, 这样的代码部分就是有除法操作的那一行:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $c = $a / $b;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>让我们把它和打印结果的那行一起放在 <code>try</code> 块里:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = prompt 'Enter dividend &gt; ';
+my $b = prompt 'Enter divisor &gt; ';
+try {
+    my $c = $a / $b;
+    say "The result of $a / $b is $c.";
+}
+say 'Done.';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意, 在这个程序中, 我们在 <code>try</code> 块之后还有一些代码。</p>
+</div>
+<div class="paragraph">
+<p>用与之前相同的输入值运行它。首先, 用非零的数字:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">$ perl6 division.pl
+Enter dividend &gt; 10
+Enter divisor &gt; 5
+The result of 10 / 5 is 2.
+Done.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>程序的表现和引入 <code>try</code> 块之前的表现完全一样。</p>
+</div>
+<div class="paragraph">
+<p>现在, 用零来试试:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">$ perl6 division.pl
+Enter dividend &gt; 10
+Enter divisor &gt; 0
+Done.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>就是这样。这里有三件事情需要注意。首先, 我们没有看到关于非法除法的错误信息。第二, 字符串 <code>The result of &#8230;&#8203;</code> 没有被打印出来。第三, <code>try</code> 块后面的代码被执行并打印出来。</p>
+</div>
+<div class="paragraph">
+<p>这里发生了什么？在 <code>try</code> 块中, 像之前一样发生了一个异常, 但它并没有停止程序的执行。<code>try</code> 块向我们隐瞒了异常的事实。当然, 我们失去了带有结果的输出, 但我们保留了继续执行程序的能力。</p>
+</div>
+<div class="sect3">
+<h4 id="_变量">10.1.1. $! 变量</h4>
+<div class="paragraph">
+<p>现在让我们看看如何了解是否发生了错误。在 Raku 中, 有一个特殊的变量, <code>$!</code>, 叫做错误变量。如果发生了异常, <code>$!</code> 就会包含一个异常。让我们用它来检查是否一切正常:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = prompt 'Enter dividend &gt; ';
+my $b = prompt 'Enter divisor &gt; ';
+try {
+    my $c = $a / $b;
+    say "The result of $a / $b is $c.";
+}
 
+if $! {
+    say 'Failure!';
+}
+else {
+    say 'All fine.';
+}
+say 'Done.';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们添加了测试 <code>if $!</code>。它把 <code>$!</code> 变量放在一个布尔上下文中处理。实际上, 变量在发生异常时的值是一个 <code>Exception</code> 类型的值。我们将在本章后面的"异常对象"一节中看到它。现在, 只要知道在布尔上下文中, <code>Exception</code> 给出一个 <code>True</code> 值就足够了。如果没有异常, <code>$!</code> 变量将包含 <code>Any</code> 类型的对象, 在布尔上下文中是 <code>False</code>。</p>
+</div>
+<div class="paragraph">
+<p>如果运行更新后的程序, 并传递零作为除数, 程序就会打印出 <code>Failure!</code> 消息:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ perl6 division.pl
+Enter dividend &gt; 10
+Enter divisor &gt; 0
+Failure!
+Done.</code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_failure_对象">10.4. Failure 对象</h3>
+<h3 id="_软故障">10.2. 软故障</h3>
+<div class="paragraph">
+<p>在前面的例子中, <code>try</code> 块包含了数学计算和打印结果的指令。在实际的程序中, 这些操作往往是分开的。让我们重新编写程序, 使其在一个单独的子程序中对数字进行除法操作:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = prompt 'Enter dividend &gt; ';
+my $b = prompt 'Enter divisor &gt; ';
+my $c = calculate($a, $b);
+say 'Now ready to print';
+say "The result of $a / $b is $c.";
+say 'Done.';
 
+sub calculate($a, $b) {
+    return $a / $b;
+}</code></pre>
 </div>
-<div class="sect2">
-<h3 id="_创建自定义异常">10.5. 创建自定义异常</h3>
+</div>
+<div class="paragraph">
+<p>现在危险的操作发生在 <code>calculate</code> 函数内部, 而结果则在函数外部使用。</p>
+</div>
+<div class="paragraph">
+<p>用应该引起异常的值运行程序:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ perl6 division.pl
+Enter dividend &gt; 10
+Enter divisor &gt; 0
+Now ready to print
+Attempt to divide 10 by zero using div
+  in block &lt;unit&gt; at 06.pl line 7
 
+Actually thrown at:
+  in block &lt;unit&gt; at 06.pl line 7</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>仔细检查输出结果。在出现异常信息之前, 屏幕上出现了一行 <code>Now ready to print</code>。在打印的时候, 计算已经完成, 非法除法已经发生, 但程序还在运行, 只有在即将打印结果时才会失败。</p>
+</div>
+<div class="paragraph">
+<p>出现这种情况是因为 Raku 允许软失败。软失败是一个未抛出的异常。除法的结果只用在我们打印 <code>$c</code> 值的那一行。在此之前, 没有任何东西阻止了程序, 它就像没有发生错误一样打印消息。</p>
+</div>
+<div class="paragraph">
+<p>了解了软故障, 我们就会得出以下结论。如果你使用 <code>try</code> 块来防止程序终止 , 你应该把它放在即将使用不可能的结果的地方周围(比如用 <code>say</code> 函数)。下面的修改可以做到这一点:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">try {
+    say "The result of $a / $b is $c.";
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>围住除法本身是不够的:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub calculate($a, $b) {
+    my $result;
+    try {
+        $result = $a / $b;
+    }
+    return $result;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里, 在 <code>try</code> 块之后, <code>$!</code> 变量包含了 <code>Any</code> 对象, 因为失败还没有发生。</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_总结_10">10.6. 总结</h3>
+<h3 id="_catch_phaser">10.3. CATCH phaser</h3>
 <div class="paragraph">
-<p>试块
-让我们从一个最简单的例外开始，除以零。运行以下一项 - 衬垫:</p>
+<p>在本章前面, 我们使用 <code>try</code> 块来捕获异常。如果异常发生在 <code>try</code> 块内部, 它就会设置 <code>$!</code> 变量, 你可以在后面检查。</p>
+</div>
+<div class="paragraph">
+<p>在 Raku 中, 这不是处理异常的唯一方法。让我们回到之前的程序, 但这次我们将使用 <code>CATCH</code> 块:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = prompt 'Enter dividend &gt; ';
+my $b = prompt 'Enter divisor &gt; ';
+my $c = $a / $b;
+say "The result of $a / $b is $c.";
+say 'Done.';
+
+CATCH {
+    say 'Exception caught!';
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该程序中断并打印以下错误消息:</p>
+<p>运行这个程序:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ perl6 division.pl
+Enter dividend &gt; 10
+Enter divisor &gt; 0
+Exception caught!
+Attempt to divide 10 by zero using div
+  in block &lt;unit&gt; at 07.pl line 4
+
+Actually thrown at:
+  in block &lt;unit&gt; at 07.pl line 4</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们不能除以零。请注意，错误消息还包含堆栈跟踪
-程序。由于我们不使用任何模块或具有任何函数调用，因此堆栈跟踪很短。
-现在，让我们在除法之前和之后做一些其他操作，这会失败:</p>
+<p>一旦零除法发生并使用了它的结果, <code>CATCH</code> 块就会被触发. <code>CATCH</code> 块是 Raku 中的 phaser 之一, 我们在第二章《编写代码》中讨论过。当发生异常时, 编译器会将执行结果传递给这个块, 到目前为止还没有人处理它。</p>
+</div>
+<div class="paragraph">
+<p>再一次注意到, 异常不是发生在除以零的那一刻, 而是发生在结果被打印到控制台的那一刻。</p>
+</div>
+<div class="paragraph">
+<p>如果我们把有问题的代码放在 <code>try</code> 块里面, <code>CATCH</code> 块就不会被运行, 这在我们下面的程序变体中可以看到:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = prompt 'Enter dividend &gt; ';
+my $b = prompt 'Enter divisor &gt; ';
+my $c  = $a / $b;
+try {
+    say "The result of $a / $b is $c.";
+}
+say 'Done.';
+
+CATCH {
+    say 'Exception caught!';
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>由于零除零的异常在运行时发生。所以，程序执行
-第一行并打印第一条消息。然后，发生异常和程序
-终止。将不会执行任何其他操作，并且永远不会到达最后一行。</p>
+<p>在这个程序中, <code>CATCH</code> 块的信息和异常信息都不会被打印出来。<code>try</code> 块隐藏了异常并设置了 <code>$!</code> 变量。<code>CATCH</code> 块没有被启动, 因为异常已经被处理了。</p>
 </div>
 <div class="paragraph">
-<p>现在让我们通过从外部输入值来更改内置值。让用户输入
-划分的数字:</p>
+<p>到目前为止, 我们已经介绍了处理异常的基本方法。现在是时候深入一点, 看看 Raku 是如何使用 <code>Exception</code> 类实际处理异常的。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exception_对象">10.4. Exception 对象</h3>
+<div class="paragraph">
+<p>在 Raku 中, 异常是通过从 <code>Exception</code> 类派生出来的类的对象来处理的, 这些对象包含了所有关于异常的必要信息, 包括一些文本描述和堆栈跟踪(在 Raku 中, 它被称为backtrace)。</p>
+</div>
+<div class="paragraph">
+<p>Raku 在出现异常时, 会创建一个异常对象。我们在本章前面已经看到了一个这样的例子-在试图打印非法数学运算结果的过程中, 错误变得明显。现在, 让我们使用 <code>die</code> 关键字自己产生一个异常。</p>
+</div>
+<div class="paragraph">
+<p><code>die</code> 关键字会抛出一个致命的异常并终止程序。一个典型的用法是, 例如, 如果程序不能打开一个文件或加载一个对程序其余部分至关重要的资源, 就停止程序:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $fh = open 'filename.txt' or die 'File not found';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果你运行这个程序，它将要求两个数字并打印他们的部门的结果。
-尝试使用一些非零值:</p>
+<p>如果没有这样的文件, 布尔上下文中的 <code>$fh</code> 变量为 false, 然后执行 <code>or</code> 运算符的第二个分支。</p>
+</div>
+<div class="paragraph">
+<p><code>die</code> 函数接受一个文本信息。考虑一个例子, 其中 <code>die</code> 是无条件调用的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'Start';
+die 'Error message';
+say 'Stop';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>使用例外 现在尝试输入零作为除数。马上，你得到一个异常:</p>
+<p>这个短程序打印出以下内容:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">Start
+Error message
+in block &lt;unit&gt; at die.pl line 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此行为可能不是该计划最期望的结果。我们应该做到
-程序更稳定，因此它不依赖于来自外部的错误数字。
-在Raku中，代码中有问题的部分可以放在try块中。在我们的例子中， 这部分代码是除法操作的行:</p>
+<p>同样, 它工作得很好, 直到出现异常, 之后就停止工作。<code>die</code> 函数接受了文本信息, 它和回溯信息一起被打印出来。这是一个程序员如何生成自己的错误信息的例子。为错误提供良好的描述, 有助于理解出错背后的原因。</p>
+</div>
+<div class="paragraph">
+<p>要处理这个异常, 可以使用 <code>try</code> 或 <code>catch</code> 块。<code>try</code> 块抑制了错误信息, 但允许程序继续运行:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'Start';
+try {
+    die 'Error message';
+}
+say 'Stop';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>让我们将其与打印结果的行一起放在try块中。</p>
+<p>异常发生后, 这个程序不会退出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ perl6 die.pl
+Start
+Stop</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>请注意，我们在此程序中的try块之后有一些代码。 使用与以前相同的输入值运行它。首先，非零数字:</p>
+<p>使用 <code>CATCH</code> 代码块, 我们捕捉到异常, 但程序终止:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'Start';
+die 'Error message';
+say 'Stop';
+
+CATCH {
+    say 'Caught';
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>完成。
-该程序的行为与引入try块之前的行为完全相同。 现在，尝试零:</p>
+<p>程序的输出如下:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ perl6 die.pl Start
+Caught
+Error message
+  in block &lt;unit&gt; at die.pl line 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>而已。这里有三件事需要注意。首先，我们没有看到有关的错误消息 非法分裂。二，字符串&#8230;&#8203;&#8230;&#8203;的结果不打印。三，代码 在执行块之后执行并打印。</p>
+<p>这就是我们前面看到的, 但这里涉及到的东西比较多, 我们要研究一下。</p>
 </div>
 <div class="paragraph">
-<p>这里发生了什么?在try块内部，异常发生，但事实并非如此 停止执行程序。try块隐藏了我们的例外事实。的 当然，我们输掉了结果，但我们保留了继续使用的能力 程序。</p>
-</div>
-<div class="paragraph">
-<p>$!变量</p>
-</div>
-<div class="paragraph">
-<p>现在让我们看看如果发生了错误，我们怎么能理解。在Raku中，有 一个特殊的变量$!，称为错误变量。如果它发生，它包含一个例外。让 我们用它来检查一切是否正常:</p>
+<p>当进入 <code>CATCH</code> 块时, Raku 会把异常对象放到默认变量 $_ 中。利用它来分析原因并做出相应的反应。让我们打印一些调试信息, 以便我们看到 $_ 和 <code>$!</code> 变量发生了什么。在下面的代码中, <code>^name</code> 方法返回变量的类名:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'Start';
+die 'Error message';
+say 'Stop';
+
+CATCH {
+    say '== $_.^name ==';
+    say $_.^name;
+    say '== $_ ==';
+    say $_;
+    say '== $! ==';
+    say $!;
+    say 'Caught';
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果$!我们添加了测试。它对待$!布尔上下文中的变量。实际上，价值 存在异常时变量的值是Exception类型的值。我们会看到 它将在本章后面的The Exception对象部分中介绍。现在，知道这一点就足够了 在布尔上下文中，Exception给出True值。如果没有例外，那就是
-$!变量将包含Any类型的对象，在布尔上下文中为False。
-如果你运行更新的程序并传递零作为除数，程序将打印出
-失败!信息:</p>
+<p>程序的结果显示了一些有趣的细节:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-txt" data-lang="txt">$ perl6 die.pl
+Start
+== $_.^name ==
+(X::AdHoc)
+== $_ ==
+Error message
+ in block &lt;unit&gt; at 10.pl line 2
+
+== $! ==
+Nil
+Caught
+Error message
+  in block &lt;unit&gt; at 10.pl line 2
+
+Actually thrown at:
+  in block &lt;unit&gt; at 10.pl line 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>软故障</p>
+<p>$_ 中的对象是 <code>X::AdHoc</code> 类的一个实例。ad hoc 异常是一个从 <code>Exception</code> 类派生出来的类型的例子。Raku 在响应 <code>die</code> 的调用时创建了这样一个对象。<code>X::</code> 命名空间被习惯性地用于异常类。</p>
 </div>
 <div class="paragraph">
-<p>在前面的示例中，try块包含两个数学计算的指令 并打印结果。在实际程序中，这些操作通常是分开的。让我们重新写一下 程序，以便它将数字分成一个单独的子程序:</p>
+<p>然后, 当我们通过将 $_ 变量传递给 <code>say</code> 函数来打印时, 就会打印出实际的错误信息:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">Error message
+  in block &lt;unit&gt; at 10.pl line 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在危险的动作发生在calculate函数内部并且使用了结果
-在它之外。
-使用应导致异常的值运行程序:</p>
+<p>请注意, <code>$!</code> 变量是空的, 它包含了 <code>Nil</code> 值。</p>
+</div>
+<div class="paragraph">
+<p>最后, 编译器打印来自 <code>CATCH</code> 块的信息, 打印错误信息和回溯信息, 并终止程序。</p>
+</div>
+<div class="sect3">
+<h4 id="_抛出异常">10.4.1. 抛出异常</h4>
+<div class="paragraph">
+<p>现在我们可以开始研究异常对象了。<code>Exception</code> 基类定义了 <code>throw</code> 方法, 你可以用它来抛出一个异常。为了简单起见, 让我们从 <code>X::AdHoc</code> 异常开始。</p>
+</div>
+<div class="paragraph">
+<p>在下面的程序中, 用 <code>new</code> 方法显式创建了一个异常, 并立即用 <code>throw</code> 方法抛出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'Start';
+X::AdHoc.new.throw;
+say 'Stop';
+
+CATCH {
+    say 'Caught';
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>仔细检查输出。在异常消息之前，行就绪了
-打印出现在屏幕上。在打印时，已经进行了计算
-完成后，非法分区已经发生，但该计划仍然存在
-仅在结果即将打印时失败。
-发生这种情况是因为Raku允许轻柔失败。一个软故障是unthrown例外。 除法的结果仅用于打印$ c值的行。在那之前， 什么都没有停止程序，它打印消息，好像没有发生错误。</p>
-</div>
-<div class="paragraph">
-<p>理解软故障会导致我们得出以下结论。如果你使用try块来 防止程序终止，你应该把它放在那里的地方 即将使用不可能的结果(例如使用say函数)。下列 修改将完成工作:</p>
+<p>程序的输出是我们所熟悉的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-txt" data-lang="txt">Start
+Caught
+Unexplained error
+  in block &lt;unit&gt; at throw.pl line 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>围绕分区本身是不够的:</p>
+<p>我们没有提供任何错误信息, 程序打印了默认的字符串-<code>Unexplained error</code>。</p>
+</div>
+<div class="paragraph">
+<p>要使用消息, 请在创建异常对象时使用 <code>payload</code> 命名参数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">X::AdHoc.new(payload =&gt; 'My error message').throw;</code></pre>
 </div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_从异常中恢复">10.4.2. 从异常中恢复</h4>
+<div class="paragraph">
+<p>正如我们所看到的, <code>CATCH</code> 块停止了程序的执行。这并不总是最好的策略。在 Raku 中, 异常对象(一个类型来自 <code>Exception</code> 类的对象)可以将控制权返回到代码中发生错误的地方。</p>
 </div>
 <div class="paragraph">
-<p>在这里，尝试块后，$!变量包含Any对象，因为失败没有 发生了。
-CATCH移相器 在本章的前面，我们使用try块来捕获异常。如果发生异常
-在try块内，它设置$!变量，您可以稍后检查。
-在Raku中，这不是处理异常的唯一方法。让我们回到上一个
-程序，但这次我们将使用CATCH块:</p>
+<p>为了实现这一点, 调用异常对象上的 <code>resume</code> 方法, 如下面的例子所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 'Start';
+X::AdHoc.new(payload =&gt; 'My error message').throw;
+say 'Stop';
+
+CATCH {
+    say 'Caught';
+    .resume;
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>运行程序:</p>
+<p><code>.resume</code> 行调用了默认变量 $_ 的方法。这相当于显式调用 $_.resume。</p>
+</div>
+<div class="paragraph">
+<p>这时, 程序并没有退出, 而是在出现异常后继续工作:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">Start
+Caught
+Stop</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>抓住了异常! 尝试使用div将10除以零</p>
+<p>在这种情况下, 错误信息不会被打印出来, 类似于 <code>try</code> 块的工作方式。例如, 从一个不存在的文件中恢复读取是没有意义的。另一方面, 当进行一系列计算时, 即使其中一个计算结果除以零, 继续计算也是有用的。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_类型化的异常">10.4.3. 类型化的异常</h4>
+<div class="paragraph">
+<p>在 Raku 中预定义的 <code>X::</code> 命名空间中还有很多类。要查看内置异常的完整列表, 请访问以下页面-<a href="docs.raku.org/type-exceptions.html" class="bare">docs.raku.org/type-exceptions.html</a>。你可以为你的特定异常创建自己的类。我们首先看看如何在 <code>CATCH</code> 块中区分不同类型的异常。</p>
+</div>
+<div class="paragraph">
+<p>让我们创建一个程序, 试图将当前的工作目录改为一个不存在的目录。在 Raku 中, 你可以使用 <code>chdir</code> 函数来改变目录:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">chdir '/non-existing/directory';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>一旦除零发生并使用其结果，就会触发CATCH块。 CATCH块是Raku中的一个相位器，我们在第2章中讨论过它， 写作 码。当发生异常时，编译器将执行传递给此块，而没有人 到目前为止已经处理过了。
-再次注意，异常不是在除零的时刻发生的，而是在
-结果将打印到控制台。
-如果我们将有问题的代码放在try块中，则不会按原样运行CATCH块 在我们的程序的以下变体中看到:</p>
+<p>输出结果显示如下错误信息:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">Failed to change the working directory to '/non-existing/directory': does not exist
+  in block &lt;unit&gt; at chdir.pl line 1</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在该程序中，来自CATCH块的消息和异常消息都不会 打印。try块隐藏了异常并设置了$!变量。CATCH块是 没有启动，因为已经处理了异常。
-到目前为止，我们已经介绍了处理异常的基本方法。现在是时候潜水了 更深入一点，看看Raku如何使用Exception类实际操作异常。
-异常对象
-Raku中的异常是通过派生自的类的对象来处理的 异常类。这些对象包含有关的所有必要信息
-异常，包括一些文本描述和堆栈跟踪(在Raku中，它被称为回溯)。</p>
-</div>
-<div class="paragraph">
-<p>当出现异常时，Raku会创建一个异常对象。我们已经看到了一个例子 本章前面的这种情况 - 在尝试打印时错误变得明显 非法数学运算的结果。现在，让我们自己制作一个例外</p>
-</div>
-<div class="paragraph">
-<p>使用die关键字。
-die关键字抛出致命异常并终止程序。典型的用法是 如果程序无法打开文件或加载对其余部分至关重要的资源，请停止该程序 程序，例如:</p>
+<p>现在, 让我们通过调用 <code>CATCH</code> 块中的 $_ 变量的 <code>^name</code> 方法来查看异常的类型:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">chdir '/non-existing/directory';
+CATCH {
+    say $_.^name;
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果没有这样的文件，则布尔上下文中的$ fh变量为false，第二个分支
-将执行或运算符。
-die函数接受文本消息。考虑一个示例，其中调用die 无条件的:</p>
+<p>它将告诉我们 $_ 变量包含一个 <code>X::IO::Chdir</code> 类的对象。</p>
+</div>
+<div class="paragraph">
+<p>现在, 让我们利用这些知识, 针对不同的特殊情况做出不同的操作。让我们构造一个程序, 它首先改变目录, 然后抛出一个特殊的异常。</p>
+</div>
+<div class="paragraph">
+<p>为了区分不同异常的路径, 我们将使用 <code>when</code> 关键字, 将 $_ 变量与给定类型进行匹配:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">chdir '/non-existing/directory';
+X::AdHoc.new.throw;
+
+CATCH {
+    when X::AdHoc {
+        say 'Ad hoc exception';
+        .resume;
+    }
+    when X::IO::Chdir {
+        say 'Non-existing directory';
+        .resume;
+    }
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这个简短的程序打印如下:</p>
+<p>运行这个程序, 确认两个异常都被正确捕获了:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">Non-existing directory
+Ad hoc exception</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>同样，它可以正常工作，直到异常发生并在它之后停止工作。模具功能
-获取与回溯信息一起打印的文本消息。这是个
-程序员如何生成自己的错误消息的示例。提供错误
-有良好的描述有助于理解出错的原因。
-要处理此异常，请使用try或CATCH块。try块抑制了 错误消息，但允许程序继续:</p>
+<p>在 <code>CATCH</code> 块中, 有两个 <code>when</code> 分支, 每个分支都有一个我们要处理的异常类型。重要的是要意识到, 在找到并执行了 <code>when</code> 块之后, <code>CATCH</code> 块会返回控制权并忽略该点之后的所有代码。这就是为什么 <code>resume</code> 方法要放在 <code>when</code> 块的任何一个地方。如果你把它放在整个 <code>CATCH</code> 块的最后一次, 那么只有在发生了其他类型的异常, 并且没有一个 <code>when</code> 块被满足的情况下, 该代码才会被到达。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_重新抛出异常">10.4.4. 重新抛出异常</h4>
+<div class="paragraph">
+<p>有时, 异常处理程序不能处理异常, 在这种情况下, 它可以通过调用 <code>rethrow</code> 方法再次抛出异常。该异常将被默认的异常处理程序捕获。</p>
+</div>
+<div class="paragraph">
+<p>请看下面的例子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 1 / 0;
+CATCH {
+    when X::Numeric::DivideByZero {
+        say 'Division by zero caught';
+        .rethrow;
+    }
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>使用例外 使用CATCH块，我们捕获异常，但程序终止:</p>
+<p>这里, <code>X::Numeric::DivideByZero</code> 异常是在试图打印除法 <code>1 / 0</code> 的结果后被捕获的, 然后重新抛出一个异常, Raku 打印出相应的错误信息并终止程序:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
+<pre class="highlight"><code class="language-txt" data-lang="txt">Division by zero caught
+Attempt to divide 1 by zero using div
+  in block &lt;unit&gt; at div0.pl line 1
+
+Actually thrown at:
+  in block &lt;unit&gt; at div0.pl line 1</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>该计划的输出如下:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>开始 抓住 错误信息</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>这就是我们之前看到的，但这里涉及的内容还有很多，我们将会这样做检查他们。</p>
-</div>
-<div class="paragraph">
-<p>进入CATCH块时，Raku将异常对象放入默认变量 <code>$_</code>。 用它来分析原因并做出相应的反应。让我们打印一些调试 信息，以便我们看到$ _和$发生了什么!变量。在下面的 代码，^ name方法返回变量类的名称:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>该计划的结果揭示了一些有趣的细节:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1"><code>$_</code> 中的对象是X </dt>
-<dd>
-<p>AdHoc类的一个实例。特殊例外是一个例子 从Exception类派生的类型。Raku创建了这样一个对象来响应 召唤死亡。惯例使用X ::名称空间作为异常类。
-然后，当我们通过将$ _变量传递给say函数来打印它时，实际的错误 消息打印:</p>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>请注意$的事实!变量为空 - 它包含Nil值。 最后，编译器从CATCH块打印消息，打印错误消息
-连同回溯信息，并终止程序。
-抛出异常
-现在我们可以开始检查异常对象了。Exception基类定义了 throw方法，可用于抛出异常。为简单起见，让我们开始吧
-X :: AdHoc例外。 在以下程序中，使用新方法显式创建异常
-立即抛出throw方法:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>该程序的输出对我们来说很熟悉:
-开始
-抓住 原因不明的错误</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>我们没有提供任何错误消息，程序打印默认值
-string-Unexplained错误。 要使用消息，请在创建异常对象时使用有效负载命名参数:
-X :: AdHoc.new(payload &#8658;'我的错误消息')。throw;
-从例外中恢复
-如我们所见，CATCH块停止执行程序。这并非总是如此 最佳策略。在Raku中，异常对象(类型派生自的对象)
-异常类)可以将控制权返回给发生错误的代码中的位置。
-为此，请在异常对象上调用resume方法，如下所示 例:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><code>.resume</code> 行调用默认变量$ _上的方法。它相当于一个明确的
-叫$ _。resume。 这一次，程序不会退出，而是在异常后继续工作:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>在这种情况下，将不会打印错误消息，类似于它与try一起使用的方式 块。例如，从不存在的文件恢复读取没有意义。在 另一方面，当进行一系列计算时，即使其中一个计算也可能有用 他们除以零。
-键入的例外</p>
-</div>
-<div class="paragraph">
-<p>在Raku中预定义的X ::名称空间中还有更多类。要查看完整列表 内置异常，请访问以下页面 - docs.raku.org/type-exceptions.html。您 可以为您的特定异常创建自己的类。我们先来看看如何 区分CATCH块中不同类型的异常。
-让我们创建一个程序，尝试将当前工作目录更改为不存在 一。在Raku中，您可以使用chdir函数来更改目录:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>输出显示以下错误消息:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>现在，让我们通过调用$ _变量上的^ name方法来查看异常的类型
-在CATCH块内:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>它将告诉我们 <code>$_</code> 变量包含 <code>X::IO::Chdir</code> 类的对象。
-现在，让我们利用这些知识做出不同的行动以应对不同的例外
-案例。让我们构建程序，首先更改目录，然后抛出一个
-临时例外。
-要分隔不同异常的路径，我们将使用when关键字 匹配给定类型的$ _变量:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>运行此程序并确认两个异常都被正确捕获:
-不存在的目录 临时例外</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>在CATCH块中，有两个分支，每个异常类型一个，我们想要的 处理。重要的是要意识到，在找到并执行了when块之后，
-CATCH块返回控制并忽略该点之后的所有代码。这就是为什么 恢复方法放在块中。如果你把它放在整个CATCH的末尾
-阻止，只有在其他类型的异常发生且没有异常时才会到达该代码
-什么时候块满意。
-重新抛出异常
-有时，异常处理程序无法处理异常。在这种情况下，它 可以通过调用rethrow方法再次抛出它。该异常将被捕获 默认异常处理程序
-请考虑以下示例:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>在这里，尝试打印后捕获 <code>X::Numeric::DivideByZero</code> 异常 除法的结果为1 / 0.然后重新抛出异常，Raku打印出 适当的错误消息并终止程序:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Failure对象 让我们创建一个程序，尝试打开一个不存在的文件并从中读取第一行:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>该程序将引发异常:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>请注意，只有在尝试读取文件后才会发生异常。只是
-打开文件不会产生错误，它只将$ f文件处理程序设置为Failure对象。 失败对象是Exception对象的包装器。例外本身就是
-可通过异常方法访问:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>您可以在布尔上下文中测试失败对象，例如，在打开后立即测试
-一份文件:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>要查看是否已处理故障，请使用已处理的方法。在以下示例中， 这个方法被调用两次 - 在try块之前和之后围绕着引发的方法 例外:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>一旦程序流离开try块，异常的状态就会变为
-处理。
-创建自定义例外
-在前面的部分中，我们已经看到Raku中的异常使用面向对象 方法，特别是有助于区分不同的例外
-CATCH块。
-在本节中，我们将创建一个集成到Raku系统中的自定义异常
-像X ::名称空间中的任何其他内置类一样顺利。如果你没有任何特别之处 要求，在同一名称空间中创建自定义异常类。
-例如，让我们与X :: Lift :: Overload异常一起创建Lift类， 当太多人进入电梯时会触发:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>我们不需要Lift类之外的异常类，因此最好限制范围 并在主类中定义异常。</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">X </dt>
-<dd>
-<p>Lift :: Overload类扩展了Exception类，并且必须至少提供
-message方法，以便异常处理程序可以打印错误消息。
-在List类中，有两个数据成员，$ .capacity和$!people，用于保存 电梯的默认容量和实际人数。enter方法增加了 编号并检查是否已达到容量。如果有更多的人进来，一个 抛出异常。
-现在，让我们创建一个Lift类的实例，让一些人进入电梯:</p>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">第三次进入后，将有五个人在电梯中，最大容量为 四强。因此，引发X </dt>
-<dd>
-<p>Lift :: Overload异常并且程序退出 以下错误消息:</p>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"></code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_11">10.7. 总结</h3>
+<h3 id="_failure_对象">10.5. Failure 对象</h3>
 <div class="paragraph">
-<p>在本章中，我们学习了如何在Raku中处理异常。我们详细研究过 通过使用不同的机制来抛出，捕获和隐藏异常的方法 语言尝试块和CATCH移相器。我们谈到了软故障 推迟的异常只有在真的不可避免时才被抛出。我们也是 演示了如何使用面向对象的方法来处理不同的异常 类型以及如何创建自定义异常。</p>
+<p>让我们创建一个程序, 尝试打开一个不存在的文件, 并从其中读取第一行:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $f = open 'dummy.txt';
+say $f.get;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个程序会引发一个异常:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Failed to open file /Users/ash/code/exceptions/dummy.txt: no such file or directory
+in block &lt;unit&gt; at 14.pl line 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意, 只有在试图从一个文件中读取数据后, 才会发生异常。仅仅打开一个文件并不会产生错误, 它只是将 <code>$f</code> 文件处理程序设置为 <code>Failure</code> 对象。</p>
+</div>
+<div class="paragraph">
+<p>失败对象是 <code>Exception</code> 对象的一个封装器。异常本身可以通过 <code>exception</code> 方法到达:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $f = open 'dummy.txt';
+say $f.exception;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它打印错误信息:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Failed to open file /Users/ash/code/exceptions/dummy.txt: no such file or directory</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你可以在布尔上下文中测试失败对象, 例如, 在打开一个文件后立即测试:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $f = open 'dummy.txt';
+say 'File not found' unless $f;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>要查看失败是否已经被处理, 使用 <code>handled</code> 方法。在下面的例子中, 这个方法在引发异常的方法周围的 <code>try</code> 块之前和之后被调用两次:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $f = open 'dummy.txt';
+say $f.handled; # False
+try {
+    say $f.get;
+}
+say $f.handled; # True</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当程序流离开 <code>try</code> 块时, 异常的状态就会变为 <code>handled</code>。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_创建自定义异常">10.6. 创建自定义异常</h3>
+<div class="paragraph">
+<p>在前面的章节中, 我们已经看到 Raku 中的异常使用了面向对象的方法, 这尤其有助于区分 <code>CATCH</code> 块中的不同异常。</p>
+</div>
+<div class="paragraph">
+<p>在这一节中, 我们将创建一个自定义的异常, 它和 <code>X::</code> 命名空间中的其他内置类一样, 顺利地集成到 Raku 系统中。如果你没有任何特殊要求, 可以在相同的命名空间中创建你的自定义异常类。</p>
+</div>
+<div class="paragraph">
+<p>例如, 让我们和 <code>X::Lift::Overload</code> 异常一起创建一个 <code>Lift</code> 类, 当有太多的人进入电梯时, 就会触发这个异常:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Lift {
+    class X::Lift::Overload is Exception {
+        method message {
+            'Too many people!'
+        }
+    }
+
+    has $.capacity = 5;
+    has $!people;
+    method enter(Int $n = 1) {
+        $!people += $n;
+        X::Lift::Overload.new.throw if $!people &gt; $!capacity;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们不需要 <code>Lift</code> 类之外的异常类, 所以最好限制作用域, 在主类中定义异常。</p>
+</div>
+<div class="paragraph">
+<p><code>X::Lift::Overload</code> 类扩展了 <code>Exception</code> 类, 必须至少提供 <code>message</code> 方法, 这样异常处理程序才能打印出错误信息。</p>
+</div>
+<div class="paragraph">
+<p>在 <code>List</code> 类中, 有两个数据成员, <code>$.capacity</code> 和 <code>$!people</code>, 用于保存默认的容量和电梯中的实际人数。<code>enter</code> 方法增加了这个数字, 并检查是否已经达到容量。如果有更多的人进来, 就会抛出一个异常。</p>
+</div>
+<div class="paragraph">
+<p>现在, 让我们创建一个 <code>Lift</code> 类的实例, 让几个人进入电梯:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $lift = Lift.new(capacity =&gt; 4);
+$lift.enter();
+$lift.enter(3);
+$lift.enter(2);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在第三次调用 <code>enter</code> 后, 电梯里将有5个人, 最大容量为4人。于是, <code>X::Lift::Overload</code> 异常被引发, 程序退出时出现以下错误信息:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Too many people!
+in method enter at lift.pl line 12 in block &lt;unit&gt; at lift.pl line 20</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_总结_10">10.7. 总结</h3>
+<div class="paragraph">
+<p>在这一章中, 我们学习了如何在 Raku 中处理异常。我们详细研究了通过使用语言的不同机制-<code>try</code> 块和 <code>CATCH</code> phaser 来抛出、捕获和隐藏异常的方法。我们谈到了软故障, 也就是推迟异常, 只有在真正不可避免的情况下才会抛出。此外, 我们还演示了如何使用面向对象的方法来处理不同类型的异常, 以及如何创建一个自定义的异常。</p>
 </div>
 </div>
 </div>
@@ -14982,7 +15237,7 @@ say $date;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_12">11.11. 总结</h3>
+<h3 id="_总结_11">11.11. 总结</h3>
 <div class="paragraph">
 <p>在本章中, 我们讨论了 Raku 中的正则表达式。它们与 Perl 5 中的正则表达式有许多共通之处, 但也提供了许多令人着迷的新东西。我们研究了构建正则表达式和匹配文本的方法, 学会了如何通过编写自定义字符类或内置字符类来扩展正则表达式引擎的功能。我们还研究了 Raku 在 Match 对象中存储结果的方法, 以及如何使用正则表达式在字符串中进行替换。</p>
 </div>
@@ -15035,7 +15290,7 @@ say $date;</code></pre>
 <div class="sect2">
 <h3 id="_创建_grammar">12.1. 创建 grammar</h3>
 <div class="paragraph">
-<p>与正则表达式一样, grammar 定义了一些规则来从给定的文本中提取信息。正则表达式的一个典型应用是在文本块中找到片段, 并将其分分割成有意义的片段, 例如, 查找电子邮件或检查其格式是否正确。 Grammar 有一个更大的目标 - 他们的任务通常是阅读整个文本并理解所有的内容。例如, 如果将 grammar 应用于以某种编程语言编写的源代码 , grammar 必须检查其有效性, 并创建该程序的语法树。这种区别仍然是一种约定 - grammar 可以解析小的文本部分, 就像正则表达式可以用来分析大的文本部分一样。</p>
+<p>与正则表达式一样, grammar 定义了一些规则来从给定的文本中提取信息。正则表达式的一个典型应用是在文本块中找到片段, 并将其分分割成有意义的片段, 例如, 查找电子邮件或检查其格式是否正确。Grammar 有一个更大的目标 - 他们的任务通常是阅读整个文本并理解所有的内容。例如, 如果将 grammar 应用于以某种编程语言编写的源代码 , grammar 必须检查其有效性, 并创建该程序的语法树。这种区别仍然是一种约定 - grammar 可以解析小的文本部分, 就像正则表达式可以用来分析大的文本部分一样。</p>
 </div>
 <div class="paragraph">
 <p>Raku 中 grammar 的语法就像定义一个类一样。Grammar 从 <strong>grammar</strong> 关键字开始:</p>
@@ -15062,7 +15317,7 @@ say $date;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如你所见, 规则类似于类中的方法。与方法不同的是, 规则在其主体块中包含了正则表达式。此示例中的 <code>TOP</code> 规则匹配了模式 <code>.*</code>,  它实际上匹配了所有的东西。这就足够了, 首先我们要创建一个最小的 grammar, 看看如何将其应用到文本上。<code>TOP</code> 是一个预定义的名字, 你可以给 grammar 中的第一个规则起一个名字。</p>
+<p>如你所见, 规则类似于类中的方法。与方法不同的是, 规则在其主体块中包含了正则表达式。此示例中的 <code>TOP</code> 规则匹配了模式 <code>.*</code>, 它实际上匹配了所有的东西。这就足够了, 首先我们要创建一个最小的 grammar, 看看如何将其应用到文本上。<code>TOP</code> 是一个预定义的名字, 你可以给 grammar 中的第一个规则起一个名字。</p>
 </div>
 <div class="paragraph">
 <p>正如本章开头提到的, 我们将为Raku 的小型子集创建一个解析器(为了简单起见, 我们将忽略真正的 Raku grammar 中的一些边缘情况)。因此, 我们的第一个 grammar 要解析的文本可能是这样的:</p>
@@ -15258,7 +15513,7 @@ say $x;⌋
 <p>Raku 中的 grammar 提供了一种非常有用的方法, 可以将 grammar 元素分成若干部分。让我们用它来说明 grammar 元素。</p>
 </div>
 <div class="paragraph">
-<p>复杂的正则表达式 \s* (.*? ';') ['#' &lt;-[\n]&gt;* ]? 包含两个部分 - 提取语句的正则表达式和用于注释的正则表达式。我们将它们提取成单独的规则。 单个 <strong>rule</strong> 描述了 grammar 中的一小部分, 可以引用其他规则。请看下面的例子:</p>
+<p>复杂的正则表达式 \s* (.*? ';') ['#' &lt;-[\n]&gt;* ]? 包含两个部分 - 提取语句的正则表达式和用于注释的正则表达式。我们将它们提取成单独的规则。单个 <strong>rule</strong> 描述了 grammar 中的一小部分, 可以引用其他规则。请看下面的例子:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15281,7 +15536,7 @@ say $x;⌋
 <p>现在 <code>TOP</code> 规则更加清晰了, 你马上就能看到程序是一连串的语句, 后面有可选的注释(我们的 grammar 不允许没有语句的注释)。</p>
 </div>
 <div class="paragraph">
-<p>到目前为止, grammar 已经完全解析了 <code>refer.pl</code> 文件, 但我们可以更进一步。我们可以提取语句, 接下来的任务是理解它们。现在让我们逐行解析文件, 添加新的行和可以解析语句的 grammar 规则一起加入到文件中。 你可以通过将源文本嵌入到我们的主文件中来完成:</p>
+<p>到目前为止, grammar 已经完全解析了 <code>refer.pl</code> 文件, 但我们可以更进一步。我们可以提取语句, 接下来的任务是理解它们。现在让我们逐行解析文件, 添加新的行和可以解析语句的 grammar 规则一起加入到文件中。你可以通过将源文本嵌入到我们的主文件中来完成:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15314,7 +15569,7 @@ say $result;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这个 <code>variable-declaration</code> 规则包含两个部分, 一个是字面字符串 <code>'my'</code>, 另一个是对规则 <code>&lt;variable&gt;</code> 的引用。我们没有明文规定这两部分之间的空格。Raku 中的规则会关心这些空格。因此, 规则可以解析在 <code>my</code> 和变量之间包含一个、两个或多个空格的变量声明。 即使是以下字符串也可以被正确解析 - <code>my$x</code>。</p>
+<p>这个 <code>variable-declaration</code> 规则包含两个部分, 一个是字面字符串 <code>'my'</code>, 另一个是对规则 <code>&lt;variable&gt;</code> 的引用。我们没有明文规定这两部分之间的空格。Raku 中的规则会关心这些空格。因此, 规则可以解析在 <code>my</code> 和变量之间包含一个、两个或多个空格的变量声明。即使是以下字符串也可以被正确解析 - <code>my$x</code>。</p>
 </div>
 <div class="paragraph">
 <p>为了描述一个变量, 我们创建一个 <strong>token</strong>。token 就像 <strong>rule</strong> 一样, 但不允许元素之间有空格。所以一个有效的变量名应该是一个没有空格的字符串:</p>
@@ -15457,7 +15712,7 @@ $x = 100;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这个程序的第三行是 <code>say $x;</code>。让我们把这种语句称为 <code>say-function</code>,  并为它实现规则:</p>
+<p>这个程序的第三行是 <code>say $x;</code>。让我们把这种语句称为 <code>say-function</code>, 并为它实现规则:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15618,7 +15873,7 @@ say %array;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>思考下一步的问题。自然, 把值赋给变量就好了。 在上面的代码中, 我们使用 <code>given/when</code> 选择器将标量代码和数组代码分开。如果我们想添加对散列的支持呢? 添加一个新的 <code>when</code> 分支是没问题的, 但是我们必须在所有与变量相关的 action 中添加类似的分支。</p>
+<p>思考下一步的问题。自然, 把值赋给变量就好了。在上面的代码中, 我们使用 <code>given/when</code> 选择器将标量代码和数组代码分开。如果我们想添加对散列的支持呢? 添加一个新的 <code>when</code> 分支是没问题的, 但是我们必须在所有与变量相关的 action 中添加类似的分支。</p>
 </div>
 <div class="paragraph">
 <p>其中一个解决方案是要求 grammar 区分变量的类型:</p>
@@ -16109,7 +16364,7 @@ G.parse($prog, :actions(A));</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在的 <code>%var</code> 存储是类属性, 它属于类, 而不属于类的实例。 实际上, 我们并没有创建任何 <code>A</code> 的实例, <code>G.parse</code> 方法接收的是类的名字。这对于某些应用来说可能没有问题, 但是为了确保变量存储不保留之前运行的解析器的值, 最好是把 <code>%var</code> 作为私有属性:</p>
+<p>现在的 <code>%var</code> 存储是类属性, 它属于类, 而不属于类的实例。实际上, 我们并没有创建任何 <code>A</code> 的实例, <code>G.parse</code> 方法接收的是类的名字。这对于某些应用来说可能没有问题, 但是为了确保变量存储不保留之前运行的解析器的值, 最好是把 <code>%var</code> 作为私有属性:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16251,7 +16506,7 @@ G.parse($prog, :actions(A.new));</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_13">12.7. 总结</h3>
+<h3 id="_总结_12">12.7. 总结</h3>
 <div class="paragraph">
 <p>在本章中, 我们讨论了 grammar, 这是 Raku 领先的新功能。Grammar 允许为自己的特定领域的语言构建解析器, 并且已经内置在语言中, 因此不需要外部模块就可以开始使用。</p>
 </div>
@@ -16736,14 +16991,14 @@ say $x; # OUTPUT: «10␤»</code></pre>
 <p>关键代码的保护方式是, 每次只能有一个线程访问 <code>$x</code> 计数器。</p>
 </div>
 <div class="paragraph">
-<p>不建议直接使用锁, 因为它们提供了太低级的接口。 相反, 使用 Promise、Channel 和 Supply。我们会在本章后面讨论前两个概念, 而 Supply 将在第十五章的《反应式编程》中讨论。</p>
+<p>不建议直接使用锁, 因为它们提供了太低级的接口。相反, 使用 Promise、Channel 和 Supply。我们会在本章后面讨论前两个概念, 而 Supply 将在第十五章的《反应式编程》中讨论。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_promise">13.4. Promise</h3>
 <div class="paragraph">
-<p>在上一节中, 我们创建了一些并行运行的代码块。 <code>Promise</code> 有助于查看这些代码块的完成状态。在 Raku 中, 承诺是由 <code>Promise</code> 类处理的。</p>
+<p>在上一节中, 我们创建了一些并行运行的代码块。<code>Promise</code> 有助于查看这些代码块的完成状态。在 Raku 中, 承诺是由 <code>Promise</code> 类处理的。</p>
 </div>
 <div class="sect3">
 <h4 id="_创造一个承诺">13.4.1. 创造一个承诺</h4>
@@ -16801,7 +17056,7 @@ Broken</code></pre>
 <div class="sect3">
 <h4 id="_工厂方法">13.4.3. 工厂方法</h4>
 <div class="paragraph">
-<p>让我们从一个简单的程序开始, 用一个代码块创建一个承诺，打印出一些东西并退出。<code>Promise.start</code> 方法创建了一个代码块并返回一个承诺。 注意, 返回的值是一个承诺, 而不是一个线程。使用 <code>await</code> 函数等待直到该承诺的代码块完成:</p>
+<p>让我们从一个简单的程序开始, 用一个代码块创建一个承诺, 打印出一些东西并退出。<code>Promise.start</code> 方法创建了一个代码块并返回一个承诺。注意, 返回的值是一个承诺, 而不是一个线程。使用 <code>await</code> 函数等待直到该承诺的代码块完成:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16820,7 +17075,7 @@ await $promise;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在前面的例子中, <code>start</code> 例程作为 <code>Promise</code> 类的一个方法被调用。 另外, 也可以通过一个独立的 <code>start</code> 函数来创建承诺:</p>
+<p>在前面的例子中, <code>start</code> 例程作为 <code>Promise</code> 类的一个方法被调用。另外, 也可以通过一个独立的 <code>start</code> 函数来创建承诺:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17010,7 +17265,7 @@ say 'Continuing';</code></pre>
 <div class="sect2">
 <h3 id="_channel">13.5. Channel</h3>
 <div class="paragraph">
-<p><code>Channel</code> 是一种通信手段，可以用来将数据从一段代码传递给另一段代码。Channel 的好处在于它是线程兼容的，因此不同的线程之间可以相互对话。在本节中，我们将学习如何在 Raku 中使用 Channel。</p>
+<p><code>Channel</code> 是一种通信手段, 可以用来将数据从一段代码传递给另一段代码。Channel 的好处在于它是线程兼容的, 因此不同的线程之间可以相互对话。在本节中, 我们将学习如何在 Raku 中使用 Channel。</p>
 </div>
 <div class="sect3">
 <h4 id="_基本用例">13.5.1. 基本用例</h4>
@@ -17253,12 +17508,12 @@ for 1..3 {
 </div>
 </div>
 <div class="paragraph">
-<p>将程序程序几次, 看看它产生的输出值是否不同。当然, 每次运行时计算出的数值都是一样的, 但输出行的顺序可能会有所不同。该通道以和我们将数字发送给它的相同的顺序返回数字。线程是并发的, 所以有些线程会先于其他线程打印出结果，并选取下一个值。 尽管线程的工作顺序不同, 但该通道只打印出数字一次。</p>
+<p>将程序程序几次, 看看它产生的输出值是否不同。当然, 每次运行时计算出的数值都是一样的, 但输出行的顺序可能会有所不同。该通道以和我们将数字发送给它的相同的顺序返回数字。线程是并发的, 所以有些线程会先于其他线程打印出结果, 并选取下一个值。尽管线程的工作顺序不同, 但该通道只打印出数字一次。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_14">13.6. 总结</h3>
+<h3 id="_总结_13">13.6. 总结</h3>
 <div class="paragraph">
 <p>在这一章中, 我们简要地讨论了 junction 的并行性, 其余的时间我们深入研究了线程、承诺和通道 - Raku 中实现并行和并发特性的机制。使用它们对于开发人员是相当容易的, 并且不需要手动操作底层机制来确保线程执行时不会发生冲突。</p>
 </div>
@@ -17363,7 +17618,7 @@ say f($a) == f($a); # True</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>第一次调用具有相同原始值 <code>$a</code> 的函数将返回与以前相同的结果。虽然在函数调用后, <code>$a</code> 的值发生了变化, 第二次调用 <code>f($a)</code> 无法返回相同的结果。 条件 <code>f($a) == f($a)</code> 已经不再是 True 了：</p>
+<p>第一次调用具有相同原始值 <code>$a</code> 的函数将返回与以前相同的结果。虽然在函数调用后, <code>$a</code> 的值发生了变化, 第二次调用 <code>f($a)</code> 无法返回相同的结果。条件 <code>f($a) == f($a)</code> 已经不再是 True 了：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17633,7 +17888,7 @@ say reduce &amp;add, 10..15;</code></pre>
 <p>在这种情况下, 匿名函数也被称为 lambda 函数。它具有普通子例程的所有属性, 只是它既没有名字, 也不能从程序中的其它地方调用。整个函数的定义是内联的。</p>
 </div>
 <div class="paragraph">
-<p>现在让我们看看 Raku 如何在语法上帮助简化创建 lambda。 首先, <code>sub</code> 块可以用尖号块来代替:</p>
+<p>现在让我们看看 Raku 如何在语法上帮助简化创建 lambda。首先, <code>sub</code> 块可以用尖号块来代替:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17854,7 +18109,7 @@ my @street = (
 <p>现在看起来已经大功告成了。一会儿我们会把它做得更好, 但现在要再次注意, 没有任何赋值操作符可以改变变量的值。实际上, 整个程序中的变量并不多。</p>
 </div>
 <div class="paragraph">
-<p>上一个例子中的数据流是由下而上的链式 <code>map</code> 和 <code>grep</code>。 首先, <code>@street</code> 被过滤, 找到双数的房子, 然后挑选红色的房子, 然后只挑选老房子, 然后计算他们的表面积。Raku 允许我们用 <code>=&#8658;</code> 和 <code>&#8656;=</code> 运算符以从上到下的方式来组织代码。在第四章《使用运算符》中的数据管道运算符一节中简要介绍了 feed 运算符。这是你如何使用它们重写链的方法:</p>
+<p>上一个例子中的数据流是由下而上的链式 <code>map</code> 和 <code>grep</code>。首先, <code>@street</code> 被过滤, 找到双数的房子, 然后挑选红色的房子, 然后只挑选老房子, 然后计算他们的表面积。Raku 允许我们用 <code>=&#8658;</code> 和 <code>&#8656;=</code> 运算符以从上到下的方式来组织代码。在第四章《使用运算符》中的数据管道运算符一节中简要介绍了 feed 运算符。这是你如何使用它们重写链的方法:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18175,7 +18430,7 @@ say $*a; # 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里, <code>$*a</code> 是主程序中的一个动态变量。它的初始化值为 1。 当 <code>f</code> 函数被调用时, 会改变同一个变量的值, 因此该程序打印出 2。问题是 <code>$*a</code> 并没有在 <code>f</code> 函数内部声明。编译器会在函数被调用的作用域中搜索这个名称。</p>
+<p>这里, <code>$*a</code> 是主程序中的一个动态变量。它的初始化值为 1。当 <code>f</code> 函数被调用时, 会改变同一个变量的值, 因此该程序打印出 2。问题是 <code>$*a</code> 并没有在 <code>f</code> 函数内部声明。编译器会在函数被调用的作用域中搜索这个名称。</p>
 </div>
 <div class="paragraph">
 <p>在前面的例子中, 可以用一个简单的全局变量来代替动态变量:</p>
@@ -18428,7 +18683,7 @@ say @cubes[0..5]; # (1 8 27 64 125 216)</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_15">14.9. 总结</h3>
+<h3 id="_总结_14">14.9. 总结</h3>
 <div class="paragraph">
 <p>在本章中, 我们讨论的是函数式编程。Raku, 虽然不是函数式编程语言, 但它包括的元素可以实现这类语言的许多特性。我们讨论了递归和化简, 讨论了高阶函数、lambda 函数和 WhateverCode 代码块(那些使用 <code>*</code> 来要求 Raku 做你想要的事情的代码块)。我们创建了一些使用使用数据管道、闭包、柯里化和动态作用域的例子。最后, 我们谈到了无限列表和惰性列表, 以及如何生成它们。</p>
 </div>
@@ -18442,7 +18697,7 @@ say @cubes[0..5]; # (1 8 27 64 125 216)</code></pre>
 <h2 id="_反应式编程">15. 反应式编程</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>在上一章中, 我们讨论了函数式编程。Raku 是一种多范式的语言, 它内置了对这方面的支持。在这一章中, 我们讨论了反应式编程, 也称为函数反应式编程或事件驱动编程。 同样, Raku 的内核也支持这种风格的编程, 开箱即用。</p>
+<p>在上一章中, 我们讨论了函数式编程。Raku 是一种多范式的语言, 它内置了对这方面的支持。在这一章中, 我们讨论了反应式编程, 也称为函数反应式编程或事件驱动编程。同样, Raku 的内核也支持这种风格的编程, 开箱即用。</p>
 </div>
 <div class="paragraph">
 <p>本章将讨论以下主题:</p>
@@ -18739,7 +18994,7 @@ _______________
 </div>
 </div>
 <div class="paragraph">
-<p>这两个分接器都接收从零开始的序列。 <code>interval</code> 方法是一种创建按需供应的工厂方法:</p>
+<p>这两个分接器都接收从零开始的序列。<code>interval</code> 方法是一种创建按需供应的工厂方法:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -19062,7 +19317,7 @@ sleep 2;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_16">15.4. 总结</h3>
+<h3 id="_总结_15">15.4. 总结</h3>
 <div class="paragraph">
 <p>在本章中, 我们讨论了 Raku 中的反应式编程。这种范式在语言核心中得到了支持, 所以不需要外部模块就可以开始编程。供应是本章的主角 - 我们涵盖了两种不同类型的供应, 按需供应和实时供应。我们有许多将分接器连接到供应上的例子, 看到了数据流是如何组织的, 也看到了数据流是如何过滤的。</p>
 </div>
