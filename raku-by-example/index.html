@@ -198,10 +198,16 @@ if (theme && theme !== "1") {
 <li><a href="#_总结_9">11.5. 总结</a></li>
 </ul>
 </li>
-<li><a href="#_使用_inine_python和matplotlib画图">12. 使用 Inine-Python和Matplotlib画图</a>
+<li><a href="#_使用_inine_python_和_matplotlib_画图">12. 使用 Inine-Python 和 Matplotlib 画图</a>
 <ul class="sectlevel2">
 <li><a href="#_提取状态">12.1. 提取状态</a></li>
-<li><a href="#_总结_10">12.2. 总结</a></li>
+<li><a href="#_plotting_with_python">12.2. Plotting with Python</a></li>
+<li><a href="#_bridging_the_gap">12.3. Bridging the Gap</a></li>
+<li><a href="#_using_the_bridge_to_plot">12.4. Using the Bridge to Plot</a></li>
+<li><a href="#_stacked_plots">12.5. Stacked Plots</a></li>
+<li><a href="#_idiomatic_use_of_inlinepython">12.6. Idiomatic Use of Inline::Python</a></li>
+<li><a href="#_idiomatic_use_of_inlinepython_2">12.7. Idiomatic Use of Inline::Python</a></li>
+<li><a href="#_总结_10">12.8. 总结</a></li>
 </ul>
 </li>
 <li><a href="#_接下来是什么">13. 接下来是什么</a>
@@ -4895,36 +4901,72 @@ say @list.collate;                 # (a Ä ä o ö ø)</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_使用_inine_python和matplotlib画图">12. 使用 Inine-Python和Matplotlib画图</h2>
+<h2 id="_使用_inine_python_和_matplotlib_画图">12. 使用 Inine-Python 和 Matplotlib 画图</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Occasionally I come across git repositories where I want to know how active they are and who the main developers are.
-Let’s develop a script that plots the commit history, and explore how to use Python modules in Raku.</p>
+<p>Occasionally I come across git repositories where I want to know how active they are and who the main developers are.</p>
+</div>
+<div class="paragraph">
+<p>Let’s develop a script that plots the commit history, and explore how to use Python modules in Raku.</p>
 </div>
 <div class="sect2">
 <h3 id="_提取状态">12.1. 提取状态</h3>
 <div class="paragraph">
-<p>We want to plot the number of commits by author and date. We can get this information easily by passing some options to git log:
-my $proc = run :out, &lt;git log --date=short --pretty=format:%ad!%an&gt;; my (%total, %by-author, %dates);
-for $proc.out.lines &#8594; $line {
-my ( $date, $author ) = $line.split: '!', 2; %total{$author}; %by-author{$author}{$date}; %dates{$date}++;
-}
-run executes an external command and :out tells it to capture the command’s output, making it available as $proc.out. The command is a list, with the first element being the actual executable and the rest being command-line arguments to this executable.
-Here git log gets the options --date short --pretty=format:%ad!%an, whichinstructsittoproducelineslike2017-03-01!John Doe.Thislinecanbe parsedwithasimplecallto$line.split: '!', 2,whichsplitsonthe!and limitstheresulttotwoelements.Assigningittoatwo-elementlist( $date, $author )unpacksit.Wethenusehashestocountcommitsbyauthor(in %total), by author and date (%by-author), and finally by date. In the second case,</p>
+<p>We want to plot the number of commits by author and date. We can get this information easily by passing some options to git log:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $proc = run :out, &lt;git log --date=short --pretty=format:%ad!%an&gt;;
+my (%total, %by-author, %dates);
+for $proc.out.lines -&gt; $line {
+    my ( $date, $author ) = $line.split: '!', 2;
+    %total{$author}++;
+    %by-author{$author}{$date}++;
+    %dates{$date}++;
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>%by-author{$author} isn’t even a hash yet and we can still hash-index it. This is due to a feature called autovivification, which automatically creates (“vivifies”) objects where we need them. The use of ++ creates integers, {&#8230;&#8203;} indexing creates hashes, [&#8230;&#8203;] indexing, .push creates arrays, and so on.
-To get from these hashes to the top contributors by commit count, we can sort %total by value. Since this sorts in ascending order, sorting by the negative value returns the list in descending order. The list contains Pair1 objects, where we only want the first five, and only their keys:
-my @top-authors = %total.sort(-<strong>.value).head(5).map(</strong>.key);
-For each author, we can extract the dates of their activity and their commit
-counts like this:
-my @dates = %by-author{$author}.keys.sort; my @counts = %by-author{$author}{@dates};
-The last line uses slicing, that is, indexing a hash with a list to return a list of elements.
-12.2 Plotting with Python
-Matplotlib is a very versatile library for all sorts of plotting and visualization tasks. It is based on NumPy,2 a Python library for scientific and numeric computing.
-Matplotlib3 is written in Python and for Python programs, but that won’t stop us from using it in a Raku program.
-But first, let’s take a look at a basic plotting example that uses dates on the x axis:
-import datetime
+<p>run executes an external command and :out tells it to capture the command’s output, making it available as $proc.out. The command is a list, with the first element being the actual executable and the rest being command-line arguments to this executable.</p>
+</div>
+<div class="paragraph">
+<p>Here git log gets the options --date short --pretty=format:%ad!%an, which instructs it to produce lines like2017-03-01!John Doe.This line can be parsed with a simple call to $line.split: '!', 2,which splits onthe! and limits the result to two elements.Assigning it to a two-element list( $date, $author ) unpacks it.We then use hashes to count commits by author(in %total), by author and date (%by-author), and finally by date. In the second case,%by-author{$author} isn’t even a hash yet and we can still hash-index it. This is due to a feature called autovivification, which automatically creates (“vivifies”) objects where we need them. The use of ++ creates integers, {&#8230;&#8203;} indexing creates hashes, [&#8230;&#8203;] indexing, .push creates arrays, and so on.</p>
+</div>
+<div class="paragraph">
+<p>To get from these hashes to the top contributors by commit count, we can sort %total by value. Since this sorts in ascending order, sorting by the negative value returns the list in descending order. The list contains Pair1 objects, where we only want the first five, and only their keys:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @top-authors = %total.sort(-*.value).head(5).map(*.key);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For each author, we can extract the dates of their activity and their commit counts like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @dates = %by-author{$author}.keys.sort;
+my @counts = %by-author{$author}{@dates};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The last line uses slicing, that is, indexing a hash with a list to return a list of elements.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_plotting_with_python">12.2. Plotting with Python</h3>
+<div class="paragraph">
+<p>Matplotlib is a very versatile library for all sorts of plotting and visualization tasks. It is based on NumPy,2 a Python library for scientific and numeric computing.</p>
+</div>
+<div class="paragraph">
+<p>Matplotlib3 is written in Python and for Python programs, but that won’t stop us from using it in a Raku program.</p>
+</div>
+<div class="paragraph">
+<p>But first, let’s take a look at a basic plotting example that uses dates on the x axis:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">import datetime
 import matplotlib.pyplot as plt
 fig, subplots = plt.subplots()
 subplots.plot(
@@ -4932,231 +4974,494 @@ subplots.plot(
     datetime.date(2017, 5, 5)],
     [ 42, 23, 42 ],
     label='An example',
-)</p>
-</div>
-<div class="paragraph">
-<p>subplots.legend(loc='upper center', shadow=True)
+)
+
+subplots.legend(loc='upper center', shadow=True)
 fig.autofmt_xdate()
-plt.show()
-To make this run, you have to install Python 2.7 and matplotlib.4 You can do this onDebian-basedLinuxsystemswithapt-get install -y python-matplotlib. The package name is the same on RPM-based distributions such as CentOS or SUSE Linux. MacOS users are advised to install Python 2.7 through homebrew or macportsandthenusepip2 install matplotliborpip2.7 install matplotlib to get the library. Windows installation is probably easiest through the conda5 package manager, which offers prebuilt binaries of both Python and matplotlib.
-When you run this script with python2.7 dates.py, it opens a GUI window, showing the plot and some controls, which allow you to zoom, scroll, and write the plot graphic to a file (Figure 12-1):</p>
+plt.show()</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>12.3 Bridging the Gap
-The Rakudo Raku compiler comes with a handy library for calling foreign functions6—called ‘NativeCall’—which allows you to call functions written in C, or anything with a compatible binary interface.
-The Inline::Python7 library uses the native call functionality to talk to Python’s C API and offers interoperability between Raku and Python code. At the time of writing, this interoperability is still fragile in places, but can be worth using for some of the great libraries that Python has to offer.
-To install Inline::Python, you must have a C compiler available, and then run
-$ zef install Inline::Python
-Now you can start to run Python 2 code in your Raku programs:
-use Inline::Python;
+<p>To make this run, you have to install Python 2.7 and matplotlib.4 You can do this on Debian-based Linux systems with <code>apt-get install -y python-matplotlib</code>. The package name is the same on RPM-based distributions such as CentOS or SUSE Linux. MacOS users are advised to install Python 2.7 through homebrew or macports and then use <code>pip2 install matplotlib</code> or <code>pip2.7 install matplotlib</code> to get the library. Windows installation is probably easiest through the conda5 package manager, which offers prebuilt binaries of both Python and matplotlib.</p>
+</div>
+<div class="paragraph">
+<p>When you run this script with python2.7 dates.py, it opens a GUI window, showing the plot and some controls, which allow you to zoom, scroll, and write the plot graphic to a file (Figure 12-1):</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_bridging_the_gap">12.3. Bridging the Gap</h3>
+<div class="paragraph">
+<p>The Rakudo Raku compiler comes with a handy library for calling foreign functions6—called ‘NativeCall’—which allows you to call functions written in C, or anything with a compatible binary interface.</p>
+</div>
+<div class="paragraph">
+<p>The Inline::Python7 library uses the native call functionality to talk to Python’s C API and offers interoperability between Raku and Python code. At the time of writing, this interoperability is still fragile in places, but can be worth using for some of the great libraries that Python has to offer.</p>
+</div>
+<div class="paragraph">
+<p>To install Inline::Python, you must have a C compiler available, and then run</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ zef install Inline::Python</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now you can start to run Python 2 code in your Raku programs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Inline::Python;
+
 my $py = Inline::Python.new;
-$py.run: 'print("Hello, Raku")';
-Besides the run method, which takes a string of Python code and executes it, you can also use call to call Python routines by specifying the namespace, the routine to call, and a list of arguments:
-use Inline::Python;
+$py.run: 'print("Hello, Raku")';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Besides the run method, which takes a string of Python code and executes it, you can also use call to call Python routines by specifying the namespace, the routine to call, and a list of arguments:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Inline::Python;
+
 my $py = Inline::Python.new;
 $py.run('import datetime');
-my $date = $py.call('datetime', 'date', 2017, 1, 31); $py.call('<em>builtin</em>', 'print', $date); # 2017-01-31
-The arguments that you pass to call are Raku objects, such as the three Int objects in this example. Inline::Python automatically translates them into the corresponding Python built-in data structure. It translates numbers, strings, arrays, and hashes. Return values are also translated in the opposite direction, though since Python 2 does not distinguish properly between byte and Unicode strings, Python strings end up as buffers in Raku.</p>
+my $date = $py.call('datetime', 'date', 2017, 1, 31);
+$py.call('__builtin__', 'print', $date); # 2017-01-31</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Objects that Inline::Python cannot translate are handled as opaque objects on the Raku side. You can pass them back into Python routines
-(as shown with the preceding print call) and you can call methods on them:
-say $date.isoformat().decode; # 2017-01-31
-Raku exposes attributes through methods, so Raku has no syntax for accessing attributes from foreign objects directly. For instance, if you try to access the year attribute of datetime.date through the normal method call syntax, you get an error:
-say $date.year;
-dies with
-'int' object is not callable
-Instead, you have to use the getattr builtin:
-say $py.call('<em>builtin</em>', 'getattr', $date, 'year');
-12.4 Using the Bridge to Plot
-We need access to two namespaces in Python, datetime and matplotlib.pyplot, so let’s start by importing them and writing some short helpers:
-my $py = Inline::Python.new; $py.run('import datetime'); $py.run('import matplotlib.pyplot'); sub plot(Str $name, |c) {
+<p>The arguments that you pass to call are Raku objects, such as the three Int objects in this example. Inline::Python automatically translates them into the corresponding Python built-in data structure. It translates numbers, strings, arrays, and hashes. Return values are also translated in the opposite direction, though since Python 2 does not distinguish properly between byte and Unicode strings, Python strings end up as buffers in Raku.</p>
+</div>
+<div class="paragraph">
+<p>Objects that Inline::Python cannot translate are handled as opaque objects on the Raku side. You can pass them back into Python routines(as shown with the preceding print call) and you can call methods on them:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $date.isoformat().decode; # 2017-01-31</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Raku exposes attributes through methods, so Raku has no syntax for accessing attributes from foreign objects directly. For instance, if you try to access the year attribute of datetime.date through the normal method call syntax, you get an error:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $date.year;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>dies with</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">'int' object is not callable</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Instead, you have to use the getattr builtin:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $py.call('__builtin__', 'getattr', $date, 'year');</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_the_bridge_to_plot">12.4. Using the Bridge to Plot</h3>
+<div class="paragraph">
+<p>We need access to two namespaces in Python, datetime and matplotlib.pyplot, so let’s start by importing them and writing some short helpers:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $py = Inline::Python.new;
+$py.run('import datetime');
+$py.run('import matplotlib.pyplot');
+sub plot(Str $name, |c) {
     $py.call('matplotlib.pyplot', $name, |c);
 }
+
 sub pydate(Str $d) {
-$py.call('datetime', 'date', $d.split('-').map(*.Int));
-}
-We can now call pydate('2017-03-01') to create a Python datetime. date object from an ISO-formatted string and call the plot function to access functionality from matplotlib:
-my ($figure, $subplots) = plot('subplots'); $figure.autofmt_xdate();
-my @dates = %dates.keys.sort;</p>
+    $py.call('datetime', 'date', $d.split('-').map(*.Int));
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>$subplots.plot:
+<p>We can now call pydate('2017-03-01') to create a Python datetime. date object from an ISO-formatted string and call the plot function to access functionality from matplotlib:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my ($figure, $subplots) = plot('subplots');
+$figure.autofmt_xdate();
+
+my @dates = %dates.keys.sort;
+
+$subplots.plot:
     $[@dates.map(&amp;pydate)],
     $[ %dates{@dates} ],
-    label     &#8658; 'Total',
-    marker    &#8658; '.',
-    linestyle &#8658; '';
-The Raku call plot('subplots') corresponds to the Python code fig, subplots = plt.subplots(). Passing arrays to Python functions needs a bit of extra work, because Inline::Python flattens arrays. Using an extra $ sigil in front of an array puts it into an extra scalar and thus prevents the flattening.
-Now we can actually plot the number of commits by author, add a legend, and plot the result:
-for @top-authors &#8594; $author {
-my @dates = %by-author{$author}.keys.sort; my @counts = %by-author{$author}{@dates}; $subplots.plot:
+    label     =&gt; 'Total',
+    marker    =&gt; '.',
+    linestyle =&gt; '';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The Raku call plot('subplots') corresponds to the Python code fig, subplots = plt.subplots(). Passing arrays to Python functions needs a bit of extra work, because Inline::Python flattens arrays. Using an extra $ sigil in front of an array puts it into an extra scalar and thus prevents the flattening.</p>
+</div>
+<div class="paragraph">
+<p>Now we can actually plot the number of commits by author, add a legend, and plot the result:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for @top-authors -&gt; $author {
+    my @dates = %by-author{$author}.keys.sort;
+    my @counts = %by-author{$author}{@dates};
+    $subplots.plot:
         $[ @dates.map(&amp;pydate) ],
         $@counts,
-        label     &#8658; $author,
-        marker    &#8658;'.',
-        linestyle &#8658; '';
+        label     =&gt; $author,
+        marker    =&gt;'.',
+        linestyle =&gt; '';
 }
-$subplots.legend(loc&#8658;'upper center', shadow&#8658;True);
+
+$subplots.legend(loc=&gt;'upper center', shadow=&gt;True);
 plot('title', 'Contributions per day');
-plot('show');
-When run in the zef git repository,8 it produces the plot shown in Figure 12-2:</p>
+plot('show');</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>12.5 Stacked Plots
-I am not yet happy with the plot, so I want to explore using stacked plots for presenting the same information. In a regular plot, the y coordinate of each plotted value is proportional to its value. In a stacked plot, it is the distance to the previous value that is proportional to its value. This is nice for values that add up to a total that is also interesting.
-Matplotlib offers a method called stackplot9 for this task. Contrary to multiple plot calls on a subplot object, it requires a shared x axis for all data series. Hence we must construct one array for each author of git commits, where dates with no value are set to zero.
-This time we have to construct an array of arrays where each inner array has the values for one author:
-my @dates = %dates.keys.sort;
+<p>When run in the zef git repository,8 it produces the plot shown in Figure 12-2:</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_stacked_plots">12.5. Stacked Plots</h3>
+<div class="paragraph">
+<p>I am not yet happy with the plot, so I want to explore using stacked plots for presenting the same information. In a regular plot, the y coordinate of each plotted value is proportional to its value. In a stacked plot, it is the distance to the previous value that is proportional to its value. This is nice for values that add up to a total that is also interesting.</p>
+</div>
+<div class="paragraph">
+<p>Matplotlib offers a method called stackplot9 for this task. Contrary to multiple plot calls on a subplot object, it requires a shared x axis for all data series. Hence we must construct one array for each author of git commits, where dates with no value are set to zero.</p>
+</div>
+<div class="paragraph">
+<p>This time we have to construct an array of arrays where each inner array has the values for one author:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @dates = %dates.keys.sort;
 my @stack = $[] xx @top-authors;
-for @dates &#8594; $d {
-for @top-authors.kv &#8594; $idx, $author {
+
+for @dates -&gt; $d {
+    for @top-authors.kv -&gt; $idx, $author {
         @stack[$idx].push: %by-author{$author}{$d} // 0;
     }
-}</p>
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Now plotting becomes a simple matter of a method call, followed by the
-usual commands to add a title and show the plot:
-$subplots.stackplot($[@dates.map(&amp;pydate)], @stack);
+<p>Now plotting becomes a simple matter of a method call, followed by the usual commands to add a title and show the plot:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$subplots.stackplot($[@dates.map(&amp;pydate)], @stack);
 plot('title', 'Contributions per day');
-plot('show');
-The result (again run on the zef source repository) is shown in Figure 12-3:</p>
+plot('show');</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Comparing this to the previous visualization reveals a discrepancy: there were no commits in 2014, and yet the stacked plot makes it appear this way. In fact, the previous plots would have shown the same “alternative facts” if we had chosen lines instead of points. It comes from matplotlib (like nearly all plotting libraries) interpolating linearly between data points. But in our case, a date with no data points means zero commits happened on that date.
-To communicate this to matplotlib, we must explicitly insert zero values for missing dates. This can be achieved by replacing
-my @dates = %dates.keys.sort;</p>
+<p>The result (again run on the zef source repository) is shown in Figure 12-3:</p>
 </div>
 <div class="paragraph">
-<p>with the line
-my @dates = %dates.keys.minmax;
-The minmax method10 finds the minimal and maximal values, and returns them in a Range.11 Assigning the range to an array turns it into an array of all values between the minimal and the maximal value. The logic for assembling the @stack variable already maps missing values to zero.
-The result looks a bit better, but still far from perfect (Figure 12-4):</p>
+<p>Comparing this to the previous visualization reveals a discrepancy: there were no commits in 2014, and yet the stacked plot makes it appear this way. In fact, the previous plots would have shown the same “alternative facts” if we had chosen lines instead of points. It comes from matplotlib (like nearly all plotting libraries) interpolating linearly between data points. But in our case, a date with no data points means zero commits happened on that date.</p>
+</div>
+<div class="paragraph">
+<p>To communicate this to matplotlib, we must explicitly insert zero values for missing dates. This can be achieved by replacing</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @dates = %dates.keys.sort;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the line</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @dates = %dates.keys.minmax;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The minmax method10 finds the minimal and maximal values, and returns them in a Range.11 Assigning the range to an array turns it into an array of all values between the minimal and the maximal value. The logic for assembling the @stack variable already maps missing values to zero.</p>
+</div>
+<div class="paragraph">
+<p>The result looks a bit better, but still far from perfect (Figure 12-4):</p>
 </div>
 <div class="paragraph">
 <p>Thinking more about the problem, contributions from separate days should not be joined together, because it produces misleading results. Matplotlib doesn’t support adding a legend automatically to stacked plots, so this seems to be to be a dead end.</p>
 </div>
 <div class="paragraph">
-<p>Since a dot plot didn’t work very well, let’s try a different kind of plot that represents each data point separately: a bar chart, or more specifically, a stacked bar chart. Matplotlib offers the bar plotting method where the named parameter bottom can be used to generate the stacking:
-my @dates = %dates.keys.sort;
-my @stack = $[] xx @top-authors; my @bottom = $[] xx @top-authors;
-for @dates &#8594; $d { my $bottom = 0;
-for @top-authors.kv &#8594; $idx, $author { @bottom[$idx].push: $bottom;
-my $value = %by-author{$author}{$d} // 0; @stack[$idx].push: $value;
-$bottom += $value;
-} }
-We need to supply color names ourselves and set the edge color of the bars to the same color, otherwise the black edge color dominates the result:
-my $width = 1.0;
-my @colors = &lt;red green blue yellow black&gt;; my @plots;
-for @top-authors.kv &#8594; $idx, $author { @plots.push: plot(
+<p>Since a dot plot didn’t work very well, let’s try a different kind of plot that represents each data point separately: a bar chart, or more specifically, a stacked bar chart. Matplotlib offers the bar plotting method where the named parameter bottom can be used to generate the stacking:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @dates = %dates.keys.sort;
+my @stack = $[] xx @top-authors;
+my @bottom = $[] xx @top-authors;
+
+for @dates -&gt; $d {
+    my $bottom = 0;
+    for @top-authors.kv -&gt; $idx, $author {
+        @bottom[$idx].push: $bottom;
+        my $value = %by-author{$author}{$d} // 0;
+        @stack[$idx].push: $value;
+        $bottom += $value;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We need to supply color names ourselves and set the edge color of the bars to the same color, otherwise the black edge color dominates the result:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $width = 1.0;
+my @colors = &lt;red green blue yellow black&gt;;
+my @plots;
+
+for @top-authors.kv -&gt; $idx, $author {
+    @plots.push: plot(
         'bar',
         $[@dates.map(&amp;pydate)],
         @stack[$idx],
         $width,
-        bottom &#8658; @bottom[$idx],
-        color &#8658; @colors[$idx],
-        edgecolor &#8658; @colors[$idx],
-); }
+        bottom =&gt; @bottom[$idx],
+        color =&gt; @colors[$idx],
+        edgecolor =&gt; @colors[$idx],
+    );
+}
 plot('legend', $@plots, $@top-authors);
+
 plot('title', 'Contributions per day');
-plot('show');</p>
+plot('show');</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>If you want to improve the result further, you could experiment with limiting the number of bars by lumping together contributions by week or month (or maybe $n-day period).
-12.6 Idiomatic Use of Inline::Python
-Now that the plots look informative and correct, it’s time to explore how to better emulate the typical Python APIs through Inline::Python.
-12.6.1 Types of Python APIs
-Python is an object-oriented language, so many APIs involve method calls, which Inline::Python helpfully automatically translates for us.
-But the objects must come from somewhere and typically this is by calling a function that returns an object, or by instantiating a class. In Python, those two are really the same under the hood, since instantiating a class is the same as calling the class as if it were a function.</p>
-</div>
-<div class="paragraph">
-<p>If you want to improve the result further, you could experiment with limiting the number of bars by lumping together contributions by week or month (or maybe $n-day period).
-12.6 Idiomatic Use of Inline::Python
-Now that the plots look informative and correct, it’s time to explore how to better emulate the typical Python APIs through Inline::Python.
-12.6.1 Types of Python APIs
-Python is an object-oriented language, so many APIs involve method calls, which Inline::Python helpfully automatically translates for us.
-But the objects must come from somewhere and typically this is by calling a function that returns an object, or by instantiating a class. In Python, those two are really the same under the hood, since instantiating a class is the same as calling the class as if it were a function.</p>
-</div>
-<div class="paragraph">
-<p>my (&amp;subplots, &amp;bar, &amp;legend, &amp;title, &amp;show)
-= gen('matplotlib.pyplot', &lt;subplots bar legend title show&gt;); my ($figure, $subplots) = subplots();
-# more code here
-legend($@plots, $@top-authors);
-title('Contributions per day');
-show();
-This makes the functions’ usage quite nice, but comes at the cost of duplicating their names. One can view this as a feature, because it allows the creation of different aliases, or as a source for bugs when the order is messed up, or a name misspelled.
-How could we avoid the duplication should we choose to create wrapper functions?
-This is where Raku’s flexibility and introspection abilities pay off. There are two key components that allow a nicer solution: the fact that declarations are expressions, and that you can introspect variables for their names.
-The first part means you can write mysub my ($a, $b), which declares
-the variables $a and $b, and calls a function with those variables as arguments. The second part means that $a.VAR.name returns a string '$a', the name of the variable.
-Let’s combine this to create a wrapper that initializes subroutines for us:
-sub pysub(Str $namespace, |args) { $py.run("import $namespace");
-for args[0] &lt;&#8594; $sub {
-my $name = $sub.VAR.name.substr(1); $sub = sub (|args) {
-            $py.call($namespace, $name, |args);
-        }
-} }
-pysub 'matplotlib.pyplot',
-my (&amp;subplots, &amp;bar, &amp;legend, &amp;title, &amp;show);
-131
-Chapter 12 ■ plotting Using inline::python and Matplotlib
-This avoids duplicating the name, but forces us to use some lower-level
-Raku features in sub pysub. Using ordinary variables means that accessing their .VAR.name results in the name of the variable, not the name of the variable that’s used on the caller side. So we can’t use slurpy arguments as in
-sub pysub(Str $namespace, *@subs)
-Instead we must use |args to obtain the rest of the arguments in a Capture.12 This doesn’t flatten the list of variables passed to the function, so when we iterate over them, we must do so by accessing args[0]. By default, loop variables are read-only, which we can avoid by using &lt;&#8594; instead of &#8594; to introduce the signature. Fortunately, that also preserves the name of the caller side variable.
-12.6.3 An Object-Oriented Interface
-Instead of exposing the functions, we can also create types that emulate the method calls on Python modules. For that, we can implement a class with a method FALLBACK, which Raku calls for us when calling a method that is not implemented in the class:
-class PyPlot is Mu { has $.py;
-submethod TWEAK {
-$!py.run('import matplotlib.pyplot');
-}
-method FALLBACK($name, |args) {
-        $!py.call('matplotlib.pyplot', $name, |args);
-    }
-}
-my $pyplot = PyPlot.new(:$py);
-my ($figure, $subplots) = $pyplot.subplots; # plotting code goes here $pyplot.legend($@plots, $@top-authors);
-$pyplot.title('Contributions per day');
-$pyplot.show;</p>
-</div>
-<div class="paragraph">
-<p>Class PyPlot inherits directly from Mu, the root of the Raku type hierarchy, instead of Any, the default parent class (which in turn inherits from Mu). Any introduces a large number of methods that Raku objects get by default, and since FALLBACK is only invoked when a method is not present, this is something to avoid.
-The method TWEAK is another method that Raku calls automatically for us, after the object has been fully instantiated. All-caps method names are reserved for such special purposes. It is marked as a submethod, which means it is not inherited into subclasses. Since TWEAK is called at the level of each class, if it were a regular method, a subclass would call it twice implicitly. Note that TWEAK is only supported in Rakudo version 2016.11 and later.
-There’s nothing specific to the Python package matplotlib.pyplot in class PyPlot, except the namespace name. We could easily generalize it to any namespace:
-class PythonModule is Mu { has $.py;
-has $.namespace; submethod TWEAK {
-        $!py.run("import $!namespace");
-    }
-method FALLBACK($name, |args) { $!py.call($!namespace, $name, |args);
-} }
-my $pyplot = PythonModule.new(:$py, :namespace&lt;matplotlib.pyplot&gt;);
-This is one Raku type that can represent any Python module. If instead we want a separate Raku type for each Python module, we could use roles, which are optionally parameterized:
-role PythonModule[Str $namespace] is Mu { has $.py;
-submethod TWEAK {
-$!py.run("import $namespace");
-}
-method FALLBACK($name, |args) {
-        $!py.call($namespace, $name, |args);
-    }
-}
-my $pyplot = PythonModule['matplotlib.pyplot'].new(:$py);</p>
-</div>
-<div class="paragraph">
-<p>Chapter 12  plotting Using inline::python and Matplotlib
-Using this approach, we can create type constraints for Python modules in
-Raku space:
-sub plot-histogram(PythonModule['matplotlib.pyplot'], @data) { # implementation here
-}
-Passing in any wrapped Python module other than matplotlib.pyplot
-results in a type error.</p>
+<p>If you want to improve the result further, you could experiment with limiting the number of bars by lumping together contributions by week or month (or maybe $n-day period).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_10">12.2. 总结</h3>
+<h3 id="_idiomatic_use_of_inlinepython">12.6. Idiomatic Use of Inline::Python</h3>
 <div class="paragraph">
-<p>We’ve explored several ways to represent commit occurrence in plots and utilized Inline::Python to interface with a Python-based plotting library.
-A bit of Raku metaprogramming allowed us to emulate different kinds of Python APIs pretty directly in Raku code, allowing a fairly direct translation of the original library’s documentation into Raku code.</p>
+<p>Now that the plots look informative and correct, it’s time to explore how to better emulate the typical Python APIs through Inline::Python.</p>
+</div>
+<div class="sect3">
+<h4 id="_types_of_python_apis">12.6.1. Types of Python APIs</h4>
+<div class="paragraph">
+<p>Python is an object-oriented language, so many APIs involve method calls, which Inline::Python helpfully automatically translates for us.</p>
+</div>
+<div class="paragraph">
+<p>But the objects must come from somewhere and typically this is by calling a function that returns an object, or by instantiating a class. In Python, those two are really the same under the hood, since instantiating a class is the same as calling the class as if it were a function.</p>
+</div>
+<div class="paragraph">
+<p>If you want to improve the result further, you could experiment with limiting the number of bars by lumping together contributions by week or month (or maybe $n-day period).</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_idiomatic_use_of_inlinepython_2">12.7. Idiomatic Use of Inline::Python</h3>
+<div class="paragraph">
+<p>Now that the plots look informative and correct, it’s time to explore how to better emulate the typical Python APIs through Inline::Python.</p>
+</div>
+<div class="sect3">
+<h4 id="_types_of_python_apis_2">12.7.1. Types of Python APIs</h4>
+<div class="paragraph">
+<p>Python is an object-oriented language, so many APIs involve method calls, which Inline::Python helpfully automatically translates for us.</p>
+</div>
+<div class="paragraph">
+<p>But the objects must come from somewhere and typically this is by calling a function that returns an object, or by instantiating a class. In Python, those two are really the same under the hood, since instantiating a class is the same as calling the class as if it were a function.</p>
+</div>
+<div class="paragraph">
+<p>An example of this (in Python) would be</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">from matplotlib.pyplot
+import subplots result = subplots()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>But the matplotlib documentation tends to use another, equivalent syntax:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">import matplotlib.pyplot as plt
+result = plt.subplots()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This uses the subplots symbol (class or function) as a method on the module matplotlib.pyplot, which the import statement aliases to plt. This is a more object-oriented syntax for the same API.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_mapping_the_function_api">12.7.2. Mapping the Function API</h4>
+<div class="paragraph">
+<p>The previous code examples used this Perl 6 code to call the subplots symbol:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $py = Inline::Python.new;
+
+sub gen(Str $namespace, *@names) {
+    $py.run("import $namespace");
+
+    return @names.map: -&gt; $name {
+        sub (|args) {
+            $py.call($namespace, $name, |args);
+        }
+    }
+}
+
+my (&amp;subplots, &amp;bar, &amp;legend, &amp;title, &amp;show)
+    = gen('matplotlib.pyplot', &lt;subplots bar legend title show&gt;);
+
+my ($figure, $subplots) = subplots();
+
+# more code here
+
+legend($@plots, $@top-authors);
+title('Contributions per day');
+show();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This makes the functions’ usage quite nice, but comes at the cost of duplicating their names. One can view this as a feature, because it allows the creation of different aliases, or as a source for bugs when the order is messed up, or a name misspelled.</p>
+</div>
+<div class="paragraph">
+<p>How could we avoid the duplication should we choose to create wrapper functions?</p>
+</div>
+<div class="paragraph">
+<p>This is where Raku’s flexibility and introspection abilities pay off. There are two key components that allow a nicer solution: the fact that declarations are expressions, and that you can introspect variables for their names.</p>
+</div>
+<div class="paragraph">
+<p>The first part means you can write mysub my ($a, $b), which declares the variables $a and $b, and calls a function with those variables as arguments. The second part means that $a.VAR.name returns a string '$a', the name of the variable.</p>
+</div>
+<div class="paragraph">
+<p>Let’s combine this to create a wrapper that initializes subroutines for us:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub pysub(Str $namespace, |args) {
+    $py.run("import $namespace");
+
+    for args[0] &lt;-&gt; $sub {
+        my $name = $sub.VAR.name.substr(1);
+        $sub = sub (|args) {
+            $py.call($namespace, $name, |args);
+        }
+    }
+}
+
+pysub 'matplotlib.pyplot',
+    my (&amp;subplots, &amp;bar, &amp;legend, &amp;title, &amp;show);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This avoids duplicating the name, but forces us to use some lower-level
+Raku features in sub pysub. Using ordinary variables means that accessing their .VAR.name results in the name of the variable, not the name of the variable that’s used on the caller side. So we can’t use slurpy arguments as in</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub pysub(Str $namespace, *@subs)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Instead we must use |args to obtain the rest of the arguments in a Capture.12 This doesn’t flatten the list of variables passed to the function, so when we iterate over them, we must do so by accessing args[0]. By default, loop variables are read-only, which we can avoid by using &lt;&#8594; instead of &#8594; to introduce the signature. Fortunately, that also preserves the name of the caller side variable.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_an_object_oriented_interface">12.7.3. An Object-Oriented Interface</h4>
+<div class="paragraph">
+<p>Instead of exposing the functions, we can also create types that emulate the method calls on Python modules. For that, we can implement a class with a method FALLBACK, which Raku calls for us when calling a method that is not implemented in the class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class PyPlot is Mu {
+    has $.py;
+    submethod TWEAK {
+        $!py.run('import matplotlib.pyplot');
+    }
+    method FALLBACK($name, |args) {
+        $!py.call('matplotlib.pyplot', $name, |args);
+    }
+}
+
+my $pyplot = PyPlot.new(:$py);
+my ($figure, $subplots) = $pyplot.subplots;
+# plotting code goes here
+$pyplot.legend($@plots, $@top-authors);
+
+$pyplot.title('Contributions per day');
+$pyplot.show;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Class PyPlot inherits directly from Mu, the root of the Raku type hierarchy, instead of Any, the default parent class (which in turn inherits from Mu). Any introduces a large number of methods that Raku objects get by default, and since FALLBACK is only invoked when a method is not present, this is something to avoid.</p>
+</div>
+<div class="paragraph">
+<p>The method TWEAK is another method that Raku calls automatically for us, after the object has been fully instantiated. All-caps method names are reserved for such special purposes. It is marked as a submethod, which means it is not inherited into subclasses. Since TWEAK is called at the level of each class, if it were a regular method, a subclass would call it twice implicitly. Note that TWEAK is only supported in Rakudo version 2016.11 and later.</p>
+</div>
+<div class="paragraph">
+<p>There’s nothing specific to the Python package matplotlib.pyplot in class PyPlot, except the namespace name. We could easily generalize it to any namespace:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class PythonModule is Mu {
+    has $.py;
+    has $.namespace;
+    submethod TWEAK {
+        $!py.run("import $!namespace");
+    }
+    method FALLBACK($name, |args) {
+        $!py.call($!namespace, $name, |args);
+    }
+}
+my $pyplot = PythonModule.new(:$py, :namespace&lt;matplotlib.pyplot&gt;);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is one Raku type that can represent any Python module. If instead we want a separate Raku type for each Python module, we could use roles, which are optionally parameterized:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">role PythonModule[Str $namespace] is Mu {
+    has $.py;
+    submethod TWEAK {
+        $!py.run("import $namespace");
+    }
+    method FALLBACK($name, |args) {
+        $!py.call($namespace, $name, |args);
+    }
+}
+
+my $pyplot = PythonModule['matplotlib.pyplot'].new(:$py);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Using this approach, we can create type constraints for Python modules in Raku space:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub plot-histogram(PythonModule['matplotlib.pyplot'], @data) {
+    # implementation here
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Passing in any wrapped Python module other than matplotlib.pyplot results in a type error.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_总结_10">12.8. 总结</h3>
+<div class="paragraph">
+<p>We’ve explored several ways to represent commit occurrence in plots and utilized Inline::Python to interface with a Python-based plotting library.</p>
+</div>
+<div class="paragraph">
+<p>A bit of Raku metaprogramming allowed us to emulate different kinds of Python APIs pretty directly in Raku code, allowing a fairly direct translation of the original library’s documentation into Raku code.</p>
 </div>
 </div>
 </div>
