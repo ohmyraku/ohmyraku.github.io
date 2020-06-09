@@ -187,6 +187,13 @@ if (theme && theme !== "1") {
 <li><a href="#_文件和目录使用状态图">10. 文件和目录使用状态图</a>
 <ul class="sectlevel2">
 <li><a href="#_reading_file_sizes">10.1. Reading File Sizes</a></li>
+<li><a href="#_generating_a_tree_map">10.2. Generating a Tree Map</a></li>
+<li><a href="#_火焰图">10.3. 火焰图</a></li>
+<li><a href="#_functional_refactorings">10.4. Functional Refactorings</a></li>
+<li><a href="#_more_language_support_for_functional_programming">10.5. More Language Support for Functional Programming</a></li>
+<li><a href="#_more_improvements">10.6. More Improvements</a></li>
+<li><a href="#_explore">10.7. Explore!</a></li>
+<li><a href="#_summary">10.8. Summary</a></li>
 </ul>
 </li>
 <li><a href="#_unicode_搜索工具">11. Unicode 搜索工具</a>
@@ -4231,423 +4238,657 @@ method error($msg) {
 <div class="sect2">
 <h3 id="_reading_file_sizes">10.1. Reading File Sizes</h3>
 <div class="paragraph">
-<p>To visualize file usage, we must first recursively read all directories and files in a given directory, and record their sizes. To get a listing of all elements in a directory, we can use the dir1 function, which returns a lazy list of IO::Path2 objects.
-We distinguish between directories, which can have child entries, and files, which can’t. Both can have a direct size, and in the case of directories also a total size, which includes files and subdirectories, recursively:
-class File { has $.name;
-has $.size;
-method total-size() { $.size } }</p>
+<p>To visualize file usage, we must first recursively read all directories and files in a given directory, and record their sizes. To get a listing of all elements in a directory, we can use the dir1 function, which returns a lazy list of IO::Path2 objects.</p>
 </div>
 <div class="paragraph">
-<p>class Directory { has $.name; has $.size;
-has @.children;
-has $!total-size; method total-size() {
+<p>We distinguish between directories, which can have child entries, and files, which can’t. Both can have a direct size, and in the case of directories also a total size, which includes files and subdirectories, recursively:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class File {
+    has $.name;
+    has $.size;
+    method total-size() { $.size }
+}
+
+class Directory {
+    has $.name;
+    has $.size;
+    has @.children;
+    has $!total-size;
+    method total-size() {
         $!total-size //= $.size + @.children.map({.total-size}).sum;
     }
 }
-sub tree(IO::Path $path) { if $path.d {
-return Directory.new(
-            name     &#8658; $path.basename,
-            size     &#8658; $path.s,
-            children &#8658; dir($path).map(&amp;tree),
-); }
-else {
-return File.new(
-            name &#8658; $path.Str,
-            size &#8658; $path.s,
+
+sub tree(IO::Path $path) {
+    if $path.d {
+        return Directory.new(
+            name     =&gt; $path.basename,
+            size     =&gt; $path.s,
+            children =&gt; dir($path).map(&amp;tree),
         );
-} }
-The code for reading a file tree recursively uses the d and s methods on IO::Path. d returns True for directories and False for files. s returns the size.3
-Just to check that we’ve got a sensible data structure, we can write a short routine that prints it recursively, with indentation to indicate nesting of directory entries:
-sub print-tree($tree, Int $indent = 0) {
-say ' ' x $indent, format-size($tree.total-size), ' ', $tree.name;
-if $tree ~~ Directory {
-print-tree($_, $indent + 2) for $tree.children }
-}</p>
+    }
+    else {
+        return File.new(
+            name =&gt; $path.Str,
+            size =&gt; $path.s,
+        );
+    }
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>sub format-size(Int $bytes) {
-my @units = flat '', &lt;k M G T P&gt;;
-my @steps = (1, { $_ * 1024 } &#8230;&#8203; *).head(6); for @steps.kv &#8594; $idx, $step {
-my $in-unit = $bytes / $step; if $in-unit &lt; 1024 {
-return sprintf '%.1f%s', $in-unit, @units[$idx]; }
-} }
-sub MAIN($dir = '.') { print-tree(tree($dir.IO));
-}</p>
+<p>The code for reading a file tree recursively uses the d and s methods on IO::Path. d returns True for directories and False for files. s returns the size.</p>
 </div>
 <div class="paragraph">
-<p>The subroutine print-tree is pretty boring, if you’re used to recursion.
-It prints out the name and size of the current node and, if the current node is
-a directory, recurses into each children with an increased indentation. The indentation is applied through the x string repetition operator, which when called as $string x $count repeats the $string $count times. It uses the ∼∼ smart matching operator to perform a type check; it tests if $tree is a Directory.
-To get a human-readable representation of the size of a number, format- size knows a list of six units: the empty string for one, k (kilo) for 1024, M (mega) for 1024×1024, and so on. This list is stored in the array @units. The multiple associated with each unit is stored in @steps, which is initialized through the series operator &#8230;&#8203;. Its structure is INITIAL, CALLABLE &#8230;&#8203; LIMIT, where it applies CALLABLE first to the initial value, and then to the next value generated, and so on, until it hits LIMIT. The limit here is *, a special term called Whatever, which means it’s unlimited. Thus, the sequence operator returns a lazy, potentially infinite, list and the trailing .head(6) call limits it to six values.
-To find the most appropriate unit to print with the size, we have to iterate over both the values and the indices of the array, which for @steps.kv &#8594; $idx, $step { .. } accomplishes. sprintf, known from other programming languages, does the actual formatting to one digit after the dot and appends the unit.
-10.2 Generating a Tree Map
-One possible visualization of file and directory sizes is a tree map, which represents each directory as a rectangle and each file inside it as a rectangle within the directory’s rectangle. The size of each rectangle is proportional to the size of the file or directory it represents.</p>
+<p>Just to check that we’ve got a sensible data structure, we can write a short routine that prints it recursively, with indentation to indicate nesting of directory entries:</p>
 </div>
-<div class="paragraph">
-<p>We’ll generate an SVG file containing all those rectangles. Modern browsers support displaying such files and also show mouse-over texts for each rectangle. This alleviates the burden of actually labeling the rectangles, which can be quite a hassle.
-To generate the SVG, we’ll use the SVG module, which you can install with $ zef install SVG
-This module provides a single static method, into which you pass nested pairs. Pairs whose values are arrays are turned into XML tags; other pairs are turned into attributes. As an example, this Raku script
-use SVG;
-print SVG.serialize(
-    :svg[
-        width &#8658; 100,
-        height &#8658; 20,
-        title &#8658; [
-'example', ]
-], );
-produces this output:
-&lt;svg xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100"
-height="20"&gt; &lt;title&gt;example&lt;/title&gt;
-&lt;/svg&gt;</p>
-</div>
-<div class="paragraph">
-<p>(without the indentation). The xmlns-tags are helpfully added by the SVG module and are necessary for programs to recognize the file as SVG.
-Returning to the tree maps (Figure 10-1), a very simple way to lay out the rectangle is to recurse into areas and for each area subdivide it either horizontally or vertically, depending upon which axis is longer:
-sub tree-map($tree, :$x1!, :$x2!, :$y1!, :$y2) {
-# do not produce rectangles for small files/dirs return if ($x2 - $x1) * ($y2 - $y1) &lt; 20;
-    # produce a rectangle for the current file or dir</p>
-</div>
-<div class="paragraph">
-<p>take 'rect' &#8658; [
-x &#8658; $x1,
-y &#8658; $y1,
-        width  &#8658; $x2 - $x1,
-        height &#8658; $y2 - $y1,
-        style  &#8658; "fill:" ~ random-color(),
-        title  &#8658; [$tree.name],
-];
-return if $tree ~~ File;
-if $x2 - $x1 &gt; $y2 - $y1 {
-# split along the x-axis
-my $base = ($x2 - $x1) / $tree.total-size; my $new-x = $x1;
-for $tree.children &#8594; $child {
-my $increment = $base * $child.total-size; tree-map(
-                $child,
-                x1 &#8658; $new-x,
-                x2 &#8658; $new-x + $increment,
-                :$y1,
-                :$y2,
-);
-            $new-x += $increment;
-        }
-}
-else {
-         # split along the y-axis
-my $base = ($y2 - $y1) / $tree.total-size; my $new-y = $y1;
-for $tree.children &#8594; $child {
-my $increment = $base * $child.total-size; tree-map(
-                 $child,
-                 :$x1,
-                 :$x2,
-                 y1 &#8658; $new-y,
-                 y2 &#8658; $new-y + $increment,
-);
-             $new-y += $increment;
-         }
-} }</p>
-</div>
-<div class="paragraph">
-<p>sub random-color {
-return 'rgb(' ~ (1..3).map({ (^256).pick }).join(',') ~ ')';
-}
-sub MAIN($dir = '.') {
-my $tree = tree($dir.IO); use SVG;
-my $width = 1024;
-my $height = 768;
-say SVG.serialize(
-        :svg[
-            :$width,
-:$height,
-| gather tree-map $tree, x1 &#8658; 0, x2 &#8658; $width, y1 &#8658; 0, y2 &#8658; $height
-] );
-}</p>
-</div>
-<div class="paragraph">
-<p>The generated file is not pretty, due to the random colors and due to some files being identified as very narrow rectangles. But it does make it obvious that there are a few big files and many mostly small files in a directory (which happens to be the .git directory of a repository). Viewing a file in a browser shows the name of the file on mouse-over.
-How did we generate this file?
-Sub tree-map calls take to add elements to a result list, so it must be called in the context of a gather statement. gather { take 1; take 2 } returns a lazy list of two elements, 1, 2. But the take calls don’t have to occur in the lexical scope of the gather; they can be in any code that’s directly or indirectly called from the gather. We call that the dynamic scope.
-The rest of sub tree-map is mostly straightforward. For each direction in which the remaining rectangle can be split, we calculate a base unit that signifies how many pixels a byte should occupy. This is used to split up the current canvas into smaller ones and use those to recurse into tree-map.
-The random color generation uses ˆ256 to create a range from 0 to 256 (exclusive) and .pick returns a random element from this range. The result is a random CSS color string like rgb(120,240,5).
-In sub MAIN, the gather returns a list, which would normally be nested inside the outer array. The pipe symbol | in :svg[ &#8230;&#8203;, | gather &#8230;&#8203; ] before the gather prevents the normal nesting and flattens the list into the outer array.
-10.3 Flame Graphs
-The disadvantage of tree maps as generated in the preceding is that the human brain isn’t very good at comparing the sizes of rectangles with different aspect ratios, especially if their widths are very different from their heights (i.e., very tall or very flat rectangles). Flame graphs prevent this perception error by showing file sizes as horizontal bars. The vertical arrangement indicates the nesting of directories and files inside other directories. The disadvantage is that less of the available space is used for visualizing the file sizes.
-It is easier to generate flame graphs than tree maps, because you only need to subdivide in one direction, whereas the height of each bar is fixed. Here it is set to 15 pixels:
-sub flame-graph($tree, :$x1!, :$x2!, :$y!, :$height!) { return if $y &gt;= $height;
-take 'rect' &#8658; [
-x &#8658; $x1,
-y &#8658; $y,
-width &#8658; $x2 - $x1,
-height &#8658; 15,
-style &#8658; "fill:" ~ random-color(),
-title &#8658; [$tree.name ~ ', ' ~ format-size($tree.total-size)],
-];</p>
-</div>
-<div class="paragraph">
-<p>return if $tree ~~ File;
-my $base = ($x2 - $x1) / $tree.total-size; my $new-x = $x1;
-for $tree.children &#8594; $child {
-my $increment = $base * $child.total-size; flame-graph(
-            $child,
-            x1 &#8658; $new-x,
-            x2 &#8658; $new-x + $increment,
-            y &#8658; $y + 15,
-            :$height,
-);
-        $new-x += $increment;
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub print-tree($tree, Int $indent = 0) {
+    say ' ' x $indent, format-size($tree.total-size), ' ',
+    $tree.name;
+
+    if $tree ~~ Directory {
+        print-tree($_, $indent + 2) for $tree.children;
     }
 }
-We can add a switch to sub MAIN to call either tree-map or flame-graph,
-depending on a command-line option:
-sub MAIN($dir = '.', :$type="flame") { my $tree = tree($dir.IO);
-use SVG;
-my $width = 1024;
-my $height = 768;
-my &amp;grapher = $type eq 'flame'
-?? { flame-graph $tree, x1 &#8658; 0, x2 &#8658; $width, y &#8658; 0, :$height }
-            !! { tree-map    $tree, x1 &#8658; 0, x2 &#8658; $width, y1 &#8658; 0,
-                 y2 &#8658; $height }
+
+sub format-size(Int $bytes) {
+    my @units = flat '', &lt;k M G T P&gt;;
+    my @steps = (1, { $_ * 1024 } ... *).head(6);
+    for @steps.kv -&gt; $idx, $step {
+        my $in-unit = $bytes / $step;
+        if $in-unit &lt; 1024 {
+            return sprintf '%.1f%s', $in-unit, @units[$idx];
+        }
+    }
+}
+
+sub MAIN($dir = '.') {
+    print-tree(tree($dir.IO));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The subroutine print-tree is pretty boring, if you’re used to recursion.It prints out the name and size of the current node and, if the current node is a directory, recurses into each children with an increased indentation. The indentation is applied through the x string repetition operator, which when called as $string x $count repeats the $string $count times. It uses the ∼∼ smart matching operator to perform a type check; it tests if $tree is a Directory.</p>
+</div>
+<div class="paragraph">
+<p>To get a human-readable representation of the size of a number, format- size knows a list of six units: the empty string for one, k (kilo) for 1024, M (mega) for 1024×1024, and so on. This list is stored in the array @units. The multiple associated with each unit is stored in @steps, which is initialized through the series operator &#8230;&#8203;. Its structure is INITIAL, CALLABLE &#8230;&#8203; LIMIT, where it applies CALLABLE first to the initial value, and then to the next value generated, and so on, until it hits LIMIT. The limit here is *, a special term called Whatever, which means it’s unlimited. Thus, the sequence operator returns a lazy, potentially infinite, list and the trailing .head(6) call limits it to six values.</p>
+</div>
+<div class="paragraph">
+<p>To find the most appropriate unit to print with the size, we have to iterate over both the values and the indices of the array, which for @steps.kv &#8594; $idx, $step { .. } accomplishes. sprintf, known from other programming languages, does the actual formatting to one digit after the dot and appends the unit.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_generating_a_tree_map">10.2. Generating a Tree Map</h3>
+<div class="paragraph">
+<p>One possible visualization of file and directory sizes is a tree map, which represents each directory as a rectangle and each file inside it as a rectangle within the directory’s rectangle. The size of each rectangle is proportional to the size of the file or directory it represents.</p>
+</div>
+<div class="paragraph">
+<p>We’ll generate an SVG file containing all those rectangles. Modern browsers support displaying such files and also show mouse-over texts for each rectangle. This alleviates the burden of actually labeling the rectangles, which can be quite a hassle.</p>
+</div>
+<div class="paragraph">
+<p>To generate the SVG, we’ll use the SVG module, which you can install with</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ zef install SVG</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This module provides a single static method, into which you pass nested pairs. Pairs whose values are arrays are turned into XML tags; other pairs are turned into attributes. As an example, this Raku script</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use SVG;
+print SVG.serialize(
+    :svg[
+        width =&gt; 100,
+        height =&gt; 20,
+        title =&gt; [
+            'example',
+        ]
+    ],
+);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>produces this output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;svg xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100"
+height="20"&gt; &lt;title&gt;example&lt;/title&gt;
+&lt;/svg&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>(without the indentation). The xmlns-tags are helpfully added by the SVG module and are necessary for programs to recognize the file as SVG.</p>
+</div>
+<div class="paragraph">
+<p>Returning to the tree maps (Figure 10-1), a very simple way to lay out the rectangle is to recurse into areas and for each area subdivide it either horizontally or vertically, depending upon which axis is longer:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub tree-map($tree, :$x1!, :$x2!, :$y1!, :$y2) {
+    # do not produce rectangles for small files/dirs
+    return if ($x2 - $x1) * ($y2 - $y1) &lt; 20;
+
+    # produce a rectangle for the current file or dir
+
+    take 'rect' =&gt; [
+        x =&gt; $x1,
+        y =&gt; $y1,
+        width  =&gt; $x2 - $x1,
+        height =&gt; $y2 - $y1,
+        style  =&gt; "fill:" ~ random-color(),
+        title  =&gt; [$tree.name],
+    ];
+    return if $tree ~~ File;
+
+    if $x2 - $x1 &gt; $y2 - $y1 {
+        # split along the x-axis
+        my $base = ($x2 - $x1) / $tree.total-size;
+        my $new-x = $x1;
+        for $tree.children -&gt; $child {
+            my $increment = $base * $child.total-size;
+            tree-map(
+                $child,
+                x1 =&gt; $new-x,
+                x2 =&gt; $new-x + $increment,
+                :$y1,
+                :$y2,
+            );
+            $new-x += $increment;
+        }
+    }
+    else {
+        # split along the y-axis
+        my $base = ($y2 - $y1) / $tree.total-size;
+        my $new-y = $y1;
+        for $tree.children -&gt; $child {
+            my $increment = $base * $child.total-size;
+            tree-map(
+                $child,
+                :$x1,
+                :$x2,
+                y1 =&gt; $new-y,
+                y2 =&gt; $new-y + $increment,
+            );
+            $new-y += $increment;
+         }
+    }
+}
+
+sub random-color {
+    return 'rgb(' ~ (1..3).map({ (^256).pick }).join(',') ~ ')';
+}
+
+sub MAIN($dir = '.') {
+    my $tree = tree($dir.IO); use SVG;
+    my $width = 1024;
+    my $height = 768;
     say SVG.serialize(
         :svg[
-:$width,
-:$height,
-| gather grapher()
-] );
-}</p>
+            :$width,
+            :$height,
+            | gather tree-map $tree, x1 =&gt; 0, x2 =&gt; $width, y1 =&gt; 0,
+            y2 =&gt; $height
+        ]
+    );
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The generated file is not pretty, due to the random colors and due to some files being identified as very narrow rectangles. But it does make it obvious that there are a few big files and many mostly small files in a directory (which happens to be the .git directory of a repository). Viewing a file in a browser shows the name of the file on mouse-over.</p>
+</div>
+<div class="paragraph">
+<p>How did we generate this file?</p>
+</div>
+<div class="paragraph">
+<p>Sub tree-map calls take to add elements to a result list, so it must be called in the context of a gather statement. gather { take 1; take 2 } returns a lazy list of two elements, 1, 2. But the take calls don’t have to occur in the lexical scope of the gather; they can be in any code that’s directly or indirectly called from the gather. We call that the dynamic scope.</p>
+</div>
+<div class="paragraph">
+<p>The rest of sub tree-map is mostly straightforward. For each direction in which the remaining rectangle can be split, we calculate a base unit that signifies how many pixels a byte should occupy. This is used to split up the current canvas into smaller ones and use those to recurse into tree-map.</p>
+</div>
+<div class="paragraph">
+<p>The random color generation uses ˆ256 to create a range from 0 to 256 (exclusive) and .pick returns a random element from this range. The result is a random CSS color string like rgb(120,240,5).</p>
+</div>
+<div class="paragraph">
+<p>In sub MAIN, the gather returns a list, which would normally be nested inside the outer array. The pipe symbol | in :svg[ &#8230;&#8203;, | gather &#8230;&#8203; ] before the gather prevents the normal nesting and flattens the list into the outer array.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_火焰图">10.3. 火焰图</h3>
+<div class="paragraph">
+<p>The disadvantage of tree maps as generated in the preceding is that the human brain isn’t very good at comparing the sizes of rectangles with different aspect ratios, especially if their widths are very different from their heights (i.e., very tall or very flat rectangles). Flame graphs prevent this perception error by showing file sizes as horizontal bars. The vertical arrangement indicates the nesting of directories and files inside other directories. The disadvantage is that less of the available space is used for visualizing the file sizes.</p>
+</div>
+<div class="paragraph">
+<p>It is easier to generate flame graphs than tree maps, because you only need to subdivide in one direction, whereas the height of each bar is fixed. Here it is set to 15 pixels:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub flame-graph($tree, :$x1!, :$x2!, :$y!, :$height!) {
+    return if $y &gt;= $height;
+    take 'rect' =&gt; [
+        x =&gt; $x1,
+        y =&gt; $y,
+        width =&gt; $x2 - $x1,
+        height =&gt; 15,
+        style =&gt; "fill:" ~ random-color(),
+        title =&gt; [$tree.name ~ ', ' ~ format-size($tree.total-size)],
+    ];
+
+    return if $tree ~~ File;
+
+    my $base = ($x2 - $x1) / $tree.total-size;
+    my $new-x = $x1;
+
+    for $tree.children -&gt; $child {
+        my $increment = $base * $child.total-size;
+        flame-graph(
+            $child,
+            x1 =&gt; $new-x,
+            x2 =&gt; $new-x + $increment,
+            y =&gt; $y + 15,
+            :$height,
+        );
+        $new-x += $increment;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We can add a switch to sub MAIN to call either tree-map or flame-graph, depending on a command-line option:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub MAIN($dir = '.', :$type="flame") {
+    my $tree = tree($dir.IO);
+    use SVG;
+    my $width = 1024;
+    my $height = 768;
+    my &amp;grapher = $type eq 'flame'
+            ?? { flame-graph $tree, x1 =&gt; 0, x2 =&gt; $width, y =&gt; 0, :$height }
+            !! { tree-map    $tree, x1 =&gt; 0, x2 =&gt; $width, y1 =&gt; 0, y2 =&gt; $height }
+    say SVG.serialize(
+        :svg[
+            :$width,
+            :$height,
+            | gather grapher()
+        ]
+    );
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>Since SVG’s coordinate system places the zero of the vertical axis at the top, this actually produces an inverted flame graph, sometimes called an icicle graph (Figure 10-2):</p>
 </div>
 <div class="paragraph">
-<p>Figure 10-2. Inverted flame graph, where the width of each bar represents a file/ directory size and the vertical position the nesting inside a directory
-This graph was generated by calling dirstat --type=flame src/ rakubook/.
-10.4 Functional Refactorings
-There’s a pattern that occurs three times in the code for generating tree maps and flame graphs: dividing an area based on the size of the files and directories in the tree associated with the area.
-Extracting such common code into a function is a good idea, but it’s slightly hindered by the fact that there is custom code inside the loop that’s part of the common code. Functional programming offers a solution: put the custom code inside a separate function and have the common code call it.
-Applying this technique to the tree graph flame graph looks like this:
-sub subdivide($tree, $lower, $upper, &amp;todo) {
-my $base = ($upper - $lower ) / $tree.total-size; my $var = $lower;
-for $tree.children &#8594; $child {
-my $incremented = $var + $base * $child.total-size; todo($child, $var, $incremented);
-$var = $incremented,
-} }
-sub flame-graph($tree, :$x1!, :$x2!, :$y!, :$height!) { return if $y &gt;= $height;
-take 'rect' &#8658; [
-x &#8658; $x1,
-y &#8658; $y,
-        width  &#8658; $x2 - $x1,
-Chapter 10 ■ a File and direCtory Usage graph
- 103
-Chapter 10 ■ a File and direCtory Usage graph
-height &#8658; 15,
-style &#8658; "fill:" ~ random-color(),
-title &#8658; [$tree.name ~ ', ' ~ format-size($tree.total-size)],
-];
-return if $tree ~~ File;
-subdivide( $tree, $x1, $x2, &#8594; $child, $x1, $x2 {
-    flame-graph( $child, :$x1, :$x2, :y($y + 15), :$height );
-});
-}
-sub tree-map($tree, :$x1!, :$x2!, :$y1!, :$y2) { return if ($x2 - $x1) * ($y2 - $y1) &lt; 20; take 'rect' &#8658; [
-x &#8658; $x1,
-y &#8658; $y1,
-        width  &#8658; $x2 - $x1,
-        height &#8658; $y2 - $y1,
-        style  &#8658; "fill:" ~ random-color(),
-        title  &#8658; [$tree.name],
-];
-return if $tree ~~ File;
-if $x2 - $x1 &gt; $y2 - $y1 {
-# split along the x-axis
-subdivide $tree, $x1, $x2, &#8594; $child, $x1, $x2 {
-            tree-map $child, :$x1, :$x2, :$y1, :$y2;
-        }
-}
-else {
-        # split along the y-axis
-        subdivide $tree, $y1, $y2, &#8594; $child, $y1, $y2 {
-            tree-map $child, :$x1, :$x2, :$y1, :$y2;
-} }
-}
-The newly introduced subroutine subdivide takes a directory tree, a start and end point, and finally a code object &amp;todo. For each child of the directory tree it calculates the new coordinates and then calls the &amp;todo function.
-The usage in subroutine flame-graph looks like this:
-subdivide( $tree, $x1, $x2, &#8594; $child, $x1, $x2 {
-    flame-graph( $child, :$x1, :$x2, :y($y + 15), :$height );
-});
-104</p>
+<p>Figure 10-2. Inverted flame graph, where the width of each bar represents a file/ directory size and the vertical position the nesting inside a directory</p>
 </div>
 <div class="paragraph">
-<p>The code object being passed to subdivide starts with &#8594;, which introduces the signature of a block. The code block recurses into flame-graph, adding some extra arguments and turning two positional arguments into named arguments along the way.
-This refactoring shortened the code and made it overall more pleasant
-to work with. But there’s still quite a bit of duplication between tree-map
-and flame-graph: both have an initial termination condition, a take of a rectangle, and then a call or two to subdivide. If we’re willing to put all the small differences into small, separate functions, we can unify it further.
-If we were to pass all those new functions as arguments to each call, we would create an unpleasantly long argument list. Instead, we can use those functions to generate the previous functions flame-graph and tree-map:
-sub svg-tree-gen(:&amp;terminate!, :&amp;base-height!, :&amp;subdivide-x!, :&amp;other!) {
-sub inner($tree, :$x1!, :$x2!, :$y1!, :$y2!) { return if terminate(:$x1, :$x2, :$y1, :$y2); take 'rect' &#8658; [
-x &#8658; $x1,
-y &#8658; $y1,
-            width  &#8658; $x2 - $x1,
-            height &#8658; base-height(:$y1, :$y2),
-            style  &#8658; "fill:" ~ random-color(),
-            title  &#8658; [$tree.name ~ ', ' ~ format-size($tree.total-
-            size)],
-];
-return if $tree ~~ File;
-if subdivide-x(:$x1, :$y1, :$x2, :$y2) {
-            # split along the x-axis
-            subdivide $tree, $x1, $x2, &#8594; $child, $x1, $x2 {
-                inner($child, :$x1, :$x2, :y1(other($y1)), :$y2);
-} }
-else {
-# split along the y-axis
-subdivide $tree, $y1, $y2, &#8594; $child, $y1, $y2 {
-                inner($child, :x1(other($x1)), :$x2, :$y1, :$y2);
-            }
-} }
-}
-Chapter 10 ■ a File and direCtory Usage graph
-105</p>
+<p>This graph was generated by calling dirstat --type=flame src/rakubook/.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_functional_refactorings">10.4. Functional Refactorings</h3>
+<div class="paragraph">
+<p>There’s a pattern that occurs three times in the code for generating tree maps and flame graphs: dividing an area based on the size of the files and directories in the tree associated with the area.</p>
 </div>
 <div class="paragraph">
-<p>Chapter 10 ■ a File and direCtory Usage graph
-my &amp;flame-graph = svg-tree-gen
-terminate &#8658; &#8594; :$y1, :$y2, | { $y1 &gt; $y2 }, base-height &#8658; &#8594; | { 15 },
-subdivide-x &#8658; &#8594; | { True },
-other &#8658; &#8594; $y1 { $y1 + 15 },
-;
-my &amp;tree-map = svg-tree-gen
-terminate &#8658; &#8594; :$x1, :$y1, :$x2, :$y2 { ($x2 - $x1) * ($y2 - $y1) &lt; 20 },
-base-height &#8658; &#8594; :$y1, :$y2 { $y2 - $y1 },
-subdivide-x &#8658; &#8594; :$x1, :$x2, :$y1, :$y2 { $x2 - $x1 &gt; $y2 - $y1 }, other &#8658; &#8594; $a { $a },
-;
-Now we have a new function svg-tree-gen, which returns a function. The behavior of the returned function depends on the four small functions that svg-tree-gen receives as arguments.
-The first argument, terminate, determines under what condition the inner function should terminate early. For tree-map, that’s when the area is below
-20 pixels; for flame-graph, that&#8217;s when the current y-coordinate $y1 exceeds the height of the whole image (stored in $y2). svg-tree-gen always calls this function with the four named arguments x1, x2, y1, and y2, so the terminate function must ignore the x1 and x2 values. It does this by adding | as a parameter, which is an anonymous capture. Such a parameter can bind arbitrary positional and named arguments, and since it’s an anonymous parameter, it discards all the values.
-The second configuration function, base-height, determines the
-height of the rectangle in the base case. For flame-graph it’s a constant, so the configuration function must discard all arguments, again with a |. For tree-graph, it must return the difference between $y2 and $y1, as before the refactoring.
-The third function determines when to subdivide along the x axis. Flame graphs always divide along the x axis, so &#8594; | { True } accomplishes that. Our simplistic approach to tree graphs divides along the longer axis, so only along the x axis if $x2 – $x1 &gt; $y2 – $y1.
-The fourth and final function we pass to svg-tree-gen calculates the coordinate of the axis that isn’t being subdivided. In the case of flame-graph that’s increasing over the previous value by the height of the bars, and for tree-map it’s theunchangedcoordinate,sowepasstheidentityfunction&#8594; $a { $a }.
-The inner function only needs a name because we need to call it from itself recursively; otherwise an anonymous function sub ($tree, :$x1!, :$x2!, :$y1!, :$y2!) { &#8230;&#8203; } would have worked fine.
-106</p>
+<p>Extracting such common code into a function is a good idea, but it’s slightly hindered by the fact that there is custom code inside the loop that’s part of the common code. Functional programming offers a solution: put the custom code inside a separate function and have the common code call it.</p>
 </div>
 <div class="paragraph">
-<p>This refactoring also unifies the names of the arguments to flame-graph and tree-map (previously, tree-map had :$y2 and flame-graph had :$height), so the call can now be simplified to
-my &amp;grapher = $type eq 'flame' ?? &amp;flame-graph !! &amp;tree-map; say SVG.serialize(
-    :svg[
-        :$width,
-:$height,
-| do gather grapher $tree, x1 &#8658; 0, x2 &#8658; $width, y1 &#8658; 0, y2 &#8658; $height
-] );
-Now that we have very compact definitions of flame-graph and tree-map, it’s a good time to play with some of the parameters. Let’s introduce a bit of margin in the flame graph by having the increment in other greater than the bar height in base-height:
-my &amp;flame-graph = svg-tree-gen base-height &#8658; &#8594; | { 15 },
-other &#8658; &#8594; $y1 { $y1 + 16 }, # rest as before
-Another knob to turn is to change the color generation to something more deterministic and make it configurable from the outside:
-sub svg-tree-gen(:&amp;color=&amp;random-color, :&amp;terminate!, :&amp;base- height!,
-:&amp;subdivide-x!, :&amp;other!) {
-sub inner($tree, :$x1!, :$x2!, :$y1!, :$y2!) {
-return if terminate(:$x1, :$x2, :$y1, :$y2); take 'rect' &#8658; [
-x &#8658; $x1,
-y &#8658; $y1,
-            width  &#8658; $x2 - $x1,
-            height &#8658; base-height(:$y1, :$y2),
-            style  &#8658; "fill:" ~ color(),
-            title  &#8658; [$tree.name ~ ', ' ~ format-size($tree.total-
-}
-];
-# rest as before
-size)],
-Chapter 10 ■ a File and direCtory Usage graph
-107</p>
+<p>Applying this technique to the tree graph flame graph looks like this:</p>
 </div>
-<div class="paragraph">
-<p>Chapter 10 ■ a File and direCtory Usage graph
-We can, for instance, keep state within the color generator and return a
-slightly different color during each iteration:
-sub color-range(|) {
-state ($r, $g, $b) = (0, 240, 120); $r = ($r + 5) % 256;
-$g = ($g + 10) % 256;
-$b = ($b + 15) % 256;
-return "rgb($r,$g,$b)";
-}
-State variables keep their values between calls to the same subroutine
-and their initialization runs only on the first call. Hence this function slightly increases the lightness in each color channel for each invocation, except when it reaches 256, where the modulo operator % resets it back to a small value.
-If we plug this into our functions by passing color &#8658; &amp;color-range to the calls to svg-tree-gen, we get much less chaotic-looking output (Figures 10-3 and 10-4):
- Figure 10-3. Tree map with deterministic color generation
-108</p>
-</div>
-<div class="paragraph">
-<p>Figure 10-4. Flame graph with deterministic color generation and one pixel margin between bars
-We could also pass in the coordinates to the &amp;color routine, which would make it possible to write a color generator that produces a nice gradient.
-10.5 More Language Support for Functional Programming
-As you’ve seen in the preceding examples, functional programming typically involves writing lots of small functions. Raku has some language features that make it very easy to write such small functions.
-A common task is to write a function that calls a particular method on its argument, as we’ve seen here:
-method total-size() {
-$!total-size //= $.size + @.children.map({.total-size}).sum; # <sup>^</sup><sup>^</sup><sup>^</sup><sup>^</sup>^
-}
-This can be abbreviated to <strong>.total-size:
-method total-size() {
-$!total-size //= $.size + @.children.map(</strong>.total-size).sum;
-}
-This works for chains of method calls too, so you could write @.children. map(<strong>.total-size.round) if total-size returned a fractional number and you wanted to call the .round method on the result.
-There are more cases where you can replace an expression with the “Whatever” star (</strong>) to create a small function. To create a function that adds 15 to its argument, you can write * + 15 instead of &#8594; $a { $a + 15 }.
-If you need to write a function to just call another function, but pass more arguments to the second function, you can use the method assuming.4
-4https://docs.raku.org/routine/assuming
-Chapter 10 ■ a File and direCtory Usage graph
-  109</p>
-</div>
-<div class="paragraph">
-<p>Chapter 10 ■ a File and direCtory Usage graph
-Forexample&#8594; $x { f(42, $x }canbereplacedwith&amp;f.assuming(42).This worksalsofornamedarguments,so&#8594; $x { f($x, height &#8658; 42 ) }canbe replacedwith&amp;f.assuming(height &#8658; 42).
-10.6 More Improvements
-The classes File and Directory have some common functionality, like the size and the name attributes, and the fact that they both have a method called total-size. A good way to factor out common behavior of classes is to put the common behavior into a role:
-role Path {
-has $.name;
-has $.size;
-method total-size() { &#8230;&#8203; } }
-class File does Path {
-method total-size() { $.size }
-}
-class Directory does Path { has @.children;
-has $!total-size; method total-size() {
-        $!total-size //= $.size + @.children.map(*.total-size).sum;
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub subdivide($tree, $lower, $upper, &amp;todo) {
+    my $base = ($upper - $lower ) / $tree.total-size;
+    my $var = $lower;
+    for $tree.children -&gt; $child {
+        my $incremented = $var + $base * $child.total-size;
+        todo($child, $var, $incremented);
+        $var = $incremented,
     }
 }
-A role looks structurally similar to a class, and using the does keyword in
-the class declaration applies the role to the class. This role application copies attributes and methods into the target class, but with some additional compile- time checks. One such check is that a class must implement stubbed-out methods like method total-size, where the &#8230;&#8203; as the method body marked it as a stub. In addition, when you apply multiple roles to the same class, name clashes are detected and throw an error unless you implement the method in the class for disambiguation.
-Roles are the preferred method of code reuse (apart from delegation) in Raku, because of the safety features mentioned previously.
-Now that File and Directory have a common role, you can use that role as a type constraint for subroutines that expect one of these types, such as sub subdivide(Path $tree, $lower, $upper, &amp;todo).
-110</p>
+
+sub flame-graph($tree, :$x1!, :$x2!, :$y!, :$height!) {
+    return if $y &gt;= $height;
+    take 'rect' =&gt; [
+        x =&gt; $x1,
+        y =&gt; $y,
+        width  =&gt; $x2 - $x1,
+        height =&gt; 15,
+        style =&gt; "fill:" ~ random-color(),
+        title =&gt; [$tree.name ~ ', ' ~ format-size($tree.total-size)],
+    ];
+    return if $tree ~~ File;
+    subdivide( $tree, $x1, $x2, -&gt; $child, $x1, $x2 {
+        flame-graph( $child, :$x1, :$x2, :y($y + 15), :$height );
+    });
+}
+
+sub tree-map($tree, :$x1!, :$x2!, :$y1!, :$y2) {
+    return if ($x2 - $x1) * ($y2 - $y1) &lt; 20;
+    take 'rect' =&gt; [
+        x =&gt; $x1,
+        y =&gt; $y1,
+        width  =&gt; $x2 - $x1,
+        height =&gt; $y2 - $y1,
+        style  =&gt; "fill:" ~ random-color(),
+        title  =&gt; [$tree.name],
+    ];
+    return if $tree ~~ File;
+
+    if $x2 - $x1 &gt; $y2 - $y1 {
+        # split along the x-axis
+        subdivide $tree, $x1, $x2, -&gt; $child, $x1, $x2 {
+            tree-map $child, :$x1, :$x2, :$y1, :$y2;
+        }
+    }
+    else {
+        # split along the y-axis
+        subdivide $tree, $y1, $y2, -&gt; $child, $y1, $y2 {
+            tree-map $child, :$x1, :$x2, :$y1, :$y2;
+        }
+    }
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Finally, the type argument to sub MAIN can have two possible values: flame for flame graphs or tree for tree maps. A data structure that models this behavior is an enum or enumeration:
-enum GraphType &lt;flame tree&gt;;
+<p>The newly introduced subroutine subdivide takes a directory tree, a start and end point, and finally a code object &amp;todo. For each child of the directory tree it calculates the new coordinates and then calls the &amp;todo function.
+The usage in subroutine flame-graph looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">subdivide( $tree, $x1, $x2, -&gt; $child, $x1, $x2 {
+    flame-graph( $child, :$x1, :$x2, :y($y + 15), :$height );
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The code object being passed to subdivide starts with &#8594;, which introduces the signature of a block. The code block recurses into flame-graph, adding some extra arguments and turning two positional arguments into named arguments along the way.</p>
+</div>
+<div class="paragraph">
+<p>This refactoring shortened the code and made it overall more pleasant
+to work with. But there’s still quite a bit of duplication between tree-map and flame-graph: both have an initial termination condition, a take of a rectangle, and then a call or two to subdivide. If we’re willing to put all the small differences into small, separate functions, we can unify it further.</p>
+</div>
+<div class="paragraph">
+<p>If we were to pass all those new functions as arguments to each call, we would create an unpleasantly long argument list. Instead, we can use those functions to generate the previous functions flame-graph and tree-map:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub svg-tree-gen(:&amp;terminate!, :&amp;base-height!, :&amp;subdivide-x!, :&amp;other!) {
+    sub inner($tree, :$x1!, :$x2!, :$y1!, :$y2!) {
+        return if terminate(:$x1, :$x2, :$y1, :$y2);
+        take 'rect' =&gt; [
+            x =&gt; $x1,
+            y =&gt; $y1,
+            width  =&gt; $x2 - $x1,
+            height =&gt; base-height(:$y1, :$y2),
+            style  =&gt; "fill:" ~ random-color(),
+            title  =&gt; [$tree.name ~ ', ' ~ format-size($tree.total-size)],
+        ];
+        return if $tree ~~ File;
+        if subdivide-x(:$x1, :$y1, :$x2, :$y2) {
+            # split along the x-axis
+            subdivide $tree, $x1, $x2, -&gt; $child, $x1, $x2 {
+                inner($child, :$x1, :$x2, :y1(other($y1)), :$y2);
+            }
+        }
+
+        else {
+            # split along the y-axis
+            subdivide $tree, $y1, $y2, -&gt; $child, $y1, $y2 {
+                inner($child, :x1(other($x1)), :$x2, :$y1, :$y2);
+            }
+        }
+    }
+}
+
+my &amp;flame-graph = svg-tree-gen
+    terminate =&gt; -&gt; :$y1, :$y2, | { $y1 &gt; $y2 },
+    base-height =&gt; -&gt; | { 15 },
+    subdivide-x =&gt; -&gt; | { True },
+    other =&gt; -&gt; $y1 { $y1 + 15 },
+    ;
+
+my &amp;tree-map = svg-tree-gen
+    terminate =&gt; -&gt; :$x1, :$y1, :$x2, :$y2 { ($x2 - $x1) * ($y2 - $y1) &lt; 20 },
+    base-height =&gt; -&gt; :$y1, :$y2 { $y2 - $y1 },
+    subdivide-x =&gt; -&gt; :$x1, :$x2, :$y1, :$y2 { $x2 - $x1 &gt; $y2 - $y1 },
+    other =&gt; -&gt; $a { $a },
+    ;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now we have a new function svg-tree-gen, which returns a function. The behavior of the returned function depends on the four small functions that svg-tree-gen receives as arguments.</p>
+</div>
+<div class="paragraph">
+<p>The first argument, terminate, determines under what condition the inner function should terminate early. For tree-map, that’s when the area is below 20 pixels; for flame-graph, that&#8217;s when the current y-coordinate $y1 exceeds the height of the whole image (stored in $y2). svg-tree-gen always calls this function with the four named arguments x1, x2, y1, and y2, so the terminate function must ignore the x1 and x2 values. It does this by adding | as a parameter, which is an anonymous capture. Such a parameter can bind arbitrary positional and named arguments, and since it’s an anonymous parameter, it discards all the values.</p>
+</div>
+<div class="paragraph">
+<p>The second configuration function, base-height, determines the height of the rectangle in the base case. For flame-graph it’s a constant, so the configuration function must discard all arguments, again with a |. For tree-graph, it must return the difference between $y2 and $y1, as before the refactoring.</p>
+</div>
+<div class="paragraph">
+<p>The third function determines when to subdivide along the x axis. Flame graphs always divide along the x axis, so &#8594; | { True } accomplishes that. Our simplistic approach to tree graphs divides along the longer axis, so only along the x axis if $x2 – $x1 &gt; $y2 – $y1.</p>
+</div>
+<div class="paragraph">
+<p>The fourth and final function we pass to svg-tree-gen calculates the coordinate of the axis that isn’t being subdivided. In the case of flame-graph that’s increasing over the previous value by the height of the bars, and for tree-map it’s the unchanged coordinate,
+so we pass the identity function <code>&#8594; $a { $a }</code>.</p>
+</div>
+<div class="paragraph">
+<p>The inner function only needs a name because we need to call it from itself recursively; otherwise an anonymous function <code>sub ($tree, :$x1!, :$x2!, :$y1!, :$y2!) { &#8230;&#8203; }</code> would have worked fine.</p>
+</div>
+<div class="paragraph">
+<p>This refactoring also unifies the names of the arguments to flame-graph and tree-map (previously, tree-map had :$y2 and flame-graph had :$height), so the call can now be simplified to</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my &amp;grapher = $type eq 'flame' ?? &amp;flame-graph !! &amp;tree-map;
+say SVG.serialize(
+    :svg[
+        :$width,
+        :$height,
+        | do gather grapher $tree, x1 =&gt; 0, x2 =&gt; $width, y1 =&gt; 0, y2 =&gt; $height
+    ]
+);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now that we have very compact definitions of flame-graph and tree-map, it’s a good time to play with some of the parameters. Let’s introduce a bit of margin in the flame graph by having the increment in other greater than the bar height in base-height:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my &amp;flame-graph = svg-tree-gen
+    base-height =&gt; -&gt; | { 15 },
+    other =&gt; -&gt; $y1 { $y1 + 16 },
+    # rest as before</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Another knob to turn is to change the color generation to something more deterministic and make it configurable from the outside:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub svg-tree-gen(
+    :&amp;color=&amp;random-color,
+    :&amp;terminate!,
+    :&amp;base- height!,
+    :&amp;subdivide-x!,
+    :&amp;other!) {
+    sub inner($tree, :$x1!, :$x2!, :$y1!, :$y2!) {
+        return if terminate(:$x1, :$x2, :$y1, :$y2);
+        take 'rect' =&gt; [
+            x =&gt; $x1,
+            y =&gt; $y1,
+            width  =&gt; $x2 - $x1,
+            height =&gt; base-height(:$y1, :$y2),
+            style  =&gt; "fill:" ~ color(),
+            title  =&gt; [$tree.name ~ ', ' ~ format-size($tree.total-size)],
+    }
+];
+# rest as before
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We can, for instance, keep state within the color generator and return a slightly different color during each iteration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub color-range(|) {
+    state ($r, $g, $b) = (0, 240, 120);
+    $r = ($r + 5) % 256;
+    $g = ($g + 10) % 256;
+    $b = ($b + 15) % 256;
+    return "rgb($r,$g,$b)";
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>State variables keep their values between calls to the same subroutine and their initialization runs only on the first call. Hence this function slightly increases the lightness in each color channel for each invocation, except when it reaches 256, where the modulo operator % resets it back to a small value.</p>
+</div>
+<div class="paragraph">
+<p>If we plug this into our functions by passing color &#8658; &amp;color-range to the calls to svg-tree-gen, we get much less chaotic-looking output (Figures 10-3 and 10-4):</p>
+</div>
+<div class="paragraph">
+<p>Figure 10-3. Tree map with deterministic color generation</p>
+</div>
+<div class="paragraph">
+<p>Figure 10-4. Flame graph with deterministic color generation and one pixel margin between bars</p>
+</div>
+<div class="paragraph">
+<p>We could also pass in the coordinates to the &amp;color routine, which would make it possible to write a color generator that produces a nice gradient.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_more_language_support_for_functional_programming">10.5. More Language Support for Functional Programming</h3>
+<div class="paragraph">
+<p>As you’ve seen in the preceding examples, functional programming typically involves writing lots of small functions. Raku has some language features that make it very easy to write such small functions.</p>
+</div>
+<div class="paragraph">
+<p>A common task is to write a function that calls a particular method on its argument, as we’ve seen here:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method total-size() {
+    $!total-size //= $.size + @.children.map({.total-size}).sum;
+    #                                        ^^^^^^^^^^^^^
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This can be abbreviated to *.total-size:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method total-size() {
+    $!total-size //= $.size + @.children.map(*.total-size).sum;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This works for chains of method calls too, so you could write @.children. map(*.total-size.round) if total-size returned a fractional number and you wanted to call the .round method on the result.</p>
+</div>
+<div class="paragraph">
+<p>There are more cases where you can replace an expression with the “Whatever” star (<strong>) to create a small function. To create a function that adds 15 to its argument, you can write <code></strong> + 15</code> instead of <code>&#8594; $a { $a + 15 }</code>.</p>
+</div>
+<div class="paragraph">
+<p>If you need to write a function to just call another function, but pass more arguments to the second function, you can use the method assuming.</p>
+</div>
+<div class="paragraph">
+<p>For example <code>&#8594; $x { f(42, $x }</code> can be replaced with <code>&amp;f.assuming(42)</code>.This worksalsofornamedarguments,so&#8594; $x { f($x, height &#8658; 42 ) } can be replaced with <code>&amp;f.assuming(height &#8658; 42)</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_more_improvements">10.6. More Improvements</h3>
+<div class="paragraph">
+<p>The classes File and Directory have some common functionality, like the size and the name attributes, and the fact that they both have a method called total-size. A good way to factor out common behavior of classes is to put the common behavior into a role:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">role Path {
+    has $.name;
+    has $.size;
+    method total-size() { ... }
+}
+
+class File does Path {
+    method total-size() { $.size }
+}
+
+class Directory does Path {
+    has @.children;
+    has $!total-size;
+    method total-size() {
+        $!total-size //= $.size + @.children.map(*.total-size).sum;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A role looks structurally similar to a class, and using the does keyword in the class declaration applies the role to the class. This role application copies attributes and methods into the target class, but with some additional compile- time checks. One such check is that a class must implement stubbed-out methods like method total-size, where the &#8230;&#8203; as the method body marked it as a stub. In addition, when you apply multiple roles to the same class, name clashes are detected and throw an error unless you implement the method in the class for disambiguation.</p>
+</div>
+<div class="paragraph">
+<p>Roles are the preferred method of code reuse (apart from delegation) in Raku, because of the safety features mentioned previously.</p>
+</div>
+<div class="paragraph">
+<p>Now that File and Directory have a common role, you can use that role as a type constraint for subroutines that expect one of these types, such as sub <code>subdivide(Path $tree, $lower, $upper, &amp;todo)</code>.</p>
+</div>
+<div class="paragraph">
+<p>Finally, the type argument to sub MAIN can have two possible values: flame for flame graphs or tree for tree maps. A data structure that models this behavior is an enum or enumeration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">enum GraphType &lt;flame tree&gt;;
+
 sub MAIN($dir = '.', GraphType :$type=flame) {
-my $tree = tree($dir.IO);
-use SVG;
-my $width = 1024;
-my $height = 768;
-my &amp;grapher = $type == flame ?? &amp;flame-graph !! &amp;tree-map; say SVG.serialize(
+    my $tree = tree($dir.IO);
+    use SVG;
+    my $width = 1024;
+    my $height = 768;
+    my &amp;grapher = $type == flame ?? &amp;flame-graph !! &amp;tree-map;
+    say SVG.serialize(
         :svg[
             :$width,
-:$height,
-| do gather grapher $tree, x1 &#8658; 0, x2 &#8658; $width, y1 &#8658; 0, y2 &#8658; $height
-] );
-}
-The values of an enum are integers starting from zero, hence the comparison with == instead of eq. You can access the possible values of an enum either as short identifiers (flame) or through the namespace of the enum type, GraphType::flame.
-Now if you obtain a help message from the script (by running it with the --help option), the type argument is automatically documented: --type=&lt;GraphType&gt; (flame tree).
-10.7 Explore!
-To get familiar with the functional programming concept, I encourage you to look through the code you’ve written so far and refactor near-duplicate code blocks into a common base and to swap out the code that differs into callbacks.
-More importantly, try to find abstractions that make sense. In the visualization examples, the underlying principle is divide and conquer.5 Can you come up with a general divide and conquer implementation that is still useful?
-5https://en.wikipedia.org/wiki/Divide_and_conquer_algorithm
-Chapter 10 ■ a File and direCtory Usage graph
- 111</p>
+            :$height,
+            | do gather grapher $tree, x1 =&gt; 0, x2 =&gt; $width, y1 =&gt; 0, y2 =&gt; $height
+        ]
+    );
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Chapter 10 ■ a File and direCtory Usage graph
-Thinking back to the tree map and flame graphs, maybe you can separate
-the logic for sizing rectangles from the logic for placing the rectangles?
-10.8 Summary
-Functional programming offers techniques for extracting common logic into separate functions. The desired differences in behavior can be encoded in more functions that you pass in as arguments to other functions.
-Raku supports functional programming by making functions first class, so you can pass them around as ordinary objects. It also offers closures (access to outer lexical variables from functions) and various shortcuts that make it more pleasant to write short functions.</p>
+<p>The values of an enum are integers starting from zero, hence the comparison with == instead of eq. You can access the possible values of an enum either as short identifiers (flame) or through the namespace of the enum type, GraphType::flame.</p>
+</div>
+<div class="paragraph">
+<p>Now if you obtain a help message from the script (by running it with the --help option), the type argument is automatically documented: --type=&lt;GraphType&gt; (flame tree).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_explore">10.7. Explore!</h3>
+<div class="paragraph">
+<p>To get familiar with the functional programming concept, I encourage you to look through the code you’ve written so far and refactor near-duplicate code blocks into a common base and to swap out the code that differs into callbacks.</p>
+</div>
+<div class="paragraph">
+<p>More importantly, try to find abstractions that make sense. In the visualization examples, the underlying principle is divide and conquer.5 Can you come up with a general divide and conquer implementation that is still useful?</p>
+</div>
+<div class="paragraph">
+<p>Thinking back to the tree map and flame graphs, maybe you can separate the logic for sizing rectangles from the logic for placing the rectangles?</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_summary">10.8. Summary</h3>
+<div class="paragraph">
+<p>Functional programming offers techniques for extracting common logic into separate functions. The desired differences in behavior can be encoded in more functions that you pass in as arguments to other functions.</p>
+</div>
+<div class="paragraph">
+<p>Raku supports functional programming by making functions first class, so you can pass them around as ordinary objects. It also offers closures (access to outer lexical variables from functions) and various shortcuts that make it more pleasant to write short functions.</p>
 </div>
 </div>
 </div>
