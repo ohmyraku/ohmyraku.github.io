@@ -16327,15 +16327,15 @@ say is-happy(2018);  # False</code></pre>
 <h2 id="_raku_中的异步和并发入门">52. Raku 中的异步和并发入门</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>从今天开始接下来的23天里，在进入本降临日历之前，我要介绍一下我将要介绍的基本概念。 我将其称为 Raku 异步和并发日历，但是这些术语是什么意思呢，它们又是如何应用于 Raku 中的呢？</p>
+<p>从今天开始接下来的23天里，在进入本降临日历之前，我想确保介绍一下我将要涉及的基本概念。我把它称为 "Raku Async &amp; Concurrency Advent Calendar"，但是这些术语是什么意思呢，它们又是如何应用于 Raku 中的呢？</p>
 </div>
 <div class="paragraph">
-<p>该降临日历假设有 Raku 的基本知识。 如果你不懂 Raku，但熟悉另一种语言，那么我相信你可能会跟得上。 但是，这是针对中高级开发人员的，因此，我建议你先从下面的资源学起，以了解 Raku：</p>
+<p>这个 Advent Calendar 的前提是你对 Raku 有基本的了解。如果您不了解 Raku，但你熟悉另一种语言，我相信你可能会跟得上。然而，这是针对中高级开发者的，所以我推荐你先从这些资源中学习 Raku。</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="http://shop.oreilly.com/product/0636920062776.do">Learning Perl 6</a>(Raku 之前被称为 Perl 6)</p>
+<p><a href="http://shop.oreilly.com/product/0636920062776.do">Learning Perl 6</a>(Raku 是以前称为 Perl 6 的语言)</p>
 </li>
 <li>
 <p><a href="https://learnxinyminutes.com/docs/perl6/">Learn Raku in Y minutes</a></p>
@@ -16351,7 +16351,7 @@ say is-happy(2018);  # False</code></pre>
 <div class="sect2">
 <h3 id="_异步编程">52.1. 异步编程</h3>
 <div class="paragraph">
-<p>异步是异步编程的缩写，因为异步(asynchronous)这个单词的输入很烦人。 异步编程是一种编程风格，其中函数的调用与其返回是断开连接的。 通常，我们编写这样的函数：</p>
+<p>Async 是异步编程的简称，因为异步(asynchronous)的输入很麻烦。异步编程是一种编程风格，对函数的调用与其返回是脱节的。通常，我们会写一个这样的函数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16360,7 +16360,7 @@ my $val = double(21);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果我们想把这段代码变成异步的，我们可以尝试这样做：</p>
+<p>如果我们想把这段代码变成异步的，我们可以尝试这样做:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16373,41 +16373,40 @@ my $val = $promise.();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这是个愚蠢的例子，但问题是，我们直到后来才真正收到该值。这种编程风格主要在你知道需要完成一些工作但又不需要立即获得结果时有用。这在你可能需要同时进行其他工作时特别有用。</p>
+<p>这是一个愚蠢的人为的例子，但重点是我们实际上要到后来才会收到值。这种编程风格主要是在你知道你需要完成一些工作，但不需要立即得到结果的时候有用。当你在此期间可能需要做其他工作的时候，这种方式尤其有用。</p>
 </div>
+<div class="sect3">
+<h4 id="_什么时候才有意义">52.1.1. 什么时候才有意义？</h4>
 <div class="paragraph">
-<p><strong>什么情况下才有意义？</strong></p>
-</div>
-<div class="paragraph">
-<p>异步可能会有帮助的几个示例情况：</p>
+<p>举几个例子说明一下异步可能有帮助的情况。</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>所有基于套接字的客户端/服务器应用程序都必须是异步的。对于 TCP 来说，在服务器上，你建立一个侦听套接字，然后当客户端连接时，会收到一个已连接的套接字，可以使用读写操作来交换数据。而 TCP 客户端则是请求一个连接，然后等待服务器接受连接。客户端可以在等待期间继续进行工作。</p>
+<p>所有基于套接字的客户端/服务器应用都是异步的。对于 TCP 来说，在服务器上，你建立一个监听的套接字，然后当客户端连接时，你会收到一个连接的套接字，你可以使用读写操作在这个套接字上交换数据。而 TCP 客户端则是请求一个连接，然后等待服务器接受连接。在等待的过程中，客户端可以继续进行工作。</p>
 </li>
 <li>
-<p>实时处理日志数据的程序通常有几个处理步骤, 每一行都要经过几个处理步骤。它等待数据到来。它解析每一行数据，以获取有趣的信息。它对数据进行过滤, 以决定它对当前任务是否有用。它对数据进行计算。这些操作都可以在一个异步编程链中执行，在异步编程链中，一旦为每个步骤准备好一些数据，就立即执行这些操作。</p>
+<p>一个实时处理日志数据的程序通常有几个处理步骤，每一行都要经过。它等待数据的到达。它解析每一行数据，从中获取有趣的信息。它对数据进行过滤，以决定它是否对当前任务有用。它对数据进行计算。这些操作中的每一个都可以在异步编程链中执行，在这个链中，每一步只要有一定量的数据准备好了，就会执行这些操作。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>异步只是一种编程风格，它适合你（软件开发人员）认为适合的任何地方。有些问题在本质上比其他问题更具异步性，但是你也可以同步构建。当异步适合你的时候就使用它。</p>
+<p>异步只是一种编程风格，它适合于你，软件开发者，决定它适合的地方。有些问题比其他问题更具有内在的异步性，但你也可以同步地构建它们。当它适合你的时候就使用异步。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_工具有哪些">52.1.2. 工具有哪些？</h4>
+<div class="paragraph">
+<p>在 Raku 中，异步编程主要是通过高级的、"可组合"的接口来进行的，比如 <a href="https://docs.raku.org/type/Promise">Promise</a>，<a href="https://docs.raku.org/type/Supply">Supply</a> 和 <a href="https://docs.raku.org/type/Channel">Channel</a>。这些都是高级的，因为它们提供了一个针对某人的接口，而不需要严格证明这些工具如何使用的安全性。你仍然要小心，这是肯定的，但陷阱减少了很多，从它们的界面上看应该更明显。它们是可组合的，因为它们的设计是为了让你把使用这些接口的不同库，以可预测的方式一起使用。</p>
 </div>
 <div class="paragraph">
-<p><strong>有哪些工具？</strong></p>
+<p>另一方面，像 <a href="https://docs.raku.org/type/Lock">Lock</a> 和 <a href="https://docs.raku.org/type/Semaphore">Semaphore</a> 这样的低级工具，当使用这些工具的不同库组合在一起时，会导致不可预测的行为。这些在 Raku 中也是可用的，因为有时你需要用它们来构建，但它们不是 Raku 的异步编程的面包和黄油。</p>
 </div>
-<div class="paragraph">
-<p>在 Raku 中，异步编程主要是通过高级的"可组合"接口（例如 <a href="https://docs.raku.org/type/Promise">Promise</a>，<a href="https://docs.raku.org/type/Supply">Supply</a> 和 <a href="https://docs.raku.org/type/Channel">Channel</a>）来执行的。这些是高级的，因为它们提供了针对某人的接口，而无需严格证明使用这些工具的安全性。可以肯定的是，你仍然需要小心翼翼，但是陷阱已经大大减少了，并且从它们的接口上看, 应该会更加明显。它们是可组合的，因为它们旨在让你使用这些接口使用不同的库，并以可预测的方式一起使用它们。</p>
 </div>
+<div class="sect3">
+<h4 id="_它是什么样子的呢">52.1.3. 它是什么样子的呢？</h4>
 <div class="paragraph">
-<p>另一方面，诸如 <a href="https://docs.raku.org/type/Lock">Lock</a> 和 <a href="https://docs.raku.org/type/Semaphore">Semaphore</a> 之类的低级工具可以通过组合使用不同库的方式使用，从而导致无法预测的行为。这些在 Raku 中也可用，因为有时你需要用它们来构建，但是它们并不是 Raku 异步编程的基础。</p>
-</div>
-<div class="paragraph">
-<p><strong>它是什么样子的？</strong></p>
-</div>
-<div class="paragraph">
-<p>那么 Raku 中的异步是什么样的呢？这是一个基本的计数程序，但我们不使用循环，而是每隔一秒输出一个数字。</p>
+<p>那么 Raku 中的异步编程是什么样的呢？这里是一个基本的计数程序，但我们不使用循环，而是每秒钟输出一个数字:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16431,6 +16430,7 @@ my $val = $promise.();</code></pre>
 </div>
 <div class="paragraph">
 <p>如你所见，语法非常简单，希望很容易理解。你甚至可以认为它是同步的，而不会造成太多麻烦。 Raku 中的异步编程的目标是使不完全了解它的人可以访问它，至少可以了解正在发生的事情。</p>
+</div>
 </div>
 </div>
 <div class="sect2">

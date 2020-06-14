@@ -1,0 +1,3116 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Raku 单行程序 :: 山川异域, 风月同天</title>
+
+<meta name="author" content="ohmyraku">
+<meta name="application-name" content="山川异域, 风月同天">
+<meta name="description" content="Table of Contents 1. 命令行选项 1.1. 使用命令行选项 1.2. 简短的单行程序的例子 1.3. 用 $*ARGFILES 读取文件   2. 使用文件 2.1. 重命名文件 2.2. 横向合并文件 2.3. 翻转文件   3. 使用数字 3.1. 对可分数进行移位 3.2. 生成随机整数 3.3. 与大数打交道 3.4. 测试回文数字 3.5. 斐波那契偶数的加法 3.6. 玩转斐波那契数字 3.7. 两点之间的距离 3.8. 玩质数 3.9. 使用 map 和 Seq 计算 π 的值 3.10. 求和 3.11. 数字之和等于各数字的阶乘之和 3.12. 通过立方体   4. 使用字符串 4.1. 生成随机密码 4.2. Unicode 的乐趣   5. 使用日期 5.">
+<meta name="robots" content="noodp"/>
+<meta name="generator" content="Hugo 0.63.2" />
+<meta name="referrer" content="no-referrer" />
+<meta name="format-detection" content="telephone=no">
+
+<link rel="canonical" href="https://ohmyraku.github.io/raku-one-liners/" />
+
+
+<link rel="icon" href="https://ohmyraku.github.io/logo.png" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Raku 单行程序" />
+<meta name="twitter:description" content="Table of Contents 1. 命令行选项 1.1. 使用命令行选项 1.2. 简短的单行程序的例子 1.3. 用 $*ARGFILES 读取文件   2. 使用文件 2.1. 重命名文件 2.2. 横向合并文件 2.3. 翻转文件   3. 使用数字 3.1. 对可分数进行移位 3.2. 生成随机整数 3.3. 与大数打交道 3.4. 测试回文数字 3.5. 斐波那契偶数的加法 3.6. 玩转斐波那契数字 3.7. 两点之间的距离 3.8. 玩质数 3.9. 使用 map 和 Seq 计算 π 的值 3.10. 求和 3.11. 数字之和等于各数字的阶乘之和 3.12. 通过立方体   4. 使用字符串 4.1. 生成随机密码 4.2. Unicode 的乐趣   5. 使用日期 5." />
+<meta name="twitter:site" content="https://ohmyraku.github.io" />
+<meta name="twitter:creator" content="ohmyraku" />
+<meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
+<meta property="og:type" content="article" />
+<meta property="og:locale" content="en" />
+<meta property="og:name" content="ohmyraku" />
+<meta property="og:title" content="Raku 单行程序" />
+<meta property="og:url" content="https://ohmyraku.github.io" />
+<meta property="og:site_name" content="山川异域, 风月同天" />
+<meta property="og:description" content="Table of Contents 1. 命令行选项 1.1. 使用命令行选项 1.2. 简短的单行程序的例子 1.3. 用 $*ARGFILES 读取文件   2. 使用文件 2.1. 重命名文件 2.2. 横向合并文件 2.3. 翻转文件   3. 使用数字 3.1. 对可分数进行移位 3.2. 生成随机整数 3.3. 与大数打交道 3.4. 测试回文数字 3.5. 斐波那契偶数的加法 3.6. 玩转斐波那契数字 3.7. 两点之间的距离 3.8. 玩质数 3.9. 使用 map 和 Seq 计算 π 的值 3.10. 求和 3.11. 数字之和等于各数字的阶乘之和 3.12. 通过立方体   4. 使用字符串 4.1. 生成随机密码 4.2. Unicode 的乐趣   5. 使用日期 5." />
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Article",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https:\/\/ohmyraku.github.io\/raku-one-liners\/"
+      },
+      "headline": "Raku 单行程序",
+      
+      "datePublished": "2020-06-12",
+      "dateModified": "2020-06-12 13:16:52 \x2b0800 CST",
+      "author": {
+        "@type": "Person",
+        "name": "ohmyraku"
+      },
+      "description": "Table of Contents 1. 命令行选项 1.1. 使用命令行选项 1.2. 简短的单行程序的例子 1.3. 用 $*ARGFILES 读取文件   2. 使用文件 2.1. 重命名文件 2.2. 横向合并文件 2.3. 翻转文件   3. 使用数字 3.1. 对可分数进行移位 3.2. 生成随机整数 3.3. 与大数打交道 3.4. 测试回文数字 3.5. 斐波那契偶数的加法 3.6. 玩转斐波那契数字 3.7. 两点之间的距离 3.8. 玩质数 3.9. 使用 map 和 Seq 计算 π 的值 3.10. 求和 3.11. 数字之和等于各数字的阶乘之和 3.12. 通过立方体   4. 使用字符串 4.1. 生成随机密码 4.2. Unicode 的乐趣   5. 使用日期 5.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "https:\/\/ohmyraku.github.io",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https:\/\/ohmyraku.github.io\/logo.png"
+        }
+      }
+    }
+</script><link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
+<script>
+
+const theme = window.localStorage.getItem('theme'); 
+if (theme && theme !== "1") {
+    document.documentElement.classList.add('theme-' + theme);
+}
+</script>
+
+
+</head>
+<body>
+  <main class="site__content">
+    <div class="site__page">
+  <nav class="site__breadcrumbs">
+    <a class="site__breadcrumb" href="https://ohmyraku.github.io/">山川异域, 风月同天</a><a class="site__breadcrumb--active" href="https://ohmyraku.github.io/raku-one-liners/">Raku 单行程序</a>
+</nav>
+
+<h1 class="page__title">Raku 单行程序</h1>
+  <div class="page__meta">
+    <p>
+    
+    <span class="page__date">
+    on <time datetime="2020-06-12T13:16:52&#43;08:00">2020-06-12</time>
+    
+    </span>
+    </p>
+
+    
+
+    
+    </div>
+</div>
+
+
+</div>
+
+<article class="page__content" ><div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_命令行选项">1. 命令行选项</a>
+<ul class="sectlevel2">
+<li><a href="#_使用命令行选项">1.1. 使用命令行选项</a></li>
+<li><a href="#_简短的单行程序的例子">1.2. 简短的单行程序的例子</a></li>
+<li><a href="#_用_argfiles_读取文件">1.3. 用 <code>$*ARGFILES</code> 读取文件</a></li>
+</ul>
+</li>
+<li><a href="#_使用文件">2. 使用文件</a>
+<ul class="sectlevel2">
+<li><a href="#_重命名文件">2.1. 重命名文件</a></li>
+<li><a href="#_横向合并文件">2.2. 横向合并文件</a></li>
+<li><a href="#_翻转文件">2.3. 翻转文件</a></li>
+</ul>
+</li>
+<li><a href="#_使用数字">3. 使用数字</a>
+<ul class="sectlevel2">
+<li><a href="#_对可分数进行移位">3.1. 对可分数进行移位</a></li>
+<li><a href="#_生成随机整数">3.2. 生成随机整数</a></li>
+<li><a href="#_与大数打交道">3.3. 与大数打交道</a></li>
+<li><a href="#_测试回文数字">3.4. 测试回文数字</a></li>
+<li><a href="#_斐波那契偶数的加法">3.5. 斐波那契偶数的加法</a></li>
+<li><a href="#_玩转斐波那契数字">3.6. 玩转斐波那契数字</a></li>
+<li><a href="#_两点之间的距离">3.7. 两点之间的距离</a></li>
+<li><a href="#_玩质数">3.8. 玩质数</a></li>
+<li><a href="#_使用_map_和_seq_计算_π_的值">3.9. 使用 map 和 Seq 计算 π 的值</a></li>
+<li><a href="#_求和">3.10. 求和</a></li>
+<li><a href="#_数字之和等于各数字的阶乘之和">3.11. 数字之和等于各数字的阶乘之和</a></li>
+<li><a href="#_通过立方体">3.12. 通过立方体</a></li>
+</ul>
+</li>
+<li><a href="#_使用字符串">4. 使用字符串</a>
+<ul class="sectlevel2">
+<li><a href="#_生成随机密码">4.1. 生成随机密码</a></li>
+<li><a href="#_unicode_的乐趣">4.2. Unicode 的乐趣</a></li>
+</ul>
+</li>
+<li><a href="#_使用日期">5. 使用日期</a>
+<ul class="sectlevel2">
+<li><a href="#_今天是几号">5.1. 今天是几号？</a></li>
+<li><a href="#_本世纪有多少天符合条件的">5.2. 本世纪有多少天符合条件的？</a></li>
+<li><a href="#_同一问题的另一种解决方案">5.3. 同一问题的另一种解决方案</a></li>
+</ul>
+</li>
+<li><a href="#_raku_语法">6. Raku 语法</a>
+<ul class="sectlevel2">
+<li><a href="#_x_和_和">6.1. X 和 .. 和 &#8230;&#8203;</a></li>
+<li><a href="#_化简运算符">6.2. 化简运算符</a></li>
+<li><a href="#_raku_中的星号">6.3. Raku 中的星号</a></li>
+<li><a href="#_eval_例程">6.4. EVAL 例程</a></li>
+</ul>
+</li>
+<li><a href="#_raku_高尔夫">7. Raku 高尔夫</a>
+<ul class="sectlevel2">
+<li><a href="#_第一个测试">7.1. 第一个测试</a></li>
+<li><a href="#_第二个测试">7.2. 第二个测试</a></li>
+<li><a href="#_拉库高尔夫码的技巧和想法">7.3. 拉库高尔夫码的技巧和想法</a></li>
+</ul>
+</li>
+<li><a href="#_关于编译器内部的附录">8. 关于编译器内部的附录</a>
+<ul class="sectlevel2">
+<li><a href="#_0_1_0_2_的背后是什么">8.1. 0.1 + 0.2 的背后是什么？</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="sect1">
+<h2 id="_命令行选项">1. 命令行选项</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_使用命令行选项">1.1. 使用命令行选项</h3>
+<div class="paragraph">
+<p>我们来谈谈 Rakudo<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup> 编译器为我们提供的命令行选项。</p>
+</div>
+<div class="sect3">
+<h4 id="_e">1.1.1. -e</h4>
+<div class="paragraph">
+<p>在使用 Raku 时要知道的第一个选项是 <strong>-e</strong>。它接收一个带有 Raku 单行程序的字符串，并立即执行。</p>
+</div>
+<div class="paragraph">
+<p>例如，打印当前用户的名字:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku -e'say $*USER'
+ash</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_n">1.1.2. -n</h4>
+<div class="paragraph">
+<p>这个选项会重复每一行输入数据的代码。当你想处理一个文件时，这是很方便的。例如，这里有一个单行程序，它将每行中的值相加并打印出总和:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku -ne'say [+] .split(" ")' data.txt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果 data.txt 文件包含以下内容：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">10 20 30 40
+1 2 3 4
+5 6 7 8</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>那么这个单行程序的结果就是:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">100
+10
+26</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>是否使用 shell 的输入重定向没有区别，下面这行也是可以的:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku -ne'say [+] .split(" ")' &lt; data.txt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>确保你把 <strong>e</strong> 选项放在列表的最后(所以，不是 <code>raku -en'&#8230;&#8203;'</code>)，或者把选项分开：<code>raku -n -e'&#8230;&#8203;'</code>。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_p">1.1.3. -p</h4>
+<div class="paragraph">
+<p>这个选项类似于 <strong>-n</strong>，但在每次迭代后都会打印主题变量。</p>
+</div>
+<div class="paragraph">
+<p>下面的单行程序将文件中的文本行反转并打印到控制台:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku -npe'.=flip' data.txt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于同样的输入文件，结果会是这样的:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">04 03 02 01
+4 3 2 1
+8 7 6 5</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>注意，你必须更新 $_ 变量，所以你输入 <strong>.=flip</strong>。如果你只有 <strong>.flip</strong>，你将反转字符串，但是结果没有被使用，而是打印出原来的行。</p>
+</div>
+<div class="paragraph">
+<p>一个带有 <strong>.flip</strong> 和没有 <strong>-p</strong> 的等效程序看起来像这样:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku -ne'.flip.say' data.txt</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_简短的单行程序的例子">1.2. 简短的单行程序的例子</h3>
+<div class="paragraph">
+<p>让我们通过几个单行程序，把文件作为开胃菜来工作。下一整章的内容都是关于文件的工作。</p>
+</div>
+<div class="sect3">
+<h4 id="_双倍空格的文件">1.2.1. 双倍空格的文件</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku -npe's/$/\n/' text.txt</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_删除所有空行">1.2.2. 删除所有空行</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku -ne'.say if .chars' text.txt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>根据你对"空白"的定义，你可能需要另一个单行程序，跳过包含空格的行:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku -ne'.say if /\S/' text.txt</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_对文件中的所有行进行编号">1.2.3. 对文件中的所有行进行编号</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku -ne'say ++$ ~ ". " ~ $_' text.txt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这段代码，可能需要注释。<code>$</code> 变量是一个状态变量，可以不用声明。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_将所有文本转换为大写字母">1.2.4. 将所有文本转换为大写字母</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku -npe'.=uc' text.txt</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_从每行的开头和结尾去掉空白">1.2.5. 从每行的开头和结尾去掉空白</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku -npe'.=trim' text.txt</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_打印文件的第一行">1.2.6. 打印文件的第一行</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku -ne'.say ; exit' text.txt</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_打印文件的前10行">1.2.7. 打印文件的前10行</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku -npe'exit if $++ == 10' text.txt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这次，后缀 <code>++</code> 运算符被应用到 <code>$</code> 变量上。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_用_argfiles_读取文件">1.3. 用 <code>$*ARGFILES</code> 读取文件</h3>
+<div class="paragraph">
+<p><code>$*ARGFILES</code> 是一个内置的动态变量，在处理多个输入文件时可能会很方便。</p>
+</div>
+<div class="paragraph">
+<p>如何读取命令行中传递的两个或多个文件？</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku work.pl a.txt b.txt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果你需要把所有的文件一起处理，就好像它们是一个数据源一样，你可以用一个单行程序要求变量来完成这项工作:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">.say for $*ARGFILES.lines</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在程序内部，你不必考虑循环处理文件，<code>$*ARGFILES</code> 会自动帮你完成。</p>
+</div>
+<div class="paragraph">
+<p>如果命令行中没有文件，变量将被附加到 STDIN 上:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ cat a.txt b.txt | raku work.pl</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>确实很方便，不是吗？</p>
+</div>
+<div class="sect3">
+<h4 id="_argfiles_和_main">1.3.1. $*ARGFILES 和 MAIN</h4>
+<div class="paragraph">
+<p>如果你想在更大的程序中使用 <code>$*ARGFILES</code> 变量，我还得提醒你。考虑一下下面的例子:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">sub MAIN(*@files) {
+    .say for $*ARGFILES.lines;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在最近的 Raku 版本中，<code>$*ARGFILES</code> 在 MAIN 子程序内部和外部的工作方式不同。</p>
+</div>
+<div class="paragraph">
+<p>本程序将完美地与早期版本(在 Rakudo 2018.10 版本之前, 包括 Rakudo 2018.10 版本)一起工作。从 Rakudo Star 2018.12 开始，如果在 MAIN 内部使用 <code>$*ARGFILES</code>，则总是连接到 <code>$*IN</code>。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_使用文件">2. 使用文件</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_重命名文件">2.1. 重命名文件</h3>
+<div class="paragraph">
+<p>让我们来解决一个任务，重命名所有在命令行参数中传递的文件，并以首选的格式给文件顺序号。下面是一个命令行的例子:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku rename.raku *.jpg img_0000.jpg</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在本例中，当前目录下的所有图像文件将被重命名为 img_0001.jpg、img_0002.jpg 等。</p>
+</div>
+<div class="paragraph">
+<p>这里是 Raku 中可能的解决方案(保存在 rename.raku 文件中):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">@*ARGS[0..*-2].sort.map: *.Str.IO.rename(++@*ARGS[*-1])</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>预先定义的动态变量 <code>@<strong>ARGS</code> 包含命令行的参数。在上面的例子中，shell 将 <code></strong>.jpg</code> 掩码展开为一个文件列表，所以数组包含了所有文件。最后一个元素是重命名样本 img_0000.jpg。</p>
+</div>
+<div class="paragraph">
+<p>如果你熟悉 C 或 Perl，请注意这个变量叫做 <strong>ARGS</strong>，而不是 <strong>ARGV</strong>。</p>
+</div>
+<div class="paragraph">
+<p>为了循环处理所有的文件（并跳过最后一个带有文件掩码的文件项），我们取 <code>@<strong>ARGS</code> 的片断。<code>0..</strong>-2</code> 构造创建一个索引范围，以取除最后一个元素以外的所有元素。</p>
+</div>
+<div class="paragraph">
+<p>然后对列表进行排序(原 <code>@*ARGS</code> 数组保持不变），我们使用 <code>map</code> 方法对文件名进行迭代。</p>
+</div>
+<div class="paragraph">
+<p><code>map</code> 的主体包含一个 <strong>WhateveCode</strong> 块(见第6章)；它接收当前值的字符串表示，将其制作成一个 <code>IO::Path</code> 对象，然后调用 <code>rename</code> 方法。注意，IO 方法创建了一个 <code>IO::Path</code> 类的对象；而裸露的 IO 则是 Raku 对象系统层次结构中的一个角色。</p>
+</div>
+<div class="paragraph">
+<p>最后，增量运算符 <code>++</code> 会改变重命名样本（该样本保存在 <code>@<strong>ARGS</code> 的最后一个，<code></strong>-1</code> 号元素中）。当运算符应用于一个字符串时，它会递增其中的数字部分，所以我们得到 img_0001.jpg、img_0002.jpg 等。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_横向合并文件">2.2. 横向合并文件</h3>
+<div class="paragraph">
+<p>让我们把几个文件合并成一个文件。我们的任务是将两个（或三个，或更多）文件逐行复制其内容。例如，我们要合并两个日志文件，知道它们的所有行都是对应的。</p>
+</div>
+<div class="paragraph">
+<p>文件 a.txt:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">2019/12/20 11:16:13
+2019/12/20 11:17:58
+2019/12/20 11:19:18
+2019/12/20 11:24:30</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>文件 b.txt:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">"/favicon.ico" failed (No such file)
+"/favicon.ico" failed (No such file)
+"/robots.txt" failed (No such file)
+"/robots.txt" failed (No such file)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第一个单行程序就说明了这个问题:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say for [Z~] @*ARGS.map: *.IO.lines;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>假设程序的运行方式如下:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku merge.raku a.txt b.txt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于命令行中的每一个文件名(<code>@*.ARGS.map</code>)，都会创建一个 <code>IO::Path</code> 对象(<code>.IO</code>)，然后读取文件中的行(<code>.lines</code>)。</p>
+</div>
+<div class="paragraph">
+<p>在有两个文件的情况下，我们有两个序列，然后使用 <strong>zip</strong> 元操作符 <strong>Z</strong> 应用于连接后缀 <strong>~</strong> 逐行连接。</p>
+</div>
+<div class="paragraph">
+<p>在这一步之后，我们得到另一个序列，我们可以逐行打印(<strong>.say for</strong>)。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">2019/12/20 11:16:13"/favicon.ico" failed (No such file)
+2019/12/20 11:17:58"/favicon.ico" failed (No such file)
+2019/12/20 11:19:18"/robots.txt" failed (No such file)
+2019/12/20 11:24:30"/robots.txt" failed (No such file)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>结果形式上是正确的，但我们要在原来的行间加一个空格。下面是单行程序的更新版本:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.trim.say for [Z~] @*ARGS.map: *.IO.lines.map: *~ ' '</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这里，每一行的末尾都会附加一个空格字符(<code>.map: *~ ' '</code>)，由于合并后的行末尾会有一个额外的空格，所以会被 <strong>trim</strong> 方法去除。它的同级，<strong>trim-trailing</strong>，可以用来代替（如果你关心原来的尾部空格恰好在第二个文件中，也可以用一个 regex）。</p>
+</div>
+<div class="paragraph">
+<p>经过以上的修改，现在两个文件已经完美的合并了:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">2019/12/20 11:16:13 "/favicon.ico" failed (No such file)
+2019/12/20 11:17:58 "/favicon.ico" failed (No such file)
+2019/12/20 11:19:18 "/robots.txt" failed (No such file)
+2019/12/20 11:24:30 "/robots.txt" failed (No such file)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>例如，将同一个文件合并到自己身上，或者提供两个以上的文件，都没有问题:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku merge.raku a.txt a.txt a.txt</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_翻转文件">2.3. 翻转文件</h3>
+<div class="paragraph">
+<p>在本节中，我们将创建一个单行程序，以相反的顺序打印文本文件的行(就像 <strong>tail -r</strong> 那样）。</p>
+</div>
+<div class="paragraph">
+<p>第一个单行程序可以完成 STDIN 流的工作。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say for $*IN.lines.reverse</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>运行该程序为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku reverse.raku &lt; text.txt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这种情况下，<code>$*IN</code> 可以省略，这使得单行本更短:</p>
+</div>
+<div class="paragraph">
+<p>如果你想直接从 Raku 读取文件，修改一下程序，用命令行参数创建一个文件句柄:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">.say for @*ARGS[0].IO.open.lines.reverse</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在你运行它如下:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku reverse.raku text.txt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>重要的是要记住，<code>line</code> 方法的默认行为是将换行符从最终的行序列中排除（该方法返回一个 <code>Seq</code> 对象，而不是数组或列表）。</p>
+</div>
+<div class="paragraph">
+<p>在 Raku 中，<code>lines</code> 方法根据 <code>IO::Handle</code> 对象的 <code>.nl-in</code> 属性中存储的值来分割行。</p>
+</div>
+<div class="paragraph">
+<p>你可以用下面的小脚本查看当前的行分隔符的值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">dd $_ for @*ARGS[0].IO.open.nl-in</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这就是你在那里发现的默认情况。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$["\n", "\r\n"]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>有趣的是，你可以控制行的行为，并告诉 Raku 不要排除换行字符。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">@*ARGS[0].IO.open(chomp =&gt; False).lines.reverse.put</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>chomp</code> 属性默认设置为 True。你也可以更改默认的分隔符。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">@*ARGS[0].IO.open(
+    nl-in =&gt; "\r",
+    chomp =&gt; False
+).lines.reverse.put</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意，如果不使用 chomping，就不需要在行上显式的 for 循环：在最后两个单行中，<code>.put</code> 方法是直接在序列对象上调用的。在早期的版本中，字符串不包含新行字符，因此它们会被打印成一个长行。</p>
+</div>
+<div class="paragraph">
+<p>给你一个小作业。告诉大家 <code>put</code> 和 `say 的区别。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_使用数字">3. 使用数字</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_对可分数进行移位">3.1. 对可分数进行移位</h3>
+<div class="paragraph">
+<p>任务是找出 3 和 5 在 1000 以下的所有倍数之和。我们感兴趣的行的第一个元素是 3，5，9，15，20，21 等。大家已经可以看到，其中有些元素，如15，既是 3 的倍数，又是 5 的倍数，所以不能把 3 和 5 的倍数分别相加。</p>
+</div>
+<div class="paragraph">
+<p>小故事就在这里。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say sum((1..999).grep: * %% (3 | 5))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，我们来解读一下。</p>
+</div>
+<div class="paragraph">
+<p>我们需要的是过滤那些 3 或 5 的倍数的数字。如果你重新阅读上一句话，你应该会有一个钟声：在 Raku 中，这可以通过 <strong>junctions</strong> 来实现，非正式地称为量子叠加。要测试一个数字是否可以被 3 或 5 整除，请写出以下内容。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$x %% 3 | 5</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对了，<code>%%</code> 这个整除操作符，是个很贴心的东西，有助于避免布尔测试中的否定式，你如果只有一个 <code>%</code>，会不会写成这样。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">!($x % (3 | 5))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>好了，主要条件已经准备好了，我们来扫描1到(含)999之间的数字。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">(1..999).grep: * %% (3 | 5)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里出现了一些比较有趣的语言元素。例如，<strong>WhateverCode</strong> 块，它是由一个 <code><strong></code> 字符引入的（见第6章）。与方法调用的冒号形式一起，它允许摆脱一对嵌套的括号和小括号。如果没有 <code></strong></code>，代码会更加复杂。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">(1..999).grep({$_ %% (3 | 5)})</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>数字已经被过滤(如果你喜欢的话，可以用 grepped)，现在是时候把它们加起来并打印出结果了。我们来到本节开头的最后一个单行程序。</p>
+</div>
+<div class="paragraph">
+<p>当然，与其写 <strong>say sum(&#8230;&#8203;)</strong>，还不如写一两个方法调用。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">((1..999).grep: * %% (3 | 5)).sum.say</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>作为奖励曲目，这是我的第一个解决方案，它比单行程序要长得多。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub f($n) {
+    ($n &lt;&lt;*&gt;&gt; (1...1000 / $n)).grep: * &lt; 1000
+}
+
+say (f(3) ∪ f(5)).keys.sum;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_生成随机整数">3.2. 生成随机整数</h3>
+<div class="paragraph">
+<p>你可能会问，这有什么大不了的，调用一种 <strong>rand</strong> 函数不是一个常规任务吗？嗯，从某种意义上说，是的，但你可能更喜欢调用一个方法。</p>
+</div>
+<div class="paragraph">
+<p>让我们看看下面的代码:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">2020.rand.Int.say;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这就是整个程序，它生成的是 2020 以下的随机数。它只使用方法调用，一个接一个地链起来。如果你从来没有见过 Raku，你首先注意到的是这里有一个对数字进行调用的方法。这在这个语言中并不是什么特别的东西。</p>
+</div>
+<div class="paragraph">
+<p>在一个数字上调用 <strong>rand</strong> 方法，有可能是对 <strong>Cool</strong> 类中定义的方法的调用，而 <strong>Cool</strong> 类会立即委派给数字的数字代表。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method rand() { self.Num.rand }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 <strong>Num</strong> 类的后面，发生了对底层 NQP 引擎的调用。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-nqp" data-lang="nqp">method rand(Num:D: ) {
+    nqp::p6box_n(nqp::rand_n(nqp::unbox_n(self)));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在我们的例子中，对象 2020 是一个 Int，所以 rand 被直接派发到 Num 类的方法上。</p>
+</div>
+<div class="paragraph">
+<p>rand 方法返回的是一个浮点数，所以调用另一个方法 Int 来得到一个整数。</p>
+</div>
+<div class="paragraph">
+<p>运行代码几次，确认它能生成随机数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku -e'2020.rand.Int.say'
+543
+$ raku -e'2020.rand.Int.say'
+1366
+$ raku -e'2020.rand.Int.say'
+1870</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果你想了解随机数生成器的质量，可以深入到 NQP 和 MoarVM，之后再深入到虚拟机的后端引擎。为了使结果可重复（例如，用于测试），通过调用 srand 函数设置种子。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku -e'srand(10); 2020.rand.Int.say'
+296
+$ raku -e'srand(10); 2020.rand.Int.say'
+296</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意，srand 例程是一个子程序，而不是一个方法。它也被定义在同一个 Num 类中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-nqp" data-lang="nqp">proto sub srand($, *%) {*}
+multi sub srand(Int:D $seed --&gt; Int:D) {
+    nqp::p6box_i(nqp::srand($seed))
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果你有机会看到源文件，你很可能会注意到，还有一个独立的 rand 子程序。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-nqp" data-lang="nqp">proto sub rand(*%) {*} multi sub rand(--&gt; Num:D) {
+    nqp::p6box_n(nqp::rand_n(1e0))
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你只能在没有参数的情况下调用它，在这种情况下，Raku 会生成一个介于 0 和 1 之间的随机数字。如果你传递参数，你会得到一个错误的解释，方法调用是比较好的。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">$ raku -e'rand(20)'
+===SORRY!=== Error while compiling -e
+Unsupported use of rand(N); in Raku please use N.rand for Num
+or (^N).pick for Int result
+at -e:1
+------&gt; rand⏏(20)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_与大数打交道">3.3. 与大数打交道</h3>
+<div class="paragraph">
+<p>在这一节中，我们将看欧拉工程的第十三个问题。让我展示其中的一部分。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">37107287533902102798797998220837590246510135740250
+46376937677490009712648124896970078050417018260538
+74324986199524741059474233309513058123726617309629
+91942213363574161572522430563301811072406154908250
+23067588207539346171171980310421047513778063246676
+89261670696623633820136378418383684178734361726757
+28112879812849979408065481931592621691275889832738
+44274228917432520321923589422876796487670272189318
+47451445736001306439091167216856844588711603153276
+70386486105843025439939619828917593665686757934951
+62176457141856560629502157223196586755079324193331
+64906352462741904929101432445813822663347944758178
+92575867718337217661963751590579239728245598838407
+58203565325359399008402633568948830189458628227828
+80181199384826282014278194139940567587151170094390
+35398664372827112653829987240784473053190104293586
+86515506006295864861532075273371959191420517255829
+71693888707715466499115593487603532921714970056938
+54370070576826684624621495650076471787294438377604
+53282654108756828443191190634694037855217779295145
+36123272525000296071075082563815656710885258350721
+45876576172410976447339110607218265236877223636045
+17423706905851860660448207621209813287860733969412
+81142660418086830619328460811191061556940512689692
+
+...
+
+72107838435069186155435662884062257473692284509516
+20849603980134001723930671666823555245252804609722
+53503534226472524250874054075591789781264330331690</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>的确，这个数字看起来很大，任务是找到一百个整数之和的前十位，每个整数由50位组成。</p>
+</div>
+<div class="paragraph">
+<p>听起来像一个任务，可能需要一些优化和简化，以摆脱一切不有助于前十位数的结果。但在 Raku 中不是这样。</p>
+</div>
+<div class="paragraph">
+<p>在这里，你可以简单地将数字相加，并取其中的前十位数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;
+    37107287433902102798797998220837590246510135740250
+    # Other 98 numbers here
+    53503534526472524250874054075591789781264330331690
+&gt;.sum.substr(0, 10).say</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Raku 默认使用任意长的整数；你不需要包含任何模块或以其他方式激活这种行为。你甚至可以计算幂数，并很快得到结果。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku -e'say 37107287433902102798797998220837590 ** 1000'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>另一个需要注意的是，我们可以透明地将字符串转换为数字，反之亦然。在当前的程序中，数字列表以一对角括号内的引号字符串列表的形式呈现。</p>
+</div>
+<div class="paragraph">
+<p>在这个列表中，你调用了和方法，它可以处理数字。得到总和后，你又把它当作一个字符串，并提取其中的前十个字符。整个代码看起来非常自然，而且很容易阅读。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_测试回文数字">3.4. 测试回文数字</h3>
+<div class="paragraph">
+<p>我们的任务是找到最大的回文数（从两端读出的数字，如1551），它是两个三位数的乘积。</p>
+</div>
+<div class="paragraph">
+<p>换句话说，我们要扫描 999×999 以下的数字，可以优化解法，但实际上，我们只需要允许数字，也就是积，因此，我们不要跳过乘法部分。</p>
+</div>
+<div class="paragraph">
+<p>这是我们的单行程序。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">(((999...100) X* (999...100)).grep: {$^a eq $^a.flip}).max.say</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>大家已经准备好了，链式方法调用在 Raku 单行程序中使用是非常方便的。</p>
+</div>
+<div class="paragraph">
+<p>前面我们也看到了方法调用的冒号形式，但这次我们使用的是一个带有占位变量的代码块。这里不太清楚是否可以使用星号，因为我们在代码块中需要变量两次。</p>
+</div>
+<div class="paragraph">
+<p>这一行的第一部分使用了交叉运算符 <code>X*</code>，（参见第 6 章）。它生成了所有三位数的乘积。由于我们需要最大的数字，所以从右到左开始是合理的，这就是为什么序列是 999&#8230;&#8203;100，而不是 100&#8230;&#8203;999。</p>
+</div>
+<div class="paragraph">
+<p>我们来看看 grepped 乘积序列中的前几个数字。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">580085 514415 906609 119911 282282 141141 853358 650056</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>单行程序并不总是很理想。在我们的例子中，我们需要生成整个产品序列，以找到其中的最大值。答案位于第三位，所以用 first 取代 max 将是一个错误。但好在如果你使用第一，Raku 将不会生成所有的数字。还有一个有用的方法，head，也可以防止生成超过必要的数量。</p>
+</div>
+<div class="paragraph">
+<p>下面的代码运行得更快，并且给出了正确的结果。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">(((999...100) X* (999...100)).grep: {$^a eq $^a.flip}).head(10).max.say</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_斐波那契偶数的加法">3.5. 斐波那契偶数的加法</h3>
+<div class="paragraph">
+<p>这里的任务是找出所有低于400万的斐波那契偶数之和。</p>
+</div>
+<div class="paragraph">
+<p>这就是完整的解决方案。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">(1, 1, * + * ... * &gt;= 4_000_000).grep(* %% 2).sum.say</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>从左端或右端解析代码同样有趣。让我们从左端开始。</p>
+</div>
+<div class="paragraph">
+<p>在第一个括号内，我们正在生成一个斐波那契数列，这个数列从两个1开始，接下来生成的每个数都是前两个数的和。你可以用一个WhateverCode块来表达它。<code>* + *</code> 等同于 <code>{$^a + $^b}</code>。</p>
+</div>
+<div class="paragraph">
+<p>序列的一个不太为人所知的特征是最后的条件。在许多例子中，你会看到一个裸星或一个 Inf。在我们的例子中，我们用一个明确的上边界来限制序列。</p>
+</div>
+<div class="paragraph">
+<p>请注意，你不能简单地写出：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">1, 1, * + * ... 4_000_000</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>为了更好地可视化，可以尝试一个更小的限制，比如100。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">&gt; (1, 1, * + * ... 100)
+(1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597 2584 4181</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当序列越过我们想要的边界时，生成不会停止。只有当序列的下一个计算元素正好等于给定的数字时，它才会停止生成，例如。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; (1, 1, * + * ... 144)
+(1 1 2 3 5 8 13 21 34 55 89 144)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果你不知道 400 万前面的斐波那契数，请使用另一个带有布尔条件的 <strong>WhateverCode</strong> 块。<code>* &gt;= 4_000_000</code>。请注意，这个条件和你在常规循环中写的条件是相反的，因为这里我们要求的是超过四百万，而不是小于。当你不得不停止序列时，这个条件就变成了 True。如果没有星号，你可以使用默认变量: <code>{$_ &gt;= 4_000_000}</code>。</p>
+</div>
+<div class="paragraph">
+<p>代码的其余部分则是对偶数进行抓取，并将它们相加。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_玩转斐波那契数字">3.6. 玩转斐波那契数字</h3>
+<div class="paragraph">
+<p>是的，很有可能，你从来没有在实际的代码中使用过这样的数字，同样，很有可能，你用它们解决了很多教育问题。尽管如此，今天，让我们尝试着去接近 <a href="Code-Golf.io" class="bare">Code-Golf.io</a> 网站上的斐波那契问题的最短解法（另见第7章关于高尔夫编码的内容）。</p>
+</div>
+<div class="paragraph">
+<p>我们如何形成一个斐波那契序列？用序列运算符 <code>&#8230;&#8203;</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">0, 1, * + * ... *</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果你想在代码中加入一些异国情调，你可以用 Inf 或 ∞ 代替最后一颗星。在任何情况下，结果都是一个 Seq 类型的懒惰序列。Raku 不会立即计算它（也不能，因为右边缘是无限的）。</p>
+</div>
+<div class="paragraph">
+<p>最后，让我们找到第一个斐波那契数的索引，它有 1000 位。当然，你可以在上面创建的序列上循环，自己追踪指数。但是在 Raku 中，有一个选项可以修改 grep 例程族，要求它返回匹配项的索引而不是项本身。</p>
+</div>
+<div class="paragraph">
+<p>另外，我们不使用 grep，而是使用一个更合适的方法，首先。如果我们调用k键的方法，它将返回第一个匹配的项目或其索引。只要提到键就够了，其实不需要值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say (0, 1, * + * ... *).first(*.chars &gt;= 1000, :k)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个程序打印一个整数，这就是给定问题的正确答案。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_两点之间的距离">3.7. 两点之间的距离</h3>
+<div class="paragraph">
+<p>这里有一个插图来帮助制定任务。我们的目标是找到A和B两点之间的距离。</p>
+</div>
+<div class="paragraph">
+<p>为了使答案更透明，更容易检查，我选择了线段AB，使它是边长为3和4的直角三角形的斜边。在这种情况下，第三条边的长度是5。</p>
+</div>
+<div class="paragraph">
+<p>下面是解题思路。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say abs(5.5+2i - (1.5+5i))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这段代码使用的是复数，只要把问题移到复数平面上，你就会从表面上两点之间的距离等于这两个数相减的绝对值中获得收益。</p>
+</div>
+<div class="paragraph">
+<p>在这种情况下，其中一个点是复平面上的5.5+2i点，第二个点是1.5+5i。在乐乐中，你写下复数就像写数学一样。</p>
+</div>
+<div class="paragraph">
+<p>如果没有复数的内置支持，你就必须明确使用毕达哥拉斯定理。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say sqrt((5.5 - 1.5)² + (2 - 5)²)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>作业。修改 Raku 的 grammar，允许使用以下代码。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say √((5.5 - 1.5)² + (2 - 5)²)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_玩质数">3.8. 玩质数</h3>
+<div class="paragraph">
+<p>让我们来解决这个问题，你需要打印第10001个质数（第一个是2）。</p>
+</div>
+<div class="paragraph">
+<p>Raku 编程语言在质数方面很擅长，因为它有一个 Int 类的内置方法 is-prime。</p>
+</div>
+<div class="paragraph">
+<p>有几种生成质数的方法。对于单行道来说，最好的是最简单，但效率最低的方法，它可以测试每个数字。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say ((1..*).grep: *.is-prime)[10000]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>计算结果大约需要半分钟，但代码相当短。用所谓的埃拉托斯特尼斯的筛子来解决这个任务，效率要高得多，但可能需要更多的代码行，因此不是单行程序，不在本书的讨论范围之内。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_使用_map_和_seq_计算_π_的值">3.9. 使用 map 和 Seq 计算 π 的值</h3>
+<div class="paragraph">
+<p>在本节中，我们使用两种不同的方法计算 π 的值。目标是尝试不同的方法来生成数字序列。</p>
+</div>
+<div class="paragraph">
+<p>准备工作</p>
+</div>
+<div class="paragraph">
+<p>当然，你不需要自己计算π的值，因为 Raku 语言给我们提供了一些预定义的常量，形状有 π 和 pi 两种，还有双倍值 τ 和 tau。</p>
+</div>
+<div class="paragraph">
+<p>但是为了演示 map 和 Seq 的用法，我们来实现一个最简单的算法来计算 π。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell"></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里有一个草拟的代码来检查答案。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $pi = 1;
+my $sign = 1;
+
+for 1..10000 -&gt; $k {
+    $sign *= -1;
+    $pi += $sign / ($k * 2 + 1);
+}
+
+say 4 * $pi;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第一部分</p>
+</div>
+<div class="paragraph">
+<p>现在，让我们使用 map 来使解更紧凑。最好是让公式也更通用。</p>
+</div>
+<div class="paragraph">
+<p>这是我们的第一个单行程序。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 4 * [+] (^1000).map({(-1) ** $_ / (2 * $_ + 1)})</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>希望你能理解这里的一切。我们在本书前面的章节中介绍了这个解决方案的不同部分。</p>
+</div>
+<div class="paragraph">
+<p>但我还是要强调，你需要在-1周围加上括号，如果你键入 <code>-1 <strong> $<em></code>，那么你总是得到-1，因为减号前缀被应用于取幂的结果。所以，正确的代码是 <code>(-1) </strong> $</em></code>。</p>
+</div>
+<div class="paragraph">
+<p>第二部分</p>
+</div>
+<div class="paragraph">
+<p>还可以尝试使用序列运算符&#8230;&#8203;&#8230;&#8203;根据上面提到的公式生成行，这也很有意思。另外，我们还要用有理数来生成分数 ⅓、⅕ 等。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 4 * [+] &lt;1/1&gt;,
+    {-Rat.new($^n.numerator, $^n.denominator + 2)} ...
+    *.abs &lt; 1E-5;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个序列以一个有理数 <code>&lt;1/1&gt;</code> 开始，这很方便，因为我们可以立即取其分子和分母。序列的生成器块使用这个数来创建一个新的有理数，它的分母在每次迭代时增加2。</p>
+</div>
+<div class="paragraph">
+<p>你可能会问我为什么要提到 <code>$n.numerator</code>，它总是1。这是需要的，因为要改变符号，我们需要知道当前值的符号，而符号被保留在有理值的分子部分。</p>
+</div>
+<div class="paragraph">
+<p>占位符 <code>$^n</code> 自动取生成器代码块的第一个（也是唯一的）数组。</p>
+</div>
+<div class="paragraph">
+<p>这个序列被生成，直到当前值的绝对值足够小。可能很想用 <code>* ≅ 0</code> 来代替最后的条件，但那个程序会运行太长时间而无法产生结果，因为近似相等运算符的默认容差是 10-15，而行不会那么快收敛。</p>
+</div>
+<div class="paragraph">
+<p>另外，你也不能使用 <code>&lt; &#8230;&#8203; / &#8230;&#8203;&gt;</code> 语法在生成器中创建一个 <strong>Rat</strong>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">{ &lt;$^n.numerator / $^n.denominator + 2&gt; }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这种情况下，Raku 将其视为一种引号结构，如 <code>&lt;red greenblue&gt;</code>，而不是代码块，你会得到一个字符串列表。</p>
+</div>
+<div class="paragraph">
+<p>第三部分</p>
+</div>
+<div class="paragraph">
+<p>Damian Conway 提出了以下使用序列的有趣而紧凑的解决方案。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 4 * [+] (1,-1,1...* )
+        «/« (1, 3, 5 ... 9999);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_求和">3.10. 求和</h3>
+<div class="paragraph">
+<p>在本节中，我们将看到一个单行程序，它可以计算一个表的列的总和。</p>
+</div>
+<div class="paragraph">
+<p>下面是一个文件中的一些示例数据。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">100.20 303.50 150.25
+130.44 1505.12 36.41
+200.12 305.60 78.12</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>下面是打印每列三个数字&#8212;&#8203;总和的代码。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">put [Z+] lines.map: *.words</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>程序会打印出我们需要的数字。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">430.76 2114.22 264.78</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们知道裸行和 <code>$*IN.lines</code> 是一样的，所以 <code>lines.map</code> 会遍历输入流中的所有行。然后，每一行都会被分割成单词&#8212;&#8203;由空格分隔的子串。</p>
+</div>
+<div class="paragraph">
+<p>工作中解析输入数据的部分就完成了。我们已经得到了一些对应于输入数据行的序列。对于我们的示例文件，这些序列如下。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">(("100.20", "303.50", "150.25").Seq, ("130.44", "1505.12", "36.41").Seq, ("200.12", "305.60", "78.12").Seq).Seq</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，把每个第一个元素、第二个元素等加起来。缩减运算符和拉链元运算符的组合只用四个字符就完成了所有的工作：<code>[Z+]</code>。</p>
+</div>
+<div class="paragraph">
+<p>这时，我们就有了一个还原序列。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">(430.76, 2114.22, 264.78).Seq</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后一个琐碎的步骤是使用put例程打印数值。如果你做了前面的功课，你就会知道 <code>say</code> 使用 <code>gist</code> 方法（在序列周围加上括号）来可视化结果，而 <code>put</code> 只是简单地使用 Str 方法打印数值。</p>
+</div>
+<div class="paragraph">
+<p>让我们在脚本中再添加几个字符，以演示如何跳过第一列，例如，包含月份名称。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Jan 100.20 303.50 150.25
+Feb 130.44 1505.12 36.41
+Mar 200.12 305.60 78.12</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你只需要做一个切片，选择除第一列以外的所有列。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">put 'Total ', [Z+] lines.map: *.words[1..*]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如你所见，我们甚至不需要自己去数列。<code>1..*</code> 的范围可以使这项工作。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_数字之和等于各数字的阶乘之和">3.11. 数字之和等于各数字的阶乘之和</h3>
+<div class="paragraph">
+<p>所以，我们的任务是找到所有数字的总和，这些数字等于其数字的阶乘之和。听起来清楚了吗？你可以看一下解题单行程序，以便更好地理解它。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say [+] (3..50_000).grep({$_ == [+] .comb.map({[*] 2..$_})})</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>让我们从 <code>&#8230;&#8203;</code> 开始。</p>
+</div>
+<div class="paragraph">
+<p>我们在 3 .. 50_000 的范围内循环。上界是基于一些考虑的猜测。我在这里就不解释了，但如果你好奇的话，可以试着去找答案。基本上，在某些时候你就明白了，这个数字要么是包含了太多的数字，要么就是本身太大了。</p>
+</div>
+<div class="paragraph">
+<p>第二步是 grep。我们要搜索的数字，是等于(<code>$_ ==</code>)和的。它的计算方法是第二次还原加 <code>[+]</code>，但你可以用和的方法代替。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">{$_ == .comb.map({[*] 2..$_}).sum}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意，<code>.comb</code> 是一个调用默认变量 $_ 的方法。梳理方法将数字拆分开来（将它们视为字符）。<code>map</code> 方法将每个数字转换为阶乘(同样，使用还原运算符 <code>[*]</code>)。</p>
+</div>
+<div class="paragraph">
+<p>最后，最外 <code>[+]</code> 将所有 grepped 数字相加，并将结果传递给 <code>say</code> 例程。</p>
+</div>
+<div class="paragraph">
+<p>虽然本书讲的是单行程序，但在使用之前，单独用一行代码来准备阶乘，会比较实用。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @f = (0..9).map({[*] 1..$_});
+say [+] (3..50_000).grep({$_ == [+] .comb.map({@f[$_]})});</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_通过立方体">3.12. 通过立方体</h3>
+<div class="paragraph">
+<p>你可能已经看到了得到42的精确值的计算，即生命、宇宙和万物的答案。让我把它复制到这里，利用乐乐的强大和它的任意精密运算，更不用说在代码中直接使用上标的乐趣了。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ time raku -e'say 80435758145817515³ - 80538738812075974³ + 12602123297335631³'
+
+42
+
+real 0m0.151s
+user 0m0.173s
+sys 0m0.035s</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_使用字符串">4. 使用字符串</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_生成随机密码">4.1. 生成随机密码</h3>
+<div class="paragraph">
+<p>下面是解决这个问题的完整代码:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">('0'..'z').pick(15).join.say</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>运行几次:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Z4x72B8wkWHo0QD
+J;V?=CE84jIS^r9
+2;m6&gt;kdHRS04XEL
+O6wK=umZ]DqyHT5
+3SP\tNkX5Zh@1C4
+PX6QC?KdWYyzNOc
+bq1EfBZNdK9vHxz</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们的代码行每次运行都会生成不同的字符串。如果您还没有安装 Raku，请尝试自己创建一个密码，或者使用上面显示的密码之一。</p>
+</div>
+<div class="paragraph">
+<p>你也可以问一个问题。密码中会有哪些字符? 很高兴你能问到这个问题! Raku 是一种面向 Unicode 的语言，'0'..'z' 的范围似乎包含了具有不同 Unicode 属性的字符（即，至少是数字和字母）。要想知道里面的内容，只要把我们今天的代码中的 pick 方法去掉就可以了。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">('0'..'z').join.say</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这一行打印两个给定字符之间的 ASCII 表子集。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">0123456789:;&lt;=&gt;?@
+ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`
+abcdefghijklmnopqrstuvwxyz</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这些是密码中可能出现的字符。选取法可以确保字符不会重复出现。如果使用 roll，则允许字符出现一次以上。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_unicode_的乐趣">4.2. Unicode 的乐趣</h3>
+<div class="paragraph">
+<p>这里的代码使用的是 ASCII 地外的四个字符。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say π × $ρ²</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 Raku 中，您可以在标识符中自由使用 Unicode 字符，例如变量或函数名。但除此之外，还有许多预定义的符号，如 π，它们有 ASCII 的替代符号。检查名为 "Unicode 与 ASCII 符号"的文档页面，以查看可以在 Raku 中使用的 Unicode 字符的全部集合。</p>
+</div>
+<div class="paragraph">
+<p>只使用 ASCII 码，上面的单行程序可以按以下方式重新编写。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">say pi * $r ** 2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>让我们回到上一章的一个帮助程序，看看哪里可以使用 Unicode 字符。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub f($n) {
+    ($n &lt;&lt;*&gt;&gt; (1...1000 / $n)).grep: * &lt; 1000
+}
+
+say (f(3) ∪ f(5)).keys.sum;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里有几个机会。</p>
+</div>
+<div class="paragraph">
+<p>首先，超运算符 <code>&lt;&lt;*&gt;&gt;</code> 可以用适当的法式引号代替。"*"，乘法字符可以用我们已经用过的十字形来代替，"×"。«×». 除法同样可以用："÷"。</p>
+</div>
+<div class="paragraph">
+<p>其次，序列运算符的三个点可以用一个 Unicode 字符代替：&#8230;&#8203;（如果你是在 Word 中编程，在输入三次句号后就会自动得到这个字符）。</p>
+</div>
+<div class="paragraph">
+<p>最后，在最后一行中，一个 Unicode 字符 ∪ 被用来寻找两个集合的交集。这里的字符和你在数学中使用的字符是一样的(你呢?)，但你可以使用它的 ASCII 版本来代替：f(3) (|) f(5)。</p>
+</div>
+<div class="paragraph">
+<p>在编程语言中，Unicode 的支持是最好的，如果不是最好的话。使用时要注意不要让别人为你的代码而疯狂!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_使用日期">5. 使用日期</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_今天是几号">5.1. 今天是几号？</h3>
+<div class="paragraph">
+<p>今天，我们就来回答一下今天是什么日子的问题。</p>
+</div>
+<div class="paragraph">
+<p>所以，要打印答案，可以使用下面一行 Raku 的代码。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">DateTime.now.yyyy-mm-dd.say</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它看起来是透明的，并以 YYYY-MM-DD 的格式打印日期。好的部分是 DateTime 类可以直接使用，你不需要导入任何模块。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku -e'DateTime.now.yyyy-mm-dd.say'
+2019-10-17</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>正如你在前面的章节中已经看到的，链式方法调用在 Raku 中是一种常见的做法。另一种相反的做法是将 <code>say</code> 作为一个子程序，并在方法名后面使用括号。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say(DateTime.now().yyyy-mm-dd());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这段代码也可以用，它是完全正确的，但它看起来很重。</p>
+</div>
+<div class="paragraph">
+<p>你还应该注意到并告诉你的朋友，在乐道中，你可以在标识符中使用破折号和省略号。</p>
+</div>
+<div class="paragraph">
+<p>好吧，也许使用省略号并不是一个好主意，但连字符在乐都的源代码中已经被非常广泛地使用了。只要确保在算术表达式中的减号运算符周围加上空格，就可以避免在解析中出现任何冲突。</p>
+</div>
+<div class="paragraph">
+<p>如果你阅读文档，你会发现另一个以同样方式命名的方法：hh-mm-ss。我打赌你一定明白它的作用。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; DateTime.now.hh-mm-ss.say
+00:12:01</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意，对于不同格式的输出，如 dd-mm-yy 或 hh-mm，你不会找到类似的方法。 使用 formatter 代替。它不是一个方法，而是在 Datish 角色中定义的一个属性。在 DateTime 类中有一个默认的 formatter，但你可以通过提供构造函数与你自己的子程序来重新定义它，例如。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">DateTime.now(formatter =&gt; -&gt; $dt {
+    sprintf '%02d.%02d.%04d',
+    $dt.day, $dt.month, $dt.year
+}).say</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里的 formatter 接收一个匿名的子程序（由一个细小的箭头引入），有一个参数 <code>$dt</code>。</p>
+</div>
+<div class="paragraph">
+<p>我希望这段代码打印的日期和我们最初的单行程序一样，因为你很可能在一天之内读完了整节内容。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_本世纪有多少天符合条件的">5.2. 本世纪有多少天符合条件的？</h3>
+<div class="paragraph">
+<p>我们接下来的单行程序比较长，最好写成两行，但它会显示出 Raku 的 Date 对象的一个非常好的特点：它可以很容易地在一个范围内使用。</p>
+</div>
+<div class="paragraph">
+<p>实质上，这个任务是计算 1901年1月1日到 2000年12月31日之间的星期天，并且只计算落在月份第一的星期天。</p>
+</div>
+<div class="paragraph">
+<p>Raku 中的 Date 对象实现了 succ 和 prec 方法，用于递增和递减日期。也可以使用两个日期作为一个范围的边界。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say (
+    Date.new(year =&gt; 1901) ..^ Date.new(year =&gt; 2001)
+).grep({.day == 1 &amp;&amp; .day-of-week == 7}).elems</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里有几个时刻要评论一下。</p>
+</div>
+<div class="paragraph">
+<p>首先，两个 Date 对象是用一个命名的参数，即年份来创建的。之所以能够做到这一点，是因为构造函数的签名中包含了月份和日期的去错值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method new(
+    Date: Int:D() :$year!,
+    Int:D() :$month = 1, Int:D() :$day = 1,
+    :&amp;formatter, *%_) {
+
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>所以，创建1月1日的日期很容易，但是对于一年的最后一天就不能这么做了。但是 Raku 有一个很好的范围运算符 <code>..^</code>，它可以排除右边的边界，让我们节省不少字符（虽然我们还没有玩 Raku Golf，但这是第7章的主题）。</p>
+</div>
+<div class="paragraph">
+<p>较长的版本，包括所有明确的日期部分，会像这样。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say (
+    Date.new(year =&gt; 1901, month =&gt; 1, day =&gt; 1) ..
+    Date.new(year =&gt; 2000, month =&gt; 12, day =&gt; 31)
+).grep({.day == 1 &amp;&amp; .day-of-week == 7}).elems</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们创建了一个范围，并使用一个组合条件来 grep 它的值。请记住，当你想在缺省变量上调用一个方法时，不需要显式地输入 $_。</p>
+</div>
+<div class="paragraph">
+<p>另一种方法是使用两个带星号的 grep。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say (
+    Date.new(year =&gt; 1901, month =&gt; 1, day =&gt; 1) ..
+    Date.new(year =&gt; 2000, month =&gt; 12, day =&gt; 31)
+).grep(*.day == 1).grep(*.day-of-week == 7).elems</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你可以在家里做一个练习。打印出今年年底前的剩余天数。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_同一问题的另一种解决方案">5.3. 同一问题的另一种解决方案</h3>
+<div class="paragraph">
+<p>下面是另一个问题的解决方法。任务是算出XX世纪中所有落在每月一号的星期天。</p>
+</div>
+<div class="paragraph">
+<p>上一次，我们只是在扫描整个世纪的所有日子，选择那些是星期天(<code>.day-of-week == 7</code>)，并且是本月第一天(<code>.day == 1</code>)的日子。</p>
+</div>
+<div class="paragraph">
+<p>可以做一个更有效的算法。因为我们只对每月的第一天感兴趣，所以没有必要扫描100年的所有36525天。只需要扫描1901年到2000年之间每个月的第一天的1200天就够了。</p>
+</div>
+<div class="paragraph">
+<p>所以，我们需要两个嵌套循环：过年和过月。我们需要两个 for 吗？不一定。让我们使用X运算符（详见第6章）。</p>
+</div>
+<div class="paragraph">
+<p>这就是我们的新单行程序。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">(gather for 1901..2000 X 1..12 {
+    take Date.new(|@_, 1)
+}).grep(*.day-of-week == 7).elems.say;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>for 1901&#8230;&#8203;2000 X 1&#8230;&#8203;12</code> 循环将XX世纪的每个月都过一遍。对于每个月，我们通过调用一个有三个参数的构造函数来创建一个Date对象。</p>
+</div>
+<div class="paragraph">
+<p>注意，在循环中，你可以同时使用 $_[0] 和 $_[1]，以及 @_[0] 和 @_[1]。在第一种情况下，$_ 变量包含两个元素的列表，而在第二种情况下，它是一个数组 @_。如果你只是用一个点来调用主题（默认）变量上的方法：.[0] 和 .[1]，则可以实现最短的代码。</p>
+</div>
+<div class="paragraph">
+<p>你可以键入 Date.new(.[0], .[1], 1) 来代替 Date.new(|@_, 1)。|@_ 语法是用来展开数组的，否则 Raku 会认为你传递的是一个数组作为第一个参数。</p>
+</div>
+<div class="paragraph">
+<p>所有月份的第一天都会在 gather-take 对的帮助下以一个序列收集。</p>
+</div>
+<div class="paragraph">
+<p>最后一步是和之前一样的 grep，但这次我们只需要选择太阳日，所以一个 *.day-of-week ==7 的条件就足够了。</p>
+</div>
+<div class="paragraph">
+<p>elems 方法的调用会返回列表中元素的数量，也就是我们要找的星期天的数量。因此，用 say 打印出来。</p>
+</div>
+<div class="paragraph">
+<p>根据读者的一个非常贴切的评论，这里有一个更好更简单的解决方法，即使用 <code>+</code> 前缀操作符将一个列表投向其长度。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say +(1901..2000 X 1..12).map(
+    {Date.new(|@_, 1)}
+).grep(*.day-of-week == 7);</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_raku_语法">6. Raku 语法</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_x_和_和">6.1. X 和 .. 和 &#8230;&#8203;</h3>
+<div class="paragraph">
+<p>在前面的章节中，我们经常使用带有交叉操作符的构造。下面是几个例子。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">(999...100) X* (999...100)
+1..10 X* 1..10</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第二行打印1到10的数字的乘法表的项。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">(1 2 3 4 5 6 7 8 9 10 2 4 6 8 10 12 14 16 18 20 3 6 9 12 15 18 21 24 27 30 4 8 12 16 20 24 28 32 36 40 5 10 15 20 25 30 35 40 45 50 6 12 18 24 30 36 42 48 54 60 7 14 21 28 35 42 49 56 63 70 8 16 24 32 40 48 56 64 72 80 9 18 27 36 45 54 63 72 81 90 10 20 30 40 50 60 70 80 90 100)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>关于这样的构造，有一些东西需要学习。</p>
+</div>
+<div class="paragraph">
+<p>你可能已经注意到 999&#8230;&#8203;100 和 1..10 之间有两个微妙的区别。在一种情况下，有三个点，在另一种情况下，只有两个点。在第一种情况下，边界是递减的数字，在第二种情况下，边界是递增的。</p>
+</div>
+<div class="paragraph">
+<p>Raku 中的两个点是范围运算符。它创建一个 Range，或者换句话说，一个 Range 类型的对象。</p>
+</div>
+<div class="paragraph">
+<p>三个点是序列操作符。在我们的例子中，它创建了一个序列，或者 Seq 类型的对象。</p>
+</div>
+<div class="paragraph">
+<p>你可以随时通过调用对象上的 WHAT 方法来检查类型（下面是 REPL 会话的一个片段）。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; (1..10).WHAT
+(Range)
+
+&gt; (1...10).WHAT
+(Seq)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>研究一下 Raku 的源代码，看看 Range 和 Seq 有哪些属性，也很有意思。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my class Range is Cool does Iterable does Positional {
+    has $.min;
+    has $.max;
+    has int $!excludes-min;
+    has int $!excludes-max;
+    has int $!infinite;
+    has int $!is-int;
+    ...
+}
+
+my class Seq is Cool does Iterable does Sequence {
+    has Iterator $!iter;
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 Range 对象中，有最小值和最大值，而在 Seq 中，我们看到的是一个迭代器。</p>
+</div>
+<div class="paragraph">
+<p>在某些情况下，例如，在一个简单的循环中，你可以选择范围或序列。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say for 1..10;
+.say for 1...10;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>但如果你想往下数，范围就不行了。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; .say for 10..1;
+Nil</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>有了序列，就没有问题了。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; .print for 10...1;
+10987654321&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在你开始好好感受它们之前，玩玩范围和序列是明智的。将它们保存在变量中，在操作中使用，用 say 或 dd 打印。</p>
+</div>
+<div class="paragraph">
+<p>作为一个起点，考虑以下三个操作。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">(1, 2, 3) X* (4, 5, 6);
+(1..3) X* (4..6);
+(1...3) X* (4...6);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_化简运算符">6.2. 化简运算符</h3>
+<div class="paragraph">
+<p>我们的下一个客人是一个带有一对方括号的化简结构。当它们不包围一个数组索引时，它们在一个完全不同的领域工作。</p>
+</div>
+<div class="sect3">
+<h4 id="_例子一_阶乘">6.2.1. 例子一: 阶乘</h4>
+<div class="paragraph">
+<p>最经典的例子就是用化简运算符计算阶乘。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">say [*] 1..2019</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>[ ]</code> 是一个化简元运算符。名称中的元部分告诉我们，它可以作为另一个运算符的包络符(顺便说一下，不仅仅是一个运算符)。</p>
+</div>
+<div class="paragraph">
+<p>在第一个例子中，运算符包含了另一个运算符，通过将范围注册为一个列表，并在所有元素之间放置 <code>*</code>，整个行可以被重新编写。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 1 * 2 * 3 #`(more elements) * 2018 * 2019</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_例子二_使用函数">6.2.2. 例子二: 使用函数</h4>
+<div class="paragraph">
+<p>现在，让我们找出最小的数字，它可以被1到20的所有数字所除。</p>
+</div>
+<div class="paragraph">
+<p>让我用 Raku 给你看一个直接的答案。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">say [lcm] 1..20</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这段代码看起来和前面的例子非常相似，但是使用了另一个运算器，lcm 例程，它是一个内置的中缀运算符，它的名字是最小公倍数，但是在文档中，你也可以读到它返回两个参数均等除以的最小整数。这个名字代表了最小公倍数，但在文档中，你也可以读到它返回的是被两个参数均分的最小整数。几乎相同的话，就是用来制定我们解决的问题。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">say 1 lcm 2 lcm 3 lcm 4 lcm 5 lcm 6 lcm 7 # ... and up to 20</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_例子三_矩阵">6.2.3. 例子三: 矩阵</h4>
+<div class="paragraph">
+<p>其他已经内置在 Raku 中的中缀运算符，也是非常有优势的。下面是一个只用几个字符的代码就可以旋转矩阵的例子。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">[Z] &lt;A B C&gt;, &lt;D E F&gt;, &lt;H I J&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里，我们要变换的是一个有9个元素的二维矩阵，也就是A到J的一字串，在输出中，行变成列，列变成行。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">((A D H) (B E I) (C F J))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>列表中的元素之间插入了zip后缀操作符Z，因此代码类似于下面的内容。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">&lt;A B C&gt; Z &lt;D E F&gt; Z &lt;H I J&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>注意，如果你想强调操作顺序，你可能得到的不是你想要的。</p>
+</div>
+<div class="paragraph">
+<p>好了，在我们没有对 Lisp 走得太远之前，我们换个话题。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_raku_中的星号">6.3. Raku 中的星号</h3>
+<div class="paragraph">
+<p>在本节中，我们将介绍使用 <code>*</code> 字符的构造。在 Raku 中，您可以根据上下文将其称为星号（或星号，如果您喜欢的话）或任何东西。</p>
+</div>
+<div class="paragraph">
+<p>Raku 不是一种隐秘的编程语言。在另一方面，有些领域需要花费时间来开始对语法有信心。</p>
+</div>
+<div class="paragraph">
+<p>让我们来看看 <code><strong></code> 的不同用例，从最简单的开始，争取了解最伤脑筋的，比如 <code></strong> ** *</code>。</p>
+</div>
+<div class="paragraph">
+<p>前面几个用法很简单，不需要多做评论。</p>
+</div>
+<div class="sect3">
+<h4 id="_乘法运算符">6.3.1. 乘法运算符</h4>
+<div class="paragraph">
+<p>单星用于乘法。严格来说，这是一个中缀运算符，其返回值是 Numeric。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 20 * 18; # 360</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_乘方运算符">6.3.2. 乘方运算符</h4>
+<div class="paragraph">
+<p>双星 <code>**</code> 是指数运算符。同样，这是一个引号：返回 Numeric 结果，计算给定两个值的幂。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say pi ** e; # 22.4591577183611</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_正则重复量词">6.3.3. 正则重复量词</h4>
+<div class="paragraph">
+<p>同样的两个标记，<code><strong></code> 或 <code></strong>*</code>，也被用在 regexes 中，它们意味着不同的东西。Raku 的一个特点是，它可以很容易地在自身内部的不同子语言之间进行切换。regexes 和 grammar 都是这种内部语言的例子，同样的符号在"主"语言中的含义可能不同（如果它们在那里有任何意义的话）。</p>
+</div>
+<div class="paragraph">
+<p>量词 <code>*</code>。这个语法项的工作方式与一般 Perl 兼容的 regex 中的行为类似：允许原子的零次或多次重复。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $weather = '*****';
+my $snow = $weather ~~ / ('*'*) /;
+say 'Snow level is ' ~ $snow.chars; # Snow level is 5</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当然，我们在这里也看到了同一字符的另一种用法，即 '*' 的字面意思。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_最小到最大重复">6.3.4. 最小到最大重复</h4>
+<div class="paragraph">
+<p>双 <code>**</code> 是另一个量化符的一部分，指定最小和最大的重复次数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $operator = '..';
+say "'$operator' is a valid Raku operator"
+    if $operator ~~ /^ '.' ** 1..3 $/;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这个例子中，预计点的重复次数是一、二、三，不能少，也不能多。</p>
+</div>
+<div class="paragraph">
+<p>我们再往前看一点，在 Whatever 符号的角色（角色如戏曲中的角色，而不是乐乐的面向对象编程中的角色）中使用一个星。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $phrase = 'I love you......';
+
+say 'You are so uncertain...'
+    if $phrase ~~ / '.' ** 4..* /;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>范围的第二端是开放的，regex 接受所有包含四个点以上的短语。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_吞噬参数">6.3.5. 吞噬参数</h4>
+<div class="paragraph">
+<p>在子签名中的数组参数前的星号意味着一个粗暴的参数&#8212;&#8203;将单独的标量参数消耗成一个数组。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">list-gifts('chocolade', 'ipad', 'camelia', 'raku');
+
+sub list-gifts(*@items) {
+    say 'Look at my gifts this year:';
+    .say for @items;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>散列值还允许庆祝吞噬参数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">dump(alpha =&gt; 'a', beta =&gt; 'b'); # Prints:
+                                 # alpha = a
+                                 # beta = b
+
+sub dump(*%data) {
+    for %data.kv {say "$^a = $^b"}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意，如果你在函数签名中省略了星号，代码就不会被编译，因为 Raku 期望的正是宣布的内容。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Too few positionals passed; expected 1 argument but got 0</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_slurpy_slurpy">6.3.6. Slurpy-slurpy</h4>
+<div class="paragraph">
+<p><code>**@</code> 也能用，但注意传递数组和列表时的区别。</p>
+</div>
+<div class="paragraph">
+<p>用一颗星。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @a = &lt; chocolade ipad &gt;;
+my @b = &lt; camelia raku &gt;;
+
+all-together(@a, @b);
+all-together(['chocolade', 'ipad'], ['camelia', 'raku']);
+all-together(&lt; chocolade ipad &gt;, &lt; camelia raku &gt;);
+
+sub all-together(*@items) {
+    .say for @items;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>目前，每份礼物都会被打印在单独的一行上，而不考虑通过参数列表的方式。</p>
+</div>
+<div class="paragraph">
+<p>用双星。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">keep-groupped(@a, @b);
+keep-groupped(['chocolade', 'ipad'], ['camelia', 'camel']);
+keep-groupped(&lt; chocolade ipad &gt;, &lt; camelia camel &gt;);
+
+sub keep-groupped(**@items) {
+    .say for @items;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这次，<code>@items</code> 数组只得到两个元素，反映了参数的结构类型。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">[chocolade ipad]
+[camelia raku]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>或</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">(chocolade ipad)
+(camelia raku)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_动态作用域_twigil">6.3.7. 动态作用域 twigil</h4>
+<div class="paragraph">
+<p><code>*</code> twigil，它引入了动态作用域。很容易将动态变量与全局变量混淆，但检查以下代码。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub happy-new-year() {
+    "Happy new $*year year!"
+}
+
+my $*year = 2020;
+say happy-new-year();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果省略了星号，代码就无法运行。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Variable '$year' is not declared</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>唯一的办法是将 <code>$year</code> 的定义移到函数定义之上，使其正确。有了动态变量 <code>$*year</code>，调用函数的地方就定义了结果。<code>$*year</code> 变量在子的外部作用域中是不可见的，但在动态作用域中是相当可见的。</p>
+</div>
+<div class="paragraph">
+<p>对于一个动态变量来说，是给一个现有的变量赋新值还是创建一个新的变量并不重要。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub happy-new-year() {
+    "Happy new $*year year!"
+}
+
+my $*year = 2018;
+
+say happy-new-year();     # 2018
+
+{
+    $*year = 2019;        # New value
+    say happy-new-year(); # 2019
+}
+
+{
+    my $*year = 2020;     # New variable
+    say happy-new-year(); # 2020
+}
+
+say happy-new-year();     # 2019</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_编译器变量">6.3.8. 编译器变量</h4>
+<div class="paragraph">
+<p>例如，Raku 自带的一些动态伪常数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say @*ARGS;      # Prints command-line arguments
+say %*ENV&lt;HOME&gt;; # Prints home directory</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_所有以这个名字命名的方法">6.3.9. 所有以这个名字命名的方法</h4>
+<div class="paragraph">
+<p><code>.*</code> 后缀伪操作符调用所有给定名称的方法，可以为给定对象找到，并返回一个结果列表。在微不足道的情况下，你会得到一个学理上荒谬的代码。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; pi.gist.say
+3.141592653589793
+
+&gt; pi.*gist.say
+(3.141592653589793 3.141592653589793e0)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>.*</code> 后缀的真正威力来自于继承。它有时有助于揭示真相。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Present {
+    method giver() {
+        'parents'
+    }
+}
+
+class ChristmasPresent is Present {
+    method giver() {
+        'Santa Claus'
+    }
+}
+
+my ChristmasPresent $present;
+
+$present.giver.say;             # Santa Claus
+$present.*giver.join(', ').say; # Santa Claus, parents</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>虽然只是一星半点，但差别很大啊!</p>
+</div>
+<div class="paragraph">
+<p>现在，说说 Raku 星角最神秘的部分。接下来的两个概念，Whatever 和 WhateverCode 类，很容易互相混淆。让我们试着去做对。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_whatever">6.3.10. Whatever</h4>
+<div class="paragraph">
+<p>一个单一的 <code>*</code> 可以代表 Whatever。Whatever 是一个预定义的类，它在一些有用的情况下引入了一些规定的行为。</p>
+</div>
+<div class="paragraph">
+<p>例如，在范围和序列中，最后的 <code>*</code> 意味着无穷大。我们已经看到过这样的例子。下面是另一个例子。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say for 1 .. *;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个单行本的能量转换效率真的很高，因为它产生了一个无限的递增整数列表。准备好后按 Ctrl+C 键继续前进。</p>
+</div>
+<div class="paragraph">
+<p>范围 <code>1 .. *</code> 与 <code>1 .. Inf</code> 是一样的。</p>
+</div>
+<div class="paragraph">
+<p>回到我们更实际的问题上，让我们创建一个自己的类来使用 Whatever 符号 <code>*</code>。下面是一个简单的例子，它是一个多方法的类，可以使用 Int 值或 Whatever。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class N {
+    multi method display(Int $n) {
+        say $n;
+    }
+
+    multi method display(Whatever) {
+        say 2000 + 100.rand.Int;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在第一种情况下，该方法只是简单地打印数值。第二种方法则是打印一个 2000 到 2100 之间的随机数。由于第二种方法的唯一论据是 Whatever，所以在签名中不需要变量。</p>
+</div>
+<div class="paragraph">
+<p>下面是你如何使用这个类。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = N.new;
+
+$n.display(2020);
+$n.display(*);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第一个调用呼应其参数，而第二个调用则打印一些随机的东西。</p>
+</div>
+<div class="paragraph">
+<p>Whatever 符号可以作为一个裸的 Whatever 来举行。比如说，你创建了一个 echo 函数，并将 <code>*</code> 传递给它。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub echo($x) {
+    say $x;
+}
+
+echo(2018); # 2018
+echo(*);    # *</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这一次，没有神奇的事情发生，程序打印出了一颗星星。而现在，我们已经到了一个小小的事情改变了很多的地步。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_whatevercode">6.3.11. WhateverCode</h4>
+<div class="paragraph">
+<p>最后，该说说 WhateverCode 了。</p>
+</div>
+<div class="paragraph">
+<p>取一个数组，打印其中的最后一个元素。你不能用 <code>@a[-1]</code> 这样的类型来做，因为它会产生错误。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Unsupported use of a negative -1 subscript to index from the end; in Raku please
+use a function such as *-1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>编译器建议使用 <code>*-1</code> 这样的函数。它是一个函数吗？是的，更准确地说，是一个 WhateverCode 块。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say (*-1).WHAT; # (WhateverCode)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，打印一个数组的后半部分。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @a = &lt; one two three four five six &gt;;
+say @a[3..*]; # (four five six)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>数组的索引范围是 <code>3..<strong></code>。范围右端的 Whatever 星号指示从数组中取出其余的部分。<code>3..</strong></code> 的类型是 <strong>Range</strong>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say (3..*).WHAT; # (Range)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后，少取一个元素。我们已经看到，要指定最后一个元素，必须使用 <code>*-1</code> 这样的函数。同样也可以在一个范围的右端进行。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say @a[3 .. *-2]; # (four five)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这时，就发生了所谓的 Whatever 柯里化，一个 Range 变成了一个 WhateverCode。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say (3 .. *-2).WHAT; # (WhateverCode)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>WhateverCode 是一个内置的类名；它可以很容易地用于方法的分派。让我们更新上一节的代码，并添加一个方法变体，以期望一个 WhateverCode 参数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class N {
+    multi method display(Int $n) {
+        say $n;
+    }
+
+    multi method display(Whatever) {
+        say 2000 + 100.rand.Int;
+    }
+
+    multi method display(WhateverCode $code) {
+        say $code(2000 + 100.rand.Int);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，参数列表中的星星落入 <code>display(Whatever)</code> 或 <code>display(WhateverCode)</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">N.display(2018);     # display(Int $n)
+N.display(*);        # display(Whatever)
+N.display(* / 2);    # display(WhateverCode $code)
+N.display(* - 1000); # display(WhateverCode $code)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>再次，看一下 <code>display</code> 方法的签名。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method display(WhateverCode $code)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>$code</code> 参数被用作方法内部的函数引用。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $code(2000 + 100.rand.Int);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>函数需要一个参数，但它要去哪里呢？或者换句话说，函数主体是什么，在哪里？我们把这个方法称为 <code>N.display(* / 2)</code> 或 <code>N.display(* - 1000)</code>。答案是，<code>* / 2</code> 和 <code>* - 1000</code> 都是函数! 还记得编译器关于使用 <code>*-1</code> 等函数的提示吗？</p>
+</div>
+<div class="paragraph">
+<p>这里的星号成为第一个函数参数，因此 <code>* / 2</code> 相当于 <code>{$^a / 2}</code>，而 <code>* - 1000</code> 相当于 <code>{$^a - 1000}</code>。</p>
+</div>
+<div class="paragraph">
+<p>这是否意味着 <code>$^b</code> 可以用在 <code>$^a</code> 的旁边? 当然可以! 让一个 WhateverCode 块接受两个参数。如何表示其中的第二个参数？不出意外，再加一个星号! 让我们把显示方法的第四个变体添加到我们的类中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method display(WhateverCode $code
+                     where {$code.arity == 2}) {
+    say $code(2000, 100.rand.Int);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里，where 块用来缩小调度范围，只选择那些有两个参数的 WhateverCode 块。做到这一点后，在方法调用中允许有两个星号。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">N.display( * + * );
+N.display( * - * );</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>调用定义了用于计算结果的函数 <code>$code</code>。所以，<code>N.display( * + * )</code> 后面的实际操作如下。<code>2000 + 100.rand.Int</code>。</p>
+</div>
+<div class="paragraph">
+<p>需要更多的雪花？增加更多的星星。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">N.display( * * * );
+N.display( * ** * );</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>同样，里面的实际计算也是。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">2000 * 100.rand.Int</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>和</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">2000 ** 100.rand.Int</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>恭喜你！你现在可以像编译器一样毫不费力地解析 <code>* ** *</code> 构造。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_家庭作业">6.3.12. 家庭作业</h4>
+<div class="paragraph">
+<p>我们来做一个练习，回答下面的问题。在下面的代码中，每颗星星的含义是什么？</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @n = ((0, 1, * + * ... *).grep: *.is-prime).map: * * * * *;
+.say for @n[^5];</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>D&#8217;oh. 我建议我们开始修改代码，去掉所有的星星，用不同的语法。</p>
+</div>
+<div class="paragraph">
+<p>序列操作符后面的 <code>*</code> 是指生成序列的意思，所以用 Inf 代替。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">((0, 1, * + * ... Inf).grep: *.is-prime).map: * * * * *</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>生成函数中的两颗星 <code>* + *</code> 可以用一个有两个显式参数的 lambda 函数代替。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">((0, 1, -&gt; $x, $y {$x + $y} ... Inf).grep:
+    *.is-prime).map: * * * * *</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，一个简单的语法交替。将 <code>.grep:</code> 替换为一个带括号的方法调用。它的参数 <code><strong>.is-prime</code> 变成了一个代码块，星号被替换为默认变量 $_。注意，在代码使用 <code></strong></code> 时，不需要大括号。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">(0, 1, -&gt; $x, $y {$x + $y} ... Inf).grep({
+    $_.is-prime
+}).map: * * * * *</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后，对于 <code>.map</code> 来说，同样的技巧：但这次这个方法有三个参数，因此，你可以写 <code>{$^a * $^b * $^c}</code> 而不是 <code>* * * * *</code>，这里是完整程序的新布局。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @n = (0, 1, -&gt; $x, $y {$x + $y} ... Inf).grep({
+    $_.is-prime
+}).map({
+    $^a * $^b * $^c
+});
+
+.say for @n[^5];</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在很明显，代码打印的是三个质数斐波那契数组的五个乘积。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_其他任务">6.3.13. 其他任务</h4>
+<div class="paragraph">
+<p>在课本中，最具挑战性的任务都会用 <code>*</code> 号来标示。下面为大家介绍几个，供大家自己解决。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1. <code>chdir('/')</code> 和 <code>&amp;*chdir('/')</code> 的区别是什么？</p>
+</li>
+<li>
+<p>2. 解释下面的代码，并修改它以证明它的优点： <code>.say for 1&#8230;&#8203;**</code>。</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_eval_例程">6.4. EVAL 例程</h3>
+<div class="paragraph">
+<p><code>EVAL</code> 例程编译并执行它作为参数得到的代码。</p>
+</div>
+<div class="paragraph">
+<p>让我们从评估一个简单的程序开始。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">EVAL('say 123');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个程序说的是 123，这里就不奇怪了。</p>
+</div>
+<div class="paragraph">
+<p>不过，也有更复杂的情况。你觉得，下面的程序是怎么打印的？</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">EVAL('say {456}');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我想它打印出来的东西和你想象的不一样。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">-&gt; ;; $_? is raw { #`(Block|140570649867712) ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它将大括号之间的内容解析为一个尖锐的块。</p>
+</div>
+<div class="paragraph">
+<p>如果你试试双引号呢？</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">EVAL("say {789}");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在它甚至拒绝编译。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">===SORRY!=== Error while compiling eval.pl
+EVAL is a very dangerous function!!! (use the MONKEY-SEE-NO- EVAL pragma to override this error,
+but only if you're VERY sure your data contains no injection attacks)
+at eval.raku:6
+------&gt; EVAL("say {789}") ⏏;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们可以通过添加几个神奇的词来修复代码。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use MONKEY-SEE-NO-EVAL;
+
+EVAL("say {789}");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这一次，它打印的是 789。</p>
+</div>
+<div class="paragraph">
+<p>代码的执行（我们还不知道具体时间，这是明天文章的主题），所以你可以进行一些计算，例如。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">use MONKEY-SEE-NO-EVAL;
+
+EVAL("say {7 / 8 + 9}"); # 9.875</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后，如果你尝试直接传递一个代码块，即使是盲猴，也无法再次实现目标。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">use MONKEY-SEE-NO-EVAL;
+
+EVAL {say 123};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该错误发生在运行时。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">Constraint type check failed in binding to parameter '$code'; expected anonymous constraint to be met but got
+-&gt; ;; $_? is raw { #`...
+in block &lt;unit&gt; at eval.raku line 10</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这条消息看起来很神秘，但至少我们再次看到，我们得到了一个匿名的尖块传递给函数。</p>
+</div>
+<div class="paragraph">
+<p>在我们结束之前，尝试使用一个小写的函数名。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">eval('say 42');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 Raku 中没有这样的功能，我们会得到一个标准的错误信息。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">===SORRY!=== Error while compiling eval2.raku Undeclared routine:
+eval used at line 5. Did you mean 'EVAL', 'val'?</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_raku_高尔夫">7. Raku 高尔夫</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在高尔夫编程的内容中，你正在尝试使用尽可能少的字符来解决一个问题。最短的程序获胜。</p>
+</div>
+<div class="sect2">
+<h3 id="_第一个测试">7.1. 第一个测试</h3>
+<div class="paragraph">
+<p>让我们玩高尔夫，打印所有 100 以下的质数。我的解决方案，需要 22 个字符，如下。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.is-prime&amp;&amp;.say for ^C</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 Raku 中没有更短的解决方案，而在 J 编程语言中，他们只用了 11 个字符。在 Raku 中，方法名已经包含了 8 个字符。我相信，为了赢得所有的高尔夫比赛，你需要一种特殊的语言，它的名字非常短(J就是这样)，并且需要一套内置的例程来生成素数、斐波那契或任何其他数字序列的列表。它还应该大力利用 Unicode 字符空间。</p>
+</div>
+<div class="paragraph">
+<p>在我们的 Raku 例子中，也有一个 Unicode 字符，.Ⅽ。这不是一个简单的 Ⅽ，即拉丁字母表的第三个字母，而是一个 Unicode 字符 ROMAN NUMERAL ONE HUNDRED(当然，它最初是拉丁字母表的第三个字母)。使用这个符号让我们在解决方案中保存了两个字符。</p>
+</div>
+<div class="paragraph">
+<p>之所以能够使用 <code>&amp;&amp;</code> 技巧，是因为如果第一个操作数为 False，则布尔表达式的第二部分不会被执行。请注意，这里不能使用单个 <code>&amp;</code>。完整的非优化版本的代码将需要额外的空格，看起来像这样。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say if .is-prime for ^100</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_第二个测试">7.2. 第二个测试</h3>
+<div class="paragraph">
+<p>让我们解决另一个高尔夫任务，并打印前 30 个斐波那契数，一行一个。我们必须在代码中使用尽可能少的字符。</p>
+</div>
+<div class="paragraph">
+<p>第一种方法比较啰嗦（即使用 <code>^31</code> 代替 <code>0..30</code>，也需要 33 个字符）。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say for (0, 1, * + * ... *)[^31]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>有一些空间，允许压缩。当然，首先也是最明显的就是去掉空格（剩余28个字符）。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say for (0,1,*+*...*)[^31]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>另一个有趣的技巧是使用 <code>&gt;&gt;</code> 元操作符来调用序列中每个元素的 <code>say</code> 方法。它将代码进一步压缩到 24 个字符。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">(0,1,*+*...*)[^31]&gt;&gt;.say</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>此刻，我们可以采用一些 Unicode，又获得了三个字符（剩下21）。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">(0,1,*+*...*)[^31]».say</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>看起来已经很紧凑了，但还是有一些选项可以尝试。让我们去掉显式切片，并尝试在最后一个元素处停止序列。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">(0,1,*+*...*&gt;514229)».say</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>代码变长了(23个字符)，但我们不需要一个确切的数字 514 229。给出一些接近的数字就足够了，这个数字比序列的第29个元素大，比第30个元素小。例如，它可以是 823 543，也就是7的幂7，用上标(19个字符)写下来。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">(0,1,*+*...*&gt;7⁷)».say</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后，可以通过使用另一个代表 80万的 Unicode 字符，让它少一个字符。并不是每一种（如果有的话）字体都能显示一些有视觉吸引力的东西，但乐乐毫无怨言地接受了这个字符。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">(0,1,*+*...*&gt; )».say</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这18个字符比 code-golf.io 网站的最高结果长了一个字符。我有一种感觉，你可以通过将序列的前两个元素替换为 <code>^2</code> 来获得另一个字符，但这在当前的 Rakudo 中是行不通的，你必须返回一个字符来扁平化列表。<code>|^2</code>, 这使得解决方案又变成了18个字符.</p>
+</div>
+<div class="paragraph">
+<p>欲望将条件中的 <code>*&gt;</code> 部分去掉，停止序列，用一个固定的数字代替。不幸的是，没有办法用1和90之间的数字的幂来表达832 040。能不能这样，我们可以用上标来计算这个数字。我们可以用上标来计算这个数字。</p>
+</div>
+<div class="paragraph">
+<p>另一个想法是使用 regex，但我们在这里至少需要四个字符，这没有帮助。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">(0,1,*+*.../20/)».say</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>但我在这里就不说了，让你再想一想。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_拉库高尔夫码的技巧和想法">7.3. 拉库高尔夫码的技巧和想法</h3>
+<div class="sect3">
+<h4 id="_省略分号">7.3.1. 省略分号</h4>
+<div class="paragraph">
+<p>在程序结束前的语句末尾或代码块末尾不需要分号。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 42;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_省略主题变量">7.3.2. 省略主题变量</h4>
+<div class="paragraph">
+<p>如果在主题变量 $_ 上调用了一个方法，那么变量的名字其实并不需要乐乐来理解你在说什么，所以，避免给主题变量明确命名。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$_.say for 1..10</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_使用前缀形式">7.3.3. 使用前缀形式</h4>
+<div class="paragraph">
+<p>在许多情况下，一个操作同样可以表达为一个代码块或一个循环或条件的后缀形式的单一操作。后缀形式通常比较短。例如</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for 1..10 {.say}
+.say for 1..10</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_使用范围制作循环">7.3.4. 使用范围制作循环</h4>
+<div class="paragraph">
+<p>范围是表达循环细节的好东西：在几个字符中，你就可以确定循环变量的初始和最终状态。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say for 1..10</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>但是想想如果你可以从0开始数，在这种情况下，可以用一个小括号字符来得到从0开始的范围，下面的代码可以打印0到9的数字。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say for ^10</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_在范围和序列之间进行选择">7.3.5. 在范围和序列之间进行选择</h4>
+<div class="paragraph">
+<p>在循环中，序列的工作方式与范围的工作方式完全相同。这种选择可能取决于高尔夫软件是计算字节还是 Unicode 字符。在第一种情况下，一个范围中的两个点比一个范围中的三个点要好。在第二种情况下，使用 Unicode 字符。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say for 1..10
+.say for 1...10
+.say for 1...10</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当你需要向下计数时，序列是你的朋友，因为它们可以推断出改变循环计数器的方向。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say for 10...1</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_使用_map_代替循环">7.3.6. 使用 map 代替循环</h4>
+<div class="paragraph">
+<p>在某些情况下，特别是当你必须对循环变量进行多个操作时，可以尝试使用 map 来迭代所有的值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">(^10).map: *.say</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_省略圆括号和引号">7.3.7. 省略圆括号和引号</h4>
+<div class="paragraph">
+<p>Raku 并不强迫你在常规形式的条件检查中使用括号。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">if ($x &gt; 0) {say $x;exit}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>有时，你也会希望在函数或方法调用中省略括号。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say(42)
+say 42</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在声明数组或哈希时，都不需要括号。对于数组，在上面使用引号结构来避免引号。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @a = ('alpha', 'beta')
+my @b=&lt;alpha beta&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_使用链式比较">7.3.8. 使用链式比较</h4>
+<div class="paragraph">
+<p>另一个有趣的功能是在一个表达式中使用一个以上的条件。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $z if $x &lt; 10 &lt; $y</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_在方法和函数之间选择">7.3.9. 在方法和函数之间选择</h4>
+<div class="paragraph">
+<p>在许多情况下，你可以在调用函数和使用方法之间进行选择。方法调用可以额外地在彼此之后进行链式调用，所以你可以节省大量的括号或空格。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">(^10).map({.sin}).grep: *&gt;0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当同时存在一个方法和一个独立的函数时，如果省去括号，方法调用往往会更短，或者至少是相同的长度。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">abs($x)
+abs $x
+$x.abs</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_使用_unicode_字符">7.3.10. 使用 Unicode 字符</h4>
+<div class="paragraph">
+<p>操作符通常有其 Unicode 对应的字符，你可以用一个字符表达一个冗长的结构。比较一下。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">if $x=~=$y
+if $x≅$y</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 Unicode 空间中也有内置常数，例如 pi 与 π，或 Inf 与 ∞。</p>
+</div>
+<div class="paragraph">
+<p>有很多数字，无论大小，都可以用一个 Unicode 符号代替。1/3 与 ⅓，或 20 与 ⑳，或 100 与 Ⅽ。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_使用上标">7.3.11. 使用上标</h4>
+<div class="paragraph">
+<p>上标是计算幂的好帮手。比较。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $x**2
+$x².say</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_使用_制作无符号变量">7.3.12. 使用 \ 制作无符号变量</h4>
+<div class="paragraph">
+<p>不要忘了以下绑定容器的方式，并创建一种无标号变量。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my \a=42;say a</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_使用默认参数">7.3.13. 使用默认参数</h4>
+<div class="paragraph">
+<p>当你在使用函数或类方法时，检查它们的签名中是否有默认值。同时检查是否有一个带有位置参数的替代变体。例如，比较三种创建日期对象的方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Date.new(year=&gt;2019,month=&gt;1,day=&gt;1)
+Date.new(year=&gt;2019)
+Date.new(2019,1,1)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_使用_代替_if">7.3.14. 使用 &amp;&amp; 代替 if</h4>
+<div class="paragraph">
+<p>布尔表达式可以节省几个字符，因为如果第一个条件已经给出了结果，Raku 将不会计算第二个条件。例如</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say if $x&gt;0
+
+$x&gt;0&amp;&amp;.say</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_在_put_和_say_之间选择">7.3.15. 在 put 和 say 之间选择</h4>
+<div class="paragraph">
+<p>最后，有时用 put 代替 say 更好。在某些情况下，当你打印数组时，你将在输出中不需要括号，例如：在另外一些情况下，当你处理范围时，你会得到所有的值，而不是简洁的输出，例如。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; say 1..10
+1..10
+
+&gt; put 1..10
+1 2 3 4 5 6 7 8 9 10</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_关于编译器内部的附录">8. 关于编译器内部的附录</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_0_1_0_2_的背后是什么">8.1. 0.1 + 0.2 的背后是什么？</h3>
+<div class="paragraph">
+<p>今天，我们将研究一个计算零的单行本。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 0.1 + 0.2 - 0.3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果你熟悉编程，你就会知道，只要你开始使用浮点运算，你就会失去精度，你就会很快面临小错误。</p>
+</div>
+<div class="paragraph">
+<p>你可能也看到了 0.30000000000000004.com 这个网站，里面有一长串不同的编程语言，以及他们如何打印一个简单的表达式 0.1+0.2。在大多数情况下，你不会得到一个 0.3 的精确值。而且往往当你得到它的时候，它实际上是打印操作过程中四舍五入的结果。</p>
+</div>
+<div class="paragraph">
+<p>在 Raku 中，0.1+0.2 正好是 0.3，而上面提到的单行本打印的是一个精确的零。</p>
+</div>
+<div class="paragraph">
+<p>让我们深入到编译器的内部来看看这是如何工作的。Raku 的语法（在乐道编译器中实现）有以下检测数字的片段。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token numish {
+    [
+    | 'NaN' &gt;&gt;
+    | &lt;integer&gt;
+    | &lt;dec_number&gt;
+    | &lt;rad_number&gt;
+    | &lt;rat_number&gt;
+    | &lt;complex_number&gt;
+    | 'Inf' &gt;&gt;
+    | $&lt;uinf&gt;='∞'
+    | &lt;unum=:No+:Nl&gt;
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>很有可能，你对 Raku 已经足够熟悉，你知道上述行为的解释是，它使用有理数来存储浮点数，比如 0.1。这是正确的，但看一下语法，你可以看到这个历程有点长。</p>
+</div>
+<div class="paragraph">
+<p>语法中所谓的 <code>rat_number</code> 是一个写在角括号里的数字。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token rat_number { '&lt;' &lt;bare_rat_number&gt; '&gt;' }
+token bare_rat_number {
+    &lt;?before &lt;.[-−+0..9&lt;&gt;:boxd]&gt;+? '/'&gt;
+    &lt;nu=.signed-integer&gt; '/' &lt;de=integer&gt;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>所以，如果你把程序改成:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &lt;1/10&gt; + &lt;2/10&gt; - &lt;3/10&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>那么你就会立即操作有理数。这里有一个相关的操作，可以转换这种格式的数字。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method rat_number($/) { make $&lt;bare_rat_number&gt;.ast }
+
+method bare_rat_number($/) {
+    my $nu := $&lt;nu&gt;.ast.compile_time_value;
+    my $de := $&lt;de&gt;.ast;
+    my $ast := $*W.add_constant(
+        'Rat', 'type_new', $nu, $de, :nocache(1));
+    $ast.node($/);
+    make $ast;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在某些时候，抽象语法树得到一个节点，其中包含一个 Rat 类型的常量，<code>$nu</code> 和 <code>$de</code> 部分作为分子和分母。</p>
+</div>
+<div class="paragraph">
+<p>在我们的例子中，写成 0.1 形式的数字首先通过 <code>dec_number</code> 标记。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">token dec_number {
+    :dba('decimal number')
+    [
+    | $&lt;coeff&gt; = [ '.' &lt;frac=.decint&gt; ] &lt;escale&gt;?
+    | $&lt;coeff&gt; = [ &lt;int=.decint&gt; '.' &lt;frac=.decint&gt; ]
+                 &lt;escale&gt;?
+    | $&lt;coeff&gt; = [ &lt;int=.decint&gt; ] &lt;escale&gt;
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>数字的整数和小数部分进入最终 Match 对象的 <code>&lt;int&gt;</code> 和 <code>&lt;frac&gt;</code> 键。这个语法标记的动作方法相当复杂。让我给你看看。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method dec_number($/) {
+    if $&lt;escale&gt; { # wants a Num
+        make $*W.add_numeric_constant: $/, 'Num', ~$/;
+    } else { # wants a Rat
+        my $Int := $*W.find_symbol(['Int']);
+        my $parti;
+        my $partf;
+
+        # we build up the number in parts
+        if nqp::chars($&lt;int&gt;) {
+            $parti := $&lt;int&gt;.ast;
+        } else {
+            $parti := nqp::box_i(0, $Int);
+        }
+
+        if nqp::chars($&lt;frac&gt;) {
+            $partf := nqp::radix_I(
+                      10, $&lt;frac&gt;.Str, 0, 4, $Int);
+
+            $parti := nqp::mul_I($parti, $partf[1], $Int);
+            $parti := nqp::add_I($parti, $partf[0], $Int);
+            $partf := $partf[1];
+        } else {
+            $partf := nqp::box_i(1, $Int);
+        }
+
+        my $ast := $*W.add_constant(
+            'Rat', 'type_new', $parti, $partf,
+            :nocache(1));
+        $ast.node($/);
+        make $ast;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于0.1、0.2和0.3这三个数字，上面的代码分别取它们的整数和小数部分，准备好两个整数 <code>$parti</code> 和 <code>$partf</code>，并将它们传递给与我们在 <code>rat_number</code> 动作中看到的相同的新常数的构造函数，之后就得到了一个Rat数。</p>
+</div>
+<div class="paragraph">
+<p>现在我们跳过一些细节，看看你必须了解的有理数的另一个重要部分。</p>
+</div>
+<div class="paragraph">
+<p>在我们的例子中，整数和小数部分得到的值如下。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-txt" data-lang="txt">$parti=1, $partf=10
+$parti=2, $partf=10
+$parti=3, $partf=10</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果你黑掉你本地的乐道文件副本，你可以很容易地自己看到它。</p>
+</div>
+<div class="paragraph">
+<p>或者，在命令行中使用 <code>--target=parse</code> 选项。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku --target=parse -e'say 0.1 + 0.2 - 0.3'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>一部分输出将包含我们想要看到的数据。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">- 0: 0.1
+- value: 0.1
+    - number: 0.1
+    - numish: 0.1
+        - dec_number: 0.1
+        - frac: 1
+        - int: 0
+        - coeff: 0.1
+- 1: 0.2
+- value: 0.2
+    - number: 0.2
+    - numish: 0.2
+        - dec_number: 0.2
+        - coeff: 0.2
+        - frac: 2
+        - int: 0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>将数字以分数的形式呈现后，进行精确的计算就非常容易了，这就是为什么我们在输出中看到的是一个纯零。</p>
+</div>
+<div class="paragraph">
+<p>回到我们的分数上。如果你同时打印分子和分母（例如使用裸体法），你会看到，如果可能的话，分数已经被归一化了。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; &lt;1/10&gt;.nude.say
+(1 10)
+&gt; &lt;2/10&gt;.nude.say
+(1 5)
+&gt; 0.2.nude.say
+(1 5)
+&gt; 0.3.nude.say
+(3 10)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如你所见，我们有 1/5，而不是 2/10，它代表的是同一个数，精度相同。当你使用这个数字时，你不应该担心找到两个分数的共同分界线，例如。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; (0.1 + 0.2).nude.say
+(3 10)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnotedef_1">
+<a href="#_footnoteref_1">1</a>. Rakudo(rakudo.org)是 Raku 的一个实现。本书的其余部分假设你正在使用 Rakudo 编译器，并在命令行中以 raku 的形式运行它。如果你有一个旧的版本，其中有 perl6 可执行文件，在你的 .profile 中做一个别名：alias raku=perl6。
+</div>
+</div>
+
+</article>
+
+
+    
+
+  </main><section class="site__search">
+    <label class="site__form">
+        <p class="form__label">Search around the site</p> 
+        <input class="site__search-bar form__input" type="text">
+    </label>
+    <div class="site__search-bar-results"></div>
+</section>
+  
+  <footer class="site__footer">
+    
+    
+    <p class="footer__sign">© 2020 ohmyraku</p></footer>
+    
+
+    
+    <script>
+        window.addEventListener("load", function () {
+            const script = document.createElement("script");
+            script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+            script.async = true
+
+            document.head.appendChild(script);
+        })
+    </script>
+
+
+
+
+
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
+
+
+
+</body>
+</html>

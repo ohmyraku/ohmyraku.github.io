@@ -8,10 +8,28 @@
     <language>zh-cn</language>
     <managingEditor>ohmyraku@outlook.com (ohmyraku)</managingEditor>
     <webMaster>ohmyraku@outlook.com (ohmyraku)</webMaster>
-    <lastBuildDate>Mon, 24 Feb 2020 12:54:52 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 12 Jun 2020 13:16:52 +0800</lastBuildDate>
     
 	<atom:link href="https://ohmyraku.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>one-liners</title>
+      <link>https://ohmyraku.github.io/tags/one-liners/</link>
+      <pubDate>Fri, 12 Jun 2020 13:16:52 +0800</pubDate>
+      <author>ohmyraku@outlook.com (ohmyraku)</author>
+      <guid>https://ohmyraku.github.io/tags/one-liners/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>raku</title>
+      <link>https://ohmyraku.github.io/tags/raku/</link>
+      <pubDate>Fri, 12 Jun 2020 13:16:52 +0800</pubDate>
+      <author>ohmyraku@outlook.com (ohmyraku)</author>
+      <guid>https://ohmyraku.github.io/tags/raku/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>compiler</title>
@@ -19,15 +37,6 @@
       <pubDate>Mon, 24 Feb 2020 12:54:52 +0800</pubDate>
       <author>ohmyraku@outlook.com (ohmyraku)</author>
       <guid>https://ohmyraku.github.io/tags/compiler/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>raku</title>
-      <link>https://ohmyraku.github.io/tags/raku/</link>
-      <pubDate>Mon, 24 Feb 2020 12:54:52 +0800</pubDate>
-      <author>ohmyraku@outlook.com (ohmyraku)</author>
-      <guid>https://ohmyraku.github.io/tags/raku/</guid>
       <description></description>
     </item>
     
