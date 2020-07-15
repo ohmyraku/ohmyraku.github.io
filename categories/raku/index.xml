@@ -91,7 +91,7 @@
       <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
       <author>ohmyraku@outlook.com (ohmyraku)</author>
       <guid>https://ohmyraku.github.io/rakudoc/</guid>
-      <description>Table of Contents 1. 简介 2. 通过例子学习 Raku 2.1. v6 2.2. 语句 2.3. 词法和块 2.4. 符号和标识符 2.5. 标量 2.6. 文件句柄和赋值 2.7. 字符串字面量 2.8. 数组、方法和调用 2.9. 散列 2.10. for 和 block 2.11. Any 和 += 2.12. 后自增和前自增 2.13. 变量, $_ 2.14. 块 2.15. 稳定的排序 2.16. say，print 和 put 2.17. 插值 2.18. 双引号字符串和单引号字符串 2.19. 禅切 2.20. 练习   3. Perl 5 到 Raku 的指南 - 简而言之 3.1. CPAN 3.2. 语法 3.3. 空白 3.</description>
+      <description>Table of Contents 1. 简介 2. 通过例子学习 Raku 2.1. 指令 v6 2.2. 语句 2.3. 词法作用域和块 2.4. 数组、方法和调用 2.5. 散列 2.6. for 和 block 2.7. 主题变量 2.8. 标准输出 2.9. 禅切 2.10. 练习   3. Perl 5 到 Raku 的指南 - 简而言之 3.1. CPAN 3.2. 语法 3.3. 空白 3.4. 符号 3.5. 数组索引/切片 3.6. {} 散列索引/切片 3.7. 创建引用并使用它们 3.8. 运算符 3.9. , (逗号) 列表分割符 3.10. 循环 3.11. 函数 3.12. 正则表达式 (regex/regexp) 3.13. BEGIN, UNITCHECK, CHECK, INIT 和 END 3.</description>
     </item>
     
     <item>

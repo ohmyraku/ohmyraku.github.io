@@ -882,14 +882,35 @@ assert odd == @[1, 3, 5]</code></pre>
 </div>
 <div class="sect2">
 <h3 id="_集合类型">2.3. 集合类型</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-nim" data-lang="nim"></code></pre>
-</div>
+<div class="paragraph">
+<p>列表、数组、集合等集合都非常有用。在本节中，我将讲述 Nim 中最常用的三种集合类型：数组、序列和集合类型。</p>
 </div>
 <div class="sect3">
 <h4 id="_数组">2.3.1. 数组</h4>
-
+<div class="paragraph">
+<p>数组类型表示一个静态项数的列表。这种类型类似于 C 数组，但提供了更多的内存安全性，如下例所示。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-nim" data-lang="nim">var list: array[3, int]
+list[0] = 1
+list[1] = 42
+assert list[0] == 1
+assert list[1] == 42
+assert list[2] == 0  # 该数组包含三个元素。任何未设置的元素都会被赋予一个默认值。
+echo list.repr       # 这将输出[1，42，0]。存储过程repr将任何变量转换为字符串，但产生的字符串有时包含调试信息，如变量的内存地址。
+echo list[500]       # 编译会出现 "Error: index out of bounds"的失败。</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>数组是值类型，就像 int、float 和许多其他类型一样，这意味着它们是在堆上分配的。这与 C 语言的数组类似，但它与 Java 的数组完全不同，后者是引用类型，存储在堆上。</p>
+</div>
+<div class="paragraph">
+<p>数组的大小是静态的，所以一个数组一旦声明，就不能改变它的大小。这就是为什么当你试图访问一个超出其边界的索引时，编译器会给你一个错误。在 C 语言中，没有对索引边界进行检查，所以有可能访问数组边界之外的内存。</p>
+</div>
+<div class="paragraph">
+<p>Nim 在编译时和运行时都会执行这些检查。只要不关闭 <code>--boundsChecks</code> 选项，就会进行运行时检查。</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_序列">2.3.2. 序列</h4>
