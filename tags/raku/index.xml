@@ -91,7 +91,7 @@
       <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
       <author>ohmyraku@outlook.com (ohmyraku)</author>
       <guid>https://ohmyraku.github.io/rakudoc/</guid>
-      <description>Table of Contents 1. 通过例子学习 Raku 1.1. 指令 v6 1.2. 语句 1.3. 词法作用域和块 1.4. 数组、方法和调用 1.5. 散列 1.6. for 和 block 1.7. 主题变量 1.8. 标准输出 1.9. 禅切 1.10. 练习   2. 关于文档 2.1. 结构 2.2. 从 Pod 生成 HTML 2.3. 贡献   3. 简介 4. 特殊变量 4.1. 描述 4.2. 注意 4.3. 特殊变量   5. Javascript 到 Raku - 简而言之 5.1. 基础语法 5.2. 面向对象编程 5.3. 异步编程 5.4. 网络 API 5.</description>
+      <description>目录 1. 通过例子学习 Raku 1.1. 指令 v6 1.2. 语句 1.3. 词法作用域和块 1.3.1. 魔符和标识符 1.3.2. 标量 1.3.3. 文件句柄和赋值 1.3.4. 字符串字面量   1.4. 数组、方法和调用 1.5. 散列 1.6. for 和 block 1.6.1. Any 和 += 1.6.2. 胖箭头、对儿和 autovivification 1.6.3. 后自增和前自增   1.7. 主题变量 1.7.1. 块 1.7.2. 稳定的排序   1.8. 标准输出 1.8.1. 变量插值 1.8.2. 双引号字符串和单引号字符串   1.9. 禅切 1.10. 练习   2. 关于文档 2.1. 结构 2.2. 从 Pod 生成 HTML 2.</description>
     </item>
     
     <item>
