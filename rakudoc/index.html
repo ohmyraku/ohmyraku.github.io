@@ -14418,10 +14418,10 @@ exp(x) = 1 + x + x²/2! + x³/3! + ... + xⁿ/n!</code></pre>
 <div class="sect2">
 <h3 id="_iterator_和_iterable_角色">27.1. Iterator 和 Iterable 角色</h3>
 <div class="paragraph">
-<p>Raku 是一种函数式语言，但在处理复杂的数据结构时，函数需要保持住。特别是，他们需要一个可以应用于所有这些界面的统一接口。此接口由 <a href="https://docs.raku.org/type/Iterator">Iterator</a> 和 <a href="https://docs.raku.org/type/Iterable">Iterable</a> 角色提供。</p>
+<p>Raku 是一种函数式语言，但在处理复杂的数据结构时，函数需要一些东西来支撑。特别是，它们需要一个统一的接口，可以以同样的方式应用于所有数据结构。<a href="https://docs.raku.org/type/Iterator">Iterator</a> 和 <a href="https://docs.raku.org/type/Iterable">Iterable</a> 角色就提供了这样一种接口。</p>
 </div>
 <div class="paragraph">
-<p><code>Iterable</code> 角色相对简单。它为迭代器方法提供了一个存根，该方法实际上是由诸如 <code>for</code> 之类的语句使用的。 <code>for</code> 会在它前面的变量上调用 <code>.iterator</code>，然后为每个项目运行一次块。其他方法（如数组赋值）将使 <code>Iterable</code> 类以相同的方式运行。</p>
+<p><code>Iterable</code> 角色比较简单。它为迭代器方法提供了一个存根，也就是 <code>for</code> 等语句实际使用的方法，<code>for</code> 会对它前面的变量调用 <code>.iterator</code>，然后每运行一项就运行一次块。其他方法, 如数组赋值, 将使 <code>Iterable</code> 类以同样的方式运行。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14437,17 +14437,17 @@ exp(x) = 1 + x + x²/2! + x³/3! + ... + xⁿ/n!</code></pre>
 };
 
 my @longer-chain =  DNA.new('ACGTACGTT');
-say @longer-chain.perl;
+say @longer-chain.raku;
 # OUTPUT: «[("A", "C", "G"), ("T", "A", "C"), ("G", "T", "T")]␤»
 
-say  @longer-chain».join("").join("|"); #OUTPUT: «ACG|TAC|GTT␤»</code></pre>
+say @longer-chain».join("").join("|"); #OUTPUT: «ACG|TAC|GTT␤»</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这个示例中，它是 <a href="https://docs.raku.org/type/Iterable">Iterable</a> 中示例的扩展，显示了如何调用 <code>.iterator</code>，只是在将创建的对象分配给<a href="https://docs.raku.org/type/Positional">位置</a>变量 <code>@long-chain</code> 时调用此方法;这个变量是一个数组，我们在最后一个例子中对它进行操作。</p>
+<p>在这个例子中，这是 <a href="https://docs.raku.org/type/Iterable">Iterable</a> 中示例的扩展，显示了如何调用 <code>.iterator</code>，只有当创建的对象被分配到一个<a href="https://docs.raku.org/type/Positional">Positional</a>变量, <code>@long-chain</code> 时，迭代器方法才会在适当的上下文中被调用; 这个变量是一个数组，我们在上一个例子中对它进行操作。</p>
 </div>
 <div class="paragraph">
-<p>（可能有点容易混淆）<code>Iterator</code> 角色比 <code>Iterable</code> 更复杂一点。首先，它提供了一个常量 <code>IterationEnd</code>，但它提供了一系列方法，如 <code>.pull-one</code>，它允许在几个上下文中进行更精细的迭代操作：添加或删除项目，或跳过它们以访问其他项目。实际上，该角色为所有其他方法提供了一个默认实现，因此唯一需要定义的方法就是 <code>pull-one</code>，其中只提供了一个 <code>stub</code>。虽然 <code>Iterable</code> 提供了高级变量循环，<code>Iterator</code> 提供了在循环的每次迭代中调用的低级函数。让我们用这个角色扩展前面的例子。</p>
+<p><code>Iterator</code>（可能有点容易混淆） 角色比 <code>Iterable</code> 更复杂一些。首先，它提供了一个常量, <code>IterationEnd</code>。然后, 它还提供了一系列方法，如 <code>.pull-one</code>，它允许在几个上下文中对迭代进行更精细的操作：添加或删除项，或跳过它们以访问其他项。事实上，该角色为所有其他方法提供了一个默认的实现，所以唯一需要定义的方法就是 <code>pull-one</code>，角色只提供了其中的一个存根(<code>stub</code>)。<code>Iterable</code> 提供了循环将使用的高级接口，而 <code>Iterator</code> 则提供了循环的每次迭代都会调用的低级函数。我们用这个角色来扩展前面的例子。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14478,16 +14478,19 @@ my $a := DNA.new('GAATCC');
 </div>
 </div>
 <div class="paragraph">
-<p>我们声明一个 <code>DNA</code> 类，它扮演两个角色，<code>Iterator</code> 和 <code>Iterable</code>;该类将包含一个字符串，该字符串将被约束为长度为3的倍数且仅由 ACGT 组成。我们先来看看 <code>pull-one</code> 方法。每次发生新的迭代时都会调用这个，因此它必须保持最后一个的状态。 <code>$.index</code> 属性将在调用中保持该状态; <code>pull-one</code> 将检查链的末尾是否已到达，并将返回角色提供的 <code>IterationEnd</code> 常量。实际上，实现这种低级接口简化了 <code>Iterable</code> 接口的实现。现在迭代器将成为对象本身，因为我们可以在其上调用 <code>pull-one</code> 来依次访问每个成员;因此，<code>.iterator</code> 将回归自我;这是可能的，因为对象将同时是 <code>Iterable</code> 和 <code>Iterator</code>。</p>
+<p>我们声明一个 <code>DNA</code> 类，它扮演两个角色，<code>Iterator</code> 和 <code>Iterable</code>; 这个类将包含一个字符串，这个字符串的长度将被约束为3的倍数, 并且只由 ACGT 组成。</p>
 </div>
 <div class="paragraph">
-<p>这并非总是如此，并且在大多数情况下 <code>.iterator</code> 将必须构建要返回的迭代器类型，例如我们在前面的示例中所做的;但是，此示例显示了构建满足迭代器和可迭代角色的类所需的最少代码。</p>
+<p>我们先来看一下 <code>pull-one</code> 方法。这个方法将在每次发生新的迭代时被调用，所以它必须保持上一次的状态。<code>$.index</code> 属性将在各次调用中保持该状态; <code>pull-one</code> 将检查是否已经到达链的末端，并将返回角色提供的 <code>IterationEnd</code> 常量。实现这种低级接口, 实际上简化了 <code>Iterable</code> 接口的实现。现在, 迭代器将是对象本身，因为我们可以对它调用 <code>pull-one</code> 来依次访问每一个成员; <code>.iterator</code> 将因此只返回 <code>self</code>; 这是可能的，因为对象将同时是 <code>Iterable</code> 和 <code>Iterator</code>。</p>
+</div>
+<div class="paragraph">
+<p>这并非总是如此，在大多数情况下 <code>.iterator</code> 将不得不构建一个要返回的迭代器类型（例如，它将跟踪迭代状态，我们现在正在主类中这样做），就像我们在前面的例子中所做的那样；然而，这个例子显示了构建一个满足迭代器和可迭代角色的类所需的最小代码。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_如何迭代上下文化和主题变量">27.2. 如何迭代：上下文化和主题变量</h3>
 <div class="paragraph">
-<p><code>for</code> 和其他循环将每次迭代中生成的项放入<a href="https://docs.raku.org/language/variables#index-entry-topic_variable">主题变量</a> $_+ 中，或将它们捕获到与块一起声明的变量中。这些变量可以直接在循环中使用，而不需要使用 <a href="https://docs.raku.org/syntax/$CIRCUMFLEX_ACCENT#%28Traps_to_avoid%29_twigil_%5E">^twigil</a> 来声明它们。</p>
+<p><code>for</code> 和其他循环将每次迭代中产生的项放入<a href="https://docs.raku.org/language/variables#index-entry-topic_variable">主题变量</a> $_+ 中，或者将它们捕获到随块声明的变量中。这些变量可以直接在循环内部使用，而不需要使用 <a href="https://docs.raku.org/syntax/$CIRCUMFLEX_ACCENT#%28Traps_to_avoid%29_twigil_%5E">^twigil</a> 来声明它们。</p>
 </div>
 <div class="paragraph">
 <p>使用 <a href="https://docs.raku.org/language/operators#index-entry-&#8230;&#8203;_operators">序列运算符</a>时会发生隐式迭代。</p>
@@ -14498,25 +14501,25 @@ my $a := DNA.new('GAATCC');
 </div>
 </div>
 <div class="paragraph">
-<p>生成块正在运行一次，而完成序列的条件，在这种情况下，术语大于300，则不满足。这具有运行循环的副作用，但也创建了输出列表。</p>
+<p>生成块正在运行一次，而完成序列的条件（在这种情况下，项大于 300）没有得到满足。这样做的副作用是运行了一个循环，但也创建了一个输出的列表。</p>
 </div>
 <div class="paragraph">
-<p>这可以通过使用 <a href="https://docs.raku.org/syntax/gather%20take">gather/take</a> 块来更系统地完成，这是一种不同类型的迭代构造，而不是在 sink 上下文中运行，每次迭代都返回一个项目。这个 <a href="https://rakuadvent.wordpress.com/2009/12/23/day-23-lazy-fruits-from-the-gather-of-eden/">Advent Calendar</a> 教程解释了这种循环的用例;实际上，<code>gather</code> 不是一个循环结构，而是一个语句前缀，它收集 <code>take</code> 生成的项并从中创建一个列表。</p>
+<p>这可以通过使用 <a href="https://docs.raku.org/syntax/gather%20take">gather/take</a> 块来更系统地完成，<code>gather/take</code> 块是一种不同的迭代构造，它不是在 sink 上下文中运行，而是每迭代一次就返回一项。这篇<a href="https://rakuadvent.wordpress.com/2009/12/23/day-23-lazy-fruits-from-the-gather-of-eden/">降临日历</a>教程解释了这种循环的用例，其实，<code>gather</code> 并不是一种循环结构，而是一个语句前缀，它收集了 <code>take</code> 产生的项，并从这些项中创建一个列表。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_经典循环以及为什么我们不喜欢它们">27.3. 经典循环以及为什么我们不喜欢它们</h3>
 <div class="paragraph">
-<p>经典循环，循环变量递增，可以通过 <a href="https://docs.raku.org/language/control#loop">loop 关键字</a>在 Raku 中完成。其他 <a href="https://docs.raku.org/language/control#repeat%2Fwhile%2C_repeat%2Funtil">repeat</a>和 <a href="https://docs.raku.org/language/control#while%2C_until">while</a> 循环也是可能的。</p>
+<p>经典的 <code>for</code> 循环，循环变量递增，可以在 Raku 中通过 <a href="https://docs.raku.org/language/control#loop">loop </a> 关键字来完成。其他的 <a href="https://docs.raku.org/language/control#repeat%2Fwhile%2C_repeat%2Funtil">repeat</a>和 <a href="https://docs.raku.org/language/control#while%2C_until">while</a> 循环也是可能的。</p>
 </div>
 <div class="paragraph">
-<p>但是，总的来说，他们是沮丧的。 Raku 是一种功能和并发语言;在 Raku 中编码时，你应该以功能的方式看待循环：逐个处理迭代器产生的项目，即将一个项目提供给一个没有任何辅助效果的块。该功能视图还允许通过<a href="https://docs.raku.org/routine/hyper">hyper</a>或<a href="https://docs.raku.org/routine/race">race</a>自动线程方法轻松并行化操作。</p>
+<p>然而，在一般情况下，它们是不被鼓励的。Raku 是一种函数式和并发式的语言；当用 Raku 编码时，你应该用函数式的方式来看待循环：逐个处理迭代器产生的项，也就是把一个项喂给一个块，而不产生任何形式的二次效应。这种函数式的观点还可以通过 <a href="https://docs.raku.org/routine/hyper">hyper</a>或<a href="https://docs.raku.org/routine/race">race</a> 自动线程的方法轻松实现操作的并行化。</p>
 </div>
 <div class="paragraph">
-<p>如果您对旧的循环感觉更舒服，该语言允许您使用它们。但是，在可能的情况下尝试使用功能和并发迭代构造被认为是更多的p6y。</p>
+<p>如果你觉得你的老式循环更舒服，语言允许你使用它们。然而，在 Raku 中，只要有可能，尽量使用函数式和并发迭代结构被认为是更好的做法。</p>
 </div>
 <div class="paragraph">
-<p><strong>注意：由于版本6.d循环可以从最后一个语句的值中生成值列表。</strong></p>
+<p><strong>注意：自从 6.d 版本以来，循环可以从最后语句的值中产生一个值的列表。</strong></p>
 </div>
 </div>
 </div>
