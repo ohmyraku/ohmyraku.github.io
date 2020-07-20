@@ -2459,6 +2459,56 @@ if (theme && theme !== "1") {
 </li>
 </ul>
 </li>
+<li><a href="#_签名_2">84. 签名</a>
+<ul class="sectlevel2">
+<li><a href="#_签名字面量_2">84.1. 签名字面量</a>
+<ul class="sectlevel3">
+<li><a href="#_参数分隔符">84.1.1. 参数分隔符</a></li>
+<li><a href="#_类型约束_2">84.1.2. 类型约束</a>
+<ul class="sectlevel4">
+<li><a href="#_约束可选参数">约束可选参数</a></li>
+<li><a href="#_约束吞噬参数">约束吞噬参数</a></li>
+<li><a href="#_约束命名参数">约束命名参数</a></li>
+<li><a href="#_约束参数的定义值">约束参数的定义值</a></li>
+<li><a href="#_约束_callables_的签名">约束 Callables 的签名</a></li>
+<li><a href="#_约束返回类型">约束返回类型</a></li>
+<li><a href="#_强制转换类型">强制转换类型</a></li>
+</ul>
+</li>
+<li><a href="#_吞噬参数或长度可变参数">84.1.3. 吞噬参数(或长度可变参数)</a></li>
+<li><a href="#_吞噬数组参数的类型">84.1.4. 吞噬数组参数的类型</a>
+<ul class="sectlevel4">
+<li><a href="#_扁平化的吞噬">扁平化的吞噬</a></li>
+<li><a href="#_未扁平化的吞噬参数">未扁平化的吞噬参数</a></li>
+<li><a href="#_单参数规则_slurpy">单参数规则 slurpy</a></li>
+</ul>
+</li>
+<li><a href="#_类型捕获">84.1.5. 类型捕获</a></li>
+<li><a href="#_位置参数_vs_命名参数">84.1.6. 位置参数 vs. 命名参数</a></li>
+<li><a href="#_参数别名">84.1.7. 参数别名</a></li>
+<li><a href="#_可选参数和强制参数">84.1.8. 可选参数和强制参数</a></li>
+<li><a href="#_动态变量_2">84.1.9. 动态变量</a></li>
+<li><a href="#_解构参数">84.1.10. 解构参数</a></li>
+<li><a href="#_子签名">84.1.11. 子签名</a></li>
+<li><a href="#_长名字">84.1.12. 长名字</a></li>
+<li><a href="#_捕获参数">84.1.13. 捕获参数</a></li>
+<li><a href="#_参数特性和修饰符">84.1.14. 参数特性和修饰符</a></li>
+</ul>
+</li>
+<li><a href="#_方法_11">84.2. 方法</a>
+<ul class="sectlevel3">
+<li><a href="#_params_方法">84.2.1. params 方法</a></li>
+<li><a href="#_arity_方法">84.2.2. arity 方法</a></li>
+<li><a href="#_count_方法">84.2.3. count 方法</a></li>
+<li><a href="#_returns_方法">84.2.4. returns 方法</a></li>
+<li><a href="#_方法_accepts_2">84.2.5. 方法 ACCEPTS</a></li>
+<li><a href="#_方法_capture_3">84.2.6. 方法 Capture</a></li>
+</ul>
+</li>
+<li><a href="#_运行时创建_signature_对象6_d_2019_03_及以后版本">84.3. 运行时创建 Signature 对象(6.d, 2019.03 及以后版本)</a></li>
+<li><a href="#_类型图_10">84.4. 类型图</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="sect1">
@@ -44531,6 +44581,1386 @@ say $a(2); # OUTPUT: «6␤»</code></pre>
 </div>
 <div class="paragraph">
 <p>抛出 <code>X::Cannot::Capture</code>。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_签名_2">84. <a href="https://docs.raku.org/type/Signature">签名</a></h2>
+<div class="sectionbody">
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Parameter list pattern</p>
+</div>
+</blockquote>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Signature {}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>签名是代码对象<a href="https://docs.raku.org/type/Parameter">参数</a>列表的静态描述。即, 签名描述了你需要什么参数和多少参数传递给代码或函数以调用它们。</p>
+</div>
+<div class="paragraph">
+<p>传递参数给签名把包含在 <strong><a href="https://docs.raku.org/type/Capture">Capture</a></strong> 中的参数绑定到了签名上。</p>
+</div>
+<div class="sect2">
+<h3 id="_签名字面量_2">84.1. 签名字面量</h3>
+<div class="paragraph">
+<p>签名出现在<a href="https://docs.raku.org/type/Sub">子例程</a>和<a href="https://docs.raku.org/type/Method">方法</a>名后面的圆括号中, 对于 blocks 签名出现在 -&gt; 或 &lt;-&gt; 箭头后面, 或者作为<a href="https://docs.raku.org/language/variables#Variable_Declarators_and_Scope">变量声明符</a>(例如 <a href="https://docs.raku.org/syntax/my">my</a> )的输入, 或者以冒号开头作为单独的项。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub f($x) { }
+#    ^^^^ sub f 的签名
+method x() { }
+#       ^^ 方法 x 的签名
+my $s = sub (*@a) { }
+#           ^^^^^ 匿名函数的签名
+
+for &lt;a b c&gt; -&gt; $x { }
+#              ^^    Block 的签名
+
+my ($a, @b) = 5, (6,7,8);
+#  ^^^^^^^^ 变量声明符的签名
+
+my $sig = :($a, $b);
+#          ^^^^^^^^ 独立的签名对象</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>签名字面量可以用于定义回调或闭包的签名。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub f(&amp;c:(Int))    {}
+sub will-work(Int) {}
+sub won't-work(Str){}
+f(&amp;will-work);
+
+f(&amp;won't-work);
+CATCH { default { put .^name, ': ', .Str } };
+# OUTPUT: «X::TypeCheck::Binding::Parameter: Constraint type check failed in binding to parameter '&amp;c'␤»
+
+f(-&gt; Int { 'this works too' } );</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你可以使用任何类型的字面量, 包括数字字面量, 作为签名的一部分；这通常与 <code>multis</code> 结合使用。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">proto sub stuff(|) {*}
+multi sub stuff(33) { 58 }
+multi sub stuff(⅓) { 43 }
+multi sub stuff(Int)  { 3 }
+multi sub stuff(Complex)  { 66 }
+say stuff($_) for (33, ⅓, i, 48); # OUTPUT: «58␤43␤66␤3␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>然而, 你不能在签名中使用 <code>True</code> 或 <code>False</code> 作为字面值, 因为它们总是会成功（或失败）。如果你这样做, 将被发出警告:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub foo(True) {};
+my $sig =  :( True );</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它们都会警告 "Literal values in signatures are smartmatched against and smartmatch with True will always succeed. Use the <code>where</code> clause instead."。使用 <code>False</code> 会产生类似的警告。</p>
+</div>
+<div class="paragraph">
+<p>支持根据列表(<code>List</code>)对签名进行智能匹配。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $sig = :(Int $i, Str $s);
+say (10, 'answer') ~~ $sig;
+# OUTPUT: «True␤»
+
+my $sub = sub ( Str $s, Int $i ) { return $s xx $i };
+say $sub.signature ~~ :( Str, Int );
+# OUTPUT: «True␤»
+
+given $sig {
+    when :(Str, Int) { say 'mismatch' }
+    when :($, $)     { say 'match' }
+    default          { say 'no match' }
+}
+# OUTPUT: «match␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它与第二个 <code>when</code> 子句匹配, 因为 <code>:($, $)</code> 代表一个有两个标量、匿名参数的签名(<code>Signature</code>), 它是 <code>$sig</code> 的一个更通用的版本。</p>
+</div>
+<div class="paragraph">
+<p>当对散列(<code>Hash</code>)进行智能匹配时, 签名被假定为由散列的键组成。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my %h = left =&gt; 1, right =&gt; 2;
+say %h ~~ :(:$left, :$right);
+# OUTPUT: «True␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>签名(<code>Signature</code>)字面量可以包含字符串/数字字面量。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $sig = :('Þor', Str, Int);
+say &lt;Þor Hammer 1&gt; ~~ $sig; # OUTPUT: «True␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>而且它们也可以包含调用者标记。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Foo {
+    method bar( $self: ){ "baz" }
+};
+say Foo.^methods.first(*.name eq 'bar').signature ~~ :($: *%) ;
+# OUTPUT: «True␤»</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_参数分隔符">84.1.1. 参数分隔符</h4>
+<div class="paragraph">
+<p>签名由逗号分割的 0 个或多个<a href="https://docs.raku.org/type/Parameter">形式参数</a>组成。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $sig = :($a, @b, %c)
+sub add ($a, $b) { $a + $b }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>作为一个例外, 签名中的第一个参数的后面可以跟着一个冒号而非逗号来标记方法的调用者。调用者是用来调用方法的对象, 其通常绑定到 <a href="https://docs.raku.org/routine/self">self</a>。 通过在签名中指定调用者, 你可以更改它绑定到的变量名称。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method ($a: @b, %c){}  # 第一个参数是调用者
+
+class Foo {
+    method whoami ($me:) {
+        "Well I'm class $me.^name(), of course!"
+    }
+}
+
+say Foo.whoami; # OUTPUT: «Well I'm class Foo, of course!␤»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_类型约束_2">84.1.2. 类型约束</h4>
+<div class="paragraph">
+<p>参数可以可选地拥有一个类型约束(默认为 <a href="https://docs.raku.org/type/Any">Any</a>)。这些能用于限制函数允许的输入。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $sig = :(Int $a, Str $b)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>类型约束可以有任何编译时定义的值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">subset Positive-integer of Int where * &gt; 0;
+sub divisors(Positive-integer $n) { $_ if $n %% $_ for 1..$n };
+divisors 2.5;
+# ERROR «Type check failed in binding to parameter '$n';
+# expected Positive-integer but got Rat (2.5) $n)»
+divisors -3;
+# ERROR: «Constraint type check failed in binding to parameter '$n';
+# expected Positive-integer but got Int (-3)»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意, 在上面的代码中, 类型约束是在两个不同的层次上执行的：第一个层次检查它是否属于子集(<code>subset</code>)所基于的类型, 在本例中是 <code>Int</code>。如果它失败了, 就会产生一个类型检查错误。一旦该过滤器被清除, 就会检查定义子集的约束, 如果失败就会产生一个约束类型检查(`Constraint type check `)错误。</p>
+</div>
+<div class="paragraph">
+<p>匿名参数也可以, 如果你实际上不需要用名字来引用一个参数, 例如为了区分 <a href="https://docs.raku.org/language/functions#index-entry-declarator_multi-Multi-dispatch">multi</a> 中的不同签名, 或者检查 <a href="https://docs.raku.org/type/Callable">Callable</a> 的签名。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $sig = :($, @, %a)         # 两个匿名参数和一个"正常的(有名字的)"参数
+$sig = :(Int, Positional)     # 只有类型也行(两个参数)
+sub baz (Str) { "Got passed a Str" }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>类型约束也可以是类型捕获(<a href="http://doc.raku.org/type/Signature#Type_Captures">type captures</a>)。</p>
+</div>
+<div class="paragraph">
+<p>除了这些名义上的类型之外, 还可以以代码块的形式对参数进行额外的约束, 这些代码块必须返回一个真值才能通过类型检查。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub f(Real $x where { $x &gt; 0 }, Real $y where { $y &gt;= $x }) { }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>where</code> 子句中的代码有一些限制：不支持任何产生副作用的东西（例如, 打印输出、从迭代器中拉取、或自增状态变量）, 如果使用这些代码, 可能会产生令人惊讶的结果。另外, 在某些实现中, <code>where</code> 子句的代码可能会为一个类型检查运行一次以上。</p>
+</div>
+<div class="paragraph">
+<p><code>where</code> 子句不需要是一个代码块, <code>where</code> 子句右边的任何东西都会被用来对它的参数进行<a href="https://docs.raku.org/language/operators#infix_~~">智能匹配</a>。所以你也可以这样写:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi factorial(Int $ where 0) { 1 }
+multi factorial(Int $x)        { $x * factorial($x - 1) }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第一个还能简化为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi factorial(0) { 1 }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>即, 你可以直接使用字面量作为匿名参数的类型和值约束。</p>
+</div>
+<div class="paragraph">
+<p><strong>提示</strong>：注意, 当你比如有几个条件时, 不要不小心漏掉一个块。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">-&gt; $y where   .so &amp;&amp; .name    {}( sub one   {} ); # WRONG!!
+-&gt; $y where { .so &amp;&amp; .name }  {}( sub two   {} ); # OK!
+-&gt; $y where   .so &amp;  .name.so {}( sub three {} ); # Also good</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第一个版本是错误的, 会发出一个关于 sub 对象强制转换为字符串的警告。原因是表达式相当于 <code>($y ~~ ($y.so &amp;&amp; $y.name));</code> 那就是"调用 <code>.so</code>, 如果它为 <code>True</code>, 调用 <code>.name</code>; 如果这也是 <code>True</code>, 则使用它的值进行智能匹配&#8230;&#8203;"。这是 <code>(.so &amp;&amp; .name)</code> 的结果将被智能匹配, 但我们要检查 <code>.so</code> 和 <code>.name</code> 是否为真值。这就是为什么明确的 Block 或者 <a href="https://docs.raku.org/type/Junction">Junction</a> 是正确的版本。</p>
+</div>
+<div class="paragraph">
+<p>在签名中不是子签名(sub-signature)的一部分的所有先前的参数都可以在参数后面的 <code>where</code> 从句中访问。 因此, 最后一个参数的 where 从句可以访问不是子签名一部分的签名的所有参数。 对于子签名, 把 where 从句放在子签名中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub foo($a, $b where * == $a ** 2) { say "$b is a square of $a" }
+foo 2, 4; # OUTPUT: «4 is a square of 2␤»»
+# foo 2, 3;
+# OUTPUT: «Constraint type check failed in binding to parameter '$b'…»</code></pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_约束可选参数">约束可选参数</h5>
+<div class="paragraph">
+<p><a href="https://docs.raku.org/type/Signature#Optional_and_Mandatory_Parameters">可选参数</a>也可以拥有约束。任何参数 <code>where</code> 从句都将被执行, 即使它是可选的, 而且不是由调用者提供。在这种情况下, 你可能必须防止 where 从句中的未定义值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub f(Int $a, UInt $i? where { !$i.defined or $i &gt; 5 } ) { ... }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_约束吞噬参数">约束吞噬参数</h5>
+<div class="paragraph">
+<p><a href="https://docs.raku.org/type/Slurpy_(A$FULL_STOPK$FULL_STOPA$FULL_STOP_Variadic">吞噬参数</a>_Parameters)不能拥有类型约束。一个 where 从句连同一个 <a href="https://docs.raku.org/type/Junction">Junction</a>可以达到同样的那个效果。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub f(*@a where { $_.all ~~ Int }) { say @a };
+f(42);
+f(&lt;a&gt;);
+CATCH { default { say .^name, ' ==&gt; ', .Str }  }
+# OUTPUT: «[42]␤Constraint type check failed in binding to parameter '@a' ...»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_约束命名参数">约束命名参数</h5>
+<div class="paragraph">
+<p>对<a href="https://docs.raku.org/type/Signature#Positional_vs._named_arguments">命名参数</a>的约束适用于<a href="https://docs.raku.org/type/Pair">冒号对</a>的值部分。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub f(Int :$i){};
+f :i&lt;forty-two&gt;;
+CATCH { default { say .^name, ' ==&gt; ', .Str }  }
+# OUTPUT: «X::TypeCheck::Binding::Parameter ==&gt; Type check failed in
+# binding to parameter '$i'; expected Int but got Str ("forty-two")␤»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_约束参数的定义值">约束参数的定义值</h5>
+<div class="paragraph">
+<p>通常, 类型约束只检查参数的值是否为正确的类型。至关重要的是, 对象实例和类型对象都将满足这样的约束条件, 如下所示:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say  42.^name;    # OUTPUT: «Int␤»
+say  42 ~~ Int;   # OUTPUT: «True␤»
+say Int ~~ Int;   # OUTPUT: «True␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意 <code>42</code> 和 <code>Int</code> 是如何满足匹配的。</p>
+</div>
+<div class="paragraph">
+<p>有时我们需要区分这些对象实例(<code>42</code>)和类型对象(<code>Int</code>)。考虑下面的代码:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub limit-lines (Str $s, Int $limit) {
+    my @lines = $s.lines;
+    @lines[0 ..^ min @lines.elems, $limit].join("\n")
+}
+say (limit-lines "a \n b \n c \n d \n", 3).perl; # "a \n b \n c "
+say limit-lines Str,      3;  # Uh-oh. Dies with "Cannot call 'lines';"
+CATCH { default { put .^name, ': ', .Str } };
+# OUTPUT: «X::Multi::NoMatch: Cannot resolve caller lines(Str: ); none of these signatures match:
+#     (Cool:D $: |c is raw)
+#     (Str:D $: :$count!, *%_)
+#     (Str:D $: $limit, *%_)
+#     (Str:D $: *%_)»
+
+say limit-lines "a \n b", Int # Always returns the max number of lines</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这里, 我们实际上只想处理字符串实例, 而不是类型对象。要做到这一点, 我们可以使用 <code>:D</code> 类型约束。这个约束检查传递的值是否是一个对象实例, 类似于调用它的 <a href="https://docs.raku.org/language/mop#DEFINITE">DEFINITE</a>(元)方法。</p>
+</div>
+<div class="paragraph">
+<p>为了热身, 让我们将 <code>:D</code> 应用到我们简陋的 <code>Int</code> 示例的右侧:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say  42 ~~ Int:D;  # OUTPUT: «True␤»
+say Int ~~ Int:D;  # OUTPUT: «False␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意, 在上面的内容中, 只有 <code>42</code> 符合 <code>Int:D</code>。</p>
+</div>
+<div class="paragraph">
+<p>回到 <code>limit-lines</code>, 我们现在可以修改它的签名以尽早发现错误:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub limit-lines (Str:D $s, Int $limit) { };
+say limit-lines Str, 3;
+CATCH { default { put .^name ~ '--' ~ .Str } };
+# OUTPUT: «Parameter '$s' of routine 'limit-lines' must be an object instance of type 'Str',
+#          not a type object of type 'Str'.  Did you forget a '.new'?»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这比之前程序失败的方式要好得多, 因为这里失败的原因比较明确。</p>
+</div>
+<div class="paragraph">
+<p>也有可能类型对象是一个例程唯一有意义的接受对象。这可以通过 <code>:U</code> 类型约束来实现, 它检查传递的值是否是一个类型对象而不是一个对象实例。下面是我们的 <code>Int</code> 例子, 这次应用了 <code>:U</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say  42 ~~ Int:U;  # OUTPUT: «False␤»
+say Int ~~ Int:U;  # OUTPUT: «True␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在 <code>42</code> 未能匹配 <code>Int:U</code>, 而 <code>Int</code> 成功了。</p>
+</div>
+<div class="paragraph">
+<p>下面是一个更实际的例子:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub can-turn-into(Str $string, Any:U $type) {
+   return so $string.$type;
+}
+say can-turn-into("3", Int);        # OUTPUT: «True␤»
+say can-turn-into("6.5", Int);      # OUTPUT: «True␤»
+say can-turn-into("6.5", Num);      # OUTPUT: «True␤»
+say can-turn-into("a string", Num); # OUTPUT: «False␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>用对象实例作为第二个参数调用 <code>can-turn-into</code> 会产生预期的约束违反。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say can-turn-into("a string", 123);
+# OUTPUT: «Parameter '$type' of routine 'can-turn-into' must be a type object
+# of type 'Any', not an object instance of type 'Int'...»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于明确表示正常行为, 即不约束参数将是实例还是类型对象, 可以使用 <code>:_</code>, 但这是不必要的, 因为这是对参数的默认约束（这种）。因此, <code>:(Num:_ $)</code> 和 <code>:(Num $)</code> 是一样的。</p>
+</div>
+<div class="paragraph">
+<p>总结一下, 这里是这些类型约束的快速说明, 也统称为类型笑脸。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># Checking a type object
+say Int ~~ Any:D;    # OUTPUT: «False␤»
+say Int ~~ Any:U;    # OUTPUT: «True␤»
+say Int ~~ Any:_;    # OUTPUT: «True␤»
+
+# Checking a subset
+subset Even of Int where * // 2;
+say 3 ~~ Even:D;     # OUTPUT: «True␤»
+say 3 ~~ Even:U;     # OUTPUT: «False␤»
+say Int ~~ Even:U;   # OUTPUT: «True␤»
+
+# Checking an object instance
+say 42 ~~ Any:D;     # OUTPUT: «True␤»
+say 42 ~~ Any:U;     # OUTPUT: «False␤»
+say 42 ~~ Any:_;     # OUTPUT: «True␤»
+
+# Checking a user-supplied class
+class Foo {};
+say Foo ~~ Any:D;    # OUTPUT: «False␤»
+say Foo ~~ Any:U;    # OUTPUT: «True␤»
+say Foo ~~ Any:_;    # OUTPUT: «True␤»
+
+# Checking an instance of a class
+my $f = Foo.new;
+say $f  ~~ Any:D;    # OUTPUT: «True␤»
+say $f  ~~ Any:U;    # OUTPUT: «False␤»
+say $f  ~~ Any:_;    # OUTPUT: «True␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="https://docs.raku.org/language/classtut#Starting_with_class">类和对象</a>文档进一步阐述了实例和类型对象的概念, 以及用 <code>.DEFINITE</code> 方法发现它们。</p>
+</div>
+<div class="paragraph">
+<p>请记住所有的参数都有值, 即使是可选的参数也有默认值, 对于显式类型约束来说, 默认值是约束类型的类型对象。如果不存在显式类型约束, 那么对于方法、子方法和子程序来说, 默认值是 <a href="https://docs.raku.org/type/Any">Any</a> 类型的对象, 对于块来说, 默认值是 <a href="https://docs.raku.org/type/Mu">Mu</a> 类型的对象。这意味着, 如果你使用 <code>:D</code> 类型的笑脸, 你需要提供一个默认值或使参数成为必需的。否则, 默认值将是一个类型对象, 这将使定义性约束失败。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub divide (Int:D :$a = 2, Int:D :$b!) { say $a/$b }
+divide :1a, :2b; # OUTPUT: «0.5␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当那个特定的参数（无论是位置参数还是命名参数）完全没有值时, 默认值就会启动。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub f($a = 42){
+  my $b is default('answer');
+  say $a;
+  $b = $a;
+  say $b
+};
+f;     # OUTPUT: «42␤42␤»
+f Nil; # OUTPUT: «Nil␤answer␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>$a</code> 的默认值是 42。在没有值的情况下, <code>$a</code> 将被分配到签名中声明的默认值。然而, 在第二种情况下, 它确实收到了一个值, 恰好是 <code>Nil</code>。将 <code>Nil</code> 分配给任何变量都会将其重置为默认值, 而默认值已经通过使用默认特性声明为 <code>answer</code>。例行参数和变量对缺省值的处理方式不同, 这在一定程度上是通过在每种情况下声明缺省值的不同方式来说明的（对参数使用 <code>=</code>, 对变量使用 <code>default</code> 特性）。</p>
+</div>
+<div class="paragraph">
+<p>注意：在 6.c 语言中, <code>:U/:D</code> 约束变量的默认值是一个带有这种约束的类型对象, 它是不可初始化的, 因此不能使用 <code>.=</code> 运算符, 例如:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use v6.c;
+my Int:D $x .= new: 42;
+# OUTPUT: You cannot create an instance of this type (Int:D)
+# in block &lt;unit&gt; at -e line 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 6.d 语言中, 默认的是没有笑脸约束的类型对象。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use v6.d;
+my Int:D $x .= new: 42; # OUTPUT: «42␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>关于术语的结束语：本节是关于使用类型笑脸 <code>:D</code> 和 <code>:U</code> 来限制参数的定义性。偶尔 definedness 被用作 definiteness 的同义词；这可能会引起混淆, 因为这两个术语有着微妙的不同含义。</p>
+</div>
+<div class="paragraph">
+<p>如上所述, 定义性涉及类型对象和对象实例之间的区别。一个类型对象总是不确定的, 而一个对象实例总是确定的。一个对象是类型对象/不确定还是对象实例/确定, 可以使用 <a href="https://docs.raku.org/language/mop#DEFINITE">DEFINITE</a>(元)方法来验证。</p>
+</div>
+<div class="paragraph">
+<p>Definiteness 应该与 definedness 区分开来, 后者关注的是定义对象和未定义对象之间的区别。一个对象是定义的还是未定义的, 可以使用定义的方法来验证, 这个方法在类 <a href="https://docs.raku.org/type/Mu">Mu</a> 中实现。默认情况下, 一个类型对象被认为是未定义的, 而一个对象实例被认为是被定义的；也就是说：<code>.defined</code> 对一个类型对象返回 <code>False</code>, 否则返回 <code>True</code>。但是这个默认行为可以被子类覆盖。覆盖默认的 <code>.defined</code> 行为的子类的一个例子是 <a href="https://docs.raku.org/type/Failure">Failure</a>, 因此即使是实例化的 <code>Failure</code> 也会作为一个未定义的值:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = Failure;                # Initialize with type object
+my $b = Failure.new("foo");     # Initialize with object instance
+say $a.DEFINITE;                # Output: «False␤» : indefinite type object
+say $b.DEFINITE;                # Output: «True␤»  : definite object instance
+say $a.defined;                 # Output: «False␤» : default response
+say $b.defined;                 # Output: «False␤» : .defined override</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_约束_callables_的签名">约束 Callables 的签名</h5>
+<div class="paragraph">
+<p>可调用(<a href="https://docs.raku.org/type/Callable">Callable</a>)参数的签名可以通过在参数后面指定一个<a href="https://docs.raku.org/type/Signature">签名</a>字面量来限制（不允许有空格）。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub apply(&amp;l:(Int:D --&gt; Int:D), Int:D \n) {
+    l(n)
+}
+
+sub identity(Int:D \i --&gt; Int:D) { i }
+sub double(Int:D \x --&gt; Int:D) { 2 * x }
+
+say apply &amp;identity, 10; # OUTPUT: «10␤»
+say apply &amp;double, 10;   # OUTPUT: «20␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>类型化的 <a href="https://docs.raku.org/language/functions#Blocks_and_lambdas">lambdas</a> 对带约束的可调用参数也有效。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say apply -&gt; Int:D \x --&gt; Int:D { 2 * x }, 3;  # OUTPUT: «6␤»
+say apply -&gt; Int:D \x --&gt; Int:D { x ** 3 }, 3; # OUTPUT: «27␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意, 这种速记语法只适用于带有 <code>&amp;</code> 符号的参数。对于其他参数, 你需要使用长版本:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub play-with-tens($c where .signature ~~ :(Int, Str)) { say $c(10, 'ten') }
+sub by-joining-them(Int $i, Str $s) { $s ~ $i }
+play-with-tens &amp;by-joining-them;                              # OUTPUT: «ten10␤»
+play-with-tens -&gt; Int \i, Str \s { s x (1..10).roll mod i };  # OUTPUT: «tenten␤»
+
+sub g(Num $i, Str $s) { $s ~ $i }
+# play-with-tens(&amp;g); # Constraint type check failed</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_约束返回类型">约束返回类型</h5>
+<div class="paragraph">
+<p>有多种方法可以限制<a href="https://docs.raku.org/type/Routine">例程</a>的返回类型。以下所有版本目前都是有效的, 并且会在成功执行例程时强制进行类型检查。</p>
+</div>
+<div class="paragraph">
+<p><a href="https://docs.raku.org/type/Nil">Nil</a> 和 <a href="https://docs.raku.org/type/Failure">Failure</a> 总是被允许作为返回类型, 不管任何类型约束。这允许 <a href="https://docs.raku.org/type/Failure">Failure</a> 被返回并在调用链上传递。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub foo(--&gt; Int) { Nil };
+say foo.raku; # OUTPUT: «Nil␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>不支持类型捕获。</p>
+</div>
+<div class="sect5">
+<h6 id="_返回类型箭头">返回类型箭头: --&gt;</h6>
+<div class="paragraph">
+<p>这种在签名中表示返回类型（或常量）的形式是首选, 因为它可以处理常量值, 而其他形式不能。为了保持一致性, 这是本站唯一接受的形式。</p>
+</div>
+<div class="paragraph">
+<p>返回类型箭头必须放在参数列表的末尾, 在它之前有一个逗号(<code>,</code>), 已可以没有。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub greeting1(Str $name  --&gt; Str) { say "Hello, $name" } # Valid
+sub greeting2(Str $name, --&gt; Str) { say "Hello, $name" } # Valid
+
+sub favorite-number1(--&gt; 42) {        } # OUTPUT: 42
+sub favorite-number2(--&gt; 42) { return } # OUTPUT: 42</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果类型约束是一个常量表达式, 则将其作为该例程的返回值。该例程中的任何 <code>return</code> 语句必须是无参数的。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub foo(Str $word --&gt; 123) { say $word; return; }
+my $value = foo("hello"); # OUTPUT: hello
+say $value;               # OUTPUT: 123</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># The code below will not compile
+sub foo(Str $word --&gt; 123) { say $word; return $word; }
+my $value = foo("hello");
+say $value;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_returns">returns</h6>
+<div class="paragraph">
+<p>在签名声明后面的关键字 <code>returns</code> 与 --&gt; 有相同的功能, 但需要注意的是, 这种形式对常量值不起作用。你也不能在块中使用它。这就是为什么总是首选尖箭头形式的原因。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub greeting(Str $name) returns Str { say "Hello, $name" } # Valid</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub favorite-number returns 42 {        } # This will fail.</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_of">of</h6>
+<div class="paragraph">
+<p><code>of</code> 只是 <code>returns</code> 关键字的真实名称。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub foo() of Int { 42 }; # Valid</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub foo() of 42 {  };    # This will fail.</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_prefixc_like_形式">prefix(C-like) 形式</h6>
+<div class="paragraph">
+<p>这类似于将类型约束放置在变量上, 比如 <code>my Type $var = 20;</code>, 只不过 <code>$var</code> 是例程的定义。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Int sub bar { 1 };     # Valid</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my 42 sub bad-answer {};  # This will fail.</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_强制转换类型">强制转换类型</h5>
+<div class="paragraph">
+<p>要接受一个类型, 但又自动将其强制转换到另一个类型, 请将接受的类型作为目标类型的参数。如果接受的类型是 <code>Any</code>, 则可以省略。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub f(Int(Str) $want-int, Str() $want-str) {
+    say $want-int.^name ~ ' ' ~ $want-str.^name
+}
+f '10', 10;
+# OUTPUT: «Int Str␤»
+
+use MONKEY;
+augment class Str { method Date() { Date.new(self) } };
+sub foo(Date(Str) $d) { say $d.^name; say $d };
+foo "2016-12-01";
+# OUTPUT: «Date␤2016-12-01␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>强制转换是通过调用带有要强制转换到的类型名称的方法来执行的, 如果它存在的话（例如, <code>Foo(Bar)</code> 强转者, 将调用方法 <code>Foo</code>）。该方法被假定为返回正确的类型-目前没有对结果进行额外的检查。</p>
+</div>
+<div class="paragraph">
+<p>也可以对返回类型进行强制转换。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub square-str (Int $x --&gt; Str(Int)) {
+    $x²
+}
+
+for 2,4, *²  … 256 -&gt; $a {
+    say $a, "² is ", square-str( $a ).chars, " figures long";
+}
+
+# OUTPUT: «2² is 1 figures long␤
+#          4² is 2 figures long␤
+#          16² is 3 figures long␤
+#          256² is 5 figures long␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这个例子中, 强制转换返回类型为 <code>Str</code>, 我们可以直接应用字符串方法, 如字符数。</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_吞噬参数或长度可变参数">84.1.3. 吞噬参数(或长度可变参数)</h4>
+<div class="paragraph">
+<p>如果一个函数可以接受不同数量的参数, 那么它就是可变的；也就是说, 它的参数数量(<code>arity</code>)不是固定的。因此, 可选参数、命名参数和吞噬参数都是可变的。一个数组或哈希参数可以通过前导的单个星(*)或双星号(**)或前导的加号(<code>+</code>)标记为吞噬参数。一个吞噬参数可以绑定到任意数量的参数（零或更多）, 它将导致一个与魔符兼容的类型。</p>
+</div>
+<div class="paragraph">
+<p>这些参数被称为 "slurpy", 因为它们会吞噬函数的任何剩余参数, 就像某人吞噬面条一样。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ = :($a, @b)  # 正好两个参数, 而第二个参数必须是 Positional 的
+$ = :($a, *@b) # 至少一个参数, @b 吞噬完任何剩余的参数
+$ = :(*%h)     # 没有位置参数, 除了任意数量的具名参数
+
+sub one-arg (@)  { }
+sub slurpy  (*@) { }
+one-arg (5, 6, 7);   # ok, same as one-arg((5, 6, 7))
+slurpy  (5, 6, 7);   # ok
+slurpy   5, 6, 7 ;   # ok
+# one-arg(5, 6, 7) ; # X::TypeCheck::Argument
+# one-arg  5, 6, 7 ; # X::TypeCheck::Argument
+
+sub named-names (*%named-args) { %named-args.keys };
+say named-names :foo(42) :bar&lt;baz&gt;; # OUTPUT: «foo bar␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>位置参数和命名参数可以结合起来；命名参数（即 <code>Pair</code>）收集在指定的散列中, 位置参数收集在数组中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub combined-slurpy (*@a, *%h) { { array =&gt; @a, hash =&gt; %h } }
+# or: sub combined-slurpy (*%h, *@a) { ... }
+
+say combined-slurpy(one =&gt; 1, two =&gt; 2);
+# OUTPUT: «{array =&gt; [], hash =&gt; {one =&gt; 1, two =&gt; 2}}␤»
+say combined-slurpy(one =&gt; 1, two =&gt; 2, 3, 4);
+# OUTPUT: «{array =&gt; [3 4], hash =&gt; {one =&gt; 1, two =&gt; 2}}␤»
+say combined-slurpy(one =&gt; 1, two =&gt; 2, 3, 4, five =&gt; 5);
+# OUTPUT: «{array =&gt; [3 4], hash =&gt; {five =&gt; 5, one =&gt; 1, two =&gt; 2}}␤»
+say combined-slurpy(one =&gt; 1, two =&gt; 2, 3, 4, five =&gt; 5, 6);
+# OUTPUT: «{array =&gt; [3 4 6], hash =&gt; {five =&gt; 5, one =&gt; 1, two =&gt; 2}}␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>需要注意的是, 位置参数不允许放在吞噬参数之后:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">:(*@args, $last);
+# ===SORRY!=== Error while compiling:
+# Cannot put required parameter $last after variadic parameters</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>通常一个吞噬参数会创建一个 <a href="https://docs.raku.org/type/Array">Array</a>（或兼容类型）, 为每个参数创建一个新的 <a href="https://docs.raku.org/type/Scalar">Scalar</a> 容器, 并将每个参数的值分配给这些 <code>Scalar</code>。如果原始参数也有一个中间的 <code>Scalar</code>, 那么在这个过程中会被绕过, 并且在被调用的函数中不可用。</p>
+</div>
+<div class="paragraph">
+<p>带魔符的参数总是会对收集的参数施加一个上下文。不带魔符的参数也可以在前面加一个 <code>+</code> 号的情况下吞噬性地使用, 以便与它们开始的任何初始类型一起工作。</p>
+</div>
+<div class="paragraph">
+<p>带有一个星号的吞噬参数会通过消融一层或多层裸的可迭代对象来展平参数。带有两个星号的吞噬参数不会展平参数:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub zipi( +zape ) {
+    zape.^name =&gt; zape
+};
+say zipi( "Hey "); # OUTPUT: «List =&gt; (Hey )␤»
+say zipi( 1...* ); # OUTPUT: «Seq =&gt; (...)␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>吞噬参数在与一些<a href="https://docs.raku.org/type/Signature#Parameter_Traits_and_Modifiers">特质和修饰符</a>结合时有特殊的行为, 这在<a href="https://docs.raku.org/type/Signature#Types_of_slurpy_array_parameters">吞噬数组参数</a>一节中有所描述。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_吞噬数组参数的类型">84.1.4. 吞噬数组参数的类型</h4>
+<div class="paragraph">
+<p>吞噬数组参数有三种变化。</p>
+</div>
+<div class="paragraph">
+<p>单星号形式将传递的参数扁平化。</p>
+</div>
+<div class="paragraph">
+<p>双星号形式不对参数进行扁平化处理。</p>
+</div>
+<div class="paragraph">
+<p>加号形式根据单参数规则进行扁平化处理。</p>
+</div>
+<div class="paragraph">
+<p>每种形式将在接下来的几节中详细介绍。由于每一种形式之间的差异都有细微的差别, 我们为每一种形式提供了一些例子, 以说明每一种扁平化约定与其他约定的不同之处。</p>
+</div>
+<div class="sect4">
+<h5 id="_扁平化的吞噬">扁平化的吞噬</h5>
+<div class="paragraph">
+<p>用一个星号声明的吞噬参数将通过溶解一个或多个裸露的 <a href="https://docs.raku.org/type/Iterable">Iterable</a> 层来扁平化参数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @array = &lt;a b c&gt;;
+my $list := &lt;d e f&gt;;
+sub a(*@a)  { @a.raku.say };
+a(@array);                 # OUTPUT: «["a", "b", "c"]»
+a(1, $list, [2, 3]);       # OUTPUT: «[1, "d", "e", "f", 2, 3]»
+a([1, 2]);                 # OUTPUT: «[1, 2]»
+a(1, [1, 2], ([3, 4], 5)); # OUTPUT: «[1, 1, 2, 3, 4, 5]»
+a(($_ for 1, 2, 3));       # OUTPUT: «[1, 2, 3]»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>一个星号吞噬参数就可以将所有给定的迭代对象扁平化, 有效地将任何用逗号创建的对象提升到最高级别。</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_未扁平化的吞噬参数">未扁平化的吞噬参数</h5>
+<div class="paragraph">
+<p>用两颗星声明的吞噬参数不会将列表中的任何 <a href="https://docs.raku.org/type/Iterable">Iterable</a> 参数扁平化, 而是大致保持参数的原样。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @array = &lt;a b c&gt;;
+my $list := &lt;d e f&gt;;
+sub b(**@b) { @b.raku.say };
+b(@array);                 # OUTPUT: «[["a", "b", "c"],]␤»
+b(1, $list, [2, 3]);       # OUTPUT: «[1, ("d", "e", "f"), [2, 3]]␤»
+b([1, 2]);                 # OUTPUT: «[[1, 2],]␤»
+b(1, [1, 2], ([3, 4], 5)); # OUTPUT: «[1, [1, 2], ([3, 4], 5)]␤»
+b(($_ for 1, 2, 3));       # OUTPUT: «[(1, 2, 3),]␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>双星号吞噬参数隐藏了嵌套的逗号对象, 并在吞噬数组中保持原样。</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_单参数规则_slurpy">单参数规则 slurpy</h5>
+<div class="paragraph">
+<p>一个使用加号创建的吞噬参数会涉及到"单参数规则", 它根据上下文决定如何处理吞噬参数。基本上, 如果只传递了一个参数, 而且这个参数是 <a href="https://docs.raku.org/type/Iterable">Iterable</a>, 那么这个参数就会被用来填充吞噬参数数组。在任何其他情况下, <code>+@</code> 的工作原理和 <code>**@</code> 一样。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @array = &lt;a b c&gt;;
+my $list := &lt;d e f&gt;;
+sub c(+@b) { @b.raku.say };
+c(@array);                 # OUTPUT: «["a", "b", "c"]␤»
+c(1, $list, [2, 3]);       # OUTPUT: «[1, ("d", "e", "f"), [2, 3]]␤»
+c([1, 2]);                 # OUTPUT: «[1, 2]␤»
+c(1, [1, 2], ([3, 4], 5)); # OUTPUT: «[1, [1, 2], ([3, 4], 5)]␤»
+c(($_ for 1, 2, 3));       # OUTPUT: «[1, 2, 3]␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>关于额外的讨论和示例, 请参见<a href="https://docs.raku.org/language/functions#Slurpy_conventions">函数的吞噬约定</a>。</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_类型捕获">84.1.5. 类型捕获</h4>
+<div class="paragraph">
+<p>类型捕获允许将类型约束的规范推迟到函数被调用时。它们允许在签名和函数主体中引用类型。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub f(::T $p1, T $p2, ::C) {
+    # $p1 和 $p2 的类型都为 T, 但是我们还不知道具体类型是什么
+    # C 将会保存一个派生自类型对象或值的类型
+    my C $division = $p1 / $p2;
+    return sub (T $p1) {
+        $division * $p1;
+    }
+}
+
+# 第一个参数是 Int 类型, 所以第二个参数也是
+# 我们通过调用在 &amp;f 中使用的运算符来推导出第三种类型
+my &amp;s = f(10,2, Int.new / Int.new);
+say s(2);  # 10 / 2 * 2  == 10</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_位置参数_vs_命名参数">84.1.6. 位置参数 vs. 命名参数</h4>
+<div class="paragraph">
+<p>参数可以是位置的, 也可以是命名的。默认情况下, 参数都是位置的, 除了吞噬的哈希和用前导冒号 <code>:</code> 标记的参数。后者被称为<a href="https://docs.raku.org/type/Pair">冒号对</a>。检查下面的签名以及它们所表示的内容。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ = :($a)   # 位置参数
+$ = :(:$a)  # 名字为 a 的具名参数
+$ = :(*@a)  # 吞噬型位置参数
+$ = :(*%h)  # 吞噬型具名参数</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在调用方, 位置参数的传递顺序与参数的声明顺序相同。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub pos($x, $y) { "x=$x y=$y" }
+pos(4, 5);                          # OUTPUT: «x=4 y=5»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在命名参数和形式参数的情况下, 只有名称用于将实参映射到形参。如果使用胖箭头来构造一个 <a href="https://docs.raku.org/type/Pair">Pair</a>, 那么只有那些以有效标识符为键的参数才会被识别为命名参数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub named(:$x, :$y) { "x=$x y=$y" }
+named( y =&gt; 5, x =&gt; 4);             # OUTPUT: «x=4 y=5»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你可以使用一个与命名参数同名的变量来调用这个例程；在这种情况下 <code>:</code> 将被用于调用, 这样变量的名称就被理解为参数的键。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub named-shortcut( :$shortcut ) {
+    say "Looks like $shortcut"
+}
+named-shortcut( shortcut =&gt; "to here"); # OUTPUT: «Looks like to here␤»
+my $shortcut = "Þor is mighty";
+named-shortcut( :$shortcut );           # OUTPUT: «Looks like Þor is mighty␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>可以为命名参数取一个与变量名不同的名字。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub named(:official($private)) { "Official business!" if $private }
+named :official;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_参数别名">84.1.7. 参数别名</h4>
+<div class="paragraph">
+<p><a href="https://docs.raku.org/type/Pair">冒号对</a>语法可以用来提供参数的别名。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub alias-named(:color(:$colour), :type(:class($kind))) {
+    say $colour ~ " " ~ $kind
+}
+alias-named(color =&gt; "red", type =&gt; "A");    # both names can be used
+alias-named(colour =&gt; "green", type =&gt; "B"); # more than two names are ok
+alias-named(color =&gt; "white", class =&gt; "C"); # every alias is independent</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>冒号 <code>:</code> 的存在将决定我们是否创建一个新的命名参数。<code>:$colour</code> 不仅是别名变量的名称, 也是一个新的命名参数（在第二次调用中使用）。然而, <code>$kind</code> 将只是别名变量的名称, 不会创建一个新的命名参数。更多别名的用法可以在 <a href="https://docs.raku.org/language/create-cli#sub_MAIN">sub MAIN</a> 中找到。</p>
+</div>
+<div class="paragraph">
+<p>一个带有命名参数的函数可以被动态调用, 用 <code>|</code> 去引用一个 <a href="https://docs.raku.org/type/Pair">Pair</a> 来将它变成一个命名参数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi f(:$named) { note &amp;?ROUTINE.signature };
+multi f(:$also-named) { note &amp;?ROUTINE.signature };
+for 'named', 'also-named' -&gt; $n {
+    f(|($n =&gt; rand))                # OUTPUT: «(:$named)␤(:$also-named)␤»
+}
+
+my $pair = :named(1);
+f |$pair;                           # OUTPUT: «(:$named)␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>同样可以用来将 <code>Hash</code> 转换为命名参数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub f(:$also-named) { note &amp;?ROUTINE.signature };
+my %pairs = also-named =&gt; 4;
+f |%pairs;                              # OUTPUT: «(:$also-named)␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>一个包含列表的 <code>Hash</code> 在滑入命名参数时可能会有问题。为了避免额外的容器层, 在滑入之前先强制为 <a href="https://docs.raku.org/type/Map">Map</a>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class C { has $.x; has $.y; has @.z };
+my %h = &lt;x y z&gt; Z=&gt; (5, 20, [1,2]);
+say C.new(|%h.Map);
+# OUTPUT: «C.new(x =&gt; 5, y =&gt; 20, z =&gt; [1, 2])␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你可以为一个命名参数创建任意数量的别名。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub alias-named(:color(:$colour),
+                :variety(:style(:sort(:type(:class($kind)))))) {
+    return $colour ~ " " ~ $kind
+}
+say alias-named(color =&gt; "red", style =&gt; "A");
+say alias-named(colour =&gt; "green", variety =&gt; "B");
+say alias-named(color =&gt; "white", class =&gt; "C");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你可以通过将参数作为<a href="https://docs.raku.org/type/Signature#index-entry-anonymous_arguments">匿名参数</a>的别名来创建不创建任何变量的命名参数。这在使用命名参数仅仅作为选择 <code>multi</code> 候选者的手段时是很有用的, 例如, 在使用特质时经常会出现这种情况。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># Timestamps calls to a routine.
+multi sub trait_mod:&lt;is&gt;(Routine:D $r is raw, :timestamped($)!) {
+    $r does my role timestamped { has Instant:D @.timestamps };
+    $r.wrap: -&gt; | { ENTER $r.timestamps.push: now; callsame };
+}
+
+sub foo is timestamped { }
+foo;
+say +&amp;foo.?timestamps; # OUTPUT: «1␤»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_可选参数和强制参数">84.1.8. 可选参数和强制参数</h4>
+<div class="paragraph">
+<p>位置参数在默认情况下是强制性的, 也可以用默认值或尾部的问号将其变成可选项。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ = :(Str $id)         # 强制性参数
+$ = :($base = 10)      # 可选参数, 默认值为 10
+$ = :(Int $x?)         # 可选参数, 默认为 Int 类型的对象</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>命名参数默认是可选的, 可以通过在参数末尾加上一个感叹号使它变成强制性参数:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ = :(:%config)        # 可选参数
+$ = :(:$debug = False) # 可选参数, 默认为 False
+$ = :(:$name!)         # 名为 name 的强制性具名参数</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>默认值可能取决于之前的参数, 并且每次调用都会被重新计算(至少在概念上)。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ = :($goal, $accuracy = $goal / 100);
+$ = :(:$excludes = ['.', '..']); # a new Array for every call</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_动态变量_2">84.1.9. 动态变量</h4>
+<div class="paragraph">
+<p><a href="https://docs.raku.org/language/variables#The_*_twigil">动态变量</a>在签名中是允许的, 尽管它们并没有提供特殊的行为, 因为无论如何, 参数绑定都会连接两个作用域。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_解构参数">84.1.10. 解构参数</h4>
+<div class="paragraph">
+<p>非标量参数的后面可以用括号中的子签名来代替, 它将对给出的参数进行解构。列表的解构就是其元素。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub first (@array ($first, *@rest)) { $first }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>或</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub first([$f, *@]) { $f }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>而散列解构成它的键值对儿(pairs):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub all-dimensions (% (:length(:$x), :width(:$y), :depth(:$z))) {
+    $x andthen $y andthen $z andthen True
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>尖号循环也可以解构散列, 允许赋值给变量。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my %hhgttu = (:40life, :41universe, :42everything);
+for %hhgttu -&gt; (:$key, :$value) {
+  say "$key → $value";
+}
+# OUTPUT: «universe → 41␤life → 40␤everything → 42␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>一般来说, 对象是根据它的属性来解构的。一个常见的用法是在 <code>for</code> 循环中解包一个 <a href="https://docs.raku.org/type/Pair">Pair</a> 的 <code>key</code> 和 <code>value</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">for &lt;Peter Paul Merry&gt;.pairs -&gt; (:key($index), :value($guest)) { }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>然而, 这种将对象解包为其属性的行为只是默认行为。要使一个对象得到不同的解构, 可以改变它的<a href="https://docs.raku.org/routine/Capture">捕获</a>方法。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_子签名">84.1.11. 子签名</h4>
+<div class="paragraph">
+<p>要匹配复合参数, 请在圆括号中的参数名后面使用子签名。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub foo(|c(Int, Str)){
+   put "called with {c.raku}"
+};
+foo(42, "answer");
+# OUTPUT: «called with \(42, "answer")»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_长名字">84.1.12. 长名字</h4>
+<div class="paragraph">
+<p>如果要将某些参数排除在多重分派中考虑之外, 可以用双分号将它们分开。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub f(Int $i, Str $s;; :$b) { say "$i, $s, {$b.raku}" };
+f(10, 'answer');
+# OUTPUT: «10, answer, Any␤»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_捕获参数">84.1.13. 捕获参数</h4>
+<div class="paragraph">
+<p>在参数前加上一个竖杠 <code>|</code>, 使得该参数成为一个<a href="https://docs.raku.org/type/Capture">Capture</a>, 用完所有剩余的位置参数和命名参数。</p>
+</div>
+<div class="paragraph">
+<p>这通常用于 <code>proto</code> 定义中（如 <code>proto foo (|) {*}</code>）, 以表明例程的 <a href="https://docs.raku.org/syntax/multi">multi 定义</a>可以有任何<a href="https://docs.raku.org/type/Signature#Type_constraints">类型约束</a>。参见 <a href="https://docs.raku.org/language/functions#proto">proto</a> 的例子。</p>
+</div>
+<div class="paragraph">
+<p>如果绑定到一个变量上, 可以使用滑入操作符 <code>|</code> 将参数作为一个整体转发。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub a(Int $i, Str $s) { say $i.WHAT, $s.WHAT }
+sub b(|c) { say c.WHAT; a(|c) }
+b(42, "answer");
+# OUTPUT«(Capture)␤(Int)(Str)␤»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_参数特性和修饰符">84.1.14. 参数特性和修饰符</h4>
+<div class="paragraph">
+<p>默认情况下, 形参数会被绑定到其实参上, 并标记为只读。我们可以通过形参的特质来改变这一点。</p>
+</div>
+<div class="paragraph">
+<p><code>is copy</code> 特性会导致参数被复制, 并允许在例程中修改参数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub count-up ($x is copy) {
+    $x = ∞ if $x ~~ Whatever;
+    .say for 1..$x;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>is rw</code> 特质, 代表的是可读可写, 使得参数绑定到一个变量（或其他可写容器）上。对参数的赋值会改变变量在调用方的值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub swap($x is rw, $y is rw) {
+    ($x, $y) = ($y, $x);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于吞噬型参数, <code>is rw</code> 被保留给语言设计者将来使用。</p>
+</div>
+<div class="paragraph">
+<p><a href="https://docs.raku.org/type/Parameter#method_raw">is raw trait</a> 会自动应用于用<a href="https://docs.raku.org/language/variables#Sigilless_variables">反斜线</a>声明为"魔符"的参数, 也可以用来使通常有符号的参数像这些参数一样。在吞噬的特殊情况下, 通常会产生一个充满 <code>Scalar</code> 的数组, 如上所述, <code>is raw</code> 会使参数产生一个 <code>List</code>。该 <code>List</code> 中的每个元素将直接作为 raw 参数进行绑定。</p>
+</div>
+<div class="paragraph">
+<p>要显式地要求一个只读参数, 请使用 <code>is readonly</code> 特质。请注意, 这只适用于容器。里面的对象很可能有突变器方法, 而且 Raku 不会在对象的属性上强制执行不可变性。</p>
+</div>
+<div class="paragraph">
+<p>特质后面可以跟上 <code>where</code> 子句:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub ip-expand-ipv6($ip is copy where m:i/^&lt;[a..f\d\:]&gt;**3..39$/) { }</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_方法_11">84.2. 方法</h3>
+<div class="sect3">
+<h4 id="_params_方法">84.2.1. params 方法</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method params(Signature:D: --&gt; Positional)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>返回构成签名的 <a href="https://docs.raku.org/type/Parameter">Parameter</a> 对象的列表。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_arity_方法">84.2.2. arity 方法</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method arity(Signature:D: --&gt; Int:D)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>返回满足签名所需的位置参数的最小数量。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_count_方法">84.2.3. count 方法</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method count(Signature:D: --&gt; Real:D)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>返回可以绑定到签名的位置参数的最大数量。如果有一个吞噬型的位置参数, 则返回 <code>Inf</code>。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_returns_方法">84.2.4. returns 方法</h4>
+<div class="paragraph">
+<p>不管签名的返回约束是什么:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">:($a, $b --&gt; Int).returns # OUTPUT: «(Int)»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_方法_accepts_2">84.2.5. 方法 ACCEPTS</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method ACCEPTS(Signature:D: Signature $topic)
+multi method ACCEPTS(Signature:D: Capture $topic)
+multi method ACCEPTS(Signature:D: Mu \topic)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果 <code>$topic</code> 是一个 <a href="https://docs.raku.org/type/Signature">Signature</a>, 如果 <code>$topic</code> 接受的东西也会被调用者接受, 则返回 <code>True</code>, 否则返回 <code>False</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">:($a, $b) ~~ :($foo, $bar, $baz?);   # OUTPUT: «True»
+:(Int $n) ~~ :(Str);                 # OUTPUT: «False»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>$topic</code> 是一个 <a href="https://docs.raku.org/type/Capture">Capture</a>, 如果可以绑定到调用者, 返回 <code>True</code>, 也就是说, 如果有调用者的 <code>Signature</code> 的函数可以用 <code>$topic</code> 调用:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">\(1, 2, :foo) ~~ :($a, $b, :foo($bar)); # OUTPUT: «True»
+\(1, :bar)    ~~ :($a);                 # OUTPUT: «False»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后, 带有 <code>Mu \topic</code> 的候选者将 <code>topic</code> 转换为 <a href="https://docs.raku.org/type/Capture">Capture</a>, 并遵循与 <a href="https://docs.raku.org/type/Capture">Capture</a> <code>$topic</code> 相同的语义:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;a b c d&gt;  ~~ :(Int $a);      # OUTPUT: «False»
+42         ~~ :(Int);         # OUTPUT: «False» (Int.Capture throws)
+set(&lt;a b&gt;) ~~ :(:$a, :$b);    # OUTPUT: «True»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>由于 <a href="https://docs.raku.org/type/Signature#index-entry-where_clause_(Signature)">where 子句</a>是不可反省的, 所以该方法不能确定两个签名是否接受同一种 <code>where</code> 约束参数。这种比较将返回 <code>False</code>。这包括带字面量的签名, 它们只是 <code>where</code> 约束的语法糖。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say :(42) ~~ :($ where 42)    # OUTPUT: «False␤»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_方法_capture_3">84.2.6. 方法 Capture</h4>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method Capture()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>抛出 <code>X::Cannot::Capture</code>。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_运行时创建_signature_对象6_d_2019_03_及以后版本">84.3. 运行时创建 Signature 对象(6.d, 2019.03 及以后版本)</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">Signature.new(params =&gt; (...), returns =&gt; Type, arity =&gt; 1, count =&gt; 1)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在某些情况下, 特别是在使用 MetaObject 协议时, 以编程方式创建 <code>Signature</code> 对象是有意义的。为此, 你可以使用以下命名参数调用 <code>new</code> 方法。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>params</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>本签名的 <a href="https://docs.raku.org/type/Parameter">Parameter</a> 对象列表。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>returns</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>任何返回值应该匹配的约束条件, 默认为 <code>Mu</code>, 这意味着没有返回值约束检查。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>arity</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>满足签名所需的最小位置参数数。默认为用 <code>params</code> 参数给定的 <code>Parameter</code> 对象的数量。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>count</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>可以绑定到签名的最大数量的位置参数。如果没有指定, 默认为 <code>arity</code>。如果有一个吞噬型的位置参数, 请指定 <code>Inf</code>。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_类型图_10">84.4. 类型图</h3>
+<div class="paragraph">
+<p><code>Signature</code> 的类型关系</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://docs.raku.org/images/type-graph-Signature.svg" alt="Signature">
 </div>
 </div>
 </div>
