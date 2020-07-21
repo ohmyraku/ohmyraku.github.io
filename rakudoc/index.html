@@ -2242,236 +2242,282 @@ if (theme && theme !== "1") {
 <li><a href="#_pack">74.1. <strong>pack</strong></a></li>
 <li><a href="#_宏">74.2. <strong>宏</strong></a></li>
 <li><a href="#_cached">74.3. <strong>cached</strong></a></li>
-<li><a href="#_方法_4">74.4. 方法</a>
-<ul class="sectlevel3">
-<li><a href="#_方法_call_me">74.4.1. 方法 CALL-ME</a></li>
-<li><a href="#_方法_capture">74.4.2. 方法 Capture</a></li>
 </ul>
 </li>
-<li><a href="#_类型图">74.5. 类型图</a></li>
-</ul>
-</li>
-<li><a href="#_角色_iterable">75. 角色 Iterable</a>
+<li><a href="#_独立的例程">75. 独立的例程</a>
 <ul class="sectlevel2">
-<li><a href="#_方法_5">75.1. 方法</a>
+<li><a href="#_例程_eval">75.1. 例程 EVAL</a></li>
+<li><a href="#_子例程_evalfile">75.2. 子例程 EVALFILE</a></li>
+<li><a href="#_子例程_mkdir">75.3. 子例程 mkdir</a></li>
+<li><a href="#_子例程_chdir">75.4. 子例程 chdir</a></li>
+<li><a href="#_子例程_chdir_2">75.5. 子例程 &amp;*chdir</a></li>
+<li><a href="#_子例程_chmod">75.6. 子例程 chmod</a></li>
+<li><a href="#_子例程_indir">75.7. 子例程 indir</a></li>
+<li><a href="#_子例程_print">75.8. 子例程 print</a></li>
+<li><a href="#_子例程_put">75.9. 子例程 put</a></li>
+<li><a href="#_子例程_say">75.10. 子例程 say</a></li>
+<li><a href="#_子例程_note">75.11. 子例程 note</a></li>
+<li><a href="#_子例程_prompt">75.12. 子例程 prompt</a></li>
+<li><a href="#_子例程_open">75.13. 子例程 open</a></li>
+<li><a href="#_子例程_slurp">75.14. 子例程 slurp</a></li>
+<li><a href="#_子例程_spurt">75.15. 子例程 spurt</a></li>
+<li><a href="#_子例程_run">75.16. 子例程 run</a></li>
+<li><a href="#_子例程_shell">75.17. 子例程 shell</a></li>
+<li><a href="#_例程_unpolar">75.18. 例程 unpolar</a></li>
+<li><a href="#_例程_printf">75.19. 例程 printf</a></li>
+<li><a href="#_例程_sprintf">75.20. 例程 sprintf</a>
 <ul class="sectlevel3">
-<li><a href="#_方法_iterator">75.1.1. 方法 iterator</a></li>
-<li><a href="#_方法_flat">75.1.2. 方法 flat</a></li>
-<li><a href="#_方法_lazy">75.1.3. 方法 lazy</a></li>
-<li><a href="#_方法_hyper">75.1.4. 方法 hyper</a>
+<li><a href="#_指令">75.20.1. 指令</a></li>
+</ul>
+</li>
+<li><a href="#_修饰符">75.21. 修饰符</a>
+<ul class="sectlevel3">
+<li><a href="#_nyi_格式参数索引_使用_符号">75.21.1. NYI 格式参数索引, 使用 '$' 符号</a></li>
+</ul>
+</li>
+<li><a href="#_子例程_flat">75.22. 子例程 flat</a></li>
+<li><a href="#_子例程_unique">75.23. 子例程 unique</a></li>
+<li><a href="#_子例程_repeated">75.24. 子例程 repeated</a></li>
+<li><a href="#_例程_squish">75.25. 例程 squish</a></li>
+<li><a href="#_子例程_emit">75.26. 子例程 emit</a></li>
+<li><a href="#_子例程_undefine">75.27. 子例程 undefine</a></li>
+<li><a href="#_控制例程">75.28. 控制例程</a></li>
+<li><a href="#_子例程_exit">75.29. 子例程 exit</a></li>
+<li><a href="#_子例程_done">75.30. 子例程 done</a></li>
+</ul>
+</li>
+<li><a href="#_角色_callable">76. 角色 Callable</a>
+<ul class="sectlevel2">
+<li><a href="#_方法_4">76.1. 方法</a>
+<ul class="sectlevel3">
+<li><a href="#_方法_call_me">76.1.1. 方法 CALL-ME</a></li>
+<li><a href="#_方法_capture">76.1.2. 方法 Capture</a></li>
+</ul>
+</li>
+<li><a href="#_类型图">76.2. 类型图</a></li>
+</ul>
+</li>
+<li><a href="#_角色_iterable">77. 角色 Iterable</a>
+<ul class="sectlevel2">
+<li><a href="#_方法_5">77.1. 方法</a>
+<ul class="sectlevel3">
+<li><a href="#_方法_iterator">77.1.1. 方法 iterator</a></li>
+<li><a href="#_方法_flat">77.1.2. 方法 flat</a></li>
+<li><a href="#_方法_lazy">77.1.3. 方法 lazy</a></li>
+<li><a href="#_方法_hyper">77.1.4. 方法 hyper</a>
 <ul class="sectlevel4">
 <li><a href="#_options_degree_and_batch">Options degree and batch</a></li>
 </ul>
 </li>
-<li><a href="#_方法_race">75.1.5. 方法 race</a></li>
+<li><a href="#_方法_race">77.1.5. 方法 race</a></li>
 </ul>
 </li>
-<li><a href="#_类型图_2">75.2. 类型图</a></li>
+<li><a href="#_类型图_2">77.2. 类型图</a></li>
 </ul>
 </li>
-<li><a href="#_角色_iterator">76. 角色 Iterator</a>
+<li><a href="#_角色_iterator">78. 角色 Iterator</a>
 <ul class="sectlevel2">
-<li><a href="#_iterationend">76.1. IterationEnd</a></li>
-<li><a href="#_方法_6">76.2. 方法</a>
+<li><a href="#_iterationend">78.1. IterationEnd</a></li>
+<li><a href="#_方法_6">78.2. 方法</a>
 <ul class="sectlevel3">
-<li><a href="#_方法_pull_one">76.2.1. 方法 pull-one</a></li>
-<li><a href="#_方法_push_exactly">76.2.2. 方法 push-exactly</a></li>
-<li><a href="#_方法_push_at_least">76.2.3. 方法 push-at-least</a></li>
-<li><a href="#_方法_push_all">76.2.4. 方法 push-all</a></li>
-<li><a href="#_方法_push_until_lazy">76.2.5. 方法 push-until-lazy</a></li>
-<li><a href="#_方法_is_lazy">76.2.6. 方法 is-lazy</a></li>
-<li><a href="#_方法_sink_all">76.2.7. 方法 sink-all</a></li>
-<li><a href="#_方法_skip_one">76.2.8. 方法 skip-one</a></li>
-<li><a href="#_方法_skip_at_least">76.2.9. 方法 skip-at-least</a></li>
-<li><a href="#_方法_skip_at_least_pull_one">76.2.10. 方法 skip-at-least-pull-one</a></li>
+<li><a href="#_方法_pull_one">78.2.1. 方法 pull-one</a></li>
+<li><a href="#_方法_push_exactly">78.2.2. 方法 push-exactly</a></li>
+<li><a href="#_方法_push_at_least">78.2.3. 方法 push-at-least</a></li>
+<li><a href="#_方法_push_all">78.2.4. 方法 push-all</a></li>
+<li><a href="#_方法_push_until_lazy">78.2.5. 方法 push-until-lazy</a></li>
+<li><a href="#_方法_is_lazy">78.2.6. 方法 is-lazy</a></li>
+<li><a href="#_方法_sink_all">78.2.7. 方法 sink-all</a></li>
+<li><a href="#_方法_skip_one">78.2.8. 方法 skip-one</a></li>
+<li><a href="#_方法_skip_at_least">78.2.9. 方法 skip-at-least</a></li>
+<li><a href="#_方法_skip_at_least_pull_one">78.2.10. 方法 skip-at-least-pull-one</a></li>
 </ul>
 </li>
-<li><a href="#_预测性迭代器predictive_iterators">76.3. 预测性迭代器(predictive iterators)</a></li>
-<li><a href="#_类型图_3">76.4. 类型图</a></li>
+<li><a href="#_预测性迭代器predictive_iterators">78.3. 预测性迭代器(predictive iterators)</a></li>
+<li><a href="#_类型图_3">78.4. 类型图</a></li>
 </ul>
 </li>
-<li><a href="#_类_junction">77. 类 Junction</a>
+<li><a href="#_类_junction">79. 类 Junction</a>
 <ul class="sectlevel2">
-<li><a href="#_失败和异常">77.1. 失败和异常</a></li>
-<li><a href="#_智能匹配">77.2. 智能匹配</a></li>
-<li><a href="#_方法_7">77.3. 方法</a>
+<li><a href="#_失败和异常">79.1. 失败和异常</a></li>
+<li><a href="#_智能匹配">79.2. 智能匹配</a></li>
+<li><a href="#_方法_7">79.3. 方法</a>
 <ul class="sectlevel3">
-<li><a href="#_方法_new">77.3.1. 方法 new</a></li>
-<li><a href="#_方法_defined">77.3.2. 方法 defined</a></li>
-<li><a href="#_方法_bool">77.3.3. 方法 Bool</a></li>
-<li><a href="#_方法_str">77.3.4. 方法 Str</a></li>
-<li><a href="#_方法_gist">77.3.5. 方法 gist</a></li>
-<li><a href="#_方法_raku">77.3.6. 方法 raku</a></li>
-<li><a href="#_infix_75">77.3.7. infix ~</a></li>
+<li><a href="#_方法_new">79.3.1. 方法 new</a></li>
+<li><a href="#_方法_defined">79.3.2. 方法 defined</a></li>
+<li><a href="#_方法_bool">79.3.3. 方法 Bool</a></li>
+<li><a href="#_方法_str">79.3.4. 方法 Str</a></li>
+<li><a href="#_方法_gist">79.3.5. 方法 gist</a></li>
+<li><a href="#_方法_raku">79.3.6. 方法 raku</a></li>
+<li><a href="#_infix_75">79.3.7. infix ~</a></li>
 </ul>
 </li>
-<li><a href="#_另见">77.4. 另见</a></li>
-<li><a href="#_类型图_4">77.5. 类型图</a></li>
+<li><a href="#_另见">79.4. 另见</a></li>
+<li><a href="#_类型图_4">79.5. 类型图</a></li>
 </ul>
 </li>
-<li><a href="#_类_proxy">78. 类 Proxy</a>
+<li><a href="#_类_proxy">80. 类 Proxy</a>
 <ul class="sectlevel2">
-<li><a href="#_方法_8">78.1. 方法</a>
+<li><a href="#_方法_8">80.1. 方法</a>
 <ul class="sectlevel3">
-<li><a href="#_方法_new_2">78.1.1. 方法 new</a></li>
+<li><a href="#_方法_new_2">80.1.1. 方法 new</a></li>
 </ul>
 </li>
-<li><a href="#_类型图_5">78.2. 类型图</a></li>
+<li><a href="#_类型图_5">80.2. 类型图</a></li>
 </ul>
 </li>
-<li><a href="#_类_supplierpreserving">79. 类 Supplier::Preserving</a>
+<li><a href="#_类_supplierpreserving">81. 类 Supplier::Preserving</a>
 <ul class="sectlevel2">
-<li><a href="#_方法_9">79.1. 方法</a>
+<li><a href="#_方法_9">81.1. 方法</a>
 <ul class="sectlevel3">
-<li><a href="#_方法_new_3">79.1.1. 方法 new</a></li>
+<li><a href="#_方法_new_3">81.1.1. 方法 new</a></li>
 </ul>
 </li>
-<li><a href="#_类型图_6">79.2. 类型图</a></li>
-<li><a href="#_由类_supplier_提供的例程">79.3. 由类 Supplier 提供的例程</a>
+<li><a href="#_类型图_6">81.2. 类型图</a></li>
+<li><a href="#_由类_supplier_提供的例程">81.3. 由类 Supplier 提供的例程</a>
 <ul class="sectlevel3">
-<li><a href="#_supplier_方法_new">79.3.1. (Supplier) 方法 new</a></li>
-<li><a href="#_supplier_方法_supply">79.3.2. (Supplier) 方法 Supply</a></li>
-<li><a href="#_supplier_方法_emit">79.3.3. (Supplier) 方法 emit</a></li>
-<li><a href="#_supplier_方法_done">79.3.4. (Supplier) 方法 done</a></li>
-<li><a href="#_supplier_方法_quit">79.3.5. (Supplier) 方法 quit</a></li>
+<li><a href="#_supplier_方法_new">81.3.1. (Supplier) 方法 new</a></li>
+<li><a href="#_supplier_方法_supply">81.3.2. (Supplier) 方法 Supply</a></li>
+<li><a href="#_supplier_方法_emit">81.3.3. (Supplier) 方法 emit</a></li>
+<li><a href="#_supplier_方法_done">81.3.4. (Supplier) 方法 done</a></li>
+<li><a href="#_supplier_方法_quit">81.3.5. (Supplier) 方法 quit</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#_类_supplier">80. 类 Supplier</a>
+<li><a href="#_类_supplier">82. 类 Supplier</a>
 <ul class="sectlevel2">
-<li><a href="#_方法_10">80.1. 方法</a>
+<li><a href="#_方法_10">82.1. 方法</a>
 <ul class="sectlevel3">
-<li><a href="#_方法_new_4">80.1.1. 方法 new()</a></li>
-<li><a href="#_方法_supply">80.1.2. 方法 Supply</a></li>
-<li><a href="#_方法_emit">80.1.3. 方法 emit</a></li>
-<li><a href="#_方法_done">80.1.4. 方法 done</a></li>
-<li><a href="#_方法_quit">80.1.5. 方法 quit</a></li>
+<li><a href="#_方法_new_4">82.1.1. 方法 new()</a></li>
+<li><a href="#_方法_supply">82.1.2. 方法 Supply</a></li>
+<li><a href="#_方法_emit">82.1.3. 方法 emit</a></li>
+<li><a href="#_方法_done">82.1.4. 方法 done</a></li>
+<li><a href="#_方法_quit">82.1.5. 方法 quit</a></li>
 </ul>
 </li>
-<li><a href="#_类型图_7">80.2. 类型图</a></li>
+<li><a href="#_类型图_7">82.2. 类型图</a></li>
 </ul>
 </li>
-<li><a href="#_类_supply">81. 类 Supply</a>
+<li><a href="#_类_supply">83. 类 Supply</a>
 <ul class="sectlevel2">
-<li><a href="#_返回分接的方法">81.1. 返回分接的方法</a>
+<li><a href="#_返回分接的方法">83.1. 返回分接的方法</a>
 <ul class="sectlevel3">
-<li><a href="#_方法_tap">81.1.1. 方法 tap</a></li>
-<li><a href="#_act">81.1.2. act</a></li>
+<li><a href="#_方法_tap">83.1.1. 方法 tap</a></li>
+<li><a href="#_act">83.1.2. act</a></li>
 </ul>
 </li>
-<li><a href="#_实用方法">81.2. 实用方法</a>
+<li><a href="#_实用方法">83.2. 实用方法</a>
 <ul class="sectlevel3">
-<li><a href="#_方法_capture_2">81.2.1. 方法 Capture</a></li>
-<li><a href="#_方法_channel">81.2.2. 方法 Channel</a></li>
-<li><a href="#_方法_promise">81.2.3. 方法 Promise</a></li>
-<li><a href="#_方法_live">81.2.4. 方法 live</a></li>
-<li><a href="#_schedule_on">81.2.5. schedule-on</a></li>
+<li><a href="#_方法_capture_2">83.2.1. 方法 Capture</a></li>
+<li><a href="#_方法_channel">83.2.2. 方法 Channel</a></li>
+<li><a href="#_方法_promise">83.2.3. 方法 Promise</a></li>
+<li><a href="#_方法_live">83.2.4. 方法 live</a></li>
+<li><a href="#_schedule_on">83.2.5. schedule-on</a></li>
 </ul>
 </li>
-<li><a href="#_等待直到供应完成的方法">81.3. 等待直到供应完成的方法</a>
+<li><a href="#_等待直到供应完成的方法">83.3. 等待直到供应完成的方法</a>
 <ul class="sectlevel3">
-<li><a href="#_方法_wait">81.3.1. 方法 wait</a></li>
-<li><a href="#_方法_list">81.3.2. 方法 list</a></li>
-<li><a href="#_方法_grab">81.3.3. 方法 grab</a></li>
-<li><a href="#_方法_reverse">81.3.4. 方法 reverse</a></li>
-<li><a href="#_方法_sort">81.3.5. 方法 sort</a></li>
-<li><a href="#_方法_collate">81.3.6. 方法 collate</a></li>
+<li><a href="#_方法_wait">83.3.1. 方法 wait</a></li>
+<li><a href="#_方法_list">83.3.2. 方法 list</a></li>
+<li><a href="#_方法_grab">83.3.3. 方法 grab</a></li>
+<li><a href="#_方法_reverse">83.3.4. 方法 reverse</a></li>
+<li><a href="#_方法_sort">83.3.5. 方法 sort</a></li>
+<li><a href="#_方法_collate">83.3.6. 方法 collate</a></li>
 </ul>
 </li>
-<li><a href="#_返回另一个_supply_的方法">81.4. 返回另一个 Supply 的方法</a>
+<li><a href="#_返回另一个_supply_的方法">83.4. 返回另一个 Supply 的方法</a>
 <ul class="sectlevel3">
-<li><a href="#_方法_from_list">81.4.1. 方法 from-list</a></li>
-<li><a href="#_方法_share">81.4.2. 方法 share</a></li>
-<li><a href="#_方法_flat_2">81.4.3. 方法 flat</a></li>
-<li><a href="#_方法_do">81.4.4. 方法 do</a></li>
-<li><a href="#_方法_on_close">81.4.5. 方法 on-close</a></li>
-<li><a href="#_方法_interval">81.4.6. 方法 interval</a></li>
-<li><a href="#_方法_grep">81.4.7. 方法 grep</a></li>
-<li><a href="#_方法_map">81.4.8. 方法 map</a></li>
-<li><a href="#_方法_batch">81.4.9. 方法 batch</a></li>
-<li><a href="#_方法_elems">81.4.10. 方法 elems</a></li>
-<li><a href="#_方法_head">81.4.11. 方法 head</a></li>
-<li><a href="#_方法_tail">81.4.12. 方法 tail</a></li>
-<li><a href="#_方法_first">81.4.13. 方法 first</a></li>
-<li><a href="#_方法_rotor">81.4.14. 方法 rotor</a></li>
-<li><a href="#_方法_delayed">81.4.15. 方法 delayed</a></li>
-<li><a href="#_方法_throttle">81.4.16. 方法 throttle</a></li>
-<li><a href="#_方法_stable">81.4.17. 方法 stable</a></li>
-<li><a href="#_方法_reduce">81.4.18. 方法 reduce</a></li>
-<li><a href="#_方法_produce">81.4.19. 方法 produce</a></li>
-<li><a href="#_方法_lines">81.4.20. 方法 lines</a></li>
-<li><a href="#_方法_words">81.4.21. 方法 words</a></li>
-<li><a href="#_方法_unique">81.4.22. 方法 unique</a></li>
-<li><a href="#_方法_repeated">81.4.23. 方法 repeated</a></li>
-<li><a href="#_方法_squish">81.4.24. 方法 squish</a></li>
-<li><a href="#_方法_max">81.4.25. 方法 max</a></li>
-<li><a href="#_方法_min">81.4.26. 方法 min</a></li>
-<li><a href="#_方法_minmax">81.4.27. 方法 minmax</a></li>
-<li><a href="#_方法_skip">81.4.28. 方法 skip</a></li>
-<li><a href="#_方法_start">81.4.29. 方法 start</a></li>
-<li><a href="#_方法_migrate">81.4.30. 方法 migrate</a></li>
+<li><a href="#_方法_from_list">83.4.1. 方法 from-list</a></li>
+<li><a href="#_方法_share">83.4.2. 方法 share</a></li>
+<li><a href="#_方法_flat_2">83.4.3. 方法 flat</a></li>
+<li><a href="#_方法_do">83.4.4. 方法 do</a></li>
+<li><a href="#_方法_on_close">83.4.5. 方法 on-close</a></li>
+<li><a href="#_方法_interval">83.4.6. 方法 interval</a></li>
+<li><a href="#_方法_grep">83.4.7. 方法 grep</a></li>
+<li><a href="#_方法_map">83.4.8. 方法 map</a></li>
+<li><a href="#_方法_batch">83.4.9. 方法 batch</a></li>
+<li><a href="#_方法_elems">83.4.10. 方法 elems</a></li>
+<li><a href="#_方法_head">83.4.11. 方法 head</a></li>
+<li><a href="#_方法_tail">83.4.12. 方法 tail</a></li>
+<li><a href="#_方法_first">83.4.13. 方法 first</a></li>
+<li><a href="#_方法_rotor">83.4.14. 方法 rotor</a></li>
+<li><a href="#_方法_delayed">83.4.15. 方法 delayed</a></li>
+<li><a href="#_方法_throttle">83.4.16. 方法 throttle</a></li>
+<li><a href="#_方法_stable">83.4.17. 方法 stable</a></li>
+<li><a href="#_方法_reduce">83.4.18. 方法 reduce</a></li>
+<li><a href="#_方法_produce">83.4.19. 方法 produce</a></li>
+<li><a href="#_方法_lines">83.4.20. 方法 lines</a></li>
+<li><a href="#_方法_words">83.4.21. 方法 words</a></li>
+<li><a href="#_方法_unique">83.4.22. 方法 unique</a></li>
+<li><a href="#_方法_repeated">83.4.23. 方法 repeated</a></li>
+<li><a href="#_方法_squish">83.4.24. 方法 squish</a></li>
+<li><a href="#_方法_max">83.4.25. 方法 max</a></li>
+<li><a href="#_方法_min">83.4.26. 方法 min</a></li>
+<li><a href="#_方法_minmax">83.4.27. 方法 minmax</a></li>
+<li><a href="#_方法_skip">83.4.28. 方法 skip</a></li>
+<li><a href="#_方法_start">83.4.29. 方法 start</a></li>
+<li><a href="#_方法_migrate">83.4.30. 方法 migrate</a></li>
 </ul>
 </li>
-<li><a href="#_合并供应的方法">81.5. 合并供应的方法</a>
+<li><a href="#_合并供应的方法">83.5. 合并供应的方法</a>
 <ul class="sectlevel3">
-<li><a href="#_方法_merge">81.5.1. 方法 merge</a></li>
-<li><a href="#_方法_zip">81.5.2. 方法 zip</a></li>
-<li><a href="#_方法_zip_latest">81.5.3. 方法 zip-latest</a></li>
+<li><a href="#_方法_merge">83.5.1. 方法 merge</a></li>
+<li><a href="#_方法_zip">83.5.2. 方法 zip</a></li>
+<li><a href="#_方法_zip_latest">83.5.3. 方法 zip-latest</a></li>
 </ul>
 </li>
-<li><a href="#_作为供应暴露的_io_功能">81.6. 作为供应暴露的 I/O 功能</a>
+<li><a href="#_作为供应暴露的_io_功能">83.6. 作为供应暴露的 I/O 功能</a>
 <ul class="sectlevel3">
-<li><a href="#_sub_signal">81.6.1. sub signal</a></li>
-<li><a href="#_方法_ionotification_watch_path">81.6.2. 方法 IO::Notification.watch-path</a></li>
+<li><a href="#_sub_signal">83.6.1. sub signal</a></li>
+<li><a href="#_方法_ionotification_watch_path">83.6.2. 方法 IO::Notification.watch-path</a></li>
 </ul>
 </li>
-<li><a href="#_类型图_8">81.7. 类型图</a></li>
+<li><a href="#_类型图_8">83.7. 类型图</a></li>
 </ul>
 </li>
-<li><a href="#_类_whatever">82. 类 Whatever</a>
+<li><a href="#_类_whatever">84. 类 Whatever</a>
 <ul class="sectlevel2">
-<li><a href="#_方法_11">82.1. 方法</a>
+<li><a href="#_方法_11">84.1. 方法</a>
 <ul class="sectlevel3">
-<li><a href="#_方法_accepts">82.1.1. 方法 ACCEPTS</a></li>
-<li><a href="#_方法_capture_3">82.1.2. 方法 Capture</a></li>
+<li><a href="#_方法_accepts">84.1.1. 方法 ACCEPTS</a></li>
+<li><a href="#_方法_capture_3">84.1.2. 方法 Capture</a></li>
 </ul>
 </li>
-<li><a href="#_类型图_9">82.2. 类型图</a></li>
+<li><a href="#_类型图_9">84.2. 类型图</a></li>
 </ul>
 </li>
-<li><a href="#_类_whatevercode">83. 类 WhateverCode</a>
+<li><a href="#_类_whatevercode">85. 类 WhateverCode</a>
 <ul class="sectlevel2">
-<li><a href="#_类型图_10">83.1. 类型图</a></li>
-<li><a href="#_由类_code_提供的例程">83.2. 由类 Code 提供的例程</a>
+<li><a href="#_类型图_10">85.1. 类型图</a></li>
+<li><a href="#_由类_code_提供的例程">85.2. 由类 Code 提供的例程</a>
 <ul class="sectlevel3">
-<li><a href="#_code_方法_accepts">83.2.1. (Code) 方法 ACCEPTS</a></li>
-<li><a href="#_code_方法_arity">83.2.2. (Code) 方法 arity</a></li>
-<li><a href="#_code_方法_assuming">83.2.3. (Code) 方法 assuming</a></li>
-<li><a href="#_code_方法_count">83.2.4. (Code) 方法 count</a></li>
-<li><a href="#_code_方法_of">83.2.5. (Code) 方法 of</a></li>
-<li><a href="#_code_方法_signature">83.2.6. (Code) 方法 signature</a></li>
-<li><a href="#_code_方法_cando">83.2.7. (Code) 方法 cando</a></li>
-<li><a href="#_code_方法_str">83.2.8. (Code) 方法 Str</a></li>
-<li><a href="#_code_方法_file">83.2.9. (Code) 方法 file</a></li>
-<li><a href="#_code_方法_line">83.2.10. (Code) 方法 line</a></li>
-<li><a href="#_code_方法_is_implementation_detail">83.2.11. (Code) 方法 is-implementation-detail</a></li>
+<li><a href="#_code_方法_accepts">85.2.1. (Code) 方法 ACCEPTS</a></li>
+<li><a href="#_code_方法_arity">85.2.2. (Code) 方法 arity</a></li>
+<li><a href="#_code_方法_assuming">85.2.3. (Code) 方法 assuming</a></li>
+<li><a href="#_code_方法_count">85.2.4. (Code) 方法 count</a></li>
+<li><a href="#_code_方法_of">85.2.5. (Code) 方法 of</a></li>
+<li><a href="#_code_方法_signature">85.2.6. (Code) 方法 signature</a></li>
+<li><a href="#_code_方法_cando">85.2.7. (Code) 方法 cando</a></li>
+<li><a href="#_code_方法_str">85.2.8. (Code) 方法 Str</a></li>
+<li><a href="#_code_方法_file">85.2.9. (Code) 方法 file</a></li>
+<li><a href="#_code_方法_line">85.2.10. (Code) 方法 line</a></li>
+<li><a href="#_code_方法_is_implementation_detail">85.2.11. (Code) 方法 is-implementation-detail</a></li>
 </ul>
 </li>
-<li><a href="#_由角色_callable_提供的例程">83.3. 由角色 Callable 提供的例程</a>
+<li><a href="#_由角色_callable_提供的例程">85.3. 由角色 Callable 提供的例程</a>
 <ul class="sectlevel3">
-<li><a href="#_callable_方法_call_me">83.3.1. (Callable) 方法 CALL-ME</a></li>
-<li><a href="#_callable_方法_capture">83.3.2. (Callable) 方法 Capture</a></li>
+<li><a href="#_callable_方法_call_me">85.3.1. (Callable) 方法 CALL-ME</a></li>
+<li><a href="#_callable_方法_capture">85.3.2. (Callable) 方法 Capture</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#_签名_2">84. 签名</a>
+<li><a href="#_签名_2">86. 签名</a>
 <ul class="sectlevel2">
-<li><a href="#_签名字面量_2">84.1. 签名字面量</a>
+<li><a href="#_签名字面量_2">86.1. 签名字面量</a>
 <ul class="sectlevel3">
-<li><a href="#_参数分隔符">84.1.1. 参数分隔符</a></li>
-<li><a href="#_类型约束_2">84.1.2. 类型约束</a>
+<li><a href="#_参数分隔符">86.1.1. 参数分隔符</a></li>
+<li><a href="#_类型约束_2">86.1.2. 类型约束</a>
 <ul class="sectlevel4">
 <li><a href="#_约束可选参数">约束可选参数</a></li>
 <li><a href="#_约束吞噬参数">约束吞噬参数</a></li>
@@ -2482,38 +2528,38 @@ if (theme && theme !== "1") {
 <li><a href="#_强制转换类型">强制转换类型</a></li>
 </ul>
 </li>
-<li><a href="#_吞噬参数或长度可变参数">84.1.3. 吞噬参数(或长度可变参数)</a></li>
-<li><a href="#_吞噬数组参数的类型">84.1.4. 吞噬数组参数的类型</a>
+<li><a href="#_吞噬参数或长度可变参数">86.1.3. 吞噬参数(或长度可变参数)</a></li>
+<li><a href="#_吞噬数组参数的类型">86.1.4. 吞噬数组参数的类型</a>
 <ul class="sectlevel4">
 <li><a href="#_扁平化的吞噬">扁平化的吞噬</a></li>
 <li><a href="#_未扁平化的吞噬参数">未扁平化的吞噬参数</a></li>
 <li><a href="#_单参数规则_slurpy">单参数规则 slurpy</a></li>
 </ul>
 </li>
-<li><a href="#_类型捕获">84.1.5. 类型捕获</a></li>
-<li><a href="#_位置参数_vs_命名参数">84.1.6. 位置参数 vs. 命名参数</a></li>
-<li><a href="#_参数别名">84.1.7. 参数别名</a></li>
-<li><a href="#_可选参数和强制参数">84.1.8. 可选参数和强制参数</a></li>
-<li><a href="#_动态变量_2">84.1.9. 动态变量</a></li>
-<li><a href="#_解构参数">84.1.10. 解构参数</a></li>
-<li><a href="#_子签名">84.1.11. 子签名</a></li>
-<li><a href="#_长名字">84.1.12. 长名字</a></li>
-<li><a href="#_捕获参数">84.1.13. 捕获参数</a></li>
-<li><a href="#_参数特性和修饰符">84.1.14. 参数特性和修饰符</a></li>
+<li><a href="#_类型捕获">86.1.5. 类型捕获</a></li>
+<li><a href="#_位置参数_vs_命名参数">86.1.6. 位置参数 vs. 命名参数</a></li>
+<li><a href="#_参数别名">86.1.7. 参数别名</a></li>
+<li><a href="#_可选参数和强制参数">86.1.8. 可选参数和强制参数</a></li>
+<li><a href="#_动态变量_2">86.1.9. 动态变量</a></li>
+<li><a href="#_解构参数">86.1.10. 解构参数</a></li>
+<li><a href="#_子签名">86.1.11. 子签名</a></li>
+<li><a href="#_长名字">86.1.12. 长名字</a></li>
+<li><a href="#_捕获参数">86.1.13. 捕获参数</a></li>
+<li><a href="#_参数特性和修饰符">86.1.14. 参数特性和修饰符</a></li>
 </ul>
 </li>
-<li><a href="#_方法_12">84.2. 方法</a>
+<li><a href="#_方法_12">86.2. 方法</a>
 <ul class="sectlevel3">
-<li><a href="#_params_方法">84.2.1. params 方法</a></li>
-<li><a href="#_arity_方法">84.2.2. arity 方法</a></li>
-<li><a href="#_count_方法">84.2.3. count 方法</a></li>
-<li><a href="#_returns_方法">84.2.4. returns 方法</a></li>
-<li><a href="#_方法_accepts_2">84.2.5. 方法 ACCEPTS</a></li>
-<li><a href="#_方法_capture_4">84.2.6. 方法 Capture</a></li>
+<li><a href="#_params_方法">86.2.1. params 方法</a></li>
+<li><a href="#_arity_方法">86.2.2. arity 方法</a></li>
+<li><a href="#_count_方法">86.2.3. count 方法</a></li>
+<li><a href="#_returns_方法">86.2.4. returns 方法</a></li>
+<li><a href="#_方法_accepts_2">86.2.5. 方法 ACCEPTS</a></li>
+<li><a href="#_方法_capture_4">86.2.6. 方法 Capture</a></li>
 </ul>
 </li>
-<li><a href="#_运行时创建_signature_对象6_d_2019_03_及以后版本">84.3. 运行时创建 Signature 对象(6.d, 2019.03 及以后版本)</a></li>
-<li><a href="#_类型图_11">84.4. 类型图</a></li>
+<li><a href="#_运行时创建_signature_对象6_d_2019_03_及以后版本">86.3. 运行时创建 Signature 对象(6.d, 2019.03 及以后版本)</a></li>
+<li><a href="#_类型图_11">86.4. 类型图</a></li>
 </ul>
 </li>
 </ul>
@@ -41327,10 +41373,1551 @@ for @numbers X @numbers -&gt; @pair {
 <div class="paragraph">
 <p>有关其他信息和示例，另请参见<a href="https://docs.raku.org/routine/is%20cached">特征描述</a> 。</p>
 </div>
-<div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::content/rakudoc/language/independent-routines[]
-== <a href="https://docs.raku.org/type/Callable">角色 Callable</a></p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_独立的例程">75. <a href="https://docs.raku.org/language/independent-routines">独立的例程</a></h2>
+<div class="sectionbody">
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Routines not defined within any class or role.</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>这些例程(routines)与一个或几个其他类一起定义在不同的文件中，但实际上并不附属于任何特定的类或角色(role)。</p>
+</div>
+<div class="sect2">
+<h3 id="_例程_eval">75.1. 例程 EVAL</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">proto sub EVAL($code where Blob|Cool|Callable, Str() :$lang = 'Raku',
+                PseudoStash :$context, *%n)</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub EVAL($code, Str :$lang where { ($lang // '') eq 'Perl5' },
+                PseudoStash :$context)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个例程将 <a href="https://docs.raku.org/type/Cool">Cool</a> <code>$code</code> 强转为 <a href="https://docs.raku.org/type/Str">Str</a>。如果 <code>$code</code> 是一个 <a href="https://docs.raku.org/type/Blob">Blob</a>，它将使用与 <code>$lang</code> 编译器相同的编码进行处理：对于 <code>Raku $lang</code>，使用 <code>utf-8</code>；对于 <code>Perl</code>，使用与 <code>perl</code> 相同的规则进行处理。</p>
+</div>
+<div class="paragraph">
+<p>这与字面字符串参数的工作原理一样。更复杂的输入，比如一个变量或内嵌代码的字符串，默认情况下是非法的。这可以通过几种方式来覆盖。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use MONKEY-SEE-NO-EVAL; # Or...
+use MONKEY;             # shortcut that turns on all MONKEY pragmas
+use Test;
+
+# any of the above allows:
+EVAL "say { 5 + 5 }";   # OUTPUT: «10␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果 <code>MONKEY-SEE-NO-EVAL</code> 编译指令没有被激活，编译器就会以 <code>EVAL is a very dangerous function!!!</code> 异常来抱怨。而这基本上是正确的，因为这将会运行与程序具有相同权限的任意代码。如果你激活了 <code>MONKEY-SEE-NO-EVAL</code> 编译指令，你应该注意清理将要通过 <code>EVAL</code> 的代码。</p>
+</div>
+<div class="paragraph">
+<p>请注意，你可以使用引号插值来创建例程名，在这个<a href="https://docs.raku.org/language/quoting#index-entry-%26_(interpolation)">例子</a>或<a href="https://docs.raku.org/language/syntax#Identifiers">其他插值创建标识符名的方法</a>中可以看到。不过，这只对已经声明的函数和其他对象有效，因此使用起来比较安全。</p>
+</div>
+<div class="paragraph">
+<p>当前词法作用域内的符号对 <code>EVAL</code> 中的代码是可见的。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $answer = 42;
+EVAL 'say $answer;';    # OUTPUT: «42␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>然而，由于词法作用域中的符号集在编译后是不可改变的，所以 <code>EVAL</code> 永远不能将符号引入到周围的作用域中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">EVAL 'my $lives = 9'; say $lives;   # error, $lives not declared</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>此外，<code>EVAL</code> 是在当前的包中进行求值的。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">module M {
+    EVAL 'our $answer = 42'
+}
+say $M::answer;         # OUTPUT: «42␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>而且也在当前的语言中，也就是说任何增加的语法都可以使用。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub infix:&lt;mean&gt;(*@a) is assoc&lt;list&gt; {
+    @a.sum / @a.elems
+}
+
+EVAL 'say 2 mean 6 mean 4';     # OUTPUT: «4␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>EVAL</code> 语句计算为最后一条语句的结果。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub infix:&lt;mean&gt;(*@a) is assoc&lt;list&gt; {
+    @a.sum / @a.elems
+}
+say EVAL 'say 1; 2 mean 6 mean 4';         # OUTPUT: «1␤4␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>EVAL</code> 也是执行其他语言代码的通道。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">EVAL "use v5.20; say 'Hello from perl!'", :lang&lt;Perl5&gt;;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你需要有 <a href="https://github.com/niner/Inline-Perl5">Inline::Perl5</a> 才能正常工作。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_evalfile">75.2. 子例程 EVALFILE</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub EVALFILE($filename where Blob|Cool, :$lang = 'Raku')</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>读取指定的文件并对其进行计算。在 <a href="https://docs.raku.org/type/Blob">Blob</a> 解码、作用域和 <code>$lang</code> 参数方面与 <code>EVAL</code> 的行为相同。计算为文件中最后一条语句所产生的值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">EVALFILE "foo.p6";</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_mkdir">75.3. 子例程 mkdir</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub    mkdir(IO() $path, Int() $mode = 0o777 --&gt; IO::Path:D)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>创建一个新的目录；关于 <code>$mode</code> 的解释和有效值，请参见 <a href="https://docs.raku.org/routine/mode">mode</a>。成功后返回指向新创建目录的 <a href="https://docs.raku.org/type/IO::Path">IO::Path</a> 对象；如果不能创建目录，则以 <a href="https://docs.raku.org/type/X::IO::Mkdir">X::IO::Mkdir</a> <a href="https://docs.raku.org/routine/fail">失败</a>。</p>
+</div>
+<div class="paragraph">
+<p>也会根据需要创建父目录(类似于 *nix 实用程序 <code>mkdir</code> 的 <code>-p</code> 选项)；也就是说，<code>mkdir "foo/bar/ber/meow"</code> 将创建 <code>foo</code>、<code>foo/bar</code> 和 <code>foo/bar/ber</code> 目录(如果它们不存在)，以及 <code>foo/bar/ber/meow</code>。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_chdir">75.4. 子例程 chdir</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub chdir(IO() $path, :$d = True, :$r, :$w, :$x --&gt; IO::Path:D)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>改变 <code>$*CWD</code> 变量的值到所提供的 <code>$path</code>，同时确保新路径通过几个文件测试。<strong>注意</strong>: 这个例程不会改变进程的当前目录(参见 <a href="https://docs.raku.org/routine/&amp;*chdir">&amp;*chdir</a>)。</p>
+</div>
+<div class="paragraph">
+<p>成功时返回 <a href="https://docs.raku.org/type/IO::Path">IO::Path</a>，代表新的 <code>$*CWD</code>。失败时，返回 <a href="https://docs.raku.org/type/Failure">Failure</a>，并保持 <code>$*CWD</code> 不变。<code>$path</code> 可以是任何有 IO 方法的对象，这些方法可以返回 <a href="https://docs.raku.org/type/IO::Path">IO::Path</a> 对象。可用的文件测试有:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>:d</code> — 检查 <a href="https://docs.raku.org/routine/d">.d</a> 返回 <code>True</code></p>
+</li>
+<li>
+<p><code>:r</code> — 检查 <a href="https://docs.raku.org/routine/r">.r</a> 返回 <code>True</code></p>
+</li>
+<li>
+<p><code>:w</code> — 检查 <a href="https://docs.raku.org/routine/w">.w</a> 返回 <code>True</code></p>
+</li>
+<li>
+<p><code>:x</code> — 检查 <a href="https://docs.raku.org/routine/x">.x</a> 返回 <code>True</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>默认情况下，只进行 <code>:d</code> 测试。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">chdir         '/tmp'; # change $*CWD to '/tmp' and check its .d is True
+chdir :r, :w, '/tmp'; # … check its .r and .w are True
+chdir '/not-there';   # returns Failure</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意，下面的构造是错误的:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># WRONG! DO NOT DO THIS!
+my $*CWD = chdir '/tmp/';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>使用 <a href="https://docs.raku.org/routine/indir">indir</a> 代替。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_chdir_2">75.5. 子例程 &amp;*chdir</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">PROCESS::&lt;&amp;chdir&gt; = sub (IO() $path --&gt; IO::Path:D) { }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>将 <code>$*CWD</code> 变量的值改为提供的 <code>$path</code>，并将进程的当前目录设置为 <a href="https://docs.raku.org/routine/absolute">$path.absolute</a> 的值。<strong>注意</strong>: 在大多数情况下，你需要使用 <a href="https://docs.raku.org/routine/chdir">chdir</a> 例程来代替。</p>
+</div>
+<div class="paragraph">
+<p>成功时返回一个代表新的 <code>$*CWD</code> 的 <a href="https://docs.raku.org/type/IO::Path">IO::Path</a>。失败时，返回 <a href="https://docs.raku.org/type/Failure">Failure</a>，并保持 <code>$*CWD</code> 不动。<code>$path</code> 可以是任何带有 IO 方法的对象，该方法可以返回一个 <a href="https://docs.raku.org/type/IO::Path">IO::Path</a> 对象。</p>
+</div>
+<div class="paragraph">
+<p>请注意，与普通的 <a href="https://docs.raku.org/routine/chdir">chdir</a> 不同，没有参数来指定要执行哪些文件测试。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">&amp;*chdir('/tmp');  # change $*CWD and process's current directory to '/tmp'
+&amp;*chdir('/not-there'); # returns Failure</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意，下面的构造是错误的:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># WRONG! DO NOT DO THIS!
+my $*CWD = &amp;*chdir('/tmp');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>使用下面的内容代替；如果你不需要改变进程的当前目录，请参见 <a href="https://docs.raku.org/routine/indir">indir</a>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">temp $*CWD;
+&amp;*chdir('/tmp');</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_chmod">75.6. 子例程 chmod</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub chmod(Int() $mode, *@filenames --&gt; List)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>将所有 <code>@filenames</code> 强转为 <a href="https://docs.raku.org/type/IO::Path">IO::Path</a> 并调用 <a href="https://docs.raku.org/type/IO::Path#method_chmod">IO::Path.chmod</a>，并对其进行 <code>$mode</code> 操作。返回一个包含成功执行了 <code>chmod</code> 的 <code>@filenames</code> 子集的<a href="https://docs.raku.org/type/List">列表</a>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">chmod 0o755, &lt;myfile1  myfile2&gt;; # make two files executable by the owner</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_indir">75.7. 子例程 indir</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub indir(IO() $path, &amp;code, :$d = True, :$r, :$w, :$x --&gt; Mu)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>接收 <a href="https://docs.raku.org/type/Callable">Callable</a> <code>&amp;code</code>，并在本地(对 <code>&amp;code</code>)将 <code>$*CWD</code> 变量改为基于 <code>$path</code> 的 <a href="https://docs.raku.org/type/IO::Path">IO::Path</a> 对象后执行，同时确保新路径通过几个文件测试。如果 <code>$path</code> 是相对的，那么即使给定了一个 <a href="https://docs.raku.org/type/IO::Path">IO::Path</a> 对象，它也会变成一个绝对路径。<strong>注意</strong>: 这个例程不会改变进程的当前目录（参见 <a href="https://docs.raku.org/routine/&amp;*chdir">&amp;*chdir</a>）。在 <code>&amp;code</code> 之外的 <code>$*CWD</code> 不受影响，即使 <code>&amp;code</code> 显式地给 <code>$*CWD</code> 分配了一个新的值。</p>
+</div>
+<div class="paragraph">
+<p>成功时返回 <code>&amp;code</code> 的返回值。在未能成功改变 <code>$*CWD</code> 时，返回<a href="https://docs.raku.org/type/Failure">失败</a>。<strong>警告</strong>: 请记住，被<a href="https://docs.raku.org/routine/eager">惰性计算</a>的东西在实际计算时，可能最终没有在动态作用域中被 <code>indir</code> 设置的 <code>$*CWD</code>。要么确保生成器有它们的 <code>$*CWD</code> 集，要么在从 <code>indir</code> 返回结果之前急切地计算它们。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say indir("/tmp", {
+    gather { take ".".IO }
+})».CWD; # OUTPUT: «(/home/camelia)␤»
+
+say indir("/tmp", {
+    eager gather { take ".".IO }
+})».CWD; # OUTPUT: «(/tmp)␤»
+
+say indir("/tmp", {
+    my $cwd = $*CWD;
+    gather { temp $*CWD = $cwd; take ".".IO }
+})».CWD; # OUTPUT: «(/tmp)␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>例程的 <code>$path</code> 参数可以是任何具有 IO 方法的对象，该方法返回一个 <a href="https://docs.raku.org/type/IO::Path">IO::Path</a> 对象。可用的文件测试有:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>:d</code> — 检查 <a href="https://docs.raku.org/routine/d">.d</a> 返回 <code>True</code></p>
+</li>
+<li>
+<p><code>:r</code> — 检查 <a href="https://docs.raku.org/routine/r">.r</a> 返回 <code>True</code></p>
+</li>
+<li>
+<p><code>:w</code> — 检查 <a href="https://docs.raku.org/routine/w">.w</a> 返回 <code>True</code></p>
+</li>
+<li>
+<p><code>:x</code> — 检查 <a href="https://docs.raku.org/routine/x">.x</a> 返回 <code>True</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>默认情况下，只进行 <code>:d</code> 测试。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $*CWD;                   # OUTPUT: «"/home/camelia".IO␤»
+indir '/tmp', { say $*CWD }; # OUTPUT: «"/tmp".IO␤»
+say $*CWD;                   # OUTPUT: «"/home/camelia".IO␤»
+
+indir '/not-there', {;};     # returns Failure; path does not exist</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_print">75.8. 子例程 print</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub print(**@args --&gt; True)
+multi sub print(Junction:D --&gt; True)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>将给定的文本打印在标准输出上(<a href="https://docs.raku.org/language/variables#index-entry-%24%2AOUT">$*OUT</a> 文件句柄)，通过调用 <a href="https://docs.raku.org/routine/Str">.Str</a> 方法将非 <a href="https://docs.raku.org/type/Str">Str</a> 对象强转为 <a href="https://docs.raku.org/type/Str">Str</a>。<a href="https://docs.raku.org/type/Junction">Junction</a> 参数自动线程化，且不保证打印字符串的顺序。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">print "Hi there!\n";       # OUTPUT: «Hi there!␤»
+print "Hi there!";         # OUTPUT: «Hi there!»
+print [1, 2, 3];           # OUTPUT: «1 2 3»
+print "Hello" | "Goodbye"; # OUTPUT: «HelloGoodbye»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>要打印文本并包含尾部的换行，使用 <a href="https://docs.raku.org/language/independent-routines#sub_put">put</a>。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_put">75.9. 子例程 put</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub put()
+multi sub put(**@args --&gt; True)
+multi sub put(Junction:D --&gt; True)
+multi sub put(Str:D \x)
+multi sub put(\x)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>和 <a href="https://docs.raku.org/language/independent-routines#sub_print">print</a> 一样，只是在结尾处使用 <a href="https://docs.raku.org/routine/print-nl">print-nl</a>(默认打印一个<a href="https://docs.raku.org/language/newline">换行</a>)。<a href="https://docs.raku.org/type/Junction">Junction</a> 参数自动线程化，且不保证打印字符串的顺序。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">put "Hi there!\n";   # OUTPUT: «Hi there!␤␤»
+put "Hi there!";     # OUTPUT: «Hi there!␤»
+put [1, 2, 3];       # OUTPUT: «1 2 3␤»
+put "Hello" | "Goodbye"; # OUTPUT: «Hello␤Goodbye␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>本身，<code>put()</code> 将打印一行新的内容:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">put "Hey"; put(); put("Hey"); # OUTPUT: «Hey␤␤Hey␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>但请注意，我们在 <code>put</code> 后面使用了括号。它本身会引发一个异常(6.d及以后的版本)。如果在 <code>for</code> 前面用过这种方式，它也会引发一个异常；请使用 <code>.put</code> 这种方法来代替。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">.put for &lt;1 2 3&gt;;             # # OUTPUT: «1␤2␤3␤»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_say">75.10. 子例程 say</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub say(**@args --&gt; True)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>打印给定对象的 "gist"；当对象是 <code>Str</code> 的子类时，它总是调用 <code>.gist</code>。除了使用 <a href="https://docs.raku.org/routine/gist">.gist</a> 方法来获取对象的字符串表示之外，与 <a href="https://docs.raku.org/language/independent-routines#sub_put">put</a> 一样，它将自动线程化 <code>Junction</code>。</p>
+</div>
+<div class="paragraph">
+<p><strong>注意</strong>: 某些对象的 <a href="https://docs.raku.org/routine/gist">.gist</a> 方法，如 <a href="https://docs.raku.org/type/List#method_gist">List</a>，只返回对象的部分信息(因此称为 "gist")。如果你想打印文本信息，你很可能要用 <a href="https://docs.raku.org/language/independent-routines#sub_put">put</a> 来代替。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say Range;        # OUTPUT: «(Range)␤»
+say class Foo {}; # OUTPUT: «(Foo)␤»
+say 'I ♥ Raku';   # OUTPUT: «I ♥ Raku␤»
+say 1..Inf;       # OUTPUT: «1..Inf␤»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_note">75.11. 子例程 note</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method note(Mu: --&gt;Bool:D)
+multi sub note(            --&gt; Bool:D)
+multi sub note(Str:D $note --&gt; Bool:D)
+multi sub note(**@args     --&gt; Bool:D)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>就像 <a href="https://docs.raku.org/routine/say">say</a>(在意义上，它将调用打印对象的 <code>.gist</code> 方法），除了它打印输出到 <a href="https://docs.raku.org/language/variables#index-entry-%24%2AERR">$*ERR</a> 句柄(<code>STDERR</code>)。如果没有给子例程形式的参数，将使用字符串  <code>"Noted"</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">note;       # STDERR OUTPUT: «Noted␤»
+note 'foo'; # STDERR OUTPUT: «foo␤»
+note 1..*;  # STDERR OUTPUT: «1..Inf␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个命令也会在 <code>Junction</code> 上自动线程化，如果对象是 <code>Str</code> 的子类，保证会在对象上调用 <code>gist</code>。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_prompt">75.12. 子例程 prompt</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub prompt()
+multi sub prompt($msg)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果提供了 <code>$msg</code>，则将 <code>$msg</code> <a href="https://docs.raku.org/routine/print">打印</a>到 <code>$*OUT</code> 句柄，然后从 <code>$*IN</code> 句柄<a href="https://docs.raku.org/routine/get">获取</a>一行输入。默认情况下，这相当于将 <code>$msg</code> 打印到 <a href="https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29">STDOUT</a>，从 <a href="https://en.wikipedia.org/wiki/Standard_streams#Standard_input_.28stdin.29">STDIN</a> 中读取一行，删除后面的新行，然后返回结果字符串。从 Rakudo 2018.08 开始，<code>prompt</code> 将为数值创建<a href="https://docs.raku.org/language/numerics#Allomorphs">同质异形</a>，相当于调用 <code>val prompt</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $name = prompt "What's your name? ";
+say "Hi, $name! Nice to meet you!";
+my $age = prompt("Say your age (number)");
+my Int $years = $age;
+my Str $age-badge = $age;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在上面的代码中，如果正确地输入了数字，<code>$age</code> 将被鸭式输入(duck-typed)到同质异形 <a href="https://docs.raku.org/type/IntStr">IntStr</a> 中。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_open">75.13. 子例程 open</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub open(IO() $path, |args --&gt; IO::Handle:D)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>用给定的 <code>$path</code> 创建一个<a href="https://docs.raku.org/type/IO::Handle">句柄</a>，并调用 <a href="https://docs.raku.org/type/IO::Handle#method_open">IO::Handle.open</a>，将剩余的参数传递给它。请注意 <a href="https://docs.raku.org/type/IO::Path">IO::Path</a> 类型提供了许多从文件中读写的方法，所以在许多常见的情况下，你不需要直接打开(<code>open</code>)文件或处理 <a href="https://docs.raku.org/type/IO::Handle">IO::Handle</a> 类型。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $fh = open :w, '/tmp/some-file.txt';
+$fh.say: 'I ♥ writing Perl code';
+$fh.close;
+
+$fh = open '/tmp/some-file.txt';
+print $fh.readchars: 4;
+$fh.seek: 7, SeekFromCurrent;
+say $fh.readchars: 4;
+$fh.close;
+
+# OUTPUT: «I ♥ Perl␤»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_slurp">75.14. 子例程 slurp</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub slurp(IO::Handle:D $fh = $*ARGFILES, |c)
+multi sub slurp(IO() $path, |c)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>将整个文件的内容 Slurps 成一个 <code>Str</code>（如果是 <code>:bin</code>，则为 <code>Buf</code>）。接受 <code>:bin</code> 和 <code>:enc</code> 可选的命名参数，与 <a href="https://docs.raku.org/routine/open">open()</a> 意义相同；可能的编码与所有其他 IO 方法相同，并在 <a href="https://docs.raku.org/type/IO::Handle#method_encoding">encoding</a> 例程中列出。如果文件不存在，或者是一个目录，该例程将失败(<code>fail</code>)。在没有任何参数的情况下，子例程 <code>slurp</code> 对 <code>$*ARGFILES</code> 进行操作，在没有任何文件名的情况下，默认为 <code>$*IN</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># read entire file as (Unicode) Str
+my $text_contents   = slurp "path/to/file";
+
+# read entire file as Latin1 Str
+my $text_contents   = slurp "path/to/file", enc =&gt; "latin1";
+
+# read entire file as Buf
+my $binary_contents = slurp "path/to/file", :bin;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_spurt">75.15. 子例程 spurt</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi spurt(IO() $path, |c)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>$path</code> 可以是任何带有 IO 方法的对象，该方法返回一个 <a href="https://docs.raku.org/type/IO::Path">IO::Path</a> 对象。在 <code>$path</code> 上调用 <a href="https://docs.raku.org/routine/spurt">IO::Path.spurt</a>，转发剩余的任何参数。</p>
+</div>
+<div class="paragraph">
+<p>选项</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>:enc</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>要写的内容的编码。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>:append</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>布尔值，表示是否要追加到(潜在的)现有文件。如果文件还不存在，则会创建。默认值为 <code>False</code>。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>:createonly</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>布尔值，表示是否在文件已经存在的情况下失败。默认值为 <code>False</code>。</p>
+</div>
+<div class="paragraph">
+<p>例子:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># write directly to a file
+spurt 'path/to/file', 'default text, directly written';
+
+# write directly with a non-Unicode encoding
+spurt 'path/to/latin1_file', 'latin1 text: äöüß', :enc&lt;latin1&gt;;
+
+spurt 'file-that-already-exists', 'some text';           # overwrite file's contents:
+spurt 'file-that-already-exists', ' new text', :append;  # append to file's contents:
+say slurp 'file-that-already-exists';                    # OUTPUT: «some text new text␤»
+
+# fail when writing to a pre-existing file
+spurt 'file-that-already-exists', 'new text', :createonly;
+# OUTPUT: «Failed to open file /home/camelia/file-that-already-exists: file already exists …»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_run">75.16. 子例程 run</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub run(
+    *@args ($, *@),
+    :$in = '-',
+    :$out = '-',
+    :$err = '-',
+    Bool :$bin = False,
+    Bool :$chomp = True,
+    Bool :$merge = False,
+    Str:D :$enc = 'UTF-8',
+    Str:D :$nl = "\n",
+    :$cwd = $*CWD,
+    Hash() :$env = %*ENV,
+    :$win-verbatim-args = False
+--&gt; Proc:D)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在不涉及 shell 的情况下运行外部命令，并返回一个 <a href="https://docs.raku.org/type/Proc">Proc</a> 对象，默认情况下，外部命令将打印到标准输出和错误，并从标准输入中读取。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">run 'touch', '--', '*.txt'; # Create a file named “*.txt”
+
+run &lt;rm -- *.txt&gt;; # Another way to use run, using word quoting for the
+                   # arguments</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果你想传递一些变量，你仍然可以使用 <code>&lt; &gt;</code>，但尽量避免使用 <code>« »</code>，因为如果你忘了给变量加引号，它将会进行分词。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $file = ‘--my arbitrary filename’;
+run ‘touch’, ‘--’, $file;  # RIGHT
+run &lt;touch --&gt;, $file;     # RIGHT
+
+run «touch -- "$file"»;    # RIGHT but WRONG if you forget quotes
+run «touch -- $file»;      # WRONG; touches ‘--my’, ‘arbitrary’ and ‘filename’
+run ‘touch’, $file;        # WRONG; error from `touch`
+run «touch "$file"»;       # WRONG; error from `touch`</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请注意，许多程序都需要 <code>--</code> 来区分命令行参数和<a href="https://mywiki.wooledge.org/BashPitfalls#Filenames_with_leading_dashes">以连字符开头的文件名</a>。</p>
+</div>
+<div class="paragraph">
+<p>一个进程的sunk <a href="https://docs.raku.org/type/Proc">Proc</a> 对象如果<a href="https://docs.raku.org/routine/exitcode">退出</a>不成功，会抛出。如果你想忽略这样的失败，只需在非沉没上下文中使用 <a href="https://docs.raku.org/routine/run">run</a>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">run 'false';     # SUNK! Will throw
+run('false').so; # OK. Evaluates Proc in Bool context; no sinking</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果您想捕获标准输出或错误，而不是直接将其打印出来，您可以使用 <code>:out</code> 或 <code>:err</code> 参数，这将使它们可以使用各自的方法。<a href="https://docs.raku.org/type/Proc">Proc.out</a> 和 <a href="https://docs.raku.org/type/Proc">Proc.err</a>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $proc = run 'echo', 'Raku is Great!', :out, :err;
+$proc.out.slurp(:close).say; # OUTPUT: «Raku is Great!␤»
+$proc.err.slurp(:close).say; # OUTPUT: «␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你可以使用这些参数将它们重定向到一个文件句柄上，从而创建一种管道。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $ls-alt-handle = open :w, '/tmp/cur-dir-ls-alt.txt';
+my $proc = run "ls", "-alt", :out($ls-alt-handle);
+# (The file will contain the output of the ls -alt command)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这些参数是相当灵活的，例如，接纳句柄来重定向它们。详见 <a href="https://docs.raku.org/type/Proc">Proc</a> 和 <a href="https://docs.raku.org/type/Proc::Async">Proc::Async</a>。</p>
+</div>
+<div class="paragraph">
+<p>关于所有参数的更多例子和解释，也请参见 <a href="https://docs.raku.org/type/Proc#method_new">new</a> 和 <a href="https://docs.raku.org/type/Proc#method_spawn">spwn</a>。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_shell">75.17. 子例程 shell</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub shell($cmd, :$in = '-', :$out = '-', :$err = '-',
+                Bool :$bin, Bool :$chomp = True, Bool :$merge,
+                Str :$enc, Str:D :$nl = "\n", :$cwd = $*CWD, :$env)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>通过系统 shell 运行命令，在 Windows 中默认为 <code>%*ENV&lt;ComSpec&gt; /c</code>，否则为 <code>/bin/sh -c</code>。所有 shell 元字符都会被 shell 解释，包括管道、重定向、环境变量替换等。Shell 转义符是一个严重的安全问题，可能会与不寻常的文件名产生混淆。为了安全起见，请使用 <a href="https://docs.raku.org/type/Proc#sub_run">run</a>。</p>
+</div>
+<div class="paragraph">
+<p>返回值的类型是 <a href="https://docs.raku.org/type/Proc">Proc</a>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">shell 'ls -lR | gzip -9 &gt; ls-lR.gz';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>详见 <a href="https://docs.raku.org/type/Proc#method_shell">Proc</a>，例如如何捕获输出。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_例程_unpolar">75.18. 例程 unpolar</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method unpolar(Real $angle)
+multi sub unpolar(Real $mag, Real $angle)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>返回一个 <code>Complex</code>，其坐标与弧度的角度相对应，以及与对象值相对应的幅度，如果是作为 <code>sub</code> 对象使用，则返回 <code>$mag</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 1.unpolar(⅓*pi);
+# OUTPUT: «0.5000000000000001+0.8660254037844386i␤»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_例程_printf">75.19. 例程 printf</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method printf (*@args)
+multi sub printf(Cool:D $format, *@args)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>作为方法，以对象为格式，使用与 <a href="https://docs.raku.org/type/Str#routine_sprintf">Str.sprintf</a> 相同的语言；作为 <code>sub</code>，它的第一个参数将是格式字符串，其余参数将按照格式约定代入格式。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">"%s is %s".printf("þor", "mighty");    # OUTPUT: «þor is mighty»
+printf( "%s is %s", "þor", "mighty");  # OUTPUT: «þor is mighty»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 <code>Junction</code> 上，也会自动线程化，不保证顺序。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">printf( "%.2f ", ⅓ | ¼ | ¾ ); # OUTPUT: «0.33 0.25 0.75 »</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_例程_sprintf">75.20. 例程 sprintf</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method sprintf(*@args)
+multi sub sprintf(Cool:D $format, *@args)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>按照与 <a href="https://docs.raku.org/type/Str#routine_sprintf">Str.sprintf</a> 相同的语言来格式化并返回一个字符串，使用这样的格式，要么是对象（如果以方法形式调用），要么是第一个参数（如果以例程形式调用）。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sprintf( "%s the %d%s", "þor", 1, "st").put; # OUTPUT: «þor the 1st␤»
+sprintf( "%s is %s", "þor", "mighty").put;   # OUTPUT: «þor is mighty␤»
+"%s's weight is %.2f %s".sprintf( "Mjölnir", 3.3392, "kg").put;
+# OUTPUT: «Mjölnir's weight is 3.34 kg␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个函数与 C 库的 <code>sprintf</code> 和 <code>printf</code> 函数基本相同。这两个函数的唯一区别是 <code>sprintf</code> 返回的是一个字符串，而 <code>printf</code> 函数写入到一个文件句柄。<code>sprintf</code> 返回的是一个 <code>Str</code>，而不是一个字面值。</p>
+</div>
+<div class="paragraph">
+<p><code>$format</code> 会扫描 <code>%</code> 字符。任何 <code>%</code> 都会引入一个格式标记。指令引导参数的使用（如果有的话）。当使用 <code>%</code> 以外的指令时，它指示下一个传递的参数如何被格式化到要创建的字符串中。在格式标记中也可以使用参数索引。它们的形式为 <code>N$</code>，下面将详细解释。</p>
+</div>
+<div class="paragraph">
+<p>可以用单引号或双引号来定义 <code>$format</code>。双引号的 <code>$format</code> 字符串在扫描前会进行内插，任何内插值包含 <code>%</code> 字符的嵌入式字符串都会引起异常。例如:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $prod = "Ab-%x-42";
+my $cost = "30";
+sprintf("Product $prod; cost: \$%d", $cost).put;
+# OUTPUT: «Your printf-style directives specify 2 arguments, but 1 argument was supplied␤»
+          «  in block &lt;unit&gt; at &lt;unknown file&gt; line 1␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当处理未知的输入时，你应该避免使用这样的语法，把所有的变量放在 <code>*@args</code> 数组中，并在 <code>$format</code> 中为每个变量设置一个 <code>%</code>。如果你需要在格式字符串中包含一个 <code>$</code> 符号(即使是作为参数索引)，要么转义，要么使用单引号形式。例如，以下任何一种形式都可以无误地工作。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sprintf("2 x \$20 = \$%d", 2*20).put; # OUTPUT: «2 x $20 = $40␤»
+sprintf('2 x $20 = $%d', 2*20).put;   # OUTPUT: «2 x $20 = $40␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>总而言之，除非你需要一些非常特殊的东西，否则使用单引号的格式字符串和不在格式字符串中使用插值字符串，你会减少意外的问题。</p>
+</div>
+<div class="sect3">
+<h4 id="_指令">75.20.1. 指令</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">百分号</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">c</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">代码点的字符</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">s</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">字符串</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">d</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">有符号整数，十进制</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">u</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">无符号整数，十进制</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">o</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">无符号整数，八进制</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">无符号整数，十六进制</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">e</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">浮点数，科学计数法</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">f</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">浮点数，固定的十进制记法</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">g</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">浮点数，记法为 %e 或 %f</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">像 x 那样, 但是使用大写字母</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">像 e 那样, 但是使用大写的 "E"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">像 g 那样, 但是有一个大写的 "E" (如果适用的话)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">b</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">二进制无符号整数</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>兼容性:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">i</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%d 的同义词</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">D</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%ld 的同义词</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">U</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%lu 的同义词</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%lo 的同义词</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%f 的同义词</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_修饰符">75.21. 修饰符</h3>
+<div class="paragraph">
+<p>修饰符改变了格式指令的含义，但基本上是无操作的(语义还在确定中)。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">h</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">将整数解释为原生的 "short"(通常为 int16)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NYI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">l</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">将整数解释为原生的 "long"(通常为 int32 或 int64)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NYI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ll</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">将整数解释为原生的 "long long"(通常为 int64)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NYI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">L</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">将整数解释为原生的 "long long"(通常为 uint64)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NYI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">q</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">将整数解释为原生的 "quads"(通常为 int64 或更大)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>在 <code>%</code> 和格式字母之间，您可以指定几个附加属性来控制格式的解释。按顺序，这些属性是:</p>
+</div>
+<div class="sect3">
+<h4 id="_nyi_格式参数索引_使用_符号">75.21.1. NYI 格式参数索引, 使用 '$' 符号</h4>
+<div class="paragraph">
+<p>在指令前有一个明确的格式化参数索引(范围从1到N个参数)，比如 <code>%2$d</code>。默认情况下，<code>sprintf</code> 会格式化列表中下一个未使用的参数，但是参数索引允许你不按顺序使用参数（注意，除非你转义 <code>$</code>，否则需要单引号）。</p>
+</div>
+<div class="paragraph">
+<p>没有索引的情况下，<code>sprintf</code> 会格式化列表中下一个未使用的参数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sprintf '%d %d', 12, 34;      # OUTPUT: «12 34␤»
+sprintf '%d %d %d', 1, 2, 3;  # OUTPUT: «1 2 3␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>NYI 带索引:</p>
+</div>
+<div class="paragraph">
+<p>当我们对所有的指令进行索引时，第一个例子就像我们期望的那样工作。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sprintf '%2$d %1$d', 12, 34;      # OUTPUT: «34 12␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>但请注意第二个例子中混合索引和非索引指令时的效果(小心你要求的东西)。第二条非索引指令得到了第一个参数，但在最后一条指令中也被特别要求。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sprintf '%3$d %d %1$d', 1, 2, 3;  # OUTPUT: «3 1 1␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>标志</p>
+</div>
+<div class="paragraph">
+<p>其中一项或多项：</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">space</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">在非负数前面置一个空格</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">在非负数前面置一个加号</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">栏内左对齐</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">使用前导零，而不是空格，作为所需的填充。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">#</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">确保任何八进制的前导 "0"，非零的十六进制前缀为 "0x" 或 "0X"，非零的二进制前缀为 "0b" 或 "0B"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">v</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NYI 向量标志(仅与指令 "d" 一起使用)，见下文说明。</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>例如:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sprintf '&lt;% d&gt;',  12;   # OUTPUT: «&lt; 12&gt;␤»
+sprintf '&lt;% d&gt;',   0;   # OUTPUT: «&lt; 0&gt;"»
+sprintf '&lt;% d&gt;', -12;   # OUTPUT: «&lt;-12&gt;␤»
+sprintf '&lt;%+d&gt;',  12;   # OUTPUT: «&lt;+12&gt;␤»
+sprintf '&lt;%+d&gt;',   0;   # OUTPUT: «&lt;+0&gt;"»
+sprintf '&lt;%+d&gt;', -12;   # OUTPUT: «&lt;-12&gt;␤»
+sprintf '&lt;%6s&gt;',  12;   # OUTPUT: «&lt;    12&gt;␤»
+sprintf '&lt;%-6s&gt;', 12;   # OUTPUT: «&lt;12    &gt;␤»
+sprintf '&lt;%06s&gt;', 12;   # OUTPUT: «&lt;000012&gt;␤»
+sprintf '&lt;%#o&gt;',  12;   # OUTPUT: «&lt;014&gt;␤»
+sprintf '&lt;%#x&gt;',  12;   # OUTPUT: «&lt;0xc&gt;␤»
+sprintf '&lt;%#X&gt;',  12;   # OUTPUT: «&lt;0XC&gt;␤»
+sprintf '&lt;%#b&gt;',  12;   # OUTPUT: «&lt;0b1100&gt;␤»
+sprintf '&lt;%#B&gt;',  12;   # OUTPUT: «&lt;0B1100&gt;␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当同时给出空格和加号作为标志时，空格将被忽略。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sprintf '&lt;%+ d&gt;', 12;   # OUTPUT: «&lt;+12&gt;␤»
+sprintf '&lt;% +d&gt;', 12;   # OUTPUT: «&lt;+12&gt;␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当在 <code>%o</code> 转换中给出 <code>#</code> 标志和一个精度时，会在开头加上必要数量的 0。如果数值为0，精度为0，则不输出任何内容；精度为0或小于实际元素数，则返回带0的数到左边。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say sprintf '&lt;%#.5o&gt;', 0o12;     # OUTPUT: «&lt;00012&gt;␤»
+say sprintf '&lt;%#.5o&gt;', 0o12345;  # OUTPUT: «&lt;012345&gt;␤»
+say sprintf '&lt;%#.0o&gt;', 0;        # OUTPUT: «&lt;&gt;␤» zero precision and value 0
+                                 #               results in no output!
+say sprintf '&lt;%#.0o&gt;', 0o1       # OUTPUT: «&lt;01&gt;␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>向量标志 'v'</p>
+</div>
+<div class="paragraph">
+<p>这个特殊的标志(<code>v</code>，后面是指令 <code>d</code>)告诉 Raku 将所提供的字符串解释为整数向量，字符串中的每个字符都有一个整数向量(<code>ord</code> 例程用于转换为整数)。Raku 依次将格式应用于每个整数，然后用分隔符（默认为点 '.'）将生成的字符串连接起来。这对于在任意字符串中显示字符的序数值非常有用。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">NYI sprintf "%vd", "AB\x[100]";           # OUTPUT: «65.66.256␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你也可以通过使用带有参数索引的星号(例如 <code>*2$v</code>)来明确指定用于分隔符的参数编号；例如:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">NYI sprintf '%*4$vX %*4$vX %*4$vX',       # 3 IPv6 addresses
+        @addr[1..3], ":";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>宽度 (minimum)</p>
+</div>
+<div class="paragraph">
+<p>缺省情况下，参数通常被格式化为只有显示给定值所需的宽度。你可以在这里指定一个最小宽度，通过在这里输入一个数字来覆盖默认宽度，或者从下一个参数(用 <code>*</code>)或从指定的参数(例如用 <code>*2$</code>)中获取所需的宽度。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sprintf "&lt;%s&gt;", "a";           # OUTPUT: «&lt;a&gt;␤»
+sprintf "&lt;%6s&gt;", "a";          # OUTPUT: «&lt;     a&gt;␤»
+sprintf "&lt;%*s&gt;", 6, "a";       # OUTPUT: «&lt;     a&gt;␤»
+NYI sprintf '&lt;%*2$s&gt;', "a", 6; # OUTPUT: «&lt;     a&gt;␤»
+sprintf "&lt;%2s&gt;", "long";       # OUTPUT: «&lt;long&gt;␤»   (does not truncate)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在所有情况下，指定的宽度将根据需要增加，以适应给定的积分数值或字符串。如果通过 <code>*</code> 获得的字段宽度为负值，它的效果与 <code>-</code> 标志相同：左对齐。</p>
+</div>
+<div class="paragraph">
+<p>精度，或最大宽度</p>
+</div>
+<div class="paragraph">
+<p>您可以通过指定一个 <code>.</code> 和一个数字来指定一个精度（用于数字转换）或最大宽度（用于字符串转换）。对于浮点格式，除了 <code>g</code> 和 <code>G</code> 之外，指定小数点右边多少位（默认为 6）。例如：:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># These examples are subject to system-specific variation.
+sprintf '&lt;%f&gt;', 1;    # OUTPUT: «"&lt;1.000000&gt;"␤»
+sprintf '&lt;%.1f&gt;', 1;  # OUTPUT: «"&lt;1.0&gt;"␤»
+sprintf '&lt;%.0f&gt;', 1;  # OUTPUT: «"&lt;1&gt;"␤»
+sprintf '&lt;%e&gt;', 10;   # OUTPUT: «"&lt;1.000000e+01&gt;"␤»
+sprintf '&lt;%.1e&gt;', 10; # OUTPUT: «"&lt;1.0e+01&gt;"␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于 "g" 和 "G"，这指定了要显示的最大数字，包括小数点之前的数字和小数点之后的数字；例如。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># These examples are subject to system-specific variation.
+sprintf '&lt;%g&gt;', 1;        # OUTPUT: «&lt;1&gt;␤»
+sprintf '&lt;%.10g&gt;', 1;     # OUTPUT: «&lt;1&gt;␤»
+sprintf '&lt;%g&gt;', 100;      # OUTPUT: «&lt;100&gt;␤»
+sprintf '&lt;%.1g&gt;', 100;    # OUTPUT: «&lt;1e+02&gt;␤»
+sprintf '&lt;%.2g&gt;', 100.01; # OUTPUT: «&lt;1e+02&gt;␤»
+sprintf '&lt;%.5g&gt;', 100.01; # OUTPUT: «&lt;100.01&gt;␤»
+sprintf '&lt;%.4g&gt;', 100.01; # OUTPUT: «&lt;100&gt;␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于整数转换，指定一个精度意味着数字本身的输出应该被零填充到这个宽度（其中0标志被忽略）。</p>
+</div>
+<div class="paragraph">
+<p>(注意，这个功能目前适用于无符号整数转换，但不适用于有符号整数。)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sprintf '&lt;%.6d&gt;', 1;         # OUTPUT: «&lt;000001&gt;␤»
+NYI sprintf '&lt;%+.6d&gt;', 1;    # OUTPUT: «&lt;+000001&gt;␤»
+NYI sprintf '&lt;%-10.6d&gt;', 1;  # OUTPUT: «&lt;000001    &gt;␤»
+sprintf '&lt;%10.6d&gt;', 1;       # OUTPUT: «&lt;    000001&gt;␤»
+NYI sprintf '&lt;%010.6d&gt;', 1;  # OUTPUT: «&lt;    000001&gt;␤»
+NYI sprintf '&lt;%+10.6d&gt;', 1;  # OUTPUT: «&lt;   +000001&gt;␤»
+sprintf '&lt;%.6x&gt;', 1;         # OUTPUT: «&lt;000001&gt;␤»
+sprintf '&lt;%#.6x&gt;', 1;        # OUTPUT: «&lt;0x000001&gt;␤»
+sprintf '&lt;%-10.6x&gt;', 1;      # OUTPUT: «&lt;000001    &gt;␤»
+sprintf '&lt;%10.6x&gt;', 1;       # OUTPUT: «&lt;    000001&gt;␤»
+sprintf '&lt;%010.6x&gt;', 1;      # OUTPUT: «&lt;    000001&gt;␤»
+sprintf '&lt;%#10.6x&gt;', 1;      # OUTPUT: «&lt;  0x000001&gt;␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于字符串转换，指定一个精度可以截断字符串以适应指定的宽度。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sprintf '&lt;%.5s&gt;', "truncated";   # OUTPUT: «&lt;trunc&gt;␤»
+sprintf '&lt;%10.5s&gt;', "truncated"; # OUTPUT: «&lt;     trunc&gt;␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你也可以使用 <code>.*</code> 从下一个参数中获取精度，或者从指定的参数中获取精度（例如，使用 <code>.*2$</code>）。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sprintf '&lt;%.6x&gt;', 1;           # OUTPUT: «&lt;000001&gt;␤»
+sprintf '&lt;%.*x&gt;', 6, 1;        # OUTPUT: «&lt;000001&gt;␤»
+NYI sprintf '&lt;%.*2$x&gt;', 1, 6;  # OUTPUT: «&lt;000001&gt;␤»
+NYI sprintf '&lt;%6.*2$x&gt;', 1, 4; # OUTPUT: «&lt;  0001&gt;␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果通过 <code>*</code> 得到的精度为负值，则算作没有精度。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sprintf '&lt;%.*s&gt;',  7, "string";   # OUTPUT: «&lt;string&gt;␤»
+sprintf '&lt;%.*s&gt;',  3, "string";   # OUTPUT: «&lt;str&gt;␤»
+sprintf '&lt;%.*s&gt;',  0, "string";   # OUTPUT: «&lt;&gt;␤»
+sprintf '&lt;%.*s&gt;', -1, "string";   # OUTPUT: «&lt;string&gt;␤»
+sprintf '&lt;%.*d&gt;',  1, 0;          # OUTPUT: «&lt;0&gt;␤»
+sprintf '&lt;%.*d&gt;',  0, 0;          # OUTPUT: «&lt;&gt;␤»
+sprintf '&lt;%.*d&gt;', -1, 0;          # OUTPUT: «&lt;0&gt;␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Size</p>
+</div>
+<div class="paragraph">
+<p>对于数字转换，您可以使用 <code>l</code>、<code>h</code>、<code>V</code>、<code>q</code>、<code>L</code> 或 <code>ll</code> 指定解释数字的大小。对于整数转换(<code>d u o x X b i D U O</code>)，数字通常被假定为你的平台上默认的整数大小(通常是32或64位)，但是你可以覆盖它来使用标准的C类型，正如用于构建 Raku 的编译器所支持的那样。</p>
+</div>
+<div class="paragraph">
+<p>(注：以下类型均未实现。)</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">hh</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">将整数解释为C类型的 "char" 或 "unsigned char"。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">h</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">解释为C型 "short" 或 "unsigned short" 的整数</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">j</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">将整数解释为C类型的 "intmax_t"，只有在C99编译器上才可以使用(不可移植)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">l</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">解释为C类型的 "long" 或 "unsigned long" 的整数。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">q, L, or ll</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">将整数解释为C类型的 "long long"、"unsigned long long" 或 "quad"（典型的64位整数）。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">t</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">将整数解释为C类型的 "ptrdiff_t"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">z</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">将整数解释为C类型的 "size_t"</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>参数的顺序</p>
+</div>
+<div class="paragraph">
+<p>通常情况下，<code>sprintf</code> 在每一个格式规范中都会取下一个未被使用的参数作为要格式化的值，如果格式规范使用了 <code>*</code> 来要求额外的参数，那么这些参数就会从参数列表中按它们在格式规范中出现的顺序被消耗掉。如果参数是由显式索引指定的，这不会影响参数的正常顺序，即使显式指定的索引本来是下一个参数。</p>
+</div>
+<div class="paragraph">
+<p>所以:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = 5; my $b = 2; my $c = 'net';
+sprintf "&lt;%*.*s&gt;", $a, $b, $c; # OUTPUT: «&lt;   ne&gt;␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>用 <code>$a</code> 表示宽度，用 <code>$b</code> 表示精度，用 <code>$c</code> 表示要格式化的值；而:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">NYI sprintf '&lt;%*1$.*s&gt;', $a, $b;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>将使用 <code>$a</code> 作为宽度和精度，使用 <code>$b</code> 作为格式化的值。</p>
+</div>
+<div class="paragraph">
+<p>下面是一些更多的例子；请注意，当使用显式索引时，如果格式字符串是双引号，则 <code>$</code> 需要转义。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sprintf "%2\$d %d\n",      12, 34;         # OUTPUT: «34 12␤␤»
+sprintf "%2\$d %d %d\n",   12, 34;         # OUTPUT: «34 12 34␤␤»
+sprintf "%3\$d %d %d\n",   12, 34, 56;     # OUTPUT: «56 12 34␤␤»
+NYI sprintf "%2\$*3\$d %d\n",  12, 34,  3; # OUTPUT: « 34 12␤␤»
+NYI sprintf "%*1\$.*f\n",       4,  5, 10; # OUTPUT: «5.0000␤␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>其他例子：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">NYI sprintf "%ld a big number", 4294967295;
+NYI sprintf "%%lld a bigger number", 4294967296;
+sprintf('%c', 97);                  # OUTPUT: «a␤»
+sprintf("%.2f", 1.969);             # OUTPUT: «1.97␤»
+sprintf("%+.3f", 3.141592);         # OUTPUT: «+3.142␤»
+sprintf('%2$d %1$d', 12, 34);       # OUTPUT: «34 12␤»
+sprintf("%x", 255);                 # OUTPUT: «ff␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>特殊情况：<code>sprintf("&lt;b&gt;%s&lt;/b&gt;n", "Raku")</code> 将无法工作，但以下情况之一可以:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sprintf Q:b "&lt;b&gt;%s&lt;/b&gt;\n",  "Raku"; # OUTPUT: «&lt;b&gt;Raku&lt;/b&gt;␤␤»
+sprintf     "&lt;b&gt;\%s&lt;/b&gt;\n", "Raku"; # OUTPUT: «&lt;b&gt;Raku&lt;/b&gt;␤␤»
+sprintf     "&lt;b&gt;%s\&lt;/b&gt;\n", "Raku"; # OUTPUT: «&lt;b&gt;Raku&lt;/b&gt;␤␤»</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_flat">75.22. 子例程 flat</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi flat(**@list)
+multi flat(Iterable \a)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>构造一个包含所提供的任何参数的列表，并返回对该列表或 <code>Iterable</code> 调用 <code>.flat</code> 方法（<a href="https://docs.raku.org/type/Any#method_flat">继承自 Any</a>）的结果。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say flat 1, (2, (3, 4), $(5, 6)); # OUTPUT: «(1 2 3 4 (5 6))␤»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_unique">75.23. 子例程 unique</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub unique(+values, |c)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>从调用者/参数列表中返回一个唯一值的序列，这样在结果列表中只保留每个重复值的第一次出现。<code>unique</code> 使用 <a href="https://docs.raku.org/routine/===">===</a> 操作符的语义来决定两个对象是否相同，除非用另一个比较器指定了可选的 <code>:with</code> 参数。即使删除了重复值，原始列表的顺序也会被保留。</p>
+</div>
+<div class="paragraph">
+<p>示例:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &lt;a a b b b c c&gt;.unique;   # OUTPUT: «(a b c)␤»
+say &lt;a b b c c b a&gt;.unique;   # OUTPUT: «(a b c)␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>(如果你知道输入的对象是相邻的，那么就用 <a href="https://docs.raku.org/routine/squish">squish</a> 来代替。)</p>
+</div>
+<div class="paragraph">
+<p>可选的 <code>:as</code> 参数允许你在 unique-ing 之前对元素进行标准化/规范化。为了比较的目的，这些值会被转换，但是进入结果列表的仍然是原始值；但是，只有第一次出现的值会出现在列表中。</p>
+</div>
+<div class="paragraph">
+<p>例如：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &lt;a A B b c b C&gt;.unique(:as(&amp;lc))      # OUTPUT: «(a B c)␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们也可以用可选的 <code>:with</code> 参数指定比较器。例如，如果想要一个唯一的哈希列表，可以使用 <code>eqv</code> 比较器。</p>
+</div>
+<div class="paragraph">
+<p>例子:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @list = %(a =&gt; 42), %(b =&gt; 13), %(a =&gt; 42);
+say @list.unique(:with(&amp;[eqv]))           # OUTPUT: «({a =&gt; 42} {b =&gt; 13})␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>注意</strong>: 由于 <code>:with</code> <a href="https://docs.raku.org/type/Callable">Callable</a> 必须对列表中的所有项进行尝试，这使得 <code>unique</code> 跟随路径的算法复杂度更高。你应该尽可能地使用 <code>:as</code> 参数来代替。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_repeated">75.24. 子例程 repeated</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub    repeated(+values, |c)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>它从调用者/参数列表中返回一个重复的值序列。它的参数与 <a href="https://docs.raku.org/routine/unique">unique</a> 相同，但不是在元素第一次出现时通过，而是在第二次（或更多次）出现时才通过。</p>
+</div>
+<div class="paragraph">
+<p>例子:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &lt;a a b b b c c&gt;.repeated;                   # OUTPUT: «(a b b c)␤»
+say &lt;a b b c c b a&gt;.repeated;                   # OUTPUT: «(b c b a)␤»
+say &lt;a A B b c b C&gt;.repeated(:as(&amp;lc));         # OUTPUT: «(A b b C)␤»
+
+my @list = %(a =&gt; 42), %(b =&gt; 13), %(a =&gt; 42);
+say @list.repeated(:with(&amp;[eqv]))               # OUTPUT: «({a =&gt; 42})␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>与 <a href="https://docs.raku.org/type/Any#method_unique">unique</a> 的情况一样，关联参数 <code>:as</code> 接收一个 <code>Callable</code>，在比较前对元素进行归一化，而 <code>:with</code> 接收一个将要使用的相等比较函数。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_例程_squish">75.25. 例程 squish</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub          squish( +values, |c)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>从调用者/参数列表中返回一个值的序列，其中一个或多个值的运行只被第一个实例替换。和 <a href="https://docs.raku.org/routine/unique">unique</a> 一样，<code>squish</code> 使用 <a href="https://docs.raku.org/routine/===">===</a> 运算符的语义来决定两个对象是否相同。与 <a href="https://docs.raku.org/routine/unique">unique</a> 不同的是，这个函数只删除相邻的重复值；相隔较远的相同值仍然被保留。即使删除重复的对象，原始列表的顺序也会被保留。</p>
+</div>
+<div class="paragraph">
+<p>例子:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &lt;a a b b b c c&gt;.squish; # OUTPUT: «(a b c)␤»
+say &lt;a b b c c b a&gt;.squish; # OUTPUT: «(a b c b a)␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>可选的 <code>:as</code> 参数，就像 <a href="https://docs.raku.org/routine/unique">unique</a> 参数一样，允许在比较前对值进行临时转换。</p>
+</div>
+<div class="paragraph">
+<p>可选的 <code>:with</code> 参数用于设置一个合适的比较运算符。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say [42, "42"].squish;                      # OUTPUT: «(42 42)␤»
+# Note that the second item in the result is still Str
+say [42, "42"].squish(with =&gt; &amp;infix:&lt;eq&gt;); # OUTPUT: «(42)␤»
+# The resulting item is Int</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_emit">75.26. 子例程 emit</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub emit(\value --&gt; Nil)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果在任何供应或 <code>react</code> 块之外使用，则会抛出一个异常 <code>emit without supply or react</code>。在 <a href="https://docs.raku.org/type/Supply">Supply</a> 块中，它将向流中添加一条消息。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $supply = supply {
+  for 1 .. 10 {
+      emit($_);
+  }
+}
+$supply.tap( -&gt; $v { say "First : $v" });</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>也请看 <a href="https://docs.raku.org/routine/emit">emit 方法的页面</a>。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_undefine">75.27. 子例程 undefine</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub undefine(Mu    \x)
+multi sub undefine(Array \x)
+multi sub undefine(Hash  \x)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在6.d语言版本中被取消(<strong>DEPRECATED</strong>)，在 6.e 中将被删除。对于<a href="https://docs.raku.org/type/Array">数组</a>和<a href="https://docs.raku.org/type/Hash">散列</a>，它将变得等同于赋值为空(<a href="https://docs.raku.org/type/Slip#index-entry-Empty-Empty">Empty</a>)；对于其他一切，在数组或哈希的情况下，等同于赋值为 <a href="https://docs.raku.org/type/Nil">Nil</a> 或 <code>Empty</code>，建议使用。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_控制例程">75.28. 控制例程</h3>
+<div class="paragraph">
+<p>改变程序流程的例程，或许返回一个值。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_exit">75.29. 子例程 exit</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub exit()
+multi sub exit(Int(Any) $status)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>退出当前进程，返回代码为 <code>$status</code>，如果没有指定值，则为零。当退出值(<code>$status</code>)与零不同时，必须从捕获它的进程(如 shell)中择机评估；它是从 <a href="https://docs.raku.org/routine/MAIN">Main</a> 中返回与零不同的退出代码的唯一方法。</p>
+</div>
+<div class="paragraph">
+<p><code>exit</code> 可以防止 <a href="https://docs.raku.org/language/phasers#LEAVE">LEAVE</a> phaser 被执行，但它会运行 <a href="https://docs.raku.org/language/variables#index-entry-%24*EXIT">&amp;*EXIT</a> 变量中的代码。</p>
+</div>
+<div class="paragraph">
+<p><code>exit</code> 应该作为最后的手段，只用于向父进程发出与零不同的退出代码的信号，而不是例外地终止一个方法或子：使用<a href="https://docs.raku.org/language/exceptions">异常</a>来代替。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_子例程_done">75.30. 子例程 done</h3>
+<div class="paragraph">
+<p>被定义为:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub done(--&gt; Nil)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果在任何供应或 <code>react</code> 块之外使用，会抛出一个 <code>done without supply or react</code> 的异常。在 <a href="https://docs.raku.org/type/Supply">Supply</a> 块中，它将表明该 <code>Supply</code> 将不再发出任何东西。也请参见关于方法 <a href="https://docs.raku.org/routine/done">done</a> 的文档。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $supply = supply {
+    for 1 .. 3 {
+        emit($_);
+    }
+    done;
+}
+$supply.tap( -&gt; $v { say "Second : $v" }, done =&gt; { say "No more" });
+# OUTPUT: OUTPUT: «Second : 1␤Second : 2␤Second : 3␤No More␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>传递给 <code>done</code> 命名参数的块将在 <code>supply</code> 块中调用 <code>done</code> 时运行。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_角色_callable">76. <a href="https://docs.raku.org/type/Callable">角色 Callable</a></h2>
+<div class="sectionbody">
 <div class="quoteblock">
 <blockquote>
 <div class="paragraph">
@@ -41358,11 +42945,10 @@ sub foo() {};
 my &amp;d = &amp;foo;</code></pre>
 </div>
 </div>
-</div>
 <div class="sect2">
-<h3 id="_方法_4">74.4. 方法</h3>
+<h3 id="_方法_4">76.1. 方法</h3>
 <div class="sect3">
-<h4 id="_方法_call_me">74.4.1. 方法 CALL-ME</h4>
+<h4 id="_方法_call_me">76.1.1. 方法 CALL-ME</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method CALL-ME(Callable:D $self: |arguments)</code></pre>
@@ -41397,7 +42983,7 @@ say $a(2); # OUTPUT: «6␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_capture">74.4.2. 方法 Capture</h4>
+<h4 id="_方法_capture">76.1.2. 方法 Capture</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -41412,7 +42998,7 @@ say $a(2); # OUTPUT: «6␤»</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_类型图">74.5. 类型图</h3>
+<h3 id="_类型图">76.2. 类型图</h3>
 <div class="paragraph">
 <p><code>Callable</code> 的类型关系</p>
 </div>
@@ -41425,7 +43011,7 @@ say $a(2); # OUTPUT: «6␤»</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_角色_iterable">75. <a href="https://docs.raku.org/type/Iterable">角色 Iterable</a></h2>
+<h2 id="_角色_iterable">77. <a href="https://docs.raku.org/type/Iterable">角色 Iterable</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
@@ -41462,9 +43048,9 @@ my $a := DNA.new('GAATCC');
 <p>这个例子混合了 <code>Iterable</code> 角色，提供了一种新的方式来迭代本质上是一个字符串（由 <a href="https://docs.raku.org/type/Signature#index-entry-where_clause_(Signature)">where</a> 约束为只有四个DNA字母）。在最后一条语句中，<code>for</code> 实际上钩住了迭代器角色，以3个字母为一组打印字母。</p>
 </div>
 <div class="sect2">
-<h3 id="_方法_5">75.1. 方法</h3>
+<h3 id="_方法_5">77.1. 方法</h3>
 <div class="sect3">
-<h4 id="_方法_iterator">75.1.1. 方法 iterator</h4>
+<h4 id="_方法_iterator">77.1.1. 方法 iterator</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -41486,7 +43072,7 @@ my $a := DNA.new('GAATCC');
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_flat">75.1.2. 方法 flat</h4>
+<h4 id="_方法_flat">77.1.2. 方法 flat</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -41528,7 +43114,7 @@ say (&lt;a b&gt;, 'c').flat.elems;    # OUTPUT: «3␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_lazy">75.1.3. 方法 lazy</h4>
+<h4 id="_方法_lazy">77.1.3. 方法 lazy</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -41548,7 +43134,7 @@ say (1 ... 1000).lazy.is-lazy; # OUTPUT: «True␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_hyper">75.1.4. 方法 hyper</h4>
+<h4 id="_方法_hyper">77.1.4. 方法 hyper</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -41585,7 +43171,7 @@ say (1 ... 1000).lazy.is-lazy; # OUTPUT: «True␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_race">75.1.5. 方法 race</h4>
+<h4 id="_方法_race">77.1.5. 方法 race</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -41617,7 +43203,7 @@ say (1 ... 1000).lazy.is-lazy; # OUTPUT: «True␤»</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_类型图_2">75.2. 类型图</h3>
+<h3 id="_类型图_2">77.2. 类型图</h3>
 <div class="paragraph">
 <p>Iterable 的类型关系</p>
 </div>
@@ -41630,7 +43216,7 @@ say (1 ... 1000).lazy.is-lazy; # OUTPUT: «True␤»</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_角色_iterator">76. <a href="https://docs.raku.org/type/Iterator">角色 Iterator</a></h2>
+<h2 id="_角色_iterator">78. <a href="https://docs.raku.org/type/Iterator">角色 Iterator</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
@@ -41645,7 +43231,7 @@ role Iterator { }</code></pre>
 <p>主要的 API 是 <code>pull-one</code> 方法，它要么返回下一个值，要么返回哨兵值 <code>IterationEnd</code>，如果没有更多的元素可用。每个实现 <code>Iterator</code> 的类都<strong>必须</strong>提供一个 <code>pull-one</code> 方法。所有其他非可选的 Iterator API 方法都是以 <code>pull-one</code> 的方式实现的，但也可以被消费类出于性能或其他原因而重写。还有一些可选的 Iterator API 方法只有在消费类实现的情况下才会被调用：这些方法不是由 <code>Iterator</code> 角色实现的。</p>
 </div>
 <div class="sect2">
-<h3 id="_iterationend">76.1. IterationEnd</h3>
+<h3 id="_iterationend">78.1. IterationEnd</h3>
 <div class="paragraph">
 <p>迭代器只允许在整个序列上进行一次迭代。一旦产生了 <code>IterationEnd</code>，就禁止进行获取更多数据的尝试，而且这样做的行为是未定义的。例如，下面的 <a href="https://docs.raku.org/type/Seq">Seq</a> 在正常使用下不会导致 <a href="https://docs.raku.org/routine/die">die</a> 被调用，因为在它返回 <code>IterationEnd</code> 之后，<a href="https://docs.raku.org/routine/pull-one">pull-one</a> 永远不会被调用:</p>
 </div>
@@ -41711,9 +43297,9 @@ say $is-it-the-end =:= IterationEnd; # OUTPUT: «True␤»</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_方法_6">76.2. 方法</h3>
+<h3 id="_方法_6">78.2. 方法</h3>
 <div class="sect3">
-<h4 id="_方法_pull_one">76.2.1. 方法 pull-one</h4>
+<h4 id="_方法_pull_one">78.2.1. 方法 pull-one</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -41791,7 +43377,7 @@ for( Seq.new(CountDown.new), &amp;say );  # OUTPUT: «10␤9␤8␤7␤6␤5␤4
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_push_exactly">76.2.2. 方法 push-exactly</h4>
+<h4 id="_方法_push_exactly">78.2.2. 方法 push-exactly</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -41863,7 +43449,7 @@ for $þor -&gt; $first, $second {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_push_at_least">76.2.3. 方法 push-at-least</h4>
+<h4 id="_方法_push_at_least">78.2.3. 方法 push-at-least</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -41893,7 +43479,7 @@ say @array; # OUTPUT: «[1 2 3 4 5 6 7 8 9 10]␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_push_all">76.2.4. 方法 push-all</h4>
+<h4 id="_方法_push_all">78.2.4. 方法 push-all</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -41955,7 +43541,7 @@ say @dna-array; # OUTPUT: «[(A A G) (C C T)]␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_push_until_lazy">76.2.5. 方法 push-until-lazy</h4>
+<h4 id="_方法_push_until_lazy">78.2.5. 方法 push-until-lazy</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -41975,7 +43561,7 @@ say @dna-array; # OUTPUT: «[(A A G) (C C T)]␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_is_lazy">76.2.6. 方法 is-lazy</h4>
+<h4 id="_方法_is_lazy">78.2.6. 方法 is-lazy</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -42001,7 +43587,7 @@ say (1 .. ∞).is-lazy; # OUTPUT: «True␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_sink_all">76.2.7. 方法 sink-all</h4>
+<h4 id="_方法_sink_all">78.2.7. 方法 sink-all</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -42023,7 +43609,7 @@ say (1 .. ∞).is-lazy; # OUTPUT: «True␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_skip_one">76.2.8. 方法 skip-one</h4>
+<h4 id="_方法_skip_one">78.2.8. 方法 skip-one</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -42047,7 +43633,7 @@ say $i.skip-one; say $i.pull-one; say $i.skip-one
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_skip_at_least">76.2.9. 方法 skip-at-least</h4>
+<h4 id="_方法_skip_at_least">78.2.9. 方法 skip-at-least</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -42071,7 +43657,7 @@ say $i.skip-at-least(2); say $i.pull-one; say $i.skip-at-least(20);
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_skip_at_least_pull_one">76.2.10. 方法 skip-at-least-pull-one</h4>
+<h4 id="_方法_skip_at_least_pull_one">78.2.10. 方法 skip-at-least-pull-one</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -42097,13 +43683,13 @@ say $i.skip-at-least-pull-one(20) =:= IterationEnd;
 </div>
 </div>
 <div class="sect2">
-<h3 id="_预测性迭代器predictive_iterators">76.3. 预测性迭代器(predictive iterators)</h3>
+<h3 id="_预测性迭代器predictive_iterators">78.3. 预测性迭代器(predictive iterators)</h3>
 <div class="paragraph">
 <p>如果你的 <code>Iterator</code> 可以在不实际产生值的情况下知道还能产生多少值，请看 <a href="https://docs.raku.org/type/PredictiveIterator">PredictiveIterator</a> 角色。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_类型图_3">76.4. 类型图</h3>
+<h3 id="_类型图_3">78.4. 类型图</h3>
 <div class="paragraph">
 <p>迭代器的类型关系</p>
 </div>
@@ -42116,7 +43702,7 @@ say $i.skip-at-least-pull-one(20) =:= IterationEnd;
 </div>
 </div>
 <div class="sect1">
-<h2 id="_类_junction">77. <a href="https://docs.raku.org/type/Junction">类 Junction</a></h2>
+<h2 id="_类_junction">79. <a href="https://docs.raku.org/type/Junction">类 Junction</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
@@ -42311,7 +43897,7 @@ if $word eq none @negations {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_失败和异常">77.1. 失败和异常</h3>
+<h3 id="_失败和异常">79.1. 失败和异常</h3>
 <div class="paragraph">
 <p><a href="https://docs.raku.org/type/Failure">失败</a>就像其他的数值一样，就 junction 而言:</p>
 </div>
@@ -42361,7 +43947,7 @@ say so $j == 42; # OUTPUT: «True␤»</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_智能匹配">77.2. 智能匹配</h3>
+<h3 id="_智能匹配">79.2. 智能匹配</h3>
 <div class="paragraph">
 <p>请注意，在 <code>~~</code> 的右侧使用 <code>Junction</code> 与使用 Junctions 与其他运算符的工作方式略有不同。</p>
 </div>
@@ -42379,9 +43965,9 @@ say 25 ~~ (25 | 42);    # OUTPUT: «True␤»             – Bool</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_方法_7">77.3. 方法</h3>
+<h3 id="_方法_7">79.3. 方法</h3>
 <div class="sect3">
-<h4 id="_方法_new">77.3.1. 方法 new</h4>
+<h4 id="_方法_new">79.3.1. 方法 new</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -42402,7 +43988,7 @@ my $n = Junction.new( "one", 1..6 )</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_defined">77.3.2. 方法 defined</h4>
+<h4 id="_方法_defined">79.3.2. 方法 defined</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -42435,7 +44021,7 @@ say (one 3, $foo).defined; # OUTPUT: «True␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_bool">77.3.3. 方法 Bool</h4>
+<h4 id="_方法_bool">79.3.3. 方法 Bool</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -42467,7 +44053,7 @@ say $n.Bool;                         # OUTPUT: «True␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_str">77.3.4. 方法 Str</h4>
+<h4 id="_方法_str">79.3.4. 方法 Str</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -42481,7 +44067,7 @@ say $n.Bool;                         # OUTPUT: «True␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_gist">77.3.5. 方法 gist</h4>
+<h4 id="_方法_gist">79.3.5. 方法 gist</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -42500,7 +44086,7 @@ say $n.Bool;                         # OUTPUT: «True␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_raku">77.3.6. 方法 raku</h4>
+<h4 id="_方法_raku">79.3.6. 方法 raku</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -42519,7 +44105,7 @@ say $n.Bool;                         # OUTPUT: «True␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_infix_75">77.3.7. infix ~</h4>
+<h4 id="_infix_75">79.3.7. infix ~</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -42555,7 +44141,7 @@ say "Found 11" if 11 == $postfixed; #OUTPUT: «Found 11!␤»</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_另见">77.4. 另见</h3>
+<h3 id="_另见">79.4. 另见</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -42571,7 +44157,7 @@ say "Found 11" if 11 == $postfixed; #OUTPUT: «Found 11!␤»</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_类型图_4">77.5. 类型图</h3>
+<h3 id="_类型图_4">79.5. 类型图</h3>
 <div class="paragraph">
 <p>Junction 的类型关系</p>
 </div>
@@ -42584,7 +44170,7 @@ say "Found 11" if 11 == $postfixed; #OUTPUT: «Found 11!␤»</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_类_proxy">78. <a href="https://docs.raku.org/type/Proxy">类 Proxy</a></h2>
+<h2 id="_类_proxy">80. <a href="https://docs.raku.org/type/Proxy">类 Proxy</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
@@ -42612,9 +44198,9 @@ say $doubled;       # OUTPUT: «8␤»</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_方法_8">78.1. 方法</h3>
+<h3 id="_方法_8">80.1. 方法</h3>
 <div class="sect3">
-<h4 id="_方法_new_2">78.1.1. 方法 new</h4>
+<h4 id="_方法_new_2">80.1.1. 方法 new</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method new(:&amp;FETCH!, :&amp;STORE! --&gt; Proxy:D)</code></pre>
@@ -42626,7 +44212,7 @@ say $doubled;       # OUTPUT: «8␤»</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_类型图_5">78.2. 类型图</h3>
+<h3 id="_类型图_5">80.2. 类型图</h3>
 <div class="paragraph">
 <p><code>Proxy</code> 类型图</p>
 </div>
@@ -42639,7 +44225,7 @@ say $doubled;       # OUTPUT: «8␤»</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_类_supplierpreserving">79. <a href="https://docs.raku.org/type/Supplier::Preserving">类 Supplier::Preserving</a></h2>
+<h2 id="_类_supplierpreserving">81. <a href="https://docs.raku.org/type/Supplier::Preserving">类 Supplier::Preserving</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
@@ -42683,9 +44269,9 @@ also done after 4.0534119s</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_方法_9">79.1. 方法</h3>
+<h3 id="_方法_9">81.1. 方法</h3>
 <div class="sect3">
-<h4 id="_方法_new_3">79.1.1. 方法 new</h4>
+<h4 id="_方法_new_3">81.1.1. 方法 new</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method new()</code></pre>
@@ -42697,7 +44283,7 @@ also done after 4.0534119s</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_类型图_6">79.2. 类型图</h3>
+<h3 id="_类型图_6">81.2. 类型图</h3>
 <div class="paragraph">
 <p><code>Supplier::Preserving</code> 的类型关系:</p>
 </div>
@@ -42708,12 +44294,12 @@ also done after 4.0534119s</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_由类_supplier_提供的例程">79.3. 由类 Supplier 提供的例程</h3>
+<h3 id="_由类_supplier_提供的例程">81.3. 由类 Supplier 提供的例程</h3>
 <div class="paragraph">
 <p><code>Supplier::Preserving</code> 继承自类 <a href="https://docs.raku.org/type/Supplier">Supplier</a>，它提供了以下例程:</p>
 </div>
 <div class="sect3">
-<h4 id="_supplier_方法_new">79.3.1. (Supplier) 方法 new</h4>
+<h4 id="_supplier_方法_new">81.3.1. (Supplier) 方法 new</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method new()</code></pre>
@@ -42724,7 +44310,7 @@ also done after 4.0534119s</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_supplier_方法_supply">79.3.2. (Supplier) 方法 Supply</h4>
+<h4 id="_supplier_方法_supply">81.3.2. (Supplier) 方法 Supply</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method Supply(Supplier:D: --&gt; Supply)</code></pre>
@@ -42735,7 +44321,7 @@ also done after 4.0534119s</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_supplier_方法_emit">79.3.3. (Supplier) 方法 emit</h4>
+<h4 id="_supplier_方法_emit">81.3.3. (Supplier) 方法 emit</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method emit(Supplier:D: Mu \value)</code></pre>
@@ -42746,7 +44332,7 @@ also done after 4.0534119s</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_supplier_方法_done">79.3.4. (Supplier) 方法 done</h4>
+<h4 id="_supplier_方法_done">81.3.4. (Supplier) 方法 done</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method done(Supplier:D:)</code></pre>
@@ -42775,7 +44361,7 @@ no more answers</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_supplier_方法_quit">79.3.5. (Supplier) 方法 quit</h4>
+<h4 id="_supplier_方法_quit">81.3.5. (Supplier) 方法 quit</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">multi method quit(Supplier:D: Exception $ex)
@@ -42793,7 +44379,7 @@ multi method quit(Supplier:D: Str() $message)</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_类_supplier">80. 类 Supplier</h2>
+<h2 id="_类_supplier">82. 类 Supplier</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
@@ -42826,9 +44412,9 @@ Two 42</code></pre>
 <p>按需供应是由 <a href="https://docs.raku.org/type/Supply">Supply</a> 类的工厂方法或由 <code>supply</code> 关键字创建的。可以用 <a href="https://docs.raku.org/type/Supplier::Preserving">Supplier::Preserving</a> 创建一个实时和按需供应(<code>Supply</code>)的混合体。</p>
 </div>
 <div class="sect2">
-<h3 id="_方法_10">80.1. 方法</h3>
+<h3 id="_方法_10">82.1. 方法</h3>
 <div class="sect3">
-<h4 id="_方法_new_4">80.1.1. 方法 new()</h4>
+<h4 id="_方法_new_4">82.1.1. 方法 new()</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method new</code></pre>
@@ -42839,7 +44425,7 @@ Two 42</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_supply">80.1.2. 方法 Supply</h4>
+<h4 id="_方法_supply">82.1.2. 方法 Supply</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method Supply(Supplier:D: --&gt; Supply)</code></pre>
@@ -42850,7 +44436,7 @@ Two 42</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_emit">80.1.3. 方法 emit</h4>
+<h4 id="_方法_emit">82.1.3. 方法 emit</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method emit(Supplier:D: Mu \value)</code></pre>
@@ -42861,7 +44447,7 @@ Two 42</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_done">80.1.4. 方法 done</h4>
+<h4 id="_方法_done">82.1.4. 方法 done</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method done(Supplier:D:)</code></pre>
@@ -42890,7 +44476,7 @@ no more answers</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_quit">80.1.5. 方法 quit</h4>
+<h4 id="_方法_quit">82.1.5. 方法 quit</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">multi method quit(Supplier:D: Exception $ex)
@@ -42906,7 +44492,7 @@ multi method quit(Supplier:D: Str() $message)</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_类型图_7">80.2. 类型图</h3>
+<h3 id="_类型图_7">82.2. 类型图</h3>
 <div class="paragraph">
 <p><code>Supplier</code> 的类型关系</p>
 </div>
@@ -42919,7 +44505,7 @@ multi method quit(Supplier:D: Str() $message)</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_类_supply">81. <a href="https://docs.raku.org/type/Supply">类 Supply</a></h2>
+<h2 id="_类_supply">83. <a href="https://docs.raku.org/type/Supply">类 Supply</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
@@ -42959,9 +44545,9 @@ $supplier.emit(42); # Will cause the tap to output "42"</code></pre>
 <p>更多的例子可以在<a href="https://docs.raku.org/language/concurrency#Supplies">并发页面</a>中找到。</p>
 </div>
 <div class="sect2">
-<h3 id="_返回分接的方法">81.1. 返回分接的方法</h3>
+<h3 id="_返回分接的方法">83.1. 返回分接的方法</h3>
 <div class="sect3">
-<h4 id="_方法_tap">81.1.1. 方法 tap</h4>
+<h4 id="_方法_tap">83.1.1. 方法 tap</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method tap(Supply:D: &amp;emit = -&gt; $ { },
@@ -43008,7 +44594,7 @@ no more ticks</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_act">81.1.2. act</h4>
+<h4 id="_act">83.1.2. act</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method act(Supply:D: &amp;act --&gt; Tap:D)</code></pre>
@@ -43020,9 +44606,9 @@ no more ticks</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_实用方法">81.2. 实用方法</h3>
+<h3 id="_实用方法">83.2. 实用方法</h3>
 <div class="sect3">
-<h4 id="_方法_capture_2">81.2.1. 方法 Capture</h4>
+<h4 id="_方法_capture_2">83.2.1. 方法 Capture</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -43036,7 +44622,7 @@ no more ticks</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_channel">81.2.2. 方法 Channel</h4>
+<h4 id="_方法_channel">83.2.2. 方法 Channel</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method Channel(Supply:D: --&gt; Channel:D)</code></pre>
@@ -43047,7 +44633,7 @@ no more ticks</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_promise">81.2.3. 方法 Promise</h4>
+<h4 id="_方法_promise">83.2.3. 方法 Promise</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method Promise(Supply:D: --&gt; Promise:D)</code></pre>
@@ -43071,7 +44657,7 @@ $supplier.done();              # got cha</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_live">81.2.4. 方法 live</h4>
+<h4 id="_方法_live">83.2.4. 方法 live</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method live(Supply:D: --&gt; Bool:D)</code></pre>
@@ -43087,7 +44673,7 @@ $supplier.done();              # got cha</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_schedule_on">81.2.5. schedule-on</h4>
+<h4 id="_schedule_on">83.2.5. schedule-on</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method schedule-on(Supply:D: Scheduler $scheduler)</code></pre>
@@ -43102,9 +44688,9 @@ $supplier.done();              # got cha</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_等待直到供应完成的方法">81.3. 等待直到供应完成的方法</h3>
+<h3 id="_等待直到供应完成的方法">83.3. 等待直到供应完成的方法</h3>
 <div class="sect3">
-<h4 id="_方法_wait">81.3.1. 方法 wait</h4>
+<h4 id="_方法_wait">83.3.1. 方法 wait</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method wait(Supply:D:)</code></pre>
@@ -43129,7 +44715,7 @@ say "Two seconds: done";</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_list">81.3.2. 方法 list</h4>
+<h4 id="_方法_list">83.3.2. 方法 list</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method list(Supply:D: --&gt; List:D)</code></pre>
@@ -43140,7 +44726,7 @@ say "Two seconds: done";</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_grab">81.3.3. 方法 grab</h4>
+<h4 id="_方法_grab">83.3.3. 方法 grab</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method grab(Supply:D: &amp;when-done --&gt; Supply:D)</code></pre>
@@ -43158,7 +44744,7 @@ $t.tap(&amp;say);           # OUTPUT: «19␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_reverse">81.3.4. 方法 reverse</h4>
+<h4 id="_方法_reverse">83.3.4. 方法 reverse</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method reverse(Supply:D: --&gt; Supply:D)</code></pre>
@@ -43176,7 +44762,7 @@ $t.tap(&amp;say);           # OUTPUT: «3␤2␤1␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_sort">81.3.5. 方法 sort</h4>
+<h4 id="_方法_sort">83.3.5. 方法 sort</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method sort(Supply:D: &amp;custom-routine-to-use? --&gt; Supply:D)</code></pre>
@@ -43194,7 +44780,7 @@ $t.tap(&amp;say);           # OUTPUT: «2␤3␤4␤10␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_collate">81.3.6. 方法 collate</h4>
+<h4 id="_方法_collate">83.3.6. 方法 collate</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method collate(Supply:D:)</code></pre>
@@ -43213,9 +44799,9 @@ $t.tap(&amp;say);           # OUTPUT: «a␤ä␤o␤ö␤»</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_返回另一个_supply_的方法">81.4. 返回另一个 Supply 的方法</h3>
+<h3 id="_返回另一个_supply_的方法">83.4. 返回另一个 Supply 的方法</h3>
 <div class="sect3">
-<h4 id="_方法_from_list">81.4.1. 方法 from-list</h4>
+<h4 id="_方法_from_list">83.4.1. 方法 from-list</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method from-list(Supply:U: +@values --&gt; Supply:D)</code></pre>
@@ -43232,7 +44818,7 @@ $s.tap(&amp;say);           # OUTPUT: «1␤2␤3␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_share">81.4.2. 方法 share</h4>
+<h4 id="_方法_share">83.4.2. 方法 share</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method share(Supply:D: --&gt; Supply:D)</code></pre>
@@ -43253,7 +44839,7 @@ sleep 2</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_flat_2">81.4.3. 方法 flat</h4>
+<h4 id="_方法_flat_2">83.4.3. 方法 flat</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method flat(Supply:D: --&gt; Supply:D)</code></pre>
@@ -43264,7 +44850,7 @@ sleep 2</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_do">81.4.4. 方法 do</h4>
+<h4 id="_方法_do">83.4.4. 方法 do</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method do(Supply:D: &amp;do --&gt; Supply:D)</code></pre>
@@ -43275,7 +44861,7 @@ sleep 2</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_on_close">81.4.5. 方法 on-close</h4>
+<h4 id="_方法_on_close">83.4.5. 方法 on-close</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method on-close(Supply:D: &amp;on-close --&gt; Supply:D)</code></pre>
@@ -43299,7 +44885,7 @@ $tap.close;        # OUTPUT: «Tap closed␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_interval">81.4.6. 方法 interval</h4>
+<h4 id="_方法_interval">83.4.6. 方法 interval</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method interval(Supply:U: $interval, $delay = 0, :$scheduler = $*SCHEDULER --&gt; Supply:D)</code></pre>
@@ -43313,7 +44899,7 @@ $tap.close;        # OUTPUT: «Tap closed␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_grep">81.4.7. 方法 grep</h4>
+<h4 id="_方法_grep">83.4.7. 方法 grep</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method grep(Supply:D: Mu $test --&gt; Supply:D)</code></pre>
@@ -43333,7 +44919,7 @@ $supplier.emit($_) for 1, 'a string', 3.14159;   # prints only 1</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_map">81.4.8. 方法 map</h4>
+<h4 id="_方法_map">83.4.8. 方法 map</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method map(Supply:D: &amp;mapper --&gt; Supply:D)</code></pre>
@@ -43353,7 +44939,7 @@ $supplier.emit(4);           # OUTPUT: «8»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_batch">81.4.9. 方法 batch</h4>
+<h4 id="_方法_batch">83.4.9. 方法 batch</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method batch(Supply:D: :$elems, :$seconds --&gt; Supply:D)</code></pre>
@@ -43364,7 +44950,7 @@ $supplier.emit(4);           # OUTPUT: «8»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_elems">81.4.10. 方法 elems</h4>
+<h4 id="_方法_elems">83.4.10. 方法 elems</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method elems(Supply:D: $seconds? --&gt; Supply:D)</code></pre>
@@ -43375,7 +44961,7 @@ $supplier.emit(4);           # OUTPUT: «8»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_head">81.4.11. 方法 head</h4>
+<h4 id="_方法_head">83.4.11. 方法 head</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method head(Supply:D: Int(Cool) $number = 1 --&gt; Supply:D)</code></pre>
@@ -43393,7 +44979,7 @@ $hs.tap(&amp;say);           # OUTPUT: «4␤10␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_tail">81.4.12. 方法 tail</h4>
+<h4 id="_方法_tail">83.4.12. 方法 tail</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method tail(Supply:D: Int(Cool) $number = 1 --&gt; Supply:D)</code></pre>
@@ -43411,7 +44997,7 @@ $ts.tap(&amp;say);           # OUTPUT: «3␤2␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_first">81.4.13. 方法 first</h4>
+<h4 id="_方法_first">83.4.13. 方法 first</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method first(Supply:D: :$end, |c)</code></pre>
@@ -43431,7 +45017,7 @@ $first-prime.tap: &amp;say;</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_rotor">81.4.14. 方法 rotor</h4>
+<h4 id="_方法_rotor">83.4.14. 方法 rotor</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method rotor(Supply:D: @cycle --&gt; Supply:D)</code></pre>
@@ -43442,7 +45028,7 @@ $first-prime.tap: &amp;say;</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_delayed">81.4.15. 方法 delayed</h4>
+<h4 id="_方法_delayed">83.4.15. 方法 delayed</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method delayed(Supply:D: $seconds, :$scheduler = $*SCHEDULER --&gt; Supply:D)</code></pre>
@@ -43453,7 +45039,7 @@ $first-prime.tap: &amp;say;</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_throttle">81.4.16. 方法 throttle</h4>
+<h4 id="_方法_throttle">83.4.16. 方法 throttle</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method throttle(Supply:D:
@@ -43665,7 +45251,7 @@ done 5</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_stable">81.4.17. 方法 stable</h4>
+<h4 id="_方法_stable">83.4.17. 方法 stable</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method stable(Supply:D: $time, :$scheduler = $*SCHEDULER --&gt; Supply:D)</code></pre>
@@ -43701,7 +45287,7 @@ sleep(10);
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_reduce">81.4.18. 方法 reduce</h4>
+<h4 id="_方法_reduce">83.4.18. 方法 reduce</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method reduce(Supply:D: &amp;with --&gt; Supply:D)</code></pre>
@@ -43718,7 +45304,7 @@ $supply.tap(-&gt; $v { say "$v" }); # OUTPUT: «15␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_produce">81.4.19. 方法 produce</h4>
+<h4 id="_方法_produce">83.4.19. 方法 produce</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method produce(Supply:D: &amp;with --&gt; Supply:D)</code></pre>
@@ -43735,7 +45321,7 @@ $supply.tap(-&gt; $v { say "$v" }); # OUTPUT: «1␤3␤6␤10␤15␤»</code><
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_lines">81.4.20. 方法 lines</h4>
+<h4 id="_方法_lines">83.4.20. 方法 lines</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method lines(Supply:D: :$chomp = True --&gt; Supply:D)</code></pre>
@@ -43746,7 +45332,7 @@ $supply.tap(-&gt; $v { say "$v" }); # OUTPUT: «1␤3␤6␤10␤15␤»</code><
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_words">81.4.21. 方法 words</h4>
+<h4 id="_方法_words">83.4.21. 方法 words</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method words(Supply:D: --&gt; Supply:D)</code></pre>
@@ -43764,7 +45350,7 @@ $ws.tap(&amp;say);           # OUTPUT: «Hello␤Word!␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_unique">81.4.22. 方法 unique</h4>
+<h4 id="_方法_unique">83.4.22. 方法 unique</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method unique(Supply:D: :$as, :$with, :$expires --&gt; Supply:D)</code></pre>
@@ -43775,7 +45361,7 @@ $ws.tap(&amp;say);           # OUTPUT: «Hello␤Word!␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_repeated">81.4.23. 方法 repeated</h4>
+<h4 id="_方法_repeated">83.4.23. 方法 repeated</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method repeated(Supply:D: :&amp;as, :&amp;with)</code></pre>
@@ -43798,7 +45384,7 @@ $supply.tap(&amp;say);           # OUTPUT: «A␤b␤b␤C␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_squish">81.4.24. 方法 squish</h4>
+<h4 id="_方法_squish">83.4.24. 方法 squish</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method squish(Supply:D: :$as, :$with --&gt; Supply:D)</code></pre>
@@ -43809,7 +45395,7 @@ $supply.tap(&amp;say);           # OUTPUT: «A␤b␤b␤C␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_max">81.4.25. 方法 max</h4>
+<h4 id="_方法_max">83.4.25. 方法 max</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method max(Supply:D: &amp;custom-routine-to-use = &amp;infix:&lt;cmp&gt; --&gt; Supply:D)</code></pre>
@@ -43820,7 +45406,7 @@ $supply.tap(&amp;say);           # OUTPUT: «A␤b␤b␤C␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_min">81.4.26. 方法 min</h4>
+<h4 id="_方法_min">83.4.26. 方法 min</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method min(Supply:D: &amp;custom-routine-to-use = &amp;infix:&lt;cmp&gt; --&gt; Supply:D)</code></pre>
@@ -43831,7 +45417,7 @@ $supply.tap(&amp;say);           # OUTPUT: «A␤b␤b␤C␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_minmax">81.4.27. 方法 minmax</h4>
+<h4 id="_方法_minmax">83.4.27. 方法 minmax</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method minmax(Supply:D: &amp;custom-routine-to-use = &amp;infix:&lt;cmp&gt; --&gt; Supply:D)</code></pre>
@@ -43842,7 +45428,7 @@ $supply.tap(&amp;say);           # OUTPUT: «A␤b␤b␤C␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_skip">81.4.28. 方法 skip</h4>
+<h4 id="_方法_skip">83.4.28. 方法 skip</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method skip(Supply:D: Int(Cool) $number = 1 --&gt; Supply:D)</code></pre>
@@ -43862,7 +45448,7 @@ $supplier.emit($_) for 1..10; # OUTPUT: «4␤5␤6␤7␤8␤9␤10␤»</code>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_start">81.4.29. 方法 start</h4>
+<h4 id="_方法_start">83.4.29. 方法 start</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method start(Supply:D: &amp;startee --&gt; Supply:D)</code></pre>
@@ -43879,7 +45465,7 @@ $supplier.emit($_) for 1..10; # OUTPUT: «4␤5␤6␤7␤8␤9␤10␤»</code>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_migrate">81.4.30. 方法 migrate</h4>
+<h4 id="_方法_migrate">83.4.30. 方法 migrate</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method migrate(Supply:D: --&gt; Supply:D)</code></pre>
@@ -43935,9 +45521,9 @@ AAPL: 111.6</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_合并供应的方法">81.5. 合并供应的方法</h3>
+<h3 id="_合并供应的方法">83.5. 合并供应的方法</h3>
 <div class="sect3">
-<h4 id="_方法_merge">81.5.1. 方法 merge</h4>
+<h4 id="_方法_merge">83.5.1. 方法 merge</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method merge(Supply @*supplies --&gt; Supply:D)</code></pre>
@@ -43948,7 +45534,7 @@ AAPL: 111.6</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_zip">81.5.2. 方法 zip</h4>
+<h4 id="_方法_zip">83.5.2. 方法 zip</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method zip(Supply @*supplies, :&amp;with = &amp;[,] --&gt; Supply:D)</code></pre>
@@ -43959,7 +45545,7 @@ AAPL: 111.6</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_zip_latest">81.5.3. 方法 zip-latest</h4>
+<h4 id="_方法_zip_latest">83.5.3. 方法 zip-latest</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method zip-latest(Supply @*supplies, :&amp;with = &amp;[,], :$initial --&gt; Supply:D)</code></pre>
@@ -43971,9 +45557,9 @@ AAPL: 111.6</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_作为供应暴露的_io_功能">81.6. 作为供应暴露的 I/O 功能</h3>
+<h3 id="_作为供应暴露的_io_功能">83.6. 作为供应暴露的 I/O 功能</h3>
 <div class="sect3">
-<h4 id="_sub_signal">81.6.1. sub signal</h4>
+<h4 id="_sub_signal">83.6.1. sub signal</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub signal(*@signals, :$scheduler = $*SCHEDULER)</code></pre>
@@ -44006,7 +45592,7 @@ AAPL: 111.6</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_ionotification_watch_path">81.6.2. 方法 IO::Notification.watch-path</h4>
+<h4 id="_方法_ionotification_watch_path">83.6.2. 方法 IO::Notification.watch-path</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method watch-path($path --&gt; Supply:D)</code></pre>
@@ -44024,7 +45610,7 @@ AAPL: 111.6</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_类型图_8">81.7. 类型图</h3>
+<h3 id="_类型图_8">83.7. 类型图</h3>
 <div class="paragraph">
 <p>供应的类型图</p>
 </div>
@@ -44037,7 +45623,7 @@ AAPL: 111.6</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_类_whatever">82. <a href="https://docs.raku.org/type/Whatever">类 Whatever</a></h2>
+<h2 id="_类_whatever">84. <a href="https://docs.raku.org/type/Whatever">类 Whatever</a></h2>
 <div class="sectionbody">
 <div class="quoteblock">
 <blockquote>
@@ -44205,9 +45791,9 @@ $maybe-always-matcher(Any);      # True</code></pre>
 <p><a href="https://docs.raku.org/type/HyperWhatever">HyperWhatever</a> 的功能与 <code>Whatever</code> 类似，只是它指的是多个值，而不是一个值。</p>
 </div>
 <div class="sect2">
-<h3 id="_方法_11">82.1. 方法</h3>
+<h3 id="_方法_11">84.1. 方法</h3>
 <div class="sect3">
-<h4 id="_方法_accepts">82.1.1. 方法 ACCEPTS</h4>
+<h4 id="_方法_accepts">84.1.1. 方法 ACCEPTS</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">multi method ACCEPTS(Whatever:D: Mu $other)
@@ -44225,7 +45811,7 @@ say 42 ~~ Whatever;  # OUTPUT: «False␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_capture_3">82.1.2. 方法 Capture</h4>
+<h4 id="_方法_capture_3">84.1.2. 方法 Capture</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -44240,7 +45826,7 @@ say 42 ~~ Whatever;  # OUTPUT: «False␤»</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_类型图_9">82.2. 类型图</h3>
+<h3 id="_类型图_9">84.2. 类型图</h3>
 <div class="paragraph">
 <p><code>Whatever</code> 的类型关系</p>
 </div>
@@ -44253,7 +45839,7 @@ say 42 ~~ Whatever;  # OUTPUT: «False␤»</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_类_whatevercode">83. <a href="https://docs.raku.org/type/WhateverCode">类 WhateverCode</a></h2>
+<h2 id="_类_whatevercode">85. <a href="https://docs.raku.org/type/WhateverCode">类 WhateverCode</a></h2>
 <div class="sectionbody">
 <div class="quoteblock">
 <blockquote>
@@ -44346,7 +45932,7 @@ run-with-rand sub { $^v.say }; # OUTPUT: «0.0589543603685792␤»</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_类型图_10">83.1. 类型图</h3>
+<h3 id="_类型图_10">85.1. 类型图</h3>
 <div class="paragraph">
 <p><code>WhateverCode</code> 的类型关系</p>
 </div>
@@ -44357,12 +45943,12 @@ run-with-rand sub { $^v.say }; # OUTPUT: «0.0589543603685792␤»</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_由类_code_提供的例程">83.2. 由类 Code 提供的例程</h3>
+<h3 id="_由类_code_提供的例程">85.2. 由类 Code 提供的例程</h3>
 <div class="paragraph">
 <p>WhateverCode 继承自类 <a href="https://docs.raku.org/type/Code">Code</a>，它提供了以下例程:</p>
 </div>
 <div class="sect3">
-<h4 id="_code_方法_accepts">83.2.1. (Code) 方法 ACCEPTS</h4>
+<h4 id="_code_方法_accepts">85.2.1. (Code) 方法 ACCEPTS</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">multi method ACCEPTS(Code:D: Mu $topic)</code></pre>
@@ -44373,7 +45959,7 @@ run-with-rand sub { $^v.say }; # OUTPUT: «0.0589543603685792␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_code_方法_arity">83.2.2. (Code) 方法 arity</h4>
+<h4 id="_code_方法_arity">85.2.2. (Code) 方法 arity</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -44397,7 +45983,7 @@ say &amp;slurpy.arity;              # OUTPUT: «2␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_code_方法_assuming">83.2.3. (Code) 方法 assuming</h4>
+<h4 id="_code_方法_assuming">85.2.3. (Code) 方法 assuming</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method assuming(Callable:D $self: |primers)</code></pre>
@@ -44471,7 +46057,7 @@ say learner :6months;  # OUTPUT: «It took me 6 months to learn Raku␤»</code>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_code_方法_count">83.2.4. (Code) 方法 count</h4>
+<h4 id="_code_方法_count">85.2.4. (Code) 方法 count</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -44495,7 +46081,7 @@ say &amp;slurpy.count;              # OUTPUT: «Inf␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_code_方法_of">83.2.5. (Code) 方法 of</h4>
+<h4 id="_code_方法_of">85.2.5. (Code) 方法 of</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -44514,7 +46100,7 @@ say &amp;slurpy.count;              # OUTPUT: «Inf␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_code_方法_signature">83.2.6. (Code) 方法 signature</h4>
+<h4 id="_code_方法_signature">85.2.6. (Code) 方法 signature</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -44534,7 +46120,7 @@ say &amp;a.signature; # OUTPUT: «(Int $one, Str $two)␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_code_方法_cando">83.2.7. (Code) 方法 cando</h4>
+<h4 id="_code_方法_cando">85.2.7. (Code) 方法 cando</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method cando(Capture $c)</code></pre>
@@ -44554,7 +46140,7 @@ say &amp;block.cando($plural); # OUTPUT: «()␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_code_方法_str">83.2.8. (Code) 方法 Str</h4>
+<h4 id="_code_方法_str">85.2.8. (Code) 方法 Str</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -44578,7 +46164,7 @@ say &amp;marine.raku; # OUTPUT: «sub marine { #`(Sub|94280758332168) ... }␤»
 </div>
 </div>
 <div class="sect3">
-<h4 id="_code_方法_file">83.2.9. (Code) 方法 file</h4>
+<h4 id="_code_方法_file">85.2.9. (Code) 方法 file</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -44597,7 +46183,7 @@ say &amp;marine.raku; # OUTPUT: «sub marine { #`(Sub|94280758332168) ... }␤»
 </div>
 </div>
 <div class="sect3">
-<h4 id="_code_方法_line">83.2.10. (Code) 方法 line</h4>
+<h4 id="_code_方法_line">85.2.10. (Code) 方法 line</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -44616,7 +46202,7 @@ say &amp;marine.raku; # OUTPUT: «sub marine { #`(Sub|94280758332168) ... }␤»
 </div>
 </div>
 <div class="sect3">
-<h4 id="_code_方法_is_implementation_detail">83.2.11. (Code) 方法 is-implementation-detail</h4>
+<h4 id="_code_方法_is_implementation_detail">85.2.11. (Code) 方法 is-implementation-detail</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method is-implementation-detail(--&gt; False)</code></pre>
@@ -44631,12 +46217,12 @@ say &amp;marine.raku; # OUTPUT: «sub marine { #`(Sub|94280758332168) ... }␤»
 </div>
 </div>
 <div class="sect2">
-<h3 id="_由角色_callable_提供的例程">83.3. 由角色 Callable 提供的例程</h3>
+<h3 id="_由角色_callable_提供的例程">85.3. 由角色 Callable 提供的例程</h3>
 <div class="paragraph">
 <p><code>WhateverCode</code> 继承自类 <a href="https://docs.raku.org/type/Code">Code</a>，它遵守的角色是 <a href="https://docs.raku.org/type/Callable">Callable</a>，它提供了以下例程。</p>
 </div>
 <div class="sect3">
-<h4 id="_callable_方法_call_me">83.3.1. (Callable) 方法 CALL-ME</h4>
+<h4 id="_callable_方法_call_me">85.3.1. (Callable) 方法 CALL-ME</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method CALL-ME(Callable:D $self: |arguments)</code></pre>
@@ -44671,7 +46257,7 @@ say $a(2); # OUTPUT: «6␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_callable_方法_capture">83.3.2. (Callable) 方法 Capture</h4>
+<h4 id="_callable_方法_capture">85.3.2. (Callable) 方法 Capture</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -44688,7 +46274,7 @@ say $a(2); # OUTPUT: «6␤»</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_签名_2">84. <a href="https://docs.raku.org/type/Signature">签名</a></h2>
+<h2 id="_签名_2">86. <a href="https://docs.raku.org/type/Signature">签名</a></h2>
 <div class="sectionbody">
 <div class="quoteblock">
 <blockquote>
@@ -44709,7 +46295,7 @@ say $a(2); # OUTPUT: «6␤»</code></pre>
 <p>传递参数给签名把包含在 <strong><a href="https://docs.raku.org/type/Capture">Capture</a></strong> 中的参数绑定到了签名上。</p>
 </div>
 <div class="sect2">
-<h3 id="_签名字面量_2">84.1. 签名字面量</h3>
+<h3 id="_签名字面量_2">86.1. 签名字面量</h3>
 <div class="paragraph">
 <p>签名出现在<a href="https://docs.raku.org/type/Sub">子例程</a>和<a href="https://docs.raku.org/type/Method">方法</a>名后面的圆括号中, 对于 blocks 签名出现在 -&gt; 或 &lt;-&gt; 箭头后面, 或者作为<a href="https://docs.raku.org/language/variables#Variable_Declarators_and_Scope">变量声明符</a>(例如 <a href="https://docs.raku.org/syntax/my">my</a> )的输入, 或者以冒号开头作为单独的项。</p>
 </div>
@@ -44830,7 +46416,7 @@ say Foo.^methods.first(*.name eq 'bar').signature ~~ :($: *%) ;
 </div>
 </div>
 <div class="sect3">
-<h4 id="_参数分隔符">84.1.1. 参数分隔符</h4>
+<h4 id="_参数分隔符">86.1.1. 参数分隔符</h4>
 <div class="paragraph">
 <p>签名由逗号分割的 0 个或多个<a href="https://docs.raku.org/type/Parameter">形式参数</a>组成。</p>
 </div>
@@ -44858,7 +46444,7 @@ say Foo.whoami; # OUTPUT: «Well I'm class Foo, of course!␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_类型约束_2">84.1.2. 类型约束</h4>
+<h4 id="_类型约束_2">86.1.2. 类型约束</h4>
 <div class="paragraph">
 <p>参数可以可选地拥有一个类型约束(默认为 <a href="https://docs.raku.org/type/Any">Any</a>)。这些能用于限制函数允许的输入。</p>
 </div>
@@ -45395,7 +46981,7 @@ for 2,4, *²  … 256 -&gt; $a {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_吞噬参数或长度可变参数">84.1.3. 吞噬参数(或长度可变参数)</h4>
+<h4 id="_吞噬参数或长度可变参数">86.1.3. 吞噬参数(或长度可变参数)</h4>
 <div class="paragraph">
 <p>如果一个函数可以接受不同数量的参数, 那么它就是可变的；也就是说, 它的参数数量(<code>arity</code>)不是固定的。因此, 可选参数、命名参数和吞噬参数都是可变的。一个数组或哈希参数可以通过前导的单个星(*)或双星号(**)或前导的加号(<code>+</code>)标记为吞噬参数。一个吞噬参数可以绑定到任意数量的参数（零或更多）, 它将导致一个与魔符兼容的类型。</p>
 </div>
@@ -45471,7 +47057,7 @@ say zipi( 1...* ); # OUTPUT: «Seq =&gt; (...)␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_吞噬数组参数的类型">84.1.4. 吞噬数组参数的类型</h4>
+<h4 id="_吞噬数组参数的类型">86.1.4. 吞噬数组参数的类型</h4>
 <div class="paragraph">
 <p>吞噬数组参数有三种变化。</p>
 </div>
@@ -45552,7 +47138,7 @@ c(($_ for 1, 2, 3));       # OUTPUT: «[1, 2, 3]␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_类型捕获">84.1.5. 类型捕获</h4>
+<h4 id="_类型捕获">86.1.5. 类型捕获</h4>
 <div class="paragraph">
 <p>类型捕获允许将类型约束的规范推迟到函数被调用时。它们允许在签名和函数主体中引用类型。</p>
 </div>
@@ -45575,7 +47161,7 @@ say s(2);  # 10 / 2 * 2  == 10</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_位置参数_vs_命名参数">84.1.6. 位置参数 vs. 命名参数</h4>
+<h4 id="_位置参数_vs_命名参数">86.1.6. 位置参数 vs. 命名参数</h4>
 <div class="paragraph">
 <p>参数可以是位置的, 也可以是命名的。默认情况下, 参数都是位置的, 除了吞噬的哈希和用前导冒号 <code>:</code> 标记的参数。后者被称为<a href="https://docs.raku.org/type/Pair">冒号对</a>。检查下面的签名以及它们所表示的内容。</p>
 </div>
@@ -45629,7 +47215,7 @@ named :official;</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_参数别名">84.1.7. 参数别名</h4>
+<h4 id="_参数别名">86.1.7. 参数别名</h4>
 <div class="paragraph">
 <p><a href="https://docs.raku.org/type/Pair">冒号对</a>语法可以用来提供参数的别名。</p>
 </div>
@@ -45714,7 +47300,7 @@ say +&amp;foo.?timestamps; # OUTPUT: «1␤»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_可选参数和强制参数">84.1.8. 可选参数和强制参数</h4>
+<h4 id="_可选参数和强制参数">86.1.8. 可选参数和强制参数</h4>
 <div class="paragraph">
 <p>位置参数在默认情况下是强制性的, 也可以用默认值或尾部的问号将其变成可选项。</p>
 </div>
@@ -45746,13 +47332,13 @@ $ = :(:$excludes = ['.', '..']); # a new Array for every call</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_动态变量_2">84.1.9. 动态变量</h4>
+<h4 id="_动态变量_2">86.1.9. 动态变量</h4>
 <div class="paragraph">
 <p><a href="https://docs.raku.org/language/variables#The_*_twigil">动态变量</a>在签名中是允许的, 尽管它们并没有提供特殊的行为, 因为无论如何, 参数绑定都会连接两个作用域。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_解构参数">84.1.10. 解构参数</h4>
+<h4 id="_解构参数">86.1.10. 解构参数</h4>
 <div class="paragraph">
 <p>非标量参数的后面可以用括号中的子签名来代替, 它将对给出的参数进行解构。列表的解构就是其元素。</p>
 </div>
@@ -45804,7 +47390,7 @@ for %hhgttu -&gt; (:$key, :$value) {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_子签名">84.1.11. 子签名</h4>
+<h4 id="_子签名">86.1.11. 子签名</h4>
 <div class="paragraph">
 <p>要匹配复合参数, 请在圆括号中的参数名后面使用子签名。</p>
 </div>
@@ -45819,7 +47405,7 @@ foo(42, "answer");
 </div>
 </div>
 <div class="sect3">
-<h4 id="_长名字">84.1.12. 长名字</h4>
+<h4 id="_长名字">86.1.12. 长名字</h4>
 <div class="paragraph">
 <p>如果要将某些参数排除在多重分派中考虑之外, 可以用双分号将它们分开。</p>
 </div>
@@ -45832,7 +47418,7 @@ f(10, 'answer');
 </div>
 </div>
 <div class="sect3">
-<h4 id="_捕获参数">84.1.13. 捕获参数</h4>
+<h4 id="_捕获参数">86.1.13. 捕获参数</h4>
 <div class="paragraph">
 <p>在参数前加上一个竖杠 <code>|</code>, 使得该参数成为一个<a href="https://docs.raku.org/type/Capture">Capture</a>, 用完所有剩余的位置参数和命名参数。</p>
 </div>
@@ -45852,7 +47438,7 @@ b(42, "answer");
 </div>
 </div>
 <div class="sect3">
-<h4 id="_参数特性和修饰符">84.1.14. 参数特性和修饰符</h4>
+<h4 id="_参数特性和修饰符">86.1.14. 参数特性和修饰符</h4>
 <div class="paragraph">
 <p>默认情况下, 形参数会被绑定到其实参上, 并标记为只读。我们可以通过形参的特质来改变这一点。</p>
 </div>
@@ -45897,9 +47483,9 @@ b(42, "answer");
 </div>
 </div>
 <div class="sect2">
-<h3 id="_方法_12">84.2. 方法</h3>
+<h3 id="_方法_12">86.2. 方法</h3>
 <div class="sect3">
-<h4 id="_params_方法">84.2.1. params 方法</h4>
+<h4 id="_params_方法">86.2.1. params 方法</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method params(Signature:D: --&gt; Positional)</code></pre>
@@ -45910,7 +47496,7 @@ b(42, "answer");
 </div>
 </div>
 <div class="sect3">
-<h4 id="_arity_方法">84.2.2. arity 方法</h4>
+<h4 id="_arity_方法">86.2.2. arity 方法</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method arity(Signature:D: --&gt; Int:D)</code></pre>
@@ -45921,7 +47507,7 @@ b(42, "answer");
 </div>
 </div>
 <div class="sect3">
-<h4 id="_count_方法">84.2.3. count 方法</h4>
+<h4 id="_count_方法">86.2.3. count 方法</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method count(Signature:D: --&gt; Real:D)</code></pre>
@@ -45932,7 +47518,7 @@ b(42, "answer");
 </div>
 </div>
 <div class="sect3">
-<h4 id="_returns_方法">84.2.4. returns 方法</h4>
+<h4 id="_returns_方法">86.2.4. returns 方法</h4>
 <div class="paragraph">
 <p>不管签名的返回约束是什么:</p>
 </div>
@@ -45943,7 +47529,7 @@ b(42, "answer");
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_accepts_2">84.2.5. 方法 ACCEPTS</h4>
+<h4 id="_方法_accepts_2">86.2.5. 方法 ACCEPTS</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">multi method ACCEPTS(Signature:D: Signature $topic)
@@ -45989,7 +47575,7 @@ set(&lt;a b&gt;) ~~ :(:$a, :$b);    # OUTPUT: «True»</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_方法_capture_4">84.2.6. 方法 Capture</h4>
+<h4 id="_方法_capture_4">86.2.6. 方法 Capture</h4>
 <div class="paragraph">
 <p>被定义为:</p>
 </div>
@@ -46004,7 +47590,7 @@ set(&lt;a b&gt;) ~~ :(:$a, :$b);    # OUTPUT: «True»</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_运行时创建_signature_对象6_d_2019_03_及以后版本">84.3. 运行时创建 Signature 对象(6.d, 2019.03 及以后版本)</h3>
+<h3 id="_运行时创建_signature_对象6_d_2019_03_及以后版本">86.3. 运行时创建 Signature 对象(6.d, 2019.03 及以后版本)</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">Signature.new(params =&gt; (...), returns =&gt; Type, arity =&gt; 1, count =&gt; 1)</code></pre>
@@ -46055,7 +47641,7 @@ set(&lt;a b&gt;) ~~ :(:$a, :$b);    # OUTPUT: «True»</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_类型图_11">84.4. 类型图</h3>
+<h3 id="_类型图_11">86.4. 类型图</h3>
 <div class="paragraph">
 <p><code>Signature</code> 的类型关系</p>
 </div>
