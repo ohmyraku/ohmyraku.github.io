@@ -2650,12 +2650,53 @@ if (theme && theme !== "1") {
 <li><a href="#_类型图_15">90.7. 类型图</a></li>
 </ul>
 </li>
-<li><a href="#_类_tap">91. 类 Tap</a></li>
-<li><a href="#_define_what_to_do_with_a_stand_alone_as_the_second_argument">Define what to do with a stand-alone * as the second argument</a></li>
-<li><a href="#_define_what_to_do_with_a_whatevercode_in_an_expression">Define what to do with a * WhateverCode in an expression</a></li>
-<li><a href="#_define_what_to_do_with_two_in_an_expression">Define what to do with two * in an expression</a></li>
-<li><a href="#_takes_only_one_parameter_and_as_such_wont_forward_n">takes only one parameter and as such wont forward $n</a></li>
-<li><a href="#_we_use_a_whatever_star_for_the_invocant">We use a Whatever star for the invocant:</a></li>
+<li><a href="#_类_tap">91. 类 Tap</a>
+<ul class="sectlevel2">
+<li><a href="#_方法_17">91.1. 方法</a>
+<ul class="sectlevel3">
+<li><a href="#_方法_close_2">91.1.1. 方法 close</a></li>
+</ul>
+</li>
+<li><a href="#_类型图_16">91.2. 类型图</a></li>
+</ul>
+</li>
+<li><a href="#_类_whatever">92. 类 Whatever</a>
+<ul class="sectlevel2">
+<li><a href="#_方法_18">92.1. 方法</a>
+<ul class="sectlevel3">
+<li><a href="#_方法_accepts_3">92.1.1. 方法 ACCEPTS</a></li>
+<li><a href="#_方法_capture_5">92.1.2. 方法 Capture</a></li>
+</ul>
+</li>
+<li><a href="#_类型图_17">92.2. 类型图</a></li>
+</ul>
+</li>
+<li><a href="#_类_whatevercode">93. 类 WhateverCode</a>
+<ul class="sectlevel2">
+<li><a href="#_类型图_18">93.1. 类型图</a></li>
+<li><a href="#_由类_code_提供的例程">93.2. 由类 Code 提供的例程</a>
+<ul class="sectlevel3">
+<li><a href="#_code_方法_accepts">93.2.1. (Code) 方法 ACCEPTS</a></li>
+<li><a href="#_code_方法_arity">93.2.2. (Code) 方法 arity</a></li>
+<li><a href="#_code_方法_assuming">93.2.3. (Code) 方法 assuming</a></li>
+<li><a href="#_code_方法_count">93.2.4. (Code) 方法 count</a></li>
+<li><a href="#_code_方法_of">93.2.5. (Code) 方法 of</a></li>
+<li><a href="#_code_方法_signature">93.2.6. (Code) 方法 signature</a></li>
+<li><a href="#_code_方法_cando">93.2.7. (Code) 方法 cando</a></li>
+<li><a href="#_code_方法_str">93.2.8. (Code) 方法 Str</a></li>
+<li><a href="#_code_方法_file">93.2.9. (Code) 方法 file</a></li>
+<li><a href="#_code_方法_line">93.2.10. (Code) 方法 line</a></li>
+<li><a href="#_code_方法_is_implementation_detail">93.2.11. (Code) 方法 is-implementation-detail</a></li>
+</ul>
+</li>
+<li><a href="#_由角色_callable_提供的例程">93.3. 由角色 Callable 提供的例程</a>
+<ul class="sectlevel3">
+<li><a href="#_callable_方法_call_me">93.3.1. (Callable) 方法 CALL-ME</a></li>
+<li><a href="#_callable_方法_capture">93.3.2. (Callable) 方法 Capture</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="sect1">
@@ -49702,724 +49743,683 @@ my $tap = $s.Supply.on-close({ say "Tap closed" }).tap(
 );
 
 # later
-$tap.close;
----
-
-=== 方法
-
-==== 方法 close
-
-[source,raku]</code></pre>
+$tap.close;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_方法_17">91.1. 方法</h3>
+<div class="sect3">
+<h4 id="_方法_close_2">91.1.1. 方法 close</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method close(Tap:D:)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>method close(Tap:D:)</p>
+<p>关闭 tap。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_类型图_16">91.2. 类型图</h3>
+<div class="paragraph">
+<p><code>Tap</code> 的类型关系</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://docs.raku.org/images/type-graph-Tap.svg" alt="Tap">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_类_whatever">92. <a href="https://docs.raku.org/type/Whatever">类 Whatever</a></h2>
+<div class="sectionbody">
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Placeholder for the value of an unspecified argument</p>
+</div>
+</blockquote>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">关闭 tap。
-
-=== 类型图
-
-`Tap` 的类型关系
-
-image::https://docs.raku.org/images/type-graph-Tap.svg[Tap]
-
-== link:https://docs.raku.org/type/Whatever[类 Whatever]
-
-&gt; Placeholder for the value of an unspecified argument
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Whatever { }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>class Whatever { }</p>
+<p><code>Whatever</code> 是一个其对象没有任何明确意义的类；它的语义来自于接受 <code>Whatever</code> 对象作为做某些特殊事情的标记的其他例程。使用 <code>*</code> 字面值作为操作数，就会创建一个 <code>Whatever</code> 对象。</p>
+</div>
+<div class="paragraph">
+<p>* 的大部分魅力来自于 <code>Whatever-currying</code>。当 <code>*</code> 被用在项的位置，也就是作为操作数，与大多数操作符结合使用时，编译器会将表达式转化为类型为 <a href="https://docs.raku.org/type/WhateverCode">WhateverCode</a> 的闭包，它实际上是一个 <a href="https://docs.raku.org/type/Block">Block</a>，可以在接受 <code>Callables</code> 的地方使用。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">`Whatever` 是一个其对象没有任何明确意义的类；它的语义来自于接受 `Whatever` 对象作为做某些特殊事情的标记的其他例程。使用 `*` 字面值作为操作数，就会创建一个 `Whatever` 对象。
-
-++*++ 的大部分魅力来自于 `Whatever-currying`。当 `*` 被用在项的位置，也就是作为操作数，与大多数操作符结合使用时，编译器会将表达式转化为类型为 link:https://docs.raku.org/type/WhateverCode[WhateverCode] 的闭包，它实际上是一个 link:https://docs.raku.org/type/Block[Block]，可以在接受 `Callables` 的地方使用。
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $c = * + 2;          # same as   -&gt; $x { $x + 2 };
+say $c(4);              # OUTPUT: «6␤»</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>my $c = * + 2;          # same as   &#8594; $x { $x + 2 };
-say $c(4);              # OUTPUT: «6␤»</p>
+<p>一个表达式中的多个 <code>*</code> 会生成具有同样多参数的闭包。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">一个表达式中的多个 `*` 会生成具有同样多参数的闭包。
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $c = * + *;          # same as   -&gt; $x, $y { $x + $y }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>my $c = * + *;          # same as   &#8594; $x, $y { $x + $y }</p>
+<p>在复杂表达式中使用 <code>*</code> 也会产生闭包。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">在复杂表达式中使用 `*` 也会产生闭包。
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $c = 4 * * + 5;      # same as   -&gt; $x { 4 * $x + 5 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>my $c = 4 * * + 5;      # same as   &#8594; $x { 4 * $x + 5 }</p>
+<p>在 <code>*</code> 上调用方法也会产生一个闭包。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">在 `*` 上调用方法也会产生一个闭包。
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;a b c&gt;.map: *.uc;      # same as    &lt;a b c&gt;.map: -&gt; $char { $char.uc }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>&lt;a b c&gt;.map: *.uc;      # same as    &lt;a b c&gt;.map: &#8594; $char { $char.uc }</p>
+<p>如前所述，并不是所有的操作符和语法结构都会将 <code><strong></code>（或 Whatever-stars）柯里化成 <code>WhateverCode</code>。在以下情况下，<code></strong></code> 仍将是一个 <code>Whatever</code> 对象。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">例外</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">例子</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">它的作用</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">逗号</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1, *, 2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">生成一个带有 * 元素的列表</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">范围操作符</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1 .. *</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Range.new(:from(1), :to(*));</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">序列操作符</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1 &#8230;&#8203; *</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">无限列表</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">赋值</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">$x = *</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">把 * 赋值给 $x</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">绑定</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">$x := *</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">把 * 绑定到 $x</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">列表重复</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1 xx *</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">生成一个无限列表</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>范围运算符被特殊处理了。 它们与 Whatever-stars 不发生柯里化, 但是它们与 <code>WhateverCode</code> 发生柯里化。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">如前所述，并不是所有的操作符和语法结构都会将 `*`（或 Whatever-stars）柯里化成 `WhateverCode`。在以下情况下，`*` 仍将是一个 `Whatever` 对象。
-
-|===
-| 例外	        | 例子	     | 它的作用
-| 逗号	        | 1, *, 2	| 生成一个带有 * 元素的列表
-| 范围操作符	 | 1 .. *	 | Range.new(:from(1), :to(*));
-| 序列操作符	 | 1 ... *	 | 无限列表
-| 赋值	        | $x = *	| 把 * 赋值给 $x
-| 绑定	        | $x := *	| 把 * 绑定到 $x
-| 列表重复	     | 1 xx *	 | 生成一个无限列表
-|===
-
-范围运算符被特殊处理了。 它们与 Whatever-stars 不发生柯里化, 但是它们与 `WhateverCode` 发生柯里化。
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say (1..*).^name;       # OUTPUT: «Range␤»
+say ((1..*-1)).^name;   # OUTPUT: «WhateverCode␤»</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>say (1..<strong>).^name;       # OUTPUT: «Range␤»
-say 1..</strong>-1.^name;   # OUTPUT: «WhateverCode␤»</p>
+<p>这使得所有这些构造都能正常工作:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">这使得所有这些构造都能正常工作:
-
-[source,raku]</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">say for 1..*;          # infinite loop</div>
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">和
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say for 1..*;          # infinite loop</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>my @a = 1..4;
-say @a[0..<strong>];           # OUTPUT: «(1 2 3 4)␤»
-say @a[0..</strong>-2];         # OUTPUT: «(1 2 3)␤»</p>
+<p>和</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">因为 Whatever-currying 是一种纯粹的语法编译器转换，所以你不会得到运行时将存储的 `Whatever-star` 编译成 `WhateverCode`。
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @a = 1..4;
+say @a[0..*];           # OUTPUT: «(1 2 3 4)␤»
+say @a[0..*-2];         # OUTPUT: «(1 2 3)␤»</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>my $x = *;
-$x + 2;   # Not a closure, dies because it can&#8217;t coerce $x to Numeric
+<p>因为 Whatever-currying 是一种纯粹的语法编译器转换，所以你不会得到运行时将存储的 <code>Whatever-star</code> 编译成 <code>WhateverCode</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = *;
+$x + 2;   # Not a closure, dies because it can't coerce $x to Numeric
 CATCH { default { put .^name, ': ', .Str } };
 # OUTPUT: «X::Multi::NoMatch: Cannot resolve caller Numeric(Whatever: );
 # none of these signatures match:␤
-# (Mu:U \v: *%_)»</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">存储 `Whatever-star` 的用例涉及到上面提到的那些柯里化例外情况。例如，如果你想要一个默认的无限序列。
-
-[source,raku]</code></pre>
+# (Mu:U \v: *%_)»</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>my $max    = potential-upper-limit() // *;
-my $series = known-lower-limit() &#8230;&#8203; $max;</p>
+<p>存储 <code>Whatever-star</code> 的用例涉及到上面提到的那些柯里化例外情况。例如，如果你想要一个默认的无限序列。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">在智能匹配的特定情况下，存储的 `*` 也会导致生成一个 `WhateverCode`。需要注意的是，这其实并不是存储的 `*` 被柯里化了，而是左手边的 `*`。
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $max    = potential-upper-limit() // *;
+my $series = known-lower-limit() ... $max;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>my $constraint           = find-constraint() // *;
-my $maybe-always-matcher = * ~~ $constraint;</p>
+<p>在智能匹配的特定情况下，存储的 <code><strong></code> 也会导致生成一个 <code>WhateverCode</code>。需要注意的是，这其实并不是存储的 <code></strong></code> 被柯里化了，而是左手边的 <code>*</code>。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">如果这个假设的 `find-constraint` 没有找到任何约束，`$maybe-always-matcher` 对任何事情都会评估为 `True`。
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $constraint           = find-constraint() // *;
+my $maybe-always-matcher = * ~~ $constraint;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>$maybe-always-matcher(555);      # True
-$maybe-always-matcher(Any);      # True</p>
+<p>如果这个假设的 <code>find-constraint</code> 没有找到任何约束，<code>$maybe-always-matcher</code> 对任何事情都会评估为 <code>True</code>。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">link:https://docs.raku.org/type/HyperWhatever[HyperWhatever] 的功能与 `Whatever` 类似，只是它指的是多个值，而不是一个值。
-
-=== 方法
-
-==== 方法 ACCEPTS
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">$maybe-always-matcher(555);      # True
+$maybe-always-matcher(Any);      # True</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>multi method ACCEPTS(Whatever:D: Mu $other)
-multi method ACCEPTS(Whatever:U: Mu $other)</p>
+<p><a href="https://docs.raku.org/type/HyperWhatever">HyperWhatever</a> 的功能与 <code>Whatever</code> 类似，只是它指的是多个值，而不是一个值。</p>
+</div>
+<div class="sect2">
+<h3 id="_方法_18">92.1. 方法</h3>
+<div class="sect3">
+<h4 id="_方法_accepts_3">92.1.1. 方法 ACCEPTS</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method ACCEPTS(Whatever:D: Mu $other)
+multi method ACCEPTS(Whatever:U: Mu $other)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果 invocant 是一个<a href="https://docs.raku.org/language/classtut#index-entry-.DEFINITE">实例</a>，总是返回 <code>True</code>。如果 invocant 是一个类型对象，则执行类型检查。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">如果 invocant 是一个link:https://docs.raku.org/language/classtut#index-entry-.DEFINITE[实例]，总是返回 `True`。如果 invocant 是一个类型对象，则执行类型检查。
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 42 ~~ (*);       # OUTPUT: «True␤»
+say 42 ~~ Whatever;  # OUTPUT: «False␤»</code></pre>
 </div>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_方法_capture_5">92.1.2. 方法 Capture</h4>
 <div class="paragraph">
-<p>say 42 ~~ (*);       # OUTPUT: «True␤»
-say 42 ~~ Whatever;  # OUTPUT: «False␤»</p>
+<p>被定义为:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">==== 方法 Capture
-
-被定义为:
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">method Capture()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>method Capture()</p>
+<p>抛出 <code>X::Cannot::Capture</code>。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_类型图_17">92.2. 类型图</h3>
+<div class="paragraph">
+<p><code>Whatever</code> 的类型关系</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://docs.raku.org/images/type-graph-Whatever.svg" alt="Whatever">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_类_whatevercode">93. <a href="https://docs.raku.org/type/WhateverCode">类 WhateverCode</a></h2>
+<div class="sectionbody">
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Code object constructed by Whatever-currying</p>
+</div>
+</blockquote>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">抛出 `X::Cannot::Capture`。
-
-=== 类型图
-
-`Whatever` 的类型关系
-
-image::https://docs.raku.org/images/type-graph-Whatever.svg[Whatever]
-
-== link:https://docs.raku.org/type/WhateverCode[类 WhateverCode]
-
-&gt; Code object constructed by Whatever-currying
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">class WhateverCode is Code { }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>class WhateverCode is Code { }</p>
+<p><code>WhateverCode</code> 对象是 <a href="https://docs.raku.org/type/Whatever">Whatever 柯里化</a>的结果。详情请看 <a href="https://docs.raku.org/type/Whatever">Whatever</a> 文档。</p>
+</div>
+<div class="paragraph">
+<p>当你想控制一个方法或函数如何解释任何 Whatever star 时，你可以使用带有 <code>Whatever</code> 和 <code>WhateverCode</code> 参数的多重分派来实现，就像下面的例子一样。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">`WhateverCode` 对象是 link:https://docs.raku.org/type/Whatever[Whatever 柯里化]的结果。详情请看 link:https://docs.raku.org/type/Whatever[Whatever] 文档。
-
-当你想控制一个方法或函数如何解释任何 Whatever star 时，你可以使用带有 `Whatever` 和 `WhateverCode` 参数的多重分派来实现，就像下面的例子一样。
-
-[source,raku]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>class Cycle {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Cycle {
       has $.pos;
       has @.vals;
-}</p>
-</div>
-<div class="paragraph">
-<p>multi sub get-val(Cycle $c, Int $idx) {
+}
+
+multi sub get-val(Cycle $c, Int $idx) {
       $c.vals[$idx % $c.vals.elems]
-}</p>
-</div>
-</div>
-</div>
-<h1 id="_define_what_to_do_with_a_stand_alone_as_the_second_argument" class="sect0">Define what to do with a stand-alone * as the second argument</h1>
-<div class="openblock partintro">
-<div class="content">
+}
+
+# Define what to do with a stand-alone * as the second argument
 multi sub get-val(Cycle $c, Whatever $idx) {
     get-val($c, $c.pos);
 }
-</div>
-</div>
-<h1 id="_define_what_to_do_with_a_whatevercode_in_an_expression" class="sect0">Define what to do with a * WhateverCode in an expression</h1>
-<div class="openblock partintro">
-<div class="content">
-<div class="paragraph">
-<p>multi sub get-val(Cycle $c, WhateverCode $idx) {
+
+# Define what to do with a * WhateverCode in an expression
+multi sub get-val(Cycle $c, WhateverCode $idx) {
     get-val($c, $idx($c.pos));
-}</p>
-</div>
-<div class="paragraph">
-<p>my Cycle $c .= new(:pos(2), :vals(0..^10));</p>
-</div>
-<div class="paragraph">
-<p>say get-val($c, 3);   # OUTPUT: «3␤»
+}
+
+my Cycle $c .= new(:pos(2), :vals(0..^10));
+
+say get-val($c, 3);   # OUTPUT: «3␤»
 say get-val($c, *);   # OUTPUT: «2␤»
-say get-val($c, *-1); # OUTPUT: «1␤»</p>
+say get-val($c, *-1); # OUTPUT: «1␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>WhateverCode does</code> <a href="https://docs.raku.org/type/Callable">Callable</a> 角色，所以应该可以内省出它所包含的 <code>Callable</code> 的类型；例如，继续前面的例子，我们可以通过检查签名来添加一个 <code>multi</code>，处理一个有两个参数的 <code>WhateverCode</code>。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">`WhateverCode does` link:https://docs.raku.org/type/Callable[Callable] 角色，所以应该可以内省出它所包含的 `Callable` 的类型；例如，继续前面的例子，我们可以通过检查签名来添加一个 `multi`，处理一个有两个参数的 `WhateverCode`。
-
-[source,raku]</code></pre>
-</div>
-</div>
-</div>
-</div>
-<h1 id="_define_what_to_do_with_two_in_an_expression" class="sect0">Define what to do with two * in an expression</h1>
-<div class="openblock partintro">
-<div class="content">
-<div class="paragraph">
-<p>multi sub get-val(Cycle $c, WhateverCode $idx where { .arity == 2 }) {
+<pre class="highlight"><code class="language-raku" data-lang="raku"># Define what to do with two * in an expression
+multi sub get-val(Cycle $c, WhateverCode $idx where { .arity == 2 }) {
     get-val($c, $idx($c.pos, $c.vals.elems));
-}</p>
+}
+
+say get-val($c, * + * div 2); # 2 + 10/2 = 7</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>say get-val($c, * + * div 2); # 2 + 10/2 = 7</p>
+<p>不过请注意，子表达式可以利用自己的 Whatever star 规则。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">不过请注意，子表达式可以利用自己的 Whatever star 规则。
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @a = (0, 1, 2);
+say get-val($c, @a[*-1]) # 2, because the star belongs to the Array class</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>my @a = (0, 1, 2);
-say get-val($c, @a[*-1]) # 2, because the star belongs to the Array class</p>
+<p>这可能会使 Whatever star 的所有权变得相当快的混乱，所以要注意不要过度。</p>
+</div>
+<div class="paragraph">
+<p>你可以使用 <a href="https://docs.raku.org/type/Callable">Callable</a> 类型进行类型约束，以便接受任何 <code>Callable</code>，包括 <code>WhateverCode</code>。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">这可能会使 Whatever star 的所有权变得相当快的混乱，所以要注意不要过度。
-
-你可以使用 link:https://docs.raku.org/type/Callable[Callable] 类型进行类型约束，以便接受任何 `Callable`，包括 `WhateverCode`。
-
-[source,raku]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>sub run-with-rand (Callable $code) { $code(rand) };
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub run-with-rand (Callable $code) { $code(rand) };
 run-with-rand *.say;           # OUTPUT: «0.773672071688484␤»
 run-with-rand {.say};          # OUTPUT: «0.38673179353983␤»
-run-with-rand sub { $^v.say }; # OUTPUT: «0.0589543603685792␤»</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">用 `&amp;-sigiled` 参数进行类型约束，效果同样不错，而且更容易输入。
-
-[source,raku]</code></pre>
+run-with-rand sub { $^v.say }; # OUTPUT: «0.0589543603685792␤»</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>sub run-with-rand (&amp;code) { code time };</p>
+<p>用 <code>&amp;-sigiled</code> 参数进行类型约束，效果同样不错，而且更容易输入。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">=== 类型图
-
-`WhateverCode` 的类型关系
-
-image::https://docs.raku.org/images/type-graph-WhateverCode.svg[WhateverCode]
-
-=== 由类 Code 提供的例程
-
-WhateverCode 继承自类 link:https://docs.raku.org/type/Code[Code]，它提供了以下例程:
-
-==== (Code) 方法 ACCEPTS
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub run-with-rand (&amp;code) { code time };</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_类型图_18">93.1. 类型图</h3>
+<div class="paragraph">
+<p><code>WhateverCode</code> 的类型关系</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://docs.raku.org/images/type-graph-WhateverCode.svg" alt="WhateverCode">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_由类_code_提供的例程">93.2. 由类 Code 提供的例程</h3>
+<div class="paragraph">
+<p>WhateverCode 继承自类 <a href="https://docs.raku.org/type/Code">Code</a>，它提供了以下例程:</p>
+</div>
+<div class="sect3">
+<h4 id="_code_方法_accepts">93.2.1. (Code) 方法 ACCEPTS</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method ACCEPTS(Code:D: Mu $topic)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>multi method ACCEPTS(Code:D: Mu $topic)</p>
+<p>通常调用代码对象并传递 <code>$topic</code> 作为参数。但是，当对一个不接受参数的代码对象进行调用时，代码对象被调用时没有参数，<code>$topic</code> 被丢弃。调用的结果会被返回。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_code_方法_arity">93.2.2. (Code) 方法 arity</h4>
+<div class="paragraph">
+<p>被定义为:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">通常调用代码对象并传递 `$topic` 作为参数。但是，当对一个不接受参数的代码对象进行调用时，代码对象被调用时没有参数，`$topic` 被丢弃。调用的结果会被返回。
-
-==== (Code) 方法 arity
-
-被定义为:
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">method arity(Code:D: --&gt; Int:D)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>method arity(Code:D: -&#8594; Int:D)</p>
+<p>返回为了调用代码对象而必须传递的最小位置参数数。代码对象 <code>Signature</code> 中的任何可选参数或吞噬参数都不作贡献，命名参数也不作贡献。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">返回为了调用代码对象而必须传递的最小位置参数数。代码对象 `Signature` 中的任何可选参数或吞噬参数都不作贡献，命名参数也不作贡献。
-
-[source,raku]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>sub argless() { }
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub argless() { }
 sub args($a, $b?) { }
 sub slurpy($a, $b, *@c) { }
 say &amp;argless.arity;             # OUTPUT: «0␤»
 say &amp;args.arity;                # OUTPUT: «1␤»
-say &amp;slurpy.arity;              # OUTPUT: «2␤»</p>
+say &amp;slurpy.arity;              # OUTPUT: «2␤»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_code_方法_assuming">93.2.3. (Code) 方法 assuming</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method assuming(Callable:D $self: |primers)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>返回一个 <code>Callable</code>，该 <code>Callable</code> 实现了与原始 <code>Callable</code> 相同的行为，但传递给 <code>.assuming</code> 的值已经绑定到相应的参数。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">==== (Code) 方法 assuming
+<pre class="highlight"><code class="language-raku" data-lang="raku">my sub slow($n){ my $i = 0; $i++ while $i &lt; $n; $i };
 
-[source,raku]</code></pre>
+# takes only one parameter and as such wont forward $n
+sub bench(&amp;c){ c, now - ENTER now };
+
+say &amp;slow.assuming(10000000).&amp;bench; # OUTPUT: «(10000000 7.5508834)␤»</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>method assuming(Callable:D $self: |primers)</p>
+<p>对于参数数量(arity)大于1的 sub，你可以用 <code>Whatever *</code> 来表示所有没有"假定"的位置参数。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">返回一个 `Callable`，该 `Callable` 实现了与原始 `Callable` 相同的行为，但传递给 `.assuming` 的值已经绑定到相应的参数。
-
-[source,raku]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>my sub slow($n){ my $i = 0; $i++ while $i &lt; $n; $i };</p>
-</div>
-</div>
-</div>
-<h1 id="_takes_only_one_parameter_and_as_such_wont_forward_n" class="sect0">takes only one parameter and as such wont forward $n</h1>
-<div class="openblock partintro">
-<div class="content">
-<div class="paragraph">
-<p>sub bench(&amp;c){ c, now - ENTER now };</p>
-</div>
-<div class="paragraph">
-<p>say &amp;slow.assuming(10000000).&bench; # OUTPUT: «(10000000 7.5508834)␤»</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">对于参数数量(arity)大于1的 sub，你可以用 `Whatever *` 来表示所有没有"假定"的位置参数。
-
-[source,raku]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>sub first-and-last ( $first, $last ) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub first-and-last ( $first, $last ) {
     say "Name is $first $last";
-}</p>
+}
+
+my &amp;surname-smith = &amp;first-and-last.assuming( *, 'Smith' );
+
+&amp;surname-smith.( 'Joe' ); # OUTPUT: «Name is Joe Smith␤»</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>my &amp;surname-smith = &amp;first-and-last.assuming( *, 'Smith' );</p>
-</div>
-<div class="paragraph">
-<p>&amp;surname-smith.( 'Joe' ); # OUTPUT: «Name is Joe Smith␤»</p>
+<p>您可以处理假定和非假定位置参数的任意组合。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">您可以处理假定和非假定位置参数的任意组合。
-
-[source,raku]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>sub longer-names ( $first, $middle, $last, $suffix ) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub longer-names ( $first, $middle, $last, $suffix ) {
     say "Name is $first $middle $last $suffix";
-}</p>
+}
+
+my &amp;surname-public = &amp;longer-names.assuming( *, *, 'Public', * );
+
+&amp;surname-public.( 'Joe', 'Q.', 'Jr.'); # OUTPUT: «Name is Joe Q. Public Jr.␤»</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>my &amp;surname-public = &amp;longer-names.assuming( *, *, 'Public', * );</p>
-</div>
-<div class="paragraph">
-<p>&amp;surname-public.( 'Joe', 'Q.', 'Jr.'); # OUTPUT: «Name is Joe Q. Public Jr.␤»</p>
+<p>命名参数也可以是假定的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">命名参数也可以是假定的。
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub foo { say "$^a $^b $:foo $:bar" }
+&amp;foo.assuming(13, :42foo)(24, :72bar); # OUTPUT: «13 24 42 72␤»</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>sub foo { say "$^a $^b $:foo $:bar" }
-&amp;foo.assuming(13, :42foo)(24, :72bar); # OUTPUT: «13 24 42 72␤»</p>
+<p>而且你可以在 <a href="https://docs.raku.org/type/Callable">Callables</a> 的所有类型上使用 <code>.assuming</code>，包括<a href="https://docs.raku.org/type/Method">方法</a>和<a href="https://docs.raku.org/type/Block">块</a>。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">而且你可以在 link:https://docs.raku.org/type/Callable[Callables] 的所有类型上使用 `.assuming`，包括link:https://docs.raku.org/type/Method[方法]和link:https://docs.raku.org/type/Block[块]。
-
-[source,raku]</code></pre>
-</div>
-</div>
-</div>
-</div>
-<h1 id="_we_use_a_whatever_star_for_the_invocant" class="sect0">We use a Whatever star for the invocant:</h1>
-<div class="openblock partintro">
-<div class="content">
-<div class="paragraph">
-<p>my &amp;comber = Str.^lookup('comb').assuming: *, /P \w+/;
+<pre class="highlight"><code class="language-raku" data-lang="raku"># We use a Whatever star for the invocant:
+my &amp;comber = Str.^lookup('comb').assuming: *, /P \w+/;
 say comber 'Perl is awesome! Python is great! And PHP is OK too';
-# OUTPUT: «(Perl Python PHP)␤»</p>
-</div>
-<div class="paragraph">
-<p>my &amp;learner = {
+# OUTPUT: «(Perl Python PHP)␤»
+
+my &amp;learner = {
     "It took me $:months months to learn $^lang"
 }.assuming: 'Raku';
-say learner :6months;  # OUTPUT: «It took me 6 months to learn Raku␤»</p>
+say learner :6months;  # OUTPUT: «It took me 6 months to learn Raku␤»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_code_方法_count">93.2.4. (Code) 方法 count</h4>
+<div class="paragraph">
+<p>被定义为:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">==== (Code) 方法 count
-
-被定义为:
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">method count(Code:D: --&gt; Real:D)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>method count(Code:D: -&#8594; Real:D)</p>
+<p>返回调用代码对象时可以传递的位置参数的最大数量。对于可以接受任意数量的位置参数的代码对象（也就是说，它们有一个吞噬(slurpy)参数），<code>count</code> 将返回 <code>Inf</code>。命名参数不作贡献。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">返回调用代码对象时可以传递的位置参数的最大数量。对于可以接受任意数量的位置参数的代码对象（也就是说，它们有一个吞噬(slurpy)参数），`count` 将返回 `Inf`。命名参数不作贡献。
-
-[source,raku]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>sub argless() { }
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub argless() { }
 sub args($a, $b?) { }
 sub slurpy($a, $b, *@c) { }
 say &amp;argless.count;             # OUTPUT: «0␤»
 say &amp;args.count;                # OUTPUT: «2␤»
-say &amp;slurpy.count;              # OUTPUT: «Inf␤»</p>
+say &amp;slurpy.count;              # OUTPUT: «Inf␤»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_code_方法_of">93.2.5. (Code) 方法 of</h4>
+<div class="paragraph">
+<p>被定义为:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">==== (Code) 方法 of
-
-被定义为:
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">method of(Code:D: --&gt; Mu)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>method of(Code:D: -&#8594; Mu)</p>
+<p>返回 <code>Code</code> 的<a href="https://docs.raku.org/type/Signature#Constraining_return_types">返回类型约束</a>。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">返回 `Code` 的link:https://docs.raku.org/type/Signature#Constraining_return_types[返回类型约束]。
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say -&gt; () --&gt; Int {}.of; # OUTPUT: «(Int)␤»</code></pre>
 </div>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_code_方法_signature">93.2.6. (Code) 方法 signature</h4>
 <div class="paragraph">
-<p>say &#8594; () -&#8594; Int {}.of; # OUTPUT: «(Int)␤»</p>
+<p>被定义为:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">==== (Code) 方法 signature
-
-被定义为:
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method signature(Code:D: --&gt; Signature:D)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>multi method signature(Code:D: -&#8594; Signature:D)</p>
+<p>返回该代码对象的 <a href="https://docs.raku.org/type/Signature">Signature</a> 对象，该对象描述其参数。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">返回该代码对象的 link:https://docs.raku.org/type/Signature[Signature] 对象，该对象描述其参数。
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub a(Int $one, Str $two) {};
+say &amp;a.signature; # OUTPUT: «(Int $one, Str $two)␤»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_code_方法_cando">93.2.7. (Code) 方法 cando</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method cando(Capture $c)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>sub a(Int $one, Str $two) {};
-say &amp;a.signature; # OUTPUT: «(Int $one, Str $two)␤»</p>
+<p>返回一个可与给定 <a href="https://docs.raku.org/type/Capture">Capture</a> 一起调用的候选者列表。因为 <code>Code</code> 对象没有任何多重分派，所以要么返回一个包含对象的列表，要么返回一个空列表。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">==== (Code) 方法 cando
-
-[source,raku]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>method cando(Capture $c)</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">返回一个可与给定 link:https://docs.raku.org/type/Capture[Capture] 一起调用的候选者列表。因为 `Code` 对象没有任何多重分派，所以要么返回一个包含对象的列表，要么返回一个空列表。
-
-[source,raku]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>my $single = \'a';         # a single argument Capture
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $single = \'a';         # a single argument Capture
 my $plural = \('a', 42);   # a two argument Capture
 my &amp;block = { say $^a };   # a Block object, that is a subclass of Code, taking one argument
-say &amp;block.cando($single); # OUTPUT: «(&#8594; $a { #`(Block|94212856419136) &#8230;&#8203; })␤»
-say &amp;block.cando($plural); # OUTPUT: «()␤»</p>
+say &amp;block.cando($single); # OUTPUT: «(-&gt; $a { #`(Block|94212856419136) ... })␤»
+say &amp;block.cando($plural); # OUTPUT: «()␤»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_code_方法_str">93.2.8. (Code) 方法 Str</h4>
+<div class="paragraph">
+<p>被定义为:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">==== (Code) 方法 Str
-
-被定义为:
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method Str(Code:D: --&gt; Str:D)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>multi method Str(Code:D: -&#8594; Str:D)</p>
+<p>将输出方法名，但也会产生一个警告。使用 <code>.raku</code> 或 <code>.gist</code> 代替。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">将输出方法名，但也会产生一个警告。使用 `.raku` 或 `.gist` 代替。
-
-[source,raku]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>sub marine() { }
-say ~&marine;
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub marine() { }
+say ~&amp;marine;
 # OUTPUT: «Sub object coerced to string (please use .gist or .raku to do that)␤marine␤»
 say &amp;marine.Str;
 # OUTPUT: «Sub object coerced to string (please use .gist or .raku to do that)␤marine␤»
-say &amp;marine.raku; # OUTPUT: «sub marine { #`(Sub|94280758332168) &#8230;&#8203; }␤»</p>
+say &amp;marine.raku; # OUTPUT: «sub marine { #`(Sub|94280758332168) ... }␤»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_code_方法_file">93.2.9. (Code) 方法 file</h4>
+<div class="paragraph">
+<p>被定义为:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">==== (Code) 方法 file
-
-被定义为:
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">method file(Code:D: --&gt; Str:D)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>method file(Code:D: -&#8594; Str:D)</p>
+<p>返回声明代码对象的文件名。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">返回声明代码对象的文件名。
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &amp;infix:&lt;+&gt;.file;</code></pre>
 </div>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_code_方法_line">93.2.10. (Code) 方法 line</h4>
 <div class="paragraph">
-<p>say &amp;infix:&lt;+&gt;.file;</p>
+<p>被定义为:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">==== (Code) 方法 line
-
-被定义为:
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">method line(Code:D: --&gt; Int:D)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>method line(Code:D: -&#8594; Int:D)</p>
+<p>返回声明该代码对象的行号。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">返回声明该代码对象的行号。
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &amp;infix:&lt;+&gt;.line;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_code_方法_is_implementation_detail">93.2.11. (Code) 方法 is-implementation-detail</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method is-implementation-detail(--&gt; False)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>say &amp;infix:&lt;+&gt;.line;</p>
+<p>注意：这个特性从 2020.05 版本开始在 Rakudo 编译器中使用。</p>
+</div>
+<div class="paragraph">
+<p>如果代码对象被标记为 <code>is implementation-detail</code> 特质，则返回 <code>True</code>，否则返回 <code>False</code>。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_由角色_callable_提供的例程">93.3. 由角色 Callable 提供的例程</h3>
+<div class="paragraph">
+<p><code>WhateverCode</code> 继承自类 <a href="https://docs.raku.org/type/Code">Code</a>，它遵守的角色是 <a href="https://docs.raku.org/type/Callable">Callable</a>，它提供了以下例程。</p>
+</div>
+<div class="sect3">
+<h4 id="_callable_方法_call_me">93.3.1. (Callable) 方法 CALL-ME</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">method CALL-ME(Callable:D $self: |arguments)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个方法是 <code>postfix:«( )»</code> 和 <code>postfix:«.( )»</code> 所需要的。它是使一个对象真正可调用的方法，需要重载，让一个给定的对象像一个例程一样行动。如果对象需要存储在一个 <code>&amp;-sigiled</code> 容器中，则必须实现 <code>Callable</code>。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">==== (Code) 方法 is-implementation-detail
-
-[source,raku]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>method is-implementation-detail(-&#8594; False)</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">注意：这个特性从 2020.05 版本开始在 Rakudo 编译器中使用。
-
-如果代码对象被标记为 `is implementation-detail` 特质，则返回 `True`，否则返回 `False`。
-
-=== 由角色 Callable 提供的例程
-
-`WhateverCode` 继承自类 link:https://docs.raku.org/type/Code[Code]，它遵守的角色是 link:https://docs.raku.org/type/Callable[Callable]，它提供了以下例程。
-
-==== (Callable) 方法 CALL-ME
-
-[source,raku]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>method CALL-ME(Callable:D $self: |arguments)</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">这个方法是 `postfix:«( )»` 和 `postfix:«.( )»` 所需要的。它是使一个对象真正可调用的方法，需要重载，让一个给定的对象像一个例程一样行动。如果对象需要存储在一个 `&amp;-sigiled` 容器中，则必须实现 `Callable`。
-
-[source,raku]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>class A does Callable {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class A does Callable {
     submethod CALL-ME(|c){ 'called' }
 }
 my &amp;a = A;
-say a(); # OUTPUT: «called␤»</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">应用 `Callable` 角色并不是使对象可调用的必要条件，如果一个类只是想在常规标量容器中添加类似子程序的语义，可以使用子方法 `CALL-ME` 来实现。
-
-[source,raku]</code></pre>
+say a(); # OUTPUT: «called␤»</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>class A {
+<p>应用 <code>Callable</code> 角色并不是使对象可调用的必要条件，如果一个类只是想在常规标量容器中添加类似子程序的语义，可以使用子方法 <code>CALL-ME</code> 来实现。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class A {
     has @.values;
-    submethod CALL-ME(Int $x where 0 &#8656; * &lt; @!values.elems) {
+    submethod CALL-ME(Int $x where 0 &lt;= * &lt; @!values.elems) {
         @!values[$x]
     }
 }
-my $a = A.new: values &#8658; [4,5,6,7];
-say $a(2); # OUTPUT: «6␤»</p>
+my $a = A.new: values =&gt; [4,5,6,7];
+say $a(2); # OUTPUT: «6␤»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_callable_方法_capture">93.3.2. (Callable) 方法 Capture</h4>
+<div class="paragraph">
+<p>被定义为:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">==== (Callable) 方法 Capture
-
-被定义为:
-
-[source,raku]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">method Capture()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>method Capture()</p>
+<p>抛出 <code>X::Cannot::Capture</code>。</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">抛出 `X::Cannot::Capture`。</code></pre>
 </div>
 </div>
 </div>
