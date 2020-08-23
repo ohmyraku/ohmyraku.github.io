@@ -477,32 +477,35 @@ if (theme && theme !== "1") {
 <li><a href="#_编程编程">52.4. 编程编程</a></li>
 </ul>
 </li>
-<li><a href="#_supply_块">53. Supply 块</a></li>
-<li><a href="#_channnels">54. Channnels</a></li>
-<li><a href="#_线程">55. 线程</a></li>
-<li><a href="#_raku_调度器">56. Raku 调度器</a></li>
-<li><a href="#_react_块">57. React 块</a>
+<li><a href="#_promises">53. Promises</a></li>
+<li><a href="#_supply_块">54. Supply 块</a></li>
+<li><a href="#_channel">55. Channel</a></li>
+<li><a href="#_线程">56. 线程</a></li>
+<li><a href="#_raku_调度器">57. Raku 调度器</a></li>
+<li><a href="#_react_块">58. React 块</a></li>
+<li><a href="#_lock_类">59. Lock 类</a></li>
+<li><a href="#_atomic_integers">60. Atomic Integers</a>
 <ul class="sectlevel2">
-<li><a href="#_面向对象设计">57.1. 面向对象设计</a></li>
-<li><a href="#_监控">57.2. 监控</a></li>
+<li><a href="#_面向对象设计">60.1. 面向对象设计</a></li>
+<li><a href="#_监控monitors">60.2. 监控(Monitors)</a></li>
 </ul>
 </li>
-<li><a href="#_第十四天_比较并交换标量">58. 第十四天 比较并交换标量</a>
+<li><a href="#_第十四天_比较并交换标量">61. 第十四天 比较并交换标量</a>
 <ul class="sectlevel2">
-<li><a href="#_异步问题的特殊性">58.1. 异步问题的特殊性</a></li>
-<li><a href="#_使用_react_块">58.2. 使用 react 块</a></li>
-<li><a href="#_使用_supplier_来进行分割和接合">58.3. 使用 Supplier 来进行分割和接合</a></li>
-<li><a href="#_按需供应与实时供应">58.4. 按需供应与实时供应</a></li>
-<li><a href="#_避免_supplierpreserving">58.5. 避免 Supplier::Preserving</a></li>
-<li><a href="#_拆分持续运行的_whenever_块">58.6. 拆分持续运行的 whenever 块</a></li>
-<li><a href="#_批量短任务">58.7. 批量短任务</a></li>
-<li><a href="#_避免睡眠">58.8. 避免睡眠</a></li>
-<li><a href="#_谨防死锁">58.9. 谨防死锁</a></li>
-<li><a href="#_结论_7">58.10. 结论</a></li>
-<li><a href="#_牢记你的承诺">58.11. 牢记你的承诺</a></li>
-<li><a href="#_批量小任务">58.12. 批量小任务</a></li>
-<li><a href="#_小心线程的限制">58.13. 小心线程的限制</a></li>
-<li><a href="#_避免休眠">58.14. 避免休眠</a></li>
+<li><a href="#_异步问题的特殊性">61.1. 异步问题的特殊性</a></li>
+<li><a href="#_使用_react_块">61.2. 使用 react 块</a></li>
+<li><a href="#_使用_supplier_来进行分割和接合">61.3. 使用 Supplier 来进行分割和接合</a></li>
+<li><a href="#_按需供应与实时供应">61.4. 按需供应与实时供应</a></li>
+<li><a href="#_避免_supplierpreserving">61.5. 避免 Supplier::Preserving</a></li>
+<li><a href="#_拆分持续运行的_whenever_块">61.6. 拆分持续运行的 whenever 块</a></li>
+<li><a href="#_批量短任务">61.7. 批量短任务</a></li>
+<li><a href="#_避免睡眠">61.8. 避免睡眠</a></li>
+<li><a href="#_谨防死锁">61.9. 谨防死锁</a></li>
+<li><a href="#_结论_7">61.10. 结论</a></li>
+<li><a href="#_牢记你的承诺">61.11. 牢记你的承诺</a></li>
+<li><a href="#_批量小任务">61.12. 批量小任务</a></li>
+<li><a href="#_小心线程的限制">61.13. 小心线程的限制</a></li>
+<li><a href="#_避免休眠">61.14. 避免休眠</a></li>
 </ul>
 </li>
 </ul>
@@ -16327,24 +16330,24 @@ say is-happy(2018);  # False</code></pre>
 <h2 id="_raku_中的异步和并发入门">52. Raku 中的异步和并发入门</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>从今天开始接下来的23天里，在进入本降临日历之前，我想确保介绍一下我将要涉及的基本概念。我把它称为 "Raku Async &amp; Concurrency Advent Calendar"，但是这些术语是什么意思呢，它们又是如何应用于 Raku 中的呢？</p>
+<p>从今天之后的23天里，在我们进入这个降临日历之前，我想确保介绍一下我将要涉及的基本概念。我把它称为 "Raku Async &amp; Concurrency Advent Calendar"，但这些术语是什么意思呢，它们又是如何应用于 Raku 的呢？</p>
 </div>
 <div class="paragraph">
-<p>这个 Advent Calendar 的前提是你对 Raku 有基本的了解。如果您不了解 Raku，但你熟悉另一种语言，我相信你可能会跟得上。然而，这是针对中高级开发者的，所以我推荐你先从这些资源中学习 Raku。</p>
+<p>这个 Advent Calendar 的前提是你对 Raku 有基本的了解。如果你不了解 Raku，但你熟悉另一种语言，我相信你可能会跟得上。然而，这是针对中高级开发者的，所以我推荐你先从这些资源中学习 Raku。</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="http://shop.oreilly.com/product/0636920062776.do">Learning Perl 6</a>(Raku 是以前称为 Perl 6 的语言)</p>
+<p><a href="http://shop.oreilly.com/product/0636920062776.do">Perl 6 入门</a>(Raku 是以前称为 Perl 6 的语言)</p>
 </li>
 <li>
-<p><a href="https://learnxinyminutes.com/docs/perl6/">Learn Raku in Y minutes</a></p>
+<p><a href="https://learnxinyminutes.com/docs/perl6/">用 Y 分钟学习 Raku</a></p>
 </li>
 <li>
-<p><a href="https://raku.guide/">Raku Guide</a></p>
+<p><a href="https://raku.guide/">Raku 指南</a></p>
 </li>
 <li>
-<p><a href="https://docs.raku.org/language.html">Raku Documentation</a></p>
+<p><a href="https://docs.raku.org/language.html">Raku 文档</a></p>
 </li>
 </ul>
 </div>
@@ -16373,40 +16376,40 @@ my $val = $promise.();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这是一个愚蠢的人为的例子，但重点是我们实际上要到后来才会收到值。这种编程风格主要是在你知道你需要完成一些工作，但不需要立即得到结果的时候有用。当你在此期间可能需要做其他工作的时候，这种方式尤其有用。</p>
+<p>这是一个愚蠢的人为的例子，但重点是我们实际上要到后来才会收到值。这种编程风格主要是在你知道你需要完成一些工作，但不需要立即得到结果的时候有用。当你可能需要在此期间做其他工作时，这种方式尤其有用。</p>
 </div>
 <div class="sect3">
 <h4 id="_什么时候才有意义">52.1.1. 什么时候才有意义？</h4>
 <div class="paragraph">
-<p>举几个例子说明一下异步可能有帮助的情况。</p>
+<p>举几个例子说明异步可能会有帮助的情况。</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>所有基于套接字的客户端/服务器应用都是异步的。对于 TCP 来说，在服务器上，你建立一个监听的套接字，然后当客户端连接时，你会收到一个连接的套接字，你可以使用读写操作在这个套接字上交换数据。而 TCP 客户端则是请求一个连接，然后等待服务器接受连接。在等待的过程中，客户端可以继续进行工作。</p>
+<p>所有基于套接字的客户端/服务器应用程序都必须是异步的。对于 TCP 来说，在服务器上，你建立一个监听套接字，然后当客户端连接时，你会收到一个连接的套接字，你可以在这个套接字上使用读写操作交换数据。而 TCP 客户端则是请求一个连接，然后等待服务器接受连接。在等待的过程中，客户端可以继续进行工作。</p>
 </li>
 <li>
-<p>一个实时处理日志数据的程序通常有几个处理步骤，每一行都要经过。它等待数据的到达。它解析每一行数据，从中获取有趣的信息。它对数据进行过滤，以决定它是否对当前任务有用。它对数据进行计算。这些操作中的每一个都可以在异步编程链中执行，在这个链中，每一步只要有一定量的数据准备好了，就会执行这些操作。</p>
+<p>一个实时处理日志数据的程序通常有几个处理步骤，每一行都要经过。它等待数据的到达。它解析每一行数据，从中获取有趣的信息。它对数据进行过滤，以决定它是否对当前任务有用。它对数据进行计算。这些操作中的每一项都可以在异步编程链中执行，其中每一步只要有一定量的数据准备好了，就会执行这些操作。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>异步只是一种编程风格，它适合于你，软件开发者，决定它适合的地方。有些问题比其他问题更具有内在的异步性，但你也可以同步地构建它们。当它适合你的时候就使用异步。</p>
+<p>异步只是一种编程风格，它适合于你，软件开发者，决定它适合的地方。有些问题比其他问题更具有内在的异步性，但你也可以同步地构建它们。当它适合你的时候就使用异步(async)。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_工具有哪些">52.1.2. 工具有哪些？</h4>
 <div class="paragraph">
-<p>在 Raku 中，异步编程主要是通过高级的、"可组合"的接口来进行的，比如 <a href="https://docs.raku.org/type/Promise">Promise</a>，<a href="https://docs.raku.org/type/Supply">Supply</a> 和 <a href="https://docs.raku.org/type/Channel">Channel</a>。这些都是高级的，因为它们提供了一个针对某人的接口，而不需要严格证明这些工具如何使用的安全性。你仍然要小心，这是肯定的，但陷阱减少了很多，从它们的界面上看应该更明显。它们是可组合的，因为它们的设计是为了让你把使用这些接口的不同库，以可预测的方式一起使用。</p>
+<p>在 Raku 中，异步编程主要是通过高级的、"可组合"的接口来进行的，比如 <a href="https://docs.raku.org/type/Promise">Promise</a>，<a href="https://docs.raku.org/type/Supply">Supply</a> 和 <a href="https://docs.raku.org/type/Channel">Channel</a>。这些都是高级的，因为它们提供了一个针对某人的接口，而不需要严格证明这些工具如何使用的安全性。你仍然要小心，这是肯定的，但陷阱减少了很多，从它们的接口上看应该更明显。它们是可组合的，因为它们的设计是为了让你把使用这些接口的不同库，以可预测的方式一起使用。</p>
 </div>
 <div class="paragraph">
-<p>另一方面，像 <a href="https://docs.raku.org/type/Lock">Lock</a> 和 <a href="https://docs.raku.org/type/Semaphore">Semaphore</a> 这样的低级工具，当使用这些工具的不同库组合在一起时，会导致不可预测的行为。这些在 Raku 中也是可用的，因为有时你需要用它们来构建，但它们不是 Raku 的异步编程的面包和黄油。</p>
+<p>另一方面，像 <a href="https://docs.raku.org/type/Lock">Lock</a> 和 <a href="https://docs.raku.org/type/Semaphore">Semaphore</a> 这样的低级工具，当使用这些工具的不同库组合在一起时，会导致不可预测的行为。这些在 Raku 中也是可用的，因为有时你需要用它们来构建，但它们不是 Raku 的异步编程的万金油。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_它是什么样子的呢">52.1.3. 它是什么样子的呢？</h4>
 <div class="paragraph">
-<p>那么 Raku 中的异步编程是什么样的呢？这里是一个基本的计数程序，但我们不使用循环，而是每秒钟输出一个数字:</p>
+<p>那么 Raku 中的异步编程是什么样的呢？这里有一个基本的计数程序，但我们不使用循环，而是每秒钟输出一个数字:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16429,66 +16432,66 @@ my $val = $promise.();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如你所见，语法非常简单，希望很容易理解。你甚至可以认为它是同步的，而不会造成太多麻烦。 Raku 中的异步编程的目标是使不完全了解它的人可以访问它，至少可以了解正在发生的事情。</p>
+<p>如你所见，语法非常简单，希望容易上手。你甚至可以认为它算是同步的，而不会遇到太多麻烦。 Raku 中的异步编程的一个目标是让那些不完全理解它的人至少能理解发生了什么。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_并发编程">52.2. 并发编程</h3>
 <div class="paragraph">
-<p>我在大学时上了一门关于并发编程的课。恐怕我没有很好地掌握本主题就通过了课程。但是，我认为部分原因是要抬起引擎盖并查看所有活动部件，这是很难真正理解的概念。但是，这也部分是因为该课程以数学术语教授并发性，而我发现实用术语更容易理解。</p>
+<p>我在大学里上过一门关于并发编程的课。恐怕我没有很好地掌握这个主题就通过了这门课。然而，我认为部分原因是因为它是一个很难真正理解的概念，通过掀开引擎盖，看看所有的运动部件。不过，也有一部分原因是因为这门课用数学术语来教授并发性，而我发现实用术语更容易理解。</p>
 </div>
 <div class="paragraph">
-<p>并发编程仅仅是同时运行程序各部分的行为。可以同时运行的程序部分称为线程。你可以将线程视为程序可以在其中运行其代码的通道。例如，每个线程可能使用不同的起始数据运行相同的程序代码。或者，一个程序可以具有用于更新图形界面的线程，以及用于与网络上的其他程序对话的线程，以及用于对接收到的数据进行本地处理的线程。</p>
+<p>并发编程仅仅是同时运行程序的各个部分的行为。程序中可以同时运行的部分称为线程。你可以把线程视为程序可以在其中运行其代码的通道。例如，每个线程可能使用不同的起始数据运行同一个程序代码。或者，一个程序可以有一个线程用于更新图形界面，一个线程用于与网络上的其他程序对话，一个线程用于对接收到的数据进行本地处理。</p>
 </div>
 <div class="sect3">
-<h4 id="_裸金属线">52.2.1. 裸金属线</h4>
+<h4 id="_裸机线程">52.2.1. 裸机线程</h4>
 <div class="paragraph">
-<p>可以通过多种方式实现在车道上行驶，包括：</p>
+<p>分道运行可以通过多种方式实现，包括：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>在单 CPU/单核计算机上，CPU 将交错需要同时发生的代码执行。代码实际上并不会同时运行，但是每个程序的每个线程都有时间在 CPU 上运行某些指令，然后执行上下文切换并运行另一个线程。</p>
+<p>在单 CPU/单核计算机上，CPU 会将需要同时进行的代码交错执行。代码实际上并不是同时运行，而是每个程序的每个线程都有时间在 CPU 上运行一些指令，然后进行上下文切换, 运行另一个线程。</p>
 </li>
 <li>
-<p>在多 CP​​U/多核计算机上，这意味着在每个 CPU 内核上都需要交织代码，这意味着在单独的硬件中同时在每个内核上运行各种程序和线程。</p>
+<p>在多 CP​​U/多核计算机上，这既意味着在每个 CPU 核心上交错运行代码，也意味着在每个核心上同时在不同的硬件上运行各种程序和线程。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>无论如何，你都会遇到一个问题，即任何给定线程中的代码可能只完成一项任务的一部分，因此你需要确保线程之间安全地交互。这称为“线程安全代码”。</p>
+<p>无论如何，你都会遇到一个问题，即任何给定线程中的代码可能只完成了任务的一小部分，因此你需要确保线程之间安全地交互。这就是所谓的"线程安全代码"。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_线程安全">52.2.2. 线程安全</h4>
 <div class="paragraph">
-<p>有几种基本的编程样式可用于构建线程安全代码。我从最喜欢到最不喜欢的样式在这里介绍它们：</p>
+<p>构建线程安全代码有几种基本的编程风格。我在这里从最喜欢到最不喜欢的风格来介绍它们：</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>任何无状态的代码或内部仅具有更改状态的代码本质上都是线程安全的。只有当代码需要访问其他代码可能使用的数据时，它才变得不安全。</p>
+<p>任何无状态的代码或者只有自身内部状态变化的代码本质上都是线程安全的。只有当代码需要访问其他代码可能使用的数据时，它才会变得不安全。</p>
 </li>
 <li>
-<p>通常，可以编写代码使其内部无状态，但是在完成执行后执行状态更改。只要某些内容以安全的方式同步状态更新，此数据转换就是线程安全的。执行转换的代码本身不必对安全性做出任何特殊规定。</p>
+<p>通常情况下，可以将代码写成内部是无状态的，但在完成执行时执行状态更改。只要某些内容以安全的方式同步状态更新，这种数据转换就是线程安全的。执行转换的代码本身不必对安全性做出任何特殊规定。</p>
 </li>
 <li>
-<p>对于必须在执行线程之间共享某些可变状态的情况，每次读取和写入数据时都必须格外小心，以确保更改不会破坏状态。</p>
+<p>对于必须在执行线程之间共享某些可变状态的情况，每次读取和写入数据时都必须格外小心，以确保这些更改不会破坏状态。</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>Raku 提供了处理这些情况的专用工具。每当编写并发程序时，都应该尽可能地瞄准前两种编码风格。这些是最容易理解和维护的。但是，第三个选择有时是最好的</p>
+<p>Raku 提供了专门的工具来处理这些情况。每当编写并发程序时，都应该尽可能地瞄准前两种编码风格。这些是最容易理解和维护的。然而，第三种选择有时是最好的</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_raku_之道">52.2.3. Raku 之道</h4>
 <div class="paragraph">
-<p>在 Raku 中，我们不倾向于直接使用线程。相反，我们计划代码块异步运行。代码的实际运行方式取决于所使用的调度程序。 Rakudo 上的默认调度程序将调度块以在与主线程不同的线程上运行。</p>
+<p>在 Raku 中，我们不倾向于直接使用线程。取而代之的是，我们调度代码块异步运行。代码的实际运行方式取决于所使用的调度程序。 Rakudo 上的默认调度程序会将代码块调度到主线程之外的单独线程上运行。<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup></p>
 </div>
 <div class="paragraph">
-<p>计划要运行的块的主要方法是使用 <code>start</code> 块，类似于以下示例。</p>
+<p>调度要运行的块的主要方法是使用 <code>start</code> 块，类似于下面的示例。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16502,20 +16505,20 @@ start {
 </div>
 </div>
 <div class="paragraph">
-<p>我个人将根据这种方式或通过其他方式安排的工作称为"任务"或"子任务"。不过，这不是 Rakuism，请注意其他人的术语可能会有所不同。</p>
+<p>我个人将根据这种方式或通过其他方式安排的工作称为"任务"(task)或"子任务"(subtask)，这取决于上下文。不过这不是 Raku 主义，所以要注意其他人的术语可能会有所不同。</p>
 </div>
 <div class="paragraph">
-<p>无论如何，重点是并发是指同时运行代码的两个不同部分。</p>
+<p>总之，主要的一点是，并发是指同时运行你的代码的两个不同部分。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_并行编程">52.3. 并行编程</h3>
 <div class="paragraph">
-<p>我们在本日历中经常使用的第三个术语是并行编程。并行编程与并发非常相似，但主要面向并行处理数据。例如，如果你要通过函数运行大量整数，则可以为每个整数同时执行该操作。这是并行编程。</p>
+<p>我们在本日历中经常使用的第三个术语是并行编程。并行编程与并发性非常相似，但主要面向并行处理数据。例如，如果你有大量的整数，你想通过一个函数来运行，你可以为对这些整数中的每一个整数都并发地执行该操作。这是并行编程。</p>
 </div>
 <div class="paragraph">
-<p>它是与异步或并发分开的术语的原因有两个。一是并行程序不一定是并发或异步的，二是有一些与并行编程有关的特殊优化，它们不一定是通用并发或异步的一部分。</p>
+<p>它是与异步(async)或并发是一个独立的术语，原因有二。其一，并行程序不一定是并发或异步的，其二，有一些与并行编程相关的特殊优化，它们不一定是通用并发或异步的一部分。</p>
 </div>
 <div class="paragraph">
 <p>例如，这是 Raku 中的一个小型并行程序：</p>
@@ -16526,35 +16529,42 @@ start {
 </div>
 </div>
 <div class="paragraph">
-<p>当该程序运行时，Raku 将安排任务在多个线程中运行，以迭代范围内的所有值，并将所有1000万个值成批增加一倍。将工作分为几批然后选择如何安排它们的工作，使并行编程成为其自身的特殊主题。该程序可能是并发的，但不是异步的。我们也可以异步进行并行编程，但本例中没有。</p>
+<p>当这个程序运行时，Raku 会安排任务在多个线程中运行，对范围内的所有值进行迭代，并将所有1000万个值全部分批翻倍。把工作分为几批，然后选择如何调度，这就是并行编程本身的特殊主题。这个程序可能是并发的，但它不是异步的。我们也可以异步地进行并行编程，但在这个例子中我们并没有。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_编程编程">52.4. 编程编程</h3>
 <div class="paragraph">
-<p>因此，当我们将这些术语放在一起时，我们发现程序可能具有所描述的三个属性中的任何一个。它可能是并发，异步和并行的。这些都不是。这些组合可能只是其中的一两个。这些是不同的编程风格。</p>
+<p>所以，当我们把这些术语放在一起的时候，我们会发现一个程序可能具有所描述的三种属性中的任何一种。它可能是并发的，异步的和并行的。它可能不具备这些特性。它可能只是其中的一个或两个，任意组合。这些都是不同的编程风格。</p>
 </div>
 <div class="paragraph">
-<p>Raku 提供的工具旨在在异步，并发和并行地形成代码时使其更易于阅读。它还旨在通过允许你在同时在多个线程中操作时安全地转换状态，来鼓励你以固有的线程安全方式编写代码。</p>
+<p>Raku 提供的工具旨在使你的代码在异步、并发和并行地编写时更容易阅读。它还旨在鼓励你以一种固有的线程安全的方式编写你的代码，允许你在多个线程中同时操作时安全地转换状态。</p>
 </div>
 <div class="paragraph">
-<p>我希望在接下来的23天里，我能更好地使你决定何时使用 Raku 的所有这些功能以及如何使用 Raku，以使你的代码更快，同时使人类仍然易于解析和理解。</p>
+<p>我希望在接下来的23天里，我将更好地让你决定何时拥抱Raku的每一个特性，以及如何以一种让你的代码更快，同时又易于人类解析和理解的方式进行。</p>
 </div>
 <div class="paragraph">
 <p>干杯。</p>
 </div>
 <div class="paragraph">
-<p>稍后我将介绍调度程序的详细信息。当我这样做时，你会看到 Raku 使用的确切机制来确定任务是否计划在单独的线程中立即运行，在将来的某个时间在单独的线程上运行，在当前线程不再忙时在当前线程上运行，但是，我通常会假设 <code>start</code> 将在下一个可用线程上安排任务，因为通常可以安全地在 Raku 中进行任务。 ↩</p>
+<p>原文链接: <a href="https://zostay.com/archive/2019/12/01/introducing-async-concurrency-in-raku.html" class="bare">https://zostay.com/archive/2019/12/01/introducing-async-concurrency-in-raku.html</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_promises">53. Promises</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在 Raku 中, <a href="https://zostay.com/archive/2019/12/02/promises.html">Promise</a> 代表了异步任务之间通信的最简单的高级语言功能。 它们很像人与人之间的承诺。 例如, 我可能会答应我的儿子, 我会帮助他完成学业。当我帮助他的时候, 我就会遵守这个承诺。 或者, 如果由于某种原因, 我未能帮助他, 我就会违背这个承诺。 Raku 中 的 Promise 也是如此。当一个值到达的时候, 返回一个值的承诺(Promise)就会被遵守。如果发生了错误, 阻止了值的到达, 那么返回值的承诺(Promise)就会被打破。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://zostay.com/posts/2019/12/02/promises/cover-korie-cull-f3gcUmrR4eQ-unsplash_hu4feb791eb4e6207b9aa233eb6f7c17b5_2502682_280x280_fill_q75_box_smart1.jpg" alt="Promise">
+</div>
 </div>
 <div class="paragraph">
-<p><a href="https://zostay.com/archive/2019/12/01/introducing-async-concurrency-in-raku.html" class="bare">https://zostay.com/archive/2019/12/01/introducing-async-concurrency-in-raku.html</a>
-== Promises</p>
-</div>
-<div class="paragraph">
-<p>在 Raku 中, <a href="https://zostay.com/archive/2019/12/02/promises.html">Promise</a> 代表了异步任务之间通信的最简单的高级语言功能。 它们非常像人与人之间的承诺。 例如, 我可能会答应我的儿子, 我会帮助他完成学业。 当我帮助他的时候, 我会遵守这个承诺。 或者, 如果由于某种原因, 我未能帮助他, 我就会违背这个承诺。 Raku 中 的 Promise 也是如此。 当值到达的时候, Promise 要返回一个值的时候, 就会遵守这个承诺。 如果发生了错误, 使值无法到达, 那么返回值的承诺就会被破坏。</p>
-</div>
-<div class="paragraph">
-<p>因此, 让我们来看看 Raku 中的基本承诺的操作：</p>
+<p>所以, 让我们来看看 Raku 中的基本承诺：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16574,19 +16584,19 @@ await $promise.then({ say .result });</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>上面的代码使用 <a href="https://docs.raku.org/language/control#index-entry-control_flow_start-start">start</a> 块开始查找第 10,000 个素数。此块返回一个  <a href="https://docs.raku.org/type/Promise">Promise</a> 对象。该对象以三种状态之一存在（可以使用 <code>.status</code> 方法检查）。初始状态为 <strong>Planned</strong>, 然后进入两个最终状态之一。如果无法达到结果（通常是因为发生异常）, 则进入 ＊Broken* s状态, 当结果可用时, 则进入 <strong>Kept</strong> 状态。一旦处于 <code>Kept</code> 状态, <code>.result</code> 方法将立即返回被保存的 <code>Promise</code> 的值。</p>
+<p>上面的代码使用 <a href="https://docs.raku.org/language/control#index-entry-control_flow_start-start">start</a> 块开始查找第 10000 个素数。这个块返回一个  <a href="https://docs.raku.org/type/Promise">Promise</a> 对象。这个对象以三种状态之一存在(你可以用 <code>.status</code> 方法检查）。初始状态为 <strong>Planned</strong> 状态, 然后它进入两种最终状态中的一种。如果无法得到一个结果(通常是因为发生了异常), 则进入 <strong>Broken</strong> 状态, 而当结果可用时, 则进入 <strong>Kept</strong> 状态。一旦处于 <strong>Kept</strong> 状态, <code>.result</code> 方法将立即返回被保存的 <code>Promise</code> 的值。</p>
 </div>
 <div class="paragraph">
-<p>可以使用 <code>.then</code> 方法将承诺链接在一起。这是通过添加另一个块来实现的, 该块在第一个块保留后立即开始。新的块将 被赋予前一个 Promise 对象作为参数, 该方法返回一个新的 Promise, 它包含下一个块的结果。</p>
+<p>可以使用 <code>.then</code> 方法将 Promise 链在一起。这是通过添加另一个块来实现的, 该块在第一个块保留后立即开始。新的块将被赋予前一个 Promise 对象作为参数, 该方法返回一个新的 Promise, 该 Promise 将包含下一个块的结果。</p>
 </div>
 <div class="paragraph">
-<p>上面代码中的 start 块安排计算在默认线程池中的下一个未使用的线程上运行, 并返回一个 Promise对象。</p>
+<p>上面代码中的 <code>start</code> 块将计算安排在默认线程池中的下一个未使用的线程上运行, 并返回一个 Promise 对象。<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup> 我们使用 <code>.then()</code> 来输出计算的 <code>.result</code>，只要它可用。</p>
 </div>
 <div class="paragraph">
-<p>最后, 我们有一个 <a href="https://docs.raku.org/type/Promise#sub_await">await</a> 语句, 该语句使主线程暂停直到值变为可用为止。如果没有这个语句, 我们的程序将在计算完成之前结束。</p>
+<p>最后, 我们有一个 <a href="https://docs.raku.org/type/Promise#sub_await">await</a> 语句, 该语句使主线程暂停，直到值变得可用。如果没有这条语句, 我们的程序会在计算完成之前结束。</p>
 </div>
 <div class="paragraph">
-<p>await 语句还可以让 一个被破坏的 Promise 传递异常。考虑一下这段代码：</p>
+<p><code>await</code> 语句还允许一个被破坏的 Promise 传递异常。考虑一下这段代码：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16596,7 +16606,7 @@ say 'something';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>上面的代码会休眠 1 秒钟, 并打印 "something" 到标准输出。 然而, 这个异常永远不会被接收到。 这是因为尽管异常导致承诺被破坏, 但我们根本没有看到承诺的结果。 我们可以在 Promise 上添加一个 <code>await</code>, 准备好接收该值, 任何抛出的导致 Promise 被破坏的异常都会被接收。</p>
+<p>上面的代码会休眠 1 秒钟, 并打印 "something" 到标准输出。 然而, 异常永远不会被接收到。 这是因为尽管异常会导致 Promise 被破坏, 但我们根本没有看到 Promise 的结果。 我们可以在 Promise 上添加一个 <code>await</code>, 准备好接收该值, 任何抛出的导致 Promise 被破坏的异常都会被接收。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16612,7 +16622,7 @@ CATCH {
 </div>
 </div>
 <div class="paragraph">
-<p>这段代码做的事情和之前的完全一样, 但是在 "something" 后面也会输出 "ERROR: bad stuff"。 始终要确保以这种方式在 <code>start</code> 块或另一个收到 Promise 的块中处理异常, 否则可能会遇到奇怪的、意想不到的问题。</p>
+<p>这段代码和之前做的事情完全一样, 但是在 "something" 后面也会输出 "ERROR: bad stuff"。一定要确保在 <code>start</code> 块内部或者在另一个以这种方式接收 Promise 的块中处理你的异常, 否则你可能最终会遇到奇怪的意外问题。</p>
 </div>
 <div class="paragraph">
 <p>这些都是 Raku Promise 的基本要素。</p>
@@ -16621,16 +16631,15 @@ CATCH {
 <p>干杯。</p>
 </div>
 <div class="paragraph">
-<p>请注意, 这是在 MoarVM 下运行的 Rakudo 通常的默认调度器的过程。 实际发生的情况可能会根据 <code>$*SCHEDULER</code> 变量中的当前值而有所不同。 我将在以后的文章中进一步讨论这个问题。 ↩</p>
-</div>
+<p>原文链接: <a href="https://zostay.com/posts/2019/12/02/promises/" class="bare">https://zostay.com/posts/2019/12/02/promises/</a></p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_supply_块">53. Supply 块</h2>
+<h2 id="_supply_块">54. Supply 块</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>当需要在线程之间安全地访问 Raku 应用程序中的数据流时, 你需要 <a href="https://docs.raku.org/type/Supply">Supply</a>。今天我们要讨论一种特殊的供应方式, 即 <a href="https://docs.raku.org/syntax/supply%20emit">Supply</a> 块。如果你熟悉序列, 也就是 <a href="https://docs.raku.org/type/Seq">Seq</a> 对象, Supply 块的方式工作与之非常类似, 但是允许你在数据到来时拉动它, 并在这期间轻松地做其他事情。</p>
+<p>当你的 Raku 应用程序中流过需要在线程间安全地访问的数据流时, 你需要 <a href="https://docs.raku.org/type/Supply">Supply</a>。今天, 我们将讨论一种特殊的使用供应的方式, 即 <a href="https://docs.raku.org/syntax/supply%20emit">supply</a> 块。如果你熟悉序列, 也就是 <a href="https://docs.raku.org/type/Seq">Seq</a> 对象, <code>supply</code> 块的工作方式与之非常相似, 但是允许你在数据到来时拉动它, 并在这期间轻松地做其他事情。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16657,27 +16666,27 @@ react {
 <div class="paragraph">
 <p>所以我们这里有三段代码:</p>
 </div>
-<div class="ulist">
-<ul>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p>函数 <code>a()</code> 生成 Hofstadter Q-sequence 的值(以一种特别低效的方式)。</p>
+<p>函数 <code>a()</code> 生成 Hofstadter Q 序列<sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnotedef_3" title="View footnote.">3</a>]</sup>的值(以一种特别低效的方式)。</p>
 </li>
 <li>
-<p>有一个使用 Supply 块生成的 Supply 对象, 它使用我们定义的函数输出 Hofstadter Q-sequence 的值, 从头开始, 一直到程序退出。</p>
+<p>有一个使用 <code>supply</code> 块生成的 Supply 对象, 它使用我们定义的函数输出 Hofstadter Q 序列的值, 从头开始, 一直到程序退出。</p>
 </li>
 <li>
-<p>然后是一个 <a href="https://docs.raku.org/language/concurrency#index-entry-react">react</a> 块, 每当值可用时就输出值, 并在值之间每隔一秒钟输出一条等待消息。关于 <code>react</code> 块, 我将在以后再详细介绍。现在, 只需知道 <code>react</code> 块允许我们通过将结果拉回到单个线程中来同步异步工作。</p>
+<p>然后是一个 <a href="https://docs.raku.org/language/concurrency#index-entry-react">react</a> 块, 只要有值就输出, 在值之间每隔一秒输出一条等待消息。关于 <code>react</code> 块, 我将在改天再详细介绍。现在, 只需要知道 <code>react</code> 块允许我们通过将结果拉回到单个线程中来同步异步工作。</p>
 </li>
-</ul>
+</ol>
 </div>
 <div class="paragraph">
-<p>至于我们的中心主题, <code>supply</code> 块, 它返回一个可以被"分接"(tapped)的 <code>Supply</code> 对象。通过调用 <code>.tap</code> 或 <code>.act</code> 方法, 或在 <code>whenever</code> 块中作为 <code>react</code> 或另一个 <code>supply</code> 块的一部分使用。</p>
+<p>至于我们的中心主题, <code>supply</code> 块, 它返回一个可以被"分接"(tapped)的 <code>Supply</code> 对象。通过调用 <code>.tap</code> 或 <code>.act</code> 方法, 或者在 <code>whenever</code> 块中作为 <code>react</code> 或另一个 <code>supply</code> 块的一部分使用。</p>
 </div>
 <div class="paragraph">
-<p>在 <code>supply</code> 块的情况下, 我们得到的这种 <code>Supply</code> 对象被称为"按需供应"。这意味着每当 <code>Supply</code> 被分接(tap)时, 都会运行与该块相关的代码。每当遇到 <code>emit</code> 时, 都会运行传递给 <code>.tap</code> 或 <code>whenever</code> 语句的块, 并给出作为参数发出的值(在上面的示例代码中命名为 <code>$v</code>)。执行将继续, 直到给定的块退出, 或者到达 <code>done</code> 语句, 这将导致 <code>supply</code> 块退出(这与 <code>last</code> for 循环的操作非常相似)。</p>
+<p>在 <code>supply</code> 块的情况下, 我们得到的这种 <code>Supply</code> 对象被称为"按需供应"(on demand Supply)。这意味着每当 <code>Supply</code> 被分接(tap)时, 与该块相关的代码都会被运行。每当遇到 <code>emit</code> 时, 传递给 <code>.tap</code> 或 <code>whenever</code> 语句的块都会被运行, 并给出作为参数发出的值(在上面的示例代码中命名为 <code>$v</code>)。执行一直持续到给 supply 的块退出或到达 <code>done</code> 语句, 这将导致 <code>supply</code> 块退出(这个操作与 <code>last</code> for 循环非常相似)。</p>
 </div>
 <div class="paragraph">
-<p>例如, 如果我们希望我们的序列在 100 次迭代后自动结束, 我们可以这样重写我们的 <code>supply</code>:</p>
+<p>例如, 如果我们希望我们的序列在迭代 100 次后自动结束, 我们可以这样重写我们的 <code>supply</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16690,21 +16699,29 @@ react {
 </div>
 </div>
 <div class="paragraph">
-<p>使用 <code>supply</code> 块时要记住的一个非常重要的因素是, <code>emit</code> 命令会一直阻塞直到每个分接(<code>tap</code>)完成工作。这意味着该 <code>supply</code> 块"支付"其分接的计算时间。这种延迟提供了一种形式的反压, 防止产生的 <code>Supply</code> 运行速度超过了分接(tap)可以处理的速度。因此,如果你想让你的事件流以光速运行, 并且不在乎工具处理是否可以跟上, 你需要确保分接(tap)立即 启动(<code>start</code>)新的任务来运行以避免阻塞, 或者你想要一个不同于普通 <code>Supply</code> 的机制来处理工作量。</p>
+<p>在使用 <code>supply</code> 块时, 要记住一个非常重要的因素, 即 <code>emit</code> 命令会在每个分接(<code>tap</code>)完成工作之前进行阻塞。<sup class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnotedef_4" title="View footnote.">4</a>]</sup>这意味着该 <code>supply</code> 块"支付"其分接的计算时间。这种延迟提供了一种反压形式, 防止生成的 <code>Supply</code> 运行速度超过分接(tap)的处理速度。因此,如果你想让你的事件流以光速运行, 并且不在乎工具处理是否能跟上, 你需要确保分接(tap)立即启动(<code>start</code>)新的任务来运行, 以避免阻塞, 或者你想要一个不同于普通 <code>Supply</code> 的机制来处理工作负载。</p>
 </div>
 <div class="paragraph">
 <p>干杯。</p>
 </div>
+<div class="paragraph">
+<p>原文链接: <a href="https://zostay.com/posts/2019/12/03/supply-blocks/" class="bare">https://zostay.com/posts/2019/12/03/supply-blocks/</a></p>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_channnels">54. Channnels</h2>
+<h2 id="_channel">55. Channel</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Raku 中的 <a href="https://docs.raku.org/type/Channel">Channel</a> 是一个异步数据队列。 你可以将数据送入队列的一端, 并在另一端安全地接收数据, 即使涉及多个线程参与时也是如此。</p>
+<p>在 Raku 中, <a href="https://docs.raku.org/type/Channel">Channel</a> 是一个异步的数据队列。 你可以将数据送入队列的一端, 并在另一端安全地接收数据, 即使是在多个线程参与的情况下。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://zostay.com/posts/2019/12/04/channels/cover-tania-miron-EKX3Lx-t5CM-unsplash_hu42ee8b5b2f8086eb01445008d13dff6b_2041273_280x280_fill_q75_box_smart1.jpg" alt="Channel">
+</div>
 </div>
 <div class="paragraph">
-<p>让我们考虑一下<a href="https://en.wikipedia.org/wiki/Dining_philosophers_problem">用餐哲学家问题</a>的一个变体：有五个哲学家在桌旁喝汤。 他们没有互相交谈, 因为他们忙于思考哲学问题。 然而, 只有 2 个汤勺。 每当一个哲学家想喝一口汤时, 她都需要一个汤勺。 幸运的是, 每个哲学家愿意分享汤勺, 并在每次舀完后将勺子放在桌子的中央。</p>
+<p>让我们考虑一下<a href="https://en.wikipedia.org/wiki/Dining_philosophers_problem">哲学家用餐问题</a>的一个变体：我们有五个哲学家在桌子上喝汤。他们不互相交谈, 因为他们太忙于思考哲学问题。然而, 只有 2 个汤勺。 每当一位哲学家想喝一口汤时, 她都需要获得一把汤勺。幸运的是, 每位哲学家都愿意分享汤勺, 并在每次舀完后将勺子放在桌子的中央。</p>
 </div>
 <div class="paragraph">
 <p>我们可以这样来模拟这个问题：</p>
@@ -16731,7 +16748,7 @@ await Promise.allof(@philosophers);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这里, 我们有五个任务运行在五个线程中, 每个任务都在争夺两个汤勺资源中的一个。 他们将各喝 100 口汤。 运行这个程序, 你会得到 500 行类似于这样的输出:</p>
+<p>在这里, 我们有五个任务运行在五个线程中, 每个任务都在争夺两个汤勺资源中的一个。他们每人将各喝 100 口汤。运行这个程序会得到 500 行类似于这样的输出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16749,30 +16766,38 @@ Philosopher 0 takes a sip with the wooden spoon.
 </div>
 </div>
 <div class="paragraph">
-<p>代码本身是非常简单的。我们启动了(<code>start</code>)五个线程, 每个线程代表一个哲学家。每个哲学家都调用 <code>.receive</code> 接收下一个可用的勺子。该方法将一直阻塞, 直到有汤勺可用为止。哲学家喝一口汤, 然后使用 <code>.send</code> 将勺子放回到桌子上供其他人使用。最终, 哲学家喝完了 100 口, 并且由 <code>start</code> 返回的 Promise 会被保留下来。</p>
+<p>代码本身非常简单。我们启动了(<code>start</code>)五个线程, 每个线程代表一个哲学家。每个哲学家都调用 <code>.receive</code> 接收下一个可用的勺子。该方法将一直阻塞, 直到有汤勺可用为止。哲学家喝一口汤, 然后使用 <code>.send</code> 将勺子放回到桌子上供其他人使用。最终, 哲学家喝完了 100 口, 并且由 <code>start</code> 返回的 Promise 会被保留下来。</p>
 </div>
 <div class="paragraph">
 <p>主线程通过使用 <code>.send</code> 将两个汤勺放在桌子上来启动这个过程。然后, 它使用 <code>await</code> 来保持程序运行, 直到所有的哲学家完成任务。</p>
 </div>
 <div class="paragraph">
-<p>就 CPU 而言, 通道的开销非常低。发送者将不会等待接收者。接收者可以使用 <code>.receive</code> 阻塞直到队列中有可用内容为止, 也可以使用 <code>.poll</code> 来检查条目而不会阻塞。成本转移到内存中。通道必须在内部存储所有已发送的项, 直到接收到它们为止, 并且队列将继续增长, 直到程序内存不足。</p>
+<p>就 CPU 而言, 通道的开销非常低。发送者将不会等待接收者。接收者可以使用 <code>.receive</code> 来阻塞, 直到队列中有可用的内容, 也可以使用 <code>.poll</code> 来检查条目而不阻塞。成本转移到内存中。通道必须在内部存储所有已发送的项, 直到它们被接收, 并且队列将继续增长, 直到程序用完内存。</p>
 </div>
 <div class="paragraph">
-<p>因此, 当你有资源或消息要分发, 但不在任务之间共享时, 通道会很有用。或者当你只需要点对点的通信时。作业队列, 资源池和点对点任务通信是通道最适合解决的问题。</p>
+<p>因此, 当你有资源或消息要分发, 但不在任务之间共享时, 通道是很有用的。或者当你只需要进行点对点的通信时。作业队列、资源池和点对点任务通信是通道非常适合解决的那种问题的好例子。</p>
 </div>
 <div class="paragraph">
 <p>干杯。</p>
 </div>
+<div class="paragraph">
+<p>原文链接: <a href="https://zostay.com/posts/2019/12/04/channels/" class="bare">https://zostay.com/posts/2019/12/04/channels/</a></p>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_线程">55. 线程</h2>
+<h2 id="_线程">56. 线程</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>警告！ 我们现在正在研究 Raku 的内心深处。 线程是低级 API，几乎所有应用程序都应避免使用线程。 但是，如果您的特定应用程序需要直接线程访问，那么这里就是为您准备的。</p>
+<p>警告！ 我们现在正在深入了解 Raku 的内部深度。线程是一种低级的 API，几乎所有的应用程序都应避免使用线程(Thread)。然而，如果你的特定应用程序需要直接访问线程(Thread)，那么它就是为你准备的。<sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnotedef_5" title="View footnote.">5</a>]</sup></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://zostay.com/posts/2019/12/05/threads/cover-boris-dunand-FLzsXmNpNY8-unsplash_hubbf65d3913ba2b5d11e1378d1ae20adb_3385815_280x280_fill_q75_box_smart1.jpg" alt="Threads">
+</div>
 </div>
 <div class="paragraph">
-<p>在 Raku 中使用 Thread 类很简单，并且看起来与如果您熟悉其他语言的线程工具所期望的非常相似：</p>
+<p>在 Raku 中, <code>Thread</code> 类的使用是直截了当的，并且看起来与你熟悉其他语言中的线程工具的预期非常相似：</p>
 </div>
 <div class="paragraph">
 <p>[source,raku]</p>
@@ -16795,16 +16820,16 @@ $t.finish; # wait for the thread to stop</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>给 Thread.start 方法运行一些代码，然后您就可以退出了。name 和 app_lifetime 选项是可选的。 如果 app_lifetime 为 False（这是默认设置），则在主应用程序线程终止时，线程将终止。 如果设置为 True，则只要此线程正在运行，应用程序就将继续运行。 通常情况下，只有应用程序的主线程才具有此特权。</p>
+<p>给 <code>Thread.start</code> 方法一些代码来运行，然后你就离开了。<code>name</code> 和 <code>app_lifetime</code> 选项是可选的。如果 <code>app_lifetime</code> 为 <code>False</code>（这是默认值），当主应用程序线程终止时，该线程将被终止。如果设置为 <code>True</code>，只要这个线程在运行，应用程序就会继续运行。正常情况下，只有应用程序的主线程才有这个权限。</p>
 </div>
 <div class="paragraph">
-<p>所有代码都在线程中运行。 您的代码可以使用名为 <code>$*THREAD</code> 的动态变量访问正在运行的线程。 这有助于在调试时拉出 <code>.id</code>，以帮助了解当前任务正在运行在哪个线程中。</p>
+<p>所有代码, 都在一个线程内运行。你的代码可以使用名为 <code>$*THREAD</code> 的动态变量访问它正在运行的线程。这对于调试时拉出 <code>.id</code>，帮助了解一个任务此时正在哪个线程中运行是很有帮助的。</p>
 </div>
 <div class="paragraph">
-<p>当您想暂停当前线程以等待另一个线程完成时，可以使用 <code>.finish</code> 方法（或者可以使用 <code>.join</code>，这是 <code>.finish</code> 的同义词）进行操作。</p>
+<p>当你想暂停当前线程以等待另一个线程完成时，你可以使用 <code>.finish</code> 方法（或者你可以使用 <code>.join</code>，它是 <code>.finish</code> 的同义词）。</p>
 </div>
 <div class="paragraph">
-<p>运行线程的另一种方法是使用 <code>.new</code> 和 <code>.run</code> 的组合。 这类似于 <code>.start</code>，但是必须将代码作为命名参数传递给 <code>.new</code>：</p>
+<p>另一种运行线程的方法是使用 <code>.new</code> 和 <code>.run</code> 的组合。这与 <code>.start</code> 类似，但代码必须作为命名参数传递给 <code>.new</code>：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16826,42 +16851,54 @@ $t2.finish;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在大多数情况下，我会在出现日历中提及线程，以此来描述代码在其中运行的“通道”。 但是，我将不时使用 <code>$*THREAD.id</code> 来帮助说明代码确实在不同的线程中运行。 否则，我通常将直接忽略 Thread 对象。</p>
+<p>在大多数情况下，我都会在降临日历中提到线程，以此来描述代码在其中运行的“通道”。然而，我会不时地使用 <code>$*THREAD.id</code> 来帮助说明代码确实在不同的线程中运行。 否则，我一般会直接忽略 Thread 对象。</p>
 </div>
 <div class="paragraph">
-<p>几乎所有 Raku 程序都应该坚持使用启动块或 <code>Promise.start</code> 来启动要在另一个线程上运行的任务。 仅在确实需要 Thread 时才应直接使用 Thread，对于大多数 Raku 开发人员而言，Thread 可能永远不会使用或接近  Thread。</p>
+<p>几乎所有的 Raku 程序都应该坚持使用 <code>start</code> 块或 <code>Promise.start</code> 来启动在另一个线程上运行的任务。只有在真正需要的时候, 你才应该直接利用 <code>Thread</code>，对于大多数 Raku 开发人员来说，可能永远不会使用或接近 Thread。</p>
 </div>
 <div class="paragraph">
 <p>干杯。</p>
 </div>
+<div class="paragraph">
+<p>原文链接: <a href="https://zostay.com/posts/2019/12/05/threads/" class="bare">https://zostay.com/posts/2019/12/05/threads/</a></p>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_raku_调度器">56. Raku 调度器</h2>
+<h2 id="_raku_调度器">57. Raku 调度器</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Raku 中大量面向并发的编码取决于 <a href="https://docs.raku.org/type/Scheduler">Scheduler</a> 的使用。许多异步操作取决于运行时开始时 VM 创建的默认调度程序。您可以通过名为 <a href="https://docs.raku.org/language/variables#index-entry-$*SCHEDULER">$*SCHEDULER</a> 的动态变量来访问它。</p>
+<p>在 Raku 中, 大量的面向并发的编码都依赖于 <a href="https://docs.raku.org/type/Scheduler">Scheduler</a> 的使用。许多异步操作依赖于虚拟机在运行时创建的默认调度程序。你可以通过名为 <a href="https://docs.raku.org/language/variables#index-entry-$*SCHEDULER">$*SCHEDULER</a> 的动态变量来访问它。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://zostay.com/posts/2019/12/06/raku-schedulers/cover-curtis-macnewton-vVIwtmqsIuk-unsplash_hu802150c44c239c3f53b4fc234a8323d6_2735965_280x280_fill_q75_box_smart1.jpg" alt="Schedulers">
+</div>
 </div>
 <div class="paragraph">
-<p>调度程序的最重要功能是 <code>.cue</code> 方法。使用代码引用调用该方法将安排执行工作。调度程序的类型将确定确切的含义。</p>
+<p>调度程序(Scheduler)的最重要功能是 <code>.cue</code> 方法。使用代码引用调用该方法将安排工作(work)的执行。调度程序的类型将决定其具体含义。</p>
 </div>
 <div class="paragraph">
-<p>也就是说，这是一个低级界面，您可能不应该在大多数代码中调用 <code>.cue</code>。最佳实践是依靠高级模块（如启动块）来启动，并构造一个 Promise 供您监视工作。</p>
+<p>也就是说，这是一个低级接口，你可能不应该在大多数代码中调用 <code>.cue</code>。最好的做法是依靠高级工具, 比如 <code>start</code>，并构造一个 Promise 供你监视工作(work)。</p>
 </div>
 <div class="paragraph">
-<p>每个调度程序都提供三种方法：</p>
+<p>每个调度程序都提供了三种方法：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>.uncaught_handler</code> 是一个访问器，它返回一个例程，或者可以将其设置为例程，只要调度程序抛出异常, 而任务代码本身不对其进行处理，就会调用该例程。如果未提供处理程序，而提示任务抛出了异常，则应用程序将在这个异常上退出。如果你使用高级并发工具, 如 <code>start</code> 块，则将永远不会使用 <code>.uncaught_handler</code>，因为它们各自提供了自己的异常处理。</p>
+</li>
+<li>
+<p><code>.cue</code> 方法用于将任务添加到调度中。调度程序将在资源允许的情况下执行该任务（取决于调度程序的操作方式）。</p>
+</li>
+<li>
+<p><code>.loads</code> 方法返回一个整数，该整数表示调度程序当前的负载。这是对当前作业队列大小的指示。</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p><code>.uncaught_handler</code> 是一个访问器，它返回一个例程，或者可以将其设置为例程，只要调度程序抛出异常而任务代码本身不对其进行处理，则将调用该例程。如果未提供处理程序，并且提示任务抛出异常，则应用程序将在该异常退出。如果您使用高级并发工具（例如启动块），则将永远不会使用.uncaught_handler，因为它们各自提供了自己的异常处理。</p>
-</div>
-<div class="paragraph">
-<p><code>.cue</code> 方法用于将任务添加到计划中。调度程序将在资源允许的情况下执行该任务（取决于调度程序的运行方式）。</p>
-</div>
-<div class="paragraph">
-<p><code>.loads</code> 方法返回一个整数，该整数指示调度程序上的当前负载。这表明当前作业队列的大小。</p>
-</div>
-<div class="paragraph">
-<p>因此，您可以构建一个非常简单的调度程序，如下所示：</p>
+<p>所以，你可以建立一个非常简单的调度程序，就像这样：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16869,7 +16906,6 @@ $t2.finish;</code></pre>
     method cue(&amp;code, Instant :$at, :$in, :$every, :$times = 1; :&amp;catch) {
         sleep $at - now if $at &amp;&amp; $at &gt; now;
         sleep $in if $in;
-
 
         for ^$times {
             code();
@@ -16898,43 +16934,51 @@ $t2.finish;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这有点类似于 CurrentThreadScheduler 所做的。</p>
+<p>这和 <code>CurrentThreadScheduler</code> 的功能有些类似。</p>
 </div>
 <div class="paragraph">
-<p>Rakudo 具有两个内置的调度程序：</p>
+<p>Rakudo 内置了两个调度程序：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://docs.raku.org/type/ThreadPoolScheduler">ThreadPoolScheduler</a> 是通常的默认 <code>$*SCHEDULER</code>。构造后，可以设置允许同时使用的线程数。然后，它管理线程池，并将在这些线程上计划提示的任务。当任务完成并释放线程时，将计划运行下一个任务。任务可以与此调度程序同时运行。当 <code>.cue</code> 返回时，任务可能尚未开始。返回对象的 <code>.cancel</code> 方法可用于请求取消给定任务的工作。</p>
+<p><a href="https://docs.raku.org/type/ThreadPoolScheduler">ThreadPoolScheduler</a> 就是通常默认的 <code>$*SCHEDULER</code>。当它被构造时，你可以设置它允许同时使用的线程数量。然后，它管理一个线程池，并将在这些线程上调度提示任务。随着任务的完成, 释放线程，下一个任务将被调度运行。任务可以和这个调度程序同时运行。当 <code>.cue</code> 返回时，任务可能尚未开始。返回对象的 <code>.cancel</code> 方法可用来请求取消某个任务的工作(work)。</p>
 </li>
 <li>
-<p><a href="https://docs.raku.org/type/CurrentThreadScheduler">CurrentThreadScheduler</a> 是备用调度程序。它基本上只是立即执行任务，并在任务完成后返回。返回的取消对象具有 <code>.cancel</code> 方法，但是它是一个空操作，因为在调度程序返回时工作将始终完成。</p>
+<p><a href="https://docs.raku.org/type/CurrentThreadScheduler">CurrentThreadScheduler</a> 是一个备用的调度程序。它基本上只是立即执行任务，并在任务完成后返回。返回的取消对象有一个 <code>.cancel</code> 方法，但是它是一个空操作，因为在调度程序返回时, 工作总是已经完成。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>许多异步方法，例如 <a href="https://docs.raku.org/type/Promise">Promise</a> 上的 <a href="https://docs.raku.org/type/Promise#method_start"><code>.start</code></a> 方法，都有一个名为 <code>:scheduler</code> 的参数，您可以在其中传递自定义调度程序。通常，您可以坚持使用默认调度程序。调度程序最常见的调整可能是更改线程池中的线程数，或在某些情况下切换为使用当前线程调度程序。您可能不需要执行任何一项操作。而且，如果您需要一些新奇的东西，那么定义自己的调度程序也可能是合理的。要考虑的事情。</p>
+<p>许多异步方法，比如 <a href="https://docs.raku.org/type/Promise">Promise</a> 上的 <a href="https://docs.raku.org/type/Promise#method_start"><code>.start</code></a> 方法，会接收一个名为 <code>:scheduler</code> 的参数，你可以在其中传递一个自定义的调度程序。一般来说，你可以坚持使用默认的调度程序。对调度程序最常见的调整可能是改变线程池中的线程数，或者在某些情况下切换到使用当前的线程调度程序。你有可能不需要做这两件事。而且，而如果你需要一些奇特的东西，那么定义自己的调度程序也是合理的。需要考虑的事情。</p>
 </div>
 <div class="paragraph">
 <p>干杯。</p>
 </div>
+<div class="paragraph">
+<p>原文链接: <a href="https://zostay.com/posts/2019/12/06/raku-schedulers/" class="bare">https://zostay.com/posts/2019/12/06/raku-schedulers/</a></p>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_react_块">57. React 块</h2>
+<h2 id="_react_块">58. React 块</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Raku 中的 <a href="https://docs.raku.org/language/concurrency#index-entry-react">react</a> 块是重新同步异步编码活动的主要方法。 使用它, 你可以轻松地将 <a href="https://docs.raku.org/type/Promise">promises</a>, <a href="https://docs.raku.org/type/Supply">supplies</a>和 <a href="https://docs.raku.org/type/Channel">channels</a> 组合在一起, 以使程序或子系统成为一个连贯的整体。</p>
+<p>Raku 中的 <a href="https://docs.raku.org/language/concurrency#index-entry-react">react</a> 块是重新同步异步编码活动的主要手段。 使用它,你可以轻松地将 <a href="https://docs.raku.org/type/Promise">promises</a>、<a href="https://docs.raku.org/type/Supply">supplies</a>和 <a href="https://docs.raku.org/type/Channel">channels</a> 组合在一起, 使你的程序或子系统成为一个连贯的整体。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://zostay.com/posts/2019/12/07/react-blocks/cover-alexander-schimmeck-X-RFSg_4EL4-unsplash_hu33a2585040fa0e46f598379fa8d3b2df_2559998_280x280_fill_q75_box_smart1.jpg" alt="react">
+</div>
 </div>
 <div class="paragraph">
-<p><code>react</code> 块本身可以运行你想要的任何代码, 还有一个或多个 whenever 块。 块中的代码会运行一次, 并且当调用 <code>done</code> 子例程时, 或者当所有与 <code>whenever</code> 块关联的对象完成时（即, 所有承诺都被保留或破坏, 所有供应已退出或关闭, 并且所有通道已失败或关闭）。</p>
+<p><code>react</code> 块本身可以运行任何你想要的代码, 再加上一个或多个 <code>whenever</code> 块。块中的代码会运行一次, 当 <code>done</code> 子例程被调用时, 或者当所有与 <code>whenever</code> 块相关联的对象完成时（即所有的承诺都被保留或破坏, 所有的供应已退出或关闭, 所有的通道已失败或关闭）, 块将退出。</p>
 </div>
 <div class="paragraph">
-<p>除了语法之外, 关于 <code>react</code> 块, 需要注意的关键一点是, 这个块内的所有代码将始终像单线程一样运行(即, 可能会使用多线程, 但这个块内的任何代码都不会并发运行)。</p>
+<p>除了语法之外, 关于 <code>react</code> 块, 需要注意的关键一点是, 块内的所有代码总是会像单线程一样运行(即, 可能会使用多线程, 但绝不会让这个块内的任何代码并发运行)。</p>
 </div>
 <div class="paragraph">
-<p>我们来看一个示例 <code>react</code> 块：</p>
+<p>我们来看一个 <code>react</code> 块的例子：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16971,7 +17015,7 @@ react {
 </div>
 </div>
 <div class="paragraph">
-<p>该程序提供了一个小型的交互式 shell, 可以执行加法和减法运算。 运行时, 你可以按以下方式使用它：</p>
+<p>这个程序提供了一个小型的交互式 shell, 可以执行加法和减法运算。运行时, 你可以按以下方式使用它：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16984,25 +17028,38 @@ Quitting.</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如你所见, 该代码与两个 <code>Supply</code> 对象, 一个 <code>Channel</code> 和一个 <code>Promise</code> 来操作的。他们中的每一个对象都能以预期的方式在任何时候工作。 <code>run</code> 块中的所有代码都像在一个线程中运行（尽管并没有特别保证仅使用一个线程, 只是没有代码会并发运行）。</p>
+<p>如你所见, 这段代码使用了几个 <code>Supply</code> 对象, 一个 <code>Channel</code> 和一个 <code>Promise</code> 来操作的。他们中的每一个都以预期的方式与 <code>whenever</code> 工作。<code>run</code> 块内的所有代码都像在单线程中运行一样（尽管并没有特别保证只使用单线程, 只是没有代码会并发运行）。</p>
 </div>
 <div class="paragraph">
-<p>但是, 在没有并发的情况下从单个任务运行确实会出现问题。 <code>$*IN</code> 文件句柄仅执行阻塞读, 即使你使用 <code>.Supply</code> 方法来异步获取数据也是如此。因此, 我们必须在后台线程中运行的任务中拉取输入, 这就是为什么我们在读取字符输入的循环之前放置一个 <code>start</code>。如果没有这个并发任务, 我们就必须多敲几次 Return 键, 以便其他 <code>whenever</code> 子句有机会运行。</p>
+<p>然而, 在这种情况下, 从单任务中运行而不并发确实存在一个问题。即使你使用 <code>.Supply</code> 方法来异步获取数据, <code>$*IN</code> 文件句柄也只执行阻塞读取。因此, 我们必须在后台线程中运行的任务中拉取输入, 这就是为什么我们在读取字符输入的循环之前放了一个 <code>start</code>。如果没有这个并发任务, 我们就必须多敲几次 Return 键, 以便其他 <code>whenever</code> 子句也有机会运行。</p>
 </div>
 <div class="paragraph">
-<p>也就是说, 我们可以把其它 <code>whenever</code> 块的工作转移到单独的并发任务中, 然后把每个任务都拉到这个 <code>react</code> 块中, 这样就能很好地工作。 <code>react</code> 块的目标是以简单的语法同步异步工作。我认为它的工作做得很好。</p>
+<p>也就是说, 我们可以把其它的 <code>whenever</code> 块的工作移到单独的并发任务中, 然后把每个任务都拉到这个 <code>react</code> 块中, 这样就能很好地工作了。<code>react</code> 块的目标是用一种简单明了的语法来同步异步工作。我认为它的工作做得很好。</p>
 </div>
 <div class="paragraph">
 <p>干杯。</p>
 </div>
 <div class="paragraph">
-<p>在Raku中编写并发代码时，我们希望避免任务之间共享数据。 这是因为不共享数据的代码是自动安全的，并且不必担心与其他代码的相互依赖性。 因此，在可能的情况下，应该通过Supply，Promise和Channel对象进行工作，然后通过中央线程将它们同步在一起。 这样，所有状态更改都是安全的。</p>
+<p>原文链接: <a href="https://zostay.com/posts/2019/12/07/react-blocks/" class="bare">https://zostay.com/posts/2019/12/07/react-blocks/</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lock_类">59. Lock 类</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在 Raku 中编写并发代码时，我们要避免任务之间共享数据。这是因为不共享数据的代码是自动安全的，并且不必担心与其他代码的相互依赖性。 所以，在可能的情况下，你应该通过 <code>Supply</code>、<code>Promise</code> 和 <code>Channel</code> 对象来完成你的工作，然后通过中央线程将它们同步在一起。这样，所有状态变化都是安全的。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://zostay.com/posts/2019/12/08/the-lock-class/cover-maxim-zhgulev-5tmItJfHkIc-unsplash_hu604da152536f26176df092a26a53d8d0_371005_280x280_fill_q75_box_smart1.jpg" alt="Lock Class">
+</div>
 </div>
 <div class="paragraph">
-<p>但是，这并不总是可行的。 有时，共享可以在不同线程上运行的任务之间更改的数据确实更有效。 但是，这种共享本质上是不安全的。</p>
+<p>不过，这并不总是实用的。有时候，在不同线程上运行的任务之间共享可以变化的数据确实更有效率。然而，这样的共享本质上是不安全的。</p>
 </div>
 <div class="paragraph">
-<p>例如，这是Raku中一个非常简单的多线程应用程序，该应用程序不是线程安全的，会导致错误的结果：</p>
+<p>例如，这里有一个在 Raku 中非常简单的多线程应用程序，它不是线程安全的，会导致错误的结果：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17016,25 +17073,35 @@ say $x;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们可能期望$ x的值为200，但它不太可能为200。几乎可以肯定会更低。这是因为简单的$ x ++操作需要：</p>
+<p>我们可能期望 <code>$x</code> 的值是 200，但它不太可能是 200。它几乎可以肯定会更低。这是因为简单的 <code>$x++</code> 操作需要：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>读取 <code>$x</code> 的值。</p>
+</li>
+<li>
+<p>在 <code>$x</code> 读取的值上加一。</p>
+</li>
+<li>
+<p>将计算出的值存储回 <code>int $x</code>。</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>读取 <code>$x</code> 的值。
-将一个加到从 <code>$x</code> 读取的值中。
-将计算出的值存储回 <code>int $x</code>。
-如果碰巧第一个任务执行了步骤1和2，然后第二个任务在第一个任务完成了步骤3之前执行了步骤1到3，则增量操作中的至少一个将丢失。在每个任务中进行100次迭代的过程中，我预计会丢失5或10次写操作，并且每次运行都可能给出稍微不同的答案。这就是在并发时不安全的含义。</p>
+<p>如果碰巧第一个任务执行了步骤1和2，然后第二个任务在第一个任务完成步骤3之前执行了步骤1到3，那么至少有一个增量操作会丢失。在每个任务的 100 次迭代过程中，我预计会有5到10次写入丢失，并且每次运行都有可能给出稍微不同的答案。这就是在并发性方面不安全的含义。</p>
 </div>
 <div class="paragraph">
-<p>对于此特定程序，以上三个步骤构成了关键部分。关键部分是一段代码，要想完全正常工作，必须按顺序执行。在Raku代码本身中，关键部分只是每个循环中的$ x ++语句。</p>
+<p>对于这个特殊的程序，上面的三个步骤构成了一个关键部分。关键部分是一段必须依次执行的代码，如果它要完全正常工作的话。在 Raku 代码本身中，关键部分只是每个循环中的 <code>$x++</code> 语句。</p>
 </div>
 <div class="paragraph">
-<p>确保以线程安全的方式处理代码中关键部分的一种机制是使用互斥锁。 Raku提供了可用于此目的的 <a href="https://docs.raku.org/type/Lock">Lock</a> 类。</p>
+<p>确保代码中的关键部分以线程安全的方式处理的一种机制是使用互斥锁。 Raku 提供 <a href="https://docs.raku.org/type/Lock">Lock</a> 类, 可以用于这个目的。</p>
 </div>
 <div class="paragraph">
-<p>创建Lock对象时，可以.lock或.unlock代码中的锁。如果其他任何代码在同一对象上调用了.lock而不调用.unlock，则调用.lock方法将阻止您的代码进一步运行。一旦持有锁的线程调用.unlock，等待锁释放的另一个线程将被允许继续执行。</p>
+<p>当你创建一个 Lock 对象时，你可以 <code>.lock</code> 或 <code>.unlock</code> 代码中的锁。如果任何其他代码在没有调用 <code>.unlock</code> 的情况下，在同一个对象上调用了 <code>.lock</code>，那么调用 <code>.lock</code> 方法将阻止你的代码继续运行。一旦持有锁的线程调用 <code>.unlock</code>，另一个等待锁释放的线程将被允许继续运行。</p>
 </div>
 <div class="paragraph">
-<p>在上面的示例中，我们可以对其进行如下修改以使其具有线程安全性：</p>
+<p>在上面的示例中，我们可以将其修改如下，使之成为线程安全的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17049,31 +17116,39 @@ say $x;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我没有提到.protect，但是它的作用与调用.lock，运行给定的块，然后运行.unlock相同。尽管这样做有一个好处，那就是如果在块内出现问题，则进行.unlock调用会进行彻底的工作。在上面使用.lock和.unlock的第一个循环中，抛出异常可能导致锁永久保持锁定状态。自动使用.protect可避免这种风险，因此这是使用Lock的首选方式。</p>
+<p>我没有提到 <code>.protect</code>，但它的作用和调用 <code>.lock</code>，运行给定的块，然后运行 <code>.unlock</code> 相同。不过这样做的好处是，如果块里面出现了问题，它可以彻底的让 <code>.unlock</code> 调用发生。在上面我们使用 <code>.lock</code> 和 <code>.unlock</code> 的第一个循环中，有可能因为抛出异常而导致锁被永久锁定。使用 <code>.protect</code> 可以自动避免这种风险，所以它是使用 <code>Lock</code> 的首选方式。</p>
 </div>
 <div class="paragraph">
-<p>在我总结之前，我想提到一些负面因素。首先，锁的性能不是很好。它们易于实现且易于使用，但是互斥会带来较高的性能成本。您可能希望确保少量使用锁，并且仅将其用于保护关键部分。</p>
+<p>在结束之前，我想提一下锁的几个负面因素。首先，锁的性能不是很好。它们易于实现且易于使用，但是互斥会带来较高的性能成本。你可能希望确保少量使用锁，并且仅将其用于保护关键部分。</p>
 </div>
 <div class="paragraph">
-<p>另一个主要缺点是，使用锁时，可以获得线程安全，但可能会增加死锁的风险。我已经提到了一个死锁风险：一个导致错误的任务，阻止锁被解锁。现在，该锁已失效，没有任务可以接管。当涉及多个锁时，死锁的风险会更加微妙，并且很难发现。与供应或承诺不同，锁不能安全地组成。这意味着，如果不小心，两个使用锁来保护自身的库在一起使用时可能会死锁。</p>
+<p>另一个主要缺点是，当使用锁时，你可以获得线程安全，但可能会增加死锁的风险。我已经提到了一个死锁风险：一个任务导致错误，使一个锁无法被解锁。这个锁现在是死锁，没有任务可以接管它。当涉及到多个锁时，死锁的风险可能会更加微妙，并且非常难以发现。与供应(Supply)或承诺(Promise)不同，锁(Lock)是不能安全地组合的。这意味着两个使用锁来保护自身安全的库在一起使用时, 如果不小心，可能会出现死锁。</p>
 </div>
 <div class="paragraph">
-<p>尽管有缺点，锁还是使代码线程安全的有用工具。在本节后的日历中，我们将使用锁来演示如何创建线程安全的数据结构。</p>
+<p>尽管有这些缺点，锁对于使代码线程安全是很有用的东西。在这个降临日历的后面，我们将使用锁来演示如何创建线程安全的数据结构。</p>
 </div>
 <div class="paragraph">
 <p>干杯。</p>
 </div>
 <div class="paragraph">
-<p>什么比锁的速度快？比较和交换(CAS)。现代 CPU 有多个核心。因此，所有的现代 CPU 都必须有工具来执行绝对的原子操作，让这些多核一起工作。这些操作之一就是 compare-and-and-swap 或 cas 操作。</p>
+<p>原文链接: <a href="https://zostay.com/posts/2019/12/08/the-lock-class/" class="bare">https://zostay.com/posts/2019/12/08/the-lock-class/</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_atomic_integers">60. Atomic Integers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>什么比锁更快？比较和交换(CAS)。现代 CPU 有多个核心。因此，所有的现代 CPU 都必须拥有执行绝对原子操作的工具，以便让这些多核一起工作。这些操作的其中之一就是比较与交换(compare-and-swap) 或 <code>cas</code> 操作。</p>
 </div>
 <div class="paragraph">
-<p>抽象的说，cas 操作需要三个参数，一个要修改的变量、一个给定值和一个新值。只有当变量所持有的当前值等于给定值时，变量才会被设置为被修改的新值。而这是作为一个单项操作来执行的，保证不受其他任何并发操作的干扰。在这一过程中，系统会设置一个标志来标记操作的成功或失败。如果该变量的值与预期值不同，则该变量保持不变，操作失败。为了完成一个原子变化，你反复运行一个计算，并以 cas 操作结束，直到操作成功为止。这听起来可能不是很有效率，但事实证明，在大多数情况下，它比锁操作要快。</p>
+<p>抽象地讲，cas 操作需要三个参数，一个要修改的变量、一个给定的值和一个新的值。只有当变量所持有的当前值等于给定值时，变量才会被设置为被修改后的新值。而这是以单次操作的方式进行的，保证不受任何其他并发操作的干扰。在这一过程中，系统会设置一个标志来标记操作的成功或失败。如果该变量的值与预期值不同，则该变量保持不变，操作失败。为了完成一个原子变化，你重复运行一个计算，并以 <code>cas</code> 操作结束，直到操作成功为止。这听起来可能不是很有效率，但事实证明，在大多数情况下，它比锁更快。</p>
 </div>
 <div class="paragraph">
-<p>Raku 通过 <a href="https://docs.raku.org/type/atomicint">atomicint</a> 类型上的 <a href="https://docs.raku.org/type/atomicint#sub_cas">cas</a> 函数提供了直接访问这个操作，同时也通过一些操作符来帮助你执行这些原子变化。</p>
+<p>Raku 通过 <a href="https://docs.raku.org/type/atomicint">atomicint</a> 类型上的 <a href="https://docs.raku.org/type/atomicint#sub_cas">cas</a> 函数以及一些帮助你执行这些原子变化的操作符，提供了对这种操作的直接访问。</p>
 </div>
 <div class="paragraph">
-<p>为了证明 atomicint 的一个可能的使用，让我们首先考虑一下 ATM 问题。有两个人有一个银行账户。假设在一天开始的时候，这个账户里有 1000 美元。其中一个人在市中心的 ATM 机上取了 100 元，另一个人在机场的 ATM 机上存了 250 元。在一天结束时，我们显然希望新的余额是 1150 元。但是，如果这两笔交易同时发生，除非我们采取一定的措施来保证这一点，否则是无法保证的。</p>
+<p>为了演示 <code>atomicint</code> 的一个可能的用法，让我们首先考虑一下 ATM 问题。有两个人有一个银行账户。假设在一天开始的时候，这个账户里有 1000 美元。其中一个人在市中心的 ATM 机上取款 100 元，另一个人在机场的 ATM 机上存款 250 元。在一天结束时，我们显然希望新的余额是 1150 美元。但是，如果这两笔交易同时发生，那就不能保证了, 除非我们采取一些谨慎的措施来保证这一点。</p>
 </div>
 <div class="paragraph">
 <p>让我们先用天真的方法写出我们的代码。</p>
@@ -17089,19 +17164,33 @@ say $balance;</code></pre>
 <div class="paragraph">
 <p>不幸的是，现在可能会出现余额与 1150 美元不同的情况。这是因为如果这两个任务实际上同时运行，它们执行的操作可能会像这样交错进行。</p>
 </div>
-<div class="paragraph">
-<p>1.Block one reads a $balance of 1000.
-2.Block two reads a $balance of 1000.
-3.Block one subtracts 100 from 1000 to get 900.
-4.Block two adds 250 to 1000 to get 1250.
-5.Block one sets the $balance to 900 for one.
-6.Block two sets the $balance to 1250 for two.</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>块一读取 1000 美元的余额。</p>
+</li>
+<li>
+<p>块二读取 1000 美元的余额。</p>
+</li>
+<li>
+<p>块一从 1000 中减去 100，得到 900。</p>
+</li>
+<li>
+<p>块二从 1000 中加上 250，得到 1250。</p>
+</li>
+<li>
+<p>块一将余额设置为 900。</p>
+</li>
+<li>
+<p>块二将余额设置为 1250。</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>读和写操作必须按顺序执行，这样才能使代码正常工作。我们可以使用 <a href="https://docs.raku.org/type/Lock">lock</a> 或 <a href="https://docs.raku.org/type/Semaphore">semaphore</a> 或其他传统的构造来形成一个围绕着修改变量的关键部分，但这些操作通常都很慢。</p>
+<p>读和写操作必须按顺序执行，这样代码才能正常工作。我们可以使用 <a href="https://docs.raku.org/type/Lock">lock</a> 或 <a href="https://docs.raku.org/type/Semaphore">semaphore</a> 或其他传统的构造来形成一个围绕着修改变量的关键部分，但这些操作通常都很慢。</p>
 </div>
 <div class="paragraph">
-<p>相反，我们可以使用 cas 操作来依次执行操作。因此，如果我们使用原子点重写上面的代码，我们的结果是这样的。</p>
+<p>相反，我们可以使用 <code>cas</code> 操作来依次执行操作。所以，如果我们使用 <code>atomicint</code> 重写上面的代码，我们最终会得到这样的结果:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17112,50 +17201,70 @@ say $balance;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里的结果将永远是预期的 1150。让我们假设这两个任务和之前一样同时运行，但最后的分配是一个比较和交换操作，而不是一个常规的集。其结果会是这样的。</p>
+<p>这里的结果将始终是预期的 1150。让我们假设这两个任务和之前一样同时运行，但最后的分配是一个比较和交换操作，而不是一个常规的集。其结果会是这样的。</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>块一读取 1000 美元的余额。</p>
+</li>
+<li>
+<p>块二读取 1000 美元的余额。</p>
+</li>
+<li>
+<p>块一从 1000 中减去 100，得到 900。</p>
+</li>
+<li>
+<p>块二在 1000 的基础上加 250，得到 1250。</p>
+</li>
+<li>
+<p>块一执行比较和交换 <code>$balance</code> 从 1000到900，成功了。</p>
+</li>
+<li>
+<p>块二执行比较和交换 <code>$balance</code> 从1000到1250，失败了。</p>
+</li>
+<li>
+<p>块二读取的 <code>$balance</code> 为900。</p>
+</li>
+<li>
+<p>块二在 900 的基础上加上 250，得到 1150。</p>
+</li>
+<li>
+<p>块二执行比较和交换 <code>$balance</code> 从900到1150，成功了。</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>1.Block one reads a $balance of 1000.
-2.Block two reads a $balance of 1000.
-3.Block one subtracts 100 from 1000 to get 900.
-4.Block two adds 250 to 1000 to get 1250.
-5.Block one performs compare-and-swap $balance from 1000 to 900 and succeeds.
-6.Block two performs compare-and-swap $balance from 1000 to 1250 and fails.
-7.Block two reads a $balance of 900.
-8.Block two adds 250 to 900 to get 1150.
-9.Block two performs compare-and-swap $balance from 900 to 1150 and succeeds.</p>
+<p>出现额外的步骤 7-9 是因为在 <code>cas</code> 操作中，解决失败需要重复操作直到成功。除非对单个变量的写入争夺程度是极端的，否则这不应该导致任何任务无限期地失败。</p>
 </div>
 <div class="paragraph">
-<p>额外的步骤 7-9 之所以会出现，是因为在 cas 操作中，解决失败需要重复操作直到成功。除非写到单个变量的争论程度很极端，否则应该不会导致任何任务无限期失败。</p>
-</div>
-<div class="paragraph">
-<p>如果你不喜欢代码中的表情符号，那也没关系。有一个 Texas 函数可以执行由原子式 emoji 操作符提供的每一个操作。atomicint 提供了以下操作。</p>
+<p>如果你不喜欢代码中的表情符号，那也没关系。有一个 Texas 函数用于执行原子表情符操作符提供的每一个操作。<code>atomicint</code> 提供了以下操作:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>atomic-assign or ⚛️=</p>
+<p>atomic-assign 或 ⚛️=</p>
 </li>
 <li>
-<p>atomic-fetch or the ⚛️ prefix for performing atomic reads of the value</p>
+<p>atomic-fetch 或 ⚛️ 前缀，用于执行原子读取值</p>
 </li>
 <li>
-<p>atomic-fetch-inc or ⚛️++ postfix</p>
+<p>atomic-fetch-inc 或 ⚛️++ 后缀</p>
 </li>
 <li>
-<p>atomic-fetch-dec or ⚛️– postfix</p>
+<p>atomic-fetch-dec 或 ⚛️– 后缀</p>
 </li>
 <li>
-<p>atomic-fetch-add or ⚛️+=</p>
+<p>atomic-fetch-add 或 ⚛️+=</p>
 </li>
 <li>
-<p>atomic-fetch-sub or ⚛️-=</p>
+<p>atomic-fetch-sub 或 ⚛️-=</p>
 </li>
 <li>
-<p>atomic-inc-fetch or ++⚛️ prefix</p>
+<p>atomic-inc-fetch 或 ++⚛️ 前缀</p>
 </li>
 <li>
-<p>atomic-dec-fetch or –⚛️ prefix</p>
+<p>atomic-dec-fetch 或 –⚛️ 前缀</p>
 </li>
 <li>
 <p>cas</p>
@@ -17163,10 +17272,10 @@ say $balance;</code></pre>
 </ul>
 </div>
 <div class="paragraph">
-<p>让我们快速考虑一下 cas 函数本身，它是其他运算符实现的基础。这个操作允许你实现任何涉及到原子量的比较和互换的操作。它有两种基本形式，为了证明它们的工作原理，我们可以用这两种形式重新实现我们的 ATM 问题。</p>
+<p>让我们快速考虑一下 <code>cas</code> 函数本身，它是实现其他运算符的基础。这个操作允许你实现任何涉及 <code>atomicint</code> 比较和交换的操作。它有两种基本形式，为了演示它们是如何工作的，我们可以使用这两种形式重新实现上面的 ATM 问题。</p>
 </div>
 <div class="paragraph">
-<p>首先，考虑一下这个使用 cas 函数的程序。</p>
+<p>首先，考虑一下这个使用 <code>cas</code> 函数的程序。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17188,7 +17297,7 @@ say $balance;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这在功能上是相同的，虽然比上面的操作更粗略。这基本上是给你直接访问 cas 操作本身，让你控制重试的次数和具体的操作。这个功能的工作原理是这样的，虽然整个操作是原子化的。</p>
+<p>这在功能上是相同的，虽然比上面的操作更啰嗦。这基本上是让你直接访问 <code>cas</code> 操作本身，并让你控制重试的次数和执行的具体操作。这个功能的工作原理是这样的，不过整个操作是原子式的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17202,10 +17311,10 @@ say $balance;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这意味着它将返回它在每个情况下看到的值，但当它看到的值与你预期的值相匹配时，它将改变存储在目标中的值。</p>
+<p>这意味着它将在每个情况下都返回它所看到的值，但当它看到的值与你所预期的值一致时，它将改变存储在目标中的值。</p>
 </div>
 <div class="paragraph">
-<p>这个方法还有第二个版本，它可以帮助你精简一下代码，为你执行循环。再来写一次 ATM 问题，我们也可以这样写。</p>
+<p>这个方法还有第二个版本，它可以帮助简化你的代码，为你执行循环。如果要再写一次 ATM 问题，我们也可以这样写。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17219,7 +17328,7 @@ say $balance;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这大大缩短了实现该操作所需的代码。它通过在一个循环中反复执行给定的操作，直到 cas 操作成功。在这种情况下，cas 函数是这样定义的，但同样，在适当的地方使用原子操作。</p>
+<p>这大大缩短了实现这个操作所需的代码。它通过在循环中反复执行给定的操作，直到 <code>cas</code> 操作成功。在这种情况下，<code>cas</code> 函数是这样定义的，但同样是在适当的地方使用原子操作。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17236,13 +17345,16 @@ say $balance;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>需要注意的是，取一个函数的 cas 子例程会返回被设置的新值，而取两个整数的 cas 则返回被看到的值。也就是说，这种第二种紧凑的形式把返回值处理成了赋值操作，但另一种形式的工作方式不允许这样处理。</p>
+<p>请注意，<code>cas</code> 子程序的另一种选择是接受一个函数，返回被设置的新值， 而接受两个整数的 <code>cas</code> 则返回被看到的值。也就是说，这种第二种且紧凑的形式将返回值像赋值操作一样处理，但另一种形式的工作方式不允许这样处理。</p>
 </div>
 <div class="paragraph">
-<p>我很想和大家分享一下如何在 Raku 中的任何标量值上使用 cas，但是这篇帖子已经说了很久了。我将在这个临终日之后再谈这个问题。</p>
+<p>我真的很想和大家分享如何在 Raku 中的任何标量值上使用 <code>cas</code>，但这篇文章已经很长了。我将在这个降临节稍后介绍。</p>
 </div>
 <div class="paragraph">
-<p>谢谢你。</p>
+<p>干杯。</p>
+</div>
+<div class="paragraph">
+<p>原文链接: <a href="https://zostay.com/posts/2019/12/09/atomic-integers/" class="bare">https://zostay.com/posts/2019/12/09/atomic-integers/</a></p>
 </div>
 <div class="paragraph">
 <p>现在我们来考虑一下如何解决并发的一个大问题。如果你有一个需要处理大量数据的算法问题，你希望在可用的 CPU 核心上最大限度地增加负载，以尽可能快地处理这些数据。为了证明我们如何在 Raku 中实现这个目标，我们将考虑 Conway 的生命游戏，在一个有效的无限游戏板上进行。</p>
@@ -17547,15 +17659,15 @@ say $after;</code></pre>
 <p>谢谢你。</p>
 </div>
 <div class="paragraph">
-<p>今天我想讨论的是利用锁来使对象的线程安全。也就是说，通过采用一个简单的模式来锁定对对象的访问，可以有效地保证一次只有一个线程可以访问对象的任何部分。因此，这就保证了对象的状态永远不会被破坏，即使是多个线程同时尝试访问对象的状态也不会被破坏。</p>
+<p>今天我想讨论一下使用锁来使对象线程安全。也就是说，通过采用一个简单的模式来锁定对对象的访问，可以有效地保证每次只有一个线程可以访问对象的任何部分。因此，这就保证了对象的状态永远不会被破坏，即使是在多个线程试图并发访问对象的的时候。</p>
 </div>
 <div class="sect2">
-<h3 id="_面向对象设计">57.1. 面向对象设计</h3>
+<h3 id="_面向对象设计">60.1. 面向对象设计</h3>
 <div class="paragraph">
-<p>在讨论共享的、可突变的对象的并发性之前，我们先来考虑一下是什么构成了一个设计良好的对象。在面向对象设计中，一个新的错误是把对象看成是信息的容器。当这样设计的时候，对象会根据它们所包含的数据被映射出来，而通过一系列的 getter 和 setter 来暴露这些数据是很有诱惑力的。然而，一个设计得好的对象将包含状态，作为封装功能的一种手段，需要该状态来操作。它通过允许其他对象通过方法向它发送消息，以执行那些可能更新内部状态的操作，作为一个副作用。</p>
+<p>在讨论共享的、可变对象的并发性之前，我们先来考虑一下是什么才是设计良好的一般对象。在面向对象设计中，一个新手的错误是把对象看作是信息的容器。当这样设计时，对象会根据它们所包含的数据进行映射，并且通过一系列的 getter 和 setter 来暴露这些数据是很有诱惑力的。然而，一个设计良好的对象将包含状态作为封装功能的一种手段，而这些功能需要该状态来操作。它通过允许其他对象通过方法向它发送消息来执行那些可能更新内部状态的操作来实现这一点。</p>
 </div>
 <div class="paragraph">
-<p>作为一个拟人化的例子，如果我们要建立一个链接的列表，只用一个推送操作，我们可以建立一个简单的列表，就像这样。</p>
+<p>举个拗口的例子，如果我们要构建一个只有 <code>push</code> 操作的链表，我们可以构建一个这样的简单列表:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17594,19 +17706,19 @@ $list.push: 3;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在，我之所以要花点时间提到良好的面向对象设计实践，是因为我们现在要考虑的监控器模式依赖于设计良好的对象才是有效的。(我之所以提到它，也是因为即使在其他优秀的工程师中，不良的面向对象设计实践也普遍存在)。</p>
+<p>现在，我之所以花点时间提到良好的面向对象设计实践，是因为我们现在要考虑的监控器模式依赖于设计良好的对象才有效。(我之所以提到这一点，也是因为不良的面向对象设计实践甚至在原本优秀的工程师中也很普遍)。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_监控">57.2. 监控</h3>
+<h3 id="_监控monitors">60.2. 监控(Monitors)</h3>
 <div class="paragraph">
-<p>当你有一个无状态的系统，或者是一个系统的状态是基于转换不可变对象的系统时，并发是最容易的。例如，如果你只需要将计算结果从一个线程传送到另一个线程，那么每个阶段都可以很容易地保留一个当前值的副本，转换这个值，然后将新的副本传递给下一个阶段。</p>
+<p>当你有一个无状态的系统，或者是一个系统的状态是基于转换不可变对象的系统时，并发是最容易的。例如，如果你只需要将计算结果从一个线程传递到另一个线程，那么每个阶段都很容易地保留当前值的副本，转换该值，并将新的副本传递给下一个阶段。</p>
 </div>
 <div class="paragraph">
-<p>然而，有状态对象可能会带来一个挑战，因为当另一个线程对对象的状态进行新的操作时，对象的状态变化可能只在一个线程中被部分应用。如果我们不保护我们的对象一次执行多个状态变化，或者在一个状态变化只完成了一部分的时候，不保护我们的对象被读取，那么我们的代码将是不安全的线程。你不应该同时从多个线程中使用这样的对象。(大多数内置的 Raku 对象就是这样的对象！)</p>
+<p>然而，有状态对象可能会带来挑战，因为当另一个线程开始对对象进行新的操作时，对对象状态的改变可能只在一个线程中被部分应用。如果我们不保护我们的对象一次执行多个状态变化，或者在状态变化只完成一部分时，不保护我们的对象被读取，那么我们的代码就不会是线程安全的。你不应该从多个线程同时使用这样的对象。(大多数内置的 Raku 对象就是这样的对象！)</p>
 </div>
 <div class="paragraph">
-<p>如果你遇到的情况是复制对象的状态是不实用的，而你需要在线程之间共享状态，一个非常简单的解决方案是使用监控模式。下面是我们在使用监控模式之前的一个线程安全版本的只推链接列表。</p>
+<p>如果你处于复制对象状态不切实际的情况下，你需要在线程之间共享状态，一个非常简单的解决方案是使用监控模式(monitor pattern)。下面是我们在使用监控模式之前的一个线程安全版本的只推链表。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17629,19 +17741,19 @@ $list.push: 3;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>就是这样的。这就是整个监控模式，只是用一个 Lock 来保护每一个从对象的可变状态读或写的公共方法的所有 c 代码。虽然这很简单，但采用这种模式也有几个缺点。</p>
+<p>就是这样。这就是整个监控模式，只是使用一个 Lock 来保护每个公共方法的所有c代码，这些方法从对象的可变状态中读取或写入。虽然这很简单，但采用这种模式也有几个缺点。</p>
 </div>
 <div class="paragraph">
-<p>如果对状态变化的争夺很高，这通常是一个低性能的解决方案。例如，如果很多线程会在这个链接的列表上频繁地执行很多推送，性能就会很差。</p>
+<p>如果对状态变化的争夺很大，这通常是一个低性能的解决方案。例如，如果很多线程会频繁地对这个链表进行多次 <code>push</code>，那么性能就不会很好。</p>
 </div>
 <div class="paragraph">
-<p>在每个部分的周围添加 <code>$!lock.protect.protect: { &#8230;&#8203; }</code>, 这样做很繁琐，而且在开发过程中容易忘记。</p>
+<p>在每个部分的周围添加 <code>$!lock.protect.protect: { &#8230;&#8203; }</code>, 做起来很繁琐，而且在开发过程中容易忘记。</p>
 </div>
 <div class="paragraph">
 <p>为了改善第一种情况，请确保你的监控器只包含与封装对象状态相关的代码。创建非监控器的次要对象，这些对象不是任何计算和动作的监控器，也不是任何其他无状态工作的监控器。</p>
 </div>
 <div class="paragraph">
-<p>对于第二种情况，我推荐使用 Jonathan Worthington 的一个模块。他写了一个工具来自动实现监控器模式的实现。如果你安装了 <a href="https://github.com/jnthn/oo-monitors">OO::Monitors</a>，你可以把上面链列表改写成:</p>
+<p>对于第二种情况，我推荐使用 Jonathan Worthington 的一个模块。他写了一个工具来自动实现监控器模式。如果你安装了 <a href="https://github.com/jnthn/oo-monitors">OO::Monitors</a>，你可以把上面的链表改写成:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17663,19 +17775,22 @@ monitor LinkedListMonitor {
 </div>
 </div>
 <div class="paragraph">
-<p>监视器是一个实现监视器模式的类。每一个方法都会自动为你加锁保护。</p>
+<p><code>monitor</code> 是一个实现监控模式的类(<code>class</code>)。每个方法都会自动为你加锁保护。</p>
 </div>
 <div class="paragraph">
-<p>如果你需要让一个有状态对象的线程安全，并且你希望有一个简单的机制来实现，这是个合理的模式。如果性能是一个主要的考虑因素，那么监控对象可能不适合你。最后，要注意的是，这种模式要想成功，必须依靠周到的面向对象设计。</p>
+<p>如果你需要使一个有状态的对象线程安全，并且你希望有一个简单的机制来实现，那么这是一个合理的模式。不过如果性能是首要考虑的问题，那么监控对象可能不适合你。最后，要知道，这种模式完全依赖于深思熟虑的 <strong>OO</strong> 设计来工作。</p>
 </div>
 <div class="paragraph">
 <p>干杯。</p>
+</div>
+<div class="paragraph">
+<p>原文链接: <a href="https://zostay.com/posts/2019/12/13/the-monitor-pattern/">https://zostay.com/posts/2019/12/13/the-monitor-pattern/</a></p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_第十四天_比较并交换标量">58. 第十四天 比较并交换标量</h2>
+<h2 id="_第十四天_比较并交换标量">61. 第十四天 比较并交换标量</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>之前，我讨论过比较和互换操作是对 <a href="https://docs.raku.org/type/atomicint">atomicint</a> 变量进行的操作。这只是冰山一角。虽然大多数的原子量符操作符⚛️操作符只适用于原子量符，但cas函数、原子量-fetch（或前缀⚛️操作符）和原子量-assign（或⚛️=操作符）都可以用于任何类型的 <a href="https://docs.raku.org/type/Scalar">Scalar</a> 变量。</p>
@@ -17775,7 +17890,7 @@ ABABABABABABABABABABABABABABAB</code></pre>
 <p>这篇预告日历的帖子将集中在异步问题上。在日历的后面，我再来考虑同样的问题，重点是并发问题。</p>
 </div>
 <div class="sect2">
-<h3 id="_异步问题的特殊性">58.1. 异步问题的特殊性</h3>
+<h3 id="_异步问题的特殊性">61.1. 异步问题的特殊性</h3>
 <div class="paragraph">
 <p>这个问题与更多的传统编程问题相比，在性质上是不同的，但在实质上没有什么不同。就像你写软件需要用函数、方法和子程序来分解成块，你在写软件的时候也是这样做的，在异步问题上基本上也是这样做的。</p>
 </div>
@@ -17790,7 +17905,7 @@ ABABABABABABABABABABABABABABAB</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_使用_react_块">58.2. 使用 react 块</h3>
+<h3 id="_使用_react_块">61.2. 使用 react 块</h3>
 <div class="paragraph">
 <p>我的第一条实用建议是，每当你需要将工作集中在一起时，总是使用 <a href="https://docs.raku.org/language/concurrency#index-entry-react">react</a> 块。反应块是协调多个异步进程一起工作的完美场所。</p>
 </div>
@@ -17839,7 +17954,7 @@ ABABABABABABABABABABABABABABAB</code></pre>
 <p>因此，react 块是协调各种任务一起执行的最佳选择。几乎我写的每一个异步程序都有一个这样的主循环。如果任务具有很强的独立性，我可能会给每一组任务设置一个事件循环，而反应块则在 <a href="https://docs.raku.org/language/control#index-entry-control_flow_start-start">start</a> 中运行。例如，我可以有一个事件循环来处理图形更新，另一个事件循环来运行网络后端。</p>
 </div>
 <div class="sect3">
-<h4 id="_首选管道">58.2.1. 首选管道</h4>
+<h4 id="_首选管道">61.2.1. 首选管道</h4>
 <div class="paragraph">
 <p>每当你分解问题时，你往往会选择创建一个 <a href="https://docs.raku.org/type/Supplier">Supplier</a> 对象，并将数据送入其中，或者是管道化。如果你可以管道化，那么你就应该管道化。管道的最简单的例子是 <a href="https://docs.raku.org/type/Supply">Supply</a> 上的 <a href="https://docs.raku.org/type/Supply#method_map">.map</a> 方法。</p>
 </div>
@@ -17887,7 +18002,7 @@ my Supply $plus-one = $original.map(* + 1);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_使用_supplier_来进行分割和接合">58.3. 使用 Supplier 来进行分割和接合</h3>
+<h3 id="_使用_supplier_来进行分割和接合">61.3. 使用 Supplier 来进行分割和接合</h3>
 <div class="paragraph">
 <p>当你有一组对象进来需要不同的处理时，你可以在这里插入一个if语句来处理每一种情况，或者你也可以将这些项目重新选取到单独的流中进行处理。如果处理的情况不复杂，可以考虑为每一种类型的处理使用一个单独的 Supplier 对象。然后，如果有必要的话，再使用一个供应商对象将这些流重新连接在一起。</p>
 </div>
@@ -17926,7 +18041,7 @@ my Supply $plus-one = $original.map(* + 1);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_按需供应与实时供应">58.4. 按需供应与实时供应</h3>
+<h3 id="_按需供应与实时供应">61.4. 按需供应与实时供应</h3>
 <div class="paragraph">
 <p>你应该知道各种用品之间的区别。它们之间的区别有些微妙，可以在一定程度上互换使用。</p>
 </div>
@@ -17941,7 +18056,7 @@ my Supply $plus-one = $original.map(* + 1);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_避免_supplierpreserving">58.5. 避免 Supplier::Preserving</h3>
+<h3 id="_避免_supplierpreserving">61.5. 避免 Supplier::Preserving</h3>
 <div class="paragraph">
 <p>然后是 <a href="https://docs.raku.org/type/Supplier::Preserving">Supplier::Preserving</a>。有人认为这是一种介于这两种类型之间的中间地带。但是，这个对象的语义与活供应器的语义是一样的，只是有一个例外：这个对象会缓冲没有 tap 时发出的事件，并立即将这些对象转储到第一个出现的 tap 中。</p>
 </div>
@@ -17976,7 +18091,7 @@ $msg.emit($_) for ^10;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_拆分持续运行的_whenever_块">58.6. 拆分持续运行的 whenever 块</h3>
+<h3 id="_拆分持续运行的_whenever_块">61.6. 拆分持续运行的 whenever 块</h3>
 <div class="paragraph">
 <p>对于你的任务来说，什么是合理的，可能会有所不同，但请记住，在 react 块内运行的代码，只要一个 react 块，就会阻止其他所有的代码运行。反应块实际上只是在老式事件循环上的一个薄薄的表皮，在这里任何一个子任务都会使其他的处理时间被饿死。</p>
 </div>
@@ -18001,13 +18116,13 @@ $msg.emit($_) for ^10;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_批量短任务">58.7. 批量短任务</h3>
+<h3 id="_批量短任务">61.7. 批量短任务</h3>
 <div class="paragraph">
 <p>另外，琐碎的任务会涉及到一定量的开销，让反应块在不同的任务之间切换。如果一个任务的速度超级快，你可能会考虑使用 Supply 上的 <code>.batch</code> 方法，让你可以在元素组上循环，避免频繁切换任务。<a href="https://docs.raku.org/type/Supply#method_batch">.batch</a> 方法很方便，因为它可以让你把一个问题在时间延迟和元素数量上进行分解。这将让你的程序有更多的时间去做实际工作，而更少的时间去做决定下一步安排哪个任务的繁忙工作。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_避免睡眠">58.8. 避免睡眠</h3>
+<h3 id="_避免睡眠">61.8. 避免睡眠</h3>
 <div class="paragraph">
 <p>如果你在一个 react 块中，你不希望调用 <a href="https://docs.raku.org/type/Date#sub_sleep">sleep</a>，除非你的目的是阻止当前线程的所有执行。否则，你最好使用 <a href="https://docs.raku.org/routine/await">await</a> 来暂停你的任务。如果你这样做，你的 react 块可以继续处理事件，直到 await 完成。如果你需要添加一个 await 数秒，你可以这样做。</p>
 </div>
@@ -18018,7 +18133,7 @@ $msg.emit($_) for ^10;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_谨防死锁">58.9. 谨防死锁</h3>
+<h3 id="_谨防死锁">61.9. 谨防死锁</h3>
 <div class="paragraph">
 <p>即使 Raku 的接口是可合成的，但如果使用不当，仍然有可能导致死锁。反应块内的任何东西都会被保证以顺序的方式运行。这意味着，如果你期望两个 whenever 块能够同时运行，那么当代码突然停止时，你会很失望。我之所以提到这个问题，是因为我时不时会遇到这个问题。即使我知道反应块执行的是单线程的规则，但我仍然可以想象多个 whenever 块可以在同一时间运行。</p>
 </div>
@@ -18027,7 +18142,7 @@ $msg.emit($_) for ^10;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_结论_7">58.10. 结论</h3>
+<h3 id="_结论_7">61.10. 结论</h3>
 <div class="paragraph">
 <p>现在就到此为止。几天后，我们将再次讨论这个话题，但我们将考虑分工的准则，而不是 Async，为并发处理分工。</p>
 </div>
@@ -18386,7 +18501,7 @@ post-emit 2</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_牢记你的承诺">58.11. 牢记你的承诺</h3>
+<h3 id="_牢记你的承诺">61.11. 牢记你的承诺</h3>
 <div class="paragraph">
 <p>每当你使用并发的时候，你要抓紧相关 <a href="https://docs.raku.org/type/Promise">Promise</a> 对象。它们几乎都是重新加入你的任务，使主线程等待你的并发任务完成等等的最佳方式。</p>
 </div>
@@ -18469,7 +18584,7 @@ start {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_批量小任务">58.12. 批量小任务</h3>
+<h3 id="_批量小任务">61.12. 批量小任务</h3>
 <div class="paragraph">
 <p>你并不总是希望每个动作都有一个任务。有些动作实在是太琐碎了，执行时间太短，无法管理。什么是一个合理的任务大小真的取决于你和你的执行环境。只是要注意的是，当涉及到的处理是琐碎的时候，分批运行你的任务往往是一个更好的策略。</p>
 </div>
@@ -18487,7 +18602,7 @@ start {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_小心线程的限制">58.13. 小心线程的限制</h3>
+<h3 id="_小心线程的限制">61.13. 小心线程的限制</h3>
 <div class="paragraph">
 <p>可用的线程数量是有限的。如果你有一个任务有可能运行大量的任务，请花点时间考虑如何分解任务。限制任务之间的依赖关系的数量，可以让你的程序在不耗费资源的情况下高效地扩展。</p>
 </div>
@@ -18496,7 +18611,7 @@ start {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_避免休眠">58.14. 避免休眠</h3>
+<h3 id="_避免休眠">61.14. 避免休眠</h3>
 <div class="paragraph">
 <p>我认为 <a href="https://docs.raku.org/type/Date#sub_sleep">sleep</a> 是有害的。相反，最好使用 <a href="https://docs.raku.org/type/Promise#method_in">await Promise.in(&#8230;&#8203;)</a>]，因为这样Raku就可以将当前线程重用到另一个任务中。只有当你故意想在暂停期间锁定一个线程时，才使用 sleep。我在这个临终日历中使用 sleep 主要是因为它比较熟悉。在实践中，我一般只在主线程上使用它。</p>
 </div>
@@ -18800,6 +18915,24 @@ True</code></pre>
 <p>谢谢你。</p>
 </div>
 </div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnotedef_1">
+<a href="#_footnoteref_1">1</a>. 我将在后面介绍调度器的细节。当我这样做的时候，你会看到 Raku 使用的确切机制来决定一个任务是否被安排在一个单独的线程中立即运行，在未来的某个时间在一个单独的线程上运行，在当前线程停止忙碌时在当前线程上运行等等。不过，我一般会假设 <code>start</code> 会把任务安排在下一个可用的线程上，因为在 Raku 中一般都是安全的。
+</div>
+<div class="footnote" id="_footnotedef_2">
+<a href="#_footnoteref_2">2</a>. 请注意，这是 MoarVM 下 Rakudo 中运行的默认调度程序的过程。实际发生的事情可能会根据 <a href="https://docs.raku.org/language/variables#index-entry-$*SCHEDULER">$*SCHEDULER</a> 变量中的当前值而有些不同。我将在以后的文章中进一步讨论这个问题
+</div>
+<div class="footnote" id="_footnotedef_3">
+<a href="#_footnoteref_3">3</a>. 关于以下整数序列的背景，见 <a href="https://oeis.org/A005185">https://oeis.org/A005185</a>
+</div>
+<div class="footnote" id="_footnotedef_4">
+<a href="#_footnoteref_4">4</a>. 这是所有 <code>Supply</code> 对象的特性，而不仅仅是 <code>supply</code> 块或按需供应生成的对象。︎
+</div>
+<div class="footnote" id="_footnotedef_5">
+<a href="#_footnoteref_5">5</a>. 需要说明的是，<code>Thread</code> 对象不一定代表一个特定的操作系统线程，但它应该能让你尽可能地接近实现。
 </div>
 </div>
 
