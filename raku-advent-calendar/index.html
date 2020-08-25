@@ -16823,7 +16823,7 @@ Philosopher 0 takes a sip with the wooden spoon.
 <h2 id="_线程">56. 线程</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>警告！ 我们现在正在深入了解 Raku 的内部深度。线程是一种低级的 API，几乎所有的应用程序都应避免使用线程(Thread)。然而，如果你的特定应用程序需要直接访问线程(Thread)，那么它就是为你准备的。<sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnotedef_5" title="View footnote.">5</a>]</sup></p>
+<p>警告！ 我们现在正在深入了解 Raku 的内部深度。线程是一种低级的 API, 几乎所有的应用程序都应避免使用线程(Thread)。然而, 如果你的特定应用程序需要直接访问线程(<a href="https://docs.raku.org/type/Thread">Thread</a>), 那么它就是为你准备的。<sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnotedef_5" title="View footnote.">5</a>]</sup></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -16831,14 +16831,11 @@ Philosopher 0 takes a sip with the wooden spoon.
 </div>
 </div>
 <div class="paragraph">
-<p>在 Raku 中, <code>Thread</code> 类的使用是直截了当的，并且看起来与你熟悉其他语言中的线程工具的预期非常相似:</p>
-</div>
-<div class="paragraph">
-<p>[source,raku]</p>
+<p>在 Raku 中, <code>Thread</code> 类的使用是直截了当的, 并且看起来与你熟悉其他语言中的线程工具的预期非常相似:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-Raku" data-lang="Raku">my $t = Thread.start:
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $t = Thread.start:
     name =&gt; 'Background task',
     :app_lifetime,
     sub {
@@ -16854,16 +16851,16 @@ $t.finish; # wait for the thread to stop</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>给 <code>Thread.start</code> 方法一些代码来运行，然后你就离开了。<code>name</code> 和 <code>app_lifetime</code> 选项是可选的。如果 <code>app_lifetime</code> 为 <code>False</code>（这是默认值），当主应用程序线程终止时，该线程将被终止。如果设置为 <code>True</code>，只要这个线程在运行，应用程序就会继续运行。正常情况下，只有应用程序的主线程才有这个权限。</p>
+<p>给 <code>Thread.start</code> 方法一些代码来运行, 然后你就离开了。<code>name</code> 和 <code>app_lifetime</code> 选项是可选的。如果 <code>app_lifetime</code> 为 <code>False</code>（这是默认值）, 当主应用程序线程终止时, 该线程将被终止。如果设置为 <code>True</code>, 只要这个线程在运行, 应用程序就会继续运行。正常情况下, 只有应用程序的主线程才有这个权限。</p>
 </div>
 <div class="paragraph">
-<p>所有代码, 都在一个线程内运行。你的代码可以使用名为 <code>$*THREAD</code> 的动态变量访问它正在运行的线程。这对于调试时拉出 <code>.id</code>，帮助了解一个任务此时正在哪个线程中运行是很有帮助的。</p>
+<p>所有代码, 都在一个线程内运行。你的代码可以使用名为 <code>$*THREAD</code> 的动态变量访问它正在运行的线程。这对于调试时拉出 <code>.id</code>, 帮助了解一个任务此时正在哪个线程中运行是很有帮助的。</p>
 </div>
 <div class="paragraph">
-<p>当你想暂停当前线程以等待另一个线程完成时，你可以使用 <code>.finish</code> 方法（或者你可以使用 <code>.join</code>，它是 <code>.finish</code> 的同义词）。</p>
+<p>当你想暂停当前线程以等待另一个线程完成时, 你可以使用 <code>.finish</code> 方法（或者你可以使用 <code>.join</code>, 它是 <code>.finish</code> 的同义词）。</p>
 </div>
 <div class="paragraph">
-<p>另一种运行线程的方法是使用 <code>.new</code> 和 <code>.run</code> 的组合。这与 <code>.start</code> 类似，但代码必须作为命名参数传递给 <code>.new</code>:</p>
+<p>另一种运行线程的方法是使用 <code>.new</code> 和 <code>.run</code> 的组合。这与 <code>.start</code> 类似, 但代码必须作为命名参数传递给 <code>.new</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16885,10 +16882,10 @@ $t2.finish;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在大多数情况下，我都会在降临日历中提到线程，以此来描述代码在其中运行的“通道”。然而，我会不时地使用 <code>$*THREAD.id</code> 来帮助说明代码确实在不同的线程中运行。否则，我一般会直接忽略 Thread 对象。</p>
+<p>在大多数情况下, 我都会在降临日历中提到线程, 以此来描述代码在其中运行的“通道”。然而, 我会不时地使用 <code>$*THREAD.id</code> 来帮助说明代码确实在不同的线程中运行。否则, 我一般会直接忽略 Thread 对象。</p>
 </div>
 <div class="paragraph">
-<p>几乎所有的 Raku 程序都应该坚持使用 <code>start</code> 块或 <code>Promise.start</code> 来启动在另一个线程上运行的任务。只有在真正需要的时候, 你才应该直接利用 <code>Thread</code>，对于大多数 Raku 开发人员来说，可能永远不会使用或接近 Thread。</p>
+<p>几乎所有的 Raku 程序都应该坚持使用 <code>start</code> 块或 <code>Promise.start</code> 来启动在另一个线程上运行的任务。只有在真正需要的时候, 你才应该直接利用 <code>Thread</code>, 对于大多数 Raku 开发人员来说, 可能永远不会使用或接近 Thread。</p>
 </div>
 <div class="paragraph">
 <p>干杯。</p>
@@ -19181,7 +19178,7 @@ True</code></pre>
 <a href="#_footnoteref_4">4</a>. 这是所有 <code>Supply</code> 对象的特性，而不仅仅是 <code>supply</code> 块或按需供应生成的对象。︎
 </div>
 <div class="footnote" id="_footnotedef_5">
-<a href="#_footnoteref_5">5</a>. 需要说明的是，<code>Thread</code> 对象不一定代表一个特定的操作系统线程，但它应该能让你尽可能地接近实现。
+<a href="#_footnoteref_5">5</a>. 需要说明的是, <code>Thread</code> 对象不一定代表一个特定的操作系统线程, 但它应该能让你尽可能地接近实现。
 </div>
 <div class="footnote" id="_footnotedef_6">
 <a href="#_footnoteref_6">6</a>. 我并不是说这是一种高效的模拟康威的《生命游戏》的方法, 但我只是在演示如何利用一个版本的模拟器, 并利用并发模式使其更高效。
