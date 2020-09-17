@@ -550,9 +550,9 @@ if (theme && theme !== "1") {
 </li>
 <li><a href="#_并发">14. 并发</a>
 <ul class="sectlevel2">
-<li><a href="#_high_level_apis">14.1. High-level APIs</a>
+<li><a href="#_高级_api">14.1. 高级 API</a>
 <ul class="sectlevel3">
-<li><a href="#_promises">14.1.1. Promises</a></li>
+<li><a href="#_promise">14.1.1. Promise</a></li>
 <li><a href="#_supplies">14.1.2. Supplies</a></li>
 <li><a href="#_channels">14.1.3. Channels</a></li>
 <li><a href="#_procasync">14.1.4. Proc::Async</a></li>
@@ -11207,18 +11207,18 @@ for ^10 {
 <h2 id="_并发">14. <a href="https://docs.raku.org/language/concurrency">并发</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>与大多数现代编程语言一样，Raku 被设计为<a href="https://en.wikipedia.org/wiki/Concurrent_computing">支持并发</a>（允许多个事件同时发生）和异步编程（有时称为事件驱动或反应式编程 - 即程序某些部分的事件或变化可能会导致程序流异步地改变程序的其它部分）。</p>
+<p>与大多数现代编程语言一样，Raku 被设计为支持并行、异步和<a href="https://en.wikipedia.org/wiki/Concurrent_computing">并发</a>。并行是指同时做多件事件。异步编程, 有时也被称为事件驱动或反应式编程, 是关于支持由程序中其他地方触发的事件引起的程序流的变化。最后，并发是关于协调对一些共享资源的访问和修改。</p>
 </div>
 <div class="paragraph">
-<p>Perl 的并发设计的目的是提供一个高层级的，可组合的，一致的接口，而不管如下所述的虚拟机通过工具层怎样为特定操作的系统来实现它。</p>
+<p>Raku 并发设计的目的是提供一个高层级的、可组合的和一致的接口，而不管如下所述的虚拟机通过工具层怎样为特定操作的系统来实现它。</p>
 </div>
 <div class="paragraph">
-<p>此外，某些 Perl 的特性可以隐式地以异步的方式操作，所以为了确保这些特性可预测的互通，用户代码应在可能情况下，避免较低层级的并发的 API（即<a href="https://docs.raku.org/type/Thread">线程</a>和<a href="https://docs.raku.org/type/Scheduler">调度器</a>），并使用高层级接口。</p>
+<p>此外，某些 Raku 的特性可以隐式地以异步的方式操作，所以为了确保这些特性的可预测的互操作，用户代码应尽可能避免使用较低层级的并发 API（如<a href="https://docs.raku.org/type/Thread">线程</a>和<a href="https://docs.raku.org/type/Scheduler">调度器</a>），而使用较高层级的接口。</p>
 </div>
 <div class="sect2">
-<h3 id="_high_level_apis">14.1. High-level APIs</h3>
+<h3 id="_高级_api">14.1. 高级 API</h3>
 <div class="sect3">
-<h4 id="_promises">14.1.1. Promises</h4>
+<h4 id="_promise">14.1.1. Promise</h4>
 <div class="paragraph">
 <p><a href="https://docs.raku.org/type/Promise">Promise</a>（在其他编程环境中也被称为 <strong>future</strong>）封装了在获得 promise 时可能尚未完成或甚至未开始的计算结果。<code>Promise</code> 从 <code>Planned</code> 状态开始, 结果要么是 <code>Kept</code> 状态, 这意味着该 promise 已成功完成, 要么是 <code>Broken</code> 状态, 意味着该 promise 已失败。 通常这就是用户代码需要以并行或异步方式操作的使用最多的功能。</p>
 </div>
