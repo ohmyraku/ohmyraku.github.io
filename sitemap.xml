@@ -4,7 +4,37 @@
   
   <url>
     <loc>https://ohmyraku.github.io/categories/</loc>
-    <lastmod>2020-06-12T13:16:52+08:00</lastmod>
+    <lastmod>2020-10-16T22:51:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/categories/raku/</loc>
+    <lastmod>2020-10-16T22:51:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/tags/raku/</loc>
+    <lastmod>2020-10-16T22:51:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/raku-recipes/</loc>
+    <lastmod>2020-10-16T22:51:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/tags/recipes/</loc>
+    <lastmod>2020-10-16T22:51:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/tags/</loc>
+    <lastmod>2020-10-16T22:51:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ohmyraku.github.io/</loc>
+    <lastmod>2020-10-16T22:51:52+08:00</lastmod>
   </url>
   
   <url>
@@ -13,27 +43,7 @@
   </url>
   
   <url>
-    <loc>https://ohmyraku.github.io/categories/raku/</loc>
-    <lastmod>2020-06-12T13:16:52+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ohmyraku.github.io/tags/raku/</loc>
-    <lastmod>2020-06-12T13:16:52+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://ohmyraku.github.io/raku-one-liners/</loc>
-    <lastmod>2020-06-12T13:16:52+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ohmyraku.github.io/tags/</loc>
-    <lastmod>2020-06-12T13:16:52+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ohmyraku.github.io/</loc>
     <lastmod>2020-06-12T13:16:52+08:00</lastmod>
   </url>
   
