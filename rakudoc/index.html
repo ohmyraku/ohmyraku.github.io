@@ -1462,7 +1462,15 @@ if (theme && theme !== "1") {
 <li><a href="#_优先级">49.3.5. 优先级</a></li>
 <li><a href="#_结合性">49.3.6. 结合性</a></li>
 <li><a href="#_traits">49.3.7. Traits</a></li>
-<li><a href="#_重新分派">49.3.8. 重新分派</a></li>
+<li><a href="#_重新分派">49.3.8. 重新分派</a>
+<ul class="sectlevel4">
+<li><a href="#_例程_callsame">例程 callsame</a></li>
+<li><a href="#_例程_callwith">例程 callwith</a></li>
+<li><a href="#_例程_nextsame">例程 nextsame</a></li>
+<li><a href="#_例程_nextwith">例程 nextwith</a></li>
+<li><a href="#_例程_nextcallee">例程 nextcallee</a></li>
+</ul>
+</li>
 <li><a href="#_强制类型">49.3.9. 强制类型</a></li>
 </ul>
 </li>
@@ -29501,14 +29509,42 @@ say square 3;       # 18</code></pre>
 <div class="sect3">
 <h4 id="_重新分派">49.3.8. 重新分派</h4>
 <div class="paragraph">
-<p>在某些情况下，例程可能想从链中调用下一个方法。 这个链可以是类层次结构中的父类的列表，或者它可以是来自多分派的较不具体的 multi 候选者，或者它可以是来自`wrap`的内部例程。</p>
+<p>在某些情况下，例程可能想从链中调用下一个方法。这个链可以是类层次结构中的父类的列表，或者它可以是来自多重分派的不太具体的 multi 候选方法，也可能是来自 <code>wrap</code> 的内部例程。</p>
 </div>
 <div class="paragraph">
-<p>在所有这些情况下，您可以使用 <code>callwith</code> 通过您自己选择的参数调用链中的下一个例程。</p>
+<p>幸运的是，我们有一系列的重新分派工具，可以帮助我们轻松完成。</p>
+</div>
+<div class="sect4">
+<h5 id="_例程_callsame">例程 callsame</h5>
+<div class="paragraph">
+<p><code>callsame</code> 调用下一个匹配的候选函数，参数与当前候选者相同，并返回该候选者的返回值。</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">multi a(Any $x) {
+    say "Any $x";
+    return 5;
+}
+multi a(Int $x) {
+    say "Int $x";
+    my $res = callsame;
+    say "Back in Int with $res";
+}
+
+a 1;        # Int 1\n Any 1\n Back in Int with 5</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_例程_callwith">例程 callwith</h5>
+<div class="paragraph">
+<p><code>callwith</code> 调用与原始签名相匹配的下一个候选函数，即下一个可能与用户提供的参数一起使用的函数，并返回该候选函数的返回值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">proto a(|) { * }
+
+multi a(Any $x) {
     say "Any $x";
     return 5;
 }
@@ -29526,92 +29562,150 @@ a 1;
 </div>
 </div>
 <div class="paragraph">
-<p>这里，<code>a 1</code> 首先调用最具体的 <code>Int</code> 候选者，并且 <code>callwith</code> 重新调度到较不具体的 <code>Any</code> 候选者。</p>
+<p>在这里，<code>a 1</code> 首先调用最特殊的 <code>Int</code> 候选函数，然后 <code>callwith</code> 再调用不那么特殊的 <code>Any</code> 候选函数。请注意，虽然我们的参数 <code>$x + 1</code> 是一个 <code>Int</code>，但我们仍然调用链中的下一个候选函数。</p>
 </div>
 <div class="paragraph">
-<p>通常，重新分派传递和调用者接收到的相同的参数，因此有一个特殊的例程：<code>callsame</code>。</p>
+<p>在这种情况下，例如：</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">multi a(Any $x) {
-    say "Any $x";
-    return 5;
-}
-multi a(Int $x) {
-    say "Int $x";
-    my $res = callsame;
-    say "Back in Int with $res";
+<pre class="highlight"><code class="language-raku" data-lang="raku">proto how-many(|) {*}
+
+multi how-many( Associative $a ) {
+    say "Associative $a ";
+    my $calling = callwith( 1 =&gt; $a );
+    return $calling;
 }
 
-a 1;        # Int 1\n Any 1\n Back in Int with 5</code></pre>
+multi how-many( Pair $a ) {
+    say "Pair $a ";
+    return "There is $a "
+
+}
+
+multi how-many( Hash $a ) {
+    say "Hash $a";
+    return "Hashing $a";
+}
+
+my $little-piggy = little =&gt; 'piggy';
+say $little-piggy.^name;        # OUTPUT: «Pair␤»
+say &amp;how-many.cando( \( $little-piggy ));
+# OUTPUT: «(sub how-many (Pair $a) { #`(Sub|68970512) ... } sub how-many (Associative $a) { #`(Sub|68970664) ... })␤»
+say how-many( $little-piggy  ); # OUTPUT: «Pair little     piggy␤There is little piggy␤»</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>另一个常见的用例是重新分派到链中的下一个例程，之后不执行任何其他操作。 这就是为什么我们有 <code>nextwith</code> 和 <code>nextsame</code>，它使用任意的参数调用下一个例程（<code>nextwith</code>）或与调用者接收（<code>nextsame</code>）相同的参数，但不会返回给调用者。 或者对其进行不同的措辞，<code>nextsame</code> 和 <code>nextwith</code> 变体用下一个候选项替换当前的调用帧(callframe)。</p>
+<p>只有用户提供的 <code>Pair</code> 参数的候选函数才是先定义的两个函数。虽然 <code>Pair</code> 很容易被强转成 <code>Hash</code>，但下面是签名的匹配方式。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">multi a(Any $x) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">say :( Pair ) ~~ :( Associative ); # OUTPUT: «True␤»
+say :( Pair ) ~~ :( Hash );        # OUTPUT: «False␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们提供的参数是一个 <code>Pair</code>。它不匹配 <code>Hash</code>，所以相应的函数因此不包含在候选列表中，从 <code>&amp;how-many.cando( \( $little-piggy ));</code> 的输出可以看出。</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_例程_nextsame">例程 nextsame</h5>
+<div class="paragraph">
+<p><code>nextsame</code> 调用下一个匹配的候选函数，其参数与当前候选函数的参数相同，并且永不返回。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">proto a(|) { * }
+
+multi a( Any $x ) {
     say "Any $x";
     return 5;
 }
-multi a(Int $x) {
+
+multi a( Int $x ) {
     say "Int $x";
     nextsame;
-    say "back in a";    # never executed, because 'nextsame' doesn't return
+    say "never executed because nextsame doesn't return";
 }
 
-a 1;        # Int 1\n Any 1</code></pre>
+a 1;
+
+# output:
+# Int 1
+# Any 1</code></pre>
 </div>
 </div>
+</div>
+<div class="sect4">
+<h5 id="_例程_nextwith">例程 nextwith</h5>
 <div class="paragraph">
-<p>如前所述，multi sub 不是唯一能在 call，call me，nextwith 和 next 中有帮助的情况。 下面是是调度到包装的例程：</p>
+<p><code>nextwith</code> 调用下一个由用户提供参数的匹配候选函数，并且永不返回。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku"># enable wrapping:
-use soft;
+<pre class="highlight"><code class="language-raku" data-lang="raku">proto a(|) { * }
 
-# function to be wrapped:
-sub square-root($x) { $x.sqrt }
+multi a( Any $x ) {
+    say "Any $x";
+    return 5;
+}
 
-&amp;square-root.wrap(sub ($num) {
-   nextsame if $num &gt;= 0;
-   1i * callwith(abs($num));
-});
+multi a( Int $x ) {
+    say "Int $x";
+    nextwith( $x + 1 );
+    say "never executed because nextwith doesn't return";
+}
 
-say square-root(4);     # 2
-say square-root(-4);    # 0+2i</code></pre>
+a 1;
+
+# output:
+# Int 1
+# Any 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>最后一个用例是从父类中重分派给方法。</p>
+<p><code>samewith</code> 用用户提供的参数再次调用当前候选函数，并返回当前候选函数新实例的返回值。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">class LoggedVersion is Version {
-    method new(|c) {
-        note "New version object created with arguments " ~ c.perl;
-        nextsame;
-    }
+<pre class="highlight"><code class="language-raku" data-lang="raku">proto a(|) { * }
+
+multi a( Int $x ) {
+    return 1 unless $x &gt; 1;
+    return $x * samewith( $x - 1 );
 }
 
-say LoggedVersion.new('1.0.2');</code></pre>
+say (a 10);
+
+#  output:
+# 3628800</code></pre>
 </div>
 </div>
+</div>
+<div class="sect4">
+<h5 id="_例程_nextcallee">例程 nextcallee</h5>
 <div class="paragraph">
-<p>如果你需要对被包装的代码进行多次调用或获得一个引用，例如内省它，你可以使用 <code>nextcallee</code>。</p>
+<p>重新分派可能需要调用一个不是当前作用域的块, 它提供了 <code>nextsame</code> 和它的朋友们，有引用到错误的作用域的问题。使用 <code>nextcallee</code> 来捕获正确的候选函数，并在所需的时间调用它。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">sub power-it($x) { $x * $x }
-sub run-it-again-and-again($x) {
-    my &amp;again = nextcallee;
-    again again $x;
+<pre class="highlight"><code class="language-raku" data-lang="raku">proto pick-winner(|) {*}
+
+multi pick-winner (Int \s) {
+    my &amp;nextone = nextcallee;
+    Promise.in(π²).then: { nextone s }
+}
+multi pick-winner { say "Woot! $^w won" }
+
+with pick-winner ^5 .pick -&gt; \result {
+    say "And the winner is...";
+    await result;
 }
 
-&amp;power-it.wrap(&amp;run-it-again-and-again);
-say power-it(5);    # 625</code></pre>
+# OUTPUT:
+# And the winner is...
+# Woot! 3 won</code></pre>
+</div>
 </div>
 </div>
 </div>
