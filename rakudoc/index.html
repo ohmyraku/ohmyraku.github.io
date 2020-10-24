@@ -1471,7 +1471,9 @@ if (theme && theme !== "1") {
 <li><a href="#_例程_nextcallee">例程 nextcallee</a></li>
 </ul>
 </li>
-<li><a href="#_强制类型">49.3.9. 强制类型</a></li>
+<li><a href="#_包裹后的例程">49.3.9. 包裹后的例程</a></li>
+<li><a href="#_父类的例程">49.3.10. 父类的例程</a></li>
+<li><a href="#_强制类型">49.3.11. 强制类型</a></li>
 </ul>
 </li>
 <li><a href="#_sub_main_2">49.4. sub MAIN</a></li>
@@ -29707,12 +29709,68 @@ with pick-winner ^5 .pick -&gt; \result {
 # Woot! 3 won</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><code>Int</code> 候选函数接收 <code>nextcallee</code>，然后启动一个 <code>Promise</code>，在超时后并行执行，然后返回。我们不能在这里使用 <code>nextsame</code>，因为它会试图对 <code>Promise</code> 的块进行 <code>nextsame</code>，而不是我们原来的例程。</p>
+</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_强制类型">49.3.9. 强制类型</h4>
+<h4 id="_包裹后的例程">49.3.9. 包裹后的例程</h4>
 <div class="paragraph">
-<p>强制类型可以帮助您在例程中拥有特定类型，但接受更宽的输入。 当调用例程时，参数将自动转换为较窄的类型。</p>
+<p>除了上面已经提到的那些，重新分派在更多的情况下也有帮助。例如，对于分派到包裹后的例程:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># enable wrapping:
+use soft;
+
+# function to be wrapped:
+sub square-root($x) { $x.sqrt }
+
+&amp;square-root.wrap(sub ($num) {
+   nextsame if $num &gt;= 0;
+   1i * callwith(abs($num));
+});
+
+say square-root(4);     # OUTPUT: «2␤»
+say square-root(-4);    # OUTPUT: «0+2i␤»</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_父类的例程">49.3.10. 父类的例程</h4>
+<div class="paragraph">
+<p>另一个用例是对来自父类的方法进行重新分派。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">say Version.new('1.0.2') # OUTPUT: v1.0.2</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class LoggedVersion is Version {
+    method new(|c) {
+        note "New version object created with arguments " ~ c.raku;
+        nextsame;
+    }
+}
+
+say LoggedVersion.new('1.0.2');
+
+# OUTPUT:
+# New version object created with arguments \("1.0.2")
+# v1.0.2</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_强制类型">49.3.11. 强制类型</h4>
+<div class="paragraph">
+<p>强制类型强制例程参数的特定类型，同时允许例程本身接受更广泛的输入。当调用时，参数会自动缩小到更严格的类型，因此在例程中，参数总是具有所需的类型。</p>
+</div>
+<div class="paragraph">
+<p>如果参数不能转换为更严格的类型，就会产生一个类型检查错误。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -29720,45 +29778,64 @@ with pick-winner ^5 .pick -&gt; \result {
     2 * $x
 }
 
-say double '21'; # 42
-say double Any;  # Type check failed in binding $x; expected 'Cool' but got 'Any'</code></pre>
+say double '21';# OUTPUT: «42␤»
+say double  21; # OUTPUT: «42␤»
+say double Any; # Type check failed in binding $x; expected 'Cool' but got 'Any'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里的 <code>Int</code> 是参数将被强制的目标类型，而 <code>Cool</code> 是例程接受的作为输入的类型。</p>
+<p>在上面的例子中，<a href="https://docs.raku.org/type/Int">Int</a> 是参数 <code>$x</code> 将被强制到的目标类型，<a href="https://docs.raku.org/type/Cool">Cool</a> 是例程接受的较宽输入的类型。</p>
 </div>
 <div class="paragraph">
-<p>如果接受的输入类型为 <code>Any</code>，则可以将 <code>Int(Any)</code> 缩写为 <code>Int()</code>。</p>
+<p>如果接受的较宽输入类型是 <a href="https://docs.raku.org/type/Any">Any</a>，则可以将强制 <code>Int(Any)</code> 简略化，省略 <code>Any</code> 类型，从而得到 <code>Int()</code>。</p>
 </div>
 <div class="paragraph">
-<p>强制只需查找与目标类型具有相同名称的方法即可。 所以你可以为你自己的类型定义强制，像这样：</p>
+<p>该强制的工作原理是寻找一个与目标类型同名的方法：如果在参数上找到这样的方法，则调用该方法将后者转换为预期的窄类型。从上面可以看出，只要提供所需的方法，就可以在用户类型之间提供强转。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">class Bar {...}
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Bar {
+   has $.msg;
+}
 
 class Foo {
    has $.msg = "I'm a foo!";
 
+   # allows coercion from Foo to Bar
    method Bar {
        Bar.new(:msg($.msg ~ ' But I am now Bar.'));
    }
 }
 
-class Bar {
-   has $.msg;
-}
-
+# wants a Bar, but accepts Any
 sub print-bar(Bar() $bar) {
-   say $bar.WHAT; # (Bar)
-   say $bar.msg;  # I'm a foo! But I am now Bar.
+   say $bar.^name; # OUTPUT: «Bar␤»
+   say $bar.msg;   # OUTPUT: «I'm a foo! But I am now Bar.␤»
 }
 
 print-bar Foo.new;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>强制类型应该在类型工作的任何地方工作，但 Rakudo 当前（2015.02）仅针对子例程参数实现了它们。</p>
+<p>在上面的代码中，一旦将 <code>Foo</code> 实例作为参数传递给 <code>print-bar</code>，就会调用 <code>Foo.Bar</code> 方法，并将结果放入 <code>$bar</code> 中。</p>
+</div>
+<div class="paragraph">
+<p>强制类型应该是在任何类型工作的地方都能工作，但 Rakudo 目前（2018.05）只在签名中实现了强制类型，对于参数和返回类型都是如此。</p>
+</div>
+<div class="paragraph">
+<p>强制类型也适用于返回类型。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub are-equal (Int $x, Int $y --&gt; Bool(Int) ) { $x - $y };
+
+for (2,4) X (1,2) -&gt; ($a,$b) {
+    say "Are $a and $b equal? ", are-equal($a, $b);
+} #  OUTPUT: «Are 2 and 1 equal? True␤Are 2 and 2 equal? False␤Are 4 and 1 equal? True␤Are 4 and 2 equal? True␤»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这种情况下，我们将 <code>Int</code> 强制成 <code>Bool</code>，然后在调用函数的 <code>for</code> 循环中打印出来（放到一个字符串上下文中）。</p>
 </div>
 </div>
 </div>
