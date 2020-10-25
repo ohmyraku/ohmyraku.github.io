@@ -224,6 +224,16 @@ if (theme && theme !== "1") {
 <li><a href="#_结尾感想">13.3. 结尾感想</a></li>
 </ul>
 </li>
+<li><a href="#_创建一个_web_服务和声明式_api">14. 创建一个 Web 服务和声明式 API</a>
+<ul class="sectlevel2">
+<li><a href="#_12_1_开始使用_cro">14.1. 12.1 开始使用 Cro</a></li>
+<li><a href="#_12_2_扩大服务范围">14.2. 12.2 扩大服务范围</a></li>
+<li><a href="#_12_3_测试">14.3. 12.3 测试</a></li>
+<li><a href="#_12_4_添加一个网页">14.4. 12.4 添加一个网页</a></li>
+<li><a href="#_12_5_声明式_api">14.5. 12.5 声明式 API</a></li>
+<li><a href="#_12_6_总结">14.6. 12.6 总结</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="sect1">
@@ -5813,6 +5823,517 @@ ENTRYPOINT ["/usr/share/raku/site/bin/myapp"]</code></pre>
 <h3 id="_结尾感想">13.3. 结尾感想</h3>
 <div class="paragraph">
 <p>Raku 是一门很大的语言，嵌入了一个更大的社区和生态系统。一本这样的书不可能涵盖所有的东西，但希望它能帮助你学习到足够多的编程任务，更重要的是，它能让你兴奋并有动力去探索和学习更多的东西。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_创建一个_web_服务和声明式_api">14. 创建一个 Web 服务和声明式 API</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>现在，似乎每一个软件都必须通过网络、云端来实现。</p>
+</div>
+<div class="paragraph">
+<p>本着这种精神，我们就来看看在 Raku 中使用 Cro 创建网络服务的简单方法，是一套库，它可以让你轻松地编写异步网络客户端和服务。Cro 这个名字来自于一个可怕的双关语：它允许我编写微服务，我的 cro 服务。</p>
+</div>
+<div class="paragraph">
+<p>在本章后面，我们将看看 Cro 是如何实现其声明式 API 的。</p>
+</div>
+<div class="sect2">
+<h3 id="_12_1_开始使用_cro">14.1. 12.1 开始使用 Cro</h3>
+<div class="paragraph">
+<p>我们将重用第 4 章中的代码，它将 UNIX 时间戳转换为 ISO 格式的日期时间字符串，反之亦然，现在通过 HTTP 将它们公开。</p>
+</div>
+<div class="paragraph">
+<p>第一部分，将 UNIX 时间戳转换为 ISO 日期，是这样的:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Cro::HTTP::Router;
+use Cro::HTTP::Server;
+
+my $application = route {
+    get -&gt; 'datetime', Int $timestamp {
+        my $dt = DateTime.new($timestamp);
+        content 'text/plain', "$dt\n";
+    }
+}
+
+my $port = 8080;
+my Cro::Service $service = Cro::HTTP::Server.new(
+    :host&lt;0.0.0.0&gt;,
+    :$port,
+    :$application,
+);
+
+$service.start;
+say "Application started on port $port";
+react whenever signal(SIGINT) { $service.stop; done; }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这个例子中，我们看到了由 Cro::HTTP::Router 模块导出的子程序 route、get 和 content。</p>
+</div>
+<div class="paragraph">
+<p><code>route</code> 以一个块作为参数，并返回一个应用程序。在块内，我们可以调用 get（或者其他 HTTP 动词函数，如 post 或 put）来声明路由，当有人通过 HTTP 请求匹配的 URL 时，Cro 为我们调用的代码片段。</p>
+</div>
+<div class="paragraph">
+<p>这里，路由声明的开头是 get -&gt; 'datetime', Int $timestamp。箭头&#8594;引入了一个签名，Cro 将每个参数解释为一个斜线限制的 URL 的一部分。在我们的例子中，与签名相匹配的 URL 是 <code>/datetime/</code> 后面跟着一个整数，比如 <code>/datetime/1578135634</code>。当 Cro 接收到这样的请求时，它会使用常量字符串 datetime 来识别路由，并将 1578135634 放入变量 <code>$timestamp</code> 中。</p>
+</div>
+<div class="paragraph">
+<p>将时间戳转换为 DateTime 对象的逻辑在第 4 章中已经很熟悉了，唯一不同的是，我们没有使用 say 将结果打印到标准输出，而是使用 content 函数将其回传给 HTTP 请求者。这是必要的，因为每个 HTTP 响应都需要声明它的内容类型，这样，例如，浏览器就知道是否要将响应渲染为 HTML，还是作为图像等。文本/纯文本内容类型顾名思义，表示的是纯文本，不需要以任何特殊的方式来解释。</p>
+</div>
+<div class="paragraph">
+<p>后面的代码是经典的管道：它在给定的 TCP 端口（这里是 8080，可以根据自己的喜好随意更改）实例化一个 Cro::HTTP::Server 对象和我们的一个微薄路由的集合，然后告诉它开始服务 HTTP 请求。我们选择了 0.0.0.0 的主机（意思是绑定到所有 IP 地址），这样如果你在 Docker 容器中运行应用程序，就可以从主机上到达。如果你不使用 Docker，使用 127.0.0.1 或 localhost 是比较安全的，因为它不会将应用程序暴露给网络中的其他机器。</p>
+</div>
+<div class="paragraph">
+<p>最后是 shocker 一行。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">react whenever signal(SIGINT) { $service.stop; done; }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>signal()函数返回一个 Supply，这是一个异步数据流，以下是进程间的通信信号。signal(SIGINT)具体来说只有当进程接收到 INT 或中断信号时才会发出事件，通常可以通过在终端中按 Ctrl+C 键来创建。</p>
+</div>
+<div class="paragraph">
+<p>react 通常以其块形式使用，react { &#8230;&#8203;. }，由于它只适用于一条语句，所以在这里缩短了。它在 everever 语句中运行并派发耗材，直到代码调用 done 函数（或者所有流完成，对于信号流来说不会发生）。</p>
+</div>
+<div class="paragraph">
+<p>所以，在 react 里面，<code>whenever signal(SIGINT) { &#8230;&#8203; }</code> 每次接收到 SIGINT 信号时，都会调用&#8230;&#8203;标记的代码&#8212;&#8203;在这种情况下，我们会停止 HTTP 服务器，退出 react 构造。</p>
+</div>
+<div class="paragraph">
+<p>如果你想处理其他信号，比如 SIGTERM（杀系统命令使用的），你可以将 signal(SIGINT)替换为</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">signal(SIGINT).merge(signal(SIGTERM))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当有人按 Ctrl+C 时，所有这些都是一种复杂的退出程序的方式。</p>
+</div>
+<div class="paragraph">
+<p>由于 Cro 的异步性，你也可以在这里做其他的事情，比如处理反应块中的其他用品（比如周期性的计时器、文件变化事件流），而 HTTP 服务器正在欢快地运行。</p>
+</div>
+<div class="paragraph">
+<p>要运行这个，首先用 zef 包管理器安装 cro 和 Cro::HTTP::测试模块。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ zef install --/test cro Cro::HTTP::Test</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>其中的 <code>--/test</code> 选项告诉 zef 不要运行模块测试，这两个选项都需要很长的时间，并且需要一些你不可能有的本地基础设施。</p>
+</div>
+<div class="paragraph">
+<p>如果你使用 Docker 来运行你的 raku 程序，你可以使用镜像 moritzlenz/raku-fundamentals，它建立在 Rakudo Star 上，并包含必要的 cro 模块。如果你走这条路，你还必须使用 docker 的 <code>--expose</code> 命令行选项来使服务在主机上可用；否则，它只能从容器内到达。那么命令行就像这样。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ docker run --rm --publish 8080:8080 -v $PW/raku -w /raku \
+    -it moritzlenz/raku-fundamentals raku datetime.p6</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们可以在命令行上用 curl4 这样的 HTTP 客户端测试服务。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ curl http://127.0.0.1:8080/datetime/1578135634
+2020-01-04T11:00:34Z</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_12_2_扩大服务范围">14.2. 12.2 扩大服务范围</h3>
+<div class="paragraph">
+<p>现在我们已经有了一个简约而有效的服务，我们可以将 ISO 日期时间字符串转换为 UNIX 时间戳。我们只需要看一下路由块，一切都保持不变。这里有一个实现它的方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my token date-re {
+    ^
+    \d**4 '-' \d**2 '-' \d** 2 # date part YYYY-MM-DD
+    [
+    ' '
+    \d**2 ':' \d**2 ':' \d**2  # time
+    ]?
+    $
+}
+
+my $application = route {
+    get -&gt; 'datetime', Int $timestamp {
+        my $dt = DateTime.new($timestamp);
+        content 'text/plain', "$dt\n";
+    }
+
+    get -&gt; 'datetime', Str $date_spec where &amp;date-re {
+        my ( $date_str, $time_str ) = $date_spec.split(' ');
+        my $date = Date.new($date_str);
+
+        my $datetime;
+        if $time_str {
+            my ( $hour, $minute, $second ) = $time_str. split(':');
+            $datetime = DateTime.new( :$date, :$hour, :$minute, :$second );
+        }
+        else {
+            $datetime = $date.DateTime;
+        }
+        content "text/plain", $datetime.posix ~ "\n";
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们先用一个 regex 定义我们要接受的日期时间格式，并将其存储在变量 <code>&amp;date-re</code> 中。然后在路由 <code>{ &#8230;&#8203; }</code> 块中，我们添加了第二个带有这个签名的 get 调用。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; 'datetime', Str $date_spec where &amp;date-re { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这就定义了第二个路由，和之前的 url 类似，<code>/datetime/YYYY-MM-DD HH:MM:SS</code> (其中时间部分是可选的)。这些逻辑同样是复制自第 4 章，所以没有什么惊喜。唯一不同的是，在命令行程序中，命令行分析器为我们分割了日期和时间部分，现在我们通过调用 <code>.split(' ')</code> 来明确分割。</p>
+</div>
+<div class="paragraph">
+<p>当我们用 curl 或浏览器测试这段代码时，我们需要记住，我们不能直接在 URL 中直接包含空格，而是需要将其转义为%20。启动我们的扩展服务后，我们可以再次调用 curl 进行测试。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ curl http://127.0.0.1:8080/datetime/2020-01-04%2011:00:34
+1578135634</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>大多数现代 Web 服务倾向于用 JSON 数据来响应，我们可以通过向内容函数传递一个 JSON 可序列化的数据结构（如哈希）来实现。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku"># in the first route
+content 'application/json', {
+    input =&gt; $timestamp,
+    result =&gt; $dt.Str,
+}
+# in the second route
+content "application/json", {
+    input =&gt; $date_spec,
+    result =&gt; $datetime.posix,
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_12_3_测试">14.3. 12.3 测试</h3>
+<div class="paragraph">
+<p>测试一个 Web 应用程序有时是一件很痛苦的事情。你必须启动应用服务器，但首先你需要找到一个可以监听的空闲端口，然后你向服务器发出请求，之后再拆掉它。</p>
+</div>
+<div class="paragraph">
+<p>通过一点点的重组和 Cro::HTTP::测试模块，这一切都可以避免。</p>
+</div>
+<div class="paragraph">
+<p>对于重组，让我们把对路由的调用放到我们自己的一个子程序中，把服务器的设置放到一个 MAIN 函数中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub routes() {
+    return route {
+        # same route definitions as before
+    }
+}
+
+multi sub MAIN(Int :$port = 8080, :$host = '0.0.0.0') {
+    my Cro::Service $service = Cro::HTTP::Server.new(
+        :$host
+        :$port,
+        application =&gt; routes(),
+    );
+    $service.start;
+    say "Application started on port $port";
+    react whenever signal(SIGINT) { $service.stop; done; }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你可以像以前一样启动 HTTP 服务器，现在的好处是可以通过命令行覆盖端口和主机（服务器监听的 IP）。</p>
+</div>
+<div class="paragraph">
+<p>我们的目标是测试，所以让我们为其添加另一个 multi MAIN。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN('test') {
+    use Cro::HTTP::Test;
+    use Test;
+    test-service routes(), {
+        test get('/datetime/1578135634'),
+            status =&gt; 200,
+            json =&gt; {
+                result =&gt; "2020-01-04T11:00:34Z",
+                input =&gt; 1578135634 ,
+            };
+        test get('/datetime/2020-01-04%2011:00:34'),
+            status =&gt; 200,
+            json =&gt; {
+                input =&gt; '2020-01-04 11:00:34',
+                result =&gt; 1578135634,
+            };
+
+    }
+    done-testing;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们来见见我们的新朋友，<code>sub test-service</code>。我们用两个参数来调用它，一个是要测试的路由，另一个是包含我们测试的块。</p>
+</div>
+<div class="paragraph">
+<p>在这个块里面，<code>get()</code> 例程在没有启动任何服务器的情况下调用相应的路由，并返回一个类型为 Cro::HTTP::Test::TestRequest 的对象。通过测试例程，我们可以检查这个测试响应是否满足我们的期望，这里关于响应代码（状态）和 JSON 响应体。</p>
+</div>
+<div class="paragraph">
+<p>我们可以通过添加测试命令行参数来运行测试，得到这样的测试输出。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ raku datetime.p6 test
+    ok 1 - Status is acceptable
+    ok 2 - Content type is recognized as a JSON one
+    ok 3 - Body is acceptable
+    1..3
+ok 1 - GET /datetime/1578135634
+    ok 1 - Status is acceptable
+    ok 2 - Content type is recognized as a JSON one
+    ok 3 - Body is acceptable
+    1..3
+ok 2 - GET /datetime/2020-01-04%2011:00:34
+1..2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>每次调用测试都会在输出中产生一个测试，并为每一个单独的比较产生一个子测试（用缩进表示）。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_12_4_添加一个网页">14.4. 12.4 添加一个网页</h3>
+<div class="paragraph">
+<p>我们的迷你网络服务现在已经到了另一个程序可以舒服地通过 JSON 通过 HTTP 与之对话的地步，但这对终端用户来说并不友好。</p>
+</div>
+<div class="paragraph">
+<p>作为一个可能的用户界面的演示，让我们添加一个可以在浏览器中查看的 HTML 页面。由于我们将通过 JavaScript 触发的 HTTP 请求来处理数据，所以我们可以摆脱静态文件的服务。Cro 为此提供了一个名为 <code>static</code> 的助手，它取代了我们对内容的调用。让我们把这两个路由添加到路由 <code>{ &#8230;&#8203;}</code> 块中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; { static 'index.html'; }
+get -&gt; 'index.js' { static 'index.js'; }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第一个签名是空的，所以对应于 <code>/</code> (root)URL，服务于 index.html 文件。第二个是服务于一个名为 index.js 的文件，URL 相同。</p>
+</div>
+<div class="paragraph">
+<p>静态助手可以做更多的事情，比如服务于整个目录，同时防止恶意的路径遍历，5 但对于我们的案例来说，简单的形式就足够了。</p>
+</div>
+<div class="paragraph">
+<p>文件 index.html 应该直接放在 raku 脚本的旁边，可以像这样。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-html" data-lang="html">&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Datetime to UNIX timestamp conversion&lt;/title&gt;
+&lt;script
+    src="https://code.jquery.com/jquery-3.5.1.min.js"
+    crossorigin="anonymous"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="/index.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;h1&gt;Convert UNIX timestamp to ISO datetime or vice versa&lt;/h1&gt;
+&lt;form&gt;
+&lt;label for="in"&gt;Input&lt;/label&gt;
+&lt;input name="in" id="in" placeholder="2014-01-14 10:12:00"&gt;&lt;/input&gt;
+&lt;button id="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt; &lt;h2&gt;Result&lt;/h2&gt;
+&lt;ul id="result"&gt;&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>可见的元素只是一些标题、一个输入表单和一个提交按钮，以及一个空的结果列表。</p>
+</div>
+<div class="paragraph">
+<p>我们将在 index.js 中添加一些 JavaScript 来使其活起来。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">$(document).ready(function() { $('#submit').click(function(event) {
+var val = $('#in').val();
+$.get('/datetime/' + val, function(response) {
+            $('#result').append(
+                '&lt;li&gt;Input: ' + val +
+                ', Result: ' + response['result'] +
+                '&lt;/li&gt;');
+});
+        event.preventDefault();
+    });
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这段代码使用 jQuery6 库，订阅按钮上的点击事件。当按钮被按下时，它会从
+的输入元素，异步提交到 URL <code>/datetime/</code>，然后将结果作为列表项追加到无序列表（<code>&lt;ul&gt;</code>）中。</p>
+</div>
+<div class="paragraph">
+<p>这远非完美，因为 Web 应用程序缺少错误处理和视觉吸引力，但它确实说明了如何在你的应用程序中拥有一个漂亮的以机器为中心的 API 端点，然后在上面放一个使用 HTML 和 javascript 的用户界面。</p>
+</div>
+<div class="paragraph">
+<p>图 12-1. 日期时间转换应用的简约型 Web 前端</p>
+</div>
+<div class="paragraph">
+<p>有几个项目旨在保持 JavaScript 代码的可组合性和可维护性，比如 Vue.js,angular 和 React。事实上，Cro 文档中附带了一个使用 React 和 Redux 构建单页应用的教程，如果你想更深入地研究这个主题，你应该遵循这个教程。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_12_5_声明式_api">14.5. 12.5 声明式 API</h3>
+<div class="paragraph">
+<p>我们现在可以通过更多的路由、认证 11 等方式来发展我们的应用，但我想提请大家注意 Cro 是如何创建其 API 的。</p>
+</div>
+<div class="paragraph">
+<p>路由的语法是这样的。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; 'datetime', Int $timestamp { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里的 get 是一个函数调用，所以我们也可以把这个写成</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">get(-&gt; 'datetime', Int $timestamp { ... });</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>箭头&#8594;引入了一个带有签名的块。其实这是一个块并不重要，一个普通的子程序也可以。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">get( sub ('datetime', Int $timestamp) { ... } )</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>其实，没有必要把子程序的声明放在 get 调用里面。我们可以写成：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub convert-from-timestamp('datetime', Int $timestamp) {
+    my $dt = DateTime.new($timestamp);
+    content 'application/json', {
+        input =&gt; $timestamp,
+        result =&gt; $dt.Str,
+    }
+}
+
+sub convert-from-isodate('datetime', Str $date_spec where &amp;date-re) {
+    # omitted for brevity
+}
+
+my $application = route {
+    get &amp;convert-from-timestamp;
+    get &amp;convert-from-isodate;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>get 是一个接受另一个函数作为参数的函数，这一点我们在第 12 章中已经看到了。与这些例子不同的是，get 并不只是调用它所接收的函数，它还会反省函数的签名，以确定何时调用它。</p>
+</div>
+<div class="paragraph">
+<p>我们也可以这样做。在前面的例子中，你可以写下</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @params = &amp;convert-from-timestamp.signature.params;
+say @params.elems;
+say @params[0].type;
+say @params[0].constraints;
+# =&gt; 2
+# =&gt; (Str)
+# =&gt; all(datetime)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>通过 <code>.signature.params</code> 方法链，我们获得了代表每个函数参数的 Parameter 对象列表；我们可以向它们询问类型、附加约束条件（比如第一个参数上使用的字符串 datetime）、变量名以及更多属性。</p>
+</div>
+<div class="paragraph">
+<p>就像 get 一样，<code>route { &#8230;&#8203; }</code> 是一个函数，它在经过一番设置后调用它的参数函数。它设置了一个动态变量，get 会锁定这个变量，这使得 route 能够返回一个对象，这个对象包含了所有对 get 的调用信息，因此也包含了所有的路由。</p>
+</div>
+<div class="paragraph">
+<p>为了说明这个原理，我们试着写一些函数，让你根据类型写出小的调度器，也就是调用第一个匹配类型的函数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my &amp;d = dispatcher {
+    on -&gt; Str  $x { say "String $x" }
+    on -&gt; Date $x { say "Date $x"   }
+}
+
+d(Date.new('2020-12-24'));
+d("a test");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>为了使这个抱负的例子成为一个有效的乐成代码，我们需要两个函数，dispatcher 和 on，它们都以一个可调用的块作为参数，dispatcher 需要声明一个动态变量，on 则执行一些理智性检查，并将其参数添加到动态变量中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub dispatcher(&amp;body) {
+    my @*CASES;
+    body();
+    my @cases = @*CASES;
+    return sub (Mu $x) {
+        for @cases -&gt; &amp;case {
+            if $x ~~ &amp;case.signature.params[0].type {
+                return case($x)
+            }
+        }
+        die "No case matched $x";
+    }
+}
+
+sub on(&amp;case) {
+    die "Called on() outside a dispatcher block"
+        unless defined @*CASES;
+    unless &amp;case.signature.params == 1 {
+        die "on() expects a block with exactly one parameter"
+    }
+    @*CASES.push: &amp;case;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>子 dispatcher 要把它的动态变量的内容复制到一个词法变量 <code>my @cases</code> 中，因为动态变量的作用范围是它所声明的函数的执行时间，所以在函数 dispatcher 返回后它就不存在了。但是 dispatcher 需要内容来做它的工作，在 case 中迭代，并调用第一个匹配的 case。它在返回的匿名函数中做这件事，这样程序员就可以在多个代码位置重复使用匹配器。</p>
+</div>
+<div class="paragraph">
+<p>在你第一次阅读使用 Cro 的代码时，你可能会认为 route 和 get 构造看起来像语言扩展，相反，它们原来是巧妙地命名为接收其他函数作为参数的函数。你可以在自己的库和框架中使用同样的技术来创建让使用它们的程序员感到自然的接口。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_12_6_总结">14.6. 12.6 总结</h3>
+<div class="paragraph">
+<p>通过 Cro 库，你可以很容易地通过 HTTP 来暴露功能。首先，你在 <code>route { &#8230;&#8203;}</code> 块中创建一些路由（当有人请求匹配的 URL 时，Cro 会调用这些代码），然后将路由传给 HTTP server 块中创建一些路由（当有人请求匹配的 URL 时，Cro 会调用这些代码），然后将这些路由传递给 HTTP 服务器。你启动服务器，就可以了。</p>
+</div>
+<div class="paragraph">
+<p>每条路由通过调用 content 函数来传达它的响应，指定内容类型和响应体；JSON 序列化会自动为相应的内容类型发生。</p>
+</div>
+<div class="paragraph">
+<p>通过静态 HTML 和 JavaScript，可能借助 JavaScript 应用框架，可以创建一个用户界面。</p>
+</div>
+<div class="paragraph">
+<p>我们也看到了 Cro 是如何通过提供高阶函数（接收其他函数作为参数的函数），并对这些函数的签名进行反省，从而实现其 API 的自然感觉。</p>
 </div>
 </div>
 </div>
