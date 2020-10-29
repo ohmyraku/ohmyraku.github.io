@@ -231,13 +231,13 @@ if (theme && theme !== "1") {
 <h2 id="_入门">2. 入门</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>在本章中，您将了解  Nim 的语法，过程，for循环以及该语言的其他基本方面。 在本章中，我们将涵盖许多信息，以使您对语言有更广泛的了解。
-在开始之前，请确保已安装 Nim 并在计算机上正常运行。 您还需要一个文本编辑器来编辑Nim代码。 请参阅附录B，以获取有关如何安装Nim和其他相关工具的说明。</p>
+<p>在本章中，你将了解  Nim 的语法，过程，for循环以及该语言的其他基本方面。 在本章中，我们将涵盖许多信息，以使你对语言有更广泛的了解。
+在开始之前，请确保已安装 Nim 并在计算机上正常运行。 你还需要一个文本编辑器来编辑Nim代码。 请参阅附录B，以获取有关如何安装Nim和其他相关工具的说明。</p>
 </div>
 <div class="sect2">
 <h3 id="_nim_语法">2.1. Nim 语法</h3>
 <div class="paragraph">
-<p>编程语言的语法是一组规则，它们控制用该语言编写程序的方式。 在上一章中，您已经对Nim的语法有所了解。</p>
+<p>编程语言的语法是一组规则，它们控制用该语言编写程序的方式。 在上一章中，你已经对Nim的语法有所了解。</p>
 </div>
 <div class="paragraph">
 <p>大多数语言在语法方面都有许多相似之处。 对于以下情况尤其如此
@@ -249,21 +249,21 @@ C语言家族，碰巧也是最受欢迎的-如此之多
 标点符号。 因此，Nim的语法与C longage系列大不相同。 相反，它的大部分灵感来自Python和Pascal。</p>
 </div>
 <div class="paragraph">
-<p>在本节中，我将教您Nim语法的基础知识。 学习语法是非常重要的第一步，因为它教会了您编写Nim代码的特定方式。</p>
+<p>在本节中，我将教你Nim语法的基础知识。 学习语法是非常重要的第一步，因为它教会了你编写Nim代码的特定方式。</p>
 </div>
 <div class="sect3">
 <h4 id="_关键字">2.1.1. 关键字</h4>
 <div class="paragraph">
-<p>大多数编程语言都有关键字的概念，Nim也不例外。关键字是在特定上下文中使用时具有特殊含义的单词。因此，您不能在源代码中使用关键字作为标识符。</p>
+<p>大多数编程语言都有关键字的概念，Nim也不例外。关键字是在特定上下文中使用时具有特殊含义的单词。因此，你不能在源代码中使用关键字作为标识符。</p>
 </div>
 <div class="paragraph">
-<p>踩踏您可以通过踩踏来解决此限制。请参阅第1.2节以了解更多信息。</p>
+<p>踩踏你可以通过踩踏来解决此限制。请参阅第1.2节以了解更多信息。</p>
 </div>
 <div class="paragraph">
-<p>从0.12.0版开始，Nim有70个关键字。这听起来可能很多，但是您必须记住您不会使用其中的大多数。其中一些还没有含义，保留给该语言的将来版本；其他则有较小的用例。</p>
+<p>从0.12.0版开始，Nim有70个关键字。这听起来可能很多，但是你必须记住你不会使用其中的大多数。其中一些还没有含义，保留给该语言的将来版本；其他则有较小的用例。</p>
 </div>
 <div class="paragraph">
-<p>最常用的关键字允许您执行以下操作：</p>
+<p>最常用的关键字允许你执行以下操作：</p>
 </div>
 <div class="ulist">
 <ul>
@@ -279,7 +279,7 @@ C语言家族，碰巧也是最受欢迎的-如此之多
 </ul>
 </div>
 <div class="paragraph">
-<p>您将在本章的下一部分中确切地了解这些关键字的含义以及如何使用它们。有关关键字的完整列表，请参阅 Nim 手册，网址为 <a href="http://nim-lang.org/docs/manual.html#lexical-analysis-identifiers-keywords" class="bare">http://nim-lang.org/docs/manual.html#lexical-analysis-identifiers-keywords</a>。</p>
+<p>你将在本章的下一部分中确切地了解这些关键字的含义以及如何使用它们。有关关键字的完整列表，请参阅 Nim 手册，网址为 <a href="http://nim-lang.org/docs/manual.html#lexical-analysis-identifiers-keywords" class="bare">http://nim-lang.org/docs/manual.html#lexical-analysis-identifiers-keywords</a>。</p>
 </div>
 </div>
 <div class="sect3">
@@ -311,10 +311,10 @@ end</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如您所见，C使用大括号分隔代码块，Ruby使用关键字end，Nim使用缩进。 Nim还在缩进开始之前的行上使用冒号字符。 这对于if语句和其他许多语句都是必需的。 但是，当您继续学习Nim时，您会发现并不是所有以缩进代码块开头的语句都必须使用冒号。</p>
+<p>如你所见，C使用大括号分隔代码块，Ruby使用关键字end，Nim使用缩进。 Nim还在缩进开始之前的行上使用冒号字符。 这对于if语句和其他许多语句都是必需的。 但是，当你继续学习Nim时，你会发现并不是所有以缩进代码块开头的语句都必须使用冒号。</p>
 </div>
 <div class="paragraph">
-<p>还要注意清单2.1中分号的使用。 在某些编程语言（大多数是C系列）的每一行结尾处都需要这样做。 它告诉编译器一行代码在何处结束。 这意味着单个语句可以跨越多行，或者多个语句可以在同一行上。 在C语言中，您将同时实现以下两个目的：</p>
+<p>还要注意清单2.1中分号的使用。 在某些编程语言（大多数是C系列）的每一行结尾处都需要这样做。 它告诉编译器一行代码在何处结束。 这意味着单个语句可以跨越多行，或者多个语句可以在同一行上。 在C语言中，你将同时实现以下两个目的：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -324,7 +324,7 @@ printf("Hello"); printf("World");</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在Nim中，分号是可选的，可用于在一行上写两个语句。 在多行中跨越一条语句会有些复杂-您只能在标点符号后拆分一条语句，并且必须缩进下一行。 这是一个例子：</p>
+<p>在Nim中，分号是可选的，可用于在一行上写两个语句。 在多行中跨越一条语句会有些复杂-你只能在标点符号后拆分一条语句，并且必须缩进下一行。 这是一个例子：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -340,13 +340,13 @@ echo(5 +         # This statement has not been correctly indented after the spli
 </div>
 </div>
 <div class="paragraph">
-<p>由于缩进在Nim中很重要，因此您需要保持其样式一致。 约定指出，所有Nim代码均应缩进两个空格。 Nim编译器当前不允许使用制表符，因为空格和制表符的不可避免的混合会产生有害的影响，尤其是在对空格敏感的编程语言中。</p>
+<p>由于缩进在Nim中很重要，因此你需要保持其样式一致。 约定指出，所有Nim代码均应缩进两个空格。 Nim编译器当前不允许使用制表符，因为空格和制表符的不可避免的混合会产生有害的影响，尤其是在对空格敏感的编程语言中。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_注释">2.1.3. 注释</h4>
 <div class="paragraph">
-<p>代码注释很重要，因为它们使您可以在代码段中添加其他含义。 Nim中的注释使用井号（＃）编写。 紧随其后的所有内容将在新行开始之前进行注释。 可以使用＃[和]＃创建多行注释，也可以使用when：：禁用代码。 这是一个例子：</p>
+<p>代码注释很重要，因为它们使你可以在代码段中添加其他含义。 Nim中的注释使用井号（＃）编写。 紧随其后的所有内容将在新行开始之前进行注释。 可以使用＃[和]＃创建多行注释，也可以使用when：：禁用代码。 这是一个例子：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -366,24 +366,24 @@ when false:
 <div class="sect2">
 <h3 id="_nim_基础">2.2. Nim 基础</h3>
 <div class="paragraph">
-<p>现在，您已经对Nim的语法有了基本的了解，为学习Nim的某些语义奠定了良好的基础。 在本节中，您将学习每个Nim程序员每天使用的一些基本知识。 您将了解最常用的静态类型，可变和不可变变量的详细信息，以及如何通过定义过程将常用代码分为独立的单元。</p>
+<p>现在，你已经对Nim的语法有了基本的了解，为学习Nim的某些语义奠定了良好的基础。 在本节中，你将学习每个Nim程序员每天使用的一些基本知识。 你将了解最常用的静态类型，可变和不可变变量的详细信息，以及如何通过定义过程将常用代码分为独立的单元。</p>
 </div>
 <div class="sect3">
 <h4 id="_基本类型">2.2.1. 基本类型</h4>
 <div class="paragraph">
-<p>Nim是一种静态类型的编程语言。这意味着Nim中的每个标识符在编译时都具有与其关联的类型。当您编译Nim程序时，编译器将确保您的代码是类型安全的。如果不是，则编译术语会编译器输出错误。这与诸如Ruby之类的动态类型编程语言相反，后者只能确保您的代码在运行时是类型安全的。</p>
+<p>Nim是一种静态类型的编程语言。这意味着Nim中的每个标识符在编译时都具有与其关联的类型。当你编译Nim程序时，编译器将确保你的代码是类型安全的。如果不是，则编译术语会编译器输出错误。这与诸如Ruby之类的动态类型编程语言相反，后者只能确保你的代码在运行时是类型安全的。</p>
 </div>
 <div class="paragraph">
-<p>按照约定，类型名称以大写字母开头。内置类型不遵循此约定，因此您可以通过检查名称的首字母来轻松区分内置类型和用户定义类型。 Nim支持许多内置类型，包括用于处理C外部函数接口（FFI）的类型。我不会在这里介绍所有内容，但本书稍后将介绍它们。</p>
+<p>按照约定，类型名称以大写字母开头。内置类型不遵循此约定，因此你可以通过检查名称的首字母来轻松区分内置类型和用户定义类型。 Nim支持许多内置类型，包括用于处理C外部函数接口（FFI）的类型。我不会在这里介绍所有内容，但本书稍后将介绍它们。</p>
 </div>
 <div class="paragraph">
-<p>外部函数接口外部函数接口（FFI）使您可以使用以其他编程语言编写的库。 Nim包含C和C ++固有的类型，从而允许使用以这些语言编写的库。</p>
+<p>外部函数接口外部函数接口（FFI）使你可以使用以其他编程语言编写的库。 Nim包含C和C ++固有的类型，从而允许使用以这些语言编写的库。</p>
 </div>
 <div class="paragraph">
-<p>大多数内置类型是在系统模块中定义的，该模块会自动导入您的源代码中。 在代码中引用这些类型时，您可以使用模块名称（例如system.int）来限定它们的类型，但这不是必需的。 有关系统模块中定义的基本类型的列表，请参见表2.1。</p>
+<p>大多数内置类型是在系统模块中定义的，该模块会自动导入你的源代码中。 在代码中引用这些类型时，你可以使用模块名称（例如system.int）来限定它们的类型，但这不是必需的。 有关系统模块中定义的基本类型的列表，请参见表2.1。</p>
 </div>
 <div class="paragraph">
-<p>模块使用import关键字导入模块。 在本书的后面，您将学到更多关于模块的知识。</p>
+<p>模块使用import关键字导入模块。 在本书的后面，你将学到更多关于模块的知识。</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. 表 2.1 基本类型</caption>
@@ -422,7 +422,7 @@ when false:
 <p><strong>整型</strong></p>
 </div>
 <div class="paragraph">
-<p>整数类型表示不带小数部分的数值数据。 即是整数。 这种类型可以存储的数据量是有限的，因此在Nim中有多种版本，每种版本都适合不同的大小要求。 Nim中主要的整数类型是int，这是您在Nim程序中应该使用最多的整数类型。 有关整数类型的列表，请参见表2.2。</p>
+<p>整数类型表示不带小数部分的数值数据。 即是整数。 这种类型可以存储的数据量是有限的，因此在Nim中有多种版本，每种版本都适合不同的大小要求。 Nim中主要的整数类型是int，这是你在Nim程序中应该使用最多的整数类型。 有关整数类型的列表，请参见表2.2。</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 2. 表 2.2 整型</caption>
@@ -443,7 +443,7 @@ when false:
 <td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Architecture-dependent. 32-bit on 32-bit systems, 64-bit on 64-bit systems</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">32-bit: -2,147,483,648 to 2,147,483,647 64-bit: -9,223,372,036,854, 775,808 to 9,223,372,036, 854,775,807</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">通用有符号的两个补码整数。 通常，您应该在大多数程序中使用此整数类型。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">通用有符号的两个补码整数。 通常，你应该在大多数程序中使用此整数类型。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">int8</p></td>
@@ -633,7 +633,7 @@ myProc("Dominik")</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>编译这个例子将导致一个错误。"file.nim(2, 7) Error: value of type 'string' has to be discarded." "file.nim(2, 7) Error: value of type 'string' has to be discarded." 这个错误的发生是由于 myProc 存储过程返回的值被隐式丢弃的结果。在大多数情况下，忽略存储过程的结果是你的代码中的一个错误，因为结果可能描述了一个发生的错误或给你一个重要的信息。你很可能会想对这个结果做一些事情，比如把它存储在一个变量中，或者通过调用把它传递给另一个过程。如果您真的不想对存储过程的结果做任何事情，您可以使用丢弃关键字来告诉编译器要保持安静。</p>
+<p>编译这个例子将导致一个错误。"file.nim(2, 7) Error: value of type 'string' has to be discarded." "file.nim(2, 7) Error: value of type 'string' has to be discarded." 这个错误的发生是由于 myProc 存储过程返回的值被隐式丢弃的结果。在大多数情况下，忽略存储过程的结果是你的代码中的一个错误，因为结果可能描述了一个发生的错误或给你一个重要的信息。你很可能会想对这个结果做一些事情，比如把它存储在一个变量中，或者通过调用把它传递给另一个过程。如果你真的不想对存储过程的结果做任何事情，你可以使用丢弃关键字来告诉编译器要保持安静。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -756,7 +756,7 @@ assert message("Dom") == "Hello Dom"</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>虽然这很方便，但只要有可能，您就应该明确地指定类型。这样做可以让你和其他人更容易确定过程的返回类型，而不需要理解过程的主体。</p>
+<p>虽然这很方便，但只要有可能，你就应该明确地指定类型。这样做可以让你和其他人更容易确定过程的返回类型，而不需要理解过程的主体。</p>
 </div>
 <div class="paragraph">
 <p><strong>警告：类型推断</strong> 存储过程的类型推断在 Nim 中还是有点经验性的。你可能会发现它在某些情况下是有限的，特别是如果你习惯于更高级的类型推理形式，比如那些在 Haskell 或 OCaml 中发现的类型推理。</p>
@@ -785,7 +785,7 @@ assert max(5, 10) == 10</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>缺省参数可以用来请求参数，这些参数可以在调用站点上选择性地指定。您可以通过使用等号给参数赋值来引入缺省参数；在这种情况下也可以省略类型。</p>
+<p>缺省参数可以用来请求参数，这些参数可以在调用站点上选择性地指定。你可以通过使用等号给参数赋值来引入缺省参数；在这种情况下也可以省略类型。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -855,7 +855,7 @@ doAssert getUserCity(2) == "New York</code></pre>
 <p><strong>匿名程序</strong></p>
 </div>
 <div class="paragraph">
-<p>有时您可能希望将存储过程作为参数传递给其他存储过程。下面的列表显示了一个新存储过程的定义，以及如何将对它的引用传递给过滤器存储过程。</p>
+<p>有时你可能希望将存储过程作为参数传递给其他存储过程。下面的列表显示了一个新存储过程的定义，以及如何将对它的引用传递给过滤器存储过程。</p>
 </div>
 <div class="listingblock">
 <div class="content">

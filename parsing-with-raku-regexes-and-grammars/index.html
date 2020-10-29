@@ -5242,7 +5242,7 @@ MathExpression.parse('(1');</code></pre>
 <div class="sect3">
 <h4 id="_字素簇">12.2.1. 字素簇</h4>
 <div class="paragraph">
-<p>不是每个代码码点都对应于一个完整的字符。有些语言允许基数字与组合字符自由组合。您可能对法语中使用的尖音符和重音符很熟悉，如 "née"(出生)或 "après"(后)。为了与其他传统的编码兼容，é 和 è 字符作为独立的代码点存在，也就是所谓的预组合字符。但它们也可以写成基本字符 e，后面跟着 <strong>COMBINING ACUTE ACCENT</strong> 或 <strong>COMBINING GRAVE ACCENT</strong>。</p>
+<p>不是每个代码码点都对应于一个完整的字符。有些语言允许基数字与组合字符自由组合。你可能对法语中使用的尖音符和重音符很熟悉，如 "née"(出生)或 "après"(后)。为了与其他传统的编码兼容，é 和 è 字符作为独立的代码点存在，也就是所谓的预组合字符。但它们也可以写成基本字符 e，后面跟着 <strong>COMBINING ACUTE ACCENT</strong> 或 <strong>COMBINING GRAVE ACCENT</strong>。</p>
 </div>
 <div class="paragraph">
 <p>在法语中，尖音和重音只作用在几个基础字符上，但在其他书写系统中，这种限制并不适用。例如，在印度次大陆常见的梵文文字中，元音可以写成组合字，应用到辅音基音上。在这种情况下，并非所有可能的基音和组合字符的组合都是作为 Unicode 编码的预组合点存在。</p>
@@ -5302,10 +5302,10 @@ MathExpression.parse('(1');</code></pre>
 <p>Unicode 属性是用冒号(:)来写的，后面的属性名称放在角括号内。例如，<code>&lt;:Letter&gt;</code> 可以匹配任何字母 - 在编写时，总共有 63409 个代码点。新的 Unicode 版本可以进一步扩大这个总数。</p>
 </div>
 <div class="paragraph">
-<p>您可以通过使用 <code>+</code> 和 <code>-</code> 自由组合 Unicode 属性，因此 <code>&lt;:Letter+:Digit&gt;</code> 可以匹配一个字母或一个数字。你还可以将基于属性的字符类与枚举结合起来。如果你想匹配一个没有 e 的单词，你可以用正则表达式 <code>/&lt;:Letter-[eE]&gt;+/</code> 来实现。</p>
+<p>你可以通过使用 <code>+</code> 和 <code>-</code> 自由组合 Unicode 属性，因此 <code>&lt;:Letter+:Digit&gt;</code> 可以匹配一个字母或一个数字。你还可以将基于属性的字符类与枚举结合起来。如果你想匹配一个没有 e 的单词，你可以用正则表达式 <code>/&lt;:Letter-[eE]&gt;+/</code> 来实现。</p>
 </div>
 <div class="paragraph">
-<p>字母、数字、标点符号等字符的分类称为常规类别，您可以使用 <code>uniprop</code> 方法查询字符所属的 Unicode 类别:</p>
+<p>字母、数字、标点符号等字符的分类称为常规类别，你可以使用 <code>uniprop</code> 方法查询字符所属的 Unicode 类别:</p>
 </div>
 <div class="listingblock">
 <div class="content">

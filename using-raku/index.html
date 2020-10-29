@@ -214,7 +214,7 @@ if (theme && theme !== "1") {
 <p><strong>Hello, World!</strong></p>
 </div>
 <div class="paragraph">
-<p>注意单引号和双引号之间的区别：单引号不会插入 <strong>\n</strong> 等特殊字符，而双引号会插入。 对于不带特殊字符的字符串使用双引号是没有错的，但是当您不希望在字符串中使用变量并且不需要插值变量时，最好使用适当的引号样式。</p>
+<p>注意单引号和双引号之间的区别：单引号不会插入 <strong>\n</strong> 等特殊字符，而双引号会插入。 对于不带特殊字符的字符串使用双引号是没有错的，但是当你不希望在字符串中使用变量并且不需要插值变量时，最好使用适当的引号样式。</p>
 </div>
 <div class="paragraph">
 <p>在上面的示例中要看的另一件事是，单行程序不需要分号。</p>
@@ -245,7 +245,7 @@ if (theme && theme !== "1") {
 <strong>Hello, Andy!</strong></p>
 </div>
 <div class="paragraph">
-<p>如果您更喜欢传统的程序流程，请将其拆分为不同的部分，然后将变量插入到字符串中：</p>
+<p>如果你更喜欢传统的程序流程，请将其拆分为不同的部分，然后将变量插入到字符串中：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -254,7 +254,7 @@ say "Hello, $name!";</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>或者，可以使用 <strong>get</strong> 函数。 它返回没有换行符的输入行。 现在，打印提示消息是您的责任：</p>
+<p>或者，可以使用 <strong>get</strong> 函数。 它返回没有换行符的输入行。 现在，打印提示消息是你的责任：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -282,7 +282,7 @@ say "Hello, $name!";</code></pre>
 </blockquote>
 </div>
 <div class="paragraph">
-<p>默认情况下，Raku 语言将所有字符串作为 UTF-8 处理。 这就是为什么有多个参数描述字符串长度的原因。 实际上，<strong>length</strong> 例程不存在，尝试使用它会发出错误消息，并带有一些提示，提示您可以使用其他方法。</p>
+<p>默认情况下，Raku 语言将所有字符串作为 UTF-8 处理。 这就是为什么有多个参数描述字符串长度的原因。 实际上，<strong>length</strong> 例程不存在，尝试使用它会发出错误消息，并带有一些提示，提示你可以使用其他方法。</p>
 </div>
 <div class="paragraph">
 <p>要以字符数的形式获取字符串的长度，请使用 <strong>chars</strong> 方法：</p>
@@ -308,7 +308,7 @@ say 'привет'.codes; # 6</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>尽管在使用组合字符时，您可以创建一个字符，该字符在 Unicode 表中作为单独的字符不存在。 在这种情况下，<strong>chars</strong> 和 <strong>codes</strong> 的结果可能会有所不同。</p>
+<p>尽管在使用组合字符时，你可以创建一个字符，该字符在 Unicode 表中作为单独的字符不存在。 在这种情况下，<strong>chars</strong> 和 <strong>codes</strong> 的结果可能会有所不同。</p>
 </div>
 <div class="paragraph">
 <p>考虑一个由两个元素组成的字符的示例：拉丁字母 <strong>x</strong> 和一个组合字符 <strong>COMBINING OGONEK</strong>。 它们一起形成一个不存在的字母，该字母是一个字符，但有两个代码点：</p>
@@ -480,7 +480,7 @@ say $reversed; # !dlroW ,olleH</code></pre>
 </blockquote>
 </div>
 <div class="paragraph">
-<p>当您需要清除用户输入时（例如从 Web 表单中清除用户输入，例如名称中的前导或尾随空格很可能是用户错误，应将其删除），通常会发生此任务。</p>
+<p>当你需要清除用户输入时（例如从 Web 表单中清除用户输入，例如名称中的前导或尾随空格很可能是用户错误，应将其删除），通常会发生此任务。</p>
 </div>
 <div class="paragraph">
 <p>删除单词之间的双侧空格和多个空格可以通过使用替换来解决：</p>
@@ -639,7 +639,7 @@ for 1..500 {
 </div>
 </div>
 <div class="paragraph">
-<p>通过此请求，您将看到参与形成随机密码的所有字符：</p>
+<p>通过此请求，你将看到参与形成随机密码的所有字符：</p>
 </div>
 <div class="paragraph">
 <p><strong>0123456789:;&lt;&#8658;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`</strong>
@@ -690,7 +690,7 @@ say $password;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>多次运行该代码，以确认您生成的密码完全不同，并且包含的相同字符不止一次。</p>
+<p>多次运行该代码，以确认你生成的密码完全不同，并且包含的相同字符不止一次。</p>
 </div>
 </div>
 <div class="sect2">
@@ -772,7 +772,7 @@ say $secret; # dahhk, sknhz!</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>您可以通过将原始消息翻译回原样来阅读原始消息方法，但交换数组：</p>
+<p>你可以通过将原始消息翻译回原样来阅读原始消息方法，但交换数组：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -844,7 +844,7 @@ say $secret; # dahhk, sknhz!</code></pre>
 <p>在给定的文本中查找最常见的单词。</p>
 </div>
 <div class="paragraph">
-<p>要查找最常用的单词，您需要首先查找文本中的所有单词。</p>
+<p>要查找最常用的单词，你需要首先查找文本中的所有单词。</p>
 </div>
 <div class="paragraph">
 <p>可以通过全局正则表达式 <strong>m:g/(\w+)/</strong> 或使用 <strong>comb</strong> 方法来完成。 该方法返回所有匹配的子字符串的列表。 在解决任务的以下示例中，将正则表达式匹配放置在 for 循环内，该循环立即更新 <strong>%count</strong> 哈希，从而保留每个找到的单词的出现次数。 为了不区分大小写地计数单词，首先使用 <strong>lc</strong> 字符串方法将 <strong>$text</strong> 值小写。</p>
@@ -861,7 +861,7 @@ say (sort {%count{$^b} &lt;=&gt; %count{$^a}}, %count.keys)[0];</code></pre>
 <p><strong>sort</strong> 函数使用单词频率作为排序参数对哈希进行排序。 然后，获取并打印第一个元素 <strong>[0]</strong>。</p>
 </div>
 <div class="paragraph">
-<p>在不同的文本上测试该程序以查看其工作方式。 您可能会注意到，即使其他单词出现的次数相同，该程序也只会打印一个单词。 要解决该问题，请提取重复次数并过滤 <strong>%count</strong> 哈希以查找符合此条件的所有单词。</p>
+<p>在不同的文本上测试该程序以查看其工作方式。 你可能会注意到，即使其他单词出现的次数相同，该程序也只会打印一个单词。 要解决该问题，请提取重复次数并过滤 <strong>%count</strong> 哈希以查找符合此条件的所有单词。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1222,7 +1222,7 @@ for %phrases.keys.sort({%phrases{$^b} &lt;=&gt; %phrases{$^a}}) {
 <p><strong>3.14159265358979</strong></p>
 </div>
 <div class="paragraph">
-<p>您可能已经注意到，代码中使用了非 ASCII 字符。 Raku 假定默认情况下源代码编码为 UTF-8。 相反，也可以使用非 Unicode 版本：</p>
+<p>你可能已经注意到，代码中使用了非 ASCII 字符。 Raku 假定默认情况下源代码编码为 UTF-8。 相反，也可以使用非 Unicode 版本：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1321,7 +1321,7 @@ say $f;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>函数签名中的 <strong>where</strong> 子句将调用拆分为阶乘函数。 仅在两个函数变体之一中具有 <strong>where</strong> 子句就足够了，但是为了清楚起见，您可以显式添加它：<strong>where $x &gt;= 2</strong>。</p>
+<p>函数签名中的 <strong>where</strong> 子句将调用拆分为阶乘函数。 仅在两个函数变体之一中具有 <strong>where</strong> 子句就足够了，但是为了清楚起见，你可以显式添加它：<strong>where $x &gt;= 2</strong>。</p>
 </div>
 <div class="paragraph">
 <p>用数字5调用阶乘会首先调用第二个变量，当 <strong>$x</strong> 达到1时切换到第一个变量。由于该变量不会迭代地调用自身，因此整个递归循环将停止。</p>
@@ -1343,7 +1343,7 @@ say $f;</code></pre>
 <p>此处，变量 <strong>$x</strong> 的类型为 <strong>Int</strong>（在 Raku 中为整数），并由 <strong>where</strong> 子句中的条件 <strong>{$x &lt; 2}</strong> 限制。 因此，此信号将决定相应的子例程是否接受该数字。</p>
 </div>
 <div class="paragraph">
-<p>Raku 提供了另一个令人兴奋的东西，它在应用到阶乘任务中获得了相当可观的结果。 可以定义自己的后缀运算符，因此您可以编写 5! 在代码中并获得5的阶乘。</p>
+<p>Raku 提供了另一个令人兴奋的东西，它在应用到阶乘任务中获得了相当可观的结果。 可以定义自己的后缀运算符，因此你可以编写 5! 在代码中并获得5的阶乘。</p>
 </div>
 <div class="paragraph">
 <p>这是定义后缀 ! 运算符的示例：</p>
@@ -1403,7 +1403,7 @@ say 5!; # Prints 120</code></pre>
 <p>斐波那契数由以下公式定义：</p>
 </div>
 <div class="paragraph">
-<p>您可以一次分配两个值（请参阅任务48，交换两个值）。 您可以使用该技术从前两个计算下一个斐波纳契数。 要引导算法，需要两个第一个值。 在斐波那契行的定义中，前两个值均为1（有时，您可能会看到第一个数字为0）。</p>
+<p>你可以一次分配两个值（请参阅任务48，交换两个值）。 你可以使用该技术从前两个计算下一个斐波纳契数。 要引导算法，需要两个第一个值。 在斐波那契行的定义中，前两个值均为1（有时，你可能会看到第一个数字为0）。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1413,7 +1413,7 @@ say $b;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>生成序列的另一种方法是使用序列运算符。 使用此运算符，您可以创建一个惰性列表，该列表根据 generator 参数中给出的公式计算其值。</p>
+<p>生成序列的另一种方法是使用序列运算符。 使用此运算符，你可以创建一个惰性列表，该列表根据 generator 参数中给出的公式计算其值。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1455,7 +1455,7 @@ say @fib[9];</code></pre>
 <p>Raku 提供了用于计算功效的 ** 运算符，因此可以代替使用简单乘法 $_ * $_ 中的一个。</p>
 </div>
 <div class="paragraph">
-<p>如果您需要命名循环变量，请选择另一种形式的循环：</p>
+<p>如果你需要命名循环变量，请选择另一种形式的循环：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1515,7 +1515,7 @@ say @fib[9];</code></pre>
 <p>这里的规则是 <strong>{$_ * 2}</strong>，因此每个下一个数字是前一个数字的两倍。 <strong>@power2</strong> 数组获取无限懒惰列表的值，并且仅前十个元素用于打印。 数组索引位置的 <strong>^10</strong> 构造创建范围 0..9，并获取 <strong>@power2</strong> 的相应切片。</p>
 </div>
 <div class="paragraph">
-<p>如果您提供列表的前几个元素，Raku 也可以推断出该规则：</p>
+<p>如果你提供列表的前几个元素，Raku 也可以推断出该规则：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1524,7 +1524,7 @@ say for @power2[^10];</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在不太明显的情况下，您最好为延迟列表使用显式生成器。</p>
+<p>在不太明显的情况下，你最好为延迟列表使用显式生成器。</p>
 </div>
 </div>
 <div class="sect2">
@@ -1623,7 +1623,7 @@ say 1/1E20 =~= 1 / (1E20 + 1); # True</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>即使您尝试在十进制点后面用很多数字打印结果，Raku 也会打印一个精确的零。</p>
+<p>即使你尝试在十进制点后面用很多数字打印结果，Raku 也会打印一个精确的零。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1640,7 +1640,7 @@ say 1/1E20 =~= 1 / (1E20 + 1); # True</code></pre>
 <p>创建一个程序以将非常大的整数相乘。</p>
 </div>
 <div class="paragraph">
-<p>对大数字的支持是内置的：<strong>Int</strong> 类允许任意精度。 您不必做任何额外的工作。 只需将数字乘以它们即可，如示例中所示（数字应写在一行上，当然不能有空格）：</p>
+<p>对大数字的支持是内置的：<strong>Int</strong> 类允许任意精度。 你不必做任何额外的工作。 只需将数字乘以它们即可，如示例中所示（数字应写在一行上，当然不能有空格）：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1808,7 +1808,7 @@ say @list; # [3 3 3607 3803]</code></pre>
 <p>5/15 和 16/280 是可以减少分数的示例。 该任务的最终结果是 1/3 和 2/35。 通常，减少分数的算法需要搜索最大的公因数，然后将分子和分母都除以该数字。</p>
 </div>
 <div class="paragraph">
-<p>有一个内置的运算符 <strong>gcd</strong> 返回最大的公约数，因此您可以使用它来解决任务（注意 <strong>gcd</strong> 用作运算符，而不是函数）：</p>
+<p>有一个内置的运算符 <strong>gcd</strong> 返回最大的公约数，因此你可以使用它来解决任务（注意 <strong>gcd</strong> 用作运算符，而不是函数）：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1831,7 +1831,7 @@ say $r.denominator; # 35</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>Rat</strong> 值将其部分保持为两个整数，可通过分子和分母方法访问。 <strong>dd</strong> 例程可为您提供即时见解：</p>
+<p><strong>Rat</strong> 值将其部分保持为两个整数，可通过分子和分母方法访问。 <strong>dd</strong> 例程可为你提供即时见解：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2021,7 +2021,7 @@ for 1..30 {
 </div>
 </div>
 <div class="paragraph">
-<p>注意，在循环中，您需要更新 <strong>$n</strong> 才能在下一个循环中使用它。</p>
+<p>注意，在循环中，你需要更新 <strong>$n</strong> 才能在下一个循环中使用它。</p>
 </div>
 <div class="paragraph">
 <p>在许多情况下，经过多次重复后，这些值收敛到 0000。在某些情况下，例如使用初始数 2916，伪随机序列的周期非常短。</p>
@@ -2033,7 +2033,7 @@ for 1..30 {
 <p>通过使用直方图可视化分布来测试随机生成器的质量。</p>
 </div>
 <div class="paragraph">
-<p>内置的随机数生成器的质量完全取决于编译器开发人员使用的算法。 作为用户，您不能做很多事情来更改现有的生成器，但是您始终可以测试它是否提供了在整个时间间隔内均匀分布的数字。</p>
+<p>内置的随机数生成器的质量完全取决于编译器开发人员使用的算法。 作为用户，你不能做很多事情来更改现有的生成器，但是你始终可以测试它是否提供了在整个时间间隔内均匀分布的数字。</p>
 </div>
 <div class="paragraph">
 <p>有一个 <strong>rand</strong> 例程（请参阅任务32，生成随机数）返回一个介于0和1之间的浮点数（实际上是 <strong>Num</strong> 类型的值）。我们将运行 100,000 次，填充包含 10个 单元格的直方图。 每个随机数都属于其中之一。 例如，介于0和0.1之间的数字位于第一个单元格中，介于0.1和0.2之间的数字位于第二个单元格中，依此类推。</p>
@@ -2185,7 +2185,7 @@ say sqrt(@σ[0] / (@data.elems - 1)); # 420.962489619523</code></pre>
 <p>请注意，@σ 数组是如何定义的，不仅要使用 Unicode 名称，而且还要将 my 声明放在供稿链的末尾。 这里使用数组是因为 feed 运算符不返回标量值，尽管我们只需要一个元素。</p>
 </div>
 <div class="paragraph">
-<p>为了使代码更接近原始数学公式，您可以为包含平均值的变量选择一个不同的名称（并删除 elems 调用）：</p>
+<p>为了使代码更接近原始数学公式，你可以为包含平均值的变量选择一个不同的名称（并删除 elems 调用）：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2348,7 +2348,7 @@ say 4 * $inside / $n; # 8 for sphere</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果您想知道 Unicode 数字的名称，请在字符上调用 <strong>uniname</strong> 方法：</p>
+<p>如果你想知道 Unicode 数字的名称，请在字符上调用 <strong>uniname</strong> 方法：</p>
 </div>
 <div class="listingblock">
 <div class="content">

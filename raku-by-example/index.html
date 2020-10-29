@@ -322,7 +322,7 @@ if (theme && theme !== "1") {
 <p>在我们开始探索 Raku 之前，你应该先有一个环境，在这个环境中你可以运行 Raku 代码。所以你需要安装 Raku，这是目前唯一一个积极开发的 Raku 编译器。或者更好的方法是安装 Rakudo Star，这是一个包含 Rakudo 本身、一些有用的模块和一个可以帮助你安装更多模块的工具的发行版。</p>
 </div>
 <div class="paragraph">
-<p>安装 Rakudo 本身只给你提供了编译器。它遵循每月发布周期，所以它可以让你跟上最新的发展。当你选择安装 Rakudo Star 时，通常每隔一段时间就会发布一次。三个月后，你会得到一个比较稳定的开发基础，还有一些工具，比如调试器和模块安装程序。您可以使用模块安装程序来利用预装的软件库，这些库既不包含在 Rakudo 本身，也不包含在 Rakudo Star 中。</p>
+<p>安装 Rakudo 本身只给你提供了编译器。它遵循每月发布周期，所以它可以让你跟上最新的发展。当你选择安装 Rakudo Star 时，通常每隔一段时间就会发布一次。三个月后，你会得到一个比较稳定的开发基础，还有一些工具，比如调试器和模块安装程序。你可以使用模块安装程序来利用预装的软件库，这些库既不包含在 Rakudo 本身，也不包含在 Rakudo Star 中。</p>
 </div>
 <div class="paragraph">
 <p>下面的章节将讨论安装 Rakudo Star 的几个选项。选择任何适合你的方法。</p>
@@ -348,7 +348,7 @@ if (theme && theme !== "1") {
 <div class="sect2">
 <h3 id="_docker">2.2. Docker</h3>
 <div class="paragraph">
-<p>在支持 Docker 的平台上，您可以从 docker hub 中拉取一个现有的 Docker 容器：</p>
+<p>在支持 Docker 的平台上，你可以从 docker hub 中拉取一个现有的 Docker 容器：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -356,7 +356,7 @@ if (theme && theme !== "1") {
 </div>
 </div>
 <div class="paragraph">
-<p>然后，您可以使用这个命令获取一个交互式的 Rakudo shell：</p>
+<p>然后，你可以使用这个命令获取一个交互式的 Rakudo shell：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -459,7 +459,7 @@ hi</code></pre>
 <div class="sect2">
 <h3 id="_总结_2">2.6. 总结</h3>
 <div class="paragraph">
-<p>在大多数平台上，您可以从预建的二进制安装程序中安装 Rakudo Star。如果无法使用，可以使用 Docker 映像。最后，Rakudo Star 可以从它的源码中构建 Rakudo Star。</p>
+<p>在大多数平台上，你可以从预建的二进制安装程序中安装 Rakudo Star。如果无法使用，可以使用 Docker 映像。最后，Rakudo Star 可以从它的源码中构建 Rakudo Star。</p>
 </div>
 </div>
 </div>
@@ -2724,7 +2724,7 @@ isa-ok $result, ExecutionResult; # more tests here</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果您没有可用的 zef，可以下载，驱动并使用它：</p>
+<p>如果你没有可用的 zef，可以下载，驱动并使用它：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3347,7 +3347,7 @@ multi sub MAIN('test') {
 </tbody>
 </table>
 <div class="paragraph">
-<p>您还可以通过枚举字符或字符范围来构建自己的字符类:</p>
+<p>你还可以通过枚举字符或字符范围来构建自己的字符类:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -5116,7 +5116,7 @@ say ".".uniprop("Word_Break");           # MidNumLet</code></pre>
 <p>当你不限于 ASCII 字符时，字符串的排序就开始变得复杂了。Raku 的排序方法使用 <code>cmp</code> 中缀运算符，它基于代码点编号做一个相当标准的按字母顺序的比较。</p>
 </div>
 <div class="paragraph">
-<p>如果您需要使用更复杂的整理算法，Rakudo 2017.02 和更新版本提供了 Unicode 排序算法<sup class="footnote">[<a id="_footnoteref_72" class="footnote" href="#_footnotedef_72" title="View footnote.">72</a>]</sup> 作为实验性功能。</p>
+<p>如果你需要使用更复杂的整理算法，Rakudo 2017.02 和更新版本提供了 Unicode 排序算法<sup class="footnote">[<a id="_footnoteref_72" class="footnote" href="#_footnotedef_72" title="View footnote.">72</a>]</sup> 作为实验性功能。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5786,7 +5786,7 @@ sub parse-date(DateStr) returns Date { ... }</code></pre>
 <p>用户需要安装了 Raku 二进制文件和 zef。然后他们可以解压压缩包，进入新创建的目录，用 <code>zef install</code> 安装软件。</p>
 </div>
 <div class="paragraph">
-<p>如果你的软件是开源的，你可以通过在 GitHub 上的 Raku 生态系统 git 仓库中发送一个 pull 请求，将其添加到官方的 Raku 生态系统中。拉取请求被接受后（通常只需要几小时或几分钟），用户可以通过 zef 安装您的软件，而不需要自己下载任何软件包。</p>
+<p>如果你的软件是开源的，你可以通过在 GitHub 上的 Raku 生态系统 git 仓库中发送一个 pull 请求，将其添加到官方的 Raku 生态系统中。拉取请求被接受后（通常只需要几小时或几分钟），用户可以通过 zef 安装你的软件，而不需要自己下载任何软件包。</p>
 </div>
 </div>
 <div class="sect3">
@@ -5815,7 +5815,7 @@ ENTRYPOINT ["/usr/share/raku/site/bin/myapp"]</code></pre>
 <div class="sect3">
 <h4 id="_windows_安装程序">13.2.3. Windows 安装程序</h4>
 <div class="paragraph">
-<p>模块 App::InstallerMaker::WiX<sup class="footnote">[<a id="_footnoteref_74" class="footnote" href="#_footnotedef_74" title="View footnote.">74</a>]</sup>可以帮助你创建一个 Windows 的 .msi 安装程序，它可以创建一个 Rakudo、zef和你的应用程序的构建。它需要 Microsoft Visual C++ 构建工具和 WiX。<sup class="footnote">[<a id="_footnoteref_75" class="footnote" href="#_footnotedef_75" title="View footnote.">75</a>]</sup>，你可以创建一个描述您的应用程序的 YAML 文件，然后运行脚本 <code>make-raku-wix-installer</code> 来创建一个独立的 .msi 文件。</p>
+<p>模块 App::InstallerMaker::WiX<sup class="footnote">[<a id="_footnoteref_74" class="footnote" href="#_footnotedef_74" title="View footnote.">74</a>]</sup>可以帮助你创建一个 Windows 的 .msi 安装程序，它可以创建一个 Rakudo、zef和你的应用程序的构建。它需要 Microsoft Visual C++ 构建工具和 WiX。<sup class="footnote">[<a id="_footnoteref_75" class="footnote" href="#_footnotedef_75" title="View footnote.">75</a>]</sup>，你可以创建一个描述你的应用程序的 YAML 文件，然后运行脚本 <code>make-raku-wix-installer</code> 来创建一个独立的 .msi 文件。</p>
 </div>
 </div>
 </div>

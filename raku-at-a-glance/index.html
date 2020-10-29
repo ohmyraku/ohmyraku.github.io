@@ -158,7 +158,7 @@ Hello, Raku</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>或者，您可以使用 <code>+e</code> 选项：</p>
+<p>或者，你可以使用 <code>+e</code> 选项：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -276,7 +276,7 @@ say $привет;</code></pre>
 使用非拉丁字符变量名称没有任何性能影响。 但如果你做，总是想到那些可能需要阅读你的代码的开发人员在将来</p>
 </div>
 <div class="paragraph">
-<p>您是否更喜欢变量名称中的非拉丁字符？ 虽然它可能会降低打字的速度，因为它需要切换键盘布局，
+<p>你是否更喜欢变量名称中的非拉丁字符？ 虽然它可能会降低打字的速度，因为它需要切换键盘布局，
 。</p>
 </div>
 </div>
@@ -545,7 +545,7 @@ $x = "abc"; # Error: Type check failed in assignment to $x;
 </div>
 </div>
 <div class="paragraph">
-<p>对于类型转换，相应的方法调用非常方便。 请记住，虽然$x包含一个整数，但它被视为一个整体的容器对象，这就是为什么你可以在它上面使用一些预定义的方法。 您可以直接在字符串上执行相同的操作。 例如：</p>
+<p>对于类型转换，相应的方法调用非常方便。 请记住，虽然$x包含一个整数，但它被视为一个整体的容器对象，这就是为什么你可以在它上面使用一些预定义的方法。 你可以直接在字符串上执行相同的操作。 例如：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -559,7 +559,7 @@ say $x; # 123</code></pre>
 <h4 id="_bool">1.6.2. Bool</h4>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">尽管有一些您可能想知道的细节，但Bool变量的使用很简单。 Bool类型是一个内置的枚举，并提供两个值：True和False（或者，在完整形式中，Bool </dt>
+<dt class="hdlist1">尽管有一些你可能想知道的细节，但Bool变量的使用很简单。 Bool类型是一个内置的枚举，并提供两个值：True和False（或者，在完整形式中，Bool </dt>
 <dd>
 <p>True和Bool :: False）。 允许递增或递减布尔变量：</p>
 </dd>
@@ -591,7 +591,7 @@ say "00".Bool; # True</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>类似地，您可以在变量上调用Int方法并获取整数
+<p>类似地，你可以在变量上调用Int方法并获取整数
 布尔值的表示（或任何其他类型的值）：</p>
 </div>
 <div class="listingblock">
@@ -628,8 +628,8 @@ say $x;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>当然，当您打印该值时，所有下划线都消失了。
-在Int对象上，您可以调用一些其他方便的方法，例如，将数字转换为字符或检查手中的整数是否为素数（是的，is-prime 是内置方法！）。</p>
+<p>当然，当你打印该值时，所有下划线都消失了。
+在Int对象上，你可以调用一些其他方便的方法，例如，将数字转换为字符或检查手中的整数是否为素数（是的，is-prime 是内置方法！）。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -646,7 +646,7 @@ say 42.is-prime; # False</code></pre>
 <div class="sect3">
 <h4 id="_字符串">1.6.4. 字符串</h4>
 <div class="paragraph">
-<p>Str 毫无疑问是一个字符串。 在 Raku 中，有一些操作字符串的方法。 再次，您将它们称为对象上的方法。</p>
+<p>Str 毫无疑问是一个字符串。 在 Raku 中，有一些操作字符串的方法。 再次，你将它们称为对象上的方法。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -698,7 +698,7 @@ say @a.Str; # 空格分割的值</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果打印数组，则将其值作为方括号中以空格分隔的列表。 或者，您可以将其插入字符串中。</p>
+<p>如果打印数组，则将其值作为方括号中以空格分隔的列表。 或者，你可以将其插入字符串中。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -758,7 +758,7 @@ say %hash.values; # the list of the values</code></pre>
 <h2 id="_运算符">2. 运算符</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>即使对于那些不熟悉Perl 5的人来说，Raku中许多操作符的含义也很明显。另一方面，有时操作符的行为包含一些您可能没有想到的微小细节。 在本章中，我们将列出一些运算符，并在必要时给出一些注释。
+<p>即使对于那些不熟悉Perl 5的人来说，Raku中许多操作符的含义也很明显。另一方面，有时操作符的行为包含一些你可能没有想到的微小细节。 在本章中，我们将列出一些运算符，并在必要时给出一些注释。
 操作员可以根据其合成属性分为几组。 这些组是前缀，中缀，后缀和此处未涉及的一些其他类型的运算符（例如cir-cumflex，它是“汉堡包”运算符，就像一对括号）。</p>
 </div>
 <div class="sect2">
@@ -853,7 +853,7 @@ say $a.WHAT;  #(Str)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在某些情况下，可以隐式创建字符串上下文，例如，当您在双引号内插入变量时。</p>
+<p>在某些情况下，可以隐式创建字符串上下文，例如，当你在双引号内插入变量时。</p>
 </div>
 </div>
 <div class="sect3">
@@ -956,7 +956,7 @@ say $y.WHAT; # (Bool)</code></pre>
 <div class="sect3">
 <h4 id="_9">2.1.11. |</h4>
 <div class="paragraph">
-<p>| 将复合对象展平为列表。 例如，当您将列表传递给子例程时，应该使用此运算符，子例程需要一个标量列表：</p>
+<p>| 将复合对象展平为列表。 例如，当你将列表传递给子例程时，应该使用此运算符，子例程需要一个标量列表：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1220,7 +1220,7 @@ Expected any of: :(Real $a, Real $b)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>为了满足要求，您可以使用+前缀运算符明确地进行类型转换：</p>
+<p>为了满足要求，你可以使用+前缀运算符明确地进行类型转换：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2783,7 +2783,7 @@ As an exercise, let’s simplify the code and get rid of an explicit array that 
 <p>方括号包着一组备选项。</p>
 </div>
 <div class="paragraph">
-<p>您可以在其他正则表达式中使用命名的正则表达式，方法是在一对尖括号中引用它的名称。 要将字符串与正则表达式匹配，请使用 <strong>smartmatch</strong> 运算符（<strong>~~</strong>）。</p>
+<p>你可以在其他正则表达式中使用命名的正则表达式，方法是在一对尖括号中引用它的名称。 要将字符串与正则表达式匹配，请使用 <strong>smartmatch</strong> 运算符（<strong>~~</strong>）。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2880,10 +2880,10 @@ print 7;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这里，<strong>Lang</strong> 是 grammar 的名称，而 <strong>TOP</strong> 是解析将开始的起始规则。规则的内容是由一对符号 <strong>^</strong> 和 <strong>$</strong> 包围的正则表达式，用于将规则绑定到文本的开头和结尾。换句话说，整个程序应该匹配 <strong>TOP</strong> 规则。规则的核心部分 <strong>&lt;statements&gt;</strong> 引用了另一条规则。规则将忽略其各部分之间的所有空格。因此，您可以自由地在 grammar 的定义中添加空格，以使其易于阅读。</p>
+<p>在这里，<strong>Lang</strong> 是 grammar 的名称，而 <strong>TOP</strong> 是解析将开始的起始规则。规则的内容是由一对符号 <strong>^</strong> 和 <strong>$</strong> 包围的正则表达式，用于将规则绑定到文本的开头和结尾。换句话说，整个程序应该匹配 <strong>TOP</strong> 规则。规则的核心部分 <strong>&lt;statements&gt;</strong> 引用了另一条规则。规则将忽略其各部分之间的所有空格。因此，你可以自由地在 grammar 的定义中添加空格，以使其易于阅读。</p>
 </div>
 <div class="paragraph">
-<p>第二条规则解释了 <strong>&lt;statements&gt;</strong> 的含义。<strong>&lt;statements&gt;</strong> 块是一系列单独的 <strong>statement</strong>。它应该包含至少一个 <strong>statement</strong>，如 <strong>+</strong> 量词所要求的那样，并且分隔符是分号。在 <strong>%%</strong> 符号后面是分隔符。在 grammar 中，这意味着指令之间必须有分隔符，但是您可以在最后一个之后省略分隔符。如果只有一个百分号字符而不是两个百分号字符，则规则也要求在最后一个语句之后有分隔符。</p>
+<p>第二条规则解释了 <strong>&lt;statements&gt;</strong> 的含义。<strong>&lt;statements&gt;</strong> 块是一系列单独的 <strong>statement</strong>。它应该包含至少一个 <strong>statement</strong>，如 <strong>+</strong> 量词所要求的那样，并且分隔符是分号。在 <strong>%%</strong> 符号后面是分隔符。在 grammar 中，这意味着指令之间必须有分隔符，但是你可以在最后一个之后省略分隔符。如果只有一个百分号字符而不是两个百分号字符，则规则也要求在最后一个语句之后有分隔符。</p>
 </div>
 <div class="paragraph">
 <p>下一步是描述 <strong>statement</strong>。目前，我们的语言只有两个操作：赋值和打印。它们中的每一个都接受值或变量名。</p>
@@ -3018,7 +3018,7 @@ print 7;｣
 <p>此输出对应于本节开头的示例程序。 它包含已解析程序的结构。 捕获的部分显示在括号  ｢&#8230;&#8203;｣ 中。 首先，打印整个匹配的文本。 实际上，由于 <strong>TOP</strong> 规则使用了一对 <code>^ &#8230;&#8203; $</code> 结构，因此整个文本应该与规则匹配。</p>
 </div>
 <div class="paragraph">
-<p>然后，打印解析树。 它从 <strong>&lt;statements&gt;</strong> 开始，然后 grammar 的其他部分完全按照文件中的程序包含的内容呈现。 在下一级别，您可以看到 <strong>identifier</strong> 和 <strong>value</strong> token 的内容。</p>
+<p>然后，打印解析树。 它从 <strong>&lt;statements&gt;</strong> 开始，然后 grammar 的其他部分完全按照文件中的程序包含的内容呈现。 在下一级别，你可以看到 <strong>identifier</strong> 和 <strong>value</strong> token 的内容。</p>
 </div>
 <div class="paragraph">
 <p>如果程序在文法上不正确，则该解析方法将返回空值(<strong>Any</strong>)。 如果只有程序的起始部分与规则匹配，则会发生同样的情况。</p>
@@ -3087,7 +3087,7 @@ rule printout {
 <div class="sect2">
 <h3 id="_actions">3.4. Actions</h3>
 <div class="paragraph">
-<p>Raku 中的 grammar 允许响应 rule 或 token 匹配的 action。 action 是在解析的文本中找到相应的 rule 或 token 时执行的代码块。 action 会接收一个对象 <code>$/</code>，您可以在其中查看匹配的详细信息。 例如，<code>$&lt;identifier&gt;</code> 的值将包含 <strong>Match</strong> 类型的对象，其中包含有关 grammar 实际消耗的子字符串的信息。</p>
+<p>Raku 中的 grammar 允许响应 rule 或 token 匹配的 action。 action 是在解析的文本中找到相应的 rule 或 token 时执行的代码块。 action 会接收一个对象 <code>$/</code>，你可以在其中查看匹配的详细信息。 例如，<code>$&lt;identifier&gt;</code> 的值将包含 <strong>Match</strong> 类型的对象，其中包含有关 grammar 实际消耗的子字符串的信息。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3099,10 +3099,10 @@ rule printout {
 </div>
 </div>
 <div class="paragraph">
-<p>如果您使用上面的 action 更新 grammar 并针对同一示例文件运行程序，那么您将在输出中看到子字符串 <code>x=42</code>。</p>
+<p>如果你使用上面的 action 更新 grammar 并针对同一示例文件运行程序，那么你将在输出中看到子字符串 <code>x=42</code>。</p>
 </div>
 <div class="paragraph">
-<p><strong>Match</strong> 对象在用双引号插值时转换为字符串，如给定示例中所示：<code>"$&lt;identifier&gt;=$&lt;value&gt;"</code>。 要使用带引号的字符串外部的文本值，您应该进行明确的类型转换：</p>
+<p><strong>Match</strong> 对象在用双引号插值时转换为字符串，如给定示例中所示：<code>"$&lt;identifier&gt;=$&lt;value&gt;"</code>。 要使用带引号的字符串外部的文本值，你应该进行明确的类型转换：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3275,7 +3275,7 @@ G.parse("42", :actions(A));</code></pre>
 <div class="sect2">
 <h3 id="_ast_和属性">3.5. AST 和属性</h3>
 <div class="paragraph">
-<p>现在，我们准备在将 <strong>assignment</strong> 和 <strong>printout</strong> 规则分别分割成两个备选项之后再次简化 grammar。 困难在于如果没有拆分，就无法理解触发了哪个分支。 您需要从 <strong>value</strong> token 中读取值，或者从 <strong>identifier</strong> token 中获取变量名，并在变量存储中查找它。</p>
+<p>现在，我们准备在将 <strong>assignment</strong> 和 <strong>printout</strong> 规则分别分割成两个备选项之后再次简化 grammar。 困难在于如果没有拆分，就无法理解触发了哪个分支。 你需要从 <strong>value</strong> token 中读取值，或者从 <strong>identifier</strong> token 中获取变量名，并在变量存储中查找它。</p>
 </div>
 <div class="paragraph">
 <p>Raku 的 grammar 提供了一种很好的机制，它在语言解析理论中很常见，即抽象语法树, 缩写为 AST。</p>
@@ -3298,7 +3298,7 @@ rule expression {
 </div>
 </div>
 <div class="paragraph">
-<p>在解析阶段构建的语法树可以包含前面步骤中计算的结果。 <strong>Match</strong> 对象有一个字段 <strong>ast</strong>，专门用于保持每个节点上的计算值。 可以简单地读取值以获得先前完成的 action 的结果。 树被称为抽象，因为计算值的方式不是很重要。 重要的是，当触发 action 时，您只需一个地点就可以获得完成 action 所需的结果。</p>
+<p>在解析阶段构建的语法树可以包含前面步骤中计算的结果。 <strong>Match</strong> 对象有一个字段 <strong>ast</strong>，专门用于保持每个节点上的计算值。 可以简单地读取值以获得先前完成的 action 的结果。 树被称为抽象，因为计算值的方式不是很重要。 重要的是，当触发 action 时，你只需一个地点就可以获得完成 action 所需的结果。</p>
 </div>
 <div class="paragraph">
 <p>该 action 可以通过调用 <strong>$/.make</strong> 方法保存自己的结果（并因此在树上进一步传递）。 你保存在那里的数据可以通过 <strong>made</strong> 字段访问，该字段具有同义词 <strong>ast</strong>。</p>
@@ -3457,7 +3457,7 @@ Lang.parsefile(
 <div class="sect2">
 <h3 id="_计算器">3.6. 计算器</h3>
 <div class="paragraph">
-<p>在考虑语言解析器时，实现计算器就像编写一个 "Hello，World!"程序。 在本节中，我们将为计算器创建一个 grammar，可以处理四个算术运算符和圆括号。计算器示例的隐藏优势是您必须教它遵循运算符优先级和嵌套表达式。</p>
+<p>在考虑语言解析器时，实现计算器就像编写一个 "Hello，World!"程序。 在本节中，我们将为计算器创建一个 grammar，可以处理四个算术运算符和圆括号。计算器示例的隐藏优势是你必须教它遵循运算符优先级和嵌套表达式。</p>
 </div>
 <div class="paragraph">
 <p>我们的计算器 grammar 将期望在顶层有单个表达式。 运算符的优先级将通过传统的 grammar 构建方法自动实现，其中表达式包括项和因式。</p>
@@ -3541,7 +3541,7 @@ Lang.parsefile(
 </div>
 </div>
 <div class="paragraph">
-<p>注意某些规则中的 <strong>$&lt;op&gt;=(&#8230;&#8203;)</strong> 结构。 这是命名捕获。 该名称通过 <strong>$/</strong> 变量简化了对值的访问。 在这种情况下，您可以将值作为 <strong>$&lt;op&gt;</strong>，并且在更新规则后不必担心变量名称的可能更改，因为它发生在编号变量 <strong>$0</strong>，<strong>$1</strong> 等处。</p>
+<p>注意某些规则中的 <strong>$&lt;op&gt;=(&#8230;&#8203;)</strong> 结构。 这是命名捕获。 该名称通过 <strong>$/</strong> 变量简化了对值的访问。 在这种情况下，你可以将值作为 <strong>$&lt;op&gt;</strong>，并且在更新规则后不必担心变量名称的可能更改，因为它发生在编号变量 <strong>$0</strong>，<strong>$1</strong> 等处。</p>
 </div>
 <div class="paragraph">
 <p>现在，为编译器创建 action。 在 <strong>TOP</strong> 级别，规则返回计算后的值，它从 <strong>expression</strong> 的 <strong>ast</strong> 字段中获取。</p>
@@ -3606,7 +3606,7 @@ method value($/) {
 </div>
 </div>
 <div class="paragraph">
-<p>正如您所看到的，顶层有 <strong>factor</strong> 和 <strong>op</strong> 条目。 您将在 action 中看到 <strong>$&lt;factor&gt;</strong> 和 <strong>$&lt;op&gt;</strong> 的值。 至少有一个 <strong>$&lt;factor&gt;</strong> 将始终可用。 节点的值已经知道并且在 <strong>ast</strong> 属性中可用。 因此，您需要做的就是遍历这两个数组的元素并执行乘法或除法。</p>
+<p>正如你所看到的，顶层有 <strong>factor</strong> 和 <strong>op</strong> 条目。 你将在 action 中看到 <strong>$&lt;factor&gt;</strong> 和 <strong>$&lt;op&gt;</strong> 的值。 至少有一个 <strong>$&lt;factor&gt;</strong> 将始终可用。 节点的值已经知道并且在 <strong>ast</strong> 属性中可用。 因此，你需要做的就是遍历这两个数组的元素并执行乘法或除法。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3704,7 +3704,7 @@ say $calc.ast;</code></pre>
 <p>它确实有效。</p>
 </div>
 <div class="paragraph">
-<p>在 github.com/ash/lang 上，您可以找到本章演示的代码的延续，它结合了语言翻译器和计算器，允许用户在变量赋值和打印指令中编写算术表达式。 这是一个解释器可以处理的示例：</p>
+<p>在 github.com/ash/lang 上，你可以找到本章演示的代码的延续，它结合了语言翻译器和计算器，允许用户在变量赋值和打印指令中编写算术表达式。 这是一个解释器可以处理的示例：</p>
 </div>
 <div class="listingblock">
 <div class="content">

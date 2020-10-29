@@ -1568,7 +1568,7 @@ $*ERR.put: 'Hello Hamadryas!';</code></pre>
 <p>You read a little about variables in [Chapter 1](<a href="https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch01.html#camelia-introduction" class="bare">https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch01.html#camelia-introduction</a>). To store a value in a variable you assign to it. The item assignment operator, <code>=</code>, stores a single thingy for you. <code>$number</code> is a scalar variable; it can store exactly one thingy. This is item assignment because there’s one thingy. This “sets” the value:</p>
 </div>
 <div class="paragraph">
-<p>您将在第1章中阅读一些关于变量的内容。将值存储在您为其分配的变量中。项目赋值运算符=为您存储单个东西。 $ number是一个标量变量;它可以存储一个东西。这是项目分配，因为有一个东西。这“设置”了价值：</p>
+<p>你将在第1章中阅读一些关于变量的内容。将值存储在你为其分配的变量中。项目赋值运算符=为你存储单个东西。 $ number是一个标量变量;它可以存储一个东西。这是项目分配，因为有一个东西。这“设置”了价值：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1579,7 +1579,7 @@ $*ERR.put: 'Hello Hamadryas!';</code></pre>
 <p>If you decide that you don’t want that value you can replace it:</p>
 </div>
 <div class="paragraph">
-<p>如果您认为不需要该值，则可以替换它：</p>
+<p>如果你认为不需要该值，则可以替换它：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1590,7 +1590,7 @@ $*ERR.put: 'Hello Hamadryas!';</code></pre>
 <p>Sometimes you want a value that you can’t change (more likely a value you don’t want another part of your program to change). Instead of the assignment operator you can use the binding operator, <code>:=</code>, to set the value:</p>
 </div>
 <div class="paragraph">
-<p>有时你想要一个你无法改变的值（更可能是你不希望程序的另一部分改变的值）。您可以使用绑定运算符：=来设置值，而不是赋值运算符：</p>
+<p>有时你想要一个你无法改变的值（更可能是你不希望程序的另一部分改变的值）。你可以使用绑定运算符：=来设置值，而不是赋值运算符：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1602,7 +1602,7 @@ $sides-of-a-square = 5</code></pre>
 <p>When you try to change the value you get an error:</p>
 </div>
 <div class="paragraph">
-<p>当您尝试更改该值时，您会收到错误：</p>
+<p>当你尝试更改该值时，你会收到错误：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1619,7 +1619,7 @@ $sides-of-a-square = 5</code></pre>
 <p>它不是使变量成为不可变的绑定运算符。它只是让左边的东西和右边的东西相同。在这种情况下，$ sides-of-square实际上是4而不仅仅是恰好存储4的变量。你不能分配给4，所以你不能分配到$ side-of-a-square。</p>
 </div>
 <div class="paragraph">
-<p>如果您首先分配给标量变量然后绑定到该变量，则最终会为同一个变量使用两个名称：</p>
+<p>如果你首先分配给标量变量然后绑定到该变量，则最终会为同一个变量使用两个名称：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1637,13 +1637,13 @@ my $sides := $number;</code></pre>
 <p>The binding operator skips this containerization. It aliases the thingy on the right side directly. If it’s already a container that’s what you bind to. You can break down the action of assignment into two steps. First you bind to an anonymous container. That’s right: a container can exist without a name. An anonymous container is just the <code>$</code> sigil:</p>
 </div>
 <div class="paragraph">
-<p>您可以更改$ sides或$ number，“other”将更改。但是没有“其他”可以改变，因为它们是同一个东西！您可能会将这些视为别名，但它有点复杂。</p>
+<p>你可以更改$ sides或$ number，“other”将更改。但是没有“其他”可以改变，因为它们是同一个东西！你可能会将这些视为别名，但它有点复杂。</p>
 </div>
 <div class="paragraph">
-<p>这里有一个重要的概念，你应该尽早学习。带=的变量赋值创建一个容器，然后在该容器中放入一个值。容器只是一个可以存储值的盒子。您可以添加，删除和替换该框中的值。这对你来说几乎是不可见的，因为语言会为你处理它。</p>
+<p>这里有一个重要的概念，你应该尽早学习。带=的变量赋值创建一个容器，然后在该容器中放入一个值。容器只是一个可以存储值的盒子。你可以添加，删除和替换该框中的值。这对你来说几乎是不可见的，因为语言会为你处理它。</p>
 </div>
 <div class="paragraph">
-<p>绑定操作员跳过此容器化。它直接在右侧别名。如果它已经是一个与你绑定的容器。您可以将分配操作分解为两个步骤。首先绑定到匿名容器。没错：容器可以没有名字而存在。一个匿名的容器只是$ sigil：</p>
+<p>绑定操作员跳过此容器化。它直接在右侧别名。如果它已经是一个与你绑定的容器。你可以将分配操作分解为两个步骤。首先绑定到匿名容器。没错：容器可以没有名字而存在。一个匿名的容器只是$ sigil：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1654,7 +1654,7 @@ my $sides := $number;</code></pre>
 <p>After that you can change the value in the container using <code>=</code>:</p>
 </div>
 <div class="paragraph">
-<p>之后，您可以使用=更改容器中的值：</p>
+<p>之后，你可以使用=更改容器中的值：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1674,7 +1674,7 @@ my $sides := $number;</code></pre>
 <p>In [Chapter 1](<a href="https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch01.html#camelia-introduction" class="bare">https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch01.html#camelia-introduction</a>) you saw some examples of statements. This is a complete program:</p>
 </div>
 <div class="paragraph">
-<p>在第1章中，您看到了一些语句示例。这是一个完整的程序：</p>
+<p>在第1章中，你看到了一些语句示例。这是一个完整的程序：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1688,7 +1688,7 @@ my $sides := $number;</code></pre>
 <p>You can still have such a subroutine though. If you define a <code>MAIN</code> subroutine (all caps!) your program will call that automatically if you run the program:</p>
 </div>
 <div class="paragraph">
-<p>如果您使用其他语言进行编程，则可能遇到了一个名为main或类似的子程序。那些语言可能要求你把你的程序放在那个例程中;当你运行程序时，它会自动为你运行该子程序。 Raku有点不同，因为它假设您的整个文件已经是主要文件。</p>
+<p>如果你使用其他语言进行编程，则可能遇到了一个名为main或类似的子程序。那些语言可能要求你把你的程序放在那个例程中;当你运行程序时，它会自动为你运行该子程序。 Raku有点不同，因为它假设你的整个文件已经是主要文件。</p>
 </div>
 <div class="paragraph">
 <p>你仍然可以拥有这样的子程序。如果你定义一个MAIN子程序（所有大写！），你的程序将在你运行程序时自动调用它：</p>
@@ -1707,10 +1707,10 @@ my $sides := $number;</code></pre>
 <p>EXERCISE 2.1Create both versions of the “Hello Raku” program. The one-line version and <code>MAIN</code> version should give you the same output.</p>
 </div>
 <div class="paragraph">
-<p>在第11章之前，你不会阅读关于子程序的内容，所以请相信我一点。在阅读本书时，您将阅读更多关于MAIN的解释。</p>
+<p>在第11章之前，你不会阅读关于子程序的内容，所以请相信我一点。在阅读本书时，你将阅读更多关于MAIN的解释。</p>
 </div>
 <div class="paragraph">
-<p>EXERCISE 2.1创建“Hello Raku”程序的两个版本。单行版本和MAIN版本应该为您提供相同的输出。</p>
+<p>EXERCISE 2.1创建“Hello Raku”程序的两个版本。单行版本和MAIN版本应该为你提供相同的输出。</p>
 </div>
 <div class="sect3">
 <h4 id="_program_arguments">2.2.1. Program Arguments</h4>
@@ -1718,7 +1718,7 @@ my $sides := $number;</code></pre>
 <p>You probably have seen other command-line programs that take arguments. The filenames you give to <strong>more</strong> or <strong>type</strong> are arguments that tell those programs which file’s contents you want to see:</p>
 </div>
 <div class="paragraph">
-<p>您可能已经看过其他带参数的命令行程序。您提供给更多或类型的文件名是告诉这些程序您想要查看哪些文件内容的参数：</p>
+<p>你可能已经看过其他带参数的命令行程序。你提供给更多或类型的文件名是告诉这些程序你想要查看哪些文件内容的参数：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1731,7 +1731,7 @@ C:\ type hello-world.p6</code></pre>
 <p>Your Raku program can take arguments too. When you try it with your existing program you get a help message instead of the output that you expected:</p>
 </div>
 <div class="paragraph">
-<p>你的Raku程序也可以参数。当您使用现有程序尝试它时，您会得到一条帮助消息，而不是您期望的输出：</p>
+<p>你的Raku程序也可以参数。当你使用现有程序尝试它时，你会得到一条帮助消息，而不是你期望的输出：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1744,7 +1744,7 @@ Usage:
 <p>To accept arguments you have to tell <code>MAIN</code> to expect them. Your program had an implicit set of empty parentheses in it. Those parentheses define the parameters, which are the templates for the arguments. Arguments are what you get; parameters are what you wanted. In this case you didn’t specify any parameters, so your program expects no arguments and complains if you try to give it some:</p>
 </div>
 <div class="paragraph">
-<p>要接受参数，你必须告诉MAIN期望它们。你的程序中有一组隐含的空括号。这些括号定义参数，这些参数是参数的模板。争论就是你得到的;参数是你想要的。在这种情况下，您没有指定任何参数，因此如果您尝试给它一些，您的程序不需要参数和抱怨：</p>
+<p>要接受参数，你必须告诉MAIN期望它们。你的程序中有一组隐含的空括号。这些括号定义参数，这些参数是参数的模板。争论就是你得到的;参数是你想要的。在这种情况下，你没有指定任何参数，因此如果你尝试给它一些，你的程序不需要参数和抱怨：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1757,7 +1757,7 @@ Usage:
 <p>You can change this. You can specify a variable in the parameter list. One parameter allows your <code>MAIN</code> subroutine to take exactly one argument. Change your <code>put</code> statement to output the value in <code>$thingy</code> by defining a signature after the subroutine name:</p>
 </div>
 <div class="paragraph">
-<p>你可以改变这个。您可以在参数列表中指定变量。一个参数允许MAIN子例程只取一个参数。通过在子例程名称后定义签名，更改put语句以输出$ thingy中的值：</p>
+<p>你可以改变这个。你可以在参数列表中指定变量。一个参数允许MAIN子例程只取一个参数。通过在子例程名称后定义签名，更改put语句以输出$ thingy中的值：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1770,7 +1770,7 @@ Usage:
 <p>When you run this program with no command-line arguments you get a different help message. You needed one argument and gave it none. Curiously, the help message tells you the name of the variable you used in the parameter:</p>
 </div>
 <div class="paragraph">
-<p>如果在没有命令行参数的情况下运行此程序，则会收到不同的帮助消息。你需要一个论点并且没有给它。奇怪的是，帮助消息告诉您在参数中使用的变量的名称：</p>
+<p>如果在没有命令行参数的情况下运行此程序，则会收到不同的帮助消息。你需要一个论点并且没有给它。奇怪的是，帮助消息告诉你在参数中使用的变量的名称：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1801,7 +1801,7 @@ Hello Raku</code></pre>
 <p>You can specify more than one parameter by separating them with commas. You can also output multiple things in a single <code>put</code> by separating them with commas:</p>
 </div>
 <div class="paragraph">
-<p>您可以通过用逗号分隔多个参数来指定它们。您也可以通过用逗号分隔它们来输出单个put中的多个内容：</p>
+<p>你可以通过用逗号分隔多个参数来指定它们。你也可以通过用逗号分隔它们来输出单个put中的多个内容：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1838,7 +1838,7 @@ Usage:
 <p>Hamadryas perlicus *是我在封面上给蝴蝶的（非）学名。有时我称他为“哈马”，因为它与“美洲驼”押韵。</p>
 </div>
 <div class="paragraph">
-<p>有时您不希望指定两个参数，即使您需要两个值。您可以为某些参数指定默认值。使用=指定默认值：</p>
+<p>有时你不希望指定两个参数，即使你需要两个值。你可以为某些参数指定默认值。使用=指定默认值：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1872,7 +1872,7 @@ Usage:
 <p>EXERCISE 2.2Create a program that takes three command-line arguments and outputs them on separate, numbered lines. Give two of the parameters default values.</p>
 </div>
 <div class="paragraph">
-<p>任何带有默认值的参数都必须显示在没有它们的参数之后。您将在第11章中看到有关参数的更多信息。</p>
+<p>任何带有默认值的参数都必须显示在没有它们的参数之后。你将在第11章中看到有关参数的更多信息。</p>
 </div>
 <div class="paragraph">
 <p>练习2.2创建一个带有三个命令行参数的程序，并将它们输出到不同的编号行上。给出两个参数默认值。</p>
@@ -1884,7 +1884,7 @@ Usage:
 <p>The <code>prompt</code> routine outputs a message asking for input. When you type some text followed by Return `prompt`reads that text and returns it. You can assign that value to a variable:</p>
 </div>
 <div class="paragraph">
-<p>提示例程输出要求输入的消息。当您键入一些文本，然后返回提示时，将读取该文本并将其返回。您可以将该值分配给变量：</p>
+<p>提示例程输出要求输入的消息。当你键入一些文本，然后返回提示时，将读取该文本并将其返回。你可以将该值分配给变量：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1896,7 +1896,7 @@ put 'Your answer was [', $answer, ']';</code></pre>
 <p>When you run the program you see the prompt and start typing right after it on the same line:</p>
 </div>
 <div class="paragraph">
-<p>运行程序时，您会看到提示并在同一行后面开始输入：</p>
+<p>运行程序时，你会看到提示并在同一行后面开始输入：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1928,7 +1928,7 @@ Your answer was [137]</code></pre>
 <p>An integer is a whole number. These are the numbers of everyday life expressed with the digits from 0 to 9:</p>
 </div>
 <div class="paragraph">
-<p>文字值是您直接在程序中键入的值。它们是固定的，有时称为“硬编码”值，因为它们直接存在于程序中，而不是来自输入或配置。这些是术语，您可以通过多种方式编写它们。</p>
+<p>文字值是你直接在程序中键入的值。它们是固定的，有时称为“硬编码”值，因为它们直接存在于程序中，而不是来自输入或配置。这些是术语，你可以通过多种方式编写它们。</p>
 </div>
 <div class="paragraph">
 <p>整数是整数。这些是用0到9的数字表示的日常生活数量：</p>
@@ -1970,7 +1970,7 @@ Your answer was [137]</code></pre>
 <p>Binary numbers are base 2 and use the digits 0 and 1. These are handy when you deal with binary formats. Prefix them with <code>0b</code>:</p>
 </div>
 <div class="paragraph">
-<p>二进制数字是基数2并使用数字0和1.当您处理二进制格式时，这些都很方便。用0b作为前缀：</p>
+<p>二进制数字是基数2并使用数字0和1.当你处理二进制格式时，这些都很方便。用0b作为前缀：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2001,7 +2001,7 @@ Your answer was [137]</code></pre>
 <p>EXERCISE 2.4在REPL中尝试不同的基础示例。 REPL回显的十进制值是多少？</p>
 </div>
 <div class="paragraph">
-<p>也许您不喜欢ASCII数字0到9.您可以使用Unicode支持的任何数字; Raku知道任何数字角色。东部阿拉伯数字工作。请注意，基数前缀是相同的：</p>
+<p>也许你不喜欢ASCII数字0到9.你可以使用Unicode支持的任何数字; Raku知道任何数字角色。东部阿拉伯数字工作。请注意，基数前缀是相同的：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2032,10 +2032,10 @@ Your answer was [137]</code></pre>
 <p>You can choose other bases up to base 36. You’ve already seen base 16, which uses 0 to 9 and <strong>A</strong> to <strong>F</strong>. Base 17 would add <strong>G</strong>, and so on up to base 36, which includes <strong>Z</strong>. Use a colon before the base (in decimal), then put the digits inside angle brackets:</p>
 </div>
 <div class="paragraph">
-<p>我不鼓励你在你的程序中代表这样的数字，但Raku理解它们。当您处理包含它们的文本时，这非常有用。您的程序将能够将这些转换为数字类型。</p>
+<p>我不鼓励你在你的程序中代表这样的数字，但Raku理解它们。当你处理包含它们的文本时，这非常有用。你的程序将能够将这些转换为数字类型。</p>
 </div>
 <div class="paragraph">
-<p>您可以选择基数为36的其他基数。您已经看过基数为16，使用0到9和A到F.基数17将添加G，依此类推到基数36，其中包括Z.使用冒号之前基数（十进制），然后将数字放在尖括号内：</p>
+<p>你可以选择基数为36的其他基数。你已经看过基数为16，使用0到9和A到F.基数17将添加G，依此类推到基数36，其中包括Z.使用冒号之前基数（十进制），然后将数字放在尖括号内：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2057,7 +2057,7 @@ Your answer was [137]</code></pre>
 <p>Literal numbers are objects. You can call methods on objects. The <code>.base</code> method allows you to specify the base that you want to represent:</p>
 </div>
 <div class="paragraph">
-<p>文字数字是对象。您可以在对象上调用方法。 .base方法允许您指定要表示的基数：</p>
+<p>文字数字是对象。你可以在对象上调用方法。 .base方法允许你指定要表示的基数：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2068,7 +2068,7 @@ Your answer was [137]</code></pre>
 <p>You can choose some other base, up to 36:</p>
 </div>
 <div class="paragraph">
-<p>您可以选择其他一些基地，最多36个：</p>
+<p>你可以选择其他一些基地，最多36个：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2084,10 +2084,10 @@ put 0x89.base: 16;     # 89</code></pre>
 <p>In the previous exercise you couldn’t specify a hexadecimal number as an argument. That’s because you weren’t actually specifying a number as an argument. It was text made up of digit characters. If you want to use a hexadecimal number you have to tell your program how to convert the number. You can use <code>.parse-base</code> for that. You tell it which base you expect and it does the rest:</p>
 </div>
 <div class="paragraph">
-<p>练习2.6编写一个以十进制数作为单个命令行参数的程序。输出二进制，八进制，十进制和十六进制值。如果在命令行上给它一个十六进制数，会发生什么？如果您在东部阿拉伯数字中指定十进制数怎么办？</p>
+<p>练习2.6编写一个以十进制数作为单个命令行参数的程序。输出二进制，八进制，十进制和十六进制值。如果在命令行上给它一个十六进制数，会发生什么？如果你在东部阿拉伯数字中指定十进制数怎么办？</p>
 </div>
 <div class="paragraph">
-<p>在上一个练习中，您无法将十六进制数指定为参数。那是因为你实际上没有指定一个数字作为参数。它是由数字字符组成的文本。如果要使用十六进制数，则必须告诉程序如何转换数字。你可以使用.parse-base。你告诉它你期望的基础，剩下的就是：</p>
+<p>在上一个练习中，你无法将十六进制数指定为参数。那是因为你实际上没有指定一个数字作为参数。它是由数字字符组成的文本。如果要使用十六进制数，则必须告诉程序如何转换数字。你可以使用.parse-base。你告诉它你期望的基础，剩下的就是：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2119,7 +2119,7 @@ put 0x89.base: 16;     # 89</code></pre>
 <p>You can also store the result in a variable and then output it. The item assignment is an operation and so is the addition. The <code>+</code> happens first because it has higher precedence:</p>
 </div>
 <div class="paragraph">
-<p>您还可以将结果存储在变量中，然后将其输出。项目分配是一项操作，添加也是如此。 +首先发生，因为它具有更高的优先级：</p>
+<p>你还可以将结果存储在变量中，然后将其输出。项目分配是一项操作，添加也是如此。 +首先发生，因为它具有更高的优先级：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2134,7 +2134,7 @@ put $sum;</code></pre>
 <p>Outputting a single number is easy. If you want to output a series of numbers, you could have multiple lines:</p>
 </div>
 <div class="paragraph">
-<p>有减法（ - ），乘法（<strong>），除法（/）和取幂（</strong>*）的运算符。您将在下一章中看到更多内容。</p>
+<p>有减法（ - ），乘法（<strong>），除法（/）和取幂（</strong>*）的运算符。你将在下一章中看到更多内容。</p>
 </div>
 <div class="paragraph">
 <p>输出单个数字很容易。如果要输出一系列数字，可以有多行：</p>
@@ -2151,7 +2151,7 @@ put $sum + 1 + 1 + 1;</code></pre>
 <p>Each time you add one more to it. That repeats a lot of structure. You can back up a little to make an improvement where the <code>put</code> statement is the same in each case:</p>
 </div>
 <div class="paragraph">
-<p>每次再添加一个。这重复了很多结构。在每种情况下，put语句相同时，您可以稍微备份以进行改进：</p>
+<p>每次再添加一个。这重复了很多结构。在每种情况下，put语句相同时，你可以稍微备份以进行改进：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2177,7 +2177,7 @@ put $sum;</code></pre>
 <p>$ sum变量显示在赋值的左侧和右侧。没关系;编译器不会混淆。它使用$ sum的当前值评估右侧的所有内容。当它将右侧减少到它的值时，它会将其分配给$ sum，替换已存在的值。你仍然一遍又一遍地做同样的事情，但现在同样的事情看起来和其他事情完全一样。</p>
 </div>
 <div class="paragraph">
-<p>现在是时候介绍循环了。它重复执行括号内的代码。此代码将一直运行，直到您中断程序（可能使用Control-C）：</p>
+<p>现在是时候介绍循环了。它重复执行括号内的代码。此代码将一直运行，直到你中断程序（可能使用Control-C）：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2192,7 +2192,7 @@ loop {
 <p>You can combine the two statements inside <code>loop</code>. The result of an assignment is the value that you assigned. Here, you add to <code>$sum</code> then assign that result back to <code>$sum</code>, and use that expression as the value you give to <code>put</code>:</p>
 </div>
 <div class="paragraph">
-<p>您可以在循环内组合这两个语句。赋值的结果是您指定的值。在这里，您添加$ sum然后将该结果分配回$ sum，并将该表达式用作您放置的值：</p>
+<p>你可以在循环内组合这两个语句。赋值的结果是你指定的值。在这里，你添加$ sum然后将该结果分配回$ sum，并将该表达式用作你放置的值：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2206,7 +2206,7 @@ loop {
 <p>This sort of structure is so common that it has its own operator: the <code>++</code> unary prefix autoincrement operator. It adds one before you use the value:</p>
 </div>
 <div class="paragraph">
-<p>这种结构很常见，它有自己的运算符：++一元前缀自动增量运算符。它在您使用该值之前添加一个：</p>
+<p>这种结构很常见，它有自己的运算符：++一元前缀自动增量运算符。它在你使用该值之前添加一个：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2220,7 +2220,7 @@ loop {
 <p>There’s also a unary postfix version. It adds one to the value, but after you use it:</p>
 </div>
 <div class="paragraph">
-<p>还有一个一元的后缀版本。它会在值中添加一个，但在您使用它之后：</p>
+<p>还有一个一元的后缀版本。它会在值中添加一个，但在你使用它之后：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2240,7 +2240,7 @@ loop {
 <p>练习2.8使用前缀和后缀自动增量运算符的两个程序的输出差异是什么？如果不运行程序，你能搞清楚吗？</p>
 </div>
 <div class="paragraph">
-<p>到目前为止，你已经用我的声明了变量。这将他们的定义限制在当前范围内。如果它们应该保留它们的值，那么在循环中你想要的变量就是一个问题。这不起作用，因为即使您使用相同的名称，每次循环都会获得一个新变量：</p>
+<p>到目前为止，你已经用我的声明了变量。这将他们的定义限制在当前范围内。如果它们应该保留它们的值，那么在循环中你想要的变量就是一个问题。这不起作用，因为即使你使用相同的名称，每次循环都会获得一个新变量：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2288,7 +2288,7 @@ loop {
 <p>That’s still one too many <code>$sum`s in that code. There’s a special form of the assignment operator that lets you shorten this. You can put the infix operator before the `=</code>, like this:</p>
 </div>
 <div class="paragraph">
-<p>那段代码中仍然有太多$ sum。有一种特殊形式的赋值运算符可以让你缩短它。您可以在=之前放置中缀运算符，如下所示：</p>
+<p>那段代码中仍然有太多$ sum。有一种特殊形式的赋值运算符可以让你缩短它。你可以在=之前放置中缀运算符，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2332,7 +2332,7 @@ $is-divisible %%= 3;</code></pre>
 <p>This chapter has been working its way to a number-guessing program. You know a little bit about numbers, command-line arguments, prompting, and looping. Next you need to know how to decide between two or more paths in your code. That comes in two parts: comparing things to get an answer and using that answer to select the next thing to do.</p>
 </div>
 <div class="paragraph">
-<p>本章一直致力于数字猜测程序。您对数字，命令行参数，提示和循环有一点了解。接下来，您需要知道如何在代码中的两个或多个路径之间做出决定。这分为两部分：比较事情以获得答案并使用该答案选择下一步要做的事情。</p>
+<p>本章一直致力于数字猜测程序。你对数字，命令行参数，提示和循环有一点了解。接下来，你需要知道如何在代码中的两个或多个路径之间做出决定。这分为两部分：比较事情以获得答案并使用该答案选择下一步要做的事情。</p>
 </div>
 <div class="sect3">
 <h4 id="_boolean_values">2.5.1. Boolean Values</h4>
@@ -2343,10 +2343,10 @@ $is-divisible %%= 3;</code></pre>
 <p>You can combine Boolean values with logical operators. The <code>&amp;&amp;</code> logical AND operator evaluates to <code>True</code> if both operands are <code>True</code>. The <code>||</code> logical OR operator evaluates to <code>True</code> if one or more operators are <code>True</code>:</p>
 </div>
 <div class="paragraph">
-<p>布尔值是逻辑值，可以是一个或另一个：是或否，打开或关闭，或者是True或False。这些是Bool类型。您将使用这些值来决定程序中的不同路径。首先，一点布尔数学。</p>
+<p>布尔值是逻辑值，可以是一个或另一个：是或否，打开或关闭，或者是True或False。这些是Bool类型。你将使用这些值来决定程序中的不同路径。首先，一点布尔数学。</p>
 </div>
 <div class="paragraph">
-<p>您可以将布尔值与逻辑运算符组合使用。如果两个操作数均为True，则&amp;&amp; logical AND运算符的计算结果为True。 ||如果一个或多个运算符为True，则逻辑OR运算符的计算结果为True：</p>
+<p>你可以将布尔值与逻辑运算符组合使用。如果两个操作数均为True，则&amp;&amp; logical AND运算符的计算结果为True。 ||如果一个或多个运算符为True，则逻辑OR运算符的计算结果为True：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2407,7 +2407,7 @@ True</code></pre>
 <p>许多对象可以在需要时将自身折叠为Bool值，但是由每个对象决定它是如何做到的。对于数字，0为False，其他所有为True。</p>
 </div>
 <div class="paragraph">
-<p>对于大多数对象（不仅仅是数字），您可以使用前缀？强迫无论是真还是假。它在对象上调用.Bool方法。内置类型知道如何使用他们决定的任何规则将其值转换为布尔值。对于数字，0为False，其他一切为True：</p>
+<p>对于大多数对象（不仅仅是数字），你可以使用前缀？强迫无论是真还是假。它在对象上调用.Bool方法。内置类型知道如何使用他们决定的任何规则将其值转换为布尔值。对于数字，0为False，其他一切为True：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2550,7 +2550,7 @@ True
 <p>The defined-or is part of a common technique to set a value if a variable doesn’t already have one (or has one that is not defined). You’ll see it as a binary assignment:</p>
 </div>
 <div class="paragraph">
-<p>如果变量还没有（或者没有定义一个变量），则定义或者是设置值的常用技术的一部分。您会将其视为二进制赋值：</p>
+<p>如果变量还没有（或者没有定义一个变量），则定义或者是设置值的常用技术的一部分。你会将其视为二进制赋值：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2595,7 +2595,7 @@ True</code></pre>
 <p>Some operators have two versions. You just saw the “ASCII” version, but there’s also a “fancy” Unicode version with <code>≠</code>:</p>
 </div>
 <div class="paragraph">
-<p>一些运营商有两个版本。您刚看到“ASCII”版本，但也有一个“奇特”的Unicode版本，≠：</p>
+<p>一些运营商有两个版本。你刚看到“ASCII”版本，但也有一个“奇特”的Unicode版本，≠：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2608,7 +2608,7 @@ True</code></pre>
 <p>Instead of a literal value you can compare a variable. It doesn’t matter which side you put the values on:</p>
 </div>
 <div class="paragraph">
-<p>您可以比较变量而不是文字值。将值放在哪一方并不重要：</p>
+<p>你可以比较变量而不是文字值。将值放在哪一方并不重要：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2627,7 +2627,7 @@ True</code></pre>
 <p>You can have an expression on either side of the comparator or variables on both sides:</p>
 </div>
 <div class="paragraph">
-<p>您可以在比较器的任一侧或两侧的变量上都有一个表达式：</p>
+<p>你可以在比较器的任一侧或两侧的变量上都有一个表达式：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2689,7 +2689,7 @@ True</code></pre>
 <p>Although not a comparator, the <code>%%</code> operator also returns a Boolean. It tests if the number on the left side is evenly divisible by the number on the right side. This is quite handy:</p>
 </div>
 <div class="paragraph">
-<p>您也可以使用更高的符号来编写这些符号：&gt; =as≥且&#8656;as≤。</p>
+<p>你也可以使用更高的符号来编写这些符号：&gt; =as≥且&#8656;as≤。</p>
 </div>
 <div class="paragraph">
 <p>虽然不是比较器，但%%运算符也返回一个布尔值。它测试左侧的数字是否可以被右侧的数字整除。这非常方便：</p>
@@ -2709,7 +2709,7 @@ False</code></pre>
 <p>You can chain comparison operators. You can test that a number is inside or outside of a window (remember the <code>&gt;</code> at the start of the input lines is the REPL prompt) like this:</p>
 </div>
 <div class="paragraph">
-<p>您可以链接比较运算符。您可以测试一个数字是在窗口内部还是外部（请记住输入行开头的&gt;是REPL提示符），如下所示：</p>
+<p>你可以链接比较运算符。你可以测试一个数字是在窗口内部还是外部（请记住输入行开头的&gt;是REPL提示符），如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2745,7 +2745,7 @@ True</code></pre>
 <p>The <code>if</code> keyword allows you to evaluate a statement only when some condition is satisfied. The postfix form is the easiest. The part after the <code>if</code> is the condition; it evaluates to <code>True</code> or <code>False</code>:</p>
 </div>
 <div class="paragraph">
-<p>if关键字允许您仅在满足某些条件时评估语句。后缀形式是最简单的。 if之后的部分是条件;它评估为真或假：</p>
+<p>if关键字允许你仅在满足某些条件时评估语句。后缀形式是最简单的。 if之后的部分是条件;它评估为真或假：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2813,7 +2813,7 @@ put 'Always outputs' if 1;</code></pre>
 <p>练习2.10这个程序的输出是什么？你可以在不运行程序的情况下解决问题吗？</p>
 </div>
 <div class="paragraph">
-<p>下一个命令与last类似，但它继续循环的下一次迭代。您可以使用后缀if跳过可被2整除的数字（当一个条件中有多个东西使用变量时，最好在单独的步骤中更改它）：</p>
+<p>下一个命令与last类似，但它继续循环的下一次迭代。你可以使用后缀if跳过可被2整除的数字（当一个条件中有多个东西使用变量时，最好在单独的步骤中更改它）：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2861,7 +2861,7 @@ put 'Always outputs' if 1;</code></pre>
 <p>You can use parentheses for <strong>grouping</strong> if you like but they can’t be immediately next to the <code>if</code>; there must be some whitespace:</p>
 </div>
 <div class="paragraph">
-<p>如果您愿意，可以使用括号进行分组，但不能紧跟if;必须有一些空白：</p>
+<p>如果你愿意，可以使用括号进行分组，但不能紧跟if;必须有一些空白：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2913,7 +2913,7 @@ put 'Always outputs' if 1;</code></pre>
 <p>An <code>else</code> allows you to provide a default block to run when the <code>if</code> is not satisfied:</p>
 </div>
 <div class="paragraph">
-<p>如果不满足if，则允许您提供默认块以运行：</p>
+<p>如果不满足if，则允许你提供默认块以运行：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2935,7 +2935,7 @@ else {
 <p>这些不同的可能性是代码的分支。你去一个或另一个分支，但不是两个。这是决定运行哪些代码的控制结构的一个示例。</p>
 </div>
 <div class="paragraph">
-<p>当你在它前面放置一个do时，整个if结构的计算结果为一个值。 do允许您将控制结构视为表达式。结果是结构内部的最后一个计算表达式。这样，您只能隔离不同的部分，然后使用一个语句进行输出：</p>
+<p>当你在它前面放置一个do时，整个if结构的计算结果为一个值。 do允许你将控制结构视为表达式。结果是结构内部的最后一个计算表达式。这样，你只能隔离不同的部分，然后使用一个语句进行输出：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2985,7 +2985,7 @@ put 'The number is ', $type;</code></pre>
 <p>An <code>elsif</code> specifies another branch with its own condition, so you have three ways this code might run. Some people think zero is neither odd nor even, and they can add another branch for that:</p>
 </div>
 <div class="paragraph">
-<p>elsif指定另一个具有自己条件的分支，因此您可以通过三种方式运行此代码。有些人认为零既不是奇数也不是偶数，他们可以为此添加另一个分支：</p>
+<p>elsif指定另一个具有自己条件的分支，因此你可以通过三种方式运行此代码。有些人认为零既不是奇数也不是偶数，他们可以为此添加另一个分支：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3092,10 +3092,10 @@ The number is greater than 50</code></pre>
 <p>In the previous exercise you set the default for the second argument using a hard-coded literal integer:</p>
 </div>
 <div class="paragraph">
-<p>练习2.12在MAIN子例程中包含pivot程序，以便您可以将最高可能的数字指定为命令行参数。如果您不提供参数，则默认为100。调整它，以便程序可以使用另一个命令行参数来指定数据透视表编号。</p>
+<p>练习2.12在MAIN子例程中包含pivot程序，以便你可以将最高可能的数字指定为命令行参数。如果你不提供参数，则默认为100。调整它，以便程序可以使用另一个命令行参数来指定数据透视表编号。</p>
 </div>
 <div class="paragraph">
-<p>在上一个练习中，您使用硬编码的文字整数设置第二个参数的默认值：</p>
+<p>在上一个练习中，你使用硬编码的文字整数设置第二个参数的默认值：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3106,7 +3106,7 @@ The number is greater than 50</code></pre>
 <p>If you run the program with one command-line argument that is less than <code>50</code> (or whatever you chose as your default) the output will always be the same:</p>
 </div>
 <div class="paragraph">
-<p>如果使用一个小于50的命令行参数（或者您选择作为默认值的任何内容）运行程序，则输出将始终相同：</p>
+<p>如果使用一个小于50的命令行参数（或者你选择作为默认值的任何内容）运行程序，则输出将始终相同：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3118,7 +3118,7 @@ The number is less than 50</code></pre>
 <p>You can use parameters you’ve already specified to compute defaults for other parameters. Use <code>$highest</code> to compute <code>$pivot</code>:</p>
 </div>
 <div class="paragraph">
-<p>您可以使用已指定的参数来计算其他参数的默认值。使用$ highest来计算$ pivot：</p>
+<p>你可以使用已指定的参数来计算其他参数的默认值。使用$ highest来计算$ pivot：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3135,7 +3135,7 @@ The number is less than 50</code></pre>
 <p>练习2.13修改上一练习的答案，以便将枢轴设置为最高值的一半。如果未指定两个参数，则默认为50。</p>
 </div>
 <div class="paragraph">
-<p>现在，您拥有编写数字猜测程序所需的一切。您的程序会选择一个您必须弄清楚的密码。在本书的早期，这看起来像一个复杂的程序，但你已经看到了足够的成就：</p>
+<p>现在，你拥有编写数字猜测程序所需的一切。你的程序会选择一个你必须弄清楚的密码。在本书的早期，这看起来像一个复杂的程序，但你已经看到了足够的成就：</p>
 </div>
 <div class="ulist">
 <ul>
@@ -3169,7 +3169,7 @@ The number is less than 50</code></pre>
 <p>EXERCISE 2.14Implement the number-guessing program. If you supply a command-line argument use that as the maximum number; otherwise use 100. It may help to immediately output the secret number as you get your program working.</p>
 </div>
 <div class="paragraph">
-<p>练习2.14实施数字猜测程序。如果提供命令行参数，请将其用作最大数字;否则使用100.当您的程序正常工作时，可能有助于立即输出密码。</p>
+<p>练习2.14实施数字猜测程序。如果提供命令行参数，请将其用作最大数字;否则使用100.当你的程序正常工作时，可能有助于立即输出密码。</p>
 </div>
 </div>
 <div class="sect2">
@@ -3178,7 +3178,7 @@ The number is less than 50</code></pre>
 <p>You made it! First chapters are typically the toughest because you’re getting your bearings. You’ve made at least one meaty program that incorporates several things that you haven’t seen in depth yet. You can take input from the command line or from a prompt. You can compare values and follow different code branches. Not bad for a first chapter.</p>
 </div>
 <div class="paragraph">
-<p>你做到了！第一章通常是最难的，因为你得到了你的支持。你已经制作了至少一个丰富的程序，其中包含了一些你还没有深入见过的东西。您可以从命令行或提示中获取输入。您可以比较值并遵循不同的代码分支。对于第一章来说还不错。</p>
+<p>你做到了！第一章通常是最难的，因为你得到了你的支持。你已经制作了至少一个丰富的程序，其中包含了一些你还没有深入见过的东西。你可以从命令行或提示中获取输入。你可以比较值并遵循不同的代码分支。对于第一章来说还不错。</p>
 </div>
 </div>
 </div>
@@ -13626,7 +13626,7 @@ $p5.run: 'print p5_test()';</code></pre>
 <p>When you run a subroutine you get some sort of result: the last evaluated expression. That’s the return value. This sets basic routines apart from the simpler [<code>Block</code>](<a href="https://docs.raku.org/type/Block.html)s" class="bare">https://docs.raku.org/type/Block.html)s</a> you saw in [Chapter 5](<a href="https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch05.html#camelia-blocks" class="bare">https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch05.html#camelia-blocks</a>). A [<code>Routine</code>](<a href="https://docs.raku.org/type/Routine.html" class="bare">https://docs.raku.org/type/Routine.html</a>) knows how to send a value back to the code that called it. This subroutine returns a different [<code>Str</code>](<a href="https://docs.raku.org/type/Str.html" class="bare">https://docs.raku.org/type/Str.html</a>) if the argument is odd or even:</p>
 </div>
 <div class="paragraph">
-<p>当您运行子例程时，您会得到某种结果：最后被计算的表达式。这是返回值。这将基础子例程和你在第五章中看到的更简单的 [<code>Block</code>](<a href="https://docs.raku.org/type/Block.html" class="bare">https://docs.raku.org/type/Block.html</a>) 区分开。[<code>例程</code>](<a href="https://docs.raku.org/type/Routine.html)知道如何将值发送回调用它的代码。如果参数为奇数或偶数，则此子例程返回不同的"><code>字符串</code></a>(<a href="https://docs.raku.org/type/Str.html)：" class="bare">https://docs.raku.org/type/Str.html)：</a></p>
+<p>当你运行子例程时，你会得到某种结果：最后被计算的表达式。这是返回值。这将基础子例程和你在第五章中看到的更简单的 [<code>Block</code>](<a href="https://docs.raku.org/type/Block.html" class="bare">https://docs.raku.org/type/Block.html</a>) 区分开。[<code>例程</code>](<a href="https://docs.raku.org/type/Routine.html)知道如何将值发送回调用它的代码。如果参数为奇数或偶数，则此子例程返回不同的"><code>字符串</code></a>(<a href="https://docs.raku.org/type/Str.html)：" class="bare">https://docs.raku.org/type/Str.html)：</a></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13692,7 +13692,7 @@ put odd-or-even( 37 );  # undeclared routine!</code></pre>
 <p>What does <code>odd-or-even</code> accept, though? The parameter is an [<code>Array</code>](<a href="https://docs.raku.org/type/Array.html" class="bare">https://docs.raku.org/type/Array.html</a>) but you only use the first element. These calls still work without warnings or errors:</p>
 </div>
 <div class="paragraph">
-<p>但是 <code>odd-or-even</code> 接受了什么？参数是一个数组，但您只使用第一个元素。这些调用仍然有效，没有警告或错误：</p>
+<p>但是 <code>odd-or-even</code> 接受了什么？参数是一个数组，但你只使用第一个元素。这些调用仍然有效，没有警告或错误：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13722,7 +13722,7 @@ put plus-minus( 9,1,2,3 );</code></pre>
 <p>With the signatures you’ll see later in the chapter you’ll be able to control this to get the situation that you want.</p>
 </div>
 <div class="paragraph">
-<p>使用您将在本章后面看到的签名，您将能够控制它以获得您想要的情况。</p>
+<p>使用你将在本章后面看到的签名，你将能够控制它以获得你想要的情况。</p>
 </div>
 </div>
 <div class="sect3">
@@ -13731,7 +13731,7 @@ put plus-minus( 9,1,2,3 );</code></pre>
 <p>You can explicitly return from anywhere in a subroutine with <code>return</code>. This distinguishes a subroutine from the [<code>Block</code>](<a href="https://docs.raku.org/type/Block.html)s" class="bare">https://docs.raku.org/type/Block.html)s</a> you used in [Chapter 5](<a href="https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch05.html#camelia-blocks" class="bare">https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch05.html#camelia-blocks</a>). This version is the same thing but with an explicit <code>return</code>:</p>
 </div>
 <div class="paragraph">
-<p>您可以使用 <code>return</code> 从子例程中的任何位置显式返回。这将子例程与您在第五章中使用的 Block 区分开来。这个版本是相同的，但具有明确的返回：</p>
+<p>你可以使用 <code>return</code> 从子例程中的任何位置显式返回。这将子例程与你在第五章中使用的 Block 区分开来。这个版本是相同的，但具有明确的返回：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13756,7 +13756,7 @@ put plus-minus( 9,1,2,3 );</code></pre>
 <p>The message tells you the argument list does not match the signature:</p>
 </div>
 <div class="paragraph">
-<p>该消息告诉您参数列表与签名不匹配：</p>
+<p>该消息告诉你参数列表与签名不匹配：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13821,7 +13821,7 @@ put plus-minus( 9,1,2,3 );</code></pre>
 <p>These techniques are more appealing in more complex situations that I’m not going to show here. No matter which of these serves your situation, they all do the same thing: they send a value back to the code that called it.</p>
 </div>
 <div class="paragraph">
-<p>这些技术在更复杂的情况下更具吸引力，我不会在这里展示。无论哪种情况适合您的情况，它们都会做同样的事情：它们将值发送回调用它的代码。</p>
+<p>这些技术在更复杂的情况下更具吸引力，我不会在这里展示。无论哪种情况适合你的情况，它们都会做同样的事情：它们将值发送回调用它的代码。</p>
 </div>
 <div class="paragraph">
 <p>EXERCISE 11.1Create a subroutine that returns the least common multiple of two integers. Use that in a program that takes two integers from the command line. The particulars of this exercise are very simple but it’s the structure of the subroutine definitions that matter.</p>
@@ -13854,13 +13854,13 @@ say fibonacci( 10 );  # 55</code></pre>
 <p>When you call this subroutine with the value of <code>10</code> it calls itself twice to get the values for <code>9</code> and <code>8</code>. When it calls itself for <code>9</code>, it creates two more calls for <code>8</code> and <code>7</code>. It keeps creating more and more calls to itself until the arguments are <code>0</code> or <code>1</code>. It can then return a value one level up, working its way back to where it started.</p>
 </div>
 <div class="paragraph">
-<p>当您使用值 <code>10</code> 调用此子例程时，它会调用自身两次以获取 <code>9</code> 和 <code>8</code> 的值。当它自己调用 <code>9</code> 时，它会为 <code>8</code> 和 <code>7</code> 创建两个以上的调用。它会不断创建对自身的调用，直到参数为 <code>0</code> 或 <code>1</code>.然后它可以返回一个级别的值，然后返回到它开始的位置。</p>
+<p>当你使用值 <code>10</code> 调用此子例程时，它会调用自身两次以获取 <code>9</code> 和 <code>8</code> 的值。当它自己调用 <code>9</code> 时，它会为 <code>8</code> 和 <code>7</code> 创建两个以上的调用。它会不断创建对自身的调用，直到参数为 <code>0</code> 或 <code>1</code>.然后它可以返回一个级别的值，然后返回到它开始的位置。</p>
 </div>
 <div class="paragraph">
 <p>A Raku subroutine knows what it is inside its own [<code>Block</code>](<a href="https://docs.raku.org/type/Block.html" class="bare">https://docs.raku.org/type/Block.html</a>). The variable <code>&amp;?ROUTINE</code> is the same subroutine object. You don’t have to know the current subroutine’s name. This is the same thing:</p>
 </div>
 <div class="paragraph">
-<p>Raku 子程序知道它自己的 Block 内部是什么。变量`&amp;?ROUTINE`是相同的子程序对象。您不必知道当前子例程的名称。这是同样的东西：</p>
+<p>Raku 子程序知道它自己的 Block 内部是什么。变量`&amp;?ROUTINE`是相同的子程序对象。你不必知道当前子例程的名称。这是同样的东西：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13875,7 +13875,7 @@ say fibonacci( 10 );  # 55</code></pre>
 <p>This is only slightly better. You’ll read more about this later when you encounter <code>multi</code> subroutines.</p>
 </div>
 <div class="paragraph">
-<p>这稍微好一点。当您遇到 <code>multi</code> 子程序时，您将在以后阅读更多相关信息。</p>
+<p>这稍微好一点。当你遇到 <code>multi</code> 子程序时，你将在以后阅读更多相关信息。</p>
 </div>
 <div class="paragraph">
 <p>EXERCISE 11.2Another favorite example of recursion is the factorial function. Start with a positive whole number and multiply it by all the strictly positive numbers that come before it. The factorial of 6 would be 6*5*4*3*2*1. Implement this as a recursive function. Once you’ve done that, implement it in the amazingly simple Raku fashion. How big a number can you get your program to produce?</p>
@@ -13889,13 +13889,13 @@ say fibonacci( 10 );  # 55</code></pre>
 <p>You can turn many recursive solutions into iterative ones. Instead of repeatedly calling subroutines with all the overhead they entail (each call sets up a new scope, defines new variables, and so on), rearrange things so you don’t need a subroutine.</p>
 </div>
 <div class="paragraph">
-<p>您可以将许多递归解决方案转换为迭代解决方案。而不是重复调用子程序，它们需要所有开销（每个调用设置一个新的作用域，定义新的变量，等等），重新排列事物，这样你就不需要子程序了。</p>
+<p>你可以将许多递归解决方案转换为迭代解决方案。而不是重复调用子程序，它们需要所有开销（每个调用设置一个新的作用域，定义新的变量，等等），重新排列事物，这样你就不需要子程序了。</p>
 </div>
 <div class="paragraph">
 <p>The factorial case is easy. The reduction operator does that for you:</p>
 </div>
 <div class="paragraph">
-<p>阶乘这个情况很容易。规约运算符为您执行此操作：</p>
+<p>阶乘这个情况很容易。规约运算符为你执行此操作：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13924,7 +13924,7 @@ put "Fib(5) is ", $fibonacci[5];</code></pre>
 <p>You can make a queue of things to work on. With a queue you can add items anywhere you like. Instead of processing the next thingy immediately you can put it at the end of the queue. When it’s time to process the next thingy you can take it from the beginning, end, or middle. You can add as many elements as you want:</p>
 </div>
 <div class="paragraph">
-<p>您可以创建一个可以处理的事物队列。使用队列，您可以在任何地方添加项目。不要立即处理下一个东西，而是将它放在队列的末尾。当处理下一件事时，你可以从开始，结束或中间开始。您可以根据需要添加任意数量的元素：</p>
+<p>你可以创建一个可以处理的事物队列。使用队列，你可以在任何地方添加项目。不要立即处理下一个东西，而是将它放在队列的末尾。当处理下一件事时，你可以从开始，结束或中间开始。你可以根据需要添加任意数量的元素：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13983,7 +13983,7 @@ say random-between( -10, -3 );</code></pre>
 <p>To use the same subroutine in several programs you can define it once in a library. That’s a separate file that you can import into your program.</p>
 </div>
 <div class="paragraph">
-<p>要在多个程序中使用相同的子程序，可以在库中定义一次。这是一个单独的文件，您可以导入到您的程序中。</p>
+<p>要在多个程序中使用相同的子程序，可以在库中定义一次。这是一个单独的文件，你可以导入到你的程序中。</p>
 </div>
 <div class="paragraph">
 <p>Move <code>random-between</code> to a new file that has the <strong>.pm</strong> or <strong>.pm6</strong> extension:</p>
@@ -14003,7 +14003,7 @@ sub random-between ( $i, $j ) {
 <p>In your original program import your library with <code>use</code>. Set <code>lib</code> as you saw in [Chapter 10](<a href="https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch10.html#camelia-using_modules" class="bare">https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch10.html#camelia-using_modules</a>):</p>
 </div>
 <div class="paragraph">
-<p>在您的原始程序中导入您的库使用。按照第10章中的说明设置lib：</p>
+<p>在你的原始程序中导入你的库使用。按照第10章中的说明设置lib：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14017,7 +14017,7 @@ say random-between( -10, -3 );</code></pre>
 <p>Your program finds your library but now you get a different error:</p>
 </div>
 <div class="paragraph">
-<p>您的程序找到了您的库，但现在您收到了另一个错误：</p>
+<p>你的程序找到了你的库，但现在你收到了另一个错误：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14033,7 +14033,7 @@ Undeclared routine:
 <p>Subroutines are lexically scoped by default, so they can’t be seen outside their files. If you want another file to use them you need to export those subroutines. The <code>is export</code> trait does that and comes right after the signature:</p>
 </div>
 <div class="paragraph">
-<p>默认情况下，子例程在词法上是作用域的，因此不能在文件外看到它们。如果您想要使用其他文件，则需要导出这些子例程。出口特征是这样做的，并在签名后立即出现：</p>
+<p>默认情况下，子例程在词法上是作用域的，因此不能在文件外看到它们。如果你想要使用其他文件，则需要导出这些子例程。出口特征是这样做的，并在签名后立即出现：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14047,7 +14047,7 @@ sub random-between ( $i, $j ) is export {
 <p>Your program now finds the library, imports the subroutine, and produces a number between your endpoints:</p>
 </div>
 <div class="paragraph">
-<p>您的程序现在找到库，导入子例程，并在端点之间生成一个数字：</p>
+<p>你的程序现在找到库，导入子例程，并在端点之间生成一个数字：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14069,7 +14069,7 @@ sub random-between ( $i, $j ) is export {
 <p>There are two types of parameters. The first are the positional parameters that you’ve seen already in [Chapter 5](<a href="https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch05.html#camelia-blocks" class="bare">https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch05.html#camelia-blocks</a>). These parameters handle the arguments by their order in the argument list. We’ll look at them in a bit more detail here. You’ll see the other sort, named parameters, later in this chapter.</p>
 </div>
 <div class="paragraph">
-<p>有两种类型的参数。第一个是您在第5章中已经看到的位置参数。这些参数按参数列表中的顺序处理参数。我们将在这里详细介绍它们。您将在本章后面看到另一种命名参数。</p>
+<p>有两种类型的参数。第一个是你在第5章中已经看到的位置参数。这些参数按参数列表中的顺序处理参数。我们将在这里详细介绍它们。你将在本章后面看到另一种命名参数。</p>
 </div>
 <div class="paragraph">
 <p>With no explicit signature the arguments show up in the array <code>@<em></code>. Each subroutine gets its own <code>@</em></code> so it doesn’t conflict with that for any other subroutine. So, if you write this:</p>
@@ -14164,7 +14164,7 @@ show-the-arguments( 1, 3, 7 );</code></pre>
 <p>There’s not much special about <code>@_</code>. You can use your own variable name instead:</p>
 </div>
 <div class="paragraph">
-<p>@_没什么特别之处。您可以使用自己的变量名称：</p>
+<p>@_没什么特别之处。你可以使用自己的变量名称：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14225,7 +14225,7 @@ show-the-arguments( 1, 3, ( 7, 6, 5 ) );</code></pre>
 <p>The slurpy parameter only flattens objects that you can iterate. If you itemize one of the [<code>List</code>](<a href="https://docs.raku.org/type/List.html)s" class="bare">https://docs.raku.org/type/List.html)s</a> that item is no longer iterable. Items resist flattening:</p>
 </div>
 <div class="paragraph">
-<p>slurpy参数仅展平您可以迭代的对象。如果您列出其中一个列表，则该项目不再可迭代。物品抗压扁：</p>
+<p>slurpy参数仅展平你可以迭代的对象。如果你列出其中一个列表，则该项目不再可迭代。物品抗压扁：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14269,7 +14269,7 @@ show-the-arguments( 1, 3, ( 7, 6, 5 ) );</code></pre>
 <p>Use a <code>**</code> in front of the parameter if you don’t want this automatic flattening:</p>
 </div>
 <div class="paragraph">
-<p>如果您不希望这种自动展平，请在参数前面使用 <code>**</code>：</p>
+<p>如果你不希望这种自动展平，请在参数前面使用 <code>**</code>：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14304,7 +14304,7 @@ show-nonflat-arguments( [ 1, 3, ( 7, $(6, 5) ) ] );</code></pre>
 <p>What if you want both flattening and nonflattening at the same time? If there’s one argument, you want to flatten that. If there’s more than one argument you want to leave that [<code>List</code>](<a href="https://docs.raku.org/type/List.html" class="bare">https://docs.raku.org/type/List.html</a>) alone. Use a <code>+</code> in front of a parameter to use the single argument rule:</p>
 </div>
 <div class="paragraph">
-<p>如果你想要同时展平和不展平怎么办？如果有一个论点，你想要弄平。如果有多个参数，您希望单独保留该列表。在参数前面使用+来使用单个参数规则：</p>
+<p>如果你想要同时展平和不展平怎么办？如果有一个论点，你想要弄平。如果有多个参数，你希望单独保留该列表。在参数前面使用+来使用单个参数规则：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14355,7 +14355,7 @@ The nonflat arguments are: [[1 3 7] 5]</code></pre>
 <p>You can have only one slurpy [<code>Array</code>](<a href="https://docs.raku.org/type/Array.html" class="bare">https://docs.raku.org/type/Array.html</a>) parameter, since it will take up the rest of the positional arguments. However, you can have positional parameters before a slurpy parameter:</p>
 </div>
 <div class="paragraph">
-<p>您可以只有一个slurpy Array参数，因为它将占用其余的位置参数。但是，您可以在slurpy参数之前获得位置参数：</p>
+<p>你可以只有一个slurpy Array参数，因为它将占用其余的位置参数。但是，你可以在slurpy参数之前获得位置参数：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14404,7 +14404,7 @@ show-the-arguments( 1, @a );</code></pre>
 <p>EXERCISE 11.6Create a library that provides a <code>head</code> and a <code>tail</code> function that each take a [<code>List</code>](<a href="https://docs.raku.org/type/List.html" class="bare">https://docs.raku.org/type/List.html</a>) parameter. Make your <code>head`function return the first item in the [`List</code>](<a href="https://docs.raku.org/type/List.html" class="bare">https://docs.raku.org/type/List.html</a>) and your <code>tail</code> function return everything else. Do not change the original [<code>List</code>](<a href="https://docs.raku.org/type/List.html" class="bare">https://docs.raku.org/type/List.html</a>). If you’re used to Lisp you might call these <code>car</code> and <code>cdr</code>:`use lib &lt;.&gt;; use HeadsTails;  my @a = &lt;1 3 5 7 11 13&gt;;  say head( @a );  # 1 say tail( @a );  # [ 3 5 7 11 13 ]`</p>
 </div>
 <div class="paragraph">
-<p>练习11.6创建一个提供head和tail函数的库，每个函数都有一个List参数。让你的headfunction返回List中的第一项，你的tail函数返回其他所有内容。请勿更改原始列表。如果您习惯使用Lisp，可以将这些汽车和cdr称为：使用lib &lt;。&gt;;使用HeadsTails;我的@a = &lt;1 3 5 7 11 13&gt;;说头（@a）; ＃1说尾巴（@a）; ＃[3 5 7 11 13]</p>
+<p>练习11.6创建一个提供head和tail函数的库，每个函数都有一个List参数。让你的headfunction返回List中的第一项，你的tail函数返回其他所有内容。请勿更改原始列表。如果你习惯使用Lisp，可以将这些汽车和cdr称为：使用lib &lt;。&gt;;使用HeadsTails;我的@a = &lt;1 3 5 7 11 13&gt;;说头（@a）; ＃1说尾巴（@a）; ＃[3 5 7 11 13]</p>
 </div>
 </div>
 <div class="sect3">
@@ -14413,7 +14413,7 @@ show-the-arguments( 1, @a );</code></pre>
 <p>By default all positional parameters require arguments. A question mark, <code>?</code>, after a parameter marks it as optional so that you don’t need to supply an argument. This subroutine takes one or two arguments:</p>
 </div>
 <div class="paragraph">
-<p>默认情况下，所有位置参数都需要参问号？后面的参数将其标记为可选，这样您就不需要提供参数。该子例程需要一个或两个参数：</p>
+<p>默认情况下，所有位置参数都需要参问号？后面的参数将其标记为可选，这样你就不需要提供参数。该子例程需要一个或两个参数：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14429,7 +14429,7 @@ one-or-two( 'Hamadryas', 'perlicus' );</code></pre>
 <p>If you have an optional argument you probably want a default value. Assign to a parameter to give it a default value. That assignment occurs only when you don’t supply an argument:</p>
 </div>
 <div class="paragraph">
-<p>如果您有可选参数，则可能需要默认值。分配给参数以为其提供默认值。只有在您不提供参数时才会发生该分配：</p>
+<p>如果你有可选参数，则可能需要默认值。分配给参数以为其提供默认值。只有在你不提供参数时才会发生该分配：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14461,7 +14461,7 @@ Got Hamadryas and perlicus</code></pre>
 <p>You can’t have required positional parameters after an optional one:</p>
 </div>
 <div class="paragraph">
-<p>在可选项之后，您不能拥有所需的位置参数：</p>
+<p>在可选项之后，你不能拥有所需的位置参数：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14489,7 +14489,7 @@ Cannot put required parameter $b after optional parameters</code></pre>
 <p>The parameter variables are filled in with read-only aliases to the original data. You see the same values but you can’t change them. This subroutine tries to add one to its value:</p>
 </div>
 <div class="paragraph">
-<p>参数变量用原始数据的只读别名填充。您看到相同的值但无法更改它们。此子例程尝试在其值中添加一个：</p>
+<p>参数变量用原始数据的只读别名填充。你看到相同的值但无法更改它们。此子例程尝试在其值中添加一个：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14503,7 +14503,7 @@ put increment( $a );</code></pre>
 <p>This doesn’t work because you can’t change the parameter variable:</p>
 </div>
 <div class="paragraph">
-<p>这不起作用，因为您无法更改参数变量：</p>
+<p>这不起作用，因为你无法更改参数变量：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14515,7 +14515,7 @@ match the type but require mutable arguments:</code></pre>
 <p>The read-only alias is the default. You can change that by applying traits to the parameters. Apply the `is copy`trait to get a mutable value that’s separate from the original argument. You can change it without changing the original value:</p>
 </div>
 <div class="paragraph">
-<p>只读别名是默认值。您可以通过将特征应用于参数来更改它。应用is copytrait以获取与原始参数分开的可变值。您可以在不更改原始值的情况下进行更改：</p>
+<p>只读别名是默认值。你可以通过将特征应用于参数来更改它。应用is copytrait以获取与原始参数分开的可变值。你可以在不更改原始值的情况下进行更改：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14568,7 +14568,7 @@ read-write( 5 );   # literal,  not mutable - ERROR!</code></pre>
 <p>You can constrain a parameter to a particular type. You already saw some of this in [Chapter 5](<a href="https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch05.html#camelia-blocks" class="bare">https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch05.html#camelia-blocks</a>):</p>
 </div>
 <div class="paragraph">
-<p>您可以将参数约束为特定类型。您已经在第5章中看到了一些内容：</p>
+<p>你可以将参数约束为特定类型。你已经在第5章中看到了一些内容：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14629,7 +14629,7 @@ two-args( { put "Got $^a and $^b" }, 'Hamadryas', 'perlicus' );</code></pre>
 <p>You can define the same subroutine name twice by giving it different signatures. Each of these is a candidate. A dispatcher decides which candidate to call based on your arguments. There are several things the dispatcher considers, in this order:</p>
 </div>
 <div class="paragraph">
-<p>您可以通过为其指定不同的签名来定义相同的子例程名称两次。这些都是候选人。调度员根据您的参数决定调用哪个候选者。调度员按以下顺序考虑以下几点：</p>
+<p>你可以通过为其指定不同的签名来定义相同的子例程名称两次。这些都是候选人。调度员根据你的参数决定调用哪个候选者。调度员按以下顺序考虑以下几点：</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -14651,7 +14651,7 @@ two-args( { put "Got $^a and $^b" }, 'Hamadryas', 'perlicus' );</code></pre>
 <p>To define candidates, declare the subroutine with <code>multi</code>. And since <code>multi</code> works on a subroutine by default (you’ll see methods in [Chapter 12](<a href="https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch12.html#camelia-classes)" class="bare">https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch12.html#camelia-classes)</a>), you can leave off the <code>sub</code>:</p>
 </div>
 <div class="paragraph">
-<p>要定义候选项，请使用multi声明子例程。并且由于默认情况下多个工作在子程序上（您将在第12章中看到方法），您可以不使用子工具：</p>
+<p>要定义候选项，请使用multi声明子例程。并且由于默认情况下多个工作在子程序上（你将在第12章中看到方法），你可以不使用子工具：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14665,7 +14665,7 @@ multi some-subroutine { ... }</code></pre>
 <p>You can also make a signature that has a literal value. These `multi`s are selected when the argument value is the same as the literal parameter:</p>
 </div>
 <div class="paragraph">
-<p>您还可以创建具有文字值的签名。当参数值与文字参数相同时，选择这些multis：</p>
+<p>你还可以创建具有文字值的签名。当参数值与文字参数相同时，选择这些multis：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14695,7 +14695,7 @@ Got something else</code></pre>
 <p>What if you wanted a [<code>Rat</code>](<a href="https://docs.raku.org/type/Rat.html" class="bare">https://docs.raku.org/type/Rat.html</a>) as one of the literal values? Put the value inside <code>&lt;&gt;</code> so the compiler doesn’t think the <code>/</code> is the start of a regex ([Chapter 15](<a href="https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch15.html#camelia-regex1)" class="bare">https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch15.html#camelia-regex1)</a>):</p>
 </div>
 <div class="paragraph">
-<p>如果您想将鼠作为字面值之一，该怎么办？将值放在&lt;&gt;中，这样编译器就不会认为/是正则表达式的开头（第15章）：</p>
+<p>如果你想将鼠作为字面值之一，该怎么办？将值放在&lt;&gt;中，这样编译器就不会认为/是正则表达式的开头（第15章）：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14729,7 +14729,7 @@ something( 'Hello' );</code></pre>
 <p>That implementation has two special cases for <code>0</code> and <code>1</code>. You have to provide special code to handle those. You can move those special cases away from the main idea by giving each case its own <code>multi</code>:</p>
 </div>
 <div class="paragraph">
-<p>该实现有两个特殊情况0和1.您必须提供特殊代码来处理这些。您可以通过为每个案例提供自己的多个来移动这些特殊情况远离主要想法：</p>
+<p>该实现有两个特殊情况0和1.你必须提供特殊代码来处理这些。你可以通过为每个案例提供自己的多个来移动这些特殊情况远离主要想法：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14749,7 +14749,7 @@ put fibonacci(5);</code></pre>
 <p>Notice that you can’t use <code>&amp;?ROUTINE</code> because <code>$n-1</code> might not be handled by the same subroutine.</p>
 </div>
 <div class="paragraph">
-<p>请注意，您不能使用＆？ROUTINE，因为$ n-1可能无法由同一子例程处理。</p>
+<p>请注意，你不能使用＆？ROUTINE，因为$ n-1可能无法由同一子例程处理。</p>
 </div>
 </div>
 <div class="sect3">
@@ -14774,7 +14774,7 @@ something( 1, 3 );
 <p>The output shows that you called two different subroutines:</p>
 </div>
 <div class="paragraph">
-<p>输出显示您调用了两个不同的子例程：</p>
+<p>输出显示你调用了两个不同的子例程：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14811,7 +14811,7 @@ multi something ( $a, $b ) { put "Two arguments"; }</code></pre>
 <p>This sort of dispatch depends on <strong>arity</strong>—the number of arguments that you supply. This means that the compiler also knows when you try to define subroutines with the same arity, like this:</p>
 </div>
 <div class="paragraph">
-<p>这种调度取决于arity  - 您提供的参数数量。这意味着编译器也知道您何时尝试使用相同的arity定义子例程，如下所示：</p>
+<p>这种调度取决于arity  - 你提供的参数数量。这意味着编译器也知道你何时尝试使用相同的arity定义子例程，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14839,7 +14839,7 @@ multi something ( $b ) { put "Also one arguments"; } # Error</code></pre>
 <p>You can also choose amongst `multi`s by parameter type. These each take the same number of arguments but distinguish them by type:</p>
 </div>
 <div class="paragraph">
-<p>您还可以通过参数类型在multis中进行选择。这些参数都采用相同数量的参数，但按类型区分：</p>
+<p>你还可以通过参数类型在multis中进行选择。这些参数都采用相同数量的参数，但按类型区分：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14866,7 +14866,7 @@ Str arguments</code></pre>
 <p>You might have the different subroutines take the same type. In those cases you can select the right one by a custom constraint. The dispatcher chooses the most specific one:</p>
 </div>
 <div class="paragraph">
-<p>您可能有不同的子例程采用相同的类型。在这些情况下，您可以通过自定义约束选择正确的约束。调度员选择最具体的一个：</p>
+<p>你可能有不同的子例程采用相同的类型。在这些情况下，你可以通过自定义约束选择正确的约束。调度员选择最具体的一个：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14881,7 +14881,7 @@ something( 538 );</code></pre>
 <p>Notice that this works regardless of the order in which you define the subroutines:</p>
 </div>
 <div class="paragraph">
-<p>请注意，无论您定义子例程的顺序如何，这都有效：</p>
+<p>请注意，无论你定义子例程的顺序如何，这都有效：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14943,7 +14943,7 @@ something( 137 );</code></pre>
 <p>What if you do <strong>not</strong> want multiple definitions with the same name? Declare one of the subroutines without`multi`:</p>
 </div>
 <div class="paragraph">
-<p>如果您不希望使用相同名称的多个定义，该怎么办？声明一个没有多个子程序的子程序：</p>
+<p>如果你不希望使用相同名称的多个定义，该怎么办？声明一个没有多个子程序的子程序：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14974,7 +14974,7 @@ Redeclaration of routine 'something' (did you mean to declare a multi-sub?)</cod
 <p>Named parameters do not depend on their position in the parameter or argument lists. By default they are optional. You can specify them anywhere in the arguments and in any order. These are often used to set options for a routine or method.</p>
 </div>
 <div class="paragraph">
-<p>命名参数不依赖于它们在参数或参数列表中的位置。默认情况下，它们是可选的您可以在参数中的任何位置以任何顺序指定它们。这些通常用于设置例程或方法的选项。</p>
+<p>命名参数不依赖于它们在参数或参数列表中的位置。默认情况下，它们是可选的你可以在参数中的任何位置以任何顺序指定它们。这些通常用于设置例程或方法的选项。</p>
 </div>
 <div class="paragraph">
 <p>Specify named parameters with a colon before the parameter variable. In the signature, use the unquoted parameter variable name, the fat arrow, and the value that you want to supply. The order of the names or values does not matter:</p>
@@ -14996,7 +14996,7 @@ put add( b =&gt; 36, a =&gt; 1  );  # Same thing</code></pre>
 <p>For this to work you cannot quote the keys or use variables as the keys. This call is actually two [<code>Pair</code>](<a href="https://docs.raku.org/type/Pair.html" class="bare">https://docs.raku.org/type/Pair.html</a>) objects treated as positional parameters:</p>
 </div>
 <div class="paragraph">
-<p>为此，您无法引用键或使用变量作为键。这个调用实际上是两个被视为位置参数的Pair对象：</p>
+<p>为此，你无法引用键或使用变量作为键。这个调用实际上是两个被视为位置参数的Pair对象：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15008,7 +15008,7 @@ put add( $keya =&gt; 1, $keyb =&gt; 36 );  # Will not work!</code></pre>
 <p>More often you’ll use the adverb syntax. With values that are positive integers you can specify the value first and the name after it:</p>
 </div>
 <div class="paragraph">
-<p>更常见的是，您将使用副词语法。对于正整数值，您可以先指定值，然后指定其后的名称：</p>
+<p>更常见的是，你将使用副词语法。对于正整数值，你可以先指定值，然后指定其后的名称：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15036,7 +15036,7 @@ put add( :36b ); # 36</code></pre>
 <p>You don’t have to use the same names for the arguments and the parameter variables. In complicated code in <code>power-of</code> you might not want to retype <code>$base</code> or <code>$power</code> every time. The subroutine still uses the long names for the interface but the implementation can use the short names:</p>
 </div>
 <div class="paragraph">
-<p>您不必对参数和参数变量使用相同的名称。在功能复杂的代码中，您可能不希望每次都重新键入$ base或$ power。子例程仍然使用接口的长名称，但实现可以使用短名称：</p>
+<p>你不必对参数和参数变量使用相同的名称。在功能复杂的代码中，你可能不希望每次都重新键入$ base或$ power。子例程仍然使用接口的长名称，但实现可以使用短名称：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15076,7 +15076,7 @@ any-args( :state );  #  True</code></pre>
 <p>A positional parameter is required simply because it exists, and you have to mark it as optional to make it such. That’s reversed with named parameters, which are optional unless you say otherwise. The parameters get their default values if you don’t specify them:</p>
 </div>
 <div class="paragraph">
-<p>仅需要位置参数因为它存在，并且您必须将其标记为可选，以使其成为可能。这与命名参数相反，除非您另有说明，否则这些参数是可选的。如果您不指定参数，参数将获得其默认值：</p>
+<p>仅需要位置参数因为它存在，并且你必须将其标记为可选，以使其成为可能。这与命名参数相反，除非你另有说明，否则这些参数是可选的。如果你不指定参数，参数将获得其默认值：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15105,7 +15105,7 @@ not-required();            # Error!</code></pre>
 <p>The error tells you that you forgot an argument:</p>
 </div>
 <div class="paragraph">
-<p>该错误告诉您忘记了一个参数：</p>
+<p>该错误告诉你忘记了一个参数：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15119,7 +15119,7 @@ not-required();            # Error!</code></pre>
 <p>Rather than define every named parameter, you can accept all of them. Don’t specify any in your parameters and they all show up in <code>%<em></code>. This is the equivalent of <code>@</em></code> but for named parameters. Each routine gets its own version of this variable:</p>
 </div>
 <div class="paragraph">
-<p>您可以接受所有参数，而不是定义每个命名参数。不要在参数中指定任何参数，它们都显示在％_中。这相当于@_但是对于命名参数。每个例程都有自己的变量版本：</p>
+<p>你可以接受所有参数，而不是定义每个命名参数。不要在参数中指定任何参数，它们都显示在％_中。这相当于@_但是对于命名参数。每个例程都有自己的变量版本：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15157,7 +15157,7 @@ any-args( genus =&gt; 'Hamadryas', species =&gt; 'perlicus' );</code></pre>
 <p>That’s how that implicit <code>%_</code> worked. When you use it in a subroutine you automatically get a slurpy for it in the signature:</p>
 </div>
 <div class="paragraph">
-<p>这就是隐含的％_的工作方式。当您在子例程中使用它时，您会在签名中自动获取它：</p>
+<p>这就是隐含的％_的工作方式。当你在子例程中使用它时，你会在签名中自动获取它：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15172,7 +15172,7 @@ sub any-args ( *%_ ) { say %_ }</code></pre>
 <p>You can mix positional and named parameters. If you use <code>@<em></code> and <code>%</em></code> in the code they are both in the implicit signature:</p>
 </div>
 <div class="paragraph">
-<p>您可以混合位置和命名参数。如果在代码中使用@<em>和％</em>，则它们都在隐式签名中：</p>
+<p>你可以混合位置和命名参数。如果在代码中使用@<em>和％</em>，则它们都在隐式签名中：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15191,7 +15191,7 @@ any-args( 'Hamadryas', 137, :status, :color('Purple') );
 <p>You can mix in the named parameters in any order that you like. The positional parameters have to be in the right order but named parameters can come between them:</p>
 </div>
 <div class="paragraph">
-<p>您可以按您喜欢的任何顺序混合命名参数。位置参数必须是正确的顺序，但命名参数可以介于它们之间：</p>
+<p>你可以按你喜欢的任何顺序混合命名参数。位置参数必须是正确的顺序，但命名参数可以介于它们之间：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15202,7 +15202,7 @@ any-args( 'Hamadryas', 137, :status, :color('Purple') );
 <p>It’s the same if you name the parameters yourself:</p>
 </div>
 <div class="paragraph">
-<p>如果您自己命名参数，则相同：</p>
+<p>如果你自己命名参数，则相同：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15222,7 +15222,7 @@ any-args( :color('Purple'), 'Hamadryas', :status, 137  );</code></pre>
 <p>You can constrain the return values of subroutines. If you try to return a value that doesn’t fit the restriction you get a runtime [<code>Exception</code>](<a href="https://docs.raku.org/type/Exception.html" class="bare">https://docs.raku.org/type/Exception.html</a>). Specify the type after the signature with a <code>-&#8594;</code>. You want this subroutine to return a defined [<code>Int</code>](<a href="https://docs.raku.org/type/Int.html" class="bare">https://docs.raku.org/type/Int.html</a>):</p>
 </div>
 <div class="paragraph">
-<p>您可以约束子例程的返回值。如果您尝试返回不符合限制的值，则会获得运行时异常。使用 - &gt;指定签名后的类型。您希望此子例程返回已定义的Int：</p>
+<p>你可以约束子例程的返回值。如果你尝试返回不符合限制的值，则会获得运行时异常。使用 - &gt;指定签名后的类型。你希望此子例程返回已定义的Int：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15259,7 +15259,7 @@ put returns-an-int( 1, 3 );</code></pre>
 <p>At runtime you get an error because the types do not match:</p>
 </div>
 <div class="paragraph">
-<p>在运行时，您会收到错误，因为类型不匹配：</p>
+<p>在运行时，你会收到错误，因为类型不匹配：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15281,7 +15281,7 @@ put returns-an-int( 1, 3 );</code></pre>
 <p>You might also see these forms that do the same thing:</p>
 </div>
 <div class="paragraph">
-<p>您可能还会看到这些表单执行相同的操作：</p>
+<p>你可能还会看到这些表单执行相同的操作：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15294,7 +15294,7 @@ my Int sub returns-an-int ( Int $a, Int $b ) { $a + $b }</code></pre>
 <p>No matter which way you define the return type you can always return either <code>Nil</code> or a [<code>Failure</code>](<a href="https://docs.raku.org/type/Failure.html" class="bare">https://docs.raku.org/type/Failure.html</a>) object (usually to signal that something went wrong). All of these calls “succeed” even though some of them don’t return a [<code>Str</code>](<a href="https://docs.raku.org/type/Str.html" class="bare">https://docs.raku.org/type/Str.html</a>):</p>
 </div>
 <div class="paragraph">
-<p>无论您以何种方式定义返回类型，都可以始终返回Nil或Failure对象（通常表示出现问题）。所有这些调用都“成功”，即使其中一些不返回Str：</p>
+<p>无论你以何种方式定义返回类型，都可以始终返回Nil或Failure对象（通常表示出现问题）。所有这些调用都“成功”，即使其中一些不返回Str：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15313,7 +15313,7 @@ put does-not-work( 538 ).^name;   # Failure</code></pre>
 <p>You can’t make complex checks in the constraint, but you can define a subset that does these. Here’s one that returns either a [<code>Rat</code>](<a href="https://docs.raku.org/type/Rat.html" class="bare">https://docs.raku.org/type/Rat.html</a>) or, if you try to divide by zero, an <code>Inf</code>:</p>
 </div>
 <div class="paragraph">
-<p>您不能在约束中进行复杂检查，但可以定义执行这些检查的子集。这里有一个返回Rat或者，如果你试图除以零，一个Inf：</p>
+<p>你不能在约束中进行复杂检查，但可以定义执行这些检查的子集。这里有一个返回Rat或者，如果你试图除以零，一个Inf：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15338,7 +15338,7 @@ put divide( 1, 0 );  # Inf</code></pre>
 <p>Much of the work of ensuring your program does the right things can be done with the judicious use of constraints on the inputs and outputs of subroutines. With a little planning these features will catch the cases that you did not expect and that shouldn’t show up in your program. Once they’ve been found you can work your way through the code to find them even sooner—and the sooner you find them, the easier your debugging life should be.</p>
 </div>
 <div class="paragraph">
-<p>确保您的程序做正确的事情的大部分工作可以通过明智地使用子程序的输入和输出的约束来完成。通过一些计划，这些功能将捕获您不期望的并且不应该出现在您的程序中的情况。一旦找到它们，您就可以通过代码更快地找到它们 - 并且越早找到它们，您的调试生活就越容易。</p>
+<p>确保你的程序做正确的事情的大部分工作可以通过明智地使用子程序的输入和输出的约束来完成。通过一些计划，这些功能将捕获你不期望的并且不应该出现在你的程序中的情况。一旦找到它们，你就可以通过代码更快地找到它们 - 并且越早找到它们，你的调试生活就越容易。</p>
 </div>
 </div>
 </div>
@@ -17223,7 +17223,7 @@ put $cracker.binomial-name; put $cracker.common-name;</code></pre>
 <p>You can make a [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html" class="bare">https://docs.raku.org/type/Junction.html</a>) from an [<code>Array</code>](<a href="https://docs.raku.org/type/Array.html" class="bare">https://docs.raku.org/type/Array.html</a>) or any other [<code>Positional</code>](<a href="https://docs.raku.org/type/Positional.html" class="bare">https://docs.raku.org/type/Positional.html</a>):</p>
 </div>
 <div class="paragraph">
-<p>您可以从[数组](<a href="https://docs.raku.org/type/Array.html)或任何其他" class="bare">https://docs.raku.org/type/Array.html)或任何其他</a> [<code>Positional</code>](<a href="https://docs.raku.org/type/Positional.html" class="bare">https://docs.raku.org/type/Positional.html</a>) 创建一个  [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)：" class="bare">https://docs.raku.org/type/Junction.html)：</a></p>
+<p>你可以从[数组](<a href="https://docs.raku.org/type/Array.html)或任何其他" class="bare">https://docs.raku.org/type/Array.html)或任何其他</a> [<code>Positional</code>](<a href="https://docs.raku.org/type/Positional.html" class="bare">https://docs.raku.org/type/Positional.html</a>) 创建一个  [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)：" class="bare">https://docs.raku.org/type/Junction.html)：</a></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17311,7 +17311,7 @@ if %hash{$n}:exists {
 <p>When you operate on a [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html" class="bare">https://docs.raku.org/type/Junction.html</a>) your code may distribute (autothread) that operation over all of its values to produce a [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html" class="bare">https://docs.raku.org/type/Junction.html</a>) of intermediate results. The first step might look like this:</p>
 </div>
 <div class="paragraph">
-<p>当您在 [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html" class="bare">https://docs.raku.org/type/Junction.html</a>) 上操作时，您的代码可以在其所有值上分配（自动读取）该操作，以产生中间结果的 [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)。第一步可能如下所示：" class="bare">https://docs.raku.org/type/Junction.html)。第一步可能如下所示：</a></p>
+<p>当你在 [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html" class="bare">https://docs.raku.org/type/Junction.html</a>) 上操作时，你的代码可以在其所有值上分配（自动读取）该操作，以产生中间结果的 [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)。第一步可能如下所示：" class="bare">https://docs.raku.org/type/Junction.html)。第一步可能如下所示：</a></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17352,7 +17352,7 @@ if True {
 <p>You don’t have to define the [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html" class="bare">https://docs.raku.org/type/Junction.html</a>) in the condition. It might already be in a variable and ready for use:</p>
 </div>
 <div class="paragraph">
-<p>您不必在条件中定义  [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)。它可能已经在变量中并且可以使用：" class="bare">https://docs.raku.org/type/Junction.html)。它可能已经在变量中并且可以使用：</a></p>
+<p>你不必在条件中定义  [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)。它可能已经在变量中并且可以使用：" class="bare">https://docs.raku.org/type/Junction.html)。它可能已经在变量中并且可以使用：</a></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17433,13 +17433,13 @@ if $n == $any {
 <p>Raku uses <code>|</code>, <code>&amp;</code>, and <code>^</code> to create [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)s" class="bare">https://docs.raku.org/type/Junction.html)s</a>. You might be used to these as numeric bit operators in other languages. You’ll find those now are called <code>+|</code>, <code>+^</code>, and <code>+&amp;</code>. That leading <code>+</code> denotes the numeric flavor.</p>
 </div>
 <div class="paragraph">
-<p>Raku 使用 <code>|</code>，<code>＆</code> 和 <code>^</code> 来创建 [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)。您可能习惯使用其他语言中的数字位运算符。您会发现现在称为" class="bare">https://docs.raku.org/type/Junction.html)。您可能习惯使用其他语言中的数字位运算符。您会发现现在称为</a> <code>+|</code>，<code>+^</code> 和 <code>+&amp;</code> 。前导 <code>+</code> 表示数字风味。</p>
+<p>Raku 使用 <code>|</code>，<code>＆</code> 和 <code>^</code> 来创建 [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)。你可能习惯使用其他语言中的数字位运算符。你会发现现在称为" class="bare">https://docs.raku.org/type/Junction.html)。你可能习惯使用其他语言中的数字位运算符。你会发现现在称为</a> <code>+|</code>，<code>+^</code> 和 <code>+&amp;</code> 。前导 <code>+</code> 表示数字风味。</p>
 </div>
 <div class="paragraph">
 <p>You can change [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)s" class="bare">https://docs.raku.org/type/Junction.html)s</a> by affecting their values. Numerically adding to a [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html" class="bare">https://docs.raku.org/type/Junction.html</a>) adds to every value in it:</p>
 </div>
 <div class="paragraph">
-<p>您可以通过影响其值来更改 [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)。以数字方式添加到" class="bare">https://docs.raku.org/type/Junction.html)。以数字方式添加到</a>  [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html" class="bare">https://docs.raku.org/type/Junction.html</a>) 会增加其中的每个值：</p>
+<p>你可以通过影响其值来更改 [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)。以数字方式添加到" class="bare">https://docs.raku.org/type/Junction.html)。以数字方式添加到</a>  [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html" class="bare">https://docs.raku.org/type/Junction.html</a>) 会增加其中的每个值：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17454,7 +17454,7 @@ if $junction %% 2 {
 <p>The output shows that you were able to add one to each of the values:</p>
 </div>
 <div class="paragraph">
-<p>输出显示您可以为每个值加一：</p>
+<p>输出显示你可以为每个值加一：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17465,7 +17465,7 @@ if $junction %% 2 {
 <p>This generally applies to all of the operations, and you can get quite creative with that. What if you add two <code>any</code>[<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)s?" class="bare">https://docs.raku.org/type/Junction.html)s?</a> Think about this for a minute before you read ahead to the output:</p>
 </div>
 <div class="paragraph">
-<p>这通常适用于所有操作，您可以从中获得相当的创意。如果你将两个 <code>any</code>  [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html" class="bare">https://docs.raku.org/type/Junction.html</a>) 相加会怎样？在继续读到输出之前，请考虑一分钟：</p>
+<p>这通常适用于所有操作，你可以从中获得相当的创意。如果你将两个 <code>any</code>  [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html" class="bare">https://docs.raku.org/type/Junction.html</a>) 相加会怎样？在继续读到输出之前，请考虑一分钟：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17488,7 +17488,7 @@ put "Result is $any-any";</code></pre>
 <p>That’s an <code>any</code> of <code>any`s! Suppose you wanted to check if that value was less than `17</code>. This virtual series of steps finds the answer:</p>
 </div>
 <div class="paragraph">
-<p>这是一个里面含有 <code>any</code> 的 <code>any</code>。假设您要检查该值是否小于 <code>17</code>。此虚拟系列步骤可找到答案：</p>
+<p>这是一个里面含有 <code>any</code> 的 <code>any</code>。假设你要检查该值是否小于 <code>17</code>。此虚拟系列步骤可找到答案：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17534,7 +17534,7 @@ if $all-of-u.contains: 'u' {
 <p>Perhaps you want to check that all of the values are a particular type. In this example there’s a [<code>Str</code>](<a href="https://docs.raku.org/type/Str.html" class="bare">https://docs.raku.org/type/Str.html</a>) in <code>@mixed-types</code>:</p>
 </div>
 <div class="paragraph">
-<p>也许您想要检查所有值是否为特定类型。在这个例子中，<code>@mixed-types</code> 中有一个 [<code>Str</code>](<a href="https://docs.raku.org/type/Str.html)：" class="bare">https://docs.raku.org/type/Str.html)：</a></p>
+<p>也许你想要检查所有值是否为特定类型。在这个例子中，<code>@mixed-types</code> 中有一个 [<code>Str</code>](<a href="https://docs.raku.org/type/Str.html)：" class="bare">https://docs.raku.org/type/Str.html)：</a></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17570,7 +17570,7 @@ else {
 <p>You can create an <code>all</code> [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html" class="bare">https://docs.raku.org/type/Junction.html</a>) with the <code>&amp;</code>:</p>
 </div>
 <div class="paragraph">
-<p>您可以使用 <code>&amp;</code> 创建一个 <code>all</code> [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)：" class="bare">https://docs.raku.org/type/Junction.html)：</a></p>
+<p>你可以使用 <code>&amp;</code> 创建一个 <code>all</code> [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)：" class="bare">https://docs.raku.org/type/Junction.html)：</a></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17620,7 +17620,7 @@ if $all-of-u.contains: 'u' {
 <p>You can create a <code>one</code> [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html" class="bare">https://docs.raku.org/type/Junction.html</a>) with the <code>^</code>:</p>
 </div>
 <div class="paragraph">
-<p>您可以使用 <code>^</code> 创建 <code>one</code>[<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)：" class="bare">https://docs.raku.org/type/Junction.html)：</a></p>
+<p>你可以使用 <code>^</code> 创建 <code>one</code>[<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)：" class="bare">https://docs.raku.org/type/Junction.html)：</a></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17651,7 +17651,7 @@ if $all-of-u.contains: 'u' {
 <p>EXERCISE 14.3Use <code>none</code> to test if no numbers you specify on the command line are prime. Once you’ve done that, use <code>none`to test that some numbers in an [`Array</code>](<a href="https://docs.raku.org/type/Array.html" class="bare">https://docs.raku.org/type/Array.html</a>) are prime.</p>
 </div>
 <div class="paragraph">
-<p>练习14.3如果您在命令行中指定的数字不是素数，则使用 <code>none</code> 来测试。完成后，使用 <code>none</code> 测试，数组中的某些数字是素数。</p>
+<p>练习14.3如果你在命令行中指定的数字不是素数，则使用 <code>none</code> 来测试。完成后，使用 <code>none</code> 测试，数组中的某些数字是素数。</p>
 </div>
 </div>
 <div class="sect3">
@@ -17666,7 +17666,7 @@ if $all-of-u.contains: 'u' {
 <p>You can apply an operation to each value with a hyperoperator ([Chapter 6](<a href="https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch06.html#camelia-lists)" class="bare">https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch06.html#camelia-lists)</a>). This one adds one to each element:</p>
 </div>
 <div class="paragraph">
-<p>您可以使用超运算符对每个值应用操作（第6章）。这个为每个元素加一：</p>
+<p>你可以使用超运算符对每个值应用操作（第6章）。这个为每个元素加一：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17755,19 +17755,19 @@ put add( 1, Inf ); # Inf</code></pre>
 <p>[<code>Set</code>](<a href="https://docs.raku.org/type/Set.html)s" class="bare">https://docs.raku.org/type/Set.html)s</a> are another way to combine values. They aren’t like [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)s" class="bare">https://docs.raku.org/type/Junction.html)s</a>, where several values can act like one value; they combine zero or more values as its own thingy that you can inspect. Each value can be in the [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html)only" class="bare">https://docs.raku.org/type/Set.html)only</a> once (although there are weighted [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html)s" class="bare">https://docs.raku.org/type/Set.html)s</a> I won’t write about), and once created the [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html" class="bare">https://docs.raku.org/type/Set.html</a>) is fixed.</p>
 </div>
 <div class="paragraph">
-<p>[<code>Set</code>](<a href="https://docs.raku.org/type/Set.html" class="bare">https://docs.raku.org/type/Set.html</a>) 是另一种组合值的方法。它们不像 [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)，其中几个值可以像一个值一样;它们将零个或多个值组合为您可以检查的自己的东西。每个值都只可以在" class="bare">https://docs.raku.org/type/Junction.html)，其中几个值可以像一个值一样;它们将零个或多个值组合为您可以检查的自己的东西。每个值都只可以在</a> [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html" class="bare">https://docs.raku.org/type/Set.html</a>) 中一次（虽然有加权集合我不会写），一旦创建了集合就固定了。</p>
+<p>[<code>Set</code>](<a href="https://docs.raku.org/type/Set.html" class="bare">https://docs.raku.org/type/Set.html</a>) 是另一种组合值的方法。它们不像 [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)，其中几个值可以像一个值一样;它们将零个或多个值组合为你可以检查的自己的东西。每个值都只可以在" class="bare">https://docs.raku.org/type/Junction.html)，其中几个值可以像一个值一样;它们将零个或多个值组合为你可以检查的自己的东西。每个值都只可以在</a> [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html" class="bare">https://docs.raku.org/type/Set.html</a>) 中一次（虽然有加权集合我不会写），一旦创建了集合就固定了。</p>
 </div>
 <div class="paragraph">
 <p>A [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html" class="bare">https://docs.raku.org/type/Set.html</a>) is a type of [<code>Associative</code>](<a href="https://docs.raku.org/type/Associative.html" class="bare">https://docs.raku.org/type/Associative.html</a>), so many of the things you already know about those work on [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html)s" class="bare">https://docs.raku.org/type/Set.html)s</a>.</p>
 </div>
 <div class="paragraph">
-<p>集合是一种[关联](<a href="https://docs.raku.org/type/Associative.html)类型，因此您已经了解的很多关于">集合</a>(<a href="https://docs.raku.org/type/Set.html)的内容。" class="bare">https://docs.raku.org/type/Set.html)的内容。</a></p>
+<p>集合是一种[关联](<a href="https://docs.raku.org/type/Associative.html)类型，因此你已经了解的很多关于">集合</a>(<a href="https://docs.raku.org/type/Set.html)的内容。" class="bare">https://docs.raku.org/type/Set.html)的内容。</a></p>
 </div>
 <div class="paragraph">
 <p>You can create a [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html" class="bare">https://docs.raku.org/type/Set.html</a>) with a routine or a coercer. Each thingy in the [<code>List</code>](<a href="https://docs.raku.org/type/List.html" class="bare">https://docs.raku.org/type/List.html</a>) is a member of the [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html" class="bare">https://docs.raku.org/type/Set.html</a>). These are the same:</p>
 </div>
 <div class="paragraph">
-<p>您可以使用例程或强制器创建[<code>集合</code>](<a href="https://docs.raku.org/type/Set.html)。" class="bare">https://docs.raku.org/type/Set.html)。</a> [<code>列表</code>](<a href="https://docs.raku.org/type/List.html)中的每个东西都是" class="bare">https://docs.raku.org/type/List.html)中的每个东西都是</a> [<code>集合</code>](<a href="https://docs.raku.org/type/Set.html)成员。这些都是一样的：" class="bare">https://docs.raku.org/type/Set.html)成员。这些都是一样的：</a></p>
+<p>你可以使用例程或强制器创建[<code>集合</code>](<a href="https://docs.raku.org/type/Set.html)。" class="bare">https://docs.raku.org/type/Set.html)。</a> [<code>列表</code>](<a href="https://docs.raku.org/type/List.html)中的每个东西都是" class="bare">https://docs.raku.org/type/List.html)中的每个东西都是</a> [<code>集合</code>](<a href="https://docs.raku.org/type/Set.html)成员。这些都是一样的：" class="bare">https://docs.raku.org/type/Set.html)成员。这些都是一样的：</a></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17779,7 +17779,7 @@ put add( 1, Inf ); # Inf</code></pre>
 <p>You can store any combination or mixture of thingys, including type objects:</p>
 </div>
 <div class="paragraph">
-<p>您可以存储任何组合或混合物，包括类型对象：</p>
+<p>你可以存储任何组合或混合物，包括类型对象：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17803,7 +17803,7 @@ put set( 1, 2, 2, 3, 3, 3 ).elems; # 3</code></pre>
 <p>You can check that a value is in the [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html" class="bare">https://docs.raku.org/type/Set.html</a>) with the <code>(elem)</code> operator:</p>
 </div>
 <div class="paragraph">
-<p>您可以使用`(elem)<code>运算符检查[`集合</code>](<a href="https://docs.raku.org/type/Set.html)中的值：" class="bare">https://docs.raku.org/type/Set.html)中的值：</a></p>
+<p>你可以使用`(elem)<code>运算符检查[`集合</code>](<a href="https://docs.raku.org/type/Set.html)中的值：" class="bare">https://docs.raku.org/type/Set.html)中的值：</a></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17863,7 +17863,7 @@ put 'Number is not in the set' if $set ∌ '♥';</code></pre>
 <p>You can compare [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html)s" class="bare">https://docs.raku.org/type/Set.html)s</a> to other [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html)s" class="bare">https://docs.raku.org/type/Set.html)s</a>. Another [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html" class="bare">https://docs.raku.org/type/Set.html</a>) that contains only some of the members is a subset. A “strict” or “proper” subset is one that is smaller than the [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html" class="bare">https://docs.raku.org/type/Set.html</a>) and only contains elements of the [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html" class="bare">https://docs.raku.org/type/Set.html</a>). Another way to say that is a proper subset is always smaller. The <code>(&lt;)</code> (or <code>⊂</code>) operator does that with the opening of the angle toward the larger [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html" class="bare">https://docs.raku.org/type/Set.html</a>). The order of elements does not matter:</p>
 </div>
 <div class="paragraph">
-<p>您可以将[<code>集合</code>](<a href="https://docs.raku.org/type/Set.html)与其他"><code>集合</code></a>(<a href="https://docs.raku.org/type/Set.html)进行比较。另一个仅包含部分成员的"><code>集合</code></a>(<a href="https://docs.raku.org/type/Set.html)是子集。" class="bare">https://docs.raku.org/type/Set.html)是子集。</a> “严格”或“适当”子集是小于[<code>集合</code>](<a href="https://docs.raku.org/type/Set.html)的子集，仅包含"><code>集合</code></a>(<a href="https://docs.raku.org/type/Set.html)的元素。另一种说法是适当的子集总是更小。" class="bare">https://docs.raku.org/type/Set.html)的元素。另一种说法是适当的子集总是更小。</a> <code>(&lt;)</code>（或 <code>⊂</code>）运算符通过朝向较大的[<code>集合</code>](<a href="https://docs.raku.org/type/Set.html)开放角度来执行此操作。元素的顺序无关紧要：" class="bare">https://docs.raku.org/type/Set.html)开放角度来执行此操作。元素的顺序无关紧要：</a></p>
+<p>你可以将[<code>集合</code>](<a href="https://docs.raku.org/type/Set.html)与其他"><code>集合</code></a>(<a href="https://docs.raku.org/type/Set.html)进行比较。另一个仅包含部分成员的"><code>集合</code></a>(<a href="https://docs.raku.org/type/Set.html)是子集。" class="bare">https://docs.raku.org/type/Set.html)是子集。</a> “严格”或“适当”子集是小于[<code>集合</code>](<a href="https://docs.raku.org/type/Set.html)的子集，仅包含"><code>集合</code></a>(<a href="https://docs.raku.org/type/Set.html)的元素。另一种说法是适当的子集总是更小。" class="bare">https://docs.raku.org/type/Set.html)的元素。另一种说法是适当的子集总是更小。</a> <code>(&lt;)</code>（或 <code>⊂</code>）运算符通过朝向较大的[<code>集合</code>](<a href="https://docs.raku.org/type/Set.html)开放角度来执行此操作。元素的顺序无关紧要：" class="bare">https://docs.raku.org/type/Set.html)开放角度来执行此操作。元素的顺序无关紧要：</a></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17915,7 +17915,7 @@ set( 3, 1, 7 )   ⊈   set( 1, 3  );    # True</code></pre>
 <p>You can also have supersets. That’s just a matter of which one you allow to be the larger [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html" class="bare">https://docs.raku.org/type/Set.html</a>). So far you’ve seen examples where you expected the larger [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html" class="bare">https://docs.raku.org/type/Set.html</a>) to be to the right of the operator. Flip those operators around so you expect the larger [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html" class="bare">https://docs.raku.org/type/Set.html</a>) to be on the left:</p>
 </div>
 <div class="paragraph">
-<p>你也可以有超集。这只是一个你允许成为更大的[<code>集合</code>](<a href="https://docs.raku.org/type/Set.html)的问题。到目前为止，您已经看到过您希望较大的"><code>集合</code></a>(<a href="https://docs.raku.org/type/Set.html)位于运算符右侧的示例。翻转这些运算符，以便您希望较大的"><code>集合</code></a>(<a href="https://docs.raku.org/type/Set.html)位于左侧：" class="bare">https://docs.raku.org/type/Set.html)位于左侧：</a></p>
+<p>你也可以有超集。这只是一个你允许成为更大的[<code>集合</code>](<a href="https://docs.raku.org/type/Set.html)的问题。到目前为止，你已经看到过你希望较大的"><code>集合</code></a>(<a href="https://docs.raku.org/type/Set.html)位于运算符右侧的示例。翻转这些运算符，以便你希望较大的"><code>集合</code></a>(<a href="https://docs.raku.org/type/Set.html)位于左侧：" class="bare">https://docs.raku.org/type/Set.html)位于左侧：</a></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -17949,7 +17949,7 @@ set( 3, 1, 7 )  ⊅    set( 1, 3  );    # True</code></pre>
 <p>EXERCISE 14.5In [Chapter 9](<a href="https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch09.html#camelia-hashes" class="bare">https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch09.html#camelia-hashes</a>) you used a [<code>Map</code>](<a href="https://docs.raku.org/type/Map.html" class="bare">https://docs.raku.org/type/Map.html</a>) to check allowed values. Do the same thing with a [<code>List</code>](<a href="https://docs.raku.org/type/List.html" class="bare">https://docs.raku.org/type/List.html</a>). Prompt for some starting colors (perhaps all on one line that you break up into elements). Continue to prompt for colors and report if the color was one of the initial colors. Can you do this ignoring case?</p>
 </div>
 <div class="paragraph">
-<p>练习14.5 在第9章中，您使用了 [<code>Map</code>](<a href="https://docs.raku.org/type/Map.html" class="bare">https://docs.raku.org/type/Map.html</a>) 来检查允许的值。用[<code>列表</code>](<a href="https://docs.raku.org/type/List.html)做同样的事情。提示一些起始颜色（可能在一行中分解为元素）。继续提示颜色并报告颜色是否为初始颜色之一。你能忽略这个案子吗？" class="bare">https://docs.raku.org/type/List.html)做同样的事情。提示一些起始颜色（可能在一行中分解为元素）。继续提示颜色并报告颜色是否为初始颜色之一。你能忽略这个案子吗？</a></p>
+<p>练习14.5 在第9章中，你使用了 [<code>Map</code>](<a href="https://docs.raku.org/type/Map.html" class="bare">https://docs.raku.org/type/Map.html</a>) 来检查允许的值。用[<code>列表</code>](<a href="https://docs.raku.org/type/List.html)做同样的事情。提示一些起始颜色（可能在一行中分解为元素）。继续提示颜色并报告颜色是否为初始颜色之一。你能忽略这个案子吗？" class="bare">https://docs.raku.org/type/List.html)做同样的事情。提示一些起始颜色（可能在一行中分解为元素）。继续提示颜色并报告颜色是否为初始颜色之一。你能忽略这个案子吗？</a></p>
 </div>
 <div class="sect3">
 <h4 id="_set_operations">14.2.1. Set Operations</h4>
@@ -17957,7 +17957,7 @@ set( 3, 1, 7 )  ⊅    set( 1, 3  );    # True</code></pre>
 <p>You can operate on two [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html)s" class="bare">https://docs.raku.org/type/Set.html)s</a> to create new [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html)s" class="bare">https://docs.raku.org/type/Set.html)s</a>. A union is a combination of two [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html)s" class="bare">https://docs.raku.org/type/Set.html)s</a>. Each element still shows up only once:</p>
 </div>
 <div class="paragraph">
-<p>您可以操作两个[<code>集合</code>](<a href="https://docs.raku.org/type/Set.html)来创建新"><code>集合</code></a>(<a href="https://docs.raku.org/type/Set.html)。并集是两个"><code>集合</code></a>(<a href="https://docs.raku.org/type/Set.html)的组合。每个元素仍然只显示一次：" class="bare">https://docs.raku.org/type/Set.html)的组合。每个元素仍然只显示一次：</a></p>
+<p>你可以操作两个[<code>集合</code>](<a href="https://docs.raku.org/type/Set.html)来创建新"><code>集合</code></a>(<a href="https://docs.raku.org/type/Set.html)。并集是两个"><code>集合</code></a>(<a href="https://docs.raku.org/type/Set.html)的组合。每个元素仍然只显示一次：" class="bare">https://docs.raku.org/type/Set.html)的组合。每个元素仍然只显示一次：</a></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18026,7 +18026,7 @@ set( &lt;A b&gt; )  ⊖  set( &lt;x y&gt; );  # set(A b x y)</code></pre>
 <p>[<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)s" class="bare">https://docs.raku.org/type/Junction.html)s</a> make several values pretend to be a single value, in such a way that you can’t tell which value it is or how many values there are. You create the [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html" class="bare">https://docs.raku.org/type/Junction.html</a>) in a way that makes the values all work together or separately. A [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html" class="bare">https://docs.raku.org/type/Set.html</a>) also combines values but lets you look inside to see what those values are. You can combine [<code>Set</code>](<a href="https://docs.raku.org/type/Set.html)s" class="bare">https://docs.raku.org/type/Set.html)s</a> in various ways to create new ones. This is handy to tell what’s in, out, or common.</p>
 </div>
 <div class="paragraph">
-<p>[<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)使多个值假装成单个值，这样你就无法判断它是哪个值或者有多少个值。您可以通过使值全部一起或单独工作的方式创建" class="bare">https://docs.raku.org/type/Junction.html)使多个值假装成单个值，这样你就无法判断它是哪个值或者有多少个值。您可以通过使值全部一起或单独工作的方式创建</a> [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)。" class="bare">https://docs.raku.org/type/Junction.html)。</a> [<code>集合</code>](<a href="https://docs.raku.org/type/Set.html)还可以组合值，但是让您查看这些值是什么。您可以通过各种方式组合"><code>集合</code></a>(<a href="https://docs.raku.org/type/Set.html)来创建新的"><code>集合</code></a>(<a href="https://docs.raku.org/type/Set.html)。这可以很方便地分辨出进出的内容。" class="bare">https://docs.raku.org/type/Set.html)。这可以很方便地分辨出进出的内容。</a></p>
+<p>[<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)使多个值假装成单个值，这样你就无法判断它是哪个值或者有多少个值。你可以通过使值全部一起或单独工作的方式创建" class="bare">https://docs.raku.org/type/Junction.html)使多个值假装成单个值，这样你就无法判断它是哪个值或者有多少个值。你可以通过使值全部一起或单独工作的方式创建</a> [<code>Junction</code>](<a href="https://docs.raku.org/type/Junction.html)。" class="bare">https://docs.raku.org/type/Junction.html)。</a> [<code>集合</code>](<a href="https://docs.raku.org/type/Set.html)还可以组合值，但是让你查看这些值是什么。你可以通过各种方式组合"><code>集合</code></a>(<a href="https://docs.raku.org/type/Set.html)来创建新的"><code>集合</code></a>(<a href="https://docs.raku.org/type/Set.html)。这可以很方便地分辨出进出的内容。" class="bare">https://docs.raku.org/type/Set.html)。这可以很方便地分辨出进出的内容。</a></p>
 </div>
 </div>
 </div>
@@ -18050,7 +18050,7 @@ set( &lt;A b&gt; )  ⊖  set( &lt;x y&gt; );  # set(A b x y)</code></pre>
 <p>忘记你在其他语言中看到的关于模式的内容。 Raku模式语法重新开始。它不那么紧凑，但也更强大。在某些情况下，它的作用有点不同。</p>
 </div>
 <div class="paragraph">
-<p>本章介绍与特定字符或字符集匹配的简单模式。这只是一个开始。在第16章中，您将看到更漂亮的模式和匹配的副作用。在第17章中，您将把它全部提升到一个新的水平。</p>
+<p>本章介绍与特定字符或字符集匹配的简单模式。这只是一个开始。在第16章中，你将看到更漂亮的模式和匹配的副作用。在第17章中，你将把它全部提升到一个新的水平。</p>
 </div>
 <div class="sect2">
 <h3 id="_the_match_operator">15.1. The Match Operator</h3>
@@ -18088,7 +18088,7 @@ else       { put 'It missed!';  }</code></pre>
 <p>You don’t have to match against <code>$_</code>. You can use the smart match to apply it to a different value. That’s the target:</p>
 </div>
 <div class="paragraph">
-<p>你不必匹配$ _。您可以使用智能匹配将其应用于其他值。这是目标：</p>
+<p>你不必匹配$ _。你可以使用智能匹配将其应用于其他值。这是目标：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18113,7 +18113,7 @@ put $genus ~~ m/Hama/ ?? 'It matched!' !! 'It missed!';</code></pre>
 <p>But you can also match against multiple items. The object on the left side of the smart match decides how the pattern applies to the object. This matches if any of the elements in <code>@animals</code> matches:</p>
 </div>
 <div class="paragraph">
-<p>但您也可以匹配多个项目。智能匹配左侧的对象决定模式如何应用于对象。如果@animals中的任何元素匹配，则匹配：</p>
+<p>但你也可以匹配多个项目。智能匹配左侧的对象决定模式如何应用于对象。如果@animals中的任何元素匹配，则匹配：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18180,7 +18180,7 @@ m/
 <p>You can put spaces between alphabetic characters, but you’ll probably get a warning because Raku wants you to put those together:</p>
 </div>
 <div class="paragraph">
-<p>您可以在字母字符之间放置空格，但您可能会收到警告，因为Raku希望您将它们放在一起：</p>
+<p>你可以在字母字符之间放置空格，但你可能会收到警告，因为Raku希望你将它们放在一起：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18214,7 +18214,7 @@ m/ 'Ha ma' /</code></pre>
 <p>You need to quote or escape any character that’s not alphabetic or a number, even if those characters aren’t “special.” The other unquoted characters may be metacharacters that have special meaning in the pattern language.</p>
 </div>
 <div class="paragraph">
-<p>您需要引用或转义任何非字母或数字的字符，即使这些字符不是“特殊”。其他未加引号的字符可能是在模式语言中具有特殊含义的元字符。</p>
+<p>你需要引用或转义任何非字母或数字的字符，即使这些字符不是“特殊”。其他未加引号的字符可能是在模式语言中具有特殊含义的元字符。</p>
 </div>
 </div>
 <div class="sect3">
@@ -18223,7 +18223,7 @@ m/ 'Ha ma' /</code></pre>
 <p>If the match operator succeeds it returns a [<code>Match</code>](<a href="https://docs.raku.org/type/Match.html" class="bare">https://docs.raku.org/type/Match.html</a>) object, which is always a <code>True</code> value. If you <code>put</code> that object it shows you the part of the [<code>Str</code>](<a href="https://docs.raku.org/type/Str.html" class="bare">https://docs.raku.org/type/Str.html</a>) that matched. The <code>say</code> calls <code>.gist</code> and the output is a bit different:</p>
 </div>
 <div class="paragraph">
-<p>如果匹配运算符成功，则返回Match对象，该对象始终为True值。如果您放置该对象，它会向您显示匹配的Str部分。说调用.gist和输出有点不同：</p>
+<p>如果匹配运算符成功，则返回Match对象，该对象始终为True值。如果你放置该对象，它会向你显示匹配的Str部分。说调用.gist和输出有点不同：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18240,7 +18240,7 @@ say $match; # ?Hama?</code></pre>
 <p>If the match does not succeed it returns [<code>Nil</code>](<a href="https://docs.raku.org/type/Nil.html" class="bare">https://docs.raku.org/type/Nil.html</a>), which is always <code>False</code>:</p>
 </div>
 <div class="paragraph">
-<p>随着模式变得更加复杂，say的输出变得有趣。这使得它对正则表达式章节很有用，并且与本书的其余部分相比，您将在这里看到更多。</p>
+<p>随着模式变得更加复杂，say的输出变得有趣。这使得它对正则表达式章节很有用，并且与本书的其余部分相比，你将在这里看到更多。</p>
 </div>
 <div class="paragraph">
 <p>如果匹配不成功，则返回Nil，它始终为False：</p>
@@ -18269,7 +18269,7 @@ put $match.^name;    # Nil</code></pre>
 <p>You don’t need the <code>$match</code> variable though. The result of the last match shows up in the special variable <code>$/</code>, which you’ll see more of later:</p>
 </div>
 <div class="paragraph">
-<p>您不需要 <code>$match</code> 变量。最后一个匹配的结果显示在特殊变量$ /中，稍后您会看到更多：</p>
+<p>你不需要 <code>$match</code> 变量。最后一个匹配的结果显示在特殊变量$ /中，稍后你会看到更多：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18285,7 +18285,7 @@ put $match.^name;    # Nil</code></pre>
 <p>Useful patterns can get quite long and unwieldy. Use <code>rx//</code> to define a pattern (a [<code>Regex</code>](<a href="https://docs.raku.org/type/Regex.html)" class="bare">https://docs.raku.org/type/Regex.html)</a>) for later use. This pattern is not immediately applied to any target. This allows you to define a pattern somewhere that doesn’t distract from what you are doing:</p>
 </div>
 <div class="paragraph">
-<p>有用的模式可能会变得非常冗长和笨拙。使用rx //定义模式（正则表达式）供以后使用。此模式不会立即应用于任何目标。这允许您在某个地方定义一个不会分散您正在做的事情的模式：</p>
+<p>有用的模式可能会变得非常冗长和笨拙。使用rx //定义模式（正则表达式）供以后使用。此模式不会立即应用于任何目标。这允许你在某个地方定义一个不会分散你正在做的事情的模式：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18311,7 +18311,7 @@ $genus ~~ $pattern;</code></pre>
 <p>It’s possible to combine saved patterns into a larger one. This allows you to decompose complicated patterns into smaller, more tractable ones that you can reuse later (which you’ll do extensively in [Chapter 17](<a href="https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch17.html#camelia-grammars)" class="bare">https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch17.html#camelia-grammars)</a>):</p>
 </div>
 <div class="paragraph">
-<p>可以将保存的模式组合成更大的模式。这允许您将复杂的模式分解为更小，更易处理的模式，以后可以重复使用（您将在第17章中进行广泛的讨论）：</p>
+<p>可以将保存的模式组合成更大的模式。这允许你将复杂的模式分解为更小，更易处理的模式，以后可以重复使用（你将在第17章中进行广泛的讨论）：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18351,7 +18351,7 @@ put $genus ~~ m/&lt;hama&gt;/ ?? 'It matched!' !! 'It missed!';</code></pre>
 <p>You can define multiple named regexes and use them together:</p>
 </div>
 <div class="paragraph">
-<p>您可以定义多个已命名的正则表达式并将它们一起使用：</p>
+<p>你可以定义多个已命名的正则表达式并将它们一起使用：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18399,7 +18399,7 @@ if $result {
 <p>[Table 15-1](<a href="https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch15.html#camelia-regex1-TABLE-predefined_patterns" class="bare">https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch15.html#camelia-regex1-TABLE-predefined_patterns</a>) shows several of the predefined patterns that are ready for you to use. You can define your patterns in a library and export them just like you could with subroutines:</p>
 </div>
 <div class="paragraph">
-<p>[表15-1](<a href="https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch15.html#camelia-regex1-TABLE-predefined_patterns)显示了几个准备好的预定义模式供你使用。您可以在库中定义模式，并像子程序一样导出它们：" class="bare">https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch15.html#camelia-regex1-TABLE-predefined_patterns)显示了几个准备好的预定义模式供你使用。您可以在库中定义模式，并像子程序一样导出它们：</a></p>
+<p>[表15-1](<a href="https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch15.html#camelia-regex1-TABLE-predefined_patterns)显示了几个准备好的预定义模式供你使用。你可以在库中定义模式，并像子程序一样导出它们：" class="bare">https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch15.html#camelia-regex1-TABLE-predefined_patterns)显示了几个准备好的预定义模式供你使用。你可以在库中定义模式，并像子程序一样导出它们：</a></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18448,7 +18448,7 @@ say m/ &lt;hama&gt; /;</code></pre>
 <p>EXERCISE 15.1Create a program that uses a regular expression to output all of the matching lines from the files you specify on the command line.</p>
 </div>
 <div class="paragraph">
-<p>练习15.1创建一个程序，该程序使用正则表达式输出您在命令行中指定的文件中的所有匹配行。</p>
+<p>练习15.1创建一个程序，该程序使用正则表达式输出你在命令行中指定的文件中的所有匹配行。</p>
 </div>
 </div>
 </div>
@@ -18464,13 +18464,13 @@ say m/ &lt;hama&gt; /;</code></pre>
 <p>You could match the initial capital <strong>H</strong> by name, even though you have to type a literal <code>H</code> in the name:</p>
 </div>
 <div class="paragraph">
-<p>您不必逐字输入匹配它的字符。您可以更轻松地指定其代码点或名称。您可以使用在第4章中双引号Strs中看到的相同\ x [* CODEPOINT <strong>]或\ c [</strong> NAME *]。</p>
+<p>你不必逐字输入匹配它的字符。你可以更轻松地指定其代码点或名称。你可以使用在第4章中双引号Strs中看到的相同\ x [* CODEPOINT <strong>]或\ c [</strong> NAME *]。</p>
 </div>
 <div class="paragraph">
 <p>如果指定名称，则必须全部为大写。</p>
 </div>
 <div class="paragraph">
-<p>您可以按名称匹配初始大写字母H，即使您必须在名称中键入文字H：</p>
+<p>你可以按名称匹配初始大写字母H，即使你必须在名称中键入文字H：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18486,7 +18486,7 @@ put $pattern ?? 'Matched!' !! 'Missed!';</code></pre>
 <p>You can do the same thing with the code point. If you specify a code point use the hexadecimal number (with either case):</p>
 </div>
 <div class="paragraph">
-<p>您可以使用代码点执行相同的操作。如果指定代码点，请使用十六进制数字（两种情况）：</p>
+<p>你可以使用代码点执行相同的操作。如果指定代码点，请使用十六进制数字（两种情况）：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18516,7 +18516,7 @@ put $pattern ?? 'Matched!' !! 'Missed!';</code></pre>
 <p>Patterns have <strong>metacharacters</strong> that match something other than their literal selves. Some of these are listed in [Table 15-2](<a href="https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch15.html#camelia-regex1-TABLE-chars_to_escape" class="bare">https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch15.html#camelia-regex1-TABLE-chars_to_escape</a>) (and most you won’t see in this chapter). The <code>.</code> matches any character (<strong>including</strong> a newline). This pattern matches any target that has at least one character:</p>
 </div>
 <div class="paragraph">
-<p>模式具有与其文字自我匹配的元字符。其中一些列在表15-2中（大多数情况下，您不会在本章中看到）。这个。匹配任何字符（包括换行符）。此模式匹配具有至少一个字符的任何目标：</p>
+<p>模式具有与其文字自我匹配的元字符。其中一些列在表15-2中（大多数情况下，你不会在本章中看到）。这个。匹配任何字符（包括换行符）。此模式匹配具有至少一个字符的任何目标：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18543,7 +18543,7 @@ put $pattern ?? 'Matched!' !! 'Missed!';</code></pre>
 <p>Some characters have special meaning in patterns. The colon introduces an adverb and the <code>#</code> starts a comment. To match those as literal characters you need to escape them. A backslash will do:</p>
 </div>
 <div class="paragraph">
-<p>有些字符在模式中有特殊含义。冒号引入了一个副词，＃开始发表评论。要将它们作为文字字符进行匹配，您需要将它们转义。反斜杠可以：</p>
+<p>有些字符在模式中有特殊含义。冒号引入了一个副词，＃开始发表评论。要将它们作为文字字符进行匹配，你需要将它们转义。反斜杠可以：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18565,7 +18565,7 @@ put $pattern ?? 'Matched!' !! 'Missed!';</code></pre>
 <p>You can do the same thing with the other pattern metacharacters. To match a literal dot, escape it:</p>
 </div>
 <div class="paragraph">
-<p>您可以使用其他模式元字符执行相同的操作。要匹配文字点，请将其转义：</p>
+<p>你可以使用其他模式元字符执行相同的操作。要匹配文字点，请将其转义：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18576,7 +18576,7 @@ put $pattern ?? 'Matched!' !! 'Missed!';</code></pre>
 <p>The backslash only escapes the character that comes immediately after it. You can’t escape a literal space character, and you can’t escape a character that isn’t special. [Table 15-2](<a href="https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch15.html#camelia-regex1-TABLE-chars_to_escape" class="bare">https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch15.html#camelia-regex1-TABLE-chars_to_escape</a>) shows what you need to escape, even though I haven’t shown you most of those features yet.</p>
 </div>
 <div class="paragraph">
-<p>反斜杠只会逃避紧随其后的字符。您无法转义文字空格字符，也无法转义不特殊的字符。表15-2显示了您需要逃脱的内容，即使我还没有向您展示大部分功能。</p>
+<p>反斜杠只会逃避紧随其后的字符。你无法转义文字空格字符，也无法转义不特殊的字符。表15-2显示了你需要逃脱的内容，即使我还没有向你展示大部分功能。</p>
 </div>
 <div class="paragraph">
 <p>| Metacharacter               | Why it’s special                           |
@@ -18610,7 +18610,7 @@ put $pattern ?? 'Matched!' !! 'Missed!';</code></pre>
 <p>You can’t use the single quotes to escape the backslash since a single backslash will still try to escape the character that comes after it.</p>
 </div>
 <div class="paragraph">
-<p>您不能使用单引号来转义反斜杠，因为单个反斜杠仍会尝试转义后面的字符。</p>
+<p>你不能使用单引号来转义反斜杠，因为单个反斜杠仍会尝试转义后面的字符。</p>
 </div>
 </div>
 <div class="sect4">
@@ -18619,7 +18619,7 @@ put $pattern ?? 'Matched!' !! 'Missed!';</code></pre>
 <p>You have a tougher time if you want to match literal spaces. You can’t escape a space with <code>\</code> because unspace isn’t allowed in a pattern. Instead, put quotes around the literal space:</p>
 </div>
 <div class="paragraph">
-<p>如果你想匹配文字空间，你会有更艰难的时间。您无法使用\来转义空格，因为模式中不允许使用空格。相反，在文字空间周围加上引号：</p>
+<p>如果你想匹配文字空间，你会有更艰难的时间。你无法使用\来转义空格，因为模式中不允许使用空格。相反，在文字空间周围加上引号：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18641,7 +18641,7 @@ put $pattern ?? 'Matched!' !! 'Missed!';</code></pre>
 <p>Those single quotes can quickly obscure what belongs where; it can be helpful to spread the pattern across lines and note what you are trying to do:</p>
 </div>
 <div class="paragraph">
-<p>那些单引号很快就会模糊属于哪里;将图案分布在线条上并记下您要做的事情会很有帮助：</p>
+<p>那些单引号很快就会模糊属于哪里;将图案分布在线条上并记下你要做的事情会很有帮助：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18715,7 +18715,7 @@ if m/$pattern/ {
 <p>If you want to match any digit, you can use <code>\d</code>. This matches anything that is a digit, not just the Arabic digits:</p>
 </div>
 <div class="paragraph">
-<p>到目前为止，您已经匹配了字面字符。您键入了所需的字符，并在某些情况下将其转义。有一些字符组很常见，它们可以获得快捷方式。它们以反斜杠开头，后跟一个表示字符集的字母。表15-3显示了快捷方式列表。</p>
+<p>到目前为止，你已经匹配了字面字符。你键入了所需的字符，并在某些情况下将其转义。有一些字符组很常见，它们可以获得快捷方式。它们以反斜杠开头，后跟一个表示字符集的字母。表15-3显示了快捷方式列表。</p>
 </div>
 <div class="paragraph">
 <p>如果要匹配任何数字，可以使用\ d。这匹配任何数字，而不仅仅是阿拉伯数字：</p>
@@ -18772,7 +18772,7 @@ if m/$pattern/ {
 <p>Instead of matching a property, you can match characters that don’t have that particular property. Put a <code>!</code> in front of the property name to negate it. This matches characters that aren’t the title-case letters:</p>
 </div>
 <div class="paragraph">
-<p>您可以匹配没有该特定属性的字符，而不是匹配属性。放一个！在属性名称前面否定它。这匹配不是标题大小写字母的字符：</p>
+<p>你可以匹配没有该特定属性的字符，而不是匹配属性。放一个！在属性名称前面否定它。这匹配不是标题大小写字母的字符：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18795,7 +18795,7 @@ if m/$pattern/ {
 <p>You can match the characters that belong to certain Unicode blocks or scripts:</p>
 </div>
 <div class="paragraph">
-<p>您可以匹配属于某些Unicode块或脚本的字符：</p>
+<p>你可以匹配属于某些Unicode块或脚本的字符：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18807,7 +18807,7 @@ if m/$pattern/ {
 <p>Even though you can abbreviate these property names I’ll use the longer names in this book. See the documentation for the other properties.</p>
 </div>
 <div class="paragraph">
-<p>即使您可以缩写这些属性名称，我也会在本书中使用较长的名称。请参阅其他属性的文档。</p>
+<p>即使你可以缩写这些属性名称，我也会在本书中使用较长的名称。请参阅其他属性的文档。</p>
 </div>
 </div>
 <div class="sect4">
@@ -18819,7 +18819,7 @@ if m/$pattern/ {
 <p>The <code>+</code> creates the union of the two properties. Any character that has either property will match:</p>
 </div>
 <div class="paragraph">
-<p>一个属性可能不足以描述您想要匹配的内容。要构建更高级的，将它们与字符类集合运算符组合。这些与第14章中看到的操作符不同;他们对角色课很特别。</p>
+<p>一个属性可能不足以描述你想要匹配的内容。要构建更高级的，将它们与字符类集合运算符组合。这些与第14章中看到的操作符不同;他们对角色课很特别。</p>
 </div>
 <div class="paragraph">
 <p>+创建两个属性的并集。任何具有任何属性的字符都将匹配：</p>
@@ -18845,7 +18845,7 @@ if m/$pattern/ {
 <p>You can shorten this to not match a character without a particular property. It looks like you leave off the first part of the subtraction; the <code>-</code> comes right after the opening angle bracket. That implies you’re subtracting from all characters. This matches all the characters that don’t have the <code>Letter</code> property:</p>
 </div>
 <div class="paragraph">
-<p>您可以将此缩短为与没有特定属性的角色不匹配。看起来你放弃了减法的第一部分; - 在打开角度支架后面。这意味着你要从所有角色中减去。这匹配所有没有Letter属性的字符：</p>
+<p>你可以将此缩短为与没有特定属性的角色不匹配。看起来你放弃了减法的第一部分; - 在打开角度支架后面。这意味着你要从所有角色中减去。这匹配所有没有Letter属性的字符：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18866,7 +18866,7 @@ if m/$pattern/ {
 <p>You can define your own character classes. Put the characters that you want to match inside <code>&lt;[&#8230;&#8203;]&gt;</code>. These aren’t the same square brackets that you saw earlier for grouping; these are inside the angle brackets. This character class matches either <code>a</code>, <code>b</code>, or <code>3</code>:</p>
 </div>
 <div class="paragraph">
-<p>您可以定义自己的角色类。将要匹配的字符放在&lt;[&#8230;&#8203;]&gt;中。这些与您之前看到的用于分组的方括号不同;这些都在尖括号内。此字符类匹配a，b或3：</p>
+<p>你可以定义自己的角色类。将要匹配的字符放在&lt;[&#8230;&#8203;]&gt;中。这些与你之前看到的用于分组的方括号不同;这些都在尖括号内。此字符类匹配a，b或3：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18888,7 +18888,7 @@ if m/$pattern/ {
 <p>You could specify the hexadecimal value of the code point. The whitespace is insignificant:</p>
 </div>
 <div class="paragraph">
-<p>您可以指定代码点的十六进制值。空白是微不足道的：</p>
+<p>你可以指定代码点的十六进制值。空白是微不足道的：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18914,7 +18914,7 @@ if m/$pattern/ {
 <p>You can make a long list of characters:</p>
 </div>
 <div class="paragraph">
-<p>您可以制作一长串字符：</p>
+<p>你可以制作一长串字符：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18925,7 +18925,7 @@ if m/$pattern/ {
 <p>Inside the character class the <code><mark></code> is just a <code></mark></code>. If you try to put a comment in there all of the characters in your message become part of the character class:</p>
 </div>
 <div class="paragraph">
-<p>在角色类中，＃只是一个＃。如果您尝试在其中放置注释，则消息中的所有字符都将成为字符类的一部分：</p>
+<p>在角色类中，＃只是一个＃。如果你尝试在其中放置注释，则消息中的所有字符都将成为字符类的一部分：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18940,7 +18940,7 @@ if m/$pattern/ {
 <p>You’ll probably get warnings about repeated characters if you try to do that.</p>
 </div>
 <div class="paragraph">
-<p>如果您尝试这样做，您可能会收到有关重复字符的警告。</p>
+<p>如果你尝试这样做，你可能会收到有关重复字符的警告。</p>
 </div>
 <div class="sect4">
 <h5 id="_character_class_ranges">CHARACTER CLASS RANGES</h5>
@@ -18948,7 +18948,7 @@ if m/$pattern/ {
 <p>But that’s too much work. You can use <code>..</code> to specify a range of characters. The literal characters work as well as the hexadecimal values and the names. Notice you don’t quote the literal characters in these ranges:</p>
 </div>
 <div class="paragraph">
-<p>但那工作太多了。您可以使用..指定一系列字符。文字字符以及十六进制值和名称都起作用。请注意，您不引用这些范围中的文字字符：</p>
+<p>但那工作太多了。你可以使用..指定一系列字符。文字字符以及十六进制值和名称都起作用。请注意，你不引用这些范围中的文字字符：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -18986,7 +18986,7 @@ if m/$pattern/ {
 <p>Sometimes it’s easier to specify the characters that can’t match. You can create a negated character class by adding a <code>-</code> between the opening angle bracket and the opening square bracket. This example matches any character that is <strong>not</strong> <code>a</code>, <code>b</code>, or <code>3</code>:</p>
 </div>
 <div class="paragraph">
-<p>有时，指定无法匹配的字符会更容易。您可以通过在开角括号和开始方括号之间添加 - 来创建否定字符类。此示例匹配任何不是a，b或3的字符：</p>
+<p>有时，指定无法匹配的字符会更容易。你可以通过在开角括号和开始方括号之间添加 - 来创建否定字符类。此示例匹配任何不是a，b或3的字符：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -19008,7 +19008,7 @@ if m/$pattern/ {
 <p>You can use a negated character class of one character. Quotes inside the character class are literal characters because Raku knows you aren’t quoting:</p>
 </div>
 <div class="paragraph">
-<p>您可以使用一个字符的否定字符类。字符类中的引号是文字字符，因为Raku知道您没有引用：</p>
+<p>你可以使用一个字符的否定字符类。字符类中的引号是文字字符，因为Raku知道你没有引用：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -19030,7 +19030,7 @@ if m/$pattern/ {
 <p>The predefined character class shortcuts can be part of your character class:</p>
 </div>
 <div class="paragraph">
-<p>预定义的字符类快捷方式可以是您的角色类的一部分：</p>
+<p>预定义的字符类快捷方式可以是你的角色类的一部分：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -19041,7 +19041,7 @@ if m/$pattern/ {
 <p>Like the Unicode properties, you can combine sets of characters:</p>
 </div>
 <div class="paragraph">
-<p>与Unicode属性一样，您可以组合字符集：</p>
+<p>与Unicode属性一样，你可以组合字符集：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -19065,7 +19065,7 @@ if m/$pattern/ {
 <p>You can change how the match operator works by applying adverbs, just like you changed how <code>Q</code> worked in [Chapter 4](<a href="https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch04.html#camelia-strings" class="bare">https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch04.html#camelia-strings</a>). There are several, but you’ll only see the most commonly used here.</p>
 </div>
 <div class="paragraph">
-<p>您可以通过应用副词来更改匹配运算符的工作方式，就像您在第4章中更改Q的工作方式一样。有几个，但您只会看到此处最常用的。</p>
+<p>你可以通过应用副词来更改匹配运算符的工作方式，就像你在第4章中更改Q的工作方式一样。有几个，但你只会看到此处最常用的。</p>
 </div>
 <div class="sect3">
 <h4 id="_matching_either_case">15.3.1. Matching Either Case</h4>
@@ -19144,7 +19144,7 @@ put 'Hamadryas' ~~ $pattern;  # Matches, :i inside</code></pre>
 <p>You can group parts of patterns with square brackets. This example groups the <code>am</code> but doesn’t do much else because there’s nothing else special going on:</p>
 </div>
 <div class="paragraph">
-<p>您可以使用方括号对部分图案进行分组。这个例子对am进行分组，但没有做太多其他事情，因为没有其他特别的事情：</p>
+<p>你可以使用方括号对部分图案进行分组。这个例子对am进行分组，但没有做太多其他事情，因为没有其他特别的事情：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -19177,7 +19177,7 @@ put 'Hamadryas' ~~ $pattern;  # Matches, :i inside</code></pre>
 <p>At this point, you’re probably going to start mixing up what’s going on. There’s another reason whitespace doesn’t matter—you can add comments to your pattern:</p>
 </div>
 <div class="paragraph">
-<p>在这一点上，你可能会开始混淆正在发生的事情。空白无关紧要的另一个原因 - 您可以为您的模式添加注释：</p>
+<p>在这一点上，你可能会开始混淆正在发生的事情。空白无关紧要的另一个原因 - 你可以为你的模式添加注释：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -19196,7 +19196,7 @@ put 'Hamadryas' ~~ $pattern;  # Matches, :i inside</code></pre>
 <p>Everything from the <code>#</code> character to the end of the line is a comment. You can use embedded comments too:</p>
 </div>
 <div class="paragraph">
-<p>从＃字符到行尾的所有内容都是注释。您也可以使用嵌入式注释：</p>
+<p>从＃字符到行尾的所有内容都是注释。你也可以使用嵌入式注释：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -19212,7 +19212,7 @@ put 'Hamadryas' ~~ $pattern;  # Matches, :i inside</code></pre>
 <p>EXERCISE 15.5Write a program that outputs only the lines of input that contain the text <code>ei</code>. You’ll probably want to save this program to build on in later exercises.</p>
 </div>
 <div class="paragraph">
-<p>这些并不是特别好的注释，因为您正在注释语法已经表示的内容。作为一种良好实践，您应该评论您要匹配的内容而不是语法的内容。但是，如果你给自己留下一个新概念的提醒，世界就不会结束。</p>
+<p>这些并不是特别好的注释，因为你正在注释语法已经表示的内容。作为一种良好实践，你应该评论你要匹配的内容而不是语法的内容。但是，如果你给自己留下一个新概念的提醒，世界就不会结束。</p>
 </div>
 <div class="paragraph">
 <p>练习15.5编写一个只输出包含文本ei的输入行的程序。你可能想要保存这个程序，以便在以后的练习中继续使用。</p>
@@ -19317,7 +19317,7 @@ say $overlap; # (?uta? ?ani? ?iti? ?idi? ?ina?)</code></pre>
 <p>The <code>.words</code> and <code>.comb</code> methods break up text. The <code>.split</code> method is the general case of that. It takes a pattern to decide how to break up the text. Whatever it matches are the parts that disappear. You could break up a line on tabs, for instance:</p>
 </div>
 <div class="paragraph">
-<p>到目前为止，您还无法使用许多功能，因为您尚未看到正则表达式。现在你已经看过正则表达式，所以你可以看到这些东西。有一些Str方法可以使用模式来转换值。本节介绍了您最常使用的功能。</p>
+<p>到目前为止，你还无法使用许多功能，因为你尚未看到正则表达式。现在你已经看过正则表达式，所以你可以看到这些东西。有一些Str方法可以使用模式来转换值。本节介绍了你最常使用的功能。</p>
 </div>
 <div class="listingblock">
 <div class="title">words和.comb方法分解文本。 .split方法就是这种情况的一般情况。它需要一种模式来决定如何分解文本。无论它匹配什么是消失的部分。你可以在标签上划分一条线，例如：</div>
@@ -19438,7 +19438,7 @@ put $line;  # Perl Perl Perl</code></pre>
 <p>EXERCISE 15.6Using <code>.split</code>, output the third column of a tab-delimited file. The butterfly census file you made at the end of [Chapter 9](<a href="https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch09.html#camelia-hashes" class="bare">https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch09.html#camelia-hashes</a>) would do nicely here.</p>
 </div>
 <div class="paragraph">
-<p>对于您将在下一章中看到的正则表达式功能，这些功能将更加有用。</p>
+<p>对于你将在下一章中看到的正则表达式功能，这些功能将更加有用。</p>
 </div>
 <div class="paragraph">
 <p>EXERCISE 15.6使用.split，输出制表符分隔文件的第三列。你在第9章结尾处制作的蝴蝶人口普查文件在这里做得很好。</p>
@@ -19451,7 +19451,7 @@ put $line;  # Perl Perl Perl</code></pre>
 <p>You haven’t seen the full power of regexes in this chapter since it was mostly about the mechanism of applying the patterns to text. That’s not a big deal—the patterns can be much more sophisticated, but the mechanisms are the same. In the next chapter you’ll see most of the fancier features you’ll regularly use.</p>
 </div>
 <div class="paragraph">
-<p>在本章中你没有看到正则表达式的全部功能，因为它主要是关于将模式应用于文本的机制。这不是什么大问题 - 模式可以更复杂，但机制是相同的。在下一章中，您将看到您经常使用的大多数更高级的功能。</p>
+<p>在本章中你没有看到正则表达式的全部功能，因为它主要是关于将模式应用于文本的机制。这不是什么大问题 - 模式可以更复杂，但机制是相同的。在下一章中，你将看到你经常使用的大多数更高级的功能。</p>
 </div>
 </div>
 </div>
@@ -21103,10 +21103,10 @@ say 'Hamadryas perlicus sixus' ~~ m/
 <p>Grammar 是一种特殊的包。它可以有方法和子程序，但主要包括称为 <code>regex</code>，<code>token</code> 和 <code>rule</code> 的特殊模式方法。其中每个都定义了一个模式并应用了不同的修饰符。</p>
 </div>
 <div class="paragraph">
-<p>Raku 倾向于将 <code>regex</code>，<code>token</code> 和 <code>rule</code> 声明称为“规则”，有时可能有点不精确。在本书中，您可以通过排版来区分语言关键字和一般术语。我会尽量不提出模棱两可的情况。</p>
+<p>Raku 倾向于将 <code>regex</code>，<code>token</code> 和 <code>rule</code> 声明称为“规则”，有时可能有点不精确。在本书中，你可以通过排版来区分语言关键字和一般术语。我会尽量不提出模棱两可的情况。</p>
 </div>
 <div class="paragraph">
-<p>从简单的东西开始（对于 grammar 来说太简单了）。定义匹配数字作为起点的 <code>TOP</code> 模式。该名称很特殊，因为 <code>.parse</code> 默认使用它。在此示例中，您使用 <code>regex</code> 声明一个 <code>TOP</code>：</p>
+<p>从简单的东西开始（对于 grammar 来说太简单了）。定义匹配数字作为起点的 <code>TOP</code> 模式。该名称很特殊，因为 <code>.parse</code> 默认使用它。在此示例中，你使用 <code>regex</code> 声明一个 <code>TOP</code>：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -21249,7 +21249,7 @@ for @strings -&gt; $string {
 <p>Instead of showing <code>Parsed!</code>, you can on success output the [<code>Match</code>](<a href="https://docs.raku.org/type/Match.html" class="bare">https://docs.raku.org/type/Match.html</a>) object you stored in <code>$result</code>:</p>
 </div>
 <div class="paragraph">
-<p>您可以在成功输出存储在 <code>$result</code> 中的  [<code>Match</code>](<a href="https://docs.raku.org/type/Match.html" class="bare">https://docs.raku.org/type/Match.html</a>) 对象，而不是显示 <code>Parsed!</code></p>
+<p>你可以在成功输出存储在 <code>$result</code> 中的  [<code>Match</code>](<a href="https://docs.raku.org/type/Match.html" class="bare">https://docs.raku.org/type/Match.html</a>) 对象，而不是显示 <code>Parsed!</code></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -21269,7 +21269,7 @@ for @strings -&gt; $string {
 <p>The output isn’t that different, but instead of its success status you see the text that matched:</p>
 </div>
 <div class="paragraph">
-<p>输出没有那么不同，但您可以看到匹配到的文本，而不是其成功状态：</p>
+<p>输出没有那么不同，但你可以看到匹配到的文本，而不是其成功状态：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -21310,7 +21310,7 @@ Failed!</code></pre>
 <p>This still doesn’t match the [<code>Str</code>](<a href="https://docs.raku.org/type/Str.html" class="bare">https://docs.raku.org/type/Str.html</a>) with leading whitespace. The parser couldn’t match that since <code>rule</code> only inserts <code>&lt;.ws&gt;</code> after explicit parts of the pattern. To match leading whitespace you need to add something to the front of the pattern. The beginning-of-string anchor does that, and now there’s something that <code>&lt;.ws&gt;</code> can come after:</p>
 </div>
 <div class="paragraph">
-<p>这仍然与带有前导空格的 [<code>Str</code>](<a href="https://docs.raku.org/type/Str.html" class="bare">https://docs.raku.org/type/Str.html</a>) 不匹配。解析器无法匹配，因为 <code>rule</code> 仅在模式的显式部分之后插入 <code>&lt;.ws&gt;</code>。要匹配前导空格，您需要在模式的前面添加一些内容。字符串开头的锚点就是这样，现在有一些 <code>&lt;.ws&gt;</code> 后面可以出现的东西：</p>
+<p>这仍然与带有前导空格的 [<code>Str</code>](<a href="https://docs.raku.org/type/Str.html" class="bare">https://docs.raku.org/type/Str.html</a>) 不匹配。解析器无法匹配，因为 <code>rule</code> 仅在模式的显式部分之后插入 <code>&lt;.ws&gt;</code>。要匹配前导空格，你需要在模式的前面添加一些内容。字符串开头的锚点就是这样，现在有一些 <code>&lt;.ws&gt;</code> 后面可以出现的东西：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -21349,7 +21349,7 @@ Failed!</code></pre>
 <p>Use <code>token</code> instead of <code>rule</code> if you don’t want any implicit whitespace:</p>
 </div>
 <div class="paragraph">
-<p>如果您不想要任何隐式空格，请使用 <code>token</code> 而不是 <code>rule</code>：</p>
+<p>如果你不想要任何隐式空格，请使用 <code>token</code> 而不是 <code>rule</code>：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -21362,13 +21362,13 @@ Failed!</code></pre>
 <p>You’ll see another feature of <code>rule</code> and <code>token</code> later in this chapter.</p>
 </div>
 <div class="paragraph">
-<p>您将在本章后面看到 <code>rule</code> 和 <code>token</code> 的另一个功能。</p>
+<p>你将在本章后面看到 <code>rule</code> 和 <code>token</code> 的另一个功能。</p>
 </div>
 <div class="paragraph">
 <p>EXERCISE 17.1Write a grammer to match octal digits, with or without a leading <code>0</code> or <code>0o</code>. Your grammar should parse numbers such as <code>123</code>, <code>0123</code>, and <code>0o456</code>, but not <code>8</code>, <code>129</code>, or <code>o345</code>.</p>
 </div>
 <div class="paragraph">
-<p>练习17.1写一个 grammar 来匹配八进制数字，带或不带前导 <code>0</code> 或 <code>0o</code>。您的 grammar 应该解析诸如 <code>123</code>, <code>0123</code> 和 <code>0o456</code> 之类的数字，但不能解析 <code>8</code> ,<code>129</code> 或 <code>o345</code>。</p>
+<p>练习17.1写一个 grammar 来匹配八进制数字，带或不带前导 <code>0</code> 或 <code>0o</code>。你的 grammar 应该解析诸如 <code>123</code>, <code>0123</code> 和 <code>0o456</code> 之类的数字，但不能解析 <code>8</code> ,<code>129</code> 或 <code>o345</code>。</p>
 </div>
 </div>
 <div class="sect2">
@@ -21377,7 +21377,7 @@ Failed!</code></pre>
 <p>Grammars wouldn’t be useful if you were limited to one rule. You can define additional rules and use them inside other rules. In the first exercise you had only the <code>TOP</code> rule but you could separate the pattern into parts. Break up the pattern in <code>TOP</code> into rules for <code>prefix</code> and <code>digits</code>. It’s this decomposability that makes it so easy to solve hard parsing problems:</p>
 </div>
 <div class="paragraph">
-<p>如果你只限于一条规则，那么 grammar 就没用了。您可以定义其他规则并在其他规则中使用它们。在第一个练习中，您只有 <code>TOP</code> 规则，但您可以将模式分成几部分。将 <code>TOP</code> 中的模式分解为 `prefix`和`digits`的规则。正是这种可分解性使得解决困难的解析问题变得如此简单：</p>
+<p>如果你只限于一条规则，那么 grammar 就没用了。你可以定义其他规则并在其他规则中使用它们。在第一个练习中，你只有 <code>TOP</code> 规则，但你可以将模式分成几部分。将 <code>TOP</code> 中的模式分解为 `prefix`和`digits`的规则。正是这种可分解性使得解决困难的解析问题变得如此简单：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -21427,7 +21427,7 @@ put "Digits: $result&lt;digits&gt;";</code></pre>
 <p>练习17.2 创建一个 grammar，匹配带有 sigil 的 Raku 变量名（忽略无符号变量，因为这太简单了）。使用单独的规则来匹配 sigil 和标识符。这是一个候选人列表，检查你是否没有自己的：<code>my @candidates = qw/     sigilless   $scalar  @array   %hash     $123abc    $abc'123 $ab&#8217;c123     $two-words $two-    $-dash     /;</code></p>
 </div>
 <div class="paragraph">
-<p>您可以通过在规则前加一个点号来抑制某些命名捕获。您可能不关心前缀，所以不要保存它：</p>
+<p>你可以通过在规则前加一个点号来抑制某些命名捕获。你可能不关心前缀，所以不要保存它：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -21458,7 +21458,7 @@ say $result // "failed";</code></pre>
 <p>This doesn’t make much of a difference in this small example, but imagine a complicated grammar with many, many rules. That brings you to the next big feature of grammars. Besides the grammar itself, you can specify an <strong>action class</strong> that processes the rules as the grammar successfully parses them.</p>
 </div>
 <div class="paragraph">
-<p>这在这个小例子中并没有太大的区别，但想象一下复杂的 grammar 有很多很多规则。这将带您进入 grammar 的下一个重要特征。除 grammar 本身外，您还可以指定一个 action 类来处理规则，因为 grammar 会成功解析它们。</p>
+<p>这在这个小例子中并没有太大的区别，但想象一下复杂的 grammar 有很多很多规则。这将带你进入 grammar 的下一个重要特征。除 grammar 本身外，你还可以指定一个 action 类来处理规则，因为 grammar 会成功解析它们。</p>
 </div>
 </div>
 <div class="sect2">
@@ -21467,7 +21467,7 @@ say $result // "failed";</code></pre>
 <p>There are two modules that can help you figure out what’s going on in your grammar. Both are much more impressive in your terminal.</p>
 </div>
 <div class="paragraph">
-<p>有两个模块可以帮助您弄清楚 grammar 中发生了什么。两者在你的终端中都更令人印象深刻。</p>
+<p>有两个模块可以帮助你弄清楚 grammar 中发生了什么。两者在你的终端中都更令人印象深刻。</p>
 </div>
 <div class="sect3">
 <h4 id="_grammartracer">17.3.1. Grammar::Tracer</h4>
@@ -21475,7 +21475,7 @@ say $result // "failed";</code></pre>
 <p>The <code>Grammar::Tracer</code> module shows you the path through a grammar (and applies to any grammar in its scope). Merely loading the module is enough to activate it:</p>
 </div>
 <div class="paragraph">
-<p><code>Grammar::Tracer</code> 模块向您显示 grammar 的路径（并适用于其作用域内的任何 grammar）。仅加载模块就足以激活它：</p>
+<p><code>Grammar::Tracer</code> 模块向你显示 grammar 的路径（并适用于其作用域内的任何 grammar）。仅加载模块就足以激活它：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -21515,7 +21515,7 @@ say $/ // "failed";</code></pre>
 <p>Changing the data to include invalid digits, such as <code>0o178</code>, means the grammar will fail. In the trace you can see it matches up to <code>0o17</code> but can’t continue, so you know where in your [<code>Str</code>](<a href="https://docs.raku.org/type/Str.html" class="bare">https://docs.raku.org/type/Str.html</a>) things went wrong. It could be that the grammar should not match the text or the grammar is not as accommodating as it should be:</p>
 </div>
 <div class="paragraph">
-<p>更改数据以包含无效数字（例如 <code>0o178</code>）意味着 grammar 将失败。在跟踪中，您可以看到它最多匹配到 <code>0o17</code> 但无法继续，因此你就知道  [<code>Str</code>](<a href="https://docs.raku.org/type/Str.html" class="bare">https://docs.raku.org/type/Str.html</a>)  中的哪些地方出错了。可能是 grammar 不应该与文本匹配，或者 grammar 不应该像它应该的那样适应：</p>
+<p>更改数据以包含无效数字（例如 <code>0o178</code>）意味着 grammar 将失败。在跟踪中，你可以看到它最多匹配到 <code>0o17</code> 但无法继续，因此你就知道  [<code>Str</code>](<a href="https://docs.raku.org/type/Str.html" class="bare">https://docs.raku.org/type/Str.html</a>)  中的哪些地方出错了。可能是 grammar 不应该与文本匹配，或者 grammar 不应该像它应该的那样适应：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -21536,7 +21536,7 @@ failed</code></pre>
 <p>Instead of adding <code>Grammar::Tracer</code> to your program you can load it from the command line with the `-M`switch. You probably don’t mean to leave it in anyway:</p>
 </div>
 <div class="paragraph">
-<p>您可以使用 <code>-M</code> 开关从命令行加载 <code>Grammar::Tracer</code>，而不是将 <code>Grammar::Tracer</code> 添加到程序中。你可能并不是故意把它留下来：</p>
+<p>你可以使用 <code>-M</code> 开关从命令行加载 <code>Grammar::Tracer</code>，而不是将 <code>Grammar::Tracer</code> 添加到程序中。你可能并不是故意把它留下来：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -21550,7 +21550,7 @@ failed</code></pre>
 <p>The <code>Grammar::Debugger</code> module does the same thing as <code>Grammar::Tracer</code> (they come together in the same distribution) but allows you to proceed one step at a time. When you start it you get a prompt; type <code>h</code> to get a list of commands:</p>
 </div>
 <div class="paragraph">
-<p><code>Grammar::Debugger</code> 模块与 <code>Grammar::Tracer</code> （它们在同一个发行版中）执行相同的操作，但允许您一次执行一个步骤。当你启动它时，你得到一个提示; 键入 <code>h</code> 以获取命令列表：</p>
+<p><code>Grammar::Debugger</code> 模块与 <code>Grammar::Tracer</code> （它们在同一个发行版中）执行相同的操作，但允许你一次执行一个步骤。当你启动它时，你得到一个提示; 键入 <code>h</code> 以获取命令列表：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -21595,7 +21595,7 @@ digits
 <p>A grammar does its work by descending into its rules to take apart text. You can go the opposite way by processing each part of the parsed text to build a new [<code>Str</code>](<a href="https://docs.raku.org/type/Str.html" class="bare">https://docs.raku.org/type/Str.html</a>) (or data structure, or whatever you like). You can tell <code>.parse</code> to use an action class to do this.</p>
 </div>
 <div class="paragraph">
-<p>grammar 通过下降到它的规则中分解文本来完成其工作。你可以通过处理已解析文本的每个部分来构建新的 [<code>Str</code>](<a href="https://docs.raku.org/type/Str.html)（或数据结构，或任何您喜欢的任何内容）。您可以告诉" class="bare">https://docs.raku.org/type/Str.html)（或数据结构，或任何您喜欢的任何内容）。您可以告诉</a> <code>.parse</code> 使用 action 类来执行此操作。</p>
+<p>grammar 通过下降到它的规则中分解文本来完成其工作。你可以通过处理已解析文本的每个部分来构建新的 [<code>Str</code>](<a href="https://docs.raku.org/type/Str.html)（或数据结构，或任何你喜欢的任何内容）。你可以告诉" class="bare">https://docs.raku.org/type/Str.html)（或数据结构，或任何你喜欢的任何内容）。你可以告诉</a> <code>.parse</code> 使用 action 类来执行此操作。</p>
 </div>
 <div class="paragraph">
 <p>Here’s a simple action class, <code>OctalActions</code>. It doesn’t need to have the same name as the grammar, but the method names are the same as the rule names. Each method takes a [<code>Match</code>](<a href="https://docs.raku.org/type/Match.html" class="bare">https://docs.raku.org/type/Match.html</a>) object argument. In this example, the signature uses <code>$/</code>, which is a variable with a few advantages that you’ll see in a moment:</p>
@@ -21656,7 +21656,7 @@ say $result // "failed";</code></pre>
 <p>Actions shouldn’t output information directly. Instead, they can add values to the [<code>Match</code>](<a href="https://docs.raku.org/type/Match.html" class="bare">https://docs.raku.org/type/Match.html</a>) object. Calling <code>make`in the action method sets a value in the abstract syntax tree (or `.ast</code>) slot of the [<code>Match</code>](<a href="https://docs.raku.org/type/Match.html" class="bare">https://docs.raku.org/type/Match.html</a>). You can access that with <code>.made</code>:</p>
 </div>
 <div class="paragraph">
-<p>Action 不应直接输出信息。相反，他们可以向 [<code>Match</code>](<a href="https://docs.raku.org/type/Match.html" class="bare">https://docs.raku.org/type/Match.html</a>) 对象添加值。在 action 方法中调用 <code>make</code> 会在 [<code>Match</code>](<a href="https://docs.raku.org/type/Match.html" class="bare">https://docs.raku.org/type/Match.html</a>) 的抽象语法树（或 <code>.ast</code> ）槽中设置一个值。您可以使用 <code>.made</code> 访问它：</p>
+<p>Action 不应直接输出信息。相反，他们可以向 [<code>Match</code>](<a href="https://docs.raku.org/type/Match.html" class="bare">https://docs.raku.org/type/Match.html</a>) 对象添加值。在 action 方法中调用 <code>make</code> 会在 [<code>Match</code>](<a href="https://docs.raku.org/type/Match.html" class="bare">https://docs.raku.org/type/Match.html</a>) 的抽象语法树（或 <code>.ast</code> ）槽中设置一个值。你可以使用 <code>.made</code> 访问它：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -21688,7 +21688,7 @@ put $result ??
 <p>In the previous example, the <code>digits</code> action method handled the value. A <code>TOP</code> action method could do it, but it has to reach one level below the [<code>Match</code>](<a href="https://docs.raku.org/type/Match.html" class="bare">https://docs.raku.org/type/Match.html</a>) object:</p>
 </div>
 <div class="paragraph">
-<p><code>make</code> 将一些内容放入[<code>Match</code>](<a href="https://docs.raku.org/type/Match.html)的" class="bare">https://docs.raku.org/type/Match.html)的</a> <code>.ast</code> 插槽中，然后 <code>.made</code> 将其恢复原状。您可以`make` 任何您喜欢的值，包括容器，对象和您可以想象的大多数其他内容。你仍然得到原始的，字面上的匹配。</p>
+<p><code>make</code> 将一些内容放入[<code>Match</code>](<a href="https://docs.raku.org/type/Match.html)的" class="bare">https://docs.raku.org/type/Match.html)的</a> <code>.ast</code> 插槽中，然后 <code>.made</code> 将其恢复原状。你可以`make` 任何你喜欢的值，包括容器，对象和你可以想象的大多数其他内容。你仍然得到原始的，字面上的匹配。</p>
 </div>
 <div class="paragraph">
 <p>在前面的示例中，<code>digits</code> action 方法处理了该值。 <code>TOP</code> action 方法可以做到，但它必须到达  [<code>Match</code>](<a href="https://docs.raku.org/type/Match.html" class="bare">https://docs.raku.org/type/Match.html</a>) 对象下面的一个级别：</p>
@@ -21720,7 +21720,7 @@ put $result.so ??
 <p>You don’t have to use <code>$/</code> in the signature; it’s a convenience. There’s nothing particularly magical about it. You could use some other variable if you are paid by the character:</p>
 </div>
 <div class="paragraph">
-<p>您不必在签名中使用 <code>$/</code>; 这是一个方便写法。它没什么特别神奇的。如果你有其它字符，您可以使用其他变量：</p>
+<p>你不必在签名中使用 <code>$/</code>; 这是一个方便写法。它没什么特别神奇的。如果你有其它字符，你可以使用其他变量：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -21824,7 +21824,7 @@ put "｢$string｣ ", $result ?? 'Parsed!' !! 'Failed!'; # Failed!</code></pre>
 <p>在 Mastering Perl 中，我提到了一个 Randal Schwartz 使用 Perl 5 正则表达式的一些高级功能创建的 JSON 解析器。在许多方面，他的实现是一种 grammar，但他被迫不可分割地将解析和 action 组合在一块。这使得正则表达式几乎无法穿透。用 Raku grammar 编写它会更清晰，更容易访问。</p>
 </div>
 <div class="paragraph">
-<p>JSON 实际上非常简单，只需处理几个奇怪的事情，但它让您有机会了解 <code>proto</code> 规则如何简化 action：</p>
+<p>JSON 实际上非常简单，只需处理几个奇怪的事情，但它让你有机会了解 <code>proto</code> 规则如何简化 action：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -21875,7 +21875,7 @@ put "｢$string｣ ", $result ?? 'Parsed!' !! 'Failed!'; # Failed!</code></pre>
 <p>You may be surprised at how easy and short that grammar is. It’s almost a straight translation of the grammar from [RFC 8259](<a href="https://trac.tools.ietf.org/html/rfc8259" class="bare">https://trac.tools.ietf.org/html/rfc8259</a>). Now, create an action class for that:</p>
 </div>
 <div class="paragraph">
-<p>您可能会对这个 grammar 的简单和简短感到惊讶。它几乎是  [RFC 8259](<a href="https://trac.tools.ietf.org/html/rfc8259" class="bare">https://trac.tools.ietf.org/html/rfc8259</a>) grammar 的直接翻译。现在，为此创建一个 action 类：</p>
+<p>你可能会对这个 grammar 的简单和简短感到惊讶。它几乎是  [RFC 8259](<a href="https://trac.tools.ietf.org/html/rfc8259" class="bare">https://trac.tools.ietf.org/html/rfc8259</a>) grammar 的直接翻译。现在，为此创建一个 action 类：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -21924,7 +21924,7 @@ put "｢$string｣ ", $result ?? 'Parsed!' !! 'Failed!'; # Failed!</code></pre>
 <p>看看笨重的 <code>value</code> 处理。几乎任何东西都可以是一个值，所以 action 方法会做一些简单的工作来弄清楚哪个东西匹配。它查找可能的子匹配以找到具有定义值的子匹配。好吧，即使这是一个快速入门的方式，这也是非常愚蠢的（虽然在愚蠢的直接智能中存在一些价值）。</p>
 </div>
 <div class="paragraph">
-<p><code>proto</code> 规则可以让您轻松地为不同的子规则赋予相同的名称但不同的模式。不是备选分支，而是每个都有一个 <code>token</code>：</p>
+<p><code>proto</code> 规则可以让你轻松地为不同的子规则赋予相同的名称但不同的模式。不是备选分支，而是每个都有一个 <code>token</code>：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -21951,7 +21951,7 @@ token value:sym&lt;null&gt;   { &lt;sym&gt;    }</code></pre>
 <p>第一个 <code>proto</code> 规则匹配 <code>*</code>，这实际上意味着它将分派给该组中的另一个规则。它可以发送给所有人并找到有效的。</p>
 </div>
 <div class="paragraph">
-<p>其中一些在其模式中使用特殊的 <code>&lt;sym&gt;</code> 子规则。这意味着规则的名称是要匹配的文字文本。 <code>proto</code> 规则 <code>&lt;true&gt;</code> 匹配文字文本 <code>true</code>。您不必在名称和模式中输入该内容。</p>
+<p>其中一些在其模式中使用特殊的 <code>&lt;sym&gt;</code> 子规则。这意味着规则的名称是要匹配的文字文本。 <code>proto</code> 规则 <code>&lt;true&gt;</code> 匹配文字文本 <code>true</code>。你不必在名称和模式中输入该内容。</p>
 </div>
 <div class="paragraph">
 <p>哪些匹配无关紧要; grammar 调用每个 <code>$&lt;value&gt;</code>。超级规则只知道值匹配的东西，并且子规则适当地处理它。 action 类生成正确的值并将其存储在 [<code>Match</code>](<a href="https://docs.raku.org/type/Match.html" class="bare">https://docs.raku.org/type/Match.html</a>) 中：</p>
@@ -21989,7 +21989,7 @@ token value:sym&lt;null&gt;   { &lt;sym&gt;    }</code></pre>
 <p>EXERCISE 17.5Implement your own JSON parser (steal all the code you like). Test it against some JSON files to see how well it works. You might like to try the JSON files at [<strong><a href="https://github.com/briandfoy/json-acceptance-tests" class="bare">https://github.com/briandfoy/json-acceptance-tests</a></strong></p>
 </div>
 <div class="paragraph">
-<p>练习17.5实现自己的 JSON 解析器（窃取你喜欢的所有代码）。针对某些 JSON 文件进行测试，看看它的工作情况。您可能想在 [https//github.com/briandfoy/json-acceptance-tests](https//github.com/briandfoy/json-acceptance-tests) 上尝试 JSON文件。</p>
+<p>练习17.5实现自己的 JSON 解析器（窃取你喜欢的所有代码）。针对某些 JSON 文件进行测试，看看它的工作情况。你可能想在 [https//github.com/briandfoy/json-acceptance-tests](https//github.com/briandfoy/json-acceptance-tests) 上尝试 JSON文件。</p>
 </div>
 </div>
 <div class="sect2">
@@ -22016,7 +22016,7 @@ token value:sym&lt;null&gt;   { &lt;sym&gt;    }</code></pre>
 <p>Still willing to give it a try? You should find that grammars make most of these concerns tractable:</p>
 </div>
 <div class="paragraph">
-<p>仍然愿意尝试一下？您应该发现 grammar 使大多数这样的问题易于处理：</p>
+<p>仍然愿意尝试一下？你应该发现 grammar 使大多数这样的问题易于处理：</p>
 </div>
 <div class="ulist">
 <ul>
@@ -22039,13 +22039,13 @@ token value:sym&lt;null&gt;   { &lt;sym&gt;    }</code></pre>
 <p>棘轮行为使事情变得简单。</p>
 </li>
 <li>
-<p>您可以轻松地处理平衡的开口和闭合（即引用的东西）。</p>
+<p>你可以轻松地处理平衡的开口和闭合（即引用的东西）。</p>
 </li>
 <li>
-<p>grammar 可以继承其他 grammar，因此您可以根据数据调整 grammar，而不是编写一个处理所有数据的 grammar。</p>
+<p>grammar 可以继承其他 grammar，因此你可以根据数据调整 grammar，而不是编写一个处理所有数据的 grammar。</p>
 </li>
 <li>
-<p>您已经看过 action 类，但你也可以拥有记住额外非[<code>匹配</code>](<a href="https://docs.raku.org/type/Match.html)数据的" class="bare">https://docs.raku.org/type/Match.html)数据的</a> action 实例。</p>
+<p>你已经看过 action 类，但你也可以拥有记住额外非[<code>匹配</code>](<a href="https://docs.raku.org/type/Match.html)数据的" class="bare">https://docs.raku.org/type/Match.html)数据的</a> action 实例。</p>
 </li>
 <li>
 <p>有一个 <code>.subparse</code> 方法，可以让你解析块，这样你就可以一次处理一条记录。</p>
@@ -22105,10 +22105,10 @@ my $result = Grammar::CSV.parse( $data );</code></pre>
 <p>You can deal with one record at a time. Using <code>.subparse</code> with the <code>record</code> rule gets you the first record and only the first record. The <code>.subparse</code> method always returns a [<code>Match</code>](<a href="https://docs.raku.org/type/Match.html" class="bare">https://docs.raku.org/type/Match.html</a>), unlike <code>.parse</code>, which only returns a [<code>Match</code>](<a href="https://docs.raku.org/type/Match.html" class="bare">https://docs.raku.org/type/Match.html</a>) when it succeeds. You can’t rely on the type of the object as an indication of success:</p>
 </div>
 <div class="paragraph">
-<p>但是，您通常不希望解析整个文件。让我们解决这个问题的第一部分。您希望在遇到记录时处理记录。你可以使用 <code>.subparse</code>，而不是使用锚定到文本末尾的 <code>.parse</code>，  <code>.subparse</code> 不会锚定到文本末尾。这意味着您可以解析部分文本然后停止。</p>
+<p>但是，你通常不希望解析整个文件。让我们解决这个问题的第一部分。你希望在遇到记录时处理记录。你可以使用 <code>.subparse</code>，而不是使用锚定到文本末尾的 <code>.parse</code>，  <code>.subparse</code> 不会锚定到文本末尾。这意味着你可以解析部分文本然后停止。</p>
 </div>
 <div class="paragraph">
-<p>您可以一次处理一条记录。将 <code>.subparse</code> 与 <code>record</code> 规则一起使用可以获得第一条记录，并且只获得第一条记录。与 <code>.parse</code> 不同，<code>.subparse</code> 方法总是返回一个 [<code>Match</code>](<a href="https://docs.raku.org/type/Match.html)，" class="bare">https://docs.raku.org/type/Match.html)，</a><code>.parse</code> 方法只在成功时返回一个 [<code>Match</code>](<a href="https://docs.raku.org/type/Match.html)。你不能依赖对象的类型作为成功的指示：" class="bare">https://docs.raku.org/type/Match.html)。你不能依赖对象的类型作为成功的指示：</a></p>
+<p>你可以一次处理一条记录。将 <code>.subparse</code> 与 <code>record</code> 规则一起使用可以获得第一条记录，并且只获得第一条记录。与 <code>.parse</code> 不同，<code>.subparse</code> 方法总是返回一个 [<code>Match</code>](<a href="https://docs.raku.org/type/Match.html)，" class="bare">https://docs.raku.org/type/Match.html)，</a><code>.parse</code> 方法只在成功时返回一个 [<code>Match</code>](<a href="https://docs.raku.org/type/Match.html)。你不能依赖对象的类型作为成功的指示：" class="bare">https://docs.raku.org/type/Match.html)。你不能依赖对象的类型作为成功的指示：</a></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -22163,7 +22163,7 @@ loop {
 <p>你以为问题已经解决了。然后，有人给你发送了一个格式略有不同的文件。新格式使用反斜杠，而不是使用两个引号转义 <code>"</code>。</p>
 </div>
 <div class="paragraph">
-<p>现在你现有的 grammar 解析失败。您没有满足该类型的转义的规则，因为您的 grammar 不需要它。作为模式和 grammar 的练习，只匹配你应该匹配的内容。在其他方面随心所欲，例如制作一个子 grammar 来处理新案例：</p>
+<p>现在你现有的 grammar 解析失败。你没有满足该类型的转义的规则，因为你的 grammar 不需要它。作为模式和 grammar 的练习，只匹配你应该匹配的内容。在其他方面随心所欲，例如制作一个子 grammar 来处理新案例：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -22207,7 +22207,7 @@ for %formats.values -&gt; $hash {
 <p>The <code>%formats</code> [<code>Hash</code>](<a href="https://docs.raku.org/type/Hash.html" class="bare">https://docs.raku.org/type/Hash.html</a>) of [<code>Hash</code>](<a href="https://docs.raku.org/type/Hash.html)es" class="bare">https://docs.raku.org/type/Hash.html)es</a> stores the filenames and the grammars for them. You can load a grammar and use it to parse the data without the explicit grammar name:</p>
 </div>
 <div class="paragraph">
-<p><code>%formats</code> [<code>散列</code>](<a href="https://docs.raku.org/type/Hash.html)的"><code>散列</code></a>(<a href="https://docs.raku.org/type/Hash.html)存储文件名和" class="bare">https://docs.raku.org/type/Hash.html)存储文件名和</a> grammar。您可以加载 grammar 并使用它来解析数据而不使用显式的 grammar 名称：</p>
+<p><code>%formats</code> [<code>散列</code>](<a href="https://docs.raku.org/type/Hash.html)的"><code>散列</code></a>(<a href="https://docs.raku.org/type/Hash.html)存储文件名和" class="bare">https://docs.raku.org/type/Hash.html)存储文件名和</a> grammar。你可以加载 grammar 并使用它来解析数据而不使用显式的 grammar 名称：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -22234,7 +22234,7 @@ corpus/test-backslash.csv with Grammar::CSV::Backslashed parsed</code></pre>
 <p>First, adjust the main grammar to have a stub method for <code>&lt;escaped-quote&gt;</code>. This forces something else to define it:</p>
 </div>
 <div class="paragraph">
-<p>角色可以提供 grammar 可以使用的规则和方法。在上一节中，您通过继承处理了不同类型的双引号转义，其中您重写了规则。你可以用角色做同样的事情。</p>
+<p>角色可以提供 grammar 可以使用的规则和方法。在上一节中，你通过继承处理了不同类型的双引号转义，其中你重写了规则。你可以用角色做同样的事情。</p>
 </div>
 <div class="paragraph">
 <p>Grammar 可以有方法和子程序。使用 <code>sub</code>，<code>method`或 `rule</code> 声明名称的方式告诉语言解析器（而不是 grammar！）如何解析[<code>块</code>](<a href="https://docs.raku.org/type/Block.html)中的东西。" class="bare">https://docs.raku.org/type/Block.html)中的东西。</a></p>
@@ -22279,7 +22279,7 @@ role BackslashedQuote { token escaped-quote { '\\"' } }</code></pre>
 <p>When it’s time to parse a file you can choose which role you want to use. You can create a new object for <code>Grammar::CSV</code> and apply the appropriate role to it:</p>
 </div>
 <div class="paragraph">
-<p>在解析文件时，您可以选择要使用的角色。您可以为 <code>Grammar::CSV</code> 创建一个新对象并将适当的角色应用于它：</p>
+<p>在解析文件时，你可以选择要使用的角色。你可以为 <code>Grammar::CSV</code> 创建一个新对象并将适当的角色应用于它：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -22307,10 +22307,10 @@ say $match // 'Failed!';</code></pre>
 <p>EXERCISE 17.6Adjust the CSV example to use roles instead of inheritance. Create an action class to adjust the escaped double quotes as you run into them. You can start with <strong>Grammars/test.csv</strong> from the downloads section of [the book’s website](<a href="https://www.learningraku.com/" class="bare">https://www.learningraku.com/</a>) if you like.</p>
 </div>
 <div class="paragraph">
-<p>这样做不会修复数据中的双引号 -  <code>""</code> 保留为 <code>""</code> - 但您可以在 action 类中修复它。</p>
+<p>这样做不会修复数据中的双引号 -  <code>""</code> 保留为 <code>""</code> - 但你可以在 action 类中修复它。</p>
 </div>
 <div class="paragraph">
-<p>练习17.6 调整 CSV 示例以使用角色而不是继承。创建一个 action 类，以便在遇到它们时调整转义的双引号。如果您愿意，可以从本书网站的下载部分 Grammars/ test.csv 开始。</p>
+<p>练习17.6 调整 CSV 示例以使用角色而不是继承。创建一个 action 类，以便在遇到它们时调整转义的双引号。如果你愿意，可以从本书网站的下载部分 Grammars/ test.csv 开始。</p>
 </div>
 </div>
 </div>
@@ -22320,7 +22320,7 @@ say $match // 'Failed!';</code></pre>
 <p>Grammars are one of the killer features of the language. You can define complex relationships between patterns and use action classes to run arbitrarily complex code when something matches. You might find that your entire program ends up being one big grammar.</p>
 </div>
 <div class="paragraph">
-<p>Grammars 是 Raku 语言的杀手级特性之一。您可以定义模式之间的复杂关系，并在匹配时使用 action 类来运行任意复杂的代码。您可能会发现整个程序最终变成一个大的 grammar。</p>
+<p>Grammars 是 Raku 语言的杀手级特性之一。你可以定义模式之间的复杂关系，并在匹配时使用 action 类来运行任意复杂的代码。你可能会发现整个程序最终变成一个大的 grammar。</p>
 </div>
 </div>
 </div>
@@ -24127,31 +24127,31 @@ orwith $s.index: 'H' { fail "Why is there an H at $_?"  }</code></pre>
 <p>I wasn’t able to teach you how to be a programmer. I only had the one book. I’ve been at it for several decades and I’m still learning. This book specifically avoided that goal, and I think I’ve succeeded there. Remember that what you’ve seen here to demonstrate and isolate concepts and syntax is not a prescription for good programming practices.</p>
 </div>
 <div class="paragraph">
-<p>我无法教你如何成为一名程序员。我只有一本书。几十年来我一直在这里，我还在学习。这本书专门避免了这个目标，我想我已经成功了。请记住，您在此处所展示的用于演示和隔离概念和语法的内容并不是良好编程实践的处方。</p>
+<p>我无法教你如何成为一名程序员。我只有一本书。几十年来我一直在这里，我还在学习。这本书专门避免了这个目标，我想我已经成功了。请记住，你在此处所展示的用于演示和隔离概念和语法的内容并不是良好编程实践的处方。</p>
 </div>
 <div class="paragraph">
 <p>I hope you learned the basics of the language and that you can get simple programs to run. If you’re at the start of your programming career, don’t feel bad if you think you are taking longer than you should to get programs working. Writing programs is always the easy part. It’s the debugging work that’s hard. That takes practice. Every time you encounter a new problem you’re adding to the list of things you’ve encountered. Eventually you encounter a problem often enough that you start to subconsciously avoid it. That merely makes space for new sorts of mistakes.</p>
 </div>
 <div class="paragraph">
-<p>我希望你学习了语言的基础知识，并且可以运行简单的程序。如果您正处于编程生涯的开始阶段，如果您认为自己花费的时间超过应该使程序运行的时间，请不要感到难过。编写程序总是很容易的。这是调试工作很难。这需要练习。每次遇到新问题时，您都会添加到您遇到的事物列表中。最终你经常遇到一个问题，你开始下意识地避免它。这只会为新的错误提供空间。</p>
+<p>我希望你学习了语言的基础知识，并且可以运行简单的程序。如果你正处于编程生涯的开始阶段，如果你认为自己花费的时间超过应该使程序运行的时间，请不要感到难过。编写程序总是很容易的。这是调试工作很难。这需要练习。每次遇到新问题时，你都会添加到你遇到的事物列表中。最终你经常遇到一个问题，你开始下意识地避免它。这只会为新的错误提供空间。</p>
 </div>
 <div class="paragraph">
 <p>You aren’t done learning the language. There’s much more in the documentation. I noted some favorite excluded topics in [Chapter 20](<a href="https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch20.html#camelia-advanced" class="bare">https://www.safaribooksonline.com/library/view/learning-perl-6/9781491977675/ch20.html#camelia-advanced</a>), but even that was limited. I really wanted to talk more about those, but I couldn’t go past that 500-page barrier. That list isn’t nearly complete. There are so many other things I don’t even mention. Explore those new topics as you become comfortable with what you’ve seen here.</p>
 </div>
 <div class="paragraph">
-<p>你还没有学过这门语言。文档中还有更多内容。我在第20章中注意到了一些最受欢迎的主题，但即使这样也是有限的。我真的想更多地谈论这些，但我无法超越这500页的障碍。该清单并不完整。还有很多其他事我甚至都没提到。当您对这里看到的内容感到满意时，请探索这些新主题。</p>
+<p>你还没有学过这门语言。文档中还有更多内容。我在第20章中注意到了一些最受欢迎的主题，但即使这样也是有限的。我真的想更多地谈论这些，但我无法超越这500页的障碍。该清单并不完整。还有很多其他事我甚至都没提到。当你对这里看到的内容感到满意时，请探索这些新主题。</p>
 </div>
 <div class="paragraph">
 <p>Consider going back to the beginning and reading through the book again. Some of the things will make more sense now that you have a better overview of the major topics. You have more context for the design decisions you dealt with in the first few chapters.</p>
 </div>
 <div class="paragraph">
-<p>考虑回到开头并再次阅读本书。由于您对主要主题有了更好的概述，因此有些事情会更有意义。在前几章中，您有更多关于设计决策的背景信息。</p>
+<p>考虑回到开头并再次阅读本书。由于你对主要主题有了更好的概述，因此有些事情会更有意义。在前几章中，你有更多关于设计决策的背景信息。</p>
 </div>
 <div class="paragraph">
 <p>Finally, read other books. Don’t limit yourself to one author. I have a particular opinion about some things, and other people have their opinions. Sometimes those are at odds. You don’t have to choose sides. As I write more extensively in <strong>Mastering Perl</strong>, your role is to take the best and most useful ideas from as many people as you can. Synthesize those into something that works in your world and for your tasks. Tell the world what decisions you made and what influenced them. Feed your ideas back into the milieu.</p>
 </div>
 <div class="paragraph">
-<p>最后，阅读其他书籍。不要仅限于一位作者。我对某些事情有一个特别的看法，而其他人有他们的意见。有时这些是不一致的。您不必选择边。正如我在 Mastering Perl 中更广泛地撰写的那样，您的角色是尽可能多地采用最好和最有用的想法。将这些合成为适合您的世界和任务的东西。告诉全世界你做出的决定以及影响他们的因素。把你的想法反馈到环境中。</p>
+<p>最后，阅读其他书籍。不要仅限于一位作者。我对某些事情有一个特别的看法，而其他人有他们的意见。有时这些是不一致的。你不必选择边。正如我在 Mastering Perl 中更广泛地撰写的那样，你的角色是尽可能多地采用最好和最有用的想法。将这些合成为适合你的世界和任务的东西。告诉全世界你做出的决定以及影响他们的因素。把你的想法反馈到环境中。</p>
 </div>
 </div>
 </div>

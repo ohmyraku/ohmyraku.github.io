@@ -748,10 +748,10 @@ my $products = $dbh.selectall_arrayref(
 <div class="sect3">
 <h4 id="_下载和安装_rakudo_star">1.11.1. 下载和安装 Rakudo Star</h4>
 <div class="paragraph">
-<p>在电脑上安装乐酷星有几种方法。您可以下载源码并编译它，或者下载一个安装程序为您的平台。Rakudo Star 适用于所有主要平台，即 Windows（32位和64位版本）、Mac OS X 和Linux。</p>
+<p>在电脑上安装乐酷星有几种方法。你可以下载源码并编译它，或者下载一个安装程序为你的平台。Rakudo Star 适用于所有主要平台，即 Windows（32位和64位版本）、Mac OS X 和Linux。</p>
 </div>
 <div class="paragraph">
-<p>Rakudo Star 的主要下载页面是 。在该页面上，您将找到不同平台的 Rakudo Star 发行版的最新版本的链接，以及关于如何安装的说明。</p>
+<p>Rakudo Star 的主要下载页面是 。在该页面上，你将找到不同平台的 Rakudo Star 发行版的最新版本的链接，以及关于如何安装的说明。</p>
 </div>
 <div class="paragraph">
 <p>在 Windows 上，这个过程非常简单。只需下载最新版本的 MSI 安装程序，运行它，并按照说明进行操作。</p>
@@ -17945,7 +17945,7 @@ say reduce &amp;add, 10..15;</code></pre>
 <p>现在, 既然我们已经使用了 <code>sort</code>, <code>grep</code>, <code>map</code> 和 <code>reduce</code> 等代码块, 那么现在是时候使用 Raku 中所谓的 <code>WhateverCode</code> 类型了。它涉及到了(<code>*</code>)星号并创建一个代码块, 可以和我们之前使用的任何代码块一样使用。</p>
 </div>
 <div class="paragraph">
-<p>例如, 您可以编写 <code>*.uc</code> 代替 <code>{.uc}</code>。下面的两行代码是等价的:</p>
+<p>例如, 你可以编写 <code>*.uc</code> 代替 <code>{.uc}</code>。下面的两行代码是等价的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -19102,7 +19102,7 @@ $supplier.emit($_) for 'a'..'e';</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>您可能会对 <code>Supply</code> 和 <code>Supplier</code> 类的存在感到困惑。<code>Supplier</code> 类是生产实时供应的工厂。</p>
+<p>你可能会对 <code>Supply</code> 和 <code>Supplier</code> 类的存在感到困惑。<code>Supplier</code> 类是生产实时供应的工厂。</p>
 </div>
 <div class="paragraph">
 <p>让我们看看实时供应是如何流式传输数据的, 以及在没有打开分接器的情况下会发生什么。在下面的程序中, 实时供应在由 <code>start</code> 关键字创建的独立线程中生成数据。实际上, <code>start</code> 创造了一个承诺(见第十三章, 《并发编程》), 因此它伴随着 <code>await</code> 关键字等待, 直到全部完成:</p>
