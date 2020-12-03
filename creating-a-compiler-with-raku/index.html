@@ -8,9 +8,16 @@
 
 <meta name="author" content="ohmyraku">
 <meta name="application-name" content="山川异域, 风月同天">
-<meta name="description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记   3. 第三章 创建计算器 3.1. 汇总 3.2. 过早的优化 3.3. 更多操作数 3.4. 多样性测试 3.5. 增加更多数学 3.6. 测试代码 3.7. 添加更多能量 3.8. 允许括号   4. 第四章 更好的解释器 4.1. 跳过注释 4.2. 复杂数字 4.3. 复杂表达式 4.4. 使用变量 4.5. 初始化声明   5. Grammar 学习 5.1. 可执行的 5.2. 组合和继承 Grammar 5.">
+<meta name="description" content="1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
+ 让我们从一个简单的解释器程序开始研究 Raku 强大的 grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。
+ my x; x = 42; say x;   在理解此代码的含义时，你不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。
+ 该程序声明一个名为 x 的变量，为其赋一个整数值，然后将该值打印到控制台。
+ 假设你将代码保存在文件 test.lng 中。 现在让我们使用 Raku 读取它。
+ my $code = &#39;test.lng&#39;.IO.slurp(); say $code;   将此 Raku 程序保存在另一个文件 lingua.raku 中，然后运行它：
+ $ raku lingua.raku   如果你安装了 Raku，则会打印出我们测试程序的内容。
+ 1.1. Grammar 现在是时候使用 Raku grammar 解析程序了。 从语法上讲，grammar 是类，但是它们使用正则表达式描述其方法的行为，这些方法又称为 rule 和 token。 第一个应用的 rule 通常称为 TOP; Raku 选择它为默认开始规则。 Grammar 用于解析某些文本，因此只需对已定义的 grammar 调用 parse 方法并将文本传递给它即可。 所有这些都在我们的第一个程序中得到了证明：">
 <meta name="robots" content="noodp"/>
-<meta name="generator" content="Hugo 0.63.2" />
+<meta name="generator" content="Hugo 0.79.0" />
 <meta name="referrer" content="no-referrer" />
 <meta name="format-detection" content="telephone=no">
 
@@ -22,7 +29,14 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="用 Raku 写编译器" />
-<meta name="twitter:description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记   3. 第三章 创建计算器 3.1. 汇总 3.2. 过早的优化 3.3. 更多操作数 3.4. 多样性测试 3.5. 增加更多数学 3.6. 测试代码 3.7. 添加更多能量 3.8. 允许括号   4. 第四章 更好的解释器 4.1. 跳过注释 4.2. 复杂数字 4.3. 复杂表达式 4.4. 使用变量 4.5. 初始化声明   5. Grammar 学习 5.1. 可执行的 5.2. 组合和继承 Grammar 5." />
+<meta name="twitter:description" content="1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
+ 让我们从一个简单的解释器程序开始研究 Raku 强大的 grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。
+ my x; x = 42; say x;   在理解此代码的含义时，你不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。
+ 该程序声明一个名为 x 的变量，为其赋一个整数值，然后将该值打印到控制台。
+ 假设你将代码保存在文件 test.lng 中。 现在让我们使用 Raku 读取它。
+ my $code = &#39;test.lng&#39;.IO.slurp(); say $code;   将此 Raku 程序保存在另一个文件 lingua.raku 中，然后运行它：
+ $ raku lingua.raku   如果你安装了 Raku，则会打印出我们测试程序的内容。
+ 1.1. Grammar 现在是时候使用 Raku grammar 解析程序了。 从语法上讲，grammar 是类，但是它们使用正则表达式描述其方法的行为，这些方法又称为 rule 和 token。 第一个应用的 rule 通常称为 TOP; Raku 选择它为默认开始规则。 Grammar 用于解析某些文本，因此只需对已定义的 grammar 调用 parse 方法并将文本传递给它即可。 所有这些都在我们的第一个程序中得到了证明：" />
 <meta name="twitter:site" content="https://ohmyraku.github.io" />
 <meta name="twitter:creator" content="ohmyraku" />
 <meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
@@ -32,7 +46,14 @@
 <meta property="og:title" content="用 Raku 写编译器" />
 <meta property="og:url" content="https://ohmyraku.github.io" />
 <meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记   3. 第三章 创建计算器 3.1. 汇总 3.2. 过早的优化 3.3. 更多操作数 3.4. 多样性测试 3.5. 增加更多数学 3.6. 测试代码 3.7. 添加更多能量 3.8. 允许括号   4. 第四章 更好的解释器 4.1. 跳过注释 4.2. 复杂数字 4.3. 复杂表达式 4.4. 使用变量 4.5. 初始化声明   5. Grammar 学习 5.1. 可执行的 5.2. 组合和继承 Grammar 5." />
+<meta property="og:description" content="1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
+ 让我们从一个简单的解释器程序开始研究 Raku 强大的 grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。
+ my x; x = 42; say x;   在理解此代码的含义时，你不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。
+ 该程序声明一个名为 x 的变量，为其赋一个整数值，然后将该值打印到控制台。
+ 假设你将代码保存在文件 test.lng 中。 现在让我们使用 Raku 读取它。
+ my $code = &#39;test.lng&#39;.IO.slurp(); say $code;   将此 Raku 程序保存在另一个文件 lingua.raku 中，然后运行它：
+ $ raku lingua.raku   如果你安装了 Raku，则会打印出我们测试程序的内容。
+ 1.1. Grammar 现在是时候使用 Raku grammar 解析程序了。 从语法上讲，grammar 是类，但是它们使用正则表达式描述其方法的行为，这些方法又称为 rule 和 token。 第一个应用的 rule 通常称为 TOP; Raku 选择它为默认开始规则。 Grammar 用于解析某些文本，因此只需对已定义的 grammar 调用 parse 方法并将文本传递给它即可。 所有这些都在我们的第一个程序中得到了证明：" />
 <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -44,12 +65,12 @@
       "headline": "用 Raku 写编译器",
       
       "datePublished": "2020-02-24",
-      "dateModified": "2020-02-24 12:54:52 \x2b0800 CST",
+      "dateModified": "2020-02-24 12:54:52 \u002b0800 CST",
       "author": {
         "@type": "Person",
         "name": "ohmyraku"
       },
-      "description": "Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记   3. 第三章 创建计算器 3.1. 汇总 3.2. 过早的优化 3.3. 更多操作数 3.4. 多样性测试 3.5. 增加更多数学 3.6. 测试代码 3.7. 添加更多能量 3.8. 允许括号   4. 第四章 更好的解释器 4.1. 跳过注释 4.2. 复杂数字 4.3. 复杂表达式 4.4. 使用变量 4.5. 初始化声明   5. Grammar 学习 5.1. 可执行的 5.2. 组合和继承 Grammar 5.",
+      "description": "1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。\n 让我们从一个简单的解释器程序开始研究 Raku 强大的 grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。\n my x; x = 42; say x;   在理解此代码的含义时，你不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。\n 该程序声明一个名为 x 的变量，为其赋一个整数值，然后将该值打印到控制台。\n 假设你将代码保存在文件 test.lng 中。 现在让我们使用 Raku 读取它。\n my $code = \u0026#39;test.lng\u0026#39;.IO.slurp(); say $code;   将此 Raku 程序保存在另一个文件 lingua.raku 中，然后运行它：\n $ raku lingua.raku   如果你安装了 Raku，则会打印出我们测试程序的内容。\n 1.1. Grammar 现在是时候使用 Raku grammar 解析程序了。 从语法上讲，grammar 是类，但是它们使用正则表达式描述其方法的行为，这些方法又称为 rule 和 token。 第一个应用的 rule 通常称为 TOP; Raku 选择它为默认开始规则。 Grammar 用于解析某些文本，因此只需对已定义的 grammar 调用 parse 方法并将文本传递给它即可。 所有这些都在我们的第一个程序中得到了证明：",
       "publisher": {
         "@type": "Organization",
         "name": "https:\/\/ohmyraku.github.io",
@@ -96,126 +117,7 @@ if (theme && theme !== "1") {
 
 </div>
 
-<article class="page__content" ><div id="toc" class="toc">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_第一章_创建一个简单的解释器">1. 第一章 创建一个简单的解释器</a>
-<ul class="sectlevel2">
-<li><a href="#_grammar">1.1. Grammar</a></li>
-<li><a href="#_actions">1.2. Actions</a></li>
-<li><a href="#_模块">1.3. 模块</a></li>
-</ul>
-</li>
-<li><a href="#_第二章_解析数字">2. 第二章 解析数字</a>
-<ul class="sectlevel2">
-<li><a href="#_查找数字">2.1. 查找数字</a></li>
-<li><a href="#_获取值">2.2. 获取值</a></li>
-<li><a href="#_使用_ast">2.3. 使用 AST</a></li>
-<li><a href="#_最后的笔记">2.4. 最后的笔记</a></li>
-</ul>
-</li>
-<li><a href="#_第三章_创建计算器">3. 第三章 创建计算器</a>
-<ul class="sectlevel2">
-<li><a href="#_汇总">3.1. 汇总</a></li>
-<li><a href="#_过早的优化">3.2. 过早的优化</a></li>
-<li><a href="#_更多操作数">3.3. 更多操作数</a></li>
-<li><a href="#_多样性测试">3.4. 多样性测试</a></li>
-<li><a href="#_增加更多数学">3.5. 增加更多数学</a></li>
-<li><a href="#_测试代码">3.6. 测试代码</a></li>
-<li><a href="#_添加更多能量">3.7. 添加更多能量</a></li>
-<li><a href="#_允许括号">3.8. 允许括号</a></li>
-</ul>
-</li>
-<li><a href="#_第四章_更好的解释器">4. 第四章 更好的解释器</a>
-<ul class="sectlevel2">
-<li><a href="#_跳过注释">4.1. 跳过注释</a></li>
-<li><a href="#_复杂数字">4.2. 复杂数字</a></li>
-<li><a href="#_复杂表达式">4.3. 复杂表达式</a></li>
-<li><a href="#_使用变量">4.4. 使用变量</a></li>
-<li><a href="#_初始化声明">4.5. 初始化声明</a></li>
-</ul>
-</li>
-<li><a href="#_grammar_学习">5. Grammar 学习</a>
-<ul class="sectlevel2">
-<li><a href="#_可执行的">5.1. 可执行的</a></li>
-<li><a href="#_组合和继承_grammar">5.2. 组合和继承 Grammar</a></li>
-<li><a href="#_复习计算器">5.3. 复习计算器</a></li>
-<li><a href="#_使用_multi_rules">5.4. 使用 MULTI-RULES</a></li>
-<li><a href="#_摆脱全局变量">5.5. 摆脱全局变量</a></li>
-<li><a href="#_更好的变量名">5.6. 更好的变量名</a></li>
-<li><a href="#_函数接收表达式">5.7. 函数接收表达式</a></li>
-</ul>
-</li>
-<li><a href="#_处理字符串">6. 处理字符串</a>
-<ul class="sectlevel2">
-<li><a href="#_字符串">6.1. 字符串</a></li>
-<li><a href="#_转义引号">6.2. 转义引号</a></li>
-<li><a href="#_变量插值">6.3. 变量插值</a></li>
-<li><a href="#_索引字符串">6.4. 索引字符串</a></li>
-</ul>
-</li>
-<li><a href="#_数组和散列">7. 数组和散列</a>
-<ul class="sectlevel2">
-<li><a href="#_数组">7.1. 数组</a></li>
-<li><a href="#_给数组项赋值">7.2. 给数组项赋值</a></li>
-<li><a href="#_题外话语法的乐趣">7.3. 题外话。语法的乐趣</a></li>
-<li><a href="#_访问数组元素">7.4. 访问数组元素</a></li>
-<li><a href="#_列表赋值">7.5. 列表赋值</a></li>
-<li><a href="#_打印数组">7.6. 打印数组</a></li>
-<li><a href="#_散列">7.7. 散列</a></li>
-<li><a href="#_复习和测试">7.8. 复习和测试</a></li>
-</ul>
-</li>
-<li><a href="#_创建抽象语法树">8. 创建抽象语法树</a>
-<ul class="sectlevel2">
-<li><a href="#_想到了_if_这个关键字">8.1. 想到了 <code>if</code> 这个关键字</a></li>
-<li><a href="#_ast_块">8.2. AST 块</a></li>
-<li><a href="#_值节点">8.3. 值节点</a></li>
-<li><a href="#_声明字符串">8.4. 声明字符串</a></li>
-<li><a href="#_声明数组和散列">8.5. 声明数组和散列</a></li>
-<li><a href="#_标量赋值">8.6. 标量赋值</a></li>
-<li><a href="#_使用索引">8.7. 使用索引</a></li>
-<li><a href="#_数组和散列的赋值与初始化">8.8. 数组和散列的赋值与初始化</a></li>
-<li><a href="#_ast_表达式">8.9. AST 表达式</a></li>
-<li><a href="#_函数调用">8.10. 函数调用</a></li>
-<li><a href="#_最终的调优">8.11. 最终的调优</a></li>
-<li><a href="#_声明字符串_2">8.12. 声明字符串</a></li>
-<li><a href="#_声明数组和散列_2">8.13. 声明数组和散列</a></li>
-<li><a href="#_标量赋值_2">8.14. 标量赋值</a></li>
-<li><a href="#_处理索引">8.15. 处理索引</a></li>
-<li><a href="#_数组和散列的赋值与初始化_2">8.16. 数组和散列的赋值与初始化</a></li>
-<li><a href="#_ast_表达式_2">8.17. AST 表达式</a></li>
-<li><a href="#_函数调用_2">8.18. 函数调用</a></li>
-<li><a href="#_最后的调试">8.19. 最后的调试</a></li>
-</ul>
-</li>
-<li><a href="#_计算_ast">9. 计算 AST</a>
-<ul class="sectlevel2">
-<li><a href="#_从_top_开始计算">9.1. 从 top 开始计算</a></li>
-<li><a href="#_使用变量_2">9.2. 使用变量</a></li>
-<li><a href="#_字符串插值">9.3. 字符串插值</a></li>
-<li><a href="#_使用_raku_getters">9.4. 使用 Raku getters</a></li>
-<li><a href="#_到处插值">9.5. 到处插值</a></li>
-<li><a href="#_算术操作">9.6. 算术操作</a></li>
-</ul>
-</li>
-<li><a href="#_测试套件">10. 测试套件</a>
-<ul class="sectlevel2">
-<li><a href="#_测试_runner">10.1. 测试 runner</a></li>
-<li><a href="#_测试">10.2. 测试</a></li>
-<li><a href="#_功能覆盖">10.3. 功能覆盖</a></li>
-</ul>
-</li>
-<li><a href="#_控制流">11. 控制流</a>
-<ul class="sectlevel2">
-<li><a href="#_实现_if">11.1. 实现 <code>if</code></a></li>
-<li><a href="#_实现_else">11.2. 实现 <code>else</code></a></li>
-<li><a href="#_实现循环">11.3. 实现循环</a></li>
-<li><a href="#_实现_while_循环">11.4. 实现 <code>while</code> 循环</a></li>
-</ul>
-</li>
-</ul>
-</div>
+<article class="page__content" >
 <div class="sect1">
 <h2 id="_第一章_创建一个简单的解释器">1. 第一章 创建一个简单的解释器</h2>
 <div class="sectionbody">
@@ -243,7 +145,7 @@ say x;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $code = 'test.lng'.IO.slurp();
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $code = &#39;test.lng&#39;.IO.slurp();
 say $code;</code></pre>
 </div>
 </div>
@@ -271,7 +173,7 @@ say $code;</code></pre>
     }
 }
 
-my $code = 'test.lng'.IO.slurp();
+my $code = &#39;test.lng&#39;.IO.slurp();
 my $result = Lingua.parse($code);
 say $result;</code></pre>
 </div>
@@ -305,12 +207,12 @@ say x;
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
-    &lt;statement&gt;* %% ';'
+    &lt;statement&gt;* %% &#39;;&#39;
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>现在，使用另一个实体, 即 <code>statement</code> 来描述 <code>TOP</code> 规则。 可以重复多次（包括不重复），并且如果有多个语句，则必须用 ';' 字符分隔。 如果你更改定义并输入 <code>%</code> 而不是 <code>%%</code>，则该规则将要求在每个语句后面必需有分号。</p>
+<p>现在，使用另一个实体, 即 <code>statement</code> 来描述 <code>TOP</code> 规则。 可以重复多次（包括不重复），并且如果有多个语句，则必须用 &#39;;&#39; 字符分隔。 如果你更改定义并输入 <code>%</code> 而不是 <code>%%</code>，则该规则将要求在每个语句后面必需有分号。</p>
 </div>
 <div class="paragraph">
 <p><code>statement</code> 本身是另一条规则，我们首先可以模糊地定义它：</p>
@@ -364,11 +266,11 @@ say x;
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule variable-declaration {
-    'my' &lt;variable-name&gt;
+    &#39;my&#39; &lt;variable-name&gt;
 }
 
 rule assignment {
-    &lt;variable-name&gt; '=' &lt;value&gt;
+    &lt;variable-name&gt; &#39;=&#39; &lt;value&gt;
 }
 
 rule function-call {
@@ -377,7 +279,7 @@ rule function-call {
 </div>
 </div>
 <div class="paragraph">
-<p>带引号的字符串（例如 <code>'my'</code> 和 <code>'='</code>）将字面值与目标语言中的相应语法项进行匹配。 尖括号中的名称是对我们需要定义以完成 grammar 的其他规则或标记的引用。 这是我们的第一个标记：</p>
+<p>带引号的字符串（例如 <code>&#39;my&#39;</code> 和 <code>&#39;=&#39;</code>）将字面值与目标语言中的相应语法项进行匹配。 尖括号中的名称是对我们需要定义以完成 grammar 的其他规则或标记的引用。 这是我们的第一个标记：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -394,7 +296,7 @@ rule function-call {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">'my' &lt;variable-name&gt;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#39;my&#39; &lt;variable-name&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -428,7 +330,7 @@ my    x</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule function-name {
-    'say'
+    &#39;say&#39;
 }</code></pre>
 </div>
 </div>
@@ -462,7 +364,7 @@ my    x</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">token function-name {
-    'say'
+    &#39;say&#39;
 }</code></pre>
 </div>
 </div>
@@ -514,14 +416,14 @@ grammar Lingua {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule variable-declaration {
-    'my' &lt;variable-name&gt; {
+    &#39;my&#39; &lt;variable-name&gt; {
         %var{$&lt;variable-name&gt;} = 0;
     }
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>将 action 放在一对花括号中的正则表达式之后。 我们知道，该规则通过匹配字面值 <code>'my'</code> 和变量名来找到子字符串 <code>my x</code>，变量名是命名 token <code>variable-name</code>。 我们可以使用该名称访问内容：<code>$&lt;variable-name&gt;</code>。 实际上，这是 <code>Lingua</code> 类的对象，但是我们将其用作哈希的键，因此将其转换为字符串，并使用新的对 <code>x &#8658; 0</code> 填充哈希。因此， 创建并用零初始化。</p>
+<p>将 action 放在一对花括号中的正则表达式之后。 我们知道，该规则通过匹配字面值 <code>&#39;my&#39;</code> 和变量名来找到子字符串 <code>my x</code>，变量名是命名 token <code>variable-name</code>。 我们可以使用该名称访问内容：<code>$&lt;variable-name&gt;</code>。 实际上，这是 <code>Lingua</code> 类的对象，但是我们将其用作哈希的键，因此将其转换为字符串，并使用新的对 <code>x ⇒ 0</code> 填充哈希。因此， 创建并用零初始化。</p>
 </div>
 <div class="paragraph">
 <p>同样，让我们为变量复制创建一个 action。</p>
@@ -529,7 +431,7 @@ grammar Lingua {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
-    &lt;variable-name&gt; '=' &lt;value&gt; {
+    &lt;variable-name&gt; &#39;=&#39; &lt;value&gt; {
         %var{~$&lt;variable-name&gt;} = +$&lt;value&gt;;
     }
 }</code></pre>
@@ -546,7 +448,7 @@ grammar Lingua {
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule function-call {
     &lt;function-name&gt; &lt;variable-name&gt; {
         say %var{$&lt;variable-name&gt;}
-            if $&lt;function-name&gt; eq 'say';
+            if $&lt;function-name&gt; eq &#39;say&#39;;
     }
 }</code></pre>
 </div>
@@ -559,7 +461,7 @@ grammar Lingua {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $code = 'test.lng'.IO.slurp();
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $code = &#39;test.lng&#39;.IO.slurp();
 my $result = Lingua.parse($code);
 #say $result;</code></pre>
 </div>
@@ -574,7 +476,7 @@ my $result = Lingua.parse($code);
 </div>
 </div>
 <div class="paragraph">
-<p>恭喜你！ 该程序不仅被解析而且还被执行。 如你所见，它打印了变量 <code>x</code> 的内容，这正是我们放入变量 <code>x</code> 中的内容。 如果你转储 <code>%var</code> 容器（通过添加 <code>say %var;</code>），则会得到 <code>{x &#8658; 42}</code>。</p>
+<p>恭喜你！ 该程序不仅被解析而且还被执行。 如你所见，它打印了变量 <code>x</code> 的内容，这正是我们放入变量 <code>x</code> 中的内容。 如果你转储 <code>%var</code> 容器（通过添加 <code>say %var;</code>），则会得到 <code>{x ⇒ 42}</code>。</p>
 </div>
 <div class="paragraph">
 <p>这是我们第一个真正的成就。 我们设法为将来的 Lingua 语言的子集创建了一个解释器。 这里最令人兴奋的部分是它没有绑定到我们之前使用的单个测试程序。 你可以根据需要创建任意多个变量，可以将其分配给不同的值，然后再次重新分配它们。 变量名比单个字母长。 所有这些神奇地起作用！ 自己尝试一下，这是我所做的一个示例：</p>
@@ -653,7 +555,7 @@ say value;</code></pre>
 
     method function-call($/) {
         say %var{$&lt;variable-name&gt;}
-            if $&lt;function-name&gt; eq 'say';
+            if $&lt;function-name&gt; eq &#39;say&#39;;
     }
 }</code></pre>
 </div>
@@ -677,7 +579,7 @@ say value;</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">use Lingua;
 use LinguaActions;
 
-my $code = 'test.lng'.IO.slurp();
+my $code = &#39;test.lng&#39;.IO.slurp();
 Lingua.parse($code, :actions(LinguaActions));</code></pre>
 </div>
 </div>
@@ -705,7 +607,7 @@ Lingua.parse($code, :actions(LinguaActions));</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my @cases = 7, 77, -84;
 for @cases -&gt; $number {
-    say "Test $number";
+    say &#34;Test $number&#34;;
     say Number.parse($number);
 }</code></pre>
 </div>
@@ -750,7 +652,7 @@ Nil</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">token number {
-    '-'? \d+
+    &#39;-&#39;? \d+
 }</code></pre>
 </div>
 </div>
@@ -769,7 +671,7 @@ Nil</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my @cases = 7, 77, -84, '+7', 0;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @cases = 7, 77, -84, &#39;+7&#39;, 0;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -792,7 +694,7 @@ Nil</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">for @cases -&gt; $number {
     my $test = Number.parse($number);
-    say ($test ?? 'OK ' !! 'NOT OK ') ~ $number;
+    say ($test ?? &#39;OK &#39; !! &#39;NOT OK &#39;) ~ $number;
 }</code></pre>
 </div>
 </div>
@@ -822,7 +724,7 @@ OK 0</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">token number {
-    &lt;[+-]&gt;? \d+ ['.' \d+]?
+    &lt;[+-]&gt;? \d+ [&#39;.&#39; \d+]?
 }</code></pre>
 </div>
 </div>
@@ -832,7 +734,7 @@ OK 0</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">token number {
-    &lt;[+-]&gt;? \d* ['.' \d+]?
+    &lt;[+-]&gt;? \d* [&#39;.&#39; \d+]?
 }</code></pre>
 </div>
 </div>
@@ -842,9 +744,9 @@ OK 0</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my @cases =
-    7, 77, -84, '+7', 0,
-    3.14, -2.78, 5.0, '.5',
-    '', '-', '+';</code></pre>
+    7, 77, -84, &#39;+7&#39;, 0,
+    3.14, -2.78, 5.0, &#39;.5&#39;,
+    &#39;&#39;, &#39;-&#39;, &#39;+&#39;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -855,7 +757,7 @@ OK 0</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">token number {
     &lt;[+-]&gt;? [
         | \d+
-        | \d* ['.' \d+]
+        | \d* [&#39;.&#39; \d+]
     ]
 }</code></pre>
 </div>
@@ -868,7 +770,7 @@ OK 0</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">token number {
     &lt;[+-]&gt;? [
         | \d+
-        | \d* ['.' \d+]
+        | \d* [&#39;.&#39; \d+]
         | \d+ &lt;[eE]&gt; &lt;[+-]&gt;? \d+
     ]
 }</code></pre>
@@ -879,7 +781,7 @@ OK 0</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">'3E4', '-33E55', '3E-3', '-1E-2'</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#39;3E4&#39;, &#39;-33E55&#39;, &#39;3E-3&#39;, &#39;-1E-2&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -890,15 +792,15 @@ OK 0</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">token number {
     &lt;[+-]&gt;? [
         | \d+
-        | \d* ['.' \d+]
+        | \d* [&#39;.&#39; \d+]
         | \d+ &lt;[eE]&gt; &lt;[+-]&gt;? \d+
-       | \d* ['.' \d+] &lt;[eE]&gt; &lt;[+-]&gt;? \d+
+       | \d* [&#39;.&#39; \d+] &lt;[eE]&gt; &lt;[+-]&gt;? \d+
     ]
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这种形式中，有些部分会重复，例如 <code>\d+</code> 或 <code>\d* ['.' \d+]</code>。 在这种紧凑的规则中可能会很好，但是也可以对其进行进一步分解，并引入负责此类重复部分的子 token。 转换后的 <code>number</code> token 及其家族如下所示：</p>
+<p>在这种形式中，有些部分会重复，例如 <code>\d+</code> 或 <code>\d* [&#39;.&#39; \d+]</code>。 在这种紧凑的规则中可能会很好，但是也可以对其进行进一步分解，并引入负责此类重复部分的子 token。 转换后的 <code>number</code> token 及其家族如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -924,7 +826,7 @@ token integer {
 }
 
 token floating-point {
-    \d* ['.' &lt;integer&gt;]
+    \d* [&#39;.&#39; &lt;integer&gt;]
 }
 
 token exponent {
@@ -937,7 +839,7 @@ token exponent {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">\d* ['.' \d+] &lt;[eE]&gt; &lt;[+-]&gt;? \d+</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">\d* [&#39;.&#39; \d+] &lt;[eE]&gt; &lt;[+-]&gt;? \d+</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -973,7 +875,7 @@ token exponent {
 </div>
 </div>
 <div class="paragraph">
-<p>换句话说，数字可以是整数，也可以是浮点值，其后跟一个可选的符号，然后可以跟一个可选的指数部分。 以这种形式，描述是如此简洁和紧凑。 所有细节（正则表达式"噪声"）都隐藏在辅助 token 标记中。</p>
+<p>换句话说，数字可以是整数，也可以是浮点值，其后跟一个可选的符号，然后可以跟一个可选的指数部分。 以这种形式，描述是如此简洁和紧凑。 所有细节（正则表达式&#34;噪声&#34;）都隐藏在辅助 token 标记中。</p>
 </div>
 </div>
 <div class="sect2">
@@ -1003,10 +905,10 @@ class NumberActions {
     my $test = Number.parse($number, :actions(NumberActions));
 
     if ($test) {
-        say "OK $number = $n";
+        say &#34;OK $number = $n&#34;;
     }
     else {
-        say "NOT OK $number";
+        say &#34;NOT OK $number&#34;;
     }
 }</code></pre>
 </div>
@@ -1029,7 +931,7 @@ OK 0 = 0</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method sign($/) {
-    $n *= -1 if ~$/ eq '-';
+    $n *= -1 if ~$/ eq &#39;-&#39;;
 }</code></pre>
 </div>
 </div>
@@ -1047,13 +949,13 @@ class NumberActions {
     }
 
     method sign($/) {
-        $sign = -1 if ~$/ eq '-';
+        $sign = -1 if ~$/ eq &#39;-&#39;;
     }
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这有助于检测第一个负数，但会破坏所有其他负数。 当然，你可以检查符号是否为 <code>'+'</code>，但问题是 <code>$n</code> 和 <code>$sign</code> 变量是全局变量，必须在解析下一个变量之前将其重置。 这是将它们移至 action 类的好时机。</p>
+<p>这有助于检测第一个负数，但会破坏所有其他负数。 当然，你可以检查符号是否为 <code>&#39;+&#39;</code>，但问题是 <code>$n</code> 和 <code>$sign</code> 变量是全局变量，必须在解析下一个变量之前将其重置。 这是将它们移至 action 类的好时机。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1066,7 +968,7 @@ class NumberActions {
     }
 
     method sign($/) {
-        $!sign = -1 if ~$/ eq '-';
+        $!sign = -1 if ~$/ eq &#39;-&#39;;
     }
 }</code></pre>
 </div>
@@ -1081,10 +983,10 @@ class NumberActions {
     my $test = Number.parse($number, :actions($actions));
 
     if ($test) {
-        say "OK $number = " ~ $actions.n;
+        say &#34;OK $number = &#34; ~ $actions.n;
     }
     else {
-        say "NOT OK $number";
+        say &#34;NOT OK $number&#34;;
     }
 }</code></pre>
 </div>
@@ -1144,7 +1046,7 @@ OK .5E-3 = -3</code></pre>
 }
 
 method sign($/) {
-    $/.make(~$/ eq '-' ?? -1 !! 1);
+    $/.make(~$/ eq &#39;-&#39; ?? -1 !! 1);
 }</code></pre>
 </div>
 </div>
@@ -1175,7 +1077,7 @@ made =&gt; -1, orig =&gt; -84, pos =&gt; 1, from =&gt; 0</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>将 <code>from</code> 和 <code>pos</code> 键设置为指向第一个字符以及与正则表达式匹配的最后一个字符之后的字符。 因此，这两个子哈希中的第一个是解析数字的结果(字符串&#8217;-84'` 中从位置 1 到位置 3，即 <code>84</code>)。 第二个哈希对应减号字符(同一字符串中的位置0到1)。</p>
+<p>将 <code>from</code> 和 <code>pos</code> 键设置为指向第一个字符以及与正则表达式匹配的最后一个字符之后的字符。 因此，这两个子哈希中的第一个是解析数字的结果(字符串’-84&#39;` 中从位置 1 到位置 3，即 <code>84</code>)。 第二个哈希对应减号字符(同一字符串中的位置0到1)。</p>
 </div>
 <div class="paragraph">
 <p><code>made</code> 属性分别设置为 <code>84</code> 和 <code>-1</code>，这确认 grammar 能够正确解析数字及其符号。</p>
@@ -1245,7 +1147,7 @@ class NumberActions {
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $test = Number.parse($number, :actions($actions));
 
 if ($test) {
-    say "OK $number = " ~ $test.made;
+    say &#34;OK $number = &#34; ~ $test.made;
 }</code></pre>
 </div>
 </div>
@@ -1259,7 +1161,7 @@ if ($test) {
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method exponent($/) {
     my $e = $&lt;integer&gt;;
-    $e *= -1 if $&lt;sign&gt; &amp;&amp; ~$&lt;sign&gt; eq '-';
+    $e *= -1 if $&lt;sign&gt; &amp;&amp; ~$&lt;sign&gt; eq &#39;-&#39;;
     $/.make($e);
 }</code></pre>
 </div>
@@ -1295,7 +1197,7 @@ OK -1E-2 = -0.01</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">token floating-point {
-    \d* ['.' &lt;integer&gt;]
+    \d* [&#39;.&#39; &lt;integer&gt;]
 }</code></pre>
 </div>
 </div>
@@ -1305,7 +1207,7 @@ OK -1E-2 = -0.01</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">token floating-point {
-    &lt;integer&gt;? ['.' &lt;integer&gt;]
+    &lt;integer&gt;? [&#39;.&#39; &lt;integer&gt;]
 }</code></pre>
 </div>
 </div>
@@ -1371,8 +1273,8 @@ OK .5E-3 = 0.0005</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "OK $number = " ~ $test.made ~
-    ' (' ~ $test.made.^name ~ ')';</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;OK $number = &#34; ~ $test.made ~
+    &#39; (&#39; ~ $test.made.^name ~ &#39;)&#39;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1404,12 +1306,12 @@ OK .5E-3 = 0.0005 (Rat)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = +"$int.$frac";
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = +&#34;$int.$frac&#34;;
 $/.make($n);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>等待，什么是 <code>"$int.$frac"</code>? 它是一个在解析过程中与 <code>floating-point</code> token 匹配的字符串，这意味着与其重建字符串并将其转换为数字，我们还可以直接将 <code>$/</code> 对象转换为数字，而无需访问它：</p>
+<p>等待，什么是 <code>&#34;$int.$frac&#34;</code>? 它是一个在解析过程中与 <code>floating-point</code> token 匹配的字符串，这意味着与其重建字符串并将其转换为数字，我们还可以直接将 <code>$/</code> 对象转换为数字，而无需访问它：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1497,7 +1399,7 @@ OK .5E-3 = 0.0005 (Num)</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">grammar Calculator {
     rule TOP {
-        &lt;number&gt; '+' &lt;number&gt;
+        &lt;number&gt; &#39;+&#39; &lt;number&gt;
     }
 
     token number {
@@ -1527,7 +1429,7 @@ OK .5E-3 = 0.0005 (Num)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">Calculator.parse('3 + 4',
+<pre class="highlight"><code class="language-raku" data-lang="raku">Calculator.parse(&#39;3 + 4&#39;,
                  :actions(CalculatorActions)).made.say;</code></pre>
 </div>
 </div>
@@ -1545,11 +1447,11 @@ OK .5E-3 = 0.0005 (Num)</code></pre>
 }
 
 rule addition {
-    &lt;number&gt; '+' &lt;number&gt;
+    &lt;number&gt; &#39;+&#39; &lt;number&gt;
 }
 
 rule subtraction {
-    &lt;number&gt; '-' &lt;number&gt;
+    &lt;number&gt; &#39;-&#39; &lt;number&gt;
 }</code></pre>
 </div>
 </div>
@@ -1577,9 +1479,9 @@ method subtraction($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my @cases = '3 + 4', '3 - 4';
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @cases = &#39;3 + 4&#39;, &#39;3 - 4&#39;;
 for @cases -&gt; $test {
-    say "$test = " ~ Calculator.parse($test,
+    say &#34;$test = &#34; ~ Calculator.parse($test,
                      :actions(CalculatorActions)).made;
 }</code></pre>
 </div>
@@ -1603,7 +1505,7 @@ for @cases -&gt; $test {
 }
 
 token op {
-    '+' | '-'
+    &#39;+&#39; | &#39;-&#39;
 }</code></pre>
 </div>
 </div>
@@ -1616,7 +1518,7 @@ token op {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method TOP($/) {
-    if $&lt;op&gt; eq '+' {
+    if $&lt;op&gt; eq &#39;+&#39; {
         $/.make($&lt;number&gt;[0].made + $&lt;number&gt;[1].made);
     }
     else {
@@ -1626,7 +1528,7 @@ token op {
 </div>
 </div>
 <div class="paragraph">
-<p>就是这样。 更新后的语法将两个测试字符串都视为有效表达式，并根据 <code>$&lt;op&gt;</code> 的内容进行正确的计算。 当检查 <code>$&lt;op&gt; eq '+'</code> 中的条件时，eq 字符串比较运算符将 <code>$&lt;op&gt;</code> 隐式转换为字符串，并且不需要单独的操作来处理 <code>op</code> 令牌。</p>
+<p>就是这样。 更新后的语法将两个测试字符串都视为有效表达式，并根据 <code>$&lt;op&gt;</code> 的内容进行正确的计算。 当检查 <code>$&lt;op&gt; eq &#39;+&#39;</code> 中的条件时，eq 字符串比较运算符将 <code>$&lt;op&gt;</code> 隐式转换为字符串，并且不需要单独的操作来处理 <code>op</code> 令牌。</p>
 </div>
 </div>
 <div class="sect2">
@@ -1664,8 +1566,8 @@ token op {
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">class CalculatorActions {
     my %operation =
-        '+' =&gt; &amp;addition,
-        '-' =&gt; &amp;subtraction;
+        &#39;+&#39; =&gt; &amp;addition,
+        &#39;-&#39; =&gt; &amp;subtraction;
 
     . . .
 }</code></pre>
@@ -1688,11 +1590,11 @@ token op {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">class CalculatorActions {
-    multi sub operation('+', $a, $b) {
+    multi sub operation(&#39;+&#39;, $a, $b) {
         $a + $b
     }
 
-    multi sub operation('-', $a, $b) {
+    multi sub operation(&#39;-&#39;, $a, $b) {
         $a - $b
     }
 
@@ -1731,9 +1633,9 @@ token op {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my @cases =
-    '3 + 4', '3 - 4',
-    '7',
-    '1 + 2 + 3', '1 + 3 + 5 + 7';</code></pre>
+    &#39;3 + 4&#39;, &#39;3 - 4&#39;,
+    &#39;7&#39;,
+    &#39;1 + 2 + 3&#39;, &#39;1 + 3 + 5 + 7&#39;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1741,11 +1643,11 @@ token op {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation('+', @values) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation(&#39;+&#39;, @values) {
     [+] @values
 }
 
-multi sub operation('-', @values) {
+multi sub operation(&#39;-&#39;, @values) {
     [-] @values
 }</code></pre>
 </div>
@@ -1817,11 +1719,11 @@ multi sub operation('-', @values) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation('+', $a is rw, $b) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation(&#39;+&#39;, $a is rw, $b) {
     $a += $b
 }
 
-multi sub operation('-', $a is rw, $b) {
+multi sub operation(&#39;-&#39;, $a is rw, $b) {
     $a -= $b
 }</code></pre>
 </div>
@@ -1852,7 +1754,7 @@ multi sub operation('-', $a is rw, $b) {
     . . .
 
     token op {
-        '+' | '-' | '*' | '/'
+        &#39;+&#39; | &#39;-&#39; | &#39;*&#39; | &#39;/&#39;
     }
 
     . . .
@@ -1861,11 +1763,11 @@ multi sub operation('-', $a is rw, $b) {
 class CalculatorActions {
     . . .
 
-    multi sub operation('*', $a is rw, $b) {
+    multi sub operation(&#39;*&#39;, $a is rw, $b) {
         $a *= $b
     }
 
-    multi sub operation('/', $a is rw, $b) {
+    multi sub operation(&#39;/&#39;, $a is rw, $b) {
         $a /= $b
     }
 
@@ -1904,11 +1806,11 @@ class CalculatorActions {
     }
 
     token op1 {
-        '+' | '-'
+        &#39;+&#39; | &#39;-&#39;
     }
 
     token op2 {
-        '*' | '/'
+        &#39;*&#39; | &#39;/&#39;
     }
 
     rule factor {
@@ -2001,7 +1903,7 @@ for @cases -&gt; $test {
     my $result = Calculator.parse(
         $test, :actions(CalculatorActions)).made;
     my $correct = EVAL($result);
-    is($result, $correct, "$test = $correct");
+    is($result, $correct, &#34;$test = $correct&#34;);
 }</code></pre>
 </div>
 </div>
@@ -2023,11 +1925,11 @@ ok 13 - 1 + 2 - 3 * 4 / 5 = 0.6</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">for @cases -&gt; $test {
     my $parse = Calculator.parse($test, :actions(CalculatorActions));
-    next unless isa-ok($parse, Match, "parsed $test");
+    next unless isa-ok($parse, Match, &#34;parsed $test&#34;);
 
     my $result = $parse.made;
     my $correct = EVAL($result);
-    is($result, $correct, "computed $test = $correct");
+    is($result, $correct, &#34;computed $test = $correct&#34;);
 }</code></pre>
 </div>
 </div>
@@ -2059,7 +1961,7 @@ ok 4 - computed 3 - 4 = -1
 }
 
 token op3 {
-    '**'
+    &#39;**&#39;
 }</code></pre>
 </div>
 </div>
@@ -2088,7 +1990,7 @@ token op3 {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation('**', $a is rw, $b) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation(&#39;**&#39;, $a is rw, $b) {
     $a **= $b
 }
 
@@ -2129,7 +2031,7 @@ ok 33 - computed 2 ** 3 ** 4 = 4096</code></pre>
 
 rule value {
     | &lt;number&gt;
-    | '(' &lt;TOP&gt; ')'
+    | &#39;(&#39; &lt;TOP&gt; &#39;)&#39;
 }</code></pre>
 </div>
 </div>
@@ -2196,7 +2098,7 @@ alpha = 100; # Assign a value</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
-    &lt;statement&gt;* %% ';'
+    &lt;statement&gt;* %% &#39;;&#39;
 }</code></pre>
 </div>
 </div>
@@ -2218,7 +2120,7 @@ alpha = 100; # Assign a value</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule comment {
-    '#' \N*
+    &#39;#&#39; \N*
 }</code></pre>
 </div>
 </div>
@@ -2243,7 +2145,7 @@ alpha = 100; # Assign a value</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
     [
         | &lt;comment&gt;
-        | &lt;statement&gt; ';'
+        | &lt;statement&gt; &#39;;&#39;
     ]*
 }</code></pre>
 </div>
@@ -2273,11 +2175,11 @@ say a</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $result = Lingua.parse($code, :actions(LinguaActions));
-say $result ?? 'OK' !! 'Error';</code></pre>
+say $result ?? &#39;OK&#39; !! &#39;Error&#39;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们愿意允许的第二种注释类型是一对字符序列 <code>/<strong></code> 和 <code></strong>/</code> 之间的注释。 它们既可以包含单行注释，也可以包含多行注释，并且可以出现在代码的任何允许空白的地方。 例如：</p>
+<p>我们愿意允许的第二种注释类型是一对字符序列 <code>/<strong></strong></code><strong> 和 <code></code></strong><code>/</code> 之间的注释。 它们既可以包含单行注释，也可以包含多行注释，并且可以出现在代码的任何允许空白的地方。 例如：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2299,7 +2201,7 @@ say a;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
-    &lt;variable-name&gt; '=' &lt;value&gt;
+    &lt;variable-name&gt; &#39;=&#39; &lt;value&gt;
 }</code></pre>
 </div>
 </div>
@@ -2309,7 +2211,7 @@ say a;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">token assignment {
-    &lt;variable-name&gt; &lt;ws&gt; '=' &lt;ws&gt; &lt;value&gt;
+    &lt;variable-name&gt; &lt;ws&gt; &#39;=&#39; &lt;ws&gt; &lt;value&gt;
 }</code></pre>
 </div>
 </div>
@@ -2349,13 +2251,13 @@ b = 20;</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">regex ws {
     &lt;!ww&gt; [
         | \s*
-        | \s* '/*' \s* .*? \s* '*/' \s*
+        | \s* &#39;/*&#39; \s* .*? \s* &#39;*/&#39; \s*
     ]
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>由于存在许多斜线和星号，因此看起来很丑陋，但是可以按预期完成工作。 注意，必须在 <code>/<strong></code> 和 <code></strong>/</code> 字面值之前和之后都留一些空格。 另请注意，此语法方法是 <strong>regex</strong>，而不是 <strong>rule</strong> 或 <strong>token</strong>。</p>
+<p>由于存在许多斜线和星号，因此看起来很丑陋，但是可以按预期完成工作。 注意，必须在 <code>/<strong></strong></code><strong> 和 <code></code></strong><code>/</code> 字面值之前和之后都留一些空格。 另请注意，此语法方法是 <strong>regex</strong>，而不是 <strong>rule</strong> 或 <strong>token</strong>。</p>
 </div>
 </div>
 <div class="sect2">
@@ -2420,7 +2322,7 @@ say gamma;</code></pre>
 
     rule value {
         | &lt;number&gt;
-        | '(' &lt;expression&gt; ')'
+        | &#39;(&#39; &lt;expression&gt; &#39;)&#39;
     }
 
     rule expression {
@@ -2470,7 +2372,7 @@ say gamma;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
-    &lt;variable-name&gt; '=' &lt;expression&gt;
+    &lt;variable-name&gt; &#39;=&#39; &lt;expression&gt;
 }</code></pre>
 </div>
 </div>
@@ -2517,7 +2419,7 @@ say x; # prints 14</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule value {
     | &lt;number&gt;
     | &lt;variable-name&gt;
-    | '(' &lt;expression&gt; ')'
+    | &#39;(&#39; &lt;expression&gt; &#39;)&#39;
 }</code></pre>
 </div>
 </div>
@@ -2584,7 +2486,7 @@ x = 10;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule variable-declaration {
-    'my' &lt;variable-name&gt; [ '=' &lt;expression&gt; ]?
+    &#39;my&#39; &lt;variable-name&gt; [ &#39;=&#39; &lt;expression&gt; ]?
 }</code></pre>
 </div>
 </div>
@@ -2643,18 +2545,18 @@ say d;</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
 
-use lib '.';
+use lib &#39;.&#39;;
 use Lingua;
 use LinguaActions;
 
-error('Usage: ./lingua &lt;filename&gt;') unless @*ARGS.elems;
+error(&#39;Usage: ./lingua &lt;filename&gt;&#39;) unless @*ARGS.elems;
 
 my $filename = @*ARGS[0];
-error("Error: File $filename not found") unless $filename.IO.f;
+error(&#34;Error: File $filename not found&#34;) unless $filename.IO.f;
 
 my $code = $filename.IO.slurp();
 my $result = Lingua.parse($code, :actions(LinguaActions));
-say $result ?? 'OK' !! error('Error: parse failed');
+say $result ?? &#39;OK&#39; !! error(&#39;Error: parse failed&#39;);
 
 sub error($message) {
     note $message;
@@ -2669,7 +2571,7 @@ sub error($message) {
 <div class="sect2">
 <h3 id="_组合和继承_grammar">5.2. 组合和继承 Grammar</h3>
 <div class="paragraph">
-<p>在 Lingua 语言中，我们允许以＃字符开头的单行注释，以及 <code>/<strong></code> 和 <code></strong>/</code> 之间的内联和多行注释。 这样的注释也用在其他编程语言中，从语言语法中提取注释规则并将其放在单独的类中可能很有用。 这也使主要语言语法更小，更透明。</p>
+<p>在 Lingua 语言中，我们允许以＃字符开头的单行注释，以及 <code>/<strong></strong></code><strong> 和 <code></code></strong><code>/</code> 之间的内联和多行注释。 这样的注释也用在其他编程语言中，从语言语法中提取注释规则并将其放在单独的类中可能很有用。 这也使主要语言语法更小，更透明。</p>
 </div>
 <div class="paragraph">
 <p>让我们回顾一下处理注释的现有 <code>Lingua</code> 语法的片段：</p>
@@ -2680,18 +2582,18 @@ sub error($message) {
     rule TOP {
         [
             | &lt;comment&gt;
-            | &lt;statement&gt; ';'
+            | &lt;statement&gt; &#39;;&#39;
         ]*
     }
 
     rule comment {
-        '#' \N*
+        &#39;#&#39; \N*
     }
 
     regex ws {
         &lt;!ww&gt; [
             | \s*
-            | \s* '/*' \s* .*? \s* '*/' \s*
+            | \s* &#39;/*&#39; \s* .*? \s* &#39;*/&#39; \s*
         ]
     }
 
@@ -2713,11 +2615,11 @@ sub error($message) {
     }
 
     regex inline-comment {
-        '/*' \s* .*? \s* '*/'
+        &#39;/*&#39; \s* .*? \s* &#39;*/&#39;
     }
 
     rule one-line-comment {
-        '#' \N*
+        &#39;#&#39; \N*
     }
 }</code></pre>
 </div>
@@ -2745,7 +2647,7 @@ grammar Lingua is CommentableLanguage {
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
     [
         | &lt;one-line-comment&gt;
-        | &lt;statement&gt; ';'
+        | &lt;statement&gt; &#39;;&#39;
     ]*
 }</code></pre>
 </div>
@@ -2779,7 +2681,7 @@ grammar Lingua is CommentableLanguage {
     }
 
     token floating-point {
-        &lt;integer&gt;? ['.' &lt;integer&gt;]
+        &lt;integer&gt;? [&#39;.&#39; &lt;integer&gt;]
     }
 
     token exponent {
@@ -2891,15 +2793,15 @@ rule factor {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">multi token op(1) {
-    '+' | '-'
+    &#39;+&#39; | &#39;-&#39;
 }
 
 multi token op(2) {
-    '*' | '/'
+    &#39;*&#39; | &#39;/&#39;
 }
 
 multi token op(3) {
-    '**'
+    &#39;**&#39;
 }</code></pre>
 </div>
 </div>
@@ -2969,7 +2871,7 @@ multi rule expr(3) {
 multi rule expr(4) {
     | &lt;number&gt;
     | &lt;variable-name&gt;
-    | '(' &lt;expression&gt; ')'
+    | &#39;(&#39; &lt;expression&gt; &#39;)&#39;
 }</code></pre>
 </div>
 </div>
@@ -3079,7 +2981,7 @@ say 4;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">token variable-name {
-    [&lt;:alpha&gt; | '_'] \w*
+    [&lt;:alpha&gt; | &#39;_&#39;] \w*
 }</code></pre>
 </div>
 </div>
@@ -3120,7 +3022,7 @@ say 100 + 300 / 3 ** (7 - 5);</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method function-call($/) {
-    say %!var{$&lt;variable-name&gt;} if $&lt;function-name&gt; eq 'say';
+    say %!var{$&lt;variable-name&gt;} if $&lt;function-name&gt; eq &#39;say&#39;;
 }</code></pre>
 </div>
 </div>
@@ -3156,10 +3058,10 @@ say 100 + 300 / 3 ** (7 - 5);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my str = "Hello, World";
+<pre class="highlight"><code class="language-raku" data-lang="raku">my str = &#34;Hello, World&#34;;
 say str;
 
-say "Hello indeed";</code></pre>
+say &#34;Hello indeed&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3168,7 +3070,7 @@ say "Hello indeed";</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule variable-declaration {
-    'my' &lt;variable-name&gt; [ '=' &lt;expression&gt; ]?
+    &#39;my&#39; &lt;variable-name&gt; [ &#39;=&#39; &lt;expression&gt; ]?
 }
 
 rule function-call {
@@ -3185,7 +3087,7 @@ rule function-call {
     | &lt;number&gt;
     | &lt;string&gt;
     | &lt;variable-name&gt;
-    | '(' &lt;expression&gt; ')'
+    | &#39;(&#39; &lt;expression&gt; &#39;)&#39;
 }</code></pre>
 </div>
 </div>
@@ -3212,7 +3114,7 @@ rule function-call {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule string {
-    '"' .*? '"'
+    &#39;&#34;&#39; .*? &#39;&#34;&#39;
 }</code></pre>
 </div>
 </div>
@@ -3227,7 +3129,7 @@ rule function-call {
 </div>
 </div>
 <div class="paragraph">
-<p>那是一个低落的果实，但是这种方法有两个问题。 首先，引号成为字符串的一部分。 其次，如果用户将字符串放入算术表达式中（例如 <code>"Hello" + "World"</code>），则编译器将失败并出现异常。</p>
+<p>那是一个低落的果实，但是这种方法有两个问题。 首先，引号成为字符串的一部分。 其次，如果用户将字符串放入算术表达式中（例如 <code>&#34;Hello&#34; + &#34;World&#34;</code>），则编译器将失败并出现异常。</p>
 </div>
 <div class="paragraph">
 <p>第一个问题很容易解决：在 action 中创建一个捕获组并以 <code>[0]</code> 的索引对其进行访问：</p>
@@ -3235,7 +3137,7 @@ rule function-call {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule string {
-    '"' ( &lt;-["]&gt;* ) '"'
+    &#39;&#34;&#39; ( &lt;-[&#34;]&gt;* ) &#39;&#34;&#39;
 }
 
 . . .
@@ -3257,11 +3159,11 @@ method string($/) {
     . . .
 
     rule variable-declaration {
-        'my' &lt;variable-name&gt; [ '=' &lt;value&gt; ]?
+        &#39;my&#39; &lt;variable-name&gt; [ &#39;=&#39; &lt;value&gt; ]?
     }
 
     rule assignment {
-        &lt;variable-name&gt; '=' &lt;value&gt;
+        &lt;variable-name&gt; &#39;=&#39; &lt;value&gt;
     }
 
     rule function-call {
@@ -3323,11 +3225,11 @@ method string($/) {
 <div class="sect2">
 <h3 id="_转义引号">6.2. 转义引号</h3>
 <div class="paragraph">
-<p>很明显，上面定义的字符串本身不能包含双引号。 让我们将 " 作为唯一可能的引号，但允许在字符串中转义引号字符：</p>
+<p>很明显，上面定义的字符串本身不能包含双引号。 让我们将 &#34; 作为唯一可能的引号，但允许在字符串中转义引号字符：</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "Hello, \"World\"!";</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;Hello, \&#34;World\&#34;!&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3340,16 +3242,16 @@ Error: parse failed</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>要允许转义的引号，<code>string</code> 规则必须使用所有非引号和非反斜杠字符，如果看到反斜杠，则仅将 <code>\"</code> 序列视为有效：</p>
+<p>要允许转义的引号，<code>string</code> 规则必须使用所有非引号和非反斜杠字符，如果看到反斜杠，则仅将 <code>\&#34;</code> 序列视为有效：</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">token string {
-    '"' ( [
-          | &lt;-["\\]&gt;+
-          | '\\"'
+    &#39;&#34;&#39; ( [
+          | &lt;-[&#34;\\]&gt;+
+          | &#39;\\&#34;&#39;
           ]* )
-    '"'
+    &#39;&#34;&#39;
 }</code></pre>
 </div>
 </div>
@@ -3365,27 +3267,27 @@ Error: parse failed</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">token string {
-    '"' ( [
-          | &lt;-["\\]&gt;+
-          | '\\"'
-          | '\\\\'
+    &#39;&#34;&#39; ( [
+          | &lt;-[&#34;\\]&gt;+
+          | &#39;\\&#34;&#39;
+          | &#39;\\\\&#39;
           ]* )
-    '"'
+    &#39;&#34;&#39;
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>不允许所有其他序列，例如 "\W" 是一个错误。 以下是带有反斜杠和引号的有效字符串的一些示例。 字符串可以包含换行符，也可以为空：</p>
+<p>不允许所有其他序列，例如 &#34;\W&#34; 是一个错误。 以下是带有反斜杠和引号的有效字符串的一些示例。 字符串可以包含换行符，也可以为空：</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "\\";
-say "\"";
-say "\\\\";
-say "\"\"";
-say "multi-
-     line";
-say "";</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;\\&#34;;
+say &#34;\&#34;&#34;;
+say &#34;\\\\&#34;;
+say &#34;\&#34;\&#34;&#34;;
+say &#34;multi-
+     line&#34;;
+say &#34;&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3395,7 +3297,7 @@ say "";</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method string($a) {
     my $s = ~$a[0];
-    $s ~~ s:g/\\\"/"/;
+    $s ~~ s:g/\\\&#34;/&#34;/;
     $s ~~ s:g/\\\\/\\/;
     $a.make($s);
 }</code></pre>
@@ -3412,8 +3314,8 @@ say "";</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my name = "John";
-say "Hello, $name!";</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my name = &#34;John&#34;;
+say &#34;Hello, $name!&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3421,7 +3323,7 @@ say "Hello, $name!";</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "5\$";</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;5\$&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3431,8 +3333,8 @@ say "Hello, $name!";</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">token string {
     . . .
-            | '\\$'
-            | '$' &lt;variable-name&gt;
+            | &#39;\\$&#39;
+            | &#39;$&#39; &lt;variable-name&gt;
     . . .
 }</code></pre>
 </div>
@@ -3471,9 +3373,9 @@ say "Hello, $name!";</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my name = "John";
-my another_name = "Carla";
-say "Hello, $name and $another_name!";</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my name = &#34;John&#34;;
+my another_name = &#34;Carla&#34;;
+say &#34;Hello, $name and $another_name!&#34;;</code></pre>
 </div>
 </div>
 </div>
@@ -3484,7 +3386,7 @@ say "Hello, $name and $another_name!";</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my s = "abcdef";
+<pre class="highlight"><code class="language-raku" data-lang="raku">my s = &#34;abcdef&#34;;
 say s[3]; # prints d</code></pre>
 </div>
 </div>
@@ -3495,8 +3397,8 @@ say s[3]; # prints d</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">multi rule expr(4) {
     | &lt;number&gt;
-    | &lt;variable-name&gt; [ '[' &lt;integer&gt; ']' ]?
-    | '(' &lt;expression&gt; ')'
+    | &lt;variable-name&gt; [ &#39;[&#39; &lt;integer&gt; &#39;]&#39; ]?
+    | &#39;(&#39; &lt;expression&gt; &#39;)&#39;
 }</code></pre>
 </div>
 </div>
@@ -3532,7 +3434,7 @@ say s[3]; # prints d</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my ch = s[4];
-say "The 4th character is \"$ch\""; # e</code></pre>
+say &#34;The 4th character is \&#34;$ch\&#34;&#34;; # e</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3566,7 +3468,7 @@ say "The 4th character is \"$ch\""; # e</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule variable-declaration {
-    'my' [
+    &#39;my&#39; [
          | &lt;array-declaration&gt;
          | &lt;scalar-declaration&gt;
     ]
@@ -3585,11 +3487,11 @@ say "The 4th character is \"$ch\""; # e</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule array-declaration {
-    &lt;variable-name&gt; '[' ']'
+    &lt;variable-name&gt; &#39;[&#39; &#39;]&#39;
 }
 
 rule scalar-declaration {
-    &lt;variable-name&gt; [ '=' &lt;value&gt; ]?
+    &lt;variable-name&gt; [ &#39;=&#39; &lt;value&gt; ]?
 }</code></pre>
 </div>
 </div>
@@ -3680,7 +3582,7 @@ data[1] = 20;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
-    &lt;variable-name&gt; [ '[' &lt;integer&gt; ']' ]? '=' &lt;value&gt;
+    &lt;variable-name&gt; [ &#39;[&#39; &lt;integer&gt; &#39;]&#39; ]? &#39;=&#39; &lt;value&gt;
 }</code></pre>
 </div>
 </div>
@@ -3712,7 +3614,7 @@ data[1] = 20;</code></pre>
 <div class="sect2">
 <h3 id="_题外话语法的乐趣">7.3. 题外话。语法的乐趣</h3>
 <div class="paragraph">
-<p>在转向更多的数组和哈希特性之前，让我们先对 grammar 进行一下改造。在赋值方法中，<code>if-else</code> 检查占据了比"有用"代码更多的行数。我们可以做两个改造，让方法更紧凑。</p>
+<p>在转向更多的数组和哈希特性之前，让我们先对 grammar 进行一下改造。在赋值方法中，<code>if-else</code> 检查占据了比&#34;有用&#34;代码更多的行数。我们可以做两个改造，让方法更紧凑。</p>
 </div>
 <div class="paragraph">
 <p>首先，让我们重复一下将一条规则一分为二的技巧。我们可以用两个子规则来代替一个通用的赋值规则。</p>
@@ -3725,11 +3627,11 @@ data[1] = 20;</code></pre>
 }
 
 rule array-item-assignment {
-    &lt;variable-name&gt; [ '[' &lt;integer&gt; ']' ] '=' &lt;value&gt;
+    &lt;variable-name&gt; [ &#39;[&#39; &lt;integer&gt; &#39;]&#39; ] &#39;=&#39; &lt;value&gt;
 }
 
 rule scalar-assignment {
-    &lt;variable-name&gt; '=' &lt;value&gt;
+    &lt;variable-name&gt; &#39;=&#39; &lt;value&gt;
 }</code></pre>
 </div>
 </div>
@@ -3851,7 +3753,7 @@ say n;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule index {
-    '[' &lt;integer&gt; ']'
+    &#39;[&#39; &lt;integer&gt; &#39;]&#39;
 }</code></pre>
 </div>
 </div>
@@ -3861,7 +3763,7 @@ say n;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
-    &lt;variable-name&gt; &lt;index&gt;? '=' &lt;value&gt;
+    &lt;variable-name&gt; &lt;index&gt;? &#39;=&#39; &lt;value&gt;
 }
 
 . . .
@@ -3869,7 +3771,7 @@ say n;</code></pre>
 multi rule expr(4) {
     | &lt;number&gt;
     | &lt;variable-name&gt; &lt;index&gt;?
-    | '(' &lt;expression&gt; ')'
+    | &#39;(&#39; &lt;expression&gt; &#39;)&#39;
 }</code></pre>
 </div>
 </div>
@@ -3933,16 +3835,16 @@ data = 7, 9, 11;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里出现了一个新的语法元素&#8212;&#8203;逗号。它与语言中的其他结构不冲突，因此可以很容易地嵌入到 grammar 中。</p>
+<p>这里出现了一个新的语法元素—​逗号。它与语言中的其他结构不冲突，因此可以很容易地嵌入到 grammar 中。</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule array-declaration {
-    &lt;variable-name&gt; '[' ']' [ '=' &lt;value&gt;+ %% ',' ]?
+    &lt;variable-name&gt; &#39;[&#39; &#39;]&#39; [ &#39;=&#39; &lt;value&gt;+ %% &#39;,&#39; ]?
 }
 
 rule assignment {
-    &lt;variable-name&gt; &lt;index&gt;? '=' &lt;value&gt;+ %% ','
+    &lt;variable-name&gt; &lt;index&gt;? &#39;=&#39; &lt;value&gt;+ %% &#39;,&#39;
 }</code></pre>
 </div>
 </div>
@@ -3951,7 +3853,7 @@ rule assignment {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my strings[] = "alpha", "beta", "gamma";
+<pre class="highlight"><code class="language-raku" data-lang="raku">my strings[] = &#34;alpha&#34;, &#34;beta&#34;, &#34;gamma&#34;;
 say strings[1]; # beta
 
 my arr[] = 11, 3 * 4, 2 * (6 + 0.5);
@@ -4019,7 +3921,7 @@ say data;</code></pre>
     my $object = $&lt;value&gt;.made;
 
     if $object ~~ Array {
-        say $object.join(', ');
+        say $object.join(&#39;, &#39;);
     }
     else {
         say $object;
@@ -4057,10 +3959,10 @@ say data;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my hash{} = "alpha" : 1, "beta": 2, "gamma": 3;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my hash{} = &#34;alpha&#34; : 1, &#34;beta&#34;: 2, &#34;gamma&#34;: 3;
 
 my days{};
-days = "Mon": "work", "Sat": "rest";</code></pre>
+days = &#34;Mon&#34;: &#34;work&#34;, &#34;Sat&#34;: &#34;rest&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4069,7 +3971,7 @@ days = "Mon": "work", "Sat": "rest";</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule variable-declaration {
-    'my' [
+    &#39;my&#39; [
         | &lt;array-declaration&gt;
         | &lt;hash-declaration&gt;
         | &lt;scalar-declaration&gt;
@@ -4077,8 +3979,8 @@ days = "Mon": "work", "Sat": "rest";</code></pre>
 }
 
 rule hash-declaration {
-    &lt;variable-name&gt; '{' '}' [
-        '=' [ &lt;string&gt; ':' &lt;value&gt; ]+ %% ','
+    &lt;variable-name&gt; &#39;{&#39; &#39;}&#39; [
+        &#39;=&#39; [ &lt;string&gt; &#39;:&#39; &lt;value&gt; ]+ %% &#39;,&#39;
     ]?
 }</code></pre>
 </div>
@@ -4089,10 +3991,10 @@ rule hash-declaration {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
-    &lt;variable-name&gt; &lt;index&gt;? '='
+    &lt;variable-name&gt; &lt;index&gt;? &#39;=&#39;
         [
-            | [ &lt;string&gt; ':' &lt;value&gt; ]+ %% ','
-            |                &lt;value&gt;+   %% ','
+            | [ &lt;string&gt; &#39;:&#39; &lt;value&gt; ]+ %% &#39;,&#39;
+            |                &lt;value&gt;+   %% &#39;,&#39;
         ]
 }</code></pre>
 </div>
@@ -4135,11 +4037,11 @@ multi method assignment($/ where !$&lt;index&gt;) {
 }
 
 rule array-index {
-    '[' &lt;integer&gt; ']'
+    &#39;[&#39; &lt;integer&gt; &#39;]&#39;
 }
 
 rule hash-index {
-    '{' &lt;string&gt; '}'
+    &#39;{&#39; &lt;string&gt; &#39;}&#39;
 }</code></pre>
 </div>
 </div>
@@ -4171,7 +4073,7 @@ multi method assignment($/ where !$&lt;index&gt;) {
 </div>
 </div>
 <div class="paragraph">
-<p>新的 <code>index</code> 规则已经可以在 <code>expr(4)</code> 规则中工作了，它允许我们使用 <code>hash{"key"}</code> 语法通过给定的散列键读取值。我们需要做的就是更新 <code>expr</code> 方法，让它知道新的数据结构。</p>
+<p>新的 <code>index</code> 规则已经可以在 <code>expr(4)</code> 规则中工作了，它允许我们使用 <code>hash{&#34;key&#34;}</code> 语法通过给定的散列键读取值。我们需要做的就是更新 <code>expr</code> 方法，让它知道新的数据结构。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4189,8 +4091,8 @@ multi method assignment($/ where !$&lt;index&gt;) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">days{"Tue"} = "work";
-say days{"Sat"};</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">days{&#34;Tue&#34;} = &#34;work&#34;;
+say days{&#34;Sat&#34;};</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4203,9 +4105,9 @@ say days{"Sat"};</code></pre>
     elsif $object ~~ Hash {
         my @str;
         for $object.keys.sort -&gt; $key {
-            @str.push("$key: $object{$key}");
+            @str.push(&#34;$key: $object{$key}&#34;);
         }
-        say @str.join(', ');
+        say @str.join(&#39;, &#39;);
     }
     . . .
 }</code></pre>
@@ -4228,11 +4130,11 @@ say days{"Sat"};</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule array-index {
-    '[' [ &lt;integer&gt; | &lt;variable-name&gt; ] ']'
+    &#39;[&#39; [ &lt;integer&gt; | &lt;variable-name&gt; ] &#39;]&#39;
 }
 
 rule hash-index {
-    '{' [ &lt;string&gt; | &lt;variable-name&gt; ] '}'
+    &#39;{&#39; [ &lt;string&gt; | &lt;variable-name&gt; ] &#39;}&#39;
 }</code></pre>
 </div>
 </div>
@@ -4269,28 +4171,28 @@ my b = 4;
 my c = 5;
 my left = a**2 + b**2;
 my right = c**2;
-say "The hypotenuse of a rectangle triangle with the
-sides $a and $b is indeed $c, as $left = $right.";
+say &#34;The hypotenuse of a rectangle triangle with the
+sides $a and $b is indeed $c, as $left = $right.&#34;;
 
 /* Using floating-point numbers for
 computing the length of a circle */
 my pi = 3.1415926;
 my R = 7;
 my c = 2 * pi * R;
-say "The length of a circle of radius $R is $c.";
+say &#34;The length of a circle of radius $R is $c.&#34;;
 
 # A list of prime numbers
 my n = 5;
 my data[] = 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31;
 my nth = data[n];
-say "$n th prime number is $nth.";
+say &#34;$n th prime number is $nth.&#34;;
 
 # Demonstrating the use of hashes
 my countries{} =
-    "France": "Paris", "Germany": "Berlin", "Italy": "Rome";
-my country = "Italy";
+    &#34;France&#34;: &#34;Paris&#34;, &#34;Germany&#34;: &#34;Berlin&#34;, &#34;Italy&#34;: &#34;Rome&#34;;
+my country = &#34;Italy&#34;;
 my city = countries{country};
-say "$city is the capital of $country.";</code></pre>
+say &#34;$city is the capital of $country.&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4339,7 +4241,7 @@ OK</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my condition = 0;
-if condition say "Passed";</code></pre>
+if condition say &#34;Passed&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4348,7 +4250,7 @@ if condition say "Passed";</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule function-call {
-    ['if' &lt;variable-name&gt;]? &lt;function-name&gt; &lt;value&gt;
+    [&#39;if&#39; &lt;variable-name&gt;]? &lt;function-name&gt; &lt;value&gt;
 }</code></pre>
 </div>
 </div>
@@ -4375,7 +4277,7 @@ if condition say "Passed";</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule function-call {
-    &lt;function-name&gt; &lt;value&gt; ['if' &lt;variable-name&gt;]?
+    &lt;function-name&gt; &lt;value&gt; [&#39;if&#39; &lt;variable-name&gt;]?
 }</code></pre>
 </div>
 </div>
@@ -4385,7 +4287,7 @@ if condition say "Passed";</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my condition = 0;
-say "Passed" if condition;</code></pre>
+say &#34;Passed&#34; if condition;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4394,7 +4296,7 @@ say "Passed" if condition;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my condition = 0;
-if condition say "Passed";
+if condition say &#34;Passed&#34;;
 
 my x = 8;
 x = 9;
@@ -4408,11 +4310,11 @@ say x;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
-    ['if' &lt;variable-name&gt;]?
-    &lt;variable-name&gt; &lt;index&gt;? '='
+    [&#39;if&#39; &lt;variable-name&gt;]?
+    &lt;variable-name&gt; &lt;index&gt;? &#39;=&#39;
         [
-            | [ &lt;string&gt; ':' &lt;value&gt; ]+ %% ','
-            |                &lt;value&gt;+   %% ','
+            | [ &lt;string&gt; &#39;:&#39; &lt;value&gt; ]+ %% &#39;,&#39;
+            |                &lt;value&gt;+   %% &#39;,&#39;
         ]
 }</code></pre>
 </div>
@@ -4433,8 +4335,8 @@ say x;</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule statement {
     | &lt;variable-declaration&gt;
-    | [ 'if' &lt;variable-name&gt; ]? &lt;assignment&gt;
-    | [ 'if' &lt;variable-name&gt; ]? &lt;function-call&gt;
+    | [ &#39;if&#39; &lt;variable-name&gt; ]? &lt;assignment&gt;
+    | [ &#39;if&#39; &lt;variable-name&gt; ]? &lt;function-call&gt;
 }</code></pre>
 </div>
 </div>
@@ -4450,7 +4352,7 @@ say x;</code></pre>
 }
 
 rule condition {
-    'if' &lt;variable-name&gt;
+    &#39;if&#39; &lt;variable-name&gt;
 }</code></pre>
 </div>
 </div>
@@ -4492,7 +4394,7 @@ OK</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">method statement($/) {
     if $&lt;condition&gt; {
         my $condition = $&lt;condition&gt;.made;
-        say "test condition = $condition";
+        say &#34;test condition = $condition&#34;;
         fail unless $condition;
     }
 }
@@ -4500,7 +4402,7 @@ OK</code></pre>
 multi method assignment($/ where !$&lt;index&gt;) {
     . . .
     else {
-        say "assign $&lt;variable-name&gt; to " ~ $&lt;value&gt;[0].made;
+        say &#34;assign $&lt;variable-name&gt; to &#34; ~ $&lt;value&gt;[0].made;
         %!var{$&lt;variable-name&gt;} = $&lt;value&gt;[0].made;
     }
 }</code></pre>
@@ -4549,7 +4451,7 @@ OK</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">if condition say "Passed";</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">if condition say &#34;Passed&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4577,7 +4479,7 @@ OK</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag1.png" alt="diag1">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag1.png" alt="diag1"/>
 </div>
 </div>
 <div class="paragraph">
@@ -4602,7 +4504,7 @@ class AST::ScalarDeclaration is ASTNode {
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
     [
         | &lt;one-line-comment&gt;
-        | &lt;statement&gt; ';'
+        | &lt;statement&gt; &#39;;&#39;
     ]*
 }</code></pre>
 </div>
@@ -4622,7 +4524,7 @@ class AST::ScalarDeclaration is ASTNode {
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag1a-1024x557.png" alt="diag">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag1a-1024x557.png" alt="diag"/>
 </div>
 </div>
 <div class="paragraph">
@@ -4690,7 +4592,7 @@ class AST::ScalarDeclaration is ASTNode {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">AST::TOP $top = AST::TOP.new(statements =&gt; Array[ASTNode].new(AST::ScalarDeclaration.new(variable-name =&gt; "a", value =&gt; 0)))</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">AST::TOP $top = AST::TOP.new(statements =&gt; Array[ASTNode].new(AST::ScalarDeclaration.new(variable-name =&gt; &#34;a&#34;, value =&gt; 0)))</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4710,7 +4612,7 @@ my b = 2;</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag2-1-1200x431.png" alt="diag">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag2-1-1200x431.png" alt="diag"/>
 </div>
 </div>
 <div class="paragraph">
@@ -4775,7 +4677,7 @@ my b = 2;</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag3-1024x619.png" alt="diag">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag3-1024x619.png" alt="diag"/>
 </div>
 </div>
 <div class="paragraph">
@@ -4837,7 +4739,7 @@ my b = 2;</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag4-1200x541.png" alt="diag">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag4-1200x541.png" alt="diag"/>
 </div>
 </div>
 <div class="paragraph">
@@ -4983,7 +4885,7 @@ multi method variable-declaration($/ where $&lt;hash-declaration&gt;) {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule variable-declaration {
-    'my' [
+    &#39;my&#39; [
         | &lt;declaration=array-declaration&gt;
         | &lt;declaration=hash-declaration&gt;
         | &lt;declaration=scalar-declaration&gt;
@@ -5127,7 +5029,7 @@ multi method assignment($/
 a[2] = 3;
 
 my b{};
-b{"x"} = "y";</code></pre>
+b{&#34;x&#34;} = &#34;y&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5135,7 +5037,7 @@ b{"x"} = "y";</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag5-1200x821.png" alt="diag">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag5-1200x821.png" alt="diag"/>
 </div>
 </div>
 </div>
@@ -5147,10 +5049,10 @@ b{"x"} = "y";</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my d[];
-d = 3, 5, "7";
+d = 3, 5, &#34;7&#34;;
 
 my e{};
-e = "1": 2, "3": "4";</code></pre>
+e = &#34;1&#34;: 2, &#34;3&#34;: &#34;4&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5277,7 +5179,7 @@ a = 2 + 3;</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag6-1200x955.png" alt="diag">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag6-1200x955.png" alt="diag"/>
 </div>
 </div>
 <div class="paragraph">
@@ -5334,7 +5236,7 @@ multi method expr($/ where $&lt;expression&gt;) {
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag7-1024x925.png" alt="diag">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag7-1024x925.png" alt="diag"/>
 </div>
 </div>
 <div class="paragraph">
@@ -5348,11 +5250,11 @@ multi method expr($/ where $&lt;expression&gt;) {
 <pre class="highlight"><code class="language-raku" data-lang="raku">AST::TOP $top = AST::TOP.new(
   statements =&gt; Array[ASTNode].new(
     AST::ScalarDeclaration.new(
-      variable-name =&gt; "x",
+      variable-name =&gt; &#34;x&#34;,
       value =&gt; AST::MathOperations.new(
         operators =&gt; Array[Str].new(
-          "+",
-          "-"
+          &#34;+&#34;,
+          &#34;-&#34;
         ),
         operands =&gt; Array[ASTNode].new(
           AST::NumberValue.new(
@@ -5360,8 +5262,8 @@ multi method expr($/ where $&lt;expression&gt;) {
           ),
           AST::MathOperations.new(
             operators =&gt; Array[Str].new(
-              "*",
-              "/"
+              &#34;*&#34;,
+              &#34;/&#34;
             ),
             operands =&gt; Array[ASTNode].new(
               AST::NumberValue.new(
@@ -5472,8 +5374,8 @@ class AST::HashItem is ASTNode {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my c{} = "a": 1, "b": 2;
-my s = "a";
+<pre class="highlight"><code class="language-raku" data-lang="raku">my c{} = &#34;a&#34;: 1, &#34;b&#34;: 2;
+my s = &#34;a&#34;;
 say c{s};</code></pre>
 </div>
 </div>
@@ -5751,7 +5653,7 @@ multi method variable-declaration($/ where $&lt;hash-declaration&gt;) {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule variable-declaration {
-    'my' [
+    &#39;my&#39; [
         | &lt;declaration=array-declaration&gt;
         | &lt;declaration=hash-declaration&gt;
         | &lt;declaration=scalar-declaration&gt;
@@ -5895,7 +5797,7 @@ multi method assignment($/
 a[2] = 3;
 
 my b{};
-b{"x"} = "y";</code></pre>
+b{&#34;x&#34;} = &#34;y&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5903,7 +5805,7 @@ b{"x"} = "y";</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag5-2048x1402.png" alt="AST tree">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag5-2048x1402.png" alt="AST tree"/>
 </div>
 </div>
 </div>
@@ -5915,10 +5817,10 @@ b{"x"} = "y";</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my d[];
-d = 3, 5, "7";
+d = 3, 5, &#34;7&#34;;
 
 my e{};
-e = "1": 2, "3": "4";</code></pre>
+e = &#34;1&#34;: 2, &#34;3&#34;: &#34;4&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6045,7 +5947,7 @@ a = 2 + 3;</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag6-2048x1630.png" alt="AST 语法树">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag6-2048x1630.png" alt="AST 语法树"/>
 </div>
 </div>
 <div class="paragraph">
@@ -6102,7 +6004,7 @@ multi method expr($/ where $&lt;expression&gt;) {
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag7-2048x1849.png" alt="Subtract">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/02/diag7-2048x1849.png" alt="Subtract"/>
 </div>
 </div>
 <div class="paragraph">
@@ -6116,11 +6018,11 @@ multi method expr($/ where $&lt;expression&gt;) {
 <pre class="highlight"><code class="language-raku" data-lang="raku">AST::TOP $top = AST::TOP.new(
   statements =&gt; Array[ASTNode].new(
     AST::ScalarDeclaration.new(
-      variable-name =&gt; "x",
+      variable-name =&gt; &#34;x&#34;,
       value =&gt; AST::MathOperations.new(
         operators =&gt; Array[Str].new(
-          "+",
-          "-"
+          &#34;+&#34;,
+          &#34;-&#34;
         ),
         operands =&gt; Array[ASTNode].new(
           AST::NumberValue.new(
@@ -6128,8 +6030,8 @@ multi method expr($/ where $&lt;expression&gt;) {
           ),
           AST::MathOperations.new(
             operators =&gt; Array[Str].new(
-              "*",
-              "/"
+              &#34;*&#34;,
+              &#34;/&#34;
             ),
             operands =&gt; Array[ASTNode].new(
               AST::NumberValue.new(
@@ -6240,8 +6142,8 @@ class AST::HashItem is ASTNode {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my c{} = "a": 1, "b": 2;
-my s = "a";
+<pre class="highlight"><code class="language-raku" data-lang="raku">my c{} = &#34;a&#34;: 1, &#34;b&#34;: 2;
+my s = &#34;a&#34;;
 say c{s};</code></pre>
 </div>
 </div>
@@ -6420,7 +6322,7 @@ b = 1, 2, 3;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $ast = Lingua.parse($code, :actions(LinguaActions.new));
-say $ast ?? 'OK' !! error('Error: parse failed');</code></pre>
+say $ast ?? &#39;OK&#39; !! error(&#39;Error: parse failed&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6485,7 +6387,7 @@ class LinguaEvaluator {
 <pre class="highlight"><code class="language-raku" data-lang="raku">AST::TOP.new(
     statements =&gt; Array[ASTNode].new(
         AST::ScalarDeclaration.new(
-            variable-name =&gt; "a",
+            variable-name =&gt; &#34;a&#34;,
             value =&gt; AST::NumberValue.new(
                 value =&gt; 7
             )
@@ -6582,7 +6484,7 @@ class LinguaEvaluator {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">Hash %!var = {:a("7")}</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">Hash %!var = {:a(&#34;7&#34;)}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6602,15 +6504,15 @@ say a;</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">AST::TOP.new(
     statements =&gt; Array[ASTNode].new(
         AST::ScalarDeclaration.new(
-            variable-name =&gt; "a",
+            variable-name =&gt; &#34;a&#34;,
             value =&gt; AST::NumberValue.new(
                 value =&gt; 7
             )
         ),
         AST::FunctionCall.new(
-            function-name =&gt; "say",
+            function-name =&gt; &#34;say&#34;,
             value =&gt; AST::Variable.new(
-                variable-name =&gt; "a"
+                variable-name =&gt; &#34;a&#34;
             )
         )
     )
@@ -6635,7 +6537,7 @@ say a;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function('say', AST::Variable $value) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function(&#39;say&#39;, AST::Variable $value) {
     say %!var{$value.variable-name};
 }</code></pre>
 </div>
@@ -6648,11 +6550,11 @@ say a;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function('say', AST::NumberValue $value) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function(&#39;say&#39;, AST::NumberValue $value) {
     say $value.value;
 }
 
-multi method call-function('say', AST::StringValue $value) {
+multi method call-function(&#39;say&#39;, AST::StringValue $value) {
     say $value.value;
 }</code></pre>
 </div>
@@ -6666,7 +6568,7 @@ multi method call-function('say', AST::StringValue $value) {
 say a;
 
 say 8;
-say "nine";</code></pre>
+say &#34;nine&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6683,7 +6585,7 @@ say "nine";</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">AST::ScalarAssignment.new(
-    variable-name =&gt; "a",
+    variable-name =&gt; &#34;a&#34;,
     rhs =&gt; AST::NumberValue.new(
         value =&gt; 10
     )
@@ -6740,7 +6642,7 @@ multi method eval-node(AST::HashDeclaration $node) {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">data[3] = 4;
-color{"red"} = "#FF0000";</code></pre>
+color{&#34;red&#34;} = &#34;#FF0000&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6763,7 +6665,7 @@ multi method eval-node(AST::HashItemAssignment $node) {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">data = 7, 8, 9;
-color = "white": "#FFFFFF", "black": "#000000";</code></pre>
+color = &#34;white&#34;: &#34;#FFFFFF&#34;, &#34;black&#34;: &#34;#000000&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6791,7 +6693,7 @@ multi method eval-node(AST::HashAssignment $node) {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my array[] = 1, 3, 4;
-my h{} = "a": 1, "b": 2;</code></pre>
+my h{} = &#34;a&#34;: 1, &#34;b&#34;: 2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6806,7 +6708,7 @@ my h{} = "a": 1, "b": 2;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my alpha = 54;
-say "The value of α is $alpha.";</code></pre>
+say &#34;The value of α is $alpha.&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6818,14 +6720,14 @@ say "The value of α is $alpha.";</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">token string {
-    '"' ( [
-            | &lt;-["\\$]&gt;+
-            | '\\"'
-            | '\\\\'
-            | '\\$'
-            | '$' &lt;variable-name&gt;
+    &#39;&#34;&#39; ( [
+            | &lt;-[&#34;\\$]&gt;+
+            | &#39;\\&#34;&#39;
+            | &#39;\\\\&#39;
+            | &#39;\\$&#39;
+            | &#39;$&#39; &lt;variable-name&gt;
             ]* )
-    '"'
+    &#39;&#34;&#39;
 }</code></pre>
 </div>
 </div>
@@ -6867,7 +6769,7 @@ say "The value of α is $alpha.";</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function('say', AST::StringValue $value) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function(&#39;say&#39;, AST::StringValue $value) {
     say self.interpolate($value);
 }
 
@@ -6878,7 +6780,7 @@ method interpolate(AST::StringValue $str) {
         $s.substr-rw($var[1], $var[2]) = %!var{$var[0]};
     }
 
-    $s ~~ s:g/\\\"/"/;
+    $s ~~ s:g/\\\&#34;/&#34;/;
     $s ~~ s:g/\\\\/\\/;
     $s ~~ s:g/\\\$/\$/;
 
@@ -6892,12 +6794,12 @@ method interpolate(AST::StringValue $str) {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my alpha = 54;
-say "The value of α is $alpha.";
+say &#34;The value of α is $alpha.&#34;;
 
 my beta;
 beta = 200;
 alpha = 100;
-say "And now it is $alpha (β = $beta).";</code></pre>
+say &#34;And now it is $alpha (β = $beta).&#34;;</code></pre>
 </div>
 </div>
 </div>
@@ -6909,10 +6811,10 @@ say "And now it is $alpha (β = $beta).";</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my date = 18;
-my month = "October";
+my month = &#34;October&#34;;
 my year = 2018;
 
-my date = "$date $month $year";
+my date = &#34;$date $month $year&#34;;
 say date;</code></pre>
 </div>
 </div>
@@ -7002,13 +6904,13 @@ say date;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my a[] = 10, 20;
-my b{} = "A": "ey", "B": "bee";
+my b{} = &#34;A&#34;: &#34;ey&#34;, &#34;B&#34;: &#34;bee&#34;;
 
 my index = 1;
 say a[index]; # prints 20
 
-my key = "A";
-say b{key}; # prints "ey"</code></pre>
+my key = &#34;A&#34;;
+say b{key}; # prints &#34;ey&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -7079,9 +6981,9 @@ say b{key}; # prints "ey"</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my date = "18";
-my month = "October";
-my year = "2018";
+<pre class="highlight"><code class="language-raku" data-lang="raku">my date = &#34;18&#34;;
+my month = &#34;October&#34;;
+my year = &#34;2018&#34;;
 . . .</code></pre>
 </div>
 </div>
@@ -7098,11 +7000,11 @@ my $actions = LinguaActions.new(:evaluator($evaluator));
 my $ast = Lingua.parse($code, :actions($actions));
 
 if $ast {
-    say 'OK';
+    say &#39;OK&#39;;
     $evaluator.eval($ast.made);
 }
 else {
-    error('Error: parse failed');
+    error(&#39;Error: parse failed&#39;);
 }</code></pre>
 </div>
 </div>
@@ -7210,23 +7112,23 @@ class LinguaActions {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation('+', $a, $b) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation(&#39;+&#39;, $a, $b) {
     $a + $b
 }
 
-multi sub operation('-', $a, $b) {
+multi sub operation(&#39;-&#39;, $a, $b) {
     $a - $b
 }
 
-multi sub operation('*', $a, $b) {
+multi sub operation(&#39;*&#39;, $a, $b) {
     $a * $b
 }
 
-multi sub operation('/', $a, $b) {
+multi sub operation(&#39;/&#39;, $a, $b) {
     $a / $b
 }
 
-multi sub operation('**', $a, $b) {
+multi sub operation(&#39;**&#39;, $a, $b) {
     $a ** $b
 }</code></pre>
 </div>
@@ -7236,7 +7138,7 @@ multi sub operation('**', $a, $b) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function('say', ASTNode $value) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function(&#39;say&#39;, ASTNode $value) {
     say $value.value;
 }</code></pre>
 </div>
@@ -7246,21 +7148,21 @@ multi sub operation('**', $a, $b) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function('say', AST::Variable $value
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function(&#39;say&#39;, AST::Variable $value
     where %!var{$value.variable-name} ~~ Array) {
 
-    say %!var{$value.variable-name}.join(', ');
+    say %!var{$value.variable-name}.join(&#39;, &#39;);
 }
 
-multi method call-function('say', AST::Variable $value
+multi method call-function(&#39;say&#39;, AST::Variable $value
     where %!var{$value.variable-name} ~~ Hash) {
 
     my $data = %!var{$value.variable-name};
     my @str;
     for $data.keys.sort -&gt; $key {
-        @str.push("$key: $data{$key}");
+        @str.push(&#34;$key: $data{$key}&#34;);
     }
-    say @str.join(', ');
+    say @str.join(&#39;, &#39;);
 }</code></pre>
 </div>
 </div>
@@ -7269,11 +7171,11 @@ multi method call-function('say', AST::Variable $value
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function('say', AST::ArrayItem $item) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function(&#39;say&#39;, AST::ArrayItem $item) {
     say %!var{$item.variable-name}[$item.index.value];
 }
 
-multi method call-function('say', AST::HashItem $item) {
+multi method call-function(&#39;say&#39;, AST::HashItem $item) {
     say %!var{$item.variable-name}{$item.key.value};
 }</code></pre>
 </div>
@@ -7344,7 +7246,7 @@ OK
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">if $ast {
-    note 'OK';
+    note &#39;OK&#39;;
     $evaluator.eval($ast.made);
 }</code></pre>
 </div>
@@ -7384,7 +7286,7 @@ say b; ## 20</code></pre>
 
 use Test;
 
-test-file($_) for dir('t').sort;
+test-file($_) for dir(&#39;t&#39;).sort;
 
 done-testing;</code></pre>
 </div>
@@ -7397,7 +7299,7 @@ done-testing;</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub test-file($file) {
     my $path = $file.path;
 
-    my $proc = run('./lingua', $path, :out, :err);
+    my $proc = run(&#39;./lingua&#39;, $path, :out, :err);
 
     is(expected($path), $proc.out.slurp, $path);
 }</code></pre>
@@ -7414,9 +7316,9 @@ done-testing;</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub expected($path) {
     my $expected;
     for $path.IO.lines -&gt; $line {
-        $line ~~ /'##'\s*(\N*)/;
+        $line ~~ /&#39;##&#39;\s*(\N*)/;
         next unless $0;
-        $expected ~= "$0\n";
+        $expected ~= &#34;$0\n&#34;;
     }
 
     return $expected;
@@ -7494,13 +7396,13 @@ say minus_n; ## -0.3</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my s1;
-s1 = "Hello, World!";
+s1 = &#34;Hello, World!&#34;;
 say s1; ## Hello, World!
 
-my s2 = "Another string";
+my s2 = &#34;Another string&#34;;
 say s2; ## Another string
 
-my s3 = ""; # Empty string
+my s3 = &#34;&#34;; # Empty string
 say s3; ##</code></pre>
 </div>
 </div>
@@ -7512,21 +7414,21 @@ say s3; ##</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">my i = 10;
 my f = -1.2;
 my c = 1E-2;
-my s = "word";
+my s = &#34;word&#34;;
 
-my str = "i=$i, f=$f, c=$c, s=$s";
+my str = &#34;i=$i, f=$f, c=$c, s=$s&#34;;
 say str; ## i=10, f=-1.2, c=0.01, s=word</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们还允许转义三个字符(<code>\</code>、<code>"</code> 和 <code>$</code>)。</p>
+<p>我们还允许转义三个字符(<code>\</code>、<code>&#34;</code> 和 <code>$</code>)。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "\\"; ## \
-say "\\\\"; ## \\
-say "\$"; ## $
-say "\""; ## "</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;\\&#34;; ## \
+say &#34;\\\\&#34;; ## \\
+say &#34;\$&#34;; ## $
+say &#34;\&#34;&#34;; ## &#34;</code></pre>
 </div>
 </div>
 </div>
@@ -7559,7 +7461,7 @@ say b; ## 7, 8, 9</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">my h{};
 say h; ##
 
-my g{} = "a": "b", "c": "d";
+my g{} = &#34;a&#34;: &#34;b&#34;, &#34;c&#34;: &#34;d&#34;;
 say g; ## a: b, c: d</code></pre>
 </div>
 </div>
@@ -7572,8 +7474,8 @@ say g; ## a: b, c: d</code></pre>
 my i = 3;
 say a[i]; ## 8
 
-my b{} = "a": 1, "b": 2;
-my j = "b";
+my b{} = &#34;a&#34;: 1, &#34;b&#34;: 2;
+my j = &#34;b&#34;;
 say b{j}; ## 2</code></pre>
 </div>
 </div>
@@ -7589,13 +7491,13 @@ say b{j}; ## 2</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">not ok 17 - t/string-index.t
-# Failed test 't/string-index.t'
+# Failed test &#39;t/string-index.t&#39;
 # at ./run-tests line 14
-# expected: 'a
+# expected: &#39;a
 # d
 # f
-# '
-#      got: 'abcdef'</code></pre>
+# &#39;
+#      got: &#39;abcdef&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -7621,18 +7523,18 @@ say b{j}; ## 2</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">AST::FunctionCall.new(
-    function-name =&gt; "say",
+    function-name =&gt; &#34;say&#34;,
     value =&gt; AST::ArrayItem.new(
-        variable-name =&gt; "abc",
+        variable-name =&gt; &#34;abc&#34;,
         index =&gt; AST::NumberValue.new(
             value =&gt; 0
         )
     )
 ),
 AST::FunctionCall.new(
-    function-name =&gt; "say",
+    function-name =&gt; &#34;say&#34;,
     value =&gt; AST::ArrayItem.new(
-        variable-name =&gt; "abc",
+        variable-name =&gt; &#34;abc&#34;,
         index =&gt; AST::NumberValue.new(
             value =&gt; 3
         )
@@ -7645,18 +7547,18 @@ AST::FunctionCall.new(
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function('say', AST::ArrayItem $item) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function(&#39;say&#39;, AST::ArrayItem $item) {
     say %!var{$item.variable-name}[$item.index.value];
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>解析器将代码理解为数组索引，而 <code>call-function</code> 方法将字符串视为数组。当索引为0的时候就可以了，因为在 Raku 中，你总是可以"索引"一个标量值。</p>
+<p>解析器将代码理解为数组索引，而 <code>call-function</code> 方法将字符串视为数组。当索引为0的时候就可以了，因为在 Raku 中，你总是可以&#34;索引&#34;一个标量值。</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">$ raku
-To exit type 'exit' or '^D'
+To exit type &#39;exit&#39; or &#39;^D&#39;
 &gt; my $x = 10;
 10
 &gt; say $x[0];
@@ -7681,7 +7583,7 @@ Index out of range. Is: 3, should be in 0..0
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function('say', AST::ArrayItem $item
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function(&#39;say&#39;, AST::ArrayItem $item
     where %!var{$item.variable-name} ~~ Str) {
     say %!var{$item.variable-name}.substr($item.index.value, 1);
 }</code></pre>
@@ -7695,7 +7597,7 @@ Index out of range. Is: 3, should be in 0..0
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function('say', AST::ArrayItem $item
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method call-function(&#39;say&#39;, AST::ArrayItem $item
     where %!var{$item.variable-name} ~~ Array) {
     say %!var{$item.variable-name}[$item.index.value];
 }</code></pre>
@@ -7723,8 +7625,8 @@ say x;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">No such method 'value' for invocant of type 'AST::ArrayItem'.
-Did you mean 'values'?
+<pre class="highlight"><code class="language-raku" data-lang="raku">No such method &#39;value&#39; for invocant of type &#39;AST::ArrayItem&#39;.
+Did you mean &#39;values&#39;?
   in method eval-node at /Users/ash/lingua/LinguaEvaluator.rakumod
   (LinguaEvaluator) line 17
   in method eval at /Users/ash/lingua/LinguaEvaluator.rakumod
@@ -7739,9 +7641,9 @@ Did you mean 'values'?
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">. . .
 AST::ScalarDeclaration.new(
-    variable-name =&gt; "x",
+    variable-name =&gt; &#34;x&#34;,
     value =&gt; AST::ArrayItem.new(
-      variable-name =&gt; "a",
+      variable-name =&gt; &#34;a&#34;,
       index =&gt; AST::NumberValue.new(
         value =&gt; 1
     )
@@ -7816,11 +7718,11 @@ $/.make(AST::HashItem.new(
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my g{} = "a": "b", "c": "d";
+<pre class="highlight"><code class="language-raku" data-lang="raku">my g{} = &#34;a&#34;: &#34;b&#34;, &#34;c&#34;: &#34;d&#34;;
 
-say g{"a"}; ## b
+say g{&#34;a&#34;}; ## b
 
-my x = g{"a"};
+my x = g{&#34;a&#34;};
 say x; ## b</code></pre>
 </div>
 </div>
@@ -7838,7 +7740,7 @@ say x; ## b</code></pre>
 my y = 2 * x;
 my z = x * 2;
 
-say "$x, $y, $z";</code></pre>
+say &#34;$x, $y, $z&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -7878,8 +7780,8 @@ my z = x * 2;
 my q = x * x;
 my d = 2 * 2;
 
-say "$x, $y, $z"; ## 10, 20, 20
-say "$q, $d"; ## 100, 4</code></pre>
+say &#34;$x, $y, $z&#34;; ## 10, 20, 20
+say &#34;$q, $d&#34;; ## 100, 4</code></pre>
 </div>
 </div>
 </div>
@@ -7900,8 +7802,8 @@ say "$q, $d"; ## 100, 4</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my flag = 42;
-if flag say "Depends";
-say "Always";</code></pre>
+if flag say &#34;Depends&#34;;
+say &#34;Always&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -7913,7 +7815,7 @@ say "Always";</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule condition {
-    'if' &lt;value&gt;
+    &#39;if&#39; &lt;value&gt;
 }
 
 rule statement {
@@ -7958,7 +7860,7 @@ multi method statement($/ where $&lt;condition&gt;) {
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://andrewshitov.com/wp-content/uploads/2020/03/diag8-1200x942.png" alt="diag8 1200x942">
+<img src="https://andrewshitov.com/wp-content/uploads/2020/03/diag8-1200x942.png" alt="diag8 1200x942"/>
 </div>
 </div>
 <div class="paragraph">
@@ -7985,12 +7887,12 @@ multi method statement($/ where $&lt;condition&gt;) {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my flag = 1;
-if flag say "Printed"; ## Printed
+if flag say &#34;Printed&#34;; ## Printed
 
 flag = 0;
-if flag say "Ignored";
+if flag say &#34;Ignored&#34;;
 
-say "Done"; ## Done</code></pre>
+say &#34;Done&#34;; ## Done</code></pre>
 </div>
 </div>
 </div>
@@ -8002,8 +7904,8 @@ say "Done"; ## Done</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my flag = 0;
-if flag say "Depends" else say "Otherwise";
-say "Always";</code></pre>
+if flag say &#34;Depends&#34; else say &#34;Otherwise&#34;;
+say &#34;Always&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -8017,15 +7919,15 @@ say "Always";</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
     [
         | &lt;one-line-comment&gt;
-        | &lt;statement=conditional-statement&gt; ';'
-        | &lt;statement&gt; ';'
+        | &lt;statement=conditional-statement&gt; &#39;;&#39;
+        | &lt;statement&gt; &#39;;&#39;
     ]*
 }
 
 rule conditional-statement {
-    'if' &lt;value&gt; &lt;statement&gt;
+    &#39;if&#39; &lt;value&gt; &lt;statement&gt;
     [
-        'else' &lt;statement&gt;
+        &#39;else&#39; &lt;statement&gt;
     ]?
 }
 
@@ -8116,8 +8018,8 @@ rule statement {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">if 1 say "A" else say "B"; ## A
-if 0 say "A" else say "B"; ## B
+<pre class="highlight"><code class="language-raku" data-lang="raku">if 1 say &#34;A&#34; else say &#34;B&#34;; ## A
+if 0 say &#34;A&#34; else say &#34;B&#34;; ## B
 
 my x;
 if 1 x = 10 else x = 20;
@@ -8150,14 +8052,14 @@ loop n say n;</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
     [
         | &lt;one-line-comment&gt;
-        | &lt;statement=conditional-statement&gt; ';'
-        | &lt;statement=loopped-statement&gt; ';'
-        | &lt;statement&gt; ';'
+        | &lt;statement=conditional-statement&gt; &#39;;&#39;
+        | &lt;statement=loopped-statement&gt; &#39;;&#39;
+        | &lt;statement&gt; &#39;;&#39;
     ]*
 }
 
 rule loopped-statement {
-    'loop' &lt;variable-name&gt; &lt;statement&gt;
+    &#39;loop&#39; &lt;variable-name&gt; &lt;statement&gt;
 }</code></pre>
 </div>
 </div>
@@ -8239,12 +8141,12 @@ loop n say n;
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my c = 0;
 if c {
-    say "c = $c";
-    say "IF block";
+    say &#34;c = $c&#34;;
+    say &#34;IF block&#34;;
 }
 else {
-    say "c = $c";
-    say "ELSE block";
+    say &#34;c = $c&#34;;
+    say &#34;ELSE block&#34;;
 }
 
 my n = 5;
@@ -8260,13 +8162,13 @@ loop n {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule block {
-    | '{' ~ '}' &lt;statement&gt;* %% ';'
-    | &lt;statement&gt; ';'
+    | &#39;{&#39; ~ &#39;}&#39; &lt;statement&gt;* %% &#39;;&#39;
+    | &lt;statement&gt; &#39;;&#39;
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Raku中的 <code>'{' ~ '}' &lt;X&gt;</code> 构造相当于 <code>'{' &lt;X&gt; '}'</code>，但它往往看起来更干净，特别是当 <code>X</code> 是由一大块代码代表的时候。</p>
+<p>Raku中的 <code>&#39;{&#39; ~ &#39;}&#39; &lt;X&gt;</code> 构造相当于 <code>&#39;{&#39; &lt;X&gt; &#39;}&#39;</code>，但它往往看起来更干净，特别是当 <code>X</code> 是由一大块代码代表的时候。</p>
 </div>
 <div class="paragraph">
 <p>从概念层面上看，我们必须允许 grammar 中允许语句的代码块。从实际的角度来说，我们要考虑到语句末尾的分号。</p>
@@ -8276,7 +8178,7 @@ loop n {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">if 1 say "A"; else say "B";</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">if 1 say &#34;A&#34;; else say &#34;B&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -8310,13 +8212,13 @@ loop n {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">multi rule block() {
-    | '{' ~ '}' &lt;statement&gt;* %% ';'
+    | &#39;{&#39; ~ &#39;}&#39; &lt;statement&gt;* %% &#39;;&#39;
     | &lt;statement&gt;
 }
 
-multi rule block(';') {
-    | '{' ~ '}' &lt;statement&gt;* %% ';'
-    | &lt;statement&gt; ';'
+multi rule block(&#39;;&#39;) {
+    | &#39;{&#39; ~ &#39;}&#39; &lt;statement&gt;* %% &#39;;&#39;
+    | &lt;statement&gt; &#39;;&#39;
 }</code></pre>
 </div>
 </div>
@@ -8326,12 +8228,12 @@ multi rule block(';') {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule conditional-statement {
-    | 'if' &lt;value&gt; &lt;block()&gt; 'else' &lt;block(';')&gt;
-    | 'if' &lt;value&gt; &lt;block(';')&gt;
+    | &#39;if&#39; &lt;value&gt; &lt;block()&gt; &#39;else&#39; &lt;block(&#39;;&#39;)&gt;
+    | &#39;if&#39; &lt;value&gt; &lt;block(&#39;;&#39;)&gt;
 }
 
 rule loopped-statement {
-    'while' &lt;variable-name&gt; &lt;block(';')&gt;
+    &#39;while&#39; &lt;variable-name&gt; &lt;block(&#39;;&#39;)&gt;
 }</code></pre>
 </div>
 </div>
@@ -8341,9 +8243,9 @@ rule loopped-statement {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule conditional-statement {
-    'if' &lt;value&gt; [
-        | &lt;block()&gt; 'else' &lt;block(';')&gt;
-        | &lt;block(';')&gt;
+    &#39;if&#39; &lt;value&gt; [
+        | &lt;block()&gt; &#39;else&#39; &lt;block(&#39;;&#39;)&gt;
+        | &lt;block(&#39;;&#39;)&gt;
     ]
 }</code></pre>
 </div>
@@ -8353,8 +8255,8 @@ rule loopped-statement {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">| 'if' &lt;value&gt; &lt;block()&gt; 'else' &lt;block(';')&gt;
-| 'if' &lt;value&gt; &lt;block(';')&gt;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">| &#39;if&#39; &lt;value&gt; &lt;block()&gt; &#39;else&#39; &lt;block(&#39;;&#39;)&gt;
+| &#39;if&#39; &lt;value&gt; &lt;block(&#39;;&#39;)&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -8367,7 +8269,7 @@ rule loopped-statement {
         | &lt;one-line-comment&gt;
         | &lt;statement=conditional-statement&gt;
         | &lt;statement=loopped-statement&gt;
-        | &lt;statement&gt; ';'
+        | &lt;statement&gt; &#39;;&#39;
     ]*
 }</code></pre>
 </div>
@@ -8560,7 +8462,7 @@ Cannot shift from an empty Array[ASTNode]
 <pre class="highlight"><code class="language-raku" data-lang="raku">my n = 5;
 loop n {
     my n2 = n * n;
-    say "n = $n, n2 = $n2";
+    say &#34;n = $n, n2 = $n2&#34;;
 }
 ## n = 5, n2 = 25
 ## n = 4, n2 = 16
@@ -8592,14 +8494,14 @@ loop n {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">multi token op(1) {
-    | '|'
-    | '&lt;'  | '&gt;'
-    | '&lt;=' | '&gt;='
-    | '==' | '!='
+    | &#39;|&#39;
+    | &#39;&lt;&#39;  | &#39;&gt;&#39;
+    | &#39;&lt;=&#39; | &#39;&gt;=&#39;
+    | &#39;==&#39; | &#39;!=&#39;
 }
 
 multi token op(2) {
-    '&amp;'
+    &#39;&amp;&#39;
 }</code></pre>
 </div>
 </div>
@@ -8609,21 +8511,21 @@ multi token op(2) {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">multi token op(3) {
-    '+' | '-'
+    &#39;+&#39; | &#39;-&#39;
 }
 
 multi token op(4) {
-    '*' | '/'
+    &#39;*&#39; | &#39;/&#39;
 }
 
 multi token op(5) {
-    '**'
+    &#39;**&#39;
 }
 
 multi rule expr(6) {
     | &lt;number&gt;
     | &lt;variable-name&gt; &lt;index&gt;?
-    | '(' &lt;expression&gt; ')'
+    | &#39;(&#39; &lt;expression&gt; &#39;)&#39;
 }</code></pre>
 </div>
 </div>
@@ -8632,35 +8534,35 @@ multi rule expr(6) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation('|', $a, $b) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation(&#39;|&#39;, $a, $b) {
     $a || $b
 }
 
-multi sub operation('&amp;', $a, $b) {
+multi sub operation(&#39;&amp;&#39;, $a, $b) {
     $a &amp;&amp; $b
 }
 
-multi sub operation('&lt;', $a, $b) {
+multi sub operation(&#39;&lt;&#39;, $a, $b) {
     $a &lt; $b
 }
 
-multi sub operation('&lt;=', $a, $b) {
+multi sub operation(&#39;&lt;=&#39;, $a, $b) {
     $a &lt;= $b
 }
 
-multi sub operation('&gt;', $a, $b) {
+multi sub operation(&#39;&gt;&#39;, $a, $b) {
     $a &gt; $b
 }
 
-multi sub operation('&gt;=', $a, $b) {
+multi sub operation(&#39;&gt;=&#39;, $a, $b) {
     $a &gt;= $b
 }
 
-multi sub operation('!=', $a, $b) {
+multi sub operation(&#39;!=&#39;, $a, $b) {
     $a != $b
 }
 
-multi sub operation('==', $a, $b) {
+multi sub operation(&#39;==&#39;, $a, $b) {
     $a == $b
 }</code></pre>
 </div>
@@ -8670,7 +8572,7 @@ multi sub operation('==', $a, $b) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation('&lt;', $a, $b) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation(&#39;&lt;&#39;, $a, $b) {
     $a &lt; $b ?? 1 !! 0
 }</code></pre>
 </div>
@@ -8683,23 +8585,23 @@ multi sub operation('==', $a, $b) {
 <pre class="highlight"><code class="language-raku" data-lang="raku">my x = 10;
 my y = 20;
 
-if x &gt; y say "&gt;" else say "&lt;"; ## &lt;
-if x &lt; y say "&gt;" else say "&lt;"; ## &gt;
+if x &gt; y say &#34;&gt;&#34; else say &#34;&lt;&#34;; ## &lt;
+if x &lt; y say &#34;&gt;&#34; else say &#34;&lt;&#34;; ## &gt;
 
-if x != y say "!=" else say "=="; ## !=
-if x != x say "!=" else say "=="; ## ==
+if x != y say &#34;!=&#34; else say &#34;==&#34;; ## !=
+if x != x say &#34;!=&#34; else say &#34;==&#34;; ## ==
 
-if x == y say "==" else say "!="; ## !=
-if x == x say "==" else say "!="; ## ==
+if x == y say &#34;==&#34; else say &#34;!=&#34;; ## !=
+if x == x say &#34;==&#34; else say &#34;!=&#34;; ## ==
 
-if 5 &lt;= 5 say "5 &lt;= 5"; ## 5 &lt;= 5
-if 5 &lt;= 6 say "5 &lt;= 6"; ## 5 &lt;= 6
+if 5 &lt;= 5 say &#34;5 &lt;= 5&#34;; ## 5 &lt;= 5
+if 5 &lt;= 6 say &#34;5 &lt;= 6&#34;; ## 5 &lt;= 6
 
-if 5 &gt;= 5 say "5 &gt;= 5"; ## 5 &gt;= 5
-if 6 &gt;= 5 say "6 &gt;= 5"; ## 6 &gt;= 5
+if 5 &gt;= 5 say &#34;5 &gt;= 5&#34;; ## 5 &gt;= 5
+if 6 &gt;= 5 say &#34;6 &gt;= 5&#34;; ## 6 &gt;= 5
 
-if (10 &gt; 1) &amp; (5 &lt; 50) say "OK 1"; ## OK 1
-if (10 &lt; 1) | (5 &lt; 50) say "OK 2"; ## OK 2</code></pre>
+if (10 &gt; 1) &amp; (5 &lt; 50) say &#34;OK 1&#34;; ## OK 1
+if (10 &lt; 1) | (5 &lt; 50) say &#34;OK 2&#34;; ## OK 2</code></pre>
 </div>
 </div>
 </div>
@@ -8739,7 +8641,7 @@ while n &lt;= 5 {
 }
 
 rule while-statement {
-    'while' &lt;value&gt; &lt;block(';')&gt;
+    &#39;while&#39; &lt;value&gt; &lt;block(&#39;;&#39;)&gt;
 }</code></pre>
 </div>
 </div>

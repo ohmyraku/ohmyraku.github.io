@@ -8,18 +8,21 @@
     <language>zh-cn</language>
     <managingEditor>ohmyraku@outlook.com (ohmyraku)</managingEditor>
     <webMaster>ohmyraku@outlook.com (ohmyraku)</webMaster>
-    <lastBuildDate>Wed, 05 Feb 2020 15:26:52 +0800</lastBuildDate>
-    
-	<atom:link href="https://ohmyraku.github.io/tags/example/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 05 Feb 2020 15:26:52 +0800</lastBuildDate><atom:link href="https://ohmyraku.github.io/tags/example/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Raku 基础</title>
       <link>https://ohmyraku.github.io/raku-by-example/</link>
       <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
       <author>ohmyraku@outlook.com (ohmyraku)</author>
       <guid>https://ohmyraku.github.io/raku-by-example/</guid>
-      <description>Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结   3. 格式化数独字谜 3.1. 让数独变得可玩 3.2. 捷径、常量和更多的捷径 3.3. IO 和其它悲剧 3.4. 获得创造性 3.5. 总结   4. 日期时间转换命令行 4.1. 使用库 4.2. DateTime 格式化 4.3. 寻找其他途径 4.4. 处理时间 4.5. 系好你的安全带 4.6. MAIN 魔法 4.7. 自动化测试 4.</description>
+      <description>1. 什么是 Raku Raku 是一种编程语言。它以自然语言为灵感，设计成易学、易读、易写的语言。它让初学者可以编写 &amp;#34;婴儿Perl&amp;#34;，同时也让有经验的程序员可以自由表达，从简练到诗意。
+ Raku 是渐近类型的。它主要遵循了动态类型化语言的范式，即接受那些在编译过程中无法保证类型安全的程序。然而，与许多动态语言不同的是，它接受并执行类型约束。在可能的情况下，编译器使用类型注解来在编译时做出决定，否则只有在运行时才有可能。
+ 许多编程范式都影响了 Raku 。你可以在 Raku 中编写命令式、面向对象和函数式的程序。声明式编程的功能，如多重分派、子类型、regex 和 grammar 引擎等，都支持声明式编程。
+ 在 Raku 中，大部分的查询都是词法查询，而且语言避免了全局状态。这使得程序的并行和并发执行更加容易，Raku 对高级并发原语的关注也是如此。当你不希望被限制在一个 CPU 内核上时，你会考虑 Promise 和消息队列, 而不是考虑线程和锁。
+ Raku 作为一门语言，对于 Raku 程序应该被编译还是被解释的问题，Raku 是没有主见的。Raku 作为一种主要的实现, 可以快速编译模块并解释脚本。
+ 1.1. Perl5, 老天鹅 在 2000 年左右，Perl 5 的发展面临着巨大的压力，面临着既要发展又要保持向后兼容的矛盾。
+ Raku 是释放这种压力的阀门。所有需要打破向后兼容性的扩展建议都被引导到了 Raku 中，使其处于梦幻般的状态，一切皆有可能，没有任何东西是固定的。经过几年的努力，Raku 才进入了一个比较稳固的状态。
+ 在这段时间里，Perl 5 也在不断发展，这两种语言的差异性足够大，以至于大多数 Perl 5 的开发者不再认为 Raku 是一条自然的升级之路，以至于 Raku 并没有试图让 Perl 5 过时（至少不会比它试图让任何其他编程语言过时的程度更高：-），2015 年第一次稳定发布的 Raku 并没有表明对 Perl 5 的支持失效。</description>
     </item>
     
   </channel>

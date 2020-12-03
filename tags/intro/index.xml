@@ -8,18 +8,28 @@
     <language>zh-cn</language>
     <managingEditor>ohmyraku@outlook.com (ohmyraku)</managingEditor>
     <webMaster>ohmyraku@outlook.com (ohmyraku)</webMaster>
-    <lastBuildDate>Wed, 05 Feb 2020 15:26:52 +0800</lastBuildDate>
-    
-	<atom:link href="https://ohmyraku.github.io/tags/intro/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 05 Feb 2020 15:26:52 +0800</lastBuildDate><atom:link href="https://ohmyraku.github.io/tags/intro/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Raku 入门</title>
       <link>https://ohmyraku.github.io/raku-guide/</link>
       <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
       <author>ohmyraku@outlook.com (ohmyraku)</author>
       <guid>https://ohmyraku.github.io/raku-guide/</guid>
-      <description>Table of Contents 1. 序言 1.1. 什么是 Raku 1.2. 术语 1.3. 安装 Raku 1.4. 运行 Raku 代码 1.5. 编辑器 1.6. Hello World! 1.7. 语法概要   2. 运算符 2.1. 一般运算符 2.2. 反转运算符 2.3. 归约运算符   3. 变量 3.1. 标量 3.2. 数组 3.3. Hashes 哈希 3.4. 类型 3.5. 自省 3.6. 作用域 3.7. 赋值 vs. 绑定   4. 函数和修改器 5. 循环和条件语句 5.1. if 5.2. unless 5.3. with 5.4. for 5.5. given 5.</description>
+      <description>本文档旨在为你提供 Raku 编程语言的快速概述。 它可以让 Raku 初学者快速上手。
+ 本文档的一部分章节涉及 Raku 文档的其他（更完整和准确）部分。 如果你需要有关特定主题的更多信息，你应该阅读它们。
+ 在本文档中，你会找到大部分所讨论主题的示例。 为了更好地理解它们，请花时间再现所有的例子。
+ 许可证 本工作根据知识共享署名 - 授权4.0国际许可协议进行许可。 要查看此许可证的副本，请访问
+   https://creativecommons.org/licenses/by-sa/4.0/.
+   贡献 如果你想对此文档做贡献，请访问：
+   https://github.com/hankache/rakuguide
+   意见反馈 欢迎所有的反馈： naoum@hankache.com
+ 如果你喜欢这个工作， 欢迎在 Github 给这个仓库点赞。
+ 翻译   保加利亚语: https://raku.guide/bg
+  中文: https://raku.guide/zh
+  荷兰语: https://raku.guide/nl
+  法语: https://raku.guide/fr
+  德语: https://raku.guide/de
+  印度尼西亚语: https://raku.</description>
     </item>
     
   </channel>

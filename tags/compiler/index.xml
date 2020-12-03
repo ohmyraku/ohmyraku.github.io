@@ -8,18 +8,21 @@
     <language>zh-cn</language>
     <managingEditor>ohmyraku@outlook.com (ohmyraku)</managingEditor>
     <webMaster>ohmyraku@outlook.com (ohmyraku)</webMaster>
-    <lastBuildDate>Mon, 24 Feb 2020 12:54:52 +0800</lastBuildDate>
-    
-	<atom:link href="https://ohmyraku.github.io/tags/compiler/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 24 Feb 2020 12:54:52 +0800</lastBuildDate><atom:link href="https://ohmyraku.github.io/tags/compiler/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>用 Raku 写编译器</title>
       <link>https://ohmyraku.github.io/creating-a-compiler-with-raku/</link>
       <pubDate>Mon, 24 Feb 2020 12:54:52 +0800</pubDate>
       <author>ohmyraku@outlook.com (ohmyraku)</author>
       <guid>https://ohmyraku.github.io/creating-a-compiler-with-raku/</guid>
-      <description>Table of Contents 1. 第一章 创建一个简单的解释器 1.1. Grammar 1.2. Actions 1.3. 模块   2. 第二章 解析数字 2.1. 查找数字 2.2. 获取值 2.3. 使用 AST 2.4. 最后的笔记   3. 第三章 创建计算器 3.1. 汇总 3.2. 过早的优化 3.3. 更多操作数 3.4. 多样性测试 3.5. 增加更多数学 3.6. 测试代码 3.7. 添加更多能量 3.8. 允许括号   4. 第四章 更好的解释器 4.1. 跳过注释 4.2. 复杂数字 4.3. 复杂表达式 4.4. 使用变量 4.5. 初始化声明   5. Grammar 学习 5.1. 可执行的 5.2. 组合和继承 Grammar 5.</description>
+      <description>1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
+ 让我们从一个简单的解释器程序开始研究 Raku 强大的 grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。
+ my x; x = 42; say x;   在理解此代码的含义时，你不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。
+ 该程序声明一个名为 x 的变量，为其赋一个整数值，然后将该值打印到控制台。
+ 假设你将代码保存在文件 test.lng 中。 现在让我们使用 Raku 读取它。
+ my $code = &amp;#39;test.lng&amp;#39;.IO.slurp(); say $code;   将此 Raku 程序保存在另一个文件 lingua.raku 中，然后运行它：
+ $ raku lingua.raku   如果你安装了 Raku，则会打印出我们测试程序的内容。
+ 1.1. Grammar 现在是时候使用 Raku grammar 解析程序了。 从语法上讲，grammar 是类，但是它们使用正则表达式描述其方法的行为，这些方法又称为 rule 和 token。 第一个应用的 rule 通常称为 TOP; Raku 选择它为默认开始规则。 Grammar 用于解析某些文本，因此只需对已定义的 grammar 调用 parse 方法并将文本传递给它即可。 所有这些都在我们的第一个程序中得到了证明：</description>
     </item>
     
   </channel>

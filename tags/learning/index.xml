@@ -8,18 +8,24 @@
     <language>zh-cn</language>
     <managingEditor>ohmyraku@outlook.com (ohmyraku)</managingEditor>
     <webMaster>ohmyraku@outlook.com (ohmyraku)</webMaster>
-    <lastBuildDate>Wed, 05 Feb 2020 15:26:52 +0800</lastBuildDate>
-    
-	<atom:link href="https://ohmyraku.github.io/tags/learning/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 05 Feb 2020 15:26:52 +0800</lastBuildDate><atom:link href="https://ohmyraku.github.io/tags/learning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Raku 学习手册</title>
       <link>https://ohmyraku.github.io/learning-raku/</link>
       <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
       <author>ohmyraku@outlook.com (ohmyraku)</author>
       <guid>https://ohmyraku.github.io/learning-raku/</guid>
-      <description>Table of Contents 1. 介绍 1.1. 为什么是 Raku? 1.2. First Steps with the REPL 1.3. 阅读文档 1.4. 基础语法 1.5. Variables 1.6. Making and Running a Program 1.7. 总结   2. 猜数字 2.1. 绑定和赋值 2.2. A MAIN Program 2.3. Literal Numbers 2.4. Numeric Operations 2.5. Conditional Execution 2.6. Putting It All Together 2.7. Summary   3. 数字 3.1. Number Types 3.2. Integers 3.3. 有理数 3.4. Imaginary and Complex Numbers 3.</description>
+      <description>1. 介绍 本章是该语言的全貌图; 如果你还不了解正在发生的一切，请不要担心。担心如果你到了本书的最后，你仍然没有了解全部！有讲很多东西，所以将围绕一些话题，重新审视其他话题，并通过一些练习看看它们是如何融合在一起的 - 这真的都是关于实践的。
+ 1.1. 为什么是 Raku? 对于初学者，你要学习 Raku。你也可能通过使用这种语言来使得物有所值！
+ 但是什么使这种语言变得有吸引力？ Perl 家族一直喜欢 DWIM-Do What I Mean。你经常做的事情应该很容易做，而最困难的事情应该是可能的。任何编程语言的用处都可以通过它解决问题的程度来衡量。
+ Raku 是一种出色的文本处理语言 - 甚至可能比 Perl 5 更好。正则表达式（第15章）有许多令人兴奋的新功能，可以更容易地匹配和提取文本。内置 grammar（第17章）功能允许你轻松编写复杂的规则来处理和响应文本。
+ 渐进类型（第3章）允许你注释变量，并限制你可以存储的内容。例如，你可以指定数字必须是整数，正数或两个其他数字之间的数。你不必必须使用它（这是渐进的部分）。你将能够注释子例程接受什么以及它应该返回什么。这可以快速揭示数据边界的错误。
+ 内置并发（第18章）功能允许你将问题分解为单独运行并可能同时运行的部分。该语言为你处理大部分内容。
+ 惰性列表和无限列表允许你处理序列而无需过多复制或甚至一次拥有整个列表（第6章）。你可以轻松创建自己的无限惰性列表。
+ 我可以继续前进，但是当你按照本书的方式工作时，你会遇到更多令人惊叹的功能。
+ 有时你不想使用 Raku。没有语言能适用所有的工作。如果你更喜欢其他更好的东西，或者可以使用不同的工具更快地完成任务，那么对你来说更强大！但是，我希望本书可以帮助你在 Raku 中快速有效地完成你需要做的事情。
+  1.2. First Steps with the REPL REPL 是一个 Read-Evaluate-Print-Loop 的工具，提供交互式提示。 REPL 计算你键入的代码，显示结果，然后再次提示你。这是尝试代码片段的快速方法。当你运行不带参数的 raku 时，它会启动它的 REPL：
+ % raku To exit type &amp;#39;exit&amp;#39; or &amp;#39;^D&amp;#39; &amp;gt;   &amp;gt; 是等待你输入内容的提示。当你键入 Return 时，REPL 开始工作。通过使两个数字相加来尝试 REPL：</description>
     </item>
     
   </channel>

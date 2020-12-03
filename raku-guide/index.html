@@ -8,9 +8,23 @@
 
 <meta name="author" content="ohmyraku">
 <meta name="application-name" content="山川异域, 风月同天">
-<meta name="description" content="Table of Contents 1. 序言 1.1. 什么是 Raku 1.2. 术语 1.3. 安装 Raku 1.4. 运行 Raku 代码 1.5. 编辑器 1.6. Hello World! 1.7. 语法概要   2. 运算符 2.1. 一般运算符 2.2. 反转运算符 2.3. 归约运算符   3. 变量 3.1. 标量 3.2. 数组 3.3. Hashes 哈希 3.4. 类型 3.5. 自省 3.6. 作用域 3.7. 赋值 vs. 绑定   4. 函数和修改器 5. 循环和条件语句 5.1. if 5.2. unless 5.3. with 5.4. for 5.5. given 5.">
+<meta name="description" content="本文档旨在为你提供 Raku 编程语言的快速概述。 它可以让 Raku 初学者快速上手。
+ 本文档的一部分章节涉及 Raku 文档的其他（更完整和准确）部分。 如果你需要有关特定主题的更多信息，你应该阅读它们。
+ 在本文档中，你会找到大部分所讨论主题的示例。 为了更好地理解它们，请花时间再现所有的例子。
+ 许可证 本工作根据知识共享署名 - 授权4.0国际许可协议进行许可。 要查看此许可证的副本，请访问
+   https://creativecommons.org/licenses/by-sa/4.0/.
+   贡献 如果你想对此文档做贡献，请访问：
+   https://github.com/hankache/rakuguide
+   意见反馈 欢迎所有的反馈： naoum@hankache.com
+ 如果你喜欢这个工作， 欢迎在 Github 给这个仓库点赞。
+ 翻译   保加利亚语: https://raku.guide/bg
+  中文: https://raku.guide/zh
+  荷兰语: https://raku.guide/nl
+  法语: https://raku.guide/fr
+  德语: https://raku.guide/de
+  印度尼西亚语: https://raku.">
 <meta name="robots" content="noodp"/>
-<meta name="generator" content="Hugo 0.63.2" />
+<meta name="generator" content="Hugo 0.79.0" />
 <meta name="referrer" content="no-referrer" />
 <meta name="format-detection" content="telephone=no">
 
@@ -22,7 +36,21 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Raku 入门" />
-<meta name="twitter:description" content="Table of Contents 1. 序言 1.1. 什么是 Raku 1.2. 术语 1.3. 安装 Raku 1.4. 运行 Raku 代码 1.5. 编辑器 1.6. Hello World! 1.7. 语法概要   2. 运算符 2.1. 一般运算符 2.2. 反转运算符 2.3. 归约运算符   3. 变量 3.1. 标量 3.2. 数组 3.3. Hashes 哈希 3.4. 类型 3.5. 自省 3.6. 作用域 3.7. 赋值 vs. 绑定   4. 函数和修改器 5. 循环和条件语句 5.1. if 5.2. unless 5.3. with 5.4. for 5.5. given 5." />
+<meta name="twitter:description" content="本文档旨在为你提供 Raku 编程语言的快速概述。 它可以让 Raku 初学者快速上手。
+ 本文档的一部分章节涉及 Raku 文档的其他（更完整和准确）部分。 如果你需要有关特定主题的更多信息，你应该阅读它们。
+ 在本文档中，你会找到大部分所讨论主题的示例。 为了更好地理解它们，请花时间再现所有的例子。
+ 许可证 本工作根据知识共享署名 - 授权4.0国际许可协议进行许可。 要查看此许可证的副本，请访问
+   https://creativecommons.org/licenses/by-sa/4.0/.
+   贡献 如果你想对此文档做贡献，请访问：
+   https://github.com/hankache/rakuguide
+   意见反馈 欢迎所有的反馈： naoum@hankache.com
+ 如果你喜欢这个工作， 欢迎在 Github 给这个仓库点赞。
+ 翻译   保加利亚语: https://raku.guide/bg
+  中文: https://raku.guide/zh
+  荷兰语: https://raku.guide/nl
+  法语: https://raku.guide/fr
+  德语: https://raku.guide/de
+  印度尼西亚语: https://raku." />
 <meta name="twitter:site" content="https://ohmyraku.github.io" />
 <meta name="twitter:creator" content="ohmyraku" />
 <meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
@@ -32,7 +60,21 @@
 <meta property="og:title" content="Raku 入门" />
 <meta property="og:url" content="https://ohmyraku.github.io" />
 <meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="Table of Contents 1. 序言 1.1. 什么是 Raku 1.2. 术语 1.3. 安装 Raku 1.4. 运行 Raku 代码 1.5. 编辑器 1.6. Hello World! 1.7. 语法概要   2. 运算符 2.1. 一般运算符 2.2. 反转运算符 2.3. 归约运算符   3. 变量 3.1. 标量 3.2. 数组 3.3. Hashes 哈希 3.4. 类型 3.5. 自省 3.6. 作用域 3.7. 赋值 vs. 绑定   4. 函数和修改器 5. 循环和条件语句 5.1. if 5.2. unless 5.3. with 5.4. for 5.5. given 5." />
+<meta property="og:description" content="本文档旨在为你提供 Raku 编程语言的快速概述。 它可以让 Raku 初学者快速上手。
+ 本文档的一部分章节涉及 Raku 文档的其他（更完整和准确）部分。 如果你需要有关特定主题的更多信息，你应该阅读它们。
+ 在本文档中，你会找到大部分所讨论主题的示例。 为了更好地理解它们，请花时间再现所有的例子。
+ 许可证 本工作根据知识共享署名 - 授权4.0国际许可协议进行许可。 要查看此许可证的副本，请访问
+   https://creativecommons.org/licenses/by-sa/4.0/.
+   贡献 如果你想对此文档做贡献，请访问：
+   https://github.com/hankache/rakuguide
+   意见反馈 欢迎所有的反馈： naoum@hankache.com
+ 如果你喜欢这个工作， 欢迎在 Github 给这个仓库点赞。
+ 翻译   保加利亚语: https://raku.guide/bg
+  中文: https://raku.guide/zh
+  荷兰语: https://raku.guide/nl
+  法语: https://raku.guide/fr
+  德语: https://raku.guide/de
+  印度尼西亚语: https://raku." />
 <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -44,12 +86,12 @@
       "headline": "Raku 入门",
       
       "datePublished": "2020-02-05",
-      "dateModified": "2020-02-05 15:26:52 \x2b0800 CST",
+      "dateModified": "2020-02-05 15:26:52 \u002b0800 CST",
       "author": {
         "@type": "Person",
         "name": "ohmyraku"
       },
-      "description": "Table of Contents 1. 序言 1.1. 什么是 Raku 1.2. 术语 1.3. 安装 Raku 1.4. 运行 Raku 代码 1.5. 编辑器 1.6. Hello World! 1.7. 语法概要   2. 运算符 2.1. 一般运算符 2.2. 反转运算符 2.3. 归约运算符   3. 变量 3.1. 标量 3.2. 数组 3.3. Hashes 哈希 3.4. 类型 3.5. 自省 3.6. 作用域 3.7. 赋值 vs. 绑定   4. 函数和修改器 5. 循环和条件语句 5.1. if 5.2. unless 5.3. with 5.4. for 5.5. given 5.",
+      "description": "本文档旨在为你提供 Raku 编程语言的快速概述。 它可以让 Raku 初学者快速上手。\n 本文档的一部分章节涉及 Raku 文档的其他（更完整和准确）部分。 如果你需要有关特定主题的更多信息，你应该阅读它们。\n 在本文档中，你会找到大部分所讨论主题的示例。 为了更好地理解它们，请花时间再现所有的例子。\n 许可证 本工作根据知识共享署名 - 授权4.0国际许可协议进行许可。 要查看此许可证的副本，请访问\n   https:\/\/creativecommons.org\/licenses\/by-sa\/4.0\/.\n   贡献 如果你想对此文档做贡献，请访问：\n   https:\/\/github.com\/hankache\/rakuguide\n   意见反馈 欢迎所有的反馈： naoum@hankache.com\n 如果你喜欢这个工作， 欢迎在 Github 给这个仓库点赞。\n 翻译   保加利亚语: https:\/\/raku.guide\/bg\n  中文: https:\/\/raku.guide\/zh\n  荷兰语: https:\/\/raku.guide\/nl\n  法语: https:\/\/raku.guide\/fr\n  德语: https:\/\/raku.guide\/de\n  印度尼西亚语: https:\/\/raku.",
       "publisher": {
         "@type": "Organization",
         "name": "https:\/\/ohmyraku.github.io",
@@ -96,139 +138,7 @@ if (theme && theme !== "1") {
 
 </div>
 
-<article class="page__content" ><div id="toc" class="toc">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_序言">1. 序言</a>
-<ul class="sectlevel2">
-<li><a href="#_什么是_raku">1.1. 什么是 Raku</a></li>
-<li><a href="#_术语">1.2. 术语</a></li>
-<li><a href="#_安装_raku">1.3. 安装 Raku</a></li>
-<li><a href="#_运行_raku_代码">1.4. 运行 Raku 代码</a></li>
-<li><a href="#_编辑器">1.5. 编辑器</a></li>
-<li><a href="#_hello_world">1.6. Hello World!</a></li>
-<li><a href="#_语法概要">1.7. 语法概要</a></li>
-</ul>
-</li>
-<li><a href="#_运算符">2. 运算符</a>
-<ul class="sectlevel2">
-<li><a href="#_一般运算符">2.1. 一般运算符</a></li>
-<li><a href="#_反转运算符">2.2. 反转运算符</a></li>
-<li><a href="#_归约运算符">2.3. 归约运算符</a></li>
-</ul>
-</li>
-<li><a href="#_变量">3. 变量</a>
-<ul class="sectlevel2">
-<li><a href="#_标量">3.1. 标量</a></li>
-<li><a href="#_数组">3.2. 数组</a></li>
-<li><a href="#_hashes_哈希">3.3. Hashes 哈希</a></li>
-<li><a href="#_类型">3.4. 类型</a></li>
-<li><a href="#_自省">3.5. 自省</a></li>
-<li><a href="#_作用域">3.6. 作用域</a></li>
-<li><a href="#_赋值_vs_绑定">3.7. 赋值 vs. 绑定</a></li>
-</ul>
-</li>
-<li><a href="#_函数和修改器">4. 函数和修改器</a></li>
-<li><a href="#_循环和条件语句">5. 循环和条件语句</a>
-<ul class="sectlevel2">
-<li><a href="#_if">5.1. if</a></li>
-<li><a href="#_unless">5.2. unless</a></li>
-<li><a href="#_with">5.3. with</a></li>
-<li><a href="#_for">5.4. for</a></li>
-<li><a href="#_given">5.5. given</a></li>
-<li><a href="#_loop">5.6. loop</a></li>
-</ul>
-</li>
-<li><a href="#_io">6. I/O</a>
-<ul class="sectlevel2">
-<li><a href="#_在终端中基本的_io_操作">6.1. 在终端中基本的 I/O 操作</a></li>
-<li><a href="#_运行_shell_命令">6.2. 运行 Shell 命令</a></li>
-<li><a href="#_file_io">6.3. File I/O</a></li>
-<li><a href="#_文件和文件目录操作">6.4. 文件和文件目录操作</a></li>
-</ul>
-</li>
-<li><a href="#_子例程">7. 子例程</a>
-<ul class="sectlevel2">
-<li><a href="#_定义">7.1. 定义</a></li>
-<li><a href="#_signature_函数签名">7.2. Signature 函数签名</a></li>
-<li><a href="#_多重分派">7.3. 多重分派</a></li>
-<li><a href="#_默认参数和可选参数">7.4. 默认参数和可选参数</a></li>
-<li><a href="#_返回值">7.5. 返回值</a></li>
-</ul>
-</li>
-<li><a href="#_函数式编程">8. 函数式编程</a>
-<ul class="sectlevel2">
-<li><a href="#_函数是一等公民">8.1. 函数是一等公民</a></li>
-<li><a href="#_匿名函数">8.2. 匿名函数</a></li>
-<li><a href="#_链式调用">8.3. 链式调用</a></li>
-<li><a href="#_feed_操作符">8.4. Feed 操作符</a></li>
-<li><a href="#_hyper_操作符">8.5. Hyper 操作符</a></li>
-<li><a href="#_junction">8.6. Junction</a></li>
-<li><a href="#_惰性列表">8.7. 惰性列表</a></li>
-<li><a href="#_闭包">8.8. 闭包</a></li>
-</ul>
-</li>
-<li><a href="#_类和对象">9. 类和对象</a>
-<ul class="sectlevel2">
-<li><a href="#_介绍">9.1. 介绍</a></li>
-<li><a href="#_封装">9.2. 封装</a></li>
-<li><a href="#_具名参数_vs_位置参数">9.3. 具名参数 vs. 位置参数</a></li>
-<li><a href="#_方法">9.4. 方法</a></li>
-<li><a href="#_类属性">9.5. 类属性</a></li>
-<li><a href="#_访问类型">9.6. 访问类型</a></li>
-<li><a href="#_继承">9.7. 继承</a></li>
-<li><a href="#_多重继承">9.8. 多重继承</a></li>
-<li><a href="#_role">9.9. Role</a></li>
-<li><a href="#_内省">9.10. 内省</a></li>
-</ul>
-</li>
-<li><a href="#_异常处理">10. 异常处理</a>
-<ul class="sectlevel2">
-<li><a href="#_捕获异常">10.1. 捕获异常</a></li>
-<li><a href="#_抛出异常">10.2. 抛出异常</a></li>
-</ul>
-</li>
-<li><a href="#_正则表达式">11. 正则表达式</a>
-<ul class="sectlevel2">
-<li><a href="#_regex_定义">11.1. Regex 定义</a></li>
-<li><a href="#_匹配字符">11.2. 匹配字符</a></li>
-<li><a href="#_匹配字符类">11.3. 匹配字符类</a></li>
-<li><a href="#_unicode_属性">11.4. Unicode 属性</a></li>
-<li><a href="#_通配符">11.5. 通配符</a></li>
-<li><a href="#_量词">11.6. 量词</a></li>
-<li><a href="#_匹配结果">11.7. 匹配结果</a></li>
-<li><a href="#_例子">11.8. 例子</a></li>
-</ul>
-</li>
-<li><a href="#_raku_模块">12. Raku 模块</a>
-<ul class="sectlevel2">
-<li><a href="#_使用模块">12.1. 使用模块</a></li>
-</ul>
-</li>
-<li><a href="#_unicode">13. Unicode</a>
-<ul class="sectlevel2">
-<li><a href="#_使用_unicode">13.1. 使用 Unicode</a></li>
-<li><a href="#_unicode_相关的操作符">13.2. Unicode 相关的操作符</a></li>
-</ul>
-</li>
-<li><a href="#_并行并发和异步">14. 并行、并发和异步</a>
-<ul class="sectlevel2">
-<li><a href="#_并行">14.1. 并行</a></li>
-<li><a href="#_并发和异步">14.2. 并发和异步</a></li>
-</ul>
-</li>
-<li><a href="#_native_calling_接口">15. Native Calling 接口</a>
-<ul class="sectlevel2">
-<li><a href="#_调用函数">15.1. 调用函数</a></li>
-<li><a href="#_函数重命名">15.2. 函数重命名</a></li>
-<li><a href="#_参数传递">15.3. 参数传递</a></li>
-<li><a href="#_返回值_2">15.4. 返回值</a></li>
-<li><a href="#_类型_2">15.5. 类型</a></li>
-</ul>
-</li>
-<li><a href="#_社区">16. 社区</a></li>
-</ul>
-</div>
+<article class="page__content" >
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
@@ -407,7 +317,7 @@ perl Configure.pl --gen-moar --make-install --prefix ~/rakudo</code></pre>
 <div class="title">Windows</div>
 <ol class="arabic">
 <li>
-<p>从 或 下载最新的安装器(.msi 后缀的文件)<br></p>
+<p>从 或 下载最新的安装器(.msi 后缀的文件)<br/></p>
 </li>
 <li>
 <p>如果你的系统架构是 64-bit, 可以从 <a href="https://rakudo.org/latest/star/win64" class="bare">https://rakudo.org/latest/star/win64</a> 下载最新的安装器(.msi 后缀的文件); 如果是 32-bit, 则从 <a href="https://rakudo.org/latest/star/win32" class="bare">https://rakudo.org/latest/star/win32</a> 下载最新的安装器(.msi 后缀的文件）。</p>
@@ -445,11 +355,11 @@ REPL 将会打印出该行的返回值。然后你可以输入另外的行, 或�
 <p>REPL 大多用于测试特殊代码片段，通常只有有一行。对于超过一行的程序，建议先把它们保存到文件中而后再运行。</p>
 </div>
 <div class="paragraph">
-<p>单行代码也通过在命令行中键入  <code>perl6 -e 'your code here'</code> 并回车来以非交互的方式来测试。</p>
+<p>单行代码也通过在命令行中键入  <code>perl6 -e &#39;your code here&#39;</code> 并回车来以非交互的方式来测试。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-tip" title="Tip"></i>
 </td>
@@ -473,7 +383,7 @@ REPL 将会打印出该行的返回值。然后你可以输入另外的行, 或�
 </div>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 <div class="sect2">
@@ -501,7 +411,7 @@ REPL 将会打印出该行的返回值。然后你可以输入另外的行, 或�
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">say 'hello world';</code></pre>
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">say &#39;hello world&#39;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -509,7 +419,7 @@ REPL 将会打印出该行的返回值。然后你可以输入另外的行, 或�
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">'hello world'.say;</code></pre>
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">&#39;hello world&#39;.say;</code></pre>
 </div>
 </div>
 </div>
@@ -520,7 +430,7 @@ REPL 将会打印出该行的返回值。然后你可以输入另外的行, 或�
 </div>
 <div class="paragraph">
 <p><strong>语句</strong> 通常是一个逻辑代码行, 它们需要以一个分号结尾:
-<code>say "Hello" if True;</code></p>
+<code>say &#34;Hello&#34; if True;</code></p>
 </div>
 <div class="paragraph">
 <p><strong>表达式</strong> 是一种能够返回值的特殊类型的语句:
@@ -547,9 +457,9 @@ REPL 将会打印出该行的返回值。然后你可以输入另外的行, 或�
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -605,8 +515,8 @@ REPL 将会打印出该行的返回值。然后你可以输入另外的行, 或�
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -622,12 +532,12 @@ REPL 将会打印出该行的返回值。然后你可以输入另外的行, 或�
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>var-1</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>var&#8217;one</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>var'1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>var’one</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>var&#39;1</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>var1_</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>var1'</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>var1&#39;</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_var</code></p></td>
@@ -688,7 +598,7 @@ REPL 将会打印出该行的返回值。然后你可以输入另外的行, 或�
 <p>嵌套的注释:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">say #`(This is an embedded comment) "Hello World."</code></pre>
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">say #`(This is an embedded comment) &#34;Hello World.&#34;</code></pre>
 </div>
 </div>
 </li>
@@ -727,12 +637,12 @@ Comment 2
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">say 'Hello World';   # Hello World
-say "Hello World";   # Hello World
-say "Don't";         # Don't
-my $name = 'John Doe';
-say 'Hello $name';   # Hello $name
-say "Hello $name";   # Hello John Doe</code></pre>
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">say &#39;Hello World&#39;;   # Hello World
+say &#34;Hello World&#34;;   # Hello World
+say &#34;Don&#39;t&#34;;         # Don&#39;t
+my $name = &#39;John Doe&#39;;
+say &#39;Hello $name&#39;;   # Hello $name
+say &#34;Hello $name&#34;;   # Hello John Doe</code></pre>
 </div>
 </div>
 </div>
@@ -749,11 +659,11 @@ say "Hello $name";   # Hello John Doe</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 7.1428%;">
-<col style="width: 7.1428%;">
-<col style="width: 28.5714%;">
-<col style="width: 28.5714%;">
-<col style="width: 28.5716%;">
+<col style="width: 7.1428%;"/>
+<col style="width: 7.1428%;"/>
+<col style="width: 28.5714%;"/>
+<col style="width: 28.5714%;"/>
+<col style="width: 28.5716%;"/>
 </colgroup>
 <thead>
 <tr>
@@ -904,64 +814,64 @@ say "Hello $name";   # Hello John Doe</code></pre>
 <td class="tableblock halign-center valign-middle"><p class="tableblock"><code>eq</code></p></td>
 <td class="tableblock halign-center valign-middle"><p class="tableblock"><code>中缀</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">字符串相等</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>"John" eq "John"</code></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>&#34;John&#34; eq &#34;John&#34;</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>True</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-middle"><p class="tableblock"><code>ne</code></p></td>
 <td class="tableblock halign-center valign-middle"><p class="tableblock"><code>中缀</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">字符串不等</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>"John" ne "Jane"</code></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>&#34;John&#34; ne &#34;Jane&#34;</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>True</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-middle"><p class="tableblock"><code>lt</code></p></td>
 <td class="tableblock halign-center valign-middle"><p class="tableblock"><code>中缀</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">字符串小于</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>"a" lt "b"</code></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>&#34;a&#34; lt &#34;b&#34;</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>True</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-middle"><p class="tableblock"><code>gt</code></p></td>
 <td class="tableblock halign-center valign-middle"><p class="tableblock"><code>中缀</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">字符串大于</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>"a" gt "b"</code></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>&#34;a&#34; gt &#34;b&#34;</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>False</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-middle"><p class="tableblock"><code>le</code></p></td>
 <td class="tableblock halign-center valign-middle"><p class="tableblock"><code>中缀</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">字符串小于等于</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>"a" le "a"</code></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>&#34;a&#34; le &#34;a&#34;</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>True</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-middle"><p class="tableblock"><code>ge</code></p></td>
 <td class="tableblock halign-center valign-middle"><p class="tableblock"><code>中缀</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">字符串大于等于</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>"a" ge "b"</code></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>&#34;a&#34; ge &#34;b&#34;</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>False</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-middle" rowspan="3"><p class="tableblock"><code>leg</code></p></td>
 <td class="tableblock halign-center valign-middle" rowspan="3"><p class="tableblock"><code>中缀</code></p></td>
 <td class="tableblock halign-left valign-middle" rowspan="3"><p class="tableblock">字符串比较</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>"a" leg "a"</code></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>&#34;a&#34; leg &#34;a&#34;</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>Same</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>"a" leg "b"</code></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>&#34;a&#34; leg &#34;b&#34;</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>Less</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>"c" leg "b"</code></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>&#34;c&#34; leg &#34;b&#34;</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>More</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-middle" rowspan="2"><p class="tableblock"><code>cmp</code></p></td>
 <td class="tableblock halign-center valign-middle" rowspan="2"><p class="tableblock"><code>中缀</code></p></td>
 <td class="tableblock halign-left valign-middle" rowspan="2"><p class="tableblock">智能比较</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>"a" cmp "b"</code></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>&#34;a&#34; cmp &#34;b&#34;</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>Less</code></p></td>
 </tr>
 <tr>
@@ -983,7 +893,7 @@ say "Hello $name";   # Hello John Doe</code></pre>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>97</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>"Hi " ~ "there"</code></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>&#34;Hi &#34; ~ &#34;there&#34;</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>Hi there</code></p></td>
 </tr>
 <tr>
@@ -994,7 +904,7 @@ say "Hello $name";   # Hello John Doe</code></pre>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>131313</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>"Hello " x 3</code></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>&#34;Hello &#34; x 3</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>Hello Hello Hello</code></p></td>
 </tr>
 <tr>
@@ -1009,15 +919,15 @@ say "Hello $name";   # Hello John Doe</code></pre>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>True</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>"Raku" ~~ "Raku"</code></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>&#34;Raku&#34; ~~ &#34;Raku&#34;</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>True</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>"Raku" ~~ Str</code></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>&#34;Raku&#34; ~~ Str</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>True</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>"enlightenment" ~~ /light/</code></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>&#34;enlightenment&#34; ~~ /light/</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>｢light｣</code></p></td>
 </tr>
 <tr>
@@ -1050,7 +960,7 @@ say "Hello $name";   # Hello John Doe</code></pre>
 <td class="tableblock halign-center valign-middle" rowspan="3"><p class="tableblock"><code>+</code></p></td>
 <td class="tableblock halign-center valign-middle" rowspan="3"><p class="tableblock"><code>前缀</code></p></td>
 <td class="tableblock halign-left valign-middle" rowspan="3"><p class="tableblock">强制转变为数值</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>+"3"</code></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>+&#34;3&#34;</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>3</code></p></td>
 </tr>
 <tr>
@@ -1065,7 +975,7 @@ say "Hello $name";   # Hello John Doe</code></pre>
 <td class="tableblock halign-center valign-middle" rowspan="3"><p class="tableblock"><code>-</code></p></td>
 <td class="tableblock halign-center valign-middle" rowspan="3"><p class="tableblock"><code>前缀</code></p></td>
 <td class="tableblock halign-left valign-middle" rowspan="3"><p class="tableblock">强制转换为数值并返回相反数</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>-"3"</code></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>-&#34;3&#34;</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>-3</code></p></td>
 </tr>
 <tr>
@@ -1088,11 +998,11 @@ say "Hello $name";   # Hello John Doe</code></pre>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>True</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>?"Hello"</code></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>?&#34;Hello&#34;</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>True</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>?""</code></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>?&#34;&#34;</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>False</code></p></td>
 </tr>
 <tr>
@@ -1173,10 +1083,10 @@ say "Hello $name";   # Hello John Doe</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
 </colgroup>
 <thead>
 <tr>
@@ -1210,10 +1120,10 @@ say "Hello $name";   # Hello John Doe</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
 </colgroup>
 <thead>
 <tr>
@@ -1240,7 +1150,7 @@ say "Hello $name";   # Hello John Doe</code></pre>
 </table>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -1248,7 +1158,7 @@ say "Hello $name";   # Hello John Doe</code></pre>
 可以到 <a href="https://docs.raku.org/language/operators" class="bare">https://docs.raku.org/language/operators</a> 查看完整的运算符列表和它们的优先级。
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 </div>
@@ -1283,7 +1193,7 @@ say "Hello $name";   # Hello John Doe</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">#字符串
-my $name = 'John Doe';
+my $name = &#39;John Doe&#39;;
 say $name;
 
 #整数
@@ -1297,7 +1207,7 @@ say $age;</code></pre>
 <div class="listingblock">
 <div class="title">字符串</div>
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">my $name = 'John Doe'; # 对于字符串类型
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">my $name = &#39;John Doe&#39;; # 对于字符串类型
 say $name.uc;          # .uc 将字母全部大写
 say $name.chars;       # .chars 获得字符串的字符数, 即字符串长度
 say $name.flip;        # .flip 返回翻转字符串的结果</code></pre>
@@ -1312,7 +1222,7 @@ eoD nhoJ</code></pre>
 </div>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -1320,7 +1230,7 @@ eoD nhoJ</code></pre>
 所有可应用于字符串的方法列表，请参照 <a href="https://docs.raku.org/type/Str" class="bare">https://docs.raku.org/type/Str</a>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="listingblock">
 <div class="title">整数</div>
@@ -1336,7 +1246,7 @@ say $age.is-prime; # .is-prime 判断整数值是否为质数</code></pre>
 </div>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -1344,7 +1254,7 @@ say $age.is-prime; # .is-prime 判断整数值是否为质数</code></pre>
 所有可应用于整数的方法列表，请参照 <a href="https://docs.raku.org/type/Int" class="bare">https://docs.raku.org/type/Int</a>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="listingblock">
 <div class="title">有理数</div>
@@ -1364,7 +1274,7 @@ say $age.nude;        # .nude 同时获得分子分母</code></pre>
 </div>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -1372,7 +1282,7 @@ say $age.nude;        # .nude 同时获得分子分母</code></pre>
 所有可应用于有理数的方法列表，请参照 <a href="https://docs.raku.org/type/Rat" class="bare">https://docs.raku.org/type/Rat</a>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 <div class="sect2">
@@ -1382,7 +1292,7 @@ say $age.nude;        # .nude 同时获得分子分母</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">my @animals = 'camel','llama','owl';
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">my @animals = &#39;camel&#39;,&#39;llama&#39;,&#39;owl&#39;;
 say @animals;</code></pre>
 </div>
 </div>
@@ -1391,7 +1301,7 @@ say @animals;</code></pre>
 </div>
 <div class="admonitionblock tip">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-tip" title="Tip"></i>
 </td>
@@ -1399,22 +1309,22 @@ say @animals;</code></pre>
 波浪符 <code>~</code> 可用于列表中字符串的连接。
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="listingblock">
 <div class="title"><code>脚本</code></div>
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">my @animals = 'camel','vicuña','llama';
-say "动物园容纳了 " ~ @animals.elems ~ " 只动物";
-say "这些动物是: " ~ @animals;
-say "动物园收养了一只 owl";
-@animals.push("owl");
-say "现在动物园有: " ~ @animals;
-say "动物园收养的第一只动物是 " ~ @animals[0];
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">my @animals = &#39;camel&#39;,&#39;vicuña&#39;,&#39;llama&#39;;
+say &#34;动物园容纳了 &#34; ~ @animals.elems ~ &#34; 只动物&#34;;
+say &#34;这些动物是: &#34; ~ @animals;
+say &#34;动物园收养了一只 owl&#34;;
+@animals.push(&#34;owl&#34;);
+say &#34;现在动物园有: &#34; ~ @animals;
+say &#34;动物园收养的第一只动物是 &#34; ~ @animals[0];
 @animals.pop;
-say "不幸的是， owl 走了，还剩下: " ~ @animals;
-say "我们要关闭动物园，只留下一只动物";
-say "我们要放走: " ~ @animals.splice(1,2) ~ " ，只剩下 " ~ @animals;</code></pre>
+say &#34;不幸的是， owl 走了，还剩下: &#34; ~ @animals;
+say &#34;我们要关闭动物园，只留下一只动物&#34;;
+say &#34;我们要放走: &#34; ~ @animals.splice(1,2) ~ &#34; ，只剩下 &#34; ~ @animals;</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1432,10 +1342,10 @@ say "我们要放走: " ~ @animals.splice(1,2) ~ " ，只剩下 " ~ @animals;</c
 </div>
 <div class="paragraph">
 <div class="title">说明</div>
-<p><code>.elems</code> 返回列表中的元素个数。<br>
-<code>.push()</code>  向数组追加一个或多个元素。<br>
-我们可以通过提供元素在数组中的位置来访问数组中特定元素 <code>@animals[0]</code>。<br>
-<code>.pop</code> 删除并返回数组中最后一个元素。<br>
+<p><code>.elems</code> 返回列表中的元素个数。<br/>
+<code>.push()</code>  向数组追加一个或多个元素。<br/>
+我们可以通过提供元素在数组中的位置来访问数组中特定元素 <code>@animals[0]</code>。<br/>
+<code>.pop</code> 删除并返回数组中最后一个元素。<br/>
 <code>.splice(a,b)</code> 会删除从位置 <code>a</code> 开始的 <code>b</code> 个元素。</p>
 </div>
 <div class="sect3">
@@ -1449,11 +1359,11 @@ say "我们要放走: " ~ @animals.splice(1,2) ~ " ，只剩下 " ~ @animals;</c
 </div>
 </div>
 <div class="paragraph">
-<p>一般的数组的长度可以无限，因此被叫做自动扩展。<br>
+<p>一般的数组的长度可以无限，因此被叫做自动扩展。<br/>
 它可以接受任意个数的元素而不受限制。</p>
 </div>
 <div class="paragraph">
-<p>对应地，我们可以创建一个定长数组。<br>
+<p>对应地，我们可以创建一个定长数组。<br/>
 在这种数组中不能访问下标超过定义大小的元素。</p>
 </div>
 <div class="paragraph">
@@ -1470,9 +1380,9 @@ say "我们要放走: " ~ @animals.splice(1,2) ~ " ，只剩下 " ~ @animals;</c
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">my @array[3];
-@array[0] = "first value";
-@array[1] = "second value";
-@array[2] = "third value";</code></pre>
+@array[0] = &#34;first value&#34;;
+@array[1] = &#34;second value&#34;;
+@array[2] = &#34;third value&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1481,10 +1391,10 @@ say "我们要放走: " ~ @animals.splice(1,2) ~ " ，只剩下 " ~ @animals;</c
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">my @array[3];
-@array[0] = "first value";
-@array[1] = "second value";
-@array[2] = "third value";
-@array[3] = "fourth value";</code></pre>
+@array[0] = &#34;first value&#34;;
+@array[1] = &#34;second value&#34;;
+@array[2] = &#34;third value&#34;;
+@array[3] = &#34;fourth value&#34;;</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1496,7 +1406,7 @@ say "我们要放走: " ~ @animals.splice(1,2) ~ " ，只剩下 " ~ @animals;</c
 <div class="sect3">
 <h4 id="_多维数组">3.2.2. 多维数组</h4>
 <div class="paragraph">
-<p>到现在为止我们看到的数组还都是一维的。<br>
+<p>到现在为止我们看到的数组还都是一维的。<br/>
 幸运的是，我们在 Raku 中能定义多维数组。</p>
 </div>
 <div class="listingblock">
@@ -1515,11 +1425,11 @@ say "我们要放走: " ~ @animals.splice(1,2) ~ " ，只剩下 " ~ @animals;</c
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">my @tbl[3;2];
 @tbl[0;0] = 1;
-@tbl[0;1] = "x";
+@tbl[0;1] = &#34;x&#34;;
 @tbl[1;0] = 2;
-@tbl[1;1] = "y";
+@tbl[1;1] = &#34;y&#34;;
 @tbl[2;0] = 3;
-@tbl[2;1] = "z";
+@tbl[2;1] = &#34;z&#34;;
 say @tbl</code></pre>
 </div>
 </div>
@@ -1538,7 +1448,7 @@ say @tbl</code></pre>
 </div>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -1546,7 +1456,7 @@ say @tbl</code></pre>
 对于完整的数组参考资料，请参照 <a href="https://docs.raku.org/type/Array" class="bare">https://docs.raku.org/type/Array</a>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 </div>
@@ -1555,14 +1465,14 @@ say @tbl</code></pre>
 <div class="listingblock">
 <div class="title">哈希是一组键值对。</div>
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">my %capitals = ('UK','London','Germany','Berlin');
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">my %capitals = (&#39;UK&#39;,&#39;London&#39;,&#39;Germany&#39;,&#39;Berlin&#39;);
 say %capitals;</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">另一种填充哈希的方法:</div>
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">my %capitals = (UK =&gt; 'London', Germany =&gt; 'Berlin');
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">my %capitals = (UK =&gt; &#39;London&#39;, Germany =&gt; &#39;Berlin&#39;);
 say %capitals;</code></pre>
 </div>
 </div>
@@ -1572,12 +1482,12 @@ say %capitals;</code></pre>
 <div class="listingblock">
 <div class="title"><code>脚本</code></div>
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">my %capitals = (UK =&gt; 'London', Germany =&gt; 'Berlin');
-%capitals.push: (France =&gt; 'Paris');
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">my %capitals = (UK =&gt; &#39;London&#39;, Germany =&gt; &#39;Berlin&#39;);
+%capitals.push: (France =&gt; &#39;Paris&#39;);
 say %capitals.kv;
 say %capitals.keys;
 say %capitals.values;
-say "The capital of France is: " ~ %capitals&lt;France&gt;;</code></pre>
+say &#34;The capital of France is: &#34; ~ %capitals&lt;France&gt;;</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1591,15 +1501,15 @@ The capital of France is: Paris</code></pre>
 </div>
 <div class="paragraph">
 <div class="title">说明</div>
-<p><code>.push:(key =&gt; "value")</code> 添加一个新键值对。<br>
-<code>.kv</code> 返回一个包含所有键值对的列表。<br>
-<code>.keys</code> 返回一个包含所有键的列表。<br>
-<code>.values</code> 返回一个包含所有值的列表。<br>
+<p><code>.push:(key =&gt; &#34;value&#34;)</code> 添加一个新键值对。<br/>
+<code>.kv</code> 返回一个包含所有键值对的列表。<br/>
+<code>.keys</code> 返回一个包含所有键的列表。<br/>
+<code>.values</code> 返回一个包含所有值的列表。<br/>
 我们可以通过哈希中特定值所对应的键来访问这个值。 <code>%hash&lt;key&gt;</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -1607,7 +1517,7 @@ The capital of France is: Paris</code></pre>
 完整的哈希参考资料，请参照 <a href="https://docs.raku.org/type/Hash" class="bare">https://docs.raku.org/type/Hash</a>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 <div class="sect2">
@@ -1617,7 +1527,7 @@ The capital of France is: Paris</code></pre>
 </div>
 <div class="admonitionblock tip">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-tip" title="Tip"></i>
 </td>
@@ -1625,11 +1535,11 @@ The capital of France is: Paris</code></pre>
 <code>.WHAT</code> 会返回变量中值的类型。
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">my $var = 'Text';
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">my $var = &#39;Text&#39;;
 say $var;
 say $var.WHAT;
 
@@ -1645,12 +1555,12 @@ say $var.WHAT;</code></pre>
 <p>这种编程风格被称作动态类型。动态在这里是指变量可以储存任何类型的值。</p>
 </div>
 <div class="paragraph">
-<p>接下来试着运行下面的例子:<br>
+<p>接下来试着运行下面的例子:<br/>
 注意在变量名前的 <code>Int</code>。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">my Int $var = 'Text';
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">my Int $var = &#39;Text&#39;;
 say $var;
 say $var.WHAT;</code></pre>
 </div>
@@ -1674,11 +1584,11 @@ say $var.WHAT;</code></pre>
 say @array;
 say @array.WHAT;
 
-my Str @multilingual = "Hello","Salut","Hallo","你好","안녕하세요","こんにちは";
+my Str @multilingual = &#34;Hello&#34;,&#34;Salut&#34;,&#34;Hallo&#34;,&#34;你好&#34;,&#34;안녕하세요&#34;,&#34;こんにちは&#34;;
 say @multilingual;
 say @multilingual.WHAT;
 
-my Str %capitals = (UK =&gt; 'London', Germany =&gt; 'Berlin');
+my Str %capitals = (UK =&gt; &#39;London&#39;, Germany =&gt; &#39;Berlin&#39;);
 say %capitals;
 say %capitals.WHAT;
 
@@ -1686,7 +1596,7 @@ my Int %country-codes = (UK =&gt; 44, Germany =&gt; 49);
 say %country-codes;
 say %country-codes.WHAT;
 
-my Str %student-name{Int} = (1 =&gt; 'Alex', 2 =&gt; 'Mary');
+my Str %student-name{Int} = (1 =&gt; &#39;Alex&#39;, 2 =&gt; &#39;Mary&#39;);
 say %student-name;
 say %student-name.WHAT;</code></pre>
 </div>
@@ -1697,10 +1607,10 @@ say %student-name.WHAT;</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 14.2857%;">
-<col style="width: 42.8571%;">
-<col style="width: 28.5714%;">
-<col style="width: 14.2858%;">
+<col style="width: 14.2857%;"/>
+<col style="width: 42.8571%;"/>
+<col style="width: 28.5714%;"/>
+<col style="width: 14.2858%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -1730,7 +1640,7 @@ say %student-name.WHAT;</code></pre>
 <tr>
 <td class="tableblock halign-center valign-middle"><p class="tableblock"><code>Str</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>字符串</code></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>my Str $var = "NEON"; say $var.flip;</code></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>my Str $var = &#34;NEON&#34;; say $var.flip;</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>NOEN</code></p></td>
 </tr>
 <tr>
@@ -1757,7 +1667,7 @@ say %student-name.WHAT;</code></pre>
 <div class="sect2">
 <h3 id="_自省">3.5. 自省</h3>
 <div class="paragraph">
-<p>自省是获取对象属性信息的过程，比如获取对象的类型。<br>
+<p>自省是获取对象属性信息的过程，比如获取对象的类型。<br/>
 在前面的一个例子中我们使用 <code>.WHAT</code> 来获取变量的类型。</p>
 </div>
 <div class="listingblock">
@@ -1768,7 +1678,7 @@ my $var2;
 say $var2.WHAT;   # (Any)
 $var2 = 1;
 say $var2.WHAT;   # (Int)
-$var2 = "Hello";
+$var2 = &#34;Hello&#34;;
 say $var2.WHAT;   # (Str)
 $var2 = True;
 say $var2.WHAT;   # (Bool)
@@ -1777,9 +1687,9 @@ say $var2.WHAT;   # (Any)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>变量的类型和它储存的值有关。<br>
-使用强声明定义的空变量，它的类型就是声明的类型<br>
-一个不是强声明定义的空变量，它的类型是 <code>(Any)</code><br>
+<p>变量的类型和它储存的值有关。<br/>
+使用强声明定义的空变量，它的类型就是声明的类型<br/>
+一个不是强声明定义的空变量，它的类型是 <code>(Any)</code><br/>
 可以通过赋 <code>Nil</code> 给变量，来清除变量的值。</p>
 </div>
 </div>
@@ -1807,7 +1717,7 @@ say $var2.WHAT;   # (Any)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">{
-  my Str $var = 'Text';
+  my Str $var = &#39;Text&#39;;
   say $var; # 可以使用
 }
 say $var;   # 不能使用, 会报错</code></pre>
@@ -1819,7 +1729,7 @@ say $var;   # 不能使用, 会报错</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">{
-  my Str $var = 'Text';
+  my Str $var = &#39;Text&#39;;
   say $var;
 }
 my Int $var = 123;
@@ -1830,7 +1740,7 @@ say $var;</code></pre>
 <div class="sect2">
 <h3 id="_赋值_vs_绑定">3.7. 赋值 vs. 绑定</h3>
 <div class="paragraph">
-<p>我们已经在前面的例子中看到如何将值 <strong>赋</strong> 给变量。<br>
+<p>我们已经在前面的例子中看到如何将值 <strong>赋</strong> 给变量。<br/>
 <strong>赋值</strong> 通过 <code>=</code> 操作符完成。</p>
 </div>
 <div class="listingblock">
@@ -1859,7 +1769,7 @@ say $var;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们不能改变 <strong>绑定</strong> 到变量上的值<br>
+<p>我们不能改变 <strong>绑定</strong> 到变量上的值<br/>
 <strong>绑定</strong> 通过 <code>:=</code> 操作符实现。</p>
 </div>
 <div class="listingblock">
@@ -1898,12 +1808,12 @@ say $a;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>就像你已经注意到的那样，绑定变量是双向的。<br>
+<p>就像你已经注意到的那样，绑定变量是双向的。<br/>
 <code>$a := $b</code> 和 <code>$b := $a</code> 拥有同样的效果.</p>
 </div>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -1911,7 +1821,7 @@ say $a;</code></pre>
 关于变量的更多信息，请参见 <a href="https://docs.raku.org/language/variables" class="bare">https://docs.raku.org/language/variables</a>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 </div>
@@ -1920,8 +1830,8 @@ say $a;</code></pre>
 <h2 id="_函数和修改器">4. 函数和修改器</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>把函数和修改器区分开来很重要。<br>
-函数在调用的时候不改变对象的初始状态。<br>
+<p>把函数和修改器区分开来很重要。<br/>
+函数在调用的时候不改变对象的初始状态。<br/>
 修改器改变对象的状态。</p>
 </div>
 <div class="listingblock">
@@ -1986,19 +1896,19 @@ say @numbers;      #4</code></pre>
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">my $age = 19;
 
 if $age &gt; 18 {
-  say 'Welcome'
+  say &#39;Welcome&#39;
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在 Raku 中我们能倒装条件语句和待运行的代码。<br>
+<p>在 Raku 中我们能倒装条件语句和待运行的代码。<br/>
 将待运行的代码和条件语句倒装后，条件语句总是优先被执行。</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">my $age = 19;
 
-say 'Welcome' if $age &gt; 18;</code></pre>
+say &#39;Welcome&#39; if $age &gt; 18;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2020,11 +1930,11 @@ say 'Welcome' if $age &gt; 18;</code></pre>
 my $座位数 = 9;
 
 if $座位数 &lt;= 5 {
-  say '我是小轿车'
+  say &#39;我是小轿车&#39;
 } elsif $座位数 &lt;= 7 {
-  say '我是七座车'
+  say &#39;我是七座车&#39;
 } else {
-  say '我是面包车'
+  say &#39;我是面包车&#39;
 }</code></pre>
 </div>
 </div>
@@ -2042,7 +1952,7 @@ if $座位数 &lt;= 5 {
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">my $clean-shoes = False;
 
 if not $clean-shoes {
-  say 'Clean your shoes'
+  say &#39;Clean your shoes&#39;
 }</code></pre>
 </div>
 </div>
@@ -2054,7 +1964,7 @@ if not $clean-shoes {
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">my $clean-shoes = False;
 
 unless $clean-shoes {
-  say 'Clean your shoes'
+  say &#39;Clean your shoes&#39;
 }</code></pre>
 </div>
 </div>
@@ -2071,7 +1981,7 @@ unless $clean-shoes {
 <div class="sect2">
 <h3 id="_with">5.3. with</h3>
 <div class="paragraph">
-<p><code>with</code> 的用法和 <code>if</code> 相同, 不过 <code>with</code> 会检查变量是否已经定义。<br>
+<p><code>with</code> 的用法和 <code>if</code> 相同, 不过 <code>with</code> 会检查变量是否已经定义。<br/>
 如果变量没有定义，那么就不会执行块中的代码。</p>
 </div>
 <div class="listingblock">
@@ -2079,7 +1989,7 @@ unless $clean-shoes {
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">my Int $var=1;
 
 with $var {
-  say 'Hello'
+  say &#39;Hello&#39;
 }</code></pre>
 </div>
 </div>
@@ -2091,7 +2001,7 @@ with $var {
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">my Int $var;
 
 with $var {
-  say 'Hello'
+  say &#39;Hello&#39;
 }</code></pre>
 </div>
 </div>
@@ -2099,7 +2009,7 @@ with $var {
 <p><code>without</code> 是否定版的 <code>with</code>。你可以拿 <code>if</code> 和 <code>unless</code> 的关系做类比。</p>
 </div>
 <div class="paragraph">
-<p>如果第一个 <code>with</code> 条件不能满足，替代执行的代码块可以使用 <code>orwith</code> 来指定。<br>
+<p>如果第一个 <code>with</code> 条件不能满足，替代执行的代码块可以使用 <code>orwith</code> 来指定。<br/>
 <code>with</code> 和 <code>orwith</code> 的关系可以同 <code>if</code> 与 <code>elsif</code> 的关系相比较。</p>
 </div>
 </div>
@@ -2131,10 +2041,10 @@ for @array -&gt; $array-item {
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">my $var = 42;
 
 given $var {
-    when 0..50 { say 'Less than or equal to 50'}
-    when Int { say "is an Int" }
+    when 0..50 { say &#39;Less than or equal to 50&#39;}
+    when Int { say &#34;is an Int&#34; }
     when 42  { say 42 }
-    default  { say "huh?" }
+    default  { say &#34;huh?&#34; }
 }</code></pre>
 </div>
 </div>
@@ -2149,10 +2059,10 @@ given $var {
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">my $var = 42;
 
 given $var {
-    when 0..50 { say 'Less than or equal to 50';proceed}
-    when Int { say "is an Int";proceed}
+    when 0..50 { say &#39;Less than or equal to 50&#39;;proceed}
+    when Int { say &#34;is an Int&#34;;proceed}
     when 42  { say 42 }
-    default  { say "huh?" }
+    default  { say &#34;huh?&#34; }
 }</code></pre>
 </div>
 </div>
@@ -2160,20 +2070,20 @@ given $var {
 <div class="sect2">
 <h3 id="_loop">5.6. loop</h3>
 <div class="paragraph">
-<p><code>loop</code> 是进行 <code>for</code> 循环的另一种方式。<br>
-Raku 中 C 语言家族的 <code>for</code> 循环使用 <code>loop</code> 来表示。<br>
+<p><code>loop</code> 是进行 <code>for</code> 循环的另一种方式。<br/>
+Raku 中 C 语言家族的 <code>for</code> 循环使用 <code>loop</code> 来表示。<br/>
 Raku 是 C 语言家族中的一员。</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">loop (my $i = 0; $i &lt; 5; $i++) {
-  say "The current number is $i"
+  say &#34;The current number is $i&#34;
 }</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -2181,7 +2091,7 @@ Raku 是 C 语言家族中的一员。</p>
 更多关于循环和条件语句的信息，参见 <a href="https://docs.raku.org/language/control" class="bare">https://docs.raku.org/language/control</a>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 </div>
@@ -2201,8 +2111,8 @@ Raku 是 C 语言家族中的一员。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">say 'Hello Mam.';
-say 'Hello Sir.';</code></pre>
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">say &#39;Hello Mam.&#39;;
+say &#39;Hello Sir.&#39;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2227,10 +2137,10 @@ say 'Hello Sir.';</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">my $name;
 
-say "Hi, what's your name?";
+say &#34;Hi, what&#39;s your name?&#34;;
 $name = get;
 
-say "Dear $name welcome to Raku";</code></pre>
+say &#34;Dear $name welcome to Raku&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2248,9 +2158,9 @@ say "Dear $name welcome to Raku";</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">my $name = prompt "Hi, what's your name? ";
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">my $name = prompt &#34;Hi, what&#39;s your name? &#34;;
 
-say "Dear $name welcome to Raku";</code></pre>
+say &#34;Dear $name welcome to Raku&#34;;</code></pre>
 </div>
 </div>
 </div>
@@ -2274,20 +2184,20 @@ say "Dear $name welcome to Raku";</code></pre>
 <div class="listingblock">
 <div class="title">如果你用的是 Linux 或 OSX 请运行以下代码：</div>
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">my $name = 'Neo';
-run 'echo', "hello $name";
-shell "ls";</code></pre>
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">my $name = &#39;Neo&#39;;
+run &#39;echo&#39;, &#34;hello $name&#34;;
+shell &#34;ls&#34;;</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">如果你用的是 Windows 请运行下面这段代码：</div>
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">shell "dir";</code></pre>
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">shell &#34;dir&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>echo</code> 和 <code>ls</code> 是常用的 Linux shell 命令<br>
-<code>echo</code> 打印文本到终端（和 Raku 中的 <code>print</code> 相同<br>
+<p><code>echo</code> 和 <code>ls</code> 是常用的 Linux shell 命令<br/>
+<code>echo</code> 打印文本到终端（和 Raku 中的 <code>print</code> 相同<br/>
 <code>ls</code> 列出当前目录下所有的文件和文件夹。</p>
 </div>
 <div class="paragraph">
@@ -2315,7 +2225,7 @@ Joanna 7</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">my $data = slurp "datafile.txt";
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">my $data = slurp &#34;datafile.txt&#34;;
 say $data;</code></pre>
 </div>
 </div>
@@ -2327,12 +2237,12 @@ say $data;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">my $newdata = "New scores:
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">my $newdata = &#34;New scores:
 Paul 10
 Paulie 9
-Paulo 11";
+Paulo 11&#34;;
 
-spurt "newdatafile.txt", $newdata;</code></pre>
+spurt &#34;newdatafile.txt&#34;, $newdata;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2348,7 +2258,7 @@ spurt "newdatafile.txt", $newdata;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">say dir;              # 列出当前目录下的文件和文件夹
-say dir "/Documents"; # 列出特定目录下的文件和文件夹</code></pre>
+say dir &#34;/Documents&#34;; # 列出特定目录下的文件和文件夹</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2356,12 +2266,12 @@ say dir "/Documents"; # 列出特定目录下的文件和文件夹</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">mkdir "newfolder";
-rmdir "newfolder";</code></pre>
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">mkdir &#34;newfolder&#34;;
+rmdir &#34;newfolder&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>mkdir</code> 创建一个新的目录。<br>
+<p><code>mkdir</code> 创建一个新的目录。<br/>
 <code>rmdir</code> 删除一个空目录，如果目录不为空则返回 error。</p>
 </div>
 <div class="paragraph">
@@ -2372,38 +2282,38 @@ rmdir "newfolder";</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">say "script123.raku".IO.e;
-say "folder123".IO.e;
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">say &#34;script123.raku&#34;.IO.e;
+say &#34;folder123&#34;.IO.e;
 
-say "script123.raku".IO.d;
-say "folder123".IO.d;
+say &#34;script123.raku&#34;.IO.d;
+say &#34;folder123&#34;.IO.d;
 
-say "script123.raku".IO.f;
-say "folder123".IO.f;</code></pre>
+say &#34;script123.raku&#34;.IO.f;
+say &#34;folder123&#34;.IO.f;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>IO.e</code> 检查文件夹或文件是否存在。<br>
-<code>IO.f</code> 检查路径所指的是否为文件。<br>
+<p><code>IO.e</code> 检查文件夹或文件是否存在。<br/>
+<code>IO.f</code> 检查路径所指的是否为文件。<br/>
 <code>IO.d</code> 检查路径所指的是否为文件夹。</p>
 </div>
 <div class="admonitionblock warning">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Windows 下使用 <code>/</code> 或 <code>\\</code> 来定义目录<br>
-<code>C:\\rakudo\\bin</code><br>
-<code>C:/rakudo/bin</code><br>
+Windows 下使用 <code>/</code> 或 <code>\\</code> 来定义目录<br/>
+<code>C:\\rakudo\\bin</code><br/>
+<code>C:/rakudo/bin</code><br/>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -2411,7 +2321,7 @@ Windows 下使用 <code>/</code> 或 <code>\\</code> 来定义目录<br>
 更多关于 I/O，详见 <a href="https://docs.raku.org/type/IO" class="bare">https://docs.raku.org/type/IO</a>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 </div>
@@ -2422,16 +2332,16 @@ Windows 下使用 <code>/</code> 或 <code>\\</code> 来定义目录<br>
 <div class="sect2">
 <h3 id="_定义">7.1. 定义</h3>
 <div class="paragraph">
-<p><strong>子例程</strong> (也叫 <strong>subs</strong> 或 <strong>functions</strong> ) 是一种功能集的打包。<br></p>
+<p><strong>子例程</strong> (也叫 <strong>subs</strong> 或 <strong>functions</strong> ) 是一种功能集的打包。<br/></p>
 </div>
 <div class="paragraph">
-<p>定义子例程时以关键字 <code>sub</code> 起始。在定义之后你能通过子例程名来进行调用。<br>
+<p>定义子例程时以关键字 <code>sub</code> 起始。在定义之后你能通过子例程名来进行调用。<br/>
 让我们来看下面的例子：</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">sub alien-greeting {
-  say "Hello earthlings";
+  say &#34;Hello earthlings&#34;;
 }
 
 alien-greeting;</code></pre>
@@ -2454,10 +2364,10 @@ alien-greeting;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">sub say-hello (Str $name) {
-    say "Hello " ~ $name ~ "!!!!"
+    say &#34;Hello &#34; ~ $name ~ &#34;!!!!&#34;
 }
-say-hello "Paul";
-say-hello "Paula";</code></pre>
+say-hello &#34;Paul&#34;;
+say-hello &#34;Paula&#34;;</code></pre>
 </div>
 </div>
 </div>
@@ -2471,14 +2381,14 @@ say-hello "Paula";</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">multi greet($name) {
-    say "Good morning $name";
+    say &#34;Good morning $name&#34;;
 }
 multi greet($name, $title) {
-    say "Good morning $title $name";
+    say &#34;Good morning $title $name&#34;;
 }
 
-greet "Johnnie";
-greet "Laura","Mrs.";</code></pre>
+greet &#34;Johnnie&#34;;
+greet &#34;Laura&#34;,&#34;Mrs.&#34;;</code></pre>
 </div>
 </div>
 </div>
@@ -2506,24 +2416,24 @@ greet "Laura","Mrs.";</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">sub say-hello($name?) {
-  with $name { say "Hello " ~ $name }
-  else { say "Hello Human" }
+  with $name { say &#34;Hello &#34; ~ $name }
+  else { say &#34;Hello Human&#34; }
 }
 say-hello;
-say-hello("Laura");</code></pre>
+say-hello(&#34;Laura&#34;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果使用者没有提供参数，那么它就默认使用预先给定的值。<br>
+<p>如果使用者没有提供参数，那么它就默认使用预先给定的值。<br/>
 上面是通过在子例程中给参数赋值的方式实现的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">sub say-hello($name="Matt") {
-  say "Hello " ~ $name;
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">sub say-hello($name=&#34;Matt&#34;) {
+  say &#34;Hello &#34; ~ $name;
 }
 say-hello;
-say-hello("Laura");</code></pre>
+say-hello(&#34;Laura&#34;);</code></pre>
 </div>
 </div>
 </div>
@@ -2544,7 +2454,7 @@ say-hello("Laura");</code></pre>
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">sub squared ($x) {
   $x ** 2;
 }
-say "7 squared is equal to " ~ squared(7);</code></pre>
+say &#34;7 squared is equal to &#34; ~ squared(7);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2557,7 +2467,7 @@ say "7 squared is equal to " ~ squared(7);</code></pre>
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">sub squared ($x) {
   return $x ** 2;
 }
-say "7 squared is equal to " ~ squared(7);</code></pre>
+say &#34;7 squared is equal to &#34; ~ squared(7);</code></pre>
 </div>
 </div>
 <div class="sect3">
@@ -2575,7 +2485,7 @@ say "7 squared is equal to " ~ squared(7);</code></pre>
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">sub squared ($x) returns Int {
   return $x ** 2;
 }
-say "1.2 squared is equal to " ~ squared(1.2);</code></pre>
+say &#34;1.2 squared is equal to &#34; ~ squared(1.2);</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -2584,7 +2494,7 @@ say "1.2 squared is equal to " ~ squared(1.2);</code></pre>
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">sub squared ($x --&gt; Int) {
   return $x ** 2;
 }
-say "1.2 squared is equal to " ~ squared(1.2);</code></pre>
+say &#34;1.2 squared is equal to &#34; ~ squared(1.2);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2597,7 +2507,7 @@ say "1.2 squared is equal to " ~ squared(1.2);</code></pre>
 </div>
 <div class="admonitionblock tip">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-tip" title="Tip"></i>
 </td>
@@ -2606,12 +2516,12 @@ say "1.2 squared is equal to " ~ squared(1.2);</code></pre>
 <p>类型限制不仅可以控制返回值的类型，还可以控制返回值的定义状态。</p>
 </div>
 <div class="paragraph">
-<p>之前的例子中，我们指定了返回值必须为 <code>Int</code>。<br>
-还可以进一步严格指定返回值 <code>Int</code> 是已定义（defined）或未定义（undefined）的：<br>
+<p>之前的例子中，我们指定了返回值必须为 <code>Int</code>。<br/>
+还可以进一步严格指定返回值 <code>Int</code> 是已定义（defined）或未定义（undefined）的：<br/>
 <code>--&gt; Int:D</code> 和 <code>--&gt; Int:U</code></p>
 </div>
 <div class="paragraph">
-<p>使用类型限制是一个好的习惯。<br>
+<p>使用类型限制是一个好的习惯。<br/>
 以下是将前面的例子修改后的结果，其中使用 <code>:D</code> 强制返回已定义的 <code>Int</code>。</p>
 </div>
 <div class="listingblock">
@@ -2619,16 +2529,16 @@ say "1.2 squared is equal to " ~ squared(1.2);</code></pre>
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">sub squared ($x --&gt; Int:D) {
   return $x ** 2;
 }
-say "1.2 squared is equal to " ~ squared(1.2);</code></pre>
+say &#34;1.2 squared is equal to &#34; ~ squared(1.2);</code></pre>
 </div>
 </div>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -2636,7 +2546,7 @@ say "1.2 squared is equal to " ~ squared(1.2);</code></pre>
 关于更多子例程和函数的资料，详见 <a href="https://docs.raku.org/language/functions" class="bare">https://docs.raku.org/language/functions</a>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 </div>
@@ -2667,7 +2577,7 @@ say "1.2 squared is equal to " ~ squared(1.2);</code></pre>
 </ul>
 </div>
 <div class="paragraph">
-<p><code>map</code> 函数是用来说明这个概念的极好例子。<br>
+<p><code>map</code> 函数是用来说明这个概念的极好例子。<br/>
 <code>map</code> 是 <strong>高阶函数</strong>, 它接收另外一个函数作为参数。</p>
 </div>
 <div class="listingblock">
@@ -2688,8 +2598,8 @@ say map(&amp;squared, @array);</code></pre>
 </div>
 <div class="paragraph">
 <div class="title">解释</div>
-<p>我们定义了一个叫做 <code>squared</code> 的子例程, 它接收一个数字并返回该数字的二次幂。<br>
-下一步, 我们使用 <code>map</code> 这个高阶函数并传递给它两个参数, 一个子例程和一个数组。<br>
+<p>我们定义了一个叫做 <code>squared</code> 的子例程, 它接收一个数字并返回该数字的二次幂。<br/>
+下一步, 我们使用 <code>map</code> 这个高阶函数并传递给它两个参数, 一个子例程和一个数组。<br/>
 结果是所有数组元素的平方组成的列表。</p>
 </div>
 <div class="paragraph">
@@ -2699,7 +2609,7 @@ say map(&amp;squared, @array);</code></pre>
 <div class="sect2">
 <h3 id="_匿名函数">8.2. 匿名函数</h3>
 <div class="paragraph">
-<p><strong>匿名函数</strong> 也叫做 <strong>拉姆达</strong>(lambda)。<br>
+<p><strong>匿名函数</strong> 也叫做 <strong>拉姆达</strong>(lambda)。<br/>
 匿名函数没有绑定到标识符(匿名函数没有名字)。</p>
 </div>
 <div class="paragraph">
@@ -2712,7 +2622,7 @@ say map(-&gt; $x {$x ** 2}, @array);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>注意我们没有声明子例程并把它作为参数传递给 <code>map</code>, 而是在里面直接定义了匿名函数。<br>
+<p>注意我们没有声明子例程并把它作为参数传递给 <code>map</code>, 而是在里面直接定义了匿名函数。<br/>
 匿名函数 <code>-&gt; $x {$x ** 2}</code> 没有句柄并且不能被调用。</p>
 </div>
 <div class="paragraph">
@@ -2750,7 +2660,7 @@ say @final-array;</code></pre>
 <p>首先我们在 <code>@array</code> 上调用 <code>unique</code> 函数, 然后我们把它的结果作为参数传递给 <code>sort</code> 函数, 再然后我们把结果传递给 <code>reverse</code> 函数。</p>
 </div>
 <div class="paragraph">
-<p>和上面的例子相比, Raku 允许链式方法。<br>
+<p>和上面的例子相比, Raku 允许链式方法。<br/>
 上面的例子可以像下面这样写, 利用 <strong>方法链</strong> 的优点:</p>
 </div>
 <div class="listingblock">
@@ -2805,7 +2715,7 @@ say @final-array-v2;</code></pre>
 </div>
 <div class="paragraph">
 <div class="title">解释</div>
-<p>正向流就像反向流一样, 但是是以反转的顺序写的。<br></p>
+<p>正向流就像反向流一样, 但是是以反转的顺序写的。<br/></p>
 </div>
 <div class="paragraph">
 <p>方法的流动方向是自下而上。</p>
@@ -2826,7 +2736,7 @@ say @array&gt;&gt;.&amp;is-even;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们能通过使用 hyper 操作符，调用 Raku 中已经定义过的方法。例如 <code>is-prime</code> 告诉我们一个数字是否是质数。<br></p>
+<p>我们能通过使用 hyper 操作符，调用 Raku 中已经定义过的方法。例如 <code>is-prime</code> 告诉我们一个数字是否是质数。<br/></p>
 </div>
 <div class="paragraph">
 <p>此外我们能定义新的子例程并使用 hyper 操作符调用它们。但是这时我们必须在方法的名字前面加上 <code>&amp;</code> 符号。例如 <code>&amp;is-even</code>。</p>
@@ -2836,17 +2746,17 @@ say @array&gt;&gt;.&amp;is-even;</code></pre>
 </div>
 <div class="admonitionblock warning">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Raku 会保证结果的顺序与原始值的顺序相同。<br>
-但是 <strong>不能保证</strong> Raku 会真正地在同一个顺序或在同一个线程中调用该方法。<br>
+Raku 会保证结果的顺序与原始值的顺序相同。<br/>
+但是 <strong>不能保证</strong> Raku 会真正地在同一个顺序或在同一个线程中调用该方法。<br/>
 因此，请注意具有副作用的方法，例如 <code>say</code> 或 <code>print</code>。
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 <div class="sect2">
@@ -2861,7 +2771,7 @@ Raku 会保证结果的顺序与原始值的顺序相同。<br>
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">my $var = 2;
 if $var == 1|2|3 {
-    say "The variable is 1 or 2 or 3"
+    say &#34;The variable is 1 or 2 or 3&#34;
 }</code></pre>
 </div>
 </div>
@@ -2874,7 +2784,7 @@ if $var == 1|2|3 {
 <div class="sect2">
 <h3 id="_惰性列表">8.7. 惰性列表</h3>
 <div class="paragraph">
-<p><strong>惰性列表</strong> 是被惰性求值的列表。<br>
+<p><strong>惰性列表</strong> 是被惰性求值的列表。<br/>
 惰性求值延迟表达式的计算直到需要时, 并把结果存储到查询表中以避免重复计算。</p>
 </div>
 <div class="paragraph">
@@ -2894,7 +2804,7 @@ if $var == 1|2|3 {
 </ul>
 </div>
 <div class="paragraph">
-<p>我们使用中缀操作符 <code>...</code> 来创建惰性列表。<br>
+<p>我们使用中缀操作符 <code>...</code> 来创建惰性列表。<br/>
 惰性列表具有 <strong>初始元素</strong>, <strong>生成器</strong> 和 <strong>结束点</strong>。</p>
 </div>
 <div class="listingblock">
@@ -2907,7 +2817,7 @@ say $lazylist;
 </div>
 </div>
 <div class="paragraph">
-<p>初始元素为 1 而结束点为 10。因为没有定义生成器所以默认的生成器为后继生成器(+1)。<br>
+<p>初始元素为 1 而结束点为 10。因为没有定义生成器所以默认的生成器为后继生成器(+1)。<br/>
 换句话说, 这个惰性列表可能返回(如果需要的话)下面的元素 (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)。</p>
 </div>
 <div class="listingblock">
@@ -2930,7 +2840,7 @@ say $lazylist;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>初始的元素是 0 和 2 而结束点是 10。虽然没有定义生成器, 但是使用了初始元素, Raku 会把生成器推断为 (+2)。<br></p>
+<p>初始的元素是 0 和 2 而结束点是 10。虽然没有定义生成器, 但是使用了初始元素, Raku 会把生成器推断为 (+2)。<br/></p>
 </div>
 <div class="paragraph">
 <p>这个惰性列表可能返回(如果需要的话)下面的元素 (0, 2, 4, 6, 8, 10)。</p>
@@ -2943,26 +2853,26 @@ say $lazylist;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这个例子中, 我们在闭合 <code>{ }</code> 中显式地定义了一个生成器。<br></p>
+<p>在这个例子中, 我们在闭合 <code>{ }</code> 中显式地定义了一个生成器。<br/></p>
 </div>
 <div class="paragraph">
 <p>这个惰性列表可能返回(如果需要的话)下面的元素 (0, 3, 6, 9, 12)。</p>
 </div>
 <div class="admonitionblock warning">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>当使用显式的生成器时, 结束点必须是生成器能返回的一个值。<br></p>
+<p>当使用显式的生成器时, 结束点必须是生成器能返回的一个值。<br/></p>
 </div>
 <div class="paragraph">
 <p>如果在上面的例子中我们使用的结束点是 10 而非 12, 那么生成器就不会停止。生成器会 <em>跳过</em> 那个结束点。</p>
 </div>
 <div class="paragraph">
-<p>你可以使用 <code>0 ...^ * &gt; 10</code> 代替 <code>0 ... 10</code>。<br>
+<p>你可以使用 <code>0 ...^ * &gt; 10</code> 代替 <code>0 ... 10</code>。<br/>
 你可以把它读作: 从 0 直到第一个大于 10 的值（不包含该值）。</p>
 </div>
 <div class="listingblock">
@@ -2981,7 +2891,7 @@ say $lazylist;</code></pre>
 </div>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 <div class="sect2">
@@ -2992,9 +2902,9 @@ say $lazylist;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">sub generate-greeting {
-    my $name = "John Doe";
+    my $name = &#34;John Doe&#34;;
     sub greeting {
-      say "Good Morning $name";
+      say &#34;Good Morning $name&#34;;
     };
     return &amp;greeting;
 }
@@ -3003,7 +2913,7 @@ $generated();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果你运行上面的代码，它将在终端上显示 <code>Good Morning John Doe</code>。<br>
+<p>如果你运行上面的代码，它将在终端上显示 <code>Good Morning John Doe</code>。<br/>
 虽然结果相当简单，但这个例子有趣的是，<code>greeting</code> 内部子程序在执行之前是从外部子例程中返回的。</p>
 </div>
 <div class="paragraph">
@@ -3033,14 +2943,14 @@ $generated();</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">sub greeting-generator($period) {
   return sub ($name) {
-    return "Good $period $name"
+    return &#34;Good $period $name&#34;
   }
 }
-my $morning = greeting-generator("Morning");
-my $evening = greeting-generator("Evening");
+my $morning = greeting-generator(&#34;Morning&#34;);
+my $evening = greeting-generator(&#34;Evening&#34;);
 
-say $morning("John");
-say $evening("Jane");</code></pre>
+say $morning(&#34;John&#34;);
+say $evening(&#34;Jane&#34;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3050,7 +2960,7 @@ say $evening("Jane");</code></pre>
 <p>基本上，<code>greeting-generator</code> 是一个子例程工厂。在这个例子中，我们使用了 <code>greeting-generator</code> 来创建两个新的子例程，一个说 <code>Good Morning</code> ，一个说 <code>Good Evening</code>。</p>
 </div>
 <div class="paragraph">
-<p><code>$morning</code> 和 <code>$evening</code> 都是闭包。它们共享相同的子例程主体定义，但存储不同的环境。<br>
+<p><code>$morning</code> 和 <code>$evening</code> 都是闭包。它们共享相同的子例程主体定义，但存储不同的环境。<br/>
 在 <code>$morning</code> 的环境中 <code>$period</code> 是 <code>Morning</code>。在 <code>$evening</code> 的环境中 <code>$period</code> 是 <code>Evening</code>。</p>
 </div>
 </div>
@@ -3060,17 +2970,17 @@ say $evening("Jane");</code></pre>
 <h2 id="_类和对象">9. 类和对象</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>在上一章中我们学习了 Raku 中函数式编程的便利性。<br>
+<p>在上一章中我们学习了 Raku 中函数式编程的便利性。<br/>
 在这一章中我们将看看 Raku 中的面向对象编程。</p>
 </div>
 <div class="sect2">
 <h3 id="_介绍">9.1. 介绍</h3>
 <div class="paragraph">
-<p><em>面向对象</em> 编程是当今广泛使用的范式之一。<br>
-<strong>对象</strong> 是一组绑定在一起的变量和子例程。<br></p>
+<p><em>面向对象</em> 编程是当今广泛使用的范式之一。<br/>
+<strong>对象</strong> 是一组绑定在一起的变量和子例程。<br/></p>
 </div>
 <div class="paragraph">
-<p>其中的变量叫做 <strong>属性</strong>, 而子例程被叫做 <strong>方法</strong>。<br>
+<p>其中的变量叫做 <strong>属性</strong>, 而子例程被叫做 <strong>方法</strong>。<br/>
 属性定义对象的 <strong>状态</strong>, 而方法定义对象的 <strong>行为</strong>。</p>
 </div>
 <div class="paragraph">
@@ -3081,21 +2991,21 @@ say $evening("Jane");</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">房间里有 4 个人</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>对象</strong> &#8658; 4 people</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>对象</strong> ⇒ 4 people</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">这 4 个人是人类</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>类</strong> &#8658; Human</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>类</strong> ⇒ Human</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">它们有不同的名字,年纪,性别和国籍</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>属性</strong> &#8658; name,age,sex,nationality</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>属性</strong> ⇒ name,age,sex,nationality</p></td>
 </tr>
 </tbody>
 </table>
@@ -3114,17 +3024,17 @@ say $evening("Jane");</code></pre>
   has $.nationality;
 }
 
-my $john = Human.new(name =&gt; 'John', age =&gt; 23, sex =&gt; 'M', nationality =&gt; 'American');
+my $john = Human.new(name =&gt; &#39;John&#39;, age =&gt; 23, sex =&gt; &#39;M&#39;, nationality =&gt; &#39;American&#39;);
 say $john;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>class</code> 关键字用于定义类。<br>
-<code>has</code> 关键字用于定义类的属性。<br>
+<p><code>class</code> 关键字用于定义类。<br/>
+<code>has</code> 关键字用于定义类的属性。<br/>
 <code>.new</code> 方法被称之为 <strong>构造函数</strong>。它创建了对象作为类的实例。</p>
 </div>
 <div class="paragraph">
-<p>在上面的例子中, 新的变量 <code>$john</code> 保存了由 <code>Human.new()</code> 所定义的新 "Human" 实例。<br>
+<p>在上面的例子中, 新的变量 <code>$john</code> 保存了由 <code>Human.new()</code> 所定义的新 &#34;Human&#34; 实例。<br/>
 传递给 <code>.new()</code> 方法的参数用于设置底层对象的属性。
 类可以使用 <code>my</code> 来声明一个 <em>本地作用域</em>:</p>
 </div>
@@ -3139,8 +3049,8 @@ say $john;</code></pre>
 <div class="sect2">
 <h3 id="_封装">9.2. 封装</h3>
 <div class="paragraph">
-<p>封装是一个面向对象的概念, 它把一组数据和方法捆绑在一块。<br>
-对象中的数据(属性)应该是 <strong>私有的</strong>, 换句话说, 只能从对象内部访问它。<br>
+<p>封装是一个面向对象的概念, 它把一组数据和方法捆绑在一块。<br/>
+对象中的数据(属性)应该是 <strong>私有的</strong>, 换句话说, 只能从对象内部访问它。<br/>
 为了从对象外部访问对象的属性, 我们使用叫做 <strong>存取器</strong> 的方法。</p>
 </div>
 <div class="paragraph">
@@ -3165,8 +3075,8 @@ say sayvar;</code></pre>
 </div>
 <div class="paragraph">
 <p><code>sayvar</code> 是一个存取器。它让我们通过不直接访问这个变量来访问这个变量。
-在 Raku 中使用  <strong>twigil</strong> 使得封装很便利。<br>
-twigil 是次级的 <em>魔符(sigil)</em> ，用于魔符和属性名之间。<br>
+在 Raku 中使用  <strong>twigil</strong> 使得封装很便利。<br/>
+twigil 是次级的 <em>魔符(sigil)</em> ，用于魔符和属性名之间。<br/>
 有两种 twigil 可用于类中:</p>
 </div>
 <div class="ulist">
@@ -3194,13 +3104,13 @@ twigil 是次级的 <em>魔符(sigil)</em> ，用于魔符和属性名之间。<
     has $!nationality;
 }
 
-my $john = Human.new(name =&gt; 'John', age =&gt; 23, sex =&gt; 'M', nationality =&gt; 'American');
+my $john = Human.new(name =&gt; &#39;John&#39;, age =&gt; 23, sex =&gt; &#39;M&#39;, nationality =&gt; &#39;American&#39;);
 say $john;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>给脚本追加这样的的语句: <code>say $john.age</code>;<br>
-它会返回这样的错误: <code>Method 'age' not found for invocant of class 'Human' 在类&#8217;Human&#8217;中没有找到请求的方法&#8217;age'</code>。<br>
+<p>给脚本追加这样的的语句: <code>say $john.age</code>;<br/>
+它会返回这样的错误: <code>Method &#39;age&#39; not found for invocant of class &#39;Human&#39; 在类’Human’中没有找到请求的方法’age&#39;</code>。<br/>
 原因是 <code>$!age</code> 是私有的并且只能用于对象内部。 尝试在对象外部访问它会返回一个错误。</p>
 </div>
 <div class="paragraph">
@@ -3210,9 +3120,9 @@ say $john;</code></pre>
 <div class="sect2">
 <h3 id="_具名参数_vs_位置参数">9.3. 具名参数 vs. 位置参数</h3>
 <div class="paragraph">
-<p>在 Raku 中, 所有的类继承了一个默认的 <code>.new</code> 构造函数。<br>
-通过为他提供参数, 它能用于创建对象。<br>
-只能提供 <strong>具名参数</strong> 给默认的构造函数。<br></p>
+<p>在 Raku 中, 所有的类继承了一个默认的 <code>.new</code> 构造函数。<br/>
+通过为他提供参数, 它能用于创建对象。<br/>
+只能提供 <strong>具名参数</strong> 给默认的构造函数。<br/></p>
 </div>
 <div class="paragraph">
 <p>如果你考虑上面的例子, 你会看到所有提供给 <code>.new</code> 方法的参数都是按名字定义的:</p>
@@ -3220,7 +3130,7 @@ say $john;</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>name =&gt; 'John'</p>
+<p>name =&gt; &#39;John&#39;</p>
 </li>
 <li>
 <p>age  =&gt; 23</p>
@@ -3228,7 +3138,7 @@ say $john;</code></pre>
 </ul>
 </div>
 <div class="paragraph">
-<p>假如我不想在每次创建新对象的时候为每个属性提供一个名字呢?<br>
+<p>假如我不想在每次创建新对象的时候为每个属性提供一个名字呢?<br/>
 那么我需要创建另外一个接收 <strong>位置参数</strong> 的构造函数。</p>
 </div>
 <div class="listingblock">
@@ -3245,7 +3155,7 @@ say $john;</code></pre>
     }
 }
 
-my $john = Human.new('John', 23, 'M', 'American');
+my $john = Human.new(&#39;John&#39;, 23, &#39;M&#39;, &#39;American&#39;);
 say $john;</code></pre>
 </div>
 </div>
@@ -3255,11 +3165,11 @@ say $john;</code></pre>
 <div class="sect3">
 <h4 id="_介绍_2">9.4.1. 介绍</h4>
 <div class="paragraph">
-<p>方法是对象的 <em>子例程</em>。<br>
+<p>方法是对象的 <em>子例程</em>。<br/>
 像子例程一样, 方法是一种打包一组功能的手段, 它们接收 <strong>参数</strong>, 拥有 <strong>签名</strong> 并可以被定义为 <strong>multi</strong>。</p>
 </div>
 <div class="paragraph">
-<p>方法是使用关键字 <code>method</code> 来定义的。<br>
+<p>方法是使用关键字 <code>method</code> 来定义的。<br/>
 正常情况下, 方法被要求在对象的属性身上执行一些动作。这强制了封装的概念。对象的属性只能在对象里面使用方法来操作。在对象外面, 只能和对象的方法交互, 并且不能访问它的属性。</p>
 </div>
 <div class="listingblock">
@@ -3272,27 +3182,27 @@ say $john;</code></pre>
   has $.eligible;
   method assess-eligibility {
       if self.age &lt; 21 {
-          $!eligible = 'No'
+          $!eligible = &#39;No&#39;
       } else {
-          $!eligible = 'Yes'
+          $!eligible = &#39;Yes&#39;
       }
   }
 }
 
-my $john = Human.new(name =&gt; 'John', age =&gt; 23, sex =&gt; 'M', nationality =&gt; 'American');
+my $john = Human.new(name =&gt; &#39;John&#39;, age =&gt; 23, sex =&gt; &#39;M&#39;, nationality =&gt; &#39;American&#39;);
 $john.assess-eligibility;
 say $john.eligible;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>一旦方法定义在类中, 它们就能在对象身上使用 <em>点记号</em> 来调用:<br>
+<p>一旦方法定义在类中, 它们就能在对象身上使用 <em>点记号</em> 来调用:<br/>
 <em>object</em> <strong>.</strong> <em>method</em>  或像上面的例子那样: <code>$john.assess-eligibility</code>。</p>
 </div>
 <div class="paragraph">
-<p>在方法的定义中, 如果我们需要引用对象本身以调用另一个方法, 则使用 <code>self</code> 关键字。<br></p>
+<p>在方法的定义中, 如果我们需要引用对象本身以调用另一个方法, 则使用 <code>self</code> 关键字。<br/></p>
 </div>
 <div class="paragraph">
-<p>在方法的定义中, 如果我们需要引用属性, 则使用 <code>!</code> , 即使属性是使用 <code>.</code> 定义的。<br>
+<p>在方法的定义中, 如果我们需要引用属性, 则使用 <code>!</code> , 即使属性是使用 <code>.</code> 定义的。<br/>
 理由是 <code>.</code> twigil 做的就是使用 <code>!</code> 声明一个属性并自动创建存取器。</p>
 </div>
 <div class="paragraph">
@@ -3301,7 +3211,7 @@ say $john.eligible;</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><code>self.age</code> 调用了 <code>.age</code> 方法(存取器)<br>
+<p><code>self.age</code> 调用了 <code>.age</code> 方法(存取器)<br/>
 二选一, 还能写成 <code>$.age</code></p>
 </li>
 <li>
@@ -3316,12 +3226,12 @@ say $john.eligible;</code></pre>
 <p>正常的方法能从类的外面在对象身上调用。</p>
 </div>
 <div class="paragraph">
-<p><strong>私有方法</strong> 是只能从类的内部调用的方法。<br>
+<p><strong>私有方法</strong> 是只能从类的内部调用的方法。<br/>
 一个可能的使用情况是一个方法调用另外一个执行特定动作的方法。
 连接外部世界的方法是公共的而被引用的那个方法应该保持私有。我们不想让用户直接调用它, 所以我们把它声明为私有的。</p>
 </div>
 <div class="paragraph">
-<p>私有方法的声明需要在方法的名字前使用 <code>!</code> twigil。<br>
+<p>私有方法的声明需要在方法的名字前使用 <code>!</code> twigil。<br/>
 私有方法是使用 <code>!</code> 而非 <code>.</code> 调用的。</p>
 </div>
 <div class="listingblock">
@@ -3341,9 +3251,9 @@ method iampublic {
 <div class="sect2">
 <h3 id="_类属性">9.5. 类属性</h3>
 <div class="paragraph">
-<p><strong>类属性</strong> 是属于类自身而非类的对象的属性。<br>
-它们能在定义期间初始化。<br>
-类属性是使用 <code>my</code> 关键字而非 <code>has</code> 关键字声明的。<br>
+<p><strong>类属性</strong> 是属于类自身而非类的对象的属性。<br/>
+它们能在定义期间初始化。<br/>
+类属性是使用 <code>my</code> 关键字而非 <code>has</code> 关键字声明的。<br/>
 它们是在类自己身上而非它的对象身上调用的。</p>
 </div>
 <div class="listingblock">
@@ -3356,8 +3266,8 @@ method iampublic {
       self.bless(:$name);
     }
 }
-my $a = Human.new('a');
-my $b = Human.new('b');
+my $a = Human.new(&#39;a&#39;);
+my $b = Human.new(&#39;b&#39;);
 
 say Human.counter;</code></pre>
 </div>
@@ -3369,7 +3279,7 @@ say Human.counter;</code></pre>
 <p>到现在为止我们看到的所以例子都使用存取器来从对象属性中获取信息。</p>
 </div>
 <div class="paragraph">
-<p>假如我们需要修改属性的值呢? <br></p>
+<p>假如我们需要修改属性的值呢? <br/></p>
 </div>
 <div class="paragraph">
 <p>我们需要使用下面的 <code>is rw</code> 关键字把它标记为 <em>read/write</em>。</p>
@@ -3380,7 +3290,7 @@ say Human.counter;</code></pre>
     has $.name;
     has $.age is rw;
 }
-my $john = Human.new(name =&gt; 'John', age =&gt; 21);
+my $john = Human.new(name =&gt; &#39;John&#39;, age =&gt; 21);
 say $john.age;
 
 $john.age = 23;
@@ -3399,13 +3309,13 @@ say $john.age;</code></pre>
 <p><strong>继承</strong> 是面向对象编程的另一个概念。</p>
 </div>
 <div class="paragraph">
-<p>当定义类的时候, 很快我们会意思到很多属性/方法在很多类中是共有的。<br>
-我们应该重复代码吗?<br>
+<p>当定义类的时候, 很快我们会意思到很多属性/方法在很多类中是共有的。<br/>
+我们应该重复代码吗?<br/>
 不! 我们应该使用 <strong>继承</strong>。</p>
 </div>
 <div class="paragraph">
-<p>假设我们想定义两个类, 一个类是 Human, 一个类是 Employees。<br>
-Human 拥有两个属性: name 和 age。<br>
+<p>假设我们想定义两个类, 一个类是 Human, 一个类是 Employees。<br/>
+Human 拥有两个属性: name 和 age。<br/>
 Employees 拥有 4  个属性: name, age, company 和 salary。</p>
 </div>
 <div class="paragraph">
@@ -3445,7 +3355,7 @@ class Employee is Human {
 </div>
 </div>
 <div class="paragraph">
-<p><code>is</code> 关键字定义了继承。<br>
+<p><code>is</code> 关键字定义了继承。<br/>
 按面向对象的说法, Employee 是 Human 的 <strong>孩子</strong>, 而 Human 是 Employee 的 <strong>父亲</strong>。</p>
 </div>
 <div class="paragraph">
@@ -3455,9 +3365,9 @@ class Employee is Human {
 <div class="sect3">
 <h4 id="_重写">9.7.2. 重写</h4>
 <div class="paragraph">
-<p>类从它们的父类中继承所有的属性和方法。<br>
-有些情况下, 我们需要让子类中的方法表现得和继承的方法不一样。<br>
-为了做到这, 我们在子类中重新定义方法。<br>
+<p>类从它们的父类中继承所有的属性和方法。<br/>
+有些情况下, 我们需要让子类中的方法表现得和继承的方法不一样。<br/>
+为了做到这, 我们在子类中重新定义方法。<br/>
 这个概念就叫做 <strong>重写</strong>。</p>
 </div>
 <div class="paragraph">
@@ -3469,7 +3379,7 @@ class Employee is Human {
     has $.name;
     has $.age;
     method introduce-yourself {
-      say 'Hi 我是人类, 我的名字是 ' ~ self.name;
+      say &#39;Hi 我是人类, 我的名字是 &#39; ~ self.name;
     }
 }
 
@@ -3478,8 +3388,8 @@ class Employee is Human {
     has $.salary;
 }
 
-my $john = Human.new(name =&gt; 'John', age =&gt; 23,);
-my $jane = Employee.new(name =&gt; 'Jane', age =&gt; 25, company =&gt; 'Acme', salary =&gt; 4000);
+my $john = Human.new(name =&gt; &#39;John&#39;, age =&gt; 23,);
+my $jane = Employee.new(name =&gt; &#39;Jane&#39;, age =&gt; 25, company =&gt; &#39;Acme&#39;, salary =&gt; 4000);
 
 $john.introduce-yourself;
 $jane.introduce-yourself;</code></pre>
@@ -3494,7 +3404,7 @@ $jane.introduce-yourself;</code></pre>
     has $.name;
     has $.age;
     method introduce-yourself {
-      say 'Hi 我是人类, 我的名字是 ' ~ self.name;
+      say &#39;Hi 我是人类, 我的名字是 &#39; ~ self.name;
     }
 }
 
@@ -3502,12 +3412,12 @@ class Employee is Human {
     has $.company;
     has $.salary;
     method introduce-yourself {
-      say 'Hi 我是一名员工, 我的名字是 ' ~ self.name ~ ' 我工作在: ' ~ self.company;
+      say &#39;Hi 我是一名员工, 我的名字是 &#39; ~ self.name ~ &#39; 我工作在: &#39; ~ self.company;
     }
 }
 
-my $john = Human.new(name =&gt;'John',age =&gt; 23,);
-my $jane = Employee.new(name =&gt;'Jane',age =&gt; 25,company =&gt; 'Acme',salary =&gt; 4000);
+my $john = Human.new(name =&gt;&#39;John&#39;,age =&gt; 23,);
+my $jane = Employee.new(name =&gt;&#39;Jane&#39;,age =&gt; 25,company =&gt; &#39;Acme&#39;,salary =&gt; 4000);
 
 $john.introduce-yourself;
 $jane.introduce-yourself;</code></pre>
@@ -3520,8 +3430,8 @@ $jane.introduce-yourself;</code></pre>
 <div class="sect3">
 <h4 id="_submethod">9.7.3. Submethod</h4>
 <div class="paragraph">
-<p><strong>submethod</strong> 是一种子类继承不到的方法。<br>
-它们只能从所声明的类中访问。<br>
+<p><strong>submethod</strong> 是一种子类继承不到的方法。<br/>
+它们只能从所声明的类中访问。<br/>
 它们使用 <code>submethod</code> 关键字定义。</p>
 </div>
 </div>
@@ -3555,11 +3465,11 @@ my $forecast-sales = line-chart.new(line-values =&gt; [9,8,10,7,6,9]);
 
 my $actual-vs-forecast = combo-chart.new(bar-values =&gt; [10,9,11,8,7,10],
                                          line-values =&gt; [9,8,10,7,6,9]);
-say "实际的销售: ";
+say &#34;实际的销售: &#34;;
 $actual-sales.plot;
-say "预测的销售: ";
+say &#34;预测的销售: &#34;;
 $forecast-sales.plot;
-say "实际 vs 预测:";
+say &#34;实际 vs 预测:&#34;;
 $actual-vs-forecast.plot;</code></pre>
 </div>
 </div>
@@ -3576,10 +3486,10 @@ $actual-vs-forecast.plot;</code></pre>
 </div>
 <div class="paragraph">
 <div class="title">解释</div>
-<p><code>combo-chart</code> 类应该能持有两个序列, 一个是绘制条形图的实际值, 另一个是绘制折线图的预测值。<br>
-这就是我们为什么把它定义为 <code>line-chart</code> 和 <code>bar-chart</code> 的孩子的原因。<br>
-你应该注意到了, 在 <code>combo-chart</code> 身上调用 <code>plot</code> 方法并没有产生所要求的结果。它只绘制了一个序列。<br>
-发生了什么事?<br></p>
+<p><code>combo-chart</code> 类应该能持有两个序列, 一个是绘制条形图的实际值, 另一个是绘制折线图的预测值。<br/>
+这就是我们为什么把它定义为 <code>line-chart</code> 和 <code>bar-chart</code> 的孩子的原因。<br/>
+你应该注意到了, 在 <code>combo-chart</code> 身上调用 <code>plot</code> 方法并没有产生所要求的结果。它只绘制了一个序列。<br/>
+发生了什么事?<br/></p>
 </div>
 <div class="paragraph">
 <p><code>combo-chart</code> 继承自 <code>line-chart</code> 和 <code>bar-chart</code>, 它们都有一个叫做 <code>plot</code> 的方法。当我们在 <code>combo-chart</code> 身上调用那个方法时, Raku 内部会尝试通过调用其所继承的方法之一来解决冲突。</p>
@@ -3616,11 +3526,11 @@ my $forecast-sales = line-chart.new(line-values =&gt; [9,8,10,7,6,9]);
 
 my $actual-vs-forecast = combo-chart.new(bar-values =&gt; [10,9,11,8,7,10],
                                          line-values =&gt; [9,8,10,7,6,9]);
-say "实际的销售: ";
+say &#34;实际的销售: &#34;;
 $actual-sales.plot;
-say "预测的销售: ";
+say &#34;预测的销售: &#34;;
 $forecast-sales.plot;
-say "实际 vs 预测:";
+say &#34;实际 vs 预测:&#34;;
 $actual-vs-forecast.plot;</code></pre>
 </div>
 </div>
@@ -3672,11 +3582,11 @@ my $forecast-sales = line-chart.new(line-values =&gt; [9,8,10,7,6,9]);
 
 my $actual-vs-forecast = combo-chart.new(bar-values =&gt; [10,9,11,8,7,10],
                                          line-values =&gt; [9,8,10,7,6,9]);
-say "实际的销售: ";
+say &#34;实际的销售: &#34;;
 $actual-sales.plot;
-say "预测的销售: ";
+say &#34;预测的销售: &#34;;
 $forecast-sales.plot;
-say "实际 vs 预测:";
+say &#34;实际 vs 预测:&#34;;
 $actual-vs-forecast.plot;</code></pre>
 </div>
 </div>
@@ -3684,7 +3594,7 @@ $actual-vs-forecast.plot;</code></pre>
 <p>运行上面的脚本你会看到结果是一样的。</p>
 </div>
 <div class="paragraph">
-<p>现在你问问自己, 如果 role 表现得像类的话那么它们的用途是什么呢?<br></p>
+<p>现在你问问自己, 如果 role 表现得像类的话那么它们的用途是什么呢?<br/></p>
 </div>
 <div class="paragraph">
 <p>要回答你的问题, 修改第一个用于展示多重继承的脚本,  这个脚本中我们 <em>忘记</em> 重写 <code>plot</code> 方法了。</p>
@@ -3713,11 +3623,11 @@ my $forecast-sales = line-chart.new(line-values =&gt; [9,8,10,7,6,9]);
 
 my $actual-vs-forecast = combo-chart.new(bar-values =&gt; [10,9,11,8,7,10],
                                          line-values =&gt; [9,8,10,7,6,9]);
-say "Actual sales:";
+say &#34;Actual sales:&#34;;
 $actual-sales.plot;
-say "Forecast sales:";
+say &#34;Forecast sales:&#34;;
 $forecast-sales.plot;
-say "Actual vs Forecast:";
+say &#34;Actual vs Forecast:&#34;;
 $actual-vs-forecast.plot;</code></pre>
 </div>
 </div>
@@ -3725,13 +3635,13 @@ $actual-vs-forecast.plot;</code></pre>
 <div class="title"><code>输出</code></div>
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">===SORRY!===
-Method 'plot' must be resolved by class combo-chart because it exists in multiple roles (line-chart, bar-chart)
-类'combo-chart'的方法'plot'必须被决定，因为存在多个role（line-chart, bar-chart）</code></pre>
+Method &#39;plot&#39; must be resolved by class combo-chart because it exists in multiple roles (line-chart, bar-chart)
+类&#39;combo-chart&#39;的方法&#39;plot&#39;必须被决定，因为存在多个role（line-chart, bar-chart）</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <div class="title">解释</div>
-<p>如果多个 role 被应用到同一个类中, 会出现冲突并抛出一个编译时错误。<br>
+<p>如果多个 role 被应用到同一个类中, 会出现冲突并抛出一个编译时错误。<br/>
 这是比多重继承更安全的方法, 其中冲突不被认为是错误并且简单地在运行时解决。</p>
 </div>
 <div class="paragraph">
@@ -3743,7 +3653,7 @@ Method 'plot' must be resolved by class combo-chart because it exists in multipl
   has Str $.name;
   has Int $.age;
   method introduce-yourself {
-    say 'Hi I am a human being, my name is ' ~ self.name;
+    say &#39;Hi I am a human being, my name is &#39; ~ self.name;
   }
 }
 
@@ -3751,12 +3661,12 @@ class Employee is Human {
   has Str $.company;
   has Int $.salary;
   method introduce-yourself {
-    say 'Hi I am a employee, my name is ' ~ self.name ~ ' and I work at: ' ~ self.company;
+    say &#39;Hi I am a employee, my name is &#39; ~ self.name ~ &#39; and I work at: &#39; ~ self.company;
   }
 }
 
-my $john = Human.new(name =&gt;'John',age =&gt; 23,);
-my $jane = Employee.new(name =&gt;'Jane',age =&gt; 25,company =&gt; 'Acme',salary =&gt; 4000);
+my $john = Human.new(name =&gt;&#39;John&#39;,age =&gt; 23,);
+my $jane = Employee.new(name =&gt;&#39;Jane&#39;,age =&gt; 25,company =&gt; &#39;Acme&#39;,salary =&gt; 4000);
 
 say $john.WHAT;
 say $jane.WHAT;
@@ -3765,7 +3675,7 @@ say $jane.^attributes;
 say $john.^methods;
 say $jane.^methods;
 say $jane.^parents;
-if $jane ~~ Human {say 'Jane is a Human'};</code></pre>
+if $jane ~~ Human {say &#39;Jane is a Human&#39;};</code></pre>
 </div>
 </div>
 </div>
@@ -3780,7 +3690,7 @@ if $jane ~~ Human {say 'Jane is a Human'};</code></pre>
   has Str $.name;
   has Int $.age;
   method introduce-yourself {
-    say 'Hi i am a human being, my name is ' ~ self.name;
+    say &#39;Hi i am a human being, my name is &#39; ~ self.name;
   }
 }
 
@@ -3788,12 +3698,12 @@ class Employee is Human {
   has Str $.company;
   has Int $.salary;
   method introduce-yourself {
-    say 'Hi i am a employee, my name is ' ~ self.name ~ ' and I work at: ' ~ self.company;
+    say &#39;Hi i am a employee, my name is &#39; ~ self.name ~ &#39; and I work at: &#39; ~ self.company;
   }
 }
 
-my $john = Human.new(name =&gt;'John',age =&gt; 23,);
-my $jane = Employee.new(name =&gt;'Jane',age =&gt; 25,company =&gt; 'Acme',salary =&gt; 4000);
+my $john = Human.new(name =&gt;&#39;John&#39;,age =&gt; 23,);
+my $jane = Employee.new(name =&gt;&#39;Jane&#39;,age =&gt; 25,company =&gt; &#39;Acme&#39;,salary =&gt; 4000);
 
 say $john.WHAT;
 say $jane.WHAT;
@@ -3802,7 +3712,7 @@ say $jane.^attributes;
 say $john.^methods;
 say $jane.^methods;
 say $jane.^parents;
-if $jane ~~ Human {say 'Jane is a Human'};</code></pre>
+if $jane ~~ Human {say &#39;Jane is a Human&#39;};</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3830,7 +3740,7 @@ if $jane ~~ Human {say 'Jane is a Human'};</code></pre>
 </div>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -3850,7 +3760,7 @@ if $jane ~~ Human {say 'Jane is a Human'};</code></pre>
 </div>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 </div>
@@ -3861,7 +3771,7 @@ if $jane ~~ Human {say 'Jane is a Human'};</code></pre>
 <div class="sect2">
 <h3 id="_捕获异常">10.1. 捕获异常</h3>
 <div class="paragraph">
-<p><strong>异常</strong> 是当某些东西出错时发生在运行时的特殊行为。<br>
+<p><strong>异常</strong> 是当某些东西出错时发生在运行时的特殊行为。<br/>
 我们说异常被 <em>抛出</em>。</p>
 </div>
 <div class="paragraph">
@@ -3870,9 +3780,9 @@ if $jane ~~ Human {say 'Jane is a Human'};</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">my Str $name;
-$name = "Joanna";
-say "Hello " ~ $name;
-say "How are you doing today?"</code></pre>
+$name = &#34;Joanna&#34;;
+say &#34;Hello &#34; ~ $name;
+say &#34;How are you doing today?&#34;</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -3889,8 +3799,8 @@ How are you doing today?</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">my Str $name;
 $name = 123;
-say "Hello " ~ $name;
-say "今天过得怎么样？"</code></pre>
+say &#34;Hello &#34; ~ $name;
+say &#34;今天过得怎么样？&#34;</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -3911,14 +3821,14 @@ say "今天过得怎么样？"</code></pre>
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">my Str $name;
 try {
   $name = 123;
-  say "Hello " ~ $name;
+  say &#34;Hello &#34; ~ $name;
   CATCH {
     default {
-      say "请再说一次你的名字，我们在记录中找不到它。";
+      say &#34;请再说一次你的名字，我们在记录中找不到它。&#34;;
     }
   }
 }
-say "今天过得怎么样？";</code></pre>
+say &#34;今天过得怎么样？&#34;;</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -3968,7 +3878,7 @@ say "今天过得怎么样？";</code></pre>
 <div class="sect2">
 <h3 id="_抛出异常">10.2. 抛出异常</h3>
 <div class="paragraph">
-<p>Perl  6 也允许你显式地抛出异常。<br>
+<p>Perl  6 也允许你显式地抛出异常。<br/>
 有两种类型的异常可以抛出:</p>
 </div>
 <div class="ulist">
@@ -3985,30 +3895,30 @@ say "今天过得怎么样？";</code></pre>
 <div class="title">特设</div>
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">my Int $age = 21;
-die "Error !";</code></pre>
+die &#34;Error !&#34;;</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">类型化</div>
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">my Int $age = 21;
-X::AdHoc.new(payload =&gt; 'Error !').throw;</code></pre>
+X::AdHoc.new(payload =&gt; &#39;Error !&#39;).throw;</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>使用 <code>die</code> 子例程后面跟着异常消息来抛出特设异常。</p>
 </div>
 <div class="paragraph">
-<p>类型化异常是对象, 因此上面的例子中使用了 <code>.new()</code> 构造函数。<br>
-所有类型化异常都是从类 <code>X</code> 开始, 下面是一些例子:<br>
-<code>X::AdHoc</code> 是最简单的异常类型<br>
-<code>X::IO</code> 跟 IO 错误有关。<br>
-<code>X::OS</code> 跟 OS 错误有关。<br>
+<p>类型化异常是对象, 因此上面的例子中使用了 <code>.new()</code> 构造函数。<br/>
+所有类型化异常都是从类 <code>X</code> 开始, 下面是一些例子:<br/>
+<code>X::AdHoc</code> 是最简单的异常类型<br/>
+<code>X::IO</code> 跟 IO 错误有关。<br/>
+<code>X::OS</code> 跟 OS 错误有关。<br/>
 <code>X::Str::Numeric</code> 跟把字符串强制转换为数字有关。</p>
 </div>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -4016,7 +3926,7 @@ X::AdHoc.new(payload =&gt; 'Error !').throw;</code></pre>
 查看异常类型和相关方法的完整列表请到  <a href="https://docs.raku.org/type-exceptions.html" class="bare">https://docs.raku.org/type-exceptions.html</a>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 </div>
@@ -4025,7 +3935,7 @@ X::AdHoc.new(payload =&gt; 'Error !').throw;</code></pre>
 <h2 id="_正则表达式">11. 正则表达式</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>正则表达式（regular expression）, 或 <em>regex</em> 是一个用于模式匹配的字符序列。<br>
+<p>正则表达式（regular expression）, 或 <em>regex</em> 是一个用于模式匹配的字符序列。<br/>
 （译注，regular expression和regex都是“正则表达式”，后者是前者的缩写。本文中的regex同时也是Perl6的类名，它包含“Perl6专属”的用法，与其他语言甚至Perl5中的正则语法不完全一致，故不翻译，以示区分。）</p>
 </div>
 <div class="paragraph">
@@ -4033,16 +3943,16 @@ X::AdHoc.new(payload =&gt; 'Error !').throw;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">if 'enlightenment' ~~ m/ light / {
-    say "enlightenment 包含单词 light";
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">if &#39;enlightenment&#39; ~~ m/ light / {
+    say &#34;enlightenment 包含单词 light&#34;;
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这个例子中, 智能匹配操作符 <code>~~</code> 用于检查一个字符串(enlightenment)是否包含一个单词(light)。<br></p>
+<p>在这个例子中, 智能匹配操作符 <code>~~</code> 用于检查一个字符串(enlightenment)是否包含一个单词(light)。<br/></p>
 </div>
 <div class="paragraph">
-<p>"Enlightenment" 与regex <code>m/ light /</code> 匹配。</p>
+<p>&#34;Enlightenment&#34; 与regex <code>m/ light /</code> 匹配。</p>
 </div>
 <div class="sect2">
 <h3 id="_regex_定义">11.1. Regex 定义</h3>
@@ -4069,30 +3979,30 @@ X::AdHoc.new(payload =&gt; 'Error !').throw;</code></pre>
 <div class="sect2">
 <h3 id="_匹配字符">11.2. 匹配字符</h3>
 <div class="paragraph">
-<p>字母数字字符和下划线 <code>_</code> 在表达式中是按原样写出的。<br>
+<p>字母数字字符和下划线 <code>_</code> 在表达式中是按原样写出的。<br/>
 所有其它字符必须使用反斜线或用引号围起来以转义。</p>
 </div>
 <div class="listingblock">
 <div class="title">反斜线</div>
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">if 'Temperature: 13' ~~ m/ \: / {
-    say "提供的字符串包含冒号 :";
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">if &#39;Temperature: 13&#39; ~~ m/ \: / {
+    say &#34;提供的字符串包含冒号 :&#34;;
 }</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">单引号</div>
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">if 'Age = 13' ~~ m/ '=' / {
-    say "提供的字符串包含等号 = ";
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">if &#39;Age = 13&#39; ~~ m/ &#39;=&#39; / {
+    say &#34;提供的字符串包含等号 = &#34;;
 }</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">双引号</div>
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">if 'name@company.com' ~~ m/ "@" / {
-    say "这是一个有效的电子邮件地址，因为它包含 @ 字符";
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">if &#39;name@company.com&#39; ~~ m/ &#34;@&#34; / {
+    say &#34;这是一个有效的电子邮件地址，因为它包含 @ 字符&#34;;
 }</code></pre>
 </div>
 </div>
@@ -4100,15 +4010,15 @@ X::AdHoc.new(payload =&gt; 'Error !').throw;</code></pre>
 <div class="sect2">
 <h3 id="_匹配字符类">11.3. 匹配字符类</h3>
 <div class="paragraph">
-<p>字符可以分类，我们可以用类别匹配字符。<br>
+<p>字符可以分类，我们可以用类别匹配字符。<br/>
 也可以匹配该类别的反面（除此之外的所有内容）:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -4163,15 +4073,15 @@ X::AdHoc.new(payload =&gt; 'Error !').throw;</code></pre>
 </table>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">if "John123" ~~ / \d / {
-  say "这不是有效名称，不允许使用数字";
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">if &#34;John123&#34; ~~ / \d / {
+  say &#34;这不是有效名称，不允许使用数字&#34;;
 } else {
-  say "这是个有效名称"
+  say &#34;这是个有效名称&#34;
 }
-if "John-Doe" ~~ / \s / {
-  say "这个字符串包含空白";
+if &#34;John-Doe&#34; ~~ / \s / {
+  say &#34;这个字符串包含空白&#34;;
 } else {
-  say "这个字符串不包含空白"
+  say &#34;这个字符串不包含空白&#34;
 }</code></pre>
 </div>
 </div>
@@ -4179,29 +4089,29 @@ if "John-Doe" ~~ / \s / {
 <div class="sect2">
 <h3 id="_unicode_属性">11.4. Unicode 属性</h3>
 <div class="paragraph">
-<p>就像之前章节看到的, 匹配字符类很方便。<br>
-话虽这么说，更系统的方法是使用 Unicode 属性。<br>
+<p>就像之前章节看到的, 匹配字符类很方便。<br/>
+话虽这么说，更系统的方法是使用 Unicode 属性。<br/>
 这样就可以让你匹配在 ASCII 标准内和标准外的字符集。
 Unicode 属性闭合在 <code>&lt;: &gt;</code> 中。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">if "Devanagari Numbers १२३" ~~ / &lt;:N&gt; / {
-  say "包含数字";
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">if &#34;Devanagari Numbers १२३&#34; ~~ / &lt;:N&gt; / {
+  say &#34;包含数字&#34;;
 } else {
-  say "不包含数字"
+  say &#34;不包含数字&#34;
 }
 
-if "Привет, Иван." ~~ / &lt;:Lu&gt; / {
-  say "包含大写字母";
+if &#34;Привет, Иван.&#34; ~~ / &lt;:Lu&gt; / {
+  say &#34;包含大写字母&#34;;
 } else {
-  say "不包含大写字母"
+  say &#34;不包含大写字母&#34;
 }
 
-if "John-Doe" ~~ / &lt;:Pd&gt; / {
-  say "包含破折号";
+if &#34;John-Doe&#34; ~~ / &lt;:Pd&gt; / {
+  say &#34;包含破折号&#34;;
 } else {
-  say "不包含破折号"
+  say &#34;不包含破折号&#34;
 }</code></pre>
 </div>
 </div>
@@ -4216,18 +4126,18 @@ if "John-Doe" ~~ / &lt;:Pd&gt; / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">if 'abc' ~~ m/ a.c / {
-    say "匹配";
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">if &#39;abc&#39; ~~ m/ a.c / {
+    say &#34;匹配&#34;;
 }
 
-if 'a2c' ~~ m/ a.c / {
-    say "匹配";
+if &#39;a2c&#39; ~~ m/ a.c / {
+    say &#34;匹配&#34;;
 }
 
-if 'ac' ~~ m/ a.c / {
-    say "匹配";
+if &#39;ac&#39; ~~ m/ a.c / {
+    say &#34;匹配&#34;;
   } else {
-    say "不匹配";
+    say &#34;不匹配&#34;;
 }</code></pre>
 </div>
 </div>
@@ -4242,16 +4152,16 @@ if 'ac' ~~ m/ a.c / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">if 'ac' ~~ m/ a?c / {
-    say "匹配";
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">if &#39;ac&#39; ~~ m/ a?c / {
+    say &#34;匹配&#34;;
   } else {
-    say "不匹配";
+    say &#34;不匹配&#34;;
 }
 
-if 'c' ~~ m/ a?c / {
-    say "匹配";
+if &#39;c&#39; ~~ m/ a?c / {
+    say &#34;匹配&#34;;
   } else {
-    say "不匹配";
+    say &#34;不匹配&#34;;
 }</code></pre>
 </div>
 </div>
@@ -4260,28 +4170,28 @@ if 'c' ~~ m/ a?c / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">if 'az' ~~ m/ a*z / {
-    say "匹配";
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">if &#39;az&#39; ~~ m/ a*z / {
+    say &#34;匹配&#34;;
   } else {
-    say "不匹配";
+    say &#34;不匹配&#34;;
 }
 
-if 'aaz' ~~ m/ a*z / {
-    say "匹配";
+if &#39;aaz&#39; ~~ m/ a*z / {
+    say &#34;匹配&#34;;
   } else {
-    say "不匹配";
+    say &#34;不匹配&#34;;
 }
 
-if 'aaaaaaaaaaz' ~~ m/ a*z / {
-    say "匹配";
+if &#39;aaaaaaaaaaz&#39; ~~ m/ a*z / {
+    say &#34;匹配&#34;;
   } else {
-    say "不匹配";
+    say &#34;不匹配&#34;;
 }
 
-if 'z' ~~ m/ a*z / {
-    say "匹配";
+if &#39;z&#39; ~~ m/ a*z / {
+    say &#34;匹配&#34;;
   } else {
-    say "不匹配";
+    say &#34;不匹配&#34;;
 }</code></pre>
 </div>
 </div>
@@ -4290,28 +4200,28 @@ if 'z' ~~ m/ a*z / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">if 'az' ~~ m/ a+z / {
-    say "匹配";
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">if &#39;az&#39; ~~ m/ a+z / {
+    say &#34;匹配&#34;;
   } else {
-    say "不匹配";
+    say &#34;不匹配&#34;;
 }
 
-if 'aaz' ~~ m/ a+z / {
-    say "匹配";
+if &#39;aaz&#39; ~~ m/ a+z / {
+    say &#34;匹配&#34;;
   } else {
-    say "不匹配";
+    say &#34;不匹配&#34;;
 }
 
-if 'aaaaaaaaaaz' ~~ m/ a+z / {
-    say "匹配";
+if &#39;aaaaaaaaaaz&#39; ~~ m/ a+z / {
+    say &#34;匹配&#34;;
   } else {
-    say "不匹配";
+    say &#34;不匹配&#34;;
 }
 
-if 'z' ~~ m/ a+z / {
-    say "匹配";
+if &#39;z&#39; ~~ m/ a+z / {
+    say &#34;匹配&#34;;
   } else {
-    say "不匹配";
+    say &#34;不匹配&#34;;
 }</code></pre>
 </div>
 </div>
@@ -4325,12 +4235,12 @@ if 'z' ~~ m/ a+z / {
 <div class="listingblock">
 <div class="title">脚本</div>
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">if 'Rakudo is a Raku compiler' ~~ m/:s Raku/ {
-    say "匹配的内容是：" ~ $/;
-    say "匹配之前的字符串：" ~ $/.prematch;
-    say "匹配之后的字符串：" ~ $/.postmatch;
-    say "匹配从字符串此处开始：" ~ $/.from;
-    say "匹配从字符串此处结束：" ~ $/.to;
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">if &#39;Rakudo is a Raku compiler&#39; ~~ m/:s Raku/ {
+    say &#34;匹配的内容是：&#34; ~ $/;
+    say &#34;匹配之前的字符串：&#34; ~ $/.prematch;
+    say &#34;匹配之后的字符串：&#34; ~ $/.postmatch;
+    say &#34;匹配从字符串此处开始：&#34; ~ $/.from;
+    say &#34;匹配从字符串此处结束：&#34; ~ $/.to;
 }</code></pre>
 </div>
 </div>
@@ -4346,63 +4256,63 @@ if 'z' ~~ m/ a+z / {
 </div>
 <div class="paragraph">
 <div class="title">解释</div>
-<p><code>$/</code> 返回一个 <em>Match Object</em> (匹配 regex 的字符串)。<br>
-下面的方法可以在 <em>Match Object</em> 身上调用:<br></p>
+<p><code>$/</code> 返回一个 <em>Match Object</em> (匹配 regex 的字符串)。<br/>
+下面的方法可以在 <em>Match Object</em> 身上调用:<br/></p>
 </div>
 <div class="paragraph">
-<p><code>.prematch</code> 返回匹配前面的字符串<br>
-<code>.postmatch</code> 返回匹配后面的字符串<br>
-<code>.from</code> 返回匹配的开始位置<br>
-<code>.to</code> 返回匹配的结束位置<br></p>
+<p><code>.prematch</code> 返回匹配前面的字符串<br/>
+<code>.postmatch</code> 返回匹配后面的字符串<br/>
+<code>.from</code> 返回匹配的开始位置<br/>
+<code>.to</code> 返回匹配的结束位置<br/></p>
 </div>
 <div class="admonitionblock tip">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-默认地，空白符在 regex 中会被忽略。<br>
-如果想在 regex 中包含空白, 我们必须显式地这样做。<br>
+默认地，空白符在 regex 中会被忽略。<br/>
+如果想在 regex 中包含空白, 我们必须显式地这样做。<br/>
 regex <code>m/:s Raku/</code> 中的 <code>:s</code> 用于强制匹配空白符。
 另外, 可以把 regex 写为 <code>m/Perl\s6/</code> ，使用 <code>\s</code> 代表空白符。
 如果 regex 中包含的空白不止一个, 使用 <code>:s</code> 比使用 <code>\s</code> 更高效。
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_例子">11.8. 例子</h3>
 <div class="paragraph">
-<p>让我们检查一个邮件是否合法。<br>
-我们假设一个合法的电子邮件地址的形式如下:<br>
+<p>让我们检查一个邮件是否合法。<br/>
+我们假设一个合法的电子邮件地址的形式如下:<br/>
 名 [点] 姓 [at] 公司名 [点] (com/org/net)</p>
 </div>
 <div class="admonitionblock warning">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-这个例子中用于电子邮件检测的 regex 不是很准确。<br>
-它的核心意图是用来解释 Raku 中的 regex 的功能的。<br>
+这个例子中用于电子邮件检测的 regex 不是很准确。<br/>
+它的核心意图是用来解释 Raku 中的 regex 的功能的。<br/>
 不要在生产中原样使用它。
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="listingblock">
 <div class="title">脚本</div>
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">my $email = 'john.doe@perl6.org';
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">my $email = &#39;john.doe@perl6.org&#39;;
 my $regex = / &lt;:L&gt;+\.&lt;:L&gt;+\@&lt;:L+:N&gt;+\.&lt;:L&gt;+ /;
 
 if $email ~~ $regex {
-  say $/ ~ " 是一个合法的Email地址";
+  say $/ ~ &#34; 是一个合法的Email地址&#34;;
 } else {
-  say "这不是合法的Email地址";
+  say &#34;这不是合法的Email地址&#34;;
 }</code></pre>
 </div>
 </div>
@@ -4412,12 +4322,12 @@ if $email ~~ $regex {
 </div>
 <div class="paragraph">
 <div class="title">解释</div>
-<p><code>&lt;:L&gt;</code>  匹配一个字母<br>
-<code>&lt;:L&gt;+</code> 匹配至少一个字母<br>
-<code>\.</code>  匹配单个 . 符号<br>
-<code>\@</code>  匹配单个 @ 符号<br>
-<code>&lt;:L+:N&gt;</code> 匹配一个字母或数字<br>
-<code>&lt;:L+:N&gt;+</code> 匹配至少一个字母或数字<br></p>
+<p><code>&lt;:L&gt;</code>  匹配一个字母<br/>
+<code>&lt;:L&gt;+</code> 匹配至少一个字母<br/>
+<code>\.</code>  匹配单个 . 符号<br/>
+<code>\@</code>  匹配单个 @ 符号<br/>
+<code>&lt;:L+:N&gt;</code> 匹配一个字母或数字<br/>
+<code>&lt;:L+:N&gt;+</code> 匹配至少一个字母或数字<br/></p>
 </div>
 <div class="paragraph">
 <p>其中的 regex 可以分解成如下:</p>
@@ -4450,26 +4360,26 @@ if $email ~~ $regex {
 <div class="listingblock">
 <div class="title">可选的, 一个 regex 可以被分解成多个具名 regex  。</div>
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">my $email = 'john.doe@perl6.org';
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">my $email = &#39;john.doe@perl6.org&#39;;
 my regex 多个字母 { &lt;:L&gt;+ };
 my regex 点 { \. };
 my regex at { \@ };
 my regex 多个字母与数字 { &lt;:L+:N&gt;+ };
 
 if $email ~~ / &lt;多个字母&gt; &lt;点&gt; &lt;多个字母&gt; &lt;at&gt; &lt;多个字母与数字&gt; &lt;点&gt; &lt;多个字母&gt; / {
-  say $/ ~ " 是一个合法的Email地址";
+  say $/ ~ &#34; 是一个合法的Email地址&#34;;
 } else {
-  say "这不是合法的Email地址";
+  say &#34;这不是合法的Email地址&#34;;
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>具名 regex 是使用 <code>my regex 表达式名 { regex 定义 }</code> 定义的。<br>
+<p>具名 regex 是使用 <code>my regex 表达式名 { regex 定义 }</code> 定义的。<br/>
 具名 regex 可以使用 <code>&lt;表达式名&gt;</code> 来调用。</p>
 </div>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -4477,7 +4387,7 @@ if $email ~~ / &lt;多个字母&gt; &lt;点&gt; &lt;多个字母&gt; &lt;at&gt; 
 更多关于 regex 的内容, 查看 <a href="https://docs.raku.org/language/regexes" class="bare">https://docs.raku.org/language/regexes</a>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 </div>
@@ -4502,11 +4412,11 @@ if $email ~~ / &lt;多个字母&gt; &lt;点&gt; &lt;多个字母&gt; &lt;at&gt; 
 <p>要安装指定的模块, 在终端中键入如下命令:</p>
 </div>
 <div class="paragraph">
-<p><code>zef install "module name"</code></p>
+<p><code>zef install &#34;module name&#34;</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -4514,12 +4424,12 @@ if $email ~~ / &lt;多个字母&gt; &lt;点&gt; &lt;多个字母&gt; &lt;at&gt; 
 Raku 的模块目录可以在 <a href="https://modules.raku.org/" class="bare">https://modules.raku.org/</a> 中找到。
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 <div class="sect2">
 <h3 id="_使用模块">12.1. 使用模块</h3>
 <div class="paragraph">
-<p>MD5 是一个关于密码的散列函数，它产生一个128位的散列值。<br>
+<p>MD5 是一个关于密码的散列函数，它产生一个128位的散列值。<br/>
 MD5 有多种加密存储在数据库中的口令的应用程序。
 当新用户注册时，其证书并不存储为纯文本，而是 <em>哈希</em>。
 这样做的理由是，如果该数据库被破解，攻击者将不能够知道口令是什么。</p>
@@ -4528,7 +4438,7 @@ MD5 有多种加密存储在数据库中的口令的应用程序。
 <p>比方说，你需要一个生成密码的MD5哈希以存储在数据库中备用的脚本。</p>
 </div>
 <div class="paragraph">
-<p>幸运的是， Raku 已经有一个能实现 MD5 算法的模块。我们来安装它:<br>
+<p>幸运的是， Raku 已经有一个能实现 MD5 算法的模块。我们来安装它:<br/>
 <code>zef install Digest::MD5</code></p>
 </div>
 <div class="paragraph">
@@ -4537,28 +4447,28 @@ MD5 有多种加密存储在数据库中的口令的应用程序。
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">use Digest::MD5;
-my $password = "password123";
+my $password = &#34;password123&#34;;
 my $hashed-password = Digest::MD5.new.md5_hex($password);
 
 say $hashed-password;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>为了运行创建哈希的 <code>md5_hex()</code> 函数, 我们需要加载需要的模块。<br>
+<p>为了运行创建哈希的 <code>md5_hex()</code> 函数, 我们需要加载需要的模块。<br/>
 <code>use</code> 关键字用于在脚本中加载模块。</p>
 </div>
 <div class="admonitionblock warning">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-实际上，MD5 哈希是不够的，因为它容易被字典攻击。<br>
+实际上，MD5 哈希是不够的，因为它容易被字典攻击。<br/>
 它应该加盐。<a href="https://zh.wikipedia.org/wiki/%E7%9B%90_(%E5%AF%86%E7%A0%81%E5%AD%A6)">维基百科：盐 (密码学)</a>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 </div>
@@ -4567,15 +4477,15 @@ say $hashed-password;</code></pre>
 <h2 id="_unicode">13. Unicode</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Unicode 是编码并表现文本的标准, 它涵盖了世界上大多数书写系统。<br>
+<p>Unicode 是编码并表现文本的标准, 它涵盖了世界上大多数书写系统。<br/>
 UTF-8 是能够以Unicode编码所有可能的字符或代码点的字符编码。</p>
 </div>
 <div class="paragraph">
-<p>字符的定义是通过:<br></p>
+<p>字符的定义是通过:<br/></p>
 </div>
 <div class="paragraph">
-<p><strong>字素</strong>: 视觉表示<br>
-<strong>代码点</strong>: 赋值给字符的数字<br>
+<p><strong>字素</strong>: 视觉表示<br/>
+<strong>代码点</strong>: 赋值给字符的数字<br/>
 <strong>代码点名称</strong>: 字符的名称</p>
 </div>
 <div class="sect2">
@@ -4583,9 +4493,9 @@ UTF-8 是能够以Unicode编码所有可能的字符或代码点的字符编码�
 <div class="listingblock">
 <div class="title">让我们看一下使用 Unicode 能输出什么</div>
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">say "a";
-say "\x0061";
-say "\c[LATIN SMALL LETTER A]";</code></pre>
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">say &#34;a&#34;;
+say &#34;\x0061&#34;;
+say &#34;\c[LATIN SMALL LETTER A]&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4607,18 +4517,18 @@ say "\c[LATIN SMALL LETTER A]";</code></pre>
 <div class="listingblock">
 <div class="title">现在我们来输出笑脸</div>
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">say "☺";
-say "\x263a";
-say "\c[WHITE SMILING FACE]";</code></pre>
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">say &#34;☺&#34;;
+say &#34;\x263a&#34;;
+say &#34;\c[WHITE SMILING FACE]&#34;;</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">组合两个代码点的另外一个例子</div>
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">say "á";
-say "\x00e1";
-say "\x0061\x0301";
-say "\c[LATIN SMALL LETTER A WITH ACUTE]";</code></pre>
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">say &#34;á&#34;;
+say &#34;\x00e1&#34;;
+say &#34;\x0061\x0301&#34;;
+say &#34;\c[LATIN SMALL LETTER A WITH ACUTE]&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4637,9 +4547,9 @@ say "\c[LATIN SMALL LETTER A WITH ACUTE]";</code></pre>
 <div class="listingblock">
 <div class="title">有些方法可以使用</div>
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">say "á".NFC;
-say "á".NFD;
-say "á".uniname;</code></pre>
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">say &#34;á&#34;.NFC;
+say &#34;á&#34;.NFD;
+say &#34;á&#34;.uniname;</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -4651,8 +4561,8 @@ LATIN SMALL LETTER A WITH ACUTE</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>NFC</code> 返回唯一的代码点。<br>
-<code>NFD</code> 分解(decompose)那个字符并返回每部分的代码点。<br>
+<p><code>NFC</code> 返回唯一的代码点。<br/>
+<code>NFD</code> 分解(decompose)那个字符并返回每部分的代码点。<br/>
 <code>uniname</code> 返回代码点的名字。</p>
 </div>
 <div class="listingblock">
@@ -4676,7 +4586,7 @@ say $var;</code></pre>
 <div class="sect3">
 <h4 id="_数字">13.2.1. 数字</h4>
 <div class="paragraph">
-<p>10 个阿拉伯数字 "0, 1, 2, 3, 4, 5, 6, 7, 8, 9" 是今天全世界使用最广泛的数字字符集。</p>
+<p>10 个阿拉伯数字 &#34;0, 1, 2, 3, 4, 5, 6, 7, 8, 9&#34; 是今天全世界使用最广泛的数字字符集。</p>
 </div>
 <div class="paragraph">
 <p>不过在全世界各地其他数字字符集也少量地被使用。</p>
@@ -4700,7 +4610,7 @@ say 1 + ٩;               # 10</code></pre>
 <h5 id="_比较">比较</h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">say 'a' cmp 'B'; # More</code></pre>
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">say &#39;a&#39; cmp &#39;B&#39;; # More</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4710,12 +4620,12 @@ say 1 + ٩;               # 10</code></pre>
 <p>虽然这在技术上是对的，不过它可能不是我们所期待的。</p>
 </div>
 <div class="paragraph">
-<p>幸运的是 Raku 拥有一套应用了 <a href="http://unicode.org/reports/tr10/">Unicode 排序算法</a>的操作符。<br>
+<p>幸运的是 Raku 拥有一套应用了 <a href="http://unicode.org/reports/tr10/">Unicode 排序算法</a>的操作符。<br/>
 <code>unicmp</code> 是其中一个，它的功能和上面的 <code>cmp</code> 相似，不过是 unicode 相关的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">say 'a' unicmp 'B'; # Less</code></pre>
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">say &#39;a&#39; unicmp &#39;B&#39;; # Less</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4729,8 +4639,8 @@ say 1 + ٩;               # 10</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl6" data-lang="perl6">say ('a','b','c','D','E','F').sort;    # (D E F a b c)
-say ('a','b','c','D','E','F').collate; # (a b c D E F)</code></pre>
+<pre class="highlight"><code class="language-perl6" data-lang="perl6">say (&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;D&#39;,&#39;E&#39;,&#39;F&#39;).sort;    # (D E F a b c)
+say (&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;D&#39;,&#39;E&#39;,&#39;F&#39;).collate; # (a b c D E F)</code></pre>
 </div>
 </div>
 </div>
@@ -4744,11 +4654,11 @@ say ('a','b','c','D','E','F').collate; # (a b c D E F)</code></pre>
 <div class="sect2">
 <h3 id="_并行">14.1. 并行</h3>
 <div class="paragraph">
-<p>在正常情况下, 程序中的所有任务都是相继地运行的。<br>
+<p>在正常情况下, 程序中的所有任务都是相继地运行的。<br/>
 这可能不是个事儿除非你正尝试去做的东西需要耗费很多时间。</p>
 </div>
 <div class="paragraph">
-<p>幸亏Raku 拥有能让你并行地运行的功能。<br>
+<p>幸亏Raku 拥有能让你并行地运行的功能。<br/>
 此时, 需要注意到的是存在两类并行方式：</p>
 </div>
 <div class="ulist">
@@ -4775,8 +4685,8 @@ say now - INIT now;                         # 输出脚本完成花费的时间<
 </div>
 <div class="paragraph">
 <div class="title">考虑上面的例子:</div>
-<p>我们只做一个操作 <code>@array.map({is-prime $_})</code>。<br>
-<code>is-prime</code> 子例程相继被每个数组元素所调用:<br>
+<p>我们只做一个操作 <code>@array.map({is-prime $_})</code>。<br/>
+<code>is-prime</code> 子例程相继被每个数组元素所调用:<br/>
 <code>is-prime @array[0]</code> 然后是 <code>is-prime @array[1]</code> 然后是 <code>is-prime @array[2]</code> 等等。</p>
 </div>
 <div class="listingblock">
@@ -4795,7 +4705,7 @@ say now - INIT now;                             # 输出完成所花费的时间
 </div>
 <div class="admonitionblock tip">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-tip" title="Tip"></i>
 </td>
@@ -4824,7 +4734,7 @@ my @result = @array.hyper.map( {$_ + 1} );
 </div>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 <div class="sect3">
@@ -4857,7 +4767,7 @@ say now - INIT now;</code></pre>
 </ol>
 </div>
 <div class="paragraph">
-<p>该脚本等到 <code>@array1.map( {is-prime($_ +1)} )</code> 完成<br>
+<p>该脚本等到 <code>@array1.map( {is-prime($_ +1)} )</code> 完成<br/>
 然后计算 <code>@array1.map( {is-prime($_ +1)} )</code>。</p>
 </div>
 <div class="paragraph">
@@ -4882,13 +4792,13 @@ say now - INIT now;</code></pre>
 </div>
 <div class="paragraph">
 <div class="title">解释</div>
-<p><code>start</code> 方法计算它后面的代码并返回 <strong>promise 类型的对象</strong> 或 <strong>promise</strong>。<br>
-如果代码被正确地求值, 那么 <em>promise</em> 会被 <strong>保留</strong>(kept)。<br>
+<p><code>start</code> 方法计算它后面的代码并返回 <strong>promise 类型的对象</strong> 或 <strong>promise</strong>。<br/>
+如果代码被正确地求值, 那么 <em>promise</em> 会被 <strong>保留</strong>(kept)。<br/>
 如果代码抛出异常, 那么 <em>promise</em> 会被 <strong>破坏</strong>(broken)。</p>
 </div>
 <div class="paragraph">
-<p><code>await</code> 子例程等待一个 <strong>promise</strong>。<br>
-如果那个 promise 是被 <strong>保留</strong> 的, await 会获取到返回值。<br>
+<p><code>await</code> 子例程等待一个 <strong>promise</strong>。<br/>
+如果那个 promise 是被 <strong>保留</strong> 的, await 会获取到返回值。<br/>
 如果那个 promise 是被 <strong>破坏</strong> 的, await 会获取到抛出异常。</p>
 </div>
 <div class="paragraph">
@@ -4896,16 +4806,16 @@ say now - INIT now;</code></pre>
 </div>
 <div class="admonitionblock warning">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-并行总是添加线程开销。如果开销抵消不了运算速度的增长，那么该脚本会显得较慢。<br>
+并行总是添加线程开销。如果开销抵消不了运算速度的增长，那么该脚本会显得较慢。<br/>
 这就是为什么，在很简单的脚本中使用 <code>race</code>，<code>hyper</code>，<code>start</code> 和 <code>await</code> 实际上可以使它们慢下来。
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 </div>
@@ -4913,7 +4823,7 @@ say now - INIT now;</code></pre>
 <h3 id="_并发和异步">14.2. 并发和异步</h3>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -4921,7 +4831,7 @@ say now - INIT now;</code></pre>
 关于并发和异步编程的更多信息, 请查看  <a href="https://docs.raku.org/language/concurrency" class="bare">https://docs.raku.org/language/concurrency</a>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 </div>
@@ -4947,7 +4857,7 @@ say now - INIT now;</code></pre>
 <pre class="highlight"><code class="language-c" data-lang="c">#include &lt;stdio.h&gt;
 
 void hellofromc () {
-  printf("Hello from C\n");
+  printf(&#34;Hello from C\n&#34;);
 }</code></pre>
 </div>
 </div>
@@ -4976,7 +4886,7 @@ gcc -shared -o ncitest.dll ncitest.o</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">use NativeCall;
 
-constant LIBPATH = "$*CWD/ncitest";
+constant LIBPATH = &#34;$*CWD/ncitest&#34;;
 sub hellofromc() is native(LIBPATH) { * }
 
 hellofromc();</code></pre>
@@ -4984,11 +4894,11 @@ hellofromc();</code></pre>
 </div>
 <div class="paragraph">
 <div class="title">解释</div>
-<p>首先，我们声明使用 <code>NativeCall</code> 模块。<br>
-接着，我们定义了一个常量 <code>LIBPATH</code> 来存储 C 库的路径。<br>
-其中 <code>$*CWD</code> 返回当前目录。<br>
-然后，我们定义一个新的 Raku 子例程 <code>hellofromc</code> 作为 C 库中名称同为 <code>hellofromc</code> 的 C 函数之包装函数。这个 C 库就是 <code>LIBPATH</code> 所对应的。<br>
-这些是通过使用 <code>is native</code> 特征实现的。<br>
+<p>首先，我们声明使用 <code>NativeCall</code> 模块。<br/>
+接着，我们定义了一个常量 <code>LIBPATH</code> 来存储 C 库的路径。<br/>
+其中 <code>$*CWD</code> 返回当前目录。<br/>
+然后，我们定义一个新的 Raku 子例程 <code>hellofromc</code> 作为 C 库中名称同为 <code>hellofromc</code> 的 C 函数之包装函数。这个 C 库就是 <code>LIBPATH</code> 所对应的。<br/>
+这些是通过使用 <code>is native</code> 特征实现的。<br/>
 最后，调用我们的 Perl6 子例程。</p>
 </div>
 <div class="paragraph">
@@ -5001,7 +4911,7 @@ hellofromc();</code></pre>
 <p>上面的例子中，我们看到了如何通过 <code>is native</code> 特征使用同名 Raku 子例程来包装 C 函数从而调用它。</p>
 </div>
 <div class="paragraph">
-<p>有时我们希望更改 Raku 子例程的名称。<br>
+<p>有时我们希望更改 Raku 子例程的名称。<br/>
 为此，我们需要使用 <code>is symbol</code> 特征。</p>
 </div>
 <div class="paragraph">
@@ -5012,8 +4922,8 @@ hellofromc();</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">use NativeCall;
 
-constant LIBPATH = "$*CWD/ncitest";
-sub hello() is native(LIBPATH) is symbol('hellofromc') { * }
+constant LIBPATH = &#34;$*CWD/ncitest&#34;;
+sub hello() is native(LIBPATH) is symbol(&#39;hellofromc&#39;) { * }
 
 hello();</code></pre>
 </div>
@@ -5026,7 +4936,7 @@ hello();</code></pre>
 <div class="sect2">
 <h3 id="_参数传递">15.3. 参数传递</h3>
 <div class="paragraph">
-<p>编译下面更改过的的 C 库代码并运行 Raku 脚本。<br>
+<p>编译下面更改过的的 C 库代码并运行 Raku 脚本。<br/>
 注意我们是如何修改 C 和 Raku 代码来接收一个字符串参数（在 C 中是 <code>chr*</code>，在 Raku 中是 <code>Str</code>）</p>
 </div>
 <div class="listingblock">
@@ -5035,7 +4945,7 @@ hello();</code></pre>
 <pre class="highlight"><code class="language-c" data-lang="c">#include &lt;stdio.h&gt;
 
 void hellofromc (char* name) {
-  printf("Hello, %s! This is C!\n", name);
+  printf(&#34;Hello, %s! This is C!\n&#34;, name);
 }</code></pre>
 </div>
 </div>
@@ -5044,17 +4954,17 @@ void hellofromc (char* name) {
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">use NativeCall;
 
-constant LIBPATH = "$*CWD/ncitest";
-sub hello(Str) is native(LIBPATH) is symbol('hellofromc') { * }
+constant LIBPATH = &#34;$*CWD/ncitest&#34;;
+sub hello(Str) is native(LIBPATH) is symbol(&#39;hellofromc&#39;) { * }
 
-hello('Jane');</code></pre>
+hello(&#39;Jane&#39;);</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_返回值_2">15.4. 返回值</h3>
 <div class="paragraph">
-<p>让我们再来定义一个简单的计算器，实现接收两个整数输入并返回它们之和。<br>
+<p>让我们再来定义一个简单的计算器，实现接收两个整数输入并返回它们之和。<br/>
 编译下面的 C 库，并运行 Raku 脚本。</p>
 </div>
 <div class="listingblock">
@@ -5070,7 +4980,7 @@ hello('Jane');</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-perl6" data-lang="perl6">use NativeCall;
 
-constant LIBPATH = "$*CWD/ncitest";
+constant LIBPATH = &#34;$*CWD/ncitest&#34;;
 sub add(int32,int32) returns int32 is native(LIBPATH) { * }
 
 say add(2,3);</code></pre>
@@ -5083,8 +4993,8 @@ say add(2,3);</code></pre>
 <div class="sect2">
 <h3 id="_类型_2">15.5. 类型</h3>
 <div class="paragraph">
-<p>你可能要问，为什么在最后的 Raku 脚本中我们要使用 <code>int32</code> 来代替 <code>Int</code> 。<br>
-因为在 Raku 中像 <code>Int</code>，<code>Rat</code> 等类型不能用来传递与接收 C 函数中的值。<br>
+<p>你可能要问，为什么在最后的 Raku 脚本中我们要使用 <code>int32</code> 来代替 <code>Int</code> 。<br/>
+因为在 Raku 中像 <code>Int</code>，<code>Rat</code> 等类型不能用来传递与接收 C 函数中的值。<br/>
 所以必须在 Raku 中使用同 C 中类型相对应的类型。</p>
 </div>
 <div class="paragraph">
@@ -5092,8 +5002,8 @@ say add(2,3);</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <thead>
 <tr>
@@ -5188,7 +5098,7 @@ say add(2,3);</code></pre>
 </table>
 <div class="admonitionblock note">
 <table>
-<tr>
+<tbody><tr>
 <td class="icon">
 <i class="fa icon-note" title="Note"></i>
 </td>
@@ -5196,7 +5106,7 @@ say add(2,3);</code></pre>
 更多关于 Native Calling 接口, 详见 <a href="https://docs.raku.org/language/nativecall" class="bare">https://docs.raku.org/language/nativecall</a>
 </td>
 </tr>
-</table>
+</tbody></table>
 </div>
 </div>
 </div>
@@ -5229,7 +5139,7 @@ say add(2,3);</code></pre>
 </div>
 </div>
 <div id="footnotes">
-<hr>
+<hr/>
 <div class="footnote" id="_footnotedef_1">
 <a href="#_footnoteref_1">1</a>. 维基百科：区间 <a href="https://zh.wikipedia.org/zh-cn/%E5%8D%80%E9%96%93#%E5%9A%B4%E6%A0%BC%E5%AE%9A%E7%BE%A9" class="bare">https://zh.wikipedia.org/zh-cn/%E5%8D%80%E9%96%93#%E5%9A%B4%E6%A0%BC%E5%AE%9A%E7%BE%A9</a>
 </div>

@@ -8,18 +8,19 @@
     <language>zh-cn</language>
     <managingEditor>ohmyraku@outlook.com (ohmyraku)</managingEditor>
     <webMaster>ohmyraku@outlook.com (ohmyraku)</webMaster>
-    <lastBuildDate>Wed, 05 Feb 2020 15:26:52 +0800</lastBuildDate>
-    
-	<atom:link href="https://ohmyraku.github.io/tags/advent/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 05 Feb 2020 15:26:52 +0800</lastBuildDate><atom:link href="https://ohmyraku.github.io/tags/advent/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Raku Advent Calendar</title>
       <link>https://ohmyraku.github.io/raku-advent-calendar/</link>
       <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
       <author>ohmyraku@outlook.com (ohmyraku)</author>
       <guid>https://ohmyraku.github.io/raku-advent-calendar/</guid>
-      <description>Table of Contents 1. 第一天 – Raku 鬼精灵: 圣诞节实用指南 1.1. But True does False 1.2. Wrapping It Up 1.3. 看不见的斗篷 1.4. Ho-Ho-Ho 1.5. 结论   2. 第二天-Raku: 符号, 变量和容器 2.1. 把钱拿出来 2.2. 我们祝你有一个愉快的列表圣诞 2.3. That&amp;#8217;s Your Assignment 2.4. Position@lly 2.5. The One and Only 2.6. Decont 2.7. 不要让它溜走 2.8. I Want Less 2.9. Defaulting on Default Defaults 2.10. 自定义 2.11. 这就是全部，伙计 2.12. 结论   3. 第三天 – LetterOps with Raku 3.</description>
+      <description>1. 第一天 – Raku 鬼精灵: 圣诞节实用指南 看看他们！同事、朋友和亲近的家人都在开心地笑着。他们都在享受着使用 Raku 的 6.c “圣诞”版编程的乐趣。给力的并发原语, 核心文法, 还有非常棒的对象模型。它让我印象深刻！
+ 但是等一下…​ 就一秒。我有个想法。一个可怕的想法。我想到了一个鬼主意! 我们可以在他们的&amp;#34;圣诞&amp;#34;上捣乱。需要的只有一点花招。哈哈哈哈哈哈！！
+ 欢迎来到 2017 年的 Raku 圣诞日历！每天，从今天直到圣诞节，我们都会有一篇很赞的关于 Raku 的博客推送到你面前。
+ 今天，我们会展示我们淘气的一面并且故意地做些淘气的事情。确实，这有点用，但是淘气点更快乐。我们开始吧！
+ 1.1. But True does False 你听过 but 操作符吗？一个好玩的东西：
+ say True but False ?? &amp;#39;Tis true&amp;#39; !! &amp;#39;Tis false&amp;#39;; # OUTPUT: «Tis false␤» my $n = 42 but &amp;#39;forty two&amp;#39;; say $n; # OUTPUT: «forty two␤» say $n + 7; # OUTPUT: «49␤»   它是一个中缀操作符，它首先拷贝它左边的对象，然后把它右边提供的 role 混进这个拷贝中：</description>
     </item>
     
   </channel>

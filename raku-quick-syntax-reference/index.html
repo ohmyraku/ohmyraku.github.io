@@ -8,9 +8,14 @@
 
 <meta name="author" content="ohmyraku">
 <meta name="application-name" content="山川异域, 风月同天">
-<meta name="description" content="Table of Contents 1. 运行 Raku 1.1. 在你自己的电脑上运行 Raku 1.2. Raku 在线 1.3. 命名行(和其它)选项 1.4. 结束语   2. 获取帮助 2.1. 第一响应者 2.2. IRC 频道和其它在线交流 2.3. 在线下获取帮助 2.4. 结束语   3. 字面值 3.1. 让我们来谈论 Unicode 3.2. 字面值表达式 3.3. 字符串？数字？同素异形体！ 3.4. 版本 3.5. 结束语   4. 表达式和运算符 4.1. 基本表达式 4.2. 算术 4.3. 字符串 4.4. 处理语法错误 4.5. 智能比较运算符 4.6. 注释：文档的重要组成部分 4.7. 逻辑 4.8. 结束语   5. 构建数据 5.1. 代码对象 5.">
+<meta name="description" content="1. 运行 Raku  如何安装 Raku 或只是准备好运行你的脚本或程序
+   Raku 是一种编程语言，因此它是包含一系列应用程序的开发生态系统的一部分。 在本书中将使用其中的一些内容，因此在进入 Raku 本身之前，你可能需要安装以下内容。
+   Git 是主流的源代码控制和开发工作流工具。 你可能需要它来下载一些 Raku 模块，或者以某种方式从源代码安装它。
+  编程语言编辑器。 Raku 具有自己的集成开发环境（IDE），称为 Comma，你可以从 Edument 获得其许可证。 社区版于 2019 年 3 月发布。 该 IDE 包含你希望获得的大多数好处，包括语法高亮显示，程序运行和文档预览。 在其余的编辑器中，Atom 的支持可能是最好的，包括高亮显示和语法检查。 其他编辑器，例如 Emacs，VS Code 和 vim，也支持 Raku，如果你已经熟悉它们，可能就足够了。
+  Docker 是一个服务隔离框架，如今已广泛用于软件包分发。安装它可以帮助你避免把东西永久地安装在系统上。你还可以通过使用特定应用程序的名称来使其快速运行。
+  在 Raku 的世界中，很多动作都发生在互联网中继通道中。尽管你可以从浏览器访问其中的一些，但是拥有自己的 IRC 桌面客户端将通过无缝身份验证和自动化实现你的入口。 你还将从命令行运行一些脚本。对它的工作原理以及如何在不同的操作系统中使用它的基本理解总是有帮助的。由于你要安装 Raku 以及其他附带的东西，因此对 apt 等打包系统（默认情况下将使用 Debian 和 Ubuntu 打包系统）以及 Windows 的 Chocolatey/NuGet 或 Mac 的 Brew 将派上用场。">
 <meta name="robots" content="noodp"/>
-<meta name="generator" content="Hugo 0.63.2" />
+<meta name="generator" content="Hugo 0.79.0" />
 <meta name="referrer" content="no-referrer" />
 <meta name="format-detection" content="telephone=no">
 
@@ -22,7 +27,12 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Raku 语法小册" />
-<meta name="twitter:description" content="Table of Contents 1. 运行 Raku 1.1. 在你自己的电脑上运行 Raku 1.2. Raku 在线 1.3. 命名行(和其它)选项 1.4. 结束语   2. 获取帮助 2.1. 第一响应者 2.2. IRC 频道和其它在线交流 2.3. 在线下获取帮助 2.4. 结束语   3. 字面值 3.1. 让我们来谈论 Unicode 3.2. 字面值表达式 3.3. 字符串？数字？同素异形体！ 3.4. 版本 3.5. 结束语   4. 表达式和运算符 4.1. 基本表达式 4.2. 算术 4.3. 字符串 4.4. 处理语法错误 4.5. 智能比较运算符 4.6. 注释：文档的重要组成部分 4.7. 逻辑 4.8. 结束语   5. 构建数据 5.1. 代码对象 5." />
+<meta name="twitter:description" content="1. 运行 Raku  如何安装 Raku 或只是准备好运行你的脚本或程序
+   Raku 是一种编程语言，因此它是包含一系列应用程序的开发生态系统的一部分。 在本书中将使用其中的一些内容，因此在进入 Raku 本身之前，你可能需要安装以下内容。
+   Git 是主流的源代码控制和开发工作流工具。 你可能需要它来下载一些 Raku 模块，或者以某种方式从源代码安装它。
+  编程语言编辑器。 Raku 具有自己的集成开发环境（IDE），称为 Comma，你可以从 Edument 获得其许可证。 社区版于 2019 年 3 月发布。 该 IDE 包含你希望获得的大多数好处，包括语法高亮显示，程序运行和文档预览。 在其余的编辑器中，Atom 的支持可能是最好的，包括高亮显示和语法检查。 其他编辑器，例如 Emacs，VS Code 和 vim，也支持 Raku，如果你已经熟悉它们，可能就足够了。
+  Docker 是一个服务隔离框架，如今已广泛用于软件包分发。安装它可以帮助你避免把东西永久地安装在系统上。你还可以通过使用特定应用程序的名称来使其快速运行。
+  在 Raku 的世界中，很多动作都发生在互联网中继通道中。尽管你可以从浏览器访问其中的一些，但是拥有自己的 IRC 桌面客户端将通过无缝身份验证和自动化实现你的入口。 你还将从命令行运行一些脚本。对它的工作原理以及如何在不同的操作系统中使用它的基本理解总是有帮助的。由于你要安装 Raku 以及其他附带的东西，因此对 apt 等打包系统（默认情况下将使用 Debian 和 Ubuntu 打包系统）以及 Windows 的 Chocolatey/NuGet 或 Mac 的 Brew 将派上用场。" />
 <meta name="twitter:site" content="https://ohmyraku.github.io" />
 <meta name="twitter:creator" content="ohmyraku" />
 <meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
@@ -32,7 +42,12 @@
 <meta property="og:title" content="Raku 语法小册" />
 <meta property="og:url" content="https://ohmyraku.github.io" />
 <meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="Table of Contents 1. 运行 Raku 1.1. 在你自己的电脑上运行 Raku 1.2. Raku 在线 1.3. 命名行(和其它)选项 1.4. 结束语   2. 获取帮助 2.1. 第一响应者 2.2. IRC 频道和其它在线交流 2.3. 在线下获取帮助 2.4. 结束语   3. 字面值 3.1. 让我们来谈论 Unicode 3.2. 字面值表达式 3.3. 字符串？数字？同素异形体！ 3.4. 版本 3.5. 结束语   4. 表达式和运算符 4.1. 基本表达式 4.2. 算术 4.3. 字符串 4.4. 处理语法错误 4.5. 智能比较运算符 4.6. 注释：文档的重要组成部分 4.7. 逻辑 4.8. 结束语   5. 构建数据 5.1. 代码对象 5." />
+<meta property="og:description" content="1. 运行 Raku  如何安装 Raku 或只是准备好运行你的脚本或程序
+   Raku 是一种编程语言，因此它是包含一系列应用程序的开发生态系统的一部分。 在本书中将使用其中的一些内容，因此在进入 Raku 本身之前，你可能需要安装以下内容。
+   Git 是主流的源代码控制和开发工作流工具。 你可能需要它来下载一些 Raku 模块，或者以某种方式从源代码安装它。
+  编程语言编辑器。 Raku 具有自己的集成开发环境（IDE），称为 Comma，你可以从 Edument 获得其许可证。 社区版于 2019 年 3 月发布。 该 IDE 包含你希望获得的大多数好处，包括语法高亮显示，程序运行和文档预览。 在其余的编辑器中，Atom 的支持可能是最好的，包括高亮显示和语法检查。 其他编辑器，例如 Emacs，VS Code 和 vim，也支持 Raku，如果你已经熟悉它们，可能就足够了。
+  Docker 是一个服务隔离框架，如今已广泛用于软件包分发。安装它可以帮助你避免把东西永久地安装在系统上。你还可以通过使用特定应用程序的名称来使其快速运行。
+  在 Raku 的世界中，很多动作都发生在互联网中继通道中。尽管你可以从浏览器访问其中的一些，但是拥有自己的 IRC 桌面客户端将通过无缝身份验证和自动化实现你的入口。 你还将从命令行运行一些脚本。对它的工作原理以及如何在不同的操作系统中使用它的基本理解总是有帮助的。由于你要安装 Raku 以及其他附带的东西，因此对 apt 等打包系统（默认情况下将使用 Debian 和 Ubuntu 打包系统）以及 Windows 的 Chocolatey/NuGet 或 Mac 的 Brew 将派上用场。" />
 <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -44,12 +59,12 @@
       "headline": "Raku 语法小册",
       
       "datePublished": "2020-02-05",
-      "dateModified": "2020-02-05 15:26:52 \x2b0800 CST",
+      "dateModified": "2020-02-05 15:26:52 \u002b0800 CST",
       "author": {
         "@type": "Person",
         "name": "ohmyraku"
       },
-      "description": "Table of Contents 1. 运行 Raku 1.1. 在你自己的电脑上运行 Raku 1.2. Raku 在线 1.3. 命名行(和其它)选项 1.4. 结束语   2. 获取帮助 2.1. 第一响应者 2.2. IRC 频道和其它在线交流 2.3. 在线下获取帮助 2.4. 结束语   3. 字面值 3.1. 让我们来谈论 Unicode 3.2. 字面值表达式 3.3. 字符串？数字？同素异形体！ 3.4. 版本 3.5. 结束语   4. 表达式和运算符 4.1. 基本表达式 4.2. 算术 4.3. 字符串 4.4. 处理语法错误 4.5. 智能比较运算符 4.6. 注释：文档的重要组成部分 4.7. 逻辑 4.8. 结束语   5. 构建数据 5.1. 代码对象 5.",
+      "description": "1. 运行 Raku  如何安装 Raku 或只是准备好运行你的脚本或程序\n   Raku 是一种编程语言，因此它是包含一系列应用程序的开发生态系统的一部分。 在本书中将使用其中的一些内容，因此在进入 Raku 本身之前，你可能需要安装以下内容。\n   Git 是主流的源代码控制和开发工作流工具。 你可能需要它来下载一些 Raku 模块，或者以某种方式从源代码安装它。\n  编程语言编辑器。 Raku 具有自己的集成开发环境（IDE），称为 Comma，你可以从 Edument 获得其许可证。 社区版于 2019 年 3 月发布。 该 IDE 包含你希望获得的大多数好处，包括语法高亮显示，程序运行和文档预览。 在其余的编辑器中，Atom 的支持可能是最好的，包括高亮显示和语法检查。 其他编辑器，例如 Emacs，VS Code 和 vim，也支持 Raku，如果你已经熟悉它们，可能就足够了。\n  Docker 是一个服务隔离框架，如今已广泛用于软件包分发。安装它可以帮助你避免把东西永久地安装在系统上。你还可以通过使用特定应用程序的名称来使其快速运行。\n  在 Raku 的世界中，很多动作都发生在互联网中继通道中。尽管你可以从浏览器访问其中的一些，但是拥有自己的 IRC 桌面客户端将通过无缝身份验证和自动化实现你的入口。 你还将从命令行运行一些脚本。对它的工作原理以及如何在不同的操作系统中使用它的基本理解总是有帮助的。由于你要安装 Raku 以及其他附带的东西，因此对 apt 等打包系统（默认情况下将使用 Debian 和 Ubuntu 打包系统）以及 Windows 的 Chocolatey\/NuGet 或 Mac 的 Brew 将派上用场。",
       "publisher": {
         "@type": "Organization",
         "name": "https:\/\/ohmyraku.github.io",
@@ -96,145 +111,7 @@ if (theme && theme !== "1") {
 
 </div>
 
-<article class="page__content" ><div id="toc" class="toc">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_运行_raku">1. 运行 Raku</a>
-<ul class="sectlevel2">
-<li><a href="#_在你自己的电脑上运行_raku">1.1. 在你自己的电脑上运行 Raku</a></li>
-<li><a href="#_raku_在线">1.2. Raku 在线</a></li>
-<li><a href="#_命名行和其它选项">1.3. 命名行(和其它)选项</a></li>
-<li><a href="#_结束语">1.4. 结束语</a></li>
-</ul>
-</li>
-<li><a href="#_获取帮助">2. 获取帮助</a>
-<ul class="sectlevel2">
-<li><a href="#_第一响应者">2.1. 第一响应者</a></li>
-<li><a href="#_irc_频道和其它在线交流">2.2. IRC 频道和其它在线交流</a></li>
-<li><a href="#_在线下获取帮助">2.3. 在线下获取帮助</a></li>
-<li><a href="#_结束语_2">2.4. 结束语</a></li>
-</ul>
-</li>
-<li><a href="#_字面值">3. 字面值</a>
-<ul class="sectlevel2">
-<li><a href="#_让我们来谈论_unicode">3.1. 让我们来谈论 Unicode</a></li>
-<li><a href="#_字面值表达式">3.2. 字面值表达式</a></li>
-<li><a href="#_字符串数字同素异形体">3.3. 字符串？数字？同素异形体！</a></li>
-<li><a href="#_版本">3.4. 版本</a></li>
-<li><a href="#_结束语_3">3.5. 结束语</a></li>
-</ul>
-</li>
-<li><a href="#_表达式和运算符">4. 表达式和运算符</a>
-<ul class="sectlevel2">
-<li><a href="#_基本表达式">4.1. 基本表达式</a></li>
-<li><a href="#_算术">4.2. 算术</a></li>
-<li><a href="#_字符串_2">4.3. 字符串</a></li>
-<li><a href="#_处理语法错误">4.4. 处理语法错误</a></li>
-<li><a href="#_智能比较运算符">4.5. 智能比较运算符</a></li>
-<li><a href="#_注释文档的重要组成部分">4.6. 注释：文档的重要组成部分</a></li>
-<li><a href="#_逻辑">4.7. 逻辑</a></li>
-<li><a href="#_结束语_4">4.8. 结束语</a></li>
-</ul>
-</li>
-<li><a href="#_构建数据">5. 构建数据</a>
-<ul class="sectlevel2">
-<li><a href="#_代码对象">5.1. 代码对象</a></li>
-<li><a href="#_列表数组范围和序列">5.2. 列表、数组、范围和序列</a></li>
-<li><a href="#_散列和映射">5.3. 散列和映射</a></li>
-<li><a href="#_其它_数据结构">5.4. 其它 数据结构</a></li>
-<li><a href="#_结束语_5">5.5. 结束语</a></li>
-</ul>
-</li>
-<li><a href="#_处理复杂数据结构">6. 处理复杂数据结构</a>
-<ul class="sectlevel2">
-<li><a href="#_不同的打印方式">6.1. 不同的打印方式</a></li>
-<li><a href="#_主题变量它们的类型以及如何生成主题变量">6.2. 主题变量、它们的类型以及如何生成主题变量</a></li>
-<li><a href="#_基本对象方法和如何调用方法">6.3. 基本对象方法和如何调用方法</a></li>
-<li><a href="#_以函数式的方式处理数据">6.4. 以函数式的方式处理数据</a></li>
-<li><a href="#_循环">6.5. 循环</a></li>
-<li><a href="#_决定">6.6. 决定</a></li>
-<li><a href="#_结束语_6">6.7. 结束语</a></li>
-</ul>
-</li>
-<li><a href="#_存储数据容器">7. 存储数据：容器</a>
-<ul class="sectlevel2">
-<li><a href="#_容器存在于哪里_作用域">7.1. 容器存在于哪里: 作用域</a></li>
-<li><a href="#_类以及如何分辨类">7.2. 类以及如何分辨类</a></li>
-<li><a href="#_赋值强制可变性以及绑定">7.3. 赋值、强制、可变性以及绑定</a></li>
-<li><a href="#_上下文">7.4. 上下文</a></li>
-<li><a href="#_扩展的标识符">7.5. 扩展的标识符</a></li>
-<li><a href="#_不带条件的项">7.6. 不带条件的项</a></li>
-<li><a href="#_原生数据">7.7. 原生数据</a></li>
-<li><a href="#_结束语_7">7.8. 结束语</a></li>
-</ul>
-</li>
-<li><a href="#_函数">8. 函数</a>
-<ul class="sectlevel2">
-<li><a href="#_可调用的代码块和例程">8.1. 可调用的：代码、块和例程</a></li>
-<li><a href="#_签名和捕获调用函数和返回值">8.2. 签名和捕获：调用函数和返回值</a></li>
-<li><a href="#_函数中的多重分派">8.3. 函数中的多重分派</a></li>
-<li><a href="#_项和运算符">8.4. 项和运算符</a></li>
-<li><a href="#_结束语_8">8.5. 结束语</a></li>
-</ul>
-</li>
-<li><a href="#_角色和类">9. 角色和类</a>
-<ul class="sectlevel2">
-<li><a href="#_创建类和对象">9.1. 创建类和对象</a></li>
-<li><a href="#_创建角色方法和属性">9.2. 创建角色:方法和属性</a></li>
-<li><a href="#_giving使用和混合角色">9.3. Giving，使用和混合角色</a></li>
-<li><a href="#_继承">9.4. 继承</a></li>
-<li><a href="#_结束语_9">9.5. 结束语</a></li>
-</ul>
-</li>
-<li><a href="#_模块">10. 模块</a>
-<ul class="sectlevel2">
-<li><a href="#_重用代码">10.1. 重用代码</a></li>
-<li><a href="#_特质或容器属性">10.2. 特质或容器属性</a></li>
-<li><a href="#_在外部文件中使用模块">10.3. 在外部文件中使用模块</a></li>
-<li><a href="#_指令">10.4. 指令</a></li>
-<li><a href="#_raku_生态">10.5. Raku 生态</a></li>
-<li><a href="#_结束语_10">10.6. 结束语</a></li>
-</ul>
-</li>
-<li><a href="#_错误以及如何处理错误">11. 错误以及如何处理错误</a>
-<ul class="sectlevel2">
-<li><a href="#_命令行参数">11.1. 命令行参数</a></li>
-<li><a href="#_失败和异常">11.2. 失败和异常</a></li>
-<li><a href="#_处理错误">11.3. 处理错误</a></li>
-<li><a href="#_结束语_11">11.4. 结束语</a></li>
-</ul>
-</li>
-<li><a href="#_与系统交互">12. 与系统交互</a>
-<ul class="sectlevel2">
-<li><a href="#_运行外部程序">12.1. 运行外部程序</a></li>
-<li><a href="#_输入和输出">12.2. 输入和输出</a></li>
-<li><a href="#_结束语_12">12.3. 结束语</a></li>
-</ul>
-</li>
-<li><a href="#_测试你的模块和脚本">13. 测试你的模块和脚本</a>
-<ul class="sectlevel2">
-<li><a href="#_标准测试模块test">13.1. 标准测试模块：Test</a></li>
-<li><a href="#_其它测试模块">13.2. 其它测试模块</a></li>
-<li><a href="#_测试最佳实践">13.3. 测试最佳实践</a></li>
-<li><a href="#_结束语_13">13.4. 结束语</a></li>
-</ul>
-</li>
-<li><a href="#_构建工程">14. 构建工程</a>
-<ul class="sectlevel2">
-<li><a href="#_用_pod6_给代码添加文档">14.1. 用 Pod6 给代码添加文档</a></li>
-<li><a href="#_工程部件和以及如何构建测试和发布">14.2. 工程部件和以及如何构建、测试和发布</a></li>
-<li><a href="#_结束语_14">14.3. 结束语</a></li>
-</ul>
-</li>
-<li><a href="#_grammars">15. Grammars</a>
-<ul class="sectlevel2">
-<li><a href="#_使用正则表达式处理文本">15.1. 使用正则表达式处理文本</a></li>
-<li><a href="#_使用_grammar_构建文本处理器">15.2. 使用 Grammar 构建文本处理器</a></li>
-<li><a href="#_结束语_15">15.3. 结束语</a></li>
-</ul>
-</li>
-</ul>
-</div>
+<article class="page__content" >
 <div class="sect1">
 <h2 id="_运行_raku">1. 运行 Raku</h2>
 <div class="sectionbody">
@@ -352,8 +229,8 @@ if (theme && theme !== "1") {
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. 下载信息</caption>
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -393,7 +270,7 @@ if (theme && theme !== "1") {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">"Hello".comb.map( * ~ 0x20E3.chr ).join().say</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#34;Hello&#34;.comb.map( * ~ 0x20E3.chr ).join().say</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -402,7 +279,7 @@ if (theme && theme !== "1") {
 <p>tio.run 在 <a href="https://tio.run/#raku" class="bare">https://tio.run/#raku</a> 上拥有一个 Raku 引擎。把上面的代码插入到代码标签下面并点击 Play 图标。输出会显示在下面：H□e□l□l□o□, 还会显示一些调试统计信息。</p>
 </li>
 <li>
-<p>Ideone(在 <a href="ideone.com" class="bare">ideone.com</a> 下) 在其它区域把 Raku 列为 "Perl"。剪切并粘贴上面的代码, 按下 Ctrl+Enter 或点击提交按钮, 你会在标准输出插槽中获得输出。这个甚至允许运行交互式命令, 并提供一个标有 stdin 的标准输入插槽。把上面的程序更改为:</p>
+<p>Ideone(在 <a href="ideone.com" class="bare">ideone.com</a> 下) 在其它区域把 Raku 列为 &#34;Perl&#34;。剪切并粘贴上面的代码, 按下 Ctrl+Enter 或点击提交按钮, 你会在标准输出插槽中获得输出。这个甚至允许运行交互式命令, 并提供一个标有 stdin 的标准输入插槽。把上面的程序更改为:</p>
 </li>
 </ul>
 </div>
@@ -452,14 +329,14 @@ if (theme && theme !== "1") {
 </ul>
 </div>
 <div class="paragraph">
-<p>例如，只键入 "Hello"。这是一个字面量表达式，它将照此打印。 编写  "Hello" ~ ", " ~ "world"，这个表达式将三个字符串连接在一起并打印结果。 这就是 Raku 的 REPL，它将读取，求值（作为表达式或语句）并打印结果。</p>
+<p>例如，只键入 &#34;Hello&#34;。这是一个字面量表达式，它将照此打印。 编写  &#34;Hello&#34; ~ &#34;, &#34; ~ &#34;world&#34;，这个表达式将三个字符串连接在一起并打印结果。 这就是 Raku 的 REPL，它将读取，求值（作为表达式或语句）并打印结果。</p>
 </div>
 <div class="paragraph">
 <p>尽管功能齐全，但是你可能需要从其他脚本中运行 Raku 脚本，或者只是重复运行它们。 你可以使用 <code>raku -e</code> 从命令行执行此操作。 所以：</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; raku -e "'hello'.comb.put"</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; raku -e &#34;&#39;hello&#39;.comb.put&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -467,7 +344,7 @@ if (theme && theme !== "1") {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">&gt; raku -e "@*ARGS.join.comb.put" hello world
+<pre class="highlight"><code class="language-raku" data-lang="raku">&gt; raku -e &#34;@*ARGS.join.comb.put&#34; hello world
 h el l o w o r l d</code></pre>
 </div>
 </div>
@@ -502,7 +379,7 @@ implementing Raku.d.</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">raku -c -e "BEGIN { say «Gotcha» }"</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">raku -c -e &#34;BEGIN { say «Gotcha» }&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -511,8 +388,8 @@ implementing Raku.d.</pre>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 2. 表 1-2 函数和命令</caption>
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -747,10 +624,10 @@ implementing Raku.d.</pre>
 </blockquote>
 </div>
 <div class="paragraph">
-<p>数字也可以表示为上标，但是当它们是数字时，它们也可以用作运算符。 3² 中的²表示"平方"。如果单独使用，则表示 2。</p>
+<p>数字也可以表示为上标，但是当它们是数字时，它们也可以用作运算符。 3² 中的²表示&#34;平方&#34;。如果单独使用，则表示 2。</p>
 </div>
 <div class="paragraph">
-<p>默认情况下，如果可能的话，浮点数表示为有理数，因为 Raku 认为这是表示它们的更精确的方法。但是，你可以使用1e0中的"e"形式显式地要求浮点表示。这意味着 1*10^0，而exp(0)恰好是1。1E6是1百万，并且也表示为浮点数。通常，用于写数字的文字会影响其表示形式，但不会影响其值。 1E6、1000000和1000000/1具有相同的数值，尽管它们内部使用不同的类型以不同的方式表示。</p>
+<p>默认情况下，如果可能的话，浮点数表示为有理数，因为 Raku 认为这是表示它们的更精确的方法。但是，你可以使用1e0中的&#34;e&#34;形式显式地要求浮点表示。这意味着 1*10^0，而exp(0)恰好是1。1E6是1百万，并且也表示为浮点数。通常，用于写数字的文字会影响其表示形式，但不会影响其值。 1E6、1000000和1000000/1具有相同的数值，尽管它们内部使用不同的类型以不同的方式表示。</p>
 </div>
 <div class="quoteblock">
 <blockquote>
@@ -822,15 +699,15 @@ implementing Raku.d.</pre>
 <div class="sect3">
 <h4 id="_字符串">3.2.3. 字符串</h4>
 <div class="paragraph">
-<p>字符串文字通常用引号引起来。 但是，本着 Unicode 支持的精神，可以通过多种方式进行引用。 "Hey" 与 «Hey» 一样有效，并且与你的老式的 "Hey" 或 'Hey' 一样有效。 也可以使用其他类型的引号，例如德语（和日语）「a」或成对的印刷引号 "a"。 为了简单起见，我将使用 "，但是在 Raku 中可以使用任何一组单引号，双引号或成对引号来定义字符串文字。但是，单引号或双引号之间存在区别，这与它们的处理方式有关。 带有插值和转义字符（你将在后面看到）。</p>
+<p>字符串文字通常用引号引起来。 但是，本着 Unicode 支持的精神，可以通过多种方式进行引用。 &#34;Hey&#34; 与 «Hey» 一样有效，并且与你的老式的 &#34;Hey&#34; 或 &#39;Hey&#39; 一样有效。 也可以使用其他类型的引号，例如德语（和日语）「a」或成对的印刷引号 &#34;a&#34;。 为了简单起见，我将使用 &#34;，但是在 Raku 中可以使用任何一组单引号，双引号或成对引号来定义字符串文字。但是，单引号或双引号之间存在区别，这与它们的处理方式有关。 带有插值和转义字符（你将在后面看到）。</p>
 </div>
 <div class="paragraph">
-<p>另外，本着 Unicode 支持的精神，你可以在字符串文字中使用任何代码点，例如 "12three"，"二重鉤括弧"，甚至可以组合使用不同的脚本，例如"二重鉤括弧사과·"。 实际的引号需要以反斜杠 "This is a quote \"" 进行转义。 也可以使用所谓的转义字符。 请参阅表3-1。</p>
+<p>另外，本着 Unicode 支持的精神，你可以在字符串文字中使用任何代码点，例如 &#34;12three&#34;，&#34;二重鉤括弧&#34;，甚至可以组合使用不同的脚本，例如&#34;二重鉤括弧사과·&#34;。 实际的引号需要以反斜杠 &#34;This is a quote \&#34;&#34; 进行转义。 也可以使用所谓的转义字符。 请参阅表3-1。</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -868,13 +745,13 @@ implementing Raku.d.</pre>
 </tbody>
 </table>
 <div class="paragraph">
-<p>附加的转义字符 <code>\x</code>，后跟数字，用于直接访问 Unicode 字符："\x062b" 打印 ث，"\x231b" 打印 ⌛。</p>
+<p>附加的转义字符 <code>\x</code>，后跟数字，用于直接访问 Unicode 字符：&#34;\x062b&#34; 打印 ث，&#34;\x231b&#34; 打印 ⌛。</p>
 </div>
 <div class="paragraph">
-<p>此外，以 <code>\c</code> 开头，后跟方括号的转义序列也可以用于创建代码点的文字序列，方法是：官方名称或数字表示形式，即数字文字。例如，"\c[0x1F600]" 打印 😀。你也可以键入 "\c[128512]"，这是十进制等效项。实际上，你甚至可以使用它来连接多个代码点："\c[128512,128514,128516,128518]" 打印 😀😂😄😆。此功能与 <code>\x</code> 的功能非常相似，但是 <code>\c</code> 通过允许对代码点或代码点的组合进行正式描述而走得更远，例如 "\c[TAMIL SYLLABLE VAA]"，等效于 வா。</p>
+<p>此外，以 <code>\c</code> 开头，后跟方括号的转义序列也可以用于创建代码点的文字序列，方法是：官方名称或数字表示形式，即数字文字。例如，&#34;\c[0x1F600]&#34; 打印 😀。你也可以键入 &#34;\c[128512]&#34;，这是十进制等效项。实际上，你甚至可以使用它来连接多个代码点：&#34;\c[128512,128514,128516,128518]&#34; 打印 😀😂😄😆。此功能与 <code>\x</code> 的功能非常相似，但是 <code>\c</code> 通过允许对代码点或代码点的组合进行正式描述而走得更远，例如 &#34;\c[TAMIL SYLLABLE VAA]&#34;，等效于 வா。</p>
 </div>
 <div class="paragraph">
-<p>所有这些形式都可以组合为单个字符串文字："\c[0x1F600]Hi\x062b" 具有三个代码点，并打印为 😀Hiث。</p>
+<p>所有这些形式都可以组合为单个字符串文字：&#34;\c[0x1F600]Hi\x062b&#34; 具有三个代码点，并打印为 😀Hiث。</p>
 </div>
 <div class="quoteblock">
 <blockquote>
@@ -884,14 +761,14 @@ implementing Raku.d.</pre>
 </blockquote>
 </div>
 <div class="paragraph">
-<p>在简单引号和双引号如何处理上述转义序列方面存在差异。 虽然双引号的行为如图所示，简单的引号会让它们通过，"\x062b" 恰好表示该字符序列，而 <code>\c</code> 转义字符以相同的方式处理。 两者都解释转义字符，主要是具有句法含义的字符，例如引号自身。'Hi \' 转义字符在单引号和双引号中的用法相同。 如果要具有文字序列，则 <code>Q[]</code> 引用构造可以做到这一点。 行为上的差异显示在表3-2中。</p>
+<p>在简单引号和双引号如何处理上述转义序列方面存在差异。 虽然双引号的行为如图所示，简单的引号会让它们通过，&#34;\x062b&#34; 恰好表示该字符序列，而 <code>\c</code> 转义字符以相同的方式处理。 两者都解释转义字符，主要是具有句法含义的字符，例如引号自身。&#39;Hi \&#39; 转义字符在单引号和双引号中的用法相同。 如果要具有文字序列，则 <code>Q[]</code> 引用构造可以做到这一点。 行为上的差异显示在表3-2中。</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 3. 表 3-2 转义字符详情</caption>
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -927,30 +804,30 @@ implementing Raku.d.</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">"Today" =&gt; "6 pounds"
-"Tomorrow" =&gt; 3/5</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#34;Today&#34; =&gt; &#34;6 pounds&#34;
+&#34;Tomorrow&#34; =&gt; 3/5</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此外，如果键仅由字母，破折号（-），撇号（'），下划线（_）和不带破折号的数字组成，则可以消除键中使用的引号：</p>
+<p>此外，如果键仅由字母，破折号（-），撇号（&#39;），下划线（_）和不带破折号的数字组成，则可以消除键中使用的引号：</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">Today-ain't-day_1 =&gt; "No it ain't"</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">Today-ain&#39;t-day_1 =&gt; &#34;No it ain&#39;t&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>有一种特殊的货币对叫做冒号对，因为它以冒号开头。 <code>:so</code> 表示一对键为 so 且值为 True 的对。冒号后必须跟与上述描述相同的字符串。所以 :Today-ain&#8217;t-day1 等同于 <code>Today-ain&#8217;t-day1 &#8658; True</code>。这对也称为副词对，因为它的形式与副词相同。</p>
+<p>有一种特殊的货币对叫做冒号对，因为它以冒号开头。 <code>:so</code> 表示一对键为 so 且值为 True 的对。冒号后必须跟与上述描述相同的字符串。所以 :Today-ain’t-day1 等同于 <code>Today-ain’t-day1 ⇒ True</code>。这对也称为副词对，因为它的形式与副词相同。</p>
 </div>
 <div class="paragraph">
 <p>你如何表达相反的 False 值？ 因为 <code>!</code> 在大多数语言（包括 Raku）中等效于否定，将其放在冒号和键之间将否定其值：<code>:!today-aint-day1</code> 将其设置为 False 而不是 True。</p>
 </div>
 <div class="paragraph">
-<p>这种文字不限于逻辑值。 使用数字也是表示一对数值为数字的缩写方式：例如 <code>:42street</code>。 这等效于键为 street 且值是42的一对。Raku通过查找数字的结尾和字母开头来进行解析，因此等效于 <code>street &#8658; 42</code>; 它也可以写成：<code>street(42)</code>。</p>
+<p>这种文字不限于逻辑值。 使用数字也是表示一对数值为数字的缩写方式：例如 <code>:42street</code>。 这等效于键为 street 且值是42的一对。Raku通过查找数字的结尾和字母开头来进行解析，因此等效于 <code>street ⇒ 42</code>; 它也可以写成：<code>street(42)</code>。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">:42street === ("street" =&gt; 42)       # True
+<pre class="highlight"><code class="language-raku" data-lang="raku">:42street === (&#34;street&#34; =&gt; 42)       # True
 :street(42) === :42street            # True</code></pre>
 </div>
 </div>
@@ -1012,7 +889,7 @@ v8.3 # Includes an Unicode 8. character vVII # Roman numerals are not digits.</c
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-shell" data-lang="shell">%raku
-To exit type 'exit' or '^D'
+To exit type &#39;exit&#39; or &#39;^D&#39;
 &gt; -38_000_000
 -38000000
 &gt;</code></pre>
@@ -1046,7 +923,7 @@ To exit type 'exit' or '^D'
 <p>由于 Raku 充分利用了 Unicode，因此在许多情况下，你将能够以与数学或物理学相同的方式来使用运算符。 他们超越了我们每天使用的常规，普通香草运算符。 这就是为什么方便（如果你还没有）配置系统以键入通用 Unicode 字符（包括或不包含）的原因。</p>
 </div>
 <div class="paragraph">
-<p>在本章的这一部分，我们将 Raku 命令行（本地或在线）用作简单的计算器。 输入表达式（在示例中，或者你可能想到的任何变体中），按 Enter 键，REPL 将执行"E"操作并打印结果。</p>
+<p>在本章的这一部分，我们将 Raku 命令行（本地或在线）用作简单的计算器。 输入表达式（在示例中，或者你可能想到的任何变体中），按 Enter 键，REPL 将执行&#34;E&#34;操作并打印结果。</p>
 </div>
 </div>
 <div class="sect2">
@@ -1104,8 +981,8 @@ Raku 确实可以使用多种其他运算符，这些运算符是特定的或使
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -1175,18 +1052,18 @@ Raku 确实可以使用多种其他运算符，这些运算符是特定的或使
 <blockquote>
 <div class="paragraph">
 <p>ASCII是美国信息交换标准代码，它是Unicode的前身，仅包含
-拉丁字母和一些常用符号。 它们是可以从键盘轻松键入的符号。 在本书和 Raku 文档中，ASCII基本上意味着使用"普通而简单的"字母和其他字符。 这可能就是为什么它们被称为Texas版本的原因，也可能是因为"Texas 中的一切都更大"，并且它们需要多个字符（而不是Unicode的单个代码点），因此它们看起来要比同等的字符大。 无论如何，在2017年9月，所有对Texas的引用都更改为ASCII。 你可能仍会在较早的文章中找到它，例如这篇文章：<a href="www.learningperl6.com/2016/11/22/quick-tip-7-texas-and-unicode-things/" class="bare">www.learningperl6.com/2016/11/22/quick-tip-7-texas-and-unicode-things/</a></p>
+拉丁字母和一些常用符号。 它们是可以从键盘轻松键入的符号。 在本书和 Raku 文档中，ASCII基本上意味着使用&#34;普通而简单的&#34;字母和其他字符。 这可能就是为什么它们被称为Texas版本的原因，也可能是因为&#34;Texas 中的一切都更大&#34;，并且它们需要多个字符（而不是Unicode的单个代码点），因此它们看起来要比同等的字符大。 无论如何，在2017年9月，所有对Texas的引用都更改为ASCII。 你可能仍会在较早的文章中找到它，例如这篇文章：<a href="www.learningperl6.com/2016/11/22/quick-tip-7-texas-and-unicode-things/" class="bare">www.learningperl6.com/2016/11/22/quick-tip-7-texas-and-unicode-things/</a></p>
 </div>
 </blockquote>
 </div>
 <div class="paragraph">
-<p>在这种情况下，≥ 等价于 &gt;= 而 ≤ 等价于 &#8656;。</p>
+<p>在这种情况下，≥ 等价于 &gt;= 而 ≤ 等价于 ⇐。</p>
 </div>
 <div class="paragraph">
 <p>等效地，!= 或 ≠ 表示不相等。 如果操作数大于另一个，则为 True。</p>
 </div>
 <div class="paragraph">
-<p>由于可以返回数字，因此还有另一个可用于对数字进行排序的运算符：&lt;&#8658; 根据其操作数的数值返回 Less，Same 或 More。 3 &lt;&#8658; 4 返回 Less，而 3.0 &lt;&#8658; 9/3 返回 Same。</p>
+<p>由于可以返回数字，因此还有另一个可用于对数字进行排序的运算符：&lt;⇒ 根据其操作数的数值返回 Less，Same 或 More。 3 &lt;⇒ 4 返回 Less，而 3.0 &lt;⇒ 9/3 返回 Same。</p>
 </div>
 <div class="paragraph">
 <p>Raku 有两个原始运算符：min 和 max 分别返回参数的最小值和最大值。</p>
@@ -1229,7 +1106,7 @@ Raku 确实可以使用多种其他运算符，这些运算符是特定的或使
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">40 + "2"</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">40 + &#34;2&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1238,10 +1115,10 @@ Raku 确实可以使用多种其他运算符，这些运算符是特定的或使
 <div class="ulist">
 <ul>
 <li>
-<p>+ 充当上下文化器，表示"这里的东西将被理解为好像是一个数字。"</p>
+<p>+ 充当上下文化器，表示&#34;这里的东西将被理解为好像是一个数字。&#34;</p>
 </li>
 <li>
-<p>+"2" 将字符串（实际上包含数字）放在数字上下文中，该字符串将字符串强制为数字，使其行为与 +2 完全相同。</p>
+<p>+&#34;2&#34; 将字符串（实际上包含数字）放在数字上下文中，该字符串将字符串强制为数字，使其行为与 +2 完全相同。</p>
 </li>
 </ul>
 </div>
@@ -1256,7 +1133,7 @@ Raku 确实可以使用多种其他运算符，这些运算符是特定的或使
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">"Let's go" ~ " to the mall"</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#34;Let&#39;s go&#34; ~ &#34; to the mall&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1264,18 +1141,18 @@ Raku 确实可以使用多种其他运算符，这些运算符是特定的或使
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">33 ~ "p"</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">33 ~ &#34;p&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>为 "33p"。这是强转的另一个例子。这儿的 ~ 用作字符串上下文器，使与它相连的任何东西成为字符串；~3 实际上是字符串 "3"。</p>
+<p>为 &#34;33p&#34;。这是强转的另一个例子。这儿的 ~ 用作字符串上下文器，使与它相连的任何东西成为字符串；~3 实际上是字符串 &#34;3&#34;。</p>
 </div>
 <div class="paragraph">
 <p>如果你想重复同一个字符串, 使用 x。所以</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">"Let's go now" x 3</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#34;Let&#39;s go now&#34; x 3</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1286,8 +1163,8 @@ Raku 确实可以使用多种其他运算符，这些运算符是特定的或使
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -1325,13 +1202,13 @@ Raku 确实可以使用多种其他运算符，这些运算符是特定的或使
 <p>你还可以用特定运算符比较字符串。实际上，有三个用于比较字符串的运算符：leg，coll 和 unicmp。你可能必须回到 Unicode 一节中以了解下面要讲的东西。不用担心我会在这里等你。</p>
 </div>
 <div class="paragraph">
-<p>与其他两个不同，leg（代表小于，相等或大于）使用字典顺序。它查看字符串的前两个字母的 Unicode（数字），并根据比较方式返回 More，Less 或 Same。 "\x12345" leg "\x12346" 始终返回 Less。这被称为字典顺序，因为它精确地使用了字符在表示字符的代码中的放置顺序。</p>
+<p>与其他两个不同，leg（代表小于，相等或大于）使用字典顺序。它查看字符串的前两个字母的 Unicode（数字），并根据比较方式返回 More，Less 或 Same。 &#34;\x12345&#34; leg &#34;\x12346&#34; 始终返回 Less。这被称为字典顺序，因为它精确地使用了字符在表示字符的代码中的放置顺序。</p>
 </div>
 <div class="paragraph">
-<p>对于大多数目的，这两个运算符的行为完全相同。实际上，默认情况下它们的工作方式相同，默认情况下，"a" coll "Z" 和 "a" unicmp "Z" 返回相同的值。但是，主要区别在于你可以使用运行时配置选项来更改 unicmp 的行为。我稍后再讲。</p>
+<p>对于大多数目的，这两个运算符的行为完全相同。实际上，默认情况下它们的工作方式相同，默认情况下，&#34;a&#34; coll &#34;Z&#34; 和 &#34;a&#34; unicmp &#34;Z&#34; 返回相同的值。但是，主要区别在于你可以使用运行时配置选项来更改 unicmp 的行为。我稍后再讲。</p>
 </div>
 <div class="paragraph">
-<p>这三个运算符中的任何一个都将字符串的长度考虑在内。如果它们共享除最后一个字符以外的所有字符，则字符数较少的字符串总是被认为少于字符数更多的字符串。 "a" leg "aa"，"a" coll "aa" 和 "a"  unicmp "aa" 始终为 Less，与右侧字符串中的第二个字母（或多个字母）无关。</p>
+<p>这三个运算符中的任何一个都将字符串的长度考虑在内。如果它们共享除最后一个字符以外的所有字符，则字符数较少的字符串总是被认为少于字符数更多的字符串。 &#34;a&#34; leg &#34;aa&#34;，&#34;a&#34; coll &#34;aa&#34; 和 &#34;a&#34;  unicmp &#34;aa&#34; 始终为 Less，与右侧字符串中的第二个字母（或多个字母）无关。</p>
 </div>
 <div class="paragraph">
 <p>本节中的所有运算符都将同素异形视为数字。 &lt;3&gt; leg &lt;3.0&gt; 返回 Less，因为它在字典上更小，与 &lt;40&gt; leg &lt;5&gt; 相同。其他两个运算符仅查看找到其数字（即字母）的顺序。如果与数字一起使用，它们还是会失败。</p>
@@ -1346,12 +1223,12 @@ Raku 确实可以使用多种其他运算符，这些运算符是特定的或使
 <p>如果你已经在 REPL 中键入了上面建议的某些表达式（可能已经输入），则可能是你输入时出错了。 如果不是这种情况，则说明你是一个谨慎的人，但是迟早会在你身上发生这种情况，可能是由于大意乱写，或者仅仅是因为你试图写一些虽然可以工作的东西，但是该语言无法如此理解 。 例如，你可能一直在尝试执行图 4-2 中所示的操作。</p>
 </div>
 <div class="paragraph">
-<p>这是一种语法错误，因为语句的组合方式存在问题。该错误是由于如下事实引起的：如上所述，+将" p"放在数字上下文中，然后解释器尝试将字符串的内容添加到数字中。它没有这样做，并且为你提供了一些有趣的信息：</p>
+<p>这是一种语法错误，因为语句的组合方式存在问题。该错误是由于如下事实引起的：如上所述，+将&#34; p&#34;放在数字上下文中，然后解释器尝试将字符串的内容添加到数字中。它没有这样做，并且为你提供了一些有趣的信息：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>它告诉你它要做什么：" &#8230;&#8203;将字符串转换为数字。"这很有用，因为你知道失败的原因。</p>
+<p>它告诉你它要做什么：&#34; …​将字符串转换为数字。&#34;这很有用，因为你知道失败的原因。</p>
 </li>
 <li>
 <p>它还给你一些提示，说明失败的原因。它试图将字符串强制转换为数字，但不能这样做，因为它不是以数字或句点开头（对于浮点数）。</p>
@@ -1369,21 +1246,21 @@ Raku 确实可以使用多种其他运算符，这些运算符是特定的或使
 </div>
 <div class="paragraph">
 <p>通常，语法错误和其他类型的解释器/编译器错误会导致错误的报告，因为它们表明你（用户）失败了
-某种程度上来说。不好的代表是由错误的错误消息引起的，以及它们在字面上被称为"错误"或"故障"的事实。在大多数情况下，它们是误解，例如在编译器或解释器中无法理解你的真实意思，这就是Raku 的误解消息的方法。他们就像"我试图按照你的意思做，而我尝试了这种方式。在某些情况下，他们甚至会建议你尝试其他操作。
+某种程度上来说。不好的代表是由错误的错误消息引起的，以及它们在字面上被称为&#34;错误&#34;或&#34;故障&#34;的事实。在大多数情况下，它们是误解，例如在编译器或解释器中无法理解你的真实意思，这就是Raku 的误解消息的方法。他们就像&#34;我试图按照你的意思做，而我尝试了这种方式。在某些情况下，他们甚至会建议你尝试其他操作。
 这是Raku 的优点之一。仔细阅读并理解错误消息将使你走很长一段路。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_智能比较运算符">4.5. 智能比较运算符</h3>
 <div class="paragraph">
-<p>某些运算符不要求两个操作数都属于同一类型，而是会尝试针对"大"的定义检查一个操作数是否大于另一个操作数。 cmp 运算符是一个比较运算符，可处理任何类型的操作数。</p>
+<p>某些运算符不要求两个操作数都属于同一类型，而是会尝试针对&#34;大&#34;的定义检查一个操作数是否大于另一个操作数。 cmp 运算符是一个比较运算符，可处理任何类型的操作数。</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">33 cmp 55      # Less
-"330" cmp "55" # Less
-"a" cmp 55     # More, number is converted to string
-"a" cmp &lt;55&gt;   # Same result, allomorph → string
+&#34;330&#34; cmp &#34;55&#34; # Less
+&#34;a&#34; cmp 55     # More, number is converted to string
+&#34;a&#34; cmp &lt;55&gt;   # Same result, allomorph → string
 33 cmp &lt;55&gt;    # Less, the allomorph → number</code></pre>
 </div>
 </div>
@@ -1411,8 +1288,8 @@ Raku 确实可以使用多种其他运算符，这些运算符是特定的或使
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">"a" before "b"   # True, 字符串比较
-3 before "33"    # True, 强转为数字
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#34;a&#34; before &#34;b&#34;   # True, 字符串比较
+3 before &#34;33&#34;    # True, 强转为数字
 v3.2 before v2+  # False, 版本比较
 2/3 after 0.6    # True, 0.66666... &gt; 0.6</code></pre>
 </div>
@@ -1446,11 +1323,11 @@ v3.2 before v2+  # False, 版本比较
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">so True    # True
-so 33      # True, since it's non-0
+so 33      # True, since it&#39;s non-0
 so 0       # False; null values are false
 so 0.0     # False; ditto
-so "True"  # True as any non-empty string
-so ""      # False, empty string
+so &#34;True&#34;  # True as any non-empty string
+so &#34;&#34;      # False, empty string
 so Nil     # False
 so &lt;0&gt;     # False</code></pre>
 </div>
@@ -1502,7 +1379,7 @@ so &lt;0&gt;     # False</code></pre>
 <p>在本章中，你将继续使用命令行。这些示例旨在以本地或其他某种形式键入 REPL（如第1章所述）。</p>
 </div>
 <div class="paragraph">
-<p>在本章中，你将探索两个概念，它们将在稍后充实：类（或类型）和角色。类描述该类的对象（或实例）的行为方式以及它们包含的属性。这里我们将模糊地使用术语"类"和"类型"，因为目前我们还没有提到任何面向对象的概念。 Raku 中的对象属于一个类，或属于某种类型。</p>
+<p>在本章中，你将探索两个概念，它们将在稍后充实：类（或类型）和角色。类描述该类的对象（或实例）的行为方式以及它们包含的属性。这里我们将模糊地使用术语&#34;类&#34;和&#34;类型&#34;，因为目前我们还没有提到任何面向对象的概念。 Raku 中的对象属于一个类，或属于某种类型。</p>
 </div>
 <div class="paragraph">
 <p>此外，类型可以继承角色，也可以实现角色。你可以将角色视为部分类型，但实际上，这意味着它们将能够执行某些操作，而与它们的实际类型无关。对象将具有单个类或类型，但是它可以实现许多不同的角色。后面的章节将专门讨论这一点。让这仅仅是一项进步，使你可以更好地了解 Raku 中某些对象的行为。</p>
@@ -1520,7 +1397,7 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">{ 'LOL' }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">{ &#39;LOL&#39; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1528,7 +1405,7 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">{ 'LOL' }(3) # Returns LOL</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">{ &#39;LOL&#39; }(3) # Returns LOL</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1536,32 +1413,32 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">{ "Hey " ~ $_}("you") # Hey you</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">{ &#34;Hey &#34; ~ $_}(&#34;you&#34;) # Hey you</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>我需要说一些有关 $_ 的事情，$_ 是你在本书中看到的第一个 Raku 变量。 稍后我将为他们整整一章。 首先，它的形状： Raku 使用信号标记来指示你要处理的变量类型。 $标记符用于标量（可以说 $calar吗？）内容，这是你在第3章中看到的内容。变量的实际名称或标识符是标记符后面的单个下划线（_）。</p>
 </div>
 <div class="paragraph">
-<p>另一方面，$_ 是主题变量，也就是说，在大多数情况下，默认变量。 这意味着，如上面的块中所示，每当未指定用于值的容器时，它将进入该默认变量。 在上面的例子中，简单的块 {"Hey"〜 $_} 实际上没有定义其参数的名称，因此，如果将其传递一些值，它将转到主题变量。</p>
+<p>另一方面，$_ 是主题变量，也就是说，在大多数情况下，默认变量。 这意味着，如上面的块中所示，每当未指定用于值的容器时，它将进入该默认变量。 在上面的例子中，简单的块 {&#34;Hey&#34;〜 $_} 实际上没有定义其参数的名称，因此，如果将其传递一些值，它将转到主题变量。</p>
 </div>
 <div class="paragraph">
 <p>但是，如所示，它是一个标量和简单变量。 如果使用两个参数会怎样？</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">{ "Hey " ~ $_ }("you", "and me")</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">{ &#34;Hey &#34; ~ $_ }(&#34;you&#34;, &#34;and me&#34;)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>你将收到一个错误："Too many positionals passed; expected 0 or 1 arguments but got 2"。</p>
+<p>你将收到一个错误：&#34;Too many positionals passed; expected 0 or 1 arguments but got 2&#34;。</p>
 </div>
 <div class="paragraph">
 <p>定义的块足够聪明，可以知道有太多参数。 你可以使用默认的非标量变量，但这将留待以后使用，因此我将介绍 twigils：</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">{ "Hey " ~ $^first ~ " and " ~ $^second}("you", "me") # Hey you and me</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">{ &#34;Hey &#34; ~ $^first ~ &#34; and &#34; ~ $^second}(&#34;you&#34;, &#34;me&#34;) # Hey you and me</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1569,7 +1446,7 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">{ "Hey " ~ $^fourth ~ " and " ~ $^second}("you", "me")</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">{ &#34;Hey &#34; ~ $^fourth ~ &#34; and &#34; ~ $^second}(&#34;you&#34;, &#34;me&#34;)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1577,21 +1454,21 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">"fourth" before "second"</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#34;fourth&#34; before &#34;second&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>为 True。参数被括号之间发现，用逗号分隔。</p>
 </div>
 <div class="paragraph">
-<p>你可以为这些占位符使用的名称种类相同。你可以将其用作配对的密钥，如第3章所述； 也就是说，它们可以以字母或下划线开头，后跟字母，下划线，撇号，破折号和数字，但不能以破折号开头。 破折号和撇号都不能是名称中的最后一个字符。 <code>$^a_1</code> 有效，而 <code>$^a'</code> 和 <code>$^a-1</code> 无效。 请记住这些规则，因为稍后你将重新使用它们。 我将在此类语法裸标识符之后调用字符串，因为你将在本书中经常使用它们。</p>
+<p>你可以为这些占位符使用的名称种类相同。你可以将其用作配对的密钥，如第3章所述； 也就是说，它们可以以字母或下划线开头，后跟字母，下划线，撇号，破折号和数字，但不能以破折号开头。 破折号和撇号都不能是名称中的最后一个字符。 <code>$^a_1</code> 有效，而 <code>$^a&#39;</code> 和 <code>$^a-1</code> 无效。 请记住这些规则，因为稍后你将重新使用它们。 我将在此类语法裸标识符之后调用字符串，因为你将在本书中经常使用它们。</p>
 </div>
 <div class="paragraph">
 <p>说到对，这些位置参数不是你可以使用的唯一类型的参数。 命名参数实际上是一对，带有一个名称（或键）和一个值。 如果要使用它们，twigil 会变成冒号：</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">{"Hey " ~ $:greet ~ ": " ~ $:tell }( greet =&gt; 'you', tell =&gt; 'Well...' )
+<pre class="highlight"><code class="language-raku" data-lang="raku">{&#34;Hey &#34; ~ $:greet ~ &#34;: &#34; ~ $:tell }( greet =&gt; &#39;you&#39;, tell =&gt; &#39;Well...&#39; )
 # Hey you: Well...</code></pre>
 </div>
 </div>
@@ -1600,15 +1477,15 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">{"The answer is " ~ $:greet }( :!greet ) # The answer is False</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">{&#34;The answer is &#34; ~ $:greet }( :!greet ) # The answer is False</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>作为一等公民，你必然会在许多不同的情况下找到障碍，因此有很多方法可以更简单地定义它们。 块 {"Hey " ~ $_ } 等效于 "Hey " ~ *，尽管要使用它，你仍需要将其用括号括起来：</p>
+<p>作为一等公民，你必然会在许多不同的情况下找到障碍，因此有很多方法可以更简单地定义它们。 块 {&#34;Hey &#34; ~ $_ } 等效于 &#34;Hey &#34; ~ *，尽管要使用它，你仍需要将其用括号括起来：</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">("Hey " ~ *)("you") # Hey you</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">(&#34;Hey &#34; ~ *)(&#34;you&#34;) # Hey you</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1616,7 +1493,7 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">("Hey " ~ * ~ " and " ~ * ~ " and " ~ *)("you", "me", "anyone")
+<pre class="highlight"><code class="language-raku" data-lang="raku">(&#34;Hey &#34; ~ * ~ &#34; and &#34; ~ * ~ &#34; and &#34; ~ *)(&#34;you&#34;, &#34;me&#34;, &#34;anyone&#34;)
 # Hey you and me and anyone</code></pre>
 </div>
 </div>
@@ -1635,11 +1512,11 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">{ $_("you")}( "Hey " ~ *w )</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">{ $_(&#34;you&#34;)}( &#34;Hey &#34; ~ *w )</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这种情况下，你将还原为块的花括号版本。 让我们从右到左看： <code>"Hey " ~ *</code> 是函数的参数，用括号括起来，因为这是调用块或函数的方式。 让我们进一步向左移动：该参数将插入到主题变量 <code>$_</code> 中。 你可以通过创建一个返回另一个函数的函数来走得更远，但是必须等到你阅读本章为止。</p>
+<p>在这种情况下，你将还原为块的花括号版本。 让我们从右到左看： <code>&#34;Hey &#34; ~ *</code> 是函数的参数，用括号括起来，因为这是调用块或函数的方式。 让我们进一步向左移动：该参数将插入到主题变量 <code>$_</code> 中。 你可以通过创建一个返回另一个函数的函数来走得更远，但是必须等到你阅读本章为止。</p>
 </div>
 <div class="paragraph">
 <p>在容器上，你可以将内容分隔在不同的行和语句中。</p>
@@ -1652,7 +1529,7 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">2, "33", { $^a + 3 }
+<pre class="highlight"><code class="language-raku" data-lang="raku">2, &#34;33&#34;, { $^a + 3 }
 # REPL will print:
 # (2 33 -&gt; $a { #`(Block|99905432) ... })</code></pre>
 </div>
@@ -1662,7 +1539,7 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">(2, "33", &lt;this is it&gt;)
+<pre class="highlight"><code class="language-raku" data-lang="raku">(2, &#34;33&#34;, &lt;this is it&gt;)
 # (2 33 (this is it))</code></pre>
 </div>
 </div>
@@ -1674,7 +1551,7 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">(2, "33" ; "this", "is", "it")
+<pre class="highlight"><code class="language-raku" data-lang="raku">(2, &#34;33&#34; ; &#34;this&#34;, &#34;is&#34;, &#34;it&#34;)
 ((2 33) (this is it))</code></pre>
 </div>
 </div>
@@ -1683,8 +1560,8 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">(2, "33", &lt;this is it&gt;)[1]    # 33
-(2, "33", &lt;this is it&gt;)[2][2] # it</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">(2, &#34;33&#34;, &lt;this is it&gt;)[1]    # 33
+(2, &#34;33&#34;, &lt;this is it&gt;)[2][2] # it</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1695,7 +1572,7 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">[2, "33", &lt;this is it&gt;] # [2 33 (this is it)]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">[2, &#34;33&#34;, &lt;this is it&gt;] # [2 33 (this is it)]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1721,8 +1598,8 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -1763,7 +1640,7 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">'α'..'ω'
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#39;α&#39;..&#39;ω&#39;
 3.2..11.3
 -3..11</code></pre>
 </div>
@@ -1816,7 +1693,7 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>片也使用 <code>Whatever</code>(*) 表示"列表的末尾:"</p>
+<p>片也使用 <code>Whatever</code>(*) 表示&#34;列表的末尾:&#34;</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1831,7 +1708,7 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">'a'..* # strings that go from 'z' to 'aa'
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#39;a&#39;..* # strings that go from &#39;z&#39; to &#39;aa&#39;
 1..Inf
 300..∞</code></pre>
 </div>
@@ -1841,7 +1718,7 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">('a'..*)[301] # kp</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">(&#39;a&#39;..*)[301] # kp</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1861,8 +1738,8 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -1899,20 +1776,20 @@ so &lt;0&gt;     # False</code></pre>
 <p>其余的数字运算符不能直接使用。 当 Range 使用其他类型的标量时，其他非数字运算符也是如此。</p>
 </div>
 <div class="paragraph">
-<p>序列可以看作是更强大的范围，是非常有趣的对象。 你可以将它们视为列表，其中存在一些规则，这些规则会基于前一个规则生成元素。 他们使用省略号（&#8230;&#8203;）或省略号（&#8230;&#8203;）。</p>
+<p>序列可以看作是更强大的范围，是非常有趣的对象。 你可以将它们视为列表，其中存在一些规则，这些规则会基于前一个规则生成元素。 他们使用省略号（…​）或省略号（…​）。</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">33...1    # 33 to 1, counting down
 1/3...9   # 0.333 to 8.333, counting up by one
-'q'...'a' # reverse alphabet, from the q to the a</code></pre>
+&#39;q&#39;...&#39;a&#39; # reverse alphabet, from the q to the a</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>序列和范围之间存在一些差异。</p>
 </div>
 <div class="paragraph">
-<p>首先是上面的：在范围中，极端总是有序的； 在序列中，它们可以按任何顺序排列。 <code>'q'..'a'</code> 作为范围，将包含0个元素。</p>
+<p>首先是上面的：在范围中，极端总是有序的； 在序列中，它们可以按任何顺序排列。 <code>&#39;q&#39;..&#39;a&#39;</code> 作为范围，将包含0个元素。</p>
 </div>
 <div class="paragraph">
 <p>但是另一个是序列实际上是智能对象，只要它是一种算术运算，即每个元素都是前一个元素加上固定数量的序列，它们就可以从第一个元素推断出什么是实际序列。 或几何顺序，其中元素是前一个元素乘以固定量的序列：</p>
@@ -1932,11 +1809,11 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这是斐波那契模n序列的示例。这是一个周期性序列，其中模式在一个数字（与n相关）之后开始重播。如前所述，它的核心是类似脸的（<code>* + *</code>），即两个 * 的和，每个都称为 Whatever。如本章第一节所述，使用 Whatevers 的表达式将变为 WhateverCode，这是一个函数，在这种情况下，该函数使用 Whatever 表示序列中的先前元素。你可以根据需要使用任意数量的"任意"，其中每个都以相反的顺序表示序列中的先前元素；也就是说，第一个*将是元素n-1，第二个*将是元素n-2。这样，你可以创建复杂的无限序列，这些序列可以应用在许多不同的用例中，例如
+<p>这是斐波那契模n序列的示例。这是一个周期性序列，其中模式在一个数字（与n相关）之后开始重播。如前所述，它的核心是类似脸的（<code>* + *</code>），即两个 * 的和，每个都称为 Whatever。如本章第一节所述，使用 Whatevers 的表达式将变为 WhateverCode，这是一个函数，在这种情况下，该函数使用 Whatever 表示序列中的先前元素。你可以根据需要使用任意数量的&#34;任意&#34;，其中每个都以相反的顺序表示序列中的先前元素；也就是说，第一个*将是元素n-1，第二个*将是元素n-2。这样，你可以创建复杂的无限序列，这些序列可以应用在许多不同的用例中，例如
 发送数据包的重试时间，或者只是在处理数学对象时重试的时间。</p>
 </div>
 <div class="paragraph">
-<p>并非所有序列都必须是无限的。你可以将任何表达式用作&#8230;&#8203;的右侧以指示其应在何处结束，如下所示：</p>
+<p>并非所有序列都必须是无限的。你可以将任何表达式用作…​的右侧以指示其应在何处结束，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1954,7 +1831,7 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">%( Óðinn =&gt; "Gungnir", Þor =&gt; "Mjolnir" )
+<pre class="highlight"><code class="language-raku" data-lang="raku">%( Óðinn =&gt; &#34;Gungnir&#34;, Þor =&gt; &#34;Mjolnir&#34; )
 {Óðinn =&gt; Gungnir, Þor =&gt; Mjolnir}</code></pre>
 </div>
 </div>
@@ -1963,7 +1840,7 @@ so &lt;0&gt;     # False</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">%( Óðinn =&gt; "Gungnir", Þor =&gt; "Mjolnir" ).Map</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">%( Óðinn =&gt; &#34;Gungnir&#34;, Þor =&gt; &#34;Mjolnir&#34; ).Map</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1972,7 +1849,7 @@ map 和散列也使用花括号来建立索引：</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">%( Óðinn =&gt; "Gungnir", Þor =&gt; "Mjolnir" ).Map.{'Þor'} # Mjolnir</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">%( Óðinn =&gt; &#34;Gungnir&#34;, Þor =&gt; &#34;Mjolnir&#34; ).Map.{&#39;Þor&#39;} # Mjolnir</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1980,7 +1857,7 @@ map 和散列也使用花括号来建立索引：</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">{Óðinn =&gt; "Gungnir", Þor =&gt; "Mjolnir"}&lt;Óðinn&gt; # Gungnir</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">{Óðinn =&gt; &#34;Gungnir&#34;, Þor =&gt; &#34;Mjolnir&#34;}&lt;Óðinn&gt; # Gungnir</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1988,7 +1865,7 @@ map 和散列也使用花括号来建立索引：</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">{Óðinn =&gt; "Gungnir", Þor =&gt; "Mjolnir"}&lt;Óðinn&gt; = "Fenrir" # will change value</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">{Óðinn =&gt; &#34;Gungnir&#34;, Þor =&gt; &#34;Mjolnir&#34;}&lt;Óðinn&gt; = &#34;Fenrir&#34; # will change value</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2002,7 +1879,7 @@ map 和散列也使用花括号来建立索引：</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">%(Freya =&gt; "Hildisvini", Odin =&gt; "Hugin", Thor =&gt; "Tanngniost")&lt;Freya Thor&gt;
+<pre class="highlight"><code class="language-raku" data-lang="raku">%(Freya =&gt; &#34;Hildisvini&#34;, Odin =&gt; &#34;Hugin&#34;, Thor =&gt; &#34;Tanngniost&#34;)&lt;Freya Thor&gt;
 # (Hildisvini Tanngniost)</code></pre>
 </div>
 </div>
@@ -2020,8 +1897,8 @@ map 和散列也使用花括号来建立索引：</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say %(Freya =&gt; "Hildisvini", Odin =&gt; "Hugin",
-Thor =&gt; "Tanngniost"){"Freya","Buddy","Thor"}:v
+<pre class="highlight"><code class="language-raku" data-lang="raku">say %(Freya =&gt; &#34;Hildisvini&#34;, Odin =&gt; &#34;Hugin&#34;,
+Thor =&gt; &#34;Tanngniost&#34;){&#34;Freya&#34;,&#34;Buddy&#34;,&#34;Thor&#34;}:v
 # (Hildisvini Tanngniost)</code></pre>
 </div>
 </div>
@@ -2050,9 +1927,9 @@ mix { spam =&gt; 0.75, egg =&gt; 0.25} # Mix(egg =&gt; 0.25, spam =&gt; 0.75)</c
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -2071,7 +1948,7 @@ mix { spam =&gt; 0.75, egg =&gt; 0.25} # Mix(egg =&gt; 0.25, spam =&gt; 0.75)</c
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sets 和 bags</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">⊆,⊈, (&#8656;)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">⊆,⊈, (⇐)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">子集或等于</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sets 和 bags</p></td>
 </tr>
@@ -2123,7 +2000,7 @@ mix { spam =&gt; 0.75, egg =&gt; 0.25} # Mix(egg =&gt; 0.25, spam =&gt; 0.75)</c
 </tbody>
 </table>
 <div class="paragraph">
-<p>这些最后的宽松操作会从成组的袋子中创建袋子，并像对待每个单独元素都是对象一样处理集合，将它们添加或"相乘"。 实际上，它可以获取常规列表并输出一个包：</p>
+<p>这些最后的宽松操作会从成组的袋子中创建袋子，并像对待每个单独元素都是对象一样处理集合，将它们添加或&#34;相乘&#34;。 实际上，它可以获取常规列表并输出一个包：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2140,7 +2017,7 @@ mix { spam =&gt; 0.75, egg =&gt; 0.25} # Mix(egg =&gt; 0.25, spam =&gt; 0.75)</c
 </div>
 </div>
 <div class="paragraph">
-<p>在这种情况下，你会得到一个空 Bag，这是那个空列表遵循"袋"的意思。</p>
+<p>在这种情况下，你会得到一个空 Bag，这是那个空列表遵循&#34;袋&#34;的意思。</p>
 </div>
 </div>
 </div>
@@ -2161,7 +2038,7 @@ mix { spam =&gt; 0.75, egg =&gt; 0.25} # Mix(egg =&gt; 0.25, spam =&gt; 0.75)</c
 <p>这是我正在写的实际日期，它包括第一部分（在T之前），日期格式为 YYYY-MM-DD，后跟时间，格式为 hh:mm:ss.fraction。</p>
 </div>
 <div class="paragraph">
-<p>Z表示"zulu时间"或UTC（通用时间坐标）时间； 这实际上不是我的时区，更像是</p>
+<p>Z表示&#34;zulu时间&#34;或UTC（通用时间坐标）时间； 这实际上不是我的时区，更像是</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2201,7 +2078,7 @@ mix { spam =&gt; 0.75, egg =&gt; 0.25} # Mix(egg =&gt; 0.25, spam =&gt; 0.75)</c
 </div>
 </div>
 <div class="paragraph">
-<p>你可以从"持续时间"中添加或减去实数，还可以对数字取模，以查找例如从"即时0"以来经过的小时或天的分数：</p>
+<p>你可以从&#34;持续时间&#34;中添加或减去实数，还可以对数字取模，以查找例如从&#34;即时0&#34;以来经过的小时或天的分数：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2212,7 +2089,7 @@ mix { spam =&gt; 0.75, egg =&gt; 0.25} # Mix(egg =&gt; 0.25, spam =&gt; 0.75)</c
 <p>其他经常与输入/输出操作结合使用的数据结构是缓冲区，在 Raku 中称为 Buf。它们只是一系列二进制元素。 它们是可变的，每个元素都可以单独更改。</p>
 </div>
 <div class="paragraph">
-<p>这也是创建对象的新方法。  Raku 是一种面向对象的语言，因此具有类（是对象的一种）和对象（是该类的特定实例）。 你将生成一个类的新对象； 许多语言也为此使用了"新"一词。 因此，将通过以下方式从数字列表中生成一个新缓冲区</p>
+<p>这也是创建对象的新方法。  Raku 是一种面向对象的语言，因此具有类（是对象的一种）和对象（是该类的特定实例）。 你将生成一个类的新对象； 许多语言也为此使用了&#34;新&#34;一词。 因此，将通过以下方式从数字列表中生成一个新缓冲区</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2261,11 +2138,11 @@ mix { spam =&gt; 0.75, egg =&gt; 0.25} # Mix(egg =&gt; 0.25, spam =&gt; 0.75)</c
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">%( Óðinn =&gt; "Gungnir", Þor =&gt; "Mjolnir" ).Map</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">%( Óðinn =&gt; &#34;Gungnir&#34;, Þor =&gt; &#34;Mjolnir&#34; ).Map</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>你所做的就是调用 <code>%( Óðinn &#8658; "Gungnir", Þor &#8658; "Mjolnir"</code> ) 散列的 <code>Map</code> 方法，它是一个对象；这把原始 Hash 转换为 Map。</p>
+<p>你所做的就是调用 <code>%( Óðinn ⇒ &#34;Gungnir&#34;, Þor ⇒ &#34;Mjolnir&#34;</code> ) 散列的 <code>Map</code> 方法，它是一个对象；这把原始 Hash 转换为 Map。</p>
 </div>
 <div class="paragraph">
 <p>让我们看看转换函数如何访问数据结构的内部，以便 Raku 可以转换数据。 但是首先，你需要知道如何打印出值。</p>
@@ -2293,7 +2170,7 @@ mix { spam =&gt; 0.75, egg =&gt; 0.25} # Mix(egg =&gt; 0.25, spam =&gt; 0.75)</c
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say( 33, 44, "Hey") # 3344Hey</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say( 33, 44, &#34;Hey&#34;) # 3344Hey</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2301,7 +2178,7 @@ mix { spam =&gt; 0.75, egg =&gt; 0.25} # Mix(egg =&gt; 0.25, spam =&gt; 0.75)</c
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say( 33 ~ 44 ~ "Hey") # 3344Hey</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say( 33 ~ 44 ~ &#34;Hey&#34;) # 3344Hey</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2309,7 +2186,7 @@ mix { spam =&gt; 0.75, egg =&gt; 0.25} # Mix(egg =&gt; 0.25, spam =&gt; 0.75)</c
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">$_ = 33; say("The value is $_") # The value is 33</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">$_ = 33; say(&#34;The value is $_&#34;) # The value is 33</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2352,20 +2229,20 @@ mix { spam =&gt; 0.75, egg =&gt; 0.25} # Mix(egg =&gt; 0.25, spam =&gt; 0.75)</c
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">.say given &lt;away&gt;           # away
-given "Up" { say "You ♡" }  # You ♡
-given { "bar" } { .().say } # bar</code></pre>
+given &#34;Up&#34; { say &#34;You ♡&#34; }  # You ♡
+given { &#34;bar&#34; } { .().say } # bar</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在第一种情况下，你是在 void 上调用 <code>.say</code> 方法，这等效于在主题变量 $_ 上调用它，该变量已从 <code>given</code> 中获取了值。 在最后一种情况下，你隐式使用主题 Callable 变量。 {"bar"} 创建一个块（返回" bar"）并将其分配给 <code>&amp;_</code>。 简单的句点（.）是方法调用运算符，当其后带有空括号时，它将在隐式主题变量中调用该函数。</p>
+<p>在第一种情况下，你是在 void 上调用 <code>.say</code> 方法，这等效于在主题变量 $_ 上调用它，该变量已从 <code>given</code> 中获取了值。 在最后一种情况下，你隐式使用主题 Callable 变量。 {&#34;bar&#34;} 创建一个块（返回&#34; bar&#34;）并将其分配给 <code>&amp;_</code>。 简单的句点（.）是方法调用运算符，当其后带有空括号时，它将在隐式主题变量中调用该函数。</p>
 </div>
 <div class="paragraph">
 <p>当你要将主题设置为某个对象并对其执行一些操作时，主题化很有用，例如：</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "Array has ", .elems,
-    " elements which add up to ", .sum given 1..33
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;Array has &#34;, .elems,
+    &#34; elements which add up to &#34;, .sum given 1..33
 # Array has 33 elements which add up to 561</code></pre>
 </div>
 </div>
@@ -2378,7 +2255,7 @@ given { "bar" } { .().say } # bar</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">.say with &lt;this song&gt;                   # (this song)
-with Any { .say } orwith "Hey" { .say } # Hey</code></pre>
+with Any { .say } orwith &#34;Hey&#34; { .say } # Hey</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2426,7 +2303,7 @@ with Any { .say } orwith "Hey" { .say } # Hey</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "With or" without Mu # With or</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;With or&#34; without Mu # With or</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2437,7 +2314,7 @@ with Any { .say } orwith "Hey" { .say } # Hey</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">"Away from Toronto" andthen .say # Away from Toronto</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#34;Away from Toronto&#34; andthen .say # Away from Toronto</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2460,8 +2337,8 @@ with Any { .say } orwith "Hey" { .say } # Hey</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -2535,7 +2412,7 @@ with Any { .say } orwith "Hey" { .say } # Hey</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>"," 被解释为将要打印的两个项分开，因此你必须使用</p>
+<p>&#34;,&#34; 被解释为将要打印的两个项分开，因此你必须使用</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2559,8 +2436,8 @@ with Any { .say } orwith "Hey" { .say } # Hey</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -2610,7 +2487,7 @@ with Any { .say } orwith "Hey" { .say } # Hey</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">("þ" xx 3, "ð" xx 4, "ß" xx 5).Mix.elems.say # 3
+<pre class="highlight"><code class="language-raku" data-lang="raku">(&#34;þ&#34; xx 3, &#34;ð&#34; xx 4, &#34;ß&#34; xx 5).Mix.elems.say # 3
 say 3.elems           # 1
 say (5,7,-3,2).minmax # -3..7</code></pre>
 </div>
@@ -2711,7 +2588,7 @@ MapReduce 是事物，是可用于大数据处理的框架的名称。 map 和 r
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say (1..10).reduce: * ~ "→" ~ * # 1→2→3→4→5→6→7→8→9→10</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say (1..10).reduce: * ~ &#34;→&#34; ~ * # 1→2→3→4→5→6→7→8→9→10</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2719,7 +2596,7 @@ MapReduce 是事物，是可用于大数据处理的框架的名称。 map 和 r
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say (1..10).reduce: { $^b ~ "→" ~ $^a } # 10→9→8→7→6→5→4→3→2→1</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say (1..10).reduce: { $^b ~ &#34;→&#34; ~ $^a } # 10→9→8→7→6→5→4→3→2→1</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2797,8 +2674,8 @@ grep( * %% 2 ) ==&gt; reduce( * + * ) )</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -2855,11 +2732,11 @@ grep( * %% 2 ) ==&gt; reduce( * + * ) )</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
+<col style="width: 20%;"/>
+<col style="width: 20%;"/>
+<col style="width: 20%;"/>
+<col style="width: 20%;"/>
+<col style="width: 20%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -2928,7 +2805,7 @@ grep( * %% 2 ) ==&gt; reduce( * + * ) )</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">for set &lt;a b c&gt; { say $_.value??$_.key!!"" }; # «b a c »</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">for set &lt;a b c&gt; { say $_.value??$_.key!!&#34;&#34; }; # «b a c »</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2938,7 +2815,7 @@ grep( * %% 2 ) ==&gt; reduce( * + * ) )</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">for 1..3 X &lt;A B C&gt; -&gt; @pair {
-    say (@pair[0] == 1)??~@pair!! ~@pair ~ "s"
+    say (@pair[0] == 1)??~@pair!! ~@pair ~ &#34;s&#34;
 } # 1 A1 B1 C2 As2 Bs2 Cs3 As3 Bs3 Cs</code></pre>
 </div>
 </div>
@@ -2951,7 +2828,7 @@ grep( * %% 2 ) ==&gt; reduce( * + * ) )</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say (for 1..3 X &lt;A B C&gt; -&gt; @pair { (@pair[0] == 1)??~@pair!! ~@ pair ~ "s" })
+<pre class="highlight"><code class="language-raku" data-lang="raku">say (for 1..3 X &lt;A B C&gt; -&gt; @pair { (@pair[0] == 1)??~@pair!! ~@ pair ~ &#34;s&#34; })
 # (1 A 1 B 1 C 2 As 2 Bs 2 Cs 3 As 3 Bs 3 Cs)</code></pre>
 </div>
 </div>
@@ -3013,7 +2890,7 @@ $_ = 3; while $_ &lt;= 20 { $_*=3; say $_2 }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say (max 1,7 ... * &gt; 30) &lt; 34 ?? "Smaller" !! "Greater" # Smaller</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say (max 1,7 ... * &gt; 30) &lt; 34 ?? &#34;Smaller&#34; !! &#34;Greater&#34; # Smaller</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3022,7 +2899,7 @@ $_ = 3; while $_ &lt;= 20 { $_*=3; say $_2 }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "Smaller" if (max 1,7 ... * &gt; 30) &lt; 34 # Smaller</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;Smaller&#34; if (max 1,7 ... * &gt; 30) &lt; 34 # Smaller</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3030,7 +2907,7 @@ $_ = 3; while $_ &lt;= 20 { $_*=3; say $_2 }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">if (max 1,7 ... * &gt; 30) &lt; 34 { say "Smaller"} else { say "Greater"}
+<pre class="highlight"><code class="language-raku" data-lang="raku">if (max 1,7 ... * &gt; 30) &lt; 34 { say &#34;Smaller&#34;} else { say &#34;Greater&#34;}
 # Smaller</code></pre>
 </div>
 </div>
@@ -3039,7 +2916,7 @@ $_ = 3; while $_ &lt;= 20 { $_*=3; say $_2 }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say (if M &gt; 1000 { "&gt;1k" } elsif M == 1000 { "1k" } else { "&lt;1k" }) # 1k</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say (if M &gt; 1000 { &#34;&gt;1k&#34; } elsif M == 1000 { &#34;1k&#34; } else { &#34;&lt;1k&#34; }) # 1k</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3050,7 +2927,7 @@ $_ = 3; while $_ &lt;= 20 { $_*=3; say $_2 }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "Not eight" unless 7 == VII # OUTPUT: «Not eight »</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;Not eight&#34; unless 7 == VII # OUTPUT: «Not eight »</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3058,11 +2935,11 @@ $_ = 3; while $_ &lt;= 20 { $_*=3; say $_2 }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">given M cmp 1000 { when More {say "M"}; when Same {say "S"}; default {say "L"} } # S</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">given M cmp 1000 { when More {say &#34;M&#34;}; when Same {say &#34;S&#34;}; default {say &#34;L&#34;} } # S</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>给定的语句将表达式的结果以及测试值的主题（在隐式的主题变量中）进行主题化。 在这种情况下，它将打印"S"，因为M是1,000的罗马数字。</p>
+<p>给定的语句将表达式的结果以及测试值的主题（在隐式的主题变量中）进行主题化。 在这种情况下，它将打印&#34;S&#34;，因为M是1,000的罗马数字。</p>
 </div>
 </div>
 <div class="sect2">
@@ -3086,14 +2963,14 @@ $_ = 3; while $_ &lt;= 20 { $_*=3; say $_2 }</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env  raku
 use v6;
 given M cmp 1000 {
-    when More {say "M"}
-    when Same {say "S"}
-    default {say "L"}
+    when More {say &#34;M&#34;}
+    when Same {say &#34;S&#34;}
+    default {say &#34;L&#34;}
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>该文件的输出应为 "S"，与上一章中看到的单行语句相同。关于上一章中显示的版本，有几处更改：</p>
+<p>该文件的输出应为 &#34;S&#34;，与上一章中看到的单行语句相同。关于上一章中显示的版本，有几处更改：</p>
 </div>
 <div class="ulist">
 <ul>
@@ -3108,7 +2985,7 @@ given M cmp 1000 {
 </ul>
 </div>
 <div class="paragraph">
-<p>Perl v6.0.0 required&#8212;&#8203;this is only v5.20.0, stopped at given.p6 line 3.</p>
+<p>Perl v6.0.0 required—​this is only v5.20.0, stopped at given.p6 line 3.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -3140,15 +3017,15 @@ secondary
 chapter1
 Chapter_2
 <em>cool</em>
-it&#8217;s-here</p>
+it’s-here</p>
 </div>
 <div class="paragraph">
 <p>在大多数情况下，容器名称的前面有一个符号，该符号与它们所包含的数据将具有的默认角色有关。 这些信息显示在表7-1中。</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -3215,9 +3092,9 @@ my %var = :a; say %var # {a =&gt; True}</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $is-it-K = M cmp 1000;
 given $is-it-K {
-    when More {say "M"}
-    when Same {say "S"}
-    default {say "L"}
+    when More {say &#34;M&#34;}
+    when Same {say &#34;S&#34;}
+    default {say &#34;L&#34;}
 }</code></pre>
 </div>
 </div>
@@ -3231,17 +3108,17 @@ given $is-it-K {
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $is-it-K = M cmp 1000;
 my $result = ( given $is-it-K {
-                     when More {"M"}
-                     when Same {"S"}
-                     default {"L"}
+                     when More {&#34;M&#34;}
+                     when Same {&#34;S&#34;}
+                     default {&#34;L&#34;}
                   }
              );
-$is-it-K = "Yes" if $result eq "S";
+$is-it-K = &#34;Yes&#34; if $result eq &#34;S&#34;;
 say $is-it-K;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这将显示 "Yes"，即 $is-it-K 的值，该值已从 Bool 更改为 Str，没有问题。 新代码还显示了如何使诸如给定的语句返回将存储在 $result 中的值。 与在块中一样，此语句将返回最后执行的指令的值，在这种情况下，该值将为 "S" 字符串。 一般来说，函数或表达式返回一个值的好习惯，而不是对它执行用户可能想要或可能不希望的任何操作（例如使用say）。 那就是你在这里所做的。</p>
+<p>这将显示 &#34;Yes&#34;，即 $is-it-K 的值，该值已从 Bool 更改为 Str，没有问题。 新代码还显示了如何使诸如给定的语句返回将存储在 $result 中的值。 与在块中一样，此语句将返回最后执行的指令的值，在这种情况下，该值将为 &#34;S&#34; 字符串。 一般来说，函数或表达式返回一个值的好习惯，而不是对它执行用户可能想要或可能不希望的任何操作（例如使用say）。 那就是你在这里所做的。</p>
 </div>
 <div class="paragraph">
 <p>但是，实际上看起来像一个函数。 函数是 Raku 中的一等公民。因此，让我们将它们存储在某个地方并从那里使用它们：</p>
@@ -3249,13 +3126,13 @@ say $is-it-K;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $is-it-K = -&gt; $test { given $test {
-                               when More {"M"}
-                               when Same {"S"}
-                               default {"L"}
+                               when More {&#34;M&#34;}
+                               when Same {&#34;S&#34;}
+                               default {&#34;L&#34;}
                             }
                         };
 
-say $is-it-K(M cmp 1000) eq "S" ?? "Yes" !! "No";</code></pre>
+say $is-it-K(M cmp 1000) eq &#34;S&#34; ?? &#34;Yes&#34; !! &#34;No&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3264,16 +3141,16 @@ say $is-it-K(M cmp 1000) eq "S" ?? "Yes" !! "No";</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my &amp;is-it-K = -&gt; $test { given $test {
-                               when More {"M"}
-                               when Same {"S"}
-                               default {"L"}
+                               when More {&#34;M&#34;}
+                               when Same {&#34;S&#34;}
+                               default {&#34;L&#34;}
                             }
                         };
-say is-it-K(M cmp 1000) eq "S" ?? "Yes" !! "No";</code></pre>
+say is-it-K(M cmp 1000) eq &#34;S&#34; ?? &#34;Yes&#34; !! &#34;No&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>当你使用 "＆" 号声明变量（即创建容器时的操作）时，你会说它将是一个函数。 因此，你可以根据需要跳过 "&amp;" 号，并使用函数名称以通常的方式调用它。</p>
+<p>当你使用 &#34;＆&#34; 号声明变量（即创建容器时的操作）时，你会说它将是一个函数。 因此，你可以根据需要跳过 &#34;&amp;&#34; 号，并使用函数名称以通常的方式调用它。</p>
 </div>
 <div class="paragraph">
 <p>到此为止，你可能已经意识到该函数的作用是将测试结果转换为字符串，因此你给它指定的名称可能有点不公平。 另外，它是一个功能完善的函数，因此你最好这样声明它：</p>
@@ -3282,12 +3159,12 @@ say is-it-K(M cmp 1000) eq "S" ?? "Yes" !! "No";</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub cmp-to-s( $lhs, $rhs ) {
     given $lhs cmp $rhs {
-        when More {"M"}
-        when Same {"S"}
-        default {"L"}
+        when More {&#34;M&#34;}
+        when Same {&#34;S&#34;}
+        default {&#34;L&#34;}
     }
 }
-say cmp-to-s(M, 1000) eq "S" ?? "Yes" !! "No";</code></pre>
+say cmp-to-s(M, 1000) eq &#34;S&#34; ?? &#34;Yes&#34; !! &#34;No&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3298,14 +3175,14 @@ say cmp-to-s(M, 1000) eq "S" ?? "Yes" !! "No";</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub cmp-to-s( $lhs, $rhs ) {
     my $result = ( given $lhs cmp $rhs {
-        when More {"M"}
-        when Same {"S"}
-        default {"L"}
+        when More {&#34;M&#34;}
+        when Same {&#34;S&#34;}
+        default {&#34;L&#34;}
     });
     return $result;
 }
 
-say cmp-to-s(M, 1001) eq "S" ?? "Yes" !! "No";</code></pre>
+say cmp-to-s(M, 1001) eq &#34;S&#34; ?? &#34;Yes&#34; !! &#34;No&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3316,9 +3193,9 @@ say cmp-to-s(M, 1001) eq "S" ?? "Yes" !! "No";</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">sub hello() { "Hello"; }
-my $hello = hello; # Will contain "Hello"
-my &amp;copy-of-hello = &amp;hello; # Will contain a copy of the function say "Original ", $hello, " and copy ", copy-of-hello;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub hello() { &#34;Hello&#34;; }
+my $hello = hello; # Will contain &#34;Hello&#34;
+my &amp;copy-of-hello = &amp;hello; # Will contain a copy of the function say &#34;Original &#34;, $hello, &#34; and copy &#34;, copy-of-hello;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3340,9 +3217,9 @@ sub this-will-take( $n ) {
 
 for 100,1000,10000 {
     my ($res,$took,$final ) = this-will-take( $_ );
-    say "Computing $res took $took from start finished at $final";
+    say &#34;Computing $res took $took from start finished at $final&#34;;
 }
-say "Everything took ", now - $us-fugit;</code></pre>
+say &#34;Everything took &#34;, now - $us-fugit;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3360,7 +3237,7 @@ say "Everything took ", now - $us-fugit;</code></pre>
 
 for 100,1000,10000 {
     my ($res,$took,$final ) = this-will-take( $_ );
-    say "Computing $res took $took, finished at $final";
+    say &#34;Computing $res took $took, finished at $final&#34;;
 }</code></pre>
 </div>
 </div>
@@ -3386,7 +3263,7 @@ for 100,1000,10000 {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my Str $name = "Þor"</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Str $name = &#34;Þor&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3394,7 +3271,7 @@ for 100,1000,10000 {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my Int %hash = %( 'eggs' =&gt; 3, 'zucchini' =&gt; 2 )</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Int %hash = %( &#39;eggs&#39; =&gt; 3, &#39;zucchini&#39; =&gt; 2 )</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3468,9 +3345,9 @@ say @a.^name; # List</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my @to-be-bound = &lt;a b c&gt;;
 my @binder := @to-be-bound;
-say @binder; @to-be-bound[1] = 'þ';
+say @binder; @to-be-bound[1] = &#39;þ&#39;;
 say @binder; # [a þ c]
-@binder[1] = 'p';
+@binder[1] = &#39;p&#39;;
 say @to-be-bound; # [a p c]</code></pre>
 </div>
 </div>
@@ -3480,8 +3357,8 @@ say @to-be-bound; # [a p c]</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">constant %what = { doesn't =&gt; 'change' };
-# {doesn't =&gt; change}</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">constant %what = { doesn&#39;t =&gt; &#39;change&#39; };
+# {doesn&#39;t =&gt; change}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3505,8 +3382,8 @@ say @de-sigilled; # [0 1 2 3 4]</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -3540,9 +3417,9 @@ say @de-sigilled; # [0 1 2 3 4]</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -3641,9 +3518,9 @@ for ^3 {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">:won't-do
+<pre class="highlight"><code class="language-raku" data-lang="raku">:won&#39;t-do
 :will-do&lt;now&gt;
-:how're-you«doing»
+:how&#39;re-you«doing»
 :&lt;+&gt;
 :&lt;©&gt;</code></pre>
 </div>
@@ -3688,7 +3565,7 @@ say (my @person:age&lt;54&gt;:doing&lt;stuff&gt; = [True,False])</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub term:&lt;✔&gt; { True }
 sub term:&lt;R&gt; { srand(time); return rand }
-say "{✔} {R}";</code></pre>
+say &#34;{✔} {R}&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3706,9 +3583,9 @@ say "{✔} {R}";</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -3748,7 +3625,7 @@ say "{✔} {R}";</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">sub bm( &amp;to-time ) { my $start = now; return to-time() ~ "⏰" ~ now - $start; }
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub bm( &amp;to-time ) { my $start = now; return to-time() ~ &#34;⏰&#34; ~ now - $start; }
 my int @natives = ^5_000_000;
 say bm( { [+] @natives } );
 my @regular = ^5_000_000;
@@ -3820,12 +3697,12 @@ say deck( &lt;J Q K&gt;, &lt;♥ ♣ ♠ ♦&gt; );</code></pre>
     return @numbers X~ @cards;
 }
 say deck( &lt;bastos espadas&gt;, 1,3,5); # (1bastos 1espadas ..)
-say deck( &lt;♥ ♣ ♠ ♦&gt;, "Ace" ); # (Ace♥ Ace♣ Ace♠ Ace♦)</code></pre>
+say deck( &lt;♥ ♣ ♠ ♦&gt;, &#34;Ace&#34; ); # (Ace♥ Ace♣ Ace♠ Ace♦)</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>含糊的参数（以星号开头）会将所有其他用作参数的参数吞噬到数组中。 在第一种情况下，每个参数都放入数组的元素中；在第二种情况下，使用单个字符串时，它将成为具有单个元素的数组。
-你也可以使用&#8594;限制例程的返回类型，如下所示：</p>
+你也可以使用→限制例程的返回类型，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3845,7 +3722,7 @@ say deck( &lt;♥ ♣ ♠ ♦&gt;, "Ace" ); # (Ace♥ Ace♣ Ace♠ Ace♦)</cod
     return (@numbers X~ @cards)[^$how-many];
 }
 say deck( &lt;bastos espadas&gt;, 4, 1,3,5); # (1bastos 1espadas 3bastos 3espadas)
-say deck( &lt;♥ ♣ ♠ ♦&gt;, 2, "Ace" );       # (Ace♥ Ace♣)</code></pre>
+say deck( &lt;♥ ♣ ♠ ♦&gt;, 2, &#34;Ace&#34; );       # (Ace♥ Ace♣)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3860,7 +3737,7 @@ say deck( &lt;♥ ♣ ♠ ♦&gt;, 2, "Ace" );       # (Ace♥ Ace♣)</code></p
 say deck( suits =&gt; &lt;bastos espadas&gt;,
             how-many =&gt; 4, cards =&gt; (1,3,5) );
 my @suits = &lt;♥ ♣ ♠ ♦&gt;;
-my @cards = "Ace";
+my @cards = &#34;Ace&#34;;
 say deck( :@suits, :@cards );</code></pre>
 </div>
 </div>
@@ -3877,7 +3754,7 @@ say deck( :@suits, :@cards );</code></pre>
     UInt :$how-many = 4, :@cards
     --&gt; Seq(List) ) {
     return (@cards X~
-      suits.values.map("❖❖" ~ ∗.key);)[^$how-many];
+      suits.values.map(&#34;❖❖&#34; ~ ∗.key);)[^$how-many];
 }
 my $palos = set &lt;bastos espadas&gt;;
 say deck( $palos, how-many =&gt; 4, cards =&gt; (1,3,5) );</code></pre>
@@ -3893,10 +3770,10 @@ say deck( $palos, how-many =&gt; 4, cards =&gt; (1,3,5) );</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub deck( @suits, UInt $hand = 3, :@cards
           --&gt; Seq(List) ) {
-    return (@cards X~ ("❖❖" X~ @suits) )[^$hand];
+    return (@cards X~ (&#34;❖❖&#34; X~ @suits) )[^$hand];
 }
 my $capture = \(&lt;Bastos Espadas&gt;,
-                :cards("Sota","Caballo","Rey"));
+                :cards(&#34;Sota&#34;,&#34;Caballo&#34;,&#34;Rey&#34;));
 say deck( |$capture );</code></pre>
 </div>
 </div>
@@ -3919,7 +3796,7 @@ say deck( |$capture );</code></pre>
     }
     return &amp;deck;
 }
-my &amp;deck = dealer( &lt;Bastos Espadas&gt; X~ "❖❖" X~ &lt;Sota Caballo Rey&gt;);
+my &amp;deck = dealer( &lt;Bastos Espadas&gt; X~ &#34;❖❖&#34; X~ &lt;Sota Caballo Rey&gt;);
 
 deck().say for ^3;
 # Every time, something like Espadas❖❖Sota</code></pre>
@@ -3933,7 +3810,7 @@ deck().say for ^3;
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub draw( @cards, &amp;drawer:(Positional) ) {
     return drawer(@cards);
 }
-my @cards = &lt;Bastos Espadas&gt; X~ "❖❖" X~ &lt;Sota Caballo Rey&gt;;
+my @cards = &lt;Bastos Espadas&gt; X~ &#34;❖❖&#34; X~ &lt;Sota Caballo Rey&gt;;
 sub first-drawer( @c ) { @c.shift };
 sub last-drawer(@c) { @c.pop };
 
@@ -3946,7 +3823,7 @@ say draw( @cards, &amp;last-drawer );  # Espadas❖❖Rey</code></pre>
 </div>
 <div class="paragraph">
 <p>你还使用了 pop 和 shift 这两个函数来提取
-数组的最后一个和第一个元素。  Raku 包括用于处理数组的整套函数，它们也可以使用 List，Any 和 Mu 函数（由于它们是超类）。你可以在完整的参考手册中访问它们，网址为 <a href="https://docs.perl6.org/type/Array" class="bare">https://docs.perl6.org/type/Array</a>。通常，任何称为 "A-Class" 的 Raku 类都将在 <a href="https://docs.perl6.org/type/A-Class" class="bare">https://docs.perl6.org/type/A-Class</a> 上托管参考手册。</p>
+数组的最后一个和第一个元素。  Raku 包括用于处理数组的整套函数，它们也可以使用 List，Any 和 Mu 函数（由于它们是超类）。你可以在完整的参考手册中访问它们，网址为 <a href="https://docs.perl6.org/type/Array" class="bare">https://docs.perl6.org/type/Array</a>。通常，任何称为 &#34;A-Class&#34; 的 Raku 类都将在 <a href="https://docs.perl6.org/type/A-Class" class="bare">https://docs.perl6.org/type/A-Class</a> 上托管参考手册。</p>
 </div>
 <div class="sect3">
 <h4 id="_子集和类型约束">8.2.1. 子集和类型约束</h4>
@@ -3959,10 +3836,10 @@ say draw( @cards, &amp;last-drawer );  # Espadas❖❖Rey</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">subset CardNumber of Int where 0 &lt; * &lt;= 10;
 
 sub card( CardNumber $card-number, $suit ) {
-    return "$card-number de $suit";
+    return &#34;$card-number de $suit&#34;;
 }
-say card( 2, "Bastos");
-say card( 9, "Espadas");</code></pre>
+say card( 2, &#34;Bastos&#34;);
+say card( 9, &#34;Espadas&#34;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3973,7 +3850,7 @@ say card( 9, "Espadas");</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub card( Int $card-number where 0 &lt; * &lt;= 10, $suit ) {
-    return "$card-number de $suit";
+    return &#34;$card-number de $suit&#34;;
 }</code></pre>
 </div>
 </div>
@@ -3989,22 +3866,22 @@ say card( 9, "Espadas");</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $cat = "Dead" | "Alive";
-say $cat eq "Dead";  # any(True, False)
-say $cat eq "Alive"; # any(False, True)</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $cat = &#34;Dead&#34; | &#34;Alive&#34;;
+say $cat eq &#34;Dead&#34;;  # any(True, False)
+say $cat eq &#34;Alive&#34;; # any(False, True)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>使用|创建连接点。 粒子，并且原则上可以具有任意数量的值。 这将导致类型为 "any" 的 Junction，可以在所有类型的操作中用作替代，如此处所示。 但是，返回值将是将该操作应用于所有组件的效果，如输出所示。</p>
+<p>使用|创建连接点。 粒子，并且原则上可以具有任意数量的值。 这将导致类型为 &#34;any&#34; 的 Junction，可以在所有类型的操作中用作替代，如此处所示。 但是，返回值将是将该操作应用于所有组件的效果，如输出所示。</p>
 </div>
 <div class="paragraph">
 <p>这不是唯一可用的结点类型。 表8-1中显示了它们，以及它们将折叠为的布尔值。</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -4040,15 +3917,15 @@ say $cat eq "Alive"; # any(False, True)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $cat = one &lt;Dead Alive&gt;;
-say "Dead or alive" if $cat eq 'Dead' and $cat eq 'Alive';</code></pre>
+say &#34;Dead or alive&#34; if $cat eq &#39;Dead&#39; and $cat eq &#39;Alive&#39;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>当且仅当比较结果之一为 True 时，if 后面的表达式才为 True。 在两种情况下都为 True，因此将打印 "Dead or alive"。 如表8-1所示，你还可以使用</p>
+<p>当且仅当比较结果之一为 True 时，if 后面的表达式才为 True。 在两种情况下都为 True，因此将打印 &#34;Dead or alive&#34;。 如表8-1所示，你还可以使用</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $cat = "Dead" ^ "Alive";</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $cat = &#34;Dead&#34; ^ &#34;Alive&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4057,17 +3934,17 @@ say "Dead or alive" if $cat eq 'Dead' and $cat eq 'Alive';</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub card( Int $card-number where 0 &lt; * &lt;= 10,
-    $suit where "Bastos" | "Espadas" | "Oros" | "Copas" )
+    $suit where &#34;Bastos&#34; | &#34;Espadas&#34; | &#34;Oros&#34; | &#34;Copas&#34; )
 {
-    return "$card-number de $suit";
+    return &#34;$card-number de $suit&#34;;
 }
-say card( 2, "Bastos");
-say card( 9, "Espadas");</code></pre>
+say card( 2, &#34;Bastos&#34;);
+say card( 9, &#34;Espadas&#34;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>该脚本将与上面的脚本相同。 但是，在这种情况下，你还将通过交点将可使用的西装限制为西班牙甲板上的西装。 + Junction 语句很简单，等于包含 * 的等式，但是它是如此普遍，以至于简化为仅参数必须遵循的选项。 如果在这里使用另一个词，则会出现类似
-约束类型检查未能绑定到参数 '$suit'； 预期会遇到匿名约束，但得到了 Str（“钻石”）
+约束类型检查未能绑定到参数 &#39;$suit&#39;； 预期会遇到匿名约束，但得到了 Str（“钻石”）
 将被抛出。 它告诉你“它不符合匿名约束”这一事实（可能会有些混淆），将最佳实践定义为任何种类的约束作为子集。 但是，上述解决方案是完美无缺的，并且在技术上是正确的。</p>
 </div>
 </div>
@@ -4105,7 +3982,7 @@ say card( 9, "Espadas");</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "1" ~~ 1;
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;1&#34; ~~ 1;
 my $a-set = set &lt;1 2 3&gt;;
 say $a-set ~~ Set;
 my @bound = &lt;3 33 333&gt;;
@@ -4114,9 +3991,9 @@ say @bound ~~ @bind;
 say @bound ~~ (3, *, 333 );
 say @bound ~~ Iterable;
 say 3 ~~ ^5;
-my %myth-objects = %(Þor =&gt; "Mjólnir",
-                     Oðinn =&gt; "Hugin") ;
-say "Oðinn" ~~ %myth-objects;</code></pre>
+my %myth-objects = %(Þor =&gt; &#34;Mjólnir&#34;,
+                     Oðinn =&gt; &#34;Hugin&#34;) ;
+say &#34;Oðinn&#34; ~~ %myth-objects;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4133,8 +4010,8 @@ say "Oðinn" ~~ %myth-objects;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "Sota" ~~ "Sota" | "Caballo" | "Rey";
-say "As" ~~ "Sota" | "Caballo" | "Rey";</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;Sota&#34; ~~ &#34;Sota&#34; | &#34;Caballo&#34; | &#34;Rey&#34;;
+say &#34;As&#34; ~~ &#34;Sota&#34; | &#34;Caballo&#34; | &#34;Rey&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4155,10 +4032,10 @@ sub print-card( Int $card-number,
                 &amp;printer where .signature ~~ $card-printer) {
     return printer( $card-number, $suit);
 }
-my &amp;de-printer = -&gt; Int $card, Str $suit { "$card de $suit" };
-my &amp;printer:&lt;♦&gt; = -&gt; Int $card, Str $suit { "$card ♦ $suit" };
-say print-card( 2, "Bastos", &amp;de-printer);   # 2 de Bastos
-say print-card( 9, "Espadas", &amp;printer:&lt;♦&gt;); # 9 ♦ Espadas</code></pre>
+my &amp;de-printer = -&gt; Int $card, Str $suit { &#34;$card de $suit&#34; };
+my &amp;printer:&lt;♦&gt; = -&gt; Int $card, Str $suit { &#34;$card ♦ $suit&#34; };
+say print-card( 2, &#34;Bastos&#34;, &amp;de-printer);   # 2 de Bastos
+say print-card( 9, &#34;Espadas&#34;, &amp;printer:&lt;♦&gt;); # 9 ♦ Espadas</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4178,8 +4055,8 @@ say print-card( 9, "Espadas", &amp;printer:&lt;♦&gt;); # 9 ♦ Espadas</code><
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">enum Palo &lt;Bastos Copas Oros Espadas&gt;;
 enum Suit &lt;♣ ♦ ♥ ♠&gt;;
-multi stringify-card( Palo $p, Int $n ) { "$n de $p" }
-multi stringify-card( Suit $s, Int $n ) { "$s\c[EN QUAD]$n" }
+multi stringify-card( Palo $p, Int $n ) { &#34;$n de $p&#34; }
+multi stringify-card( Suit $s, Int $n ) { &#34;$s\c[EN QUAD]$n&#34; }
 say stringify-card( Bastos, 3 );    # 3 de Bastos
 say stringify-card( Suit::&lt;♣&gt;, 5 ); # ♣ 5</code></pre>
 </div>
@@ -4192,9 +4069,9 @@ say stringify-card( Suit::&lt;♣&gt;, 5 ); # ♣ 5</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">proto stringify-card( Str, Int) {*}
-multi stringify-card( $p where (* ~~ any &lt;Bastos Copas Oros Espadas&gt;),Int $n ) { "$n de $p" }
-multi stringify-card( $s where (* ~~ any &lt;♣ ♦ ♥ ♠&gt;), Int $n ) { "$s\c[EN QUAD]$n" }
-say stringify-card( "Bastos", 3 ); say stringify-card( "♣", 5 );</code></pre>
+multi stringify-card( $p where (* ~~ any &lt;Bastos Copas Oros Espadas&gt;),Int $n ) { &#34;$n de $p&#34; }
+multi stringify-card( $s where (* ~~ any &lt;♣ ♦ ♥ ♠&gt;), Int $n ) { &#34;$s\c[EN QUAD]$n&#34; }
+say stringify-card( &#34;Bastos&#34;, 3 ); say stringify-card( &#34;♣&#34;, 5 );</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4203,18 +4080,18 @@ say stringify-card( "Bastos", 3 ); say stringify-card( "♣", 5 );</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">proto stringify-card( | ) {*}
-multi stringify-card( Str $p ) { "▶ $p" }
+multi stringify-card( Str $p ) { &#34;▶ $p&#34; }
 multi stringify-card( $p where
                       (* ~~ any &lt;Bastos Copas Oros Espadas&gt;),
                       Int $n ) {
-      samewith "$n de $p"
+      samewith &#34;$n de $p&#34;
 }
 multi stringify-card( $s where (* ~~ any &lt;♣ ♦ ♥ ♠&gt;),
                       Int $n ) {
-      samewith "$s\c[EN QUAD]$n"
+      samewith &#34;$s\c[EN QUAD]$n&#34;
 }
-say stringify-card( "Bastos", 3 ); # ▶ 3 de Bastos
-say stringify-card( "♣", 5 );      # ▶ ♣ 5</code></pre>
+say stringify-card( &#34;Bastos&#34;, 3 ); # ▶ 3 de Bastos
+say stringify-card( &#34;♣&#34;, 5 );      # ▶ ♣ 5</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4226,15 +4103,15 @@ say stringify-card( "♣", 5 );      # ▶ ♣ 5</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>你不需要插入变量名，因为它们实际上并不是签名的一部分；但是，带有问号的可选参数确实需要至少得到一个提示。这就是为什么你使用简单的标记后跟问号的原因。该声明将以与上述相同的方式工作。始终建议尽可能准确地使用签名。但是，在上述情况下，你实际上并不预先知道如何使用卡的级联处理，因此暂时将其保持这种状态。引入了一个新的多重游戏，主要用于通过在任何卡牌前面加 "Play" 符号来对字符串中表示的卡牌进行后处理。由于这是“组”的一部分，因此你无需使用子名称：你可以使用 samewith，它使用提供的一组新参数调用相同的 multi。</p>
+<p>你不需要插入变量名，因为它们实际上并不是签名的一部分；但是，带有问号的可选参数确实需要至少得到一个提示。这就是为什么你使用简单的标记后跟问号的原因。该声明将以与上述相同的方式工作。始终建议尽可能准确地使用签名。但是，在上述情况下，你实际上并不预先知道如何使用卡的级联处理，因此暂时将其保持这种状态。引入了一个新的多重游戏，主要用于通过在任何卡牌前面加 &#34;Play&#34; 符号来对字符串中表示的卡牌进行后处理。由于这是“组”的一部分，因此你无需使用子名称：你可以使用 samewith，它使用提供的一组新参数调用相同的 multi。</p>
 </div>
 <div class="paragraph">
 <p>这只是与一组乘法一起使用的例程之一。其余的重新分配功能如表8-2所示。</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -4286,10 +4163,10 @@ say ✏; # 2 =&gt; ♥, for instance.</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub infix:&lt;⚙&gt; (Str $s, Int $n) { $s =&gt; $n };
-sub postfix:&lt;♣&gt; (Int $n ) { "♣" ⚙ $n };
-sub postfix:&lt;♦&gt; (Int $n ) { "♦" ⚙ $n };
-sub postfix:&lt;♥&gt; (Int $n ) { "♥" ⚙ $n };
-sub postfix:&lt;♠&gt; (Int $n ) { "♠" ⚙ $n };
+sub postfix:&lt;♣&gt; (Int $n ) { &#34;♣&#34; ⚙ $n };
+sub postfix:&lt;♦&gt; (Int $n ) { &#34;♦&#34; ⚙ $n };
+sub postfix:&lt;♥&gt; (Int $n ) { &#34;♥&#34; ⚙ $n };
+sub postfix:&lt;♠&gt; (Int $n ) { &#34;♠&#34; ⚙ $n };
 say qq:to/CARDS/;
 {10♦}
 {6♥}
@@ -4302,9 +4179,9 @@ CARDS</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -4406,13 +4283,13 @@ say (my $new-int = $Simply-an-Int.new(3)); #3</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">proto stringify-card( Str, |) {*}
 multi stringify-card( $s where (* ~~ any &lt;♣ ♦ ♥ ♠&gt;), Any:D $n )
-{ "$s\c[EN QUAD]$n" }
+{ &#34;$s\c[EN QUAD]$n&#34; }
 multi stringify-card( $s where (* ~~ any &lt;♣ ♦ ♥ ♠&gt;), Any:U $n )
 {
-    "$s\c[EN QUAD]" ~ (1..10).pick;
+    &#34;$s\c[EN QUAD]&#34; ~ (1..10).pick;
 }
-say stringify-card( "♣", 5 );
-say stringify-card( "♥", Int );</code></pre>
+say stringify-card( &#34;♣&#34;, 5 );
+say stringify-card( &#34;♥&#34;, Int );</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4421,7 +4298,7 @@ say stringify-card( "♥", Int );</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">"$s\c[EN QUAD]" ~ $n.new((1..10).pick);</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#34;$s\c[EN QUAD]&#34; ~ $n.new((1..10).pick);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4431,12 +4308,12 @@ say stringify-card( "♥", Int );</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub stringify-card( $s, ::T $n ) {
-    when T ~~ Str { "$n of $s" }
-    when T ~~ Int { "$n\c[EN QUAD]$s" }
-    default { "$n$s" }
+    when T ~~ Str { &#34;$n of $s&#34; }
+    when T ~~ Int { &#34;$n\c[EN QUAD]$s&#34; }
+    default { &#34;$n$s&#34; }
 }
-say stringify-card( "♣", 5 );     # 5 ♣
-say stringify-card( "♥", "Ace" ); # Ace of ♥</code></pre>
+say stringify-card( &#34;♣&#34;, 5 );     # 5 ♣
+say stringify-card( &#34;♥&#34;, &#34;Ace&#34; ); # Ace of ♥</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4449,7 +4326,7 @@ say stringify-card( "♥", "Ace" ); # Ace of ♥</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">"J ♣".match("J").say # ⌈J⌋</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#34;J ♣&#34;.match(&#34;J&#34;).say # ⌈J⌋</code></pre>
 </div>
 </div>
 <div class="sect3">
@@ -4459,7 +4336,7 @@ say stringify-card( "♥", "Ace" ); # Ace of ♥</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">"J ♣".HOW.say; # Perl6::Metamodel::ClassHOW.new</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#34;J ♣&#34;.HOW.say; # Perl6::Metamodel::ClassHOW.new</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4467,7 +4344,7 @@ say stringify-card( "♥", "Ace" ); # Ace of ♥</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">"J ♣".HOW.name("").say</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#34;J ♣&#34;.HOW.name(&#34;&#34;).say</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4475,8 +4352,8 @@ say stringify-card( "♥", "Ace" ); # Ace of ♥</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -4502,7 +4379,7 @@ say stringify-card( "♥", "Ace" ); # Ace of ♥</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">for (3, 1..3, "m" ) -&gt; $m {
+<pre class="highlight"><code class="language-raku" data-lang="raku">for (3, 1..3, &#34;m&#34; ) -&gt; $m {
     .say with $m.?bounds()
 }</code></pre>
 </div>
@@ -4521,9 +4398,9 @@ say stringify-card( "♥", "Ace" ); # Ace of ♥</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">class Card {
     has $.value;
     has $.suit;
-    method show() { "$!value of $!suit" }
+    method show() { &#34;$!value of $!suit&#34; }
 }
-my Card $deuce = Card.new( value =&gt; 2, suit =&gt; '♥' );
+my Card $deuce = Card.new( value =&gt; 2, suit =&gt; &#39;♥&#39; );
 say $deuce.perl;
 say $deuce.show;</code></pre>
 </div>
@@ -4544,7 +4421,7 @@ say $deuce.show;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">method show() { "{self.value} of $!suit" }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">method show() { &#34;{self.value} of $!suit&#34; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4561,22 +4438,22 @@ say $deuce.show;</code></pre>
         return self.bless( :$value, :$suit );
     }
     submethod BUILD( :$!value, :$!suit ) {}
-    method show() { "$!value of $!suit" }
+    method show() { &#34;$!value of $!suit&#34; }
 }
-my Card $deuce = Card.new( 2, '♥' );
+my Card $deuce = Card.new( 2, &#39;♥&#39; );
 say $deuce.perl; # Card.new
 say $deuce.show; # 2 of ♥</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>如上所述，如果你使用隐藏属性，则这尤其必要。 隐藏的属性使用 !twigil 既表明它们将被隐藏（也从 .perl 中隐藏），也没有为它们创建访问器的事实。 你仍然可以使用默认的 new 来添加值，但是如果要在指示如何实例化对象的文档中公开实现，则隐藏实现没有太多意义。
-如果你不想覆盖默认的新值（子类可能仍会使用），则需要将新值 new 声明为 multi； 在其中，你可以使用默认构造函数的签名调用 self.bless； 如你所知，<code>:$value</code> 等于 <code>value &#8658; $value</code>。 但是幸运的是开始了对象的构建阶段。 由于未使用默认构造函数，因此也需要指定它。
+如果你不想覆盖默认的新值（子类可能仍会使用），则需要将新值 new 声明为 multi； 在其中，你可以使用默认构造函数的签名调用 self.bless； 如你所知，<code>:$value</code> 等于 <code>value ⇒ $value</code>。 但是幸运的是开始了对象的构建阶段。 由于未使用默认构造函数，因此也需要指定它。
 生成对象的过程按表9-2所示的不同阶段进行。</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -4614,7 +4491,7 @@ say $deuce.show; # 2 of ♥</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">method gist() { "$!value of $!suit" }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">method gist() { &#34;$!value of $!suit&#34; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4653,14 +4530,14 @@ say $deuce.show; # 2 of ♥</code></pre>
             return False;
         }
     }
-    method gist() { "$!value of $!suit won $!victories times" }
+    method gist() { &#34;$!value of $!suit won $!victories times&#34; }
 }
-my Card $deuce = Card.new( 2, '♥' );
-say $deuce; # Will print "2 of ♥ won 0 times";
-say Card.new( 3, '♥' ).better-than( $deuce );
-say $deuce.better-than: Card.new( 3, '♦' );
-say $deuce.better-than: Card.new( 1, '♥' );
-say $deuce; # Will print "2 of ♥ won 1 times";</code></pre>
+my Card $deuce = Card.new( 2, &#39;♥&#39; );
+say $deuce; # Will print &#34;2 of ♥ won 0 times&#34;;
+say Card.new( 3, &#39;♥&#39; ).better-than( $deuce );
+say $deuce.better-than: Card.new( 3, &#39;♦&#39; );
+say $deuce.better-than: Card.new( 1, &#39;♥&#39; );
+say $deuce; # Will print &#34;2 of ♥ won 1 times&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4681,7 +4558,7 @@ say $deuce; # Will print "2 of ♥ won 1 times";</code></pre>
         return self.bless( :$value, :$suit );
     }
     submethod BUILD( :$!value, :$!suit ) {}
-    multi method better-than( Card $s where $s.suit eq "Joker": Card $c) {
+    multi method better-than( Card $s where $s.suit eq &#34;Joker&#34;: Card $c) {
         return True
     }
     multi method better-than( Card $s: Card $c where *.suit eq $!suit) {
@@ -4695,10 +4572,10 @@ say $deuce; # Will print "2 of ♥ won 1 times";</code></pre>
       return False;
     }
 }
-my Card $deuce = Card.new( 2, '♥' );
-say Card.new( 3, '♥' ).better-than( $deuce );
-say $deuce.better-than: Card.new( 3, '♦' );
-say Card.new( 0, "Joker" ).better-than( $deuce );</code></pre>
+my Card $deuce = Card.new( 2, &#39;♥&#39; );
+say Card.new( 3, &#39;♥&#39; ).better-than( $deuce );
+say $deuce.better-than: Card.new( 3, &#39;♦&#39; );
+say Card.new( 0, &#34;Joker&#34; ).better-than( $deuce );</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4778,9 +4655,9 @@ enum french-digits &lt;2 3 4 J Q K Ace&gt;;
 enum spanish-digits &lt;2. 3. 4. Sota Caballo Rey As&gt;;
 class French-card-values does Card-values[french-digits] { };
 class Spanish-card-values does Card-values[spanish-digits] { };
-my $french-cards = French-card-values.new( name =&gt; "French" );
+my $french-cards = French-card-values.new( name =&gt; &#34;French&#34; );
 say $french-cards.better-than( french-digits::«3», french- digits::«J»);
-my $spanish-cards = Spanish-card-values.new( name =&gt; "Española" );
+my $spanish-cards = Spanish-card-values.new( name =&gt; &#34;Española&#34; );
 say $spanish-cards.better-than( Rey, Sota );</code></pre>
 </div>
 </div>
@@ -4792,8 +4669,8 @@ say $spanish-cards.better-than( Rey, Sota );</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $french-cards  = Card-values[french-digits].new( name =&gt; "French" );
-my $spanish-cards = Card-values[spanish-digits].new( name =&gt; "Española" );</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $french-cards  = Card-values[french-digits].new( name =&gt; &#34;French&#34; );
+my $spanish-cards = Card-values[spanish-digits].new( name =&gt; &#34;Española&#34; );</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4811,16 +4688,16 @@ my $spanish-cards = Card-values[spanish-digits].new( name =&gt; "Española" );</
     method Str(::T:) {
         when T ~~ Str {
             my @pair = self.comb;
-            return @pair[0] ~ " of " ~ @pair[1..*].join("");
+            return @pair[0] ~ &#34; of &#34; ~ @pair[1..*].join(&#34;&#34;);
         }
         when T ~~ Pair {
-            return self.value ~ " of " ~ self.key;
+            return self.value ~ &#34; of &#34; ~ self.key;
         }
     }
 }
-my $deuce = "2♠" but Card;
+my $deuce = &#34;2♠&#34; but Card;
 say $deuce.Str; # 2 of ♠
-my $ace = :Bastos("As") but Card; say $ace.Str; # As of Bastos</code></pre>
+my $ace = :Bastos(&#34;As&#34;) but Card; say $ace.Str; # As of Bastos</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4829,8 +4706,8 @@ my $ace = :Bastos("As") but Card; say $ace.Str; # As of Bastos</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $deuce = "2♠" but 2;
-my $ace = "Ace ♠" but 100;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $deuce = &#34;2♠&#34; but 2;
+my $ace = &#34;Ace ♠&#34; but 100;
 say $deuce.^name; # Str+{&lt;anon|1&gt;};
 say $deuce.Int &lt; $ace.Int; # True</code></pre>
 </div>
@@ -4895,15 +4772,15 @@ class Guiñote is Game {
     }
 }
 my @deck = &lt;As 3 7 8 Rey Caballo&gt;;
-my Brisca $game1 .= new: name =&gt; 'brisca1';
+my Brisca $game1 .= new: name =&gt; &#39;brisca1&#39;;
 
-my $game2 = Guiñote.new( name =&gt; 'Este guiñote', diez-de- últimas =&gt; 10 );
+my $game2 = Guiñote.new( name =&gt; &#39;Este guiñote&#39;, diez-de- últimas =&gt; 10 );
 say $game1.score( @deck ); # 28 say $game2.score( @deck ); # 37</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>你定义一个基类 Game。西班牙的纸牌游戏类似于现代纸牌游戏:你抽一手牌，然后从你的手牌中选择一张牌来玩。如果该张牌的得分高于另一张，则你将赢得两张牌。如果没有，则另赢。游戏结束时，你会得到一堆纸牌，并且会得到一张分数，这取决于纸牌的固有分数以及其他因素，例如你赢得了最后一局（diez deúltimas，最后一局得10分）。有不同的游戏（在不同地区和拉丁美洲的游戏方式不同），但基准
-是根据你在游戏期间可能获得的纸牌价值和额外胜利以不同的方式对一堆纸牌评分。但是每个人都有基于卡片的分数，这就是为什么你定义分数方法的原因。通过使用 yadda yadda yadda 运算符（&#8230;&#8203;），你可以使该基类不可实例化，并强制所有子类重新实现它；因此，游戏将是一个抽象的基本类，没有实际的代码。</p>
+是根据你在游戏期间可能获得的纸牌价值和额外胜利以不同的方式对一堆纸牌评分。但是每个人都有基于卡片的分数，这就是为什么你定义分数方法的原因。通过使用 yadda yadda yadda 运算符（…​），你可以使该基类不可实例化，并强制所有子类重新实现它；因此，游戏将是一个抽象的基本类，没有实际的代码。</p>
 </div>
 <div class="paragraph">
 <p>该运算符也可以在角色中使用，强制这些类混合角色以重新实现它。
@@ -4939,8 +4816,8 @@ a op b。  Raku 通过方法调用对此进行了概括:a-class a .= new 等效�
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my @deck = &lt;As 3 7 8 Rey Sota&gt;;
 
-my Game $game1 = Brisca.new: name =&gt; 'brisca1' ;
-my Game $game2 = Guiñote.new( name =&gt; 'Este guiñote', :0diez- de-últimas );
+my Game $game1 = Brisca.new: name =&gt; &#39;brisca1&#39; ;
+my Game $game2 = Guiñote.new( name =&gt; &#39;Este guiñote&#39;, :0diez- de-últimas );
 say $game1.score( @deck );
 say $game2.score( @deck );</code></pre>
 </div>
@@ -4950,9 +4827,9 @@ say $game2.score( @deck );</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my Game $game = Brisca.new: name =&gt; 'brisca1';
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Game $game = Brisca.new: name =&gt; &#39;brisca1&#39;;
 say $game.score( @deck );
-$game = Guiñote.new( name =&gt; 'Este guiñote', :0diez-de-últimas );
+$game = Guiñote.new( name =&gt; &#39;Este guiñote&#39;, :0diez-de-últimas );
 say $game.score( @deck );</code></pre>
 </div>
 </div>
@@ -5100,9 +4977,9 @@ method better-than ( $lhs, $rhs ) {
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -5179,7 +5056,7 @@ method better-than ( $lhs, $rhs ) {
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">class Card-Values {
     has @.values is rw is required;
-    has $.pintan is rw is default("Bastos") = "Espadas";
+    has $.pintan is rw is default(&#34;Bastos&#34;) = &#34;Espadas&#34;;
     method one() is DEPRECATED { @!values.pick ~ $!pintan };
     method draw( $cards = 1 ) { (@!values.pick: $cards ) X~ $!pintan };
 }
@@ -5188,7 +5065,7 @@ my Card-Values $cards .= new: values =&gt; &lt;As Sota Caballo Rey&gt;;
 say $cards.one;
 $cards.pintan = Nil;
 say $cards.draw;
-$cards.values = ("Ace", 2..10, &lt;J Q K&gt;).flat;
+$cards.values = (&#34;Ace&#34;, 2..10, &lt;J Q K&gt;).flat;
 say $cards.draw( 2 );</code></pre>
 </div>
 </div>
@@ -5208,7 +5085,7 @@ say $cards.draw( 2 );</code></pre>
     }
 }
 import Moves;
-say shuffle( "As de bastos", "3 de oros", "Sota de espadas" );</code></pre>
+say shuffle( &#34;As de bastos&#34;, &#34;3 de oros&#34;, &#34;Sota de espadas&#34; );</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5226,12 +5103,12 @@ say shuffle( "As de bastos", "3 de oros", "Sota de espadas" );</code></pre>
 }
 
 import Moves :shfl;
-say shuffle( "As de bastos", "3 de oros", "Sota de espadas" );
+say shuffle( &#34;As de bastos&#34;, &#34;3 de oros&#34;, &#34;Sota de espadas&#34; );
 # say card-sort(&lt;1♠ 5♣ 3♥&gt;); # Purposefully commented out</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这种情况下，你添加了一个要导出的参数。 它实际上是一个对，<code>shfl &#8658; True</code>，但这将是选择性导入的一种标签或组。 当你在要导入的软件包的名称后面使用它时，它实际上表示你只对带有该标记的例程感兴趣。 这也从 <code>:DEFAULT</code> 组中排除了该例程，该例程是在不使用 <code>export</code> 的情况下添加的； 在这种情况下，<code>import Moves</code>；
+<p>在这种情况下，你添加了一个要导出的参数。 它实际上是一个对，<code>shfl ⇒ True</code>，但这将是选择性导入的一种标签或组。 当你在要导入的软件包的名称后面使用它时，它实际上表示你只对带有该标记的例程感兴趣。 这也从 <code>:DEFAULT</code> 组中排除了该例程，该例程是在不使用 <code>export</code> 的情况下添加的； 在这种情况下，<code>import Moves</code>；
 只会导入卡片排序，因为 <code>shuffle</code> 不在 <code>:DEFAULT</code> 组中。 你需要将此组显式添加到列表中，以防默认情况下也要导出该组：</p>
 </div>
 <div class="listingblock">
@@ -5262,7 +5139,7 @@ say shuffle( "As de bastos", "3 de oros", "Sota de espadas" );
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">need Moves;
 import Moves;
-say shuffle( "As de bastos", "3 de oros", "Sota de espadas" );
+say shuffle( &#34;As de bastos&#34;, &#34;3 de oros&#34;, &#34;Sota de espadas&#34; );
 say card-sort(&lt;1♠ 5♣ 3♥&gt;);</code></pre>
 </div>
 </div>
@@ -5334,9 +5211,9 @@ sub shuffle( *@deck ) is export {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $module = Bool.pick?? "Moves" !! "Moves-Pro";
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $module = Bool.pick?? &#34;Moves&#34; !! &#34;Moves-Pro&#34;;
 require ::($module);
-say ::("$module")::EXPORT::DEFAULT::('&amp;shuffle')( "As de bastos", "3 de oros", "Sota de espadas" );</code></pre>
+say ::(&#34;$module&#34;)::EXPORT::DEFAULT::(&#39;&amp;shuffle&#39;)( &#34;As de bastos&#34;, &#34;3 de oros&#34;, &#34;Sota de espadas&#34; );</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5350,9 +5227,9 @@ say ::("$module")::EXPORT::DEFAULT::('&amp;shuffle')( "As de bastos", "3 de oros
 sub shuffle( *@deck ) {
     @deck.pick( * );
 }
-my $shuffle = Bool.pick?? "shuffle" !! "shuffle-pro";
+my $shuffle = Bool.pick?? &#34;shuffle&#34; !! &#34;shuffle-pro&#34;;
 
-say &amp;::($shuffle)( "As de bastos", "3 de oros", "Sota de espadas" );&gt;</code></pre>
+say &amp;::($shuffle)( &#34;As de bastos&#34;, &#34;3 de oros&#34;, &#34;Sota de espadas&#34; );&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5360,8 +5237,8 @@ say &amp;::($shuffle)( "As de bastos", "3 de oros", "Sota de espadas" );&gt;</co
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $pro = Bool.pick?? "" !! "-pro";
-say &amp;::("shuffle$pro")( "As de bastos", "3 de oros", "Sota de espadas" );</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $pro = Bool.pick?? &#34;&#34; !! &#34;-pro&#34;;
+say &amp;::(&#34;shuffle$pro&#34;)( &#34;As de bastos&#34;, &#34;3 de oros&#34;, &#34;Sota de espadas&#34; );</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5369,23 +5246,23 @@ say &amp;::("shuffle$pro")( "As de bastos", "3 de oros", "Sota de espadas" );</c
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say ::("\&amp;shuffle$pro")( "As de bastos", "3 de oros", "Sota de espadas" );</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say ::(&#34;\&amp;shuffle$pro&#34;)( &#34;As de bastos&#34;, &#34;3 de oros&#34;, &#34;Sota de espadas&#34; );</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>你需要在转义符的转义符（""）之内处理转义符，否则将其理解为常规调用。
+<p>你需要在转义符的转义符（&#34;&#34;）之内处理转义符，否则将其理解为常规调用。
 间接查找以相同的方式工作，生成一个或另一个名称。 现在，你可以按需分解常规名称了：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>::("$module") 将解析为符号，即模块名称。</p>
+<p>::(&#34;$module&#34;) 将解析为符号，即模块名称。</p>
 </li>
 <li>
 <p>::EXPORT::DEFAULT 访问 DEFAULT 组中的导出例程表。</p>
 </li>
 <li>
-<p>最后，::('＆shuffle') 将返回你要查找的符号。 请在这里注意单引号。</p>
+<p>最后，::(&#39;＆shuffle&#39;) 将返回你要查找的符号。 请在这里注意单引号。</p>
 </li>
 </ul>
 </div>
@@ -5397,7 +5274,7 @@ say &amp;::("shuffle$pro")( "As de bastos", "3 de oros", "Sota de espadas" );</c
 <pre class="highlight"><code class="language-raku" data-lang="raku">use Moves;
 say Moves::EXPORT::.keys; # (ALL DEFAULT shfl)
 say Moves::EXPORT::DEFAULT::.keys; # (&amp;shuffle &amp;card-sort)
-say &amp;Moves::EXPORT::DEFAULT::shuffle( "As de bastos","3 de oros", "Sota de espadas" ); # Return the usual</code></pre>
+say &amp;Moves::EXPORT::DEFAULT::shuffle( &#34;As de bastos&#34;,&#34;3 de oros&#34;, &#34;Sota de espadas&#34; ); # Return the usual</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5417,9 +5294,9 @@ say &amp;Moves::EXPORT::DEFAULT::shuffle( "As de bastos","3 de oros", "Sota de e
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -5503,7 +5380,7 @@ say draw-two;</code></pre>
     }
 }
 
-say "loaded";</code></pre>
+say &#34;loaded&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5545,7 +5422,7 @@ say "loaded";</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">use JSON::Fast;
-say to-json { 3 =&gt; '♠', 8 =&gt; '♣' };</code></pre>
+say to-json { 3 =&gt; &#39;♠&#39;, 8 =&gt; &#39;♣&#39; };</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5554,8 +5431,8 @@ say to-json { 3 =&gt; '♠', 8 =&gt; '♣' };</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">{
-  "8": "♣",
-  "3": "♠"
+  &#34;8&#34;: &#34;♣&#34;,
+  &#34;3&#34;: &#34;♠&#34;
 }</code></pre>
 </div>
 </div>
@@ -5570,10 +5447,10 @@ say to-json { 3 =&gt; '♠', 8 =&gt; '♣' };</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">constant URL='https://deckofcardsapi.com/api/deck/';
+<pre class="highlight"><code class="language-raku" data-lang="raku">constant URL=&#39;https://deckofcardsapi.com/api/deck/&#39;;
 use WWW;
-my $deck-id = jget(URL ~ 'new/shuffle/?deck_count=1')&lt;deck_id&gt;;
-say jget URL ~ "/$deck-id/draw/?count=2";</code></pre>
+my $deck-id = jget(URL ~ &#39;new/shuffle/?deck_count=1&#39;)&lt;deck_id&gt;;
+say jget URL ~ &#34;/$deck-id/draw/?count=2&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5657,15 +5534,15 @@ use Cro::HTTP::Server;
 use JSON::Fast;
 use Draw-Two;
 my $application = route {
-    get -&gt; 'cards' {
-        content 'application/json', to-json draw-two;
+    get -&gt; &#39;cards&#39; {
+        content &#39;application/json&#39;, to-json draw-two;
     }
 }
 
 my Cro::Service $croupier = Cro::HTTP::Server.new:
     :host&lt;localhost&gt;, :port&lt;31415&gt;, :$application;
 $croupier.start;
-say "Server started";
+say &#34;Server started&#34;;
 react whenever signal(SIGINT) { $croupier.stop; exit; }</code></pre>
 </div>
 </div>
@@ -5745,8 +5622,8 @@ method draw ( UInt $how-many = 1 --&gt; Slip ) {
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">use Deck;
 my Deck $this-deck .= new;
-say "One card ", $this-deck.draw;
-say "Three cards ", $this-deck.draw( 3 ).join(" ❦ ");</code></pre>
+say &#34;One card &#34;, $this-deck.draw;
+say &#34;Three cards &#34;, $this-deck.draw( 3 ).join(&#34; ❦ &#34;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5758,7 +5635,7 @@ say "Three cards ", $this-deck.draw( 3 ).join(" ❦ ");</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my Deck $this-deck .= new;
 my UInt $how-many = (@*ARGS[0] // 1).UInt;
-say "Cards ", $this-deck.draw( $how-many ).join(" ❦ ");</code></pre>
+say &#34;Cards &#34;, $this-deck.draw( $how-many ).join(&#34; ❦ &#34;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5770,7 +5647,7 @@ say "Cards ", $this-deck.draw( $how-many ).join(" ❦ ");</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>然后 <code>@*ARGS[0]</code> 将包含 "3" 作为字符串。这就是为什么你需要转
+<p>然后 <code>@*ARGS[0]</code> 将包含 &#34;3&#34; 作为字符串。这就是为什么你需要转
 通过使用 <code>(@*ARGS[0] // 1).Uint</code> 将其转换为明智的选择。 <code>draw</code> 方法不使用任何内容（默认为1）或使用 Uint。<code>//</code> 是定义或运算符：如果已定义，则将值返回到左侧；如果不是，它将返回右侧的值。这是为变量分配默认值的一种很好的习惯用法。没有参数，它将默认为1。</p>
 </div>
 <div class="paragraph">
@@ -5780,8 +5657,8 @@ say "Cards ", $this-deck.draw( $how-many ).join(" ❦ ");</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -5829,7 +5706,7 @@ say "Cards ", $this-deck.draw( $how-many ).join(" ❦ ");</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my Cro::Service $croupier = Cro::HTTP::Server.new: :host&lt;localhost&gt;, :port(%*ENV&lt;CRO_PORT&gt;), :$application;
 $croupier.start;
-say "Server started at %*ENV&lt;CRO_PORT&gt;";</code></pre>
+say &#34;Server started at %*ENV&lt;CRO_PORT&gt;&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5847,7 +5724,7 @@ say "Server started at %*ENV&lt;CRO_PORT&gt;";</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my Deck $this-deck .= new;
 my $how-many = %*ENV&lt;HOW_MANY&gt; // 1;
-say "Cards ", $this-deck.draw( $how-many ).join(" ❦ ");</code></pre>
+say &#34;Cards &#34;, $this-deck.draw( $how-many ).join(&#34; ❦ &#34;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5858,7 +5735,7 @@ say "Cards ", $this-deck.draw( $how-many ).join(" ❦ ");</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub MAIN( $how-many = 1) {
 my Deck $this-deck .= new;
-say "Cards ", $this-deck.draw( $how-many ).join(" ❦ ");
+say &#34;Cards &#34;, $this-deck.draw( $how-many ).join(&#34; ❦ &#34;);
 }</code></pre>
 </div>
 </div>
@@ -5871,10 +5748,10 @@ say "Cards ", $this-deck.draw( $how-many ).join(" ❦ ");
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my Deck $this-deck .= new;
 multi sub MAIN() {
-    say "Your card ", $this-deck.draw;
+    say &#34;Your card &#34;, $this-deck.draw;
 }
 multi sub MAIN( $how-many ) {
-    say "Cards ", $this-deck.draw( $how-many ).join(" ❦ ");
+    say &#34;Cards &#34;, $this-deck.draw( $how-many ).join(&#34; ❦ &#34;);
 }</code></pre>
 </div>
 </div>
@@ -5888,7 +5765,7 @@ multi sub MAIN( $how-many ) {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN( UInt $how-many ) {
-    say "Cards ", $this-deck.draw( $how-many ).join(" ❦ ");
+    say &#34;Cards &#34;, $this-deck.draw( $how-many ).join(&#34; ❦ &#34;);
 }</code></pre>
 </div>
 </div>
@@ -5915,7 +5792,7 @@ Chapter11/multi-main-type.p6 &lt;how-many&gt;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">use JSON::Fast;
-say from-json "foobar; baz";</code></pre>
+say from-json &#34;foobar; baz&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5934,8 +5811,8 @@ say from-json "foobar; baz";</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $this-deck = Deck.new( cards =&gt; ( &lt;A J Q K&gt; X~ &lt;♠ ♦ ♣ ♥&gt; ) );
 multi sub MAIN( UInt $how-many ) {
-    die "There aren't that many cards" if $how-many &gt; 16;
-    say "Cards ", $this-deck.draw( $how-many ).join(" ❦ ");
+    die &#34;There aren&#39;t that many cards&#34; if $how-many &gt; 16;
+    say &#34;Cards &#34;, $this-deck.draw( $how-many ).join(&#34; ❦ &#34;);
 }</code></pre>
 </div>
 </div>
@@ -5944,7 +5821,7 @@ multi sub MAIN( UInt $how-many ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">There aren't that many cards
+<pre class="highlight"><code class="language-raku" data-lang="raku">There aren&#39;t that many cards
   in sub MAIN at Chapter11/die.p6 line 15
   in block &lt;unit&gt; at Chapter11/die.p6 line 8</code></pre>
 </div>
@@ -5966,8 +5843,8 @@ multi sub MAIN( UInt $how-many ) {
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -6034,7 +5911,7 @@ multi sub MAIN( UInt $how-many ) {
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method draw ( UInt $how-many = 1 ) { if ( $how-many &gt; @!cards.elems ) {
 return X::OutOfRange.new( got =&gt; $how-many,
-range =&gt; "1.." ~ @!cards.elems).fail
+range =&gt; &#34;1..&#34; ~ @!cards.elems).fail
 }
 if @!cards {
 self!_shuffle;
@@ -6057,7 +5934,7 @@ return X::OutOfRange.new.fail; }
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my Decker $this-deck .= new;
 my UInt $how-many = (@*ARGS[0] // 1).UInt;
-say "Cards ", $this-deck.draw( $how-many ).join(" ❦ ");</code></pre>
+say &#34;Cards &#34;, $this-deck.draw( $how-many ).join(&#34; ❦ &#34;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6081,9 +5958,9 @@ say "Cards ", $this-deck.draw( $how-many ).join(" ❦ ");</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">my Decker $this-deck .= new;
 my $draw = $this-deck.draw: (@*ARGS[0] // 1).UInt;
 if $draw.defined == False {
-    say "Oops, something went wrong →\n\t", $draw.exception;
+    say &#34;Oops, something went wrong →\n\t&#34;, $draw.exception;
 } else {
-    say "Cards ", $draw.join(" ❦ ");
+    say &#34;Cards &#34;, $draw.join(&#34; ❦ &#34;);
 }</code></pre>
 </div>
 </div>
@@ -6101,9 +5978,9 @@ Argument out of range. Is: 44, should be in 1..40</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method draw ( UInt $how-many = 1 --&gt; Slip) { if ( ! @!cards.elems ) {
-X::AdHoc.new( payload =&gt; "No more cards" ).throw }
+X::AdHoc.new( payload =&gt; &#34;No more cards&#34; ).throw }
 if ( $how-many &gt; @!cards.elems ) { X::OutOfRange.new( got =&gt; $how-many,
-range =&gt; "1.." ~ @!cards.elems).throw
+range =&gt; &#34;1..&#34; ~ @!cards.elems).throw
 }
     if @!cards {
         self!_shuffle;
@@ -6125,12 +6002,12 @@ return @draw.Slip; }
 <pre class="highlight"><code class="language-raku" data-lang="raku">use Deckeroo;
 my Deckeroo $this-deck .= new; CATCH {
 when X::AdHoc { .Str.say }
-when X::OutOfRange { say "We don't have that many cards: ", $_.Str; }
-default { say "Something has happened: $_"; }
+when X::OutOfRange { say &#34;We don&#39;t have that many cards: &#34;, $_.Str; }
+default { say &#34;Something has happened: $_&#34;; }
 }
 for ^(@*ARGS[0] // 1) {
-say "Cards ", $this-deck.draw(( @*ARGS[1] // 2 ).UInt ).
-join(" ❦ "); }</code></pre>
+say &#34;Cards &#34;, $this-deck.draw(( @*ARGS[1] // 2 ).UInt ).
+join(&#34; ❦ &#34;); }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6166,7 +6043,7 @@ No more cards</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">&gt;perl6 catch.p6 1 54
-We don't have that many cards: Argument out of range. Is: 54, should be in 1..40</code></pre>
+We don&#39;t have that many cards: Argument out of range. Is: 54, should be in 1..40</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6187,8 +6064,8 @@ We don't have that many cards: Argument out of range. Is: 54, should be in 1..40
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">try {
     for ^(@*ARGS[0] // 1) {
-say "Cards ", $this-deck.draw(( @*ARGS[1] // 2 ).UInt ).
-join(" ❦ "); }
+say &#34;Cards &#34;, $this-deck.draw(( @*ARGS[1] // 2 ).UInt ).
+join(&#34; ❦ &#34;); }
 }</code></pre>
 </div>
 </div>
@@ -6198,7 +6075,7 @@ join(" ❦ "); }
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">try for ^(@*ARGS[0] // 1) {
-    say "Cards ", $this-deck.draw(( @*ARGS[1] // 2 ).UInt ).join(" ❦ ");
+    say &#34;Cards &#34;, $this-deck.draw(( @*ARGS[1] // 2 ).UInt ).join(&#34; ❦ &#34;);
 }</code></pre>
 </div>
 </div>
@@ -6212,7 +6089,7 @@ join(" ❦ "); }
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">unit class X::Cards::NoMore is Exception;
 method message() {
-"No more cards left, sorry";
+&#34;No more cards left, sorry&#34;;
 }</code></pre>
 </div>
 </div>
@@ -6248,7 +6125,7 @@ if ( ! @!cards.elems ) { X::Cards::NoMore.new.throw
 <div class="paragraph">
 <p>使用文件系统，网络以及所有可用的内容
 如今，与系统交互并不像以前那么重要
-之前。 十年前，大多数语言参考都以 "hello world" 和一个"打开文件"命令开头，而如今，大多数程序运行在通过环境变量（在第11章中已看到）或通过网络（在第10章中看到）进行交互的环境中。 。 尽管如此，知道如何与系统交互仍然是许多程序的组成部分，甚至在我们需要运行以其他语言编写的应用程序时更是如此。 下一个。</p>
+之前。 十年前，大多数语言参考都以 &#34;hello world&#34; 和一个&#34;打开文件&#34;命令开头，而如今，大多数程序运行在通过环境变量（在第11章中已看到）或通过网络（在第10章中看到）进行交互的环境中。 。 尽管如此，知道如何与系统交互仍然是许多程序的组成部分，甚至在我们需要运行以其他语言编写的应用程序时更是如此。 下一个。</p>
 </div>
 <div class="sect2">
 <h3 id="_运行外部程序">12.1. 运行外部程序</h3>
@@ -6269,9 +6146,9 @@ if ( ! @!cards.elems ) { X::Cards::NoMore.new.throw
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -6315,7 +6192,7 @@ if ( ! @!cards.elems ) { X::Cards::NoMore.new.throw
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">shell "concentration";</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">shell &#34;concentration&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6323,7 +6200,7 @@ if ( ! @!cards.elems ) { X::Cards::NoMore.new.throw
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">shell "echo '1,1 2,2' | concentration";</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">shell &#34;echo &#39;1,1 2,2&#39; | concentration&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6343,9 +6220,9 @@ row-1,column-1 row-2,column-2 »</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -6355,17 +6232,17 @@ row-1,column-1 row-2,column-2 »</code></pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">:$in</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">'-'</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#39;-&#39;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">捕获输入</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">:$out</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">'-'</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#39;-&#39;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">捕获输出</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">:$err</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">'-'</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#39;-&#39;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">捕获错误输出</p></td>
 </tr>
 <tr>
@@ -6400,8 +6277,8 @@ row-1,column-1 row-2,column-2 »</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $concentration = shell "concentration", :in;
-$concentration.in.put("1,1 2,2");</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $concentration = shell &#34;concentration&#34;, :in;
+$concentration.in.put(&#34;1,1 2,2&#34;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6415,9 +6292,9 @@ $concentration.in.put("1,1 2,2");</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -6458,10 +6335,10 @@ $concentration.in.put("1,1 2,2");</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $concentration = Proc.new: :in :out;
-$concentration.shell: "concentration";
-$concentration.in.say("1,1 2,2");
+$concentration.shell: &#34;concentration&#34;;
+$concentration.in.say(&#34;1,1 2,2&#34;);
 $concentration.in.close;
-say "Output is \n\t", $concentration.out.lines().join("\n\t");</code></pre>
+say &#34;Output is \n\t&#34;, $concentration.out.lines().join(&#34;\n\t&#34;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6480,8 +6357,8 @@ row-1,column-1 row-2,column-2 »</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $cal = run "cal", "1965", :out;
-say "The whole calendar for 1965\n\n", $cal.out.lines().join("\n\t");</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $cal = run &#34;cal&#34;, &#34;1965&#34;, :out;
+say &#34;The whole calendar for 1965\n\n&#34;, $cal.out.lines().join(&#34;\n\t&#34;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6496,7 +6373,7 @@ say "The whole calendar for 1965\n\n", $cal.out.lines().join("\n\t");</code></pr
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">if $*ARGFILES.path ~~ IO::Special {
-    say "No input"
+    say &#34;No input&#34;
 } else {
     $*ARGFILES.lines.elems.say
 }</code></pre>
@@ -6511,7 +6388,7 @@ say "The whole calendar for 1965\n\n", $cal.out.lines().join("\n\t");</code></pr
 </div>
 </div>
 <div class="paragraph">
-<p>如果没有参数，它将仅打印“无输入" <code>$*ARGFILES</code> 是一个魔术变量，它包含作为参数提供的所有文件的整理内容。 没有它们，<code>$*ARGFILES</code> 将改为从标准输入中读取，它将变成 IO::Special 句柄，指向标准输入STDIN。 你对该行为不感兴趣，因此该程序将简单地退出并显示一条消息。</p>
+<p>如果没有参数，它将仅打印“无输入&#34; <code>$*ARGFILES</code> 是一个魔术变量，它包含作为参数提供的所有文件的整理内容。 没有它们，<code>$*ARGFILES</code> 将改为从标准输入中读取，它将变成 IO::Special 句柄，指向标准输入STDIN。 你对该行为不感兴趣，因此该程序将简单地退出并显示一条消息。</p>
 </div>
 <div class="paragraph">
 <p>如果不是这种情况，<code>.lines</code> 将返回一个列表，其中包含打开文件中的所有行； <code>.elems</code> 将对它们进行计数，然后说将它们打印出来。
@@ -6519,9 +6396,9 @@ say "The whole calendar for 1965\n\n", $cal.out.lines().join("\n\t");</code></pr
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -6566,9 +6443,9 @@ say "The whole calendar for 1965\n\n", $cal.out.lines().join("\n\t");</code></pr
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -6638,7 +6515,7 @@ say "The whole calendar for 1965\n\n", $cal.out.lines().join("\n\t");</code></pr
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say &lt;. Chapter12&gt;.map: { $_ =&gt; "$_/x.p6".IO.e };</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &lt;. Chapter12&gt;.map: { $_ =&gt; &#34;$_/x.p6&#34;.IO.e };</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6658,21 +6535,21 @@ say "The whole calendar for 1965\n\n", $cal.out.lines().join("\n\t");</code></pr
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">say &lt;. Chapter12&gt;
-    .map( * ~ "/x.p6")
+    .map( * ~ &#34;/x.p6&#34;)
     .grep( { .IO.e } )
     .map( { $_ =&gt; .IO.s } )</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>首先使用 map 创建可能的文件名，然后仅过滤现有的文件名，最后使用 <code>.smethod</code> 计算大小。这将在同一目录中打印(<code>./x.p6 &#8658; 104</code>)。</p>
+<p>首先使用 map 创建可能的文件名，然后仅过滤现有的文件名，最后使用 <code>.smethod</code> 计算大小。这将在同一目录中打印(<code>./x.p6 ⇒ 104</code>)。</p>
 </div>
 <div class="paragraph">
 <p>你已经可以使用文件句柄从中提取信息或对其进行写入。 表12-6显示了可直接在手柄上使用的主要方法。</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -6714,7 +6591,7 @@ say "The whole calendar for 1965\n\n", $cal.out.lines().join("\n\t");</code></pr
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">"/tmp/cards.txt".IO.spurt: 1..10 X~ &lt;♠ ♦ ♣ ♥&gt;;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#34;/tmp/cards.txt&#34;.IO.spurt: 1..10 X~ &lt;♠ ♦ ♣ ♥&gt;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6722,7 +6599,7 @@ say "The whole calendar for 1965\n\n", $cal.out.lines().join("\n\t");</code></pr
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "/tmp/cards.txt".IO.comb: "♥";</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;/tmp/cards.txt&#34;.IO.comb: &#34;♥&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6730,8 +6607,8 @@ say "The whole calendar for 1965\n\n", $cal.out.lines().join("\n\t");</code></pr
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -6801,7 +6678,7 @@ say "The whole calendar for 1965\n\n", $cal.out.lines().join("\n\t");</code></pr
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $open-first = "/tmp/cards.txt".IO.open: :mode&lt;wo&gt;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $open-first = &#34;/tmp/cards.txt&#34;.IO.open: :mode&lt;wo&gt;;
 $open-first.put: 1..10 X~ &lt;♠♦♣♥&gt;;
 $open-first.close;</code></pre>
 </div>
@@ -6811,9 +6688,9 @@ $open-first.close;</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -6849,11 +6726,11 @@ $open-first.close;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">use LWP::Simple;
-constant $filename = "/tmp/camelia.ico";
-my $camelia = LWP::Simple.get( 'https://docs.perl6.org/ favicon.ico' );
+constant $filename = &#34;/tmp/camelia.ico&#34;;
+my $camelia = LWP::Simple.get( &#39;https://docs.perl6.org/ favicon.ico&#39; );
 my $binary-file = $filename.IO.open: :bin, :w; $binary-file.write( $camelia );
 $binary-file.close;
-say "Written $filename";</code></pre>
+say &#34;Written $filename&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6864,10 +6741,10 @@ say "Written $filename";</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">constant $filename = "/tmp/camelia.ico";
+<pre class="highlight"><code class="language-raku" data-lang="raku">constant $filename = &#34;/tmp/camelia.ico&#34;;
 my $binary-file = $filename.IO.open: :bin, :r;
 my $camelia = $binary-file.read; $binary-file.close;
-say "Read ", $camelia.elems, " bytes";</code></pre>
+say &#34;Read &#34;, $camelia.elems, &#34; bytes&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6900,7 +6777,7 @@ say "Read ", $camelia.elems, " bytes";</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">use Test;
 sub returns-forty-two( --&gt; 42 ) {};
-is( returns-forty-two, 42, "Returns 42");</code></pre>
+is( returns-forty-two, 42, &#34;Returns 42&#34;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6934,7 +6811,7 @@ is( returns-forty-two, 42, "Returns 42");</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub returns-forty-two( --&gt; 42 ) {};
-ok( returns-forty-two() == 66, "Returns 42");</code></pre>
+ok( returns-forty-two() == 66, &#34;Returns 42&#34;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6943,7 +6820,7 @@ ok( returns-forty-two() == 66, "Returns 42");</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">not ok 1 - Returns 42
-# Failed test 'Returns 42'
+# Failed test &#39;Returns 42&#39;
 # at ../Chapter13-notest/not-ok.p6 line 9</code></pre>
 </div>
 </div>
@@ -6953,8 +6830,8 @@ ok( returns-forty-two() == 66, "Returns 42");</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -7021,7 +6898,7 @@ ok( returns-forty-two() == 66, "Returns 42");</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">plan 1;
-use-ok( "Deckie", "Can use library");</code></pre>
+use-ok( &#34;Deckie&#34;, &#34;Can use library&#34;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -7052,10 +6929,10 @@ ok 1 - Can use library
 my $deck = Deckie.new;
 for 1..($deck.cards.elems/2) {
     my $draw = $deck.draw( 2 );
-    is( $draw.elems, 2, "Correct number of elems" );
-    cmp-ok( +$draw.comb[0], "&gt;", 0, "Figure OK");
+    is( $draw.elems, 2, &#34;Correct number of elems&#34; );
+    cmp-ok( +$draw.comb[0], &#34;&gt;&#34;, 0, &#34;Figure OK&#34;);
 }
-throws-like { $deck.draw( 2 ) }, X::Cards::NoMore, "No more cards" ;
+throws-like { $deck.draw( 2 ) }, X::Cards::NoMore, &#34;No more cards&#34; ;
 done-testing;</code></pre>
 </div>
 </div>
@@ -7075,7 +6952,7 @@ ok 41 - No more cards 1..41</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>首先是一个子测试，该子测试检查代码是否确实引发了异常以及它是否是正确的类型，如果两个都正确，它将显示消息 "No more cards"。 在这种情况下，如果你使用完成测试来指示测试结束，那么测试数量将显示在测试脚本的末尾，而不是像以前那样显示在开始处。
+<p>首先是一个子测试，该子测试检查代码是否确实引发了异常以及它是否是正确的类型，如果两个都正确，它将显示消息 &#34;No more cards&#34;。 在这种情况下，如果你使用完成测试来指示测试结束，那么测试数量将显示在测试脚本的末尾，而不是像以前那样显示在开始处。
 你可以在 <code>plan *</code> 之前进行测试，但效果大致相同。 另外，当两个测试相关或应用于同一对象时，可以将它们分组为子测试：</p>
 </div>
 <div class="listingblock">
@@ -7085,9 +6962,9 @@ my $deck = Deckie.new;
 for 1..($deck.cards.elems/2) {
     my $draw = $deck.draw( 2 );
     subtest {
-        is( $draw.elems, 2, "Correct number of elems" );
-        cmp-ok( +$draw.comb[0], "&gt;", 0, "Figure OK");
-    }, "Testing card hand"
+        is( $draw.elems, 2, &#34;Correct number of elems&#34; );
+        cmp-ok( +$draw.comb[0], &#34;&gt;&#34;, 0, &#34;Figure OK&#34;);
+    }, &#34;Testing card hand&#34;
 }</code></pre>
 </div>
 </div>
@@ -7097,9 +6974,9 @@ for 1..($deck.cards.elems/2) {
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -7123,8 +7000,8 @@ todo, skip, skip-rest</p></td>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -7155,8 +7032,8 @@ todo, skip, skip-rest</p></td>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">plan 1;
-my $path = "./ok.p6".IO.e??"./ok.p6"!!"Chapter13/ok.p6";
-is-run $path, :out("ok 1 - Returns 42\n"), "Runs test";</code></pre>
+my $path = &#34;./ok.p6&#34;.IO.e??&#34;./ok.p6&#34;!!&#34;Chapter13/ok.p6&#34;;
+is-run $path, :out(&#34;ok 1 - Returns 42\n&#34;), &#34;Runs test&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -7206,7 +7083,7 @@ ok 1 - Runs test</code></pre>
 my $deck = Deckie.new;
 for 1..($deck.cards.elems/2) {
     given $deck.draw( 2 ) {
-        isnt( @_[0], @_[1], "Cards from pair are different");
+        isnt( @_[0], @_[1], &#34;Cards from pair are different&#34;);
     }
 }</code></pre>
 </div>
@@ -7250,7 +7127,7 @@ test-perl6</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>正在声明一对以“服务”为键，并使用 <code>[docker]</code> 这样的值。 这些键的解释顺序是预定义的，并且与文件中的显示方式无关。 “最小”语言表示你将不下载任何特定语言，服务的“ docker”命令其启动docker服务。 完成后，“安装”阶段将下载 jjmerelo/test-perl6 docker 窗映像。 实际上，将通过运行 "script" 键的值进行测试，该脚本通过 <code>-v</code> 在映像内的当前目录中挂载，并仅运行默认测试。</p>
+<p>正在声明一对以“服务”为键，并使用 <code>[docker]</code> 这样的值。 这些键的解释顺序是预定义的，并且与文件中的显示方式无关。 “最小”语言表示你将不下载任何特定语言，服务的“ docker”命令其启动docker服务。 完成后，“安装”阶段将下载 jjmerelo/test-perl6 docker 窗映像。 实际上，将通过运行 &#34;script&#34; 键的值进行测试，该脚本通过 <code>-v</code> 在映像内的当前目录中挂载，并仅运行默认测试。</p>
 </div>
 <div class="paragraph">
 <p>你将需要在主模块目录中将该文件另存为 .travis.yml。 你显然需要注册 Travis 并在你正在运行的存储库中启用它才能继续进行。 当结果的状态（通过或失败）改变时，Travis 将为你运行测试并向你发送消息。</p>
@@ -7261,9 +7138,9 @@ test-perl6</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
-  "description" : "Test",
-  "name" : " Raku  Quick Reference examples",
-  "version" : "0.0.1"
+  &#34;description&#34; : &#34;Test&#34;,
+  &#34;name&#34; : &#34; Raku  Quick Reference examples&#34;,
+  &#34;version&#34; : &#34;0.0.1&#34;
 }</code></pre>
 </div>
 </div>
@@ -7331,7 +7208,7 @@ Thrown when there are no more cards in the deck.
 
 #| Returns the exception message
 method message() {
-    "No more cards left, sorry";
+    &#34;No more cards left, sorry&#34;;
 }
 
 =begin pod
@@ -7360,8 +7237,8 @@ it under the Artistic License 2.0.
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 4. 主要的 Pod 转换模块</caption>
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -7398,7 +7275,7 @@ it under the Artistic License 2.0.
 <p>将以 HTML 呈现标准输出。通常，如果已安装模块的名称为 <code>Pod::To::XXX</code>，则将使用 <code>--doc=XXX</code>。默认情况下，它使用系统随附的 <code>Pod::To::Text</code>。</p>
 </div>
 <div class="paragraph">
-<p>让我们再次观察两种文档：Pod 命令的前缀为 <code>=</code>，智能注释的前缀为 <code><mark></code>。 <code></mark>|</code> 注释在方法声明之前，并将与方法签名一起显示在输出中。这样，很容易将诸如 Pod6 之类的 markdown 方法与生成的文档中的注释结合在一起。</p>
+<p>让我们再次观察两种文档：Pod 命令的前缀为 <code>=</code>，智能注释的前缀为 <code><mark></mark></code>。 <code>|</code> 注释在方法声明之前，并将与方法签名一起显示在输出中。这样，很容易将诸如 Pod6 之类的 markdown 方法与生成的文档中的注释结合在一起。</p>
 </div>
 <div class="paragraph">
 <p>Pod 命令有四种类型：</p>
@@ -7475,22 +7352,22 @@ it under the Artistic License 2.0.
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">{
-  "authors" : [ "JJ Merelo" ],
-  "build-depends" : [ ],
-  "depends" : [ ],
-  "description" : "A card deck",
-  "license" : "Artistic-2.0",
-  "name" : "Deckie",
-  "perl" : "6.*",
-  "provides" : {
-    "Deckie" : "lib/Deckie.pm6",
-    "X::Cards::NoMore" : "lib/X/Cards/NoMore"
+  &#34;authors&#34; : [ &#34;JJ Merelo&#34; ],
+  &#34;build-depends&#34; : [ ],
+  &#34;depends&#34; : [ ],
+  &#34;description&#34; : &#34;A card deck&#34;,
+  &#34;license&#34; : &#34;Artistic-2.0&#34;,
+  &#34;name&#34; : &#34;Deckie&#34;,
+  &#34;perl&#34; : &#34;6.*&#34;,
+  &#34;provides&#34; : {
+    &#34;Deckie&#34; : &#34;lib/Deckie.pm6&#34;,
+    &#34;X::Cards::NoMore&#34; : &#34;lib/X/Cards/NoMore&#34;
   },
-  "resources" : [ ],
-  "source-url" : "https://github.com/JJ/perl6-quick-reference-chapter14.git",
-  "tags" : [ "apress", "games" ],
-  "test-depends" : [ ],
-  "version" : "0.0.1"
+  &#34;resources&#34; : [ ],
+  &#34;source-url&#34; : &#34;https://github.com/JJ/perl6-quick-reference-chapter14.git&#34;,
+  &#34;tags&#34; : [ &#34;apress&#34;, &#34;games&#34; ],
+  &#34;test-depends&#34; : [ ],
+  &#34;version&#34; : &#34;0.0.1&#34;
 }</code></pre>
 </div>
 </div>
@@ -7517,7 +7394,7 @@ it under the Artistic License 2.0.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">"resources" : [ "examples/deckie.p6" ],</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#34;resources&#34; : [ &#34;examples/deckie.p6&#34; ],</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -7535,7 +7412,7 @@ it under the Artistic License 2.0.
 <pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env perl6
 use v6;
 use Deckie;
-say Deckie.new.draw( 40 ).join(" · " );</code></pre>
+say Deckie.new.draw( 40 ).join(&#34; · &#34; );</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -7556,7 +7433,7 @@ meta-ok;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>将通过运行 meta-o 测试来检查 META6.json 文件是否遵循正确的语法。它还将检查它是否包含必填字段，以及某些字段（如许可证）的格式是否正确。由于测试是按顺序运行的，并且这是应该检查的第一件事，因此该测试将命名为 00-meta.t。<code>Test::META</code> 不属于标准发行版，因此你需要将依赖于测试的键更改为 "test-depends": ["Test::META"],，这表明你仅需要该模块进行测试，而实际上不需要使该模块永久运行。某些模块安装应用程序可能会选择临时添加它或询问它。完成所有这些之后，就可以对模块进行测试了。用于安装模块的相同程序 zef 也用于测试你自己的模块，因为通过测试是下载或从源代码安装它们的必要条件。运行</p>
+<p>将通过运行 meta-o 测试来检查 META6.json 文件是否遵循正确的语法。它还将检查它是否包含必填字段，以及某些字段（如许可证）的格式是否正确。由于测试是按顺序运行的，并且这是应该检查的第一件事，因此该测试将命名为 00-meta.t。<code>Test::META</code> 不属于标准发行版，因此你需要将依赖于测试的键更改为 &#34;test-depends&#34;: [&#34;Test::META&#34;],，这表明你仅需要该模块进行测试，而实际上不需要使该模块永久运行。某些模块安装应用程序可能会选择临时添加它或询问它。完成所有这些之后，就可以对模块进行测试了。用于安装模块的相同程序 zef 也用于测试你自己的模块，因为通过测试是下载或从源代码安装它们的必要条件。运行</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7666,7 +7543,7 @@ say rx«foo».^name;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">for &lt;foo bar baz&gt; {
-    say "$_ matches" if m/foo/;
+    say &#34;$_ matches&#34; if m/foo/;
 }</code></pre>
 </div>
 </div>
@@ -7676,7 +7553,7 @@ say rx«foo».^name;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">for &lt;foo bar baz&gt; -&gt; $m {
-    say "$m matches" if $m ~~ m/foo/;
+    say &#34;$m matches&#34; if $m ~~ m/foo/;
 }</code></pre>
 </div>
 </div>
@@ -7696,7 +7573,7 @@ say rx«foo».^name;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">Match.new(pos =&gt; 3, made =&gt; Any, from =&gt; 0, hash =&gt; Map. new(()), orig =&gt; "foo", list =&gt; ())</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">Match.new(pos =&gt; 3, made =&gt; Any, from =&gt; 0, hash =&gt; Map. new(()), orig =&gt; &#34;foo&#34;, list =&gt; ())</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -7705,8 +7582,8 @@ say rx«foo».^name;</code></pre>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 5. Match 属性</caption>
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -7737,8 +7614,8 @@ say rx«foo».^name;</code></pre>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 6. 在匹配表达式中使用选定的副词</caption>
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -7768,8 +7645,8 @@ say rx«foo».^name;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $match = "stafoostatic" ~~ m:g:2nd/sta/;
-say "From {$match.prematch} to {$match.postmatch}";</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $match = &#34;stafoostatic&#34; ~~ m:g:2nd/sta/;
+say &#34;From {$match.prematch} to {$match.postmatch}&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -7789,8 +7666,8 @@ say "From {$match.prematch} to {$match.postmatch}";</code></pre>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 7. 量词和其它正则符号</caption>
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -7814,7 +7691,7 @@ say "From {$match.prematch} to {$match.postmatch}";</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Postfix的“肯定会出现很多次。”</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">""</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;&#34;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">引用将再次表示实际的字符串，包括空格和符号，因为在正则表达式中空格无意义（除非另有说明）。</p></td>
 </tr>
 </tbody>
@@ -7824,11 +7701,11 @@ say "From {$match.prematch} to {$match.postmatch}";</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "foo baz bar" ~~ m/ fo+" ba".?" ba"r* /; # ⌈foo baz bar⌋</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;foo baz bar&#34; ~~ m/ fo+&#34; ba&#34;.?&#34; ba&#34;r* /; # ⌈foo baz bar⌋</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这种正则表达式开始显示出强大功能，但当然也使正则表达式声名狼藉。 乍一看，它们看起来像是线路噪声。 但实际上，仅需几个指令，你现在就可以使用各种字符串结构。 为了清楚起见， Raku 添加了不重要的空格，在这个例子中，你可以将斜杠与实际正则表达式的开头和结尾分开。 上面的其他量词在此表达式中使用，甚至与 <code>.?</code> 一起使用。 只是表示在字面值 " ba" 之后（或在前面有空格）是否可以存在单个字符。 结果由选择的日式引号引起来，因为这是 <code>.gist</code> 方法在 Match 情况下的行为。</p>
+<p>这种正则表达式开始显示出强大功能，但当然也使正则表达式声名狼藉。 乍一看，它们看起来像是线路噪声。 但实际上，仅需几个指令，你现在就可以使用各种字符串结构。 为了清楚起见， Raku 添加了不重要的空格，在这个例子中，你可以将斜杠与实际正则表达式的开头和结尾分开。 上面的其他量词在此表达式中使用，甚至与 <code>.?</code> 一起使用。 只是表示在字面值 &#34; ba&#34; 之后（或在前面有空格）是否可以存在单个字符。 结果由选择的日式引号引起来，因为这是 <code>.gist</code> 方法在 Match 情况下的行为。</p>
 </div>
 <div class="paragraph">
 <p>另一组符号允许你匹配替代项或连词，也可以使匹配停止而不是贪婪。 请参阅表15-4。</p>
@@ -7836,8 +7713,8 @@ say "From {$match.prematch} to {$match.postmatch}";</code></pre>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 8. 备选，节俭量词和表达式连接</caption>
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -7871,9 +7748,9 @@ say "From {$match.prematch} to {$match.postmatch}";</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "foo baz bar" ~~ m:g/ [fo+ | ba.] /;          # (⌈foo⌋ ⌈baz⌋ ⌈bar⌋)
-say "foo bar baz" ~~ m/ fo.+?b /;                 # ⌈foo b⌋
-say "10 ♥" ~~ m/ ..? " " "♥" | "♠" | "♣" | "♦" /; # ⌈10 ♥⌋</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;foo baz bar&#34; ~~ m:g/ [fo+ | ba.] /;          # (⌈foo⌋ ⌈baz⌋ ⌈bar⌋)
+say &#34;foo bar baz&#34; ~~ m/ fo.+?b /;                 # ⌈foo b⌋
+say &#34;10 ♥&#34; ~~ m/ ..? &#34; &#34; &#34;♥&#34; | &#34;♠&#34; | &#34;♣&#34; | &#34;♦&#34; /; # ⌈10 ♥⌋</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -7882,7 +7759,7 @@ say "10 ♥" ~~ m/ ..? " " "♥" | "♠" | "♣" | "♦" /; # ⌈10 ♥⌋</code
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my$card= "10♥"~~m/(..?)"" ("♥"|"♠"|"♣"|"♦") /;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my$card= &#34;10♥&#34;~~m/(..?)&#34;&#34; (&#34;♥&#34;|&#34;♠&#34;|&#34;♣&#34;|&#34;♦&#34;) /;
 say $card;
 .say for $card.list;</code></pre>
 </div>
@@ -7898,10 +7775,10 @@ say $card;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $card = "10 ♥"
-~~ m/ $&lt;value&gt; = (..?) " " $&lt;suit&gt; = ("♥" | "♠" | "♣" | "♦") /;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $card = &#34;10 ♥&#34;
+~~ m/ $&lt;value&gt; = (..?) &#34; &#34; $&lt;suit&gt; = (&#34;♥&#34; | &#34;♠&#34; | &#34;♣&#34; | &#34;♦&#34;) /;
 say $_.key =&gt; $_.value for $card.hash;
-say "$&lt;value&gt; of $&lt;suit&gt;";</code></pre>
+say &#34;$&lt;value&gt; of $&lt;suit&gt;&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -7913,8 +7790,8 @@ say "$&lt;value&gt; of $&lt;suit&gt;";</code></pre>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 9. 转义字符类</caption>
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -7944,16 +7821,16 @@ say "$&lt;value&gt; of $&lt;suit&gt;";</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "3 ♣" ~~ / (\d+) \s+ (\W) /;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;3 ♣&#34; ~~ / (\d+) \s+ (\W) /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>现在更加清晰了，而且比它是。 在正则表达式中，你不仅需要匹配并提取正确的子字符串，还需要避免误报。 在这种情况下
-将避免匹配 " AA♣" 之类的内容。 但是，现在有了新的不精确之处：<code>\W</code> 可以匹配任何非字母数字字符。 你可以使用 Unicode 字符属性（使用 <code>&lt;:property&gt;</code> 语法）更精确地表达字符类。 它们有两种风格：字符属性和类别。 字符属性指的是脚本和块的类型，这两个大类是可用于检查字母。 你可以将 <code>\W</code> 替换为 <code>&lt;:Block（'Miscellaneous Symbols'）&gt;</code>。这意味着你要学习很多，因为它实际上比枚举这四种西装要长。 使用 <code>&lt;:So&gt;</code>（对于Other_Symbol常规类别）将更短，但是在该类别中仍然有更多的符号。 最终，你为</p>
+将避免匹配 &#34; AA♣&#34; 之类的内容。 但是，现在有了新的不精确之处：<code>\W</code> 可以匹配任何非字母数字字符。 你可以使用 Unicode 字符属性（使用 <code>&lt;:property&gt;</code> 语法）更精确地表达字符类。 它们有两种风格：字符属性和类别。 字符属性指的是脚本和块的类型，这两个大类是可用于检查字母。 你可以将 <code>\W</code> 替换为 <code>&lt;:Block（&#39;Miscellaneous Symbols&#39;）&gt;</code>。这意味着你要学习很多，因为它实际上比枚举这四种西装要长。 使用 <code>&lt;:So&gt;</code>（对于Other_Symbol常规类别）将更短，但是在该类别中仍然有更多的符号。 最终，你为</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "10 ♦" ~~ / (\d+) \s+ (&lt;[♥ ♠ ♣ ♦]&gt;) /;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;10 ♦&#34; ~~ / (\d+) \s+ (&lt;[♥ ♠ ♣ ♦]&gt;) /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -7975,8 +7852,8 @@ for &lt;٨٦ 33&gt; {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">$_ = "A ♥,A ♣";
-s/","/█/;
+<pre class="highlight"><code class="language-raku" data-lang="raku">$_ = &#34;A ♥,A ♣&#34;;
+s/&#34;,&#34;/█/;
 .say;</code></pre>
 </div>
 </div>
@@ -7989,8 +7866,8 @@ s/","/█/;
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 10. 边界运算符</caption>
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -8020,7 +7897,7 @@ s/","/█/;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">$_ = "3♠";
+<pre class="highlight"><code class="language-raku" data-lang="raku">$_ = &#34;3♠&#34;;
 s/^«(.+)»(&lt;[♥ ♠ ♣ ♦]&gt;)$/$1$0/;
 .say;</code></pre>
 </div>
@@ -8034,7 +7911,7 @@ s/^«(.+)»(&lt;[♥ ♠ ♣ ♦]&gt;)$/$1$0/;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">"&lt;zipi&gt;&lt;zape&gt;" ~~ m:g/ '&lt;' ~ '&gt;' (\w+) { say $/[0] } /;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#34;&lt;zipi&gt;&lt;zape&gt;&#34; ~~ m:g/ &#39;&lt;&#39; ~ &#39;&gt;&#39; (\w+) { say $/[0] } /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -8072,7 +7949,7 @@ say $r.^mro</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $suits = rx/&lt;[♥ ♠ ♣ ♦]&gt;/;
-say "Q♠" ~~ /^«(.+)»($suits)$/;
+say &#34;Q♠&#34; ~~ /^«(.+)»($suits)$/;
 # ⌈Q♠⌋
 # 0 =&gt; ⌈Q⌋
 # 1 =&gt; ⌈♠⌋</code></pre>
@@ -8085,21 +7962,21 @@ say "Q♠" ~~ /^«(.+)»($suits)$/;
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my regex suits { &lt;[♥ ♠ ♣ ♦]&gt; };
-say "Q♠" ~~ /^«(.+)»&lt;suits&gt;$/;
+say &#34;Q♠&#34; ~~ /^«(.+)»&lt;suits&gt;$/;
 # ⌈Q♠⌋
 # 0 =&gt; ⌈Q⌋
 # suits =&gt; ⌈♠⌋</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>语法与将它们声明为 "block"-正则表达式非常相似。 但是，你使用大括号内的正则表达式语法来分隔正则代码。
+<p>语法与将它们声明为 &#34;block&#34;-正则表达式非常相似。 但是，你使用大括号内的正则表达式语法来分隔正则代码。
 另外，你可以使用 <code>my</code> 声明其词法范围。 不这样做
 会由于不适合某个方法的声明而产生一些隐秘的错误，因此你可以使用my（或我们的，如果要声明它）
 与包范围）。 你还使用一种特殊的语法将正则表达式作为另一个子正则表达式包含在内。 <code>&lt;&gt;</code> 已在正则表达式中广泛使用，大多数情况下与其他符号一起使用。 如果以这种方式使用它们，则将假定它所包含的标识符是另一个正则表达式，并将其包含在其中。 你也可以单独使用类似于例程的正则表达式，但是由于将其用作对象而不是调用它，因此请在前面加上 <code>&amp;</code> 符号。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "♣ ♦" ~~ &amp;suits; # ⌈♣⌋</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;♣ ♦&#34; ~~ &amp;suits; # ⌈♣⌋</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -8117,8 +7994,8 @@ say "Q♠" ~~ /^«(.+)»&lt;suits&gt;$/;
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 11. 表15-7. 主要字符类</caption>
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -8160,7 +8037,7 @@ say "Q♠" ~~ /^«(.+)»&lt;suits&gt;$/;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">$_ = "foostastic";
+<pre class="highlight"><code class="language-raku" data-lang="raku">$_ = &#34;foostastic&#34;;
 
 say m/(\w+)/;
 # ⌈foostastic⌋
@@ -8188,8 +8065,8 @@ say m/(\w+) s \w ** 4 /;
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my token any-letter { &lt;alpha&gt;+ }
 my token any-letter-plus-s { &lt;alpha&gt;+ s }
-say "foostastic" ~~ &amp;any-letter;
-say "foostastic" ~~ &amp;any-letter-plus-s;</code></pre>
+say &#34;foostastic&#34; ~~ &amp;any-letter;
+say &#34;foostastic&#34; ~~ &amp;any-letter-plus-s;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -8199,7 +8076,7 @@ say "foostastic" ~~ &amp;any-letter-plus-s;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my token any-letter { &lt;alpha&gt;+ }
-say "foo,bar" ~~ m/&lt;first=any-letter&gt;&lt;punct&gt;&lt;second=any- letter&gt;/;</code></pre>
+say &#34;foo,bar&#34; ~~ m/&lt;first=any-letter&gt;&lt;punct&gt;&lt;second=any- letter&gt;/;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -8236,7 +8113,7 @@ second =&gt; ⌈bar⌋
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my token word { &lt;alpha&gt;+ }
 my rule comma-separated {&lt;word&gt;&lt;punct&gt; &lt;word&gt;}
-say "foo, bar" ~~ &amp;comma-separated;</code></pre>
+say &#34;foo, bar&#34; ~~ &amp;comma-separated;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -8254,11 +8131,11 @@ say "foo, bar" ~~ &amp;comma-separated;</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">grammar Game {
     token TOP    { &lt;player&gt; \s+ &lt;action&gt; \s+ &lt;card&gt; }
-    token card   { [ &lt;[1..9]&gt; | "10" | &lt;[AJQK]&gt; ] ["♥" | "♠" | "♣" | "♦"] }
+    token card   { [ &lt;[1..9]&gt; | &#34;10&#34; | &lt;[AJQK]&gt; ] [&#34;♥&#34; | &#34;♠&#34; | &#34;♣&#34; | &#34;♦&#34;] }
     token action { &lt;alpha&gt;+ }
     token player { &lt;upper&gt;&lt;alpha&gt;+ }
 }
-say Game.parse("Alice plays K♠");</code></pre>
+say Game.parse(&#34;Alice plays K♠&#34;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -8284,7 +8161,7 @@ say Game.parse("Alice plays K♠");</code></pre>
 </div>
 <div class="paragraph">
 <p>语法是使用关键字语法声明的，并且由于它们是类，因此通常在声明中使用大写。 它们由一系列正则表达式组成，这是它们的方法，其中最重要的一个是 <code>TOP</code>，即提交的字符串将与之匹配的正则表达式。
-由于令牌在处理字符串时比正则表达式函数更有效（因为它们不会回溯），因此传统上语法是由令牌和规则（也属于regex-as-method）填充的，但是如果你愿意或自己使用，也可以使用正则表达式 语法需要它。 在这种情况下，你不需要使用作用域声明符 <code>my</code>，因为实际上，这些标记在 Game 类中得到了隐式的 "has"。</p>
+由于令牌在处理字符串时比正则表达式函数更有效（因为它们不会回溯），因此传统上语法是由令牌和规则（也属于regex-as-method）填充的，但是如果你愿意或自己使用，也可以使用正则表达式 语法需要它。 在这种情况下，你不需要使用作用域声明符 <code>my</code>，因为实际上，这些标记在 Game 类中得到了隐式的 &#34;has&#34;。</p>
 </div>
 <div class="paragraph">
 <p>语法除了解析外，还有两种其他方法：parsefile和subparse。 后者用于将语法应用于字符串的一部分，而不是整个字符串：</p>
@@ -8294,12 +8171,12 @@ say Game.parse("Alice plays K♠");</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">grammar G {
     token TOP { &lt;alpha&gt;+ }
 }
-say G.parse( "abcd" );
-say G.parse( "abcd3" );
-say G.subparse( "abcd3" );
+say G.parse( &#34;abcd&#34; );
+say G.parse( &#34;abcd3&#34; );
+say G.subparse( &#34;abcd3&#34; );
 
-constant filename = "/tmp/letters.txt";
-spurt( filename, "foostastic");
+constant filename = &#34;/tmp/letters.txt&#34;;
+spurt( filename, &#34;foostastic&#34;);
 say G.parsefile( filename );
 unlink filename;</code></pre>
 </div>
@@ -8315,7 +8192,7 @@ unlink filename;</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">unit grammar Game;
 token TOP ($separator) { &lt;hand&gt;+ % $separator }
 token hand { &lt;player&gt; \s+ &lt;action&gt; \s+ &lt;card&gt; }
-token card { [ &lt;[1..9]&gt; | "10" | &lt;[AJQK]&gt; ] ["♥" | "♠" | "♣" | "♦"] }
+token card { [ &lt;[1..9]&gt; | &#34;10&#34; | &lt;[AJQK]&gt; ] [&#34;♥&#34; | &#34;♠&#34; | &#34;♣&#34; | &#34;♦&#34;] }
 token action { &lt;alpha&gt;+ }
 token player { &lt;upper&gt;&lt;alpha&gt;+ }</code></pre>
 </div>
@@ -8326,10 +8203,10 @@ token player { &lt;upper&gt;&lt;alpha&gt;+ }</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">use Game;
-my $game-desc1 = "Alice plays 7♥,Bob plays 8♠";
-say Game.parse( $game-desc1, :args(( ",",)) );
-$game-desc1 ~~ s/","/|/;
-say Game.parse( $game-desc1, :args(( "|",)) );</code></pre>
+my $game-desc1 = &#34;Alice plays 7♥,Bob plays 8♠&#34;;
+say Game.parse( $game-desc1, :args(( &#34;,&#34;,)) );
+$game-desc1 ~~ s/&#34;,&#34;/|/;
+say Game.parse( $game-desc1, :args(( &#34;|&#34;,)) );</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -8338,9 +8215,9 @@ say Game.parse( $game-desc1, :args(( "|",)) );</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $match = Game.parse( $game-desc1, :args(( "|",)) );
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $match = Game.parse( $game-desc1, :args(( &#34;|&#34;,)) );
 for $match&lt;hand&gt;.list -&gt; $hand {
-    say "Playing→ $hand";
+    say &#34;Playing→ $hand&#34;;
 }</code></pre>
 </div>
 </div>
@@ -8358,9 +8235,9 @@ Playing→ Bob plays 8♠</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">token TOP ($separator = ",") { &lt;hand&gt;+ % $separator }
+<pre class="highlight"><code class="language-raku" data-lang="raku">token TOP ($separator = &#34;,&#34;) { &lt;hand&gt;+ % $separator }
 token hand { &lt;player&gt; \s+ &lt;action&gt; \s+ &lt;card&gt; }
-token card { [ &lt;[1..9]&gt; | "10" | &lt;[AJQK]&gt; ] ["♥" | "♠" | "♣" | "♦"] }
+token card { [ &lt;[1..9]&gt; | &#34;10&#34; | &lt;[AJQK]&gt; ] [&#34;♥&#34; | &#34;♠&#34; | &#34;♣&#34; | &#34;♦&#34;] }
 proto token action {*}
 token action:sym&lt;plays&gt; { &lt;sym&gt; }
 token action:sym&lt;draws&gt; { &lt;sym&gt; }
@@ -8374,9 +8251,9 @@ token player { &lt;upper&gt;&lt;alpha&gt;+ }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $match = Cards.parse( "Alice plays 7♥,Bob draws 8♠, Cara wins A♦" );
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $match = Cards.parse( &#34;Alice plays 7♥,Bob draws 8♠, Cara wins A♦&#34; );
 for $match&lt;hand&gt; -&gt; $h {
-    say "Action→ $h&lt;action&gt;";
+    say &#34;Action→ $h&lt;action&gt;&#34;;
 }</code></pre>
 </div>
 </div>
@@ -8387,8 +8264,8 @@ for $match&lt;hand&gt; -&gt; $h {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say Cards.parse( "Alice plays 7♥", :rule&lt;hand&gt; );
-say Cards.parse( "wins", :rule&lt;action&gt; );</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say Cards.parse( &#34;Alice plays 7♥&#34;, :rule&lt;hand&gt; );
+say Cards.parse( &#34;wins&#34;, :rule&lt;action&gt; );</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -8423,7 +8300,7 @@ method TOP ($/) { make ~$/ }</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">use Cards;
 use Cards-Action;
-my $to-parse = "Alice plays 7♥,Bob draws 8♠,Cara wins A♦";
+my $to-parse = &#34;Alice plays 7♥,Bob draws 8♠,Cara wins A♦&#34;;
 my $match = Cards.parse( $to-parse, actions =&gt; Cards-Action.new );
 say $match.made;</code></pre>
 </div>
@@ -8437,9 +8314,9 @@ say $match.made;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">unit class Cards-Who;
-method TOP ($/) { make join("", $/&lt;hand&gt;».made ) }
+method TOP ($/) { make join(&#34;&#34;, $/&lt;hand&gt;».made ) }
 method hand( $/ ) {
-    make ~$/&lt;player&gt; ~ ' → ' ~ ~$/.&lt;card&gt; ~ "\n"
+    make ~$/&lt;player&gt; ~ &#39; → &#39; ~ ~$/.&lt;card&gt; ~ &#34;\n&#34;
 }</code></pre>
 </div>
 </div>
@@ -8448,7 +8325,7 @@ method hand( $/ ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $to-parse = "Alice plays 7♥,Bob draws 8♠,Cara wins A♦";
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $to-parse = &#34;Alice plays 7♥,Bob draws 8♠,Cara wins A♦&#34;;
 my $match = Cards.parse( $to-parse, actions =&gt; Cards-Who );
 say $match.made;</code></pre>
 </div>

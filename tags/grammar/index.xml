@@ -8,18 +8,22 @@
     <language>zh-cn</language>
     <managingEditor>ohmyraku@outlook.com (ohmyraku)</managingEditor>
     <webMaster>ohmyraku@outlook.com (ohmyraku)</webMaster>
-    <lastBuildDate>Wed, 05 Feb 2020 15:26:52 +0800</lastBuildDate>
-    
-	<atom:link href="https://ohmyraku.github.io/tags/grammar/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 05 Feb 2020 15:26:52 +0800</lastBuildDate><atom:link href="https://ohmyraku.github.io/tags/grammar/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用 Raku 正则表达式和 Grammars 进行解析</title>
       <link>https://ohmyraku.github.io/parsing-with-raku-regexes-and-grammars/</link>
       <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
       <author>ohmyraku@outlook.com (ohmyraku)</author>
       <guid>https://ohmyraku.github.io/parsing-with-raku-regexes-and-grammars/</guid>
-      <description>Table of Contents 1. 什么是正则表达式和 Grammar？ 1.1. 使用场景 1.2. 正则或正则表达式 1.3. Raku 正则表达式有什么特别之处   2. Raku 入门 2.1. 安装 Raku 2.2. 使用 Raku 2.3. 获取代码示例 2.4. 使用 Raku 的第一步 2.5. 总结   3. 正则表达式构造块 3.1. 字面量 3.2. 元字符与字面量 3.3. Anchors 3.4. 预定义字符类 3.5. 量词 3.6. 析取 3.7. 连接 3.8. 零宽断言 3.9. 总结   4. 正则表达式和 Raku 代码 4.1. 智能匹配 4.2. 引号形式 4.3. 修饰符 4.4. comb 和 split 4.</description>
+      <description>1. 什么是正则表达式和 Grammar？ 我们会接触到各种各样的结构化数据: 电话号码、电子邮件地址、邮政地址、信用卡号码等等。
+ 正则表达式是一种声明性的编程结构, 用来描述这些数据格式。正则表达式可以让你搜索数据, 确保输入的数据确实是真实的格式, 甚至可以提取相关的组件, 如邮政地址的邮政编码, 或日志文件条目中的时间戳。
+ 当你需要读取和验证更复杂的结构时, 比如程序设计语言, 或者像 XML 这样的标记语言, 你可以把多个正则表达式组合成 grammar。Grammar 的作用不仅仅是简单地组合正则表达式。它们还提供生成良好的错误信息和在分析输入文本时跟踪状态的基础设施。
+ 1.1. 使用场景 1.1.1. 搜索 正则表达式的一个常见用途是在大量数据中搜索感兴趣的模式, 例如在日志文件中查找某些消息, 在 URL 中查找特定的信息, 或者在文本中查找电话号码。在写这篇文章的时候, 我的 .bash_history 中大约有 6% 的条目涉及到使用正则表达式进行搜索。
+   许多命令行工具都支持某些正则表达式方言, 允许你搜索文件名、文件内容、日志、捕获的网络流量以及几乎所有你能想到的东西。大多数现代编程语言也可以很容易地使用正则表达式, 使其成为一种无处不在、不可或缺的搜索工具。
+  1.1.2. 验证 大多数应用程序都面临着不可信的用户输入。特别是 Web 应用程序面临着大量的不可信输入。这些输入必须在应用任何进一步的逻辑或将其存储在例如数据库中之前进行验证。
+ 正则表达式是验证的第一步。他们使检查数字等简单的事情变得简单, 并验证输入的最小长度和最大长度。同时, 它们允许程序员进行更精确、更复杂的检查。
+ Web 应用程序员只需要提供一个正则表达式, 并将其与输入字段关联。然后, Web 框架可以根据所有已配置的正则表达式来验证表单输入, 并自动为终端用户生成错误信息, 这样 Web 应用程序员就不需要处理拒绝输入和重新生成表单的工作流程。
+  1.1.3. 解析 单独使用正则表达式不太适合解析复杂的输入数据。然而, Raku 添加了功能, 使其非常适合这项任务。这些扩展包括易于使用的回溯控制和通过命名正则表达式获得的可组合性。</description>
     </item>
     
   </channel>

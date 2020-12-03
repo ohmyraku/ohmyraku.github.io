@@ -8,18 +8,23 @@
     <language>zh-cn</language>
     <managingEditor>ohmyraku@outlook.com (ohmyraku)</managingEditor>
     <webMaster>ohmyraku@outlook.com (ohmyraku)</webMaster>
-    <lastBuildDate>Wed, 05 Feb 2020 15:26:52 +0800</lastBuildDate>
-    
-	<atom:link href="https://ohmyraku.github.io/tags/deep/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 05 Feb 2020 15:26:52 +0800</lastBuildDate><atom:link href="https://ohmyraku.github.io/tags/deep/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Raku 深入研究</title>
       <link>https://ohmyraku.github.io/raku-deep-dive/</link>
       <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
       <author>ohmyraku@outlook.com (ohmyraku)</author>
       <guid>https://ohmyraku.github.io/raku-deep-dive/</guid>
-      <description>Table of Contents 1. 什么是 Raku 1.1. Raku 起源 1.2. 与 Perl 5 的区别 1.3. 类 1.4. 与 Perl 5 的兼容性 1.5. Raku 资源 1.6. 文档 1.7. 测试套件 1.8. STD.pm 1.9. 社区 1.10. 编译器 1.11. 使用 Rakudo Star 1.12. 命令行选项 1.13. 总结   2. 编写代码 2.1. 使用 Unicode 2.2. 空白和反空白 2.3. 注释 2.4. phaser 2.5. 总结   3. 变量和内置数据类型 3.1. 使用变量 3.2. 使用简单的内置数据类型 3.3. 操作日期和时间的数据类型 3.4. 总结   4.</description>
+      <description>1. 什么是 Raku 在这一章中，我们将研究 Raku 出现的原因，并跟踪了解 Perl 语言的发展历史。你会看到一些自 Perl 5 以来发生的变化，你会看到一些例子，你会学习如何下载和使用编译器，在哪里找到文档，以及如何在 Raku 中运行你的第一个程序。
+ 在这一章中，我们将介绍以下内容:
+   Raku 的起源
+  与 Perl 5 的区别
+  Raku 资源
+  编译器
+  使用 Rakudo Star
+  编写我们的 Hello World 程序
+   1.1. Raku 起源 Raku 是 Perl 家族中的一种编程语言。Perl 本身出现于 1987 年，从那时起，它就在不断发展：目前的稳定版本是 2017年5月发布的5.26。2000年，Perl 的创造者 Larry Wall 提出要开始研究该语言的下一个版本- Raku 。
+ 这有几个原因。首先，一种语言应该继续发展，以反映开发者的新要求。第二，它可能会改变非 Perl 社区对 Perl 的看法。5.</description>
     </item>
     
   </channel>

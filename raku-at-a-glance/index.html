@@ -8,9 +8,15 @@
 
 <meta name="author" content="ohmyraku">
 <meta name="application-name" content="山川异域, 风月同天">
-<meta name="description" content="Table of Contents 1. Raku 概要 1.1. Hello, World 1.2. 变量 1.3. 内省 1.4. Twigils 1.5. 经常使用的特殊变量 1.6. 内置类型   2. 运算符 2.1. 前缀 2.2. 后缀 2.3. 方法后缀 2.4. 中缀运算符 2.5. 列表运算符 2.6. Junction 运算符 2.7. 短路运算符 2.8. 其它中缀运算符 2.9. 元运算符 2.10. 超运算符   3. 正则表达式和 Grammars 3.1. 正则表达式 3.2. $/ 对象 3.3. Grammars 3.4. Actions 3.5. AST 和属性 3.6. 计算器     1. Raku 概要 1.">
+<meta name="description" content="1. Raku 概要 1.1. Hello, World Raku编译器可以从文件或&#43; e命令行开关的内容中读取程序。 最简单的“Hello，World！”程序如下所示：
+ say &#34;Hello, Raku &#34;;   把它保存到文件中并运行:
+ $ raku hello.pl Hello, Raku   或者，你可以使用 &#43;e 选项：
+ $ raku -e&#39;say &#34;Hello, Raku&#34;&#39; Hello, Raku    1.2. 变量 1.2.1. 符号 Raku使用符号来标记变量。 这些符号部分兼容 使用Perl 5语法。 例如，标量，列表和散列分别使用$，@和％sigils。
+ my $scalar = 42; say $scalar;   代码打印42并不奇怪。
+ 考虑以下片段，它也给出了可预测的结果（方括号表示一个数组）：
+ my @array = (10, 20, 30); say @array; # [10 20 30]   现在，让我们使用Raku的优点并重写上面的代码，使用更少的输入，更少的字符和更少的标点符号：">
 <meta name="robots" content="noodp"/>
-<meta name="generator" content="Hugo 0.63.2" />
+<meta name="generator" content="Hugo 0.79.0" />
 <meta name="referrer" content="no-referrer" />
 <meta name="format-detection" content="telephone=no">
 
@@ -22,7 +28,13 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Raku at a glance" />
-<meta name="twitter:description" content="Table of Contents 1. Raku 概要 1.1. Hello, World 1.2. 变量 1.3. 内省 1.4. Twigils 1.5. 经常使用的特殊变量 1.6. 内置类型   2. 运算符 2.1. 前缀 2.2. 后缀 2.3. 方法后缀 2.4. 中缀运算符 2.5. 列表运算符 2.6. Junction 运算符 2.7. 短路运算符 2.8. 其它中缀运算符 2.9. 元运算符 2.10. 超运算符   3. 正则表达式和 Grammars 3.1. 正则表达式 3.2. $/ 对象 3.3. Grammars 3.4. Actions 3.5. AST 和属性 3.6. 计算器     1. Raku 概要 1." />
+<meta name="twitter:description" content="1. Raku 概要 1.1. Hello, World Raku编译器可以从文件或&#43; e命令行开关的内容中读取程序。 最简单的“Hello，World！”程序如下所示：
+ say &#34;Hello, Raku &#34;;   把它保存到文件中并运行:
+ $ raku hello.pl Hello, Raku   或者，你可以使用 &#43;e 选项：
+ $ raku -e&#39;say &#34;Hello, Raku&#34;&#39; Hello, Raku    1.2. 变量 1.2.1. 符号 Raku使用符号来标记变量。 这些符号部分兼容 使用Perl 5语法。 例如，标量，列表和散列分别使用$，@和％sigils。
+ my $scalar = 42; say $scalar;   代码打印42并不奇怪。
+ 考虑以下片段，它也给出了可预测的结果（方括号表示一个数组）：
+ my @array = (10, 20, 30); say @array; # [10 20 30]   现在，让我们使用Raku的优点并重写上面的代码，使用更少的输入，更少的字符和更少的标点符号：" />
 <meta name="twitter:site" content="https://ohmyraku.github.io" />
 <meta name="twitter:creator" content="ohmyraku" />
 <meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
@@ -32,7 +44,13 @@
 <meta property="og:title" content="Raku at a glance" />
 <meta property="og:url" content="https://ohmyraku.github.io" />
 <meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="Table of Contents 1. Raku 概要 1.1. Hello, World 1.2. 变量 1.3. 内省 1.4. Twigils 1.5. 经常使用的特殊变量 1.6. 内置类型   2. 运算符 2.1. 前缀 2.2. 后缀 2.3. 方法后缀 2.4. 中缀运算符 2.5. 列表运算符 2.6. Junction 运算符 2.7. 短路运算符 2.8. 其它中缀运算符 2.9. 元运算符 2.10. 超运算符   3. 正则表达式和 Grammars 3.1. 正则表达式 3.2. $/ 对象 3.3. Grammars 3.4. Actions 3.5. AST 和属性 3.6. 计算器     1. Raku 概要 1." />
+<meta property="og:description" content="1. Raku 概要 1.1. Hello, World Raku编译器可以从文件或&#43; e命令行开关的内容中读取程序。 最简单的“Hello，World！”程序如下所示：
+ say &#34;Hello, Raku &#34;;   把它保存到文件中并运行:
+ $ raku hello.pl Hello, Raku   或者，你可以使用 &#43;e 选项：
+ $ raku -e&#39;say &#34;Hello, Raku&#34;&#39; Hello, Raku    1.2. 变量 1.2.1. 符号 Raku使用符号来标记变量。 这些符号部分兼容 使用Perl 5语法。 例如，标量，列表和散列分别使用$，@和％sigils。
+ my $scalar = 42; say $scalar;   代码打印42并不奇怪。
+ 考虑以下片段，它也给出了可预测的结果（方括号表示一个数组）：
+ my @array = (10, 20, 30); say @array; # [10 20 30]   现在，让我们使用Raku的优点并重写上面的代码，使用更少的输入，更少的字符和更少的标点符号：" />
 <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -44,12 +62,12 @@
       "headline": "Raku at a glance",
       
       "datePublished": "2020-02-05",
-      "dateModified": "2020-02-05 15:26:52 \x2b0800 CST",
+      "dateModified": "2020-02-05 15:26:52 \u002b0800 CST",
       "author": {
         "@type": "Person",
         "name": "ohmyraku"
       },
-      "description": "Table of Contents 1. Raku 概要 1.1. Hello, World 1.2. 变量 1.3. 内省 1.4. Twigils 1.5. 经常使用的特殊变量 1.6. 内置类型   2. 运算符 2.1. 前缀 2.2. 后缀 2.3. 方法后缀 2.4. 中缀运算符 2.5. 列表运算符 2.6. Junction 运算符 2.7. 短路运算符 2.8. 其它中缀运算符 2.9. 元运算符 2.10. 超运算符   3. 正则表达式和 Grammars 3.1. 正则表达式 3.2. $\/ 对象 3.3. Grammars 3.4. Actions 3.5. AST 和属性 3.6. 计算器     1. Raku 概要 1.",
+      "description": "1. Raku 概要 1.1. Hello, World Raku编译器可以从文件或\u002b e命令行开关的内容中读取程序。 最简单的“Hello，World！”程序如下所示：\n say \u0026#34;Hello, Raku \u0026#34;;   把它保存到文件中并运行:\n $ raku hello.pl Hello, Raku   或者，你可以使用 \u002be 选项：\n $ raku -e\u0026#39;say \u0026#34;Hello, Raku\u0026#34;\u0026#39; Hello, Raku    1.2. 变量 1.2.1. 符号 Raku使用符号来标记变量。 这些符号部分兼容 使用Perl 5语法。 例如，标量，列表和散列分别使用$，@和％sigils。\n my $scalar = 42; say $scalar;   代码打印42并不奇怪。\n 考虑以下片段，它也给出了可预测的结果（方括号表示一个数组）：\n my @array = (10, 20, 30); say @array; # [10 20 30]   现在，让我们使用Raku的优点并重写上面的代码，使用更少的输入，更少的字符和更少的标点符号：",
       "publisher": {
         "@type": "Organization",
         "name": "https:\/\/ohmyraku.github.io",
@@ -96,45 +114,7 @@ if (theme && theme !== "1") {
 
 </div>
 
-<article class="page__content" ><div id="toc" class="toc">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_raku_概要">1. Raku 概要</a>
-<ul class="sectlevel2">
-<li><a href="#_hello_world">1.1. Hello, World</a></li>
-<li><a href="#_变量">1.2. 变量</a></li>
-<li><a href="#_内省">1.3. 内省</a></li>
-<li><a href="#_twigils">1.4. Twigils</a></li>
-<li><a href="#_经常使用的特殊变量">1.5. 经常使用的特殊变量</a></li>
-<li><a href="#_内置类型">1.6. 内置类型</a></li>
-</ul>
-</li>
-<li><a href="#_运算符">2. 运算符</a>
-<ul class="sectlevel2">
-<li><a href="#_前缀">2.1. 前缀</a></li>
-<li><a href="#_后缀">2.2. 后缀</a></li>
-<li><a href="#_方法后缀">2.3. 方法后缀</a></li>
-<li><a href="#_中缀运算符">2.4. 中缀运算符</a></li>
-<li><a href="#_列表运算符">2.5. 列表运算符</a></li>
-<li><a href="#_junction_运算符">2.6. Junction 运算符</a></li>
-<li><a href="#_短路运算符">2.7. 短路运算符</a></li>
-<li><a href="#_其它中缀运算符">2.8. 其它中缀运算符</a></li>
-<li><a href="#_元运算符">2.9. 元运算符</a></li>
-<li><a href="#_超运算符">2.10. 超运算符</a></li>
-</ul>
-</li>
-<li><a href="#_正则表达式和_grammars">3. 正则表达式和 Grammars</a>
-<ul class="sectlevel2">
-<li><a href="#_正则表达式">3.1. 正则表达式</a></li>
-<li><a href="#_对象">3.2. <code>$/</code> 对象</a></li>
-<li><a href="#_grammars">3.3. Grammars</a></li>
-<li><a href="#_actions">3.4. Actions</a></li>
-<li><a href="#_ast_和属性">3.5. AST 和属性</a></li>
-<li><a href="#_计算器">3.6. 计算器</a></li>
-</ul>
-</li>
-</ul>
-</div>
+<article class="page__content" >
 <div class="sect1">
 <h2 id="_raku_概要">1. Raku 概要</h2>
 <div class="sectionbody">
@@ -145,7 +125,7 @@ if (theme && theme !== "1") {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "Hello, Raku ";</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;Hello, Raku &#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -162,7 +142,7 @@ Hello, Raku</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">$ raku -e'say "Hello, Raku"'
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ raku -e&#39;say &#34;Hello, Raku&#34;&#39;
 Hello, Raku</code></pre>
 </div>
 </div>
@@ -215,8 +195,8 @@ say @array; # [10 20 30]</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my %hash =
-    'Language' =&gt; 'Perl',
-    'Version'  =&gt; '6';
+    &#39;Language&#39; =&gt; &#39;Perl&#39;,
+    &#39;Version&#39;  =&gt; &#39;6&#39;;
 say %hash;</code></pre>
 </div>
 </div>
@@ -238,9 +218,9 @@ say %hash;</code></pre>
 say @squares[3]; # This prints the 4th element, thus 9
 
 my %capitals =
-           'France'  =&gt; 'Paris',
-           'Germany' =&gt; 'Berlin';
-        say %capitals{'Germany'};</code></pre>
+           &#39;France&#39;  =&gt; &#39;Paris&#39;,
+           &#39;Germany&#39; =&gt; &#39;Berlin&#39;;
+        say %capitals{&#39;Germany&#39;};</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -249,9 +229,9 @@ my %capitals =
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my %month+abbrs =
-           :jan('January'),
-           :feb('February'),
-           :mar('March');
+           :jan(&#39;January&#39;),
+           :feb(&#39;February&#39;),
+           :mar(&#39;March&#39;);
 say %month+abbrs&lt;mar&gt;; # prints March</code></pre>
 </div>
 </div>
@@ -260,13 +240,13 @@ say %month+abbrs&lt;mar&gt;; # prints March</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $hello+world = "Hello, World";
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $hello+world = &#34;Hello, World&#34;;
 say $hello+world;
 
-my $don't = "Isn’t it a Hello?";
-say $don't;
+my $don&#39;t = &#34;Isn’t it a Hello?&#34;;
+say $don&#39;t;
 
-my $привет = "A Cyrillic Hi ";
+my $привет = &#34;A Cyrillic Hi &#34;;
 say $привет;</code></pre>
 </div>
 </div>
@@ -290,7 +270,7 @@ say $привет;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $scalar = 42;
-my $hello-world = "Hello, World";
+my $hello-world = &#34;Hello, World&#34;;
 
 say $scalar.WHAT;      # (Int)
 say $hello-world.WHAT; # (Str)</code></pre>
@@ -316,8 +296,8 @@ say @squares.WHAT; #(Array)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my %hash     = 'Language' =&gt; 'Perl';
-my %capitals = 'France'   =&gt; 'Paris';
+<pre class="highlight"><code class="language-raku" data-lang="raku">my %hash     = &#39;Language&#39; =&gt; &#39;Perl&#39;;
+my %capitals = &#39;France&#39;   =&gt; &#39;Paris&#39;;
 
 say %hash.WHAT;     # (Hash)
 say %capitals.WHAT; # (Hash)</code></pre>
@@ -332,7 +312,7 @@ say %capitals.WHAT; # (Hash)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $value = 42;
-say "OK" if $value.WHAT === Int;</code></pre>
+say &#34;OK&#34; if $value.WHAT === Int;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -341,7 +321,7 @@ say "OK" if $value.WHAT === Int;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $value = 42;
-say "OK" if $value.isa(Int);</code></pre>
+say &#34;OK&#34; if $value.isa(Int);</code></pre>
 </div>
 </div>
 </div>
@@ -413,11 +393,11 @@ say "OK" if $value.isa(Int);</code></pre>
 <pre class="highlight"><code class="language-txt" data-lang="txt">Raku (6.c)
 90177
 twigilAvars.pl
-"/usr/bin/raku".IO
+&#34;/usr/bin/raku&#34;.IO
 moar (2016.11)
 macosx (10.10.5)
 darwin (14.5.0)
-"/Users/ash/Books/Raku/code".IO  {Apple_PubSub_Socket_Render =&gt; /private/tmp/com.apple....,
+&#34;/Users/ash/Books/Raku/code&#34;.IO  {Apple_PubSub_Socket_Render =&gt; /private/tmp/com.apple....,
 DISPLAY =&gt; /private/tmp/com.apple..., HISTCONTROL =&gt; igA norespace, HOME =&gt; /Users/ash, LC_CTYPE =&gt; UTFA8, LOGNAME  =&gt; ash ...</code></pre>
 </div>
 </div>
@@ -471,7 +451,7 @@ DISPLAY =&gt; /private/tmp/com.apple..., HISTCONTROL =&gt; igA norespace, HOME =
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">"Perl's Birthday: 18 December 1987" ~~
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#34;Perl&#39;s Birthday: 18 December 1987&#34; ~~
     / (\d+) \s (\D+) \s (\d+) /;
 say $/.Str;
 say $/[$_] for 0..2;</code></pre>
@@ -522,7 +502,7 @@ Array, Hash, Complex</p>
 <p>Num, Pair, Rat</p>
 </div>
 <div class="paragraph">
-<p>Num 类型用于处理浮点变量，而 Pair 是一个"键/值"对。 Rat 类型使用数字和分母引入有理数。</p>
+<p>Num 类型用于处理浮点变量，而 Pair 是一个&#34;键/值&#34;对。 Rat 类型使用数字和分母引入有理数。</p>
 </div>
 <div class="sect3">
 <h4 id="_带类型的变量">1.6.1. 带类型的变量</h4>
@@ -540,7 +520,7 @@ Array, Hash, Complex</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my Int $x;
-$x = "abc"; # Error: Type check failed in assignment to $x;
+$x = &#34;abc&#34;; # Error: Type check failed in assignment to $x;
             # expected Int but got Str</code></pre>
 </div>
 </div>
@@ -550,7 +530,7 @@ $x = "abc"; # Error: Type check failed in assignment to $x;
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my Int $x;
-$x = "123".Int; $ Now this is OK
+$x = &#34;123&#34;.Int; $ Now this is OK
 say $x; # 123</code></pre>
 </div>
 </div>
@@ -587,7 +567,7 @@ my $pi = 3.14;
 say $pi.Bool;  # True
 
 say 0.Bool;    # False
-say "00".Bool; # True</code></pre>
+say &#34;00&#34;.Bool; # True</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -650,12 +630,12 @@ say 42.is-prime; # False</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = "My string";
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = &#34;My string&#34;;
 
 say $str.lc; # my string
 say $str.uc; # MY STRING
 
-say $str.index('t'); # 4</code></pre>
+say $str.index(&#39;t&#39;); # 4</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -663,7 +643,7 @@ say $str.index('t'); # 4</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-txt" data-lang="txt">No such method 'length' for invocant of type 'Str'. Did you mean any of these?
+<pre class="highlight"><code class="language-txt" data-lang="txt">No such method &#39;length&#39; for invocant of type &#39;Str&#39;. Did you mean any of these?
     codes
     chars</code></pre>
 </div>
@@ -673,7 +653,7 @@ say $str.index('t'); # 4</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "περλ 6".chars; # 6</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;περλ 6&#34;.chars; # 6</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -681,7 +661,7 @@ say $str.index('t'); # 4</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">"Today is %02i %s %i\n".printf($day, $month, $year);</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#34;Today is %02i %s %i\n&#34;.printf($day, $month, $year);</code></pre>
 </div>
 </div>
 </div>
@@ -705,7 +685,7 @@ say @a.Str; # 空格分割的值</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">my @a = 1, 2, 3, 5, 7, 11;
 
 say @a;                 # [1 2 3 5 7 11]
-say "This is @a: @a[]"; # This is @a: 1 2 3 5 7 11</code></pre>
+say &#34;This is @a: @a[]&#34;; # This is @a: 1 2 3 5 7 11</code></pre>
 </div>
 </div>
 </div>
@@ -716,7 +696,7 @@ say "This is @a: @a[]"; # This is @a: 1 2 3 5 7 11</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my %hash = Language =&gt; 'Perl', Version =&gt; 6;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my %hash = Language =&gt; &#39;Perl&#39;, Version =&gt; 6;
 
 say %hash.elems;  # number of pairs in the hash
 say %hash.keys;   # the list of the keys
@@ -793,7 +773,7 @@ say !(1 == 2) # True</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my Str $price  = '4' ~ '2';
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Str $price  = &#39;4&#39; ~ &#39;2&#39;;
 my Int $amount = +$price;
 
 say $amount;        # 42
@@ -815,7 +795,7 @@ say $price.Numeric; # 42</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my Str $price = '4' ~ '2';
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Str $price = &#39;4&#39; ~ &#39;2&#39;;
 say -$price; # -42</code></pre>
 </div>
 </div>
@@ -872,7 +852,7 @@ say ++$x; # 42</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = 'a';
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = &#39;a&#39;;
 say ++$a; # b</code></pre>
 </div>
 </div>
@@ -881,7 +861,7 @@ say ++$a; # b</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $f = "file001.txt";
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $f = &#34;file001.txt&#34;;
 
 ++$f;
 say $f; # file002.txt
@@ -892,9 +872,9 @@ say $f; # file003.txt</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_5">2.1.7. &#8201;&#8212;&#8201;</h4>
+<h4 id="_5">2.1.7.  — </h4>
 <div class="paragraph">
-<p>&#8201;&#8212;&#8201;是减量的前缀形式。 它的工作方式与++前缀完全相同，但当然会使操作数更小（无论是字符串还是数字）。</p>
+<p> — 是减量的前缀形式。 它的工作方式与++前缀完全相同，但当然会使操作数更小（无论是字符串还是数字）。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -984,9 +964,9 @@ say sum(|@data); # 30</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 'x';
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = &#39;x&#39;;
 {
-    temp $x = 'y';
+    temp $x = &#39;y&#39;;
     say $x; # y
 }
 say $x;</code></pre>
@@ -1003,9 +983,9 @@ say $x;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $var = 'a';
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $var = &#39;a&#39;;
 try {
-    let $var = 'b';
+    let $var = &#39;b&#39;;
     die;
 }
 say $var; # a</code></pre>
@@ -1036,23 +1016,23 @@ say $x;   # 43</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_11">2.2.2. &#8201;&#8212;&#8201;</h4>
+<h4 id="_11">2.2.2.  — </h4>
 <div class="paragraph">
-<p>&#8201;&#8212;&#8201;是后缀自减。</p>
+<p> — 是后缀自减。</p>
 </div>
 <div class="paragraph">
 <p>postfix和prefix运算符都神奇地知道如何处理文件名中的数字。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $filename = 'file01.txt';
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $filename = &#39;file01.txt&#39;;
 for 1..10 {
     say $filename++;
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>此示例使用递增的数字打印文件名列表：file01.txt，file02.txt，&#8230;&#8203; file10.txt。</p>
+<p>此示例使用递增的数字打印文件名列表：file01.txt，file02.txt，…​ file10.txt。</p>
 </div>
 </div>
 </div>
@@ -1068,11 +1048,11 @@ for 1..10 {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "0.0".Numeric; # 0
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;0.0&#34;.Numeric; # 0
 say 42.Bool; # True
 
 class C {
-    method m() {say "m()"}
+    method m() {say &#34;m()&#34;}
 }
 my $c = C.new;
 $c.m(); # m()</code></pre>
@@ -1120,7 +1100,7 @@ say $i.HOW.methods($i);</code></pre>
 <div class="title">?method 如果定义了方法，则调用方法。 如果对象没有具有给定名称的方法，则返回 Nil。</div>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">class C {
-    method m() {'m'}
+    method m() {&#39;m&#39;}
 }
 
 my $c = C.new();
@@ -1135,10 +1115,10 @@ say $c.?n(); # Nil</code></pre>
 <div class="title">+method 尝试在对象上调用具有给定名称的所有方法。 例如，当实例是对象层次结构的一部分并且其父实例也具有相同名称的方法时，可以使用此方法。 有关第4章中的类和类层次结构的更多信息。</div>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">class A {
-    method m($x) {"A::m($x)"}
+    method m($x) {&#34;A::m($x)&#34;}
 }
 class B is A {
-    method m($x) {"B::m($x)"}
+    method m($x) {&#34;B::m($x)&#34;}
 }
 
 my $o = B.new;
@@ -1202,7 +1182,7 @@ say 10 mod 3; # 1</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say 10 % "3" # 1</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 10 % &#34;3&#34; # 1</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1210,12 +1190,12 @@ say 10 mod 3; # 1</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say 10 mod "3";</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 10 mod &#34;3&#34;;</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-txt" data-lang="txt">Calling 'infix:&lt;mod&gt;' will never work with argument types  (Int, Str)
+<pre class="highlight"><code class="language-txt" data-lang="txt">Calling &#39;infix:&lt;mod&gt;&#39; will never work with argument types  (Int, Str)
 Expected any of: :(Real $a, Real $b)</code></pre>
 </div>
 </div>
@@ -1224,7 +1204,7 @@ Expected any of: :(Real $a, Real $b)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say 10 mod +"3" # 1</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 10 mod +&#34;3&#34; # 1</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1232,7 +1212,7 @@ Expected any of: :(Real $a, Real $b)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say 10 mod "3".Int; # 1</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 10 mod &#34;3&#34;.Int; # 1</code></pre>
 </div>
 </div>
 </div>
@@ -1287,11 +1267,11 @@ say 1024 +&gt; 8; # 4</code></pre>
 
 </div>
 <div class="sect4">
-<h5 id="_25">&lt;, &gt;, &#8656;, &gt;=</h5>
+<h5 id="_25">&lt;, &gt;, ⇐, &gt;=</h5>
 
 </div>
 <div class="sect4">
-<h5 id="_26">&lt;&#8658;</h5>
+<h5 id="_26">&lt;⇒</h5>
 
 </div>
 </div>
@@ -1402,7 +1382,7 @@ say 1024 +&gt; 8; # 4</code></pre>
 
 </div>
 <div class="sect3">
-<h4 id="_38">2.8.4. &#8658;</h4>
+<h4 id="_38">2.8.4. ⇒</h4>
 
 </div>
 <div class="sect3">
@@ -1448,7 +1428,7 @@ say 1024 +&gt; 8; # 4</code></pre>
 <div class="paragraph">
 <p>Subroutines, or subs
 For a sub, which takes no arguments, its definition and the call are very straightforward and easy.
-sub call+me {      say "I&#8217;m called"  }
+sub call+me {      say &#34;I’m called&#34;  }
 call+me;</p>
 </div>
 <div class="paragraph">
@@ -1475,9 +1455,9 @@ sub inc($x is rw) {      $x+;
 Typed arguments
 Similarly to the above-described typed variables, it is possible to indi-
 cate that the sub’s parameters are typed. To do so, add a type name before the name of the parameter.
-sub say+hi(Str $name) {      say "Hi, $name ";  }
+sub say+hi(Str $name) {      say &#34;Hi, $name &#34;;  }
 If the types of the expected and the actual parameters do not match, a compile-time error will occur.
-say+hi("Mr. X"); # OK
+say+hi(&#34;Mr. X&#34;); # OK
 # say+hi(123); # Error: Calling say-hi(Int) will never work
                # with declared signature (Str $name)
 Optional parameters
@@ -1489,20 +1469,20 @@ names. The defined built-in function helps to tell if the parameter was really p
 </div>
 <div class="paragraph">
 <p>sub send+mail(Str $to, Str $bcc?) {      if defined $bcc {
-        # . . .         say "Sent to $to with a bcc to $bcc.";      }
+        # . . .         say &#34;Sent to $to with a bcc to $bcc.&#34;;      }
     else {          # . . .
-        say "Sent to $to.";
+        say &#34;Sent to $to.&#34;;
     }
 }</p>
 </div>
 <div class="paragraph">
-<p>send+mail('<a href="mailto:mail@example.com">mail@example.com</a>');  send+mail('<a href="mailto:mail@example.com">mail@example.com</a>', '<a href="mailto:copy@example.com">copy@example.com</a>');
+<p>send+mail(&#39;<a href="mailto:mail@example.com">mail@example.com</a>&#39;);  send+mail(&#39;<a href="mailto:mail@example.com">mail@example.com</a>&#39;, &#39;<a href="mailto:copy@example.com">copy@example.com</a>&#39;);
 Default values
 Raku also allows specifying the default values of the sub’s arguments. Syntactically, this looks like an assignment.
-sub i+live+in(Str $city = "Moscow") {         say "I live in $city.";               }</p>
+sub i+live+in(Str $city = &#34;Moscow&#34;) {         say &#34;I live in $city.&#34;;               }</p>
 </div>
 <div class="paragraph">
-<p>i+live+in('Saint Petersburg');  i+live+in(); # The default city
+<p>i+live+in(&#39;Saint Petersburg&#39;);  i+live+in(); # The default city
 It is also possible to pass values that are not known at the compile phase. When the default value is not a constant, it will be calculated at runtime.
 sub to+pay($salary, $bonus = 100.rand) {      return ($salary + $bonus).floor;
 }</p>
@@ -1542,14 +1522,14 @@ Now the sub expects new names of the arguments.</p>
 Alternatively, you can use the fatarrow syntax to pass named parame- ters as it is done in the following example:</p>
 </div>
 <div class="paragraph">
-<p>say power(val &#8658; 5, pow &#8658; 2); # 25
+<p>say power(val ⇒ 5, pow ⇒ 2); # 25
 Slurpy parameters and flattening
 Raku allows passing scalars, arrays, hashes, or objects of any other type as the arguments to a sub. There are no restrictions regarding the com- bination and its order in a sub declaration. For example, the first argu- ment may be an array, and the second one may be a scalar. Raku will pass the array as a whole. Thus the following scalar will not be eaten by the array.
 In the following example, the @text variable is used inside the sub, and it contains only the values from the array passed in the sub call.
 sub cute+output(@text, $before, $after) {      say $before ~ $_ ~ $after for @text;  }</p>
 </div>
 <div class="paragraph">
-<p>my @text = &lt;C C Perl Go&gt;;  cute+output(@text, '{', '}');
+<p>my @text = &lt;C C Perl Go&gt;;  cute+output(@text, &#39;{&#39;, &#39;}&#39;);
 The output looks quite predictable.
 {C}&amp;
 {C}&amp;
@@ -1576,7 +1556,7 @@ sub get+array(*@a) {      say @a;
 <div class="paragraph">
 <p>get+array(1, 2, 3); # Good: [1 2 3]
 Similarly, it will work in the opposite direction, that is to say, when the sub expects to get a few scalars but receives an array when called.
-sub get+scalars($a, $b, $c) {      say "$a and $b and $c";  }</p>
+sub get+scalars($a, $b, $c) {      say &#34;$a and $b and $c&#34;;  }</p>
 </div>
 <div class="paragraph">
 <p>my @a = &lt;3 4 5&gt;;
@@ -1598,7 +1578,7 @@ sub cube($x) {      sub square($x) {          return $x * $x;      }
 The name of the inner sub square is only visible within the body of the outer sub cube.
 Anonymous subs
 Let’s look at the creation of anonymous subs. One of the options (there are more than one) is to use syntax similar to what you often see in JavaScript.
-say sub ($x, $y) {$x ~ ' ' ~ $y}("Perl", 6);
+say sub ($x, $y) {$x ~ &#39; &#39; ~ $y}(&#34;Perl&#34;, 6);
 The first pair of parentheses contains the list of formal arguments of the anonymous sub; the second, the list of the arguments passed. The body of the sub is located between the braces. (The tilde denotes a string concatenation operator in Raku.)
 By the way, it is important that there be no spaces before parentheses with the actual values of the sub parameters.
 Another way of creating an anonymous sub is to use the arrow operator (+&gt;). We will discuss it later in the section dedicated to anonymous blocks.
@@ -1607,7 +1587,7 @@ Another way of creating an anonymous sub is to use the arrow operator (+&gt;). W
 <div class="paragraph">
 <p>Variables and signatures
 Lexical variables
-Lexical variables in Raku are those declared with the my keyword. The- se variables are only visible within the block where they were declared. If you tried accessing them outside the scope, you’d get the error: Var+ iable '$x' is not declared.
+Lexical variables in Raku are those declared with the my keyword. The- se variables are only visible within the block where they were declared. If you tried accessing them outside the scope, you’d get the error: Var+ iable &#39;$x&#39; is not declared.
 {
      my $x = 42;
      say $x; # This is fine
@@ -1654,11 +1634,11 @@ Dynamic variables are marked with the * twigil (a character clearly ref- erencin
 In the following example, the echo() function prints a dynamic variable  $*var, which is not declared in the function, nor is it a global variable. It, nevertheless, can be resolved when used in other functions, even if they have their own instances of the variable with the same name.</p>
 </div>
 <div class="paragraph">
-<p>sub alpha {      my $*var = 'Alpha';      echo();
+<p>sub alpha {      my $*var = &#39;Alpha&#39;;      echo();
 }</p>
 </div>
 <div class="paragraph">
-<p>sub beta {      my $*var = 'Beta';      echo();
+<p>sub beta {      my $*var = &#39;Beta&#39;;      echo();
 }</p>
 </div>
 <div class="paragraph">
@@ -1708,7 +1688,7 @@ my $pow = {$^x ** $^y};   say $pow(3, 4); # 81
 The values 3 and 4, which were passed in the function call, will land in its variables $^x and $^y, respectively.
 Now, let us go back to the loop example from the previous section and rewrite it in the form with no arguments (and thus, no arrow).
 for 0..9 {
-    say "$^n2, $^n1";
+    say &#34;$^n2, $^n1&#34;;
 }</p>
 </div>
 <div class="paragraph">
@@ -1728,17 +1708,17 @@ portance anymore. The following call gives us the same result.</p>
 <p>say $pow(:exp(2), :base(25)); # 625
 Keep in mind that using named placeholders is
 sub f($a) {
-    # say $^a; # Error: Redeclaration of symbol '$^a'                # as a placeholder parameter
+    # say $^a; # Error: Redeclaration of symbol &#39;$^a&#39;                # as a placeholder parameter
 }
 Neither you can use any other placeholder names if the signature of the sub is already defined:
 sub f($a) {
-    say $^b; # Placeholder variable '$^b' cannot
+    say $^b; # Placeholder variable &#39;$^b&#39; cannot
              # override existing signature
 }
 Function overloading
 The multi keyword allows defining more than one function (or sub- routine, or simply sub) with the same name. The only restriction is that those functions should have different signatures. In Raku, the signature of the sub is defined together with its name, and the arguments may be typed. In the case of multi subs, typed arguments make even more sense because they help to distinguish between different versions of the function with a single name and make a correct choice when the com- piler needs to call one of them.
 multi sub twice(Int $x) {       return $x * 2;
-}    multi sub twice(Str $s) {       return "$s, $s";
+}    multi sub twice(Str $s) {       return &#34;$s, $s&#34;;
 }    70
  specifying a signature to the block, and you cannot have both.
 just a different way of
@@ -1746,16 +1726,16 @@ just a different way of
  with the name of the already existing parameter:</p>
 </div>
 <div class="paragraph">
-<p>say twice(42);   # 84   say twice("hi"); # hi, hi
+<p>say twice(42);   # 84   say twice(&#34;hi&#34;); # hi, hi
 As we have two functions here, one taking an integer argument and another expecting a string, the compiler can easily decide which one it should use.
 Sub overloading with subtypes
 Multi subs can be made even more specific by using subtypes. In Raku, subtypes are created with the subset keyword. A subtype definition takes one of the existing types and adds a restriction to select the val- ues to be included in the subtype range.
 The following lines give a clear view of how subtypes are defined. From the same integer type, Int, the Odd subtype selects only the odd num- bers, while the Even subtype picks only the even numbers.
 subset Odd of Int where {$^n % 2 == 1};   subset Even of Int where {$^n % 2 == 0};
 Now, the subtypes can be used in the signatures of the multi subs. The  testnum function has two versions, one for odd and one for even num- bers.
-multi sub testnum(Odd $x) {       say "$x is odd";
+multi sub testnum(Odd $x) {       say &#34;$x is odd&#34;;
 }
-  multi sub testnum(Even $x) {       say "$x is even";
+  multi sub testnum(Even $x) {       say &#34;$x is even&#34;;
 }</p>
 </div>
 <div class="paragraph">
@@ -1781,16 +1761,16 @@ In the first option, the rest of the file is the module definition (note the pre
 </div>
 <div class="paragraph">
 <p>unit module X;
-sub x() {      say "X::x()";  }</p>
+sub x() {      say &#34;X::x()&#34;;  }</p>
 </div>
 <div class="paragraph">
 <p>In the second option, the code looks similar to the way you declare classes (more on classes in Chapter 4).
-module X {       sub x() {           say "X::x()";       }
+module X {       sub x() {           say &#34;X::x()&#34;;       }
 }
 export
 The my and our variables, as well as subs, which are defined in the module, are not visible outside of its scope by default. To export a name, the is export trait is required.
 unit module X;
-  sub x() is export {       say "X::x()";   }</p>
+  sub x() is export {       say &#34;X::x()&#34;;   }</p>
 </div>
 <div class="paragraph">
 <p>This is all you need to do to be able to call the x() sub in the pro- gramme using your module.
@@ -1803,25 +1783,25 @@ An example. Let us first create the module Greet and save it in the file named G
 </div>
 <div class="paragraph">
 <p>unit module Greet;
-  sub hey($name) is export {       say "Hey, $name ";
+  sub hey($name) is export {       say &#34;Hey, $name &#34;;
 }
 Then, let us use this module in our programme by saying use Greet.
 use Greet;</p>
 </div>
 <div class="paragraph">
-<p>hey("you"); # Hey, you</p>
+<p>hey(&#34;you&#34;); # Hey, you</p>
 </div>
 <div class="paragraph">
 <p>Module names can be more complicated. With is export, all the ex- ported names will be available in the current scope after the module is  used.
 In the following example, the module  Greet::Polite  sits in the  Greet/Polite.pm file.
-module Greet::Polite {       sub hello($name) is export {           say "Hello, $name ";       }
+module Greet::Polite {       sub hello($name) is export {           say &#34;Hello, $name &#34;;       }
 }
 The programme uses both of these modules and can access all the ex- ported subs.
 use Greet;   use Greet::Polite;</p>
 </div>
 <div class="paragraph">
-<p>hey("you");     # a sub from Greet
-hello("Mr. X"); # from Greet::Polite
+<p>hey(&#34;you&#34;);     # a sub from Greet
+hello(&#34;Mr. X&#34;); # from Greet::Polite
 import
 The  use  keyword automatically imports the names from modules. When a module is defined in the current file in the lexical scope (please note that the module can be declared as local with my module), no im-
 74</p>
@@ -1853,7 +1833,7 @@ Let us create a module named N, which contains the sub n(). This time, the sub i
 unit module N;</p>
 </div>
 <div class="paragraph">
-<p>our sub n() {       say "N::n()";   }</p>
+<p>our sub n() {       say &#34;N::n()&#34;;   }</p>
 </div>
 <div class="paragraph">
 <p>75</p>
@@ -1916,7 +1896,7 @@ Class data variables are called attributes. They are declared with the has keywo
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $cafe = Cafe.new(      name =&gt; "Paris"  );</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $cafe = Cafe.new(      name =&gt; &#34;Paris&#34;  );</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1936,12 +1916,12 @@ Class data variables are called attributes. They are declared with the has keywo
     has $.name is rw;
     has @ orders;
 }
-my $cafe = Cafe.new( name =&gt; "Paris"  );</code></pre>
+my $cafe = Cafe.new( name =&gt; &#34;Paris&#34;  );</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Now, read and write actions are available.
-$cafe.name = "Berlin";  say $cafe.name;
+$cafe.name = &#34;Berlin&#34;;  say $cafe.name;
 Class methods
 The method keyword defines a method
 sub
@@ -1963,13 +1943,13 @@ In the following short example, two methods are created, and each of them manipu
 
     method order($what) {          @ orders.push($what);      }
 
-    method list+orders {          @ orders.sort.join(', ').say;      }
+    method list+orders {          @ orders.sort.join(&#39;, &#39;).say;      }
 }
 
-my $cafe = Cafe.new(      name =&gt; "Paris"
+my $cafe = Cafe.new(      name =&gt; &#34;Paris&#34;
 );
 
-$cafe.order('meet');  $cafe.order('fish');  $cafe.list+orders; # fish, meet</code></pre>
+$cafe.order(&#39;meet&#39;);  $cafe.order(&#39;fish&#39;);  $cafe.list+orders; # fish, meet</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1977,7 +1957,7 @@ $cafe.order('meet');  $cafe.order('fish');  $cafe.list+orders; # fish, meet</cod
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">@orders.sort.join(', ').say;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">@orders.sort.join(&#39;, &#39;).say;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1988,7 +1968,7 @@ $cafe.order('meet');  $cafe.order('fish');  $cafe.list+orders; # fish, meet</cod
 <pre class="highlight"><code class="language-raku" data-lang="raku">method order($what) {      @ orders.push($what);      self.list+orders;
 }
 
-method list+orders {      say self.name;      @ orders.sort.join(', ').say;  }</code></pre>
+method list+orders {      say self.name;      @ orders.sort.join(&#39;, &#39;).say;  }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1999,10 +1979,10 @@ method list+orders {      say self.name;      @ orders.sort.join(', ').say;  }</
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">class A {      method x {          say "A.x"      }      method y {          say "A.y"      }
+<pre class="highlight"><code class="language-raku" data-lang="raku">class A {      method x {          say &#34;A.x&#34;      }      method y {          say &#34;A.y&#34;      }
 }
 
-class B is A {      method x {          say "B.x"      }
+class B is A {      method x {          say &#34;B.x&#34;      }
 }</code></pre>
 </div>
 </div>
@@ -2023,7 +2003,7 @@ say $b.^mro;
 In our example, the following order will be printed.
 B)&amp;(A)&amp;(Any)&amp;(Mu&amp;
 Of course, you may call the .^mro method on any other variable or ob- ject in a programme, regardless of whether it is an instance of the user- defined class, a simple variable, or a constant. Just get an idea of how this is implemented internally.
-$ raku +e'42.^mro.say'
+$ raku +e&#39;42.^mro.say&#39;
 Int)&amp;(Cool)&amp;(Any)&amp;(Mu&amp;
 84</p>
 </div>
@@ -2033,10 +2013,10 @@ When more than one class is mentioned in the list of base classes, we have multi
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">class A {      method a {          say "A.a"      }
+<pre class="highlight"><code class="language-raku" data-lang="raku">class A {      method a {          say &#34;A.a&#34;      }
 }
 
-class B {      method b {          say "B.b";      }
+class B {      method b {          say &#34;B.b&#34;;      }
 }
   class C is A is B {  }
 
@@ -2049,10 +2029,10 @@ $c.b;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">class A {      method meth {          say "A.meth"      }
+<pre class="highlight"><code class="language-raku" data-lang="raku">class A {      method meth {          say &#34;A.meth&#34;      }
 }
 
-class B {      method meth {          say "B.meth";      }
+class B {      method meth {          say &#34;B.meth&#34;;      }
 }
 
 
@@ -2082,16 +2062,16 @@ The following example demonstrates the usage of a private method of a class. The
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">class A {
     # Method is only available within A
-    method  private {          say "A.private";      }
+    method  private {          say &#34;A.private&#34;;      }
 
     # Public method calling a private method     method public {
-        # You cannot avoid self here.         # Consider the ' ' as a separator like '.'         self private;
+        # You cannot avoid self here.         # Consider the &#39; &#39; as a separator like &#39;.&#39;         self private;
     }
 }
 
 class B is A {
     method method {
-        # Again self, but this the '.' this time.         # This is a public method.         self.public;
+        # Again self, but this the &#39;.&#39; this time.         # This is a public method.         self.public;
 
         # This will be a compile-time error.
         # self private;      }
@@ -2105,7 +2085,7 @@ my $b = B.new;  $b.method; # A.private</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">class C {      method meth  {say 'meth' }      method  meth {say ' meth'}      method demo {          self.meth;          self meth;
+<pre class="highlight"><code class="language-raku" data-lang="raku">class C {      method meth  {say &#39;meth&#39; }      method  meth {say &#39; meth&#39;}      method demo {          self.meth;          self meth;
     }
 }
 
@@ -2121,7 +2101,7 @@ $c.demo; # Prints both meth and  meth</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">class A {      submethod submeth {          say "A.submeth"      }
+<pre class="highlight"><code class="language-raku" data-lang="raku">class A {      submethod submeth {          say &#34;A.submeth&#34;      }
 }
 
 class B is A {
@@ -2131,7 +2111,7 @@ my A $a;
 my B $b;
 
 $a.submeth;   # OK
-# $b.submeth; # Error: No such method 'submeth' for invocant of type 'B'</code></pre>
+# $b.submeth; # Error: No such method &#39;submeth&#39; for invocant of type &#39;B&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2166,7 +2146,7 @@ The first was via an explicit call of the new constructor. In this case, a new i
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">class A {
-    has $.x = 42;      method m {          say "A.m";      }
+    has $.x = 42;      method m {          say &#34;A.m&#34;;      }
 }</code></pre>
 </div>
 </div>
@@ -2205,7 +2185,7 @@ The new method is inherited from the Mu class. It accepts a list of the named ar
 </div>
 </div>
 <div class="paragraph">
-<p>Note that the name of the field (x) may not be quoted. An attempt of A.new('x' &#8658; 14) will fail because it will be interpreted as a Pair being passed as a positional parameter.
+<p>Note that the name of the field (x) may not be quoted. An attempt of A.new(&#39;x&#39; ⇒ 14) will fail because it will be interpreted as a Pair being passed as a positional parameter.
 Alternatively, you can use the :named(value) format for specifying named parameters:</p>
 </div>
 <div class="listingblock">
@@ -2233,10 +2213,10 @@ Alternatively, you can use the :named(value) format for specifying named paramet
 
     method dump {
         # Here, we print the current values.         # The variables are interpolated as usual         # but to escape an apostrophe character from         # the variable name, a pair of braces is added.
-        "{$.str}'s length is $ len.".say;      }
+        &#34;{$.str}&#39;s length is $ len.&#34;.say;      }
 }
 
-my $a = A.new(str =&gt; "Perl");  $a.dump;</code></pre>
+my $a = A.new(str =&gt; &#34;Perl&#34;);  $a.dump;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2264,7 +2244,7 @@ role FoodService {      has @ orders;
     }
 
     method bill {
-        # Order's total is still a sum of the orders.         return self.calc;
+        # Order&#39;s total is still a sum of the orders.         return self.calc;
     }
 }
 
@@ -2303,7 +2283,7 @@ Roles can be used for defining and API and forcing the presence of a meth- od in
 <p>It is not possible to run this programme as it generates a compile-time error:</p>
 </div>
 <div class="paragraph">
-<p>Note that the ellipsis &#8230;&#8203; is a valid Raku construction that is used to
+<p>Note that the ellipsis …​ is a valid Raku construction that is used to
 create forward declarations.</p>
 </div>
 <div class="paragraph">
@@ -2341,7 +2321,7 @@ for &lt;1 3 5 7 9&gt; {
 }
 
 # Now, we read the numbers until the channel has them.
-# "while @a -&gt; $x" creates a loop with the $x as a loop variable. while $channel.poll +&gt; $x {
+# &#34;while @a -&gt; $x&#34; creates a loop with the $x as a loop variable. while $channel.poll +&gt; $x {
     say $x;
 }
 
@@ -2445,9 +2425,9 @@ The Channel class also defines a method that checks on whether the channel is cl
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $c = Channel.new;   say "open" if  $c.closed; # is open
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $c = Channel.new;   say &#34;open&#34; if  $c.closed; # is open
 
-$c.close;   say "closed" if $c.closed; # closed</code></pre>
+$c.close;   say &#34;closed&#34; if $c.closed; # closed</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2552,7 +2532,7 @@ This is how a message is passed for the kept promise:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $p = Promise.new;  $p.keep('All done');  say $p.status; # Kept  say $p.result; # All done</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $p = Promise.new;  $p.keep(&#39;All done&#39;);  say $p.status; # Kept  say $p.result; # All done</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2560,7 +2540,7 @@ This is how a message is passed for the kept promise:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $p = Promise.new;  $p.break('Timeout');  say $p.status; # Broken  say $p.cause;  # Timeout</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $p = Promise.new;  $p.break(&#39;Timeout&#39;);  say $p.status; # Broken  say $p.cause;  # Timeout</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2620,7 +2600,7 @@ try {
     say $p.result;
 }
 say $p.status; # This line will be executed
-               # and will print 'Broken'</code></pre>
+               # and will print &#39;Broken&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2691,11 +2671,11 @@ The then method, when called on an already existing promise, creates another pro
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $p = Promise.in(2);   my $t = $p.then({say "OK"}); # Prints this in two seconds
-say "promised"; # Prints immediately
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $p = Promise.in(2);   my $t = $p.then({say &#34;OK&#34;}); # Prints this in two seconds
+say &#34;promised&#34;; # Prints immediately
 sleep 3;
 
-say "done";</code></pre>
+say &#34;done&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2711,7 +2691,7 @@ done</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">Promise.start({  # A new promise       say 1 / 0    # generates an exception                    # (the result of the division is used in say). }).then({        # The code executed after the broken line.     say "oops"
+<pre class="highlight"><code class="language-raku" data-lang="raku">Promise.start({  # A new promise       say 1 / 0    # generates an exception                    # (the result of the division is used in say). }).then({        # The code executed after the broken line.     say &#34;oops&#34;
 }).result        # This is required so that we wait until                  # the result is known.</code></pre>
 </div>
 </div>
@@ -2766,7 +2746,7 @@ As an exercise, let’s simplify the code and get rid of an explicit array that 
 <h2 id="_正则表达式和_grammars">3. 正则表达式和 Grammars</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Raku 中的 grammars 是众所周知的正则表达式的"下一个级别"。 Grammars 可以让你创建更复杂的文本解析器。 只使用 Raku 提供的 grammars 设施，即可在没有任何外部帮助的情况下创建新的特定领域的语言（DSL），语言翻译器或解释器。</p>
+<p>Raku 中的 grammars 是众所周知的正则表达式的&#34;下一个级别&#34;。 Grammars 可以让你创建更复杂的文本解析器。 只使用 Raku 提供的 grammars 设施，即可在没有任何外部帮助的情况下创建新的特定领域的语言（DSL），语言翻译器或解释器。</p>
 </div>
 <div class="sect2">
 <h3 id="_正则表达式">3.1. 正则表达式</h3>
@@ -2787,8 +2767,8 @@ As an exercise, let’s simplify the code and get rid of an explicit array that 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say 'Thu' ~~ m/&lt;weekday&gt;/;
-say 'Thy' ~~ m/&lt;weekday&gt;/;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;Thu&#39; ~~ m/&lt;weekday&gt;/;
+say &#39;Thy&#39; ~~ m/&lt;weekday&gt;/;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2802,7 +2782,7 @@ False</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>匹配的结果是 <strong>Match</strong> 类型的对象。 当你打印它时，你会在小方括号 「&#8230;&#8203;」 内看到所匹配到的子字符串 。</p>
+<p>匹配的结果是 <strong>Match</strong> 类型的对象。 当你打印它时，你会在小方括号 「…​」 内看到所匹配到的子字符串 。</p>
 </div>
 <div class="paragraph">
 <p>正则表达式是最简单的命名结构。 除此之外，还有 rules 和 tokens（因此，关键字是 <strong>rule</strong> 和 <strong>token</strong>）。</p>
@@ -2820,12 +2800,12 @@ my rule  number_rule  { &lt;[\d]&gt; &lt;[\d]&gt; }</code></pre>
 <p>(注意闭合花括号后面没有不需要分号。)</p>
 </div>
 <div class="paragraph">
-<p><code>&lt;[&#8230;&#8203;]&gt;</code> 结构创建一个字符类。在上面的例子中, 两个字符的字符串 <strong>42</strong> 匹配 <code>number_token</code> token 但是不匹配 <code>number_rule</code> rule。</p>
+<p><code>&lt;[…​]&gt;</code> 结构创建一个字符类。在上面的例子中, 两个字符的字符串 <strong>42</strong> 匹配 <code>number_token</code> token 但是不匹配 <code>number_rule</code> rule。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say 1 if "42" ~~ /&lt;number_token&gt;/;
-say 1 if "42" ~~ /&lt;number_rule&gt;/;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 1 if &#34;42&#34; ~~ /&lt;number_token&gt;/;
+say 1 if &#34;42&#34; ~~ /&lt;number_rule&gt;/;</code></pre>
 </div>
 </div>
 </div>
@@ -2839,7 +2819,7 @@ say 1 if "42" ~~ /&lt;number_rule&gt;/;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">'Wed 15' ~~ /(\w+) \s (\d+)/;
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#39;Wed 15&#39; ~~ /(\w+) \s (\d+)/;
 say ~$0; # Wed
 say ~$1; # 15</code></pre>
 </div>
@@ -2874,7 +2854,7 @@ print 7;</code></pre>
         ^ &lt;statements&gt; $
     }
     rule statements {
-        &lt;statement&gt;+ %% ';'
+        &lt;statement&gt;+ %% &#39;;&#39;
     }
 }</code></pre>
 </div>
@@ -2917,15 +2897,15 @@ rule statement {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
-    &lt;identifier&gt; '=' &lt;expression&gt;
+    &lt;identifier&gt; &#39;=&#39; &lt;expression&gt;
 }
 rule printout {
-    'print' &lt;expression&gt;
+    &#39;print&#39; &lt;expression&gt;
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这里，我们看到字符串字面量，即 <strong>'='</strong> 和 <strong>'print'</strong>。 同样，它们周围的空格不会影响规则。</p>
+<p>在这里，我们看到字符串字面量，即 <strong>&#39;=&#39;</strong> 和 <strong>&#39;print&#39;</strong>。 同样，它们周围的空格不会影响规则。</p>
 </div>
 <div class="paragraph">
 <p><strong>expression</strong> 与标识符（在我们的例子中是变量名）或常量值匹配。 因此，<strong>expression</strong> 是 <strong>identifier</strong> 或没有附加字符串的 <strong>value</strong>。</p>
@@ -2969,7 +2949,7 @@ rule printout {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $parsed = Lang.parsefile('test.lang');</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $parsed = Lang.parsefile(&#39;test.lang&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3015,7 +2995,7 @@ print 7;｣
 </div>
 </div>
 <div class="paragraph">
-<p>此输出对应于本节开头的示例程序。 它包含已解析程序的结构。 捕获的部分显示在括号  ｢&#8230;&#8203;｣ 中。 首先，打印整个匹配的文本。 实际上，由于 <strong>TOP</strong> 规则使用了一对 <code>^ &#8230;&#8203; $</code> 结构，因此整个文本应该与规则匹配。</p>
+<p>此输出对应于本节开头的示例程序。 它包含已解析程序的结构。 捕获的部分显示在括号  ｢…​｣ 中。 首先，打印整个匹配的文本。 实际上，由于 <strong>TOP</strong> 规则使用了一对 <code>^ …​ $</code> 结构，因此整个文本应该与规则匹配。</p>
 </div>
 <div class="paragraph">
 <p>然后，打印解析树。 它从 <strong>&lt;statements&gt;</strong> 开始，然后 grammar 的其他部分完全按照文件中的程序包含的内容呈现。 在下一级别，你可以看到 <strong>identifier</strong> 和 <strong>value</strong> token 的内容。</p>
@@ -3033,17 +3013,17 @@ print 7;｣
         ^ &lt;statements&gt; $
     }
     rule statements {
-        &lt;statement&gt;+ %% ';'
+        &lt;statement&gt;+ %% &#39;;&#39;
     }
     rule statement  {
         | &lt;assignment&gt;
         | &lt;printout&gt;
     }
     rule assignment {
-        &lt;identifier&gt; '=' &lt;expression&gt;
+        &lt;identifier&gt; &#39;=&#39; &lt;expression&gt;
     }
     rule printout   {
-        'print' &lt;expression&gt;
+        &#39;print&#39; &lt;expression&gt;
     }
     rule expression {
         | &lt;identifier&gt;
@@ -3073,12 +3053,12 @@ print 7;｣
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
-    | &lt;identifier&gt; '=' &lt;value&gt;
-    | &lt;identifier&gt; '=' &lt;identifier&gt;
+    | &lt;identifier&gt; &#39;=&#39; &lt;value&gt;
+    | &lt;identifier&gt; &#39;=&#39; &lt;identifier&gt;
 }
 rule printout {
-    | 'print' &lt;value&gt;
-    | 'print' &lt;identifier&gt;
+    | &#39;print&#39; &lt;value&gt;
+    | &#39;print&#39; &lt;identifier&gt;
 }</code></pre>
 </div>
 </div>
@@ -3092,9 +3072,9 @@ rule printout {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
-    | &lt;identifier&gt; '=' &lt;value&gt;
-          { say "$&lt;identifier&gt;=$&lt;value&gt;" }
-    | &lt;identifier&gt; '=' &lt;identifier&gt;
+    | &lt;identifier&gt; &#39;=&#39; &lt;value&gt;
+          { say &#34;$&lt;identifier&gt;=$&lt;value&gt;&#34; }
+    | &lt;identifier&gt; &#39;=&#39; &lt;identifier&gt;
 }</code></pre>
 </div>
 </div>
@@ -3102,19 +3082,19 @@ rule printout {
 <p>如果你使用上面的 action 更新 grammar 并针对同一示例文件运行程序，那么你将在输出中看到子字符串 <code>x=42</code>。</p>
 </div>
 <div class="paragraph">
-<p><strong>Match</strong> 对象在用双引号插值时转换为字符串，如给定示例中所示：<code>"$&lt;identifier&gt;=$&lt;value&gt;"</code>。 要使用带引号的字符串外部的文本值，你应该进行明确的类型转换：</p>
+<p><strong>Match</strong> 对象在用双引号插值时转换为字符串，如给定示例中所示：<code>&#34;$&lt;identifier&gt;=$&lt;value&gt;&#34;</code>。 要使用带引号的字符串外部的文本值，你应该进行明确的类型转换：</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
-    | &lt;identifier&gt; '=' &lt;value&gt;
+    | &lt;identifier&gt; &#39;=&#39; &lt;value&gt;
           {%var{~$&lt;identifier&gt;} = +$&lt;value&gt; }
-    | &lt;identifier&gt; '=' &lt;identifier&gt;
+    | &lt;identifier&gt; &#39;=&#39; &lt;identifier&gt;
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>到目前为止，我们已经有了一个为变量赋值的 action，并且可以处理文件的第一行。 变量存储将包含 <code>{x &#8658; 42}</code> 对。</p>
+<p>到目前为止，我们已经有了一个为变量赋值的 action，并且可以处理文件的第一行。 变量存储将包含 <code>{x ⇒ 42}</code> 对。</p>
 </div>
 <div class="paragraph">
 <p>在 <strong>assignment</strong> rule 的第二个备选项中，<code>&lt;identifier&gt;</code> 名称被提及了两次; 这就是为什么你可以引用它作为 <code>$&lt;identifier&gt;</code> 的数组元素的原因。</p>
@@ -3122,11 +3102,11 @@ rule printout {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
-    | &lt;identifier&gt; '=' &lt;value&gt;
+    | &lt;identifier&gt; &#39;=&#39; &lt;value&gt;
       {
           %var{~$&lt;identifier&gt;} = +$&lt;value&gt;
       }
-    | &lt;identifier&gt; '=' &lt;identifier&gt;
+    | &lt;identifier&gt; &#39;=&#39; &lt;identifier&gt;
       {
           %var{~$&lt;identifier&gt;[0]} =
           %var{~$&lt;identifier&gt;[1]}
@@ -3135,7 +3115,7 @@ rule printout {
 </div>
 </div>
 <div class="paragraph">
-<p>对代码的这一添加使得可以解析两个变量的赋值：<strong>y = x</strong>。 <strong>%var</strong> 散列将包含两个值：<strong>{x &#8658; 42, y &#8658; 42}</strong>。</p>
+<p>对代码的这一添加使得可以解析两个变量的赋值：<strong>y = x</strong>。 <strong>%var</strong> 散列将包含两个值：<strong>{x ⇒ 42, y ⇒ 42}</strong>。</p>
 </div>
 <div class="paragraph">
 <p>或者，可以使用捕获圆括号。 在这种情况下，要访问捕获的子字符串，请使用特殊变量，例如 <strong>$0</strong>：</p>
@@ -3143,11 +3123,11 @@ rule printout {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
-    | (&lt;identifier&gt;) '=' (&lt;value&gt;)
+    | (&lt;identifier&gt;) &#39;=&#39; (&lt;value&gt;)
       {
           %var{$0} = +$1
       }
-    | (&lt;identifier&gt;) '=' (&lt;identifier&gt;)
+    | (&lt;identifier&gt;) &#39;=&#39; (&lt;identifier&gt;)
       {
           %var{$0} = %var{$1}
       }
@@ -3163,11 +3143,11 @@ rule printout {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule printout {
-    | 'print' &lt;value&gt;
+    | &#39;print&#39; &lt;value&gt;
       {
           say +$&lt;value&gt;
       }
-    | 'print' &lt;identifier&gt;
+    | &#39;print&#39; &lt;identifier&gt;
       {
           say %var{$&lt;identifier&gt;}
       }
@@ -3209,28 +3189,28 @@ grammar Lang {
         ^ &lt;statements&gt; $
     }
     rule statements {
-        &lt;statement&gt;+ %% ';'
+        &lt;statement&gt;+ %% &#39;;&#39;
     }
     rule statement {
         | &lt;assignment&gt;
         | &lt;printout&gt;
     }
     rule assignment {
-        | (&lt;identifier&gt;) '=' (&lt;value&gt;)
+        | (&lt;identifier&gt;) &#39;=&#39; (&lt;value&gt;)
           {
               %var{$0} = +$1
           }
-        | (&lt;identifier&gt;) '=' (&lt;identifier&gt;)
+        | (&lt;identifier&gt;) &#39;=&#39; (&lt;identifier&gt;)
           {
               %var{$0} = %var{$1}
           }
     }
     rule printout {
-        | 'print' &lt;value&gt;
+        | &#39;print&#39; &lt;value&gt;
           {
               say +$&lt;value&gt;
           }
-        | 'print' &lt;identifier&gt;
+        | &#39;print&#39; &lt;identifier&gt;
           {
               say %var{$&lt;identifier&gt;}
           }
@@ -3243,7 +3223,7 @@ grammar Lang {
     }
 }
 
-Lang.parsefile('data/test.lang');</code></pre>
+Lang.parsefile(&#39;data/test.lang&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3265,7 +3245,7 @@ class A {
     method TOP($/) {say ~$/}
 }
 
-G.parse("42", :actions(A));</code></pre>
+G.parse(&#34;42&#34;, :actions(A));</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3286,10 +3266,10 @@ G.parse("42", :actions(A));</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
-    &lt;identifier&gt; '=' &lt;expression&gt;
+    &lt;identifier&gt; &#39;=&#39; &lt;expression&gt;
 }
 rule printout {
-    'print' &lt;expression&gt;
+    &#39;print&#39; &lt;expression&gt;
 }
 rule expression {
     | &lt;identifier&gt;
@@ -3375,7 +3355,7 @@ method value($/) {
 <p>该方法获取 <strong>$/</strong> 对象并使用其 <strong>identifier</strong> 和 <strong>expression</strong> 元素的值。 第一个转换为字符串，并成为 <strong>%var</strong> 散列的键。 从第二个开始，我们通过获取 <strong>made</strong> 属性来获取值。</p>
 </div>
 <div class="paragraph">
-<p>最后，让我们停止使用全局变量存储并将哈希移动到 action 类中（我们在 grammar 本身中不需要它）。因此它将被声明为 <strong>has %!var;</strong> 并在 action 主体中用作私有键变量：<strong>%!var{&#8230;&#8203;}</strong>。</p>
+<p>最后，让我们停止使用全局变量存储并将哈希移动到 action 类中（我们在 grammar 本身中不需要它）。因此它将被声明为 <strong>has %!var;</strong> 并在 action 主体中用作私有键变量：<strong>%!var{…​}</strong>。</p>
 </div>
 <div class="paragraph">
 <p>在此更改之后，在使用 grammar 对其进行解析之前，创建 actions 类的实例非常重要：</p>
@@ -3383,7 +3363,7 @@ method value($/) {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">Lang.parsefile(
-    'test.lang',
+    &#39;test.lang&#39;,
     :actions(LangActions.new())
 );</code></pre>
 </div>
@@ -3398,17 +3378,17 @@ method value($/) {
         ^ &lt;statements&gt; $
     }
     rule statements {
-        &lt;statement&gt;+ %% ';'
+        &lt;statement&gt;+ %% &#39;;&#39;
     }
     rule statement {
         | &lt;assignment&gt;
         | &lt;printout&gt;
     }
     rule assignment {
-        &lt;identifier&gt; '=' &lt;expression&gt;
+        &lt;identifier&gt; &#39;=&#39; &lt;expression&gt;
     }
     rule printout {
-        'print' &lt;expression&gt;
+        &#39;print&#39; &lt;expression&gt;
     }
     rule expression {
         | &lt;identifier&gt;
@@ -3448,7 +3428,7 @@ class LangActions {
 }
 
 Lang.parsefile(
-        'data/test.lang',
+        &#39;data/test.lang&#39;,
         :actions(LangActions.new())
         );</code></pre>
 </div>
@@ -3457,7 +3437,7 @@ Lang.parsefile(
 <div class="sect2">
 <h3 id="_计算器">3.6. 计算器</h3>
 <div class="paragraph">
-<p>在考虑语言解析器时，实现计算器就像编写一个 "Hello，World!"程序。 在本节中，我们将为计算器创建一个 grammar，可以处理四个算术运算符和圆括号。计算器示例的隐藏优势是你必须教它遵循运算符优先级和嵌套表达式。</p>
+<p>在考虑语言解析器时，实现计算器就像编写一个 &#34;Hello，World!&#34;程序。 在本节中，我们将为计算器创建一个 grammar，可以处理四个算术运算符和圆括号。计算器示例的隐藏优势是你必须教它遵循运算符优先级和嵌套表达式。</p>
 </div>
 <div class="paragraph">
 <p>我们的计算器 grammar 将期望在顶层有单个表达式。 运算符的优先级将通过传统的 grammar 构建方法自动实现，其中表达式包括项和因式。</p>
@@ -3467,7 +3447,7 @@ Lang.parsefile(
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;term&gt;+ %% ['+'|'-']</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;term&gt;+ %% [&#39;+&#39;|&#39;-&#39;]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3475,7 +3455,7 @@ Lang.parsefile(
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;term&gt; [['+'|'-'] &lt;term&gt;]*</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;term&gt; [[&#39;+&#39;|&#39;-&#39;] &lt;term&gt;]*</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3483,7 +3463,7 @@ Lang.parsefile(
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;factor&gt;+ %% ['*'|'/']</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;factor&gt;+ %% [&#39;*&#39;|&#39;/&#39;]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3492,7 +3472,7 @@ Lang.parsefile(
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule group {
-    '(' &lt;expression&gt; ')'
+    &#39;(&#39; &lt;expression&gt; &#39;)&#39;
 }</code></pre>
 </div>
 </div>
@@ -3505,8 +3485,8 @@ Lang.parsefile(
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">token value {
-    | \d+['.' \d+]*
-    | '.' \d+
+    | \d+[&#39;.&#39; \d+]*
+    | &#39;.&#39; \d+
 }</code></pre>
 </div>
 </div>
@@ -3520,28 +3500,28 @@ Lang.parsefile(
         ^ &lt;expression&gt; $
     }
     rule expression {
-        | &lt;term&gt;+ %% $&lt;op&gt;=(['+'|'-'])
+        | &lt;term&gt;+ %% $&lt;op&gt;=([&#39;+&#39;|&#39;-&#39;])
         | &lt;group&gt;
     }
     rule term {
-        &lt;factor&gt;+ %% $&lt;op&gt;=(['*'|'/'])
+        &lt;factor&gt;+ %% $&lt;op&gt;=([&#39;*&#39;|&#39;/&#39;])
     }
     rule factor {
         | &lt;value&gt;
         | &lt;group&gt;
     }
     rule group {
-        '(' &lt;expression&gt; ')'
+        &#39;(&#39; &lt;expression&gt; &#39;)&#39;
     }
     token value {
-        | \d+['.' \d+]*
-        | '.' \d+
+        | \d+[&#39;.&#39; \d+]*
+        | &#39;.&#39; \d+
     }
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>注意某些规则中的 <strong>$&lt;op&gt;=(&#8230;&#8203;)</strong> 结构。 这是命名捕获。 该名称通过 <strong>$/</strong> 变量简化了对值的访问。 在这种情况下，你可以将值作为 <strong>$&lt;op&gt;</strong>，并且在更新规则后不必担心变量名称的可能更改，因为它发生在编号变量 <strong>$0</strong>，<strong>$1</strong> 等处。</p>
+<p>注意某些规则中的 <strong>$&lt;op&gt;=(…​)</strong> 结构。 这是命名捕获。 该名称通过 <strong>$/</strong> 变量简化了对值的访问。 在这种情况下，你可以将值作为 <strong>$&lt;op&gt;</strong>，并且在更新规则后不必担心变量名称的可能更改，因为它发生在编号变量 <strong>$0</strong>，<strong>$1</strong> 等处。</p>
 </div>
 <div class="paragraph">
 <p>现在，为编译器创建 action。 在 <strong>TOP</strong> 级别，规则返回计算后的值，它从 <strong>expression</strong> 的 <strong>ast</strong> 字段中获取。</p>
@@ -3618,7 +3598,7 @@ method value($/) {
         my @vals = $&lt;factor&gt;[1..*].map(*.ast);
 
         for 0..@ops.elems - 1 -&gt; $c {
-            if @ops[$c] eq '*' {
+            if @ops[$c] eq &#39;*&#39; {
                 $result *= @vals[$c];
             }
             else {
@@ -3665,7 +3645,7 @@ method value($/) {
             my @ops = $&lt;op&gt;.map(~*);
             my @vals = $&lt;term&gt;[1..*].map(*.ast);
             for 0..@ops.elems -1 -&gt; $c {
-                if @ops[$c] eq '+' {
+                if @ops[$c] eq &#39;+&#39; {
                     $result += @vals[$c];
                 }
                 else {
@@ -3696,7 +3676,7 @@ say $calc.ast;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku calc.pl '39 + 3.14 * (7 - 18 / (505 - 502)) - .14'
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku calc.pl &#39;39 + 3.14 * (7 - 18 / (505 - 502)) - .14&#39;
 42</code></pre>
 </div>
 </div>

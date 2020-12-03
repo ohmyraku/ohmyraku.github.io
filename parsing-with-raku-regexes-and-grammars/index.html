@@ -8,9 +8,17 @@
 
 <meta name="author" content="ohmyraku">
 <meta name="application-name" content="山川异域, 风月同天">
-<meta name="description" content="Table of Contents 1. 什么是正则表达式和 Grammar？ 1.1. 使用场景 1.2. 正则或正则表达式 1.3. Raku 正则表达式有什么特别之处   2. Raku 入门 2.1. 安装 Raku 2.2. 使用 Raku 2.3. 获取代码示例 2.4. 使用 Raku 的第一步 2.5. 总结   3. 正则表达式构造块 3.1. 字面量 3.2. 元字符与字面量 3.3. Anchors 3.4. 预定义字符类 3.5. 量词 3.6. 析取 3.7. 连接 3.8. 零宽断言 3.9. 总结   4. 正则表达式和 Raku 代码 4.1. 智能匹配 4.2. 引号形式 4.3. 修饰符 4.4. comb 和 split 4.">
+<meta name="description" content="1. 什么是正则表达式和 Grammar？ 我们会接触到各种各样的结构化数据: 电话号码、电子邮件地址、邮政地址、信用卡号码等等。
+ 正则表达式是一种声明性的编程结构, 用来描述这些数据格式。正则表达式可以让你搜索数据, 确保输入的数据确实是真实的格式, 甚至可以提取相关的组件, 如邮政地址的邮政编码, 或日志文件条目中的时间戳。
+ 当你需要读取和验证更复杂的结构时, 比如程序设计语言, 或者像 XML 这样的标记语言, 你可以把多个正则表达式组合成 grammar。Grammar 的作用不仅仅是简单地组合正则表达式。它们还提供生成良好的错误信息和在分析输入文本时跟踪状态的基础设施。
+ 1.1. 使用场景 1.1.1. 搜索 正则表达式的一个常见用途是在大量数据中搜索感兴趣的模式, 例如在日志文件中查找某些消息, 在 URL 中查找特定的信息, 或者在文本中查找电话号码。在写这篇文章的时候, 我的 .bash_history 中大约有 6% 的条目涉及到使用正则表达式进行搜索。
+   许多命令行工具都支持某些正则表达式方言, 允许你搜索文件名、文件内容、日志、捕获的网络流量以及几乎所有你能想到的东西。大多数现代编程语言也可以很容易地使用正则表达式, 使其成为一种无处不在、不可或缺的搜索工具。
+  1.1.2. 验证 大多数应用程序都面临着不可信的用户输入。特别是 Web 应用程序面临着大量的不可信输入。这些输入必须在应用任何进一步的逻辑或将其存储在例如数据库中之前进行验证。
+ 正则表达式是验证的第一步。他们使检查数字等简单的事情变得简单, 并验证输入的最小长度和最大长度。同时, 它们允许程序员进行更精确、更复杂的检查。
+ Web 应用程序员只需要提供一个正则表达式, 并将其与输入字段关联。然后, Web 框架可以根据所有已配置的正则表达式来验证表单输入, 并自动为终端用户生成错误信息, 这样 Web 应用程序员就不需要处理拒绝输入和重新生成表单的工作流程。
+  1.1.3. 解析 单独使用正则表达式不太适合解析复杂的输入数据。然而, Raku 添加了功能, 使其非常适合这项任务。这些扩展包括易于使用的回溯控制和通过命名正则表达式获得的可组合性。">
 <meta name="robots" content="noodp"/>
-<meta name="generator" content="Hugo 0.63.2" />
+<meta name="generator" content="Hugo 0.79.0" />
 <meta name="referrer" content="no-referrer" />
 <meta name="format-detection" content="telephone=no">
 
@@ -22,7 +30,15 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="使用 Raku 正则表达式和 Grammars 进行解析" />
-<meta name="twitter:description" content="Table of Contents 1. 什么是正则表达式和 Grammar？ 1.1. 使用场景 1.2. 正则或正则表达式 1.3. Raku 正则表达式有什么特别之处   2. Raku 入门 2.1. 安装 Raku 2.2. 使用 Raku 2.3. 获取代码示例 2.4. 使用 Raku 的第一步 2.5. 总结   3. 正则表达式构造块 3.1. 字面量 3.2. 元字符与字面量 3.3. Anchors 3.4. 预定义字符类 3.5. 量词 3.6. 析取 3.7. 连接 3.8. 零宽断言 3.9. 总结   4. 正则表达式和 Raku 代码 4.1. 智能匹配 4.2. 引号形式 4.3. 修饰符 4.4. comb 和 split 4." />
+<meta name="twitter:description" content="1. 什么是正则表达式和 Grammar？ 我们会接触到各种各样的结构化数据: 电话号码、电子邮件地址、邮政地址、信用卡号码等等。
+ 正则表达式是一种声明性的编程结构, 用来描述这些数据格式。正则表达式可以让你搜索数据, 确保输入的数据确实是真实的格式, 甚至可以提取相关的组件, 如邮政地址的邮政编码, 或日志文件条目中的时间戳。
+ 当你需要读取和验证更复杂的结构时, 比如程序设计语言, 或者像 XML 这样的标记语言, 你可以把多个正则表达式组合成 grammar。Grammar 的作用不仅仅是简单地组合正则表达式。它们还提供生成良好的错误信息和在分析输入文本时跟踪状态的基础设施。
+ 1.1. 使用场景 1.1.1. 搜索 正则表达式的一个常见用途是在大量数据中搜索感兴趣的模式, 例如在日志文件中查找某些消息, 在 URL 中查找特定的信息, 或者在文本中查找电话号码。在写这篇文章的时候, 我的 .bash_history 中大约有 6% 的条目涉及到使用正则表达式进行搜索。
+   许多命令行工具都支持某些正则表达式方言, 允许你搜索文件名、文件内容、日志、捕获的网络流量以及几乎所有你能想到的东西。大多数现代编程语言也可以很容易地使用正则表达式, 使其成为一种无处不在、不可或缺的搜索工具。
+  1.1.2. 验证 大多数应用程序都面临着不可信的用户输入。特别是 Web 应用程序面临着大量的不可信输入。这些输入必须在应用任何进一步的逻辑或将其存储在例如数据库中之前进行验证。
+ 正则表达式是验证的第一步。他们使检查数字等简单的事情变得简单, 并验证输入的最小长度和最大长度。同时, 它们允许程序员进行更精确、更复杂的检查。
+ Web 应用程序员只需要提供一个正则表达式, 并将其与输入字段关联。然后, Web 框架可以根据所有已配置的正则表达式来验证表单输入, 并自动为终端用户生成错误信息, 这样 Web 应用程序员就不需要处理拒绝输入和重新生成表单的工作流程。
+  1.1.3. 解析 单独使用正则表达式不太适合解析复杂的输入数据。然而, Raku 添加了功能, 使其非常适合这项任务。这些扩展包括易于使用的回溯控制和通过命名正则表达式获得的可组合性。" />
 <meta name="twitter:site" content="https://ohmyraku.github.io" />
 <meta name="twitter:creator" content="ohmyraku" />
 <meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
@@ -32,7 +48,15 @@
 <meta property="og:title" content="使用 Raku 正则表达式和 Grammars 进行解析" />
 <meta property="og:url" content="https://ohmyraku.github.io" />
 <meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="Table of Contents 1. 什么是正则表达式和 Grammar？ 1.1. 使用场景 1.2. 正则或正则表达式 1.3. Raku 正则表达式有什么特别之处   2. Raku 入门 2.1. 安装 Raku 2.2. 使用 Raku 2.3. 获取代码示例 2.4. 使用 Raku 的第一步 2.5. 总结   3. 正则表达式构造块 3.1. 字面量 3.2. 元字符与字面量 3.3. Anchors 3.4. 预定义字符类 3.5. 量词 3.6. 析取 3.7. 连接 3.8. 零宽断言 3.9. 总结   4. 正则表达式和 Raku 代码 4.1. 智能匹配 4.2. 引号形式 4.3. 修饰符 4.4. comb 和 split 4." />
+<meta property="og:description" content="1. 什么是正则表达式和 Grammar？ 我们会接触到各种各样的结构化数据: 电话号码、电子邮件地址、邮政地址、信用卡号码等等。
+ 正则表达式是一种声明性的编程结构, 用来描述这些数据格式。正则表达式可以让你搜索数据, 确保输入的数据确实是真实的格式, 甚至可以提取相关的组件, 如邮政地址的邮政编码, 或日志文件条目中的时间戳。
+ 当你需要读取和验证更复杂的结构时, 比如程序设计语言, 或者像 XML 这样的标记语言, 你可以把多个正则表达式组合成 grammar。Grammar 的作用不仅仅是简单地组合正则表达式。它们还提供生成良好的错误信息和在分析输入文本时跟踪状态的基础设施。
+ 1.1. 使用场景 1.1.1. 搜索 正则表达式的一个常见用途是在大量数据中搜索感兴趣的模式, 例如在日志文件中查找某些消息, 在 URL 中查找特定的信息, 或者在文本中查找电话号码。在写这篇文章的时候, 我的 .bash_history 中大约有 6% 的条目涉及到使用正则表达式进行搜索。
+   许多命令行工具都支持某些正则表达式方言, 允许你搜索文件名、文件内容、日志、捕获的网络流量以及几乎所有你能想到的东西。大多数现代编程语言也可以很容易地使用正则表达式, 使其成为一种无处不在、不可或缺的搜索工具。
+  1.1.2. 验证 大多数应用程序都面临着不可信的用户输入。特别是 Web 应用程序面临着大量的不可信输入。这些输入必须在应用任何进一步的逻辑或将其存储在例如数据库中之前进行验证。
+ 正则表达式是验证的第一步。他们使检查数字等简单的事情变得简单, 并验证输入的最小长度和最大长度。同时, 它们允许程序员进行更精确、更复杂的检查。
+ Web 应用程序员只需要提供一个正则表达式, 并将其与输入字段关联。然后, Web 框架可以根据所有已配置的正则表达式来验证表单输入, 并自动为终端用户生成错误信息, 这样 Web 应用程序员就不需要处理拒绝输入和重新生成表单的工作流程。
+  1.1.3. 解析 单独使用正则表达式不太适合解析复杂的输入数据。然而, Raku 添加了功能, 使其非常适合这项任务。这些扩展包括易于使用的回溯控制和通过命名正则表达式获得的可组合性。" />
 <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -44,12 +68,12 @@
       "headline": "使用 Raku 正则表达式和 Grammars 进行解析",
       
       "datePublished": "2020-02-05",
-      "dateModified": "2020-02-05 15:26:52 \x2b0800 CST",
+      "dateModified": "2020-02-05 15:26:52 \u002b0800 CST",
       "author": {
         "@type": "Person",
         "name": "ohmyraku"
       },
-      "description": "Table of Contents 1. 什么是正则表达式和 Grammar？ 1.1. 使用场景 1.2. 正则或正则表达式 1.3. Raku 正则表达式有什么特别之处   2. Raku 入门 2.1. 安装 Raku 2.2. 使用 Raku 2.3. 获取代码示例 2.4. 使用 Raku 的第一步 2.5. 总结   3. 正则表达式构造块 3.1. 字面量 3.2. 元字符与字面量 3.3. Anchors 3.4. 预定义字符类 3.5. 量词 3.6. 析取 3.7. 连接 3.8. 零宽断言 3.9. 总结   4. 正则表达式和 Raku 代码 4.1. 智能匹配 4.2. 引号形式 4.3. 修饰符 4.4. comb 和 split 4.",
+      "description": "1. 什么是正则表达式和 Grammar？ 我们会接触到各种各样的结构化数据: 电话号码、电子邮件地址、邮政地址、信用卡号码等等。\n 正则表达式是一种声明性的编程结构, 用来描述这些数据格式。正则表达式可以让你搜索数据, 确保输入的数据确实是真实的格式, 甚至可以提取相关的组件, 如邮政地址的邮政编码, 或日志文件条目中的时间戳。\n 当你需要读取和验证更复杂的结构时, 比如程序设计语言, 或者像 XML 这样的标记语言, 你可以把多个正则表达式组合成 grammar。Grammar 的作用不仅仅是简单地组合正则表达式。它们还提供生成良好的错误信息和在分析输入文本时跟踪状态的基础设施。\n 1.1. 使用场景 1.1.1. 搜索 正则表达式的一个常见用途是在大量数据中搜索感兴趣的模式, 例如在日志文件中查找某些消息, 在 URL 中查找特定的信息, 或者在文本中查找电话号码。在写这篇文章的时候, 我的 .bash_history 中大约有 6% 的条目涉及到使用正则表达式进行搜索。\n   许多命令行工具都支持某些正则表达式方言, 允许你搜索文件名、文件内容、日志、捕获的网络流量以及几乎所有你能想到的东西。大多数现代编程语言也可以很容易地使用正则表达式, 使其成为一种无处不在、不可或缺的搜索工具。\n  1.1.2. 验证 大多数应用程序都面临着不可信的用户输入。特别是 Web 应用程序面临着大量的不可信输入。这些输入必须在应用任何进一步的逻辑或将其存储在例如数据库中之前进行验证。\n 正则表达式是验证的第一步。他们使检查数字等简单的事情变得简单, 并验证输入的最小长度和最大长度。同时, 它们允许程序员进行更精确、更复杂的检查。\n Web 应用程序员只需要提供一个正则表达式, 并将其与输入字段关联。然后, Web 框架可以根据所有已配置的正则表达式来验证表单输入, 并自动为终端用户生成错误信息, 这样 Web 应用程序员就不需要处理拒绝输入和重新生成表单的工作流程。\n  1.1.3. 解析 单独使用正则表达式不太适合解析复杂的输入数据。然而, Raku 添加了功能, 使其非常适合这项任务。这些扩展包括易于使用的回溯控制和通过命名正则表达式获得的可组合性。",
       "publisher": {
         "@type": "Organization",
         "name": "https:\/\/ohmyraku.github.io",
@@ -96,137 +120,7 @@ if (theme && theme !== "1") {
 
 </div>
 
-<article class="page__content" ><div id="toc" class="toc">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_什么是正则表达式和_grammar">1. 什么是正则表达式和 Grammar？</a>
-<ul class="sectlevel2">
-<li><a href="#_使用场景">1.1. 使用场景</a></li>
-<li><a href="#_正则或正则表达式">1.2. 正则或正则表达式</a></li>
-<li><a href="#_raku_正则表达式有什么特别之处">1.3. Raku 正则表达式有什么特别之处</a></li>
-</ul>
-</li>
-<li><a href="#_raku_入门">2. Raku 入门</a>
-<ul class="sectlevel2">
-<li><a href="#_安装_raku">2.1. 安装 Raku</a></li>
-<li><a href="#_使用_raku">2.2. 使用 Raku</a></li>
-<li><a href="#_获取代码示例">2.3. 获取代码示例</a></li>
-<li><a href="#_使用_raku_的第一步">2.4. 使用 Raku 的第一步</a></li>
-<li><a href="#_总结">2.5. 总结</a></li>
-</ul>
-</li>
-<li><a href="#_正则表达式构造块">3. 正则表达式构造块</a>
-<ul class="sectlevel2">
-<li><a href="#_字面量">3.1. 字面量</a></li>
-<li><a href="#_元字符与字面量">3.2. 元字符与字面量</a></li>
-<li><a href="#_anchors">3.3. Anchors</a></li>
-<li><a href="#_预定义字符类">3.4. 预定义字符类</a></li>
-<li><a href="#_量词">3.5. 量词</a></li>
-<li><a href="#_析取">3.6. 析取</a></li>
-<li><a href="#_连接">3.7. 连接</a></li>
-<li><a href="#_零宽断言">3.8. 零宽断言</a></li>
-<li><a href="#_总结_2">3.9. 总结</a></li>
-</ul>
-</li>
-<li><a href="#_正则表达式和_raku_代码">4. 正则表达式和 Raku 代码</a>
-<ul class="sectlevel2">
-<li><a href="#_智能匹配">4.1. 智能匹配</a></li>
-<li><a href="#_引号形式">4.2. 引号形式</a></li>
-<li><a href="#_修饰符">4.3. 修饰符</a></li>
-<li><a href="#_comb_和_split">4.4. comb 和 split</a></li>
-<li><a href="#_替换">4.5. 替换</a></li>
-<li><a href="#_跨越代码和正则表达式边界">4.6. 跨越代码和正则表达式边界</a></li>
-<li><a href="#_总结_3">4.7. 总结</a></li>
-</ul>
-</li>
-<li><a href="#_从正则表达式匹配中提取数据">5. 从正则表达式匹配中提取数据</a>
-<ul class="sectlevel2">
-<li><a href="#_位置捕获">5.1. 位置捕获</a></li>
-<li><a href="#_匹配对象">5.2. 匹配对象</a></li>
-<li><a href="#_命名捕获">5.3. 命名捕获</a></li>
-<li><a href="#_反向引用">5.4. 反向引用</a></li>
-<li><a href="#_重温匹配对象">5.5. 重温匹配对象</a></li>
-<li><a href="#_总结_4">5.6. 总结</a></li>
-</ul>
-</li>
-<li><a href="#_正则表达式技术性细节">6. 正则表达式技术性细节</a>
-<ul class="sectlevel2">
-<li><a href="#_带状态机的匹配">6.1. 带状态机的匹配</a></li>
-<li><a href="#_正则表达式控制流">6.2. 正则表达式控制流</a></li>
-<li><a href="#_回溯">6.3. 回溯</a></li>
-<li><a href="#_为什么要避免回溯">6.4. 为什么要避免回溯</a></li>
-<li><a href="#_节俭量词和回溯">6.5. 节俭量词和回溯</a></li>
-<li><a href="#_最长_token_匹配">6.6. 最长 token 匹配</a></li>
-<li><a href="#_总结_5">6.7. 总结</a></li>
-</ul>
-</li>
-<li><a href="#_正则表达式技术">7. 正则表达式技术</a>
-<ul class="sectlevel2">
-<li><a href="#_了解你的数据格式">7.1. 了解你的数据格式</a></li>
-<li><a href="#_考虑无效输入">7.2. 考虑无效输入</a></li>
-<li><a href="#_使用锚点">7.3. 使用锚点</a></li>
-<li><a href="#_匹配引用的字符串">7.4. 匹配引用的字符串</a></li>
-<li><a href="#_测试正则表达式">7.5. 测试正则表达式</a></li>
-<li><a href="#_总结_6">7.6. 总结</a></li>
-</ul>
-</li>
-<li><a href="#_重用和组合正则表达式">8. 重用和组合正则表达式</a>
-<ul class="sectlevel2">
-<li><a href="#_命名正则表达式">8.1. 命名正则表达式</a></li>
-<li><a href="#_空白">8.2. 空白</a></li>
-<li><a href="#_grammars">8.3. Grammars</a></li>
-<li><a href="#_使用_grammars_重用代码">8.4. 使用 Grammars 重用代码</a></li>
-<li><a href="#_proto_regexes">8.5. Proto Regexes</a></li>
-<li><a href="#_总结_7">8.6. 总结</a></li>
-</ul>
-</li>
-<li><a href="#_使用_grammar_进行解析">9. 使用 Grammar 进行解析</a>
-<ul class="sectlevel2">
-<li><a href="#_理解_grammar">9.1. 理解 Grammar</a></li>
-<li><a href="#_从简单开始">9.2. 从简单开始</a></li>
-<li><a href="#_组装完整的_grammar">9.3. 组装完整的 Grammar</a></li>
-<li><a href="#_调试_grammar">9.4. 调试 Grammar</a></li>
-<li><a href="#_解析空白和注释">9.5. 解析空白和注释</a></li>
-<li><a href="#_保存状态">9.6. 保存状态</a></li>
-<li><a href="#_总结_8">9.7. 总结</a></li>
-</ul>
-</li>
-<li><a href="#_从匹配中提取数据">10. 从匹配中提取数据</a>
-<ul class="sectlevel2">
-<li><a href="#_action_对象">10.1. Action 对象</a></li>
-<li><a href="#_使用_action_对象构建_ast">10.2. 使用 Action 对象构建 AST</a></li>
-<li><a href="#_在_action_对象中保存状态">10.3. 在 Action 对象中保存状态</a></li>
-<li><a href="#_总结_9">10.4. 总结</a></li>
-</ul>
-</li>
-<li><a href="#_生成好的解析错误消息">11. 生成好的解析错误消息</a>
-<ul class="sectlevel2">
-<li><a href="#_探索问题">11.1. 探索问题</a></li>
-<li><a href="#_断言">11.2. 断言</a></li>
-<li><a href="#_改进后的位置报告">11.3. 改进后的位置报告</a></li>
-<li><a href="#_高水位标记">11.4. 高水位标记</a></li>
-<li><a href="#_解析器组合器和_failgoal">11.5. 解析器组合器和 FAILGOAL</a></li>
-<li><a href="#_使用哪种技术">11.6. 使用哪种技术?</a></li>
-<li><a href="#_总结_10">11.7. 总结</a></li>
-</ul>
-</li>
-<li><a href="#_unicode_和自然语言">12. Unicode 和自然语言</a>
-<ul class="sectlevel2">
-<li><a href="#_书写系统">12.1. 书写系统</a></li>
-<li><a href="#_字节代码点字素和字形">12.2. 字节、代码点、字素和字形</a></li>
-<li><a href="#_总结_11">12.3. 总结</a></li>
-</ul>
-</li>
-<li><a href="#_案例学习">13. 案例学习</a>
-<ul class="sectlevel2">
-<li><a href="#_s_表达式">13.1. S 表达式</a></li>
-<li><a href="#_数学表达式和运算符优先级解析器">13.2. 数学表达式和运算符优先级解析器</a></li>
-<li><a href="#_pythonesque_一种基于缩进的语言">13.3. Pythonesque, 一种基于缩进的语言</a></li>
-<li><a href="#_总结_12">13.4. 总结</a></li>
-</ul>
-</li>
-</ul>
-</div>
+<article class="page__content" >
 <div class="sect1">
 <h2 id="_什么是正则表达式和_grammar">1. 什么是正则表达式和 Grammar？</h2>
 <div class="sectionbody">
@@ -248,7 +142,7 @@ if (theme && theme !== "1") {
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://imgs.xkcd.com/comics/regular_expressions.png" alt="regular_expressions">
+<img src="https://imgs.xkcd.com/comics/regular_expressions.png" alt="regular_expressions"/>
 </div>
 </div>
 <div class="paragraph">
@@ -286,7 +180,7 @@ if (theme && theme !== "1") {
 <p>正则表达式是一种编写正则语言的形式。随着从理论计算机科学中这些概念的发展, 它们是简约的, 只允许字面量, 替换(<code>|</code>), 括号进行分组, 以及<a href="https://en.wikipedia.org/wiki/Kleene_star">Kleene star</a><sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup>(*)表示零次或多次重复。</p>
 </div>
 <div class="paragraph">
-<p>早期的文本处理工具, 如 <code>grep</code>, <code>sed</code> 和 <code>awk</code> 都接受了正则表达式的概念, 并加入了许多方便的功能, 比如可以编写 <code>[az]</code> 而不是 <code>a|b|c|d|e</code> &#8230;&#8203;.。他们提供了预定义的*字符类*、字符集、例如字母、数字、空白字符等等。他们还增加了捕获功能, 帮助提取正则表达式匹配的特定部分的字符串。</p>
+<p>早期的文本处理工具, 如 <code>grep</code>, <code>sed</code> 和 <code>awk</code> 都接受了正则表达式的概念, 并加入了许多方便的功能, 比如可以编写 <code>[az]</code> 而不是 <code>a|b|c|d|e</code> …​.。他们提供了预定义的*字符类*、字符集、例如字母、数字、空白字符等等。他们还增加了捕获功能, 帮助提取正则表达式匹配的特定部分的字符串。</p>
 </div>
 <div class="paragraph">
 <p>后来的实现增加了一些超出正则语言所允许的功能, 因此需要一个单独的单词。这些实现也是为了便于使用而不是理论构造的极简主义而进行优化。现在, 我们在谈论到编程语言和库中的实用(而且更强大的)实现时, 倾向于使用正则表达式。</p>
@@ -295,10 +189,10 @@ if (theme && theme !== "1") {
 <div class="sect2">
 <h3 id="_raku_正则表达式有什么特别之处">1.3. Raku 正则表达式有什么特别之处</h3>
 <div class="paragraph">
-<p>为了继续上一节的历史课程, Perl 是最早将正则表达式纳入其核心功能的通用编程语言之一。它从早期的正则表达式实现中借鉴了语法, 并对其进行了扩展, 使正则表达式变得更加强大和有用。很快, Perl 的特殊版本的正则表达式就成为了事实上的标准。所以很多名为兼容 Perl 的正则表达式(PCRE)的库被创建出来, 这样其他软件可以在他们自己的实现中使用 "Perl 正则表达式"。</p>
+<p>为了继续上一节的历史课程, Perl 是最早将正则表达式纳入其核心功能的通用编程语言之一。它从早期的正则表达式实现中借鉴了语法, 并对其进行了扩展, 使正则表达式变得更加强大和有用。很快, Perl 的特殊版本的正则表达式就成为了事实上的标准。所以很多名为兼容 Perl 的正则表达式(PCRE)的库被创建出来, 这样其他软件可以在他们自己的实现中使用 &#34;Perl 正则表达式&#34;。</p>
 </div>
 <div class="paragraph">
-<p>遗憾的是, 在使正则表达式如此有用的过程中, Perl 给几乎所有的 ASCII 字符都赋予了特殊的的含义(除了按字面匹配的字符)。并且, 随着更多新的、更强大的正则表达式功能被创造出来, 这就导致了在继续保持与现有的正则表达式语法向后兼容的同时, 还需要使用一些晦涩的字符序列来实现新的功能。<code>(?&#8656;pattern)</code> 就是一个很好的例子。</p>
+<p>遗憾的是, 在使正则表达式如此有用的过程中, Perl 给几乎所有的 ASCII 字符都赋予了特殊的的含义(除了按字面匹配的字符)。并且, 随着更多新的、更强大的正则表达式功能被创造出来, 这就导致了在继续保持与现有的正则表达式语法向后兼容的同时, 还需要使用一些晦涩的字符序列来实现新的功能。<code>(?⇐pattern)</code> 就是一个很好的例子。</p>
 </div>
 <div class="paragraph">
 <p>Raku 正则表达式清理了这种历史上的语法包袱。它们通过允许无处不在的空白, 引入了关于哪些字符是特殊字符, 哪些不是特殊字符的规则, 以及最重要的是, 它们有一个简单、可扩展的语法, 可以通过名字来调用其他正则表达式, 从而提高来可读性。</p>
@@ -365,7 +259,7 @@ if (theme && theme !== "1") {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">$ docker run -it moritzlenz/raku-regex-alpine -e 'say "hi"'</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ docker run -it moritzlenz/raku-regex-alpine -e &#39;say &#34;hi&#34;&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -382,8 +276,8 @@ if (theme && theme !== "1") {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">$ alias p6d="docker run -it -v $PWD:/raku -w /raku
-     moritzlenz/raku-regex-alpine"</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ alias p6d=&#34;docker run -it -v $PWD:/raku -w /raku
+     moritzlenz/raku-regex-alpine&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -419,8 +313,8 @@ implementing Raku.c.</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-shell" data-lang="shell">$ raku
-To exit type 'exit' or '^D'
-&gt; say "Hello, world";
+To exit type &#39;exit&#39; or &#39;^D&#39;
+&gt; say &#34;Hello, world&#34;;
 Hello, world
 &gt; exit</code></pre>
 </div>
@@ -430,7 +324,7 @@ Hello, world
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; say "Hello, world" ~~ / \w+ /
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; say &#34;Hello, world&#34; ~~ / \w+ /
 ⌜Hello⌟</code></pre>
 </div>
 </div>
@@ -445,7 +339,7 @@ Hello, world
 <pre class="highlight"><code class="language-shell" data-lang="shell">$ raku
 You may want to `zef install Readline` or `zef install
 Linenoise` or use rlwrap for a line editor.
-To exit type 'exit' or '^D'
+To exit type &#39;exit&#39; or &#39;^D&#39;
 &gt;</code></pre>
 </div>
 </div>
@@ -458,7 +352,7 @@ To exit type 'exit' or '^D'
 ===&gt; Searching for: Linenoise
 ===&gt; Searching for missing dependencies: LibraryMake
 ...
-===&gt; Installing: Linenoise:ver('0.1.1'):auth('Rob Hoelz')</code></pre>
+===&gt; Installing: Linenoise:ver(&#39;0.1.1&#39;):auth(&#39;Rob Hoelz&#39;)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -471,7 +365,7 @@ Hello, world</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>假设你在当前工作目录下有一个文件 <code>greet.p6</code>, 其中包含了 <code>say "Hello, world";</code>。</p>
+<p>假设你在当前工作目录下有一个文件 <code>greet.p6</code>, 其中包含了 <code>say &#34;Hello, world&#34;;</code>。</p>
 </div>
 </div>
 <div class="sect2">
@@ -504,7 +398,7 @@ Hello, world</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "Hello, World";         # Output: Hello, World
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;Hello, World&#34;;         # Output: Hello, World
 say( 2 * 21 );              # Output: 42</code></pre>
 </div>
 </div>
@@ -516,7 +410,7 @@ say( 2 * 21 );              # Output: 42</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 1;
-my @capitals = 'Algiers', 'Tirana', 'Berlin', 'Tokio';
+my @capitals = &#39;Algiers&#39;, &#39;Tirana&#39;, &#39;Berlin&#39;, &#39;Tokio&#39;;
 my %populations =
       Algiers =&gt; 3_500_000,
       Berlin  =&gt; 3_700_000,
@@ -525,14 +419,14 @@ my %populations =
 </div>
 </div>
 <div class="paragraph">
-<p><code>$</code> 代表标量变量 - 通常是持有单一值的变量。作比之下, <code>@</code> 表示数组, 一个线性的值的集合, 可以通过一个从零开始的索引来访问元素。在上一个代码块的上下文中, <code>@capitals[0]</code> 返回 'Algiers'。</p>
+<p><code>$</code> 代表标量变量 - 通常是持有单一值的变量。作比之下, <code>@</code> 表示数组, 一个线性的值的集合, 可以通过一个从零开始的索引来访问元素。在上一个代码块的上下文中, <code>@capitals[0]</code> 返回 &#39;Algiers&#39;。</p>
 </div>
 <div class="paragraph">
 <p>哈希(其他语言称之为字典或映射)将键(字符串)与值关联起来。你可以通过 <code>{}</code> 索引操作符来查找一个键的值, 并使用几个有用的方法:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say %populations{'Algiers'};    # Output: 3500000
+<pre class="highlight"><code class="language-raku" data-lang="raku">say %populations{&#39;Algiers&#39;};    # Output: 3500000
 say %populations.keys.sort;     # Output: (Algiers Berlin Tirana)
 say %populations.values.sum;    # Output: 7553400</code></pre>
 </div>
@@ -544,13 +438,13 @@ say %populations.values.sum;    # Output: 7553400</code></pre>
 <p>由于正则表达式作用在字符串上, 我们就应该多说说它们。</p>
 </div>
 <div class="paragraph">
-<p>字符串是由 Unicode 字符组成的序列。<sup class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnotedef_7" title="View footnote.">7</a>]</sup>我们已经看到了一些由单引号 <code>''</code> 和双引号 <code>""</code> 包围的字符串的示例。 主要区别在于, 双引号可以实现转义序列, 如 <code>\n</code> 是换行符(换行)和变量插值, 即用变量的值替换变量名:</p>
+<p>字符串是由 Unicode 字符组成的序列。<sup class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnotedef_7" title="View footnote.">7</a>]</sup>我们已经看到了一些由单引号 <code>&#39;&#39;</code> 和双引号 <code>&#34;&#34;</code> 包围的字符串的示例。 主要区别在于, 双引号可以实现转义序列, 如 <code>\n</code> 是换行符(换行)和变量插值, 即用变量的值替换变量名:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $name = 'Larry';
-say "Hello, $name";         # Output: Hello, Larry
-say 'Hello, $name';         # Output: Hello, $name</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $name = &#39;Larry&#39;;
+say &#34;Hello, $name&#34;;         # Output: Hello, Larry
+say &#39;Hello, $name&#39;;         # Output: Hello, $name</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -558,8 +452,8 @@ say 'Hello, $name';         # Output: Hello, $name</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say 'a quote: \' a backslash: \\';
-# Output: a quote: ' a backslash: \</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;a quote: \&#39; a backslash: \\&#39;;
+# Output: a quote: &#39; a backslash: \</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -570,8 +464,8 @@ say 'Hello, $name';         # Output: Hello, $name</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $macbeth = q:to/END/;       # need to put the ; on this line!
 When shall we three meet again?
 In thunder, lightning, or in rain?
-    When the hurlyburly's done,
-    When the battle's lost and won.
+    When the hurlyburly&#39;s done,
+    When the battle&#39;s lost and won.
 END
 # normal Raku code resumes here</code></pre>
 </div>
@@ -591,13 +485,13 @@ END
     say $_;
 }
 if 1 &gt; 2 {
-    say "No Way";
+    say &#34;No Way&#34;;
 }
 elsif 1 == 2 {
-    say "Still no chance";
+    say &#34;Still no chance&#34;;
 }
 else {
-    say "This runs";
+    say &#34;This runs&#34;;
 }</code></pre>
 </div>
 </div>
@@ -717,40 +611,40 @@ say $p.magnitude();                  # Output: 5.3851648071345</code></pre>
 <div class="sect2">
 <h3 id="_字面量">3.1. 字面量</h3>
 <div class="paragraph">
-<p>正则表达式中最简单的元素是字面量: 即完全匹配自己的字符串。例如, 正则表达式 <code>/perl/</code> 匹配任何包含 p,e,r 和 l 字符的字符串, 它们的顺序正好是这样的。因此, 字符串 "properly" 从第四个字符开始匹配此正则表达式(pro<strong>perl</strong>y), 但字符串 "superficial" 不匹配, 因为它在 per 和 l 之间包含了其他字符(ficia)。</p>
+<p>正则表达式中最简单的元素是字面量: 即完全匹配自己的字符串。例如, 正则表达式 <code>/perl/</code> 匹配任何包含 p,e,r 和 l 字符的字符串, 它们的顺序正好是这样的。因此, 字符串 &#34;properly&#34; 从第四个字符开始匹配此正则表达式(pro<strong>perl</strong>y), 但字符串 &#34;superficial&#34; 不匹配, 因为它在 per 和 l 之间包含了其他字符(ficia)。</p>
 </div>
 <div class="paragraph">
-<p>仅由字母, 下划线 <code>_</code> 和数字组成的字面量不需要任何特殊的语法。只需将字母和数字写为正则表达式的一部分写成字面量即可。其他字面量必须用引号括起来, 要么使用单引号要么使用双引号: <code>/'2016-12-24'/</code> 和 <code>/"2016-12-24"/</code> 类似, 两者都与字符串 2016-12-24 匹配。由于这两个破折号既不是字母也不是数字, 所以需要成为引号字符串的一部分, 才能从字面上匹配。单引号和双引号对儿在插值方面的行为有所不同: 变量和花括号 <code>{&#8230;&#8203;}</code> 分隔的代码块在双引号中被插值, 所以下面的正则表达式都匹配字符串 "3":</p>
+<p>仅由字母, 下划线 <code>_</code> 和数字组成的字面量不需要任何特殊的语法。只需将字母和数字写为正则表达式的一部分写成字面量即可。其他字面量必须用引号括起来, 要么使用单引号要么使用双引号: <code>/&#39;2016-12-24&#39;/</code> 和 <code>/&#34;2016-12-24&#34;/</code> 类似, 两者都与字符串 2016-12-24 匹配。由于这两个破折号既不是字母也不是数字, 所以需要成为引号字符串的一部分, 才能从字面上匹配。单引号和双引号对儿在插值方面的行为有所不同: 变量和花括号 <code>{…​}</code> 分隔的代码块在双引号中被插值, 所以下面的正则表达式都匹配字符串 &#34;3&#34;:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">$_ = 3; # the string to be matched against
 my $x = 3;
-say "yes" if /"$x"/;      # Output: yes
-say "yes" if /"{1 + 2}"/; # Output: yes</code></pre>
+say &#34;yes&#34; if /&#34;$x&#34;/;      # Output: yes
+say &#34;yes&#34; if /&#34;{1 + 2}&#34;/; # Output: yes</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>而正则表达式 <code>/'{1 + 2}'/</code> 只匹配字面字符串 <code>{1 + 2}</code>。</p>
+<p>而正则表达式 <code>/&#39;{1 + 2}&#39;/</code> 只匹配字面字符串 <code>{1 + 2}</code>。</p>
 </div>
 <div class="paragraph">
-<p>在 Raku 正则表达式中, 默认情况下会忽略空格, 所以 <code>/perl/</code>, <code>/pe rl/</code>, 和 <code>/ p e r l/</code> 都是等价的(尽管后两个产生一个警告), 而且匹配的字符串完全相同。在引号里面, 空格是重要的,  所以 <code>/"pe rl"/</code> 与字符串 properly 不匹配, 因为该字符串中没有空格字符, 但引号内的字符串有。</p>
+<p>在 Raku 正则表达式中, 默认情况下会忽略空格, 所以 <code>/perl/</code>, <code>/pe rl/</code>, 和 <code>/ p e r l/</code> 都是等价的(尽管后两个产生一个警告), 而且匹配的字符串完全相同。在引号里面, 空格是重要的,  所以 <code>/&#34;pe rl&#34;/</code> 与字符串 properly 不匹配, 因为该字符串中没有空格字符, 但引号内的字符串有。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_元字符与字面量">3.2. 元字符与字面量</h3>
 <div class="paragraph">
-<p>正如我们在上一节中看到的那样, 正则表达式中的字母数字字符与它们自身匹配。所有其他字符都可能有一些特殊的含义。 我们已经看到 <code>'</code> 和 <code>"</code> 是特殊的: 它们包围着被引用的字符串。</p>
+<p>正如我们在上一节中看到的那样, 正则表达式中的字母数字字符与它们自身匹配。所有其他字符都可能有一些特殊的含义。 我们已经看到 <code>&#39;</code> 和 <code>&#34;</code> 是特殊的: 它们包围着被引用的字符串。</p>
 </div>
 <div class="paragraph">
-<p>我们称这种"特殊"字符为元语法或元字符。 反斜线 <code>\</code> 使字面量字符变得容易, 反之亦然。例如, <code>/d/</code> 匹配字面的 d, 但 <code>/\d/</code> 可以匹配单个数字。另一方面, 正则表达式中的 <code>+</code> 修饰前一个字符, 但是 <code>/\+/</code> 匹配的是一个加号, 也就是 <code>+</code>。唯一的例外是 <code>#</code> 字符, 它不能通过反斜线前缀来匹配字面意思, 必须用引号代替。</p>
+<p>我们称这种&#34;特殊&#34;字符为元语法或元字符。 反斜线 <code>\</code> 使字面量字符变得容易, 反之亦然。例如, <code>/d/</code> 匹配字面的 d, 但 <code>/\d/</code> 可以匹配单个数字。另一方面, 正则表达式中的 <code>+</code> 修饰前一个字符, 但是 <code>/\+/</code> 匹配的是一个加号, 也就是 <code>+</code>。唯一的例外是 <code>#</code> 字符, 它不能通过反斜线前缀来匹配字面意思, 必须用引号代替。</p>
 </div>
 <div class="paragraph">
 <p>并非所有元字符都有特殊的语义含义。例如, 感叹号(<code>!</code>)没有元语义, 并且 Raku 产生一个适当的错误信息:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">$ raku -e '/!/'
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ raku -e &#39;/!/&#39;
 ===SORRY!=== Error while compiling -e
 Unrecognized regex metacharacter ! (must be quoted to match literally)</code></pre>
 </div>
@@ -776,16 +670,16 @@ Unrecognized regex metacharacter ! (must be quoted to match literally)</code></p
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku"># Start-of-line positions that ^^ matches:
-"⏏ab\n⏏de"
-"⏏ab\n⏏de\n"
+&#34;⏏ab\n⏏de&#34;
+&#34;⏏ab\n⏏de\n&#34;
 
 # End-of-line positions that $$ matches:
-"ab⏏\nde⏏"
-"ab⏏\nde⏏\n"</code></pre>
+&#34;ab⏏\nde⏏&#34;
+&#34;ab⏏\nde⏏\n&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>锚点是零宽度的正则表达式元素。因此他们不会"消耗"输入字符串中的字符, 也就是说, 它们不会推进正则表达式引擎尝试匹配的当前位置。一个好的心理模型是, 它们在输入字符串的两个字符之间(或在输入字符串的第一个字符之前, 或在输入字符串的最后一个字符之后)进行匹配。</p>
+<p>锚点是零宽度的正则表达式元素。因此他们不会&#34;消耗&#34;输入字符串中的字符, 也就是说, 它们不会推进正则表达式引擎尝试匹配的当前位置。一个好的心理模型是, 它们在输入字符串的两个字符之间(或在输入字符串的第一个字符之前, 或在输入字符串的最后一个字符之后)进行匹配。</p>
 </div>
 <div class="paragraph">
 <p>Raku 中内置了更多的锚(表 3-1)。</p>
@@ -793,9 +687,9 @@ Unrecognized regex metacharacter ! (must be quoted to match literally)</code></p
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. Raku 正则表达式锚点。⏏ 标记锚点匹配的位置</caption>
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -806,67 +700,67 @@ Unrecognized regex metacharacter ! (must be quoted to match literally)</code></p
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">^</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">字符串开头</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"⏏some\nlines"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;⏏some\nlines&#34;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">^^</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">行的结尾</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"⏏some\n⏏lines"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;⏏some\n⏏lines&#34;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">$</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">字符串结尾</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"some\nlines⏏"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;some\nlines⏏&#34;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">$$</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">行的结尾</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"some⏏\nlines⏏"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;some⏏\nlines⏏&#34;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">左单词边界</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"⏏some ⏏words"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;⏏some ⏏words&#34;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">«</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">左单词边界</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"⏏some ⏏words"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;⏏some ⏏words&#34;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&gt;&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">右单词边界</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"some⏏ words⏏"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;some⏏ words⏏&#34;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">»</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">右单词边界</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"some⏏ words⏏"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;some⏏ words⏏&#34;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;?wb&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">任意单词边界</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"⏏some⏏ ⏏words⏏!!"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;⏏some⏏ ⏏words⏏!!&#34;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;!wb&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">非单词边界</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"s⏏o⏏m⏏e w⏏o⏏r⏏d⏏s!⏏!"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;s⏏o⏏m⏏e w⏏o⏏r⏏d⏏s!⏏!&#34;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;?ww&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">单词内</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"s⏏o⏏m⏏e w⏏o⏏r⏏d⏏s!!"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;s⏏o⏏m⏏e w⏏o⏏r⏏d⏏s!!&#34;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;!ww&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">非单词内</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"⏏some⏏ ⏏words⏏!⏏!⏏"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;⏏some⏏ ⏏words⏏!⏏!⏏&#34;</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>单词边界是字母数字字符组和下划线(<code>_</code>)以及任何其他字符之间的边界。例如, 字符串 "some-words_here" 就包含这些单词边界: "⏏some⏏-⏏words_here⏏"。注意, 在这种情况下 <code>_</code> 字符的周围没有边界。它被当作一个字符来处理。</p>
+<p>单词边界是字母数字字符组和下划线(<code>_</code>)以及任何其他字符之间的边界。例如, 字符串 &#34;some-words_here&#34; 就包含这些单词边界: &#34;⏏some⏏-⏏words_here⏏&#34;。注意, 在这种情况下 <code>_</code> 字符的周围没有边界。它被当作一个字符来处理。</p>
 </div>
 </div>
 <div class="sect2">
@@ -885,7 +779,7 @@ Unrecognized regex metacharacter ! (must be quoted to match literally)</code></p
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">for '/usr/share/dict/words'.IO.lines -&gt; $word {
+<pre class="highlight"><code class="language-raku" data-lang="raku">for &#39;/usr/share/dict/words&#39;.IO.lines -&gt; $word {
     say $word if lc($word) ~~ / ^ .e.rl $ /;
 }</code></pre>
 </div>
@@ -903,7 +797,7 @@ pearl</code></pre>
 <p>它们只是在大小写上有区别, 所以对于填字游戏, 它们是一样的。</p>
 </div>
 <div class="paragraph">
-<p>这个脚本是如何工作的? 代码 '/usr/share/dict/words'.IO 创建了一个 <code>IO::Path</code> 对象, 并在其上调用 <code>.lines</code> 方法返回文件中的一系列行。<code>for</code> 循环会在这些行上进行迭代, 这些行也正好是单词。</p>
+<p>这个脚本是如何工作的? 代码 &#39;/usr/share/dict/words&#39;.IO 创建了一个 <code>IO::Path</code> 对象, 并在其上调用 <code>.lines</code> 方法返回文件中的一系列行。<code>for</code> 循环会在这些行上进行迭代, 这些行也正好是单词。</p>
 </div>
 <div class="paragraph">
 <p>命令 <code>say $word</code> 打印单词, 然后跟着一个换行符, 但是只有满足 <code>if</code> 后缀的条件才打印。<code>lc($word)</code> 返回小写的 <code>$word</code>, 最后一行的其余部分检查小写单词是否与正则表达式 <code>/ ^ .e.rl $ /</code> 匹配。</p>
@@ -914,10 +808,10 @@ pearl</code></pre>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 2. Raku 正则表达式预定义字符类</caption>
 <colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -929,68 +823,68 @@ pearl</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">任意字符</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">a, 4,<br></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a, 4,<br/></p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">\d</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">数字</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1, ٤</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">a,<br></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a,<br/></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">\D</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">非数字</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">a,<br></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a,<br/></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1, ٤</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">\w</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">单词字符</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">a, 4,</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">+, /, " "</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+, /, &#34; &#34;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">\W</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">非单词字符</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">+, /, " "</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+, /, &#34; &#34;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">x, 4, ٤</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">\s</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">空白符</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">" ", "\t"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34; &#34;, &#34;\t&#34;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">a, -, 4</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">\S</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">非空白符</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">a, -, 4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">" ", "\t"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34; &#34;, &#34;\t&#34;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">\n</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">逻辑换行符</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"\n", "\c[LINE SEPARATOR]"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"\t",<br></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;\n&#34;, &#34;\c[LINE SEPARATOR]&#34;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;\t&#34;,<br/></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">\N</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">非换行符</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"\t", +, a</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"\n"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;\t&#34;, +, a</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;\n&#34;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">\h</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">水平空白</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">" ", "\t"</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"\n", a, 4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34; &#34;, &#34;\t&#34;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;\n&#34;, a, 4</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">\H</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">非水平空白</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"\n", a, 4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">" ", "\t"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34;\n&#34;, a, 4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#34; &#34;, &#34;\t&#34;</p></td>
 </tr>
 </tbody>
 </table>
@@ -1004,7 +898,7 @@ pearl</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">for 0..0x1FFFF -&gt; $c {
     if chr($c) ~~ /\n/ {
-        printf "U+%05X - %s\n", $c, $c.uniname
+        printf &#34;U+%05X - %s\n&#34;, $c, $c.uniname
 }</code></pre>
 </div>
 </div>
@@ -1032,11 +926,11 @@ U+02029 - PARAGRAPH SEPARATOR</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say 'perl' ~~ / &lt;[aeiou]&gt;/; # Output: ⌜e⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;perl&#39; ~~ / &lt;[aeiou]&gt;/; # Output: ⌜e⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在字符类中, 非字母数字字符会失去其特殊含义, 所以 <code>/ &lt;[ " ']&gt; /</code> 匹配单引号或双引号。例外的是空格, 它们被简单地忽略, 和结束方括号 <code>]</code> (它结束字符类, 所以必须使用反斜线转义才能成为字符类的一部分)以及反斜线。要匹配开口或闭合方括号, 请使用正则表达式 <code>/ &lt;[ [ \] ]&gt; /</code>。</p>
+<p>在字符类中, 非字母数字字符会失去其特殊含义, 所以 <code>/ &lt;[ &#34; &#39;]&gt; /</code> 匹配单引号或双引号。例外的是空格, 它们被简单地忽略, 和结束方括号 <code>]</code> (它结束字符类, 所以必须使用反斜线转义才能成为字符类的一部分)以及反斜线。要匹配开口或闭合方括号, 请使用正则表达式 <code>/ &lt;[ [ \] ]&gt; /</code>。</p>
 </div>
 <div class="paragraph">
 <p>你可以在自定义字符类中包含预定义的字符类: <code>/ &lt;[ \w $ - ]&gt; /</code> 匹配单个字符, 这个字符可以是一个单词字符(<code>\w</code>)、连字符或美元符号。</p>
@@ -1045,7 +939,7 @@ U+02029 - PARAGRAPH SEPARATOR</code></pre>
 <p>字符范围可以简化连续字符的列表。例如, <code>/ &lt;[ 0..9 a..f A..F ]&gt;</code> 匹配十六进制字符, 换句话说, 它匹配这些字符中的任何一个: 0123456789abcdefABCDEF。</p>
 </div>
 <div class="paragraph">
-<p>你可以通过在字符类前面添加一个减号( <code>-</code> )来否定字符类。因此, 要匹配除双引号之外的任何字符, 可以使用 <code>/ &lt;-[ " ]&gt; /</code>。这是一个更通用语法的特例, 可以让你混合和匹配肯定和否定的字符类以及预定义的字符类:</p>
+<p>你可以通过在字符类前面添加一个减号( <code>-</code> )来否定字符类。因此, 要匹配除双引号之外的任何字符, 可以使用 <code>/ &lt;-[ &#34; ]&gt; /</code>。这是一个更通用语法的特例, 可以让你混合和匹配肯定和否定的字符类以及预定义的字符类:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1070,9 +964,9 @@ U+02029 - PARAGRAPH SEPARATOR</code></pre>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 3. 从通用类别中选出的 Unicode 属性</caption>
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -1141,7 +1035,7 @@ U+02029 - PARAGRAPH SEPARATOR</code></pre>
 <p>量词的绑定非常紧密, 比正则表达式元素的连接更紧密 , 因此 <code>/ ab+ /</code> 匹配 ab, abb, abbb 等。你可以把它写成 <code>/ a [b+] /</code> 以消除任何歧义。</p>
 </div>
 <div class="paragraph">
-<p>如果你想匹配 ab, abab, ababab, 你可以使用引号或括号来强制 <code>+</code> 应用于多个字符: <code>/ [ab]+ /</code> 和 <code>/ 'ab'+ /</code> 都匹配这些字符串。前者比较通用,  因为它不仅适用于字面量, 也适用于其他的正则表达式。<code>/ [\d+ ',']+ /</code> 匹配一个数字列表, 每个数字后面跟一个逗号。</p>
+<p>如果你想匹配 ab, abab, ababab, 你可以使用引号或括号来强制 <code>+</code> 应用于多个字符: <code>/ [ab]+ /</code> 和 <code>/ &#39;ab&#39;+ /</code> 都匹配这些字符串。前者比较通用,  因为它不仅适用于字面量, 也适用于其他的正则表达式。<code>/ [\d+ &#39;,&#39;]+ /</code> 匹配一个数字列表, 每个数字后面跟一个逗号。</p>
 </div>
 <div class="paragraph">
 <p>还有更多的量词, 如表 3-4 所示。</p>
@@ -1149,9 +1043,9 @@ U+02029 - PARAGRAPH SEPARATOR</code></pre>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 4. Raku 正则表达式量词</caption>
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -1196,9 +1090,9 @@ U+02029 - PARAGRAPH SEPARATOR</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">/ ^ a ** 4 $ /;     # Matches exactly 4 a's
-/ ^ a ** 2..4 $ /;  # Matches between 2 and 4 a's
-/ ^ a ** 5..* $ /;  # Matches at least 5 a's</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">/ ^ a ** 4 $ /;     # Matches exactly 4 a&#39;s
+/ ^ a ** 2..4 $ /;  # Matches between 2 and 4 a&#39;s
+/ ^ a ** 5..* $ /;  # Matches at least 5 a&#39;s</code></pre>
 </div>
 </div>
 <div class="sect3">
@@ -1211,7 +1105,7 @@ U+02029 - PARAGRAPH SEPARATOR</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "&lt;a&gt; b &lt;c&gt;" ~~ /"&lt;" .+ "&gt;"/; # Output: ⌜&lt;a&gt; b &lt;c&gt;⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;&lt;a&gt; b &lt;c&gt;&#34; ~~ /&#34;&lt;&#34; .+ &#34;&gt;&#34;/; # Output: ⌜&lt;a&gt; b &lt;c&gt;⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1219,7 +1113,7 @@ U+02029 - PARAGRAPH SEPARATOR</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "&lt;a&gt; b &lt;c&gt;" ~~ /"&lt;" .+? "&gt;"/; # Output: ⌜&lt;a&gt;⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;&lt;a&gt; b &lt;c&gt;&#34; ~~ /&#34;&lt;&#34; .+? &#34;&gt;&#34;/; # Output: ⌜&lt;a&gt;⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1242,7 +1136,7 @@ U+02029 - PARAGRAPH SEPARATOR</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say '1,24,5' ~~ / [\d+]* % ',' /; # Output: ⌜1,24,5⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;1,24,5&#39; ~~ / [\d+]* % &#39;,&#39; /; # Output: ⌜1,24,5⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1250,7 +1144,7 @@ U+02029 - PARAGRAPH SEPARATOR</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say '1,24,5' ~~ / [\d+]*? % ',' /; # Output: ⌜⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;1,24,5&#39; ~~ / [\d+]*? % &#39;,&#39; /; # Output: ⌜⌟</code></pre>
 </div>
 </div>
 </div>
@@ -1258,7 +1152,7 @@ U+02029 - PARAGRAPH SEPARATOR</code></pre>
 <div class="sect2">
 <h3 id="_析取">3.6. 析取</h3>
 <div class="paragraph">
-<p>"Hi," "Hello," 和 "Hey" 可能都是英语中被普遍接受的问候语。 匹配这种问候语的正则表达式必须接受这三个选项中的任何一个:</p>
+<p>&#34;Hi,&#34; &#34;Hello,&#34; 和 &#34;Hey&#34; 可能都是英语中被普遍接受的问候语。 匹配这种问候语的正则表达式必须接受这三个选项中的任何一个:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1276,8 +1170,8 @@ U+02029 - PARAGRAPH SEPARATOR</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say 'aab' ~~ / a+ | \w+ /;  # Output: ⌜aab⌟
-say 'aab' ~~ / a+ || \w+ /; # Output: ⌜aa⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;aab&#39; ~~ / a+ | \w+ /;  # Output: ⌜aab⌟
+say &#39;aab&#39; ~~ / a+ || \w+ /; # Output: ⌜aa⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1349,19 +1243,19 @@ say 'aab' ~~ / a+ || \w+ /; # Output: ⌜aa⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say 'up to 200 MB' ~~ / \d+ &lt;?before \s* &lt;[kMGT]&gt;? B &gt; /;
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;up to 200 MB&#39; ~~ / \d+ &lt;?before \s* &lt;[kMGT]&gt;? B &gt; /;
 # Output: ⌜200⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这里, 正则表达式 <code>\s* &lt;[kMGT]&gt;? B</code> 匹配可选的空格,  然后是单位 B、KB、MB、GB 或 TB。周围的 <code>&lt;?before &#8230;&#8203;&gt;</code> 使只有当单位的正则表达式匹配时, 匹配才会成功。请注意, 这个断言没有推进字符串中正则表达式的位置, 因此匹配单元的字符串不包含在整个正则表达式所匹配的字符串中。<sup class="footnote">[<a id="_footnoteref_15" class="footnote" href="#_footnotedef_15" title="View footnote.">15</a>]</sup></p>
+<p>在这里, 正则表达式 <code>\s* &lt;[kMGT]&gt;? B</code> 匹配可选的空格,  然后是单位 B、KB、MB、GB 或 TB。周围的 <code>&lt;?before …​&gt;</code> 使只有当单位的正则表达式匹配时, 匹配才会成功。请注意, 这个断言没有推进字符串中正则表达式的位置, 因此匹配单元的字符串不包含在整个正则表达式所匹配的字符串中。<sup class="footnote">[<a id="_footnoteref_15" class="footnote" href="#_footnotedef_15" title="View footnote.">15</a>]</sup></p>
 </div>
 <div class="paragraph">
 <p>你可以使用 <code>!</code> 代替 <code>?</code> 来否定向前查看。所以要匹配一个数字, 其后面不是单位, 你可以使用正则表达式:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say 'up to 200 MB' ~~ / \d+ &lt;!before \s* &lt;[kMGT]&gt;? B &gt; /;
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;up to 200 MB&#39; ~~ / \d+ &lt;!before \s* &lt;[kMGT]&gt;? B &gt; /;
 # Output: ⌜20⌟</code></pre>
 </div>
 </div>
@@ -1370,7 +1264,7 @@ say 'aab' ~~ / a+ || \w+ /; # Output: ⌜aa⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say 'up to 200 MB' ~~ / « \d+ » &lt;!before \s* &lt;[kMGT]&gt;? B &gt; /;
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;up to 200 MB&#39; ~~ / « \d+ » &lt;!before \s* &lt;[kMGT]&gt;? B &gt; /;
 # Output: Nil</code></pre>
 </div>
 </div>
@@ -1379,12 +1273,12 @@ say 'aab' ~~ / a+ || \w+ /; # Output: ⌜aa⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say '200,50' ~~ / &lt;?after \, &gt; \d+ /; # Output: ⌜50⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;200,50&#39; ~~ / &lt;?after \, &gt; \d+ /; # Output: ⌜50⌟</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say '200,50' ~~ / &lt;!after \, &gt; \d+ /; # Output: ⌜200⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;200,50&#39; ~~ / &lt;!after \, &gt; \d+ /; # Output: ⌜200⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1418,7 +1312,7 @@ say 'aab' ~~ / a+ || \w+ /; # Output: ⌜aa⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = "If I had a hammer, I'd hammer in the morning";
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = &#34;If I had a hammer, I&#39;d hammer in the morning&#34;;
 say $str ~~ /h.mm\w*/; # Output: ⌜hammer⌟
 say $str ~~ /hummer/;  # Output: Nil</code></pre>
 </div>
@@ -1431,7 +1325,7 @@ say $str ~~ /hummer/;  # Output: Nil</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = "If I had a hammer, I'd hammer in the morning";
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = &#34;If I had a hammer, I&#39;d hammer in the morning&#34;;
 say $str.match(/h.mm\w*/); # Output: ⌜hammer⌟</code></pre>
 </div>
 </div>
@@ -1439,7 +1333,7 @@ say $str.match(/h.mm\w*/); # Output: ⌜hammer⌟</code></pre>
 <div class="sect2">
 <h3 id="_引号形式">4.2. 引号形式</h3>
 <div class="paragraph">
-<p>到目前为止, 我们已经看到由两个斜杠 <code>/&#8230;&#8203;/</code> 分隔的正则表达式, 但是还有其他的方法来编写正则表达式。这些都是等价的:</p>
+<p>到目前为止, 我们已经看到由两个斜杠 <code>/…​/</code> 分隔的正则表达式, 但是还有其他的方法来编写正则表达式。这些都是等价的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1461,18 +1355,18 @@ regex { a.b }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">$_ = 'abc';
+<pre class="highlight"><code class="language-raku" data-lang="raku">$_ = &#39;abc&#39;;
 if m/b./ {
-    say "match";
+    say &#34;match&#34;;
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>由于智能匹配运算符 <code>~~</code> 自动将 <code>$_</code> 设置为表达式的左侧, 所以在智能匹配中可以使用 <code>m/&#8230;&#8203;/</code>:</p>
+<p>由于智能匹配运算符 <code>~~</code> 自动将 <code>$_</code> 设置为表达式的左侧, 所以在智能匹配中可以使用 <code>m/…​/</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "abc" ~~ m/b/; # Output: ⌜b⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;abc&#34; ~~ m/b/; # Output: ⌜b⌟</code></pre>
 </div>
 </div>
 </div>
@@ -1486,8 +1380,8 @@ if m/b./ {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = "If I had a hammer, I'd hammer in the morning";
-say $str.match(:global, /h.mm\w*/).join('|');
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = &#34;If I had a hammer, I&#39;d hammer in the morning&#34;;
+say $str.match(:global, /h.mm\w*/).join(&#39;|&#39;);
 # Output: hammer|hammer</code></pre>
 </div>
 </div>
@@ -1496,18 +1390,18 @@ say $str.match(:global, /h.mm\w*/).join('|');
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say 'Hello, world'.match(/:i hello/); # Output: ⌜Hello⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;Hello, world&#39;.match(/:i hello/); # Output: ⌜Hello⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>如前文所示, 影响到正则表达式编译的修饰符可以在正则表达式本身内部使用。影响编译后的正则表达式行为的修饰符总是在外部使用。</p>
 </div>
 <div class="paragraph">
-<p>由于 <code>m/&#8230;&#8203;/</code> 形式是立即匹配的, 所以你也可以给它添加会影响正则表达式的运行时行为的修饰符:</p>
+<p>由于 <code>m/…​/</code> 形式是立即匹配的, 所以你也可以给它添加会影响正则表达式的运行时行为的修饰符:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say ('abc' ~~ m:g/./).elems; # Output: 3</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say (&#39;abc&#39; ~~ m:g/./).elems; # Output: 3</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1516,9 +1410,9 @@ say $str.match(:global, /h.mm\w*/).join('|');
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 5. 影响正则表达式编译行为的修饰符或它的一部分</caption>
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -1555,7 +1449,7 @@ say $str.match(:global, /h.mm\w*/).join('|');
 <p><code>:sigspace</code> 修饰符使 grammar 匹配中的空格与字符串中的空格匹配, 尽管不一定是一对一的映射。<code>:ratchet</code> 修饰符禁用回溯, 所以如果正则表达式引擎成功地以一种方式匹配字符串, 它不会再尝试以另一种不同的方式匹配。我们稍后将更详细地讨论这两个修饰符。</p>
 </div>
 <div class="paragraph">
-<p>这些修饰符也可以放在正则表达式的中间, 或者通过方括号组 <code>[&#8230;&#8203;]</code> 组来限制正则表达式的一部分:</p>
+<p>这些修饰符也可以放在正则表达式的中间, 或者通过方括号组 <code>[…​]</code> 组来限制正则表达式的一部分:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1569,9 +1463,9 @@ say $str.match(:global, /h.mm\w*/).join('|');
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 6. 影响编译正则表达式运行使行为的修饰符</caption>
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -1628,7 +1522,7 @@ say $str.match(:global, /h.mm\w*/).join('|');
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my @numbers = "1308 5th Avenue".comb(/\d+/);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @numbers = &#34;1308 5th Avenue&#34;.comb(/\d+/);
 say @numbers;       # Output: [1308 5]</code></pre>
 </div>
 </div>
@@ -1637,19 +1531,19 @@ say @numbers;       # Output: [1308 5]</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my ($city, $area, $popul) = 'Berlin;891.8;3671000'.split(/';'/);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my ($city, $area, $popul) = &#39;Berlin;891.8;3671000&#39;.split(/&#39;;&#39;/);
 say $area;          # Output: 891.8</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这里, 正则表达式只包含一个字面量; 在这种情况下, 你可以直接将字面字符串传递给 <code>split</code>, 就像 'Berlin; 891.8; 3671000'.split(';'); 那样。</p>
+<p>在这里, 正则表达式只包含一个字面量; 在这种情况下, 你可以直接将字面字符串传递给 <code>split</code>, 就像 &#39;Berlin; 891.8; 3671000&#39;.split(&#39;;&#39;); 那样。</p>
 </div>
 <div class="paragraph">
 <p><code>comb</code> 和 <code>split</code> 方法都接收第二个可选的参数 <code>limit</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my ($city, $rest) = 'Berlin;891.8;3671000'.split(';', 2);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my ($city, $rest) = &#39;Berlin;891.8;3671000&#39;.split(&#39;;&#39;, 2);
 say $city;          # Output: Berlin
 say $rest;          # Output: 891.8;3671000</code></pre>
 </div>
@@ -1668,7 +1562,7 @@ say $rest;          # Output: 891.8;3671000</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say '42 eur'.subst( rx:i/ « eur » /, '€'); # Output: 42 €</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;42 eur&#39;.subst( rx:i/ « eur » /, &#39;€&#39;); # Output: 42 €</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1676,7 +1570,7 @@ say $rest;          # Output: 891.8;3671000</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say '42 €'.subst(/\s+/, '');               # Output: 42€</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;42 €&#39;.subst(/\s+/, &#39;&#39;);               # Output: 42€</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1684,8 +1578,8 @@ say $rest;          # Output: 891.8;3671000</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say '1 2 3'.subst(/\s+/, '');              # Output: 12 3
-say '1 2 3'.subst(:g, /\s+/, '');          # Output: 123</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;1 2 3&#39;.subst(/\s+/, &#39;&#39;);              # Output: 12 3
+say &#39;1 2 3&#39;.subst(:g, /\s+/, &#39;&#39;);          # Output: 123</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1693,7 +1587,7 @@ say '1 2 3'.subst(:g, /\s+/, '');          # Output: 123</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "9 of spades".subst(/\d+/, -&gt; $m { $m + 1 });
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;9 of spades&#34;.subst(/\d+/, -&gt; $m { $m + 1 });
     # Output: 10 of spades</code></pre>
 </div>
 </div>
@@ -1702,7 +1596,7 @@ say '1 2 3'.subst(:g, /\s+/, '');          # Output: 123</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "9 of spades".subst(/(\d+)/, -&gt; $/ { $0 + 1 });
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;9 of spades&#34;.subst(/(\d+)/, -&gt; $/ { $0 + 1 });
     # Output: 10 of spades</code></pre>
 </div>
 </div>
@@ -1711,7 +1605,7 @@ say '1 2 3'.subst(:g, /\s+/, '');          # Output: 123</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $var = '1 2 3';
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $var = &#39;1 2 3&#39;;
 $var ~~ s:g/ \s+ //;
 say $var;                                  # Output: 123</code></pre>
 </div>
@@ -1721,17 +1615,17 @@ say $var;                                  # Output: 123</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $var = '"fantastic", she said';
-$var ~~ s:g/ \" (.*?) \" /«$0»/;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $var = &#39;&#34;fantastic&#34;, she said&#39;;
+$var ~~ s:g/ \&#34; (.*?) \&#34; /«$0»/;
 say $var;           # Output: «fantastic», she said</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果你使用 <code>[&#8230;&#8203;]</code> 或 <code>{&#8230;&#8203;}</code> 来分隔正则表达式, 那么替换部分也可以是 Raku 表达式:</p>
+<p>如果你使用 <code>[…​]</code> 或 <code>{…​}</code> 来分隔正则表达式, 那么替换部分也可以是 Raku 表达式:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $ad = 'Buy now! USD 10 per book. Prices double soon to 20.';
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $ad = &#39;Buy now! USD 10 per book. Prices double soon to 20.&#39;;
 $ad ~~ s:g[ \d+ ] = 2 * $/;
 say $ad;</code></pre>
 </div>
@@ -1752,8 +1646,8 @@ say $ad;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $input = "It's just a jump to the left.
-And then a step to the right.";
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $input = &#34;It&#39;s just a jump to the left.
+And then a step to the right.&#34;;
 
 $input ~~ s:g/ &lt;?before jump&gt; /⇑/;
 $input ~~ s:g/ &lt;?before left&gt; /←/;
@@ -1763,12 +1657,12 @@ say $input;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里的 <code>&lt;?before &#8230;&#8203;&gt;</code> 和 <code>&lt;?after &#8230;&#8203;&gt;</code> 将它们内部的正则表达式变成零宽度的正则表达式, 所以替换命令并不会替换匹配的文本(如 "jump"), 而是在匹配之前或之后插入替换部分
+<p>这里的 <code>&lt;?before …​&gt;</code> 和 <code>&lt;?after …​&gt;</code> 将它们内部的正则表达式变成零宽度的正则表达式, 所以替换命令并不会替换匹配的文本(如 &#34;jump&#34;), 而是在匹配之前或之后插入替换部分
 :</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-txt" data-lang="txt">It's just a ⇑jump to the ←left.
+<pre class="highlight"><code class="language-txt" data-lang="txt">It&#39;s just a ⇑jump to the ←left.
 And then a step to the right→.</code></pre>
 </div>
 </div>
@@ -1777,7 +1671,7 @@ And then a step to the right→.</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $input = '2 links with 75MB each';
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $input = &#39;2 links with 75MB each&#39;;
 say $input.subst(:g, / \d+ &lt;?before &lt;[MG]&gt; B&gt;/, 500);
     # Output: 2 links with 500MB each</code></pre>
 </div>
@@ -1794,7 +1688,7 @@ say $input.subst(:g, / \d+ &lt;?before &lt;[MG]&gt; B&gt;/, 500);
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $word-regex = /\w+/;
-say "Hello, world" ~~ $word-regex;    # Output: ⌜Hello⌟</code></pre>
+say &#34;Hello, world&#34; ~~ $word-regex;    # Output: ⌜Hello⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1805,10 +1699,10 @@ say "Hello, world" ~~ $word-regex;    # Output: ⌜Hello⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $audience = 'world';
-my $greeting = 'Hello';
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $audience = &#39;world&#39;;
+my $greeting = &#39;Hello&#39;;
 
-if "Hello, world" ~~ / $greeting ', ' $audience / {
+if &#34;Hello, world&#34; ~~ / $greeting &#39;, &#39; $audience / {
     # this branch is executed
 }</code></pre>
 </div>
@@ -1821,10 +1715,10 @@ if "Hello, world" ~~ / $greeting ', ' $audience / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $audience = "\\w+";
-my $greeting = 'Hello';
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $audience = &#34;\\w+&#34;;
+my $greeting = &#39;Hello&#39;;
 
-if "Hello, world" ~~ / $greeting ', ' &lt;$audience&gt; / {
+if &#34;Hello, world&#34; ~~ / $greeting &#39;, &#39; &lt;$audience&gt; / {
     # this branch is executed
 }</code></pre>
 </div>
@@ -1837,7 +1731,7 @@ if "Hello, world" ~~ / $greeting ', ' &lt;$audience&gt; / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my @numbers = 'one', 'two', 'three';
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @numbers = &#39;one&#39;, &#39;two&#39;, &#39;three&#39;;
 my $regex = / @numbers /;</code></pre>
 </div>
 </div>
@@ -1846,7 +1740,7 @@ my $regex = / @numbers /;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $regex = / [ 'one' | 'two' | 'three' ] /</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $regex = / [ &#39;one&#39; | &#39;two&#39; | &#39;three&#39; ] /</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1861,7 +1755,7 @@ my $regex = / @numbers /;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $count = 0;
-my $str = "between 23 and 42 numbers";
+my $str = &#34;between 23 and 42 numbers&#34;;
 
 if $str ~~ / [ \d+ { $count++ } \D* ]+ / {
     say $count;     # Output: 2
@@ -1879,7 +1773,7 @@ if $str ~~ / [ \d+ { $count++ } \D* ]+ / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say '1.0e42' ~~ / ^ \d+ ['.' \d+]?  [e|E \d+]? $ /;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;1.0e42&#39; ~~ / ^ \d+ [&#39;.&#39; \d+]?  [e|E \d+]? $ /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1887,10 +1781,10 @@ if $str ~~ / [ \d+ { $count++ } \D* ]+ / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">'1.0e42' ~~ / ^
-    \d+        { say "integer: '$/'" }
-    ['.' \d+]  { say "decimal place: '$/'" }
-    [e|E \d+]  { say "exponent: '$/'" }
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#39;1.0e42&#39; ~~ / ^
+    \d+        { say &#34;integer: &#39;$/&#39;&#34; }
+    [&#39;.&#39; \d+]  { say &#34;decimal place: &#39;$/&#39;&#34; }
+    [e|E \d+]  { say &#34;exponent: &#39;$/&#39;&#34; }
     $ /;</code></pre>
 </div>
 </div>
@@ -1899,9 +1793,9 @@ if $str ~~ / [ \d+ { $count++ } \D* ]+ / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">integer: '1'
-decimal place: '1.0'
-exponent: '1.0e'</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">integer: &#39;1&#39;
+decimal place: &#39;1.0&#39;
+exponent: &#39;1.0e&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1911,7 +1805,7 @@ exponent: '1.0e'</code></pre>
 <p>这些代码块使用了特殊变量 <code>$/</code>, 它包含了匹配(或者至少是部分匹配, 就其进展而言)。</p>
 </div>
 <div class="paragraph">
-<p>这些代码块的执行纯粹是为了它们的副作用。你可以使用 <code>&lt;?{&#8230;&#8203;}&gt;</code> 形式来影响正则表达式匹配。如果该代码块中的代码返回 <code>false</code> 值, 则匹配失败<sup class="footnote">[<a id="_footnoteref_25" class="footnote" href="#_footnotedef_25" title="View footnote.">25</a>]</sup>:</p>
+<p>这些代码块的执行纯粹是为了它们的副作用。你可以使用 <code>&lt;?{…​}&gt;</code> 形式来影响正则表达式匹配。如果该代码块中的代码返回 <code>false</code> 值, 则匹配失败<sup class="footnote">[<a id="_footnoteref_25" class="footnote" href="#_footnotedef_25" title="View footnote.">25</a>]</sup>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1927,13 +1821,13 @@ for 0, 100, 255, 256, 1000 -&gt; $num {
 <p>此示例的正则表达式匹配 0 到 255 之间的数字(例如, 可能用于验证 IPv4 地址), 并且只打印 0、100 和 255 这些数字。</p>
 </div>
 <div class="paragraph">
-<p><code>$/.Int</code> 调用将匹配的字符串转换为整数, 并且当且仅当该数字最多为 255 时比较 <code>&#8656; 255</code> 才返回 <code>True</code>。</p>
+<p><code>$/.Int</code> 调用将匹配的字符串转换为整数, 并且当且仅当该数字最多为 255 时比较 <code>⇐ 255</code> 才返回 <code>True</code>。</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 7. 把 Raku 代码嵌入正则表达式的方法</caption>
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -1990,9 +1884,9 @@ for 0, 100, 255, 256, 1000 -&gt; $num {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">if "Hello, world" ~~ / (\w+) ', ' (\w+) / {
-    say "Greeting: $0";         # Output: Greeting: Hello
-    say "Audience: $1";         # Output: Audience: world
+<pre class="highlight"><code class="language-raku" data-lang="raku">if &#34;Hello, world&#34; ~~ / (\w+) &#39;, &#39; (\w+) / {
+    say &#34;Greeting: $0&#34;;         # Output: Greeting: Hello
+    say &#34;Audience: $1&#34;;         # Output: Audience: world
 }</code></pre>
 </div>
 </div>
@@ -2019,7 +1913,7 @@ for 0, 100, 255, 256, 1000 -&gt; $num {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $input = "There are 9 million bicycles in Beijing";
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $input = &#34;There are 9 million bicycles in Beijing&#34;;
 
 if $input ~~ /(\d+) \s+ (\w+)/ {
     say $0.^name;    # Output: Match
@@ -2036,7 +1930,7 @@ if $input ~~ /(\d+) \s+ (\w+)/ {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">'abcdef' ~~ /(.) (b(c)(d(e))) /;
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#39;abcdef&#39; ~~ /(.) (b(c)(d(e))) /;
 say $0.Str;         # Output: a
 say $1.Str;         # Output: bcde
 say $1[0].Str;      # Output: c
@@ -2058,7 +1952,7 @@ say $1[1][0].Str;   # Output: e</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">if "127.0.0.1" ~~ /(\d+)**4 % "."/ {
+<pre class="highlight"><code class="language-raku" data-lang="raku">if &#34;127.0.0.1&#34; ~~ /(\d+)**4 % &#34;.&#34;/ {
     say $0.elems;       # Output: 4
     say $0[3].Str;      # Output: 1
 }</code></pre>
@@ -2076,15 +1970,15 @@ say $1[1][0].Str;   # Output: e</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = 'Hello, World';
-if $str ~~ / $&lt;greeting&gt;=[\w+] ', ' $&lt;audience&gt;=[\w+] / {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = &#39;Hello, World&#39;;
+if $str ~~ / $&lt;greeting&gt;=[\w+] &#39;, &#39; $&lt;audience&gt;=[\w+] / {
     say $&lt;greeting&gt;.Str;        # Output: Hello
     say $&lt;audience&gt;.Str;        # Output: World
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>$&lt;thename&gt;</code> 在正则表达式内部和外部都指向命名捕获。在正则表达式内部, 你可以给它分配一个名字, 然后在正则表达式外面你可以访问相应的匹配对象。在正则表达式外部, <code>$&lt;thename&gt;</code> 实际上是对匹配对象的命名访问的快捷方式, <code>$/&lt;thename&gt;</code> 或 <code>$/{'thename'}</code>。这种访问命名捕获的模式与访问哈希元素的语法相同。</p>
+<p><code>$&lt;thename&gt;</code> 在正则表达式内部和外部都指向命名捕获。在正则表达式内部, 你可以给它分配一个名字, 然后在正则表达式外面你可以访问相应的匹配对象。在正则表达式外部, <code>$&lt;thename&gt;</code> 实际上是对匹配对象的命名访问的快捷方式, <code>$/&lt;thename&gt;</code> 或 <code>$/{&#39;thename&#39;}</code>。这种访问命名捕获的模式与访问哈希元素的语法相同。</p>
 </div>
 <div class="paragraph">
 <p>如果在同一个正则表达式中使用了两次(或更频繁地)相同的名字, 那么捕获再次成为一个数组。</p>
@@ -2099,8 +1993,8 @@ if $str ~~ / $&lt;greeting&gt;=[\w+] ', ' $&lt;audience&gt;=[\w+] / {
     &lt;?{ $/.Int &lt;= 255 }&gt;
 }
 
-my $str = '127.0.0.1';
-if $str ~~ / ^ &lt;byte&gt; ** 4 % '.' $ / {
+my $str = &#39;127.0.0.1&#39;;
+if $str ~~ / ^ &lt;byte&gt; ** 4 % &#39;.&#39; $ / {
     for $&lt;byte&gt;.list -&gt; $byte {
         say $byte.Str;
     }
@@ -2112,10 +2006,10 @@ if $str ~~ / ^ &lt;byte&gt; ** 4 % '.' $ / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = 'Hello, World';
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = &#39;Hello, World&#39;;
 my regex word { \w+ };
 
-if $str ~~ /&lt;greeting=word&gt; ', ' &lt;audience=word&gt;/ {
+if $str ~~ /&lt;greeting=word&gt; &#39;, &#39; &lt;audience=word&gt;/ {
     say $&lt;greeting&gt;.Str;        # Output: Hello
     say $&lt;audience&gt;.Str;        # Output: World
 }</code></pre>
@@ -2131,7 +2025,7 @@ if $str ~~ /&lt;greeting=word&gt; ', ' &lt;audience=word&gt;/ {
 <p>为了使它工作, 我们可以通过包括单词字边界断言: <code>/ « (\w+) \s+ $0 » /</code> (记住 « 匹配左单词边界而 » 匹配右单词边界)来限制匹配整个单词。</p>
 </div>
 <div class="paragraph">
-<p>现在, 如果你把它与字符串 "the quick brown fox jumps over the the lazy black dog" 进行测试, 它就会正确地匹配两个 "the"。</p>
+<p>现在, 如果你把它与字符串 &#34;the quick brown fox jumps over the the lazy black dog&#34; 进行测试, 它就会正确地匹配两个 &#34;the&#34;。</p>
 </div>
 <div class="paragraph">
 <p>反向引用也适用于命名捕获; 前面的例子可以写成 <code>/« $&lt;word&gt;=\w+ \s+ $&lt;word&gt; »/</code>。</p>
@@ -2155,7 +2049,7 @@ if $str ~~ /&lt;greeting=word&gt; ', ' &lt;audience=word&gt;/ {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $encoded = 'a' x 5;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $encoded = &#39;a&#39; x 5;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2164,11 +2058,11 @@ if $str ~~ /&lt;greeting=word&gt; ', ' &lt;audience=word&gt;/ {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">for 2..15 -&gt; $number {
-    my $encoded = 'a' x $number;
+    my $encoded = &#39;a&#39; x $number;
     if $encoded ~~ / ^ (a ** 2..*) $0+ $ / {
-        say "$number is not a prime, a factor is ", $0.chars;
+        say &#34;$number is not a prime, a factor is &#34;, $0.chars;
     } else {
-        say "$number is a prime";
+        say &#34;$number is a prime&#34;;
     }
 }</code></pre>
 </div>
@@ -2195,7 +2089,7 @@ if $str ~~ /&lt;greeting=word&gt; ', ' &lt;audience=word&gt;/ {
 </div>
 </div>
 <div class="paragraph">
-<p>例如, 如果 <code>$number</code> 为 6, <code>$encoded</code> 就会变成 "aaaaaa"。当第一组(<code>a <strong>* 2..</strong></code>)与三个 a(<code>aaa</code>)匹配时, 正则表达式引擎就会找到匹配。相应地, <code>$0+</code> 产生另外三个 a, 总共六个 a。 在质数的情况下, 正则表达式引擎无法找到这样的分区, 导致匹配失败。</p>
+<p>例如, 如果 <code>$number</code> 为 6, <code>$encoded</code> 就会变成 &#34;aaaaaa&#34;。当第一组(<code>a <strong>* 2..</strong></code>)与三个 a(<code>aaa</code>)匹配时, 正则表达式引擎就会找到匹配。相应地, <code>$0+</code> 产生另外三个 a, 总共六个 a。 在质数的情况下, 正则表达式引擎无法找到这样的分区, 导致匹配失败。</p>
 </div>
 <div class="paragraph">
 <p>由于 <code>**</code> 量词是贪婪的, 因此正则表达式引擎首先找到最大的质数因子, 因此它将 5 识别为 10 的质数因子。如果你把它改成 <code>**?</code> 量词(因此正则表达式变为 <code>/ ^ (a <strong>*? 2..</strong>) $0+ $ /</code>), 它找到最小的质因数。</p>
@@ -2223,7 +2117,7 @@ if $str ~~ /&lt;greeting=word&gt; ', ' &lt;audience=word&gt;/ {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "abc" ~~ /../; # Output: ⌜ab⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;abc&#34; ~~ /../; # Output: ⌜ab⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2231,7 +2125,7 @@ if $str ~~ /&lt;greeting=word&gt; ', ' &lt;audience=word&gt;/ {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "abc" ~~ /.(.)(.)/</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;abc&#34; ~~ /.(.)(.)/</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2245,7 +2139,7 @@ if $str ~~ /&lt;greeting=word&gt; ', ' &lt;audience=word&gt;/ {
 </div>
 </div>
 <div class="paragraph">
-<p>其中 0 和 1 是捕获的索引。嵌套捕获会产生更多的缩进, 所以 <code>"abc" ∼∼ /.(.(.))/</code> 打印出:</p>
+<p>其中 0 和 1 是捕获的索引。嵌套捕获会产生更多的缩进, 所以 <code>&#34;abc&#34; ∼∼ /.(.(.))/</code> 打印出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2259,7 +2153,7 @@ if $str ~~ /&lt;greeting=word&gt; ', ' &lt;audience=word&gt;/ {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">"abc" ∼∼ /.(.$&lt;char&gt;=[.])/</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#34;abc&#34; ∼∼ /.(.$&lt;char&gt;=[.])/</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2276,7 +2170,7 @@ char =&gt; ⌜c⌟</code></pre>
 <div class="sect2">
 <h3 id="_总结_4">5.6. 总结</h3>
 <div class="paragraph">
-<p>捕获允许你从成功的正则表达式匹配中提取数据。你可以通过在正则表达式的一部分的周围添加一对圆括号, 使用 <code>$&lt;name&gt;=[&#8230;&#8203;]</code> 语法, 或者通过调用一个命名的正则表达式, 来指示正则表达式引擎捕获数据: <code>&lt;name&gt;</code>。</p>
+<p>捕获允许你从成功的正则表达式匹配中提取数据。你可以通过在正则表达式的一部分的周围添加一对圆括号, 使用 <code>$&lt;name&gt;=[…​]</code> 语法, 或者通过调用一个命名的正则表达式, 来指示正则表达式引擎捕获数据: <code>&lt;name&gt;</code>。</p>
 </div>
 <div class="paragraph">
 <p>正则表达式匹配和捕获都产生匹配对象; 最上面的匹配对象会变成一棵子匹配树。反向引用允许你精确地匹配一个正则表达式的前一部分的匹配对象, 你可以滥用该功能来构建一个简单的质数测试。</p>
@@ -2311,7 +2205,7 @@ char =&gt; ⌜c⌟</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0h/y9/mz_101004.jpg@596w_1l.jpg" alt="state mechine">
+<img src="https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0h/y9/mz_101004.jpg@596w_1l.jpg" alt="state mechine"/>
 </div>
 <div class="title">Figure 1. 一个简单的确定性有限自动机。可接受状态 A1 用两个圆标记</div>
 </div>
@@ -2332,7 +2226,7 @@ char =&gt; ⌜c⌟</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0h/y9/pf_100956.jpg@596w_1l.jpg" alt="state mechinne">
+<img src="https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0h/y9/pf_100956.jpg@596w_1l.jpg" alt="state mechinne"/>
 </div>
 <div class="title">Figure 2. 一个简单的匹配正则表达式 / ^ a [bca]* $ / 的自动机</div>
 </div>
@@ -2344,7 +2238,7 @@ char =&gt; ⌜c⌟</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/bj/m3_505496.jpg@596w_1l.jpg" alt="first step">
+<img src="https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/bj/m3_505496.jpg@596w_1l.jpg" alt="first step"/>
 </div>
 <div class="title">Figure 3. 图 6-3 匹配 A 或 B 的部分构造自动机, 第一步</div>
 </div>
@@ -2411,13 +2305,13 @@ char =&gt; ⌜c⌟</code></pre>
 <p>因此, 如果你有一个正则表达式 <code>/ \w+ .* /</code> 并将其与字符串 abcd 匹配,  那么 <code>\w+</code> 会匹配整个字符串, 使 <code>.*</code> 成功匹配空字符串。<code>\w+</code> 只匹配第一个字符, 剩余的 <code>.*</code> 同样允许匹配, 但不会发生, 因为这违反了正则表达式最左边的部分尽量匹配的规则。</p>
 </div>
 <div class="paragraph">
-<p>如果你试图用一个简单的正则表达式 <code>/ \" .* \"/</code> 来匹配一个带引号的字符串, 那么它可能比你预期的要匹配的多:</p>
+<p>如果你试图用一个简单的正则表达式 <code>/ \&#34; .* \&#34;/</code> 来匹配一个带引号的字符串, 那么它可能比你预期的要匹配的多:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = 'Amanda sighed. "It was madness", she said. '
-    ~ '"Sheer madness"';
-if $str ~~ / \" .* \" / {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = &#39;Amanda sighed. &#34;It was madness&#34;, she said. &#39;
+    ~ &#39;&#34;Sheer madness&#34;&#39;;
+if $str ~~ / \&#34; .* \&#34; / {
     say $/.Str;
 }</code></pre>
 </div>
@@ -2427,7 +2321,7 @@ if $str ~~ / \" .* \" / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-txt" data-lang="txt">"It was madness", she said. "Sheer madness"</code></pre>
+<pre class="highlight"><code class="language-txt" data-lang="txt">&#34;It was madness&#34;, she said. &#34;Sheer madness&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2440,7 +2334,7 @@ if $str ~~ / \" .* \" / {
 <p>贪婪规则并不总是在第一次尝试时就会产生匹配。 在前面的例子中, <code>.*</code> 首先匹配了所有能匹配的东西, 包括输入字符串中的最后一个引号。但是在正则表达式中的最后一个引号没有匹配到, 导致了失败。</p>
 </div>
 <div class="paragraph">
-<p>正则表达式引擎没有放弃, 而是开始回溯: 它回到了之前的量词(<code>.<strong></code> 中的 <code></strong></code>), 并使其少重复一次匹配。只有这样, 正则表达式中的引号才能找到输入字符串中的引号, 使整个正则表达式匹配成功。</p>
+<p>正则表达式引擎没有放弃, 而是开始回溯: 它回到了之前的量词(<code>.<strong></strong></code><strong> 中的 <code></code></strong>), 并使其少重复一次匹配。只有这样, 正则表达式中的引号才能找到输入字符串中的引号, 使整个正则表达式匹配成功。</p>
 </div>
 <div class="paragraph">
 <p>如果有多个正则表达式元素可以以不同的方式匹配, 那么回溯会尝试从最后一个元素开始尝试所有的选项, 如果它们全部都失败了, 那么回溯就会从倒数第二个元素尝试另外一个选项。然后探索该配置中最后一个元素的所有变体, 并继续尝试从之前的元素中搜索匹配。如果你把它看成是搜索树, 那就是深度优先搜索。</p>
@@ -2450,68 +2344,68 @@ if $str ~~ / \" .* \" / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">'mabracadabra' ~~ / (.+a) (.*) $0 /;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#39;mabracadabra&#39; ~~ / (.+a) (.*) $0 /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这开始时, 第一组 <code>(.+ a)</code> 匹配完整的字符串; 第二组 <code>(.<strong>)</code> 匹配空的字符串; 最后一部分, <code>$0</code> 匹配失败。因此, 回溯开始了, 它要求第二组匹配更少的字符, 但它不能; 所以它又回到了第一组, 要求它匹配更少的字符。现在, 第一组匹配了 mabracada, <code>.</strong></code> 匹配了剩下的三个字符。但是, 最后一组仍然没有匹配成功, 所以 <code>.*</code> 放弃了另一个字符, 最后一组继续失败。如此循环, 直到第一组只匹配了两个字符, ma。 即使在这种配置下, 其余的正则表达式也无法成功匹配。正则表达式引擎没有选项了, 所以它采用了最后的机制: 它尝试在第二个字符的左边一个位置开始匹配。</p>
+<p>这开始时, 第一组 <code>(.+ a)</code> 匹配完整的字符串; 第二组 <code>(.<strong>)</strong></code><strong> 匹配空的字符串; 最后一部分, <code>$0</code> 匹配失败。因此, 回溯开始了, 它要求第二组匹配更少的字符, 但它不能; 所以它又回到了第一组, 要求它匹配更少的字符。现在, 第一组匹配了 mabracada, <code>.</code></strong> 匹配了剩下的三个字符。但是, 最后一组仍然没有匹配成功, 所以 <code>.*</code> 放弃了另一个字符, 最后一组继续失败。如此循环, 直到第一组只匹配了两个字符, ma。 即使在这种配置下, 其余的正则表达式也无法成功匹配。正则表达式引擎没有选项了, 所以它采用了最后的机制: 它尝试在第二个字符的左边一个位置开始匹配。</p>
 </div>
 <div class="paragraph">
 <p>从第二个字符开始, 第一个组再次尝试匹配整个剩余的字符串, abracadabra。我们可以通过添加在正则表达式的第二部分后面添加一个代码块来直观的说明:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">'mabracadabra' ~~ /(.+a) (.*) { say "0: '$0'; 1: '$1'" } $0 /;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#39;mabracadabra&#39; ~~ /(.+a) (.*) { say &#34;0: &#39;$0&#39;; 1: &#39;$1&#39;&#34; } $0 /;</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">0: 'mabracadabra'; 1: ''
-0: 'mabracada'; 1: 'bra'
-0: 'mabracada'; 1: 'br'
-0: 'mabracada'; 1: 'b'
-0: 'mabracada'; 1: ''
-0: 'mabraca'; 1: 'dabra'
-0: 'mabraca'; 1: 'dabr'
-0: 'mabraca'; 1: 'dab'
-0: 'mabraca'; 1: 'da'
-0: 'mabraca'; 1: 'd'
-0: 'mabraca'; 1: ''
-0: 'mabra'; 1: 'cadabra'
-0: 'mabra'; 1: 'cadabr'
-0: 'mabra'; 1: 'cadab'
-0: 'mabra'; 1: 'cada'
-0: 'mabra'; 1: 'cad'
-0: 'mabra'; 1: 'ca'
-0: 'mabra'; 1: 'c'
-0: 'mabra'; 1: ''
-0: 'ma'; 1: 'bracadabra'
-0: 'ma'; 1: 'bracadabr'
-0: 'ma'; 1: 'bracadab'
-0: 'ma'; 1: 'bracada'
-0: 'ma'; 1: 'bracad'
-0: 'ma'; 1: 'braca'
-0: 'ma'; 1: 'brac'
-0: 'ma'; 1: 'bra'
-0: 'ma'; 1: 'br'
-0: 'ma'; 1: 'b'
-0: 'ma'; 1: ''
-0: 'abracadabra'; 1: ''
-0: 'abracada'; 1: 'bra'
-0: 'abracada'; 1: 'br'
-0: 'abracada'; 1: 'b'
-0: 'abracada'; 1: ''
-0: 'abraca'; 1: 'dabra'
-0: 'abraca'; 1: 'dabr'
-0: 'abraca'; 1: 'dab'
-0: 'abraca'; 1: 'da'
-0: 'abraca'; 1: 'd'
-0: 'abraca'; 1: ''
-0: 'abra'; 1: 'cadabra'
-0: 'abra'; 1: 'cadabr'
-0: 'abra'; 1: 'cadab'
-0: 'abra'; 1: 'cada'
-0: 'abra'; 1: 'cad'</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">0: &#39;mabracadabra&#39;; 1: &#39;&#39;
+0: &#39;mabracada&#39;; 1: &#39;bra&#39;
+0: &#39;mabracada&#39;; 1: &#39;br&#39;
+0: &#39;mabracada&#39;; 1: &#39;b&#39;
+0: &#39;mabracada&#39;; 1: &#39;&#39;
+0: &#39;mabraca&#39;; 1: &#39;dabra&#39;
+0: &#39;mabraca&#39;; 1: &#39;dabr&#39;
+0: &#39;mabraca&#39;; 1: &#39;dab&#39;
+0: &#39;mabraca&#39;; 1: &#39;da&#39;
+0: &#39;mabraca&#39;; 1: &#39;d&#39;
+0: &#39;mabraca&#39;; 1: &#39;&#39;
+0: &#39;mabra&#39;; 1: &#39;cadabra&#39;
+0: &#39;mabra&#39;; 1: &#39;cadabr&#39;
+0: &#39;mabra&#39;; 1: &#39;cadab&#39;
+0: &#39;mabra&#39;; 1: &#39;cada&#39;
+0: &#39;mabra&#39;; 1: &#39;cad&#39;
+0: &#39;mabra&#39;; 1: &#39;ca&#39;
+0: &#39;mabra&#39;; 1: &#39;c&#39;
+0: &#39;mabra&#39;; 1: &#39;&#39;
+0: &#39;ma&#39;; 1: &#39;bracadabra&#39;
+0: &#39;ma&#39;; 1: &#39;bracadabr&#39;
+0: &#39;ma&#39;; 1: &#39;bracadab&#39;
+0: &#39;ma&#39;; 1: &#39;bracada&#39;
+0: &#39;ma&#39;; 1: &#39;bracad&#39;
+0: &#39;ma&#39;; 1: &#39;braca&#39;
+0: &#39;ma&#39;; 1: &#39;brac&#39;
+0: &#39;ma&#39;; 1: &#39;bra&#39;
+0: &#39;ma&#39;; 1: &#39;br&#39;
+0: &#39;ma&#39;; 1: &#39;b&#39;
+0: &#39;ma&#39;; 1: &#39;&#39;
+0: &#39;abracadabra&#39;; 1: &#39;&#39;
+0: &#39;abracada&#39;; 1: &#39;bra&#39;
+0: &#39;abracada&#39;; 1: &#39;br&#39;
+0: &#39;abracada&#39;; 1: &#39;b&#39;
+0: &#39;abracada&#39;; 1: &#39;&#39;
+0: &#39;abraca&#39;; 1: &#39;dabra&#39;
+0: &#39;abraca&#39;; 1: &#39;dabr&#39;
+0: &#39;abraca&#39;; 1: &#39;dab&#39;
+0: &#39;abraca&#39;; 1: &#39;da&#39;
+0: &#39;abraca&#39;; 1: &#39;d&#39;
+0: &#39;abraca&#39;; 1: &#39;&#39;
+0: &#39;abra&#39;; 1: &#39;cadabra&#39;
+0: &#39;abra&#39;; 1: &#39;cadabr&#39;
+0: &#39;abra&#39;; 1: &#39;cadab&#39;
+0: &#39;abra&#39;; 1: &#39;cada&#39;
+0: &#39;abra&#39;; 1: &#39;cad&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2542,11 +2436,11 @@ if $str ~~ / \" .* \" / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">"aaaaaa" ~~ /^ (a+) &lt;[bcd]&gt; /;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#34;aaaaaa&#34; ~~ /^ (a+) &lt;[bcd]&gt; /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>你可以看到这个匹配失败了, 因为输入字符串中没有 b、c 或 d。然而, 正则表达式引擎还不够聪明, 不知道这一点, 它必须这样搜索才能达到最佳性能。相反, 它首先尝试匹配输入中的所有 a, 然后是再少匹配一个 a, 以此类推, 然后再宣告失败。同样的, 我们可以通过一个嵌入的代码块来跟踪它的进度。 比如说 <code>"aaaaaa" ∼∼ /^(a+) { say $0 } b/</code> 产生这样的输出:</p>
+<p>你可以看到这个匹配失败了, 因为输入字符串中没有 b、c 或 d。然而, 正则表达式引擎还不够聪明, 不知道这一点, 它必须这样搜索才能达到最佳性能。相反, 它首先尝试匹配输入中的所有 a, 然后是再少匹配一个 a, 以此类推, 然后再宣告失败。同样的, 我们可以通过一个嵌入的代码块来跟踪它的进度。 比如说 <code>&#34;aaaaaa&#34; ∼∼ /^(a+) { say $0 } b/</code> 产生这样的输出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2560,7 +2454,7 @@ Nil</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在某些方面比计算机更聪明, 我们可以告诉它永远不要放弃它匹配的任何东西, 来帮助它。比如 说 <code>"aaaaaa" ∼∼ /^(a+:) { say $0 } b/</code> 产生更短的输出:</p>
+<p>在某些方面比计算机更聪明, 我们可以告诉它永远不要放弃它匹配的任何东西, 来帮助它。比如 说 <code>&#34;aaaaaa&#34; ∼∼ /^(a+:) { say $0 } b/</code> 产生更短的输出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2572,7 +2466,7 @@ Nil</code></pre>
 <p>量词后面的冒号(:)告诉它不要回溯这个量词。它不仅适用于所有的量词, 也适用于分词。这个量词与回溯控制冒号一起称为占有式量词, 因为这个量词永远不会放弃它曾经的拥有的东西。</p>
 </div>
 <div class="paragraph">
-<p>第二种禁用回溯的方法是使用 <code>:ratchet</code>(或 <code>:r</code>) 修饰符, 你也可以在组 <code>[&#8230;&#8203;]</code> 或捕获 <code>(&#8230;&#8203;)</code> 中使用。 在这种情况下, 修饰符的效果从使用点延伸到组的闭合括号。</p>
+<p>第二种禁用回溯的方法是使用 <code>:ratchet</code>(或 <code>:r</code>) 修饰符, 你也可以在组 <code>[…​]</code> 或捕获 <code>(…​)</code> 中使用。 在这种情况下, 修饰符的效果从使用点延伸到组的闭合括号。</p>
 </div>
 </div>
 <div class="sect3">
@@ -2584,20 +2478,20 @@ Nil</code></pre>
 <p>Jan Goyvaerts 在正则表达式 gulu 博客上分享了一个<a href="http://www.regexguru.com/2008/04/unintended-backtracking-can-bite-you/">例子</a><sup class="footnote">[<a id="_footnoteref_33" class="footnote" href="#_footnotedef_33" title="View footnote.">33</a>]</sup>, 这里转述了这个例子, 并根据 Raku 正则表达式语法进行了调整。</p>
 </div>
 <div class="paragraph">
-<p>当你尝试匹配一对 HTML 标记时, 如字符串 <code>&lt;a href="&#8230;&#8203;"&gt;some text&lt;/a&gt;</code>, 你可以使用像这样的正则表达式:</p>
+<p>当你尝试匹配一对 HTML 标记时, 如字符串 <code>&lt;a href=&#34;…​&#34;&gt;some text&lt;/a&gt;</code>, 你可以使用像这样的正则表达式:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $html-re = rx:ignorecase{
-    '&lt;' $&lt;tag&gt;=[ &lt;[a..z]&gt;+ ] # opening tag
+    &#39;&lt;&#39; $&lt;tag&gt;=[ &lt;[a..z]&gt;+ ] # opening tag
          &lt;-[ &gt; ]&gt;*           # attributes within opening tag
-    '&gt;'
+    &#39;&gt;&#39;
          ( .* )              # content between opening and
                              # closing tags
-    '&lt;/' $&lt;tag&gt; '&gt;'
+    &#39;&lt;/&#39; $&lt;tag&gt; &#39;&gt;&#39;
 };
 
-say 'more text &lt;a href="..:"&gt;link text&lt;/a&gt; bla' ~~ $html-re;</code></pre>
+say &#39;more text &lt;a href=&#34;..:&#34;&gt;link text&lt;/a&gt; bla&#39; ~~ $html-re;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2639,8 +2533,8 @@ say 'more text &lt;a href="..:"&gt;link text&lt;/a&gt; bla' ~~ $html-re;</code><
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "abc" ~~ /ab | a.* /;        # Output: ⌜abc⌟
-say "abc" ~~ /ab | a {} .* /;    # Output: ⌜ab⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;abc&#34; ~~ /ab | a.* /;        # Output: ⌜abc⌟
+say &#34;abc&#34; ~~ /ab | a {} .* /;    # Output: ⌜ab⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2678,7 +2572,7 @@ say "abc" ~~ /ab | a {} .* /;    # Output: ⌜ab⌟</code></pre>
 <p>例如, 像 johndoe 这样的字符串(没有任何 <code>@</code> 符号)是一个有效的电子邮件地址, 可以用于本地发送。如果你要写一个电子邮件地址的正则表达式来进行输入验证, 是否应该允许? 答案取决于具体情况。如果你正在开发一个纯粹在公司内部使用的应用程序,  那么允许它可能是有意义的。而在公共 Web 应用程序中, 就不那么合理了。</p>
 </div>
 <div class="paragraph">
-<p>保持电子邮件地址, 你知道本地部分可以被引起来吗? 或者域部分可以是 IP 地址, 还可以有方括号? 是的, <code>"somebody"@[93.184.216.34]</code> 和 <code>some+body@[IPv6:2001:db8::1]</code> 都是有效的电子邮件地址。</p>
+<p>保持电子邮件地址, 你知道本地部分可以被引起来吗? 或者域部分可以是 IP 地址, 还可以有方括号? 是的, <code>&#34;somebody&#34;@[93.184.216.34]</code> 和 <code>some+body@[IPv6:2001:db8::1]</code> 都是有效的电子邮件地址。</p>
 </div>
 <div class="paragraph">
 <p>有些数据格式有其格式规范。例如 JSON, 即 JavaScript Object Notation, <a href="http://json.org/">它的主页上有解析规则</a>。<sup class="footnote">[<a id="_footnoteref_34" class="footnote" href="#_footnotedef_34" title="View footnote.">34</a>]</sup> 在这种情况下, 重复作者为创建这些规则所做的工作, 并简单地将它们翻译为 Raku 语法, 往往是一种实用的选择。</p>
@@ -2709,7 +2603,7 @@ organization=Acme Widgets Inc.
 ; is not working
 server=192.0.2.62
 port=143
-file="payroll.dat"</code></pre>
+file=&#34;payroll.dat&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2766,26 +2660,26 @@ file="payroll.dat"</code></pre>
 <p>当你编写正则表达式时, 不要只考虑那些正则表达式应该匹配的字符串。对他们不应该匹配的字符串要同等重视。一般来说, 正则表达式应该拒绝的字符串比正则表达式应该接受的字符串多, 这使得这些字符串既重要又难于思考。</p>
 </div>
 <div class="paragraph">
-<p>你可以做的一件事是写否定测试; 也就是说, 用不应该匹配的输入进行测试。另一个是当你看到 .* 或 <code>.+</code> 这样的项时, 要停下来, 多想一想。这些词太宽泛了, 以至于大多数时候都是错误的。大多数数据格式都不包含"然后, 无论如何"这样的子句。 例如, 如果你解析到行尾的注释, /'#' .*/ 是错的, 因为它可以通过断行来匹配; /'#' \N* \n? / 是比较好的正则表达式。如果你解析类似于 C 的注释, / * ... * /, 正则表达式 / '/*' .* '*/' 也匹配整个字符串 /* abc */ de */, 因为 .* 贪婪地匹配了字符串中间的结尾注释标记 */。</p>
+<p>你可以做的一件事是写否定测试; 也就是说, 用不应该匹配的输入进行测试。另一个是当你看到 .* 或 <code>.+</code> 这样的项时, 要停下来, 多想一想。这些词太宽泛了, 以至于大多数时候都是错误的。大多数数据格式都不包含&#34;然后, 无论如何&#34;这样的子句。 例如, 如果你解析到行尾的注释, /&#39;#&#39; .*/ 是错的, 因为它可以通过断行来匹配; /&#39;#&#39; \N* \n? / 是比较好的正则表达式。如果你解析类似于 C 的注释, / * ... * /, 正则表达式 / &#39;/*&#39; .* &#39;*/&#39; 也匹配整个字符串 /* abc */ de */, 因为 .* 贪婪地匹配了字符串中间的结尾注释标记 */。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_使用锚点">7.3. 使用锚点</h3>
 <div class="paragraph">
-<p>如果你写的正则表达式是为了匹配整个字符串, 请记住锚定 <code>^</code> 和 <code>$</code> 以确保它确实匹配整个字符串。如果不是的话, 请考虑一下正则表达式匹配的边界。如果你试图匹配一个单词, 后面不跟着一个点(<code>.</code>), 那么正则表达式 <code>/\w+ &lt;!before '.'&gt; /</code> 可以匹配一个部分单词:</p>
+<p>如果你写的正则表达式是为了匹配整个字符串, 请记住锚定 <code>^</code> 和 <code>$</code> 以确保它确实匹配整个字符串。如果不是的话, 请考虑一下正则表达式匹配的边界。如果你试图匹配一个单词, 后面不跟着一个点(<code>.</code>), 那么正则表达式 <code>/\w+ &lt;!before &#39;.&#39;&gt; /</code> 可以匹配一个部分单词:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "supercalifragilisticexpialidocious."
-        ~~ / \w+ &lt;!before '.'&gt; /;
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;supercalifragilisticexpialidocious.&#34;
+        ~~ / \w+ &lt;!before &#39;.&#39;&gt; /;
 # Output: ⌜supercalifragilisticexpialidociou⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里的 <code>\w+</code> 实际上匹配的字符是比实际的单词少一个,  所以 <code>&lt;!before '.'&gt;</code> 可以成功匹配。</p>
+<p>这里的 <code>\w+</code> 实际上匹配的字符是比实际的单词少一个,  所以 <code>&lt;!before &#39;.&#39;&gt;</code> 可以成功匹配。</p>
 </div>
 <div class="paragraph">
-<p>如果这样的行为不是你想要的, 你可以添加一个断言, 比如单词边界, <code>/ \w+ » &lt;!before '.'&gt; /</code>。 因为 <code>\w+</code> 暗示单词的一部分已经被匹配了, 所以你也可以写 <code>/ \w+ &lt;!before \w&gt; &lt;!before '.'&gt; /</code>。</p>
+<p>如果这样的行为不是你想要的, 你可以添加一个断言, 比如单词边界, <code>/ \w+ » &lt;!before &#39;.&#39;&gt; /</code>。 因为 <code>\w+</code> 暗示单词的一部分已经被匹配了, 所以你也可以写 <code>/ \w+ &lt;!before \w&gt; &lt;!before &#39;.&#39;&gt; /</code>。</p>
 </div>
 <div class="paragraph">
 <p>断言的内容是一个正则表达式, 所以在这里我们必须引用点(或转义为 <code>&lt;!before \.&gt;</code>), 否则这个点会展开它的特殊含义, 以匹配任何字符。</p>
@@ -2804,41 +2698,41 @@ file="payroll.dat"</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-txt" data-lang="txt">a,"b,c",d</code></pre>
+<pre class="highlight"><code class="language-txt" data-lang="txt">a,&#34;b,c&#34;,d</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>其中 "b, c" 是带引号的字符串。</p>
+<p>其中 &#34;b, c&#34; 是带引号的字符串。</p>
 </div>
 <div class="paragraph">
-<p>如前所述, <code>/ \" .* \" /</code> 不是解析引号字符串的有效方法 , 因为 <code>.*</code> 可以匹配断开的结尾引号。如果输入的内容是:</p>
+<p>如前所述, <code>/ \&#34; .* \&#34; /</code> 不是解析引号字符串的有效方法 , 因为 <code>.*</code> 可以匹配断开的结尾引号。如果输入的内容是:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-txt" data-lang="txt">a,"b,c",d,"e,f"</code></pre>
+<pre class="highlight"><code class="language-txt" data-lang="txt">a,&#34;b,c&#34;,d,&#34;e,f&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>那么被引用的字符串的正则表达式实际上会与输入中的两个被引用的字符串以及中间的列匹配。</p>
 </div>
 <div class="paragraph">
-<p>一个不那么幼稚的方法是写成 <code>/ \" .*? \" /</code>, 这样可以将引用的字符串限制在最短的匹配范围内。这个方法是可行的, 但前提是没有任何东西迫使正则表达式以不同的方式回溯和匹配:</p>
+<p>一个不那么幼稚的方法是写成 <code>/ \&#34; .*? \&#34; /</code>, 这样可以将引用的字符串限制在最短的匹配范围内。这个方法是可行的, 但前提是没有任何东西迫使正则表达式以不同的方式回溯和匹配:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say '"a,b","' ~~ / ^ \" .*? \" $ /; # Output: ⌜"a,b","⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;&#34;a,b&#34;,&#34;&#39; ~~ / ^ \&#34; .*? \&#34; $ /; # Output: ⌜&#34;a,b&#34;,&#34;⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里的输入是一个不平衡的引号字符串, 中间有第三个引号字符。第一次尝试只匹配了字符串中的 "a, b" 部分, <code>$anchor</code> 没有匹配, 因此回溯开始, 下一次尝试匹配整个字符串。</p>
+<p>这里的输入是一个不平衡的引号字符串, 中间有第三个引号字符。第一次尝试只匹配了字符串中的 &#34;a, b&#34; 部分, <code>$anchor</code> 没有匹配, 因此回溯开始, 下一次尝试匹配整个字符串。</p>
 </div>
 <div class="paragraph">
 <p>这通常不是理想的行为。一种更稳健的方法是放弃正则表达式中的点, 并更努力地思考引号字符串中允许的内容: 这很容易用否定的字符类来实现:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say '"a,b","' ~~ / \" &lt;-["]&gt;* \" /;             # Output: ⌜"a,b"⌟
-say '"a,b","' ~~ / ^ \" &lt;-["]&gt;* \" $ /;         # Output: Nil</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;&#34;a,b&#34;,&#34;&#39; ~~ / \&#34; &lt;-[&#34;]&gt;* \&#34; /;             # Output: ⌜&#34;a,b&#34;⌟
+say &#39;&#34;a,b&#34;,&#34;&#39; ~~ / ^ \&#34; &lt;-[&#34;]&gt;* \&#34; $ /;         # Output: Nil</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2850,14 +2744,14 @@ say '"a,b","' ~~ / ^ \" &lt;-["]&gt;* \" $ /;         # Output: Nil</code></pre>
 <p>我们的挑战并未就此结束。在前面的 CSV 示例中, 我们现在可以处理包含分隔字符的列, 但由于引号字符获得了特殊的含义, 你不能轻易拥有包含引号字符的列。</p>
 </div>
 <div class="paragraph">
-<p>解决这个问题最常见的方法是引入一个转义字符, 通常是反斜线(<code>\</code>)。如果你在引号字符或反斜线之前加上一个反斜线, 那么第二个字符就失去了其它的特殊意义。 因此, 如果你想在 CSV 列中包含 <code>she said "hey, ho"</code> 这个字符串, 你必须把它写成 <code>"she said \"hey, ho\""</code>。</p>
+<p>解决这个问题最常见的方法是引入一个转义字符, 通常是反斜线(<code>\</code>)。如果你在引号字符或反斜线之前加上一个反斜线, 那么第二个字符就失去了其它的特殊意义。 因此, 如果你想在 CSV 列中包含 <code>she said &#34;hey, ho&#34;</code> 这个字符串, 你必须把它写成 <code>&#34;she said \&#34;hey, ho\&#34;&#34;</code>。</p>
 </div>
 <div class="paragraph">
 <p>使用反斜杠作为转义字符的工作变得更加复杂, 因为反斜线在 Raku(以及大多数其他编程语言)中也有特殊的含义。所以, 在普通的字符串文字中, 你必须将反斜线加倍, 才能产生一个反斜线:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "a\\b"; # Output: a\b</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;a\\b&#34;; # Output: a\b</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2865,14 +2759,14 @@ say '"a,b","' ~~ / ^ \" &lt;-["]&gt;* \" $ /;         # Output: Nil</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say Q"a\b"; # Output: a\b say Q"a\\b"; # Output: a\\b</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say Q&#34;a\b&#34;; # Output: a\b say Q&#34;a\\b&#34;; # Output: a\\b</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>正则表达式没有这种模式, 所以你必须在正则表达式中使用双倍的反斜线来匹配字面的反斜线。</p>
 </div>
 <div class="paragraph">
-<p>说到带转义字符的引号, 现在有两种情况需要考虑在引号字符串中使用: 无意义的常规字符和转义序列。常规字符是指除了引号或反斜线以外的所有字符, 字符类 &lt;-["\\]&gt; 描述了这一点。转义序列是一个反斜杠, 后面是引号或反斜线。用正则表达式的术语来说, 那就是 \\ &lt;["\\]&gt;。许多数据格式也允许在反斜线后面加上其他字符, 在这种情况下, 序列简化为 <code>\\</code>。(记住, 点可以匹配任何字符)。</p>
+<p>说到带转义字符的引号, 现在有两种情况需要考虑在引号字符串中使用: 无意义的常规字符和转义序列。常规字符是指除了引号或反斜线以外的所有字符, 字符类 &lt;-[&#34;\\]&gt; 描述了这一点。转义序列是一个反斜杠, 后面是引号或反斜线。用正则表达式的术语来说, 那就是 \\ &lt;[&#34;\\]&gt;。许多数据格式也允许在反斜线后面加上其他字符, 在这种情况下, 序列简化为 <code>\\</code>。(记住, 点可以匹配任何字符)。</p>
 </div>
 <div class="paragraph">
 <p>将这两种情况结合在一起, 就可以得到这样的字符序列:</p>
@@ -2880,17 +2774,17 @@ say '"a,b","' ~~ / ^ \" &lt;-["]&gt;* \" $ /;         # Output: Nil</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my regex quoted {
-    \" # opening quote
+    \&#34; # opening quote
     [
-        &lt;-[ " \\ ]&gt; # regular character
+        &lt;-[ &#34; \\ ]&gt; # regular character
         | \\ .      # escape sequence
     ]*
-    \" # closing quote
+    \&#34; # closing quote
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果你花了一分钟或更长的时间来阅读这本正则表达式, 不要担心。这是个需要拆解和理解的地方, 但这将是本书中涉及最多的正则表达式。 <code>my regex quoted {&#8230;&#8203;}</code> 构造声明一个命名正则表达式作为词法变量。稍后, 我们将学习 grammar, 在 garmmar 中我们可以省略 <code>my</code>。</p>
+<p>如果你花了一分钟或更长的时间来阅读这本正则表达式, 不要担心。这是个需要拆解和理解的地方, 但这将是本书中涉及最多的正则表达式。 <code>my regex quoted {…​}</code> 构造声明一个命名正则表达式作为词法变量。稍后, 我们将学习 grammar, 在 garmmar 中我们可以省略 <code>my</code>。</p>
 </div>
 </div>
 </div>
@@ -2905,24 +2799,24 @@ say '"a,b","' ~~ / ^ \" &lt;-["]&gt;* \" $ /;         # Output: Nil</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my regex quoted {
-    \" # opening quote
+    \&#34; # opening quote
     [
-            &lt;-[ " \\ ]&gt; # regular character
+            &lt;-[ &#34; \\ ]&gt; # regular character
          | \\ .         # escape sequence
     ]*
-    \" # closing quote
+    \&#34; # closing quote
 }
 
 my @should-match =
-    Q&lt;"abc"&gt;,
-    Q&lt;"abc\\"&gt;,
-    Q&lt;"ac\\def\"ef"&gt;,
+    Q&lt;&#34;abc&#34;&gt;,
+    Q&lt;&#34;abc\\&#34;&gt;,
+    Q&lt;&#34;ac\\def\&#34;ef&#34;&gt;,
     ;
 
 my @should-not-match =
     Q&lt;abc&gt;,
-    Q&lt;"abc"def"&gt;,
-    Q&lt;"ab\\"cdef"&gt;,
+    Q&lt;&#34;abc&#34;def&#34;&gt;,
+    Q&lt;&#34;ab\\&#34;cdef&#34;&gt;,
     ;
 
 use Test;
@@ -2930,12 +2824,12 @@ plan 6;
 
 for @should-match -&gt; $s {
     ok $s ~~ / ^ &lt;quoted&gt; $ /,
-        "Successful match of string $s";
+        &#34;Successful match of string $s&#34;;
 }
 
 for @should-not-match -&gt; $s {
     nok $s ~~ / ^ &lt;quoted&gt; $ /,
-        "Successful rejection of string $s";
+        &#34;Successful rejection of string $s&#34;;
 }</code></pre>
 </div>
 </div>
@@ -2958,12 +2852,12 @@ for @should-not-match -&gt; $s {
 <div class="content">
 <pre class="highlight"><code class="language-shell" data-lang="shell">$ raku quotes-with-escapes.p6
 1..6
-ok 1 - Successful match of string "abc"
-ok 2 - Successful match of string "abc\\"
-ok 3 - Successful match of string "ac\\def\"ef"
+ok 1 - Successful match of string &#34;abc&#34;
+ok 2 - Successful match of string &#34;abc\\&#34;
+ok 3 - Successful match of string &#34;ac\\def\&#34;ef&#34;
 ok 4 - Successful rejection of string abc
-ok 5 - Successful rejection of string "abc"def"
-ok 6 - Successful rejection of string "ab\\"cdef"</code></pre>
+ok 5 - Successful rejection of string &#34;abc&#34;def&#34;
+ok 6 - Successful rejection of string &#34;ab\\&#34;cdef&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2973,14 +2867,14 @@ ok 6 - Successful rejection of string "ab\\"cdef"</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-shell" data-lang="shell">$ raku quotes-with-escapes.p6
 1..6
-ok 1 - Successful match of string "abc"
-not ok 2 - Successful match of string "abc\\"a
-# Failed test 'Successful match of string "abc\\"a'
+ok 1 - Successful match of string &#34;abc&#34;
+not ok 2 - Successful match of string &#34;abc\\&#34;a
+# Failed test &#39;Successful match of string &#34;abc\\&#34;a&#39;
 # at quotes-with-escapes.p6 line 26
-ok 3 - Successful match of string "ac\\def\"ef"
+ok 3 - Successful match of string &#34;ac\\def\&#34;ef&#34;
 ok 4 - Successful rejection of string abc
-ok 5 - Successful rejection of string "abc"def"
-ok 6 - Successful rejection of string "ab\\"cdef"
+ok 5 - Successful rejection of string &#34;abc&#34;def&#34;
+ok 6 - Successful rejection of string &#34;ab\\&#34;cdef&#34;
 # Looks like you failed 1 test of 6</code></pre>
 </div>
 </div>
@@ -3004,7 +2898,7 @@ Result: PASS</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-shell" data-lang="shell">$ prove -e raku quotes-with-escapes.p6
 quotes-with-escapes.p6 .. 1/6
-# Failed test 'Successful match of string "abc\\"a'
+# Failed test &#39;Successful match of string &#34;abc\\&#34;a&#39;
 # at quotes-with-escapes.p6 line 26
 # Looks like you failed 1 test of 6
 quotes-with-escapes.p6 .. Dubious, test returned 1 (wstat 256,0x100) Failed 1/6 subtests
@@ -3019,7 +2913,7 @@ Result: FAIL</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>prove</code> 甚至在终端输出中增加了颜色, 绿色表示"所有测试成功", 红色表示"测试失败", 让状态一目了然。</p>
+<p><code>prove</code> 甚至在终端输出中增加了颜色, 绿色表示&#34;所有测试成功&#34;, 红色表示&#34;测试失败&#34;, 让状态一目了然。</p>
 </div>
 <div class="paragraph">
 <p>在最初开发完你的正则表达式之后, 你很可能想用它们来做一些测试以外的事情。在这种情况下, 你可以将测试提取到一个子程序中, 只有当你用一个特殊命令行参数调用你的脚本时才会运行它们, 比如 <code>--test</code>:</p>
@@ -3027,25 +2921,25 @@ Result: FAIL</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my regex quoted {
-    \" # opening quote
+    \&#34; # opening quote
     [
-        &lt;-[ " \\ ]&gt; # regular character
+        &lt;-[ &#34; \\ ]&gt; # regular character
        | \\ .       # escape sequence
     ]*
-    \" # closing quote
+    \&#34; # closing quote
 }
 
 multi sub MAIN(Bool :$test!) {
     my @should-match =
-        Q&lt;"abc"&gt;,
-        Q&lt;"abc\\"&gt;,
-        Q&lt;"ac\\def\"ef"&gt;,
+        Q&lt;&#34;abc&#34;&gt;,
+        Q&lt;&#34;abc\\&#34;&gt;,
+        Q&lt;&#34;ac\\def\&#34;ef&#34;&gt;,
         ;
 
     my @should-not-match =
         Q&lt;abc&gt;,
-        Q&lt;"abc"def"&gt;,
-        Q&lt;"ab\\"cdef"&gt;,
+        Q&lt;&#34;abc&#34;def&#34;&gt;,
+        Q&lt;&#34;ab\\&#34;cdef&#34;&gt;,
         ;
 
     use Test;
@@ -3053,21 +2947,21 @@ multi sub MAIN(Bool :$test!) {
 
     for @should-match -&gt; $s {
         ok $s ~~ / ^ &lt;quoted&gt; $ /,
-            "Successful match of string $s";
+            &#34;Successful match of string $s&#34;;
     }
 
     for @should-not-match -&gt; $s {
         nok $s ~~ / ^ &lt;quoted&gt; $ /,
-            "Successful rejection of string $s";
+            &#34;Successful rejection of string $s&#34;;
     }
 }
 
 multi sub MAIN($input) {
     if $input ~~ / ^ &lt;quoted&gt; $ / {
-        say "$input is a quoted string";
+        say &#34;$input is a quoted string&#34;;
     }
     else {
-        say "invalid input: $input";
+        say &#34;invalid input: $input&#34;;
         exit 1;
     }
 }</code></pre>
@@ -3083,12 +2977,12 @@ multi sub MAIN($input) {
 <div class="content">
 <pre class="highlight"><code class="language-shell" data-lang="shell">$ raku quote-checker --test
 1..6
-ok 1 - Successful match of string "abc"
-ok 2 - Successful match of string "abc\\"
-ok 3 - Successful match of string "ac\\def\"ef"
+ok 1 - Successful match of string &#34;abc&#34;
+ok 2 - Successful match of string &#34;abc\\&#34;
+ok 3 - Successful match of string &#34;ac\\def\&#34;ef&#34;
 ok 4 - Successful rejection of string abc
-ok 5 - Successful rejection of string "abc"def"
-ok 6 - Successful rejection of string "ab\\"cdef"</code></pre>
+ok 5 - Successful rejection of string &#34;abc&#34;def&#34;
+ok 6 - Successful rejection of string &#34;ab\\&#34;cdef&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3096,7 +2990,7 @@ ok 6 - Successful rejection of string "ab\\"cdef"</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">$ prove -e "" "raku quote-checker.p6 --test"
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ prove -e &#34;&#34; &#34;raku quote-checker.p6 --test&#34;
 raku examples/quote-checker.p6 --test .. ok
 All tests successful.
 Files=1, Tests=6,  0 wallclock secs ( 0.01 usr  0.00 sys 0.26 cusr  0.02 csys = 0.29 CPU)
@@ -3105,12 +2999,12 @@ Result: PASS
 </div>
 </div>
 <div class="paragraph">
-<p>第二个候选程序, 用 <code>multi MAIN($input)</code> 声明, 是程序的"正常"执行路径。它需要一个位置参数, 在命令行中是一个不是选项的字符串(所以不以减号(-)字符开头)。它检查参数是否是一个引号字符串, 并打印出相应的信息:</p>
+<p>第二个候选程序, 用 <code>multi MAIN($input)</code> 声明, 是程序的&#34;正常&#34;执行路径。它需要一个位置参数, 在命令行中是一个不是选项的字符串(所以不以减号(-)字符开头)。它检查参数是否是一个引号字符串, 并打印出相应的信息:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku quote-checker '"yes"'
-"yes" is a quoted string
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku quote-checker &#39;&#34;yes&#34;&#39;
+&#34;yes&#34; is a quoted string
 $ raku quote-checker no
 invalid input: no</code></pre>
 </div>
@@ -3154,12 +3048,12 @@ invalid input: no</code></pre>
     &lt;?{ $/.Int &lt;= 255 }&gt;
 }
 
-my $str = '127.0.0.1';
-say $str ~~ / ^ &lt;byte&gt; ** 4 % '.' $ /;</code></pre>
+my $str = &#39;127.0.0.1&#39;;
+say $str ~~ / ^ &lt;byte&gt; ** 4 % &#39;.&#39; $ /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里的 <code>my regex byte { &#8230;&#8203; }</code> 声明了一个名为 <code>byte</code> 的正则表达式。<code>regex</code> 前面的关键字决定了作用域: <code>my</code> 是词法作用域的。 如果省略 <code>my</code> 关键字, 则声明一个附加到 grammar 上的正则表达式。稍后会有更多介绍。</p>
+<p>这里的 <code>my regex byte { …​ }</code> 声明了一个名为 <code>byte</code> 的正则表达式。<code>regex</code> 前面的关键字决定了作用域: <code>my</code> 是词法作用域的。 如果省略 <code>my</code> 关键字, 则声明一个附加到 grammar 上的正则表达式。稍后会有更多介绍。</p>
 </div>
 <div class="paragraph">
 <p>Raku 中的正则表达式是代码对象, 就像子例程或方法一样。就像例程一样, 你可以通过在正则表达式的名字前加上一个 <code>&amp;</code> 符号来引用正则表达式<sup class="footnote">[<a id="_footnoteref_38" class="footnote" href="#_footnotedef_38" title="View footnote.">38</a>]</sup>:</p>
@@ -3175,8 +3069,8 @@ say &amp;byte ~~ Code; # Output: True</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku -e 'my regex a { . }; a("x")'
-No such method '!cursor_start' for invocant of type 'Str'</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ raku -e &#39;my regex a { . }; a(&#34;x&#34;)&#39;
+No such method &#39;!cursor_start&#39; for invocant of type &#39;Str&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3185,7 +3079,7 @@ No such method '!cursor_start' for invocant of type 'Str'</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my regex a { . };
-say "x" ~~ &amp;a; # Output: ⌜x⌟</code></pre>
+say &#34;x&#34; ~~ &amp;a; # Output: ⌜x⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3193,7 +3087,7 @@ say "x" ~~ &amp;a; # Output: ⌜x⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my regex a { . }; "x" ~~ / &lt;a&gt; /;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex a { . }; &#34;x&#34; ~~ / &lt;a&gt; /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3205,9 +3099,9 @@ say "x" ~~ &amp;a; # Output: ⌜x⌟</code></pre>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 8. 调用命名正则表达式的语法形式</caption>
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -3299,12 +3193,12 @@ say "x" ~~ &amp;a; # Output: ⌜x⌟</code></pre>
     \d ** 1..3
     &lt;?{ $/.Int &lt;= 255 }&gt;
 }
-my $str = '127.0.0.1';
-say $str ~~ / ^ &lt;byte&gt; ** 4 % '.' $ /;</code></pre>
+my $str = &#39;127.0.0.1&#39;;
+say $str ~~ / ^ &lt;byte&gt; ** 4 % &#39;.&#39; $ /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>my token byte { &#8230;&#8203; }</code> 的作用与在正则表达式 <code>my regex byte { :r &#8230;&#8203;}</code> 中明确地禁用回溯是一样的。然而, 它的使用频率很高, 以至于它应该有自己的语法。</p>
+<p><code>my token byte { …​ }</code> 的作用与在正则表达式 <code>my regex byte { :r …​}</code> 中明确地禁用回溯是一样的。然而, 它的使用频率很高, 以至于它应该有自己的语法。</p>
 </div>
 <div class="paragraph">
 <p>请注意, 我们有时使用 <code>regex</code> 这个词来指代使用 <code>token</code> 关键字声明的正则表达式。</p>
@@ -3317,7 +3211,7 @@ say $str ~~ / ^ &lt;byte&gt; ** 4 % '.' $ /;</code></pre>
 <p>回到标记化一个简单的数学表达式的例子, 我们忽略了一个重要的细节：输入中包含了 token 之间的空白, 而 token 流之间不包含空白。词法分析通常会丢弃无关紧要的空白。</p>
 </div>
 <div class="paragraph">
-<p>并非所有的空白都是无关紧要的。 你不希望写出 "Hello, World", 并让它变成 Hello, World。 许多语言对空白做了区分, 即 token 之间的空白在 token 之间是无关紧要的, 但 token 内的空白(如引号字符串)是重要的。</p>
+<p>并非所有的空白都是无关紧要的。 你不希望写出 &#34;Hello, World&#34;, 并让它变成 Hello, World。 许多语言对空白做了区分, 即 token 之间的空白在 token 之间是无关紧要的, 但 token 内的空白(如引号字符串)是重要的。</p>
 </div>
 <div class="paragraph">
 <p>然而, 它比这更微妙：在 SQL, Perl, Python, JavaScript 等语言中, 当一个类似于单词的 token 后跟着一个非单词的 token 时, 你可以省略空白, 或者反过来（例如 <code>a+b</code> 和 <code>a + b</code> 是相同的）。 然而, 禁止将两个类似于单词的 token 连接在一起而不留任何空白。 相反, 如果两个 token 之间存在空白, 那么空白的数量就无所谓了。<sup class="footnote">[<a id="_footnoteref_39" class="footnote" href="#_footnotedef_39" title="View footnote.">39</a>]</sup></p>
@@ -3343,7 +3237,7 @@ FROM   account;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Raku 定义了一个名为 <code>ws</code> 的正则表达式, 它是 whitespace 的缩写, 它按照前面的规则解析空白：任意数量的空白(空格、制表符、换行符, &#8230;&#8203;&#8230;&#8203;), 但至少有一个空白, 除非它位于单词边界。或者用代码表示, <code>regex ws { &lt;!ww&gt; \s* }</code>(其中 <code>&lt;!ww&gt;</code> 匹配除了单词内之外的任何地方)<sup class="footnote">[<a id="_footnoteref_40" class="footnote" href="#_footnotedef_40" title="View footnote.">40</a>]</sup>。</p>
+<p>Raku 定义了一个名为 <code>ws</code> 的正则表达式, 它是 whitespace 的缩写, 它按照前面的规则解析空白：任意数量的空白(空格、制表符、换行符, …​…​), 但至少有一个空白, 除非它位于单词边界。或者用代码表示, <code>regex ws { &lt;!ww&gt; \s* }</code>(其中 <code>&lt;!ww&gt;</code> 匹配除了单词内之外的任何地方)<sup class="footnote">[<a id="_footnoteref_40" class="footnote" href="#_footnotedef_40" title="View footnote.">40</a>]</sup>。</p>
 </div>
 <div class="paragraph">
 <p>还有一个快捷方式可以帮助你避免在代码中到处使用显式的 <code>&lt;ws&gt;</code> 或 <code>&lt;.ws&gt;</code> 调用。<sup class="footnote">[<a id="_footnoteref_41" class="footnote" href="#_footnotedef_41" title="View footnote.">41</a>]</sup> 如果使用关键字 <code>rule</code> 而不是 <code>regex</code> 或 <code>token</code> 来声明正则表达式, 那么 Raku 会在你的正则表达式中使用空格的地方插入隐式的 <code>&lt;.ws&gt;</code> 调用。这与在正则表达式中使用 <code>:sigspace</code> 或 <code>:s</code> 修饰符具有相同的效果。</p>
@@ -3357,10 +3251,10 @@ FROM   account;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my token number { \d+ }
-my rule  sum    { &lt;number&gt; '+' &lt;number&gt; }
+my rule  sum    { &lt;number&gt; &#39;+&#39; &lt;number&gt; }
 
-say '1+2'   ~~ / ^ &lt;sum&gt; $ /;
-say '1 + 2' ~~ / ^ &lt;sum&gt; $ /;</code></pre>
+say &#39;1+2&#39;   ~~ / ^ &lt;sum&gt; $ /;
+say &#39;1 + 2&#39; ~~ / ^ &lt;sum&gt; $ /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3368,7 +3262,7 @@ say '1 + 2' ~~ / ^ &lt;sum&gt; $ /;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">token sum { &lt;number&gt; &lt;.ws&gt; '+' &lt;.ws&gt; &lt;number&gt; &lt;.ws&gt; },</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">token sum { &lt;number&gt; &lt;.ws&gt; &#39;+&#39; &lt;.ws&gt; &lt;number&gt; &lt;.ws&gt; },</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3394,8 +3288,8 @@ say '1 + 2' ~~ / ^ &lt;sum&gt; $ /;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "a a" ~~ rule { a+ }
-say "a a" ~~ rule { a + }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;a a&#34; ~~ rule { a+ }
+say &#34;a a&#34; ~~ rule { a + }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3411,7 +3305,7 @@ say "a a" ~~ rule { a + }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say 'ab' ~~ rule { a b } # Output: Nil</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;ab&#39; ~~ rule { a b } # Output: Nil</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3435,13 +3329,13 @@ say "a a" ~~ rule { a + }</code></pre>
     }
 
     token TOP {
-        &lt;byte&gt; ** 4 % '.'
+        &lt;byte&gt; ** 4 % &#39;.&#39;
     }
 }
 
-my $str = '127.0.0.1';
+my $str = &#39;127.0.0.1&#39;;
 if IPv4Address.parse($str) {
-    say join ', ', $&lt;byte&gt;.list;
+    say join &#39;, &#39;, $&lt;byte&gt;.list;
         # Output: 127, 0, 0, 1
 }</code></pre>
 </div>
@@ -3488,22 +3382,22 @@ say IPv4Address.parse($str, :rule&lt;byte&gt;);           # Output: Nil</code></
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">grammar StandardSQL {
     regex TOP {
-        'SELECT' \s+ &lt;name&gt;
+        &#39;SELECT&#39; \s+ &lt;name&gt;
     }
     regex name {
           &lt;identifier&gt;
         | &lt;quoted_name&gt;
     }
     regex quoted_name {
-        \" &lt;-["]&gt;+ \"
+        \&#34; &lt;-[&#34;]&gt;+ \&#34;
     }
     regex identifier {
         « &lt;:alpha&gt; \w* »
     }
 }
 
-say StandardSQL.parse('SELECT salary');
-say StandardSQL.parse('SELECT "monthly salary"');</code></pre>
+say StandardSQL.parse(&#39;SELECT salary&#39;);
+say StandardSQL.parse(&#39;SELECT &#34;monthly salary&#34;&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3514,9 +3408,9 @@ say StandardSQL.parse('SELECT "monthly salary"');</code></pre>
 <pre class="highlight"><code class="language-txt" data-lang="txt">⌜SELECT salary⌟
   name =&gt; ⌜salary⌟
    identifier =&gt; ⌜salary⌟
-⌜SELECT "monthly salary"⌟
- name =&gt; ⌜"monthly salary"⌟
-  quoted_name =&gt; ⌜"monthly salary"⌟</code></pre>
+⌜SELECT &#34;monthly salary&#34;⌟
+ name =&gt; ⌜&#34;monthly salary&#34;⌟
+  quoted_name =&gt; ⌜&#34;monthly salary&#34;⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3529,11 +3423,11 @@ say StandardSQL.parse('SELECT "monthly salary"');</code></pre>
         \` &lt;-[`]&gt;+ \`
     }
 }
-say MysqlSQL.parse('SELECT `monthly salary`');</code></pre>
+say MysqlSQL.parse(&#39;SELECT `monthly salary`&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这里 grammar 声明中的文本 "is StandardSQL" 定义了从 <code>StandardSQL</code> grammar 中继承。继承意味着, 如果在子类中调用一个正则表达式或方法, 而在子类中没有定义, 则会调用父类中同名的方法。</p>
+<p>这里 grammar 声明中的文本 &#34;is StandardSQL&#34; 定义了从 <code>StandardSQL</code> grammar 中继承。继承意味着, 如果在子类中调用一个正则表达式或方法, 而在子类中没有定义, 则会调用父类中同名的方法。</p>
 </div>
 </div>
 <div class="sect3">
@@ -3548,7 +3442,7 @@ say MysqlSQL.parse('SELECT `monthly salary`');</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">role ParseInteger {
     token unsigned { &lt;[0..9]&gt;+ }
-    token signed   { ['+' | '-']? &lt;unsigned&gt; }
+    token signed   { [&#39;+&#39; | &#39;-&#39;]? &lt;unsigned&gt; }
 }
 
 role ParseFloat does ParseInteger {
@@ -3556,7 +3450,7 @@ role ParseFloat does ParseInteger {
     token float {
         $&lt;sign&gt;=&lt;[+-]&gt;?
         [
-          $&lt;coeff&gt; = [ &lt;[0..9]&gt;* '.' &lt;unsigned&gt; ] &lt;escale&gt;?
+          $&lt;coeff&gt; = [ &lt;[0..9]&gt;* &#39;.&#39; &lt;unsigned&gt; ] &lt;escale&gt;?
         | $&lt;coeff&gt; = [               &lt;unsigned&gt; ] &lt;escale&gt;
         ]
     }
@@ -3564,7 +3458,7 @@ role ParseFloat does ParseInteger {
 
 grammar Sum does ParseFloat {
     token number { &lt;signed&gt; | &lt;float&gt; }
-    rule TOP { &lt;number&gt; '+' &lt;number&gt; }
+    rule TOP { &lt;number&gt; &#39;+&#39; &lt;number&gt; }
 }
 
 grammar JSON does ParseFloat {
@@ -3576,7 +3470,7 @@ grammar JSON does ParseFloat {
     # rest of the grammar here
 }
 
-say Sum.parse('2 + -4');</code></pre>
+say Sum.parse(&#39;2 + -4&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3600,9 +3494,9 @@ say Sum.parse('2 + -4');</code></pre>
         | &lt;number&gt;
         | &lt;object&gt;
         | &lt;array&gt;
-        | 'true'
-        | 'false'
-        | 'null'
+        | &#39;true&#39;
+        | &#39;false&#39;
+        | &#39;null&#39;
     }
     # more tokens and rules go here
 }</code></pre>
@@ -3638,7 +3532,7 @@ say Sum.parse('2 + -4');</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">token value:sym&lt;number&gt; {
-    '-'?
+    &#39;-&#39;?
     [ 0 | &lt;[1..9]&gt; &lt;[0..9]&gt;* ]
     [ \. &lt;[0..9]&gt;+ ]?
     [ &lt;[eE]&gt; [\+|\-]? &lt;[0..9]&gt;+ ]?
@@ -3646,11 +3540,11 @@ say Sum.parse('2 + -4');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在每个单独候选项中, <code>:sym&lt;&#8230;&#8203;&gt;</code> 里面的名字可用作特殊符号 <code>&lt;sym&gt;</code> 使用。所以不要写成:</p>
+<p>在每个单独候选项中, <code>:sym&lt;…​&gt;</code> 里面的名字可用作特殊符号 <code>&lt;sym&gt;</code> 使用。所以不要写成:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">token value:sym&lt;null&gt; { 'null' }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">token value:sym&lt;null&gt; { &#39;null&#39; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3685,7 +3579,7 @@ say Sum.parse('2 + -4');</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">role DateValue {
 token value:sym&lt;date&gt; {
-        &lt;[0..9]&gt;**4 '-' &lt;[0..9]&gt;**2 '-' &lt;[0..9]&gt;**2
+        &lt;[0..9]&gt;**4 &#39;-&#39; &lt;[0..9]&gt;**2 &#39;-&#39; &lt;[0..9]&gt;**2
     }
 }</code></pre>
 </div>
@@ -3701,7 +3595,7 @@ token value:sym&lt;date&gt; {
 <pre class="highlight"><code class="language-raku" data-lang="raku">grammar JSONValueWithDate is JSONValue does DateValue { };
 
 for &lt;true null 2015-12-24 42&gt; -&gt; $str {
-    say $str, ': ', ?JSONValueWithDate.parse($str);
+    say $str, &#39;: &#39;, ?JSONValueWithDate.parse($str);
 }</code></pre>
 </div>
 </div>
@@ -3725,7 +3619,7 @@ null: True
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">for &lt;true null 2015-12-24 42&gt; -&gt; $str {
-    say $str, ': ', ?(JSONValue but DateValue).parse($str);
+    say $str, &#39;: &#39;, ?(JSONValue but DateValue).parse($str);
 }</code></pre>
 </div>
 </div>
@@ -3744,7 +3638,7 @@ null: True
 my $grammar = (JSONValue but DateValue) but IntegerValue;
 
 for &lt;true null 2015-12-24 42&gt; -&gt; $str {
-    say $str, ': ', ?$grammar.parse($str);
+    say $str, &#39;: &#39;, ?$grammar.parse($str);
 }</code></pre>
 </div>
 </div>
@@ -3793,14 +3687,14 @@ for &lt;true null 2015-12-24 42&gt; -&gt; $str {
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">grammar MathExpression {
     token TOP    { &lt;sum&gt; }
-    rule sum     { &lt;product&gt;+ % '+' }
-    rule product { &lt;term&gt;+ % '*' }
+    rule sum     { &lt;product&gt;+ % &#39;+&#39; }
+    rule product { &lt;term&gt;+ % &#39;*&#39; }
     rule term    { &lt;number&gt; | &lt;group&gt; }
-    rule group   { '(' &lt;sum&gt; ')' }
+    rule group   { &#39;(&#39; &lt;sum&gt; &#39;)&#39; }
     token number { \d+ }
 }
 
-say MathExpression.parse('2 + 4 * 5 * (1 + 3)');</code></pre>
+say MathExpression.parse(&#39;2 + 4 * 5 * (1 + 3)&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3842,7 +3736,7 @@ say MathExpression.parse('2 + 4 * 5 * (1 + 3)');</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">token number {
     (\d+)
-    { die "how did I get here?" if $0 eq '1' }
+    { die &#34;how did I get here?&#34; if $0 eq &#39;1&#39; }
 }</code></pre>
 </div>
 </div>
@@ -3874,8 +3768,8 @@ say MathExpression.parse('2 + 4 * 5 * (1 + 3)');</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">rule sum { &lt;product&gt;+ % '+' }
-rule product { &lt;term&gt;+ % '*' }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule sum { &lt;product&gt;+ % &#39;+&#39; }
+rule product { &lt;term&gt;+ % &#39;*&#39; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3884,7 +3778,7 @@ rule product { &lt;term&gt;+ % '*' }</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule expression { &lt;operator&gt;+ % &lt;term&gt; }
-token operator { '*' | '+' }</code></pre>
+token operator { &#39;*&#39; | &#39;+&#39; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3910,7 +3804,7 @@ token operator { '*' | '+' }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">token a { &lt;a&gt;? 'a' }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">token a { &lt;a&gt;? &#39;a&#39; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3937,7 +3831,7 @@ VAR2=</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">token assignment {
-    &lt;variable&gt; '=' &lt;string&gt;?
+    &lt;variable&gt; &#39;=&#39; &lt;string&gt;?
 }</code></pre>
 </div>
 </div>
@@ -3967,10 +3861,10 @@ VAR2=</code></pre>
 multi sub MAIN(Bool :$test!) {
     use Test;
     plan 2;
-    ok MathExpression.parse('1234', :rule&lt;number&gt;),
-        '&lt;number&gt; parses 1234';
-    nok MathExpression.parse('1+4', :rule&lt;number&gt;),
-        '&lt;number&gt; does not parse 1+4';
+    ok MathExpression.parse(&#39;1234&#39;, :rule&lt;number&gt;),
+        &#39;&lt;number&gt; parses 1234&#39;;
+    nok MathExpression.parse(&#39;1+4&#39;, :rule&lt;number&gt;),
+        &#39;&lt;number&gt; does not parse 1+4&#39;;
 }</code></pre>
 </div>
 </div>
@@ -3981,22 +3875,22 @@ multi sub MAIN(Bool :$test!) {
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">grammar MathExpression {
     token number { \d+ }
-    rule product { &lt;number&gt;+ % '*' }
+    rule product { &lt;number&gt;+ % &#39;*&#39; }
 }
 
 multi sub MAIN(Bool :$test!) {
     use Test;
     plan 5;
-    ok MathExpression.parse('1234', :rule&lt;number&gt;),
-        '&lt;number&gt; parses 1234';
-    nok MathExpression.parse('1+4', :rule&lt;number&gt;),
-        '&lt;number&gt; does not parse 1+4';
-    ok MathExpression.parse('1234', :rule&lt;product&gt;),
-        '&lt;product&gt; can parse a simple number';
-    ok MathExpression.parse('1*3*4', :rule&lt;product&gt;),
-        '&lt;product&gt; can parse three terms';
-    ok MathExpression.parse('1 * 3', :rule&lt;product&gt;),
-        '&lt;product&gt; and whitespace';
+    ok MathExpression.parse(&#39;1234&#39;, :rule&lt;number&gt;),
+        &#39;&lt;number&gt; parses 1234&#39;;
+    nok MathExpression.parse(&#39;1+4&#39;, :rule&lt;number&gt;),
+        &#39;&lt;number&gt; does not parse 1+4&#39;;
+    ok MathExpression.parse(&#39;1234&#39;, :rule&lt;product&gt;),
+        &#39;&lt;product&gt; can parse a simple number&#39;;
+    ok MathExpression.parse(&#39;1*3*4&#39;, :rule&lt;product&gt;),
+        &#39;&lt;product&gt; can parse three terms&#39;;
+    ok MathExpression.parse(&#39;1 * 3&#39;, :rule&lt;product&gt;),
+        &#39;&lt;product&gt; and whitespace&#39;;
 }</code></pre>
 </div>
 </div>
@@ -4057,8 +3951,8 @@ multi sub MAIN(Bool :$test!) {
                    }
     token toplevel { &lt;keyval&gt;* }
     token sections { &lt;header&gt; &lt;keyval&gt;* }
-    token header   { ^^ \h* '[' ~ ']' $&lt;text&gt;=&lt;-[ \] \n ]&gt;+ \h* &lt;.eol&gt;+ }
-    token keyval   { ^^ \h* &lt;key&gt; \h* '=' \h* &lt;value&gt;? \h* &lt;.eol&gt;+ }
+    token header   { ^^ \h* &#39;[&#39; ~ &#39;]&#39; $&lt;text&gt;=&lt;-[ \] \n ]&gt;+ \h* &lt;.eol&gt;+ }
+    token keyval   { ^^ \h* &lt;key&gt; \h* &#39;=&#39; \h* &lt;value&gt;? \h* &lt;.eol&gt;+ }
     regex key      { &lt;![#\[]&gt; &lt;-[;=]&gt;+ }
     regex value    { [ &lt;![#;]&gt; \N ]+ }
     token eol      { [ &lt;[#;]&gt; \N* ]? \n }
@@ -4105,19 +3999,19 @@ EOF</code></pre>
 <p>让我们逐条看一下输出, 即使它是以一个大块的形式出现。</p>
 </div>
 <div class="paragraph">
-<p>这告诉我们, <code>TOP</code> 调用了 <code>eol</code>, 但匹配失败了。对 <code>eol</code> 的调用使用 <code>*</code> 来量词化, 这不会导致 <code>TOP</code> 的匹配失败。 然后 <code>TOP</code> 调用 <code>key</code>, 匹配文本 "a" value 匹配文本 "b"。然后 <code>eol</code> 正则表达式继续匹配换行符, 第二次尝试失败(因为一行中没有两个换行符)。这会导致初始的 <code>keyval</code> token 匹配成功。第二次调用 <code>keyval</code> 匹配很快就成功了(在调用 <code>key</code> 的时候)。然后, token <code>toplevel</code> 的匹配成功进行, 消耗了字符串 "a = b\n"。</p>
+<p>这告诉我们, <code>TOP</code> 调用了 <code>eol</code>, 但匹配失败了。对 <code>eol</code> 的调用使用 <code>*</code> 来量词化, 这不会导致 <code>TOP</code> 的匹配失败。 然后 <code>TOP</code> 调用 <code>key</code>, 匹配文本 &#34;a&#34; value 匹配文本 &#34;b&#34;。然后 <code>eol</code> 正则表达式继续匹配换行符, 第二次尝试失败(因为一行中没有两个换行符)。这会导致初始的 <code>keyval</code> token 匹配成功。第二次调用 <code>keyval</code> 匹配很快就成功了(在调用 <code>key</code> 的时候)。然后, token <code>toplevel</code> 的匹配成功进行, 消耗了字符串 &#34;a = b\n&#34;。</p>
 </div>
 <div class="paragraph">
 <p>到目前为止, 这一切看起来都和预期的一样。现在我们来看看第二大块的输出:</p>
 </div>
 <div class="paragraph">
-<p><code>TOP</code> 接下来调用 <code>section</code>, 其中 token <code>header</code> 成功匹配了字符串 "[foo]\n"。然后, <code>keyval</code> 调用 <code>key</code>, 匹配了整行 "c:d\n"。等等, 这不对劲吧, 我们可能会期望 <code>key</code> 只匹配 c。我当然不会想到它会匹配结尾的换行符。因为输入中没有等号, 导致正则表达式引擎根本不会调用正则表达式 <code>value</code>。但由于 <code>keyval</code> 又是用星 <code>*</code> 量词进行量化, 所提调用的正则表达式部分的匹配成功只是匹配到了标题 "[foo]\n"。</p>
+<p><code>TOP</code> 接下来调用 <code>section</code>, 其中 token <code>header</code> 成功匹配了字符串 &#34;[foo]\n&#34;。然后, <code>keyval</code> 调用 <code>key</code>, 匹配了整行 &#34;c:d\n&#34;。等等, 这不对劲吧, 我们可能会期望 <code>key</code> 只匹配 c。我当然不会想到它会匹配结尾的换行符。因为输入中没有等号, 导致正则表达式引擎根本不会调用正则表达式 <code>value</code>。但由于 <code>keyval</code> 又是用星 <code>*</code> 量词进行量化, 所提调用的正则表达式部分的匹配成功只是匹配到了标题 &#34;[foo]\n&#34;。</p>
 </div>
 <div class="paragraph">
 <p>下面是 <code>Grammar::Tracer</code> 输出的最后一部分:</p>
 </div>
 <div class="paragraph">
-<p>从这里开始就是 FAILs。第二次调用 <code>section</code> 再次尝试解析一个标题, 但它的下一个输入仍然是 "c:d\n", 所以它失败了, 就像 token <code>TOP</code> 中的字符串末尾锚点 <code>$</code> 一样, 方法解析中的整体匹配失败。</p>
+<p>从这里开始就是 FAILs。第二次调用 <code>section</code> 再次尝试解析一个标题, 但它的下一个输入仍然是 &#34;c:d\n&#34;, 所以它失败了, 就像 token <code>TOP</code> 中的字符串末尾锚点 <code>$</code> 一样, 方法解析中的整体匹配失败。</p>
 </div>
 <div class="paragraph">
 <p>所以我们已经知道正则表达式 <code>key</code> 匹配了整行 <code>c:d\n</code>, 但是由于后面没有等号(<code>=</code>), token <code>keyval</code> 无法解析这一行。由于没有其他的正则表达式(特别是没有 <code>header</code>)与之匹配, 这就是匹配失败的地方。</p>
@@ -4149,7 +4043,7 @@ EOF</code></pre>
         &lt;keyvalue&gt;*
     }
     rule header {
-        '[' &lt;-[ \] \n ]&gt;+ ']' &lt;.eol&gt;
+        &#39;[&#39; &lt;-[ \] \n ]&gt;+ &#39;]&#39; &lt;.eol&gt;
     }
     rule keyvalue {
         ^^
@@ -4187,7 +4081,7 @@ password: s3kr1t</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku"># comment parsing for SQL:
-token ws { &lt;!ww&gt; \s* [ '--' \N* \n ]* }
+token ws { &lt;!ww&gt; \s* [ &#39;--&#39; \N* \n ]* }
 
 # comment parsing for INI files:
 token eol { [ [ &lt;[#;]&gt; \N* ]? \n ]+ }</code></pre>
@@ -4235,8 +4129,8 @@ c = a, 5, b</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">grammar VariableLists {
     token TOP        { &lt;statement&gt;* }
-    rule statement   { &lt;identifier&gt; '=' &lt;termlist&gt; \n }
-    rule termlist    { &lt;term&gt; * % ',' }
+    rule statement   { &lt;identifier&gt; &#39;=&#39; &lt;termlist&gt; \n }
+    rule termlist    { &lt;term&gt; * % &#39;,&#39; }
     token term       { &lt;identifier&gt; | &lt;number&gt; }
     token number     { \d+ }
     token identifier { &lt;:alpha&gt; \w* }
@@ -4268,10 +4162,10 @@ b= 2</code></pre>
     rule statement {
         &lt;identifier&gt;
         { %*SYMBOLS{ $&lt;identifier&gt; } = True }
-        '=' &lt;termlist&gt;
+        &#39;=&#39; &lt;termlist&gt;
         \n
     }
-    rule termlist { &lt;term&gt; * % ',' }
+    rule termlist { &lt;term&gt; * % &#39;,&#39; }
     token term { &lt;variable&gt; | &lt;number&gt; }
     token variable {
         &lt;identifier&gt;
@@ -4283,7 +4177,7 @@ b= 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在 token <code>TOP</code> 中, <code>:my %<strong>SYMBOLS</code> 声明了一个变量。正则表达式中的声明以冒号(:)开始, 以分号(;)结束。在这之间, 它们看起来就像 Raku 中的普通声明一样。<code>%sigil</code> 表示变量是一个散列 - 字符串键与值之间的映射。而 <code></strong></code> 使它成为一个动态变量 - 一个不限于当前作用域的变量, 也可以被当前作用域中调用的代码(或者是正则表达式, 也是代码)看到。因为这是一个非常大的作用域, 所以习惯上选择大写字母的变量。</p>
+<p>在 token <code>TOP</code> 中, <code>:my %<strong>SYMBOLS</strong></code><strong> 声明了一个变量。正则表达式中的声明以冒号(:)开始, 以分号(;)结束。在这之间, 它们看起来就像 Raku 中的普通声明一样。<code>%sigil</code> 表示变量是一个散列 - 字符串键与值之间的映射。而 <code></code></strong> 使它成为一个动态变量 - 一个不限于当前作用域的变量, 也可以被当前作用域中调用的代码(或者是正则表达式, 也是代码)看到。因为这是一个非常大的作用域, 所以习惯上选择大写字母的变量。</p>
 </div>
 <div class="paragraph">
 <p>第二部分, 将符号添加到符号表中, 在规则语句中发生。</p>
@@ -4293,13 +4187,13 @@ b= 2</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule statement {
     &lt;identifier&gt;
     { %*SYMBOLS{ $&lt;identifier&gt; } = True }
-    '=' &lt;termlist&gt;
+    &#39;=&#39; &lt;termlist&gt;
     \n
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在花括号里面是普通(非正则表达式)的 Raku 代码, 所以我们可以用它来处理 <code>%*SYMBOLS</code> 这个散列。表达式 <code>$&lt;identifier&gt;</code> 访问变量名称的捕获<sup class="footnote">[<a id="_footnoteref_53" class="footnote" href="#_footnotedef_53" title="View footnote.">53</a>]</sup>。因此, 如果这条规则解析了变量 a, 那么这条语句将 <code>%*SYMBOLS{'a'}</code> 设置为 <code>%*SYMBOLS{'a'}。= True</code>。</p>
+<p>在花括号里面是普通(非正则表达式)的 Raku 代码, 所以我们可以用它来处理 <code>%*SYMBOLS</code> 这个散列。表达式 <code>$&lt;identifier&gt;</code> 访问变量名称的捕获<sup class="footnote">[<a id="_footnoteref_53" class="footnote" href="#_footnotedef_53" title="View footnote.">53</a>]</sup>。因此, 如果这条规则解析了变量 a, 那么这条语句将 <code>%*SYMBOLS{&#39;a&#39;}</code> 设置为 <code>%*SYMBOLS{&#39;a&#39;}。= True</code>。</p>
 </div>
 <div class="paragraph">
 <p>代码块的位置是相关的。把它放在 <code>termlist</code> 调用之前, 意味着在解析 <code>termlist</code> 时已经知道这个变量, 所以它接受像 a = 2, a 这样的输入, 如果我们先调用 <code>termlist</code>, 这样的输入会被拒绝。</p>
@@ -4317,14 +4211,14 @@ token variable {
 </div>
 </div>
 <div class="paragraph">
-<p>你可能还记得在前面的例子中, <code>&lt;?{&#8230;&#8203;}&gt;</code> 执行了一段 Raku 代码, 如果返回的值为 false, 则解析失败。如果 <code>$&lt;identifier&gt;</code> 不在 <code>%*SYMBOLS</code> 中, 就会出现这种情况。这时, token 的非回溯性就很重要了。如果被解析的变量是 abc, 而变量 a 在 <code>%*SYMBOLS</code> 中, 那么回溯将尝试对 <code>&lt;identifier&gt;</code> 进行更短的匹配, 直到匹配到 a, 然后成功。<sup class="footnote">[<a id="_footnoteref_54" class="footnote" href="#_footnotedef_54" title="View footnote.">54</a>]</sup></p>
+<p>你可能还记得在前面的例子中, <code>&lt;?{…​}&gt;</code> 执行了一段 Raku 代码, 如果返回的值为 false, 则解析失败。如果 <code>$&lt;identifier&gt;</code> 不在 <code>%*SYMBOLS</code> 中, 就会出现这种情况。这时, token 的非回溯性就很重要了。如果被解析的变量是 abc, 而变量 a 在 <code>%*SYMBOLS</code> 中, 那么回溯将尝试对 <code>&lt;identifier&gt;</code> 进行更短的匹配, 直到匹配到 a, 然后成功。<sup class="footnote">[<a id="_footnoteref_54" class="footnote" href="#_footnotedef_54" title="View footnote.">54</a>]</sup></p>
 </div>
 <div class="paragraph">
 <p>因为 <code>%*SYMBOLS</code> 是在 token <code>TOP</code> 中声明的, 所以当你尝试从 grammar 之外调用 <code>TOP</code> 以外的规则时, 你必须重复这个声明。如果没有像 <code>my %*SYMBOLS;</code> 这样的声明, 那么像:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">VariableLists.parse('abc', rule =&gt; 'variable');</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">VariableLists.parse(&#39;abc&#39;, rule =&gt; &#39;variable&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4388,16 +4282,16 @@ c = a, 5, b</code></pre>
     rule declaration {
         &lt;identifier&gt;
         { %*SYMBOLS{ $&lt;identifier&gt; } = True; }
-        '=' &lt;termlist&gt;
+        &#39;=&#39; &lt;termlist&gt;
         \n
     }
     rule block {
         :my %*SYMBOLS = CALLERS::&lt;%*SYMBOLS&gt;;
-        '{' \n*
+        &#39;{&#39; \n*
             &lt;statement&gt;*
-        '}' \n*
+        &#39;}&#39; \n*
     }
-    rule termlist { &lt;term&gt; * % ',' }
+    rule termlist { &lt;term&gt; * % &#39;,&#39; }
     token term { &lt;variable&gt; | &lt;number&gt; }
     token variable {
         &lt;identifier&gt;
@@ -4427,7 +4321,7 @@ c = a, 5, b</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在前两行之后, <code>%*SYMBOLS</code> 的值为 {a =&gt; True, b =&gt; True}。当规则块解析第三行的开头的大括号时, 它创建了一个 <code>%*SYMBOLS</code> 的副本。第四行的 <code>c</code> 的声明将 <code>c &#8658; True</code> 插入到 <code>%*SYMBOLS</code> 的副本中。在规则块解析了最后一行的结尾大括号之后, 它成功地退出了, <code>%*SYMBOLS</code> 的副本也退出了作用域。这样, 我们就剩下了早期版本的 <code>%*SYMBOLS</code> (只有键 a 和 b), 当 <code>TOP</code> 退出时, 它就会超出作用域。</p>
+<p>在前两行之后, <code>%*SYMBOLS</code> 的值为 {a =&gt; True, b =&gt; True}。当规则块解析第三行的开头的大括号时, 它创建了一个 <code>%*SYMBOLS</code> 的副本。第四行的 <code>c</code> 的声明将 <code>c ⇒ True</code> 插入到 <code>%*SYMBOLS</code> 的副本中。在规则块解析了最后一行的结尾大括号之后, 它成功地退出了, <code>%*SYMBOLS</code> 的副本也退出了作用域。这样, 我们就剩下了早期版本的 <code>%*SYMBOLS</code> (只有键 a 和 b), 当 <code>TOP</code> 退出时, 它就会超出作用域。</p>
 </div>
 </div>
 <div class="sect3">
@@ -4472,17 +4366,17 @@ grammar VariableLists {
     rule declaration {
         &lt;identifier&gt;
         { $*ST.declare( $&lt;identifier&gt; ) }
-        '=' &lt;termlist&gt;
+        &#39;=&#39; &lt;termlist&gt;
         \n
     }
     rule block {
-        '{' \n*
+        &#39;{&#39; \n*
             { $*ST.enter-scope() }
             &lt;statement&gt;*
             { $*ST.leave-scope() }
-        '}' \n*
+        &#39;}&#39; \n*
     }
-    rule termlist { &lt;term&gt; * % ',' }
+    rule termlist { &lt;term&gt; * % &#39;,&#39; }
     token term { &lt;variable&gt; | &lt;number&gt; }
     token variable {
          &lt;identifier&gt;
@@ -4513,9 +4407,9 @@ grammar VariableLists {
 }
 
 rule block_wrapped {
-    '{' \n*
+    &#39;{&#39; \n*
         &lt;statement&gt;*
-    '}' \n*
+    &#39;}&#39; \n*
 }</code></pre>
 </div>
 </div>
@@ -4572,8 +4466,8 @@ rule block_wrapped {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">if 'abc' ~~ /\w/ {
-    $/.make({'a' =&gt; 'bc'});
+<pre class="highlight"><code class="language-raku" data-lang="raku">if &#39;abc&#39; ~~ /\w/ {
+    $/.make({&#39;a&#39; =&gt; &#39;bc&#39;});
     say $/.made;      # Output: {a =&gt; bc}
 }</code></pre>
 </div>
@@ -4583,8 +4477,8 @@ rule block_wrapped {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">if 'abc' ~~ /\w/ {
-    make {'a' =&gt; 'bc'};
+<pre class="highlight"><code class="language-raku" data-lang="raku">if &#39;abc&#39; ~~ /\w/ {
+    make {&#39;a&#39; =&gt; &#39;bc&#39;};
     say $/.made;     # Output: {a =&gt; bc}
 }</code></pre>
 </div>
@@ -4593,7 +4487,7 @@ rule block_wrapped {
 <p>你大概可以看到这一点: 你可以构建一个数据结构, 它将成为最终 AST 的一部分, 然后用 <code>make</code> 将其附加到匹配对象上。</p>
 </div>
 <div class="paragraph">
-<p>你要在哪里做呢? 一个选择是内联代码对象, <code>{ &#8230;&#8203; }</code>, 但这将 grammar 与 AST 生成代码紧密地耦合在一起。这就是第二个特性的用武之地: action 对象。</p>
+<p>你要在哪里做呢? 一个选择是内联代码对象, <code>{ …​ }</code>, 但这将 grammar 与 AST 生成代码紧密地耦合在一起。这就是第二个特性的用武之地: action 对象。</p>
 </div>
 <div class="paragraph">
 <p>action 对象是你传递给 grammar 上的 <code>.parse</code> 或 <code>.subparse</code> 调用的对象。从此以后, 每当一个命名正则表达式成功匹配时, 正则表达式引擎为你调用一个方法; 它搜索和该正则表达式同名的方法, 如果存在同名方法, 就用匹配对象作为参数调用它。 如果这样的方法不存在, 则不会发生任何事情, 也不会产生错误。</p>
@@ -4605,10 +4499,10 @@ rule block_wrapped {
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">grammar MathExpression {
     token TOP    { &lt;sum&gt; }
-    rule sum     { &lt;product&gt;+ % '+' }
-    rule product { &lt;term&gt;+ % '*' }
+    rule sum     { &lt;product&gt;+ % &#39;+&#39; }
+    rule product { &lt;term&gt;+ % &#39;*&#39; }
     rule term    { &lt;number&gt; | &lt;group&gt; }
-    rule group   { '(' &lt;sum&gt; ')' }
+    rule group   { &#39;(&#39; &lt;sum&gt; &#39;)&#39; }
     token number { \d+ }
 }
 
@@ -4634,7 +4528,7 @@ class MathEvalAction {
 }
 
 my $match = MathExpression.parse(
-    '4 + 5 * (1 + 3)',
+    &#39;4 + 5 * (1 + 3)&#39;,
     actions =&gt; MathEvalAction.new,
 );
 
@@ -4657,7 +4551,7 @@ say $match.made;       # Output: 24</code></pre>
 <p>规则 <code>product</code> 解析由星号分隔的项的列表。同名的 action 方法取每个项的附加值, 并将它们相乘。<code>$&lt;term&gt;».made</code> 中的 <code>».</code> 语法在列表 <code>$&lt;term&gt;</code> 的每个元素上调用 <code>made</code> 方法, 并返回一个包含所有结果的列表。如果你无法用键盘打出 <code>»</code> 字符, 可以改用 <code>&gt;&gt;</code>, 这样这就变成了 <code>$&lt;term&gt;&gt;&gt;.made</code>。</p>
 </div>
 <div class="paragraph">
-<p><code>[<strong>] LIST</code> 在 LIST 的每个元素之间插入 <code></strong></code> 运算符, 从而计算出所有这些值的乘积。</p>
+<p><code>[<strong>] LIST</strong></code><strong> 在 LIST 的每个元素之间插入 <code></code></strong> 运算符, 从而计算出所有这些值的乘积。</p>
 </div>
 <div class="paragraph">
 <p>由于规则 <code>sum</code> 和 <code>product</code> 具有相同的结构, 所以它们的 action 方法也是如此。<code>sum</code> 使用 <code>[+]</code> 来创建下一级的匹配对象的所有数字之和。</p>
@@ -4714,7 +4608,7 @@ token value:sym&lt;number&gt; { &lt;number&gt; }</code></pre>
 <p>上一节说明了 action 对象和方法的机制, 它构建一个类似于 AST 的东西, 但它不是树。因为树是解析成功后的最常见结果, 所以我想介绍另一个 action 类, 在解析过程中创建一个抽象的语法树, 同样的 grammar 类在解析过程中会创建一个抽象的语法树。</p>
 </div>
 <div class="paragraph">
-<p>为了省去单独编写一个树类的麻烦, 我们将使用一个嵌套数组来表示树。树的第一个元素是运算符; 其他元素是操作数。因此, 对于表达式 <code>1 + 2 + 3</code>, 结果是 <code>['+', 1, 2, 3]</code>。由于嵌套表达式用嵌套括号表示, 所以我们不需要运算符来表示一组圆括号: 因此, 表达式 <code>2 <strong>(3 + 4)</code> 被表示为 <code>['</strong>', 2, ['+', 3, 4]]</code>。</p>
+<p>为了省去单独编写一个树类的麻烦, 我们将使用一个嵌套数组来表示树。树的第一个元素是运算符; 其他元素是操作数。因此, 对于表达式 <code>1 + 2 + 3</code>, 结果是 <code>[&#39;+&#39;, 1, 2, 3]</code>。由于嵌套表达式用嵌套括号表示, 所以我们不需要运算符来表示一组圆括号: 因此, 表达式 <code>2 <strong>(3 + 4)</strong></code><strong> 被表示为 <code>[&#39;</code></strong><code>&#39;, 2, [&#39;+&#39;, 3, 4]]</code>。</p>
 </div>
 <div class="paragraph">
 <p>让我们来看看 action 类, 以及如何使用它:</p>
@@ -4731,10 +4625,10 @@ token value:sym&lt;number&gt; { &lt;number&gt; }</code></pre>
         make $&lt;sum&gt;.made;
     }
     method sum($/) {
-        make self.reduce('+', $&lt;produce&gt;».made);
+        make self.reduce(&#39;+&#39;, $&lt;produce&gt;».made);
     }
     method product($/) {
-        make self.reduce('*', $&lt;term&gt;».made);
+        make self.reduce(&#39;*&#39;, $&lt;term&gt;».made);
     }
     method term($/) {
         make $/.values[0].made;
@@ -4748,7 +4642,7 @@ token value:sym&lt;number&gt; { &lt;number&gt; }</code></pre>
 }
 
 say $match = MathExpression.parse(
-    '4 + 5 * (1 + 3)',
+    &#39;4 + 5 * (1 + 3)&#39;,
     actions =&gt; MathASTAction.new,
 );
 say $match.made.perl;</code></pre>
@@ -4759,7 +4653,7 @@ say $match.made.perl;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-txt" data-lang="txt">["+", 4, ["*", 5, ["+", 1, 3]]]</code></pre>
+<pre class="highlight"><code class="language-txt" data-lang="txt">[&#34;+&#34;, 4, [&#34;*&#34;, 5, [&#34;+&#34;, 1, 3]]]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4773,21 +4667,21 @@ say $match.made.perl;</code></pre>
 }
 
 method product($/) {
-    make self.reduce('*', $&lt;term&gt;».made);
+    make self.reduce(&#39;*&#39;, $&lt;term&gt;».made);
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果我们只使用 <code>make ['<strong>', |$&lt;term&gt;».made]</code> 作为 <code>product</code> 方法的主体, 那么 <code>1 + 2</code> 的 AST 会以 <code>['+', ['</strong>', 1], ['*', 2]]</code> 的形式出现, 因为每个 <code>sum</code> 都解析一个 <code>product</code> 表达式。我们不希望出现额外的单元素乘法, 所以我们做了一个特殊情况。如果只解析了一个项, 那么只返回该项。否则, 返回一个由运算符组成的数组, 然后返回所有项的 AST。</p>
+<p>如果我们只使用 <code>make [&#39;<strong>&#39;, |$&lt;term&gt;».made]</strong></code><strong> 作为 <code>product</code> 方法的主体, 那么 <code>1 + 2</code> 的 AST 会以 <code>[&#39;+&#39;, [&#39;</code></strong><code>&#39;, 1], [&#39;*&#39;, 2]]</code> 的形式出现, 因为每个 <code>sum</code> 都解析一个 <code>product</code> 表达式。我们不希望出现额外的单元素乘法, 所以我们做了一个特殊情况。如果只解析了一个项, 那么只返回该项。否则, 返回一个由运算符组成的数组, 然后返回所有项的 AST。</p>
 </div>
 <div class="paragraph">
-<p>由于这种特殊情况使用了两次(对于 <code>sum</code> 和 <code>product</code>), 所以将其分解成一个方法是有意义的, 我称这个方法为 <code>reduce</code>。<code>reduce</code> 方法使用语法 <code>[$op, |@list]</code> 来创建一个数组 <code>$op</code> 与 <code>@list</code> 的元素相连接。<code>|</code> 扁平化 <code>@list</code>; 如果我们不使用它, 结果将是 <code>['+', [1, 2]]</code> 而不是 <code>['+', 1, 2]</code>。</p>
+<p>由于这种特殊情况使用了两次(对于 <code>sum</code> 和 <code>product</code>), 所以将其分解成一个方法是有意义的, 我称这个方法为 <code>reduce</code>。<code>reduce</code> 方法使用语法 <code>[$op, |@list]</code> 来创建一个数组 <code>$op</code> 与 <code>@list</code> 的元素相连接。<code>|</code> 扁平化 <code>@list</code>; 如果我们不使用它, 结果将是 <code>[&#39;+&#39;, [1, 2]]</code> 而不是 <code>[&#39;+&#39;, 1, 2]</code>。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_在_action_对象中保存状态">10.3. 在 Action 对象中保存状态</h3>
 <div class="paragraph">
-<p>上一节中的 action 类是一个方法的集合, 但他们并不保留任何状态。可以说, 它们不是"真正的"对象。实际上, 我们可以把 action 类上的 <code>.new</code> 调用移除, 直接把类传递给 grammar, 这样例子就可以像以前一样工作了。状态是正在构建的 AST, 它存储在匹配对象的 <code>.made</code> 属性中。</p>
+<p>上一节中的 action 类是一个方法的集合, 但他们并不保留任何状态。可以说, 它们不是&#34;真正的&#34;对象。实际上, 我们可以把 action 类上的 <code>.new</code> 调用移除, 直接把类传递给 grammar, 这样例子就可以像以前一样工作了。状态是正在构建的 AST, 它存储在匹配对象的 <code>.made</code> 属性中。</p>
 </div>
 <div class="paragraph">
 <p>这是一种常见的模式, 但不一定要这么做。作为 action 对象的对象是普通的 Raku 对象, 你可以用它做任何你想做的事情。你可以在它们中存储数据, 甚至可以在多次调用 grammar 的 <code>.parse</code> 方法时重用同一个 action 对象。</p>
@@ -4812,8 +4706,8 @@ method product($/) {
 }
 
 grammar VariableAssignment {
-    rule TOP         { \s* &lt;identifier&gt; '=' &lt;termlist&gt; }
-    rule termlist    { &lt;term&gt; * % ',' }
+    rule TOP         { \s* &lt;identifier&gt; &#39;=&#39; &lt;termlist&gt; }
+    rule termlist    { &lt;term&gt; * % &#39;,&#39; }
     token term       { &lt;identifier&gt; | &lt;number&gt; }
     token number     { \d+ }
     token identifier { &lt;:alpha&gt; \w* }
@@ -4822,11 +4716,11 @@ grammar VariableAssignment {
 
 my $actions = VariableCollection.new;
 
-my @lines = 'a = 1', 'c = a, 5, b', 'b = 2';
+my @lines = &#39;a = 1&#39;, &#39;c = a, 5, b&#39;, &#39;b = 2&#39;;
 
 for @lines -&gt; $line {
     unless VariableAssignment.parse($line, :$actions) {
-        die qq[Invalid input: "$line"];
+        die qq[Invalid input: &#34;$line&#34;];
     }
 }
 
@@ -4835,7 +4729,7 @@ say $actions.definitions;
 </div>
 </div>
 <div class="paragraph">
-<p>在这里例子中, <code>has %.define</code> 定义了一个公共属性; 一个附加在对象上的状态, 可以从外部访问。语法: <code>$actions</code> 是 <code>actions &#8658; $actions</code> 的简写。</p>
+<p>在这里例子中, <code>has %.define</code> 定义了一个公共属性; 一个附加在对象上的状态, 可以从外部访问。语法: <code>$actions</code> 是 <code>actions ⇒ $actions</code> 的简写。</p>
 </div>
 <div class="paragraph">
 <p>这种使用有状态的 action 对象和一次一项地解析部分输入的模式对流处理非常有用; 如果你在接收数据时, 需要在收到完整的输入之前访问结果, 或者如果你的系统连续运行, 并且有一个不断的输入流, 那么这种模式非常有用。</p>
@@ -4871,7 +4765,7 @@ say $actions.definitions;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">rule  termlist { &lt;term&gt; * % ',' }
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule  termlist { &lt;term&gt; * % &#39;,&#39; }
 token term     { &lt;identifier&gt; | &lt;number&gt; }</code></pre>
 </div>
 </div>
@@ -4879,7 +4773,7 @@ token term     { &lt;identifier&gt; | &lt;number&gt; }</code></pre>
 <p>假设这与字符串 <strong>1,a</strong> 相匹配, token <code>term</code> 首先尝试将 <code>identifier</code> 和 <code>number</code> 与字符串匹配。<code>identifier</code> 正则表达式匹配失败了, 但是 <code>number</code> 匹配成功了。然后, <code>termlist</code> 本身匹配了逗号, 再次轮到 <code>term</code>。这一次, <code>identifier</code> 分支成功匹配了字符串 a, <code>number</code> 匹配失败了。最后, <code>termlist</code> 尝试匹配下一个逗号, 也失败了, 但整个 <code>termlist</code> 匹配成功。</p>
 </div>
 <div class="paragraph">
-<p>在这个例子中, 我们已经看到了三个失败的匹配作为成功匹配的一部分。那么这样的"正常"失败的匹配与致命性地导致整个解析失败的匹配有什么区别呢？</p>
+<p>在这个例子中, 我们已经看到了三个失败的匹配作为成功匹配的一部分。那么这样的&#34;正常&#34;失败的匹配与致命性地导致整个解析失败的匹配有什么区别呢？</p>
 </div>
 <div class="paragraph">
 <p>从技术上讲, 一个致命的失败的正则表达式是指失败后一直向上传播到 <code>TOP</code> 的正则表达式。但这并不能帮助我们创建出好的错误信息。当它失败时, 我们还不知道它是否会一直向上传播。而一旦它传播到 <code>regex TOP</code>, 就来不及从失败的匹配中提取有用的信息了。</p>
@@ -4896,13 +4790,13 @@ token term     { &lt;identifier&gt; | &lt;number&gt; }</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule group {
-    '(' &lt;sum&gt;
-    [')' || { die "Cannot find closing ')'" } ]
+    &#39;(&#39; &lt;sum&gt;
+    [&#39;)&#39; || { die &#34;Cannot find closing &#39;)&#39;&#34; } ]
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这个正则表达式试图匹配关闭的括号。如果这样做不成功, 它不是默默地失败, 而是使用一个代码块 <code>{&#8230;&#8203;}</code> 使用内置的 <code>die</code> 函数抛出一个异常。异常会中止解析, 如果解析方法的调用者没有捕捉到异常, 程序会退出, 并返回一个匹配不成功的返回代码。为了成为改进错误报告的有效工具, 我们必须将这种模式应用到更多的地方。</p>
+<p>这个正则表达式试图匹配关闭的括号。如果这样做不成功, 它不是默默地失败, 而是使用一个代码块 <code>{…​}</code> 使用内置的 <code>die</code> 函数抛出一个异常。异常会中止解析, 如果解析方法的调用者没有捕捉到异常, 程序会退出, 并返回一个匹配不成功的返回代码。为了成为改进错误报告的有效工具, 我们必须将这种模式应用到更多的地方。</p>
 </div>
 <div class="paragraph">
 <p>只在最琐碎的输入中描述错误就足够了。在任何多行输入中, 我们需要指出错误的位置；否则, 用户将很难修复问题。</p>
@@ -4914,12 +4808,12 @@ token term     { &lt;identifier&gt; | &lt;number&gt; }</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">grammar MathExpression {
     token TOP           { &lt;sum&gt; }
-    rule sum            { &lt;multiplication&gt;+ % '+' }
-    rule multiplication { &lt;term&gt;+ % '*' }
+    rule sum            { &lt;multiplication&gt;+ % &#39;+&#39; }
+    rule multiplication { &lt;term&gt;+ % &#39;*&#39; }
     rule term           { &lt;number&gt; | &lt;group&gt; }
     rule group {
-              '(' &lt;sum&gt;
-            [ ')' || &lt;error("no closing ')'")&gt; ]
+              &#39;(&#39; &lt;sum&gt;
+            [ &#39;)&#39; || &lt;error(&#34;no closing &#39;)&#39;&#34;)&gt; ]
     }
 
     token number        { \d+ }
@@ -4927,12 +4821,12 @@ token term     { &lt;identifier&gt; | &lt;number&gt; }</code></pre>
     method error($msg)  {
         my $parsed = self.target.substr(0, self.pos);
         my $line-no = $parsed.lines.elems;
-        die "Cannot parse mathematical expression: "
-            ~ "$msg at line $line-no";
+        die &#34;Cannot parse mathematical expression: &#34;
+            ~ &#34;$msg at line $line-no&#34;;
     }
 }
 
-say MathExpression.parse("(\n1");</code></pre>
+say MathExpression.parse(&#34;(\n1&#34;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4940,7 +4834,7 @@ say MathExpression.parse("(\n1");</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">[ ')' || {die "Cannot find closing ')'" } ]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">[ &#39;)&#39; || {die &#34;Cannot find closing &#39;)&#39;&#34; } ]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4948,7 +4842,7 @@ say MathExpression.parse("(\n1");</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">[ ')' || &lt;error("no closing ')'")&gt; ]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">[ &#39;)&#39; || &lt;error(&#34;no closing &#39;)&#39;&#34;)&gt; ]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4965,7 +4859,7 @@ say MathExpression.parse("(\n1");</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-txt" data-lang="txt">Cannot parse mathematical expression: no closing ')' at line 2</code></pre>
+<pre class="highlight"><code class="language-txt" data-lang="txt">Cannot parse mathematical expression: no closing &#39;)&#39; at line 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4978,7 +4872,7 @@ say MathExpression.parse("(\n1");</code></pre>
 <p>我们在上一节中看到的 <code>error</code> 方法是一个很好的第一近似法, 但我们可以做的事情还有更多, 以提高它的精度。</p>
 </div>
 <div class="paragraph">
-<p>第一件事很简单。在许多情况下, 一个隐式的 <code>&lt;.ws&gt; ` 调用可以匹配 `[ &lt;something&gt; || &lt;error(&#8230;&#8203;)&gt;]</code> 块之前的空格。在 grammar 中, <code>ws</code> 可以匹配换行, 这可能会把报告的错误位置往下移, 这与我们对错误位置报告的直观理解不符。</p>
+<p>第一件事很简单。在许多情况下, 一个隐式的 <code>&lt;.ws&gt; ` 调用可以匹配 `[ &lt;something&gt; || &lt;error(…​)&gt;]</code> 块之前的空格。在 grammar 中, <code>ws</code> 可以匹配换行, 这可能会把报告的错误位置往下移, 这与我们对错误位置报告的直观理解不符。</p>
 </div>
 <div class="paragraph">
 <p>我们可以通过删除 <code>$parsed</code> 字符串中的尾部空格来弥补这个问题:</p>
@@ -5001,11 +4895,11 @@ say MathExpression.parse("(\n1");</code></pre>
     my $parsed = self.target.substr(0, self.pos)\
                  .trim-trailing;
     my $context = $parsed.substr($parsed.chars - 10 max 0)
-          ~ '⏏' ~ self.target.substr($parsed.chars, 10);
+          ~ &#39;⏏&#39; ~ self.target.substr($parsed.chars, 10);
     my $line-no = $parsed.lines.elems;
-    die "Cannot parse mathematical expression: $msg\n"
-        ~ "at line $line-no, around " ~ $context.perl
-        ~ "\n(error location indicated by ⏏)\n";
+    die &#34;Cannot parse mathematical expression: $msg\n&#34;
+        ~ &#34;at line $line-no, around &#34; ~ $context.perl
+        ~ &#34;\n(error location indicated by ⏏)\n&#34;;
 }</code></pre>
 </div>
 </div>
@@ -5014,16 +4908,16 @@ say MathExpression.parse("(\n1");</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-txt" data-lang="txt">Cannot parse mathematical expression: no closing ')' at line 1, around "(1 + 2⏏"
+<pre class="highlight"><code class="language-txt" data-lang="txt">Cannot parse mathematical expression: no closing &#39;)&#39; at line 1, around &#34;(1 + 2⏏&#34;
 (error location indicated by ⏏)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>或使用输入字符串 "1 + 2 5", 你得到:</p>
+<p>或使用输入字符串 &#34;1 + 2 5&#34;, 你得到:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-txt" data-lang="txt">Cannot parse mathematical expression: no closing ')' at line 1, around "(1 + 2⏏ 5"
+<pre class="highlight"><code class="language-txt" data-lang="txt">Cannot parse mathematical expression: no closing &#39;)&#39; at line 1, around &#34;(1 + 2⏏ 5&#34;
 (error location indicated by ⏏)</code></pre>
 </div>
 </div>
@@ -5031,7 +4925,7 @@ say MathExpression.parse("(\n1");</code></pre>
 <div class="sect2">
 <h3 id="_高水位标记">11.4. 高水位标记</h3>
 <div class="paragraph">
-<p>到目前为止讨论过的技术依赖于手动插入 <code>|| &lt;error(&#8230;&#8203;)&gt;</code> 片段到 grammar 中。如果你想避免这种情况 - 牺牲一点错误信息的清晰度, 你可以使用另一种技术。即使不是这样, 你也可以将它与显式错误报告结合起来使用。</p>
+<p>到目前为止讨论过的技术依赖于手动插入 <code>|| &lt;error(…​)&gt;</code> 片段到 grammar 中。如果你想避免这种情况 - 牺牲一点错误信息的清晰度, 你可以使用另一种技术。即使不是这样, 你也可以将它与显式错误报告结合起来使用。</p>
 </div>
 <div class="paragraph">
 <p>就像每当海平面或河流的水位达到一个新的记录时, 高水位标志就会被推高一点, 我们可以记录下我们的 grammar 达到的最远的位置。我们可以通过一个动态变量来做到这一点, 如果 <code>self.pos</code> 大于变量的当前值, 我们将其设置为 <code>self.pos</code>。这个高水位标志就构成了我们错误位置报告的基础。</p>
@@ -5068,7 +4962,7 @@ say MathExpression.parse("(\n1");</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>签名中的语法 <code>|c</code> 可以捕获所有剩余的参数, 包括命名参数和位置参数。这确保了像 <code>MathExpression.parse($string, rule &#8658; 'multiplication')</code> 这样的调用可以继续工作。<code>callsame</code> 然后将相同的参数传递给原始解析方法。最关键的部分是匹配失败时调用 <code>error</code> 方法。当然, <code>error</code> 方法还需要一些摆弄才能使用 <code>$*HIGHWATER</code> 和 <code>$*LASTRULE</code> 动态变量。</p>
+<p>签名中的语法 <code>|c</code> 可以捕获所有剩余的参数, 包括命名参数和位置参数。这确保了像 <code>MathExpression.parse($string, rule ⇒ &#39;multiplication&#39;)</code> 这样的调用可以继续工作。<code>callsame</code> 然后将相同的参数传递给原始解析方法。最关键的部分是匹配失败时调用 <code>error</code> 方法。当然, <code>error</code> 方法还需要一些摆弄才能使用 <code>$*HIGHWATER</code> 和 <code>$*LASTRULE</code> 动态变量。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5076,9 +4970,9 @@ say MathExpression.parse("(\n1");</code></pre>
     my $parsed = $target.substr(0, $*HIGHWATER)\
                  .trim-trailing;
     my $line-no = $parsed.lines.elems;
-    my $msg = "Cannot parse mathematical expression";
-    $msg ~= "; error in rule $*LASTRULE" if $*LASTRULE;
-    die "$msg at line $line-no";
+    my $msg = &#34;Cannot parse mathematical expression&#34;;
+    $msg ~= &#34;; error in rule $*LASTRULE&#34; if $*LASTRULE;
+    die &#34;$msg at line $line-no&#34;;
 }</code></pre>
 </div>
 </div>
@@ -5086,7 +4980,7 @@ say MathExpression.parse("(\n1");</code></pre>
 <p>这个 <code>error</code> 方法使用 <code>$*HIGHWATER</code> 代替 <code>self.pos</code> 来确定解析失败的位置, 而 <code>$*LASTRULE</code> 则用于报告最后一次解析规则的进展。</p>
 </div>
 <div class="paragraph">
-<p>这里还有一个值得注意的变化：<code>error</code> 方法不是访问 <code>self.target</code>, 而是获取目标字符串作为参数。这是由于 grammar 力学中的一个细节, 我们到目前为止已经略过了。当你调用 <code>SomeGrammar.parse(&#8230;&#8203;)</code> 时, 这是对类型对象 <code>SomeGrammar</code> 的方法调用。但是 grammar 引擎需要在某个地方保留状态, 所以方法 <code>parse</code> 会创建一个 grammar 的实例 - 这与你可以在正则表达式调用的方法内部的 <code>self</code> 中访问的实例是一样的。这个细节很重要, 因为解析完成之后, 方法 <code>parse</code> 才调用 <code>error</code>, 所以实例就没有了。试图调用 <code>self.target</code> 或 <code>self.pos</code> 时, 会死掉, 并打印消息 <strong>Cannot look up attributes in a MathExpression type object</strong>。</p>
+<p>这里还有一个值得注意的变化：<code>error</code> 方法不是访问 <code>self.target</code>, 而是获取目标字符串作为参数。这是由于 grammar 力学中的一个细节, 我们到目前为止已经略过了。当你调用 <code>SomeGrammar.parse(…​)</code> 时, 这是对类型对象 <code>SomeGrammar</code> 的方法调用。但是 grammar 引擎需要在某个地方保留状态, 所以方法 <code>parse</code> 会创建一个 grammar 的实例 - 这与你可以在正则表达式调用的方法内部的 <code>self</code> 中访问的实例是一样的。这个细节很重要, 因为解析完成之后, 方法 <code>parse</code> 才调用 <code>error</code>, 所以实例就没有了。试图调用 <code>self.target</code> 或 <code>self.pos</code> 时, 会死掉, 并打印消息 <strong>Cannot look up attributes in a MathExpression type object</strong>。</p>
 </div>
 <div class="paragraph">
 <p>这种基于高水标的错误报告正确地识别了 <code>1+</code> 为未完成的和, <code>1*</code> 为未完成的乘法, 以及 <code>(1</code> 为不完整的组表达式。</p>
@@ -5100,7 +4994,7 @@ say MathExpression.parse("(\n1");</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">token group {
-    '(' &lt;sum&gt; ')'
+    &#39;(&#39; &lt;sum&gt; &#39;)&#39;
 }</code></pre>
 </div>
 </div>
@@ -5110,7 +5004,7 @@ say MathExpression.parse("(\n1");</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">token group {
-    '(' ~ ')' &lt;sum&gt;
+    &#39;(&#39; ~ &#39;)&#39; &lt;sum&gt;
 }</code></pre>
 </div>
 </div>
@@ -5124,30 +5018,30 @@ say MathExpression.parse("(\n1");</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">grammar MathExpression {
     token TOP           { &lt;sum&gt; }
-    rule sum            { &lt;multiplication&gt;+ % '+' }
-    rule multiplication { &lt;term&gt;+ % '*' }
+    rule sum            { &lt;multiplication&gt;+ % &#39;+&#39; }
+    rule multiplication { &lt;term&gt;+ % &#39;*&#39; }
     rule term           { &lt;number&gt; | &lt;group&gt; }
-    rule group          { '(' ~ ')' &lt;sum&gt; }
+    rule group          { &#39;(&#39; ~ &#39;)&#39; &lt;sum&gt; }
     token number        { \d+ }
 
     method FAILGOAL($goal) {
         my $cleaned = $goal.trim;
-        self.error("No closing $cleaned");
+        self.error(&#34;No closing $cleaned&#34;);
     }
 
     method error($msg) {
         my $parsed = self.target.substr(0, self.pos)\
                      .trim-trailing;
     my $context = $parsed.substr($parsed.chars - 10 max 0)
-        ~ '⏏' ~ self.target.substr($parsed.chars, 10);
+        ~ &#39;⏏&#39; ~ self.target.substr($parsed.chars, 10);
     my $line-no = $parsed.lines.elems;
-    die "Cannot parse mathematical expression: $msg\n"
-         ~ "at line $line-no, around " ~ $context.perl
-         ~ "\n(error location indicated by ⏏)\n";
+    die &#34;Cannot parse mathematical expression: $msg\n&#34;
+         ~ &#34;at line $line-no, around &#34; ~ $context.perl
+         ~ &#34;\n(error location indicated by ⏏)\n&#34;;
     }
 }
 
-MathExpression.parse('(1');</code></pre>
+MathExpression.parse(&#39;(1&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5158,7 +5052,7 @@ MathExpression.parse('(1');</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-txt" data-lang="txt">Cannot parse mathematical expression: No closing ')' at line 1, around "(1⏏"
+<pre class="highlight"><code class="language-txt" data-lang="txt">Cannot parse mathematical expression: No closing &#39;)&#39; at line 1, around &#34;(1⏏&#34;
 (error location indicated by ⏏)</code></pre>
 </div>
 </div>
@@ -5169,7 +5063,7 @@ MathExpression.parse('(1');</code></pre>
 <p>对于哪种类型的项目应该使用哪种错误报告技术, 没有硬性规定。唯一的规则是, 实际使用你的 grammar 的人越多, 你就越应该在错误信息上下功夫。</p>
 </div>
 <div class="paragraph">
-<p>你也可以把所有这些技术结合起来：在你需要的地方使用 <code>[&lt;expected&gt; || &lt;error('&#8230;&#8203;')&gt;]</code> 模式, 在你需要的地方放一个 <code>FAILGOAL</code> 方法, 在你没有明确安装断言的情况下, 使用高水标记技术来获得一个好的错误位置, 以获得更好的错误报告。</p>
+<p>你也可以把所有这些技术结合起来：在你需要的地方使用 <code>[&lt;expected&gt; || &lt;error(&#39;…​&#39;)&gt;]</code> 模式, 在你需要的地方放一个 <code>FAILGOAL</code> 方法, 在你没有明确安装断言的情况下, 使用高水标记技术来获得一个好的错误位置, 以获得更好的错误报告。</p>
 </div>
 <div class="paragraph">
 <p>在本章后面的例子中, 你可能会觉得不适应, 因为在本章后面的例子中, 现在 grammar 的源码有一半以上的内容是专门用来报错的。但我们一开始就使用了一个相当简单的 grammar, 这就人为地缩小了 grammar 的规模。</p>
@@ -5228,7 +5122,7 @@ MathExpression.parse('(1');</code></pre>
 <p>不同的书写系统有几个地方会影响到程序员如何处理文字处理：你不能认为文字实际上是由字母组成的。一般来说，文本分割(将文本分割成单词、句子和其他单位的过程)是针对特定语言的。并非所有语言和书写系统都使用空格来分隔单词，甚至根本就不使用空格来分隔单词。有关更多信息，请参阅 <a href="http://unicode.org/reports/tr29/">Unicode 技术报告中关于文本分割的内容</a><sup class="footnote">[<a id="_footnoteref_64" class="footnote" href="#_footnotedef_64" title="View footnote.">64</a>]</sup>。</p>
 </div>
 <div class="paragraph">
-<p>内置的字符类如 <code>\d</code> 和 <code>\w</code> 可以匹配所有脚本中的字符，而不仅仅是拉丁文脚本。这意味着，如果你使用 <code>\d+</code> 来匹配一个数字，它可以匹配 42 和 ٤٢(这是<a href="https://en.wikipedia.org/wiki/Eastern_Arabic_numerals">东阿拉伯语数字</a><sup class="footnote">[<a id="_footnoteref_65" class="footnote" href="#_footnotedef_65" title="View footnote.">65</a>]</sup>)。虽然这可能会让人感到惊讶，但将字符串 "٤٢" 转换为数字就像我们的"正常"阿拉伯数字一样。</p>
+<p>内置的字符类如 <code>\d</code> 和 <code>\w</code> 可以匹配所有脚本中的字符，而不仅仅是拉丁文脚本。这意味着，如果你使用 <code>\d+</code> 来匹配一个数字，它可以匹配 42 和 ٤٢(这是<a href="https://en.wikipedia.org/wiki/Eastern_Arabic_numerals">东阿拉伯语数字</a><sup class="footnote">[<a id="_footnoteref_65" class="footnote" href="#_footnotedef_65" title="View footnote.">65</a>]</sup>)。虽然这可能会让人感到惊讶，但将字符串 &#34;٤٢&#34; 转换为数字就像我们的&#34;正常&#34;阿拉伯数字一样。</p>
 </div>
 </div>
 <div class="sect2">
@@ -5242,7 +5136,7 @@ MathExpression.parse('(1');</code></pre>
 <div class="sect3">
 <h4 id="_字素簇">12.2.1. 字素簇</h4>
 <div class="paragraph">
-<p>不是每个代码码点都对应于一个完整的字符。有些语言允许基数字与组合字符自由组合。你可能对法语中使用的尖音符和重音符很熟悉，如 "née"(出生)或 "après"(后)。为了与其他传统的编码兼容，é 和 è 字符作为独立的代码点存在，也就是所谓的预组合字符。但它们也可以写成基本字符 e，后面跟着 <strong>COMBINING ACUTE ACCENT</strong> 或 <strong>COMBINING GRAVE ACCENT</strong>。</p>
+<p>不是每个代码码点都对应于一个完整的字符。有些语言允许基数字与组合字符自由组合。你可能对法语中使用的尖音符和重音符很熟悉，如 &#34;née&#34;(出生)或 &#34;après&#34;(后)。为了与其他传统的编码兼容，é 和 è 字符作为独立的代码点存在，也就是所谓的预组合字符。但它们也可以写成基本字符 e，后面跟着 <strong>COMBINING ACUTE ACCENT</strong> 或 <strong>COMBINING GRAVE ACCENT</strong>。</p>
 </div>
 <div class="paragraph">
 <p>在法语中，尖音和重音只作用在几个基础字符上，但在其他书写系统中，这种限制并不适用。例如，在印度次大陆常见的梵文文字中，元音可以写成组合字，应用到辅音基音上。在这种情况下，并非所有可能的基音和组合字符的组合都是作为 Unicode 编码的预组合点存在。</p>
@@ -5255,7 +5149,7 @@ MathExpression.parse('(1');</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "e\c[COMBINING GRAVE ACCENT]".chars; # Output: 1</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;e\c[COMBINING GRAVE ACCENT]&#34;.chars; # Output: 1</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5269,8 +5163,8 @@ MathExpression.parse('(1');</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">if "e\c[COMBINING GRAVE ACCENT]" ~~ / ^ . $ / {
-    say "A single grapheme cluster";
+<pre class="highlight"><code class="language-raku" data-lang="raku">if &#34;e\c[COMBINING GRAVE ACCENT]&#34; ~~ / ^ . $ / {
+    say &#34;A single grapheme cluster&#34;;
 }</code></pre>
 </div>
 </div>
@@ -5278,7 +5172,7 @@ MathExpression.parse('(1');</code></pre>
 <p>当文本被渲染时，无论是为了打印或在屏幕上显示，渲染引擎可以选择将多个字母组组合成单个字形(可以显示的形状)。例如，在英语中，字母 f 和 i 的序列可能会被渲染成一个字形，这是一个包含两个字符的单字形，通常比两个字符分开的字形要窄。</p>
 </div>
 <div class="paragraph">
-<p>要在匹配正则表达式时忽略组合字符，可以使用 <code>:ignoremark</code> 修饰符; 简称为 <code>:m</code>。因此， <code>/:ignoremark uber/</code> 匹配字符串 "über"。当你怀疑用户在输入二进制符号时可能会有问题，但仍然想给他们提供包含这些符号的搜索结果时，这个方法很有用。</p>
+<p>要在匹配正则表达式时忽略组合字符，可以使用 <code>:ignoremark</code> 修饰符; 简称为 <code>:m</code>。因此， <code>/:ignoremark uber/</code> 匹配字符串 &#34;über&#34;。当你怀疑用户在输入二进制符号时可能会有问题，但仍然想给他们提供包含这些符号的搜索结果时，这个方法很有用。</p>
 </div>
 </div>
 <div class="sect3">
@@ -5309,7 +5203,7 @@ MathExpression.parse('(1');</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "a".uniprop; # Output: Ll</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;a&#34;.uniprop; # Output: Ll</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5320,12 +5214,12 @@ MathExpression.parse('(1');</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "a".uniprop('Script');         # Output: Latin
-say "a".uniprop('Block');          # Output: Basic Latin</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;a&#34;.uniprop(&#39;Script&#39;);         # Output: Latin
+say &#34;a&#34;.uniprop(&#39;Block&#39;);          # Output: Basic Latin</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>类别和属性的相同组合可以在一个正则表达式中使用；<code>/&lt;:Block('Basic Latin'&gt;)&gt;/</code> 匹配 "Basic Latin" 块中的任何字符。</p>
+<p>类别和属性的相同组合可以在一个正则表达式中使用；<code>/&lt;:Block(&#39;Basic Latin&#39;&gt;)&gt;/</code> 匹配 &#34;Basic Latin&#34; 块中的任何字符。</p>
 </div>
 <div class="paragraph">
 <p>在字素簇的情况下，<code>uniprop</code> 方法和正则表达式匹配的属性都适用于基础字符，因此,字符串 <code>x\c[COMBINING TILDE]</code> 可以成功地被 <code>&lt;:Letter&gt;</code> 匹配，但不能被 <code>&lt;:Mark&gt;</code> 匹配，因为 <code>&lt;:Mark&gt;</code> 是标识组合标记代码点的类别。</p>
@@ -5373,7 +5267,7 @@ say "a".uniprop('Block');          # Output: Basic Latin</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">["a", "b", ["c", "d"]]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">[&#34;a&#34;, &#34;b&#34;, [&#34;c&#34;, &#34;d&#34;]]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5385,7 +5279,7 @@ say "a".uniprop('Block');          # Output: Basic Latin</code></pre>
 <div class="sect3">
 <h4 id="_解析_s_表达式">13.1.1. 解析 S 表达式</h4>
 <div class="paragraph">
-<p>让我们从解析原子开始。原子可以是一个整数，比如 12345，一个标识符，比如 lisp，或者是一个引号字符串"像这样"。在一个可扩展的 grammar 中，这样的备选列表应该作为一个 <code>proto token</code> 来实现。</p>
+<p>让我们从解析原子开始。原子可以是一个整数，比如 12345，一个标识符，比如 lisp，或者是一个引号字符串&#34;像这样&#34;。在一个可扩展的 grammar 中，这样的备选列表应该作为一个 <code>proto token</code> 来实现。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5396,8 +5290,8 @@ say "a".uniprop('Block');          # Output: Basic Latin</code></pre>
         &lt;[ a..z A..Z 0..9 _ =*: ]&gt;*
     }
     token atom:sym&lt;integer&gt; { &lt;[+-]&gt;? &lt;[0..9]&gt;+           }
-    token atom:sym&lt;string&gt;  { '"' ~ '"' &lt;string_contents&gt; }
-    token string_contents   { [ | &lt;-[\\"]&gt;+ | \\ . ]*     }
+    token atom:sym&lt;string&gt;  { &#39;&#34;&#39; ~ &#39;&#34;&#39; &lt;string_contents&gt; }
+    token string_contents   { [ | &lt;-[\\&#34;]&gt;+ | \\ . ]*     }
 }</code></pre>
 </div>
 </div>
@@ -5419,7 +5313,7 @@ say "a".uniprop('Block');          # Output: Basic Latin</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>解析字符串遵循前面一章中的模式：外面的两个引号和中间的字符串内容。这里的字符串内容是通过一个单独的规则来解析的，以使数据提取更容易。字符串内容包括"常规"允许的字符（除了反斜线或双引号之外的所有字符），或者是一个转义序列：一个反斜线之后是一个单一的任意字符。</p>
+<p>解析字符串遵循前面一章中的模式：外面的两个引号和中间的字符串内容。这里的字符串内容是通过一个单独的规则来解析的，以使数据提取更容易。字符串内容包括&#34;常规&#34;允许的字符（除了反斜线或双引号之外的所有字符），或者是一个转义序列：一个反斜线之后是一个单一的任意字符。</p>
 </div>
 <div class="paragraph">
 <p>你可能已经注意到 Raku 允许你在标识符中使用连字符或减号(<code>-</code>)，我之前在类名 S-Expression 中使用过，但在正则表达式 string_contents 的名称中没有使用。
@@ -5436,21 +5330,21 @@ say "a".uniprop('Block');          # Output: Basic Latin</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">use Test;
 
 my %atoms =
-    integer    =&gt; ('1', '01234', '-23', '+12'),
-    identifier =&gt; ('abc', '=', '*_*'),
-    string     =&gt; ('""', '"abc"', Q'"abc\"def"', Q'"\\"'),
+    integer    =&gt; (&#39;1&#39;, &#39;01234&#39;, &#39;-23&#39;, &#39;+12&#39;),
+    identifier =&gt; (&#39;abc&#39;, &#39;=&#39;, &#39;*_*&#39;),
+    string     =&gt; (&#39;&#34;&#34;&#39;, &#39;&#34;abc&#34;&#39;, Q&#39;&#34;abc\&#34;def&#34;&#39;, Q&#39;&#34;\\&#34;&#39;),
     ;
 
 my %not-atoms =
-    identifier =&gt; ('', '_'),
-    string     =&gt; ('', '"""', Q'"\"',),
+    identifier =&gt; (&#39;&#39;, &#39;_&#39;),
+    string     =&gt; (&#39;&#39;, &#39;&#34;&#34;&#34;&#39;, Q&#39;&#34;\&#34;&#39;,),
     ;
 
 for %atoms.keys.sort -&gt; $atom {
     for %atoms{$atom}.list -&gt; $test {
         ok S-Expression.parse($test,
-            rule =&gt; "atom:sym&lt;$atom&gt;";
-            "Parsing '$test' as atom $atom";
+            rule =&gt; &#34;atom:sym&lt;$atom&gt;&#34;;
+            &#34;Parsing &#39;$test&#39; as atom $atom&#34;;
             ),
     }
 }
@@ -5458,8 +5352,8 @@ for %atoms.keys.sort -&gt; $atom {
 for %not-atoms.keys.sort -&gt; $atom {
     for %not-atoms{$atom}.list -&gt; $test {
         nok try {S-Expression.parse($test,
-            rule =&gt; "atom:sym&lt;$atom&gt;") },
-            "Not parsing '$test' as atom $atom";
+            rule =&gt; &#34;atom:sym&lt;$atom&gt;&#34;) },
+            &#34;Not parsing &#39;$test&#39; as atom $atom&#34;;
     }
 }
 done-testing;</code></pre>
@@ -5469,7 +5363,7 @@ done-testing;</code></pre>
 <p>我们设置了一些原子应该匹配的输入字符串(<code>%atoms</code>)和一些不应该匹配的字符串(<code>%not-atoms</code>)。接下来，我们对这些例子进行迭代，然后用例子字符串和相应的规则调用 <code>S-Expression.parse</code>，并对我们期望被解析的字符串调用 <code>ok</code>，对我们期望不匹配的字符串调用 <code>nok</code>(ok的否定)。</p>
 </div>
 <div class="paragraph">
-<p>对于我们期望解析失败的情况，测试代码将 <code>S-Expression.parse</code> 的调用封装在一个 <code>try {&#8230;&#8203;}</code> 块中。这并不是绝对必要的，因为我们没有高级错误报告功能，不会导致抛出异常。然而，这样的东西可能会在以后添加，我们不应该通过导致测试失败来惩罚未来的改进。</p>
+<p>对于我们期望解析失败的情况，测试代码将 <code>S-Expression.parse</code> 的调用封装在一个 <code>try {…​}</code> 块中。这并不是绝对必要的，因为我们没有高级错误报告功能，不会导致抛出异常。然而，这样的东西可能会在以后添加，我们不应该通过导致测试失败来惩罚未来的改进。</p>
 </div>
 <div class="paragraph">
 <p>最后，测试代码不是在开始时使用通常的 <code>plan NUMBER;</code>，而是在结束时使用 <code>done-testing;</code>。这就减轻了我们自己计算测试的需要，但代价是降低了检测能力，如果我们计划中的任何测试失败了，我们就可以进行检测。</p>
@@ -5480,7 +5374,7 @@ done-testing;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">token expression {
-    '(' ~ ')' [&lt;atom&gt;* % \s+]
+    &#39;(&#39; ~ &#39;)&#39; [&lt;atom&gt;* % \s+]
 }</code></pre>
 </div>
 </div>
@@ -5505,11 +5399,11 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my @tests = '()', '(abc)', ' (abc) ', '( abc )',
-            '(1)', '(+1)', '(-1)', '( () ( ) )';
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @tests = &#39;()&#39;, &#39;(abc)&#39;, &#39; (abc) &#39;, &#39;( abc )&#39;,
+            &#39;(1)&#39;, &#39;(+1)&#39;, &#39;(-1)&#39;, &#39;( () ( ) )&#39;;
 
 for @tests -&gt; $t {
-    ok S-Expression.parse($t), "can parse '$t'";
+    ok S-Expression.parse($t), &#34;can parse &#39;$t&#39;&#34;;
 }</code></pre>
 </div>
 </div>
@@ -5518,8 +5412,8 @@ for @tests -&gt; $t {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">not ok 20 - can parse '( abc )'
-not ok 24 - can parse '( () ( ) )'</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">not ok 20 - can parse &#39;( abc )&#39;
+not ok 24 - can parse &#39;( () ( ) )&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5528,7 +5422,7 @@ not ok 24 - can parse '( () ( ) )'</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">token expression {
-    \s* '(' ~ ')' [\s* &lt;atom&gt;* % \s+ \s*]
+    \s* &#39;(&#39; ~ &#39;)&#39; [\s* &lt;atom&gt;* % \s+ \s*]
 }</code></pre>
 </div>
 </div>
@@ -5540,7 +5434,7 @@ not ok 24 - can parse '( () ( ) )'</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">grammar S-Expression {
     token TOP                  { \s* [&lt;expression&gt; \s*] *    }
     token expression           {
-        \s* '(' ~ ')' [\s* &lt;atom&gt;* % \s+ \s*]
+        \s* &#39;(&#39; ~ &#39;)&#39; [\s* &lt;atom&gt;* % \s+ \s*]
     }
     proto token atom {*}
     token atom:sym&lt;expression&gt; { &lt;expression&gt;                }
@@ -5549,8 +5443,8 @@ not ok 24 - can parse '( () ( ) )'</code></pre>
         &lt;[ a..z A..Z 0..9 _ =*:+- ]&gt;*
     }
     token atom:sym&lt;integer&gt;   { &lt;[+-]&gt;? &lt;[0..9]&gt;+            }
-    token atom:sym&lt;string&gt;    { '"' ~ '"' &lt;string_contents&gt;  }
-    token string_contents     { [ | &lt;-[\\"]&gt;+ | \\ . ]*      }
+    token atom:sym&lt;string&gt;    { &#39;&#34;&#39; ~ &#39;&#34;&#39; &lt;string_contents&gt;  }
+    token string_contents     { [ | &lt;-[\\&#34;]&gt;+ | \\ . ]*      }
 }</code></pre>
 </div>
 </div>
@@ -5561,7 +5455,7 @@ not ok 24 - can parse '( () ( ) )'</code></pre>
 <p>对应于 S 表达式语法的动作类大多是 直截了当。只有两件事与众不同。首先是区分 S 表达式(a)和(“a”)是有用的,  换句话说, 在标识符和带引号的字符串之间。保持这一点 区别, action 类从此类返回一个 Identifier 对象:</p>
 </div>
 <div class="paragraph">
-<p>与 S-表达式 grammar 对应的 action 类大多是直截了当的。只是有两点有点出格。第一个是区分 S-表达式 (a) 和 ("a")，换句话说，就是区分标识符和引号字符串是有用的。为了保持这种区分，action 类从这个类中返回一个 <code>Identifier</code> 对象:</p>
+<p>与 S-表达式 grammar 对应的 action 类大多是直截了当的。只是有两点有点出格。第一个是区分 S-表达式 (a) 和 (&#34;a&#34;)，换句话说，就是区分标识符和引号字符串是有用的。为了保持这种区分，action 类从这个类中返回一个 <code>Identifier</code> 对象:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5579,7 +5473,7 @@ not ok 24 - can parse '( () ( ) )'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>第二个要考虑的问题是如何处理引号字符串中的反斜线字符。在 S-Expression 的实现中似乎有一个共识，即 <code>\\</code> 是一个反斜线，而 <code>\"</code> 是一个双引号字符；但是，反斜线后面有另一个不同的字符，其语义上并没有达成一致。在这里，我们将简单地去掉反斜线，所以 <code>\\</code> 变成 <code>\</code>，<code>\a</code> 变成 a:</p>
+<p>第二个要考虑的问题是如何处理引号字符串中的反斜线字符。在 S-Expression 的实现中似乎有一个共识，即 <code>\\</code> 是一个反斜线，而 <code>\&#34;</code> 是一个双引号字符；但是，反斜线后面有另一个不同的字符，其语义上并没有达成一致。在这里，我们将简单地去掉反斜线，所以 <code>\\</code> 变成 <code>\</code>，<code>\a</code> 变成 a:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5626,14 +5520,14 @@ class S-Actions {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $m = S-Expression.parse(
-    Q'((a "b") 23 "ab \\cd")',
+    Q&#39;((a &#34;b&#34;) 23 &#34;ab \\cd&#34;)&#39;,
     actions =&gt; S-Actions.new,
 );
-ok $m, 'Can parse S-Expression with action method';
+ok $m, &#39;Can parse S-Expression with action method&#39;;
 
 is-deeply $m.made,
-    [[[Identifier.new(str =&gt; "a"), "b"], 23, "ab \\cd"],],
-    "correct data extracted";</code></pre>
+    [[[Identifier.new(str =&gt; &#34;a&#34;), &#34;b&#34;], 23, &#34;ab \\cd&#34;],],
+    &#34;correct data extracted&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5645,7 +5539,7 @@ is-deeply $m.made,
     my $m = S-Expression.parse($input,
         actions =&gt; S-Actions.new);
     unless $m {
-        die "Cannot parse S-Expression";
+        die &#34;Cannot parse S-Expression&#34;;
     }
     return $m.made;
 }</code></pre>
@@ -5703,10 +5597,10 @@ token term:sym&lt;integer&gt; {
     &lt;[+-]&gt;? &lt;[0..9]&gt;+
 }
 rule term:sym&lt;parenthesized&gt; {
-    '(' ~ ')'&lt;expression&gt;
+    &#39;(&#39; ~ &#39;)&#39;&lt;expression&gt;
 }
 rule term:sym&lt;function&gt; {
-    &lt;name=.identifier&gt; '(' ~ ')' &lt;expression&gt;
+    &lt;name=.identifier&gt; &#39;(&#39; ~ &#39;)&#39; &lt;expression&gt;
 }
 token identifier { &lt;[a..z]&gt;+ }</code></pre>
 </div>
@@ -5733,10 +5627,10 @@ grammar MathExpression does Grammar::ErrorReporting {
         &lt;[+-]&gt;? &lt;[0..9]&gt;+
     }
     rule term:sym&lt;parenthesized&gt; {
-        '(' ~ ')' &lt;expression&gt;
+        &#39;(&#39; ~ &#39;)&#39; &lt;expression&gt;
     }
     rule term:sym&lt;function&gt; {
-        &lt;name=.identifier&gt; '(' ~ ')' &lt;expression&gt;
+        &lt;name=.identifier&gt; &#39;(&#39; ~ &#39;)&#39; &lt;expression&gt;
     }
     token identifier { &lt;[a..z]&gt;+ } }</code></pre>
 </div>
@@ -5766,7 +5660,7 @@ grammar MathExpression does Grammar::ErrorReporting {
 </div>
 </div>
 <div class="paragraph">
-<p>现在，我们需要编写一个运算符优先级解析器，将平面数组 <code>[1, '+', 2, '<strong>', 5]</code> 变成一个按优先级分组的树，所以是 <code>[1, '+', [2, '</strong>', 5]</code>, 或者更好的是 <code>['+', 1, ['*', 2, 5]]</code>。</p>
+<p>现在，我们需要编写一个运算符优先级解析器，将平面数组 <code>[1, &#39;+&#39;, 2, &#39;<strong>&#39;, 5]</strong></code><strong> 变成一个按优先级分组的树，所以是 <code>[1, &#39;+&#39;, [2, &#39;</code></strong><code>&#39;, 5]</code>, 或者更好的是 <code>[&#39;+&#39;, 1, [&#39;*&#39;, 2, 5]]</code>。</p>
 </div>
 <div class="paragraph">
 <p>问题的关键是，每当我们第一次看到一个运算符时，我们不知道它相邻的运算符是否真的属于这个运算符（就像 <code>2*5</code> 的情况一样），或者下一个运算符的优先级更高，并且偷了右边的操作数。</p>
@@ -5786,9 +5680,9 @@ grammar MathExpression does Grammar::ErrorReporting {
             @stack.push([$op, $term1, $term2]);
         }
 
-        my %prec = '+' =&gt; 1, '-' =&gt; 1,
-                   '*' =&gt; 2, '/' =&gt; 2,
-                   '**' =&gt; 3;
+        my %prec = &#39;+&#39; =&gt; 1, &#39;-&#39; =&gt; 1,
+                   &#39;*&#39; =&gt; 2, &#39;/&#39; =&gt; 2,
+                   &#39;**&#39; =&gt; 3;
 
         my @stack = @tokens[0];
         for @tokens[1..*] -&gt; $op, $term {
@@ -5808,7 +5702,7 @@ grammar MathExpression does Grammar::ErrorReporting {
 <p>方法 <code>opp-parse</code> 期待一个 token 列表，从一个项目(term)开始，然后是一个中缀运算符，以此类推，其他每一个 token 都是一个运算符。</p>
 </div>
 <div class="paragraph">
-<p>第一个元素是一个子程序 <code>opp-reduce</code>，它实现了简化步骤：从堆栈中取出最后两个项和它们之间的运算符，然后将它们作为数组添加回来。因此，如果堆栈中的元素有 <code>1, '+', 2, '<strong>', 4</code>，那么调用这个函数将其修改为 <code>[1，'+'，['+'，['</strong>'，2，4]]]</code>，第二次调用将其进一步修改为 <code>['+'，1，['*'，2，4]]]</code>。</p>
+<p>第一个元素是一个子程序 <code>opp-reduce</code>，它实现了简化步骤：从堆栈中取出最后两个项和它们之间的运算符，然后将它们作为数组添加回来。因此，如果堆栈中的元素有 <code>1, &#39;+&#39;, 2, &#39;<strong>&#39;, 4</strong></code><strong>，那么调用这个函数将其修改为 <code>[1，&#39;+&#39;，[&#39;+&#39;，[&#39;</code></strong><code>&#39;，2，4]]]</code>，第二次调用将其进一步修改为 <code>[&#39;+&#39;，1，[&#39;*&#39;，2，4]]]</code>。</p>
 </div>
 <div class="paragraph">
 <p><code>%`prec</code> 是一个哈希值，它将每个中缀运算符映射到一个数字优先级，其中较高的数字对应的运算符与参数的绑定更紧密。</p>
@@ -5859,7 +5753,7 @@ method identifier($/) { make $/.Str }</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub parse-math-expression(Str $input) {
     my $match = MathExpression.parse($input,
         actions =&gt; MathActions.new);
-    die "Cannot parse input" unless $match;
+    die &#34;Cannot parse input&#34; unless $match;
     return $match.made;
 }</code></pre>
 </div>
@@ -5872,9 +5766,9 @@ method identifier($/) { make $/.Str }</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">use Test;
 plan 1;
 
-is-deeply parse-math-expression('1 + 2 * 3**4 * 5 + 6'),
-    ["+", ["+", 1, ["*", ["*", 2, ["**", 3, 4]], 5]], 6],
-    'correct parse tree from nested expression';</code></pre>
+is-deeply parse-math-expression(&#39;1 + 2 * 3**4 * 5 + 6&#39;),
+    [&#34;+&#34;, [&#34;+&#34;, 1, [&#34;*&#34;, [&#34;*&#34;, 2, [&#34;**&#34;, 3, 4]], 5]], 6],
+    &#39;correct parse tree from nested expression&#39;;</code></pre>
 </div>
 </div>
 </div>
@@ -5928,7 +5822,7 @@ method infix:sym&lt;**&gt;($/) { make Operator.new(~$&lt;sym&gt;, 3) }
 </div>
 </div>
 <div class="paragraph">
-<p>比较 <code>$op.precedence &#8656; @stack[*-2].precedence</code> 是针对左结合性的运算符的；当你把小于或等于(<code>&#8656;</code>)改为严格的小于(<code>&lt;</code>)时，你会得到右结合性运算符的行为。如果你想更多的探索运算符优先级解析器, 你可以在 <code>Operator</code> 类中添加一个结合属性，给指数运算符以右优先级，并改变比较方式来考虑结合性。表达式 <code>2 <strong> 3 </strong> 4</code> 应该是 <code>['<strong>' 2, ['</strong>', 3, 4]]]</code>。如果你觉得很冒险，你甚至可以尝试在 grammar 和运算符优先级解析器中添加后缀运算符。</p>
+<p>比较 <code>$op.precedence ⇐ @stack[*-2].precedence</code> 是针对左结合性的运算符的；当你把小于或等于(<code>⇐</code>)改为严格的小于(<code>&lt;</code>)时，你会得到右结合性运算符的行为。如果你想更多的探索运算符优先级解析器, 你可以在 <code>Operator</code> 类中添加一个结合属性，给指数运算符以右优先级，并改变比较方式来考虑结合性。表达式 <code>2 <strong> 3 </strong> 4</code> 应该是 <code>[&#39;<strong>&#39; 2, [&#39;</strong>&#39;, 3, 4]]]</code>。如果你觉得很冒险，你甚至可以尝试在 grammar 和运算符优先级解析器中添加后缀运算符。</p>
 </div>
 </div>
 </div>
@@ -5940,9 +5834,9 @@ method infix:sym&lt;**&gt;($/) { make Operator.new(~$&lt;sym&gt;, 3) }
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">if 1 &lt; 2 {
-    say "Inside the branch";
+    say &#34;Inside the branch&#34;;
 }
-say "outside the branch";</code></pre>
+say &#34;outside the branch&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5951,8 +5845,8 @@ say "outside the branch";</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">if 1 &lt; 2:
-    print("Inside the branch")
-print("outside the branch")</code></pre>
+    print(&#34;Inside the branch&#34;)
+print(&#34;outside the branch&#34;)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5996,7 +5890,7 @@ b= 5</code></pre>
     token number     { \d+                    }
     token identifier { &lt;:alpha&gt; \w*           }
     token operator   {
-         &lt;[-+=&lt;&gt;*/,]&gt;| '==' | '&lt;=' | '&gt;=' | '!='
+         &lt;[-+=&lt;&gt;*/,]&gt;| &#39;==&#39; | &#39;&lt;=&#39; | &#39;&gt;=&#39; | &#39;!=&#39;
     }
     # more rules go here later
 }</code></pre>
@@ -6034,8 +5928,8 @@ method handle_indentation($match) {
     my $current = $match.Str.chars;
     my $last = @*INDENTATION[*-1];
     if $current &gt; $last {
-        die "Inconsistent indentation: expected "
-          ~ "at most $last, got $current spaces";
+        die &#34;Inconsistent indentation: expected &#34;
+          ~ &#34;at most $last, got $current spaces&#34;;
     }
     elsif $current &lt; $last {
         my $idx = @*INDENTATION.first(:k, $current);
@@ -6045,7 +5939,7 @@ method handle_indentation($match) {
             }
         }
         else {
-            die "Unexpected indentation level: $current.";
+            die &#34;Unexpected indentation level: $current.&#34;;
         }
     }
 }</code></pre>
@@ -6076,7 +5970,7 @@ method handle_indentation($match) {
 <pre class="highlight"><code class="language-raku" data-lang="raku">grammar Pythonesque {
 my class NEW_INDENTATION { }
 rule statement:sym&lt;if&gt; {
-        'if'  &lt;expression&gt; ':'
+        &#39;if&#39;  &lt;expression&gt; &#39;:&#39;
         { @*INDENTATION.push(NEW_INDENTATION) }
     }
     # rest of the grammar here
@@ -6099,13 +5993,13 @@ method handle_indentation($match) {
             @*INDENTATION[*-1] = $current;
         }
         else {
-            die "Inconsistent indentation: expected "
-              ~ "more than $before, got $current spaces";
+            die &#34;Inconsistent indentation: expected &#34;
+              ~ &#34;more than $before, got $current spaces&#34;;
         }
     }
     elsif $current &gt; $last {
-        die "Inconsistent indentation: expected "
-          ~ "at most $last, got $current spaces";
+        die &#34;Inconsistent indentation: expected &#34;
+          ~ &#34;at most $last, got $current spaces&#34;;
     }
     # rest of the method as before
 }</code></pre>
@@ -6170,7 +6064,7 @@ token TOP {
 <div class="sect3">
 <h4 id="_action_对象_2">13.3.2. Action 对象</h4>
 <div class="paragraph">
-<p>当我第一次为 Pythonesque 写 action 对象时，我把所有的东西都做成了数组：if 语句是一个数组，第一个元素是字符串 "if"，第二个元素是条件，第三个元素是 if 语句的主体。表达式也是数组，所以第二个元素也是一个数组。我很快就把生成的 AST 给弄丢了。</p>
+<p>当我第一次为 Pythonesque 写 action 对象时，我把所有的东西都做成了数组：if 语句是一个数组，第一个元素是字符串 &#34;if&#34;，第二个元素是条件，第三个元素是 if 语句的主体。表达式也是数组，所以第二个元素也是一个数组。我很快就把生成的 AST 给弄丢了。</p>
 </div>
 <div class="paragraph">
 <p>为了解决这个问题，我把表达式保存为数组，但把操作符、变量和 if 语句移到单独的类中。</p>
@@ -6217,7 +6111,7 @@ class If {
 <p>为了使语句的嵌套正确，我们需要维护一个作用域的堆栈。最底层的元素（或索引0，如果以数组的形式实现）是最外层的作用域，最上面的元素（或索引 <code>*-1</code>）对应于当前的作用域。</p>
 </div>
 <div class="paragraph">
-<p>当我们离开一个作用域（除了最外层的作用域，也称为"主线"）时，它属于一个 <code>if</code> 语句，而这个 <code>if</code> 语句是最外层的作用域中最后一个被解析的语句。所以我们需要将当前的作用域去掉堆栈的作用域，并将其设置为 <code>if</code> 语句的主体。</p>
+<p>当我们离开一个作用域（除了最外层的作用域，也称为&#34;主线&#34;）时，它属于一个 <code>if</code> 语句，而这个 <code>if</code> 语句是最外层的作用域中最后一个被解析的语句。所以我们需要将当前的作用域去掉堆栈的作用域，并将其设置为 <code>if</code> 语句的主体。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6273,7 +6167,7 @@ class If {
     $
 
     # leave all open scopes:
-    { self.handle_indentation('') }
+    { self.handle_indentation(&#39;&#39;) }
     &lt;.leave_scope&gt;
 }</code></pre>
 </div>
@@ -6301,7 +6195,7 @@ class If {
 </div>
 </div>
 <div id="footnotes">
-<hr>
+<hr/>
 <div class="footnote" id="_footnotedef_1">
 <a href="#_footnoteref_1">1</a>. <a href="https://en.wikipedia.org/wiki/Regular_language" class="bare">https://en.wikipedia.org/wiki/Regular_language</a>
 </div>
@@ -6309,7 +6203,7 @@ class If {
 <a href="#_footnoteref_2">2</a>. <a href="https://en.wikipedia.org/wiki/Kleene_star" class="bare">https://en.wikipedia.org/wiki/Kleene_star</a>
 </div>
 <div class="footnote" id="_footnotedef_3">
-<a href="#_footnoteref_3">3</a>. 其他编程语言用 "Traits" 一词来表示 Raku 中角色的概念。
+<a href="#_footnoteref_3">3</a>. 其他编程语言用 &#34;Traits&#34; 一词来表示 Raku 中角色的概念。
 </div>
 <div class="footnote" id="_footnotedef_4">
 <a href="#_footnoteref_4">4</a>. <a href="https://github.com/ugexe/zef" class="bare">https://github.com/ugexe/zef</a>

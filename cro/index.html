@@ -8,9 +8,17 @@
 
 <meta name="author" content="ohmyraku">
 <meta name="application-name" content="山川异域, 风月同天">
-<meta name="description" content="Table of Contents 1. Cro 开发工具 1.1. 存根服务 1.2. HTTP 服务 1.3. 运行服务 1.4. 追踪服务 1.5. 服务静态内容 1.6. 使用服务链接 1.7. URI 段匹配 1.8. 请求方法 1.9. 查询字符串,header 和 cookies 1.10. 访问 Cro::HTTP::Request 实例 1.11. 请求体 1.12. 添加自定义请求体解析器 1.13. 生成响应 1.14. 服务静态内容 1.15. 添加自定义响应体序列化器 1.16. 设置响应体缓存能力 1.17. Push 承诺 1.18. 组合路由 1.19. 代理路由到另一个 Cro::Transform 1.20. 在路由块中应用中间件 1.21. 基本示例 1.22. 为服务设置测试 1.23. 编写测试 1.24. 状态 1.25. 内容类型 1.26. 标题 1.27. body-text 1.28. body-blob 1.">
+<meta name="description" content="1. Cro 开发工具 Cro包含帮助开发人员更有效地工作的工具。 当前，这些工具可通过命令行界面使用。 将来还将添加Web界面。 没有这些工具，完全有可能使用Cro。 它们旨在提供一些合理的默认值，但并不适合每个项目。
+ 1.1. 存根服务 可以使用cro stub命令对新服务进行存根。 一般用法是：
+ cro stub &lt;service-type&gt; &lt;service-id&gt; &lt;path&gt; [&#39;links-and-options&#39;]   其中
+ service-type是要创建的服务的类型 service-id是服务的ID（与其他cro命令一起使用；也将在.cro.yml中用作服务的默认描述性名称）
+ 路径是创建服务的位置 links-and-options指定指向应添加到存根的其他服务的链接，以及特定于服务类型的选项
+ 如果未指定链接和选项，则将以交互方式请求它们。 要提供选项，请使用类似于Perl 6冒号对的语法将其放在引号中，其中：foo启用选项，：！foo禁用选项，而：foo &lt;bar&gt;是带有值bar的选项foo。 例如：
+ cro stub http foo services/foo &#39;:!secure :websocket&#39; cro stub http bar services/bar &#39;:!secure :websocket&#39;   已存根的服务从环境变量获取端口和证书配置，并且当服务之间存在关系时，其地址也将使用环境变量注入。 设置容器部署时，这很方便。
+ 链接导致存根服务包含创建可以与另一个端点通信的“客户端”的代码。 这些与选项一起使用，格式为：link &lt;service-id：endpoint-id&gt;。 service-id是目标.cro.yml的id字段，endpoint-id是该.cro.yml文件的终结点列表中条目的id字段。
+ cro stub http foo services/foo &#39;:link&lt;flash-storage:http&gt;&#39;    1.">
 <meta name="robots" content="noodp"/>
-<meta name="generator" content="Hugo 0.63.2" />
+<meta name="generator" content="Hugo 0.79.0" />
 <meta name="referrer" content="no-referrer" />
 <meta name="format-detection" content="telephone=no">
 
@@ -22,7 +30,15 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Cro 入门" />
-<meta name="twitter:description" content="Table of Contents 1. Cro 开发工具 1.1. 存根服务 1.2. HTTP 服务 1.3. 运行服务 1.4. 追踪服务 1.5. 服务静态内容 1.6. 使用服务链接 1.7. URI 段匹配 1.8. 请求方法 1.9. 查询字符串,header 和 cookies 1.10. 访问 Cro::HTTP::Request 实例 1.11. 请求体 1.12. 添加自定义请求体解析器 1.13. 生成响应 1.14. 服务静态内容 1.15. 添加自定义响应体序列化器 1.16. 设置响应体缓存能力 1.17. Push 承诺 1.18. 组合路由 1.19. 代理路由到另一个 Cro::Transform 1.20. 在路由块中应用中间件 1.21. 基本示例 1.22. 为服务设置测试 1.23. 编写测试 1.24. 状态 1.25. 内容类型 1.26. 标题 1.27. body-text 1.28. body-blob 1." />
+<meta name="twitter:description" content="1. Cro 开发工具 Cro包含帮助开发人员更有效地工作的工具。 当前，这些工具可通过命令行界面使用。 将来还将添加Web界面。 没有这些工具，完全有可能使用Cro。 它们旨在提供一些合理的默认值，但并不适合每个项目。
+ 1.1. 存根服务 可以使用cro stub命令对新服务进行存根。 一般用法是：
+ cro stub &lt;service-type&gt; &lt;service-id&gt; &lt;path&gt; [&#39;links-and-options&#39;]   其中
+ service-type是要创建的服务的类型 service-id是服务的ID（与其他cro命令一起使用；也将在.cro.yml中用作服务的默认描述性名称）
+ 路径是创建服务的位置 links-and-options指定指向应添加到存根的其他服务的链接，以及特定于服务类型的选项
+ 如果未指定链接和选项，则将以交互方式请求它们。 要提供选项，请使用类似于Perl 6冒号对的语法将其放在引号中，其中：foo启用选项，：！foo禁用选项，而：foo &lt;bar&gt;是带有值bar的选项foo。 例如：
+ cro stub http foo services/foo &#39;:!secure :websocket&#39; cro stub http bar services/bar &#39;:!secure :websocket&#39;   已存根的服务从环境变量获取端口和证书配置，并且当服务之间存在关系时，其地址也将使用环境变量注入。 设置容器部署时，这很方便。
+ 链接导致存根服务包含创建可以与另一个端点通信的“客户端”的代码。 这些与选项一起使用，格式为：link &lt;service-id：endpoint-id&gt;。 service-id是目标.cro.yml的id字段，endpoint-id是该.cro.yml文件的终结点列表中条目的id字段。
+ cro stub http foo services/foo &#39;:link&lt;flash-storage:http&gt;&#39;    1." />
 <meta name="twitter:site" content="https://ohmyraku.github.io" />
 <meta name="twitter:creator" content="ohmyraku" />
 <meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
@@ -32,7 +48,15 @@
 <meta property="og:title" content="Cro 入门" />
 <meta property="og:url" content="https://ohmyraku.github.io" />
 <meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="Table of Contents 1. Cro 开发工具 1.1. 存根服务 1.2. HTTP 服务 1.3. 运行服务 1.4. 追踪服务 1.5. 服务静态内容 1.6. 使用服务链接 1.7. URI 段匹配 1.8. 请求方法 1.9. 查询字符串,header 和 cookies 1.10. 访问 Cro::HTTP::Request 实例 1.11. 请求体 1.12. 添加自定义请求体解析器 1.13. 生成响应 1.14. 服务静态内容 1.15. 添加自定义响应体序列化器 1.16. 设置响应体缓存能力 1.17. Push 承诺 1.18. 组合路由 1.19. 代理路由到另一个 Cro::Transform 1.20. 在路由块中应用中间件 1.21. 基本示例 1.22. 为服务设置测试 1.23. 编写测试 1.24. 状态 1.25. 内容类型 1.26. 标题 1.27. body-text 1.28. body-blob 1." />
+<meta property="og:description" content="1. Cro 开发工具 Cro包含帮助开发人员更有效地工作的工具。 当前，这些工具可通过命令行界面使用。 将来还将添加Web界面。 没有这些工具，完全有可能使用Cro。 它们旨在提供一些合理的默认值，但并不适合每个项目。
+ 1.1. 存根服务 可以使用cro stub命令对新服务进行存根。 一般用法是：
+ cro stub &lt;service-type&gt; &lt;service-id&gt; &lt;path&gt; [&#39;links-and-options&#39;]   其中
+ service-type是要创建的服务的类型 service-id是服务的ID（与其他cro命令一起使用；也将在.cro.yml中用作服务的默认描述性名称）
+ 路径是创建服务的位置 links-and-options指定指向应添加到存根的其他服务的链接，以及特定于服务类型的选项
+ 如果未指定链接和选项，则将以交互方式请求它们。 要提供选项，请使用类似于Perl 6冒号对的语法将其放在引号中，其中：foo启用选项，：！foo禁用选项，而：foo &lt;bar&gt;是带有值bar的选项foo。 例如：
+ cro stub http foo services/foo &#39;:!secure :websocket&#39; cro stub http bar services/bar &#39;:!secure :websocket&#39;   已存根的服务从环境变量获取端口和证书配置，并且当服务之间存在关系时，其地址也将使用环境变量注入。 设置容器部署时，这很方便。
+ 链接导致存根服务包含创建可以与另一个端点通信的“客户端”的代码。 这些与选项一起使用，格式为：link &lt;service-id：endpoint-id&gt;。 service-id是目标.cro.yml的id字段，endpoint-id是该.cro.yml文件的终结点列表中条目的id字段。
+ cro stub http foo services/foo &#39;:link&lt;flash-storage:http&gt;&#39;    1." />
 <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -44,12 +68,12 @@
       "headline": "Cro 入门",
       
       "datePublished": "2020-02-05",
-      "dateModified": "2020-02-05 15:26:52 \x2b0800 CST",
+      "dateModified": "2020-02-05 15:26:52 \u002b0800 CST",
       "author": {
         "@type": "Person",
         "name": "ohmyraku"
       },
-      "description": "Table of Contents 1. Cro 开发工具 1.1. 存根服务 1.2. HTTP 服务 1.3. 运行服务 1.4. 追踪服务 1.5. 服务静态内容 1.6. 使用服务链接 1.7. URI 段匹配 1.8. 请求方法 1.9. 查询字符串,header 和 cookies 1.10. 访问 Cro::HTTP::Request 实例 1.11. 请求体 1.12. 添加自定义请求体解析器 1.13. 生成响应 1.14. 服务静态内容 1.15. 添加自定义响应体序列化器 1.16. 设置响应体缓存能力 1.17. Push 承诺 1.18. 组合路由 1.19. 代理路由到另一个 Cro::Transform 1.20. 在路由块中应用中间件 1.21. 基本示例 1.22. 为服务设置测试 1.23. 编写测试 1.24. 状态 1.25. 内容类型 1.26. 标题 1.27. body-text 1.28. body-blob 1.",
+      "description": "1. Cro 开发工具 Cro包含帮助开发人员更有效地工作的工具。 当前，这些工具可通过命令行界面使用。 将来还将添加Web界面。 没有这些工具，完全有可能使用Cro。 它们旨在提供一些合理的默认值，但并不适合每个项目。\n 1.1. 存根服务 可以使用cro stub命令对新服务进行存根。 一般用法是：\n cro stub \u0026lt;service-type\u0026gt; \u0026lt;service-id\u0026gt; \u0026lt;path\u0026gt; [\u0026#39;links-and-options\u0026#39;]   其中\n service-type是要创建的服务的类型 service-id是服务的ID（与其他cro命令一起使用；也将在.cro.yml中用作服务的默认描述性名称）\n 路径是创建服务的位置 links-and-options指定指向应添加到存根的其他服务的链接，以及特定于服务类型的选项\n 如果未指定链接和选项，则将以交互方式请求它们。 要提供选项，请使用类似于Perl 6冒号对的语法将其放在引号中，其中：foo启用选项，：！foo禁用选项，而：foo \u0026lt;bar\u0026gt;是带有值bar的选项foo。 例如：\n cro stub http foo services\/foo \u0026#39;:!secure :websocket\u0026#39; cro stub http bar services\/bar \u0026#39;:!secure :websocket\u0026#39;   已存根的服务从环境变量获取端口和证书配置，并且当服务之间存在关系时，其地址也将使用环境变量注入。 设置容器部署时，这很方便。\n 链接导致存根服务包含创建可以与另一个端点通信的“客户端”的代码。 这些与选项一起使用，格式为：link \u0026lt;service-id：endpoint-id\u0026gt;。 service-id是目标.cro.yml的id字段，endpoint-id是该.cro.yml文件的终结点列表中条目的id字段。\n cro stub http foo services\/foo \u0026#39;:link\u0026lt;flash-storage:http\u0026gt;\u0026#39;    1.",
       "publisher": {
         "@type": "Organization",
         "name": "https:\/\/ohmyraku.github.io",
@@ -96,84 +120,7 @@ if (theme && theme !== "1") {
 
 </div>
 
-<article class="page__content" ><div id="toc" class="toc">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_cro_开发工具">1. Cro 开发工具</a>
-<ul class="sectlevel2">
-<li><a href="#_存根服务">1.1. 存根服务</a></li>
-<li><a href="#_http_服务">1.2. HTTP 服务</a></li>
-<li><a href="#_运行服务">1.3. 运行服务</a></li>
-<li><a href="#_追踪服务">1.4. 追踪服务</a></li>
-<li><a href="#_服务静态内容">1.5. 服务静态内容</a></li>
-<li><a href="#_使用服务链接">1.6. 使用服务链接</a></li>
-<li><a href="#_uri_段匹配">1.7. URI 段匹配</a></li>
-<li><a href="#_请求方法">1.8. 请求方法</a></li>
-<li><a href="#_查询字符串header_和_cookies">1.9. 查询字符串,header 和 cookies</a></li>
-<li><a href="#_访问_crohttprequest_实例">1.10. 访问 Cro::HTTP::Request 实例</a></li>
-<li><a href="#_请求体">1.11. 请求体</a></li>
-<li><a href="#_添加自定义请求体解析器">1.12. 添加自定义请求体解析器</a></li>
-<li><a href="#_生成响应">1.13. 生成响应</a></li>
-<li><a href="#_服务静态内容_2">1.14. 服务静态内容</a></li>
-<li><a href="#_添加自定义响应体序列化器">1.15. 添加自定义响应体序列化器</a></li>
-<li><a href="#_设置响应体缓存能力">1.16. 设置响应体缓存能力</a></li>
-<li><a href="#_push_承诺">1.17. Push 承诺</a></li>
-<li><a href="#_组合路由">1.18. 组合路由</a></li>
-<li><a href="#_代理路由到另一个_crotransform">1.19. 代理路由到另一个 Cro::Transform</a></li>
-<li><a href="#_在路由块中应用中间件">1.20. 在路由块中应用中间件</a></li>
-<li><a href="#_基本示例">1.21. 基本示例</a></li>
-<li><a href="#_为服务设置测试">1.22. 为服务设置测试</a></li>
-<li><a href="#_编写测试">1.23. 编写测试</a></li>
-<li><a href="#_状态">1.24. 状态</a></li>
-<li><a href="#_内容类型">1.25. 内容类型</a></li>
-<li><a href="#_标题">1.26. 标题</a></li>
-<li><a href="#_body_text">1.27. body-text</a></li>
-<li><a href="#_body_blob">1.28. body-blob</a></li>
-<li><a href="#_body">1.29. body</a></li>
-<li><a href="#_json">1.30. json</a></li>
-<li><a href="#_使用一个_uri一组标头等进行许多测试">1.31. 使用一个 URI，一组标头等进行许多测试</a></li>
-</ul>
-</li>
-<li><a href="#_cromediatype">2. Cro::MediaType</a>
-<ul class="sectlevel2">
-<li><a href="#_解析媒体类型">2.1. 解析媒体类型</a></li>
-<li><a href="#_提取媒体类型部分">2.2. 提取媒体类型部分</a></li>
-<li><a href="#_从零件构造媒体类型">2.3. 从零件构造媒体类型</a></li>
-<li><a href="#_序列化媒体类型">2.4. 序列化媒体类型</a></li>
-</ul>
-</li>
-<li><a href="#_cro_模块结构">3. Cro 模块结构</a>
-<ul class="sectlevel2">
-<li><a href="#_crocore">3.1. Cro::Core</a></li>
-<li><a href="#_crotls">3.2. Cro::TLS</a></li>
-<li><a href="#_crohttp">3.3. Cro::HTTP</a></li>
-<li><a href="#_crowebsocket">3.4. Cro::WebSocket</a></li>
-<li><a href="#_crozeromq">3.5. Cro::ZeroMQ</a></li>
-<li><a href="#_解析方法">3.6. 解析方法</a></li>
-<li><a href="#_获取uri部分">3.7. 获取URI部分</a></li>
-<li><a href="#_uri字符串化">3.8. URI字符串化</a></li>
-</ul>
-</li>
-<li><a href="#_crowebapptemplate">4. Cro::WebApp::Template</a>
-<ul class="sectlevel2">
-<li><a href="#_使用模板">4.1. 使用模板</a></li>
-<li><a href="#_模板位置和编译">4.2. 模板位置和编译</a></li>
-<li><a href="#_模板语言">4.3. 模板语言</a></li>
-<li><a href="#_解包散列和对象属性">4.4. 解包散列和对象属性</a></li>
-<li><a href="#_变量">4.5. 变量</a></li>
-<li><a href="#_迭代">4.6. 迭代</a></li>
-<li><a href="#_条件">4.7. 条件</a></li>
-<li><a href="#_子例程和宏">4.8. 子例程和宏</a></li>
-<li><a href="#_分解出sub和宏">4.9. 分解出sub和宏</a></li>
-<li><a href="#_插入_html_和_javascript">4.10. 插入 HTML 和 JavaScript</a></li>
-<li><a href="#_关键角色">4.11. 关键角色</a></li>
-<li><a href="#_组成">4.12. 组成</a></li>
-<li><a href="#_http_服务器示例">4.13. HTTP 服务器示例</a></li>
-<li><a href="#_客户端管道">4.14. 客户端管道</a></li>
-</ul>
-</li>
-</ul>
-</div>
+<article class="page__content" >
 <div class="sect1">
 <h2 id="_cro_开发工具">1. Cro 开发工具</h2>
 <div class="sectionbody">
@@ -187,7 +134,7 @@ if (theme && theme !== "1") {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">cro stub &lt;service-type&gt; &lt;service-id&gt; &lt;path&gt; ['links-and-options']</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro stub &lt;service-type&gt; &lt;service-id&gt; &lt;path&gt; [&#39;links-and-options&#39;]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -206,8 +153,8 @@ links-and-options指定指向应添加到存根的其他服务的链接，以及
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">cro stub http foo services/foo ':!secure :websocket'
-cro stub http bar services/bar ':!secure :websocket'</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro stub http foo services/foo &#39;:!secure :websocket&#39;
+cro stub http bar services/bar &#39;:!secure :websocket&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -218,7 +165,7 @@ cro stub http bar services/bar ':!secure :websocket'</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">cro stub http foo services/foo ':link&lt;flash-storage:http&gt;'</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro stub http foo services/foo &#39;:link&lt;flash-storage:http&gt;&#39;</code></pre>
 </div>
 </div>
 </div>
@@ -430,12 +377,12 @@ cro trace flashcard-backend :http</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # GET /catalogue/
-    get -&gt; 'catalogue' {
+    get -&gt; &#39;catalogue&#39; {
         ...
     }
 
     # GET /catalogue/products
-    get -&gt; 'catalogue', 'products' {
+    get -&gt; &#39;catalogue&#39;, &#39;products&#39; {
         ...
     }
 }</code></pre>
@@ -445,18 +392,18 @@ cro trace flashcard-backend :http</code></pre>
 <p>位置变量用于捕获URI段。 默认情况下，它们将作为Str提供，因此在参数上放置Str类型约束等同于将其保留。</p>
 </div>
 <div class="paragraph">
-<p>在参数上放置一个Int类型约束意味着仅当该段可以解析为整数（/ ^'-'？\ d + $ /）时，路由才会匹配。 UInt的识别和处理方式相同，但只允许使用正整数。 也可以使用int8，uint8，int16，uint16，int32，uint32，int64和uint64，它们的工作方式类似于Int或UInt，但是执行范围验证。</p>
+<p>在参数上放置一个Int类型约束意味着仅当该段可以解析为整数（/ ^&#39;-&#39;？\ d + $ /）时，路由才会匹配。 UInt的识别和处理方式相同，但只允许使用正整数。 也可以使用int8，uint8，int16，uint16，int32，uint32，int64和uint64，它们的工作方式类似于Int或UInt，但是执行范围验证。</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # GET /catalogue/products/42
-    get -&gt; 'catalogue', 'products', uint32 $id {
+    get -&gt; &#39;catalogue&#39;, &#39;products&#39;, uint32 $id {
         ...
     }
 
     # GET /catalogue/search/saussages
-    get -&gt; 'catalogue', 'search', $term {
+    get -&gt; &#39;catalogue&#39;, &#39;search&#39;, $term {
         ...
     }
 }</code></pre>
@@ -474,7 +421,7 @@ cro trace flashcard-backend :http</code></pre>
         &lt;[89ab]&gt; &lt;[0..9a..f]&gt; ** 15
         $/;
 
-    get -&gt; 'user-log', UUIDv4 $id {
+    get -&gt; &#39;user-log&#39;, UUIDv4 $id {
         ...
     }
 }</code></pre>
@@ -491,7 +438,7 @@ cro trace flashcard-backend :http</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # GET /products/by-tag
     # GET /products/by-tag/sparkly
-    get -&gt; 'products', 'by-tag', $tag-name? {
+    get -&gt; &#39;products&#39;, &#39;by-tag&#39;, $tag-name? {
         ...
     }
 }</code></pre>
@@ -503,7 +450,7 @@ cro trace flashcard-backend :http</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">route {
-    get -&gt; 'catalogue', 'tree', *@path {
+    get -&gt; &#39;catalogue&#39;, &#39;tree&#39;, *@path {
         ...
     }
 }</code></pre>
@@ -518,13 +465,13 @@ cro trace flashcard-backend :http</code></pre>
 </dl>
 </div>
 <div class="paragraph">
-<p>最长的文字初始段获胜。例如，对于GET / category / search的请求，无论以什么顺序声明，路线get&#8594;'category'，'search'{}都会胜过get&#8594;'category'，$ name {}。</p>
+<p>最长的文字初始段获胜。例如，对于GET / category / search的请求，无论以什么顺序声明，路线get→&#39;category&#39;，&#39;search&#39;{}都会胜过get→&#39;category&#39;，$ name {}。</p>
 </div>
 <div class="paragraph">
-<p>声明的段总是比粗俗的段好。例如，给定GET / tree / describe，无论声明的顺序如何，路由get&#8594;'tree'，$ operation {}都会胜过get&#8594;'tree'，* @ path {}。</p>
+<p>声明的段总是比粗俗的段好。例如，给定GET / tree / describe，无论声明的顺序如何，路由get→&#39;tree&#39;，$ operation {}都会胜过get→&#39;tree&#39;，* @ path {}。</p>
 </div>
 <div class="paragraph">
-<p>具有某些约束的路段的路线将始终比那些没有约束的路段尝试。例如，get&#8594;'product'，ISBN13 $ i {}会在get&#8594;'product'，Str $ query {}之前尝试，然后选择是否匹配。就Cro路由器而言，与Str相比，Int受限制。以任何方式约束的路由均被视为“相等”，并且将按照在源代码中写入的顺序对其进行测试。</p>
+<p>具有某些约束的路段的路线将始终比那些没有约束的路段尝试。例如，get→&#39;product&#39;，ISBN13 $ i {}会在get→&#39;product&#39;，Str $ query {}之前尝试，然后选择是否匹配。就Cro路由器而言，与Str相比，Int受限制。以任何方式约束的路由均被视为“相等”，并且将按照在源代码中写入的顺序对其进行测试。</p>
 </div>
 <div class="paragraph">
 <p>如果网段上没有路由匹配，则路由器将生成HTTP 404 Not Found响应。</p>
@@ -539,22 +486,22 @@ cro trace flashcard-backend :http</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # POST /catalogue/products
-    post -&gt; 'catalogue', 'products' {
+    post -&gt; &#39;catalogue&#39;, &#39;products&#39; {
         ...
     }
 
     # PUT /catalogue/products/42
-    post -&gt; 'catalogue', 'products', uint32 $id {
+    post -&gt; &#39;catalogue&#39;, &#39;products&#39;, uint32 $id {
         ...
     }
 
     # DELETE /catalogue/products/42
-    delete -&gt; 'catalogue', 'products', uint32 $id {
+    delete -&gt; &#39;catalogue&#39;, &#39;products&#39;, uint32 $id {
         ...
     }
 
     # PATCH /catalogue/products/42
-    patch -&gt; 'catalogue', 'products', uint32 $id {
+    patch -&gt; &#39;catalogue&#39;, &#39;products&#39;, uint32 $id {
         ...
     }
 }</code></pre>
@@ -567,12 +514,12 @@ cro trace flashcard-backend :http</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # POST /catalogue/products
-    http 'POST', -&gt; 'catalogue', 'products' {
+    http &#39;POST&#39;, -&gt; &#39;catalogue&#39;, &#39;products&#39; {
         ...
     }
 
     # PUT /catalogue/products/42
-    http 'PUT', -&gt; 'catalogue', 'products', uint32 $id {
+    http &#39;PUT&#39;, -&gt; &#39;catalogue&#39;, &#39;products&#39;, uint32 $id {
         ...
     }
 
@@ -586,10 +533,10 @@ cro trace flashcard-backend :http</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
-    http 'LINK', -&gt; $id {
+    http &#39;LINK&#39;, -&gt; $id {
         ...
     }
-    http 'UNLINK', -&gt; $id {
+    http &#39;UNLINK&#39;, -&gt; $id {
         ...
     }
 }</code></pre>
@@ -616,19 +563,19 @@ cro trace flashcard-backend :http</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # Must have a search term in the query string.
-    get -&gt; 'search', :$term! {
+    get -&gt; &#39;search&#39;, :$term! {
         ...
     }
 
     # Mininum and maximum price filters are optional; sourced from the query
     # string.
-    get -&gt; 'category', $category-name, :$min-price, :$max-price {
+    get -&gt; &#39;category&#39;, $category-name, :$min-price, :$max-price {
         ...
     }
 
     # Must have a term in the query string (the `is query` trait here is purely
     # for documentation purposes).
-    get -&gt; 'search', :$term! is query {
+    get -&gt; &#39;search&#39;, :$term! is query {
         ...
     }
 }</code></pre>
@@ -650,7 +597,7 @@ cro trace flashcard-backend :http</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # Require a single city to search in, and allow multiple selection of
     # interesting numbers of rooms.
-    get -&gt; 'apartments', Str :$city!, :@rooms {
+    get -&gt; &#39;apartments&#39;, Str :$city!, :@rooms {
         ...
     }
 }</code></pre>
@@ -663,7 +610,7 @@ cro trace flashcard-backend :http</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # Get a hash of all query string parameters
-    get -&gt; 'search', 'advanced', :%params {
+    get -&gt; &#39;search&#39;, &#39;advanced&#39;, :%params {
         ...
     }
 }</code></pre>
@@ -676,18 +623,18 @@ cro trace flashcard-backend :http</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # Gets the accept header, if there is one.
-    get -&gt; 'article', $name, :$accept is header {
+    get -&gt; &#39;article&#39;, $name, :$accept is header {
         ...
     }
 
     # Gets the super-sneaky-tracking-id cookie; does not match if there
-    # is no such cookie (since it's marked required).
-    get -&gt; 'viral', $meme, :$super-sneaky-tracking-id! is cookie {
+    # is no such cookie (since it&#39;s marked required).
+    get -&gt; &#39;viral&#39;, $meme, :$super-sneaky-tracking-id! is cookie {
         ...
     }
 
     # Gets all the cookies and all the headers in hashes.
-    get -&gt; 'dump', :%cookies is cookie, :%headers is header {
+    get -&gt; &#39;dump&#39;, :%cookies is cookie, :%headers is header {
         ...
     }
 }</code></pre>
@@ -700,7 +647,7 @@ cro trace flashcard-backend :http</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # /search?term=mountains&amp;images=true
-    get -&gt; search, :$term!, :$images where 'true' {
+    get -&gt; search, :$term!, :$images where &#39;true&#39; {
         ...
     }
 
@@ -729,10 +676,10 @@ cro trace flashcard-backend :http</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     get -&gt; {
-        say "Request headers:";
+        say &#34;Request headers:&#34;;
         for request.headers {
-            say "{.name}: {.value}";
-            content 'text/plain', 'Response';
+            say &#34;{.name}: {.value}&#34;;
+            content &#39;text/plain&#39;, &#39;Response&#39;;
         }
     }
 }</code></pre>
@@ -751,20 +698,20 @@ cro trace flashcard-backend :http</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">post -&gt; 'product' {
+<pre class="highlight"><code class="language-raku" data-lang="raku">post -&gt; &#39;product&#39; {
     # Get the body produced by the body parser for a JSON request body (it
     # is deserialized automatically if the content-type of the request
     # indicates JSON).
     request-body -&gt; %json-object {
         # Save it, and then...
-        created 'product/42', 'application/json', %json-object;
+        created &#39;product/42&#39;, &#39;application/json&#39;, %json-object;
     }
 }
 
-post -&gt; 'photos', 'add' {
-    # Given a HTML form using enctype="multipart/form-data", with a text
-    # input "title" and an file upload input "photo", get the title and
-    # uploaded file's filename and contents.
+post -&gt; &#39;photos&#39;, &#39;add&#39; {
+    # Given a HTML form using enctype=&#34;multipart/form-data&#34;, with a text
+    # input &#34;title&#34; and an file upload input &#34;photo&#34;, get the title and
+    # uploaded file&#39;s filename and contents.
     request-body -&gt; (:$title, :$photo, *%rest) {
         my $file-name = $photo.filename;
         my $file-content = $photo.body-blob;
@@ -772,7 +719,7 @@ post -&gt; 'photos', 'add' {
     }
 }
 
-put -&gt; 'product', $id, 'description' {
+put -&gt; &#39;product&#39;, $id, &#39;description&#39; {
     # Get the body as text (assumes the client set the body to some text; note
     # this is not something a web browser form would do).
     request-body-text -&gt; $description {
@@ -780,9 +727,9 @@ put -&gt; 'product', $id, 'description' {
     }
 }
 
-put -&gt; 'product', $id, 'image', $filename {
+put -&gt; &#39;product&#39;, $id, &#39;image&#39;, $filename {
     # Get the body as a binary blob (again, this assumes that a client send a
-    # request with a body that's a bunch of bytes that we want; this may happen
+    # request with a body that&#39;s a bunch of bytes that we want; this may happen
     # in a HTTP API, but not from a browser).
     request-body-blob -&gt; $image {
         # Save it; produce no content
@@ -795,7 +742,7 @@ put -&gt; 'product', $id, 'image', $filename {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">post -&gt; 'product' {
+<pre class="highlight"><code class="language-raku" data-lang="raku">post -&gt; &#39;product&#39; {
     request-body -&gt; (:$name!, :$description!, :$price!) {
         # Do stuff here...
     }
@@ -810,8 +757,8 @@ put -&gt; 'product', $id, 'image', $filename {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">post -&gt; 'product' {
-    request-body 'application/json' =&gt; -&gt; (:$name!, :$description!, :$price!) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">post -&gt; &#39;product&#39; {
+    request-body &#39;application/json&#39; =&gt; -&gt; (:$name!, :$description!, :$price!) {
         # Do stuff here...
     }
 }</code></pre>
@@ -822,12 +769,12 @@ put -&gt; 'product', $id, 'image', $filename {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">put -&gt; 'product', $id, 'image' {
+<pre class="highlight"><code class="language-raku" data-lang="raku">put -&gt; &#39;product&#39;, $id, &#39;image&#39; {
     request-body-blob
-        'image/gif' =&gt; -&gt; $gif {
+        &#39;image/gif&#39; =&gt; -&gt; $gif {
             ...
         },
-        'image/jpeg' =&gt; -&gt; $jpeg {
+        &#39;image/jpeg&#39; =&gt; -&gt; $jpeg {
             ...
         };
 }</code></pre>
@@ -838,16 +785,16 @@ put -&gt; 'product', $id, 'image', $filename {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">put -&gt; 'product', $id, 'image' {
+<pre class="highlight"><code class="language-raku" data-lang="raku">put -&gt; &#39;product&#39;, $id, &#39;image&#39; {
     request-body-blob
-        'image/gif' =&gt; -&gt; $gif {
+        &#39;image/gif&#39; =&gt; -&gt; $gif {
             ...
         },
-        'image/jpeg' =&gt; -&gt; $jpeg {
+        &#39;image/jpeg&#39; =&gt; -&gt; $jpeg {
             ...
         },
         {
-            bad-request 'text/plain', 'Only gif or jpeg allowed';
+            bad-request &#39;text/plain&#39;, &#39;Only gif or jpeg allowed&#39;;
         }
 }</code></pre>
 </div>
@@ -857,9 +804,9 @@ put -&gt; 'product', $id, 'image', $filename {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">post -&gt; 'log' {
+<pre class="highlight"><code class="language-raku" data-lang="raku">post -&gt; &#39;log&#39; {
     request-body
-        -&gt; (:$level where 'error', :$message!) {
+        -&gt; (:$level where &#39;error&#39;, :$message!) {
             # Process errors specially
         },
         -&gt; (:$level!, :$message!) {
@@ -907,7 +854,7 @@ put -&gt; 'product', $id, 'image', $filename {
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     body-parser My::Custom::BodyParser;
 
-    post -&gt; 'product' {
+    post -&gt; &#39;product&#39; {
         request-body -&gt; My::Type $body {
         }
     }
@@ -936,9 +883,9 @@ put -&gt; 'product', $id, 'image', $filename {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
-    get -&gt; 'test' {
+    get -&gt; &#39;test&#39; {
         given response {
-            .append-header('Content-type', 'text/html');
+            .append-header(&#39;Content-type&#39;, &#39;text/html&#39;);
             .set-body: q:to/HTML/;
                 &lt;h1&gt;Did you know...&lt;/h1&gt;
                 &lt;p&gt;
@@ -988,8 +935,8 @@ put -&gt; 'product', $id, 'image', $filename {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
-    get -&gt; 'test' {
-        content 'text/html', q:to/HTML/;
+    get -&gt; &#39;test&#39; {
+        content &#39;text/html&#39;, q:to/HTML/;
             &lt;h1&gt;Did you know...&lt;/h1&gt;
             &lt;p&gt;
               Aside from fingerprints, everyone has a unique tongue print
@@ -1015,8 +962,8 @@ put -&gt; 'product', $id, 'image', $filename {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
-    get -&gt; 'testing' {
-        redirect :permanent, '/test';
+    get -&gt; &#39;testing&#39; {
+        redirect :permanent, &#39;/test&#39;;
     }
 }</code></pre>
 </div>
@@ -1032,7 +979,7 @@ put -&gt; 'product', $id, 'image', $filename {
 错误请求，用于HTTP 400错误请求
 禁止，用于HTTP 403禁止
 冲突，用于HTTP 409冲突
-如果请求处理程序的评估结果为&#8230;&#8203;（即存根代码的Perl 6语法），则将生成HTTP 510 Not Implemented响应。如果评估路由处理程序产生异常，则该异常将被传递。然后，通常由响应序列化程序处理该响应序列化程序，该序列化程序将生成HTTP 500 Internal Server Error响应，但是可以插入其他中间件来更改发生的情况（例如，提供自定义错误页面）。</p>
+如果请求处理程序的评估结果为…​（即存根代码的Perl 6语法），则将生成HTTP 510 Not Implemented响应。如果评估路由处理程序产生异常，则该异常将被传递。然后，通常由响应序列化程序处理该响应序列化程序，该序列化程序将生成HTTP 500 Internal Server Error响应，但是可以插入其他中间件来更改发生的情况（例如，提供自定义错误页面）。</p>
 </div>
 <div class="paragraph">
 <p>所有其他响应代码都是通过显式设置response.status产生的。</p>
@@ -1049,7 +996,7 @@ put -&gt; 'product', $id, 'image', $filename {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; {
-    static 'www/index.html';
+    static &#39;www/index.html&#39;;
 }</code></pre>
 </div>
 </div>
@@ -1058,8 +1005,8 @@ put -&gt; 'product', $id, 'image', $filename {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; 'css', *@path {
-    static 'css', @path;
+<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; &#39;css&#39;, *@path {
+    static &#39;css&#39;, @path;
 }</code></pre>
 </div>
 </div>
@@ -1079,9 +1026,9 @@ put -&gt; 'product', $id, 'image', $filename {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; 'downloads', *@path {
-    static 'files', @path, mime-types =&gt; {
-        'foo' =&gt; 'application/x-foo'
+<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; &#39;downloads&#39;, *@path {
+    static &#39;files&#39;, @path, mime-types =&gt; {
+        &#39;foo&#39; =&gt; &#39;application/x-foo&#39;
     }
 }</code></pre>
 </div>
@@ -1091,8 +1038,8 @@ put -&gt; 'product', $id, 'image', $filename {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; 'content', *@path {
-    static 'static-data/content', @path,
+<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; &#39;content&#39;, *@path {
+    static &#39;static-data/content&#39;, @path,
         :indexes&lt;index.html index.htm&gt;;
 }</code></pre>
 </div>
@@ -1117,8 +1064,8 @@ put -&gt; 'product', $id, 'image', $filename {
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     body-serializer Custom::Serializer::YAML;
 
-    get -&gt; 'userlevels' {
-        content 'application/yaml', &lt;reader moderator producer admin&gt;;
+    get -&gt; &#39;userlevels&#39; {
+        content &#39;application/yaml&#39;, &lt;reader moderator producer admin&gt;;
     }
 }</code></pre>
 </div>
@@ -1167,9 +1114,9 @@ put -&gt; 'product', $id, 'image', $filename {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; 'css', *@path {
+<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; &#39;css&#39;, *@path {
     cache-control :public, :max-age(300);
-    static 'css', @path;
+    static &#39;css&#39;, @path;
 }</code></pre>
 </div>
 </div>
@@ -1204,12 +1151,12 @@ put -&gt; 'product', $id, 'image', $filename {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; {
-    push-promise '/css/main.css';
-    content 'text/html', $some-content;
+    push-promise &#39;/css/main.css&#39;;
+    content &#39;text/html&#39;, $some-content;
 }
-get -&gt; 'css', *@path {
+get -&gt; &#39;css&#39;, *@path {
     cache-control :public, :max-age(300);
-    static 'assets/css', @path;
+    static &#39;assets/css&#39;, @path;
 }</code></pre>
 </div>
 </div>
@@ -1225,10 +1172,10 @@ get -&gt; 'css', *@path {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; {
-    push-promise '/js/strings.js', headers =&gt; {
+    push-promise &#39;/js/strings.js&#39;, headers =&gt; {
         Accept-language =&gt; *
     };
-    content 'text/html', $some-content;
+    content &#39;text/html&#39;, $some-content;
 }</code></pre>
 </div>
 </div>
@@ -1250,8 +1197,8 @@ get -&gt; 'css', *@path {
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub product-routes() is export {
     route {
-        get -&gt; 'products' { ... }
-        get -&gt; 'products', uint32 $id { ... }
+        get -&gt; &#39;products&#39; { ... }
+        get -&gt; &#39;products&#39;, uint32 $id { ... }
         # ...
     }
 }</code></pre>
@@ -1413,7 +1360,7 @@ my $app = route {
     before SomeMiddleware;
     after SomeOtherMiddleware;
     get -&gt; {
-        content 'text/plain', 'Hello with middleware';
+        content &#39;text/plain&#39;, &#39;Hello with middleware&#39;;
     }
 }</code></pre>
 </div>
@@ -1425,7 +1372,7 @@ my $app = route {
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $routes = route {
     get -&gt; {
-        content 'text/plain', 'Hello with middleware';
+        content &#39;text/plain&#39;, &#39;Hello with middleware&#39;;
     }
 }
 my $app = Cro.compose(SomeMiddleware, $routes, SomeOtherMiddleware);</code></pre>
@@ -1485,7 +1432,7 @@ Run any after middleware</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">after {
-    header 'Strict-transport-security', 'max-age=31536000; includeSubDomains'
+    header &#39;Strict-transport-security&#39;, &#39;max-age=31536000; includeSubDomains&#39;
 }</code></pre>
 </div>
 </div>
@@ -1495,7 +1442,7 @@ Run any after middleware</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">before {
-    forbidden unless .connection.peer-host eq '127.0.0.1' | '::1';
+    forbidden unless .connection.peer-host eq &#39;127.0.0.1&#39; | &#39;::1&#39;;
 }</code></pre>
 </div>
 </div>
@@ -1508,22 +1455,22 @@ Run any after middleware</code></pre>
 # Forbidden
 after {
     if .status == 403 &amp;&amp; !.has-body {
-        content 'text/html', '&lt;h1&gt;Forbidden&lt;/h1&gt;';
+        content &#39;text/html&#39;, &#39;&lt;h1&gt;Forbidden&lt;/h1&gt;&#39;;
     }
 }
 before {
-    forbidden unless .request.connection.peer-host eq '127.0.0.1' | '::1';
+    forbidden unless .request.connection.peer-host eq &#39;127.0.0.1&#39; | &#39;::1&#39;;
 }
 
 # CORRECT - the `after` is placed after any early response from the `before`
 # is inserted into the output pipeline, and so will add the content to the
 # response, as desired.
 before {
-    forbidden unless .request.connection.peer-host eq '127.0.0.1' | '::1';
+    forbidden unless .request.connection.peer-host eq &#39;127.0.0.1&#39; | &#39;::1&#39;;
 }
 after {
     if .status == 403 &amp;&amp; !.has-body {
-        content 'text/html', '&lt;h1&gt;Forbidden&lt;/h1&gt;';
+        content &#39;text/html&#39;, &#39;&lt;h1&gt;Forbidden&lt;/h1&gt;&#39;;
     }
 }</code></pre>
 </div>
@@ -1567,11 +1514,11 @@ after {
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub routes() is export {
     route {
         get -&gt; {
-            content 'text/plain', 'Nothing to see here';
+            content &#39;text/plain&#39;, &#39;Nothing to see here&#39;;
         }
-        post -&gt; 'add' {
-            request-body 'application-json' =&gt; -&gt; (:$x!, :$y!) {
-                content 'application/json', { :result($x + $y) };
+        post -&gt; &#39;add&#39; {
+            request-body &#39;application-json&#39; =&gt; -&gt; (:$x!, :$y!) {
+                content &#39;application/json&#39;, { :result($x + $y) };
             }
         }
     }
@@ -1587,12 +1534,12 @@ after {
 use MyService::Routes;
 
 test-service routes(), {
-    test get('/'),
+    test get(&#39;/&#39;),
         status =&gt; 200,
-        content-type =&gt; 'text/plain',
+        content-type =&gt; &#39;text/plain&#39;,
         body =&gt; /nothing/;
 
-    test-given '/add', {
+    test-given &#39;/add&#39;, {
         test post(json =&gt; { :x(37), :y(5) }),
             status =&gt; 200,
             json =&gt; { :result(42) };
@@ -1638,7 +1585,7 @@ done-testing;</code></pre>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">通过调用get，put，post，delete，head或patch中的一种来指定请求。还有其他HTTP方法的request（$ method，&#8230;&#8203;）（实际上，get只会调用request（'GET'，&#8230;&#8203;））。这些函数接受提供相对URI的可选位置参数，如果提供的话，该参数将附加到当前有效的基本URI上。 ：$ json命名参数经过特殊处理，扩展为{content-type &#8658;'application / json，body &#8658; $ json）。所有其他命名参数将传递给Cro </dt>
+<dt class="hdlist1">通过调用get，put，post，delete，head或patch中的一种来指定请求。还有其他HTTP方法的request（$ method，…​）（实际上，get只会调用request（&#39;GET&#39;，…​））。这些函数接受提供相对URI的可选位置参数，如果提供的话，该参数将附加到当前有效的基本URI上。 ：$ json命名参数经过特殊处理，扩展为{content-type ⇒&#39;application / json，body ⇒ $ json）。所有其他命名参数将传递给Cro </dt>
 <dd>
 <p>HTTP :: Client request`方法，从而使所有HTTP客户端功能可用。</p>
 </dd>
@@ -1652,13 +1599,13 @@ done-testing;</code></pre>
 <div class="sect2">
 <h3 id="_状态">1.24. 状态</h3>
 <div class="paragraph">
-<p>将响应的状态属性与支票进行智能匹配。虽然最常见的是整数，例如status &#8658; 200，但也可以使用status &#8658; * &lt;400（例如不是错误）之类的东西。</p>
+<p>将响应的状态属性与支票进行智能匹配。虽然最常见的是整数，例如status ⇒ 200，但也可以使用status ⇒ * &lt;400（例如不是错误）之类的东西。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_内容类型">1.25. 内容类型</h3>
 <div class="paragraph">
-<p>检查内容类型是否等效。如果传递了字符串，它将解析为一种媒体类型，并检查该类型和子类型是否与响应匹配。如果字符串中有任何其他参数（例如字符集），则还将在接收的媒体类型中检查这些参数。如果接收到的媒体类型具有未提及的其他参数，则这些参数将被忽略。因此，check content-type &#8658;'text / plain&#8217;匹配text / plain;响应中为charset = utf8。</p>
+<p>检查内容类型是否等效。如果传递了字符串，它将解析为一种媒体类型，并检查该类型和子类型是否与响应匹配。如果字符串中有任何其他参数（例如字符集），则还将在接收的媒体类型中检查这些参数。如果接收到的媒体类型具有未提及的其他参数，则这些参数将被忽略。因此，check content-type ⇒&#39;text / plain’匹配text / plain;响应中为charset = utf8。</p>
 </div>
 <div class="dlist">
 <dl>
@@ -1723,7 +1670,7 @@ done-testing;</code></pre>
 <div class="sect2">
 <h3 id="_json">1.30. json</h3>
 <div class="paragraph">
-<p>这是JSON响应的常见情况的便捷捷径。它实现content-type &#8658; {.type eq&#8217;application'&amp;&amp; .subtype-name eq&#8217;json'|| .suffix eq&#8217;json'}（也就是说，它接受application / json或诸如application / vnd.foobar + json之类的东西）。</p>
+<p>这是JSON响应的常见情况的便捷捷径。它实现content-type ⇒ {.type eq’application&#39;&amp;&amp; .subtype-name eq’json&#39;|| .suffix eq’json&#39;}（也就是说，它接受application / json或诸如application / vnd.foobar + json之类的东西）。</p>
 </div>
 <div class="paragraph">
 <p>如果传递了代码值，则将使用反序列化的JSON主体调用代码，并且应返回真实值以通过测试。否则，将使用is-deeply测试例程来检查接收到的JSON的结构是否与预期的匹配。</p>
@@ -1736,7 +1683,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">test-given '/add', {
+<pre class="highlight"><code class="language-raku" data-lang="raku">test-given &#39;/add&#39;, {
     test post(json =&gt; { :x(37), :y(5) }),
         status =&gt; 200,
         json =&gt; { :result(42) };
@@ -1758,7 +1705,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">test-given '/add', headers =&gt; { X-Precision =&gt; '15' } {
+<pre class="highlight"><code class="language-raku" data-lang="raku">test-given &#39;/add&#39;, headers =&gt; { X-Precision =&gt; &#39;15&#39; } {
     ...
 }</code></pre>
 </div>
@@ -1768,7 +1715,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">test-given headers =&gt; { X-Precision =&gt; '15' } {
+<pre class="highlight"><code class="language-raku" data-lang="raku">test-given headers =&gt; { X-Precision =&gt; &#39;15&#39; } {
     ...
 }</code></pre>
 </div>
@@ -1789,7 +1736,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $media-type = Cro::MediaType.parse('content/html; charset=UTF-8');</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $media-type = Cro::MediaType.parse(&#39;content/html; charset=UTF-8&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1822,7 +1769,7 @@ done-testing;</code></pre>
 <p>type-and-subtype-返回 application/vnd.foobar+json</p>
 </li>
 <li>
-<p>parameters-返回一个包含 <code>Pair</code> 的数组； 在给定的示例中，charset &#8658;'UTF-8'</p>
+<p>parameters-返回一个包含 <code>Pair</code> 的数组； 在给定的示例中，charset ⇒&#39;UTF-8&#39;</p>
 </li>
 </ul>
 </div>
@@ -1841,11 +1788,11 @@ done-testing;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $media-type = Cro::MediaType.new:
-    type =&gt; 'application',
-    tree =&gt; 'vnd',
-    subtype-name =&gt; 'foobar',
-    suffix =&gt; 'json',
-    parameters =&gt; [charset =&gt; 'UTF-8'];
+    type =&gt; &#39;application&#39;,
+    tree =&gt; &#39;vnd&#39;,
+    subtype-name =&gt; &#39;foobar&#39;,
+    suffix =&gt; &#39;json&#39;,
+    parameters =&gt; [charset =&gt; &#39;UTF-8&#39;];
 
 say ~$media-type;   # application/vnd.foobar+json; charset=UTF-8</code></pre>
 </div>
@@ -1981,7 +1928,7 @@ say ~$media-type;   # application/vnd.foobar+json; charset=UTF-8</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">Cro::Uri.parse("http://example.com");</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">Cro::Uri.parse(&#34;http://example.com&#34;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1989,7 +1936,7 @@ say ~$media-type;   # application/vnd.foobar+json; charset=UTF-8</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">Cro::Uri.parse("http://example.com",
+<pre class="highlight"><code class="language-raku" data-lang="raku">Cro::Uri.parse(&#34;http://example.com&#34;,
                grammar =&gt; $custom-grammar,
                actions =&gt; $custom-actions);</code></pre>
 </div>
@@ -2106,8 +2053,8 @@ say ~$media-type;   # application/vnd.foobar+json; charset=UTF-8</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $base = Cro::Uri.parse('http://foo.com/bar/baz/wat.html');
-say ~$base.add('../eek.html');  # http://foo.com/bar/eek.html</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $base = Cro::Uri.parse(&#39;http://foo.com/bar/baz/wat.html&#39;);
+say ~$base.add(&#39;../eek.html&#39;);  # http://foo.com/bar/eek.html</code></pre>
 </div>
 </div>
 </div>
@@ -2163,9 +2110,9 @@ say ~$base.add('../eek.html');  # http://foo.com/bar/eek.html</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">route -&gt; 'product', Int $id {
+<pre class="highlight"><code class="language-raku" data-lang="raku">route -&gt; &#39;product&#39;, Int $id {
     my $product = $repository.lookup-product($id);
-    template 'templates/product.crotmp', $product;
+    template &#39;templates/product.crotmp&#39;, $product;
 }</code></pre>
 </div>
 </div>
@@ -2174,9 +2121,9 @@ say ~$base.add('../eek.html');  # http://foo.com/bar/eek.html</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">route -&gt; 'product', Int $id {
+<pre class="highlight"><code class="language-raku" data-lang="raku">route -&gt; &#39;product&#39;, Int $id {
     my $product = $repository.lookup-product($id);
-    content 'text/html', render-template 'templates/product.crotmp', $product;
+    content &#39;text/html&#39;, render-template &#39;templates/product.crotmp&#39;, $product;
 }</code></pre>
 </div>
 </div>
@@ -2190,10 +2137,10 @@ say ~$base.add('../eek.html');  # http://foo.com/bar/eek.html</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">route -&gt; 'product', Int $id {
+<pre class="highlight"><code class="language-raku" data-lang="raku">route -&gt; &#39;product&#39;, Int $id {
     my $product = $repository.lookup-product($id);
-    template 'templates/product.crotmp', $product,
-        content-type =&gt; 'text/plain';
+    template &#39;templates/product.crotmp&#39;, $product,
+        content-type =&gt; &#39;text/plain&#39;;
 }</code></pre>
 </div>
 </div>
@@ -2204,14 +2151,14 @@ say ~$base.add('../eek.html');  # http://foo.com/bar/eek.html</code></pre>
 <div class="sect2">
 <h3 id="_模板位置和编译">4.2. 模板位置和编译</h3>
 <div class="paragraph">
-<p>默认情况下，将在当前工作目录中查找模板，并且模板中的&lt;：use'&#8230;&#8203;'&gt;指令也是如此。 模板在首次使用时也会被延迟编译。</p>
+<p>默认情况下，将在当前工作目录中查找模板，并且模板中的&lt;：use&#39;…​&#39;&gt;指令也是如此。 模板在首次使用时也会被延迟编译。</p>
 </div>
 <div class="paragraph">
 <p>调用template-location函数以指定可以放置模板的目录。 这些调用位于搜索路径的前面，因此对模板位置的最新调用优先。 正在做：</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">template-location 'templates/';</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">template-location &#39;templates/&#39;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2222,8 +2169,8 @@ say ~$base.add('../eek.html');  # http://foo.com/bar/eek.html</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">use Cro::WebApp::Template;
 use Test;
 
-lives-ok { template-location 'templates/', :compile-all },
-    'All templates have valid syntax';
+lives-ok { template-location &#39;templates/&#39;, :compile-all },
+    &#39;All templates have valid syntax&#39;;
 
 done-testing;</code></pre>
 </div>
@@ -2237,14 +2184,14 @@ done-testing;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">&lt;h1&gt;Oh, hello there&lt;/h1&gt;
-&lt;p&gt;I've been expecting you...&lt;/p&gt;</code></pre>
+&lt;p&gt;I&#39;ve been expecting you...&lt;/p&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>将导致产生HTML。</p>
 </div>
 <div class="paragraph">
-<p>对模板引擎重要的语法由类似HTML的标记组成，该标记以非字母字符开头。 有些单独使用，例如&lt;.foo&gt;和&lt;$ foo&gt;，而另一些使用关闭器，例如&lt;@foo&gt; &#8230;&#8203; &lt;/ @&gt;关闭器不需要一个就再次写出完整的打开器，只需 匹配“印记”。 如果需要，可以在更近的地方重复打开器的打开字母字符（因此&lt;@foo&gt;可以用&lt;/ @ foo&gt;关闭）。</p>
+<p>对模板引擎重要的语法由类似HTML的标记组成，该标记以非字母字符开头。 有些单独使用，例如&lt;.foo&gt;和&lt;$ foo&gt;，而另一些使用关闭器，例如&lt;@foo&gt; …​ &lt;/ @&gt;关闭器不需要一个就再次写出完整的打开器，只需 匹配“印记”。 如果需要，可以在更近的地方重复打开器的打开字母字符（因此&lt;@foo&gt;可以用&lt;/ @ foo&gt;关闭）。</p>
 </div>
 <div class="paragraph">
 <p>与Perl 6一样，存在当前主题的概念，例如Perl 6 $ _。</p>
@@ -2269,8 +2216,8 @@ done-testing;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">{
-    name =&gt; 'Dave',
-    weather =&gt; 'rain'
+    name =&gt; &#39;Dave&#39;,
+    weather =&gt; &#39;rain&#39;
 }</code></pre>
 </div>
 </div>
@@ -2305,7 +2252,7 @@ done-testing;</code></pre>
 <div class="sect2">
 <h3 id="_变量">4.5. 变量</h3>
 <div class="paragraph">
-<p>&lt;$ &#8230;&#8203;&gt;语法可用于引用变量。 它将被字符串化，HTML编码并插入到文档中。 引用不存在的变量是模板编译时错误。 当前主题可以通过&lt;$ _&gt;访问。</p>
+<p>&lt;$ …​&gt;语法可用于引用变量。 它将被字符串化，HTML编码并插入到文档中。 引用不存在的变量是模板编译时错误。 当前主题可以通过&lt;$ _&gt;访问。</p>
 </div>
 <div class="paragraph">
 <p>允许变量使用&lt;.foo&gt;标记中允许的任何语法，例如&lt;$ product.name&gt;或&lt;$ product &lt;name &gt;&gt;。 例如，假设定义了变量$ person和$ weather，则：</p>
@@ -2336,9 +2283,9 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-html" data-lang="html">&lt;select name="country"&gt;
+<pre class="highlight"><code class="language-html" data-lang="html">&lt;select name=&#34;country&#34;&gt;
   &lt;@countries&gt;
-    &lt;option value="&lt;.alpha2&gt;"&gt;&lt;.name&gt;&lt;/option&gt;
+    &lt;option value=&#34;&lt;.alpha2&gt;&#34;&gt;&lt;.name&gt;&lt;/option&gt;
   &lt;/@&gt;
 &lt;/select&gt;</code></pre>
 </div>
@@ -2350,9 +2297,9 @@ done-testing;</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">{
     countries =&gt; [
-        { name =&gt; 'Argentina', alpha2 =&gt; 'AR' },
-        { name =&gt; 'Bhutan', alpha2 =&gt; 'BT' },
-        { name =&gt; 'Czech Republic', alpha2 =&gt; 'CZ' },
+        { name =&gt; &#39;Argentina&#39;, alpha2 =&gt; &#39;AR&#39; },
+        { name =&gt; &#39;Bhutan&#39;, alpha2 =&gt; &#39;BT&#39; },
+        { name =&gt; &#39;Czech Republic&#39;, alpha2 =&gt; &#39;CZ&#39; },
     ]
 }</code></pre>
 </div>
@@ -2362,10 +2309,10 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-html" data-lang="html">&lt;select name="country"&gt;
-    &lt;option value="AR"&gt;Argentina&lt;/option&gt;
-    &lt;option value="BT"&gt;Bhutan&lt;/option&gt;
-    &lt;option value="CZ"&gt;Czech Republic&lt;/option&gt;
+<pre class="highlight"><code class="language-html" data-lang="html">&lt;select name=&#34;country&#34;&gt;
+    &lt;option value=&#34;AR&#34;&gt;Argentina&lt;/option&gt;
+    &lt;option value=&#34;BT&#34;&gt;Bhutan&lt;/option&gt;
+    &lt;option value=&#34;CZ&#34;&gt;Czech Republic&lt;/option&gt;
 &lt;/select&gt;</code></pre>
 </div>
 </div>
@@ -2377,15 +2324,15 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;select name="country"&gt;
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;select name=&#34;country&#34;&gt;
   &lt;@countries: $c&gt;
-    &lt;option value="&lt;$c.alpha2&gt;"&gt;&lt;$c.name&gt;&lt;/option&gt;
+    &lt;option value=&#34;&lt;$c.alpha2&gt;&#34;&gt;&lt;$c.name&gt;&lt;/option&gt;
   &lt;/@&gt;
 &lt;/select&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>保留当前的默认目标。 如果当前目标本身是可迭代的，则可以简单地编写&lt;@_&gt; &#8230;&#8203; &lt;/ @ _&gt;。</p>
+<p>保留当前的默认目标。 如果当前目标本身是可迭代的，则可以简单地编写&lt;@_&gt; …​ &lt;/ @ _&gt;。</p>
 </div>
 <div class="paragraph">
 <p>如果开始和结束迭代标签是该行中唯一的东西，那么将不会为那些行生成任何输出，从而使输出更令人愉快。</p>
@@ -2394,7 +2341,7 @@ done-testing;</code></pre>
 <div class="sect2">
 <h3 id="_条件">4.7. 条件</h3>
 <div class="paragraph">
-<p>&lt;？$ foo&gt; &#8230;&#8203; &lt;/？&gt;（“ if”）和&lt;！$ foo&gt; &#8230;&#8203; &lt;/！&gt;（“除非”）可用于条件执行。它们对指定的变量执行布尔测试。还可以将它们与主题引用语法一起使用，例如&lt;?. is-admin&gt; &#8230;&#8203; &lt;/？&gt;。对于更复杂的条件，使用语法&lt;？{$ a eq $ b}&gt; &#8230;&#8203; &lt;/？&gt;接受Perl 6表达式的子集。与Perl 6唯一的不同之处在于&lt;？{.answer == 42}&gt; &#8230;&#8203; &lt;/？&gt;将具有与&lt;.answer&gt;中相同的哈希/对象语义，以与其余模板保持一致语言。</p>
+<p>&lt;？$ foo&gt; …​ &lt;/？&gt;（“ if”）和&lt;！$ foo&gt; …​ &lt;/！&gt;（“除非”）可用于条件执行。它们对指定的变量执行布尔测试。还可以将它们与主题引用语法一起使用，例如&lt;?. is-admin&gt; …​ &lt;/？&gt;。对于更复杂的条件，使用语法&lt;？{$ a eq $ b}&gt; …​ &lt;/？&gt;接受Perl 6表达式的子集。与Perl 6唯一的不同之处在于&lt;？{.answer == 42}&gt; …​ &lt;/？&gt;将具有与&lt;.answer&gt;中相同的哈希/对象语义，以与其余模板保持一致语言。</p>
 </div>
 <div class="paragraph">
 <p>允许以下构造：</p>
@@ -2409,7 +2356,7 @@ done-testing;</code></pre>
 <p>分组括号</p>
 </div>
 <div class="paragraph">
-<p>比较运算==，！=，&lt;，&#8656;，&gt; =，&gt;，eq，ne，lt，gt，===和！===</p>
+<p>比较运算==，！=，&lt;，⇐，&gt; =，&gt;，eq，ne，lt，gt，===和！===</p>
 </div>
 <div class="paragraph">
 <p>&amp;&amp;，||和和或短路逻辑运算符</p>
@@ -2466,9 +2413,9 @@ done-testing;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-html" data-lang="html">&lt;:sub select($options, $name)&gt;
-  &lt;select name="&lt;$name&gt;"&gt;
+  &lt;select name=&#34;&lt;$name&gt;&#34;&gt;
     &lt;@options&gt;
-      &lt;option value="&lt;$value&gt;"&gt;&lt;$text&gt;&lt;/option&gt;
+      &lt;option value=&#34;&lt;$value&gt;&#34;&gt;&lt;$text&gt;&lt;/option&gt;
     &lt;/@&gt;
   &lt;/select&gt;
 &lt;/:&gt;</code></pre>
@@ -2479,7 +2426,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;&amp;select(.countries, 'country')&gt;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;&amp;select(.countries, &#39;country&#39;)&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2491,9 +2438,9 @@ done-testing;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">&lt;:macro bs-card($title)&gt;
-  &lt;div class="card" style="width: 18rem;"&gt;
-    &lt;div class="card-body"&gt;
-      &lt;h5 class="card-title"&gt;&lt;$title&gt;&lt;/h5&gt;
+  &lt;div class=&#34;card&#34; style=&#34;width: 18rem;&#34;&gt;
+    &lt;div class=&#34;card-body&#34;&gt;
+      &lt;h5 class=&#34;card-title&#34;&gt;&lt;$title&gt;&lt;/h5&gt;
       &lt;:body&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -2505,8 +2452,8 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;|bs-card("My Stuff")&gt;
-  It's my stuff, in a BS card!
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;|bs-card(&#34;My Stuff&#34;)&gt;
+  It&#39;s my stuff, in a BS card!
 &lt;/|&gt;</code></pre>
 </div>
 </div>
@@ -2517,11 +2464,11 @@ done-testing;</code></pre>
 <div class="sect2">
 <h3 id="_分解出sub和宏">4.9. 分解出sub和宏</h3>
 <div class="paragraph">
-<p>模板子和宏可以分解为其他模板文件，然后使用&lt;：use &#8230;&#8203;&gt;导入：</p>
+<p>模板子和宏可以分解为其他模板文件，然后使用&lt;：use …​&gt;导入：</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;:use 'common.crotmp'&gt;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;:use &#39;common.crotmp&#39;&gt;</code></pre>
 </div>
 </div>
 </div>
@@ -2607,13 +2554,13 @@ $echo-server.start();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>请注意，如果Cro.compose（&#8230;&#8203;）具有以源开头和接收器结尾的内容，则仅返回Cro::Service。 那么在这种情况下，水槽从哪里来？ 由于连接是可答复的，因此它提供了接收器。 还值得注意的是，连接流神奇地变成了消息流。 如果编写者发现生成连接的对象后面是消耗消息的对象，它将把其余的管道传递给Cro::ConnectionManager实例，因此其余管道的处理将针对每个连接。</p>
+<p>请注意，如果Cro.compose（…​）具有以源开头和接收器结尾的内容，则仅返回Cro::Service。 那么在这种情况下，水槽从哪里来？ 由于连接是可答复的，因此它提供了接收器。 还值得注意的是，连接流神奇地变成了消息流。 如果编写者发现生成连接的对象后面是消耗消息的对象，它将把其余的管道传递给Cro::ConnectionManager实例，因此其余管道的处理将针对每个连接。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_http_服务器示例">4.13. HTTP 服务器示例</h3>
 <div class="paragraph">
-<p>大多数Cro HTTP服务将使用诸如Cro::HTTP::Router和Cro::HTTP::Server之类的高级模块进行组装。 但是，可以在没有这些便利的情况下使用Cro.compose（&#8230;&#8203;）将HTTP处理管道组合在一起。 首先，需要各种组件和消息类型：</p>
+<p>大多数Cro HTTP服务将使用诸如Cro::HTTP::Router和Cro::HTTP::Server之类的高级模块进行组装。 但是，可以在没有这些便利的情况下使用Cro.compose（…​）将HTTP处理管道组合在一起。 首先，需要各种组件和消息类型：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2638,8 +2585,8 @@ use Cro::TCP;</code></pre>
         supply {
             whenever $request-stream -&gt; $request {
                 given Cro::HTTP::Response.new(:200status) {
-                    .append-header('Content-type', 'text/html');
-                    .set-body("&lt;strong&gt;Hello from Cro!&lt;/strong&gt;");
+                    .append-header(&#39;Content-type&#39;, &#39;text/html&#39;);
+                    .set-body(&#34;&lt;strong&gt;Hello from Cro!&lt;/strong&gt;&#34;);
                     .emit;
                 }
             }
@@ -2654,7 +2601,7 @@ use Cro::TCP;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my Cro::Service $http-service = Cro.compose(
-    Cro::TCP::Listener.new( :host('localhost'), :port(8181) ),
+    Cro::TCP::Listener.new( :host(&#39;localhost&#39;), :port(8181) ),
     Cro::HTTP::RequestParser.new,
     HTTPHello,
     Cro::HTTP::ResponseSerializer.new
@@ -2668,7 +2615,7 @@ use Cro::TCP;</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">$http-service.start;
 signal(SIGINT).tap: {
-    note "Shutting down...";
+    note &#34;Shutting down...&#34;;
     $http-service.stop;
     exit;
 }
@@ -2691,10 +2638,10 @@ sleep;</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my Cro::Connector $conn = Cro.compose(Cro::TCP::Connector);
 my Supply $responses = $conn.establish(
-    host =&gt; 'localhost',
+    host =&gt; &#39;localhost&#39;,
     port =&gt; 4242,
     supply {
-        emit Cro::TCP::Message.new( :data('hello'.encode('ascii')) )
+        emit Cro::TCP::Message.new( :data(&#39;hello&#39;.encode(&#39;ascii&#39;)) )
     }
 );
 react {
@@ -2721,7 +2668,7 @@ react {
 
 my $req = supply {
     my Cro::HTTP::Request $req .= new(:method&lt;GET&gt;, :target&lt;/&gt;);
-    $req.add-header('Host', 'www.perl6.org');
+    $req.add-header(&#39;Host&#39;, &#39;www.perl6.org&#39;);
     emit $req;
 }
 react {

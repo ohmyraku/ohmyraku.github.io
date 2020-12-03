@@ -8,9 +8,16 @@
 
 <meta name="author" content="ohmyraku">
 <meta name="application-name" content="山川异域, 风月同天">
-<meta name="description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结   3. 格式化数独字谜 3.1. 让数独变得可玩 3.2. 捷径、常量和更多的捷径 3.3. IO 和其它悲剧 3.4. 获得创造性 3.5. 总结   4. 日期时间转换命令行 4.1. 使用库 4.2. DateTime 格式化 4.3. 寻找其他途径 4.4. 处理时间 4.5. 系好你的安全带 4.6. MAIN 魔法 4.7. 自动化测试 4.">
+<meta name="description" content="1. 什么是 Raku Raku 是一种编程语言。它以自然语言为灵感，设计成易学、易读、易写的语言。它让初学者可以编写 &#34;婴儿Perl&#34;，同时也让有经验的程序员可以自由表达，从简练到诗意。
+ Raku 是渐近类型的。它主要遵循了动态类型化语言的范式，即接受那些在编译过程中无法保证类型安全的程序。然而，与许多动态语言不同的是，它接受并执行类型约束。在可能的情况下，编译器使用类型注解来在编译时做出决定，否则只有在运行时才有可能。
+ 许多编程范式都影响了 Raku 。你可以在 Raku 中编写命令式、面向对象和函数式的程序。声明式编程的功能，如多重分派、子类型、regex 和 grammar 引擎等，都支持声明式编程。
+ 在 Raku 中，大部分的查询都是词法查询，而且语言避免了全局状态。这使得程序的并行和并发执行更加容易，Raku 对高级并发原语的关注也是如此。当你不希望被限制在一个 CPU 内核上时，你会考虑 Promise 和消息队列, 而不是考虑线程和锁。
+ Raku 作为一门语言，对于 Raku 程序应该被编译还是被解释的问题，Raku 是没有主见的。Raku 作为一种主要的实现, 可以快速编译模块并解释脚本。
+ 1.1. Perl5, 老天鹅 在 2000 年左右，Perl 5 的发展面临着巨大的压力，面临着既要发展又要保持向后兼容的矛盾。
+ Raku 是释放这种压力的阀门。所有需要打破向后兼容性的扩展建议都被引导到了 Raku 中，使其处于梦幻般的状态，一切皆有可能，没有任何东西是固定的。经过几年的努力，Raku 才进入了一个比较稳固的状态。
+ 在这段时间里，Perl 5 也在不断发展，这两种语言的差异性足够大，以至于大多数 Perl 5 的开发者不再认为 Raku 是一条自然的升级之路，以至于 Raku 并没有试图让 Perl 5 过时（至少不会比它试图让任何其他编程语言过时的程度更高：-），2015 年第一次稳定发布的 Raku 并没有表明对 Perl 5 的支持失效。">
 <meta name="robots" content="noodp"/>
-<meta name="generator" content="Hugo 0.63.2" />
+<meta name="generator" content="Hugo 0.79.0" />
 <meta name="referrer" content="no-referrer" />
 <meta name="format-detection" content="telephone=no">
 
@@ -22,7 +29,14 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Raku 基础" />
-<meta name="twitter:description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结   3. 格式化数独字谜 3.1. 让数独变得可玩 3.2. 捷径、常量和更多的捷径 3.3. IO 和其它悲剧 3.4. 获得创造性 3.5. 总结   4. 日期时间转换命令行 4.1. 使用库 4.2. DateTime 格式化 4.3. 寻找其他途径 4.4. 处理时间 4.5. 系好你的安全带 4.6. MAIN 魔法 4.7. 自动化测试 4." />
+<meta name="twitter:description" content="1. 什么是 Raku Raku 是一种编程语言。它以自然语言为灵感，设计成易学、易读、易写的语言。它让初学者可以编写 &#34;婴儿Perl&#34;，同时也让有经验的程序员可以自由表达，从简练到诗意。
+ Raku 是渐近类型的。它主要遵循了动态类型化语言的范式，即接受那些在编译过程中无法保证类型安全的程序。然而，与许多动态语言不同的是，它接受并执行类型约束。在可能的情况下，编译器使用类型注解来在编译时做出决定，否则只有在运行时才有可能。
+ 许多编程范式都影响了 Raku 。你可以在 Raku 中编写命令式、面向对象和函数式的程序。声明式编程的功能，如多重分派、子类型、regex 和 grammar 引擎等，都支持声明式编程。
+ 在 Raku 中，大部分的查询都是词法查询，而且语言避免了全局状态。这使得程序的并行和并发执行更加容易，Raku 对高级并发原语的关注也是如此。当你不希望被限制在一个 CPU 内核上时，你会考虑 Promise 和消息队列, 而不是考虑线程和锁。
+ Raku 作为一门语言，对于 Raku 程序应该被编译还是被解释的问题，Raku 是没有主见的。Raku 作为一种主要的实现, 可以快速编译模块并解释脚本。
+ 1.1. Perl5, 老天鹅 在 2000 年左右，Perl 5 的发展面临着巨大的压力，面临着既要发展又要保持向后兼容的矛盾。
+ Raku 是释放这种压力的阀门。所有需要打破向后兼容性的扩展建议都被引导到了 Raku 中，使其处于梦幻般的状态，一切皆有可能，没有任何东西是固定的。经过几年的努力，Raku 才进入了一个比较稳固的状态。
+ 在这段时间里，Perl 5 也在不断发展，这两种语言的差异性足够大，以至于大多数 Perl 5 的开发者不再认为 Raku 是一条自然的升级之路，以至于 Raku 并没有试图让 Perl 5 过时（至少不会比它试图让任何其他编程语言过时的程度更高：-），2015 年第一次稳定发布的 Raku 并没有表明对 Perl 5 的支持失效。" />
 <meta name="twitter:site" content="https://ohmyraku.github.io" />
 <meta name="twitter:creator" content="ohmyraku" />
 <meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
@@ -32,7 +46,14 @@
 <meta property="og:title" content="Raku 基础" />
 <meta property="og:url" content="https://ohmyraku.github.io" />
 <meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结   3. 格式化数独字谜 3.1. 让数独变得可玩 3.2. 捷径、常量和更多的捷径 3.3. IO 和其它悲剧 3.4. 获得创造性 3.5. 总结   4. 日期时间转换命令行 4.1. 使用库 4.2. DateTime 格式化 4.3. 寻找其他途径 4.4. 处理时间 4.5. 系好你的安全带 4.6. MAIN 魔法 4.7. 自动化测试 4." />
+<meta property="og:description" content="1. 什么是 Raku Raku 是一种编程语言。它以自然语言为灵感，设计成易学、易读、易写的语言。它让初学者可以编写 &#34;婴儿Perl&#34;，同时也让有经验的程序员可以自由表达，从简练到诗意。
+ Raku 是渐近类型的。它主要遵循了动态类型化语言的范式，即接受那些在编译过程中无法保证类型安全的程序。然而，与许多动态语言不同的是，它接受并执行类型约束。在可能的情况下，编译器使用类型注解来在编译时做出决定，否则只有在运行时才有可能。
+ 许多编程范式都影响了 Raku 。你可以在 Raku 中编写命令式、面向对象和函数式的程序。声明式编程的功能，如多重分派、子类型、regex 和 grammar 引擎等，都支持声明式编程。
+ 在 Raku 中，大部分的查询都是词法查询，而且语言避免了全局状态。这使得程序的并行和并发执行更加容易，Raku 对高级并发原语的关注也是如此。当你不希望被限制在一个 CPU 内核上时，你会考虑 Promise 和消息队列, 而不是考虑线程和锁。
+ Raku 作为一门语言，对于 Raku 程序应该被编译还是被解释的问题，Raku 是没有主见的。Raku 作为一种主要的实现, 可以快速编译模块并解释脚本。
+ 1.1. Perl5, 老天鹅 在 2000 年左右，Perl 5 的发展面临着巨大的压力，面临着既要发展又要保持向后兼容的矛盾。
+ Raku 是释放这种压力的阀门。所有需要打破向后兼容性的扩展建议都被引导到了 Raku 中，使其处于梦幻般的状态，一切皆有可能，没有任何东西是固定的。经过几年的努力，Raku 才进入了一个比较稳固的状态。
+ 在这段时间里，Perl 5 也在不断发展，这两种语言的差异性足够大，以至于大多数 Perl 5 的开发者不再认为 Raku 是一条自然的升级之路，以至于 Raku 并没有试图让 Perl 5 过时（至少不会比它试图让任何其他编程语言过时的程度更高：-），2015 年第一次稳定发布的 Raku 并没有表明对 Perl 5 的支持失效。" />
 <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -44,12 +65,12 @@
       "headline": "Raku 基础",
       
       "datePublished": "2020-02-05",
-      "dateModified": "2020-02-05 15:26:52 \x2b0800 CST",
+      "dateModified": "2020-02-05 15:26:52 \u002b0800 CST",
       "author": {
         "@type": "Person",
         "name": "ohmyraku"
       },
-      "description": "Table of Contents 1. 什么是 Raku 1.1. Perl5, 老天鹅 1.2. 库的可用性 1.3. 我为什么要使用 Raku? 1.4. 总结   2. 运行 Raku 2.1. 安装器 2.2. Docker 2.3. 从源代码创建 2.4. 测试你的 Rakudo Star 安装 2.5. 文档 2.6. 总结   3. 格式化数独字谜 3.1. 让数独变得可玩 3.2. 捷径、常量和更多的捷径 3.3. IO 和其它悲剧 3.4. 获得创造性 3.5. 总结   4. 日期时间转换命令行 4.1. 使用库 4.2. DateTime 格式化 4.3. 寻找其他途径 4.4. 处理时间 4.5. 系好你的安全带 4.6. MAIN 魔法 4.7. 自动化测试 4.",
+      "description": "1. 什么是 Raku Raku 是一种编程语言。它以自然语言为灵感，设计成易学、易读、易写的语言。它让初学者可以编写 \u0026#34;婴儿Perl\u0026#34;，同时也让有经验的程序员可以自由表达，从简练到诗意。\n Raku 是渐近类型的。它主要遵循了动态类型化语言的范式，即接受那些在编译过程中无法保证类型安全的程序。然而，与许多动态语言不同的是，它接受并执行类型约束。在可能的情况下，编译器使用类型注解来在编译时做出决定，否则只有在运行时才有可能。\n 许多编程范式都影响了 Raku 。你可以在 Raku 中编写命令式、面向对象和函数式的程序。声明式编程的功能，如多重分派、子类型、regex 和 grammar 引擎等，都支持声明式编程。\n 在 Raku 中，大部分的查询都是词法查询，而且语言避免了全局状态。这使得程序的并行和并发执行更加容易，Raku 对高级并发原语的关注也是如此。当你不希望被限制在一个 CPU 内核上时，你会考虑 Promise 和消息队列, 而不是考虑线程和锁。\n Raku 作为一门语言，对于 Raku 程序应该被编译还是被解释的问题，Raku 是没有主见的。Raku 作为一种主要的实现, 可以快速编译模块并解释脚本。\n 1.1. Perl5, 老天鹅 在 2000 年左右，Perl 5 的发展面临着巨大的压力，面临着既要发展又要保持向后兼容的矛盾。\n Raku 是释放这种压力的阀门。所有需要打破向后兼容性的扩展建议都被引导到了 Raku 中，使其处于梦幻般的状态，一切皆有可能，没有任何东西是固定的。经过几年的努力，Raku 才进入了一个比较稳固的状态。\n 在这段时间里，Perl 5 也在不断发展，这两种语言的差异性足够大，以至于大多数 Perl 5 的开发者不再认为 Raku 是一条自然的升级之路，以至于 Raku 并没有试图让 Perl 5 过时（至少不会比它试图让任何其他编程语言过时的程度更高：-），2015 年第一次稳定发布的 Raku 并没有表明对 Perl 5 的支持失效。",
       "publisher": {
         "@type": "Organization",
         "name": "https:\/\/ohmyraku.github.io",
@@ -96,151 +117,12 @@ if (theme && theme !== "1") {
 
 </div>
 
-<article class="page__content" ><div id="toc" class="toc">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_什么是_raku">1. 什么是 Raku</a>
-<ul class="sectlevel2">
-<li><a href="#_perl5_老天鹅">1.1. Perl5, 老天鹅</a></li>
-<li><a href="#_库的可用性">1.2. 库的可用性</a></li>
-<li><a href="#_我为什么要使用_raku">1.3. 我为什么要使用 Raku?</a></li>
-<li><a href="#_总结">1.4. 总结</a></li>
-</ul>
-</li>
-<li><a href="#_运行_raku">2. 运行 Raku</a>
-<ul class="sectlevel2">
-<li><a href="#_安装器">2.1. 安装器</a></li>
-<li><a href="#_docker">2.2. Docker</a></li>
-<li><a href="#_从源代码创建">2.3. 从源代码创建</a></li>
-<li><a href="#_测试你的_rakudo_star_安装">2.4. 测试你的 Rakudo Star 安装</a></li>
-<li><a href="#_文档">2.5. 文档</a></li>
-<li><a href="#_总结_2">2.6. 总结</a></li>
-</ul>
-</li>
-<li><a href="#_格式化数独字谜">3. 格式化数独字谜</a>
-<ul class="sectlevel2">
-<li><a href="#_让数独变得可玩">3.1. 让数独变得可玩</a></li>
-<li><a href="#_捷径常量和更多的捷径">3.2. 捷径、常量和更多的捷径</a></li>
-<li><a href="#_io_和其它悲剧">3.3. IO 和其它悲剧</a></li>
-<li><a href="#_获得创造性">3.4. 获得创造性</a></li>
-<li><a href="#_总结_3">3.5. 总结</a></li>
-</ul>
-</li>
-<li><a href="#_日期时间转换命令行">4. 日期时间转换命令行</a>
-<ul class="sectlevel2">
-<li><a href="#_使用库">4.1. 使用库</a></li>
-<li><a href="#_datetime_格式化">4.2. DateTime 格式化</a></li>
-<li><a href="#_寻找其他途径">4.3. 寻找其他途径</a></li>
-<li><a href="#_处理时间">4.4. 处理时间</a></li>
-<li><a href="#_系好你的安全带">4.5. 系好你的安全带</a></li>
-<li><a href="#_main_魔法">4.6. MAIN 魔法</a></li>
-<li><a href="#_自动化测试">4.7. 自动化测试</a></li>
-<li><a href="#_总结_4">4.8. 总结</a></li>
-</ul>
-</li>
-<li><a href="#_测试_say">5. 测试 say</a>
-<ul class="sectlevel2">
-<li><a href="#_总结_5">5.1. 总结</a></li>
-</ul>
-</li>
-<li><a href="#_silent_cron_一个_cron_包裹器">6. Silent-Cron, 一个 Cron 包裹器</a>
-<ul class="sectlevel2">
-<li><a href="#_异步运行命令">6.1. 异步运行命令</a></li>
-<li><a href="#_实现超时">6.2. 实现超时</a></li>
-<li><a href="#_更多关于承诺的信息">6.3. 更多关于承诺的信息</a></li>
-<li><a href="#_可能的扩展">6.4. 可能的扩展</a></li>
-<li><a href="#_重构和自动化测试">6.5. 重构和自动化测试</a></li>
-<li><a href="#_总结_6">6.6. 总结</a></li>
-</ul>
-</li>
-<li><a href="#_有状态的_silent_cron">7. 有状态的 Silent Cron</a>
-<ul class="sectlevel2">
-<li><a href="#_持久化存储">7.1. 持久化存储</a></li>
-<li><a href="#_开发存储后端">7.2. 开发存储后端</a></li>
-<li><a href="#_使用存储后端">7.3. 使用存储后端</a></li>
-<li><a href="#_扩展空间">7.4. 扩展空间</a></li>
-<li><a href="#_总结_7">7.5. 总结</a></li>
-</ul>
-</li>
-<li><a href="#_回顾_raku_基础知识">8. 回顾 Raku 基础知识</a>
-<ul class="sectlevel2">
-<li><a href="#_变量和作用域">8.1. 变量和作用域</a></li>
-<li><a href="#_子例程">8.2. 子例程</a></li>
-<li><a href="#_类和对象">8.3. 类和对象</a></li>
-<li><a href="#_并发">8.4. 并发</a></li>
-<li><a href="#_展望">8.5. 展望</a></li>
-</ul>
-</li>
-<li><a href="#_使用正则表达式和_grammar_解析_ini_文件">9. 使用正则表达式和 Grammar 解析 INI 文件</a>
-<ul class="sectlevel2">
-<li><a href="#_正则表达式基础">9.1. 正则表达式基础</a></li>
-<li><a href="#_解析_ini_原语">9.2. 解析 INI 原语</a></li>
-<li><a href="#_把东西组装起来">9.3. 把东西组装起来</a></li>
-<li><a href="#_回溯">9.4. 回溯</a></li>
-<li><a href="#_grammar">9.5. Grammar</a></li>
-<li><a href="#_从匹配中提取数据">9.6. 从匹配中提取数据</a></li>
-<li><a href="#_生成好的错误信息">9.7. 生成好的错误信息</a></li>
-<li><a href="#_编写你自己的_grammar">9.8. 编写你自己的 Grammar</a></li>
-<li><a href="#_总结_8">9.9. 总结</a></li>
-</ul>
-</li>
-<li><a href="#_文件和目录使用状态图">10. 文件和目录使用状态图</a>
-<ul class="sectlevel2">
-<li><a href="#_reading_file_sizes">10.1. Reading File Sizes</a></li>
-<li><a href="#_generating_a_tree_map">10.2. Generating a Tree Map</a></li>
-<li><a href="#_火焰图">10.3. 火焰图</a></li>
-<li><a href="#_functional_refactorings">10.4. Functional Refactorings</a></li>
-<li><a href="#_more_language_support_for_functional_programming">10.5. More Language Support for Functional Programming</a></li>
-<li><a href="#_more_improvements">10.6. More Improvements</a></li>
-<li><a href="#_explore">10.7. Explore!</a></li>
-<li><a href="#_summary">10.8. Summary</a></li>
-</ul>
-</li>
-<li><a href="#_unicode_搜索工具">11. Unicode 搜索工具</a>
-<ul class="sectlevel2">
-<li><a href="#_代码点字符集和字节">11.1. 代码点、字符集和字节</a></li>
-<li><a href="#_数字">11.2. 数字</a></li>
-<li><a href="#_其它_unicode_属性">11.3. 其它 Unicode 属性</a></li>
-<li><a href="#_排序">11.4. 排序</a></li>
-<li><a href="#_总结_9">11.5. 总结</a></li>
-</ul>
-</li>
-<li><a href="#_使用_inine_python_和_matplotlib_画图">12. 使用 Inine-Python 和 Matplotlib 画图</a>
-<ul class="sectlevel2">
-<li><a href="#_提取状态">12.1. 提取状态</a></li>
-<li><a href="#_plotting_with_python">12.2. Plotting with Python</a></li>
-<li><a href="#_bridging_the_gap">12.3. Bridging the Gap</a></li>
-<li><a href="#_using_the_bridge_to_plot">12.4. Using the Bridge to Plot</a></li>
-<li><a href="#_stacked_plots">12.5. Stacked Plots</a></li>
-<li><a href="#_idiomatic_use_of_inlinepython">12.6. Idiomatic Use of Inline::Python</a></li>
-<li><a href="#_idiomatic_use_of_inlinepython_2">12.7. Idiomatic Use of Inline::Python</a></li>
-<li><a href="#_总结_10">12.8. 总结</a></li>
-</ul>
-</li>
-<li><a href="#_接下来是什么">13. 接下来是什么</a>
-<ul class="sectlevel2">
-<li><a href="#_扩展你的代码库">13.1. 扩展你的代码库</a></li>
-<li><a href="#_打包你的应用">13.2. 打包你的应用</a></li>
-<li><a href="#_结尾感想">13.3. 结尾感想</a></li>
-</ul>
-</li>
-<li><a href="#_创建一个_web_服务和声明式_api">14. 创建一个 Web 服务和声明式 API</a>
-<ul class="sectlevel2">
-<li><a href="#_12_1_开始使用_cro">14.1. 12.1 开始使用 Cro</a></li>
-<li><a href="#_12_2_扩大服务范围">14.2. 12.2 扩大服务范围</a></li>
-<li><a href="#_12_3_测试">14.3. 12.3 测试</a></li>
-<li><a href="#_12_4_添加一个网页">14.4. 12.4 添加一个网页</a></li>
-<li><a href="#_12_5_声明式_api">14.5. 12.5 声明式 API</a></li>
-<li><a href="#_12_6_总结">14.6. 12.6 总结</a></li>
-</ul>
-</li>
-</ul>
-</div>
+<article class="page__content" >
 <div class="sect1">
 <h2 id="_什么是_raku">1. 什么是 Raku</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Raku 是一种编程语言。它以自然语言为灵感，设计成易学、易读、易写的语言。它让初学者可以编写 "婴儿Perl"，同时也让有经验的程序员可以自由表达，从简练到诗意。</p>
+<p>Raku 是一种编程语言。它以自然语言为灵感，设计成易学、易读、易写的语言。它让初学者可以编写 &#34;婴儿Perl&#34;，同时也让有经验的程序员可以自由表达，从简练到诗意。</p>
 </div>
 <div class="paragraph">
 <p>Raku 是渐近类型的。它主要遵循了动态类型化语言的范式，即接受那些在编译过程中无法保证类型安全的程序。然而，与许多动态语言不同的是，它接受并执行类型约束。在可能的情况下，编译器使用类型注解来在编译时做出决定，否则只有在运行时才有可能。</p>
@@ -297,7 +179,7 @@ if (theme && theme !== "1") {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-txt" data-lang="txt">Unable to parse expression in argument list; couldn't find final ')'</code></pre>
+<pre class="highlight"><code class="language-txt" data-lang="txt">Unable to parse expression in argument list; couldn&#39;t find final &#39;)&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -379,18 +261,18 @@ if (theme && theme !== "1") {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">alias p6d='docker run -v $PWD:/raku -w /raku -it rakudo-star raku'</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">alias p6d=&#39;docker run -v $PWD:/raku -w /raku -it rakudo-star raku&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我把这一行放到了我的 <code>~/.bashrc</code> 文件中，所以新的 shell 实例有一个 p6d 命令，简称 "Raku docker"。</p>
+<p>我把这一行放到了我的 <code>~/.bashrc</code> 文件中，所以新的 shell 实例有一个 p6d 命令，简称 &#34;Raku docker&#34;。</p>
 </div>
 <div class="paragraph">
 <p>作为一个简短的测试，看看它是否有效，你可以运行:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">$ p6d -e 'say "hi"'
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ p6d -e &#39;say &#34;hi&#34;&#39;
 hi</code></pre>
 </div>
 </div>
@@ -439,7 +321,7 @@ $ make install</code></pre>
 This is Rakudo version 2017.04.2 built on MoarVM version 2017.04
 implementing Raku.c.
 
-$ raku -e "say &lt;hi&gt;"
+$ raku -e &#34;say &lt;hi&gt;&#34;
 hi</code></pre>
 </div>
 </div>
@@ -492,7 +374,7 @@ hi</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku"># file sudoku.p6
 use v6;
-my $sudoku = '000000075000080094000500600010000200000900057006003040001000023080000006063240000';
+my $sudoku = &#39;000000075000080094000500600010000200000900057006003040001000023080000006063240000&#39;;
 for 0..8 -&gt; $line-number {
     say substr $sudoku, $line-number * 9, 9;
 }</code></pre>
@@ -537,7 +419,7 @@ Perl v6.0.0 required--this is only v5.22.1, stopped at sudoku.p6 line 1. BEGIN f
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-txt" data-lang="txt">syntax error at sudoku.p6 line 4, near "for 0"
+<pre class="highlight"><code class="language-txt" data-lang="txt">syntax error at sudoku.p6 line 4, near &#34;for 0&#34;
 Execution of sudoku.p6 aborted due to compilation errors.</code></pre>
 </div>
 </div>
@@ -546,7 +428,7 @@ Execution of sudoku.p6 aborted due to compilation errors.</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $sudoku = '00000007500...';</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $sudoku = &#39;00000007500...&#39;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -559,11 +441,11 @@ Execution of sudoku.p6 aborted due to compilation errors.</code></pre>
 <p>这个变量开始时并不是空的，因为在它的旁边有一个初始化。它开始时的值是一个字符串的字段，如引号所示。</p>
 </div>
 <div class="paragraph">
-<p>需要注意的是，除了"它是一个标量"这个非常模糊的符号所暗示的"它是一个标量 "之外，我们不需要声明变量的类型。如果我们愿意，我们可以添加一个类型约束。</p>
+<p>需要注意的是，除了&#34;它是一个标量&#34;这个非常模糊的符号所暗示的&#34;它是一个标量 &#34;之外，我们不需要声明变量的类型。如果我们愿意，我们可以添加一个类型约束。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my Str $sudoku = '00000007500...';</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Str $sudoku = &#39;00000007500...&#39;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -580,13 +462,13 @@ Execution of sudoku.p6 aborted due to compilation errors.</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>for 循环具有 ITERABLE BLOCK 的一般结构。这里的 iterable 是一个范围<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup>，块是一个尖号块。该块以 <code>&#8594;</code> 开头，引入了一个签名。这个签名告诉编译器这个块期望有哪些参数，这里是一个单一的标量，叫做 <code>$line-number</code>。</p>
+<p>for 循环具有 ITERABLE BLOCK 的一般结构。这里的 iterable 是一个范围<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup>，块是一个尖号块。该块以 <code>→</code> 开头，引入了一个签名。这个签名告诉编译器这个块期望有哪些参数，这里是一个单一的标量，叫做 <code>$line-number</code>。</p>
 </div>
 <div class="paragraph">
-<p>Raku 允许使用破折号 <code>-</code> 或单引号 <code>'</code> 将多个简单的标识符连接成一个大的标识符。这意味着只要下面的字符是字母或下划线，就可以在标识符中使用。</p>
+<p>Raku 允许使用破折号 <code>-</code> 或单引号 <code>&#39;</code> 将多个简单的标识符连接成一个大的标识符。这意味着只要下面的字符是字母或下划线，就可以在标识符中使用。</p>
 </div>
 <div class="paragraph">
-<p>同样，类型约束是可选的。如果你选择了包含它们，它会是 <code>for 0..8 &#8594; Int $line-number { &#8230;&#8203; }</code>。</p>
+<p>同样，类型约束是可选的。如果你选择了包含它们，它会是 <code>for 0..8 → Int $line-number { …​ }</code>。</p>
 </div>
 <div class="paragraph">
 <p><code>$line-number</code> 又是一个词法变量，在签名后的块中可见。块由大括号分隔。</p>
@@ -633,18 +515,18 @@ Execution of sudoku.p6 aborted due to compilation errors.</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku"># file sudoku.p6
 use v6;
-my $sudoku = '000000075000080094000500600010000200000900057006003040001000023080000006063240000';
-$sudoku = $sudoku.trans('0' =&gt; ' ');
+my $sudoku = &#39;000000075000080094000500600010000200000900057006003040001000023080000006063240000&#39;;
+$sudoku = $sudoku.trans(&#39;0&#39; =&gt; &#39; &#39;);
 for 0..8 -&gt; $line-number {
     say substr $sudoku, $line-number * 9, 9;
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>trans<sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnotedef_5" title="View footnote.">5</a>]</sup> 是 Str 类中的一个方法，它的参数是一个 Pair<sup class="footnote">[<a id="_footnoteref_6" class="footnote" href="#_footnotedef_6" title="View footnote.">6</a>]</sup>。创建一个 Pair 的方法是 <code>Pair.new('0', ' ')</code>，但是因为它很常用，所以有一个快捷方式，就是用胖箭头形式，<code>&#8658;</code>。方法 <code>trans</code> 将每一次出现的 pair 的键替换成 pair 的值，然后返回生成的字符串。</p>
+<p>trans<sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnotedef_5" title="View footnote.">5</a>]</sup> 是 Str 类中的一个方法，它的参数是一个 Pair<sup class="footnote">[<a id="_footnoteref_6" class="footnote" href="#_footnotedef_6" title="View footnote.">6</a>]</sup>。创建一个 Pair 的方法是 <code>Pair.new(&#39;0&#39;, &#39; &#39;)</code>，但是因为它很常用，所以有一个快捷方式，就是用胖箭头形式，<code>⇒</code>。方法 <code>trans</code> 将每一次出现的 pair 的键替换成 pair 的值，然后返回生成的字符串。</p>
 </div>
 <div class="paragraph">
-<p>说到快捷方式，你还可以把 <code>$sudoku.trans(&#8230;&#8203;)</code> 缩短为 <code>$sudoku.=$sudoku.trans(&#8230;&#8203;)</code>。这是一个通用的模式，将返回结果的方法变成了 mutator。</p>
+<p>说到快捷方式，你还可以把 <code>$sudoku.trans(…​)</code> 缩短为 <code>$sudoku.=$sudoku.trans(…​)</code>。这是一个通用的模式，将返回结果的方法变成了 mutator。</p>
 </div>
 <div class="paragraph">
 <p>用新的字符串替换，结果是可以玩的，但很难看。</p>
@@ -694,7 +576,7 @@ for 0..8 -&gt; $line-number {
     }
 
 for chunks($sudoku, 9) -&gt; $line {
-    say chunks($line, 3).join('|');
+    say chunks($line, 3).join(&#39;|&#39;);
 }</code></pre>
 </div>
 </div>
@@ -736,7 +618,7 @@ for chunks($sudoku, 9) -&gt; $line {
 <p><code>loop</code> 语句的形式为 <code>loop (INITIAL, CONDITION, POST) BLOCK</code>，其工作原理类似于 C 语言和相关语言中的 for 循环。它首先执行 INITIAL，然后在 CONDITION 为真时，先执行 BLOCK，然后执行 POST。</p>
 </div>
 <div class="paragraph">
-<p>一个子例程返回最后一个表达式<sup class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnotedef_7" title="View footnote.">7</a>]</sup>的值，这里是上面讨论的 <code>gather loop &#8230;&#8203;</code> 构造。</p>
+<p>一个子例程返回最后一个表达式<sup class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnotedef_7" title="View footnote.">7</a>]</sup>的值，这里是上面讨论的 <code>gather loop …​</code> 构造。</p>
 </div>
 <div class="paragraph">
 <p>再回到程序中，现在的 for 循环看起来是这样的。</p>
@@ -744,7 +626,7 @@ for chunks($sudoku, 9) -&gt; $line {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">for chunks($sudoku, 9) -&gt; $line {
-    say chunks($line, 3).join('|');
+    say chunks($line, 3).join(&#39;|&#39;);
 }</code></pre>
 </div>
 </div>
@@ -756,7 +638,7 @@ for chunks($sudoku, 9) -&gt; $line {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say '|', chunks($line, 3).join('|'), '|';</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;|&#39;, chunks($line, 3).join(&#39;|&#39;), &#39;|&#39;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -780,13 +662,13 @@ for chunks($sudoku, 9) -&gt; $line {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $separator = '+---+---+---+';
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $separator = &#39;+---+---+---+&#39;;
 my $index = 0;
 for chunks($sudoku, 9) -&gt; $line {
     if $index++ %% 3 {
         say $separator;
     }
-    say '|', chunks($line, 3).join('|'), '|';
+    say &#39;|&#39;, chunks($line, 3).join(&#39;|&#39;), &#39;|&#39;;
 }
 say $separator;</code></pre>
 </div>
@@ -846,15 +728,15 @@ say $x;</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku"># file sudoku.p6
 use v6;
 
-my $sudoku = '000000075000080094000500600010000200000900057006003040001000023080000006063240000';
-$sudoku = $sudoku.trans('0' =&gt; ' ');
-my $separator = '+---+---+---+';
+my $sudoku = &#39;000000075000080094000500600010000200000900057006003040001000023080000006063240000&#39;;
+$sudoku = $sudoku.trans(&#39;0&#39; =&gt; &#39; &#39;);
+my $separator = &#39;+---+---+---+&#39;;
 my $index = 0;
 for $sudoku.comb(9) -&gt; $line {
     if $index++ %% 3 {
         say $separator;
     }
-    say '|', $line.comb(3).join('|'), '|';
+    say &#39;|&#39;, $line.comb(3).join(&#39;|&#39;), &#39;|&#39;;
 }
 say $separator;</code></pre>
 </div>
@@ -872,9 +754,9 @@ say $separator;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $separator = '+---+---+---+'; for $sudoku.comb(9) -&gt; $line {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $separator = &#39;+---+---+---+&#39;; for $sudoku.comb(9) -&gt; $line {
 say $separator if $++ %% 3;
-    say '|', $line.comb(3).join('|'), '|';
+    say &#39;|&#39;, $line.comb(3).join(&#39;|&#39;), &#39;|&#39;;
 }
 say $separator;</code></pre>
 </div>
@@ -883,14 +765,14 @@ say $separator;</code></pre>
 <p>由于 <code>$separator</code> 是常量，我们可以将它声明为：</p>
 </div>
 <div class="paragraph">
-<p>如果你想降低线路噪声因子，你也可以放弃这个sigil，所以恒定的separator ='&#8230;&#8203;'。
+<p>如果你想降低线路噪声因子，你也可以放弃这个sigil，所以恒定的separator =&#39;…​&#39;。
 最后，有一个带参数的方法调用的另一种语法：而不是$ obj.method（args），你可以说$ obj.method：args，它将我们带到了小型数独格式化程序的惯用形式：</p>
 </div>
 <div class="paragraph">
 <p>因为 <code>$separator</code> 是一个常数，所以我们可以把它声明为一个常数。</p>
 </div>
 <div class="paragraph">
-<p>如果你想降低行噪声系数，也可以放弃 sigil，所以常量 <code>separator='&#8230;&#8203;'</code>。</p>
+<p>如果你想降低行噪声系数，也可以放弃 sigil，所以常量 <code>separator=&#39;…​&#39;</code>。</p>
 </div>
 <div class="paragraph">
 <p>最后，对于带参数的方法调用，还有另一种语法：你可以使用 <code>$obj.method: args</code> 代替 <code>$obj.method(args)</code>，这就给我们引出了成语形式的数独格式化。</p>
@@ -900,13 +782,13 @@ say $separator;</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku"># file sudoku.p6
 use v6;
 
-my $sudoku = '000000075000080094000500600010000200000900057006003040 001000023080000006063240000';
-$sudoku = $sudoku.trans: '0' =&gt; ' ';
+my $sudoku = &#39;000000075000080094000500600010000200000900057006003040 001000023080000006063240000&#39;;
+$sudoku = $sudoku.trans: &#39;0&#39; =&gt; &#39; &#39;;
 
-constant separator = '+---+---+---+';
+constant separator = &#39;+---+---+---+&#39;;
 for $sudoku.comb(9) -&gt; $line {
     say separator if $++ %% 3;
-    say '|', $line.comb(3).join('|'), '|';
+    say &#39;|&#39;, $line.comb(3).join(&#39;|&#39;), &#39;|&#39;;
 }
 say separator;</code></pre>
 </div>
@@ -928,14 +810,14 @@ say separator;</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku"># file sudoku.p6
 use v6;
 
-constant separator = '+---+---+---+';
+constant separator = &#39;+---+---+---+&#39;;
 
 sub MAIN($sudoku) {
-    my $substituted = $sudoku.trans: '0' =&gt; ' ';
+    my $substituted = $sudoku.trans: &#39;0&#39; =&gt; &#39; &#39;;
 
     for $substituted.comb(9) -&gt; $line {
         say separator if $++ %% 3;
-        say '|', $line.comb(3).join('|'), '|';
+        say &#39;|&#39;, $line.comb(3).join(&#39;|&#39;), &#39;|&#39;;
     }
     say separator;
 }</code></pre>
@@ -977,7 +859,7 @@ Usage:
 </div>
 </div>
 <div class="paragraph">
-<p>你可能已经注意到，最后一个例子中的替换数独字符串使用了一个单独的变量。这是因为函数参数（签名中声明的变量）默认是只读的。与其创建一个新的变量，我还可以写成 <code>sub MAIN($sudoku is copy) { &#8230;&#8203;}</code>.</p>
+<p>你可能已经注意到，最后一个例子中的替换数独字符串使用了一个单独的变量。这是因为函数参数（签名中声明的变量）默认是只读的。与其创建一个新的变量，我还可以写成 <code>sub MAIN($sudoku is copy) { …​}</code>.</p>
 </div>
 <div class="paragraph">
 <p>经典的 UNIX 程序，如 cat 和 wc，都遵循了从命令行中给出的文件名中读取输入的惯例，如果命令行中没有给出文件名，则从标准输入中读取。</p>
@@ -990,14 +872,14 @@ Usage:
 <pre class="highlight"><code class="language-raku" data-lang="raku"># file sudoku.p6
 use v6;
 
-constant separator = '+---+---+---+';
+constant separator = &#39;+---+---+---+&#39;;
 
 for lines() -&gt; $sudoku {
-    my $substituted = $sudoku.trans: '0' =&gt; ' ';
+    my $substituted = $sudoku.trans: &#39;0&#39; =&gt; &#39; &#39;;
 
     for $substituted.comb(9) -&gt; $line {
         say separator if $++ %% 3;
-        say '|', $line.comb(3).join('|'), '|';
+        say &#39;|&#39;, $line.comb(3).join(&#39;|&#39;), &#39;|&#39;;
     }
     say separator;
 }</code></pre>
@@ -1017,20 +899,20 @@ for lines() -&gt; $sudoku {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" standalone="no"?&gt;
-&lt;!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/ Graphics/SVG/1.1/DTD/svg11.dtd"&gt;
-&lt;svg width="304" height="304" version="1.1" xmlns="http://www.w3.org/2000/svg"&gt;
-&lt;line x1="0" x2="300" y1="33.3333" y2="33.3333" style="stroke:grey" /&gt;
-&lt;line x1="0" x2="300" y1="66.6667" y2="66.6667" style="stroke:grey" /&gt;
-&lt;line x1="0" x2="303" y1="100" y2="100" style="stroke:black; stroke-width:2"/&gt;
-&lt;line x1="0" x2="300" y1="133.333" y2="133.333" style="stroke:grey" /&gt;
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version=&#34;1.0&#34; standalone=&#34;no&#34;?&gt;
+&lt;!DOCTYPE svg PUBLIC &#34;-//W3C//DTD SVG 1.1//EN&#34; &#34;http://www.w3.org/ Graphics/SVG/1.1/DTD/svg11.dtd&#34;&gt;
+&lt;svg width=&#34;304&#34; height=&#34;304&#34; version=&#34;1.1&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+&lt;line x1=&#34;0&#34; x2=&#34;300&#34; y1=&#34;33.3333&#34; y2=&#34;33.3333&#34; style=&#34;stroke:grey&#34; /&gt;
+&lt;line x1=&#34;0&#34; x2=&#34;300&#34; y1=&#34;66.6667&#34; y2=&#34;66.6667&#34; style=&#34;stroke:grey&#34; /&gt;
+&lt;line x1=&#34;0&#34; x2=&#34;303&#34; y1=&#34;100&#34; y2=&#34;100&#34; style=&#34;stroke:black; stroke-width:2&#34;/&gt;
+&lt;line x1=&#34;0&#34; x2=&#34;300&#34; y1=&#34;133.333&#34; y2=&#34;133.333&#34; style=&#34;stroke:grey&#34; /&gt;
     &lt;!-- more horizontal lines here --&gt;
-&lt;line y1="0" y2="300" x1="33.3333" x2="33.3333" style="stroke:grey" /&gt;
+&lt;line y1=&#34;0&#34; y2=&#34;300&#34; x1=&#34;33.3333&#34; x2=&#34;33.3333&#34; style=&#34;stroke:grey&#34; /&gt;
 &lt;!-- more vertical lines here --&gt;
-&lt;text x="43.7333" y="124.5"&gt; 1 &lt;/text&gt;
-&lt;text x="43.7333" y="257.833"&gt; 8 &lt;/text&gt;
+&lt;text x=&#34;43.7333&#34; y=&#34;124.5&#34;&gt; 1 &lt;/text&gt;
+&lt;text x=&#34;43.7333&#34; y=&#34;257.833&#34;&gt; 8 &lt;/text&gt;
 &lt;!-- more cells go here --&gt;
-&lt;rect width="304" height="304" style="fill:none;stroke-width: 1;stroke:black;stroke-width:6"/&gt;
+&lt;rect width=&#34;304&#34; height=&#34;304&#34; style=&#34;fill:none;stroke-width: 1;stroke:black;stroke-width:6&#34;/&gt;
 &lt;/svg&gt;</code></pre>
 </div>
 </div>
@@ -1084,7 +966,7 @@ $ autotime 1450956180
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">$ raku -e "say DateTime.new(1480915200)"
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ raku -e &#34;say DateTime.new(1480915200)&#34;
 2016-12-05T05:20:00Z</code></pre>
 </div>
 </div>
@@ -1105,7 +987,7 @@ sub MAIN (Int $timestamp) {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-shell" data-lang="shell">$ autotime 1450915200
-Invalid DateTime string '1450915200'; use an ISO 8601 timestamp (yyyy-mm-ddThh:mm:ssZ or yyyy-mm-ddThh:mm:ss+01:00) instead
+Invalid DateTime string &#39;1450915200&#39;; use an ISO 8601 timestamp (yyyy-mm-ddThh:mm:ssZ or yyyy-mm-ddThh:mm:ss+01:00) instead
   in sub MAIN at autotime line 2
   in block &lt;unit&gt; at autotime line 2</code></pre>
 </div>
@@ -1134,7 +1016,7 @@ sub MAIN(Int $timestamp) {
 <p><code>$thing.ˆname</code> 是对 <code>$thing</code> 的元类的一个方法的调用，<code>name</code> 请求它的名称（换句话说，就是类的名称）。IntStr<sup class="footnote">[<a id="_footnoteref_14" class="footnote" href="#_footnotedef_14" title="View footnote.">14</a>]</sup>是 Int 和 Str 的一个子类，这就是为什么 <code>DateTime</code> 构造函数合法地认为它是 Str 的原因。在命令行参数传递给 MAIN 之前，解析命令行参数的机制是将命令行中的字符串转换为 IntStr 而不是 Str，以避免在我们想把它当作字符串的时候丢失信息。</p>
 </div>
 <div class="paragraph">
-<p>长话短说，我们可以通过加一个 <code>+</code> 前缀来强行将参数转化为"实数"整数，这是一般的数值转换机制。</p>
+<p>长话短说，我们可以通过加一个 <code>+</code> 前缀来强行将参数转化为&#34;实数&#34;整数，这是一般的数值转换机制。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1190,7 +1072,7 @@ sub MAIN(Int $timestamp) {
 </div>
 </div>
 <div class="paragraph">
-<p><code>all(&#8230;&#8203;)</code> 创建了一个 Junction<sup class="footnote">[<a id="_footnoteref_16" class="footnote" href="#_footnotedef_16" title="View footnote.">16</a>]</sup>, 一个由其他几个值组成的复合值，它也存储了一个逻辑模式。当你将一个 Junction 与另一个值进行比较时，这个比较会自动应用到 Junction 中的所有值上。<code>if</code> 语句在布尔语境中对 Junction 进行求值，在这种情况下，只有当所有的比较都返回 <code>True</code> 时，才会返回 <code>True</code>。</p>
+<p><code>all(…​)</code> 创建了一个 Junction<sup class="footnote">[<a id="_footnoteref_16" class="footnote" href="#_footnotedef_16" title="View footnote.">16</a>]</sup>, 一个由其他几个值组成的复合值，它也存储了一个逻辑模式。当你将一个 Junction 与另一个值进行比较时，这个比较会自动应用到 Junction 中的所有值上。<code>if</code> 语句在布尔语境中对 Junction 进行求值，在这种情况下，只有当所有的比较都返回 <code>True</code> 时，才会返回 <code>True</code>。</p>
 </div>
 <div class="paragraph">
 <p>其他类型的 Junction 还有：<code>any</code>、<code>all</code>、<code>none</code> 和 <code>one</code>。考虑到0是唯一一个在布尔语境中为 <code>false</code> 的整数，我们甚至可以把前面的语句写成:</p>
@@ -1230,7 +1112,7 @@ else {
 </div>
 </div>
 <div class="paragraph">
-<p>其中的 "Z" 表示 UTC 或 "Zulu" 时区。相反，我希望它是:</p>
+<p>其中的 &#34;Z&#34; 表示 UTC 或 &#34;Zulu&#34; 时区。相反，我希望它是:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1244,7 +1126,7 @@ else {
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub MAIN(Int $timestamp) {
     my $dt = DateTime.new(+$timestamp, formatter =&gt; sub ($o) {
-            sprintf '%04d-%02d-%02d %02d:%02d:%02d',
+            sprintf &#39;%04d-%02d-%02d %02d:%02d:%02d&#39;,
                     $o.year, $o.month,  $o.day,
                     $o.hour, $o.minute, $o.second,
     });
@@ -1270,10 +1152,10 @@ else {
 <p>如果你想以不同的格式输出，比如 <code>DD.MM.YYY</code>，你可以用你自己的格式字符串替换格式字符串。</p>
 </div>
 <div class="paragraph">
-<p>语法 <code>formatter &#8658; &#8230;&#8203;</code> 在参数的上下文中表示一个命名的参数，这意味着名称而不是参数列表中的位置决定了要绑定到哪个参数。如果有一堆参数的话，这个很方便。</p>
+<p>语法 <code>formatter ⇒ …​</code> 在参数的上下文中表示一个命名的参数，这意味着名称而不是参数列表中的位置决定了要绑定到哪个参数。如果有一堆参数的话，这个很方便。</p>
 </div>
 <div class="paragraph">
-<p>我不喜欢这样的代码了，因为 <code>formatter</code> 是在 <code>DateTime.new(&#8230;&#8203;)</code> 调用中内联的，我觉得不清楚。</p>
+<p>我不喜欢这样的代码了，因为 <code>formatter</code> 是在 <code>DateTime.new(…​)</code> 调用中内联的，我觉得不清楚。</p>
 </div>
 <div class="paragraph">
 <p>让我们把这个作为一个单独的例程吧:</p>
@@ -1283,7 +1165,7 @@ else {
 <pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
 sub MAIN(Int $timestamp) {
     sub formatter($o) {
-        sprintf '%04d-%02d-%02d %02d:%02d:%02d',
+        sprintf &#39;%04d-%02d-%02d %02d:%02d:%02d&#39;,
                 $o.year, $o.month,  $o.day,
                 $o.hour, $o.minute, $o.second,
     }
@@ -1301,10 +1183,10 @@ sub MAIN(Int $timestamp) {
 <p>是的，你可以把一个子例程声明放在另一个子例程声明的正文中；子例程只是一个普通的词法符号，就像用 <code>my</code> 声明的变量一样。</p>
 </div>
 <div class="paragraph">
-<p>在这行中，<code>my $dt = DateTime.new(+$timestamp, formatter &#8658; &amp;formatter);</code>，语法中的 <code>&amp;formatter</code> 指的是将子例程作为一个对象，而不是调用它。</p>
+<p>在这行中，<code>my $dt = DateTime.new(+$timestamp, formatter ⇒ &amp;formatter);</code>，语法中的 <code>&amp;formatter</code> 指的是将子例程作为一个对象，而不是调用它。</p>
 </div>
 <div class="paragraph">
-<p>在 Raku 中，<code>formatter &#8658; &amp;formatter</code> 有一个快捷方式： <code>:&amp;formatter</code>。一般来说，如果你想填充一个命名参数，其名称是变量的名称，而其值是变量的值，你可以通过写 <code>:$variable</code> 来创建它。而引申一下，<code>:thing</code> 是 <code>thing &#8658; True</code> 的简写。</p>
+<p>在 Raku 中，<code>formatter ⇒ &amp;formatter</code> 有一个快捷方式： <code>:&amp;formatter</code>。一般来说，如果你想填充一个命名参数，其名称是变量的名称，而其值是变量的值，你可以通过写 <code>:$variable</code> 来创建它。而引申一下，<code>:thing</code> 是 <code>thing ⇒ True</code> 的简写。</p>
 </div>
 </div>
 <div class="sect2">
@@ -1340,7 +1222,7 @@ sub MAIN(Int $timestamp) {
 
 multi sub MAIN(Int $timestamp) {
     sub formatter($o) {
-        sprintf '%04d-%02d-%02d %02d:%02d:%02d',
+        sprintf &#39;%04d-%02d-%02d %02d:%02d:%02d&#39;,
                 $o.year, $o.month,  $o.day,
                 $o.hour, $o.minute, $o.second,
     }
@@ -1367,7 +1249,7 @@ multi sub MAIN(Str $date) {
 <pre class="highlight"><code class="language-raku" data-lang="raku">$ ./autotime 2015-12-24
 1450915200
 $ ./autotime 1450915200
-Ambiguous call to 'MAIN'; these signatures all match:
+Ambiguous call to &#39;MAIN&#39;; these signatures all match:
 :(Int $timestamp)
 :(Str $date)
   in block &lt;unit&gt; at ./autotime line 17</code></pre>
@@ -1391,7 +1273,7 @@ Ambiguous call to 'MAIN'; these signatures all match:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">Invalid Date string 'foobar'; use yyyy-mm-dd instead</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">Invalid Date string &#39;foobar&#39;; use yyyy-mm-dd instead</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1429,7 +1311,7 @@ $ ./autotime 1450915200
 <pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN(Str $date where { try Date.new($_) }, Str $time?) {
     my $d = Date.new($date);
     if $time {
-        my ( $hour, $minute, $second ) = $time.split(':');
+        my ( $hour, $minute, $second ) = $time.split(&#39;:&#39;);
         say DateTime.new(date =&gt; $d, :$hour, :$minute, :$second).posix;
     }
     else {
@@ -1439,7 +1321,7 @@ $ ./autotime 1450915200
 </div>
 </div>
 <div class="paragraph">
-<p>因为后面的 <code>?</code> 的存在, 新的第二个参数是可选的。我们在冒号上拆分时间字符串，得到小时、分钟和秒。在写这段代码的时候，我的第一直觉是使用更短的变量名, <code>my ($h, $m, $s) = $time.split(':')</code>, 但这样对 <code>DateTime</code> 构造函数的调用就会是这样的:</p>
+<p>因为后面的 <code>?</code> 的存在, 新的第二个参数是可选的。我们在冒号上拆分时间字符串，得到小时、分钟和秒。在写这段代码的时候，我的第一直觉是使用更短的变量名, <code>my ($h, $m, $s) = $time.split(&#39;:&#39;)</code>, 但这样对 <code>DateTime</code> 构造函数的调用就会是这样的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1499,7 +1381,7 @@ $ ./autotime 1450915200
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub formatter($_) {
-    sprintf '%04d-%02d-%02d %02d:%02d:%02d',
+    sprintf &#39;%04d-%02d-%02d %02d:%02d:%02d&#39;,
             .year, .month,  .day,
             .hour, .minute, .second,
 }</code></pre>
@@ -1553,7 +1435,7 @@ $ ./autotime 1450915200
 
 multi sub MAIN(Int \timestamp) {
     sub formatter($_) {
-        sprintf '%04d-%02d-%02d %02d:%02d:%02d',
+        sprintf &#39;%04d-%02d-%02d %02d:%02d:%02d&#39;,
                 .year, .month,  .day,
                 .hour, .minute, .second,
     }
@@ -1566,7 +1448,7 @@ multi sub MAIN(Int \timestamp) {
 multi sub MAIN(Str $date where { try Date.new($_) }, Str $time?) {
     my $d = Date.new($date);
     if $time {
-        my ( $hour, $minute, $second ) = $time.split(':');
+        my ( $hour, $minute, $second ) = $time.split(&#39;:&#39;);
         say DateTime.new(date =&gt; $d, :$hour, :$minute, :$second).posix;
     }
     else {
@@ -1638,7 +1520,7 @@ Usage:
 <pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env perl6
 sub from-timestamp(Int \timestamp) {
     sub formatter($_) {
-        sprintf '%04d-%02d-%02d %02d:%02d:%02d',
+        sprintf &#39;%04d-%02d-%02d %02d:%02d:%02d&#39;,
             .year, .month, .day,
             .hour, .minute, .second,
     }
@@ -1651,7 +1533,7 @@ sub from-timestamp(Int \timestamp) {
 sub from-date-string(Str $date, Str $time?) {
     my $d = Date.new($date);
     if $time {
-        my ( $hour, $minute, $second ) = $time.split(':');
+        my ( $hour, $minute, $second ) = $time.split(&#39;:&#39;);
         return DateTime.new(date =&gt; $d, :$hour, :$minute, :$second);
     } else {
         return $d.DateTime;
@@ -1675,15 +1557,15 @@ multi sub MAIN(Str $date where { try Date.new($_) }, Str $time?) {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">#| Run internal tests
-multi sub MAIN('test') {
+multi sub MAIN(&#39;test&#39;) {
     use Test;
     plan 4;
-    is-deeply from-timestamp(1450915200), Date.new('2015-12-24'), 'Timestamp to Date';
+    is-deeply from-timestamp(1450915200), Date.new(&#39;2015-12-24&#39;), &#39;Timestamp to Date&#39;;
 
     my $dt = from-timestamp(1450915201);
-    is $dt, "2015-12-24 00:00:01", 'Timestamp to DateTime with string formatting';
-    is from-date-string('2015-12-24').posix, 1450915200, 'from-date-string, one argument';
-    is from-date-string('2015-12-24', '00:00:01').posix, 1450915201, 'from-date-string, two arguments';
+    is $dt, &#34;2015-12-24 00:00:01&#34;, &#39;Timestamp to DateTime with string formatting&#39;;
+    is from-date-string(&#39;2015-12-24&#39;).posix, 1450915200, &#39;from-date-string, one argument&#39;;
+    is from-date-string(&#39;2015-12-24&#39;, &#39;00:00:01&#39;).posix, 1450915201, &#39;from-date-string, two arguments&#39;;
 }</code></pre>
 </div>
 </div>
@@ -1705,7 +1587,7 @@ ok 4 - from-date-string, two arguments</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">$ prove -e "" "./autotime test"
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ prove -e &#34;&#34; &#34;./autotime test&#34;
 ./autotime-tested.p6 test .. ok</code></pre>
 </div>
 </div>
@@ -1717,14 +1599,14 @@ Result: PASS</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在终端中，这甚至会将 "All tests successful" 输出的颜色标注为绿色，这样更容易被发现。而测试失败则用红色标记。</p>
+<p>在终端中，这甚至会将 &#34;All tests successful&#34; 输出的颜色标注为绿色，这样更容易被发现。而测试失败则用红色标记。</p>
 </div>
 <div class="paragraph">
 <p>测试是如何工作的？第一行代码使用了一个我们还没有看到的新功能。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN('test') {</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN(&#39;test&#39;) {</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1735,11 +1617,11 @@ Result: PASS</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN(Str $anon where {$anon eq 'test'}) {</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN(Str $anon where {$anon eq &#39;test&#39;}) {</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>除了它没有声明变量 <code>$anon</code>。所以它是一个 <code>multi</code> 候选项，只能通过提供字符串 'test' 作为唯一参数来调用。</p>
+<p>除了它没有声明变量 <code>$anon</code>。所以它是一个 <code>multi</code> 候选项，只能通过提供字符串 &#39;test&#39; 作为唯一参数来调用。</p>
 </div>
 <div class="paragraph">
 <p>下一行，<code>use Test;</code>，加载 Raku 附带的测试模块<sup class="footnote">[<a id="_footnoteref_19" class="footnote" href="#_footnotedef_19" title="View footnote.">19</a>]</sup>。它还会将 <code>Test</code> 默认导出的所有符号导入到当前的词法作用域中。这包括后面要用到的函数 <code>plan</code>、<code>is</code>、和 <code>is-deeply</code>。</p>
@@ -1756,21 +1638,21 @@ Result: PASS</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">#| Run internal tests
-multi sub MAIN('test') {
+multi sub MAIN(&#39;test&#39;) {
     use Test; plan 2;
 
-    subtest 'timestamp', {
+    subtest &#39;timestamp&#39;, {
         plan 2;
-        is-deeply from-timestamp(1450915200), Date.new('2015-12-24'), 'Date';;
+        is-deeply from-timestamp(1450915200), Date.new(&#39;2015-12-24&#39;), &#39;Date&#39;;;
 
         my $dt = from-timestamp(1450915201);
-        is $dt, "2015-12-24 00:00:01", 'DateTime with string formatting';
+        is $dt, &#34;2015-12-24 00:00:01&#34;, &#39;DateTime with string formatting&#39;;
     };
 
-    subtest 'from-date-string', {
+    subtest &#39;from-date-string&#39;, {
         plan 2;
-        is from-date-string('2015-12-24').posix, 1450915200, 'one argument';
-        is from-date-string('2015-12-24', '00:00:01').posix, 1450915201, 'two arguments';
+        is from-date-string(&#39;2015-12-24&#39;).posix, 1450915200, &#39;one argument&#39;;
+        is from-date-string(&#39;2015-12-24&#39;, &#39;00:00:01&#39;).posix, 1450915201, &#39;two arguments&#39;;
     };
 }</code></pre>
 </div>
@@ -1851,14 +1733,14 @@ my $output = do {
     doublespeak(42);
     $*OUT.captured;
 };
-is $output, "4242\n", 'doublespeak works';</code></pre>
+is $output, &#34;4242\n&#34;, &#39;doublespeak works&#39;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>这段代码的第一部分是我们要测试的函数 -  <code>sub doublespeak</code>。它用 <code>∼</code> 字符串连接运算符将其参数与自身进行连接。结果被传递给 <code>say</code>。</p>
 </div>
 <div class="paragraph">
-<p>在引擎盖下，<code>say</code> 会做一些格式化处理，然后查找变量 <code>$<strong>OUT</code>。sigil 后面的 <code></strong></code> 标志着它是一个动态变量。对动态变量的查找会通过调用栈，在每个栈帧中查找变量的声明，并在每个栈帧中选择第一个找到的变量。</p>
+<p>在引擎盖下，<code>say</code> 会做一些格式化处理，然后查找变量 <code>$<strong>OUT</strong></code><strong>。sigil 后面的 <code></code></strong> 标志着它是一个动态变量。对动态变量的查找会通过调用栈，在每个栈帧中查找变量的声明，并在每个栈帧中选择第一个找到的变量。</p>
 </div>
 <div class="paragraph">
 <p>通常情况下，<code>$*OUT</code> 包含一个类型为 <code>IO:::Handle`<sup class="footnote">[<a id="_footnoteref_23" class="footnote" href="#_footnotedef_23" title="View footnote.">23</a>]</sup> 的对象，但 `say</code> 函数其实并不关心这个，只要能在这个对象上调用 <code>print</code> 方法就可以了。这就是所谓的鸭子类型化：我们其实并不关心对象的类型，只要它能像鸭子一样呱呱叫就可以了。或者在这个例子中，像鸭子一样打印。</p>
@@ -1902,10 +1784,10 @@ plan 1;</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
+<col style="width: 25%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -1945,8 +1827,8 @@ plan 1;</code></pre>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -1992,7 +1874,7 @@ plan 1;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>do { &#8230;&#8203; }</code> 只是执行大括号内的代码，并返回最后一条语句的值。和 Raku 中的所有代码块一样，它也引入了一个新的词法作用域。
+<p><code>do { …​ }</code> 只是执行大括号内的代码，并返回最后一条语句的值。和 Raku 中的所有代码块一样，它也引入了一个新的词法作用域。
 新的作用域在下一行中派上了用场，<code>my $*OUT</code> 声明了一个新的动态变量 <code>$*OUT</code>，但是它只在块的作用域中有效。它是用 <code>OutputCapture.new</code> 来初始化的，它是前面声明的类的一个新实例。<code>new</code> 并不是什么神奇的东西，它只是从 <code>OutputCapture</code> 的超级类中继承过来的。我们没有声明一个，但默认情况下，类会得到类型为 Any<sup class="footnote">[<a id="_footnoteref_25" class="footnote" href="#_footnotedef_25" title="View footnote.">25</a>]</sup> 的超级类，它提供了（除此之外）方法 <code>new</code> 作为构造函数。</p>
 </div>
 <div class="paragraph">
@@ -2003,7 +1885,7 @@ plan 1;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">is $output, "4242\n", 'doublespeak works';</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">is $output, &#34;4242\n&#34;, &#39;doublespeak works&#39;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2066,8 +1948,8 @@ sub MAIN(*@cmd) {
     my $output = $collector.list.join;
     my $exitcode = $result.exitcode;
     if $exitcode != 0 {
-        say "Program @cmd[] exited with code $exitcode";
-        print "Output:\n", $output if $output;
+        say &#34;Program @cmd[] exited with code $exitcode&#34;;
+        print &#34;Output:\n&#34;, $output if $output;
     }
     exit $exitcode;
 }</code></pre>
@@ -2082,7 +1964,7 @@ sub MAIN(*@cmd) {
 </div>
 </div>
 <div class="paragraph">
-<p>首先你应该注意的是 <code><strong>@cmd</code>。变量前面的 <code></strong></code> 表示的是一个 slurpy 参数<sup class="footnote">[<a id="_footnoteref_29" class="footnote" href="#_footnotedef_29" title="View footnote.">29</a>]</sup>，它之所以这样命名，是因为它可以吞噬任何数量的参数。这个 <code>*</code> 只需要在参数声明中使用。</p>
+<p>首先你应该注意的是 <code><strong>@cmd</strong></code><strong>。变量前面的 <code></code></strong> 表示的是一个 slurpy 参数<sup class="footnote">[<a id="_footnoteref_29" class="footnote" href="#_footnotedef_29" title="View footnote.">29</a>]</sup>，它之所以这样命名，是因为它可以吞噬任何数量的参数。这个 <code>*</code> 只需要在参数声明中使用。</p>
 </div>
 <div class="paragraph">
 <p>所以 <code>*@cmd</code> 收集了所有的命令行参数，在数组变量 <code>@cmd</code> 中，第一个元素是要执行的命令，其他元素是传递给这个命令的参数。</p>
@@ -2158,8 +2040,8 @@ my $output = $collector.list.join;</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $exitcode = $result.exitcode;
 if $exitcode != 0 {
-    say "Program @cmd[] exited with code $exitcode";
-    print "Output:\n", $output if $output;
+    say &#34;Program @cmd[] exited with code $exitcode&#34;;
+    print &#34;Output:\n&#34;, $output if $output;
 }
 exit $exitcode;</code></pre>
 </div>
@@ -2169,22 +2051,22 @@ exit $exitcode;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "Program @cmd[] exited with code $exitcode";</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;Program @cmd[] exited with code $exitcode&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>变量 <code>$exitcode</code> 被内插，也就是说，它的名字在运行时被替换为其值。这在双引号字符串"&#8230;&#8203; "中会发生，但在单引号字符串'&#8230;&#8203;'中不会。只有标量变量在"&#8230;&#8203; "中才会被插值；其他变量（数组、哈希值、代码对象）只有在后面有某种括号结构时才会被插值。这就是为什么 <code>@cmd</code> 后面有 <code>[]</code> 的原因，我们称其为 Zen slice。返回多个值的数组或哈希索引一般称为切片；例如，<code>@cmd[0，1]</code> 返回前两个值。将索引留空则返回整个数组。</p>
+<p>变量 <code>$exitcode</code> 被内插，也就是说，它的名字在运行时被替换为其值。这在双引号字符串&#34;…​ &#34;中会发生，但在单引号字符串&#39;…​&#39;中不会。只有标量变量在&#34;…​ &#34;中才会被插值；其他变量（数组、哈希值、代码对象）只有在后面有某种括号结构时才会被插值。这就是为什么 <code>@cmd</code> 后面有 <code>[]</code> 的原因，我们称其为 Zen slice。返回多个值的数组或哈希索引一般称为切片；例如，<code>@cmd[0，1]</code> 返回前两个值。将索引留空则返回整个数组。</p>
 </div>
 <div class="paragraph">
 <p>另一种实现插值的方法是在变量上添加一个以括号结尾的方法调用，所以也可以写成:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "Program @cmd.join(' ') exited with code $exitcode";</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;Program @cmd.join(&#39; &#39;) exited with code $exitcode&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>有关"&#8230;&#8203; "插值的更多深入信息，请参见文档。<sup class="footnote">[<a id="_footnoteref_34" class="footnote" href="#_footnotedef_34" title="View footnote.">34</a>]</sup></p>
+<p>有关&#34;…​ &#34;插值的更多深入信息，请参见文档。<sup class="footnote">[<a id="_footnoteref_34" class="footnote" href="#_footnotedef_34" title="View footnote.">34</a>]</sup></p>
 </div>
 </div>
 <div class="sect2">
@@ -2233,8 +2115,8 @@ exit $exitcode;</code></pre>
     my $output = $collector.list.join;
 
     if $exitcode != 0 {
-        say "Program @cmd[] exited with code $exitcode";
-        print "Output:\n", $output if $output;
+        say &#34;Program @cmd[] exited with code $exitcode&#34;;
+        print &#34;Output:\n&#34;, $output if $output;
     }
     exit $exitcode;
 }
@@ -2247,12 +2129,12 @@ else {
 <p>表达式 <code>$promise.status ~~ Kept</code> 使用智能匹配运算符来检查承诺状态是否与常数 <code>Kept</code> 的状态相同。智能匹配是一个非常通用的运算符，其语义取决于表达式的右侧。对于右侧的数，比较的是数值。对于右侧的类型，则是类型检查。更多内容请参考官方文档。<sup class="footnote">[<a id="_footnoteref_35" class="footnote" href="#_footnotedef_35" title="View footnote.">35</a>]</sup></p>
 </div>
 <div class="paragraph">
-<p>在 <code>else { &#8230;&#8203; }</code> 分支中，我们需要处理超时的情况。这可能就像打印出一条超时的语句一样简单，当 silent-cron 之后立即退出时，这可能是可以接受的。但是我们可能将来要做更多的事情，所以我们应该杀死外部程序。而如果程序在发出友好的 <code>kill</code> 信号后没有终止，就应该收到一个 <code>kill(9)</code>，在 UNIX 系统中，这个 <code>kill(9)</code> 会强行终止程序。</p>
+<p>在 <code>else { …​ }</code> 分支中，我们需要处理超时的情况。这可能就像打印出一条超时的语句一样简单，当 silent-cron 之后立即退出时，这可能是可以接受的。但是我们可能将来要做更多的事情，所以我们应该杀死外部程序。而如果程序在发出友好的 <code>kill</code> 信号后没有终止，就应该收到一个 <code>kill(9)</code>，在 UNIX 系统中，这个 <code>kill(9)</code> 会强行终止程序。</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">else { $proc.kill;
-    say "Program @cmd[] did not finish after $timeout seconds";
+    say &#34;Program @cmd[] did not finish after $timeout seconds&#34;;
     sleep 1 if $promise.status ~~ Planned;
     $proc.kill(9);
     await $promise;
@@ -2374,7 +2256,7 @@ say @approximations.map({.result}).sum / @approximations;</code></pre>
 <div class="sect2">
 <h3 id="_可能的扩展">6.4. 可能的扩展</h3>
 <div class="paragraph">
-<p>如果你想玩 silent-cron，可以增加一个重试机制。如果一个命令因为外部依赖（如API或NFS共享）而失败，那么这个外部依赖可能需要时间来恢复。因此，你应该添加一个二次幂或指数型的重试机制；也就是说，重试之间的等待时间应该以二次幂（1，2，4，9，16，16，&#8230;&#8203;）或指数型（1，2，4，8，16，32，&#8230;&#8203;）的方式增加。</p>
+<p>如果你想玩 silent-cron，可以增加一个重试机制。如果一个命令因为外部依赖（如API或NFS共享）而失败，那么这个外部依赖可能需要时间来恢复。因此，你应该添加一个二次幂或指数型的重试机制；也就是说，重试之间的等待时间应该以二次幂（1，2，4，9，16，16，…​）或指数型（1，2，4，8，16，32，…​）的方式增加。</p>
 </div>
 </div>
 <div class="sect2">
@@ -2407,14 +2289,14 @@ sub MAIN(*@cmd, :$timeout) {
     if !$timeout || $promise.status ~~ Kept {
         my $exitcode = $promise.result.exitcode;
         if $exitcode != 0 {
-            say "Program @cmd[] exited with code $exitcode";
-            print "Output:\n", $output if $output;
+            say &#34;Program @cmd[] exited with code $exitcode&#34;;
+            print &#34;Output:\n&#34;, $output if $output;
         }
         exit $exitcode;
     }
     else {
         $proc.kill;
-        say "Program @cmd[] did not finish after $timeout seconds";
+        say &#34;Program @cmd[] did not finish after $timeout seconds&#34;;
         sleep 1 if $promise.status ~~ Planned;
         $proc.kill(9);
         $ = await $promise;
@@ -2459,14 +2341,14 @@ method exitcode() { $!exitcode }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>它允许类的用户从外部访问属性中的值。作为奖励，你还可以从标准构造函数中初始化它，作为一个命名参数，<code>ExecutionResult.new( exitcode &#8658; 42 )</code>。退出代码并不是一个必须的属性，因为我们无法知道一个已经超时的程序的退出代码。所以我们给它一个默认值，如果属性还没有被初始化，我们就给它一个默认值。</p>
+<p>它允许类的用户从外部访问属性中的值。作为奖励，你还可以从标准构造函数中初始化它，作为一个命名参数，<code>ExecutionResult.new( exitcode ⇒ 42 )</code>。退出代码并不是一个必须的属性，因为我们无法知道一个已经超时的程序的退出代码。所以我们给它一个默认值，如果属性还没有被初始化，我们就给它一个默认值。</p>
 </div>
 <div class="paragraph">
 <p>输出是一个必填属性，所以我们用 <code>is required</code> 标记为必填属性。这就是一个 trait。trait 是修改其他事物的行为的代码，这里指的是属性的行为。它们会出现在很多地方，例如子程序签名（在参数上复制）、变量声明和类中。如果你试图调用 <code>ExecutionResult.new()</code> 而不指定输出，你会得到这样的错误:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-txt" data-lang="txt">The attribute '$!output' is required, but you did not provide a value for it.</code></pre>
+<pre class="highlight"><code class="language-txt" data-lang="txt">The attribute &#39;$!output&#39; is required, but you did not provide a value for it.</code></pre>
 </div>
 </div>
 </div>
@@ -2493,7 +2375,7 @@ method exitcode() { $!exitcode }</code></pre>
     my $output = $collector.list.join;
 
     if !$timeout || $promise.status ~~ Kept {
-        say "No timeout";
+        say &#34;No timeout&#34;;
         return ExecutionResult.new(
             :$output,
             :exitcode($promise.result.exitcode),
@@ -2523,12 +2405,12 @@ method exitcode() { $!exitcode }</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN(*@cmd, :$timeout) {
     my $result = run-with-timeout(@cmd, :$timeout);
     unless $result.is-success {
-        say "Program @cmd[] ",
-            $result.timed-out ?? "ran into a timeout"
-                              !! "exited with code $result.
-                              exitcode()";
+        say &#34;Program @cmd[] &#34;,
+            $result.timed-out ?? &#34;ran into a timeout&#34;
+                              !! &#34;exited with code $result.
+                              exitcode()&#34;;
 
-        print "Output:\n", $result.output if $result.output;
+        print &#34;Output:\n&#34;, $result.output if $result.output;
     }
     exit $result.exitcode // 2;
 }</code></pre>
@@ -2568,8 +2450,8 @@ method exitcode() { $!exitcode }</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my class Mock::Proc::Async {
-    has $.out = '';
-    has $.err = '';
+    has $.out = &#39;&#39;;
+    has $.err = &#39;&#39;;
     method stdout {
         Supply.from-list($.out);
     }
@@ -2609,7 +2491,7 @@ method start {
 </div>
 </div>
 <div class="paragraph">
-<p>因为我们在其他地方不需要 mock Proc 类，我们甚至不需要给它起个名字。<code>class { &#8230;&#8203; }</code> 创建了一个匿名类，对它的 <code>.new</code> 调用会从它中创建一个新对象。</p>
+<p>因为我们在其他地方不需要 mock Proc 类，我们甚至不需要给它起个名字。<code>class { …​ }</code> 创建了一个匿名类，对它的 <code>.new</code> 调用会从它中创建一个新对象。</p>
 </div>
 <div class="paragraph">
 <p>如前所述，当在 void 上下文中，或者我们在 Raku 中称其为 sink 上下文时，一个带有非零退出代码的 Proc 会抛出一个异常。我们可以通过扩展匿名类来模拟这种行为。</p>
@@ -2619,7 +2501,7 @@ method start {
 <pre class="highlight"><code class="language-raku" data-lang="raku">class {
     has $.exitcode;
     method sink() {
-        die "mock Proc used in sink context";
+        die &#34;mock Proc used in sink context&#34;;
     }
 }</code></pre>
 </div>
@@ -2629,13 +2511,13 @@ method start {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN('test') {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN(&#39;test&#39;) {
     use Test;
     my class Mock::Proc::Async {
         has $.exitcode = 0;
         has $.execution-time = 0;
-        has $.out = '';
-        has $.err = ''; method kill($?) {}
+        has $.out = &#39;&#39;;
+        has $.err = &#39;&#39;; method kill($?) {}
 
         method stdout {
             Supply.from-list($.out);
@@ -2648,7 +2530,7 @@ method start {
                 (class {
                     has $.exitcode;
                     method sink() {
-                        die "mock Proc used in sink context";
+                        die &#34;mock Proc used in sink context&#34;;
                     }
                 }).new(:$.exitcode);
             });
@@ -2659,26 +2541,26 @@ method start {
     my $result = run-with-timeout([],
         timeout =&gt; 2,
         executer =&gt; Mock::Proc::Async.new(
-            out =&gt; 'mocked output',
+            out =&gt; &#39;mocked output&#39;,
         ),
     );
     isa-ok $result, ExecutionResult;
-    is $result.exitcode, 0, 'exit code';
-    is $result.output, 'mocked output', 'output';
-    ok $result.is-success, 'success';
+    is $result.exitcode, 0, &#39;exit code&#39;;
+    is $result.output, &#39;mocked output&#39;, &#39;output&#39;;
+    ok $result.is-success, &#39;success&#39;;
 
     # timeout
     $result = run-with-timeout([],
         timeout =&gt; 0.1,
         executer =&gt; Mock::Proc::Async.new(
             execution-time =&gt; 1,
-            out =&gt; 'mocked output',
+            out =&gt; &#39;mocked output&#39;,
         ),
     );
     isa-ok $result, ExecutionResult;
-    is $result.output, 'mocked output', 'output';
-    ok $result.timed-out, 'timeout reported';
-    nok $result.is-success, 'success';
+    is $result.output, &#39;mocked output&#39;, &#39;output&#39;;
+    ok $result.timed-out, &#39;timeout reported&#39;;
+    nok $result.is-success, &#39;success&#39;;
 }</code></pre>
 </div>
 </div>
@@ -2702,7 +2584,7 @@ my $result = start run-with-timeout([],
     timeout =&gt; 5,
     executer =&gt; Mock::Proc::Async.new(
         execution-time =&gt; 2,
-        out =&gt; 'mocked output',
+        out =&gt; &#39;mocked output&#39;,
     ),
 );
 $*SCHEDULER.advance-by(5); $result = $result.result;
@@ -2757,7 +2639,7 @@ $ zef install Test::Scheduler</code></pre>
 <p>外部 API 失败，网络拥塞，以及其他事情的发生会使作业无法成功，所以某种重试机制是可取的。如果是 cron 作业，cron 已经负责定期重试作业，所以 <code>silent-cron</code> 应该只是抑制偶尔的错误。另一方面，如果一个作业持续失败，这通常是管理员或开发人员应该研究的事情，所以这是一个值得报告的问题。</p>
 </div>
 <div class="paragraph">
-<p>为了实现这个功能，<code>silent-cron</code> 需要在独立运行之间存储持久状态。它需要记录当前运行的结果，然后决定故障历史记录是否符合 "偶然性"。</p>
+<p>为了实现这个功能，<code>silent-cron</code> 需要在独立运行之间存储持久状态。它需要记录当前运行的结果，然后决定故障历史记录是否符合 &#34;偶然性&#34;。</p>
 </div>
 <div class="sect2">
 <h3 id="_持久化存储">7.1. 持久化存储</h3>
@@ -2770,7 +2652,7 @@ $ zef install Test::Scheduler</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">use DBIish;
-my $dbh = DBIish.connect('SQLite', :database('database-file.sqlite3'));</code></pre>
+my $dbh = DBIish.connect(&#39;SQLite&#39;, :database(&#39;database-file.sqlite3&#39;));</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2778,7 +2660,7 @@ my $dbh = DBIish.connect('SQLite', :database('database-file.sqlite3'));</code></
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">$dbh.do('INSERT INTO player (name) VALUES ?', 'John');</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">$dbh.do(&#39;INSERT INTO player (name) VALUES ?&#39;, &#39;John&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2789,7 +2671,7 @@ my $dbh = DBIish.connect('SQLite', :database('database-file.sqlite3'));</code></
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $sth = $dbh.prepare('SELECT id FROM player WHERE name = ?');
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $sth = $dbh.prepare(&#39;SELECT id FROM player WHERE name = ?&#39;);
 my %ids;
 for &lt;John Jack&gt; -&gt; $name {
     $sth.execute($name);
@@ -2813,8 +2695,8 @@ $sth.finish;</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $repo = ExecutionResultRepository.new(
-    jobname =&gt; 'refresh cache',
-    statefile =&gt; 'silent-cron.sqlite3',
+    jobname =&gt; &#39;refresh cache&#39;,
+    statefile =&gt; &#39;silent-cron.sqlite3&#39;,
 );
 $repo.insert($result);
 my @last-results = $repo.tail(5);</code></pre>
@@ -2841,7 +2723,7 @@ my @last-results = $repo.tail(5);</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">has $!db; method !db() {
     return $!db if $!db;
-    $!db = DBIish.connect('SQLite', :database($.statefile));
+    $!db = DBIish.connect(&#39;SQLite&#39;, :database($.statefile));
     self!create-schema();
     return $!db;
 }</code></pre>
@@ -2858,7 +2740,7 @@ my @last-results = $repo.tail(5);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">constant $table = 'job_execution';
+<pre class="highlight"><code class="language-raku" data-lang="raku">constant $table = &#39;job_execution&#39;;
 method !create-schema() {
     $!db.do(qq:to/SCHEMA/);
         CREATE TABLE IF NOT EXISTS $table (
@@ -2867,7 +2749,7 @@ method !create-schema() {
             exitcode    INTEGER NOT NULL,
             timed_out   INTEGER NOT NULL,
             output      VARCHAR NOT NULL,
-            executed    TIMESTAMP NOT NULL DEFAULT (DATETIME('NOW'))
+            executed    TIMESTAMP NOT NULL DEFAULT (DATETIME(&#39;NOW&#39;))
         );
 
     SCHEMA
@@ -2943,10 +2825,10 @@ method !create-schema() {
 </div>
 </div>
 <div class="paragraph">
-<p>尾部方法中的最后一条语句值得注意一下。<code>$sth.allrows(:array-of-hash)</code> 将数据库中的记录生成为一个散列值列表。这个列表是惰性的，也就是说，它是按需生成的。懒人列表是一个非常方便的功能，因为它允许你用相同的 API 使用迭代器和列表。例如，当读取文件中的 <code>lines</code> 时，你可以写 <code>$handle.lines &#8594; $line { &#8230;&#8203; }</code>，行方法不需要将整个文件加载到内存中，而是可以在访问时读取一行。</p>
+<p>尾部方法中的最后一条语句值得注意一下。<code>$sth.allrows(:array-of-hash)</code> 将数据库中的记录生成为一个散列值列表。这个列表是惰性的，也就是说，它是按需生成的。懒人列表是一个非常方便的功能，因为它允许你用相同的 API 使用迭代器和列表。例如，当读取文件中的 <code>lines</code> 时，你可以写 <code>$handle.lines → $line { …​ }</code>，行方法不需要将整个文件加载到内存中，而是可以在访问时读取一行。</p>
 </div>
 <div class="paragraph">
-<p><code>$sth.allrows(&#8230;&#8203;)</code> 是惰性的，后面的 <code>.map</code> 调用也是惰性的，<code>map</code> 通过调用传递给它的代码对象来变换一个个元素。而这也是懒惰地完成的。所以 SQLite 只有在实际访问结果列表中的元素时，才会从数据库文件中检索行。</p>
+<p><code>$sth.allrows(…​)</code> 是惰性的，后面的 <code>.map</code> 调用也是惰性的，<code>map</code> 通过调用传递给它的代码对象来变换一个个元素。而这也是懒惰地完成的。所以 SQLite 只有在实际访问结果列表中的元素时，才会从数据库文件中检索行。</p>
 </div>
 </div>
 <div class="sect2">
@@ -2957,7 +2839,7 @@ method !create-schema() {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN(*@cmd, :$timeout, :$jobname is copy,
-               :$statefile='silent-cron.sqlite3', Int :$tries = 3) {
+               :$statefile=&#39;silent-cron.sqlite3&#39;, Int :$tries = 3) {
     $jobname //= @cmd.Str;
     my $result = run-with-timeout(@cmd, :$timeout);
     my $repo = ExecutionResultRepository.new(:$jobname, :$statefile);
@@ -2966,11 +2848,11 @@ method !create-schema() {
     my @runs = $repo.tail($tries);
 
     unless $result.is-success or @runs.grep({.is-success}) {
-        say "The last @runs.elems() runs of @cmd[] all failed, the last execution ",
-        $result.timed-out ?? "ran into a timeout"
-                          !! "exited with code $result.exitcode()";
+        say &#34;The last @runs.elems() runs of @cmd[] all failed, the last execution &#34;,
+        $result.timed-out ?? &#34;ran into a timeout&#34;
+                          !! &#34;exited with code $result.exitcode()&#34;;
 
-        print "Output:\n", $result.output if $result.output;
+        print &#34;Output:\n&#34;, $result.output if $result.output;
     }
     exit $result.exitcode // 2;
 }</code></pre>
@@ -3012,7 +2894,7 @@ method !create-schema() {
 <p>在 Perl 6 中，变量名由一个符号，<code>$</code>、<code>@</code>、<code>%</code> 或 <code>&amp;</code> 组成，后面是标识符。sigil 意味着一个类型约束，其中 <code>$</code> 是最一般的类型约束。(默认没有限制)，<code>@</code> 代表数组，<code>%</code> 代表散列(关联数组/映射)，<code>&amp;</code> 代表代码对象。</p>
 </div>
 <div class="paragraph">
-<p>标识符可以包含 <code>-</code> 和 <code>'</code> 字符，只要后面的字符是字母就可以。标识符必须以字母或下划线开头。</p>
+<p>标识符可以包含 <code>-</code> 和 <code>&#39;</code> 字符，只要后面的字符是字母就可以。标识符必须以字母或下划线开头。</p>
 </div>
 <div class="paragraph">
 <p>用 <code>my</code> 声明的子程序和变量是词法作用域的。它们从声明的点到当前 <code>{}</code>-闭合块儿（或当前文件，如果声明在 block 之外）的块的结尾都是可见的。子例程参数在子例程的签名和块中是可见的。</p>
@@ -3053,8 +2935,8 @@ method !create-schema() {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say chunks 'abcd', 2; # Output: (ab cd)
-say chunks('abcd', 2); # Output: (ab cd)</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say chunks &#39;abcd&#39;, 2; # Output: (ab cd)
+say chunks(&#39;abcd&#39;, 2); # Output: (ab cd)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3062,7 +2944,7 @@ say chunks('abcd', 2); # Output: (ab cd)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say chunks(join('x', 'ab', 'c'), 2);</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say chunks(join(&#39;x&#39;, &#39;ab&#39;, &#39;c&#39;), 2);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3070,7 +2952,7 @@ say chunks('abcd', 2); # Output: (ab cd)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say chunks(join 'x', 'ab', 'c', 2);</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say chunks(join &#39;x&#39;, &#39;ab&#39;, &#39;c&#39;, 2);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3078,7 +2960,7 @@ say chunks('abcd', 2); # Output: (ab cd)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say chunks join('x', 'ab', 'c'), 2;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say chunks join(&#39;x&#39;, &#39;ab&#39;, &#39;c&#39;), 2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3095,12 +2977,12 @@ say chunks('abcd', 2); # Output: (ab cd)</code></pre>
 
 # right way:
 if random-choice() {
-    say 'You were lucky.';
+    say &#39;You were lucky.&#39;;
 }
 
 # wrong way:
 if random-choice {
-    say 'You were lucky.';
+    say &#39;You were lucky.&#39;;
 }</code></pre>
 </div>
 </div>
@@ -3109,7 +2991,7 @@ if random-choice {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-txt" data-lang="txt">Function 'random-choice' needs parens to avoid gobbling block</code></pre>
+<pre class="highlight"><code class="language-txt" data-lang="txt">Function &#39;random-choice&#39; needs parens to avoid gobbling block</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3117,7 +2999,7 @@ if random-choice {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-txt" data-lang="txt">Missing block (apparently claimed by 'random-choice')</code></pre>
+<pre class="highlight"><code class="language-txt" data-lang="txt">Missing block (apparently claimed by &#39;random-choice&#39;)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3177,13 +3059,13 @@ if random-choice {
     }
 }
 my $c = OutputCapture.new;
-$c.print('42');
+$c.print(&#39;42&#39;);
 # use the `lines` accessor method:
 say $c.lines; # Output: [42]</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>当你用点 twigil 声明属性时，你也可以通过命名参数从构造函数中初始化属性，如 <code>OutputCapture.new( lines &#8658; [42] )</code>。</p>
+<p>当你用点 twigil 声明属性时，你也可以通过命名参数从构造函数中初始化属性，如 <code>OutputCapture.new( lines ⇒ [42] )</code>。</p>
 </div>
 <div class="paragraph">
 <p>私有方法以 <code>!</code> 开始，只能在类体内部以 <code>self!private-method</code> 的形式调用。</p>
@@ -3272,10 +3154,10 @@ my %hash = Config::INI::parse($ini_string);</code></pre>
 
 my regex key { \w+ }
 
-multi sub MAIN('test') {
+multi sub MAIN(&#39;test&#39;) {
     use Test;
-    ok 'abc'     ~~ /^ &lt;key&gt; $/, '&lt;key&gt; matches a simple identifier';
-    ok  '[abc]' !~~ /^ &lt;key&gt; $/, '&lt;key&gt; does not match a  section header';
+    ok &#39;abc&#39;     ~~ /^ &lt;key&gt; $/, &#39;&lt;key&gt; matches a simple identifier&#39;;
+    ok  &#39;[abc]&#39; !~~ /^ &lt;key&gt; $/, &#39;&lt;key&gt; does not match a  section header&#39;;
     done-testing;
 }</code></pre>
 </div>
@@ -3287,10 +3169,10 @@ multi sub MAIN('test') {
 <p>在编程语言中，支持所谓的 Perl 兼容正则表达式(PCRE)的传统由来已久。许多程序设计语言都支持一些偏离 PCRE 的元素，包括 Perl 本身，但大多数程序设计语言中都保留了一些常见的语法元素。Raku 仍然支持其中的一些元素，但在其他方面却有很大的偏差。</p>
 </div>
 <div class="paragraph">
-<p>这里的 <code>\w+</code> 和 PCRE 中的一样，但忽略了周围的空格。在测试例程中，<code>'abc' ~~ /^ &lt;key&gt; $/</code> 中的斜线分隔了一个匿名的正则表达式。在这个正则表达式中，<code>^</code> 和 <code>$</code> 分别代表匹配字符串的开头和结尾，这在 PCRE 中很熟悉。然而，与 PCRE 不同的是， <code>&lt;key&gt;</code> 子规则调用了前面的命名正则表达式 <code>key</code>。这是 Raku 的一个扩展。在 PCRE 中，正则表达式中的 <code>&lt;</code> 匹配的是字面的  <code>&lt;</code>，在 Raku 中，它引入了一个子规则调用。</p>
+<p>这里的 <code>\w+</code> 和 PCRE 中的一样，但忽略了周围的空格。在测试例程中，<code>&#39;abc&#39; ~~ /^ &lt;key&gt; $/</code> 中的斜线分隔了一个匿名的正则表达式。在这个正则表达式中，<code>^</code> 和 <code>$</code> 分别代表匹配字符串的开头和结尾，这在 PCRE 中很熟悉。然而，与 PCRE 不同的是， <code>&lt;key&gt;</code> 子规则调用了前面的命名正则表达式 <code>key</code>。这是 Raku 的一个扩展。在 PCRE 中，正则表达式中的 <code>&lt;</code> 匹配的是字面的  <code>&lt;</code>，在 Raku 中，它引入了一个子规则调用。</p>
 </div>
 <div class="paragraph">
-<p>一般来说，所有的非单词字符都是为"特殊"语法所保留的，你必须用引号或反斜线才能得到字面意思。例如，在正则表达式中的 <code>\&lt;</code> 或 <code>'&lt;'</code> 与小于号匹配。引号可以应用于一个以上的字符，因此，正则表达式中的 <code>'a+b'</code> 匹配一个 a，后面是加号 <code>+</code>，再后面是 b。单词字符（字母、数字和下划线）总是按字面意思匹配。</p>
+<p>一般来说，所有的非单词字符都是为&#34;特殊&#34;语法所保留的，你必须用引号或反斜线才能得到字面意思。例如，在正则表达式中的 <code>\&lt;</code> 或 <code>&#39;&lt;&#39;</code> 与小于号匹配。引号可以应用于一个以上的字符，因此，正则表达式中的 <code>&#39;a+b&#39;</code> 匹配一个 a，后面是加号 <code>+</code>，再后面是 b。单词字符（字母、数字和下划线）总是按字面意思匹配。</p>
 </div>
 <div class="sect3">
 <h4 id="_字符类">9.1.1. 字符类</h4>
@@ -3299,9 +3181,9 @@ multi sub MAIN('test') {
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -3351,9 +3233,9 @@ multi sub MAIN('test') {
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -3368,7 +3250,7 @@ multi sub MAIN('test') {
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">否定</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&#8592;[abc]&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">←[abc]&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">除了 a, b 或 c 的任何东西</p></td>
 </tr>
 <tr>
@@ -3386,8 +3268,8 @@ multi sub MAIN('test') {
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 50%;"/>
+<col style="width: 50%;"/>
 </colgroup>
 <tbody>
 <tr>
@@ -3432,7 +3314,7 @@ multi sub MAIN('test') {
 <p>再回到 INI 解析，我们必须思考一个值里面允许使用哪些字符。列出允许的字符似乎是徒劳的，因为我们很可能会忘记一些字符。相反，我们应该思考什么是不允许在值中出现的。换行符当然不允许，因为它们会引入下一个键/值对或章节标题。分号也不允许，因为它们会引入注释。</p>
 </div>
 <div class="paragraph">
-<p>我们可以将这种排除法表述为否定字符类。<code>&#8592;[ \n ; ]&gt;</code> 匹配任何一个既不是换行符也不是分号的字符。注意，在字符类中，几乎所有的字符都会失去其特殊意义。只有反斜线、空格、两个小点和闭合括号才代表着除它们之外的任何东西。在字符类的内部和外部都是如此， <code>\n</code> 匹配一个换行字符，而 <code>\s</code> 匹配一个空格。大写字母与此相反，因此，例如，<code>\S</code> 匹配任何一个非空格字符。</p>
+<p>我们可以将这种排除法表述为否定字符类。<code>←[ \n ; ]&gt;</code> 匹配任何一个既不是换行符也不是分号的字符。注意，在字符类中，几乎所有的字符都会失去其特殊意义。只有反斜线、空格、两个小点和闭合括号才代表着除它们之外的任何东西。在字符类的内部和外部都是如此， <code>\n</code> 匹配一个换行字符，而 <code>\s</code> 匹配一个空格。大写字母与此相反，因此，例如，<code>\S</code> 匹配任何一个非空格字符。</p>
 </div>
 <div class="paragraph">
 <p>这让我们看到了一个在 INI 文件中匹配一个值的正则表达式版本:</p>
@@ -3448,8 +3330,8 @@ multi sub MAIN('test') {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my regex value { &lt;-[ \n ; ]&gt;+ }
-if ' abc ' ~~ /&lt;value&gt;/ {
-    say "matched '$/'"; # matched ' abc '
+if &#39; abc &#39; ~~ /&lt;value&gt;/ {
+    say &#34;matched &#39;$/&#39;&#34;; # matched &#39; abc &#39;
 }</code></pre>
 </div>
 </div>
@@ -3472,7 +3354,7 @@ if ' abc ' ~~ /&lt;value&gt;/ {
 </div>
 </div>
 <div class="paragraph">
-<p>现在你知道为什么人们在提出用正则表达式来解决问题时，会以"现在你有两个问题了"<sup class="footnote">[<a id="_footnoteref_56" class="footnote" href="#_footnotedef_56" title="View footnote.">56</a>]</sup>来回应。一个更简单的解决方案是先匹配一个引入的值，然后引入一个约束条件，即第一个或最后一个字符都不能是空格:</p>
+<p>现在你知道为什么人们在提出用正则表达式来解决问题时，会以&#34;现在你有两个问题了&#34;<sup class="footnote">[<a id="_footnoteref_56" class="footnote" href="#_footnotedef_56" title="View footnote.">56</a>]</sup>来回应。一个更简单的解决方案是先匹配一个引入的值，然后引入一个约束条件，即第一个或最后一个字符都不能是空格:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3484,16 +3366,16 @@ if ' abc ' ~~ /&lt;value&gt;/ {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">is ' abc ' ~~ /&lt;value&gt;/, 'abc', '&lt;value&gt; does not match leading or trailing whitespace';
-is ' a'    ~~ /&lt;value&gt;/, 'a',   '&lt;value&gt; matches single non-whitespace too';
-ok "a\nb" !~~ /^ &lt;value&gt; $/,    '&lt;value&gt; does not match \n';</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">is &#39; abc &#39; ~~ /&lt;value&gt;/, &#39;abc&#39;, &#39;&lt;value&gt; does not match leading or trailing whitespace&#39;;
+is &#39; a&#39;    ~~ /&lt;value&gt;/, &#39;a&#39;,   &#39;&lt;value&gt; matches single non-whitespace too&#39;;
+ok &#34;a\nb&#34; !~~ /^ &lt;value&gt; $/,    &#39;&lt;value&gt; does not match \n&#39;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p><code>&lt;!before regex&gt;</code> 是一个否定的向前查看，也就是说，下面的文本必须不匹配 <code>regex</code>，并且在匹配的过程中不消耗文本。<code>&lt;!after regex&gt;</code> 是否定的向后查看，它试图匹配已经匹配过的文本，而且必须不成功，整个匹配才会成功。</p>
 </div>
 <div class="paragraph">
-<p>在 Raku 中，当然还有另一种方法可以解决这个问题。如果你把要求表述为"值不能包含换行或分号，并且以非空格开头，以非空格结尾"，那么很明显，如果我们在正则表达式中使用 AND 运算符，这个问题就很容易解决了。而事实就是如此:</p>
+<p>在 Raku 中，当然还有另一种方法可以解决这个问题。如果你把要求表述为&#34;值不能包含换行或分号，并且以非空格开头，以非空格结尾&#34;，那么很明显，如果我们在正则表达式中使用 AND 运算符，这个问题就很容易解决了。而事实就是如此:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3501,14 +3383,14 @@ ok "a\nb" !~~ /^ &lt;value&gt; $/,    '&lt;value&gt; does not match \n';</code><
 </div>
 </div>
 <div class="paragraph">
-<p><code>&amp;</code> 操作符将两个或更多的小的正则表达式定界，这些表达式必须成功地匹配到同一个字符串，才能使整个匹配成功。<code>\S.<strong></code> 可以匹配任何以非空格字符(<code>\S</code>)开头的字符串，后面是任意字符(<code>.</code>)，任意次数的 <code></strong></code>。同样的，<code>.*\S</code> 匹配任何以非空格字符结尾的字符串。</p>
+<p><code>&amp;</code> 操作符将两个或更多的小的正则表达式定界，这些表达式必须成功地匹配到同一个字符串，才能使整个匹配成功。<code>\S.<strong></strong></code><strong> 可以匹配任何以非空格字符(<code>\S</code>)开头的字符串，后面是任意字符(<code>.</code>)，任意次数的 <code></code></strong>。同样的，<code>.*\S</code> 匹配任何以非空格字符结尾的字符串。</p>
 </div>
 <div class="paragraph">
 <p>谁会想到匹配一个配置文件中的值这么简单的东西会如此复杂呢？幸运的是，现在我们知道了如何单独匹配键/值对就简单多了。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my regex pair { &lt;key&gt; '=' &lt;value&gt; }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex pair { &lt;key&gt; &#39;=&#39; &lt;value&gt; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3516,7 +3398,7 @@ ok "a\nb" !~~ /^ &lt;value&gt; $/,    '&lt;value&gt; does not match \n';</code><
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my regex pair { &lt;key&gt; \h* '=' \h* &lt;value&gt; }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex pair { &lt;key&gt; \h* &#39;=&#39; \h* &lt;value&gt; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3527,7 +3409,7 @@ ok "a\nb" !~~ /^ &lt;value&gt; $/,    '&lt;value&gt; does not match \n';</code><
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my regex pair { &lt;key&gt; \h* '=' \h* &lt;value&gt; \n+ }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex pair { &lt;key&gt; \h* &#39;=&#39; \h* &lt;value&gt; \n+ }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3535,9 +3417,9 @@ ok "a\nb" !~~ /^ &lt;value&gt; $/,    '&lt;value&gt; does not match \n';</code><
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">ok "key=value\n" ~~ /&lt;pair&gt;/, 'simple pair';
-ok "key = value\n\n" ~~ /&lt;pair&gt;/, 'pair with blanks';
-ok "key\n= value\n" !~~ /&lt;pair&gt;/, 'pair with newline before assignment';</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">ok &#34;key=value\n&#34; ~~ /&lt;pair&gt;/, &#39;simple pair&#39;;
+ok &#34;key = value\n\n&#34; ~~ /&lt;pair&gt;/, &#39;pair with blanks&#39;;
+ok &#34;key\n= value\n&#34; !~~ /&lt;pair&gt;/, &#39;pair with newline before assignment&#39;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3545,12 +3427,12 @@ ok "key\n= value\n" !~~ /&lt;pair&gt;/, 'pair with newline before assignment';</
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my regex header { '[' &lt;-[ \[ \] \n ]&gt;+ ']' \n+ }
-# and in multi sub MAIN('test'):
-ok "[abc]\n"    ~~ /^ &lt;header&gt; $/, 'simple header';
-ok "[a c]\n"    ~~ /^ &lt;header&gt; $/, 'header with spaces';
-ok "[a [b]]\n" !~~ /^ &lt;header&gt; $/, 'cannot nest headers';
-ok "[a\nb]\n"  !~~ /^ &lt;header&gt; $/, 'No newlines inside headers';</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex header { &#39;[&#39; &lt;-[ \[ \] \n ]&gt;+ &#39;]&#39; \n+ }
+# and in multi sub MAIN(&#39;test&#39;):
+ok &#34;[abc]\n&#34;    ~~ /^ &lt;header&gt; $/, &#39;simple header&#39;;
+ok &#34;[a c]\n&#34;    ~~ /^ &lt;header&gt; $/, &#39;header with spaces&#39;;
+ok &#34;[a [b]]\n&#34; !~~ /^ &lt;header&gt; $/, &#39;cannot nest headers&#39;;
+ok &#34;[a\nb]\n&#34;  !~~ /^ &lt;header&gt; $/, &#39;No newlines inside headers&#39;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3558,7 +3440,7 @@ ok "[a\nb]\n"  !~~ /^ &lt;header&gt; $/, 'No newlines inside headers';</code></p
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my regex comment { ';' \N*\n+ }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex comment { &#39;;&#39; \N*\n+ }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3579,7 +3461,7 @@ ok "[a\nb]\n"  !~~ /^ &lt;header&gt; $/, 'No newlines inside headers';</code></p
 </div>
 </div>
 <div class="paragraph">
-<p><code>[&#8230;&#8203;]</code> 对正则表达式的一部分进行分组，这样，后面的量词 <code>*</code> 应用于整个组，而不仅仅是最后一项。</p>
+<p><code>[…​]</code> 对正则表达式的一部分进行分组，这样，后面的量词 <code>*</code> 应用于整个组，而不仅仅是最后一项。</p>
 </div>
 <div class="paragraph">
 <p>整个 INI 文件可能由一些初始键/值对或注释组成，然后是一些 section:</p>
@@ -3621,7 +3503,7 @@ key3 = with spaces
 more=stuff
 EOI
 
-ok $ini ~~ /^&lt;inifile&gt;$/, 'Can parse a full INI file';</code></pre>
+ok $ini ~~ /^&lt;inifile&gt;$/, &#39;Can parse a full INI file&#39;;</code></pre>
 </div>
 </div>
 </div>
@@ -3638,11 +3520,11 @@ ok $ini ~~ /^&lt;inifile&gt;$/, 'Can parse a full INI file';</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">'abc' ~~ /.* b/</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#39;abc&#39; ~~ /.* b/</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>正则表达式引擎首先计算 <code>.<strong></code>。<code>.</code> 可以匹配任何字符。<code></strong></code> 量词符是贪婪的，这意味着它尽量匹配尽可能多的字符。它最终会匹配整个字符串，即 abc。然后正则表达式引擎会尝试匹配 b，这是一个字面值。由于之前的匹配吞噬了整个字符串，所以匹配 c 和剩余的空字符串失败了。所以之前的正则表达式部分，<code>.<strong></code>，必须放弃一个字符。现在，它匹配了 ab，而 b 的字面值匹配器对 b 和 c 进行了比较，再次失败。所以有一个最后的迭代，<code>.</strong></code> 再次放弃了一个匹配的字符，现在 b 的字面值可以匹配字符串中的第二个字符。</p>
+<p>正则表达式引擎首先计算 <code>.<strong></strong></code><strong>。<code>.</code> 可以匹配任何字符。<code></code></strong> 量词符是贪婪的，这意味着它尽量匹配尽可能多的字符。它最终会匹配整个字符串，即 abc。然后正则表达式引擎会尝试匹配 b，这是一个字面值。由于之前的匹配吞噬了整个字符串，所以匹配 c 和剩余的空字符串失败了。所以之前的正则表达式部分，<code>.<strong></strong></code><strong>，必须放弃一个字符。现在，它匹配了 ab，而 b 的字面值匹配器对 b 和 c 进行了比较，再次失败。所以有一个最后的迭代，<code>.</code></strong> 再次放弃了一个匹配的字符，现在 b 的字面值可以匹配字符串中的第二个字符。</p>
 </div>
 <div class="paragraph">
 <p>这种来回迭代的方式叫做回溯。当你在字符串中搜索模式时，这是一个很好的功能。但在解析器中，它通常是不可取的。比如说，如果在输入 <code>key2=value2</code> 中的正则表达式 <code>key</code> 匹配了子串 key2，你不希望它只因为正则表达式的下一部分不能匹配到一个更短的子串，那么你就不希望它匹配到更短的子串。</p>
@@ -3655,7 +3537,7 @@ ok $ini ~~ /^&lt;inifile&gt;$/, 'Can parse a full INI file';</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "two words" ~~ /\w+\s*\w+/; # 「two words」</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;two words&#34; ~~ /\w+\s*\w+/; # 「two words」</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3663,7 +3545,7 @@ ok $ini ~~ /^&lt;inifile&gt;$/, 'Can parse a full INI file';</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "two" ~~ /\w+\s*\w+/; # 「two」</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;two&#34; ~~ /\w+\s*\w+/; # 「two」</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3682,9 +3564,9 @@ ok $ini ~~ /^&lt;inifile&gt;$/, 'Can parse a full INI file';</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my token key     { \w+ }
 my regex value   { &lt;!before \s&gt; &lt;-[\n;]&gt;+ &lt;!after \s&gt; }
-my token pair    { &lt;key&gt; \h* '=' \h* &lt;value&gt; \n+ }
-my token header  { '[' &lt;-[ \[ \] \n ]&gt;+ ']' \n+ }
-my token comment { ';' \N*\n+ }
+my token pair    { &lt;key&gt; \h* &#39;=&#39; \h* &lt;value&gt; \n+ }
+my token header  { &#39;[&#39; &lt;-[ \[ \] \n ]&gt;+ &#39;]&#39; \n+ }
+my token comment { &#39;;&#39; \N*\n+ }
 my token block   { [ &lt;pair&gt; | &lt;comment&gt; ]* }
 my token section { &lt;header&gt; &lt;block&gt; }
 my token inifile { &lt;block&gt; &lt;section&gt;* }</code></pre>
@@ -3710,9 +3592,9 @@ my token inifile { &lt;block&gt; &lt;section&gt;* }</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">grammar IniFile {
     token key     { \w+ }
     token value   { &lt;!before \s&gt; &lt;-[\n;]&gt;+ &lt;!after \s&gt; }
-    token pair    { &lt;key&gt; \h* '=' \h* &lt;value&gt; \n+ }
-    token header  { '[' &lt;-[ \[ \] \n ]&gt;+ ']' \n+ }
-    token comment { ';' \N*\n+ }
+    token pair    { &lt;key&gt; \h* &#39;=&#39; \h* &lt;value&gt; \n+ }
+    token header  { &#39;[&#39; &lt;-[ \[ \] \n ]&gt;+ &#39;]&#39; \n+ }
+    token comment { &#39;;&#39; \N*\n+ }
     token block   { [&lt;pair&gt; | &lt;comment&gt;]* }
     token section { &lt;header&gt; &lt;block&gt; }
     token TOP     { &lt;block&gt; &lt;section&gt;* }
@@ -3740,7 +3622,7 @@ my token inifile { &lt;block&gt; &lt;section&gt;* }</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">grammar IniFile {
     token ws { \h* }
-    rule pair { &lt;key&gt;    '='    &lt;value&gt; \n+ }
+    rule pair { &lt;key&gt;    &#39;=&#39;    &lt;value&gt; \n+ }
     # rest as before
 }</code></pre>
 </div>
@@ -3778,14 +3660,14 @@ more=stuff</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">{
 _ =&gt; {
-          key1 =&gt; "value2"
+          key1 =&gt; &#34;value2&#34;
       },
       section1 =&gt; {
-          key2 =&gt; "value2",
-          key3 =&gt; "with spaces"
+          key2 =&gt; &#34;value2&#34;,
+          key3 =&gt; &#34;with spaces&#34;
       },
       section2 =&gt; {
-          more =&gt; "stuff"
+          more =&gt; &#34;stuff&#34;
       }
 }</code></pre>
 </div>
@@ -3806,7 +3688,7 @@ _ =&gt; {
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/c8/x0_167351.jpg@596w_1l.jpg" alt="匹配树">
+<img src="https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/c8/x0_167351.jpg@596w_1l.jpg" alt="匹配树"/>
 </div>
 <div class="title">Figure 1. 解析示例 INI 文件的匹配树</div>
 </div>
@@ -3814,11 +3696,11 @@ _ =&gt; {
 <p>我们可以使用此数据结构来提取嵌套的哈希值。 标头标记匹配像“[section1] \ n”这样的字符串，我们只对“section1”感兴趣。 为了到达内部部分，我们可以通过在我们感兴趣的匹配的子规则周围插入一对括号来修改标题：</p>
 </div>
 <div class="paragraph">
-<p>我们可以遍历这个数据结构来提取嵌套的散列值。<code>header</code> 标记匹配的字符串是 <code>"[section1]\n"</code>，我们只对 "section1" 感兴趣。为了进入内部部分，我们可以通过在我们感兴趣的匹配的子正则表达式周围插入一对括号来修改 <code>header</code>:</p>
+<p>我们可以遍历这个数据结构来提取嵌套的散列值。<code>header</code> 标记匹配的字符串是 <code>&#34;[section1]\n&#34;</code>，我们只对 &#34;section1&#34; 感兴趣。为了进入内部部分，我们可以通过在我们感兴趣的匹配的子正则表达式周围插入一对括号来修改 <code>header</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">token header { '[' ( &lt;-[ \[ \] \n ]&gt;+ ) ']' \n+ }
+<pre class="highlight"><code class="language-raku" data-lang="raku">token header { &#39;[&#39; ( &lt;-[ \[ \] \n ]&gt;+ ) &#39;]&#39; \n+ }
 #                   ^^^^^^^^^^^^^^^^^^^^ a capturing group</code></pre>
 </div>
 </div>
@@ -3830,7 +3712,7 @@ _ =&gt; {
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub parse-ini(Str $input) {
     my $m = IniFile.parse($input);
     unless $m {
-        die "The input is not a valid INI file.";
+        die &#34;The input is not a valid INI file.&#34;;
     }
 
     sub block(Match $m) {
@@ -3857,7 +3739,7 @@ _ =&gt; {
 <p>Raku 也提供了一个自下而上的方法。它允许你为每个 regex、token 或 rule 编写一个数据提取或 <strong>action</strong> 方法。Grammar 引擎将匹配对象作为单一参数传递，而 action 方法可以调用例程 <code>make</code> 将结果附加到匹配对象上。结果可以通过匹配对象上的 <code>.made</code> 方法获得。</p>
 </div>
 <div class="paragraph">
-<p>一旦一个 regex 匹配成功，action 方法的执行就会发生；因此，一个 regex 的 action 方法可以依赖 subregex 调用的 action 方法已经运行。例如，当 <code>rule pair { &lt;key&gt; '=' &lt;value&gt; \n+ }</code> 正在执行时，首先标记 <code>key</code> 匹配成功，其 action 方法立即运行。然后，标记 <code>value</code> 匹配成功，它的 action 方法也会运行。最后，<code>rule pair</code> 本身可以匹配成功，所以它的 action 方法可以依赖 <code>$m&lt;key&gt;.made</code> 和 <code>$m&lt;value&gt;.made</code>，假设匹配结果存储在变量 <code>$m</code> 中。</p>
+<p>一旦一个 regex 匹配成功，action 方法的执行就会发生；因此，一个 regex 的 action 方法可以依赖 subregex 调用的 action 方法已经运行。例如，当 <code>rule pair { &lt;key&gt; &#39;=&#39; &lt;value&gt; \n+ }</code> 正在执行时，首先标记 <code>key</code> 匹配成功，其 action 方法立即运行。然后，标记 <code>value</code> 匹配成功，它的 action 方法也会运行。最后，<code>rule pair</code> 本身可以匹配成功，所以它的 action 方法可以依赖 <code>$m&lt;key&gt;.made</code> 和 <code>$m&lt;value&gt;.made</code>，假设匹配结果存储在变量 <code>$m</code> 中。</p>
 </div>
 <div class="paragraph">
 <p>说到变量，一个 regex 匹配会将其结果隐式地存储在特殊变量 <code>$/</code> 中，在 action 方法中习惯性地使用 <code>$/</code> 作为参数。还有一个访问命名的子匹配的捷径：你可以写 <code>$&lt;key&gt;</code>，而不是写 <code>$/&lt;key&gt;</code>。考虑到这个惯例，action 类就变成了:</p>
@@ -3894,7 +3776,7 @@ _ =&gt; {
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub parse-ini(Str $input) {
     my $m = IniFile.parse($input, :actions(IniFile::Actions));
     unless $m {
-        die "The input is not a valid INI file.";
+        die &#34;The input is not a valid INI file.&#34;;
     }
 
     return $m.made
@@ -3906,13 +3788,13 @@ _ =&gt; {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">sub parse-ini(Str $input, :$rule = 'TOP') {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub parse-ini(Str $input, :$rule = &#39;TOP&#39;) {
     my $m = IniFile.parse($input,
         :actions(IniFile::Actions),
         :$rule,
     );
     unless $m {
-        die "The input is not a valid INI file.";
+        die &#34;The input is not a valid INI file.&#34;;
     }
 
     return $m.made
@@ -3922,8 +3804,8 @@ say parse-ini($ini).perl;
 
 use Test;
 
-is-deeply parse-ini("k = v\n", :rule&lt;pair&gt;), 'k' =&gt; 'v',
-    'can parse a simple pair';
+is-deeply parse-ini(&#34;k = v\n&#34;, :rule&lt;pair&gt;), &#39;k&#39; =&gt; &#39;v&#39;,
+    &#39;can parse a simple pair&#39;;
 done-testing;</code></pre>
 </div>
 </div>
@@ -3935,13 +3817,13 @@ done-testing;</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">grammar IniFile {
     # regexes/tokens unchanged as before
 
-    method parse-ini(Str $input, :$rule = 'TOP') {
+    method parse-ini(Str $input, :$rule = &#39;TOP&#39;) {
         my $m = self.parse($input,
             :actions(IniFile::Actions),
             :$rule,
         );
     unless $m {
-        die "The input is not a valid INI file.";
+        die &#34;The input is not a valid INI file.&#34;;
     }
 
     return $m.made
@@ -3954,7 +3836,7 @@ my $result = IniFile.parse-ini($text);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>为了实现这个功能，类 <code>IniFile::Action</code> 必须在 grammar 之前声明，或者需要在文件顶部用类 <code>IniFile::Action { &#8230;&#8203; }</code> 在文件的顶部(用三个点来标记为前向声明)预先声明。</p>
+<p>为了实现这个功能，类 <code>IniFile::Action</code> 必须在 grammar 之前声明，或者需要在文件顶部用类 <code>IniFile::Action { …​ }</code> 在文件的顶部(用三个点来标记为前向声明)预先声明。</p>
 </div>
 </div>
 <div class="sect2">
@@ -4005,25 +3887,25 @@ other=stuff</code></pre>
 |  block
 |  |  pair
 |  |  |  key
-|  |  |  * MATCH "key"
+|  |  |  * MATCH &#34;key&#34;
 |  |  |  ws
-|  |  |  * MATCH ""
+|  |  |  * MATCH &#34;&#34;
 |  |  |  ws
-|  |  |  * MATCH ""
+|  |  |  * MATCH &#34;&#34;
 |  |  |  value
-|  |  |  * MATCH "value"
+|  |  |  * MATCH &#34;value&#34;
 |  |  |  ws
-|  |  |  * MATCH ""
+|  |  |  * MATCH &#34;&#34;
 |  |  |  ws
-|  |  |  * MATCH ""
-|  |  * MATCH "key=value\n"
+|  |  |  * MATCH &#34;&#34;
+|  |  * MATCH &#34;key=value\n&#34;
 |  |  pair
 |  |  |  key
 |  |  |  * FAIL
 |  |  * FAIL
 |  |  comment
 |  |  * FAIL
-|  * MATCH "key=value\n"
+|  * MATCH &#34;key=value\n&#34;
 |  section
 ...</code></pre>
 </div>
@@ -4039,7 +3921,7 @@ other=stuff</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">rule pair { &lt;key&gt; '=' &lt;value&gt; \n+ }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule pair { &lt;key&gt; &#39;=&#39; &lt;value&gt; \n+ }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4052,7 +3934,7 @@ other=stuff</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule pair {
     &lt;key&gt;
-    [ '=' || &lt;expect('=')&gt; ]
+    [ &#39;=&#39; || &lt;expect(&#39;=&#39;)&gt; ]
     &lt;value&gt; \n+
 }</code></pre>
 </div>
@@ -4066,7 +3948,7 @@ other=stuff</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method expect($what) {
-    die "Cannot parse input as INI file: Expected $what";
+    die &#34;Cannot parse input as INI file: Expected $what&#34;;
 }</code></pre>
 </div>
 </div>
@@ -4079,7 +3961,7 @@ other=stuff</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>后面还有一个回溯。这已经比"无效语法"要好，虽然位置还是缺失了。在方法 <code>expect</code> 里面，我们可以通过方法 <code>pos</code> 找到当前的解析位置，这个位置是由 `grammar ` 声明符带来的隐式父类 Grammar<sup class="footnote">[<a id="_footnoteref_59" class="footnote" href="#_footnotedef_59" title="View footnote.">59</a>]</sup> 提供的。</p>
+<p>后面还有一个回溯。这已经比&#34;无效语法&#34;要好，虽然位置还是缺失了。在方法 <code>expect</code> 里面，我们可以通过方法 <code>pos</code> 找到当前的解析位置，这个位置是由 `grammar ` 声明符带来的隐式父类 Grammar<sup class="footnote">[<a id="_footnoteref_59" class="footnote" href="#_footnotedef_59" title="View footnote.">59</a>]</sup> 提供的。</p>
 </div>
 <div class="paragraph">
 <p>我们可以用它来改善一下错误信息:</p>
@@ -4087,8 +3969,8 @@ other=stuff</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method expect($what) {
-    die "Cannot parse input as INI file: Expected $what at character
-    {self.pos}";
+    die &#34;Cannot parse input as INI file: Expected $what at character
+    {self.pos}&#34;;
 }</code></pre>
 </div>
 </div>
@@ -4103,13 +3985,13 @@ other=stuff</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">method expect($what) {
     my $parsed-so-far = self.target.substr(0, self.pos);
     my @lines = $parsed-so-far.lines;
-    die "Cannot parse input as INI file: Expected $what at line
-    @lines.elems(), after '@lines[*-1]'";
+    die &#34;Cannot parse input as INI file: Expected $what at line
+    @lines.elems(), after &#39;@lines[*-1]&#39;&#34;;
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这使我们从错误信息的"meh"领域进入了相当好的领域。因此:</p>
+<p>这使我们从错误信息的&#34;meh&#34;领域进入了相当好的领域。因此:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4127,38 +4009,38 @@ EOI</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-txt" data-lang="txt">Cannot parse input as INI file: Expected = at line 3, after
-'key_without_value'</code></pre>
+&#39;key_without_value&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>你可以通过在解析失败的位置前后提供上下文来进一步完善 <code>expect</code> 方法。当然，你还需要在 regex 中更多的地方应用 <code>[ thing || &lt;expect('thing')&gt; ]</code> 模式来获得更好的错误信息。</p>
+<p>你可以通过在解析失败的位置前后提供上下文来进一步完善 <code>expect</code> 方法。当然，你还需要在 regex 中更多的地方应用 <code>[ thing || &lt;expect(&#39;thing&#39;)&gt; ]</code> 模式来获得更好的错误信息。</p>
 </div>
 <div class="paragraph">
-<p>最后，你还可以提供不同类型的错误信息。例如，当解析一个 <code>section header</code> 时，一旦解析了初始的 <code>[</code> ，你可能不希望出现错误信息是 "expected rest of section header"，而是 "malformed section header, at line &#8230;&#8203;"。</p>
+<p>最后，你还可以提供不同类型的错误信息。例如，当解析一个 <code>section header</code> 时，一旦解析了初始的 <code>[</code> ，你可能不希望出现错误信息是 &#34;expected rest of section header&#34;，而是 &#34;malformed section header, at line …​&#34;。</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">rule pair {
     &lt;key&gt;
-    [ '=' || &lt;expect('=')&gt; ]
-    [ &lt;value&gt; || &lt;expect('value')&gt;]
+    [ &#39;=&#39; || &lt;expect(&#39;=&#39;)&gt; ]
+    [ &lt;value&gt; || &lt;expect(&#39;value&#39;)&gt;]
     \n+
 }
 token header {
-    '['
-     [ ( &lt;-[ \[ \] \n ]&gt;+ )    ']'
-         || &lt;error("malformed section header")&gt; ]
+    &#39;[&#39;
+     [ ( &lt;-[ \[ \] \n ]&gt;+ )    &#39;]&#39;
+         || &lt;error(&#34;malformed section header&#34;)&gt; ]
 }
 ...
 method expect($what) {
-    self.error("expected $what");
+    self.error(&#34;expected $what&#34;);
 }
 
 method error($msg) {
     my $parsed-so-far = self.target.substr(0, self.pos);
     my @lines = $parsed-so-far.lines;
-    die "Cannot parse input as INI file: $msg at line @lines.
-    elems(), after '@lines[*-1]'";
+    die &#34;Cannot parse input as INI file: $msg at line @lines.
+    elems(), after &#39;@lines[*-1]&#39;&#34;;
 }</code></pre>
 </div>
 </div>
@@ -4176,7 +4058,7 @@ method error($msg) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">token header { '[' ( &lt;-[ \[ \] \n ]&gt;+ ) ']' \n+ }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">token header { &#39;[&#39; ( &lt;-[ \[ \] \n ]&gt;+ ) &#39;]&#39; \n+ }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4184,7 +4066,7 @@ method error($msg) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">token header { '[' ~ ']' ( &lt;-[ \[ \] \n ]&gt;+ ) \n+ }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">token header { &#39;[&#39; ~ &#39;]&#39; ( &lt;-[ \[ \] \n ]&gt;+ ) \n+ }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4194,13 +4076,13 @@ method error($msg) {
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">method FAILGOAL($goal) {
     my $cleaned-goal = $goal.trim;
-    $cleaned-goal = $0 if $goal ~~ / \' (.+) \' /;
-    self.error("Cannot find closing $cleaned-goal");
+    $cleaned-goal = $0 if $goal ~~ / \&#39; (.+) \&#39; /;
+    self.error(&#34;Cannot find closing $cleaned-goal&#34;);
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>传给 <strong>FAILGOAL</strong> 的参数是正则表达式源码的字符串，这个字符串不能匹配闭合分隔符，这里是 ']'（带尾部空格）。我们希望从中提取出错误信息的字面意义的 <code>]</code> ，因此在方法中间的 regex 匹配。如果这个 regex 匹配成功，那么这个字面符号就在 <code>$/[0]</code> 中，<code>$0</code> 是一个快捷方式。</p>
+<p>传给 <strong>FAILGOAL</strong> 的参数是正则表达式源码的字符串，这个字符串不能匹配闭合分隔符，这里是 &#39;]&#39;（带尾部空格）。我们希望从中提取出错误信息的字面意义的 <code>]</code> ，因此在方法中间的 regex 匹配。如果这个 regex 匹配成功，那么这个字面符号就在 <code>$/[0]</code> 中，<code>$0</code> 是一个快捷方式。</p>
 </div>
 <div class="paragraph">
 <p>所有使用 <code>~</code> 的解析构造都可以从这样的方法 <strong>FAILGOAL</strong> 中受益，所以在解析几个不同的引号或括号构造的 grammar 中，写一个方法是值得的。</p>
@@ -4216,7 +4098,7 @@ method error($msg) {
 <p>即使是像 CSV 这样简单的东西，也会有一些复杂性。例如，你可以允许引号字符串本身就可以包含分隔符，以及允许在引号字符串中使用引号字符的转义字符。</p>
 </div>
 <div class="paragraph">
-<p>如果你对更深层次的 regexes 有兴趣，我强烈推荐 Jeffrey E. F. Friedl 的《精通正则表达式》（O&#8217;Reilly Media, 2008）。这本书并没有处理 Raku 中的正则表达式，但其中的概念可以很好地转化到 Raku 的正则表达式中。</p>
+<p>如果你对更深层次的 regexes 有兴趣，我强烈推荐 Jeffrey E. F. Friedl 的《精通正则表达式》（O’Reilly Media, 2008）。这本书并没有处理 Raku 中的正则表达式，但其中的概念可以很好地转化到 Raku 的正则表达式中。</p>
 </div>
 </div>
 <div class="sect2">
@@ -4297,7 +4179,7 @@ sub tree(IO::Path $path) {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub print-tree($tree, Int $indent = 0) {
-    say ' ' x $indent, format-size($tree.total-size), ' ',
+    say &#39; &#39; x $indent, format-size($tree.total-size), &#39; &#39;,
     $tree.name;
 
     if $tree ~~ Directory {
@@ -4306,17 +4188,17 @@ sub tree(IO::Path $path) {
 }
 
 sub format-size(Int $bytes) {
-    my @units = flat '', &lt;k M G T P&gt;;
+    my @units = flat &#39;&#39;, &lt;k M G T P&gt;;
     my @steps = (1, { $_ * 1024 } ... *).head(6);
     for @steps.kv -&gt; $idx, $step {
         my $in-unit = $bytes / $step;
         if $in-unit &lt; 1024 {
-            return sprintf '%.1f%s', $in-unit, @units[$idx];
+            return sprintf &#39;%.1f%s&#39;, $in-unit, @units[$idx];
         }
     }
 }
 
-sub MAIN($dir = '.') {
+sub MAIN($dir = &#39;.&#39;) {
     print-tree(tree($dir.IO));
 }</code></pre>
 </div>
@@ -4325,10 +4207,10 @@ sub MAIN($dir = '.') {
 <p>The subroutine print-tree is pretty boring, if you’re used to recursion.It prints out the name and size of the current node and, if the current node is a directory, recurses into each children with an increased indentation. The indentation is applied through the x string repetition operator, which when called as $string x $count repeats the $string $count times. It uses the ∼∼ smart matching operator to perform a type check; it tests if $tree is a Directory.</p>
 </div>
 <div class="paragraph">
-<p>To get a human-readable representation of the size of a number, format- size knows a list of six units: the empty string for one, k (kilo) for 1024, M (mega) for 1024×1024, and so on. This list is stored in the array @units. The multiple associated with each unit is stored in @steps, which is initialized through the series operator &#8230;&#8203;. Its structure is INITIAL, CALLABLE &#8230;&#8203; LIMIT, where it applies CALLABLE first to the initial value, and then to the next value generated, and so on, until it hits LIMIT. The limit here is *, a special term called Whatever, which means it’s unlimited. Thus, the sequence operator returns a lazy, potentially infinite, list and the trailing .head(6) call limits it to six values.</p>
+<p>To get a human-readable representation of the size of a number, format- size knows a list of six units: the empty string for one, k (kilo) for 1024, M (mega) for 1024×1024, and so on. This list is stored in the array @units. The multiple associated with each unit is stored in @steps, which is initialized through the series operator …​. Its structure is INITIAL, CALLABLE …​ LIMIT, where it applies CALLABLE first to the initial value, and then to the next value generated, and so on, until it hits LIMIT. The limit here is *, a special term called Whatever, which means it’s unlimited. Thus, the sequence operator returns a lazy, potentially infinite, list and the trailing .head(6) call limits it to six values.</p>
 </div>
 <div class="paragraph">
-<p>To find the most appropriate unit to print with the size, we have to iterate over both the values and the indices of the array, which for @steps.kv &#8594; $idx, $step { .. } accomplishes. sprintf, known from other programming languages, does the actual formatting to one digit after the dot and appends the unit.</p>
+<p>To find the most appropriate unit to print with the size, we have to iterate over both the values and the indices of the array, which for @steps.kv → $idx, $step { .. } accomplishes. sprintf, known from other programming languages, does the actual formatting to one digit after the dot and appends the unit.</p>
 </div>
 </div>
 <div class="sect2">
@@ -4358,7 +4240,7 @@ print SVG.serialize(
         width =&gt; 100,
         height =&gt; 20,
         title =&gt; [
-            'example',
+            &#39;example&#39;,
         ]
     ],
 );</code></pre>
@@ -4369,8 +4251,8 @@ print SVG.serialize(
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;svg xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100"
-height="20"&gt; &lt;title&gt;example&lt;/title&gt;
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; xmlns:svg=&#34;http://www.w3.org/2000/svg&#34; xmlns:xlink=&#34;http://www.w3.org/1999/xlink&#34; width=&#34;100&#34;
+height=&#34;20&#34;&gt; &lt;title&gt;example&lt;/title&gt;
 &lt;/svg&gt;</code></pre>
 </div>
 </div>
@@ -4388,12 +4270,12 @@ height="20"&gt; &lt;title&gt;example&lt;/title&gt;
 
     # produce a rectangle for the current file or dir
 
-    take 'rect' =&gt; [
+    take &#39;rect&#39; =&gt; [
         x =&gt; $x1,
         y =&gt; $y1,
         width  =&gt; $x2 - $x1,
         height =&gt; $y2 - $y1,
-        style  =&gt; "fill:" ~ random-color(),
+        style  =&gt; &#34;fill:&#34; ~ random-color(),
         title  =&gt; [$tree.name],
     ];
     return if $tree ~~ File;
@@ -4433,10 +4315,10 @@ height="20"&gt; &lt;title&gt;example&lt;/title&gt;
 }
 
 sub random-color {
-    return 'rgb(' ~ (1..3).map({ (^256).pick }).join(',') ~ ')';
+    return &#39;rgb(&#39; ~ (1..3).map({ (^256).pick }).join(&#39;,&#39;) ~ &#39;)&#39;;
 }
 
-sub MAIN($dir = '.') {
+sub MAIN($dir = &#39;.&#39;) {
     my $tree = tree($dir.IO); use SVG;
     my $width = 1024;
     my $height = 768;
@@ -4467,7 +4349,7 @@ sub MAIN($dir = '.') {
 <p>The random color generation uses ˆ256 to create a range from 0 to 256 (exclusive) and .pick returns a random element from this range. The result is a random CSS color string like rgb(120,240,5).</p>
 </div>
 <div class="paragraph">
-<p>In sub MAIN, the gather returns a list, which would normally be nested inside the outer array. The pipe symbol | in :svg[ &#8230;&#8203;, | gather &#8230;&#8203; ] before the gather prevents the normal nesting and flattens the list into the outer array.</p>
+<p>In sub MAIN, the gather returns a list, which would normally be nested inside the outer array. The pipe symbol | in :svg[ …​, | gather …​ ] before the gather prevents the normal nesting and flattens the list into the outer array.</p>
 </div>
 </div>
 <div class="sect2">
@@ -4482,13 +4364,13 @@ sub MAIN($dir = '.') {
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub flame-graph($tree, :$x1!, :$x2!, :$y!, :$height!) {
     return if $y &gt;= $height;
-    take 'rect' =&gt; [
+    take &#39;rect&#39; =&gt; [
         x =&gt; $x1,
         y =&gt; $y,
         width =&gt; $x2 - $x1,
         height =&gt; 15,
-        style =&gt; "fill:" ~ random-color(),
-        title =&gt; [$tree.name ~ ', ' ~ format-size($tree.total-size)],
+        style =&gt; &#34;fill:&#34; ~ random-color(),
+        title =&gt; [$tree.name ~ &#39;, &#39; ~ format-size($tree.total-size)],
     ];
 
     return if $tree ~~ File;
@@ -4515,12 +4397,12 @@ sub MAIN($dir = '.') {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">sub MAIN($dir = '.', :$type="flame") {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub MAIN($dir = &#39;.&#39;, :$type=&#34;flame&#34;) {
     my $tree = tree($dir.IO);
     use SVG;
     my $width = 1024;
     my $height = 768;
-    my &amp;grapher = $type eq 'flame'
+    my &amp;grapher = $type eq &#39;flame&#39;
             ?? { flame-graph $tree, x1 =&gt; 0, x2 =&gt; $width, y =&gt; 0, :$height }
             !! { tree-map    $tree, x1 =&gt; 0, x2 =&gt; $width, y1 =&gt; 0, y2 =&gt; $height }
     say SVG.serialize(
@@ -4568,13 +4450,13 @@ sub MAIN($dir = '.') {
 
 sub flame-graph($tree, :$x1!, :$x2!, :$y!, :$height!) {
     return if $y &gt;= $height;
-    take 'rect' =&gt; [
+    take &#39;rect&#39; =&gt; [
         x =&gt; $x1,
         y =&gt; $y,
         width  =&gt; $x2 - $x1,
         height =&gt; 15,
-        style =&gt; "fill:" ~ random-color(),
-        title =&gt; [$tree.name ~ ', ' ~ format-size($tree.total-size)],
+        style =&gt; &#34;fill:&#34; ~ random-color(),
+        title =&gt; [$tree.name ~ &#39;, &#39; ~ format-size($tree.total-size)],
     ];
     return if $tree ~~ File;
     subdivide( $tree, $x1, $x2, -&gt; $child, $x1, $x2 {
@@ -4584,12 +4466,12 @@ sub flame-graph($tree, :$x1!, :$x2!, :$y!, :$height!) {
 
 sub tree-map($tree, :$x1!, :$x2!, :$y1!, :$y2) {
     return if ($x2 - $x1) * ($y2 - $y1) &lt; 20;
-    take 'rect' =&gt; [
+    take &#39;rect&#39; =&gt; [
         x =&gt; $x1,
         y =&gt; $y1,
         width  =&gt; $x2 - $x1,
         height =&gt; $y2 - $y1,
-        style  =&gt; "fill:" ~ random-color(),
+        style  =&gt; &#34;fill:&#34; ~ random-color(),
         title  =&gt; [$tree.name],
     ];
     return if $tree ~~ File;
@@ -4621,7 +4503,7 @@ The usage in subroutine flame-graph looks like this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The code object being passed to subdivide starts with &#8594;, which introduces the signature of a block. The code block recurses into flame-graph, adding some extra arguments and turning two positional arguments into named arguments along the way.</p>
+<p>The code object being passed to subdivide starts with →, which introduces the signature of a block. The code block recurses into flame-graph, adding some extra arguments and turning two positional arguments into named arguments along the way.</p>
 </div>
 <div class="paragraph">
 <p>This refactoring shortened the code and made it overall more pleasant
@@ -4635,13 +4517,13 @@ to work with. But there’s still quite a bit of duplication between tree-map an
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub svg-tree-gen(:&amp;terminate!, :&amp;base-height!, :&amp;subdivide-x!, :&amp;other!) {
     sub inner($tree, :$x1!, :$x2!, :$y1!, :$y2!) {
         return if terminate(:$x1, :$x2, :$y1, :$y2);
-        take 'rect' =&gt; [
+        take &#39;rect&#39; =&gt; [
             x =&gt; $x1,
             y =&gt; $y1,
             width  =&gt; $x2 - $x1,
             height =&gt; base-height(:$y1, :$y2),
-            style  =&gt; "fill:" ~ random-color(),
-            title  =&gt; [$tree.name ~ ', ' ~ format-size($tree.total-size)],
+            style  =&gt; &#34;fill:&#34; ~ random-color(),
+            title  =&gt; [$tree.name ~ &#39;, &#39; ~ format-size($tree.total-size)],
         ];
         return if $tree ~~ File;
         if subdivide-x(:$x1, :$y1, :$x2, :$y2) {
@@ -4679,27 +4561,27 @@ my &amp;tree-map = svg-tree-gen
 <p>Now we have a new function svg-tree-gen, which returns a function. The behavior of the returned function depends on the four small functions that svg-tree-gen receives as arguments.</p>
 </div>
 <div class="paragraph">
-<p>The first argument, terminate, determines under what condition the inner function should terminate early. For tree-map, that’s when the area is below 20 pixels; for flame-graph, that&#8217;s when the current y-coordinate $y1 exceeds the height of the whole image (stored in $y2). svg-tree-gen always calls this function with the four named arguments x1, x2, y1, and y2, so the terminate function must ignore the x1 and x2 values. It does this by adding | as a parameter, which is an anonymous capture. Such a parameter can bind arbitrary positional and named arguments, and since it’s an anonymous parameter, it discards all the values.</p>
+<p>The first argument, terminate, determines under what condition the inner function should terminate early. For tree-map, that’s when the area is below 20 pixels; for flame-graph, that’s when the current y-coordinate $y1 exceeds the height of the whole image (stored in $y2). svg-tree-gen always calls this function with the four named arguments x1, x2, y1, and y2, so the terminate function must ignore the x1 and x2 values. It does this by adding | as a parameter, which is an anonymous capture. Such a parameter can bind arbitrary positional and named arguments, and since it’s an anonymous parameter, it discards all the values.</p>
 </div>
 <div class="paragraph">
 <p>The second configuration function, base-height, determines the height of the rectangle in the base case. For flame-graph it’s a constant, so the configuration function must discard all arguments, again with a |. For tree-graph, it must return the difference between $y2 and $y1, as before the refactoring.</p>
 </div>
 <div class="paragraph">
-<p>The third function determines when to subdivide along the x axis. Flame graphs always divide along the x axis, so &#8594; | { True } accomplishes that. Our simplistic approach to tree graphs divides along the longer axis, so only along the x axis if $x2 – $x1 &gt; $y2 – $y1.</p>
+<p>The third function determines when to subdivide along the x axis. Flame graphs always divide along the x axis, so → | { True } accomplishes that. Our simplistic approach to tree graphs divides along the longer axis, so only along the x axis if $x2 – $x1 &gt; $y2 – $y1.</p>
 </div>
 <div class="paragraph">
 <p>The fourth and final function we pass to svg-tree-gen calculates the coordinate of the axis that isn’t being subdivided. In the case of flame-graph that’s increasing over the previous value by the height of the bars, and for tree-map it’s the unchanged coordinate,
-so we pass the identity function <code>&#8594; $a { $a }</code>.</p>
+so we pass the identity function <code>→ $a { $a }</code>.</p>
 </div>
 <div class="paragraph">
-<p>The inner function only needs a name because we need to call it from itself recursively; otherwise an anonymous function <code>sub ($tree, :$x1!, :$x2!, :$y1!, :$y2!) { &#8230;&#8203; }</code> would have worked fine.</p>
+<p>The inner function only needs a name because we need to call it from itself recursively; otherwise an anonymous function <code>sub ($tree, :$x1!, :$x2!, :$y1!, :$y2!) { …​ }</code> would have worked fine.</p>
 </div>
 <div class="paragraph">
 <p>This refactoring also unifies the names of the arguments to flame-graph and tree-map (previously, tree-map had :$y2 and flame-graph had :$height), so the call can now be simplified to</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my &amp;grapher = $type eq 'flame' ?? &amp;flame-graph !! &amp;tree-map;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my &amp;grapher = $type eq &#39;flame&#39; ?? &amp;flame-graph !! &amp;tree-map;
 say SVG.serialize(
     :svg[
         :$width,
@@ -4733,13 +4615,13 @@ say SVG.serialize(
     :&amp;other!) {
     sub inner($tree, :$x1!, :$x2!, :$y1!, :$y2!) {
         return if terminate(:$x1, :$x2, :$y1, :$y2);
-        take 'rect' =&gt; [
+        take &#39;rect&#39; =&gt; [
             x =&gt; $x1,
             y =&gt; $y1,
             width  =&gt; $x2 - $x1,
             height =&gt; base-height(:$y1, :$y2),
-            style  =&gt; "fill:" ~ color(),
-            title  =&gt; [$tree.name ~ ', ' ~ format-size($tree.total-size)],
+            style  =&gt; &#34;fill:&#34; ~ color(),
+            title  =&gt; [$tree.name ~ &#39;, &#39; ~ format-size($tree.total-size)],
     }
 ];
 # rest as before
@@ -4756,7 +4638,7 @@ say SVG.serialize(
     $r = ($r + 5) % 256;
     $g = ($g + 10) % 256;
     $b = ($b + 15) % 256;
-    return "rgb($r,$g,$b)";
+    return &#34;rgb($r,$g,$b)&#34;;
 }</code></pre>
 </div>
 </div>
@@ -4764,7 +4646,7 @@ say SVG.serialize(
 <p>State variables keep their values between calls to the same subroutine and their initialization runs only on the first call. Hence this function slightly increases the lightness in each color channel for each invocation, except when it reaches 256, where the modulo operator % resets it back to a small value.</p>
 </div>
 <div class="paragraph">
-<p>If we plug this into our functions by passing color &#8658; &amp;color-range to the calls to svg-tree-gen, we get much less chaotic-looking output (Figures 10-3 and 10-4):</p>
+<p>If we plug this into our functions by passing color ⇒ &amp;color-range to the calls to svg-tree-gen, we get much less chaotic-looking output (Figures 10-3 and 10-4):</p>
 </div>
 <div class="paragraph">
 <p>Figure 10-3. Tree map with deterministic color generation</p>
@@ -4806,13 +4688,13 @@ say SVG.serialize(
 <p>This works for chains of method calls too, so you could write @.children. map(*.total-size.round) if total-size returned a fractional number and you wanted to call the .round method on the result.</p>
 </div>
 <div class="paragraph">
-<p>There are more cases where you can replace an expression with the “Whatever” star (<strong>) to create a small function. To create a function that adds 15 to its argument, you can write <code></strong> + 15</code> instead of <code>&#8594; $a { $a + 15 }</code>.</p>
+<p>There are more cases where you can replace an expression with the “Whatever” star (<strong>) to create a small function. To create a function that adds 15 to its argument, you can write <code></code></strong><code> + 15</code> instead of <code>→ $a { $a + 15 }</code>.</p>
 </div>
 <div class="paragraph">
 <p>If you need to write a function to just call another function, but pass more arguments to the second function, you can use the method assuming.</p>
 </div>
 <div class="paragraph">
-<p>For example <code>&#8594; $x { f(42, $x }</code> can be replaced with <code>&amp;f.assuming(42)</code>.This worksalsofornamedarguments,so&#8594; $x { f($x, height &#8658; 42 ) } can be replaced with <code>&amp;f.assuming(height &#8658; 42)</code>.</p>
+<p>For example <code>→ $x { f(42, $x }</code> can be replaced with <code>&amp;f.assuming(42)</code>.This worksalsofornamedarguments,so→ $x { f($x, height ⇒ 42 ) } can be replaced with <code>&amp;f.assuming(height ⇒ 42)</code>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -4842,7 +4724,7 @@ class Directory does Path {
 </div>
 </div>
 <div class="paragraph">
-<p>A role looks structurally similar to a class, and using the does keyword in the class declaration applies the role to the class. This role application copies attributes and methods into the target class, but with some additional compile- time checks. One such check is that a class must implement stubbed-out methods like method total-size, where the &#8230;&#8203; as the method body marked it as a stub. In addition, when you apply multiple roles to the same class, name clashes are detected and throw an error unless you implement the method in the class for disambiguation.</p>
+<p>A role looks structurally similar to a class, and using the does keyword in the class declaration applies the role to the class. This role application copies attributes and methods into the target class, but with some additional compile- time checks. One such check is that a class must implement stubbed-out methods like method total-size, where the …​ as the method body marked it as a stub. In addition, when you apply multiple roles to the same class, name clashes are detected and throw an error unless you implement the method in the class for disambiguation.</p>
 </div>
 <div class="paragraph">
 <p>Roles are the preferred method of code reuse (apart from delegation) in Raku, because of the safety features mentioned previously.</p>
@@ -4857,7 +4739,7 @@ class Directory does Path {
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">enum GraphType &lt;flame tree&gt;;
 
-sub MAIN($dir = '.', GraphType :$type=flame) {
+sub MAIN($dir = &#39;.&#39;, GraphType :$type=flame) {
     my $tree = tree($dir.IO);
     use SVG;
     my $width = 1024;
@@ -4933,7 +4815,7 @@ sub MAIN($dir = '.', GraphType :$type=flame) {
 </div>
 </div>
 <div class="paragraph">
-<p>每一行都对应于 Unicode 所说的 "代码点"，通常是一个字符本身，但偶尔也会有像 U+00300-COMBINING GRAVE ACCENT 这样的字符，它与一个 U+00061-LATIN SMALL LETTER A 结合起来，就形成了字符 à。</p>
+<p>每一行都对应于 Unicode 所说的 &#34;代码点&#34;，通常是一个字符本身，但偶尔也会有像 U+00300-COMBINING GRAVE ACCENT 这样的字符，它与一个 U+00061-LATIN SMALL LETTER A 结合起来，就形成了字符 à。</p>
 </div>
 <div class="paragraph">
 <p>Raku 在 Str 和 Int 类中都提供了一个 <code>uniname</code> 方法，它可以为给定的字符生成 Unicode 代码点名称，可以是直接的字符形式，也可以是代码点编号的形式。 有了这个，第一部分 uni 所需的功能看起来是这样的:</p>
@@ -4943,7 +4825,7 @@ sub MAIN($dir = '.', GraphType :$type=flame) {
 <pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
 use v6;
 sub format-codepoint(Int $codepoint) {
-    sprintf "%s - U+%05x - %s\n",
+    sprintf &#34;%s - U+%05x - %s\n&#34;,
         $codepoint.chr,
         $codepoint,
         $codepoint.uniname;
@@ -5028,7 +4910,7 @@ e - U+00065 - LATIN SMALL LETTER E</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $s = "ø\c[COMBINING TILDE]"; say $s; # Output: ø̃
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $s = &#34;ø\c[COMBINING TILDE]&#34;; say $s; # Output: ø̃
 say $s.chars; # Output: 1</code></pre>
 </div>
 </div>
@@ -5040,7 +4922,7 @@ say $s.chars; # Output: 1</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my $bytes = 'Raku'.encode('UTF-8'); # utf8:0x&lt;50 65 72 6c 20 36&gt;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $bytes = &#39;Raku&#39;.encode(&#39;UTF-8&#39;); # utf8:0x&lt;50 65 72 6c 20 36&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5054,7 +4936,7 @@ say $s.chars; # Output: 1</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">$*OUT.write('Raku'.encode('UTF-8'));</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">$*OUT.write(&#39;Raku&#39;.encode(&#39;UTF-8&#39;));</code></pre>
 </div>
 </div>
 </div>
@@ -5073,7 +4955,7 @@ say $s.chars; # Output: 1</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "٤٢".Int; # 42</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;٤٢&#34;.Int; # 42</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5081,7 +4963,7 @@ say $s.chars; # Output: 1</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "\c[TIBETAN DIGIT HALF ZERO]".unival;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;\c[TIBETAN DIGIT HALF ZERO]&#34;.unival;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5095,8 +4977,8 @@ say $s.chars; # Output: 1</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "ø".uniprop;                           # Ll
-say "\c[TIBETAN DIGIT HALF ZERO]".uniprop; # No</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;ø&#34;.uniprop;                           # Ll
+say &#34;\c[TIBETAN DIGIT HALF ZERO]&#34;.uniprop; # No</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5104,9 +4986,9 @@ say "\c[TIBETAN DIGIT HALF ZERO]".uniprop; # No</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say "a".uniprop-bool('ASCII_Hex_Digit'); # True
-say "ü".uniprop-bool('Numeric_Type');    # False
-say ".".uniprop("Word_Break");           # MidNumLet</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;a&#34;.uniprop-bool(&#39;ASCII_Hex_Digit&#39;); # True
+say &#34;ü&#34;.uniprop-bool(&#39;Numeric_Type&#39;);    # False
+say &#34;.&#34;.uniprop(&#34;Word_Break&#34;);           # MidNumLet</code></pre>
 </div>
 </div>
 </div>
@@ -5170,7 +5052,7 @@ say @list.collate;                 # (a Ä ä o ö ø)</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $proc = run :out, &lt;git log --date=short --pretty=format:%ad!%an&gt;;
 my (%total, %by-author, %dates);
 for $proc.out.lines -&gt; $line {
-    my ( $date, $author ) = $line.split: '!', 2;
+    my ( $date, $author ) = $line.split: &#39;!&#39;, 2;
     %total{$author}++;
     %by-author{$author}{$date}++;
     %dates{$date}++;
@@ -5181,7 +5063,7 @@ for $proc.out.lines -&gt; $line {
 <p>run executes an external command and :out tells it to capture the command’s output, making it available as $proc.out. The command is a list, with the first element being the actual executable and the rest being command-line arguments to this executable.</p>
 </div>
 <div class="paragraph">
-<p>Here git log gets the options --date short --pretty=format:%ad!%an, which instructs it to produce lines like2017-03-01!John Doe.This line can be parsed with a simple call to $line.split: '!', 2,which splits onthe! and limits the result to two elements.Assigning it to a two-element list( $date, $author ) unpacks it.We then use hashes to count commits by author(in %total), by author and date (%by-author), and finally by date. In the second case,%by-author{$author} isn’t even a hash yet and we can still hash-index it. This is due to a feature called autovivification, which automatically creates (“vivifies”) objects where we need them. The use of ++ creates integers, {&#8230;&#8203;} indexing creates hashes, [&#8230;&#8203;] indexing, .push creates arrays, and so on.</p>
+<p>Here git log gets the options --date short --pretty=format:%ad!%an, which instructs it to produce lines like2017-03-01!John Doe.This line can be parsed with a simple call to $line.split: &#39;!&#39;, 2,which splits onthe! and limits the result to two elements.Assigning it to a two-element list( $date, $author ) unpacks it.We then use hashes to count commits by author(in %total), by author and date (%by-author), and finally by date. In the second case,%by-author{$author} isn’t even a hash yet and we can still hash-index it. This is due to a feature called autovivification, which automatically creates (“vivifies”) objects where we need them. The use of ++ creates integers, {…​} indexing creates hashes, […​] indexing, .push creates arrays, and so on.</p>
 </div>
 <div class="paragraph">
 <p>To get from these hashes to the top contributors by commit count, we can sort %total by value. Since this sorts in ascending order, sorting by the negative value returns the list in descending order. The list contains Pair1 objects, where we only want the first five, and only their keys:</p>
@@ -5224,10 +5106,10 @@ subplots.plot(
     [datetime.date(2017, 1, 5), datetime.date(2017, 3, 5),
     datetime.date(2017, 5, 5)],
     [ 42, 23, 42 ],
-    label='An example',
+    label=&#39;An example&#39;,
 )
 
-subplots.legend(loc='upper center', shadow=True)
+subplots.legend(loc=&#39;upper center&#39;, shadow=True)
 fig.autofmt_xdate()
 plt.show()</code></pre>
 </div>
@@ -5263,7 +5145,7 @@ plt.show()</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">use Inline::Python;
 
 my $py = Inline::Python.new;
-$py.run: 'print("Hello, Raku")';</code></pre>
+$py.run: &#39;print(&#34;Hello, Raku&#34;)&#39;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5274,9 +5156,9 @@ $py.run: 'print("Hello, Raku")';</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">use Inline::Python;
 
 my $py = Inline::Python.new;
-$py.run('import datetime');
-my $date = $py.call('datetime', 'date', 2017, 1, 31);
-$py.call('__builtin__', 'print', $date); # 2017-01-31</code></pre>
+$py.run(&#39;import datetime&#39;);
+my $date = $py.call(&#39;datetime&#39;, &#39;date&#39;, 2017, 1, 31);
+$py.call(&#39;__builtin__&#39;, &#39;print&#39;, $date); # 2017-01-31</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5303,7 +5185,7 @@ $py.call('__builtin__', 'print', $date); # 2017-01-31</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-txt" data-lang="txt">'int' object is not callable</code></pre>
+<pre class="highlight"><code class="language-txt" data-lang="txt">&#39;int&#39; object is not callable</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5311,7 +5193,7 @@ $py.call('__builtin__', 'print', $date); # 2017-01-31</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">say $py.call('__builtin__', 'getattr', $date, 'year');</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $py.call(&#39;__builtin__&#39;, &#39;getattr&#39;, $date, &#39;year&#39;);</code></pre>
 </div>
 </div>
 </div>
@@ -5323,23 +5205,23 @@ $py.call('__builtin__', 'print', $date); # 2017-01-31</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $py = Inline::Python.new;
-$py.run('import datetime');
-$py.run('import matplotlib.pyplot');
+$py.run(&#39;import datetime&#39;);
+$py.run(&#39;import matplotlib.pyplot&#39;);
 sub plot(Str $name, |c) {
-    $py.call('matplotlib.pyplot', $name, |c);
+    $py.call(&#39;matplotlib.pyplot&#39;, $name, |c);
 }
 
 sub pydate(Str $d) {
-    $py.call('datetime', 'date', $d.split('-').map(*.Int));
+    $py.call(&#39;datetime&#39;, &#39;date&#39;, $d.split(&#39;-&#39;).map(*.Int));
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>We can now call pydate('2017-03-01') to create a Python datetime. date object from an ISO-formatted string and call the plot function to access functionality from matplotlib:</p>
+<p>We can now call pydate(&#39;2017-03-01&#39;) to create a Python datetime. date object from an ISO-formatted string and call the plot function to access functionality from matplotlib:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">my ($figure, $subplots) = plot('subplots');
+<pre class="highlight"><code class="language-raku" data-lang="raku">my ($figure, $subplots) = plot(&#39;subplots&#39;);
 $figure.autofmt_xdate();
 
 my @dates = %dates.keys.sort;
@@ -5347,13 +5229,13 @@ my @dates = %dates.keys.sort;
 $subplots.plot:
     $[@dates.map(&amp;pydate)],
     $[ %dates{@dates} ],
-    label     =&gt; 'Total',
-    marker    =&gt; '.',
-    linestyle =&gt; '';</code></pre>
+    label     =&gt; &#39;Total&#39;,
+    marker    =&gt; &#39;.&#39;,
+    linestyle =&gt; &#39;&#39;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The Raku call plot('subplots') corresponds to the Python code fig, subplots = plt.subplots(). Passing arrays to Python functions needs a bit of extra work, because Inline::Python flattens arrays. Using an extra $ sigil in front of an array puts it into an extra scalar and thus prevents the flattening.</p>
+<p>The Raku call plot(&#39;subplots&#39;) corresponds to the Python code fig, subplots = plt.subplots(). Passing arrays to Python functions needs a bit of extra work, because Inline::Python flattens arrays. Using an extra $ sigil in front of an array puts it into an extra scalar and thus prevents the flattening.</p>
 </div>
 <div class="paragraph">
 <p>Now we can actually plot the number of commits by author, add a legend, and plot the result:</p>
@@ -5367,13 +5249,13 @@ $subplots.plot:
         $[ @dates.map(&amp;pydate) ],
         $@counts,
         label     =&gt; $author,
-        marker    =&gt;'.',
-        linestyle =&gt; '';
+        marker    =&gt;&#39;.&#39;,
+        linestyle =&gt; &#39;&#39;;
 }
 
-$subplots.legend(loc=&gt;'upper center', shadow=&gt;True);
-plot('title', 'Contributions per day');
-plot('show');</code></pre>
+$subplots.legend(loc=&gt;&#39;upper center&#39;, shadow=&gt;True);
+plot(&#39;title&#39;, &#39;Contributions per day&#39;);
+plot(&#39;show&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5409,8 +5291,8 @@ for @dates -&gt; $d {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">$subplots.stackplot($[@dates.map(&amp;pydate)], @stack);
-plot('title', 'Contributions per day');
-plot('show');</code></pre>
+plot(&#39;title&#39;, &#39;Contributions per day&#39;);
+plot(&#39;show&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5475,7 +5357,7 @@ my @plots;
 
 for @top-authors.kv -&gt; $idx, $author {
     @plots.push: plot(
-        'bar',
+        &#39;bar&#39;,
         $[@dates.map(&amp;pydate)],
         @stack[$idx],
         $width,
@@ -5484,10 +5366,10 @@ for @top-authors.kv -&gt; $idx, $author {
         edgecolor =&gt; @colors[$idx],
     );
 }
-plot('legend', $@plots, $@top-authors);
+plot(&#39;legend&#39;, $@plots, $@top-authors);
 
-plot('title', 'Contributions per day');
-plot('show');</code></pre>
+plot(&#39;title&#39;, &#39;Contributions per day&#39;);
+plot(&#39;show&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5557,7 +5439,7 @@ result = plt.subplots()</code></pre>
 <pre class="highlight"><code class="language-raku" data-lang="raku">my $py = Inline::Python.new;
 
 sub gen(Str $namespace, *@names) {
-    $py.run("import $namespace");
+    $py.run(&#34;import $namespace&#34;);
 
     return @names.map: -&gt; $name {
         sub (|args) {
@@ -5567,14 +5449,14 @@ sub gen(Str $namespace, *@names) {
 }
 
 my (&amp;subplots, &amp;bar, &amp;legend, &amp;title, &amp;show)
-    = gen('matplotlib.pyplot', &lt;subplots bar legend title show&gt;);
+    = gen(&#39;matplotlib.pyplot&#39;, &lt;subplots bar legend title show&gt;);
 
 my ($figure, $subplots) = subplots();
 
 # more code here
 
 legend($@plots, $@top-authors);
-title('Contributions per day');
+title(&#39;Contributions per day&#39;);
 show();</code></pre>
 </div>
 </div>
@@ -5588,7 +5470,7 @@ show();</code></pre>
 <p>This is where Raku’s flexibility and introspection abilities pay off. There are two key components that allow a nicer solution: the fact that declarations are expressions, and that you can introspect variables for their names.</p>
 </div>
 <div class="paragraph">
-<p>The first part means you can write mysub my ($a, $b), which declares the variables $a and $b, and calls a function with those variables as arguments. The second part means that $a.VAR.name returns a string '$a', the name of the variable.</p>
+<p>The first part means you can write mysub my ($a, $b), which declares the variables $a and $b, and calls a function with those variables as arguments. The second part means that $a.VAR.name returns a string &#39;$a&#39;, the name of the variable.</p>
 </div>
 <div class="paragraph">
 <p>Let’s combine this to create a wrapper that initializes subroutines for us:</p>
@@ -5596,7 +5478,7 @@ show();</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">sub pysub(Str $namespace, |args) {
-    $py.run("import $namespace");
+    $py.run(&#34;import $namespace&#34;);
 
     for args[0] &lt;-&gt; $sub {
         my $name = $sub.VAR.name.substr(1);
@@ -5606,7 +5488,7 @@ show();</code></pre>
     }
 }
 
-pysub 'matplotlib.pyplot',
+pysub &#39;matplotlib.pyplot&#39;,
     my (&amp;subplots, &amp;bar, &amp;legend, &amp;title, &amp;show);</code></pre>
 </div>
 </div>
@@ -5620,7 +5502,7 @@ Raku features in sub pysub. Using ordinary variables means that accessing their 
 </div>
 </div>
 <div class="paragraph">
-<p>Instead we must use |args to obtain the rest of the arguments in a Capture.12 This doesn’t flatten the list of variables passed to the function, so when we iterate over them, we must do so by accessing args[0]. By default, loop variables are read-only, which we can avoid by using &lt;&#8594; instead of &#8594; to introduce the signature. Fortunately, that also preserves the name of the caller side variable.</p>
+<p>Instead we must use |args to obtain the rest of the arguments in a Capture.12 This doesn’t flatten the list of variables passed to the function, so when we iterate over them, we must do so by accessing args[0]. By default, loop variables are read-only, which we can avoid by using &lt;→ instead of → to introduce the signature. Fortunately, that also preserves the name of the caller side variable.</p>
 </div>
 </div>
 <div class="sect3">
@@ -5633,10 +5515,10 @@ Raku features in sub pysub. Using ordinary variables means that accessing their 
 <pre class="highlight"><code class="language-raku" data-lang="raku">class PyPlot is Mu {
     has $.py;
     submethod TWEAK {
-        $!py.run('import matplotlib.pyplot');
+        $!py.run(&#39;import matplotlib.pyplot&#39;);
     }
     method FALLBACK($name, |args) {
-        $!py.call('matplotlib.pyplot', $name, |args);
+        $!py.call(&#39;matplotlib.pyplot&#39;, $name, |args);
     }
 }
 
@@ -5645,7 +5527,7 @@ my ($figure, $subplots) = $pyplot.subplots;
 # plotting code goes here
 $pyplot.legend($@plots, $@top-authors);
 
-$pyplot.title('Contributions per day');
+$pyplot.title(&#39;Contributions per day&#39;);
 $pyplot.show;</code></pre>
 </div>
 </div>
@@ -5664,7 +5546,7 @@ $pyplot.show;</code></pre>
     has $.py;
     has $.namespace;
     submethod TWEAK {
-        $!py.run("import $!namespace");
+        $!py.run(&#34;import $!namespace&#34;);
     }
     method FALLBACK($name, |args) {
         $!py.call($!namespace, $name, |args);
@@ -5681,14 +5563,14 @@ my $pyplot = PythonModule.new(:$py, :namespace&lt;matplotlib.pyplot&gt;);</code>
 <pre class="highlight"><code class="language-raku" data-lang="raku">role PythonModule[Str $namespace] is Mu {
     has $.py;
     submethod TWEAK {
-        $!py.run("import $namespace");
+        $!py.run(&#34;import $namespace&#34;);
     }
     method FALLBACK($name, |args) {
         $!py.call($namespace, $name, |args);
     }
 }
 
-my $pyplot = PythonModule['matplotlib.pyplot'].new(:$py);</code></pre>
+my $pyplot = PythonModule[&#39;matplotlib.pyplot&#39;].new(:$py);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5696,7 +5578,7 @@ my $pyplot = PythonModule['matplotlib.pyplot'].new(:$py);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">sub plot-histogram(PythonModule['matplotlib.pyplot'], @data) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub plot-histogram(PythonModule[&#39;matplotlib.pyplot&#39;], @data) {
     # implementation here
 }</code></pre>
 </div>
@@ -5741,7 +5623,7 @@ my $pyplot = PythonModule['matplotlib.pyplot'].new(:$py);</code></pre>
 <p>在 <a href="https://docs.raku.org/language/modules">https://docs.raku.org/language/modules</a> 的官方文档中解释了如何编写模块，以及模块安装程序 zef（和其他工具）所依赖的标准目录布局和元数据。</p>
 </div>
 <div class="paragraph">
-<p>随着你的代码库的增长，类型注解可以帮助你跟踪例程接受哪些参数，以及它们返回哪些参数。我倾向于在公共 API 的签名中使用类型注解。我所说的"公共"指的是可以从模块外访问的例程。在例程中，为了简洁和灵活，我倾向于省略它们。</p>
+<p>随着你的代码库的增长，类型注解可以帮助你跟踪例程接受哪些参数，以及它们返回哪些参数。我倾向于在公共 API 的签名中使用类型注解。我所说的&#34;公共&#34;指的是可以从模块外访问的例程。在例程中，为了简洁和灵活，我倾向于省略它们。</p>
 </div>
 <div class="paragraph">
 <p>为了使类型约束更可重用，你可以定义创建 <code>subset</code> 类型。例如，我们已经看到了一个临时类型约束的例子。</p>
@@ -5805,7 +5687,7 @@ sub parse-date(DateStr) returns Date { ... }</code></pre>
 <pre class="highlight"><code class="language-shell" data-lang="shell">FROM rakudo-star:2017.04
 COPY myapp /tmp/install
 RUN zef install /tmp/install
-ENTRYPOINT ["/usr/share/raku/site/bin/myapp"]</code></pre>
+ENTRYPOINT [&#34;/usr/share/raku/site/bin/myapp&#34;]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5853,9 +5735,9 @@ ENTRYPOINT ["/usr/share/raku/site/bin/myapp"]</code></pre>
 use Cro::HTTP::Server;
 
 my $application = route {
-    get -&gt; 'datetime', Int $timestamp {
+    get -&gt; &#39;datetime&#39;, Int $timestamp {
         my $dt = DateTime.new($timestamp);
-        content 'text/plain', "$dt\n";
+        content &#39;text/plain&#39;, &#34;$dt\n&#34;;
     }
 }
 
@@ -5867,7 +5749,7 @@ my Cro::Service $service = Cro::HTTP::Server.new(
 );
 
 $service.start;
-say "Application started on port $port";
+say &#34;Application started on port $port&#34;;
 react whenever signal(SIGINT) { $service.stop; done; }</code></pre>
 </div>
 </div>
@@ -5878,7 +5760,7 @@ react whenever signal(SIGINT) { $service.stop; done; }</code></pre>
 <p><code>route</code> 以一个块作为参数，并返回一个应用程序。在块内，我们可以调用 get（或者其他 HTTP 动词函数，如 post 或 put）来声明路由，当有人通过 HTTP 请求匹配的 URL 时，Cro 为我们调用的代码片段。</p>
 </div>
 <div class="paragraph">
-<p>这里，路由声明的开头是 get -&gt; 'datetime', Int $timestamp。箭头&#8594;引入了一个签名，Cro 将每个参数解释为一个斜线限制的 URL 的一部分。在我们的例子中，与签名相匹配的 URL 是 <code>/datetime/</code> 后面跟着一个整数，比如 <code>/datetime/1578135634</code>。当 Cro 接收到这样的请求时，它会使用常量字符串 datetime 来识别路由，并将 1578135634 放入变量 <code>$timestamp</code> 中。</p>
+<p>这里，路由声明的开头是 get -&gt; &#39;datetime&#39;, Int $timestamp。箭头→引入了一个签名，Cro 将每个参数解释为一个斜线限制的 URL 的一部分。在我们的例子中，与签名相匹配的 URL 是 <code>/datetime/</code> 后面跟着一个整数，比如 <code>/datetime/1578135634</code>。当 Cro 接收到这样的请求时，它会使用常量字符串 datetime 来识别路由，并将 1578135634 放入变量 <code>$timestamp</code> 中。</p>
 </div>
 <div class="paragraph">
 <p>将时间戳转换为 DateTime 对象的逻辑在第 4 章中已经很熟悉了，唯一不同的是，我们没有使用 say 将结果打印到标准输出，而是使用 content 函数将其回传给 HTTP 请求者。这是必要的，因为每个 HTTP 响应都需要声明它的内容类型，这样，例如，浏览器就知道是否要将响应渲染为 HTML，还是作为图像等。文本/纯文本内容类型顾名思义，表示的是纯文本，不需要以任何特殊的方式来解释。</p>
@@ -5898,10 +5780,10 @@ react whenever signal(SIGINT) { $service.stop; done; }</code></pre>
 <p>signal()函数返回一个 Supply，这是一个异步数据流，以下是进程间的通信信号。signal(SIGINT)具体来说只有当进程接收到 INT 或中断信号时才会发出事件，通常可以通过在终端中按 Ctrl+C 键来创建。</p>
 </div>
 <div class="paragraph">
-<p>react 通常以其块形式使用，react { &#8230;&#8203;. }，由于它只适用于一条语句，所以在这里缩短了。它在 everever 语句中运行并派发耗材，直到代码调用 done 函数（或者所有流完成，对于信号流来说不会发生）。</p>
+<p>react 通常以其块形式使用，react { …​. }，由于它只适用于一条语句，所以在这里缩短了。它在 everever 语句中运行并派发耗材，直到代码调用 done 函数（或者所有流完成，对于信号流来说不会发生）。</p>
 </div>
 <div class="paragraph">
-<p>所以，在 react 里面，<code>whenever signal(SIGINT) { &#8230;&#8203; }</code> 每次接收到 SIGINT 信号时，都会调用&#8230;&#8203;标记的代码&#8212;&#8203;在这种情况下，我们会停止 HTTP 服务器，退出 react 构造。</p>
+<p>所以，在 react 里面，<code>whenever signal(SIGINT) { …​ }</code> 每次接收到 SIGINT 信号时，都会调用…​标记的代码—​在这种情况下，我们会停止 HTTP 服务器，退出 react 构造。</p>
 </div>
 <div class="paragraph">
 <p>如果你想处理其他信号，比如 SIGTERM（杀系统命令使用的），你可以将 signal(SIGINT)替换为</p>
@@ -5956,47 +5838,47 @@ react whenever signal(SIGINT) { $service.stop; done; }</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my token date-re {
     ^
-    \d**4 '-' \d**2 '-' \d** 2 # date part YYYY-MM-DD
+    \d**4 &#39;-&#39; \d**2 &#39;-&#39; \d** 2 # date part YYYY-MM-DD
     [
-    ' '
-    \d**2 ':' \d**2 ':' \d**2  # time
+    &#39; &#39;
+    \d**2 &#39;:&#39; \d**2 &#39;:&#39; \d**2  # time
     ]?
     $
 }
 
 my $application = route {
-    get -&gt; 'datetime', Int $timestamp {
+    get -&gt; &#39;datetime&#39;, Int $timestamp {
         my $dt = DateTime.new($timestamp);
-        content 'text/plain', "$dt\n";
+        content &#39;text/plain&#39;, &#34;$dt\n&#34;;
     }
 
-    get -&gt; 'datetime', Str $date_spec where &amp;date-re {
-        my ( $date_str, $time_str ) = $date_spec.split(' ');
+    get -&gt; &#39;datetime&#39;, Str $date_spec where &amp;date-re {
+        my ( $date_str, $time_str ) = $date_spec.split(&#39; &#39;);
         my $date = Date.new($date_str);
 
         my $datetime;
         if $time_str {
-            my ( $hour, $minute, $second ) = $time_str. split(':');
+            my ( $hour, $minute, $second ) = $time_str. split(&#39;:&#39;);
             $datetime = DateTime.new( :$date, :$hour, :$minute, :$second );
         }
         else {
             $datetime = $date.DateTime;
         }
-        content "text/plain", $datetime.posix ~ "\n";
+        content &#34;text/plain&#34;, $datetime.posix ~ &#34;\n&#34;;
     }
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>我们先用一个 regex 定义我们要接受的日期时间格式，并将其存储在变量 <code>&amp;date-re</code> 中。然后在路由 <code>{ &#8230;&#8203; }</code> 块中，我们添加了第二个带有这个签名的 get 调用。</p>
+<p>我们先用一个 regex 定义我们要接受的日期时间格式，并将其存储在变量 <code>&amp;date-re</code> 中。然后在路由 <code>{ …​ }</code> 块中，我们添加了第二个带有这个签名的 get 调用。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; 'datetime', Str $date_spec where &amp;date-re { ... }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; &#39;datetime&#39;, Str $date_spec where &amp;date-re { ... }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这就定义了第二个路由，和之前的 url 类似，<code>/datetime/YYYY-MM-DD HH:MM:SS</code> (其中时间部分是可选的)。这些逻辑同样是复制自第 4 章，所以没有什么惊喜。唯一不同的是，在命令行程序中，命令行分析器为我们分割了日期和时间部分，现在我们通过调用 <code>.split(' ')</code> 来明确分割。</p>
+<p>这就定义了第二个路由，和之前的 url 类似，<code>/datetime/YYYY-MM-DD HH:MM:SS</code> (其中时间部分是可选的)。这些逻辑同样是复制自第 4 章，所以没有什么惊喜。唯一不同的是，在命令行程序中，命令行分析器为我们分割了日期和时间部分，现在我们通过调用 <code>.split(&#39; &#39;)</code> 来明确分割。</p>
 </div>
 <div class="paragraph">
 <p>当我们用 curl 或浏览器测试这段代码时，我们需要记住，我们不能直接在 URL 中直接包含空格，而是需要将其转义为%20。启动我们的扩展服务后，我们可以再次调用 curl 进行测试。</p>
@@ -6013,12 +5895,12 @@ my $application = route {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku"># in the first route
-content 'application/json', {
+content &#39;application/json&#39;, {
     input =&gt; $timestamp,
     result =&gt; $dt.Str,
 }
 # in the second route
-content "application/json", {
+content &#34;application/json&#34;, {
     input =&gt; $date_spec,
     result =&gt; $datetime.posix,
 }</code></pre>
@@ -6044,14 +5926,14 @@ content "application/json", {
     }
 }
 
-multi sub MAIN(Int :$port = 8080, :$host = '0.0.0.0') {
+multi sub MAIN(Int :$port = 8080, :$host = &#39;0.0.0.0&#39;) {
     my Cro::Service $service = Cro::HTTP::Server.new(
         :$host
         :$port,
         application =&gt; routes(),
     );
     $service.start;
-    say "Application started on port $port";
+    say &#34;Application started on port $port&#34;;
     react whenever signal(SIGINT) { $service.stop; done; }
 }</code></pre>
 </div>
@@ -6064,20 +5946,20 @@ multi sub MAIN(Int :$port = 8080, :$host = '0.0.0.0') {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN('test') {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN(&#39;test&#39;) {
     use Cro::HTTP::Test;
     use Test;
     test-service routes(), {
-        test get('/datetime/1578135634'),
+        test get(&#39;/datetime/1578135634&#39;),
             status =&gt; 200,
             json =&gt; {
-                result =&gt; "2020-01-04T11:00:34Z",
+                result =&gt; &#34;2020-01-04T11:00:34Z&#34;,
                 input =&gt; 1578135634 ,
             };
-        test get('/datetime/2020-01-04%2011:00:34'),
+        test get(&#39;/datetime/2020-01-04%2011:00:34&#39;),
             status =&gt; 200,
             json =&gt; {
-                input =&gt; '2020-01-04 11:00:34',
+                input =&gt; &#39;2020-01-04 11:00:34&#39;,
                 result =&gt; 1578135634,
             };
 
@@ -6121,12 +6003,12 @@ ok 2 - GET /datetime/2020-01-04%2011:00:34
 <p>我们的迷你网络服务现在已经到了另一个程序可以舒服地通过 JSON 通过 HTTP 与之对话的地步，但这对终端用户来说并不友好。</p>
 </div>
 <div class="paragraph">
-<p>作为一个可能的用户界面的演示，让我们添加一个可以在浏览器中查看的 HTML 页面。由于我们将通过 JavaScript 触发的 HTTP 请求来处理数据，所以我们可以摆脱静态文件的服务。Cro 为此提供了一个名为 <code>static</code> 的助手，它取代了我们对内容的调用。让我们把这两个路由添加到路由 <code>{ &#8230;&#8203;}</code> 块中。</p>
+<p>作为一个可能的用户界面的演示，让我们添加一个可以在浏览器中查看的 HTML 页面。由于我们将通过 JavaScript 触发的 HTTP 请求来处理数据，所以我们可以摆脱静态文件的服务。Cro 为此提供了一个名为 <code>static</code> 的助手，它取代了我们对内容的调用。让我们把这两个路由添加到路由 <code>{ …​}</code> 块中。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; { static 'index.html'; }
-get -&gt; 'index.js' { static 'index.js'; }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; { static &#39;index.html&#39;; }
+get -&gt; &#39;index.js&#39; { static &#39;index.js&#39;; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6144,19 +6026,19 @@ get -&gt; 'index.js' { static 'index.js'; }</code></pre>
 &lt;head&gt;
 &lt;title&gt;Datetime to UNIX timestamp conversion&lt;/title&gt;
 &lt;script
-    src="https://code.jquery.com/jquery-3.5.1.min.js"
-    crossorigin="anonymous"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" src="/index.js"&gt;&lt;/script&gt;
+    src=&#34;https://code.jquery.com/jquery-3.5.1.min.js&#34;
+    crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;/index.js&#34;&gt;&lt;/script&gt;
 &lt;/head&gt;
 
 &lt;body&gt;
 &lt;h1&gt;Convert UNIX timestamp to ISO datetime or vice versa&lt;/h1&gt;
 &lt;form&gt;
-&lt;label for="in"&gt;Input&lt;/label&gt;
-&lt;input name="in" id="in" placeholder="2014-01-14 10:12:00"&gt;&lt;/input&gt;
-&lt;button id="submit"&gt;Submit&lt;/button&gt;
+&lt;label for=&#34;in&#34;&gt;Input&lt;/label&gt;
+&lt;input name=&#34;in&#34; id=&#34;in&#34; placeholder=&#34;2014-01-14 10:12:00&#34;&gt;&lt;/input&gt;
+&lt;button id=&#34;submit&#34;&gt;Submit&lt;/button&gt;
 &lt;/form&gt; &lt;h2&gt;Result&lt;/h2&gt;
-&lt;ul id="result"&gt;&lt;/ul&gt;
+&lt;ul id=&#34;result&#34;&gt;&lt;/ul&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 </div>
@@ -6169,13 +6051,13 @@ get -&gt; 'index.js' { static 'index.js'; }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">$(document).ready(function() { $('#submit').click(function(event) {
-var val = $('#in').val();
-$.get('/datetime/' + val, function(response) {
-            $('#result').append(
-                '&lt;li&gt;Input: ' + val +
-                ', Result: ' + response['result'] +
-                '&lt;/li&gt;');
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">$(document).ready(function() { $(&#39;#submit&#39;).click(function(event) {
+var val = $(&#39;#in&#39;).val();
+$.get(&#39;/datetime/&#39; + val, function(response) {
+            $(&#39;#result&#39;).append(
+                &#39;&lt;li&gt;Input: &#39; + val +
+                &#39;, Result: &#39; + response[&#39;result&#39;] +
+                &#39;&lt;/li&gt;&#39;);
 });
         event.preventDefault();
     });
@@ -6206,7 +6088,7 @@ $.get('/datetime/' + val, function(response) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; 'datetime', Int $timestamp { ... }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; &#39;datetime&#39;, Int $timestamp { ... }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6214,15 +6096,15 @@ $.get('/datetime/' + val, function(response) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">get(-&gt; 'datetime', Int $timestamp { ... });</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">get(-&gt; &#39;datetime&#39;, Int $timestamp { ... });</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>箭头&#8594;引入了一个带有签名的块。其实这是一个块并不重要，一个普通的子程序也可以。</p>
+<p>箭头→引入了一个带有签名的块。其实这是一个块并不重要，一个普通的子程序也可以。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">get( sub ('datetime', Int $timestamp) { ... } )</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">get( sub (&#39;datetime&#39;, Int $timestamp) { ... } )</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6230,15 +6112,15 @@ $.get('/datetime/' + val, function(response) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">sub convert-from-timestamp('datetime', Int $timestamp) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub convert-from-timestamp(&#39;datetime&#39;, Int $timestamp) {
     my $dt = DateTime.new($timestamp);
-    content 'application/json', {
+    content &#39;application/json&#39;, {
         input =&gt; $timestamp,
         result =&gt; $dt.Str,
     }
 }
 
-sub convert-from-isodate('datetime', Str $date_spec where &amp;date-re) {
+sub convert-from-isodate(&#39;datetime&#39;, Str $date_spec where &amp;date-re) {
     # omitted for brevity
 }
 
@@ -6269,7 +6151,7 @@ say @params[0].constraints;
 <p>通过 <code>.signature.params</code> 方法链，我们获得了代表每个函数参数的 Parameter 对象列表；我们可以向它们询问类型、附加约束条件（比如第一个参数上使用的字符串 datetime）、变量名以及更多属性。</p>
 </div>
 <div class="paragraph">
-<p>就像 get 一样，<code>route { &#8230;&#8203; }</code> 是一个函数，它在经过一番设置后调用它的参数函数。它设置了一个动态变量，get 会锁定这个变量，这使得 route 能够返回一个对象，这个对象包含了所有对 get 的调用信息，因此也包含了所有的路由。</p>
+<p>就像 get 一样，<code>route { …​ }</code> 是一个函数，它在经过一番设置后调用它的参数函数。它设置了一个动态变量，get 会锁定这个变量，这使得 route 能够返回一个对象，这个对象包含了所有对 get 的调用信息，因此也包含了所有的路由。</p>
 </div>
 <div class="paragraph">
 <p>为了说明这个原理，我们试着写一些函数，让你根据类型写出小的调度器，也就是调用第一个匹配类型的函数。</p>
@@ -6277,12 +6159,12 @@ say @params[0].constraints;
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-raku" data-lang="raku">my &amp;d = dispatcher {
-    on -&gt; Str  $x { say "String $x" }
-    on -&gt; Date $x { say "Date $x"   }
+    on -&gt; Str  $x { say &#34;String $x&#34; }
+    on -&gt; Date $x { say &#34;Date $x&#34;   }
 }
 
-d(Date.new('2020-12-24'));
-d("a test");</code></pre>
+d(Date.new(&#39;2020-12-24&#39;));
+d(&#34;a test&#34;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6300,15 +6182,15 @@ d("a test");</code></pre>
                 return case($x)
             }
         }
-        die "No case matched $x";
+        die &#34;No case matched $x&#34;;
     }
 }
 
 sub on(&amp;case) {
-    die "Called on() outside a dispatcher block"
+    die &#34;Called on() outside a dispatcher block&#34;
         unless defined @*CASES;
     unless &amp;case.signature.params == 1 {
-        die "on() expects a block with exactly one parameter"
+        die &#34;on() expects a block with exactly one parameter&#34;
     }
     @*CASES.push: &amp;case;
 }</code></pre>
@@ -6324,7 +6206,7 @@ sub on(&amp;case) {
 <div class="sect2">
 <h3 id="_12_6_总结">14.6. 12.6 总结</h3>
 <div class="paragraph">
-<p>通过 Cro 库，你可以很容易地通过 HTTP 来暴露功能。首先，你在 <code>route { &#8230;&#8203;}</code> 块中创建一些路由（当有人请求匹配的 URL 时，Cro 会调用这些代码），然后将路由传给 HTTP server 块中创建一些路由（当有人请求匹配的 URL 时，Cro 会调用这些代码），然后将这些路由传递给 HTTP 服务器。你启动服务器，就可以了。</p>
+<p>通过 Cro 库，你可以很容易地通过 HTTP 来暴露功能。首先，你在 <code>route { …​}</code> 块中创建一些路由（当有人请求匹配的 URL 时，Cro 会调用这些代码），然后将路由传给 HTTP server 块中创建一些路由（当有人请求匹配的 URL 时，Cro 会调用这些代码），然后将这些路由传递给 HTTP 服务器。你启动服务器，就可以了。</p>
 </div>
 <div class="paragraph">
 <p>每条路由通过调用 content 函数来传达它的响应，指定内容类型和响应体；JSON 序列化会自动为相应的内容类型发生。</p>
@@ -6339,7 +6221,7 @@ sub on(&amp;case) {
 </div>
 </div>
 <div id="footnotes">
-<hr>
+<hr/>
 <div class="footnote" id="_footnotedef_1">
 <a href="#_footnoteref_1">1</a>. <a href="http://gcc.gnu.org/" class="bare">http://gcc.gnu.org/</a>
 </div>
