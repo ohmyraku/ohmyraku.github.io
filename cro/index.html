@@ -27,63 +27,7 @@
 
 <link rel="icon" href="https://ohmyraku.github.io/logo.png" />
 
-
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Cro 入门" />
-<meta name="twitter:description" content="1. Cro 开发工具 Cro包含帮助开发人员更有效地工作的工具。 当前，这些工具可通过命令行界面使用。 将来还将添加Web界面。 没有这些工具，完全有可能使用Cro。 它们旨在提供一些合理的默认值，但并不适合每个项目。
- 1.1. 存根服务 可以使用cro stub命令对新服务进行存根。 一般用法是：
- cro stub &lt;service-type&gt; &lt;service-id&gt; &lt;path&gt; [&#39;links-and-options&#39;]   其中
- service-type是要创建的服务的类型 service-id是服务的ID（与其他cro命令一起使用；也将在.cro.yml中用作服务的默认描述性名称）
- 路径是创建服务的位置 links-and-options指定指向应添加到存根的其他服务的链接，以及特定于服务类型的选项
- 如果未指定链接和选项，则将以交互方式请求它们。 要提供选项，请使用类似于Perl 6冒号对的语法将其放在引号中，其中：foo启用选项，：！foo禁用选项，而：foo &lt;bar&gt;是带有值bar的选项foo。 例如：
- cro stub http foo services/foo &#39;:!secure :websocket&#39; cro stub http bar services/bar &#39;:!secure :websocket&#39;   已存根的服务从环境变量获取端口和证书配置，并且当服务之间存在关系时，其地址也将使用环境变量注入。 设置容器部署时，这很方便。
- 链接导致存根服务包含创建可以与另一个端点通信的“客户端”的代码。 这些与选项一起使用，格式为：link &lt;service-id：endpoint-id&gt;。 service-id是目标.cro.yml的id字段，endpoint-id是该.cro.yml文件的终结点列表中条目的id字段。
- cro stub http foo services/foo &#39;:link&lt;flash-storage:http&gt;&#39;    1." />
-<meta name="twitter:site" content="https://ohmyraku.github.io" />
-<meta name="twitter:creator" content="ohmyraku" />
-<meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
-<meta property="og:type" content="article" />
-<meta property="og:locale" content="en" />
-<meta property="og:name" content="ohmyraku" />
-<meta property="og:title" content="Cro 入门" />
-<meta property="og:url" content="https://ohmyraku.github.io" />
-<meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="1. Cro 开发工具 Cro包含帮助开发人员更有效地工作的工具。 当前，这些工具可通过命令行界面使用。 将来还将添加Web界面。 没有这些工具，完全有可能使用Cro。 它们旨在提供一些合理的默认值，但并不适合每个项目。
- 1.1. 存根服务 可以使用cro stub命令对新服务进行存根。 一般用法是：
- cro stub &lt;service-type&gt; &lt;service-id&gt; &lt;path&gt; [&#39;links-and-options&#39;]   其中
- service-type是要创建的服务的类型 service-id是服务的ID（与其他cro命令一起使用；也将在.cro.yml中用作服务的默认描述性名称）
- 路径是创建服务的位置 links-and-options指定指向应添加到存根的其他服务的链接，以及特定于服务类型的选项
- 如果未指定链接和选项，则将以交互方式请求它们。 要提供选项，请使用类似于Perl 6冒号对的语法将其放在引号中，其中：foo启用选项，：！foo禁用选项，而：foo &lt;bar&gt;是带有值bar的选项foo。 例如：
- cro stub http foo services/foo &#39;:!secure :websocket&#39; cro stub http bar services/bar &#39;:!secure :websocket&#39;   已存根的服务从环境变量获取端口和证书配置，并且当服务之间存在关系时，其地址也将使用环境变量注入。 设置容器部署时，这很方便。
- 链接导致存根服务包含创建可以与另一个端点通信的“客户端”的代码。 这些与选项一起使用，格式为：link &lt;service-id：endpoint-id&gt;。 service-id是目标.cro.yml的id字段，endpoint-id是该.cro.yml文件的终结点列表中条目的id字段。
- cro stub http foo services/foo &#39;:link&lt;flash-storage:http&gt;&#39;    1." />
-<script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "Article",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https:\/\/ohmyraku.github.io\/cro\/"
-      },
-      "headline": "Cro 入门",
-      
-      "datePublished": "2020-02-05",
-      "dateModified": "2020-02-05 15:26:52 \u002b0800 CST",
-      "author": {
-        "@type": "Person",
-        "name": "ohmyraku"
-      },
-      "description": "1. Cro 开发工具 Cro包含帮助开发人员更有效地工作的工具。 当前，这些工具可通过命令行界面使用。 将来还将添加Web界面。 没有这些工具，完全有可能使用Cro。 它们旨在提供一些合理的默认值，但并不适合每个项目。\n 1.1. 存根服务 可以使用cro stub命令对新服务进行存根。 一般用法是：\n cro stub \u0026lt;service-type\u0026gt; \u0026lt;service-id\u0026gt; \u0026lt;path\u0026gt; [\u0026#39;links-and-options\u0026#39;]   其中\n service-type是要创建的服务的类型 service-id是服务的ID（与其他cro命令一起使用；也将在.cro.yml中用作服务的默认描述性名称）\n 路径是创建服务的位置 links-and-options指定指向应添加到存根的其他服务的链接，以及特定于服务类型的选项\n 如果未指定链接和选项，则将以交互方式请求它们。 要提供选项，请使用类似于Perl 6冒号对的语法将其放在引号中，其中：foo启用选项，：！foo禁用选项，而：foo \u0026lt;bar\u0026gt;是带有值bar的选项foo。 例如：\n cro stub http foo services\/foo \u0026#39;:!secure :websocket\u0026#39; cro stub http bar services\/bar \u0026#39;:!secure :websocket\u0026#39;   已存根的服务从环境变量获取端口和证书配置，并且当服务之间存在关系时，其地址也将使用环境变量注入。 设置容器部署时，这很方便。\n 链接导致存根服务包含创建可以与另一个端点通信的“客户端”的代码。 这些与选项一起使用，格式为：link \u0026lt;service-id：endpoint-id\u0026gt;。 service-id是目标.cro.yml的id字段，endpoint-id是该.cro.yml文件的终结点列表中条目的id字段。\n cro stub http foo services\/foo \u0026#39;:link\u0026lt;flash-storage:http\u0026gt;\u0026#39;    1.",
-      "publisher": {
-        "@type": "Organization",
-        "name": "https:\/\/ohmyraku.github.io",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https:\/\/ohmyraku.github.io\/logo.png"
-        }
-      }
-    }
-</script><link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
+<link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
 <script>
 
 const theme = window.localStorage.getItem('theme'); 
@@ -2701,6 +2645,10 @@ react {
     <p class="footer__sign">© 2020 ohmyraku</p></footer>
     
 
+    <link rel="stylesheet" href="https://ohmyraku.github.io/css/prism.min.css"> 
+    
+    
+
     
     <script>
         window.addEventListener("load", function () {
@@ -2716,7 +2664,7 @@ react {
 
 
 
-<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.80368e52cf9dd9e602bf5e846e392520e70607ee948e4316b49e90236e76aa56f529c21ebfc37cf22abaa49b54d8ffe2ae2368212cbeeb22de989716b6575a49.js" integrity="sha512-gDaOUs&#43;d2eYCv16EbjklIOcGB&#43;6UjkMWtJ6QI252qlb1KcIev8N88iq6pJtU2P/iriNoISy&#43;6yLemJcWtldaSQ=="></script>
 
 
 

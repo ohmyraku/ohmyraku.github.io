@@ -23,55 +23,7 @@
 
 <link rel="icon" href="https://ohmyraku.github.io/logo.png" />
 
-
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Raku 官方文档" />
-<meta name="twitter:description" content="1. 通过例子学习 Raku 假设你举办了一场乒乓球锦标赛。裁判员以 Player1 Player2 | 3:2 的格式告诉你每场比赛的结果, 这意味着 Player1 以 3:2 的比分战胜了 Player2。你需要一个脚本来总结每个选手赢了多少场比赛和多少局, 以确定总冠军。
- 输入数据（存储在一个名为 scores.txt 的文件中）如下所示：
- Beth Ana Charlie Dave Ana Dave | 3:0 Charlie Beth | 3:1 Ana Beth | 2:3 Dave Charlie | 3:0 Ana Charlie | 3:1 Beth Dave | 0:3   第一行是选手名单。之后的每一行都记录了一场比赛的结果。
- 在 Raku 中, 有一种方法可以解决这个问题。
- use v6; # start by printing out the header. say &#34;Tournament Results:\n&#34;; my $file = open &#39;scores." />
-<meta name="twitter:site" content="https://ohmyraku.github.io" />
-<meta name="twitter:creator" content="ohmyraku" />
-<meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
-<meta property="og:type" content="article" />
-<meta property="og:locale" content="en" />
-<meta property="og:name" content="ohmyraku" />
-<meta property="og:title" content="Raku 官方文档" />
-<meta property="og:url" content="https://ohmyraku.github.io" />
-<meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="1. 通过例子学习 Raku 假设你举办了一场乒乓球锦标赛。裁判员以 Player1 Player2 | 3:2 的格式告诉你每场比赛的结果, 这意味着 Player1 以 3:2 的比分战胜了 Player2。你需要一个脚本来总结每个选手赢了多少场比赛和多少局, 以确定总冠军。
- 输入数据（存储在一个名为 scores.txt 的文件中）如下所示：
- Beth Ana Charlie Dave Ana Dave | 3:0 Charlie Beth | 3:1 Ana Beth | 2:3 Dave Charlie | 3:0 Ana Charlie | 3:1 Beth Dave | 0:3   第一行是选手名单。之后的每一行都记录了一场比赛的结果。
- 在 Raku 中, 有一种方法可以解决这个问题。
- use v6; # start by printing out the header. say &#34;Tournament Results:\n&#34;; my $file = open &#39;scores." />
-<script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "Article",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https:\/\/ohmyraku.github.io\/rakudoc\/"
-      },
-      "headline": "Raku 官方文档",
-      
-      "datePublished": "2020-02-05",
-      "dateModified": "2020-02-05 15:26:52 \u002b0800 CST",
-      "author": {
-        "@type": "Person",
-        "name": "ohmyraku"
-      },
-      "description": "1. 通过例子学习 Raku 假设你举办了一场乒乓球锦标赛。裁判员以 Player1 Player2 | 3:2 的格式告诉你每场比赛的结果, 这意味着 Player1 以 3:2 的比分战胜了 Player2。你需要一个脚本来总结每个选手赢了多少场比赛和多少局, 以确定总冠军。\n 输入数据（存储在一个名为 scores.txt 的文件中）如下所示：\n Beth Ana Charlie Dave Ana Dave | 3:0 Charlie Beth | 3:1 Ana Beth | 2:3 Dave Charlie | 3:0 Ana Charlie | 3:1 Beth Dave | 0:3   第一行是选手名单。之后的每一行都记录了一场比赛的结果。\n 在 Raku 中, 有一种方法可以解决这个问题。\n use v6; # start by printing out the header. say \u0026#34;Tournament Results:\\n\u0026#34;; my $file = open \u0026#39;scores.",
-      "publisher": {
-        "@type": "Organization",
-        "name": "https:\/\/ohmyraku.github.io",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https:\/\/ohmyraku.github.io\/logo.png"
-        }
-      }
-    }
-</script><link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
+<link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
 <script>
 
 const theme = window.localStorage.getItem('theme'); 
@@ -52687,6 +52639,10 @@ say $a(2); # OUTPUT: «6␤»</code></pre>
     <p class="footer__sign">© 2020 ohmyraku</p></footer>
     
 
+    <link rel="stylesheet" href="https://ohmyraku.github.io/css/prism.min.css"> 
+    
+    
+
     
     <script>
         window.addEventListener("load", function () {
@@ -52702,7 +52658,7 @@ say $a(2); # OUTPUT: «6␤»</code></pre>
 
 
 
-<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.80368e52cf9dd9e602bf5e846e392520e70607ee948e4316b49e90236e76aa56f529c21ebfc37cf22abaa49b54d8ffe2ae2368212cbeeb22de989716b6575a49.js" integrity="sha512-gDaOUs&#43;d2eYCv16EbjklIOcGB&#43;6UjkMWtJ6QI252qlb1KcIev8N88iq6pJtU2P/iriNoISy&#43;6yLemJcWtldaSQ=="></script>
 
 
 

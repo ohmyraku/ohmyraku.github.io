@@ -28,65 +28,7 @@
 
 <link rel="icon" href="https://ohmyraku.github.io/logo.png" />
 
-
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="使用 Raku" />
-<meta name="twitter:description" content="字符串 1. 1.1 使用字符串 1.1. 1. 你好, 世界! print &#39;Hello, World!&#39;   有两个内置函数可打印到控制台：print 和 say。 两者都打印其参数，但是 say 例程另外以换行符结束输出。
- 因此，最快的解决方案是使用 say 并传递不带换行符的字符串：
- say &#39;Hello, World!&#39;   另一种解决方案是使用 print 并在字符串本身中包含 \n 字符：
- print &#34;Hello, World!\n&#34;   两个程序的输出是一样的：
- Hello, World!
- 注意单引号和双引号之间的区别：单引号不会插入 \n 等特殊字符，而双引号会插入。 对于不带特殊字符的字符串使用双引号是没有错的，但是当你不希望在字符串中使用变量并且不需要插值变量时，最好使用适当的引号样式。
- 在上面的示例中要看的另一件事是，单行程序不需要分号。
-  1.2. 2. 跟人打招呼  询问用户的名字，并通过打印&#34;你好, &lt;名字&gt;!&#34; 来打招呼。
-   Raku 提供了一个简单的 prompt 函数，该函数执行两种操作：打印提示并读取输入。 因此，使用它的程序可能如下所示：
- say &#39;Hello, &#39; ~ prompt(&#39;Enter your name: &#39;) ~ &#39;!" />
-<meta name="twitter:site" content="https://ohmyraku.github.io" />
-<meta name="twitter:creator" content="ohmyraku" />
-<meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
-<meta property="og:type" content="article" />
-<meta property="og:locale" content="en" />
-<meta property="og:name" content="ohmyraku" />
-<meta property="og:title" content="使用 Raku" />
-<meta property="og:url" content="https://ohmyraku.github.io" />
-<meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="字符串 1. 1.1 使用字符串 1.1. 1. 你好, 世界! print &#39;Hello, World!&#39;   有两个内置函数可打印到控制台：print 和 say。 两者都打印其参数，但是 say 例程另外以换行符结束输出。
- 因此，最快的解决方案是使用 say 并传递不带换行符的字符串：
- say &#39;Hello, World!&#39;   另一种解决方案是使用 print 并在字符串本身中包含 \n 字符：
- print &#34;Hello, World!\n&#34;   两个程序的输出是一样的：
- Hello, World!
- 注意单引号和双引号之间的区别：单引号不会插入 \n 等特殊字符，而双引号会插入。 对于不带特殊字符的字符串使用双引号是没有错的，但是当你不希望在字符串中使用变量并且不需要插值变量时，最好使用适当的引号样式。
- 在上面的示例中要看的另一件事是，单行程序不需要分号。
-  1.2. 2. 跟人打招呼  询问用户的名字，并通过打印&#34;你好, &lt;名字&gt;!&#34; 来打招呼。
-   Raku 提供了一个简单的 prompt 函数，该函数执行两种操作：打印提示并读取输入。 因此，使用它的程序可能如下所示：
- say &#39;Hello, &#39; ~ prompt(&#39;Enter your name: &#39;) ~ &#39;!" />
-<script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "Article",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https:\/\/ohmyraku.github.io\/using-raku\/"
-      },
-      "headline": "使用 Raku",
-      
-      "datePublished": "2020-02-05",
-      "dateModified": "2020-02-05 15:26:52 \u002b0800 CST",
-      "author": {
-        "@type": "Person",
-        "name": "ohmyraku"
-      },
-      "description": "字符串 1. 1.1 使用字符串 1.1. 1. 你好, 世界! print \u0026#39;Hello, World!\u0026#39;   有两个内置函数可打印到控制台：print 和 say。 两者都打印其参数，但是 say 例程另外以换行符结束输出。\n 因此，最快的解决方案是使用 say 并传递不带换行符的字符串：\n say \u0026#39;Hello, World!\u0026#39;   另一种解决方案是使用 print 并在字符串本身中包含 \\n 字符：\n print \u0026#34;Hello, World!\\n\u0026#34;   两个程序的输出是一样的：\n Hello, World!\n 注意单引号和双引号之间的区别：单引号不会插入 \\n 等特殊字符，而双引号会插入。 对于不带特殊字符的字符串使用双引号是没有错的，但是当你不希望在字符串中使用变量并且不需要插值变量时，最好使用适当的引号样式。\n 在上面的示例中要看的另一件事是，单行程序不需要分号。\n  1.2. 2. 跟人打招呼  询问用户的名字，并通过打印\u0026#34;你好, \u0026lt;名字\u0026gt;!\u0026#34; 来打招呼。\n   Raku 提供了一个简单的 prompt 函数，该函数执行两种操作：打印提示并读取输入。 因此，使用它的程序可能如下所示：\n say \u0026#39;Hello, \u0026#39; ~ prompt(\u0026#39;Enter your name: \u0026#39;) ~ \u0026#39;!",
-      "publisher": {
-        "@type": "Organization",
-        "name": "https:\/\/ohmyraku.github.io",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https:\/\/ohmyraku.github.io\/logo.png"
-        }
-      }
-    }
-</script><link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
+<link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
 <script>
 
 const theme = window.localStorage.getItem('theme'); 
@@ -2380,6 +2322,10 @@ say &#39;Yes, this is it!&#39;;</code></pre>
     <p class="footer__sign">© 2020 ohmyraku</p></footer>
     
 
+    <link rel="stylesheet" href="https://ohmyraku.github.io/css/prism.min.css"> 
+    
+    
+
     
     <script>
         window.addEventListener("load", function () {
@@ -2395,7 +2341,7 @@ say &#39;Yes, this is it!&#39;;</code></pre>
 
 
 
-<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.80368e52cf9dd9e602bf5e846e392520e70607ee948e4316b49e90236e76aa56f529c21ebfc37cf22abaa49b54d8ffe2ae2368212cbeeb22de989716b6575a49.js" integrity="sha512-gDaOUs&#43;d2eYCv16EbjklIOcGB&#43;6UjkMWtJ6QI252qlb1KcIev8N88iq6pJtU2P/iriNoISy&#43;6yLemJcWtldaSQ=="></script>
 
 
 

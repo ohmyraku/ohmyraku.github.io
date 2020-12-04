@@ -33,75 +33,7 @@
 
 <link rel="icon" href="https://ohmyraku.github.io/logo.png" />
 
-
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Raku 入门" />
-<meta name="twitter:description" content="本文档旨在为你提供 Raku 编程语言的快速概述。 它可以让 Raku 初学者快速上手。
- 本文档的一部分章节涉及 Raku 文档的其他（更完整和准确）部分。 如果你需要有关特定主题的更多信息，你应该阅读它们。
- 在本文档中，你会找到大部分所讨论主题的示例。 为了更好地理解它们，请花时间再现所有的例子。
- 许可证 本工作根据知识共享署名 - 授权4.0国际许可协议进行许可。 要查看此许可证的副本，请访问
-   https://creativecommons.org/licenses/by-sa/4.0/.
-   贡献 如果你想对此文档做贡献，请访问：
-   https://github.com/hankache/rakuguide
-   意见反馈 欢迎所有的反馈： naoum@hankache.com
- 如果你喜欢这个工作， 欢迎在 Github 给这个仓库点赞。
- 翻译   保加利亚语: https://raku.guide/bg
-  中文: https://raku.guide/zh
-  荷兰语: https://raku.guide/nl
-  法语: https://raku.guide/fr
-  德语: https://raku.guide/de
-  印度尼西亚语: https://raku." />
-<meta name="twitter:site" content="https://ohmyraku.github.io" />
-<meta name="twitter:creator" content="ohmyraku" />
-<meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
-<meta property="og:type" content="article" />
-<meta property="og:locale" content="en" />
-<meta property="og:name" content="ohmyraku" />
-<meta property="og:title" content="Raku 入门" />
-<meta property="og:url" content="https://ohmyraku.github.io" />
-<meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="本文档旨在为你提供 Raku 编程语言的快速概述。 它可以让 Raku 初学者快速上手。
- 本文档的一部分章节涉及 Raku 文档的其他（更完整和准确）部分。 如果你需要有关特定主题的更多信息，你应该阅读它们。
- 在本文档中，你会找到大部分所讨论主题的示例。 为了更好地理解它们，请花时间再现所有的例子。
- 许可证 本工作根据知识共享署名 - 授权4.0国际许可协议进行许可。 要查看此许可证的副本，请访问
-   https://creativecommons.org/licenses/by-sa/4.0/.
-   贡献 如果你想对此文档做贡献，请访问：
-   https://github.com/hankache/rakuguide
-   意见反馈 欢迎所有的反馈： naoum@hankache.com
- 如果你喜欢这个工作， 欢迎在 Github 给这个仓库点赞。
- 翻译   保加利亚语: https://raku.guide/bg
-  中文: https://raku.guide/zh
-  荷兰语: https://raku.guide/nl
-  法语: https://raku.guide/fr
-  德语: https://raku.guide/de
-  印度尼西亚语: https://raku." />
-<script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "Article",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https:\/\/ohmyraku.github.io\/raku-guide\/"
-      },
-      "headline": "Raku 入门",
-      
-      "datePublished": "2020-02-05",
-      "dateModified": "2020-02-05 15:26:52 \u002b0800 CST",
-      "author": {
-        "@type": "Person",
-        "name": "ohmyraku"
-      },
-      "description": "本文档旨在为你提供 Raku 编程语言的快速概述。 它可以让 Raku 初学者快速上手。\n 本文档的一部分章节涉及 Raku 文档的其他（更完整和准确）部分。 如果你需要有关特定主题的更多信息，你应该阅读它们。\n 在本文档中，你会找到大部分所讨论主题的示例。 为了更好地理解它们，请花时间再现所有的例子。\n 许可证 本工作根据知识共享署名 - 授权4.0国际许可协议进行许可。 要查看此许可证的副本，请访问\n   https:\/\/creativecommons.org\/licenses\/by-sa\/4.0\/.\n   贡献 如果你想对此文档做贡献，请访问：\n   https:\/\/github.com\/hankache\/rakuguide\n   意见反馈 欢迎所有的反馈： naoum@hankache.com\n 如果你喜欢这个工作， 欢迎在 Github 给这个仓库点赞。\n 翻译   保加利亚语: https:\/\/raku.guide\/bg\n  中文: https:\/\/raku.guide\/zh\n  荷兰语: https:\/\/raku.guide\/nl\n  法语: https:\/\/raku.guide\/fr\n  德语: https:\/\/raku.guide\/de\n  印度尼西亚语: https:\/\/raku.",
-      "publisher": {
-        "@type": "Organization",
-        "name": "https:\/\/ohmyraku.github.io",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https:\/\/ohmyraku.github.io\/logo.png"
-        }
-      }
-    }
-</script><link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
+<link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
 <script>
 
 const theme = window.localStorage.getItem('theme'); 
@@ -5164,6 +5096,10 @@ say add(2,3);</code></pre>
     <p class="footer__sign">© 2020 ohmyraku</p></footer>
     
 
+    <link rel="stylesheet" href="https://ohmyraku.github.io/css/prism.min.css"> 
+    
+    
+
     
     <script>
         window.addEventListener("load", function () {
@@ -5179,7 +5115,7 @@ say add(2,3);</code></pre>
 
 
 
-<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.80368e52cf9dd9e602bf5e846e392520e70607ee948e4316b49e90236e76aa56f529c21ebfc37cf22abaa49b54d8ffe2ae2368212cbeeb22de989716b6575a49.js" integrity="sha512-gDaOUs&#43;d2eYCv16EbjklIOcGB&#43;6UjkMWtJ6QI252qlb1KcIev8N88iq6pJtU2P/iriNoISy&#43;6yLemJcWtldaSQ=="></script>
 
 
 

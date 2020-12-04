@@ -26,61 +26,7 @@
 
 <link rel="icon" href="https://ohmyraku.github.io/logo.png" />
 
-
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Raku 单行程序" />
-<meta name="twitter:description" content="1. 命令行选项 1.1. 使用命令行选项 我们来谈谈 Rakudo[1] 编译器为我们提供的命令行选项。
- 1.1.1. -e 在使用 Raku 时要知道的第一个选项是 -e。它接收一个带有 Raku 单行程序的字符串，并立即执行。
- 例如，打印当前用户的名字:
- $ raku -e&#39;say $*USER&#39; ash    1.1.2. -n 这个选项会重复每一行输入数据的代码。当你想处理一个文件时，这是很方便的。例如，这里有一个单行程序，它将每行中的值相加并打印出总和:
- $ raku -ne&#39;say [&#43;] .split(&#34; &#34;)&#39; data.txt   如果 data.txt 文件包含以下内容：
- 10 20 30 40 1 2 3 4 5 6 7 8   那么这个单行程序的结果就是:
- 100 10 26   是否使用 shell 的输入重定向没有区别，下面这行也是可以的:
- $ raku -ne&#39;say [&#43;] ." />
-<meta name="twitter:site" content="https://ohmyraku.github.io" />
-<meta name="twitter:creator" content="ohmyraku" />
-<meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
-<meta property="og:type" content="article" />
-<meta property="og:locale" content="en" />
-<meta property="og:name" content="ohmyraku" />
-<meta property="og:title" content="Raku 单行程序" />
-<meta property="og:url" content="https://ohmyraku.github.io" />
-<meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="1. 命令行选项 1.1. 使用命令行选项 我们来谈谈 Rakudo[1] 编译器为我们提供的命令行选项。
- 1.1.1. -e 在使用 Raku 时要知道的第一个选项是 -e。它接收一个带有 Raku 单行程序的字符串，并立即执行。
- 例如，打印当前用户的名字:
- $ raku -e&#39;say $*USER&#39; ash    1.1.2. -n 这个选项会重复每一行输入数据的代码。当你想处理一个文件时，这是很方便的。例如，这里有一个单行程序，它将每行中的值相加并打印出总和:
- $ raku -ne&#39;say [&#43;] .split(&#34; &#34;)&#39; data.txt   如果 data.txt 文件包含以下内容：
- 10 20 30 40 1 2 3 4 5 6 7 8   那么这个单行程序的结果就是:
- 100 10 26   是否使用 shell 的输入重定向没有区别，下面这行也是可以的:
- $ raku -ne&#39;say [&#43;] ." />
-<script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "Article",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https:\/\/ohmyraku.github.io\/raku-one-liners\/"
-      },
-      "headline": "Raku 单行程序",
-      
-      "datePublished": "2020-06-12",
-      "dateModified": "2020-06-12 13:16:52 \u002b0800 CST",
-      "author": {
-        "@type": "Person",
-        "name": "ohmyraku"
-      },
-      "description": "1. 命令行选项 1.1. 使用命令行选项 我们来谈谈 Rakudo[1] 编译器为我们提供的命令行选项。\n 1.1.1. -e 在使用 Raku 时要知道的第一个选项是 -e。它接收一个带有 Raku 单行程序的字符串，并立即执行。\n 例如，打印当前用户的名字:\n $ raku -e\u0026#39;say $*USER\u0026#39; ash    1.1.2. -n 这个选项会重复每一行输入数据的代码。当你想处理一个文件时，这是很方便的。例如，这里有一个单行程序，它将每行中的值相加并打印出总和:\n $ raku -ne\u0026#39;say [\u002b] .split(\u0026#34; \u0026#34;)\u0026#39; data.txt   如果 data.txt 文件包含以下内容：\n 10 20 30 40 1 2 3 4 5 6 7 8   那么这个单行程序的结果就是:\n 100 10 26   是否使用 shell 的输入重定向没有区别，下面这行也是可以的:\n $ raku -ne\u0026#39;say [\u002b] .",
-      "publisher": {
-        "@type": "Organization",
-        "name": "https:\/\/ohmyraku.github.io",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https:\/\/ohmyraku.github.io\/logo.png"
-        }
-      }
-    }
-</script><link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
+<link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
 <script>
 
 const theme = window.localStorage.getItem('theme'); 
@@ -3047,6 +2993,10 @@ $parti=3, $partf=10</code></pre>
     <p class="footer__sign">© 2020 ohmyraku</p></footer>
     
 
+    <link rel="stylesheet" href="https://ohmyraku.github.io/css/prism.min.css"> 
+    
+    
+
     
     <script>
         window.addEventListener("load", function () {
@@ -3062,7 +3012,7 @@ $parti=3, $partf=10</code></pre>
 
 
 
-<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.80368e52cf9dd9e602bf5e846e392520e70607ee948e4316b49e90236e76aa56f529c21ebfc37cf22abaa49b54d8ffe2ae2368212cbeeb22de989716b6575a49.js" integrity="sha512-gDaOUs&#43;d2eYCv16EbjklIOcGB&#43;6UjkMWtJ6QI252qlb1KcIev8N88iq6pJtU2P/iriNoISy&#43;6yLemJcWtldaSQ=="></script>
 
 
 

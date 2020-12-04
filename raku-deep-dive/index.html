@@ -28,65 +28,7 @@
 
 <link rel="icon" href="https://ohmyraku.github.io/logo.png" />
 
-
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Raku 深入研究" />
-<meta name="twitter:description" content="1. 什么是 Raku 在这一章中，我们将研究 Raku 出现的原因，并跟踪了解 Perl 语言的发展历史。你会看到一些自 Perl 5 以来发生的变化，你会看到一些例子，你会学习如何下载和使用编译器，在哪里找到文档，以及如何在 Raku 中运行你的第一个程序。
- 在这一章中，我们将介绍以下内容:
-   Raku 的起源
-  与 Perl 5 的区别
-  Raku 资源
-  编译器
-  使用 Rakudo Star
-  编写我们的 Hello World 程序
-   1.1. Raku 起源 Raku 是 Perl 家族中的一种编程语言。Perl 本身出现于 1987 年，从那时起，它就在不断发展：目前的稳定版本是 2017年5月发布的5.26。2000年，Perl 的创造者 Larry Wall 提出要开始研究该语言的下一个版本- Raku 。
- 这有几个原因。首先，一种语言应该继续发展，以反映开发者的新要求。第二，它可能会改变非 Perl 社区对 Perl 的看法。5." />
-<meta name="twitter:site" content="https://ohmyraku.github.io" />
-<meta name="twitter:creator" content="ohmyraku" />
-<meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
-<meta property="og:type" content="article" />
-<meta property="og:locale" content="en" />
-<meta property="og:name" content="ohmyraku" />
-<meta property="og:title" content="Raku 深入研究" />
-<meta property="og:url" content="https://ohmyraku.github.io" />
-<meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="1. 什么是 Raku 在这一章中，我们将研究 Raku 出现的原因，并跟踪了解 Perl 语言的发展历史。你会看到一些自 Perl 5 以来发生的变化，你会看到一些例子，你会学习如何下载和使用编译器，在哪里找到文档，以及如何在 Raku 中运行你的第一个程序。
- 在这一章中，我们将介绍以下内容:
-   Raku 的起源
-  与 Perl 5 的区别
-  Raku 资源
-  编译器
-  使用 Rakudo Star
-  编写我们的 Hello World 程序
-   1.1. Raku 起源 Raku 是 Perl 家族中的一种编程语言。Perl 本身出现于 1987 年，从那时起，它就在不断发展：目前的稳定版本是 2017年5月发布的5.26。2000年，Perl 的创造者 Larry Wall 提出要开始研究该语言的下一个版本- Raku 。
- 这有几个原因。首先，一种语言应该继续发展，以反映开发者的新要求。第二，它可能会改变非 Perl 社区对 Perl 的看法。5." />
-<script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "Article",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https:\/\/ohmyraku.github.io\/raku-deep-dive\/"
-      },
-      "headline": "Raku 深入研究",
-      
-      "datePublished": "2020-02-05",
-      "dateModified": "2020-02-05 15:26:52 \u002b0800 CST",
-      "author": {
-        "@type": "Person",
-        "name": "ohmyraku"
-      },
-      "description": "1. 什么是 Raku 在这一章中，我们将研究 Raku 出现的原因，并跟踪了解 Perl 语言的发展历史。你会看到一些自 Perl 5 以来发生的变化，你会看到一些例子，你会学习如何下载和使用编译器，在哪里找到文档，以及如何在 Raku 中运行你的第一个程序。\n 在这一章中，我们将介绍以下内容:\n   Raku 的起源\n  与 Perl 5 的区别\n  Raku 资源\n  编译器\n  使用 Rakudo Star\n  编写我们的 Hello World 程序\n   1.1. Raku 起源 Raku 是 Perl 家族中的一种编程语言。Perl 本身出现于 1987 年，从那时起，它就在不断发展：目前的稳定版本是 2017年5月发布的5.26。2000年，Perl 的创造者 Larry Wall 提出要开始研究该语言的下一个版本- Raku 。\n 这有几个原因。首先，一种语言应该继续发展，以反映开发者的新要求。第二，它可能会改变非 Perl 社区对 Perl 的看法。5.",
-      "publisher": {
-        "@type": "Organization",
-        "name": "https:\/\/ohmyraku.github.io",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https:\/\/ohmyraku.github.io\/logo.png"
-        }
-      }
-    }
-</script><link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
+<link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
 <script>
 
 const theme = window.localStorage.getItem('theme'); 
@@ -19214,6 +19156,10 @@ sleep 2;</code></pre>
     <p class="footer__sign">© 2020 ohmyraku</p></footer>
     
 
+    <link rel="stylesheet" href="https://ohmyraku.github.io/css/prism.min.css"> 
+    
+    
+
     
     <script>
         window.addEventListener("load", function () {
@@ -19229,7 +19175,7 @@ sleep 2;</code></pre>
 
 
 
-<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.80368e52cf9dd9e602bf5e846e392520e70607ee948e4316b49e90236e76aa56f529c21ebfc37cf22abaa49b54d8ffe2ae2368212cbeeb22de989716b6575a49.js" integrity="sha512-gDaOUs&#43;d2eYCv16EbjklIOcGB&#43;6UjkMWtJ6QI252qlb1KcIev8N88iq6pJtU2P/iriNoISy&#43;6yLemJcWtldaSQ=="></script>
 
 
 

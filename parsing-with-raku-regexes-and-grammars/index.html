@@ -27,63 +27,7 @@
 
 <link rel="icon" href="https://ohmyraku.github.io/logo.png" />
 
-
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="使用 Raku 正则表达式和 Grammars 进行解析" />
-<meta name="twitter:description" content="1. 什么是正则表达式和 Grammar？ 我们会接触到各种各样的结构化数据: 电话号码、电子邮件地址、邮政地址、信用卡号码等等。
- 正则表达式是一种声明性的编程结构, 用来描述这些数据格式。正则表达式可以让你搜索数据, 确保输入的数据确实是真实的格式, 甚至可以提取相关的组件, 如邮政地址的邮政编码, 或日志文件条目中的时间戳。
- 当你需要读取和验证更复杂的结构时, 比如程序设计语言, 或者像 XML 这样的标记语言, 你可以把多个正则表达式组合成 grammar。Grammar 的作用不仅仅是简单地组合正则表达式。它们还提供生成良好的错误信息和在分析输入文本时跟踪状态的基础设施。
- 1.1. 使用场景 1.1.1. 搜索 正则表达式的一个常见用途是在大量数据中搜索感兴趣的模式, 例如在日志文件中查找某些消息, 在 URL 中查找特定的信息, 或者在文本中查找电话号码。在写这篇文章的时候, 我的 .bash_history 中大约有 6% 的条目涉及到使用正则表达式进行搜索。
-   许多命令行工具都支持某些正则表达式方言, 允许你搜索文件名、文件内容、日志、捕获的网络流量以及几乎所有你能想到的东西。大多数现代编程语言也可以很容易地使用正则表达式, 使其成为一种无处不在、不可或缺的搜索工具。
-  1.1.2. 验证 大多数应用程序都面临着不可信的用户输入。特别是 Web 应用程序面临着大量的不可信输入。这些输入必须在应用任何进一步的逻辑或将其存储在例如数据库中之前进行验证。
- 正则表达式是验证的第一步。他们使检查数字等简单的事情变得简单, 并验证输入的最小长度和最大长度。同时, 它们允许程序员进行更精确、更复杂的检查。
- Web 应用程序员只需要提供一个正则表达式, 并将其与输入字段关联。然后, Web 框架可以根据所有已配置的正则表达式来验证表单输入, 并自动为终端用户生成错误信息, 这样 Web 应用程序员就不需要处理拒绝输入和重新生成表单的工作流程。
-  1.1.3. 解析 单独使用正则表达式不太适合解析复杂的输入数据。然而, Raku 添加了功能, 使其非常适合这项任务。这些扩展包括易于使用的回溯控制和通过命名正则表达式获得的可组合性。" />
-<meta name="twitter:site" content="https://ohmyraku.github.io" />
-<meta name="twitter:creator" content="ohmyraku" />
-<meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
-<meta property="og:type" content="article" />
-<meta property="og:locale" content="en" />
-<meta property="og:name" content="ohmyraku" />
-<meta property="og:title" content="使用 Raku 正则表达式和 Grammars 进行解析" />
-<meta property="og:url" content="https://ohmyraku.github.io" />
-<meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="1. 什么是正则表达式和 Grammar？ 我们会接触到各种各样的结构化数据: 电话号码、电子邮件地址、邮政地址、信用卡号码等等。
- 正则表达式是一种声明性的编程结构, 用来描述这些数据格式。正则表达式可以让你搜索数据, 确保输入的数据确实是真实的格式, 甚至可以提取相关的组件, 如邮政地址的邮政编码, 或日志文件条目中的时间戳。
- 当你需要读取和验证更复杂的结构时, 比如程序设计语言, 或者像 XML 这样的标记语言, 你可以把多个正则表达式组合成 grammar。Grammar 的作用不仅仅是简单地组合正则表达式。它们还提供生成良好的错误信息和在分析输入文本时跟踪状态的基础设施。
- 1.1. 使用场景 1.1.1. 搜索 正则表达式的一个常见用途是在大量数据中搜索感兴趣的模式, 例如在日志文件中查找某些消息, 在 URL 中查找特定的信息, 或者在文本中查找电话号码。在写这篇文章的时候, 我的 .bash_history 中大约有 6% 的条目涉及到使用正则表达式进行搜索。
-   许多命令行工具都支持某些正则表达式方言, 允许你搜索文件名、文件内容、日志、捕获的网络流量以及几乎所有你能想到的东西。大多数现代编程语言也可以很容易地使用正则表达式, 使其成为一种无处不在、不可或缺的搜索工具。
-  1.1.2. 验证 大多数应用程序都面临着不可信的用户输入。特别是 Web 应用程序面临着大量的不可信输入。这些输入必须在应用任何进一步的逻辑或将其存储在例如数据库中之前进行验证。
- 正则表达式是验证的第一步。他们使检查数字等简单的事情变得简单, 并验证输入的最小长度和最大长度。同时, 它们允许程序员进行更精确、更复杂的检查。
- Web 应用程序员只需要提供一个正则表达式, 并将其与输入字段关联。然后, Web 框架可以根据所有已配置的正则表达式来验证表单输入, 并自动为终端用户生成错误信息, 这样 Web 应用程序员就不需要处理拒绝输入和重新生成表单的工作流程。
-  1.1.3. 解析 单独使用正则表达式不太适合解析复杂的输入数据。然而, Raku 添加了功能, 使其非常适合这项任务。这些扩展包括易于使用的回溯控制和通过命名正则表达式获得的可组合性。" />
-<script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "Article",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https:\/\/ohmyraku.github.io\/parsing-with-raku-regexes-and-grammars\/"
-      },
-      "headline": "使用 Raku 正则表达式和 Grammars 进行解析",
-      
-      "datePublished": "2020-02-05",
-      "dateModified": "2020-02-05 15:26:52 \u002b0800 CST",
-      "author": {
-        "@type": "Person",
-        "name": "ohmyraku"
-      },
-      "description": "1. 什么是正则表达式和 Grammar？ 我们会接触到各种各样的结构化数据: 电话号码、电子邮件地址、邮政地址、信用卡号码等等。\n 正则表达式是一种声明性的编程结构, 用来描述这些数据格式。正则表达式可以让你搜索数据, 确保输入的数据确实是真实的格式, 甚至可以提取相关的组件, 如邮政地址的邮政编码, 或日志文件条目中的时间戳。\n 当你需要读取和验证更复杂的结构时, 比如程序设计语言, 或者像 XML 这样的标记语言, 你可以把多个正则表达式组合成 grammar。Grammar 的作用不仅仅是简单地组合正则表达式。它们还提供生成良好的错误信息和在分析输入文本时跟踪状态的基础设施。\n 1.1. 使用场景 1.1.1. 搜索 正则表达式的一个常见用途是在大量数据中搜索感兴趣的模式, 例如在日志文件中查找某些消息, 在 URL 中查找特定的信息, 或者在文本中查找电话号码。在写这篇文章的时候, 我的 .bash_history 中大约有 6% 的条目涉及到使用正则表达式进行搜索。\n   许多命令行工具都支持某些正则表达式方言, 允许你搜索文件名、文件内容、日志、捕获的网络流量以及几乎所有你能想到的东西。大多数现代编程语言也可以很容易地使用正则表达式, 使其成为一种无处不在、不可或缺的搜索工具。\n  1.1.2. 验证 大多数应用程序都面临着不可信的用户输入。特别是 Web 应用程序面临着大量的不可信输入。这些输入必须在应用任何进一步的逻辑或将其存储在例如数据库中之前进行验证。\n 正则表达式是验证的第一步。他们使检查数字等简单的事情变得简单, 并验证输入的最小长度和最大长度。同时, 它们允许程序员进行更精确、更复杂的检查。\n Web 应用程序员只需要提供一个正则表达式, 并将其与输入字段关联。然后, Web 框架可以根据所有已配置的正则表达式来验证表单输入, 并自动为终端用户生成错误信息, 这样 Web 应用程序员就不需要处理拒绝输入和重新生成表单的工作流程。\n  1.1.3. 解析 单独使用正则表达式不太适合解析复杂的输入数据。然而, Raku 添加了功能, 使其非常适合这项任务。这些扩展包括易于使用的回溯控制和通过命名正则表达式获得的可组合性。",
-      "publisher": {
-        "@type": "Organization",
-        "name": "https:\/\/ohmyraku.github.io",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https:\/\/ohmyraku.github.io\/logo.png"
-        }
-      }
-    }
-</script><link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
+<link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
 <script>
 
 const theme = window.localStorage.getItem('theme'); 
@@ -6439,6 +6383,10 @@ class If {
     <p class="footer__sign">© 2020 ohmyraku</p></footer>
     
 
+    <link rel="stylesheet" href="https://ohmyraku.github.io/css/prism.min.css"> 
+    
+    
+
     
     <script>
         window.addEventListener("load", function () {
@@ -6454,7 +6402,7 @@ class If {
 
 
 
-<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.80368e52cf9dd9e602bf5e846e392520e70607ee948e4316b49e90236e76aa56f529c21ebfc37cf22abaa49b54d8ffe2ae2368212cbeeb22de989716b6575a49.js" integrity="sha512-gDaOUs&#43;d2eYCv16EbjklIOcGB&#43;6UjkMWtJ6QI252qlb1KcIev8N88iq6pJtU2P/iriNoISy&#43;6yLemJcWtldaSQ=="></script>
 
 
 

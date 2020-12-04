@@ -28,65 +28,7 @@
 
 <link rel="icon" href="https://ohmyraku.github.io/logo.png" />
 
-
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Raku Recipes" />
-<meta name="twitter:description" content="1. 在真实环境中使用 Raku 在解决任何问题之前，你需要准备好你的环境来编辑、测试和运行你的 Raku 程序。本章将对你将面临的问题提出解决方案。Raku 可以作为第一语言使用（事实上，我鼓励你这样看待它），但你也可以直接使用其他语言的概念。
- 比方说，你喜欢烹饪，你决定创建一个应用程序，其中有你创建的食谱，以及其他来自内容提供商和广大公众的食谱。人们将能够看到、上传、评论和评价菜谱。后台将用 Raku 编写，因为这将使你能够利用它的所有功能。
- 你将需要执行一系列与处理、处理、渲染有关的不同任务，并对这些文件进行各种操作。
- 但在你做这些之前，你需要准备好你的工具。在本章中，你将立即开始做这些工作。
- 1.1. 食谱 1-1. 准备好你的工具 1.1.1. 问题 你需要在 Raku 中创建一个程序、模块或脚本。
-  1.1.2. 解决办法 安装 Rakudo Raku 和 Comma IDE 并开始使用它们。
-  1.1.3. 它是如何工作的 Raku 是一种编译语言，它使用一个虚拟机来运行由编译器创建的字节码汇编。这类似于 Java 创建 .class 和 .jar 文件然后在 Java 虚拟机中运行的方式，或者 C# 创建在 CLR 中运行的程序集的方式。
- 那么，Raku 编译器实际上是一个不同程序的堆栈。
-   下层被运行字节码汇编的虚拟机所占据。Raku 并不致力于单一的虚拟机，事实上目前有三个虚拟机可用。MoarVM、JavaScript 虚拟机和 JVM。一般来说，MoarVM 是参考虚拟机，除非另有说明，否则本书将使用 MoarVM。
-  下一层由 NQP（Not Quite Perl 的缩写，意思是 Not Quite Perl，也可能是完全不同的语言）占据，NQP 是一种简化的语言，它通过翻译成 Java 或 MoarVM 字节码来生成字节码。" />
-<meta name="twitter:site" content="https://ohmyraku.github.io" />
-<meta name="twitter:creator" content="ohmyraku" />
-<meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
-<meta property="og:type" content="article" />
-<meta property="og:locale" content="en" />
-<meta property="og:name" content="ohmyraku" />
-<meta property="og:title" content="Raku Recipes" />
-<meta property="og:url" content="https://ohmyraku.github.io" />
-<meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="1. 在真实环境中使用 Raku 在解决任何问题之前，你需要准备好你的环境来编辑、测试和运行你的 Raku 程序。本章将对你将面临的问题提出解决方案。Raku 可以作为第一语言使用（事实上，我鼓励你这样看待它），但你也可以直接使用其他语言的概念。
- 比方说，你喜欢烹饪，你决定创建一个应用程序，其中有你创建的食谱，以及其他来自内容提供商和广大公众的食谱。人们将能够看到、上传、评论和评价菜谱。后台将用 Raku 编写，因为这将使你能够利用它的所有功能。
- 你将需要执行一系列与处理、处理、渲染有关的不同任务，并对这些文件进行各种操作。
- 但在你做这些之前，你需要准备好你的工具。在本章中，你将立即开始做这些工作。
- 1.1. 食谱 1-1. 准备好你的工具 1.1.1. 问题 你需要在 Raku 中创建一个程序、模块或脚本。
-  1.1.2. 解决办法 安装 Rakudo Raku 和 Comma IDE 并开始使用它们。
-  1.1.3. 它是如何工作的 Raku 是一种编译语言，它使用一个虚拟机来运行由编译器创建的字节码汇编。这类似于 Java 创建 .class 和 .jar 文件然后在 Java 虚拟机中运行的方式，或者 C# 创建在 CLR 中运行的程序集的方式。
- 那么，Raku 编译器实际上是一个不同程序的堆栈。
-   下层被运行字节码汇编的虚拟机所占据。Raku 并不致力于单一的虚拟机，事实上目前有三个虚拟机可用。MoarVM、JavaScript 虚拟机和 JVM。一般来说，MoarVM 是参考虚拟机，除非另有说明，否则本书将使用 MoarVM。
-  下一层由 NQP（Not Quite Perl 的缩写，意思是 Not Quite Perl，也可能是完全不同的语言）占据，NQP 是一种简化的语言，它通过翻译成 Java 或 MoarVM 字节码来生成字节码。" />
-<script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "Article",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https:\/\/ohmyraku.github.io\/raku-recipes\/"
-      },
-      "headline": "Raku Recipes",
-      
-      "datePublished": "2020-10-16",
-      "dateModified": "2020-10-16 22:51:52 \u002b0800 CST",
-      "author": {
-        "@type": "Person",
-        "name": "ohmyraku"
-      },
-      "description": "1. 在真实环境中使用 Raku 在解决任何问题之前，你需要准备好你的环境来编辑、测试和运行你的 Raku 程序。本章将对你将面临的问题提出解决方案。Raku 可以作为第一语言使用（事实上，我鼓励你这样看待它），但你也可以直接使用其他语言的概念。\n 比方说，你喜欢烹饪，你决定创建一个应用程序，其中有你创建的食谱，以及其他来自内容提供商和广大公众的食谱。人们将能够看到、上传、评论和评价菜谱。后台将用 Raku 编写，因为这将使你能够利用它的所有功能。\n 你将需要执行一系列与处理、处理、渲染有关的不同任务，并对这些文件进行各种操作。\n 但在你做这些之前，你需要准备好你的工具。在本章中，你将立即开始做这些工作。\n 1.1. 食谱 1-1. 准备好你的工具 1.1.1. 问题 你需要在 Raku 中创建一个程序、模块或脚本。\n  1.1.2. 解决办法 安装 Rakudo Raku 和 Comma IDE 并开始使用它们。\n  1.1.3. 它是如何工作的 Raku 是一种编译语言，它使用一个虚拟机来运行由编译器创建的字节码汇编。这类似于 Java 创建 .class 和 .jar 文件然后在 Java 虚拟机中运行的方式，或者 C# 创建在 CLR 中运行的程序集的方式。\n 那么，Raku 编译器实际上是一个不同程序的堆栈。\n   下层被运行字节码汇编的虚拟机所占据。Raku 并不致力于单一的虚拟机，事实上目前有三个虚拟机可用。MoarVM、JavaScript 虚拟机和 JVM。一般来说，MoarVM 是参考虚拟机，除非另有说明，否则本书将使用 MoarVM。\n  下一层由 NQP（Not Quite Perl 的缩写，意思是 Not Quite Perl，也可能是完全不同的语言）占据，NQP 是一种简化的语言，它通过翻译成 Java 或 MoarVM 字节码来生成字节码。",
-      "publisher": {
-        "@type": "Organization",
-        "name": "https:\/\/ohmyraku.github.io",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https:\/\/ohmyraku.github.io\/logo.png"
-        }
-      }
-    }
-</script><link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
+<link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
 <script>
 
 const theme = window.localStorage.getItem('theme'); 
@@ -12470,6 +12412,10 @@ FreeM 193112- Used 57%
     <p class="footer__sign">© 2020 ohmyraku</p></footer>
     
 
+    <link rel="stylesheet" href="https://ohmyraku.github.io/css/prism.min.css"> 
+    
+    
+
     
     <script>
         window.addEventListener("load", function () {
@@ -12485,7 +12431,7 @@ FreeM 193112- Used 57%
 
 
 
-<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.80368e52cf9dd9e602bf5e846e392520e70607ee948e4316b49e90236e76aa56f529c21ebfc37cf22abaa49b54d8ffe2ae2368212cbeeb22de989716b6575a49.js" integrity="sha512-gDaOUs&#43;d2eYCv16EbjklIOcGB&#43;6UjkMWtJ6QI252qlb1KcIev8N88iq6pJtU2P/iriNoISy&#43;6yLemJcWtldaSQ=="></script>
 
 
 

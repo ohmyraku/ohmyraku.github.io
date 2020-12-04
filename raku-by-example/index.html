@@ -26,61 +26,7 @@
 
 <link rel="icon" href="https://ohmyraku.github.io/logo.png" />
 
-
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Raku 基础" />
-<meta name="twitter:description" content="1. 什么是 Raku Raku 是一种编程语言。它以自然语言为灵感，设计成易学、易读、易写的语言。它让初学者可以编写 &#34;婴儿Perl&#34;，同时也让有经验的程序员可以自由表达，从简练到诗意。
- Raku 是渐近类型的。它主要遵循了动态类型化语言的范式，即接受那些在编译过程中无法保证类型安全的程序。然而，与许多动态语言不同的是，它接受并执行类型约束。在可能的情况下，编译器使用类型注解来在编译时做出决定，否则只有在运行时才有可能。
- 许多编程范式都影响了 Raku 。你可以在 Raku 中编写命令式、面向对象和函数式的程序。声明式编程的功能，如多重分派、子类型、regex 和 grammar 引擎等，都支持声明式编程。
- 在 Raku 中，大部分的查询都是词法查询，而且语言避免了全局状态。这使得程序的并行和并发执行更加容易，Raku 对高级并发原语的关注也是如此。当你不希望被限制在一个 CPU 内核上时，你会考虑 Promise 和消息队列, 而不是考虑线程和锁。
- Raku 作为一门语言，对于 Raku 程序应该被编译还是被解释的问题，Raku 是没有主见的。Raku 作为一种主要的实现, 可以快速编译模块并解释脚本。
- 1.1. Perl5, 老天鹅 在 2000 年左右，Perl 5 的发展面临着巨大的压力，面临着既要发展又要保持向后兼容的矛盾。
- Raku 是释放这种压力的阀门。所有需要打破向后兼容性的扩展建议都被引导到了 Raku 中，使其处于梦幻般的状态，一切皆有可能，没有任何东西是固定的。经过几年的努力，Raku 才进入了一个比较稳固的状态。
- 在这段时间里，Perl 5 也在不断发展，这两种语言的差异性足够大，以至于大多数 Perl 5 的开发者不再认为 Raku 是一条自然的升级之路，以至于 Raku 并没有试图让 Perl 5 过时（至少不会比它试图让任何其他编程语言过时的程度更高：-），2015 年第一次稳定发布的 Raku 并没有表明对 Perl 5 的支持失效。" />
-<meta name="twitter:site" content="https://ohmyraku.github.io" />
-<meta name="twitter:creator" content="ohmyraku" />
-<meta name="twitter:image" content="https://ohmyraku.github.io/logo.png">
-<meta property="og:type" content="article" />
-<meta property="og:locale" content="en" />
-<meta property="og:name" content="ohmyraku" />
-<meta property="og:title" content="Raku 基础" />
-<meta property="og:url" content="https://ohmyraku.github.io" />
-<meta property="og:site_name" content="山川异域, 风月同天" />
-<meta property="og:description" content="1. 什么是 Raku Raku 是一种编程语言。它以自然语言为灵感，设计成易学、易读、易写的语言。它让初学者可以编写 &#34;婴儿Perl&#34;，同时也让有经验的程序员可以自由表达，从简练到诗意。
- Raku 是渐近类型的。它主要遵循了动态类型化语言的范式，即接受那些在编译过程中无法保证类型安全的程序。然而，与许多动态语言不同的是，它接受并执行类型约束。在可能的情况下，编译器使用类型注解来在编译时做出决定，否则只有在运行时才有可能。
- 许多编程范式都影响了 Raku 。你可以在 Raku 中编写命令式、面向对象和函数式的程序。声明式编程的功能，如多重分派、子类型、regex 和 grammar 引擎等，都支持声明式编程。
- 在 Raku 中，大部分的查询都是词法查询，而且语言避免了全局状态。这使得程序的并行和并发执行更加容易，Raku 对高级并发原语的关注也是如此。当你不希望被限制在一个 CPU 内核上时，你会考虑 Promise 和消息队列, 而不是考虑线程和锁。
- Raku 作为一门语言，对于 Raku 程序应该被编译还是被解释的问题，Raku 是没有主见的。Raku 作为一种主要的实现, 可以快速编译模块并解释脚本。
- 1.1. Perl5, 老天鹅 在 2000 年左右，Perl 5 的发展面临着巨大的压力，面临着既要发展又要保持向后兼容的矛盾。
- Raku 是释放这种压力的阀门。所有需要打破向后兼容性的扩展建议都被引导到了 Raku 中，使其处于梦幻般的状态，一切皆有可能，没有任何东西是固定的。经过几年的努力，Raku 才进入了一个比较稳固的状态。
- 在这段时间里，Perl 5 也在不断发展，这两种语言的差异性足够大，以至于大多数 Perl 5 的开发者不再认为 Raku 是一条自然的升级之路，以至于 Raku 并没有试图让 Perl 5 过时（至少不会比它试图让任何其他编程语言过时的程度更高：-），2015 年第一次稳定发布的 Raku 并没有表明对 Perl 5 的支持失效。" />
-<script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "Article",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https:\/\/ohmyraku.github.io\/raku-by-example\/"
-      },
-      "headline": "Raku 基础",
-      
-      "datePublished": "2020-02-05",
-      "dateModified": "2020-02-05 15:26:52 \u002b0800 CST",
-      "author": {
-        "@type": "Person",
-        "name": "ohmyraku"
-      },
-      "description": "1. 什么是 Raku Raku 是一种编程语言。它以自然语言为灵感，设计成易学、易读、易写的语言。它让初学者可以编写 \u0026#34;婴儿Perl\u0026#34;，同时也让有经验的程序员可以自由表达，从简练到诗意。\n Raku 是渐近类型的。它主要遵循了动态类型化语言的范式，即接受那些在编译过程中无法保证类型安全的程序。然而，与许多动态语言不同的是，它接受并执行类型约束。在可能的情况下，编译器使用类型注解来在编译时做出决定，否则只有在运行时才有可能。\n 许多编程范式都影响了 Raku 。你可以在 Raku 中编写命令式、面向对象和函数式的程序。声明式编程的功能，如多重分派、子类型、regex 和 grammar 引擎等，都支持声明式编程。\n 在 Raku 中，大部分的查询都是词法查询，而且语言避免了全局状态。这使得程序的并行和并发执行更加容易，Raku 对高级并发原语的关注也是如此。当你不希望被限制在一个 CPU 内核上时，你会考虑 Promise 和消息队列, 而不是考虑线程和锁。\n Raku 作为一门语言，对于 Raku 程序应该被编译还是被解释的问题，Raku 是没有主见的。Raku 作为一种主要的实现, 可以快速编译模块并解释脚本。\n 1.1. Perl5, 老天鹅 在 2000 年左右，Perl 5 的发展面临着巨大的压力，面临着既要发展又要保持向后兼容的矛盾。\n Raku 是释放这种压力的阀门。所有需要打破向后兼容性的扩展建议都被引导到了 Raku 中，使其处于梦幻般的状态，一切皆有可能，没有任何东西是固定的。经过几年的努力，Raku 才进入了一个比较稳固的状态。\n 在这段时间里，Perl 5 也在不断发展，这两种语言的差异性足够大，以至于大多数 Perl 5 的开发者不再认为 Raku 是一条自然的升级之路，以至于 Raku 并没有试图让 Perl 5 过时（至少不会比它试图让任何其他编程语言过时的程度更高：-），2015 年第一次稳定发布的 Raku 并没有表明对 Perl 5 的支持失效。",
-      "publisher": {
-        "@type": "Organization",
-        "name": "https:\/\/ohmyraku.github.io",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https:\/\/ohmyraku.github.io\/logo.png"
-        }
-      }
-    }
-</script><link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
+<link rel="stylesheet" href="https://ohmyraku.github.io/scss/main.min.84f71d25d375c522a861bb4719728ce6839cf3635b15ca0c7a1b4d799c2dc3399a1d6cb46058a9d8fdbebe9156a8857279cfdeb70aa3862e629de234b5a41fa1.css" integrity="sha512-hPcdJdN1xSKoYbtHGXKM5oOc82NbFcoMehtNeZwtwzmaHWy0YFip2P2&#43;vpFWqIVyec/etwqjhi5ineI0taQfoQ==">
 <script>
 
 const theme = window.localStorage.getItem('theme'); 
@@ -6468,6 +6414,10 @@ sub on(&amp;case) {
     <p class="footer__sign">© 2020 ohmyraku</p></footer>
     
 
+    <link rel="stylesheet" href="https://ohmyraku.github.io/css/prism.min.css"> 
+    
+    
+
     
     <script>
         window.addEventListener("load", function () {
@@ -6483,7 +6433,7 @@ sub on(&amp;case) {
 
 
 
-<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.80368e52cf9dd9e602bf5e846e392520e70607ee948e4316b49e90236e76aa56f529c21ebfc37cf22abaa49b54d8ffe2ae2368212cbeeb22de989716b6575a49.js" integrity="sha512-gDaOUs&#43;d2eYCv16EbjklIOcGB&#43;6UjkMWtJ6QI252qlb1KcIev8N88iq6pJtU2P/iriNoISy&#43;6yLemJcWtldaSQ=="></script>
 
 
 
