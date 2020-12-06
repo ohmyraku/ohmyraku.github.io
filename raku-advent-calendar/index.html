@@ -19636,6 +19636,223 @@ Imported namespace nicknames</pre>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_第六天_declarative_apis_easy_peasy_with_raku">80. 第六天 - Declarative APIs, easy peasy with Raku</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://raku.org/">Raku</a> 的 API 往往很容易阅读，例如，命名的参数减轻了对方法调用中参数顺序的记忆。</p>
+</div>
+<div class="paragraph">
+<p>但有时一个库的作者会在此基础上制作出特别漂亮的声明式 API。其中一个例子是 <a href="https://cro.services/">Cro</a>，一个用于编写基于 HTTP 的服务的框架，它允许你写一些东西，如:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $application = route {
+    get -&gt; &#39;greet&#39;, $name {
+        content &#39;text/plain&#39;, &#34;Hello, $name!&#34;;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>来声明你的路由，也就是 Cro 为你调用的回调，当用户请求符合路由引入的模式的 URL 时，Cro 会为你调用哪些回调，在这个例子中，/greet/fido 等等。</p>
+</div>
+<div class="paragraph">
+<p>今天，我们将探讨使这种声明式 API 工作的机制，也就是自然读取的 API 和尽可能少使用锅炉模板的 API。</p>
+</div>
+<div class="paragraph">
+<p>我们将探讨如何为你编写的库启用类似的接口。</p>
+</div>
+<div class="sect2">
+<h3 id="_声明式_api_基础">80.1. 声明式 API 基础</h3>
+<div class="paragraph">
+<p>上面的例子依赖于几个主要的想法。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>像 <code>route</code>、<code>get</code> 和 <code>content</code> 这样的裸词只是名称相同的函数，你可以简单地用它们的名称和空格来调用它们。语句的其他部分被解释为这些函数的参数。</p>
+</li>
+<li>
+<p>在 <code>route { …​ }</code> 中，<code>{ …​ }</code> 是一个 Block，也就是像函数一样的一段代码。</p>
+</li>
+<li>
+<p>同样，<code>→ &#39;greet&#39;, $name { …​ }</code> 是一个块，这个块有一个显式<a href="https://docs.raku.org/type/Signature">签名</a>(&#39;greet&#39;, $name) 部分。库代码可以反省这个签名，也就是找到参数的名称 ($name) 和常量字符串 &#39;greet&#39; 的值。</p>
+</li>
+<li>
+<p>还有一种无形的机制，将 get 与外面的 <code>route { …​ }</code> 块绑定。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>最后一点需要再解释一下。在 Cro 中，你可以有多个独立的 <code>route { }</code> 块，像这样。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app1 = route {
+    get -&gt; &#39;meet&#39; { content &#39;text/plain&#39;, &#39;Nice to see you&#39; }
+}
+my $app2 = route {
+    get -&gt; &#39;greet&#39; { content &#39;text/plain&#39;, &#39;Oh hai&#39; }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Cro 如何知道 <code>meet</code> 回调属于 <code>$app1</code>，<code>greet</code> 属于 <code>$app2</code>？<code>route</code> 子程序需要调用传递给它的块来找出它声明的回调，所以它需要向块中注入某种上下文。做到这一点的方法是通过一个<a href="https://docs.raku.org/language/variables#index-entry-Dynamically_scoped_variables">动态作用域变量</a>。</p>
+</div>
+<div class="paragraph">
+<p>在 Raku 中，你可以通过在 <a href="https://docs.raku.org/language/glossary#index-entry-Sigil">sigil</a> 后面声明一个带 * 的变量来实现。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub outer(&amp;callback) {
+    my @*DYNAMIC;
+    callback();
+    return @*DYNAMIC.list;
+}
+sub inner() {
+    @*DYNAMIC.push(42);
+}
+say outer(&amp;inner);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里 sub outer 声明了一个动态变量 @*DYNAMIC。在 outer 完成之前，所有被调用的都可以看到这个变量，包括 inner 的内部，它被绑定到参数 <code>&amp;callback</code> 上。因此，代码打印 <code>[42]</code>。</p>
+</div>
+<div class="paragraph">
+<p>如果你看看 <a href="https://github.com/croservices/cro-http/blob/5e636321ef16a3abae2927eb3948b19eb4de3d02/lib/Cro/HTTP/Router.pm6#L606">Cro::HTTP 对 sub route 的定义</a>，你可以看到它使用的技巧基本相同，只是用一个空的 RouteSet 而不是一个空的数组来初始化动态变量。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_实用化">80.2. 实用化</h3>
+<div class="paragraph">
+<p>假设你正在写一个观察目录树的库，你可以配置它将飞翔同步到另一个当地，或者根据某些属性自动删除它们，或者当某些文件改变时调用你的代码。</p>
+</div>
+<div class="paragraph">
+<p>你想提供一个额外的厉害的，像这样的声明式 API。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $syncer = directory &#39;Documents&#39;, {
+    watch name =&gt; /.*/, -&gt; $file { say &#34;File $file changed&#34; }
+    delete name =&gt; /\.swp/;
+    delete name =&gt; /\.swo/;
+    delete age_days =&gt; * &gt; 5;
+    sync extension =&gt; &#39;txt&#39;;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>要让这个例子编译，你只需要用适当的签名声明 directory, delete, sync 和 watch 这四个函数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub delete(*%conditions) {}
+sub sync(*%conditions) {}
+sub watch(&amp;callback, *%conditions) {}
+
+sub directory(Str $path, &amp;callback) {}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当然，你还需要在一个数据结构中捕获条件和回调，这样你的假设库就可以用它做一些事情。</p>
+</div>
+<div class="paragraph">
+<p>这可以是一个用于存储动作类型的枚举，以及一个用于条件和可选回调的类。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">enum Sync::Action &lt;Delete Sync Watch&gt;;
+class ConditionalRule {
+    has Sync::Action $.action is required;
+    has %.conditions;
+    has &amp;.callback;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>加上一个存储目录和 ConditionalRule 对象列表的类。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Sync::Spec {
+    has Str $.path;
+    has ConditionalRule @.rules;
+    method add(ConditionalRule $r) { @.rules.append: $r }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后，我们需要将开始的四个函数具体化。directory 创建一个 Sync::Spec 对象，然后调用它的回调。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub directory(Str $path, &amp;callback) {
+    my $*SYNC = Sync::Spec.new(:$path);
+    callback;
+    return $*SYNC;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>其他三个需要创建新的 ConditionalRule 对象，并将其添加到 $*SYNC 中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub delete(*%conditions) {
+    $*SYNC.add: ConditionalRule.new:
+        :action(Sync::Action::Delete),
+        :%conditions,
+}
+sub sync(*%conditions) {
+    $*SYNC.add: ConditionalRule.new:
+        :action(Sync::Action::Sync),
+        :%conditions,
+}
+sub watch(&amp;callback, *%conditions) {
+    $*SYNC.add: ConditionalRule.new:
+        :action(Sync::Action::Sync),
+        :%conditions,
+        :&amp;callback,
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这是一个恼人的模板，但它允许漂亮界面的用户放弃所有的模板。</p>
+</div>
+<div class="paragraph">
+<p>一旦你把所有这些拼凑在一起，directory 就会返回一个 Sync::Spec 对象，这个对象包含了所有必要的知识，为假设的 syncer 库提供燃料。</p>
+</div>
+<div class="paragraph">
+<p>剩下的就是真正实现它了。这个任务远远超出了本文的范围 - 留给读者去做，如果你选择了这些的话。</p>
+</div>
+<div class="paragraph">
+<p>但是，等等，我们还没有完全完成，因为当有人滥用我们整洁的小 API 时。如果你只是在目录块之外调用 delete，你就会得到 Dynamic variable $*SYNC not found 的错误信息，这并不值得我们向往的精彩。</p>
+</div>
+<div class="paragraph">
+<p>幸运的是，我们可以很容易地改进这一点。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub delete(*%conditions) {
+    die &#39;delete outside a directory { } block&#39;
+        unless defined $*SYNC;
+    $*SYNC.add: ConditionalRule.new:
+        :action(Sync::Action::Delete),
+        :%conditions,
+}</code></pre>
+</div>
+</div>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>并类推其他三个动作。同样是更多的模板，符合 Raku 代表用户折磨实现者的座右铭。</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
 <div id="footnotes">
 <hr/>
 <div class="footnote" id="_footnotedef_1">
