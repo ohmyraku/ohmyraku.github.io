@@ -15,16 +15,15 @@
       <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
       <author>ohmyraku@outlook.com (ohmyraku)</author>
       <guid>https://ohmyraku.github.io/using-raku/</guid>
-      <description>字符串 1. 1.1 使用字符串 1.1. 1. 你好, 世界! print &amp;#39;Hello, World!&amp;#39;   有两个内置函数可打印到控制台：print 和 say。 两者都打印其参数，但是 say 例程另外以换行符结束输出。
+      <description>字符串 1. 1.1 使用字符串 1.1. 1. 你好, 世界! #!/usr/bin/env raku print &amp;#39;Hello, World!&amp;#39;   有两个内置函数可打印到控制台：print 和 say。 两者都打印其参数，但是 say 例程另外以换行符结束输出。
  因此，最快的解决方案是使用 say 并传递不带换行符的字符串：
- say &amp;#39;Hello, World!&amp;#39;   另一种解决方案是使用 print 并在字符串本身中包含 \n 字符：
- print &amp;#34;Hello, World!\n&amp;#34;   两个程序的输出是一样的：
+ #!/usr/bin/env raku say &amp;#39;Hello, World!&amp;#39;   另一种解决方案是使用 print 并在字符串本身中包含 \n 字符：
+ #!/usr/bin/env raku print &amp;#34;Hello, World!\n&amp;#34;   两个程序的输出是一样的：
  Hello, World!
  注意单引号和双引号之间的区别：单引号不会插入 \n 等特殊字符，而双引号会插入。 对于不带特殊字符的字符串使用双引号是没有错的，但是当你不希望在字符串中使用变量并且不需要插值变量时，最好使用适当的引号样式。
  在上面的示例中要看的另一件事是，单行程序不需要分号。
   1.2. 2. 跟人打招呼  询问用户的名字，并通过打印&amp;#34;你好, &amp;lt;名字&amp;gt;!&amp;#34; 来打招呼。
-   Raku 提供了一个简单的 prompt 函数，该函数执行两种操作：打印提示并读取输入。 因此，使用它的程序可能如下所示：
- say &amp;#39;Hello, &amp;#39; ~ prompt(&amp;#39;Enter your name: &amp;#39;) ~ &amp;#39;!</description>
+   Raku 提供了一个简单的 prompt 函数，该函数执行两种操作：打印提示并读取输入。 因此，使用它的程序可能如下所示：</description>
     </item>
     
   </channel>

@@ -16,12 +16,12 @@
       <author>ohmyraku@outlook.com (ohmyraku)</author>
       <guid>https://ohmyraku.github.io/raku-at-a-glance/</guid>
       <description>1. Raku 概要 1.1. Hello, World Raku编译器可以从文件或+ e命令行开关的内容中读取程序。 最简单的“Hello，World！”程序如下所示：
- say &amp;#34;Hello, Raku &amp;#34;;   把它保存到文件中并运行:
+ #!/usr/bin/env raku say &amp;#34;Hello, Raku &amp;#34;;   把它保存到文件中并运行:
  $ raku hello.pl Hello, Raku   或者，你可以使用 +e 选项：
- $ raku -e&amp;#39;say &amp;#34;Hello, Raku&amp;#34;&amp;#39; Hello, Raku    1.2. 变量 1.2.1. 符号 Raku使用符号来标记变量。 这些符号部分兼容 使用Perl 5语法。 例如，标量，列表和散列分别使用$，@和％sigils。
- my $scalar = 42; say $scalar;   代码打印42并不奇怪。
+ #!/usr/bin/env raku $ raku -e&amp;#39;say &amp;#34;Hello, Raku&amp;#34;&amp;#39; Hello, Raku    1.2. 变量 1.2.1. 符号 Raku使用符号来标记变量。 这些符号部分兼容 使用Perl 5语法。 例如，标量，列表和散列分别使用$，@和％sigils。
+ #!/usr/bin/env raku my $scalar = 42; say $scalar;   代码打印42并不奇怪。
  考虑以下片段，它也给出了可预测的结果（方括号表示一个数组）：
- my @array = (10, 20, 30); say @array; # [10 20 30]   现在，让我们使用Raku的优点并重写上面的代码，使用更少的输入，更少的字符和更少的标点符号：</description>
+ #!/usr/bin/env raku my @array = (10, 20, 30); say @array; # [10 20 30]   现在，让我们使用Raku的优点并重写上面的代码，使用更少的输入，更少的字符和更少的标点符号：</description>
     </item>
     
   </channel>

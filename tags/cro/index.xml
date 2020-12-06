@@ -17,13 +17,13 @@
       <guid>https://ohmyraku.github.io/cro/</guid>
       <description>1. Cro 开发工具 Cro包含帮助开发人员更有效地工作的工具。 当前，这些工具可通过命令行界面使用。 将来还将添加Web界面。 没有这些工具，完全有可能使用Cro。 它们旨在提供一些合理的默认值，但并不适合每个项目。
  1.1. 存根服务 可以使用cro stub命令对新服务进行存根。 一般用法是：
- cro stub &amp;lt;service-type&amp;gt; &amp;lt;service-id&amp;gt; &amp;lt;path&amp;gt; [&amp;#39;links-and-options&amp;#39;]   其中
+ #!/usr/bin/env raku cro stub &amp;lt;service-type&amp;gt; &amp;lt;service-id&amp;gt; &amp;lt;path&amp;gt; [&amp;#39;links-and-options&amp;#39;]   其中
  service-type是要创建的服务的类型 service-id是服务的ID（与其他cro命令一起使用；也将在.cro.yml中用作服务的默认描述性名称）
  路径是创建服务的位置 links-and-options指定指向应添加到存根的其他服务的链接，以及特定于服务类型的选项
  如果未指定链接和选项，则将以交互方式请求它们。 要提供选项，请使用类似于Perl 6冒号对的语法将其放在引号中，其中：foo启用选项，：！foo禁用选项，而：foo &amp;lt;bar&amp;gt;是带有值bar的选项foo。 例如：
- cro stub http foo services/foo &amp;#39;:!secure :websocket&amp;#39; cro stub http bar services/bar &amp;#39;:!secure :websocket&amp;#39;   已存根的服务从环境变量获取端口和证书配置，并且当服务之间存在关系时，其地址也将使用环境变量注入。 设置容器部署时，这很方便。
+ #!/usr/bin/env raku cro stub http foo services/foo &amp;#39;:!secure :websocket&amp;#39; cro stub http bar services/bar &amp;#39;:!secure :websocket&amp;#39;   已存根的服务从环境变量获取端口和证书配置，并且当服务之间存在关系时，其地址也将使用环境变量注入。 设置容器部署时，这很方便。
  链接导致存根服务包含创建可以与另一个端点通信的“客户端”的代码。 这些与选项一起使用，格式为：link &amp;lt;service-id：endpoint-id&amp;gt;。 service-id是目标.cro.yml的id字段，endpoint-id是该.cro.yml文件的终结点列表中条目的id字段。
- cro stub http foo services/foo &amp;#39;:link&amp;lt;flash-storage:http&amp;gt;&amp;#39;    1.</description>
+ #!/usr/bin/env raku cro stub http foo services/foo &amp;#39;:link&amp;lt;flash-storage:http&amp;gt;&amp;#39;    1.</description>
     </item>
     
   </channel>
