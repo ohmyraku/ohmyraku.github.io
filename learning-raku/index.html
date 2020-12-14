@@ -64,6 +64,223 @@ if (theme && theme !== "1") {
 </div>
 
 
+<div class="page__toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#_介绍">1. 介绍</a>
+      <ul>
+        <li><a href="#_为什么是_raku">1.1. 为什么是 Raku?</a></li>
+        <li><a href="#_first_steps_with_the_repl">1.2. First Steps with the REPL</a></li>
+        <li><a href="#_阅读文档">1.3. 阅读文档</a></li>
+        <li><a href="#_基础语法">1.4. 基础语法</a></li>
+        <li><a href="#_variables">1.5. Variables</a></li>
+        <li><a href="#_making_and_running_a_program">1.6. Making and Running a Program</a></li>
+        <li><a href="#_总结">1.7. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_猜数字">2. 猜数字</a>
+      <ul>
+        <li><a href="#_绑定和赋值">2.1. 绑定和赋值</a></li>
+        <li><a href="#_a_main_program">2.2. A MAIN Program</a></li>
+        <li><a href="#_literal_numbers">2.3. Literal Numbers</a></li>
+        <li><a href="#_numeric_operations">2.4. Numeric Operations</a></li>
+        <li><a href="#_conditional_execution">2.5. Conditional Execution</a></li>
+        <li><a href="#_putting_it_all_together">2.6. Putting It All Together</a></li>
+        <li><a href="#_summary">2.7. Summary</a></li>
+      </ul>
+    </li>
+    <li><a href="#_数字">3. 数字</a>
+      <ul>
+        <li><a href="#_number_types">3.1. Number Types</a></li>
+        <li><a href="#_integers">3.2. Integers</a></li>
+        <li><a href="#_有理数">3.3. 有理数</a></li>
+        <li><a href="#_imaginary_and_complex_numbers">3.4. Imaginary and Complex Numbers</a></li>
+        <li><a href="#_numbers_small_and_large">3.5. Numbers Small and Large</a></li>
+        <li><a href="#_the_numeric_hierarchy">3.6. The Numeric Hierarchy</a></li>
+        <li><a href="#_总结_2">3.7. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_字符串">4. 字符串</a>
+      <ul>
+        <li><a href="#_literal_quoting">4.1. Literal Quoting</a></li>
+        <li><a href="#_escaped_strings">4.2. Escaped Strings</a></li>
+        <li><a href="#_interpolated_strings">4.3. Interpolated Strings</a></li>
+        <li><a href="#_here_docs">4.4. Here Docs</a></li>
+        <li><a href="#_shell_strings">4.5. Shell Strings</a></li>
+        <li><a href="#_fancier_quoting">4.6. Fancier Quoting</a></li>
+        <li><a href="#_summary_2">4.7. Summary</a></li>
+      </ul>
+    </li>
+    <li><a href="#_创建块">5. 创建块</a>
+      <ul>
+        <li><a href="#_存储_blocks">5.1. 存储 Blocks</a></li>
+        <li><a href="#_简单子例程">5.2. 简单子例程</a></li>
+        <li><a href="#_whatever_code">5.3. Whatever Code</a></li>
+        <li><a href="#_总结_3">5.4. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_positionals">6. Positionals</a>
+      <ul>
+        <li><a href="#_constructing_a_list">6.1. Constructing a List</a></li>
+        <li><a href="#_ranges">6.2. Ranges</a></li>
+        <li><a href="#_sequences">6.3. Sequences</a></li>
+        <li><a href="#_single_element_access">6.4. Single-Element Access</a></li>
+        <li><a href="#_arrays">6.5. Arrays</a></li>
+        <li><a href="#_combining_lists">6.6. Combining Lists</a></li>
+        <li><a href="#_filtering_lists">6.7. Filtering Lists</a></li>
+        <li><a href="#_transforming_a_list">6.8. Transforming a List</a></li>
+        <li><a href="#_sorting_lists">6.9. Sorting Lists</a></li>
+        <li><a href="#_sorting_on_multiple_comparisons">6.10. Sorting on Multiple Comparisons</a></li>
+        <li><a href="#_summary_3">6.11. Summary</a></li>
+      </ul>
+    </li>
+    <li><a href="#_当出错的时候">7. 当出错的时候</a>
+      <ul>
+        <li><a href="#_异常">7.1. 异常</a></li>
+        <li><a href="#_failures">7.2. Failures</a></li>
+        <li><a href="#_warnings">7.3. Warnings</a></li>
+        <li><a href="#_the_wisdom_of_exceptions">7.4. The Wisdom of Exceptions</a></li>
+        <li><a href="#_summary_4">7.5. Summary</a></li>
+      </ul>
+    </li>
+    <li><a href="#_文件和目录输入和输出">8. 文件和目录,输入和输出</a>
+      <ul>
+        <li><a href="#_文件路径">8.1. 文件路径</a></li>
+        <li><a href="#_操作目录">8.2. 操作目录</a></li>
+        <li><a href="#_格式化输出">8.3. 格式化输出</a></li>
+        <li><a href="#_标准文件句柄">8.4. 标准文件句柄</a></li>
+        <li><a href="#_读取输入">8.5. 读取输入</a></li>
+        <li><a href="#_写出">8.6. 写出</a></li>
+        <li><a href="#_二进制文件">8.7. 二进制文件</a></li>
+        <li><a href="#_总结_4">8.8. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_associative">9. Associative</a>
+      <ul>
+        <li><a href="#_pairs">9.1. Pairs</a></li>
+        <li><a href="#_maps">9.2. Maps</a></li>
+        <li><a href="#_hashes">9.3. Hashes</a></li>
+        <li><a href="#_multilevel_hashes">9.4. Multilevel Hashes</a></li>
+        <li><a href="#_总结_5">9.5. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_使用模块">10. 使用模块</a>
+      <ul>
+        <li><a href="#_installing_modules">10.1. Installing Modules</a></li>
+        <li><a href="#_加载模块">10.2. 加载模块</a></li>
+        <li><a href="#_从_web_抓取数据">10.3. 从 Web 抓取数据</a></li>
+        <li><a href="#_在_raku_中运行_perl_5">10.4. 在 Raku 中运行 Perl 5</a></li>
+        <li><a href="#_总结_6">10.5. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_子例程">11. 子例程</a>
+      <ul>
+        <li><a href="#_a_basic_subroutine">11.1. A Basic Subroutine</a></li>
+        <li><a href="#_递归">11.2. 递归</a></li>
+        <li><a href="#_在库中存储子程序">11.3. 在库中存储子程序</a></li>
+        <li><a href="#_位置参数">11.4. 位置参数</a></li>
+        <li><a href="#_same_name_different_signature">11.5. Same Name, Different Signature</a></li>
+        <li><a href="#_named_parameters">11.6. Named Parameters</a></li>
+        <li><a href="#_return_types">11.7. Return Types</a></li>
+        <li><a href="#_summary_5">11.8. Summary</a></li>
+      </ul>
+    </li>
+    <li><a href="#_类">12. 类</a>
+      <ul>
+        <li><a href="#_your_first_class">12.1. Your First Class</a></li>
+        <li><a href="#_定义方法">12.2. 定义方法</a></li>
+        <li><a href="#_对象">12.3. 对象</a></li>
+        <li><a href="#_multi_methods">12.4. multi Methods</a></li>
+        <li><a href="#_inheriting_types">12.5. Inheriting Types</a></li>
+        <li><a href="#_controlling_object_creation">12.6. Controlling Object Creation</a></li>
+        <li><a href="#_private_classes">12.7. Private Classes</a></li>
+        <li><a href="#_summary_6">12.8. Summary</a></li>
+      </ul>
+    </li>
+    <li><a href="#_角色">13. 角色</a>
+      <ul>
+        <li><a href="#_给类添加行为">13.1. 给类添加行为</a></li>
+        <li><a href="#_methods_in_roles">13.2. Methods in Roles</a></li>
+        <li><a href="#_de_conflicting_roles">13.3. De-Conflicting Roles</a></li>
+        <li><a href="#_anonymous_roles">13.4. Anonymous Roles</a></li>
+        <li><a href="#_summary_7">13.5. Summary</a></li>
+      </ul>
+    </li>
+    <li><a href="#_junctions和集合">14. Junctions和集合</a>
+      <ul>
+        <li><a href="#_junctions">14.1. Junctions</a></li>
+        <li><a href="#_sets">14.2. Sets</a></li>
+        <li><a href="#_summary_8">14.3. Summary</a></li>
+      </ul>
+    </li>
+    <li><a href="#_正则表达式">15. 正则表达式</a>
+      <ul>
+        <li><a href="#_the_match_operator">15.1. The Match Operator</a></li>
+        <li><a href="#_matching_nonliteral_characters">15.2. Matching Nonliteral Characters</a></li>
+        <li><a href="#_matching_adverbs">15.3. Matching Adverbs</a></li>
+        <li><a href="#_things_that_use_patterns">15.4. Things That Use Patterns</a></li>
+        <li><a href="#_summary_9">15.5. Summary</a></li>
+      </ul>
+    </li>
+    <li><a href="#_更漂亮的正则表达式">16. 更漂亮的正则表达式</a>
+      <ul>
+        <li><a href="#_量词">16.1. 量词</a></li>
+        <li><a href="#_controlling_quantifiers">16.2. Controlling Quantifiers</a></li>
+        <li><a href="#_captures">16.3. Captures</a></li>
+        <li><a href="#_surrounders_and_separators">16.4. Surrounders and Separators</a></li>
+        <li><a href="#_断言">16.5. 断言</a></li>
+        <li><a href="#_alternations">16.6. Alternations</a></li>
+        <li><a href="#_summary_10">16.7. Summary</a></li>
+      </ul>
+    </li>
+    <li><a href="#_grammars">17. Grammars</a>
+      <ul>
+        <li><a href="#_a_simple_grammar">17.1. A Simple Grammar</a></li>
+        <li><a href="#_multiple_rules">17.2. Multiple Rules</a></li>
+        <li><a href="#_debugging_grammars">17.3. Debugging Grammars</a></li>
+        <li><a href="#_a_simple_action_class">17.4. A Simple Action Class</a></li>
+        <li><a href="#_ratcheting">17.5. Ratcheting</a></li>
+        <li><a href="#_parsing_json">17.6. Parsing JSON</a></li>
+        <li><a href="#_parsing_csv">17.7. Parsing CSV</a></li>
+        <li><a href="#_summary_11">17.8. Summary</a></li>
+      </ul>
+    </li>
+    <li><a href="#_供应通道和承诺">18. 供应、通道和承诺</a>
+      <ul>
+        <li><a href="#_supplier">18.1. Supplier</a></li>
+        <li><a href="#_channel">18.2. Channel</a></li>
+        <li><a href="#_promise">18.3. Promise</a></li>
+        <li><a href="#_响应式编程">18.4. 响应式编程</a></li>
+        <li><a href="#_总结_7">18.5. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_控制其它程序">19. 控制其它程序</a>
+      <ul>
+        <li><a href="#_快速和容易">19.1. 快速和容易</a></li>
+        <li><a href="#_procs">19.2. Procs</a></li>
+        <li><a href="#_异步控制">19.3. 异步控制</a></li>
+        <li><a href="#_总结_8">19.4. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_高级话题">20. 高级话题</a>
+      <ul>
+        <li><a href="#_单行">20.1. 单行</a></li>
+        <li><a href="#_declarator_block_comments">20.2. Declarator Block Comments</a></li>
+        <li><a href="#_feed_operators">20.3. Feed Operators</a></li>
+        <li><a href="#_destructuring_signatures">20.4. Destructuring Signatures</a></li>
+        <li><a href="#_defining_your_own_operators">20.5. Defining Your Own Operators</a></li>
+        <li><a href="#_perl_5_patterns">20.6. Perl 5 Patterns</a></li>
+        <li><a href="#_shaped_arrays">20.7. Shaped Arrays</a></li>
+        <li><a href="#_typed_containers">20.8. Typed Containers</a></li>
+        <li><a href="#_nativecall">20.9. NativeCall</a></li>
+        <li><a href="#_the_with_topicalizer">20.10. The with Topicalizer</a></li>
+      </ul>
+    </li>
+    <li><a href="#_结论">21. 结论</a></li>
+  </ul>
+</nav>
+</div>
+
 </div>
 
 <article class="page__content" >
@@ -23929,28 +24146,12 @@ orwith $s.index: &#39;H&#39; { fail &#34;Why is there an H at $_?&#34;  }</code>
     
     
     <p class="footer__sign">© 2020 ohmyraku</p></footer>
-    
-
-    <link rel="stylesheet" href="https://ohmyraku.github.io/css/prism.min.css"> 
-    
-    
-
-    
-    <script>
-        window.addEventListener("load", function () {
-            const script = document.createElement("script");
-            script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-            script.async = true
-
-            document.head.appendChild(script);
-        })
-    </script>
 
 
 
 
 
-<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.80368e52cf9dd9e602bf5e846e392520e70607ee948e4316b49e90236e76aa56f529c21ebfc37cf22abaa49b54d8ffe2ae2368212cbeeb22de989716b6575a49.js" integrity="sha512-gDaOUs&#43;d2eYCv16EbjklIOcGB&#43;6UjkMWtJ6QI252qlb1KcIev8N88iq6pJtU2P/iriNoISy&#43;6yLemJcWtldaSQ=="></script>
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
 
 
 

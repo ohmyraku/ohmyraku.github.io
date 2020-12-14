@@ -63,6 +63,174 @@ if (theme && theme !== "1") {
 </div>
 
 
+<div class="page__toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#_在真实环境中使用_raku">1. 在真实环境中使用 Raku</a>
+      <ul>
+        <li><a href="#_食谱_1_1_准备好你的工具">1.1. 食谱 1-1. 准备好你的工具</a></li>
+        <li><a href="#_食谱_1_2_将其他语言的概念运用到_raku_中">1.2. 食谱 1-2. 将其他语言的概念运用到 Raku 中</a></li>
+        <li><a href="#_食谱_1_3_参与到社区中来">1.3. 食谱 1-3. 参与到社区中来</a></li>
+        <li><a href="#_食谱_1_4_安装一些外部的有用的模块">1.4. 食谱 1-4. 安装一些外部的、有用的模块</a></li>
+        <li><a href="#_食谱_1_5_检测操作系统环境并据此改变程序行为">1.5. 食谱 1-5. 检测操作系统环境，并据此改变程序行为</a></li>
+      </ul>
+    </li>
+    <li><a href="#_输入和输出">2. 输入和输出</a>
+      <ul>
+        <li><a href="#_食谱_2_1_读取作为参数处理的文件">2.1. 食谱 2-1. 读取作为参数处理的文件</a></li>
+        <li><a href="#_食谱_2_2_异步读取和处理文件">2.2. 食谱 2-2. 异步读取和处理文件</a></li>
+        <li><a href="#_食谱_2_3_连接外部实用程序和文件的输入和输出">2.3. 食谱 2-3. 连接外部实用程序和文件的输入和输出</a></li>
+        <li><a href="#_食谱_2_4_读取和处理二进制文件">2.4. 食谱 2-4. 读取和处理二进制文件</a></li>
+        <li><a href="#_食谱_2_5_观看文件的变化">2.5. 食谱 2-5. 观看文件的变化</a></li>
+      </ul>
+    </li>
+    <li><a href="#_数据科学和数据分析">3. 数据科学和数据分析</a>
+      <ul>
+        <li><a href="#_食谱_3_1_从多个文件中提取唯一的电子邮件地址用户名">3.1. 食谱 3-1. 从多个文件中提取唯一的电子邮件地址/用户名</a></li>
+        <li><a href="#_食谱_3_2_创建一个加权随机数生成器">3.2. 食谱 3-2. 创建一个加权随机数生成器</a></li>
+        <li><a href="#_食谱_3_3_用电子表格工作过滤排序和转换数据">3.3. 食谱 3-3. 用电子表格工作、过滤、排序和转换数据</a></li>
+        <li><a href="#_食谱_3_4_应用一系列的变换并从中提取数据">3.4. 食谱 3-4. 应用一系列的变换并从中提取数据</a></li>
+        <li><a href="#_食谱_3_5_创建一个随机数据生成器">3.5. 食谱 3-5. 创建一个随机数据生成器</a></li>
+        <li><a href="#_食谱_3_6_处理大的结构化的文件">3.6. 食谱 3-6. 处理大的、结构化的文件</a></li>
+      </ul>
+    </li>
+    <li><a href="#_数学">4. 数学</a>
+      <ul>
+        <li><a href="#_食谱_4_1_生成数学序列并从中提取随机元素">4.1. 食谱 4-1. 生成数学序列并从中提取随机元素</a></li>
+        <li><a href="#_食谱_4_2_编程一个分而治之的算法">4.2. 食谱 4-2. 编程一个分而治之的算法</a></li>
+        <li><a href="#_食谱_4_3_使用矩阵">4.3. 食谱 4-3. 使用矩阵</a></li>
+        <li><a href="#_食谱_4_4_计算_mandelbrot_集">4.4. 食谱 4-4. 计算 Mandelbrot 集</a></li>
+        <li><a href="#_食谱_4_5_充分利用整数的无限精确性">4.5. 食谱 4-5. 充分利用整数的无限精确性</a></li>
+      </ul>
+    </li>
+    <li><a href="#_配置和执行程序">5. 配置和执行程序</a>
+      <ul>
+        <li><a href="#_食谱_5_1_使用_jsonyaml_ini_文件配置程序">5.1. 食谱 5-1. 使用 JSON/YAML/.ini 文件配置程序</a></li>
+        <li><a href="#_食谱_5_2_用标志和参数配置命令行命令">5.2. 食谱 5-2. 用标志和参数配置命令行命令</a></li>
+        <li><a href="#_食谱_5_3_在程序中使用_shell_环境变量">5.3. 食谱 5-3. 在程序中使用 Shell 环境变量</a></li>
+        <li><a href="#_食谱_5_4_为应用程序创建一个_docker_容器以便轻松地分发它">5.4. 食谱 5-4. 为应用程序创建一个 Docker 容器，以便轻松地分发它</a></li>
+        <li><a href="#_食谱_5_5_使用_etcd_进行高级分布式配置">5.5. 食谱 5-5. 使用 etcd 进行高级/分布式配置</a></li>
+      </ul>
+    </li>
+    <li><a href="#_自动化系统任务">6. 自动化系统任务</a>
+      <ul>
+        <li><a href="#_食谱_6_1_检查某些事件的日志">6.1. 食谱 6-1. 检查某些事件的日志</a></li>
+        <li><a href="#_食谱_6_2_在控制台上交互式检查日志">6.2. 食谱 6-2. 在控制台上交互式检查日志</a></li>
+        <li><a href="#_食谱_6_3_检查_git_提交的模式和元数据或将它们存储起来">6.3. 食谱 6-3. 检查 Git 提交的模式和元数据，或将它们存储起来</a></li>
+        <li><a href="#_食谱_6_4_清理你的_docker_镜像商店">6.4. 食谱 6-4. 清理你的 Docker 镜像商店</a></li>
+        <li><a href="#_食谱_6_5_处理最后一个登录你系统的人">6.5. 食谱 6-5. 处理最后一个登录你系统的人</a></li>
+      </ul>
+    </li>
+    <li><a href="#_模块">7. 模块</a>
+      <ul>
+        <li><a href="#_食谱_7_1_在_raku_中设计类角色和模块">7.1. 食谱 7-1. 在 Raku 中设计类、角色和模块</a></li>
+        <li><a href="#_食谱_7_2_记录你的模块">7.2. 食谱 7-2. 记录你的模块</a></li>
+        <li><a href="#_食谱_7_3_测试你的模块">7.3. 食谱 7-3. 测试你的模块</a></li>
+        <li><a href="#_食谱_7_4_将你的模块作为一个开源模块发布">7.4. 食谱 7-4. 将你的模块作为一个开源模块发布</a></li>
+        <li><a href="#_食谱_7_5_使用多个调度来加快应用速度">7.5. 食谱 7-5. 使用多个调度来加快应用速度</a></li>
+      </ul>
+    </li>
+    <li><a href="#_处理错误">8. 处理错误</a>
+      <ul>
+        <li><a href="#_食谱_8_1_设计一个异常层次结构">8.1. 食谱 8-1. 设计一个异常层次结构</a></li>
+        <li><a href="#_食谱_8_2_向用户传递有意义的错误信息">8.2. 食谱 8-2. 向用户传递有意义的错误信息</a></li>
+        <li><a href="#_食谱_8_3_捕捉和处理程序中的错误">8.3. 食谱 8-3. 捕捉和处理程序中的错误</a></li>
+        <li><a href="#_食谱_8_4_在_comma_ide_中调试你的应用程序">8.4. 食谱 8-4. 在 Comma IDE 中调试你的应用程序</a></li>
+        <li><a href="#_食谱_8_5_用漂亮的错误让它们大方地失败从而调试_grammar">8.5. 食谱 8-5. 用漂亮的错误让它们大方地失败，从而调试 Grammar</a></li>
+      </ul>
+    </li>
+    <li><a href="#_客户端_web_和_api">9. 客户端 Web 和 API</a>
+      <ul>
+        <li><a href="#_食谱_9_1_查询_geoip_数据库">9.1. 食谱 9-1. 查询 GeoIP 数据库</a></li>
+        <li><a href="#_食谱_9_2_从网站下载和提取信息">9.2. 食谱 9-2. 从网站下载和提取信息</a></li>
+        <li><a href="#_食谱_9_3_使用_web_api_从网站获取信息">9.3. 食谱 9-3. 使用 Web API 从网站获取信息</a></li>
+        <li><a href="#_食谱_9_4_通过查询互联网服务来检查ip和地址">9.4. 食谱 9-4. 通过查询互联网服务来检查IP和地址</a></li>
+      </ul>
+    </li>
+    <li><a href="#_文本处理">10. 文本处理</a>
+      <ul>
+        <li><a href="#_食谱_10_1_scrape_markdown_文档">10.1. 食谱 10-1. Scrape Markdown 文档</a></li>
+        <li><a href="#_食谱_10_2_生成一组静态网页">10.2. 食谱 10-2. 生成一组静态网页</a></li>
+        <li><a href="#_食谱_10_3_创建一个词典并在上面进行快速搜索">10.3. 食谱 10-3. 创建一个词典并在上面进行快速搜索</a></li>
+        <li><a href="#_食谱_10_4_计算纯文本文档的差异">10.4. 食谱 10-4. 计算纯文本文档的差异</a></li>
+      </ul>
+    </li>
+    <li><a href="#_微服务">11. 微服务</a>
+      <ul>
+        <li><a href="#_食谱_11_1_创建一个微服务问题">11.1. 食谱 11-1. 创建一个微服务问题</a></li>
+        <li><a href="#_食谱_11_2_使用_web_套接字连接到客户端">11.2. 食谱 11-2. 使用 Web 套接字连接到客户端</a></li>
+        <li><a href="#_食谱_11_3_为诸如_telegram_这样的消息应用程序创建一个迷你机器人">11.3. 食谱 11-3. 为诸如 Telegram 这样的消息应用程序创建一个迷你机器人</a></li>
+        <li><a href="#_食谱_11_4_测试你的微服务">11.4. 食谱 11-4. 测试你的微服务</a></li>
+        <li><a href="#_食谱_11_5_应对_web_hooks">11.5. 食谱 11-5. 应对 Web Hooks</a></li>
+      </ul>
+    </li>
+    <li><a href="#_使用数据源">12. 使用数据源</a>
+      <ul>
+        <li><a href="#_食谱_12_1_使用关系型数据库">12.1. 食谱 12-1. 使用关系型数据库</a></li>
+        <li><a href="#_食谱_12_2_使用_redis_的接口">12.2. 食谱 12-2. 使用 Redis 的接口</a></li>
+        <li><a href="#_食谱_12_3_使用_orm_进行高级数据描述和访问">12.3. 食谱 12-3. 使用 ORM 进行高级数据描述和访问</a></li>
+        <li><a href="#_食谱_12_4_使用_mongodb">12.4. 食谱 12-4. 使用 MongoDB</a></li>
+        <li><a href="#_食谱_12_5_从_wikidata_中提取信息">12.5. 食谱 12-5. 从 Wikidata 中提取信息</a></li>
+      </ul>
+    </li>
+    <li><a href="#_创建桌面应用">13. 创建桌面应用</a>
+      <ul>
+        <li><a href="#_食谱_13_1_使用全控制台_ui">13.1. 食谱 13-1. 使用全控制台 UI</a></li>
+        <li><a href="#_食谱_13_2_创建一个使用系统_windows_的应用程序">13.2. 食谱 13-2. 创建一个使用系统 Windows 的应用程序</a></li>
+        <li><a href="#_食谱_13_3_创建一个小游戏">13.3. 食谱 13-3. 创建一个小游戏</a></li>
+      </ul>
+    </li>
+    <li><a href="#_与其它语言的库和代码对接">14. 与其它语言的库和代码对接</a>
+      <ul>
+        <li><a href="#_食谱_14_1_嵌入_perl_程序">14.1. 食谱 14-1. 嵌入 Perl 程序</a></li>
+        <li><a href="#_食谱_14_2_运行外部程序并捕获输出">14.2. 食谱 14-2. 运行外部程序并捕获输出</a></li>
+        <li><a href="#_食谱_14_3_用_nativecall_封装用c写的外部库">14.3. 食谱 14-3. 用 NativeCall 封装用C写的外部库</a></li>
+        <li><a href="#_食谱_14_4_与图形处理库合作">14.4. 食谱 14-4. 与图形处理库合作</a></li>
+      </ul>
+    </li>
+    <li><a href="#_加快处理速度">15. 加快处理速度</a>
+      <ul>
+        <li><a href="#_食谱_15_1_使用带_hyperrace_的数据并行">15.1. 食谱 15-1. 使用带 Hyper/Race 的数据并行</a></li>
+        <li><a href="#_食谱_15_2_使用异步输入输出">15.2. 食谱 15-2. 使用异步输入/输出</a></li>
+        <li><a href="#_食谱_15_3_使用通道和线程使你的程序并发执行">15.3. 食谱 15-3. 使用通道和线程使你的程序并发执行</a></li>
+        <li><a href="#_食谱_15_4_使用_comma_ide_监控并发">15.4. 食谱 15-4. 使用 Comma IDE 监控并发</a></li>
+        <li><a href="#_食谱_15_5_创建强大的并发程序">15.5. 食谱 15-5. 创建强大的并发程序</a></li>
+      </ul>
+    </li>
+    <li><a href="#_创建微型语言">16. 创建微型语言</a>
+      <ul>
+        <li><a href="#_食谱_16_1_使用能展现其可能性的迷你语言">16.1. 食谱 16-1. 使用能展现其可能性的迷你语言</a></li>
+        <li><a href="#_食谱_16_2_创建和处理用迷你语言编写的迷你程序的配方">16.2. 食谱 16-2. 创建和处理用迷你语言编写的迷你程序的配方</a></li>
+        <li><a href="#_食谱_16_3_处理配方和生成报告">16.3. 食谱 16-3. 处理配方和生成报告</a></li>
+        <li><a href="#_食谱_16_4_将_grammar_转换为一个完整的配方处理应用程序生成_html_或其他外部格式">16.4. 食谱 16-4. 将 Grammar 转换为一个完整的配方处理应用程序，生成 HTML 或其他外部格式</a></li>
+        <li><a href="#_食谱_16_5_重用常见语言模式">16.5. 食谱 16-5. 重用常见语言模式</a></li>
+      </ul>
+    </li>
+    <li><a href="#_有趣的单行程序">17. 有趣的单行程序</a>
+      <ul>
+        <li><a href="#_食谱_17_1_用单行代码写一个猜谜游戏">17.1. 食谱 17-1. 用单行代码写一个猜谜游戏</a></li>
+        <li><a href="#_食谱_17_2_使用单行计算序列中的第n个元素">17.2. 食谱 17-2. 使用单行计算序列中的第n个元素</a></li>
+        <li><a href="#_食谱_17_3_使用单行代码重复执行系统管理任务">17.3. 食谱 17-3. 使用单行代码重复执行系统管理任务</a></li>
+      </ul>
+    </li>
+    <li><a href="#_术语">18. 术语</a>
+      <ul>
+        <li><a href="#_dator">18.1. Dator</a></li>
+        <li><a href="#_distrodistribution">18.2. Distro/Distribution</a></li>
+        <li><a href="#_grammarole">18.3. Grammarole</a></li>
+        <li><a href="#_hyperrace">18.4. Hyper/Race</a></li>
+        <li><a href="#_punning">18.5. Punning</a></li>
+        <li><a href="#_rakuish">18.6. Rakuish</a></li>
+        <li><a href="#_rocket_operator">18.7. Rocket Operator</a></li>
+        <li><a href="#_routingine">18.8. Routingine</a></li>
+        <li><a href="#_token">18.9. Token</a></li>
+        <li><a href="#_websocker">18.10. Websocker</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+
 </div>
 
 <article class="page__content" >
@@ -13030,28 +13198,12 @@ raku -M FileSystem::Capacity::VolumesInfo
     
     
     <p class="footer__sign">© 2020 ohmyraku</p></footer>
-    
-
-    <link rel="stylesheet" href="https://ohmyraku.github.io/css/prism.min.css"> 
-    
-    
-
-    
-    <script>
-        window.addEventListener("load", function () {
-            const script = document.createElement("script");
-            script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-            script.async = true
-
-            document.head.appendChild(script);
-        })
-    </script>
 
 
 
 
 
-<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.80368e52cf9dd9e602bf5e846e392520e70607ee948e4316b49e90236e76aa56f529c21ebfc37cf22abaa49b54d8ffe2ae2368212cbeeb22de989716b6575a49.js" integrity="sha512-gDaOUs&#43;d2eYCv16EbjklIOcGB&#43;6UjkMWtJ6QI252qlb1KcIev8N88iq6pJtU2P/iriNoISy&#43;6yLemJcWtldaSQ=="></script>
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
 
 
 

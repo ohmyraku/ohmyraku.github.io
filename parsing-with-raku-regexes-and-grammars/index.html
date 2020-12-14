@@ -62,6 +62,139 @@ if (theme && theme !== "1") {
 </div>
 
 
+<div class="page__toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#_什么是正则表达式和_grammar">1. 什么是正则表达式和 Grammar？</a>
+      <ul>
+        <li><a href="#_使用场景">1.1. 使用场景</a></li>
+        <li><a href="#_正则或正则表达式">1.2. 正则或正则表达式</a></li>
+        <li><a href="#_raku_正则表达式有什么特别之处">1.3. Raku 正则表达式有什么特别之处</a></li>
+      </ul>
+    </li>
+    <li><a href="#_raku_入门">2. Raku 入门</a>
+      <ul>
+        <li><a href="#_安装_raku">2.1. 安装 Raku</a></li>
+        <li><a href="#_使用_raku">2.2. 使用 Raku</a></li>
+        <li><a href="#_获取代码示例">2.3. 获取代码示例</a></li>
+        <li><a href="#_使用_raku_的第一步">2.4. 使用 Raku 的第一步</a></li>
+        <li><a href="#_总结">2.5. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_正则表达式构造块">3. 正则表达式构造块</a>
+      <ul>
+        <li><a href="#_字面量">3.1. 字面量</a></li>
+        <li><a href="#_元字符与字面量">3.2. 元字符与字面量</a></li>
+        <li><a href="#_anchors">3.3. Anchors</a></li>
+        <li><a href="#_预定义字符类">3.4. 预定义字符类</a></li>
+        <li><a href="#_量词">3.5. 量词</a></li>
+        <li><a href="#_析取">3.6. 析取</a></li>
+        <li><a href="#_连接">3.7. 连接</a></li>
+        <li><a href="#_零宽断言">3.8. 零宽断言</a></li>
+        <li><a href="#_总结_2">3.9. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_正则表达式和_raku_代码">4. 正则表达式和 Raku 代码</a>
+      <ul>
+        <li><a href="#_智能匹配">4.1. 智能匹配</a></li>
+        <li><a href="#_引号形式">4.2. 引号形式</a></li>
+        <li><a href="#_修饰符">4.3. 修饰符</a></li>
+        <li><a href="#_comb_和_split">4.4. comb 和 split</a></li>
+        <li><a href="#_替换">4.5. 替换</a></li>
+        <li><a href="#_跨越代码和正则表达式边界">4.6. 跨越代码和正则表达式边界</a></li>
+        <li><a href="#_总结_3">4.7. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_从正则表达式匹配中提取数据">5. 从正则表达式匹配中提取数据</a>
+      <ul>
+        <li><a href="#_位置捕获">5.1. 位置捕获</a></li>
+        <li><a href="#_匹配对象">5.2. 匹配对象</a></li>
+        <li><a href="#_命名捕获">5.3. 命名捕获</a></li>
+        <li><a href="#_反向引用">5.4. 反向引用</a></li>
+        <li><a href="#_重温匹配对象">5.5. 重温匹配对象</a></li>
+        <li><a href="#_总结_4">5.6. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_正则表达式技术性细节">6. 正则表达式技术性细节</a>
+      <ul>
+        <li><a href="#_带状态机的匹配">6.1. 带状态机的匹配</a></li>
+        <li><a href="#_正则表达式控制流">6.2. 正则表达式控制流</a></li>
+        <li><a href="#_回溯">6.3. 回溯</a></li>
+        <li><a href="#_为什么要避免回溯">6.4. 为什么要避免回溯</a></li>
+        <li><a href="#_节俭量词和回溯">6.5. 节俭量词和回溯</a></li>
+        <li><a href="#_最长_token_匹配">6.6. 最长 token 匹配</a></li>
+        <li><a href="#_总结_5">6.7. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_正则表达式技术">7. 正则表达式技术</a>
+      <ul>
+        <li><a href="#_了解你的数据格式">7.1. 了解你的数据格式</a></li>
+        <li><a href="#_考虑无效输入">7.2. 考虑无效输入</a></li>
+        <li><a href="#_使用锚点">7.3. 使用锚点</a></li>
+        <li><a href="#_匹配引用的字符串">7.4. 匹配引用的字符串</a></li>
+        <li><a href="#_测试正则表达式">7.5. 测试正则表达式</a></li>
+        <li><a href="#_总结_6">7.6. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_重用和组合正则表达式">8. 重用和组合正则表达式</a>
+      <ul>
+        <li><a href="#_命名正则表达式">8.1. 命名正则表达式</a></li>
+        <li><a href="#_空白">8.2. 空白</a></li>
+        <li><a href="#_grammars">8.3. Grammars</a></li>
+        <li><a href="#_使用_grammars_重用代码">8.4. 使用 Grammars 重用代码</a></li>
+        <li><a href="#_proto_regexes">8.5. Proto Regexes</a></li>
+        <li><a href="#_总结_7">8.6. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_使用_grammar_进行解析">9. 使用 Grammar 进行解析</a>
+      <ul>
+        <li><a href="#_理解_grammar">9.1. 理解 Grammar</a></li>
+        <li><a href="#_从简单开始">9.2. 从简单开始</a></li>
+        <li><a href="#_组装完整的_grammar">9.3. 组装完整的 Grammar</a></li>
+        <li><a href="#_调试_grammar">9.4. 调试 Grammar</a></li>
+        <li><a href="#_解析空白和注释">9.5. 解析空白和注释</a></li>
+        <li><a href="#_保存状态">9.6. 保存状态</a></li>
+        <li><a href="#_总结_8">9.7. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_从匹配中提取数据">10. 从匹配中提取数据</a>
+      <ul>
+        <li><a href="#_action_对象">10.1. Action 对象</a></li>
+        <li><a href="#_使用_action_对象构建_ast">10.2. 使用 Action 对象构建 AST</a></li>
+        <li><a href="#_在_action_对象中保存状态">10.3. 在 Action 对象中保存状态</a></li>
+        <li><a href="#_总结_9">10.4. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_生成好的解析错误消息">11. 生成好的解析错误消息</a>
+      <ul>
+        <li><a href="#_探索问题">11.1. 探索问题</a></li>
+        <li><a href="#_断言">11.2. 断言</a></li>
+        <li><a href="#_改进后的位置报告">11.3. 改进后的位置报告</a></li>
+        <li><a href="#_高水位标记">11.4. 高水位标记</a></li>
+        <li><a href="#_解析器组合器和_failgoal">11.5. 解析器组合器和 FAILGOAL</a></li>
+        <li><a href="#_使用哪种技术">11.6. 使用哪种技术?</a></li>
+        <li><a href="#_总结_10">11.7. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_unicode_和自然语言">12. Unicode 和自然语言</a>
+      <ul>
+        <li><a href="#_书写系统">12.1. 书写系统</a></li>
+        <li><a href="#_字节代码点字素和字形">12.2. 字节、代码点、字素和字形</a></li>
+        <li><a href="#_总结_11">12.3. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_案例学习">13. 案例学习</a>
+      <ul>
+        <li><a href="#_s_表达式">13.1. S 表达式</a></li>
+        <li><a href="#_数学表达式和运算符优先级解析器">13.2. 数学表达式和运算符优先级解析器</a></li>
+        <li><a href="#_pythonesque_一种基于缩进的语言">13.3. Pythonesque, 一种基于缩进的语言</a></li>
+        <li><a href="#_总结_12">13.4. 总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+
 </div>
 
 <article class="page__content" >
@@ -6805,28 +6938,12 @@ token TOP {
     
     
     <p class="footer__sign">© 2020 ohmyraku</p></footer>
-    
-
-    <link rel="stylesheet" href="https://ohmyraku.github.io/css/prism.min.css"> 
-    
-    
-
-    
-    <script>
-        window.addEventListener("load", function () {
-            const script = document.createElement("script");
-            script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-            script.async = true
-
-            document.head.appendChild(script);
-        })
-    </script>
 
 
 
 
 
-<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.80368e52cf9dd9e602bf5e846e392520e70607ee948e4316b49e90236e76aa56f529c21ebfc37cf22abaa49b54d8ffe2ae2368212cbeeb22de989716b6575a49.js" integrity="sha512-gDaOUs&#43;d2eYCv16EbjklIOcGB&#43;6UjkMWtJ6QI252qlb1KcIev8N88iq6pJtU2P/iriNoISy&#43;6yLemJcWtldaSQ=="></script>
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
 
 
 

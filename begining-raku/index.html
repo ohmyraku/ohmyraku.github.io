@@ -62,6 +62,338 @@ if (theme && theme !== "1") {
 </div>
 
 
+<div class="page__toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#_关于_raku">1. 关于 Raku</a>
+      <ul>
+        <li><a href="#_rakudo">1.1. Rakudo</a></li>
+        <li><a href="#_在浏览器中运行_raku">1.2. 在浏览器中运行 Raku</a></li>
+        <li><a href="#_repl">1.3. REPL</a></li>
+        <li><a href="#_单行程序">1.4. 单行程序</a></li>
+        <li><a href="#_运行程序">1.5. 运行程序</a></li>
+        <li><a href="#_错误信息">1.6. 错误信息</a></li>
+        <li><a href="#_use_v6">1.7. use v6</a></li>
+        <li><a href="#_文档">1.8. 文档</a></li>
+        <li><a href="#_更多信息">1.9. 更多信息</a></li>
+        <li><a href="#_速度">1.10. 速度</a></li>
+      </ul>
+    </li>
+    <li><a href="#_变量运算符值和过程">2. 变量、运算符、值和过程</a>
+      <ul>
+        <li><a href="#_使用_say_和_print_输出">2.1. 使用 say 和 print 输出</a></li>
+        <li><a href="#_变量">2.2. 变量</a></li>
+        <li><a href="#_注释">2.3. 注释</a></li>
+        <li><a href="#_非破坏性运算符">2.4. 非破坏性运算符</a></li>
+        <li><a href="#_数值运算符">2.5. 数值运算符</a></li>
+        <li><a href="#_运算符优先级">2.6. 运算符优先级</a></li>
+        <li><a href="#_值">2.7. 值</a></li>
+        <li><a href="#_变量名">2.8. 变量名</a></li>
+        <li><a href="#_常量">2.9. 常量</a></li>
+        <li><a href="#_无符号变量">2.10. 无符号变量</a></li>
+        <li><a href="#_true_和_false">2.11. True 和 False</a></li>
+        <li><a href="#">2.12. //</a></li>
+      </ul>
+    </li>
+    <li><a href="#_类型系统">3. 类型系统</a>
+      <ul>
+        <li><a href="#_强类型">3.1. 强类型</a></li>
+        <li><a href="#_mro方法解析顺序">3.2. <code>^mro</code>(方法解析顺序)</a></li>
+        <li><a href="#_一切皆对象">3.3. 一切皆对象</a></li>
+        <li><a href="#_特殊值">3.4. 特殊值</a></li>
+        <li><a href="#_d定义副词">3.5. :D(定义副词)</a></li>
+        <li><a href="#_类型转换">3.6. 类型转换</a></li>
+        <li><a href="#_比较运算符">3.7. 比较运算符</a></li>
+      </ul>
+    </li>
+    <li><a href="#_控制流">4. 控制流</a>
+      <ul>
+        <li><a href="#_块儿">4.1. 块儿</a></li>
+        <li><a href="#_范围简介">4.2. 范围(简介)</a></li>
+        <li><a href="#_loop">4.3. loop</a></li>
+        <li><a href="#_for">4.4. for</a></li>
+        <li><a href="#_无限循环">4.5. 无限循环</a></li>
+        <li><a href="#_while">4.6. while</a></li>
+        <li><a href="#_until">4.7. until</a></li>
+        <li><a href="#_repeat_while">4.8. repeat while</a></li>
+        <li><a href="#_repeat_until">4.9. repeat until</a></li>
+        <li><a href="#_循环总结">4.10. 循环总结</a></li>
+        <li><a href="#_if">4.11. if</a></li>
+        <li><a href="#_given">4.12. given</a></li>
+        <li><a href="#_with">4.13. with</a></li>
+        <li><a href="#_5">4.14. ?? !!</a></li>
+        <li><a href="#_do">4.15. do</a></li>
+        <li><a href="#_when">4.16. when</a></li>
+        <li><a href="#_循环操纵">4.17. 循环操纵</a></li>
+      </ul>
+    </li>
+    <li><a href="#_数字_2">5. 数字</a>
+      <ul>
+        <li><a href="#_八进制十六进制和二进制">5.1. 八进制、十六进制和二进制…​</a></li>
+        <li><a href="#_unnicode_数">5.2. Unnicode 数</a></li>
+        <li><a href="#_非数值">5.3. 非数值</a></li>
+        <li><a href="#_n_u_m_b_e_r_s">5.4. N_U_M_B_E_R_S</a></li>
+        <li><a href="#_浮点数">5.5. 浮点数</a></li>
+        <li><a href="#_narrow">5.6. narrow</a></li>
+        <li><a href="#_sign">5.7. sign</a></li>
+        <li><a href="#_凑整">5.8. 凑整</a></li>
+        <li><a href="#_nannot_a_number_2">5.9. NaN(Not a Number)</a></li>
+        <li><a href="#_6">5.10. =~=</a></li>
+        <li><a href="#_is_prime_素数">5.11. is-prime (素数)</a></li>
+        <li><a href="#_取模和变体">5.12. 取模和变体</a></li>
+        <li><a href="#_其它运算符">5.13. 其它运算符</a></li>
+      </ul>
+    </li>
+    <li><a href="#_基本输入和输出">6. 基本输入和输出</a>
+      <ul>
+        <li><a href="#_换行">6.1. 换行</a></li>
+        <li><a href="#_字符串化">6.2. 字符串化</a></li>
+        <li><a href="#_输出">6.3. 输出</a></li>
+        <li><a href="#_字符串化数字">6.4. 字符串化数字</a></li>
+        <li><a href="#_printf">6.5. printf</a></li>
+        <li><a href="#_获取用户输入">6.6. 获取用户输入</a></li>
+      </ul>
+    </li>
+    <li><a href="#_字符串_2">7. 字符串</a>
+      <ul>
+        <li><a href="#_unicode">7.1. Unicode</a></li>
+        <li><a href="#_join">7.2. join</a></li>
+        <li><a href="#_split">7.3. split</a></li>
+        <li><a href="#_words">7.4. words</a></li>
+        <li><a href="#_comb">7.5. comb</a></li>
+        <li><a href="#_flip">7.6. flip</a></li>
+        <li><a href="#_substr部分字符串">7.7. substr(部分字符串)</a></li>
+        <li><a href="#_改变大小写">7.8. 改变大小写</a></li>
+        <li><a href="#_x字符串重复运算符">7.9. x(字符串重复运算符)</a></li>
+        <li><a href="#_succ">7.10. succ</a></li>
+        <li><a href="#_pred">7.11. pred</a></li>
+        <li><a href="#_quoting">7.12. quoting</a></li>
+        <li><a href="#_多行字符串heredocs">7.13. 多行字符串(Heredocs)</a></li>
+      </ul>
+    </li>
+    <li><a href="#_数组和列表">8. 数组和列表</a>
+      <ul>
+        <li><a href="#_列表操作符">8.1. ,(列表操作符)</a></li>
+        <li><a href="#_xxx引用单词">8.2. &lt;xxx&gt;(引用单词)</a></li>
+        <li><a href="#_数组构造器">8.3. [](数组构造器)</a></li>
+        <li><a href="#_xxx带插值的单词引用">8.4. [xxx](带插值的单词引用)</a></li>
+        <li><a href="#_empty">8.5. Empty</a></li>
+        <li><a href="#_列表元素">8.6. 列表元素</a></li>
+        <li><a href="#_pop_push_shift_unshift">8.7. pop / push / shift / unshift</a></li>
+        <li><a href="#_rotate列表旋转">8.8. rotate(列表旋转)</a></li>
+        <li><a href="#_列表的列表">8.9. 列表的列表</a></li>
+        <li><a href="#_展平列表">8.10. 展平列表</a></li>
+        <li><a href="#_数组切片">8.11. 数组切片</a></li>
+        <li><a href="#_splice">8.12. splice</a></li>
+        <li><a href="#_map">8.13. map</a></li>
+        <li><a href="#_sort">8.14. sort</a></li>
+        <li><a href="#_reverse">8.15. reverse</a></li>
+        <li><a href="#_数组限制">8.16. 数组限制</a></li>
+        <li><a href="#_带类型的数组">8.17. 带类型的数组</a></li>
+        <li><a href="#_shaped_array">8.18. Shaped Array</a></li>
+        <li><a href="#_unique不重复的列表">8.19. unique(不重复的列表)</a></li>
+        <li><a href="#_xx列表重复运算符">8.20. xx(列表重复运算符)</a></li>
+        <li><a href="#_列表选择">8.21. 列表选择</a></li>
+        <li><a href="#_minmax">8.22. min/max</a></li>
+        <li><a href="#_随机值">8.23. 随机值</a></li>
+        <li><a href="#_排列">8.24. 排列</a></li>
+        <li><a href="#_组合">8.25. 组合</a></li>
+        <li><a href="#_but数组">8.26. but(数组)</a></li>
+        <li><a href="#_合在一块儿">8.27. 合在一块儿</a></li>
+      </ul>
+    </li>
+    <li><a href="#_对儿和散列">9. 对儿和散列</a>
+      <ul>
+        <li><a href="#_pair">9.1. Pair</a></li>
+        <li><a href="#_hash">9.2. Hash</a></li>
+        <li><a href="#_hash_构造器">9.3. Hash 构造器 {}</a></li>
+        <li><a href="#_哈希赋值和值">9.4. 哈希赋值和值</a></li>
+        <li><a href="#_keys">9.5. keys</a></li>
+        <li><a href="#_values">9.6. values</a></li>
+        <li><a href="#_kv_keys_values">9.7. kv (keys + values)</a></li>
+        <li><a href="#_带类型的_hash">9.8. 带类型的 Hash</a></li>
+        <li><a href="#_shaped_hash">9.9. Shaped Hash</a></li>
+        <li><a href="#_invert">9.10. invert</a></li>
+        <li><a href="#_antipairs">9.11. antipairs</a></li>
+        <li><a href="#_散列切片">9.12. 散列切片</a></li>
+        <li><a href="#_散列查询">9.13. 散列查询</a></li>
+        <li><a href="#_散列删除">9.14. 散列删除</a></li>
+        <li><a href="#_散列重复值">9.15. 散列重复值</a></li>
+        <li><a href="#_散列用法">9.16. 散列用法</a></li>
+        <li><a href="#_grep_和智能匹配">9.17. grep 和智能匹配</a></li>
+        <li><a href="#_哈希方法">9.18. 哈希(方法)</a></li>
+        <li><a href="#_but散列">9.19. but(散列)</a></li>
+      </ul>
+    </li>
+    <li><a href="#_过程">10. 过程</a>
+      <ul>
+        <li><a href="#_不带参数的过程">10.1. 不带参数的过程</a></li>
+        <li><a href="#_带参数的过程">10.2. 带参数的过程</a></li>
+        <li><a href="#_10">10.3. @_</a></li>
+        <li><a href="#_占位符变量_2">10.4. 占位符变量</a></li>
+        <li><a href="#_过程作为变量">10.5. 过程作为变量</a></li>
+        <li><a href="#_类型约束">10.6. 类型约束</a></li>
+        <li><a href="#_return">10.7. return</a></li>
+        <li><a href="#_args">10.8. <code>@*ARGS</code></a></li>
+        <li><a href="#_main">10.9. MAIN</a></li>
+        <li><a href="#_why">10.10. WHY</a></li>
+        <li><a href="#_intstr_问题">10.11. IntStr 问题</a></li>
+        <li><a href="#_多重分派">10.12. 多重分派</a></li>
+        <li><a href="#_过程参数">10.13. 过程参数</a></li>
+        <li><a href="#_slurpy_运算符">10.14. <code>*</code> (Slurpy 运算符)</a></li>
+        <li><a href="#_块重新访问">10.15. 块重新访问</a></li>
+        <li><a href="#_调用在变量中指定的过程">10.16. 调用在变量中指定的过程</a></li>
+        <li><a href="#_过程中的过程">10.17. 过程中的过程</a></li>
+      </ul>
+    </li>
+    <li><a href="#_正则表达式介绍">11. 正则表达式介绍</a>
+      <ul>
+        <li><a href="#_什么是正则表达式">11.1. 什么是正则表达式?</a></li>
+        <li><a href="#_制作正则表达式">11.2. 制作正则表达式</a></li>
+        <li><a href="#_智能匹配运算符">11.3. ~~ (智能匹配运算符)</a></li>
+        <li><a href="#_部分字符串">11.4. 部分字符串</a></li>
+        <li><a href="#_字符串的开头或结尾">11.5. 字符串的开头或结尾</a></li>
+        <li><a href="#_正则表达式元字符">11.6. 正则表达式元字符</a></li>
+        <li><a href="#_match_对象">11.7. $/(Match 对象)</a></li>
+        <li><a href="#_特殊字符">11.8. 特殊字符</a></li>
+        <li><a href="#_捕获和分组">11.9. 捕获和分组</a></li>
+        <li><a href="#_字符类">11.10. 字符类</a></li>
+        <li><a href="#_自定义字符类">11.11. 自定义字符类</a></li>
+        <li><a href="#_非贪婪">11.12. 非贪婪</a></li>
+        <li><a href="#_向后引用">11.13. 向后引用</a></li>
+        <li><a href="#_使用正则表达式">11.14. 使用正则表达式</a></li>
+        <li><a href="#_字符串替换">11.15. 字符串替换</a></li>
+        <li><a href="#_副词_2">11.16. 副词</a></li>
+        <li><a href="#_翻译">11.17. 翻译</a></li>
+        <li><a href="#_trimtrim_leadingtrim_trailing">11.18. trim/trim-leading/trim-trailing</a></li>
+        <li><a href="#_split_和_grep">11.19. split 和 grep</a></li>
+        <li><a href="#_注释_2">11.20. 注释</a></li>
+      </ul>
+    </li>
+    <li><a href="#_模块">12. 模块</a>
+      <ul>
+        <li><a href="#_预编译">12.1. 预编译</a></li>
+        <li><a href="#_用_zef_管理模块">12.2. 用 zef 管理模块</a></li>
+        <li><a href="#_使用模块use">12.3. 使用模块(use)</a></li>
+        <li><a href="#_编写模块">12.4. 编写模块</a></li>
+      </ul>
+    </li>
+    <li><a href="#_文件和目录">13. 文件和目录</a>
+      <ul>
+        <li><a href="#_输入输出_io">13.1. 输入输出 - IO</a></li>
+        <li><a href="#_读取文件">13.2. 读取文件</a></li>
+        <li><a href="#_写文件">13.3. 写文件</a></li>
+        <li><a href="#_移除文件">13.4. 移除文件</a></li>
+        <li><a href="#_临时文件">13.5. 临时文件</a></li>
+        <li><a href="#_文件测试">13.6. 文件测试</a></li>
+        <li><a href="#_二进制文件">13.7. 二进制文件</a></li>
+        <li><a href="#_目录">13.8. 目录</a></li>
+      </ul>
+    </li>
+    <li><a href="#_日期和时间">14. 日期和时间</a>
+      <ul>
+        <li><a href="#_time">14.1. time</a></li>
+        <li><a href="#_now">14.2. now</a></li>
+        <li><a href="#_润秒">14.3. 润秒</a></li>
+        <li><a href="#_instant">14.4. Instant</a></li>
+        <li><a href="#_计时器">14.5. 计时器</a></li>
+      </ul>
+    </li>
+    <li><a href="#_编写模块_2">15. 编写模块</a>
+      <ul>
+        <li><a href="#_unit_模块">15.1. unit 模块</a></li>
+        <li><a href="#_is_exportt">15.2. is exportt</a></li>
+        <li><a href="#_pm6">15.3. pm6</a></li>
+        <li><a href="#_use_lib">15.4. use lib</a></li>
+        <li><a href="#_斐波纳契记时">15.5. 斐波纳契记时</a></li>
+        <li><a href="#_字典">15.6. 字典</a></li>
+      </ul>
+    </li>
+    <li><a href="#_范围和序列">16. 范围和序列</a>
+      <ul>
+        <li><a href="#_范围">16.1. 范围</a></li>
+        <li><a href="#_lazy">16.2. lazy</a></li>
+        <li><a href="#_序列">16.3. 序列</a></li>
+        <li><a href="#_state">16.4. state</a></li>
+        <li><a href="#_truly_随机_flip_flop">16.5. Truly 随机 Flip-Flop</a></li>
+        <li><a href="#_flip_flop_问题">16.6. flip-flop 问题</a></li>
+        <li><a href="#_gathertake">16.7. gather/take</a></li>
+        <li><a href="#_闭包">16.8. 闭包</a></li>
+      </ul>
+    </li>
+    <li><a href="#_类">17. 类</a>
+      <ul>
+        <li><a href="#_has">17.1. has</a></li>
+        <li><a href="#_new">17.2. new</a></li>
+        <li><a href="#_method">17.3. method</a></li>
+        <li><a href="#_命名参数_2">17.4. 命名参数</a></li>
+        <li><a href="#_公开的类变量">17.5. 公开的类变量</a></li>
+        <li><a href="#_self">17.6. self</a></li>
+        <li><a href="#_自定义_new">17.7. 自定义 «new»</a></li>
+        <li><a href="#_自定义_build">17.8. 自定义 BUILD</a></li>
+        <li><a href="#_错误的起始值">17.9. 错误的起始值</a></li>
+        <li><a href="#_对象比较">17.10. 对象比较</a></li>
+        <li><a href="#_person_类">17.11. Person 类</a></li>
+        <li><a href="#_输出_2">17.12. 输出</a></li>
+        <li><a href="#_私有方法">17.13. 私有方法</a></li>
+        <li><a href="#_继承">17.14. 继承</a></li>
+        <li><a href="#_角色">17.15. 角色</a></li>
+        <li><a href="#_多重分派_2">17.16. 多重分派</a></li>
+        <li><a href="#_fallback_方法">17.17. Fallback 方法</a></li>
+        <li><a href="#_14">17.18. .?</a></li>
+        <li><a href="#_15">17.19. .+</a></li>
+        <li><a href="#_16">17.20. .*</a></li>
+        <li><a href="#_handles代理">17.21. handles(代理)</a></li>
+        <li><a href="#_调用在变量中指定的方法">17.22. 调用在变量中指定的方法</a></li>
+      </ul>
+    </li>
+    <li><a href="#_docker">18. Docker</a>
+      <ul>
+        <li><a href="#_使用_docker_安装_rakudo_star">18.1. 使用 Docker 安装 Rakudo Star</a></li>
+      </ul>
+    </li>
+    <li><a href="#_答案">19. 答案</a>
+      <ul>
+        <li><a href="#_第一章">19.1. 第一章</a></li>
+        <li><a href="#_第二章">19.2. 第二章</a></li>
+        <li><a href="#_第三章">19.3. 第三章</a></li>
+        <li><a href="#_第四章">19.4. 第四章</a></li>
+        <li><a href="#_第五章">19.5. 第五章</a></li>
+        <li><a href="#_第六章">19.6. 第六章</a></li>
+        <li><a href="#_第七章">19.7. 第七章</a></li>
+        <li><a href="#_第八章">19.8. 第八章</a></li>
+        <li><a href="#_第九章">19.9. 第九章</a></li>
+        <li><a href="#_第十章">19.10. 第十章</a></li>
+        <li><a href="#_第十一章">19.11. 第十一章</a></li>
+        <li><a href="#_第十二章">19.12. 第十二章</a></li>
+        <li><a href="#_第十三章">19.13. 第十三章</a></li>
+        <li><a href="#_第十四章">19.14. 第十四章</a></li>
+        <li><a href="#_第十五章">19.15. 第十五章</a></li>
+        <li><a href="#_第十六章">19.16. 第十六章</a></li>
+        <li><a href="#_第十七章">19.17. 第十七章</a></li>
+      </ul>
+    </li>
+    <li><a href="#_小心">20. 小心</a>
+      <ul>
+        <li><a href="#_length">20.1. length</a></li>
+        <li><a href="#_对象不是字符串">20.2. 对象不是字符串</a></li>
+        <li><a href="#_另请参考">20.3. 另请参考</a></li>
+        <li><a href="#_语法汇总">20.4. 语法汇总</a></li>
+      </ul>
+    </li>
+    <li><a href="#_raku_背景和历史">21. Raku 背景和历史</a>
+      <ul>
+        <li><a href="#_6_a_和_6_b">21.1. 6.a 和 6.b</a></li>
+        <li><a href="#_6_c">21.2. 6.c</a></li>
+        <li><a href="#_6_d">21.3. 6.d</a></li>
+        <li><a href="#_6_e">21.4. 6.e</a></li>
+        <li><a href="#_关于版本">21.5. 关于版本</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+
 </div>
 
 <article class="page__content" >
@@ -20459,28 +20791,12 @@ use v6.e;</code></pre>
     
     
     <p class="footer__sign">© 2020 ohmyraku</p></footer>
-    
-
-    <link rel="stylesheet" href="https://ohmyraku.github.io/css/prism.min.css"> 
-    
-    
-
-    
-    <script>
-        window.addEventListener("load", function () {
-            const script = document.createElement("script");
-            script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-            script.async = true
-
-            document.head.appendChild(script);
-        })
-    </script>
 
 
 
 
 
-<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.80368e52cf9dd9e602bf5e846e392520e70607ee948e4316b49e90236e76aa56f529c21ebfc37cf22abaa49b54d8ffe2ae2368212cbeeb22de989716b6575a49.js" integrity="sha512-gDaOUs&#43;d2eYCv16EbjklIOcGB&#43;6UjkMWtJ6QI252qlb1KcIev8N88iq6pJtU2P/iriNoISy&#43;6yLemJcWtldaSQ=="></script>
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
 
 
 

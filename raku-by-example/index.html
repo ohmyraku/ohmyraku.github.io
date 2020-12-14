@@ -61,6 +61,148 @@ if (theme && theme !== "1") {
 </div>
 
 
+<div class="page__toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#_什么是_raku">1. 什么是 Raku</a>
+      <ul>
+        <li><a href="#_perl5_老天鹅">1.1. Perl5, 老天鹅</a></li>
+        <li><a href="#_库的可用性">1.2. 库的可用性</a></li>
+        <li><a href="#_我为什么要使用_raku">1.3. 我为什么要使用 Raku?</a></li>
+        <li><a href="#_总结">1.4. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_运行_raku">2. 运行 Raku</a>
+      <ul>
+        <li><a href="#_安装器">2.1. 安装器</a></li>
+        <li><a href="#_docker">2.2. Docker</a></li>
+        <li><a href="#_从源代码创建">2.3. 从源代码创建</a></li>
+        <li><a href="#_测试你的_rakudo_star_安装">2.4. 测试你的 Rakudo Star 安装</a></li>
+        <li><a href="#_文档">2.5. 文档</a></li>
+        <li><a href="#_总结_2">2.6. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_格式化数独字谜">3. 格式化数独字谜</a>
+      <ul>
+        <li><a href="#_让数独变得可玩">3.1. 让数独变得可玩</a></li>
+        <li><a href="#_捷径常量和更多的捷径">3.2. 捷径、常量和更多的捷径</a></li>
+        <li><a href="#_io_和其它悲剧">3.3. IO 和其它悲剧</a></li>
+        <li><a href="#_获得创造性">3.4. 获得创造性</a></li>
+        <li><a href="#_总结_3">3.5. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_日期时间转换命令行">4. 日期时间转换命令行</a>
+      <ul>
+        <li><a href="#_使用库">4.1. 使用库</a></li>
+        <li><a href="#_datetime_格式化">4.2. DateTime 格式化</a></li>
+        <li><a href="#_寻找其他途径">4.3. 寻找其他途径</a></li>
+        <li><a href="#_处理时间">4.4. 处理时间</a></li>
+        <li><a href="#_系好你的安全带">4.5. 系好你的安全带</a></li>
+        <li><a href="#_main_魔法">4.6. MAIN 魔法</a></li>
+        <li><a href="#_自动化测试">4.7. 自动化测试</a></li>
+        <li><a href="#_总结_4">4.8. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_测试_say">5. 测试 say</a>
+      <ul>
+        <li><a href="#_总结_5">5.1. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_silent_cron_一个_cron_包裹器">6. Silent-Cron, 一个 Cron 包裹器</a>
+      <ul>
+        <li><a href="#_异步运行命令">6.1. 异步运行命令</a></li>
+        <li><a href="#_实现超时">6.2. 实现超时</a></li>
+        <li><a href="#_更多关于承诺的信息">6.3. 更多关于承诺的信息</a></li>
+        <li><a href="#_可能的扩展">6.4. 可能的扩展</a></li>
+        <li><a href="#_重构和自动化测试">6.5. 重构和自动化测试</a></li>
+        <li><a href="#_总结_6">6.6. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_有状态的_silent_cron">7. 有状态的 Silent Cron</a>
+      <ul>
+        <li><a href="#_持久化存储">7.1. 持久化存储</a></li>
+        <li><a href="#_开发存储后端">7.2. 开发存储后端</a></li>
+        <li><a href="#_使用存储后端">7.3. 使用存储后端</a></li>
+        <li><a href="#_扩展空间">7.4. 扩展空间</a></li>
+        <li><a href="#_总结_7">7.5. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_回顾_raku_基础知识">8. 回顾 Raku 基础知识</a>
+      <ul>
+        <li><a href="#_变量和作用域">8.1. 变量和作用域</a></li>
+        <li><a href="#_子例程">8.2. 子例程</a></li>
+        <li><a href="#_类和对象">8.3. 类和对象</a></li>
+        <li><a href="#_并发">8.4. 并发</a></li>
+        <li><a href="#_展望">8.5. 展望</a></li>
+      </ul>
+    </li>
+    <li><a href="#_使用正则表达式和_grammar_解析_ini_文件">9. 使用正则表达式和 Grammar 解析 INI 文件</a>
+      <ul>
+        <li><a href="#_正则表达式基础">9.1. 正则表达式基础</a></li>
+        <li><a href="#_解析_ini_原语">9.2. 解析 INI 原语</a></li>
+        <li><a href="#_把东西组装起来">9.3. 把东西组装起来</a></li>
+        <li><a href="#_回溯">9.4. 回溯</a></li>
+        <li><a href="#_grammar">9.5. Grammar</a></li>
+        <li><a href="#_从匹配中提取数据">9.6. 从匹配中提取数据</a></li>
+        <li><a href="#_生成好的错误信息">9.7. 生成好的错误信息</a></li>
+        <li><a href="#_编写你自己的_grammar">9.8. 编写你自己的 Grammar</a></li>
+        <li><a href="#_总结_8">9.9. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_文件和目录使用状态图">10. 文件和目录使用状态图</a>
+      <ul>
+        <li><a href="#_reading_file_sizes">10.1. Reading File Sizes</a></li>
+        <li><a href="#_generating_a_tree_map">10.2. Generating a Tree Map</a></li>
+        <li><a href="#_火焰图">10.3. 火焰图</a></li>
+        <li><a href="#_functional_refactorings">10.4. Functional Refactorings</a></li>
+        <li><a href="#_more_language_support_for_functional_programming">10.5. More Language Support for Functional Programming</a></li>
+        <li><a href="#_more_improvements">10.6. More Improvements</a></li>
+        <li><a href="#_explore">10.7. Explore!</a></li>
+        <li><a href="#_summary">10.8. Summary</a></li>
+      </ul>
+    </li>
+    <li><a href="#_unicode_搜索工具">11. Unicode 搜索工具</a>
+      <ul>
+        <li><a href="#_代码点字符集和字节">11.1. 代码点、字符集和字节</a></li>
+        <li><a href="#_数字">11.2. 数字</a></li>
+        <li><a href="#_其它_unicode_属性">11.3. 其它 Unicode 属性</a></li>
+        <li><a href="#_排序">11.4. 排序</a></li>
+        <li><a href="#_总结_9">11.5. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_使用_inine_python_和_matplotlib_画图">12. 使用 Inine-Python 和 Matplotlib 画图</a>
+      <ul>
+        <li><a href="#_提取状态">12.1. 提取状态</a></li>
+        <li><a href="#_plotting_with_python">12.2. Plotting with Python</a></li>
+        <li><a href="#_bridging_the_gap">12.3. Bridging the Gap</a></li>
+        <li><a href="#_using_the_bridge_to_plot">12.4. Using the Bridge to Plot</a></li>
+        <li><a href="#_stacked_plots">12.5. Stacked Plots</a></li>
+        <li><a href="#_idiomatic_use_of_inlinepython">12.6. Idiomatic Use of Inline::Python</a></li>
+        <li><a href="#_idiomatic_use_of_inlinepython_2">12.7. Idiomatic Use of Inline::Python</a></li>
+        <li><a href="#_总结_10">12.8. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_接下来是什么">13. 接下来是什么</a>
+      <ul>
+        <li><a href="#_扩展你的代码库">13.1. 扩展你的代码库</a></li>
+        <li><a href="#_打包你的应用">13.2. 打包你的应用</a></li>
+        <li><a href="#_结尾感想">13.3. 结尾感想</a></li>
+      </ul>
+    </li>
+    <li><a href="#_创建一个_web_服务和声明式_api">14. 创建一个 Web 服务和声明式 API</a>
+      <ul>
+        <li><a href="#_12_1_开始使用_cro">14.1. 12.1 开始使用 Cro</a></li>
+        <li><a href="#_12_2_扩大服务范围">14.2. 12.2 扩大服务范围</a></li>
+        <li><a href="#_12_3_测试">14.3. 12.3 测试</a></li>
+        <li><a href="#_12_4_添加一个网页">14.4. 12.4 添加一个网页</a></li>
+        <li><a href="#_12_5_声明式_api">14.5. 12.5 声明式 API</a></li>
+        <li><a href="#_12_6_总结">14.6. 12.6 总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+
 </div>
 
 <article class="page__content" >
@@ -6752,28 +6894,12 @@ sub on(&amp;case) {
     
     
     <p class="footer__sign">© 2020 ohmyraku</p></footer>
-    
-
-    <link rel="stylesheet" href="https://ohmyraku.github.io/css/prism.min.css"> 
-    
-    
-
-    
-    <script>
-        window.addEventListener("load", function () {
-            const script = document.createElement("script");
-            script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-            script.async = true
-
-            document.head.appendChild(script);
-        })
-    </script>
 
 
 
 
 
-<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.80368e52cf9dd9e602bf5e846e392520e70607ee948e4316b49e90236e76aa56f529c21ebfc37cf22abaa49b54d8ffe2ae2368212cbeeb22de989716b6575a49.js" integrity="sha512-gDaOUs&#43;d2eYCv16EbjklIOcGB&#43;6UjkMWtJ6QI252qlb1KcIev8N88iq6pJtU2P/iriNoISy&#43;6yLemJcWtldaSQ=="></script>
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
 
 
 

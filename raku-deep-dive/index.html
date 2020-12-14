@@ -63,6 +63,178 @@ if (theme && theme !== "1") {
 </div>
 
 
+<div class="page__toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#_什么是_raku">1. 什么是 Raku</a>
+      <ul>
+        <li><a href="#_raku_起源">1.1. Raku 起源</a></li>
+        <li><a href="#_与_perl_5_的区别">1.2. 与 Perl 5 的区别</a></li>
+        <li><a href="#_类">1.3. 类</a></li>
+        <li><a href="#_与_perl_5_的兼容性">1.4. 与 Perl 5 的兼容性</a></li>
+        <li><a href="#_raku_资源">1.5. Raku 资源</a></li>
+        <li><a href="#_文档">1.6. 文档</a></li>
+        <li><a href="#_测试套件">1.7. 测试套件</a></li>
+        <li><a href="#_std_pm">1.8. STD.pm</a></li>
+        <li><a href="#_社区">1.9. 社区</a></li>
+        <li><a href="#_编译器">1.10. 编译器</a></li>
+        <li><a href="#_使用_rakudo_star">1.11. 使用 Rakudo Star</a></li>
+        <li><a href="#_命令行选项">1.12. 命令行选项</a></li>
+        <li><a href="#_总结">1.13. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_编写代码">2. 编写代码</a>
+      <ul>
+        <li><a href="#_使用_unicode">2.1. 使用 Unicode</a></li>
+        <li><a href="#_空白和反空白">2.2. 空白和反空白</a></li>
+        <li><a href="#_注释">2.3. 注释</a></li>
+        <li><a href="#_phaser">2.4. phaser</a></li>
+        <li><a href="#_总结_2">2.5. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_变量和内置数据类型">3. 变量和内置数据类型</a>
+      <ul>
+        <li><a href="#_使用变量">3.1. 使用变量</a></li>
+        <li><a href="#_使用简单的内置数据类型">3.2. 使用简单的内置数据类型</a></li>
+        <li><a href="#_操作日期和时间的数据类型">3.3. 操作日期和时间的数据类型</a></li>
+        <li><a href="#_总结_3">3.4. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_使用运算符">4. 使用运算符</a>
+      <ul>
+        <li><a href="#_运算符分类">4.1. 运算符分类</a></li>
+        <li><a href="#_raku_中的运算符">4.2. Raku 中的运算符</a></li>
+        <li><a href="#_raku_中的元运算符">4.3. Raku 中的元运算符</a></li>
+        <li><a href="#_总结_4">4.4. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_控制流">5. 控制流</a>
+      <ul>
+        <li><a href="#_了解代码块和变量作用域">5.1. 了解代码块和变量作用域</a></li>
+        <li><a href="#_有条件的检查">5.2. 有条件的检查</a></li>
+        <li><a href="#_使用循环">5.3. 使用循环</a></li>
+        <li><a href="#_执行代码一次">5.4. 执行代码一次</a></li>
+        <li><a href="#_使用_gather_和_take_收集数据">5.5. 使用 gather 和 take 收集数据</a></li>
+        <li><a href="#_总结_5">5.6. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_子例程">6. 子例程</a>
+      <ul>
+        <li><a href="#_创建和调用子例程">6.1. 创建和调用子例程</a></li>
+        <li><a href="#_命名参数">6.2. 命名参数</a></li>
+        <li><a href="#_类型约束">6.3. 类型约束</a></li>
+        <li><a href="#_multi_subs">6.4. Multi Subs</a></li>
+        <li><a href="#_嵌套的子例程">6.5. 嵌套的子例程</a></li>
+        <li><a href="#_创建运算符">6.6. 创建运算符</a></li>
+        <li><a href="#_传递函数作为参数">6.7. 传递函数作为参数</a></li>
+        <li><a href="#_匿名子例程">6.8. 匿名子例程</a></li>
+        <li><a href="#_总结_6">6.9. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_模块">7. 模块</a>
+      <ul>
+        <li><a href="#_创建模块">7.1. 创建模块</a></li>
+        <li><a href="#_使用模块">7.2. 使用模块</a></li>
+        <li><a href="#_内省">7.3. 内省</a></li>
+        <li><a href="#_使用_zef">7.4. 使用 zef</a></li>
+        <li><a href="#_总结_7">7.5. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_面向对象编程">8. 面向对象编程</a>
+      <ul>
+        <li><a href="#_创建类">8.1. 创建类</a></li>
+        <li><a href="#_使用属性">8.2. 使用属性</a></li>
+        <li><a href="#_使用方法">8.3. 使用方法</a></li>
+        <li><a href="#_更多关于属性的信息">8.4. 更多关于属性的信息</a></li>
+        <li><a href="#_类方法">8.5. 类方法</a></li>
+        <li><a href="#_继承">8.6. 继承</a></li>
+        <li><a href="#_使用角色添加对象和类">8.7. 使用角色添加对象和类</a></li>
+        <li><a href="#_使用内省学习更多">8.8. 使用内省学习更多</a></li>
+        <li><a href="#_方法后缀运算符">8.9. 方法后缀运算符</a></li>
+        <li><a href="#_总结_8">8.10. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_输入和输出">9. 输入和输出</a>
+      <ul>
+        <li><a href="#_标准输入和输出">9.1. 标准输入和输出</a></li>
+        <li><a href="#_使用文件和目录">9.2. 使用文件和目录</a></li>
+        <li><a href="#_从流中读取">9.3. 从流中读取</a></li>
+        <li><a href="#_写入流">9.4. 写入流</a></li>
+        <li><a href="#_总结_9">9.5. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_异常">10. 异常</a>
+      <ul>
+        <li><a href="#_try_块">10.1. try 块</a></li>
+        <li><a href="#_软故障">10.2. 软故障</a></li>
+        <li><a href="#_catch_phaser">10.3. CATCH phaser</a></li>
+        <li><a href="#_exception_对象">10.4. Exception 对象</a></li>
+        <li><a href="#_failure_对象">10.5. Failure 对象</a></li>
+        <li><a href="#_创建自定义异常">10.6. 创建自定义异常</a></li>
+        <li><a href="#_总结_10">10.7. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_正则表达式">11. 正则表达式</a>
+      <ul>
+        <li><a href="#_与正则表达式匹配">11.1. 与正则表达式匹配</a></li>
+        <li><a href="#_字面量">11.2. 字面量</a></li>
+        <li><a href="#_字符类">11.3. 字符类</a></li>
+        <li><a href="#_使用量词创建可重复模式">11.4. 使用量词创建可重复模式</a></li>
+        <li><a href="#_使用捕获提取子字符串">11.5. 使用捕获提取子字符串</a></li>
+        <li><a href="#_在正则表达式中使用备选项">11.6. 在正则表达式中使用备选项</a></li>
+        <li><a href="#_用锚点定位正则表达式">11.7. 用锚点定位正则表达式</a></li>
+        <li><a href="#_使用断言进行向前查看和向后查看">11.8. 使用断言进行向前查看和向后查看</a></li>
+        <li><a href="#_使用副词修饰正则表达式">11.9. 使用副词修饰正则表达式</a></li>
+        <li><a href="#_使用正则表达式替换和修改字符串">11.10. 使用正则表达式替换和修改字符串</a></li>
+        <li><a href="#_总结_11">11.11. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_grammars">12. Grammars</a>
+      <ul>
+        <li><a href="#_创建_grammar">12.1. 创建 grammar</a></li>
+        <li><a href="#_使用_rule_和_token">12.2. 使用 rule 和 token</a></li>
+        <li><a href="#_使用_action">12.3. 使用 action</a></li>
+        <li><a href="#_使用抽象语法树属性">12.4. 使用抽象语法树属性</a></li>
+        <li><a href="#_使用_action_类">12.5. 使用 action 类</a></li>
+        <li><a href="#_完整的程序">12.6. 完整的程序</a></li>
+        <li><a href="#_总结_12">12.7. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_并发编程">13. 并发编程</a>
+      <ul>
+        <li><a href="#_junction">13.1. Junction</a></li>
+        <li><a href="#_线程">13.2. 线程</a></li>
+        <li><a href="#_终身线程">13.3. 终身线程</a></li>
+        <li><a href="#_promise">13.4. Promise</a></li>
+        <li><a href="#_channel">13.5. Channel</a></li>
+        <li><a href="#_总结_13">13.6. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_函数式编程">14. 函数式编程</a>
+      <ul>
+        <li><a href="#_什么是函数式编程">14.1. 什么是函数式编程</a></li>
+        <li><a href="#_使用递归">14.2. 使用递归</a></li>
+        <li><a href="#_使用化简">14.3. 使用化简</a></li>
+        <li><a href="#_高阶函数和_lambda">14.4. 高阶函数和 lambda</a></li>
+        <li><a href="#_管道数据和_feed_运算符">14.5. 管道数据和 feed 运算符</a></li>
+        <li><a href="#_操作作用域">14.6. 操作作用域</a></li>
+        <li><a href="#_创建并使用迭代器">14.7. 创建并使用迭代器</a></li>
+        <li><a href="#_惰性和无限列表">14.8. 惰性和无限列表</a></li>
+        <li><a href="#_总结_14">14.9. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_反应式编程">15. 反应式编程</a>
+      <ul>
+        <li><a href="#_什么是反应式编程">15.1. 什么是反应式编程</a></li>
+        <li><a href="#_按需供应">15.2. 按需供应</a></li>
+        <li><a href="#_实时供应">15.3. 实时供应</a></li>
+        <li><a href="#_总结_15">15.4. 总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+
 </div>
 
 <article class="page__content" >
@@ -21209,28 +21381,12 @@ sleep 2;</code></pre>
     
     
     <p class="footer__sign">© 2020 ohmyraku</p></footer>
-    
-
-    <link rel="stylesheet" href="https://ohmyraku.github.io/css/prism.min.css"> 
-    
-    
-
-    
-    <script>
-        window.addEventListener("load", function () {
-            const script = document.createElement("script");
-            script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-            script.async = true
-
-            document.head.appendChild(script);
-        })
-    </script>
 
 
 
 
 
-<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.80368e52cf9dd9e602bf5e846e392520e70607ee948e4316b49e90236e76aa56f529c21ebfc37cf22abaa49b54d8ffe2ae2368212cbeeb22de989716b6575a49.js" integrity="sha512-gDaOUs&#43;d2eYCv16EbjklIOcGB&#43;6UjkMWtJ6QI252qlb1KcIev8N88iq6pJtU2P/iriNoISy&#43;6yLemJcWtldaSQ=="></script>
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
 
 
 

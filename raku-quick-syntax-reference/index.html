@@ -59,6 +59,147 @@ if (theme && theme !== "1") {
 </div>
 
 
+<div class="page__toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#_运行_raku">1. 运行 Raku</a>
+      <ul>
+        <li><a href="#_在你自己的电脑上运行_raku">1.1. 在你自己的电脑上运行 Raku</a></li>
+        <li><a href="#_raku_在线">1.2. Raku 在线</a></li>
+        <li><a href="#_命名行和其它选项">1.3. 命名行(和其它)选项</a></li>
+        <li><a href="#_结束语">1.4. 结束语</a></li>
+      </ul>
+    </li>
+    <li><a href="#_获取帮助">2. 获取帮助</a>
+      <ul>
+        <li><a href="#_第一响应者">2.1. 第一响应者</a></li>
+        <li><a href="#_irc_频道和其它在线交流">2.2. IRC 频道和其它在线交流</a></li>
+        <li><a href="#_在线下获取帮助">2.3. 在线下获取帮助</a></li>
+        <li><a href="#_结束语_2">2.4. 结束语</a></li>
+      </ul>
+    </li>
+    <li><a href="#_字面值">3. 字面值</a>
+      <ul>
+        <li><a href="#_让我们来谈论_unicode">3.1. 让我们来谈论 Unicode</a></li>
+        <li><a href="#_字面值表达式">3.2. 字面值表达式</a></li>
+        <li><a href="#_字符串数字同素异形体">3.3. 字符串？数字？同素异形体！</a></li>
+        <li><a href="#_版本">3.4. 版本</a></li>
+        <li><a href="#_结束语_3">3.5. 结束语</a></li>
+      </ul>
+    </li>
+    <li><a href="#_表达式和运算符">4. 表达式和运算符</a>
+      <ul>
+        <li><a href="#_基本表达式">4.1. 基本表达式</a></li>
+        <li><a href="#_算术">4.2. 算术</a></li>
+        <li><a href="#_字符串_2">4.3. 字符串</a></li>
+        <li><a href="#_处理语法错误">4.4. 处理语法错误</a></li>
+        <li><a href="#_智能比较运算符">4.5. 智能比较运算符</a></li>
+        <li><a href="#_注释文档的重要组成部分">4.6. 注释：文档的重要组成部分</a></li>
+        <li><a href="#_逻辑">4.7. 逻辑</a></li>
+        <li><a href="#_结束语_4">4.8. 结束语</a></li>
+      </ul>
+    </li>
+    <li><a href="#_构建数据">5. 构建数据</a>
+      <ul>
+        <li><a href="#_代码对象">5.1. 代码对象</a></li>
+        <li><a href="#_列表数组范围和序列">5.2. 列表、数组、范围和序列</a></li>
+        <li><a href="#_散列和映射">5.3. 散列和映射</a></li>
+        <li><a href="#_其它_数据结构">5.4. 其它 数据结构</a></li>
+        <li><a href="#_结束语_5">5.5. 结束语</a></li>
+      </ul>
+    </li>
+    <li><a href="#_处理复杂数据结构">6. 处理复杂数据结构</a>
+      <ul>
+        <li><a href="#_不同的打印方式">6.1. 不同的打印方式</a></li>
+        <li><a href="#_主题变量它们的类型以及如何生成主题变量">6.2. 主题变量、它们的类型以及如何生成主题变量</a></li>
+        <li><a href="#_基本对象方法和如何调用方法">6.3. 基本对象方法和如何调用方法</a></li>
+        <li><a href="#_以函数式的方式处理数据">6.4. 以函数式的方式处理数据</a></li>
+        <li><a href="#_循环">6.5. 循环</a></li>
+        <li><a href="#_决定">6.6. 决定</a></li>
+        <li><a href="#_结束语_6">6.7. 结束语</a></li>
+      </ul>
+    </li>
+    <li><a href="#_存储数据容器">7. 存储数据：容器</a>
+      <ul>
+        <li><a href="#_容器存在于哪里_作用域">7.1. 容器存在于哪里: 作用域</a></li>
+        <li><a href="#_类以及如何分辨类">7.2. 类以及如何分辨类</a></li>
+        <li><a href="#_赋值强制可变性以及绑定">7.3. 赋值、强制、可变性以及绑定</a></li>
+        <li><a href="#_上下文">7.4. 上下文</a></li>
+        <li><a href="#_扩展的标识符">7.5. 扩展的标识符</a></li>
+        <li><a href="#_不带条件的项">7.6. 不带条件的项</a></li>
+        <li><a href="#_原生数据">7.7. 原生数据</a></li>
+        <li><a href="#_结束语_7">7.8. 结束语</a></li>
+      </ul>
+    </li>
+    <li><a href="#_函数">8. 函数</a>
+      <ul>
+        <li><a href="#_可调用的代码块和例程">8.1. 可调用的：代码、块和例程</a></li>
+        <li><a href="#_签名和捕获调用函数和返回值">8.2. 签名和捕获：调用函数和返回值</a></li>
+        <li><a href="#_函数中的多重分派">8.3. 函数中的多重分派</a></li>
+        <li><a href="#_项和运算符">8.4. 项和运算符</a></li>
+        <li><a href="#_结束语_8">8.5. 结束语</a></li>
+      </ul>
+    </li>
+    <li><a href="#_角色和类">9. 角色和类</a>
+      <ul>
+        <li><a href="#_创建类和对象">9.1. 创建类和对象</a></li>
+        <li><a href="#_创建角色方法和属性">9.2. 创建角色:方法和属性</a></li>
+        <li><a href="#_giving使用和混合角色">9.3. Giving，使用和混合角色</a></li>
+        <li><a href="#_继承">9.4. 继承</a></li>
+        <li><a href="#_结束语_9">9.5. 结束语</a></li>
+      </ul>
+    </li>
+    <li><a href="#_模块">10. 模块</a>
+      <ul>
+        <li><a href="#_重用代码">10.1. 重用代码</a></li>
+        <li><a href="#_特质或容器属性">10.2. 特质或容器属性</a></li>
+        <li><a href="#_在外部文件中使用模块">10.3. 在外部文件中使用模块</a></li>
+        <li><a href="#_指令">10.4. 指令</a></li>
+        <li><a href="#_raku_生态">10.5. Raku 生态</a></li>
+        <li><a href="#_结束语_10">10.6. 结束语</a></li>
+      </ul>
+    </li>
+    <li><a href="#_错误以及如何处理错误">11. 错误以及如何处理错误</a>
+      <ul>
+        <li><a href="#_命令行参数">11.1. 命令行参数</a></li>
+        <li><a href="#_失败和异常">11.2. 失败和异常</a></li>
+        <li><a href="#_处理错误">11.3. 处理错误</a></li>
+        <li><a href="#_结束语_11">11.4. 结束语</a></li>
+      </ul>
+    </li>
+    <li><a href="#_与系统交互">12. 与系统交互</a>
+      <ul>
+        <li><a href="#_运行外部程序">12.1. 运行外部程序</a></li>
+        <li><a href="#_输入和输出">12.2. 输入和输出</a></li>
+        <li><a href="#_结束语_12">12.3. 结束语</a></li>
+      </ul>
+    </li>
+    <li><a href="#_测试你的模块和脚本">13. 测试你的模块和脚本</a>
+      <ul>
+        <li><a href="#_标准测试模块test">13.1. 标准测试模块：Test</a></li>
+        <li><a href="#_其它测试模块">13.2. 其它测试模块</a></li>
+        <li><a href="#_测试最佳实践">13.3. 测试最佳实践</a></li>
+        <li><a href="#_结束语_13">13.4. 结束语</a></li>
+      </ul>
+    </li>
+    <li><a href="#_构建工程">14. 构建工程</a>
+      <ul>
+        <li><a href="#_用_pod6_给代码添加文档">14.1. 用 Pod6 给代码添加文档</a></li>
+        <li><a href="#_工程部件和以及如何构建测试和发布">14.2. 工程部件和以及如何构建、测试和发布</a></li>
+        <li><a href="#_结束语_14">14.3. 结束语</a></li>
+      </ul>
+    </li>
+    <li><a href="#_grammars">15. Grammars</a>
+      <ul>
+        <li><a href="#_使用正则表达式处理文本">15.1. 使用正则表达式处理文本</a></li>
+        <li><a href="#_使用_grammar_构建文本处理器">15.2. 使用 Grammar 构建文本处理器</a></li>
+        <li><a href="#_结束语_15">15.3. 结束语</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+
 </div>
 
 <article class="page__content" >
@@ -9068,28 +9209,12 @@ Cara → A♦</code></pre>
     
     
     <p class="footer__sign">© 2020 ohmyraku</p></footer>
-    
-
-    <link rel="stylesheet" href="https://ohmyraku.github.io/css/prism.min.css"> 
-    
-    
-
-    
-    <script>
-        window.addEventListener("load", function () {
-            const script = document.createElement("script");
-            script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-            script.async = true
-
-            document.head.appendChild(script);
-        })
-    </script>
 
 
 
 
 
-<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.80368e52cf9dd9e602bf5e846e392520e70607ee948e4316b49e90236e76aa56f529c21ebfc37cf22abaa49b54d8ffe2ae2368212cbeeb22de989716b6575a49.js" integrity="sha512-gDaOUs&#43;d2eYCv16EbjklIOcGB&#43;6UjkMWtJ6QI252qlb1KcIev8N88iq6pJtU2P/iriNoISy&#43;6yLemJcWtldaSQ=="></script>
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
 
 
 

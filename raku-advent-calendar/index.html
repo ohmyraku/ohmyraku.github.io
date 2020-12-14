@@ -59,6 +59,385 @@ if (theme && theme !== "1") {
 </div>
 
 
+<div class="page__toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#_第一天_raku_鬼精灵_圣诞节实用指南">1. 第一天 – Raku 鬼精灵: 圣诞节实用指南</a>
+      <ul>
+        <li><a href="#_but_true_does_false">1.1. But True does False</a></li>
+        <li><a href="#_wrapping_it_up">1.2. Wrapping It Up</a></li>
+        <li><a href="#_看不见的斗篷">1.3. 看不见的斗篷</a></li>
+        <li><a href="#_ho_ho_ho">1.4. Ho-Ho-Ho</a></li>
+        <li><a href="#_结论">1.5. 结论</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第二天_raku_符号_变量和容器">2. 第二天-Raku: 符号, 变量和容器</a>
+      <ul>
+        <li><a href="#_把钱拿出来">2.1. 把钱拿出来</a></li>
+        <li><a href="#_我们祝你有一个愉快的列表圣诞">2.2. 我们祝你有一个愉快的列表圣诞</a></li>
+        <li><a href="#_thats_your_assignment">2.3. That’s Your Assignment</a></li>
+        <li><a href="#_positionlly">2.4. Position@lly</a></li>
+        <li><a href="#_the_one_and_only">2.5. The One and Only</a></li>
+        <li><a href="#_decont">2.6. Decont</a></li>
+        <li><a href="#_不要让它溜走">2.7. 不要让它溜走</a></li>
+        <li><a href="#_i_want_less">2.8. I Want Less</a></li>
+        <li><a href="#_defaulting_on_default_defaults">2.9. Defaulting on Default Defaults</a></li>
+        <li><a href="#_自定义">2.10. 自定义</a></li>
+        <li><a href="#_这就是全部伙计">2.11. 这就是全部，伙计</a></li>
+        <li><a href="#_结论_2">2.12. 结论</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第三天_letterops_with_raku">3. 第三天 – LetterOps with Raku</a>
+      <ul>
+        <li><a href="#_规模">3.1. 规模</a></li>
+        <li><a href="#_markdown_来拯救">3.2. Markdown 来拯救</a></li>
+        <li><a href="#_使用_raku_处理_markdown">3.3. 使用 Raku 处理 Markdown</a></li>
+        <li><a href="#_需要更多的结构">3.4. 需要更多的结构</a></li>
+        <li><a href="#_这里的玩具是重要的">3.5. 这里的玩具是重要的</a></li>
+        <li><a href="#_还没有">3.6. 还没有</a></li>
+        <li><a href="#_包起来">3.7. 包起来</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第四天_使用_grammars_进行解析">4. 第四天-使用 Grammars 进行解析</a>
+      <ul>
+        <li><a href="#_理解_grammars">4.1. 理解 Grammars</a></li>
+        <li><a href="#_递归下降分析法和优先级">4.2. 递归下降分析法和优先级</a></li>
+        <li><a href="#_左递归和其他陷阱">4.3. 左递归和其他陷阱</a></li>
+        <li><a href="#_始于简单">4.4. 始于简单</a></li>
+        <li><a href="#_组装完整的_grammars">4.5. 组装完整的 Grammars</a></li>
+        <li><a href="#_调试_grammars">4.6. 调试 Grammars</a></li>
+        <li><a href="#_解析空白和注释">4.7. 解析空白和注释</a></li>
+        <li><a href="#_保存状态">4.8. 保存状态</a></li>
+        <li><a href="#_使用动态变量实现词法作用域">4.9. 使用动态变量实现词法作用域</a></li>
+        <li><a href="#_总结">4.10. 总结</a></li>
+        <li><a href="#_解构_json">4.11. 解构 JSON</a></li>
+        <li><a href="#_在块儿中使用签名">4.12. 在块儿中使用签名</a></li>
+        <li><a href="#_你甚至可以解构对象">4.13. 你甚至可以解构对象!</a></li>
+        <li><a href="#_结论_3">4.14. 结论</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第六天_raku_书籍">5. 第六天-Raku 书籍</a></li>
+    <li><a href="#_第七天_测试所有的东西">6. 第七天 – 测试所有的东西</a>
+      <ul>
+        <li><a href="#_it_depends">6.1. It depends…</a></li>
+        <li><a href="#_懒惰和不耐烦">6.2. 懒惰和不耐烦</a></li>
+        <li><a href="#_晾干">6.3. 晾干</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第八天_adventures_in_nqp_land_hacking_the_rakudo_compiler">7. 第八天 - Adventures in NQP Land: Hacking the Rakudo Compiler</a>
+      <ul>
+        <li><a href="#_背景">7.1. 背景</a></li>
+        <li><a href="#_not_quite_perl_nqp">7.2. Not Quite Perl (NQP)</a></li>
+        <li><a href="#_进入战壕">7.3. 进入战壕</a></li>
+        <li><a href="#_工作区和工具">7.4. 工作区和工具</a></li>
+        <li><a href="#_hacking">7.5. Hacking</a></li>
+        <li><a href="#_测试">7.6. 测试</a></li>
+        <li><a href="#_文档">7.7. 文档</a></li>
+        <li><a href="#_nqp_经验教训">7.8. NQP 经验教训</a></li>
+        <li><a href="#_成功">7.9. 成功！</a></li>
+        <li><a href="#_总结_2">7.10. 总结</a></li>
+        <li><a href="#_参考">7.11. 参考</a></li>
+        <li><a href="#_附录">7.12. 附录</a></li>
+        <li><a href="#_主要的_raku_pod_渲染器">7.13. 主要的 Raku POD 渲染器</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第九天_http_and_web_sockets_with_cro">8. 第九天 – HTTP and Web Sockets with Cro</a>
+      <ul>
+        <li><a href="#_响应式管道">8.1. 响应式管道</a></li>
+        <li><a href="#_http_服务器简单的方法">8.2. HTTP 服务器，简单的方法</a></li>
+        <li><a href="#_通向幸福的途径">8.3. 通向幸福的途径</a></li>
+        <li><a href="#_中间件变得更容易">8.4. 中间件变得更容易</a></li>
+        <li><a href="#_这只是一个供应链supply_chain">8.5. 这只是一个供应链(Supply chain)</a></li>
+        <li><a href="#_哦和websockets">8.6. 哦，和WebSockets？</a></li>
+        <li><a href="#_综上所述">8.7. 综上所述</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第十天_wrapping_rats">9. 第十天 – Wrapping Rats</a></li>
+    <li><a href="#_第十一天_raku_中所有的星号">10. 第十一天-Raku 中所有的星号</a>
+      <ul>
+        <li><a href="#_1_乘法">10.1. 1. 乘法</a></li>
+        <li><a href="#_2_幂">10.2. 2. 幂</a></li>
+        <li><a href="#_3_零或多次重复">10.3. 3. 零或多次重复</a></li>
+        <li><a href="#_4_min_到_max_次重复">10.4. 4. Min 到 Max 次重复</a></li>
+        <li><a href="#_5_吞噬参数">10.5. 5. 吞噬参数</a></li>
+        <li><a href="#_6_吨吨吨吨吨吨吨">10.6. 6. 吨吨吨吨吨吨吨</a></li>
+        <li><a href="#_7_动态作用域">10.7. 7. 动态作用域</a></li>
+        <li><a href="#_8_编译变量">10.8. 8. 编译变量</a></li>
+        <li><a href="#_9_all_methods">10.9. 9. All methods</a></li>
+        <li><a href="#_10_whatever">10.10. 10. Whatever</a></li>
+        <li><a href="#_11_whatevercode">10.11. 11. WhateverCode</a></li>
+        <li><a href="#_作业">10.12. 作业</a></li>
+        <li><a href="#_附加题">10.13. 附加题</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第十二天_the_year_of_raku_books">11. 第十二天 – The Year of Raku Books</a></li>
+    <li><a href="#_第十三天_使用_raku_挖掘维基百科">12. 第十三天 - 使用 Raku 挖掘维基百科</a>
+      <ul>
+        <li><a href="#_介绍">12.1. 介绍</a></li>
+        <li><a href="#_grammar_和_actions_难学吗">12.2. Grammar 和 Actions 难学吗?</a></li>
+        <li><a href="#_第一根火柴">12.3. 第一根火柴</a></li>
+        <li><a href="#_第二根火柴">12.4. 第二根火柴</a></li>
+        <li><a href="#_第三根火柴">12.5. 第三根火柴</a></li>
+        <li><a href="#_面向对象">12.6. 面向对象</a></li>
+        <li><a href="#_w_is_your_friend">12.7. &lt;|w&gt; is your friend</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第十五天_带有_promise_的简单网络爬虫">13. 第十五天-带有 Promise 的简单网络爬虫</a>
+      <ul>
+        <li><a href="#_结论是">13.1. 结论是</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第十六天_raku_性能改进">14. 第十六天-Raku 性能改进</a></li>
+    <li><a href="#_第十七天_关于消息传递">15. 第十七天-关于消息传递</a>
+      <ul>
+        <li><a href="#_为什么要传递消息">15.1. 为什么要传递消息</a></li>
+        <li><a href="#_传递什么信息">15.2. 传递什么信息</a></li>
+        <li><a href="#_强制性的你好世界">15.3. 强制性的你好，世界</a></li>
+        <li><a href="#_一些更有用的东西">15.4. 一些更有用的东西</a></li>
+        <li><a href="#_保持主题">15.5. 保持主题</a></li>
+        <li><a href="#_但是生命比amqp更重要">15.6. 但是，生命比AMQP更重要</a></li>
+        <li><a href="#_把它包起来">15.7. 把它包起来</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第十八天_raku_支持的工作流">16. 第十八天-Raku 支持的工作流</a></li>
+    <li><a href="#_第十九天_language_independent_validation_rules_livr_for_raku">17. 第十九天-Language Independent Validation Rules (LIVR) for Raku</a>
+      <ul>
+        <li><a href="#_livr_介绍">17.1. LIVR 介绍</a></li>
+        <li><a href="#_livr和raku">17.2. LIVR和Raku</a></li>
+        <li><a href="#_livr_链接">17.3. LIVR 链接</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第二十天_宏的进阶">18. 第二十天-宏的进阶</a></li>
+    <li><a href="#_第二十一天_数独与junctions和集合">19. 第二十一天-数独与Junctions和集合</a>
+      <ul>
+        <li><a href="#_junctions量子逻辑测试">19.1. Junctions：量子逻辑测试</a></li>
+        <li><a href="#_集合对象的集合">19.2. 集合：对象的集合</a></li>
+        <li><a href="#_关于对象的说明">19.3. 关于对象的说明</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第二十二天_raku_d_的特性">20. 第二十二天-Raku.d 的特性</a>
+      <ul>
+        <li><a href="#_在创建时调整对象">20.1. 在创建时调整对象</a></li>
+        <li><a href="#_并发性改进">20.2. 并发性改进</a></li>
+        <li><a href="#_unicode_goodies">20.3. Unicode goodies</a></li>
+        <li><a href="#_跳过值">20.4. 跳过值</a></li>
+        <li><a href="#_of_bufs_and_blobs">20.5. Of Bufs and Blobs</a></li>
+        <li><a href="#_测试测试测试">20.6. 测试，测试，测试！</a></li>
+        <li><a href="#_这是怎么回事">20.7. 这是怎么回事</a></li>
+        <li><a href="#_main_函数">20.8. MAIN 函数</a></li>
+        <li><a href="#_嵌入_raku">20.9. 嵌入 Raku</a></li>
+        <li><a href="#_礼品袋的底部">20.10. 礼品袋的底部</a></li>
+        <li><a href="#_赶上雪橇的时间">20.11. 赶上雪橇的时间</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第二十三天_raku_高尔夫">21. 第二十三天-Raku 高尔夫</a>
+      <ul>
+        <li><a href="#_一些基本的例子">21.1. 一些基本的例子</a></li>
+        <li><a href="#_numbers">21.2. Numbers</a></li>
+        <li><a href="#_条件">21.3. 条件</a></li>
+        <li><a href="#_打字很难让我们使用一些预定义的字符串">21.4. 打字很难，让我们使用一些预定义的字符串！</a></li>
+        <li><a href="#_base_16_base_36_nah_base_0x10ffff">21.5. Base 16? Base 36? Nah, Base 0x10FFFF!</a></li>
+        <li><a href="#_所有的好事都必须结束可怕的事情_更是如此">21.6. 所有的好事都必须结束;可怕的事情 - 更是如此</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第二十四天_解魔方">22. 第二十四天-解魔方</a>
+      <ul>
+        <li><a href="#_介绍_2">22.1. 介绍</a></li>
+        <li><a href="#_符号">22.2. 符号</a></li>
+        <li><a href="#_算法">22.3. 算法</a></li>
+        <li><a href="#_设计一个模块">22.4. 设计一个模块</a></li>
+        <li><a href="#_代码">22.5. 代码</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第二十五天_圣诞奖金_并发http服务器实施和scripter的方法">23. 第二十五天-圣诞奖金 - 并发HTTP服务器实施和scripter的方法</a>
+      <ul>
+        <li><a href="#_raku_范式">23.1. Raku 范式</a></li>
+        <li><a href="#_raku_supplies_就像一个_v12_引擎">23.2. Raku Supplies 就像一个 V12 引擎</a></li>
+        <li><a href="#_wap6_的结构">23.3. Wap6 的结构</a></li>
+        <li><a href="#_wap6_的核心">23.4. Wap6 的核心</a></li>
+        <li><a href="#_webservices">23.5. Webservices</a></li>
+        <li><a href="#_当客户端请求静态文件时">23.6. 当客户端请求静态文件时</a></li>
+        <li><a href="#_结语">23.7. 结语</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第一天_移植_vigilance将raku与标准工具集成在一起">24. 第一天 - 移植 Vigilance，将Raku与标准工具集成在一起</a>
+      <ul>
+        <li><a href="#_shebang_和导入">24.1. Shebang 和导入</a></li>
+        <li><a href="#_命令行选项">24.2. 命令行选项</a></li>
+        <li><a href="#_io_读写文件">24.3. IO: 读写文件</a></li>
+        <li><a href="#_获得md5校验和">24.4. 获得MD5校验和</a></li>
+        <li><a href="#_结束之前的思考">24.5. 结束之前的思考</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第二天_like_6_perls_in_a_pod_document_everything">25. 第二天 – Like 6 Perls in a Pod: document everything</a></li>
+    <li><a href="#_大多数人都可以阅读源代码但每个人都可以阅读文档">26. 大多数人都可以阅读源代码，但每个人都可以阅读文档。</a></li>
+    <li><a href="#_pod_6_stands_for_plain_old_documentation_for_raku">27. Pod 6 stands for “Plain Old documentation for Raku”</a></li>
+    <li><a href="#_给模块添加文档">28. 给模块添加文档</a></li>
+    <li><a href="#_回到生产">29. 回到生产</a></li>
+    <li><a href="#_第三天_raku_跳转到那儿">30. 第三天 – Raku – 跳转到那儿</a></li>
+    <li><a href="#_第四天_献给新年的_raku_pod_新功能">31. 第四天 - 献给新年的 Raku Pod 新功能</a>
+      <ul>
+        <li><a href="#_介绍_3">31.1. 介绍</a></li>
+        <li><a href="#_准备">31.2. 准备</a></li>
+        <li><a href="#_背景_2">31.3. 背景</a></li>
+        <li><a href="#_rakudo_nqp_grammar_和_actions_学到的东西">31.4. Rakudo NQP grammar 和 actions: 学到的东西</a></li>
+        <li><a href="#_总结_3">31.5. 总结</a></li>
+        <li><a href="#_左还是右">31.6. 左还是右？</a></li>
+        <li><a href="#_参数">31.7. 参数</a></li>
+        <li><a href="#_动态范围">31.8. 动态范围</a></li>
+        <li><a href="#_宏里面的变量">31.9. 宏里面的变量</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第六天_懒惰精灵与勤劳精灵">32. 第六天 - 懒惰精灵与勤劳精灵</a>
+      <ul>
+        <li><a href="#_lazy_slack">32.1. Lazy slack</a></li>
+        <li><a href="#_尽力追赶">32.2. 尽力追赶</a></li>
+        <li><a href="#_use_the_right_elf">32.3. Use the right elf</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第七天_细胞自动机">33. 第七天 – 细胞自动机</a>
+      <ul>
+        <li><a href="#_为学习而做">33.1. 为学习而做</a></li>
+        <li><a href="#_走在前面">33.2. 走在前面</a></li>
+        <li><a href="#_制作东西">33.3. 制作东西</a></li>
+        <li><a href="#_改变">33.4. 改变</a></li>
+        <li><a href="#_改变邻居">33.5. 改变邻居</a></li>
+        <li><a href="#_优化机会">33.6. 优化机会？</a></li>
+        <li><a href="#_其他变化">33.7. 其他变化？</a></li>
+        <li><a href="#_这有用吗">33.8. 这有用吗？</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第八天_让你的_raku_grammar_紧凑一点">34. 第八天 — 让你的 Raku grammar 紧凑一点</a>
+      <ul>
+        <li><a href="#_1_拆分_actions">34.1. 1.拆分 actions</a></li>
+        <li><a href="#_使用_multi_方法">34.2. 使用 multi 方法</a></li>
+        <li><a href="#_3_让_perl_完成这项工作">34.3. 3. 让 Perl 完成这项工作</a></li>
+        <li><a href="#_4_使用_multi_rules_和_multi_tokens">34.4. 4. 使用 multi-rules 和 multi-tokens</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第九天_raku_中的常量">35. 第九天 - Raku 中的常量</a>
+      <ul>
+        <li><a href="#_如何制作一个常数">35.1. 如何制作一个常数</a></li>
+        <li><a href="#_从模块导出常量">35.2. 从模块导出常量</a></li>
+        <li><a href="#_在程序中使用模块">35.3. 在程序中使用模块</a></li>
+        <li><a href="#_最后对代码维护进行了一些注释">35.4. 最后，对代码维护进行了一些注释</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第十天_跳转_开启你的工作流">36. 第十天 - 跳转, 开启你的工作流</a></li>
+    <li><a href="#_第十一天_使用_raku_测试你的时刻表">37. 第十一天 - 使用 Raku 测试你的时刻表</a></li>
+    <li><a href="#_第十二天_构建灵活的_grammar">38. 第十二天 - 构建灵活的 grammar</a></li>
+    <li><a href="#_第十三天_使用_cro_和_debian_从头构建_web_服务">39. 第十三天 - 使用 Cro 和 Debian 从头构建 Web 服务</a>
+      <ul>
+        <li><a href="#_安装_rakudo_raku_编译器">39.1. 安装 Rakudo Raku 编译器</a></li>
+        <li><a href="#_安装_cro_服务">39.2. 安装 Cro 服务</a></li>
+        <li><a href="#_cro_实战">39.3. Cro 实战</a></li>
+        <li><a href="#_总结_4">39.4. 总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第十四天_使用_raku_设计小航天器">40. 第十四天 - 使用 Raku 设计(小)航天器</a>
+      <ul>
+        <li><a href="#_寻找共同点">40.1. 寻找共同点</a></li>
+        <li><a href="#_asn_1_和限制">40.2. <code>ASN.1</code> 和限制</a></li>
+        <li><a href="#_逐步建设问题答案">40.3. 逐步建设。问题答案。</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第十五天_使用_raku_构建小型航天器">41. 第十五天 - 使用 Raku 构建(小型)航天器</a>
+      <ul>
+        <li><a href="#_炫耀长耳朵">41.1. 炫耀长耳朵</a></li>
+        <li><a href="#_类型类型类型">41.2. 类型，类型，类型</a></li>
+        <li><a href="#_进步进化序列化">41.3. 进步，进化，序列化！</a></li>
+        <li><a href="#_如果有时间进行编码总会有时间进行解码">41.4. 如果有时间进行编码，总会有时间进行解码</a></li>
+        <li><a href="#_what_oclock_supply_oclock">41.5. What o’clock? Supply o’clock!</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第十六天_检查你的列表俩次">42. 第十六天 - 检查你的列表俩次</a>
+      <ul>
+        <li><a href="#_从命令行了解_raku">42.1. 从命令行了解 Raku</a></li>
+        <li><a href="#_就像拔牙">42.2. 就像拔牙?</a></li>
+        <li><a href="#_一种强大的沉默的类型">42.3. 一种强大的，沉默的类型</a></li>
+        <li><a href="#_精灵类型不匹配_弥补改进的错误处理">42.4. 精灵类型不匹配 - 弥补改进的错误处理</a></li>
+        <li><a href="#_我们不会去直到我们得到一些">42.5. 我们不会去，直到我们得到一些！</a></li>
+        <li><a href="#_跑步者走上了这条路">42.6. 跑步者走上了这条路。</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第17天_通往幸福的编译之路">43. 第17天 - 通往幸福的编译之路</a>
+      <ul>
+        <li><a href="#_marcus_junius_brute_forcethe_younger">43.1. Marcus Junius Brute Force（The Younger）</a></li>
+        <li><a href="#_我让路径遍历少了以及所有其他路径">43.2. 我让路径遍历少了（以及所有其他路径）</a></li>
+        <li><a href="#_在方程式中思考">43.3. 在方程式中思考</a></li>
+        <li><a href="#_第四语言">43.4. 第四语言</a></li>
+        <li><a href="#_结论_5">43.5. 结论</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第十八天_一棵_avg_格式的圣诞树">44. 第十八天 - 一棵 AVG 格式的圣诞树</a>
+      <ul>
+        <li><a href="#_关于svg并创建它">44.1. 关于SVG并创建它</a></li>
+        <li><a href="#_我们抽象吧">44.2. 我们抽象吧！</a></li>
+        <li><a href="#_让我们延伸">44.3. 让我们延伸！</a></li>
+        <li><a href="#_一个重构点">44.4. 一个重构点</a></li>
+        <li><a href="#_一个进一步的抽象">44.5. 一个进一步的抽象</a></li>
+        <li><a href="#_最后是我们的树">44.6. 最后是我们的树</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第十九天_交互式桌面应用">45. 第十九天 - 交互式桌面应用</a>
+      <ul>
+        <li><a href="#_骰子滚动">45.1. 骰子滚动</a></li>
+        <li><a href="#_简单的_gtksimple">45.2. 简单的 GTK::Simple</a></li>
+        <li><a href="#_网格布局">45.3. 网格布局</a></li>
+        <li><a href="#_交互">45.4. 交互</a></li>
+        <li><a href="#_把它们放在一起">45.5. 把它们放在一起</a></li>
+        <li><a href="#_最后的想法">45.6. 最后的想法</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第二十天_raku_中的命题组合">46. 第二十天 - Raku 中的命题组合</a></li>
+    <li><a href="#_你如何以数学方式包装礼物">47. 你如何以数学方式包装礼物？</a>
+      <ul>
+        <li><a href="#_一个立方体卡罗尔">47.1. 一个立方体卡罗尔</a></li>
+        <li><a href="#_sat_a_clause的令人满意的故事">47.2. SAT-a-Clause的令人满意的故事</a></li>
+        <li><a href="#_比你想知道的3d礼品包装更多">47.3. 比你想知道的3D礼品包装更多</a></li>
+      </ul>
+    </li>
+    <li><a href="#_把它包起来_2">把它包起来</a>
+      <ul>
+        <li><a href="#_第二十一天_一个红色的圣诞老人">48. 第二十一天 - 一个红色的圣诞老人</a></li>
+        <li><a href="#_第二十二天_测试_cro_http_api">49. 第二十二天 - 测试 Cro HTTP API</a></li>
+        <li><a href="#_第二十三天_blin很快就到圣诞节了">50. 第二十三天 - Blin，很快就到圣诞节了！</a></li>
+        <li><a href="#_第二十四天_使用_raku_进行主题建模">51. 第二十四天 - 使用 Raku 进行主题建模</a></li>
+        <li><a href="#_raku_中的异步和并发入门">52. Raku 中的异步和并发入门</a></li>
+        <li><a href="#_promise">53. Promise</a></li>
+        <li><a href="#_supply_块">54. Supply 块</a></li>
+        <li><a href="#_channel">55. Channel</a></li>
+        <li><a href="#_线程">56. 线程</a></li>
+        <li><a href="#_raku_调度器">57. Raku 调度器</a></li>
+        <li><a href="#_react_块">58. React 块</a></li>
+        <li><a href="#_lock_类">59. Lock 类</a></li>
+        <li><a href="#_atomic_integer">60. Atomic Integer</a></li>
+        <li><a href="#_分而治之模式">61. 分而治之模式</a></li>
+        <li><a href="#_并行的_map_reduce_模式">62. 并行的 Map-Reduce 模式</a></li>
+        <li><a href="#_保留你的线程或不保留">63. 保留你的线程或不保留</a></li>
+        <li><a href="#_监控模式">64. 监控模式</a></li>
+        <li><a href="#_比较并交换标量">65. 比较并交换标量</a></li>
+        <li><a href="#_拆解异步问题">66. 拆解异步问题</a></li>
+        <li><a href="#_信号量">67. 信号量</a></li>
+        <li><a href="#_比较_react_与_tap">68. 比较 react 与 tap</a></li>
+        <li><a href="#_supply_反压">69. Supply 反压</a></li>
+        <li><a href="#_无锁的线程安全结构">70. 无锁的线程安全结构</a></li>
+        <li><a href="#_拆解并发问题">71. 拆解并发问题</a></li>
+        <li><a href="#_并行循环执行">72. 并行循环执行</a></li>
+        <li><a href="#_asynchronous_socket">73. Asynchronous Socket</a></li>
+        <li><a href="#_异步锁">74. 异步锁</a></li>
+        <li><a href="#_异步进程间通信">75. 异步进程间通信</a></li>
+        <li><a href="#_第一天_为什么_raku_是_advent_code_的理想语言">76. 第一天 - 为什么 Raku 是 Advent Code 的理想语言？</a></li>
+        <li><a href="#_第二天_perl_is_dead_long_live_perl_and_raku">77. 第二天 - Perl is dead. Long live Perl and Raku.</a></li>
+        <li><a href="#_使用_raku_进行文化编程">78. 使用 Raku 进行文化编程</a></li>
+        <li><a href="#_第四天_使用_raku_grammars_解析_clojure_命名空间形式">79. 第四天 - 使用 Raku grammars 解析 Clojure 命名空间形式</a></li>
+        <li><a href="#_第六天_declarative_apis_easy_peasy_with_raku">80. 第六天 - Declarative APIs, easy peasy with Raku</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+
 </div>
 
 <article class="page__content" >
@@ -19898,28 +20277,12 @@ sub watch(&amp;callback, *%conditions) {
     
     
     <p class="footer__sign">© 2020 ohmyraku</p></footer>
-    
-
-    <link rel="stylesheet" href="https://ohmyraku.github.io/css/prism.min.css"> 
-    
-    
-
-    
-    <script>
-        window.addEventListener("load", function () {
-            const script = document.createElement("script");
-            script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-            script.async = true
-
-            document.head.appendChild(script);
-        })
-    </script>
 
 
 
 
 
-<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.80368e52cf9dd9e602bf5e846e392520e70607ee948e4316b49e90236e76aa56f529c21ebfc37cf22abaa49b54d8ffe2ae2368212cbeeb22de989716b6575a49.js" integrity="sha512-gDaOUs&#43;d2eYCv16EbjklIOcGB&#43;6UjkMWtJ6QI252qlb1KcIev8N88iq6pJtU2P/iriNoISy&#43;6yLemJcWtldaSQ=="></script>
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
 
 
 

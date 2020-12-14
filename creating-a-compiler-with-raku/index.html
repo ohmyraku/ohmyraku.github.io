@@ -61,6 +61,128 @@ if (theme && theme !== "1") {
 </div>
 
 
+<div class="page__toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#_第一章_创建一个简单的解释器">1. 第一章 创建一个简单的解释器</a>
+      <ul>
+        <li><a href="#_grammar">1.1. Grammar</a></li>
+        <li><a href="#_actions">1.2. Actions</a></li>
+        <li><a href="#_模块">1.3. 模块</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第二章_解析数字">2. 第二章 解析数字</a>
+      <ul>
+        <li><a href="#_查找数字">2.1. 查找数字</a></li>
+        <li><a href="#_获取值">2.2. 获取值</a></li>
+        <li><a href="#_使用_ast">2.3. 使用 AST</a></li>
+        <li><a href="#_最后的笔记">2.4. 最后的笔记</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第三章_创建计算器">3. 第三章 创建计算器</a>
+      <ul>
+        <li><a href="#_汇总">3.1. 汇总</a></li>
+        <li><a href="#_过早的优化">3.2. 过早的优化</a></li>
+        <li><a href="#_更多操作数">3.3. 更多操作数</a></li>
+        <li><a href="#_多样性测试">3.4. 多样性测试</a></li>
+        <li><a href="#_增加更多数学">3.5. 增加更多数学</a></li>
+        <li><a href="#_测试代码">3.6. 测试代码</a></li>
+        <li><a href="#_添加更多能量">3.7. 添加更多能量</a></li>
+        <li><a href="#_允许括号">3.8. 允许括号</a></li>
+      </ul>
+    </li>
+    <li><a href="#_第四章_更好的解释器">4. 第四章 更好的解释器</a>
+      <ul>
+        <li><a href="#_跳过注释">4.1. 跳过注释</a></li>
+        <li><a href="#_复杂数字">4.2. 复杂数字</a></li>
+        <li><a href="#_复杂表达式">4.3. 复杂表达式</a></li>
+        <li><a href="#_使用变量">4.4. 使用变量</a></li>
+        <li><a href="#_初始化声明">4.5. 初始化声明</a></li>
+      </ul>
+    </li>
+    <li><a href="#_grammar_学习">5. Grammar 学习</a>
+      <ul>
+        <li><a href="#_可执行的">5.1. 可执行的</a></li>
+        <li><a href="#_组合和继承_grammar">5.2. 组合和继承 Grammar</a></li>
+        <li><a href="#_复习计算器">5.3. 复习计算器</a></li>
+        <li><a href="#_使用_multi_rules">5.4. 使用 MULTI-RULES</a></li>
+        <li><a href="#_摆脱全局变量">5.5. 摆脱全局变量</a></li>
+        <li><a href="#_更好的变量名">5.6. 更好的变量名</a></li>
+        <li><a href="#_函数接收表达式">5.7. 函数接收表达式</a></li>
+      </ul>
+    </li>
+    <li><a href="#_处理字符串">6. 处理字符串</a>
+      <ul>
+        <li><a href="#_字符串">6.1. 字符串</a></li>
+        <li><a href="#_转义引号">6.2. 转义引号</a></li>
+        <li><a href="#_变量插值">6.3. 变量插值</a></li>
+        <li><a href="#_索引字符串">6.4. 索引字符串</a></li>
+      </ul>
+    </li>
+    <li><a href="#_数组和散列">7. 数组和散列</a>
+      <ul>
+        <li><a href="#_数组">7.1. 数组</a></li>
+        <li><a href="#_给数组项赋值">7.2. 给数组项赋值</a></li>
+        <li><a href="#_题外话语法的乐趣">7.3. 题外话。语法的乐趣</a></li>
+        <li><a href="#_访问数组元素">7.4. 访问数组元素</a></li>
+        <li><a href="#_列表赋值">7.5. 列表赋值</a></li>
+        <li><a href="#_打印数组">7.6. 打印数组</a></li>
+        <li><a href="#_散列">7.7. 散列</a></li>
+        <li><a href="#_复习和测试">7.8. 复习和测试</a></li>
+      </ul>
+    </li>
+    <li><a href="#_创建抽象语法树">8. 创建抽象语法树</a>
+      <ul>
+        <li><a href="#_想到了_if_这个关键字">8.1. 想到了 <code>if</code> 这个关键字</a></li>
+        <li><a href="#_ast_块">8.2. AST 块</a></li>
+        <li><a href="#_值节点">8.3. 值节点</a></li>
+        <li><a href="#_声明字符串">8.4. 声明字符串</a></li>
+        <li><a href="#_声明数组和散列">8.5. 声明数组和散列</a></li>
+        <li><a href="#_标量赋值">8.6. 标量赋值</a></li>
+        <li><a href="#_使用索引">8.7. 使用索引</a></li>
+        <li><a href="#_数组和散列的赋值与初始化">8.8. 数组和散列的赋值与初始化</a></li>
+        <li><a href="#_ast_表达式">8.9. AST 表达式</a></li>
+        <li><a href="#_函数调用">8.10. 函数调用</a></li>
+        <li><a href="#_最终的调优">8.11. 最终的调优</a></li>
+        <li><a href="#_声明字符串_2">8.12. 声明字符串</a></li>
+        <li><a href="#_声明数组和散列_2">8.13. 声明数组和散列</a></li>
+        <li><a href="#_标量赋值_2">8.14. 标量赋值</a></li>
+        <li><a href="#_处理索引">8.15. 处理索引</a></li>
+        <li><a href="#_数组和散列的赋值与初始化_2">8.16. 数组和散列的赋值与初始化</a></li>
+        <li><a href="#_ast_表达式_2">8.17. AST 表达式</a></li>
+        <li><a href="#_函数调用_2">8.18. 函数调用</a></li>
+        <li><a href="#_最后的调试">8.19. 最后的调试</a></li>
+      </ul>
+    </li>
+    <li><a href="#_计算_ast">9. 计算 AST</a>
+      <ul>
+        <li><a href="#_从_top_开始计算">9.1. 从 top 开始计算</a></li>
+        <li><a href="#_使用变量_2">9.2. 使用变量</a></li>
+        <li><a href="#_字符串插值">9.3. 字符串插值</a></li>
+        <li><a href="#_使用_raku_getters">9.4. 使用 Raku getters</a></li>
+        <li><a href="#_到处插值">9.5. 到处插值</a></li>
+        <li><a href="#_算术操作">9.6. 算术操作</a></li>
+      </ul>
+    </li>
+    <li><a href="#_测试套件">10. 测试套件</a>
+      <ul>
+        <li><a href="#_测试_runner">10.1. 测试 runner</a></li>
+        <li><a href="#_测试">10.2. 测试</a></li>
+        <li><a href="#_功能覆盖">10.3. 功能覆盖</a></li>
+      </ul>
+    </li>
+    <li><a href="#_控制流">11. 控制流</a>
+      <ul>
+        <li><a href="#_实现_if">11.1. 实现 <code>if</code></a></li>
+        <li><a href="#_实现_else">11.2. 实现 <code>else</code></a></li>
+        <li><a href="#_实现循环">11.3. 实现循环</a></li>
+        <li><a href="#_实现_while_循环">11.4. 实现 <code>while</code> 循环</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+
 </div>
 
 <article class="page__content" >
@@ -9037,28 +9159,12 @@ say k; ## 10</code></pre>
     
     
     <p class="footer__sign">© 2020 ohmyraku</p></footer>
-    
-
-    <link rel="stylesheet" href="https://ohmyraku.github.io/css/prism.min.css"> 
-    
-    
-
-    
-    <script>
-        window.addEventListener("load", function () {
-            const script = document.createElement("script");
-            script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-            script.async = true
-
-            document.head.appendChild(script);
-        })
-    </script>
 
 
 
 
 
-<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.80368e52cf9dd9e602bf5e846e392520e70607ee948e4316b49e90236e76aa56f529c21ebfc37cf22abaa49b54d8ffe2ae2368212cbeeb22de989716b6575a49.js" integrity="sha512-gDaOUs&#43;d2eYCv16EbjklIOcGB&#43;6UjkMWtJ6QI252qlb1KcIev8N88iq6pJtU2P/iriNoISy&#43;6yLemJcWtldaSQ=="></script>
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
 
 
 

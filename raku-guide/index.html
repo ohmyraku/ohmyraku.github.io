@@ -68,6 +68,141 @@ if (theme && theme !== "1") {
 </div>
 
 
+<div class="page__toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#_序言">1. 序言</a>
+      <ul>
+        <li><a href="#_什么是_raku">1.1. 什么是 Raku</a></li>
+        <li><a href="#_术语">1.2. 术语</a></li>
+        <li><a href="#_安装_raku">1.3. 安装 Raku</a></li>
+        <li><a href="#_运行_raku_代码">1.4. 运行 Raku 代码</a></li>
+        <li><a href="#_编辑器">1.5. 编辑器</a></li>
+        <li><a href="#_hello_world">1.6. Hello World!</a></li>
+        <li><a href="#_语法概要">1.7. 语法概要</a></li>
+      </ul>
+    </li>
+    <li><a href="#_运算符">2. 运算符</a>
+      <ul>
+        <li><a href="#_一般运算符">2.1. 一般运算符</a></li>
+        <li><a href="#_反转运算符">2.2. 反转运算符</a></li>
+        <li><a href="#_归约运算符">2.3. 归约运算符</a></li>
+      </ul>
+    </li>
+    <li><a href="#_变量">3. 变量</a>
+      <ul>
+        <li><a href="#_标量">3.1. 标量</a></li>
+        <li><a href="#_数组">3.2. 数组</a></li>
+        <li><a href="#_hashes_哈希">3.3. Hashes 哈希</a></li>
+        <li><a href="#_类型">3.4. 类型</a></li>
+        <li><a href="#_自省">3.5. 自省</a></li>
+        <li><a href="#_作用域">3.6. 作用域</a></li>
+        <li><a href="#_赋值_vs_绑定">3.7. 赋值 vs. 绑定</a></li>
+      </ul>
+    </li>
+    <li><a href="#_函数和修改器">4. 函数和修改器</a></li>
+    <li><a href="#_循环和条件语句">5. 循环和条件语句</a>
+      <ul>
+        <li><a href="#_if">5.1. if</a></li>
+        <li><a href="#_unless">5.2. unless</a></li>
+        <li><a href="#_with">5.3. with</a></li>
+        <li><a href="#_for">5.4. for</a></li>
+        <li><a href="#_given">5.5. given</a></li>
+        <li><a href="#_loop">5.6. loop</a></li>
+      </ul>
+    </li>
+    <li><a href="#_io">6. I/O</a>
+      <ul>
+        <li><a href="#_在终端中基本的_io_操作">6.1. 在终端中基本的 I/O 操作</a></li>
+        <li><a href="#_运行_shell_命令">6.2. 运行 Shell 命令</a></li>
+        <li><a href="#_file_io">6.3. File I/O</a></li>
+        <li><a href="#_文件和文件目录操作">6.4. 文件和文件目录操作</a></li>
+      </ul>
+    </li>
+    <li><a href="#_子例程">7. 子例程</a>
+      <ul>
+        <li><a href="#_定义">7.1. 定义</a></li>
+        <li><a href="#_signature_函数签名">7.2. Signature 函数签名</a></li>
+        <li><a href="#_多重分派">7.3. 多重分派</a></li>
+        <li><a href="#_默认参数和可选参数">7.4. 默认参数和可选参数</a></li>
+        <li><a href="#_返回值">7.5. 返回值</a></li>
+      </ul>
+    </li>
+    <li><a href="#_函数式编程">8. 函数式编程</a>
+      <ul>
+        <li><a href="#_函数是一等公民">8.1. 函数是一等公民</a></li>
+        <li><a href="#_匿名函数">8.2. 匿名函数</a></li>
+        <li><a href="#_链式调用">8.3. 链式调用</a></li>
+        <li><a href="#_feed_操作符">8.4. Feed 操作符</a></li>
+        <li><a href="#_hyper_操作符">8.5. Hyper 操作符</a></li>
+        <li><a href="#_junction">8.6. Junction</a></li>
+        <li><a href="#_惰性列表">8.7. 惰性列表</a></li>
+        <li><a href="#_闭包">8.8. 闭包</a></li>
+      </ul>
+    </li>
+    <li><a href="#_类和对象">9. 类和对象</a>
+      <ul>
+        <li><a href="#_介绍">9.1. 介绍</a></li>
+        <li><a href="#_封装">9.2. 封装</a></li>
+        <li><a href="#_具名参数_vs_位置参数">9.3. 具名参数 vs. 位置参数</a></li>
+        <li><a href="#_方法">9.4. 方法</a></li>
+        <li><a href="#_类属性">9.5. 类属性</a></li>
+        <li><a href="#_访问类型">9.6. 访问类型</a></li>
+        <li><a href="#_继承">9.7. 继承</a></li>
+        <li><a href="#_多重继承">9.8. 多重继承</a></li>
+        <li><a href="#_role">9.9. Role</a></li>
+        <li><a href="#_内省">9.10. 内省</a></li>
+      </ul>
+    </li>
+    <li><a href="#_异常处理">10. 异常处理</a>
+      <ul>
+        <li><a href="#_捕获异常">10.1. 捕获异常</a></li>
+        <li><a href="#_抛出异常">10.2. 抛出异常</a></li>
+      </ul>
+    </li>
+    <li><a href="#_正则表达式">11. 正则表达式</a>
+      <ul>
+        <li><a href="#_regex_定义">11.1. Regex 定义</a></li>
+        <li><a href="#_匹配字符">11.2. 匹配字符</a></li>
+        <li><a href="#_匹配字符类">11.3. 匹配字符类</a></li>
+        <li><a href="#_unicode_属性">11.4. Unicode 属性</a></li>
+        <li><a href="#_通配符">11.5. 通配符</a></li>
+        <li><a href="#_量词">11.6. 量词</a></li>
+        <li><a href="#_匹配结果">11.7. 匹配结果</a></li>
+        <li><a href="#_例子">11.8. 例子</a></li>
+      </ul>
+    </li>
+    <li><a href="#_raku_模块">12. Raku 模块</a>
+      <ul>
+        <li><a href="#_使用模块">12.1. 使用模块</a></li>
+      </ul>
+    </li>
+    <li><a href="#_unicode">13. Unicode</a>
+      <ul>
+        <li><a href="#_使用_unicode">13.1. 使用 Unicode</a></li>
+        <li><a href="#_unicode_相关的操作符">13.2. Unicode 相关的操作符</a></li>
+      </ul>
+    </li>
+    <li><a href="#_并行并发和异步">14. 并行、并发和异步</a>
+      <ul>
+        <li><a href="#_并行">14.1. 并行</a></li>
+        <li><a href="#_并发和异步">14.2. 并发和异步</a></li>
+      </ul>
+    </li>
+    <li><a href="#_native_calling_接口">15. Native Calling 接口</a>
+      <ul>
+        <li><a href="#_调用函数">15.1. 调用函数</a></li>
+        <li><a href="#_函数重命名">15.2. 函数重命名</a></li>
+        <li><a href="#_参数传递">15.3. 参数传递</a></li>
+        <li><a href="#_返回值_2">15.4. 返回值</a></li>
+        <li><a href="#_类型_2">15.5. 类型</a></li>
+      </ul>
+    </li>
+    <li><a href="#_社区">16. 社区</a></li>
+  </ul>
+</nav>
+</div>
+
 </div>
 
 <article class="page__content" >
@@ -5276,28 +5411,12 @@ say add(2,3);</code></pre>
     
     
     <p class="footer__sign">© 2020 ohmyraku</p></footer>
-    
-
-    <link rel="stylesheet" href="https://ohmyraku.github.io/css/prism.min.css"> 
-    
-    
-
-    
-    <script>
-        window.addEventListener("load", function () {
-            const script = document.createElement("script");
-            script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-            script.async = true
-
-            document.head.appendChild(script);
-        })
-    </script>
 
 
 
 
 
-<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.80368e52cf9dd9e602bf5e846e392520e70607ee948e4316b49e90236e76aa56f529c21ebfc37cf22abaa49b54d8ffe2ae2368212cbeeb22de989716b6575a49.js" integrity="sha512-gDaOUs&#43;d2eYCv16EbjklIOcGB&#43;6UjkMWtJ6QI252qlb1KcIev8N88iq6pJtU2P/iriNoISy&#43;6yLemJcWtldaSQ=="></script>
+<script defer type="text/javascript" src="https://ohmyraku.github.io/js/script.14164ab553b19613ce98aadb54b1ed9a89ae5b056c72b99a4c672e37954f33d67bebe1452b0279025ba889964b51bdf8ec69683933cf427ae67c08ac2cdda7b1.js" integrity="sha512-FBZKtVOxlhPOmKrbVLHtmomuWwVscrmaTGcuN5VPM9Z76&#43;FFKwJ5AluoiZZLUb347GloOTPPQnrmfAisLN2nsQ=="></script>
 
 
 
