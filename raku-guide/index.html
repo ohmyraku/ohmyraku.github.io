@@ -1259,9 +1259,7 @@ say &#34;Hello $name&#34;;   # Hello John Doe</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#字符串
+<pre class="highlight"><code class="language-raku" data-lang="raku">#字符串
 my $name = &#39;John Doe&#39;;
 say $name;
 
@@ -1361,9 +1359,7 @@ say $age.nude;        # .nude 同时获得分子分母</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @animals = &#39;camel&#39;,&#39;llama&#39;,&#39;owl&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @animals = &#39;camel&#39;,&#39;llama&#39;,&#39;owl&#39;;
 say @animals;</code></pre>
 </div>
 </div>
@@ -1450,9 +1446,7 @@ say &#34;我们要放走: &#34; ~ @animals.splice(1,2) ~ &#34; ，只剩下 &#34
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @array[3];
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @array[3];
 @array[0] = &#34;first value&#34;;
 @array[1] = &#34;second value&#34;;
 @array[2] = &#34;third value&#34;;</code></pre>
@@ -1463,9 +1457,7 @@ my @array[3];
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @array[3];
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @array[3];
 @array[0] = &#34;first value&#34;;
 @array[1] = &#34;second value&#34;;
 @array[2] = &#34;third value&#34;;
@@ -1498,9 +1490,7 @@ my @array[3];
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @tbl[3;2];
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @tbl[3;2];
 @tbl[0;0] = 1;
 @tbl[0;1] = &#34;x&#34;;
 @tbl[1;0] = 2;
@@ -1616,9 +1606,7 @@ The capital of France is: Paris</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $var = &#39;Text&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $var = &#39;Text&#39;;
 say $var;
 say $var.WHAT;
 
@@ -1639,9 +1627,7 @@ say $var.WHAT;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my Int $var = &#39;Text&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Int $var = &#39;Text&#39;;
 say $var;
 say $var.WHAT;</code></pre>
 </div>
@@ -1661,9 +1647,7 @@ say $var.WHAT;</code></pre>
 <div class="listingblock">
 <div class="title">数组和哈希同样可以为静态类型:</div>
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my Int @array = 1,2,3;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Int @array = 1,2,3;
 say @array;
 say @array.WHAT;
 
@@ -1755,9 +1739,7 @@ say %student-name.WHAT;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my Int $var;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Int $var;
 say $var.WHAT;    # (Int)
 my $var2;
 say $var2.WHAT;   # (Any)
@@ -1801,9 +1783,7 @@ say $var2.WHAT;   # (Any)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-{
+<pre class="highlight"><code class="language-raku" data-lang="raku">{
   my Str $var = &#39;Text&#39;;
   say $var; # 可以使用
 }
@@ -1815,9 +1795,7 @@ say $var;   # 不能使用, 会报错</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-{
+<pre class="highlight"><code class="language-raku" data-lang="raku">{
   my Str $var = &#39;Text&#39;;
   say $var;
 }
@@ -1834,9 +1812,7 @@ say $var;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my Int $var = 123;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Int $var = 123;
 say $var;</code></pre>
 </div>
 </div>
@@ -1984,9 +1960,7 @@ say @numbers;      #4</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $age = 19;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $age = 19;
 
 if $age &gt; 18 {
   say &#39;Welcome&#39;
@@ -1999,9 +1973,7 @@ if $age &gt; 18 {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $age = 19;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $age = 19;
 
 say &#39;Welcome&#39; if $age &gt; 18;</code></pre>
 </div>
@@ -2021,9 +1993,7 @@ say &#39;Welcome&#39; if $age &gt; 18;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-# 为变量不同的值运行相同的代码
+<pre class="highlight"><code class="language-raku" data-lang="raku"># 为变量不同的值运行相同的代码
 my $座位数 = 9;
 
 if $座位数 &lt;= 5 {
@@ -2046,9 +2016,7 @@ if $座位数 &lt;= 5 {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $clean-shoes = False;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $clean-shoes = False;
 
 if not $clean-shoes {
   say &#39;Clean your shoes&#39;
@@ -2060,9 +2028,7 @@ if not $clean-shoes {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $clean-shoes = False;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $clean-shoes = False;
 
 unless $clean-shoes {
   say &#39;Clean your shoes&#39;
@@ -2087,9 +2053,7 @@ unless $clean-shoes {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my Int $var=1;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Int $var=1;
 
 with $var {
   say &#39;Hello&#39;
@@ -2101,9 +2065,7 @@ with $var {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my Int $var;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Int $var;
 
 with $var {
   say &#39;Hello&#39;
@@ -2125,9 +2087,7 @@ with $var {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @array = [1,2,3];
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @array = [1,2,3];
 
 for @array -&gt; $array-item {
   say $array-item * 100
@@ -2145,9 +2105,7 @@ for @array -&gt; $array-item {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $var = 42;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $var = 42;
 
 given $var {
     when 0..50 { say &#39;Less than or equal to 50&#39;}
@@ -2165,9 +2123,7 @@ given $var {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $var = 42;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $var = 42;
 
 given $var {
     when 0..50 { say &#39;Less than or equal to 50&#39;;proceed}
@@ -2187,9 +2143,7 @@ Raku 是 C 语言家族中的一员。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-loop (my $i = 0; $i &lt; 5; $i++) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">loop (my $i = 0; $i &lt; 5; $i++) {
   say &#34;The current number is $i&#34;
 }</code></pre>
 </div>
@@ -2224,9 +2178,7 @@ loop (my $i = 0; $i &lt; 5; $i++) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;Hello Mam.&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;Hello Mam.&#39;;
 say &#39;Hello Sir.&#39;;</code></pre>
 </div>
 </div>
@@ -2250,9 +2202,7 @@ say &#39;Hello Sir.&#39;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $name;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $name;
 
 say &#34;Hi, what&#39;s your name?&#34;;
 $name = get;
@@ -2275,9 +2225,7 @@ say &#34;Dear $name welcome to Raku&#34;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $name = prompt &#34;Hi, what&#39;s your name? &#34;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $name = prompt &#34;Hi, what&#39;s your name? &#34;;
 
 say &#34;Dear $name welcome to Raku&#34;;</code></pre>
 </div>
@@ -2344,9 +2292,7 @@ Joanna 7</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $data = slurp &#34;datafile.txt&#34;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $data = slurp &#34;datafile.txt&#34;;
 say $data;</code></pre>
 </div>
 </div>
@@ -2358,9 +2304,7 @@ say $data;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $newdata = &#34;New scores:
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $newdata = &#34;New scores:
 Paul 10
 Paulie 9
 Paulo 11&#34;;
@@ -2380,9 +2324,7 @@ spurt &#34;newdatafile.txt&#34;, $newdata;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say dir;              # 列出当前目录下的文件和文件夹
+<pre class="highlight"><code class="language-raku" data-lang="raku">say dir;              # 列出当前目录下的文件和文件夹
 say dir &#34;/Documents&#34;; # 列出特定目录下的文件和文件夹</code></pre>
 </div>
 </div>
@@ -2391,9 +2333,7 @@ say dir &#34;/Documents&#34;; # 列出特定目录下的文件和文件夹</code
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-mkdir &#34;newfolder&#34;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">mkdir &#34;newfolder&#34;;
 rmdir &#34;newfolder&#34;;</code></pre>
 </div>
 </div>
@@ -2409,9 +2349,7 @@ rmdir &#34;newfolder&#34;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;script123.raku&#34;.IO.e;
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;script123.raku&#34;.IO.e;
 say &#34;folder123&#34;.IO.e;
 
 say &#34;script123.raku&#34;.IO.d;
@@ -2469,9 +2407,7 @@ Windows 下使用 <code>/</code> 或 <code>\\</code> 来定义目录<br/>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub alien-greeting {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub alien-greeting {
   say &#34;Hello earthlings&#34;;
 }
 
@@ -2494,9 +2430,7 @@ alien-greeting;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub say-hello (Str $name) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub say-hello (Str $name) {
     say &#34;Hello &#34; ~ $name ~ &#34;!!!!&#34;
 }
 say-hello &#34;Paul&#34;;
@@ -2513,9 +2447,7 @@ say-hello &#34;Paula&#34;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi greet($name) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi greet($name) {
     say &#34;Good morning $name&#34;;
 }
 multi greet($name, $title) {
@@ -2550,9 +2482,7 @@ greet &#34;Laura&#34;,&#34;Mrs.&#34;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub say-hello($name?) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub say-hello($name?) {
   with $name { say &#34;Hello &#34; ~ $name }
   else { say &#34;Hello Human&#34; }
 }
@@ -2566,9 +2496,7 @@ say-hello(&#34;Laura&#34;);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub say-hello($name=&#34;Matt&#34;) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub say-hello($name=&#34;Matt&#34;) {
   say &#34;Hello &#34; ~ $name;
 }
 say-hello;
@@ -2665,9 +2593,7 @@ say &#34;1.2 squared is equal to &#34; ~ squared(1.2);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub squared ($x --&gt; Int:D) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub squared ($x --&gt; Int:D) {
   return $x ** 2;
 }
 say &#34;1.2 squared is equal to &#34; ~ squared(1.2);</code></pre>
@@ -2758,9 +2684,7 @@ say map(&amp;squared, @array);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @array = &lt;1 2 3 4 5&gt;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @array = &lt;1 2 3 4 5&gt;;
 say map(-&gt; $x {$x ** 2}, @array);</code></pre>
 </div>
 </div>
@@ -2794,9 +2718,7 @@ say $squared(9);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @array       = &lt;7 8 9 0 1 2 4 3 5 6 7 8 9 &gt;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @array       = &lt;7 8 9 0 1 2 4 3 5 6 7 8 9 &gt;;
 my @final-array = reverse(sort(unique(@array)));
 say @final-array;</code></pre>
 </div>
@@ -2810,9 +2732,7 @@ say @final-array;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @array       = &lt;7 8 9 0 1 2 4 3 5 6 7 8 9 &gt;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @array       = &lt;7 8 9 0 1 2 4 3 5 6 7 8 9 &gt;;
 my @final-array = @array.unique.sort.reverse;
 say @final-array;</code></pre>
 </div>
@@ -2875,9 +2795,7 @@ say @final-array-v2;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @array = &lt;0 1 2 3 4 5 6 7 8 9 10&gt;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @array = &lt;0 1 2 3 4 5 6 7 8 9 10&gt;;
 sub is-even($var) { $var %% 2 };
 
 say @array&gt;&gt;.is-prime;
@@ -2918,9 +2836,7 @@ Raku 会保证结果的顺序与原始值的顺序相同。<br/>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $var = 2;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $var = 2;
 if $var == 1|2|3 {
     say &#34;The variable is 1 or 2 or 3&#34;
 }</code></pre>
@@ -3052,9 +2968,7 @@ say $lazylist;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub generate-greeting {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub generate-greeting {
     my $name = &#34;John Doe&#34;;
     sub greeting {
       say &#34;Good Morning $name&#34;;
@@ -3094,9 +3008,7 @@ $generated();</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub greeting-generator($period) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub greeting-generator($period) {
   return sub ($name) {
     return &#34;Good $period $name&#34;
   }
@@ -3172,9 +3084,7 @@ say $evening(&#34;Jane&#34;);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Human {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Human {
   has $.name;
   has $.age;
   has $.sex;
@@ -3197,9 +3107,7 @@ say $john;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my class Human {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my class Human {
 
 }</code></pre>
 </div>
@@ -3218,18 +3126,14 @@ my class Human {
 <div class="listingblock">
 <div class="title">直接访问变量:</div>
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my  $var = 7;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my  $var = 7;
 say $var;</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">封装:</div>
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $var = 7;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $var = 7;
 sub sayvar {
     $var;
 }
@@ -3260,9 +3164,7 @@ twigil 是次级的 <em>魔符(sigil)</em> ，用于魔符和属性名之间。<
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Human {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Human {
     has $!name;
     has $!age;
     has $!sex;
@@ -3308,9 +3210,7 @@ say $john;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Human {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Human {
     has $.name;
     has $.age;
     has $.sex;
@@ -3341,9 +3241,7 @@ say $john;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Human {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Human {
   has $.name;
   has $.age;
   has $.sex;
@@ -3405,9 +3303,7 @@ say $john.eligible;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method !iamprivate {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method !iamprivate {
     # code goes in here
 }
 
@@ -3429,9 +3325,7 @@ method iampublic {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Human {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Human {
     has $.name;
     my  $.counter = 0;
     method new($name) {
@@ -3459,9 +3353,7 @@ say Human.counter;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Human {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Human {
     has $.name;
     has $.age is rw;
 }
@@ -3498,9 +3390,7 @@ Employees 拥有 4  个属性: name, age, company 和 salary。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Human {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Human {
     has $.name;
     has $.age;
 }
@@ -3521,9 +3411,7 @@ class Employee {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Human {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Human {
     has $.name;
     has $.age;
 }
@@ -3554,9 +3442,7 @@ class Employee is Human {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Human {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Human {
     has $.name;
     has $.age;
     method introduce-yourself {
@@ -3581,9 +3467,7 @@ $jane.introduce-yourself;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Human {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Human {
     has $.name;
     has $.age;
     method introduce-yourself {
@@ -3626,9 +3510,7 @@ $jane.introduce-yourself;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class bar-chart {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class bar-chart {
   has Int @.bar-values;
   method plot {
     say @.bar-values;
@@ -3685,9 +3567,7 @@ $actual-vs-forecast.plot;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class bar-chart {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class bar-chart {
   has Int @.bar-values;
   method plot {
     say @.bar-values;
@@ -3743,9 +3623,7 @@ role 使用关键字 <code>role</code> 声明, 而想实现该 role 的类可以
 <div class="listingblock">
 <div class="title">使用 role 重写多重继承的例子</div>
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-role bar-chart {
+<pre class="highlight"><code class="language-raku" data-lang="raku">role bar-chart {
   has Int @.bar-values;
   method plot {
     say @.bar-values;
@@ -3790,9 +3668,7 @@ $actual-vs-forecast.plot;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-role bar-chart {
+<pre class="highlight"><code class="language-raku" data-lang="raku">role bar-chart {
   has Int @.bar-values;
   method plot {
     say @.bar-values;
@@ -3840,9 +3716,7 @@ Method &#39;plot&#39; must be resolved by class combo-chart because it exists in
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Human {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Human {
   has Str $.name;
   has Int $.age;
   method introduce-yourself {
@@ -3879,9 +3753,7 @@ if $jane ~~ Human {say &#39;Jane is a Human&#39;};</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Human {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Human {
   has Str $.name;
   has Int $.age;
   method introduce-yourself {
@@ -3974,9 +3846,7 @@ if $jane ~~ Human {say &#39;Jane is a Human&#39;};</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my Str $name;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Str $name;
 $name = &#34;Joanna&#34;;
 say &#34;Hello &#34; ~ $name;
 say &#34;How are you doing today?&#34;</code></pre>
@@ -3994,9 +3864,7 @@ How are you doing today?</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my Str $name;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Str $name;
 $name = 123;
 say &#34;Hello &#34; ~ $name;
 say &#34;今天过得怎么样？&#34;</code></pre>
@@ -4017,9 +3885,7 @@ say &#34;今天过得怎么样？&#34;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my Str $name;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Str $name;
 try {
   $name = 123;
   say &#34;Hello &#34; ~ $name;
@@ -4044,9 +3910,7 @@ say &#34;今天过得怎么样？&#34;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-try {
+<pre class="highlight"><code class="language-raku" data-lang="raku">try {
   # 代码在这里运行
   # 如果有东西出错, 脚本会进入到下面的 CATCH 块中
   # 如果什么错误也没有, 那么 CATCH 块会被忽略
@@ -4064,9 +3928,7 @@ try {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-try {
+<pre class="highlight"><code class="language-raku" data-lang="raku">try {
   # 代码在这里运行
   # 如果有东西出错, 脚本会进入到下面的 CATCH 块中
   # 如果什么错误也没有, 那么 CATCH 块会被忽略
@@ -4148,9 +4010,7 @@ X::AdHoc.new(payload =&gt; &#39;Error !&#39;).throw;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-if &#39;enlightenment&#39; ~~ m/ light / {
+<pre class="highlight"><code class="language-raku" data-lang="raku">if &#39;enlightenment&#39; ~~ m/ light / {
     say &#34;enlightenment 包含单词 light&#34;;
 }</code></pre>
 </div>
@@ -4280,9 +4140,7 @@ if &#39;enlightenment&#39; ~~ m/ light / {
 </table>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-if &#34;John123&#34; ~~ / \d / {
+<pre class="highlight"><code class="language-raku" data-lang="raku">if &#34;John123&#34; ~~ / \d / {
   say &#34;这不是有效名称，不允许使用数字&#34;;
 } else {
   say &#34;这是个有效名称&#34;
@@ -4305,9 +4163,7 @@ Unicode 属性闭合在 <code>&lt;: &gt;</code> 中。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-if &#34;Devanagari Numbers १२३&#34; ~~ / &lt;:N&gt; / {
+<pre class="highlight"><code class="language-raku" data-lang="raku">if &#34;Devanagari Numbers १२३&#34; ~~ / &lt;:N&gt; / {
   say &#34;包含数字&#34;;
 } else {
   say &#34;不包含数字&#34;
@@ -4337,9 +4193,7 @@ if &#34;John-Doe&#34; ~~ / &lt;:Pd&gt; / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-if &#39;abc&#39; ~~ m/ a.c / {
+<pre class="highlight"><code class="language-raku" data-lang="raku">if &#39;abc&#39; ~~ m/ a.c / {
     say &#34;匹配&#34;;
 }
 
@@ -4365,9 +4219,7 @@ if &#39;ac&#39; ~~ m/ a.c / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-if &#39;ac&#39; ~~ m/ a?c / {
+<pre class="highlight"><code class="language-raku" data-lang="raku">if &#39;ac&#39; ~~ m/ a?c / {
     say &#34;匹配&#34;;
   } else {
     say &#34;不匹配&#34;;
@@ -4385,9 +4237,7 @@ if &#39;c&#39; ~~ m/ a?c / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-if &#39;az&#39; ~~ m/ a*z / {
+<pre class="highlight"><code class="language-raku" data-lang="raku">if &#39;az&#39; ~~ m/ a*z / {
     say &#34;匹配&#34;;
   } else {
     say &#34;不匹配&#34;;
@@ -4417,9 +4267,7 @@ if &#39;z&#39; ~~ m/ a*z / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-if &#39;az&#39; ~~ m/ a+z / {
+<pre class="highlight"><code class="language-raku" data-lang="raku">if &#39;az&#39; ~~ m/ a+z / {
     say &#34;匹配&#34;;
   } else {
     say &#34;不匹配&#34;;
@@ -4665,9 +4513,7 @@ MD5 有多种加密存储在数据库中的口令的应用程序。
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Digest::MD5;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Digest::MD5;
 my $password = &#34;password123&#34;;
 my $hashed-password = Digest::MD5.new.md5_hex($password);
 
@@ -4714,9 +4560,7 @@ UTF-8 是能够以Unicode编码所有可能的字符或代码点的字符编码�
 <div class="listingblock">
 <div class="title">让我们看一下使用 Unicode 能输出什么</div>
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;a&#34;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;a&#34;;
 say &#34;\x0061&#34;;
 say &#34;\c[LATIN SMALL LETTER A]&#34;;</code></pre>
 </div>
@@ -4740,9 +4584,7 @@ say &#34;\c[LATIN SMALL LETTER A]&#34;;</code></pre>
 <div class="listingblock">
 <div class="title">现在我们来输出笑脸</div>
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;☺&#34;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;☺&#34;;
 say &#34;\x263a&#34;;
 say &#34;\c[WHITE SMILING FACE]&#34;;</code></pre>
 </div>
@@ -4750,9 +4592,7 @@ say &#34;\c[WHITE SMILING FACE]&#34;;</code></pre>
 <div class="listingblock">
 <div class="title">组合两个代码点的另外一个例子</div>
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;á&#34;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;á&#34;;
 say &#34;\x00e1&#34;;
 say &#34;\x0061\x0301&#34;;
 say &#34;\c[LATIN SMALL LETTER A WITH ACUTE]&#34;;</code></pre>
@@ -4774,9 +4614,7 @@ say &#34;\c[LATIN SMALL LETTER A WITH ACUTE]&#34;;</code></pre>
 <div class="listingblock">
 <div class="title">有些方法可以使用</div>
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;á&#34;.NFC;
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;á&#34;.NFC;
 say &#34;á&#34;.NFD;
 say &#34;á&#34;.uniname;</code></pre>
 </div>
@@ -4797,9 +4635,7 @@ LATIN SMALL LETTER A WITH ACUTE</code></pre>
 <div class="listingblock">
 <div class="title">Unicode 字符可以用作标识符:</div>
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $Δ = 1;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $Δ = 1;
 $Δ++;
 say $Δ;</code></pre>
 </div>
@@ -4807,9 +4643,7 @@ say $Δ;</code></pre>
 <div class="listingblock">
 <div class="title">Unicode 可以用作做算术:</div>
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $var = 2 + ⅒;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $var = 2 + ⅒;
 say $var;</code></pre>
 </div>
 </div>
@@ -4829,9 +4663,7 @@ say $var;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say (٤,٥,٦,1,2,3).sort;  # (1 2 3 4 5 6)
+<pre class="highlight"><code class="language-raku" data-lang="raku">say (٤,٥,٦,1,2,3).sort;  # (1 2 3 4 5 6)
 say 1 + ٩;               # 10</code></pre>
 </div>
 </div>
@@ -4845,9 +4677,7 @@ say 1 + ٩;               # 10</code></pre>
 <h5 id="_比较">比较</h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;a&#39; cmp &#39;B&#39;; # More</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;a&#39; cmp &#39;B&#39;; # More</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4862,9 +4692,7 @@ say &#39;a&#39; cmp &#39;B&#39;; # More</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;a&#39; unicmp &#39;B&#39;; # Less</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;a&#39; unicmp &#39;B&#39;; # Less</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4878,9 +4706,7 @@ say &#39;a&#39; unicmp &#39;B&#39;; # Less</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say (&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;D&#39;,&#39;E&#39;,&#39;F&#39;).sort;    # (D E F a b c)
+<pre class="highlight"><code class="language-raku" data-lang="raku">say (&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;D&#39;,&#39;E&#39;,&#39;F&#39;).sort;    # (D E F a b c)
 say (&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;D&#39;,&#39;E&#39;,&#39;F&#39;).collate; # (a b c D E F)</code></pre>
 </div>
 </div>
@@ -4919,9 +4745,7 @@ say (&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;D&#39;,&#39;E&#39;,&#39;F&#39;).co
 <h4 id="_数据并行化">14.1.1. 数据并行化</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @array = (0..50000);                     # 数组总体
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @array = (0..50000);                     # 数组总体
 my @result = @array.map({ is-prime $_ });   # 为每个数组元素调用 is-prime（判断是否为质数）
 say now - INIT now;                         # 输出脚本完成花费的时间</code></pre>
 </div>
@@ -4935,9 +4759,7 @@ say now - INIT now;                         # 输出脚本完成花费的时间<
 <div class="listingblock">
 <div class="title">幸运的是, 我们能同时在多个数组元素身上调用 <code>is-prime</code> 函数:</div>
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @array = (0..50000);                         # 数组总体
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @array = (0..50000);                         # 数组总体
 my @result = @array.race.map({ is-prime $_ });  # 为每个数组元素调用 is-prime（判断是否为质数）
 say now - INIT now;                             # 输出完成所花费的时间</code></pre>
 </div>
@@ -4986,9 +4808,7 @@ my @result = @array.hyper.map( {$_ + 1} );
 <h4 id="_任务并行化">14.1.2. 任务并行化</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @array1 = (0..49999);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @array1 = (0..49999);
 my @array2 = (2..50001);
 
 my @result1 = @array1.map( {is-prime($_ + 1)} );
@@ -5023,9 +4843,7 @@ say now - INIT now;</code></pre>
 <div class="listingblock">
 <div class="title">为什么不并行地执行呢?</div>
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @array1 = (0..49999);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @array1 = (0..49999);
 my @array2 = (2..50001);
 
 my $promise1 = start @array1.map( {$_ + 1} );

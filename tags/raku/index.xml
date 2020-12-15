@@ -51,10 +51,10 @@
       <guid>https://ohmyraku.github.io/creating-a-compiler-with-raku/</guid>
       <description>1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
  让我们从一个简单的解释器程序开始研究 Raku 强大的 grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。
- #!/usr/bin/env raku my x; x = 42; say x;   在理解此代码的含义时，你不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。
+ my x; x = 42; say x;   在理解此代码的含义时，你不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。
  该程序声明一个名为 x 的变量，为其赋一个整数值，然后将该值打印到控制台。
  假设你将代码保存在文件 test.lng 中。 现在让我们使用 Raku 读取它。
- #!/usr/bin/env raku my $code = &amp;#39;test.lng&amp;#39;.IO.slurp(); say $code;   将此 Raku 程序保存在另一个文件 lingua.raku 中，然后运行它：
+ my $code = &amp;#39;test.lng&amp;#39;.IO.slurp(); say $code;   将此 Raku 程序保存在另一个文件 lingua.raku 中，然后运行它：
  $ raku lingua.raku   如果你安装了 Raku，则会打印出我们测试程序的内容。
  1.1. Grammar 现在是时候使用 Raku grammar 解析程序了。 从语法上讲，grammar 是类，但是它们使用正则表达式描述其方法的行为，这些方法又称为 rule 和 token。 第一个应用的 rule 通常称为 TOP; Raku 选择它为默认开始规则。 Grammar 用于解析某些文本，因此只需对已定义的 grammar 调用 parse 方法并将文本传递给它即可。 所有这些都在我们的第一个程序中得到了证明：</description>
     </item>
@@ -67,13 +67,13 @@
       <guid>https://ohmyraku.github.io/cro/</guid>
       <description>1. Cro 开发工具 Cro包含帮助开发人员更有效地工作的工具。 当前，这些工具可通过命令行界面使用。 将来还将添加Web界面。 没有这些工具，完全有可能使用Cro。 它们旨在提供一些合理的默认值，但并不适合每个项目。
  1.1. 存根服务 可以使用cro stub命令对新服务进行存根。 一般用法是：
- #!/usr/bin/env raku cro stub &amp;lt;service-type&amp;gt; &amp;lt;service-id&amp;gt; &amp;lt;path&amp;gt; [&amp;#39;links-and-options&amp;#39;]   其中
+ cro stub &amp;lt;service-type&amp;gt; &amp;lt;service-id&amp;gt; &amp;lt;path&amp;gt; [&amp;#39;links-and-options&amp;#39;]   其中
  service-type是要创建的服务的类型 service-id是服务的ID（与其他cro命令一起使用；也将在.cro.yml中用作服务的默认描述性名称）
  路径是创建服务的位置 links-and-options指定指向应添加到存根的其他服务的链接，以及特定于服务类型的选项
  如果未指定链接和选项，则将以交互方式请求它们。 要提供选项，请使用类似于Perl 6冒号对的语法将其放在引号中，其中：foo启用选项，：！foo禁用选项，而：foo &amp;lt;bar&amp;gt;是带有值bar的选项foo。 例如：
- #!/usr/bin/env raku cro stub http foo services/foo &amp;#39;:!secure :websocket&amp;#39; cro stub http bar services/bar &amp;#39;:!secure :websocket&amp;#39;   已存根的服务从环境变量获取端口和证书配置，并且当服务之间存在关系时，其地址也将使用环境变量注入。 设置容器部署时，这很方便。
+ cro stub http foo services/foo &amp;#39;:!secure :websocket&amp;#39; cro stub http bar services/bar &amp;#39;:!secure :websocket&amp;#39;   已存根的服务从环境变量获取端口和证书配置，并且当服务之间存在关系时，其地址也将使用环境变量注入。 设置容器部署时，这很方便。
  链接导致存根服务包含创建可以与另一个端点通信的“客户端”的代码。 这些与选项一起使用，格式为：link &amp;lt;service-id：endpoint-id&amp;gt;。 service-id是目标.cro.yml的id字段，endpoint-id是该.cro.yml文件的终结点列表中条目的id字段。
- #!/usr/bin/env raku cro stub http foo services/foo &amp;#39;:link&amp;lt;flash-storage:http&amp;gt;&amp;#39;    1.</description>
+ cro stub http foo services/foo &amp;#39;:link&amp;lt;flash-storage:http&amp;gt;&amp;#39;    1.</description>
     </item>
     
     <item>
@@ -97,12 +97,12 @@
       <author>ohmyraku@outlook.com (ohmyraku)</author>
       <guid>https://ohmyraku.github.io/raku-at-a-glance/</guid>
       <description>1. Raku 概要 1.1. Hello, World Raku编译器可以从文件或+ e命令行开关的内容中读取程序。 最简单的“Hello，World！”程序如下所示：
- #!/usr/bin/env raku say &amp;#34;Hello, Raku &amp;#34;;   把它保存到文件中并运行:
+ say &amp;#34;Hello, Raku &amp;#34;;   把它保存到文件中并运行:
  $ raku hello.pl Hello, Raku   或者，你可以使用 +e 选项：
- #!/usr/bin/env raku $ raku -e&amp;#39;say &amp;#34;Hello, Raku&amp;#34;&amp;#39; Hello, Raku    1.2. 变量 1.2.1. 符号 Raku使用符号来标记变量。 这些符号部分兼容 使用Perl 5语法。 例如，标量，列表和散列分别使用$，@和％sigils。
- #!/usr/bin/env raku my $scalar = 42; say $scalar;   代码打印42并不奇怪。
+ $ raku -e&amp;#39;say &amp;#34;Hello, Raku&amp;#34;&amp;#39; Hello, Raku    1.2. 变量 1.2.1. 符号 Raku使用符号来标记变量。 这些符号部分兼容 使用Perl 5语法。 例如，标量，列表和散列分别使用$，@和％sigils。
+ my $scalar = 42; say $scalar;   代码打印42并不奇怪。
  考虑以下片段，它也给出了可预测的结果（方括号表示一个数组）：
- #!/usr/bin/env raku my @array = (10, 20, 30); say @array; # [10 20 30]   现在，让我们使用Raku的优点并重写上面的代码，使用更少的输入，更少的字符和更少的标点符号：</description>
+ my @array = (10, 20, 30); say @array; # [10 20 30]   现在，让我们使用Raku的优点并重写上面的代码，使用更少的输入，更少的字符和更少的标点符号：</description>
     </item>
     
     <item>
@@ -173,7 +173,7 @@
  输入数据（存储在一个名为 scores.txt 的文件中）如下所示：
  Beth Ana Charlie Dave Ana Dave | 3:0 Charlie Beth | 3:1 Ana Beth | 2:3 Dave Charlie | 3:0 Ana Charlie | 3:1 Beth Dave | 0:3   第一行是选手名单。之后的每一行都记录了一场比赛的结果。
  在 Raku 中, 有一种方法可以解决这个问题。
- #!/usr/bin/env raku use v6; # start by printing out the header. say &amp;#34;Tournament Results:\n&amp;#34;; my $file = open &amp;#39;scores.</description>
+ use v6; # start by printing out the header. say &amp;#34;Tournament Results:\n&amp;#34;; my $file = open &amp;#39;scores.</description>
     </item>
     
     <item>
@@ -231,15 +231,16 @@
       <pubDate>Wed, 05 Feb 2020 15:26:52 +0800</pubDate>
       <author>ohmyraku@outlook.com (ohmyraku)</author>
       <guid>https://ohmyraku.github.io/using-raku/</guid>
-      <description>字符串 1. 1.1 使用字符串 1.1. 1. 你好, 世界! #!/usr/bin/env raku print &amp;#39;Hello, World!&amp;#39;   有两个内置函数可打印到控制台：print 和 say。 两者都打印其参数，但是 say 例程另外以换行符结束输出。
+      <description>字符串 1. 1.1 使用字符串 1.1. 1. 你好, 世界! print &amp;#39;Hello, World!&amp;#39;   有两个内置函数可打印到控制台：print 和 say。 两者都打印其参数，但是 say 例程另外以换行符结束输出。
  因此，最快的解决方案是使用 say 并传递不带换行符的字符串：
- #!/usr/bin/env raku say &amp;#39;Hello, World!&amp;#39;   另一种解决方案是使用 print 并在字符串本身中包含 \n 字符：
- #!/usr/bin/env raku print &amp;#34;Hello, World!\n&amp;#34;   两个程序的输出是一样的：
+ say &amp;#39;Hello, World!&amp;#39;   另一种解决方案是使用 print 并在字符串本身中包含 \n 字符：
+ print &amp;#34;Hello, World!\n&amp;#34;   两个程序的输出是一样的：
  Hello, World!
  注意单引号和双引号之间的区别：单引号不会插入 \n 等特殊字符，而双引号会插入。 对于不带特殊字符的字符串使用双引号是没有错的，但是当你不希望在字符串中使用变量并且不需要插值变量时，最好使用适当的引号样式。
  在上面的示例中要看的另一件事是，单行程序不需要分号。
   1.2. 2. 跟人打招呼  询问用户的名字，并通过打印&amp;#34;你好, &amp;lt;名字&amp;gt;!&amp;#34; 来打招呼。
-   Raku 提供了一个简单的 prompt 函数，该函数执行两种操作：打印提示并读取输入。 因此，使用它的程序可能如下所示：</description>
+   Raku 提供了一个简单的 prompt 函数，该函数执行两种操作：打印提示并读取输入。 因此，使用它的程序可能如下所示：
+ say &amp;#39;Hello, &amp;#39; ~ prompt(&amp;#39;Enter your name: &amp;#39;) ~ &amp;#39;!</description>
     </item>
     
     <item>

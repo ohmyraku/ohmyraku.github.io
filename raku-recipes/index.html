@@ -408,9 +408,7 @@ Perl 6.d. and v0.8.2</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-echo workspace.xml &gt; .gitignore</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">echo workspace.xml &gt; .gitignore</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -453,9 +451,7 @@ echo workspace.xml &gt; .gitignore</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use v6;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use v6;
 sub MAIN( $dir = &#39;.&#39; ) {
     say tree( $dir )».List.flat.elems;
 }
@@ -704,9 +700,7 @@ sub tree( $dir ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Text::Markdown;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Text::Markdown;
 sub MAIN( $file ) {
     if $file.IO.e {
         my $md = parse-markdown-from-file($file);
@@ -768,9 +762,7 @@ sub MAIN( $file ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Recipes {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Recipes {
     has $.folder;
     has $!is-win = $*DISTRO.is-win;
     multi method show( $self where .is-win: ) {
@@ -788,9 +780,7 @@ Recipes.new(folder =&gt; &#34;recipes&#34;).show</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi method show( $self: ) {</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method show( $self: ) {</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -807,9 +797,7 @@ multi method show( $self: ) {</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say $*DISTRO</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $*DISTRO</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -817,9 +805,7 @@ say $*DISTRO</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say $*DISTRO.perl
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $*DISTRO.perl
 # OUTPUT: «Distro.new(release =&gt; &#34;9&#34;, is-win =&gt; Bool::False, path-sep =&gt; &#34;:&#34;,
 #     name =&gt; &#34;debian&#34;, auth  =&gt; &#34;https://www.debian.org/&#34;, version =&gt;
       v9.stretch,
@@ -834,9 +820,7 @@ say $*DISTRO.perl
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Recipes {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Recipes {
     has $.folder;
     has $.folder-path = IO::Path.new( $!folder );;
     has $!is-win = $*DISTRO.is-win;
@@ -886,9 +870,7 @@ Recipes.new(folder =&gt; &#34;recipes/desserts&#34;).show</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;Sentences → &#34;, $*ARGFILES.lines.join(&#34;\n&#34;) .split( / [ &#39;.&#39; | \v**2 ] / ).elems;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;Sentences → &#34;, $*ARGFILES.lines.join(&#34;\n&#34;) .split( / [ &#39;.&#39; | \v**2 ] / ).elems;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -913,9 +895,7 @@ say &#34;Sentences → &#34;, $*ARGFILES.lines.join(&#34;\n&#34;) .split( / [ &#
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;Sentences → &#34;, $*ARGFILES.slurp.split( / [ &#39;.&#39; | \v**2 ] / ).elems;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;Sentences → &#34;, $*ARGFILES.slurp.split( / [ &#39;.&#39; | \v**2 ] / ).elems;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -923,9 +903,7 @@ say &#34;Sentences → &#34;, $*ARGFILES.slurp.split( / [ &#39;.&#39; | \v**2 ] 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;Sentences → &#34;, $*ARGFILES.lines.grep( /^&lt;:L&gt;/ ) .join(&#34;\n&#34;).split( / [ &#39;.&#39; | \v**2 ] / ).elems;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;Sentences → &#34;, $*ARGFILES.lines.grep( /^&lt;:L&gt;/ ) .join(&#34;\n&#34;).split( / [ &#39;.&#39; | \v**2 ] / ).elems;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -969,9 +947,7 @@ say &#34;Sentences → &#34;, $*ARGFILES.lines.grep( /^&lt;:L&gt;/ ) .join(&#34;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Text::Markdown;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Text::Markdown;
 sub MAIN( $dir = &#39;.&#39; ) {
     my @promises = do for tree( $dir ).List.flat -&gt; $f {
         start extract-titles( $f )
@@ -1023,9 +999,7 @@ sub extract-titles ( $f ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub MAIN( $dir = &#39;.&#39; ) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub MAIN( $dir = &#39;.&#39; ) {
     my $supply = supply tree-emit( $dir );
     my @titles = gather {
         $supply.tap( -&gt; $f { take $f.IO.lines.head } )
@@ -1049,9 +1023,7 @@ sub tree-emit( $dir ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub MAIN( $dir = &#39;.&#39; ) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub MAIN( $dir = &#39;.&#39; ) {
     my $supply = supply tree-emit( $dir );
     say &#34;Now let&#39;s rock&#34;;
     my @titles = gather {
@@ -1122,9 +1094,7 @@ Let&#39;s emit recipes/main/rice/tuna-risotto.md
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $proc = Proc::Async.new: &#39;tail&#39;, &#39;-f&#39;, &#39;/tmp/ps.log&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $proc = Proc::Async.new: &#39;tail&#39;, &#39;-f&#39;, &#39;/tmp/ps.log&#39;;
 $proc.stdout.tap(-&gt; $v {
     $v ~~ m:g/([\d+] ** 3 % &#39;:&#39;) \s+ (\S+)/;
     with $/ {
@@ -1160,9 +1130,7 @@ say &#34;Finished&#34;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $find-proc = Proc::Async.new: &#39;find&#39;, @*ARGS[0] // &#34;recipes&#34;, &#34;-name&#34;, &#34;*.md&#34;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $find-proc = Proc::Async.new: &#39;find&#39;, @*ARGS[0] // &#34;recipes&#34;, &#34;-name&#34;, &#34;*.md&#34;;
 my $wc-proc = Proc::Async.new: &#39;wc&#39;;
 
 $wc-proc.bind-stdin: $find-proc.stdout;
@@ -1232,9 +1200,7 @@ say &#34;✓ Finished&#34;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my Blob $image = slurp( @*ARGS[0] // &#34;../recipes-images/rice.jpg&#34;, :bin);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Blob $image = slurp( @*ARGS[0] // &#34;../recipes-images/rice.jpg&#34;, :bin);
 # From here https://stackoverflow.com/a/43313299/891440 by user6096479
 my $index = 0;
 until $image[$index] == 255 and $image[$index+1] == any( 0xC0, 0xC2 ) {
@@ -1327,9 +1293,7 @@ await Promise.in(30).then: { say &#34;Finished watch&#34;; };</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $dir = @*ARGS[0] // &#39;recipes&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $dir = @*ARGS[0] // &#39;recipes&#39;;
 my $dir-watch-supply= $dir.IO.watch;
 my $ctrl-c = Promise.new;
 $dir-watch-supply.tap: -&gt; $change {
@@ -1387,9 +1351,7 @@ await $ctrl-c;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-one@ema.il
+<pre class="highlight"><code class="language-raku" data-lang="raku">one@ema.il
 another@electron.ic
 yetan@oth.er</code></pre>
 </div>
@@ -1399,9 +1361,7 @@ yetan@oth.er</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say [∩] do for dir( @*ARGS[0] // &#34;emails&#34;, test =&gt; /txt$/ ) -&gt; $f {
+<pre class="highlight"><code class="language-raku" data-lang="raku">say [∩] do for dir( @*ARGS[0] // &#34;emails&#34;, test =&gt; /txt$/ ) -&gt; $f {
     $f.lines;
 }</code></pre>
 </div>
@@ -1473,9 +1433,7 @@ say [∩] do for dir( @*ARGS[0] // &#34;emails&#34;, test =&gt; /txt$/ ) -&gt; $
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $ingredients = ( rice =&gt; 1, chickpeas =&gt; 1,
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $ingredients = ( rice =&gt; 1, chickpeas =&gt; 1,
                     onion =&gt; 2, tomatoes =&gt; 1,
                     garlic =&gt; 0.5, pasta =&gt; 1,
                     chestnut =&gt; 0.25, bellpeppers =&gt; 1).Mix;
@@ -1558,11 +1516,7 @@ Tuna       100g    130</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env raku
-
-use Parser::FreeXL::Native;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Parser::FreeXL::Native;
 
 my %ingredients = %( Rice =&gt; g =&gt; 350,
                      Tuna =&gt;  g =&gt; 400 ,
@@ -1599,9 +1553,7 @@ sub extract-measure( $str ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-zef install Parser::FreeXL::Native</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">zef install Parser::FreeXL::Native</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1672,9 +1624,7 @@ Cheese;100g;128</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Text::CSV;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Text::CSV;
 say csv(in =&gt; &#34;data/calories.csv&#34;,  sep =&gt; &#39;;&#39;, headers =&gt; &#34;auto&#34; );</code></pre>
 </div>
 </div>
@@ -1723,9 +1673,7 @@ say csv(in =&gt; &#34;data/calories.csv&#34;,  sep =&gt; &#39;;&#39;, headers =&
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-((c1 op c2) op c3).... op cm) ==&gt; X</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">((c1 op c2) op c3).... op cm) ==&gt; X</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1736,11 +1684,7 @@ say csv(in =&gt; &#34;data/calories.csv&#34;,  sep =&gt; &#39;;&#39;, headers =&
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env raku
-
-use Text::CSV;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Text::CSV;
 
 my %calories = csv(in =&gt; &#34;data/calories.csv&#34;,  sep =&gt; &#39;;&#39;, headers =&gt; &#34;auto&#34;, key =&gt; &#34;Ingredient&#34; );
 
@@ -1773,11 +1717,7 @@ sub parse-measure ( $description ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env raku
-
-use Text::CSV;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Text::CSV;
 
 csv(in =&gt; &#34;data/calories.csv&#34;,  sep =&gt; &#39;;&#39;, headers =&gt; &#34;auto&#34;, key =&gt; &#34;Ingredient&#34; ).pairs
     ==&gt; map( {
@@ -1867,11 +1807,7 @@ Chickpeas;100g;364;No;Yes;Yes;Yes
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env raku
-
-use Raku::Recipes;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes;
 
 my %calories-table = calories-table;
 
@@ -1901,9 +1837,7 @@ say &#34;Your recipe ⇒ &#34;, @main-course.pick, &#34; with &#34;, @side-dish.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-given (@main-course X @side-dish).grep( { @_[0] ne @_[1] } ).pick {
+<pre class="highlight"><code class="language-raku" data-lang="raku">given (@main-course X @side-dish).grep( { @_[0] ne @_[1] } ).pick {
     say &#34;Your recipe → @_[0] with &#34;, lc( @_[1] ), &#34; on the side&#34;
 }</code></pre>
 </div>
@@ -1952,9 +1886,7 @@ given (@main-course X @side-dish).grep( { @_[0] ne @_[1] } ).pick {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-.say for &#34;/home/jmerelo/Documentos/Nutrients.csv&#34;.IO.lines.grep: {
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say for &#34;/home/jmerelo/Documentos/Nutrients.csv&#34;.IO.lines.grep: {
     my @data = $_.split(&#39;&#34;,&#34;&#39;);
     $_ if @data[2] eq &#34;Protein&#34; and @data[4] &gt; 70 and @data[5] ~~ /^g/
 }</code></pre>
@@ -2017,9 +1949,7 @@ given (@main-course X @side-dish).grep( { @_[0] ne @_[1] } ).pick {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say [+] (1,2,4...*)[^64]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say [+] (1,2,4...*)[^64]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2027,9 +1957,7 @@ say [+] (1,2,4...*)[^64]</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say 2⁶⁴ -1;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 2⁶⁴ -1;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2040,9 +1968,7 @@ say 2⁶⁴ -1;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub digits( $_1, $_2 ) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub digits( $_1, $_2 ) {
     return $_1, $_2, { ($^a ~ $^b) % 9 } ... *;
 }
 
@@ -2099,9 +2025,7 @@ for 1..5 X 1..5 -&gt; @_ {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes;
 # We&#39;re using this code from Raku::Recipes:
 sub calories-table( $dir = &#34;.&#34; ) is export {
     csv(in =&gt; &#34;$dir/data/calories.csv&#34;,  sep =&gt; &#39;;&#39;, headers =&gt; &#34;auto&#34;,
@@ -2152,9 +2076,7 @@ sub proteins( @items ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi sub recipes( -1, $ ) { return [] };
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub recipes( -1, $ ) { return [] };
 multi sub recipes( $index,
                    $weight  where
                    %calories-table{@products[$index]}&lt;Calories&gt; &gt; $weight ) {
@@ -2311,11 +2233,7 @@ my @ingredients = recipes( @products.elems -1 , $max-calories );</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env raku
-
-use Math::Matrix;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Math::Matrix;
 
 # Recipe x ingredient
 # Columns = Recipes
@@ -2349,9 +2267,7 @@ say $food-matrix dot $person-recipes;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Math::Matrix;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Math::Matrix;
 my $first = Math::Matrix.new( [[1,2],[3,4]] );
 my $second = $first * 2;
 say $second + $first;</code></pre>
@@ -2386,11 +2302,7 @@ say $second + $first;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env raku
-
-use Array::Shaped::Console;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Array::Shaped::Console;
 
 sub mandelbrot( Complex $c --&gt; Seq ) {
     0, *²+$c ... *.abs &gt; 2;
@@ -2416,9 +2328,7 @@ say printed(@mandelbrot);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-0, *²+$c ... *.abs &gt; 2;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">0, *²+$c ... *.abs &gt; 2;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2547,11 +2457,7 @@ say printed(@mandelbrot);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env perl6
-
-my Int @primes = (1,2,3…∞).grep: *.is-prime;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Int @primes = (1,2,3…∞).grep: *.is-prime;
 
 my $prev = 0;
 my @contiguous = lazy gather {
@@ -2572,9 +2478,7 @@ say @contiguous[300..310];</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my Int @primes = (264...∞).grep: *.is-prime;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Int @primes = (264...∞).grep: *.is-prime;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2595,9 +2499,7 @@ my Int @primes = (264...∞).grep: *.is-prime;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub sum-divisors (Int $num) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub sum-divisors (Int $num) {
     my @divisors = grep { $num %% $_ }, 2..($num / 2).Int;
     return [+] 1, | @divisors;
 }
@@ -2615,11 +2517,7 @@ for 2..Inf -&gt; $i {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env raku
-
-use experimental :cached;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use experimental :cached;
 
 sub sum-divisors (Int $num) is cached {
     my @divisors = grep { $num %% $_ }, 2..($num / 2).Int;
@@ -2696,9 +2594,7 @@ say @amicable[^3];</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes;
 use JSON::Fast;
 
 my %conf = from-json(  slurp(@*ARGS[0] // &#34;config.json&#34; ) );
@@ -2770,9 +2666,7 @@ repetitions =  5
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes;
 use Config::INI;
 
 my %conf = Config::INI::parse_file( @*ARGS[0].IO.e ?? @*ARGS[0] !! &#34;config.ini&#34; );
@@ -2828,9 +2722,7 @@ calories: 500</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use YAMLish;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use YAMLish;
 use Raku::Recipes::Roly;
 use X::Raku::Recipes;
 
@@ -2895,9 +2787,7 @@ say &#34;Use &#34;, @recipe.join(&#34; and &#34;);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-Use 236.111111 g of cod and 304.878049 g of potatoes</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">Use 236.111111 g of cod and 304.878049 g of potatoes</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2939,9 +2829,7 @@ Chickpeas;100g;364;No;Yes;Yes;Yes;7;No</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes::Classy;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::Classy;
 
 sub MAIN( Bool :$Dairy, Bool :$Vegan, Bool :$Main, Bool :$Side, Bool :$Dessert ) {
     my %ingredients = Raku::Recipes::Classy.new().calories-table;
@@ -2967,9 +2855,7 @@ sub MAIN( Bool :$Dairy, Bool :$Vegan, Bool :$Main, Bool :$Side, Bool :$Dessert )
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-raku Chapter-5/filter-ingredients.p6 --Main --/Side</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">raku Chapter-5/filter-ingredients.p6 --Main --/Side</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2977,9 +2863,7 @@ raku Chapter-5/filter-ingredients.p6 --Main --/Side</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @flags = &lt;Dairy Vegan Main Side Dessert&gt;.grep: { defined ::{&#34;\$$_&#34;} };</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @flags = &lt;Dairy Vegan Main Side Dessert&gt;.grep: { defined ::{&#34;\$$_&#34;} };</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2995,9 +2879,7 @@ my @flags = &lt;Dairy Vegan Main Side Dessert&gt;.grep: { defined ::{&#34;\$$_&#
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say %ingredients.keys.grep: -&gt; $i {
+<pre class="highlight"><code class="language-raku" data-lang="raku">say %ingredients.keys.grep: -&gt; $i {
         so all @flags.map:  { %ingredients{$i}{$_} eq ::{&#34;\$$_&#34;} };
 }</code></pre>
 </div>
@@ -3021,9 +2903,7 @@ say %ingredients.keys.grep: -&gt; $i {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-Usage:
+<pre class="highlight"><code class="language-raku" data-lang="raku">Usage:
   Chapter-5/filter-ingredients.p6 [--Dairy] [--Vegan] [--Main] [--Side]
 [--Dessert]</code></pre>
 </div>
@@ -3033,9 +2913,7 @@ Usage:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes::Classy;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::Classy;
 
 multi sub MAIN() {
     say Raku::Recipes::Classy.new.products;
@@ -3057,9 +2935,7 @@ multi sub MAIN( Bool :$Dairy, Bool :$Vegan, Bool :$Main, Bool :$Side, Bool :$Des
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-# This is added to the previous example
+<pre class="highlight"><code class="language-raku" data-lang="raku"># This is added to the previous example
 multi sub MAIN(Bool :$Dairy, Bool :$Vegan, Bool :$Main,
            Bool :$Side, Bool :$Dessert,
            Int :$min-proteins) {
@@ -3075,9 +2951,7 @@ multi sub MAIN(Bool :$Dairy, Bool :$Vegan, Bool :$Main,
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-raku -Ilib Chapter-5/filter-ingredients-proteins.p6 --min-proteins=5 --Vegan
+<pre class="highlight"><code class="language-raku" data-lang="raku">raku -Ilib Chapter-5/filter-ingredients-proteins.p6 --min-proteins=5 --Vegan
 (Chickpeas Lentils Kidney beans)</code></pre>
 </div>
 </div>
@@ -3092,9 +2966,7 @@ raku -Ilib Chapter-5/filter-ingredients-proteins.p6 --min-proteins=5 --Vegan
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes::Roly;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::Roly;
 my $recipes = Raku::Recipes::Roly.new;
 
 subset Main of Str where {
@@ -3129,9 +3001,7 @@ sub MAIN( Int :$calories = 500,
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-Usage:
+<pre class="highlight"><code class="language-raku" data-lang="raku">Usage:
   Chapter-5/generate-recipe-cli.p6 --main=&lt;Main&gt; --side=&lt;Side&gt;
 [--calories=&lt;Int&gt;]</code></pre>
 </div>
@@ -3144,9 +3014,7 @@ Usage:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-raku -Ilib Chapter-5/generate-recipe-cli.p6 -Ilib --main=Sardines --side=&#34;Green kiwi&#34;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">raku -Ilib Chapter-5/generate-recipe-cli.p6 -Ilib --main=Sardines --side=&#34;Green kiwi&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3178,9 +3046,7 @@ raku -Ilib Chapter-5/generate-recipe-cli.p6 -Ilib --main=Sardines --side=&#34;Gr
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-export CALORIE_TABLE_FILE=../data/calories.csv</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">export CALORIE_TABLE_FILE=../data/calories.csv</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3194,9 +3060,7 @@ export CALORIE_TABLE_FILE=../data/calories.csv</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method new( $dir = &#34;.&#34; ) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method new( $dir = &#34;.&#34; ) {
     my $calorie-table-file = %*ENV&lt;CALORIE_TABLE_FILE&gt; // &#34;$dir/data/
     calories.csv&#34;;
     my %calories-table = csv(in =&gt; $calorie-table-file,
@@ -3265,9 +3129,7 @@ self.bless( :%calories-table, :@products );
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-FROM jjmerelo/alpine-raku:latest
+<pre class="highlight"><code class="language-raku" data-lang="raku">FROM jjmerelo/alpine-raku:latest
 LABEL version=&#34;0.0.2&#34; maintainer=&#34;JJ Merelo &lt;jjmerelo@GMail.com&gt;&#34;
 
 ADD META6.json Chapter-5/filter-ingredients-proteins.p6 ./
@@ -3359,9 +3221,7 @@ ENTRYPOINT [&#34;./filter-ingredients-proteins.p6&#34;]</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $can-haz-etcdctl = shell &#34;etcdctl --version&#34;, :out;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $can-haz-etcdctl = shell &#34;etcdctl --version&#34;, :out;
 
 my $output = $can-haz-etcdctl.out.slurp;
 die &#34;Can&#39;t find etcdctl&#34; unless $output ~~ /&#34;etcdctl version&#34;/;
@@ -3437,9 +3297,7 @@ sub MAIN( $key, $value ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $can-haz-etcdctl = shell &#34;etcdctl --version&#34;, :out;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $can-haz-etcdctl = shell &#34;etcdctl --version&#34;, :out;
 
 my $output = $can-haz-etcdctl.out.slurp;
 die &#34;Can&#39;t find etcdctl&#34; unless $output ~~ /&#34;etcdctl version&#34;/;
@@ -3479,9 +3337,7 @@ for @*ARGS -&gt; $key {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-docker pull jjmerelo/raku-recipes:Chapter-6</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">docker pull jjmerelo/raku-recipes:Chapter-6</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3489,9 +3345,7 @@ docker pull jjmerelo/raku-recipes:Chapter-6</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-docker -it –rm --entrypoint bash jjmerelo/raku-recipes:Chapter-6</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">docker -it –rm --entrypoint bash jjmerelo/raku-recipes:Chapter-6</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3531,9 +3385,7 @@ path /org/gtk/vfs/client/enumerator/2 (g-dbus-error-quark, 19)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-Feb 17 12:06:45 penny dbus[1450]: [system] Successfully activated service &#39;org.freedesktop.hostname1&#39;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">Feb 17 12:06:45 penny dbus[1450]: [system] Successfully activated service &#39;org.freedesktop.hostname1&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3544,9 +3396,7 @@ Feb 17 12:06:45 penny dbus[1450]: [system] Successfully activated service &#39;o
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;/var/log/syslog&#34;.IO.lines.grep: /&#34;-WARNING **&#34;/;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;/var/log/syslog&#34;.IO.lines.grep: /&#34;-WARNING **&#34;/;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3564,9 +3414,7 @@ docker/tmp for background deletion: %!s(&lt;nil&gt;). Deleting synchronously&#34
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @warnings = &#34;/var/log/syslog&#34;.IO.lines.grep: /warn/;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @warnings = &#34;/var/log/syslog&#34;.IO.lines.grep: /warn/;
 for @warnings -&gt; $w {
     my ($metadata, $message) = $w.split( &#34;: &#34;, 2 );
     say &#34;→ &#34;, $metadata.split(/\s+/)[*-1],
@@ -3588,9 +3436,7 @@ for @warnings -&gt; $w {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Syslog::Grammar;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Syslog::Grammar;
 use Syslog::Grammar::Actions;
 
 &#34;/var/log/syslog&#34;.IO.lines
@@ -3632,9 +3478,7 @@ for @lines -&gt; %w {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-⇒ firefox.desktop has warned about
+<pre class="highlight"><code class="language-raku" data-lang="raku">⇒ firefox.desktop has warned about
     message repeated 2 times: [ [Child 11536, MediaDecoderStateMachine #1] WARNING: (some stuff)]
     by 12:29:14</code></pre>
 </div>
@@ -3668,9 +3512,7 @@ for @lines -&gt; %w {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Term::Choose :choose;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Term::Choose :choose;
 use Term::TablePrint;
 use Libarchive::Filter;
 
@@ -3739,9 +3581,7 @@ while @files {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Git::Log;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Git::Log;
 
 git-log()&lt;&gt;
     ==&gt; map( { DateTime.new( $_&lt;AuthorDate&gt; ).Date } )
@@ -3788,9 +3628,7 @@ say @dates.join( &#34;\n&#34; );</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @dow = &lt;Nope Mon Tue Wed Thu Fri Sat Sun&gt;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @dow = &lt;Nope Mon Tue Wed Thu Fri Sat Sun&gt;;
 git-log()&lt;&gt;
     ==&gt; map( { DateTime.new( $_&lt;AuthorDate&gt; ).day-of-week } )
     ==&gt; classify( { $_ } )
@@ -3850,9 +3688,7 @@ Sun, 39</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Docker::API;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Docker::API;
 my Docker::API $docker-api .= new;
 my @images = $docker-api.images( dangling =&gt; True )[];
 
@@ -3927,9 +3763,7 @@ Trying to delete sha256:bf9a0c98b8a3dd48a313642dd014759dfe36625e0b2a2c0b35ed3c8d
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-docker run -itu root -v &#39;pwd&#39;:/home/raku --entrypoint sh jjmerelo/raku-recipes:Chapter6</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">docker run -itu root -v &#39;pwd&#39;:/home/raku --entrypoint sh jjmerelo/raku-recipes:Chapter6</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3937,9 +3771,7 @@ docker run -itu root -v &#39;pwd&#39;:/home/raku --entrypoint sh jjmerelo/raku-r
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-passwd rakurecipes</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">passwd rakurecipes</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3956,9 +3788,7 @@ passwd rakurecipes</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Sys::Lastlog;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Sys::Lastlog;
 say .user.username, &#34;, &#34;, .entry.timestamp
     for Sys::Lastlog.new().list.grep: *.entry.time &gt; 0;</code></pre>
 </div>
@@ -4022,9 +3852,7 @@ say .user.username, &#34;, &#34;, .entry.timestamp
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Text::CSV;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Text::CSV;
 # Utility functions for the Raku Recipes book
 unit module Raku::Recipes;
 our %calories-table is export;
@@ -4061,9 +3889,7 @@ multi proteins( @items )  is export  {...}</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-module Raku::Recipes {
+<pre class="highlight"><code class="language-raku" data-lang="raku">module Raku::Recipes {
  # Code and declarations would go here...
 }</code></pre>
 </div>
@@ -4079,9 +3905,7 @@ module Raku::Recipes {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Text::CSV;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Text::CSV;
 use Raku::Recipes;
 
 # Utility functions for the Raku Recipes book
@@ -4113,9 +3937,7 @@ method filter-ingredients( Bool :$Dairy, Bool :$Vegan, Bool :$Main, Bool :$Side,
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say Raku::Recipes::Classy.new.products;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say Raku::Recipes::Classy.new.products;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4129,9 +3951,7 @@ say Raku::Recipes::Classy.new.products;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#| Role that describes generic recipe ingredients
+<pre class="highlight"><code class="language-raku" data-lang="raku">#| Role that describes generic recipe ingredients
 unit role Raku::Recipes::Ingredients;
 
 has @.ingredients;
@@ -4146,9 +3966,7 @@ method gist {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes::Ingredients;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::Ingredients;
 
 #| A class with a fragment of a recipe: description + ingredients
 unit class Raku::Recipes::Recipe does Raku::Recipes::Ingredients;
@@ -4170,9 +3988,7 @@ method gist {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-role A { has $.foo = &#34;Foo&#34; };
+<pre class="highlight"><code class="language-raku" data-lang="raku">role A { has $.foo = &#34;Foo&#34; };
 role B is A { has $.bar = &#34;Bar&#34; };
 say A.new; # OUTPUT: A.new(foo =&gt; &#34;Foo&#34;)
 say B.new; # OUTPUT: B.new(bar =&gt; &#34;Bar&#34;, foo =&gt; &#34;Foo&#34;)
@@ -4188,9 +4004,7 @@ say C.new; # OUTPUT: C.new(baz =&gt; &#34;Baz&#34;, bar =&gt; &#34;Bar&#34;, foo
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-# Utility functions for the Raku Recipes book
+<pre class="highlight"><code class="language-raku" data-lang="raku"># Utility functions for the Raku Recipes book
 unit role Raku::Recipes::Roly;
 
 has %.calories-table;
@@ -4206,9 +4020,7 @@ method calories-table() { return %!calories-table };</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-unit class Raku::Recipes::Classy does Raku::Recipes::Roly;
+<pre class="highlight"><code class="language-raku" data-lang="raku">unit class Raku::Recipes::Classy does Raku::Recipes::Roly;
 
 # &#34;method new&#34; and attributes used to be here...
 multi method optimal-ingredients( -1, $ ) is export { return [] };
@@ -4245,9 +4057,7 @@ multi method optimal-ingredients( -1, $ ) is export { return [] };
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-# this would be a comment</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku"># this would be a comment</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4255,9 +4065,7 @@ multi method optimal-ingredients( -1, $ ) is export { return [] };
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#| Utility functions for the Raku Recipes book
+<pre class="highlight"><code class="language-raku" data-lang="raku">#| Utility functions for the Raku Recipes book
 unit class Raku::Recipes::Classy does Raku::Recipes::Roly;
 
 #| Compute optimal ingredients, knapsack style
@@ -4277,9 +4085,7 @@ method filter-ingredients( Bool :$Dairy,
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes::Classy;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::Classy;
 say Raku::Recipes::Classy.WHY;
 say Raku::Recipes::Classy.^lookup(&#39;filter-ingredients&#39;).WHY;</code></pre>
 </div>
@@ -4310,9 +4116,7 @@ Filters ingredients by type</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#| Utility functions for the Raku Recipes book
+<pre class="highlight"><code class="language-raku" data-lang="raku">#| Utility functions for the Raku Recipes book
 unit module Raku::Recipes;
 # ...
 
@@ -4325,9 +4129,7 @@ sub parse-measure ( $description ) is export { ... }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes;
 say Raku::Recipes.WHY;
 say &amp;parse-measure.HOW;
 say &amp;parse-measure.WHY;</code></pre>
@@ -4338,9 +4140,7 @@ say &amp;parse-measure.WHY;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-Utility functions for the Raku Recipes book
+<pre class="highlight"><code class="language-raku" data-lang="raku">Utility functions for the Raku Recipes book
 Perl6::Metamodel::ClassHOW.new
 Parses measure to return an array with components</code></pre>
 </div>
@@ -4350,9 +4150,7 @@ Parses measure to return an array with components</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &amp;parse-measure.HOW.name(&amp;parse-measure);
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &amp;parse-measure.HOW.name(&amp;parse-measure);
 say &amp;parse-measure.^name;</code></pre>
 </div>
 </div>
@@ -4364,9 +4162,7 @@ say &amp;parse-measure.^name;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say Raku::Recipes::Classy.^lookup(&#39;filter-ingredients&#39;).WHY;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say Raku::Recipes::Classy.^lookup(&#39;filter-ingredients&#39;).WHY;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4377,9 +4173,7 @@ say Raku::Recipes::Classy.^lookup(&#39;filter-ingredients&#39;).WHY;</code></pre
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say Raku::Recipes::Classy.^lookup(&#39;filter-ingredients&#39;).^name;
+<pre class="highlight"><code class="language-raku" data-lang="raku">say Raku::Recipes::Classy.^lookup(&#39;filter-ingredients&#39;).^name;
 say Raku::Recipes::Classy.new.^lookup(&#39;filter-ingredients&#39;).HOW;</code></pre>
 </div>
 </div>
@@ -4403,9 +4197,7 @@ Perl6::Metamodel::ClassHOW.new</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say Raku::Recipes::Classy.new.^lookup(&#39;optimal-ingredients&#39;).raku;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say Raku::Recipes::Classy.new.^lookup(&#39;optimal-ingredients&#39;).raku;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4413,9 +4205,7 @@ say Raku::Recipes::Classy.new.^lookup(&#39;optimal-ingredients&#39;).raku;</code
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-proto method optimal-ingredients (::T : |) {*}</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">proto method optimal-ingredients (::T : |) {*}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4423,9 +4213,7 @@ proto method optimal-ingredients (::T : |) {*}</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#| Uses the knapsack algorithms to compute the ingredients that maximize protein content.
+<pre class="highlight"><code class="language-raku" data-lang="raku">#| Uses the knapsack algorithms to compute the ingredients that maximize protein content.
 proto method optimal-ingredients (Int,$) {*}</code></pre>
 </div>
 </div>
@@ -4434,9 +4222,7 @@ proto method optimal-ingredients (Int,$) {*}</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say Raku::Recipes::Classy.new.^lookup(&#39;optimal-ingredients&#39;).WHY;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say Raku::Recipes::Classy.new.^lookup(&#39;optimal-ingredients&#39;).WHY;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4450,9 +4236,7 @@ say Raku::Recipes::Classy.new.^lookup(&#39;optimal-ingredients&#39;).WHY;</code>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-raku --doc=Text lib/Raku/Recipes.pm6</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">raku --doc=Text lib/Raku/Recipes.pm6</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4460,9 +4244,7 @@ raku --doc=Text lib/Raku/Recipes.pm6</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-module Raku::Recipes
+<pre class="highlight"><code class="language-raku" data-lang="raku">module Raku::Recipes
 
 Utility functions for the Raku Recipes book
 sub parse-measure(
@@ -4480,9 +4262,7 @@ Parses measure to return an array with components</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-raku --doc=Text -Ilib lib/Raku/Recipes/Classy.pm6</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">raku --doc=Text -Ilib lib/Raku/Recipes/Classy.pm6</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4493,9 +4273,7 @@ raku --doc=Text -Ilib lib/Raku/Recipes/Classy.pm6</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-# ... (some more code above and below suppressed for brevity) ...
+<pre class="highlight"><code class="language-raku" data-lang="raku"># ... (some more code above and below suppressed for brevity) ...
 #|[
 Creates a new calorie table, reading it from the directory indicated,
 the current directory by default. The file will be in a subdirectory data,
@@ -4512,9 +4290,7 @@ method products () { return @!products };
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method new(
+<pre class="highlight"><code class="language-raku" data-lang="raku">method new(
     $dir = &#34;.&#34;,
 )</code></pre>
 </div>
@@ -4534,9 +4310,7 @@ Basic getter for products
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-=begin pod
+<pre class="highlight"><code class="language-raku" data-lang="raku">=begin pod
 
 =head1 NAME
 
@@ -4623,9 +4397,7 @@ unit role Raku::Recipes::Roly:ver&lt;0.0.2&gt;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Test; # -*- mode: perl6 -*-
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Test; # -*- mode: perl6 -*-
 use Raku::Recipes::Roly;
 
 my $rr = Raku::Recipes::Roly.new( &#34;.&#34; );
@@ -4651,9 +4423,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use-ok(&#34;Raku::Recipes::Roly&#34;);</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">use-ok(&#34;Raku::Recipes::Roly&#34;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4681,9 +4451,7 @@ use-ok(&#34;Raku::Recipes::Roly&#34;);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-    ok 1 - Values processed
+<pre class="highlight"><code class="language-raku" data-lang="raku">    ok 1 - Values processed
     ok 2 - Many elements in the table
     1..2
 ok 1 - Products
@@ -4702,9 +4470,7 @@ ok 2 - Calories table
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-our $pod is export = $=pod[0];</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">our $pod is export = $=pod[0];</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4718,9 +4484,7 @@ our $pod is export = $=pod[0];</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-subtest &#34;There&#39;s documentation for the module&#34;, {
+<pre class="highlight"><code class="language-raku" data-lang="raku">subtest &#34;There&#39;s documentation for the module&#34;, {
     ok $pod, &#34;There&#39;s documentation&#34;;
 };</code></pre>
 </div>
@@ -4730,9 +4494,7 @@ subtest &#34;There&#39;s documentation for the module&#34;, {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-subtest &#34;Test declarator blocks&#34;, {
+<pre class="highlight"><code class="language-raku" data-lang="raku">subtest &#34;Test declarator blocks&#34;, {
     ok Raku::Recipes::Classy.WHY, &#34;Class described&#34;;
     ok Raku::Recipes::Classy.new.^lookup(&#39;filter-ingredients&#39;).WHY,
     &#34;Declarator blocks retrieved&#34;;
@@ -4911,9 +4673,7 @@ subtest &#34;Test declarator blocks&#34;, {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub gimme-calories( $first, $second?, $third?) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub gimme-calories( $first, $second?, $third?) {
     my ($product, $unit, $how-much);
     if $third {
         ($how-much, $unit, $product) = ($first, $second, $third);
@@ -4940,9 +4700,7 @@ sub gimme-calories( $first, $second?, $third?) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi sub how-many-calories( Str $description ){
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub how-many-calories( Str $description ){
     return samewith( | $description.split(/\s+/))
 }
 
@@ -4971,9 +4729,7 @@ multi sub how-many-calories( Int $how-much, Str $unit, Str $product ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @measures = 1000.rand.Int xx 10000;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @measures = 1000.rand.Int xx 10000;
 my @food = &lt;Rice Tuna Lentils&gt;;
 my @final = @measures.map( {$_ ~ &#34;g &#34;})  X~ @food;
 
@@ -5022,9 +4778,7 @@ say now - $start;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub parse-measure ( $description ) is export {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub parse-measure ( $description ) is export {
     $description ~~ / $&lt;unit&gt;=(&lt;:N&gt;*) \s* $&lt;measure&gt;=(\S+) /;
     my $unit = +$&lt;unit&gt; ?? +$&lt;unit&gt; !! 1;
     return ($unit, ~$&lt;measure&gt;);
@@ -5036,9 +4790,7 @@ sub parse-measure ( $description ) is export {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi sub unit-measure ( $description where /^&lt;:N&gt;/ ) is export {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub unit-measure ( $description where /^&lt;:N&gt;/ ) is export {
     $description ~~ / $&lt;unit&gt;=(&lt;:N&gt;+) \s* $&lt;measure&gt;=(\S+) /;
     return ( +$&lt;unit&gt;, ~$&lt;measure&gt; );
 }
@@ -5062,11 +4814,7 @@ multi sub unit-measure ( $description where /^&lt;alpha&gt;/ ) is export {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env perl6
-
-use Raku::Recipes;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes;
 
 my @measures = 1000.rand.Int xx 10000;
 
@@ -5105,9 +4853,7 @@ say Duration.new(now - $time);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi sub unit-measure ( $description
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub unit-measure ( $description
                          where  /$&lt;unit&gt;=(&lt;:N&gt;+) \s* $&lt;measure&gt;=(\S+) /) is export {
     my $value = +val( ~$&lt;unit&gt;  ) // unival( ~$&lt;unit&gt; );
     return ( $value, ~$&lt;measure&gt; );
@@ -5160,9 +4906,7 @@ multi sub unit-measure ( $description ) is export {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes::Roly;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::Roly;
 
 class X::Raku::Recipes::WrongType:api&lt;1&gt; is Exception {
     has $.desired-type is required;
@@ -5234,9 +4978,7 @@ class X::Raku::Recipes::WrongUnit:api&lt;1&gt; is Exception {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-# Check out the whole program in Chapter 5 when %conf{$part} ∉ $recipes.products {
+<pre class="highlight"><code class="language-raku" data-lang="raku"># Check out the whole program in Chapter 5 when %conf{$part} ∉ $recipes.products {
     X::Raku::Recipes::ProductMissing.new( :product(%conf{$part}) ).throw()
 }</code></pre>
 </div>
@@ -5246,9 +4988,7 @@ class X::Raku::Recipes::WrongUnit:api&lt;1&gt; is Exception {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-role X::Raku::Recipes::Missing:api&lt;1&gt; is Exception {
+<pre class="highlight"><code class="language-raku" data-lang="raku">role X::Raku::Recipes::Missing:api&lt;1&gt; is Exception {
     has $!part is required;
     has $!name is required;
     submethod BUILD( :$!part, :$!name ) {}
@@ -5272,9 +5012,7 @@ role X::Raku::Recipes::Missing:api&lt;1&gt; is Exception {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class X::Raku::Recipes::Missing::Part does X::Raku::Recipes::Missing {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class X::Raku::Recipes::Missing::Part does X::Raku::Recipes::Missing {
     submethod BUILD( :$!part=&#34;part of meal&#34;, :$!name) {}
 }
 
@@ -5295,9 +5033,7 @@ class X::Raku::Recipes::Missing::Product does X::Raku::Recipes::Missing {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method new( $dir = &#34;.&#34; ) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method new( $dir = &#34;.&#34; ) {
     my $calorie-table-file = %*ENV&lt;CALORIE_TABLE_FILE&gt; // &#34;$dir/data/calories.csv&#34;;
     X::Raku::Recipes::Missing::File.new(:name($calorie-table-file)).throw
             unless $calorie-table-file.IO.e;
@@ -5340,9 +5076,7 @@ method new( $dir = &#34;.&#34; ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class X::Raku::Recipes::WrongType:api&lt;0&gt; {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class X::Raku::Recipes::WrongType:api&lt;0&gt; {
     submethod BUILD() {
         X::Obsolete.new(old =&gt; &#34;X::Raku::Recipes::WrongType:api&lt;0&gt;&#34;,
             replacement =&gt; &#34;X::Raku::Recipes::WrongType:api&lt;1&gt; in Raku::Recipes&#34;,
@@ -5357,9 +5091,7 @@ class X::Raku::Recipes::WrongType:api&lt;0&gt; {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-Unsupported use of X::Raku::Recipes::WrongType:api&lt;0&gt;; using Raku::Recipes
+<pre class="highlight"><code class="language-raku" data-lang="raku">Unsupported use of X::Raku::Recipes::WrongType:api&lt;0&gt;; using Raku::Recipes
 please use X::Raku::Recipes::WrongType:api&lt;1&gt; in
 Raku::Recipes
   in submethod BUILD at /home/jmerelo/progs/perl6/raku-recipes-apress/
@@ -5376,9 +5108,7 @@ Raku::Recipes
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes;
 use Colorizable;
 
 class X::Raku::Recipes::Obsolete is Exception {
@@ -5452,11 +5182,7 @@ class X::Raku::Recipes::Obsolete is Exception {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env raku
-
-use Raku::Recipes::Calorie-Computer;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::Calorie-Computer;
 use X::Raku::Recipes;
 use X::Raku::Recipes::Missing;
 
@@ -5507,9 +5233,7 @@ CATCH {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-Calories for a main dish of Tuna and side of Rice are 585</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">Calories for a main dish of Tuna and side of Rice are 585</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5523,9 +5247,7 @@ Calories for a main dish of Tuna and side of Rice are 585</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-{
+<pre class="highlight"><code class="language-raku" data-lang="raku">{
     $calories = $rrr.calories-for( main =&gt; $main =&gt; 200,
                                    side =&gt; $side =&gt; 250 );
     CATCH {
@@ -5560,9 +5282,7 @@ Calories for a main dish of Tuna and side of Rice are 585</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-CATCH {
+<pre class="highlight"><code class="language-raku" data-lang="raku">CATCH {
        when X::Raku::Recipes::Missing::Product {
             given .message {
                 when /$main/ { $main = &#34;Pasta&#34; }
@@ -5683,9 +5403,7 @@ CATCH {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-unit grammar Raku::Recipes::Grammar::Ingredients;
+<pre class="highlight"><code class="language-raku" data-lang="raku">unit grammar Raku::Recipes::Grammar::Ingredients;
 
 token TOP { &lt;row&gt; }
 token row { &#34;*&#34; | &#34;-&#34; | &#34;✅&#34; \h+ &lt;ingredient&gt; }
@@ -5714,9 +5432,7 @@ token unit     { &#34;g&#34; | &#34;tbsp&#34; | &#34;clove&#34; | &#34;tbsps&#34
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token row { [&#34;*&#34; || &#34;-&#34; || &#34;✅&#34;] \h+ &lt;ingredient&gt; }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">token row { [&#34;*&#34; || &#34;-&#34; || &#34;✅&#34;] \h+ &lt;ingredient&gt; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5730,9 +5446,7 @@ token row { [&#34;*&#34; || &#34;-&#34; || &#34;✅&#34;] \h+ &lt;ingredient&gt;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes::Grammar::Ingredients;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::Grammar::Ingredients;
 
 my $row = Raku::Recipes::Grammar::Ingredients.parse(&#34;* 2 tbsps&#34;);
 say &#34;We need to use $row&lt;row&gt;&lt;ingredient&gt;&lt;quantity&gt; $row&lt;row&gt;&lt;ingredient&gt;&lt;unit&gt; of whatever&#34;</code></pre>
@@ -5755,9 +5469,7 @@ say &#34;We need to use $row&lt;row&gt;&lt;ingredient&gt;&lt;quantity&gt; $row&l
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token row { &lt;dingbat&gt; &lt;whitespace&gt; &lt;ingredient&gt; }
+<pre class="highlight"><code class="language-raku" data-lang="raku">token row { &lt;dingbat&gt; &lt;whitespace&gt; &lt;ingredient&gt; }
 token dingbat { [&#34;*&#34; || &#34;-&#34; || &#34;✅&#34;] }
 token whitespace { \h+ }</code></pre>
 </div>
@@ -5770,9 +5482,7 @@ token whitespace { \h+ }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes::Grammar::ErrorReporting;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::Grammar::ErrorReporting;
 
 my $measure = Raku::Recipes::Grammar::ErrorReporting.parse(&#34;* 2 tbsp&#34;);
 say ~$measure&lt;row&gt;&lt;ingredient&gt;&lt;quantity&gt;, &#34; of &#34;,
@@ -5792,9 +5502,7 @@ say ~$measure&lt;row&gt;&lt;ingredient&gt;&lt;quantity&gt;, &#34; of &#34;,
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token row {  &lt;.dingbat&gt; &lt;.whitespace&gt; &lt;ingredient&gt; }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">token row {  &lt;.dingbat&gt; &lt;.whitespace&gt; &lt;ingredient&gt; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5854,9 +5562,7 @@ token row {  &lt;.dingbat&gt; &lt;.whitespace&gt; &lt;ingredient&gt; }</code></p
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use GeoIP2;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use GeoIP2;
 my $ip = qx{curl -s ifconfig.me};
 my $geo = GeoIP2.new( path =&gt; &#39;Chapter-9/GeoLite2-Country.mmdb&#39; );
 my $location = $geo.locate( ip =&gt; $ip );
@@ -5872,9 +5578,7 @@ say &#34;The IP is in $location&lt;country&gt;&lt;names&gt;&lt;en&gt;, $location
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-IP 在西班牙，欧洲</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">IP 在西班牙，欧洲</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5921,9 +5625,7 @@ IP 在西班牙，欧洲</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use HTTP::UserAgent;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use HTTP::UserAgent;
 
 my $URL = @*ARGS[0] // &#34;https://en.wikibooks.org/wiki/Cookbook:Apple_Pie_I&#34;;
 my $recipr = HTTP::UserAgent.new;
@@ -5976,9 +5678,7 @@ say @ingredients.map( ~*[0] ).unique;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use WWW;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use WWW;
 use DOM::Tiny;
 
 my $URL = @*ARGS[0] // &#34;https://en.wikibooks.org/wiki/Cookbook:Apple_Pie_I&#34;;
@@ -6057,9 +5757,7 @@ say @my-lis.map( &#34;→ &#34; ~ *.all-text).unique.join(&#34;\n&#34;);</code><
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Cro::HTTP::Client;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Cro::HTTP::Client;
 use URI::Encode;
 
 my $appID = %*ENV{&#39;EDAMAM_APP_ID&#39;};
@@ -6091,9 +5789,7 @@ say %data&lt;hits&gt;.map( *&lt;recipe&gt;&lt;label&gt; ).join: &#34;\n&#34;;</c
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-Summer water
+<pre class="highlight"><code class="language-raku" data-lang="raku">Summer water
 Pineapple Coconut Water
 Water Toast
 Water Kefir from &#39;Mastering Fermentation&#39;
@@ -6134,9 +5830,7 @@ ORDER BY UCASE(STR(?recipeLabel))</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Wikidata::API;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Wikidata::API;
 my $query = &#34;Chapter-9/ingredients.sparql&#34;.IO.slurp;
 my $recipes-with-garlic= query($query);
 say &#34;Recipes with garlic:\n&#34;,
@@ -6198,9 +5892,7 @@ sub utf8y ( $str ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Sys::IP;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Sys::IP;
 use Services::PortMapping;
 use CheckSocket;
 
@@ -6291,9 +5983,7 @@ A healthy way to start a meal, or to munch between them.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Text::Markdown;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Text::Markdown;
 
 sub MAIN( $filename = &#34;recipes/appetizers/carrot-wraps.md&#34;) {
     my $md = parse-markdown-from-file($filename);
@@ -6370,9 +6060,7 @@ Ingredient → 4 wheat tortillas</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes;
 use Markit;
 
 my $md = Markdown.new;
@@ -6441,9 +6129,7 @@ for recipes() -&gt; $recipe {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes;
 use Markit;
 use Template::Classic;
 
@@ -6528,9 +6214,7 @@ for recipes() -&gt; $recipe {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes;
 use Markit;
 use Template::Classic;
 use Text::Markdown;
@@ -6606,9 +6290,7 @@ spurt(&#34;build/index.html&#34;, generate-index( %links ).eager.join);</code></
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Data::StaticTable;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Data::StaticTable;
 use Raku::Recipes::Texts;
 
 
@@ -6652,9 +6334,7 @@ say $recipes.take( @rice ).display;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my Data::StaticTable::Position @rice =
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Data::StaticTable::Position @rice =
         $recipe-query.grep(rx/rice/, &#39;Ingredients&#39;):n;</code></pre>
 </div>
 </div>
@@ -6674,9 +6354,7 @@ my Data::StaticTable::Position @rice =
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my Data::StaticTable::Position @rice =
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Data::StaticTable::Position @rice =
         $recipe-query.grep(rx/rice/, &#39;Ingredients&#39;, :n );</code></pre>
 </div>
 </div>
@@ -6685,9 +6363,7 @@ my Data::StaticTable::Position @rice =
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my Data::StaticTable::Position @rice =
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Data::StaticTable::Position @rice =
         $recipe-query.grep(rx/rice/, &#39;Ingredients&#39;, n =&gt; True);</code></pre>
 </div>
 </div>
@@ -6723,9 +6399,7 @@ my Data::StaticTable::Position @rice =
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-constant $prefix = &#34;recipes/main/rice/&#34;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">constant $prefix = &#34;recipes/main/rice/&#34;;
 say &#34;Different&#34;
     if files_are_different( &#34;$prefix/tuna-risotto.md&#34;,
                                      &#34;$prefix/tuna-risotto-low-cost.md&#34;);</code></pre>
@@ -6736,9 +6410,7 @@ say &#34;Different&#34;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-constant $prefix = &#34;recipes/main/rice/&#34;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">constant $prefix = &#34;recipes/main/rice/&#34;;
 say sift4( &#34;$prefix/tuna-risotto.md&#34;.IO.slurp,
                &#34;$prefix/tuna-risotto-low-cost.md&#34;.IO.slurp, 100, 400);</code></pre>
 </div>
@@ -6751,9 +6423,7 @@ say sift4( &#34;$prefix/tuna-risotto.md&#34;.IO.slurp,
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Algorithm::Diff;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Algorithm::Diff;
 
 constant $prefix = &#34;recipes/main/rice/&#34;;
 for sdiff( &#34;$prefix/tuna-risotto.md&#34;.IO.lines, &#34;$prefix/tuna-risotto-low-cost.md&#34;.IO.lines).rotor(3)
@@ -6835,9 +6505,7 @@ EO
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Cro::HTTP::Server;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Cro::HTTP::Server;
 use Cro::HTTP::Router;
 use Raku::Recipes::Roly;
 
@@ -6886,9 +6554,7 @@ react whenever signal(SIGINT) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Cro::HTTP::Client;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Cro::HTTP::Client;
 my $ingredient = @*ARGS[0] // &#34;water&#34;;
 my $cro = Cro::HTTP::Client.new( base-uri =&gt; &#34;http://localhost:31415/Ingredient/&#34; );
 my $response = await $cro.get( $ingredient );
@@ -6928,9 +6594,7 @@ with requests.get(&#39;http://localhost:31415/Ingredient/&#39;+ingredient) as r:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $recipes = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $recipes = route {
     get -&gt; &#34;Ingredient&#34;, Str $ingredient where $rrr.is-ingredient($ingredient) {
         content &#39;application/json&#39;, $rrr.calories-table{$ingredient};
     }
@@ -6953,9 +6617,7 @@ my $recipes = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub static-routes {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub static-routes {
     route {
         get -&gt; *@path {
             static &#39;build/&#39;, @path, :indexes&lt;index.html index.htm&gt;;
@@ -7016,9 +6678,7 @@ my $recipes = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub keep-routes is export {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub keep-routes is export {
     route {
         put -&gt; Str $ingredient where $rrr.is-ingredient($ingredient) {
             $pantry ∪= $ingredient;
@@ -7127,9 +6787,7 @@ cro: 1
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-unit role Raku::Recipes::Grammar::Measures;
+<pre class="highlight"><code class="language-raku" data-lang="raku">unit role Raku::Recipes::Grammar::Measures;
 token quantity { &lt;:N&gt;+ }
 token unit     { &#34;g&#34; | &#34;tbsp&#34; | &#34;clove&#34; | &#34;tbsps&#34; | &#34;cloves&#34; }</code></pre>
 </div>
@@ -7139,9 +6797,7 @@ token unit     { &#34;g&#34; | &#34;tbsp&#34; | &#34;clove&#34; | &#34;tbsps&#34
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes::Roly;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::Roly;
 use Raku::Recipes::Grammar::Measures;
 
 my @products;
@@ -7225,9 +6881,7 @@ Deno.exit(0);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Cro::HTTP::Router;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Cro::HTTP::Router;
 use Cro::HTTP::Router::WebSocket;
 use Raku::Recipes::Grammar::Measured-Ingredients;
 use Raku::Recipes::Roly;
@@ -7340,9 +6994,7 @@ sub routes() is export {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes::Roly;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::Roly;
 use X::Raku::Recipes;
 my $rrr = Raku::Recipes::Roly.new();
 unit module Raku::Recipes::Grammar::Actions;
@@ -7390,9 +7042,7 @@ class Measured-Ingredients {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $item = Raku::Recipes::Grammar::Measured-Ingredients.parse(&#34;2 egg&#34;,
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $item = Raku::Recipes::Grammar::Measured-Ingredients.parse(&#34;2 egg&#34;,
         actions =&gt; Raku::Recipes::Grammar::Actions::Measured-Ingredients.new);</code></pre>
 </div>
 </div>
@@ -7413,11 +7063,7 @@ my $item = Raku::Recipes::Grammar::Measured-Ingredients.parse(&#34;2 egg&#34;,
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env perl6
-
-use Telegram;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Telegram;
 use Raku::Recipes::Grammar::Measured-Ingredients;
 use Raku::Recipes::Grammar::Actions;
 use Raku::Recipes::Roly;
@@ -7468,9 +7114,7 @@ react {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi method calories( Pair $ingredient ) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method calories( Pair $ingredient ) {
     return self.calories( $ingredient.key, $ingredient.value.value );
 }</code></pre>
 </div>
@@ -7492,9 +7136,7 @@ multi method calories( Pair $ingredient ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-whenever $bot.messagesTap -&gt; $msg {
+<pre class="highlight"><code class="language-raku" data-lang="raku">whenever $bot.messagesTap -&gt; $msg {
         $msg.text ~~ /\/$&lt;command&gt; = (\w+) \h* $&lt;args&gt; = (.*)/;
         say &#34;$msg $&lt;command&gt;&#34;;
         given $&lt;command&gt; {
@@ -7563,9 +7205,7 @@ EOM
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Cro::HTTP::Test;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Cro::HTTP::Test;
 
 require &#34;ingredients-microservice-v3.p6&#34; &lt;&amp;static-routes&gt;;
 test-service static-routes, {
@@ -7585,9 +7225,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub static-routes is export { ... }
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub static-routes is export { ... }
 sub type-routes is export { ... }
 sub ingredient-routes is export { ... }
 # Route block definition here
@@ -7630,9 +7268,7 @@ ok 1 - GET /
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Cro::HTTP::Router;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Cro::HTTP::Router;
 use Raku::Recipes::Roly;
 use Raku::Recipes;
 
@@ -7699,11 +7335,7 @@ sub keep-routes is export {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env perl6
-
-use Cro::HTTP::Test;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Cro::HTTP::Test;
 use My::Routes;
 
 test-service static-routes, {
@@ -7750,9 +7382,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-test get(&#34;Dessert&#34;),
+<pre class="highlight"><code class="language-raku" data-lang="raku">test get(&#34;Dessert&#34;),
     status =&gt; 200,
     json =&gt; /Apple/;</code></pre>
 </div>
@@ -7768,9 +7398,7 @@ test get(&#34;Dessert&#34;),
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-test get(&#34;Olive%20Oil&#34;),
+<pre class="highlight"><code class="language-raku" data-lang="raku">test get(&#34;Olive%20Oil&#34;),
         status =&gt; 200,
         content-type =&gt; &#34;application/json&#34;,
         body =&gt; *&lt;Vegan&gt; == True;</code></pre>
@@ -7811,11 +7439,7 @@ test get(&#34;Olive%20Oil&#34;),
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env perl6
-
-use Raku::Recipes::Texts;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::Texts;
 
 my $builder = Channel.new;
 
@@ -7860,9 +7484,7 @@ await $p;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Cro::HTTP::Router;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Cro::HTTP::Router;
 use Raku::Recipes::Texts;
 
 my $lock = Lock::Async.new;
@@ -7909,11 +7531,7 @@ sub rebuild-route is export {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env perl6
-
-use Cro::HTTP::Server;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Cro::HTTP::Server;
 use Cro::HTTP::Router;
 use My::Routes;
 use My::Rebuild;
@@ -8081,9 +7699,7 @@ Skyr drink;100g;54.0;7.4</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-unit role Raku::Recipes::Dator;
+<pre class="highlight"><code class="language-raku" data-lang="raku">unit role Raku::Recipes::Dator;
 
 method get-ingredient( Str $ingredient ) {...}
 method get-ingredients() {...}
@@ -8103,9 +7719,7 @@ method delete-ingredient( Str $ingredient) {...}</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Text::CSV;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Text::CSV;
 use Raku::Recipes::Dator;
 use Raku::Recipes;
 use X::Raku::Recipes::Missing;
@@ -8156,9 +7770,7 @@ method delete-ingredient( Str $ingredient) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes::CSVDator;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::CSVDator;
 use X::Raku::Recipes::Missing;
 use JSON::Fast;
 
@@ -8188,9 +7800,7 @@ sub MAIN( $ingredient ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use DBIish;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use DBIish;
 use Raku::Recipes::Dator;
 use Raku::Recipes;
 use X::Raku::Recipes::Missing;
@@ -8316,9 +7926,7 @@ DELETE
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes::CSVDator;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::CSVDator;
 use Raku::Recipes::SQLator;
 use X::Raku::Recipes::Missing;
 use JSON::Fast;
@@ -8378,9 +7986,7 @@ sub MAIN( $ingredient, $data-source = &#34;Chapter-12/ingredients.sqlite3&#34; )
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-Raku::Recipes::Redisator:
+<pre class="highlight"><code class="language-raku" data-lang="raku">Raku::Recipes::Redisator:
 use Redis;
 use Raku::Recipes::Dator;
 use Raku::Recipes;
@@ -8447,9 +8053,7 @@ method delete-ingredient( Str $ingredient) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Redis;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Redis;
 use Raku::Recipes::Redisator;
 use Raku::Recipes::SQLator;
 
@@ -8473,9 +8077,7 @@ say $redisr.get-ingredients;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes;
 
 unit role Raku::Recipes::Base;
 
@@ -8508,9 +8110,7 @@ method check-unit( Str $ingredient where $ingredient ∈ self.products,
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes::CSVDator;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::CSVDator;
 use Raku::Recipes::SQLator;
 use Raku::Recipes::Redisator;
 use Raku::Recipes::Base;
@@ -8537,9 +8137,7 @@ sub MAIN( $ingredient, $type, $data-source = &#34;Chapter-12/ingredients.sqlite3
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-raku Chapter-12/check-ingredient.p6 Rice Vegan 127.0.0.1:6379</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">raku Chapter-12/check-ingredient.p6 Rice Vegan 127.0.0.1:6379</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -8582,9 +8180,7 @@ raku Chapter-12/check-ingredient.p6 Rice Vegan 127.0.0.1:6379</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Red:api&lt;2&gt;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Red:api&lt;2&gt;;
 
 model Raku::Recipes::IngRedient is rw is table&lt;Ingredient&gt; {
 
@@ -8620,10 +8216,7 @@ model Raku::Recipes::IngRedient is rw is table&lt;Ingredient&gt; {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env perl6
-use Red;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Red;
 use Raku::Recipes::IngRedient;
 use Raku::Recipes::SQLator;
 
@@ -8701,11 +8294,7 @@ say &#34;Vegan ingredients →&#34;,
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env perl6
-
-use MongoDB::Client;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use MongoDB::Client;
 use MongoDB::Database;
 use BSON::Document;
 use Raku::Recipes::Texts;
@@ -8773,9 +8362,7 @@ if $doc&lt;ok&gt; {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-db.recipes.find( { &#34;title&#34; : { $regex: /Tuna/ } } )
+<pre class="highlight"><code class="language-raku" data-lang="raku">db.recipes.find( { &#34;title&#34; : { $regex: /Tuna/ } } )
 
 use MongoDB::Client;
 use MongoDB::Database;
@@ -8809,9 +8396,7 @@ while $cursor.fetch -&gt; BSON::Document $d {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-Tuna risotto
+<pre class="highlight"><code class="language-raku" data-lang="raku">Tuna risotto
 Tuna risotto</code></pre>
 </div>
 </div>
@@ -8854,9 +8439,7 @@ Tuna risotto</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Wikidata::API;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Wikidata::API;
 use Raku::Recipes::SQLator;
 
 my $dator = Raku::Recipes::SQLator.new;
@@ -8885,9 +8468,7 @@ sub utf8y ( $str ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-?item ?label &#34;$ingredient&#34;\@en.</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">?item ?label &#34;$ingredient&#34;\@en.</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -8898,9 +8479,7 @@ sub utf8y ( $str ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $result = query($query);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $result = query($query);
 if $result&lt;results&gt;&lt;bindings&gt; -&gt; @r {
 say &#34;$ingredient ⇒\n\t&#34;, @r.first&lt;itemDescription&gt;&lt;value&gt;; }</code></pre>
 </div>
@@ -8990,11 +8569,7 @@ beef ⇒
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env perl6
-
-use Termbox :ALL;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Termbox :ALL;
 use Raku::Recipes::SQLator;
 
 my %data = Raku::Recipes::SQLator.new.get-ingredients;
@@ -9211,11 +8786,7 @@ sub ingredient-to-coords( UInt $ingredient-index) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env perl6
-
-use GTK::Simple;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use GTK::Simple;
 use GTK::Simple::App;
 use GTK::Simple::RadioButton;
 use Raku::Recipes::SQLator;
@@ -9357,9 +8928,7 @@ sub grayout-same-name( $b ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-$app.set-content(
+<pre class="highlight"><code class="language-raku" data-lang="raku">$app.set-content(
             GTK::Simple::VBox.new(
                 create-type-buttons( @panels ),
                 GTK::Simple::HBox.new( |@panels )
@@ -9382,9 +8951,7 @@ $app.border-width = 15;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $first-radio-button =
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $first-radio-button =
         GTK::Simple::RadioButton.new(:$label )
         but $dator.get-ingredient($label);</code></pre>
 </div>
@@ -9406,9 +8973,7 @@ my $first-radio-button =
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-for @all-radio -&gt; $b {
+<pre class="highlight"><code class="language-raku" data-lang="raku">for @all-radio -&gt; $b {
     $b.sensitive = $b.Hash{$type} eq &#34;No&#34;;
 }</code></pre>
 </div>
@@ -9421,9 +8986,7 @@ for @all-radio -&gt; $b {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-for @all-radio -&gt; $other {
+<pre class="highlight"><code class="language-raku" data-lang="raku">for @all-radio -&gt; $other {
     if $b.WHICH ne $other.WHICH and $b.label eq $other.label {
         $other.sensitive = False;
     }
@@ -9484,9 +9047,7 @@ Lentils | Rice | Apple</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sudo apt install libsdl2-dev</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">sudo apt install libsdl2-dev</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -9497,9 +9058,7 @@ sudo apt install libsdl2-dev</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use SDL2::Raw;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use SDL2::Raw;
 
 enum unit-state &lt;HEALTHY INFECTED&gt;;
 constant OPAQUE = 255;
@@ -9553,11 +9112,7 @@ method render {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env perl6
-
-use SDL2::Raw;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use SDL2::Raw;
 use lib &lt;lib Chapter-13/lib&gt;;
 use SDL2;
 use My::Unit;
@@ -9775,9 +9330,7 @@ sub infection-loop( $renderer ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-perlbrew use 5.30.3</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">perlbrew use 5.30.3</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -9813,9 +9366,7 @@ MMMMM</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-requires &#39;MealMaster&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">requires &#39;MealMaster&#39;;
 requires &#34;Text::Markdown&#34;;</code></pre>
 </div>
 </div>
@@ -9832,10 +9383,7 @@ requires &#34;Text::Markdown&#34;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env perl6
-use Inline::Perl5;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Inline::Perl5;
 use MealMaster:from&lt;Perl5&gt;;
 use Text::Markdown:from&lt;Perl5&gt;;
 use Raku::Recipes::Recipe;
@@ -9875,9 +9423,7 @@ for @recipes -&gt; $r {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&lt;h1&gt;Zucchini Fritters #2&lt;/h1&gt;
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;h1&gt;Zucchini Fritters #2&lt;/h1&gt;
 &lt;p&gt;Categories: Appetizers&lt;/p&gt;
 &lt;h2&gt;Ingredients&lt;/h2&gt;
 &lt;ul&gt;
@@ -9905,9 +9451,7 @@ for @recipes -&gt; $r {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-unit module Sys::Chown;
+<pre class="highlight"><code class="language-raku" data-lang="raku">unit module Sys::Chown;
 use P5getpwnam;
 use P5getgrnam;
 use UNIX::Privileges :USER;
@@ -9987,11 +9531,7 @@ multi sub chown (@files, IO::Path $file where .e ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env raku
-
-sub term:&lt;bcp&gt; { prompt(&#34; &#34; x 6 ~ &#34;← &#34;) }
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub term:&lt;bcp&gt; { prompt(&#34; &#34; x 6 ~ &#34;← &#34;) }
 class Bc {
     has $!bc;
 
@@ -10050,9 +9590,7 @@ await $promise;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub term:&lt;⏎&gt; { prompt(&#34; &#34; x 6 ~ &#34;← &#34;) }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub term:&lt;⏎&gt; { prompt(&#34; &#34; x 6 ~ &#34;← &#34;) }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10060,9 +9598,7 @@ sub term:&lt;⏎&gt; { prompt(&#34; &#34; x 6 ~ &#34;← &#34;) }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $next = ⏎;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $next = ⏎;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10127,9 +9663,7 @@ my $next = ⏎;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-char * cmark_markdown_to_html(const char *text, size_t len, int options)</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">char * cmark_markdown_to_html(const char *text, size_t len, int options)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10137,9 +9671,7 @@ char * cmark_markdown_to_html(const char *text, size_t len, int options)</code><
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use NativeCall;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use NativeCall;
 unit module cmark::Simple;
 
 constant CMARK_OPT_DEFAULT is export = 0;
@@ -10178,9 +9710,7 @@ sub commonmark-to-html( Str $text ) is export {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-commonmark-to-html(&#39;þor&#39;)</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">commonmark-to-html(&#39;þor&#39;)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10227,9 +9757,7 @@ commonmark-to-html(&#39;þor&#39;)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class vec4 is repr(&#39;CStruct&#39;) is export {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class vec4 is repr(&#39;CStruct&#39;) is export {
     has num32 $.x;
     has num32 $.y;
     has num32 $.z;
@@ -10249,9 +9777,7 @@ class vec4 is repr(&#39;CStruct&#39;) is export {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-typedef struct kmVec4
+<pre class="highlight"><code class="language-raku" data-lang="raku">typedef struct kmVec4
 {
         kmScalar x;
         kmScalar y;
@@ -10271,9 +9797,7 @@ typedef struct kmVec4
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-our $vec4-x = vec4.new( 1, 0, 0, 1);</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">our $vec4-x = vec4.new( 1, 0, 0, 1);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10281,9 +9805,7 @@ our $vec4-x = vec4.new( 1, 0, 0, 1);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-our $vec4-y = vec4.new( 0e0, 1, 0e0, 1);</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">our $vec4-y = vec4.new( 0e0, 1, 0e0, 1);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10297,9 +9819,7 @@ our $vec4-y = vec4.new( 0e0, 1, 0e0, 1);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub kmVec4Scale(vec4 $pOut, vec4 $pIn, num32 $s)
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub kmVec4Scale(vec4 $pOut, vec4 $pIn, num32 $s)
         returns vec4 is native(&#39;kazmath&#39;) is export {*}</code></pre>
 </div>
 </div>
@@ -10308,9 +9828,7 @@ sub kmVec4Scale(vec4 $pOut, vec4 $pIn, num32 $s)
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-kmVec4* kmVec4Scale(kmVec4* pOut, const kmVec4* pIn, const kmScalar s);</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">kmVec4* kmVec4Scale(kmVec4* pOut, const kmVec4* pIn, const kmScalar s);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10321,9 +9839,7 @@ kmVec4* kmVec4Scale(kmVec4* pOut, const kmVec4* pIn, const kmScalar s);</code></
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my vec4 $out .= new;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my vec4 $out .= new;
 my vec4 $in .= new(1.Num, 0.Num, 0.Num, 1.Num);
 my vec4 $result = kmVec4Scale($out, $in, 2.Num);</code></pre>
 </div>
@@ -10333,9 +9849,7 @@ my vec4 $result = kmVec4Scale($out, $in, 2.Num);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-kazmath::vec4.new(x =&gt; 1.4142135381698608e0, y =&gt; 0e0, z =&gt; 0e0, w =&gt; 1.4142135381698608e0)</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">kazmath::vec4.new(x =&gt; 1.4142135381698608e0, y =&gt; 0e0, z =&gt; 0e0, w =&gt; 1.4142135381698608e0)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10349,9 +9863,7 @@ kazmath::vec4.new(x =&gt; 1.4142135381698608e0, y =&gt; 0e0, z =&gt; 0e0, w =&gt
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class mat4 is repr(&#39;CStruct&#39;) is export {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class mat4 is repr(&#39;CStruct&#39;) is export {
     HAS num32 @.mat[16] is CArray;
     submethod BUILD( :@mat = 0.Num xx 16) {
         for ^16 {
@@ -10375,9 +9887,7 @@ class mat4 is repr(&#39;CStruct&#39;) is export {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-typedef struct kmMat4 {
+<pre class="highlight"><code class="language-raku" data-lang="raku">typedef struct kmMat4 {
         kmScalar mat[16];
 } kmMat4;</code></pre>
 </div>
@@ -10408,9 +9918,7 @@ typedef struct kmMat4 {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub kmMat4RotationX(mat4 $mat, num32 $radians)
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub kmMat4RotationX(mat4 $mat, num32 $radians)
     returns mat4 is native(&#39;kazmath&#39;) is export {*}</code></pre>
 </div>
 </div>
@@ -10419,9 +9927,7 @@ sub kmMat4RotationX(mat4 $mat, num32 $radians)
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-kmMat4* kmMat4RotationX(kmMat4* pOut, const kmScalar radians);</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">kmMat4* kmMat4RotationX(kmMat4* pOut, const kmScalar radians);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10432,9 +9938,7 @@ kmMat4* kmMat4RotationX(kmMat4* pOut, const kmScalar radians);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my mat4 $one-mat .= new;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my mat4 $one-mat .= new;
 my mat4 $result1 = kmMat4RotationX($one-mat, pi/2);
 say $result1;
 my vec4 $out .= new;
@@ -10448,9 +9952,7 @@ say $result;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-|1 0 0 0|
+<pre class="highlight"><code class="language-raku" data-lang="raku">|1 0 0 0|
 |0 -4.371138828673793e-08 -1 0|
 |0 1 -4.371138828673793e-08 0|
 |0 0 0 1|
@@ -10462,9 +9964,7 @@ kazmath::vec4.new(x =&gt; 0e0, y =&gt; -4.371138828673793e-08, z =&gt; 1e0, w =&
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub kmVec4Transform(vec4 $pOut, vec4 $pV,
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub kmVec4Transform(vec4 $pOut, vec4 $pV,
                     mat4 $pM)
         returns vec4 is native(&#39;kazmath&#39;) is export {*}</code></pre>
 </div>
@@ -10521,9 +10021,7 @@ sub kmVec4Transform(vec4 $pOut, vec4 $pV,
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-# Grab Nutrients.csv from https://data.nal.usda.gov/dataset/usda-branded-food-products-database/resource/c929dc84-1516-4ac7-bbb8-c0c191ca8cec
+<pre class="highlight"><code class="language-raku" data-lang="raku"># Grab Nutrients.csv from https://data.nal.usda.gov/dataset/usda-branded-food-products-database/resource/c929dc84-1516-4ac7-bbb8-c0c191ca8cec
 my @nutrients = &#34;/home/jmerelo/Documentos/Nutrients.csv&#34;.IO.lines;
 my $time = now;
 my @selected = @nutrients.grep: {
@@ -10543,9 +10041,7 @@ say @selected.join: &#34;\n&#34;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @selected = @nutrients.race.grep: {</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @selected = @nutrients.race.grep: {</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10553,9 +10049,7 @@ my @selected = @nutrients.race.grep: {</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @selected = @nutrients.race( :11degree ).grep: {</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @selected = @nutrients.race( :11degree ).grep: {</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10563,9 +10057,7 @@ my @selected = @nutrients.race( :11degree ).grep: {</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @selected = @nutrients.race( :batch(@nutrients/4), :4degree ).grep: {</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @selected = @nutrients.race( :batch(@nutrients/4), :4degree ).grep: {</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10585,9 +10077,7 @@ my @selected = @nutrients.race( :batch(@nutrients/4), :4degree ).grep: {</code><
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $degree = @*ARGS[0] // 4;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $degree = @*ARGS[0] // 4;
 my $time = now;
 my @selected = @nutrients
     .race( :batch(@nutrients/$degree),:degree($degree)  )
@@ -10632,11 +10122,7 @@ my @selected = @nutrients
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env perl6
-
-use Cro::HTTP::Client;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Cro::HTTP::Client;
 use URI::Encode;
 use Raku::Recipes::SQLator;
 
@@ -10740,11 +10226,7 @@ for await @responses -&gt; $response {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env perl6
-
-use Inline::Perl5;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Inline::Perl5;
 use MealMaster:from&lt;Perl5&gt;;
 use Raku::Recipes::Recipe;
 use Raku::Recipes::SQLator;
@@ -10831,9 +10313,7 @@ sub process-ingredients( $recipe ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @promises = do for ^$threads { start ... }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @promises = do for ^$threads { start ... }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10850,9 +10330,7 @@ my @promises = do for ^$threads { start ... }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-$i ~~ s:i!&lt;|w&gt; $ing &lt;|w&gt; ! $subst !</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">$i ~~ s:i!&lt;|w&gt; $ing &lt;|w&gt; ! $subst !</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10912,9 +10390,7 @@ $i ~~ s:i!&lt;|w&gt; $ing &lt;|w&gt; ! $subst !</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-unit module Recipr::Log::Timeline;
+<pre class="highlight"><code class="language-raku" data-lang="raku">unit module Recipr::Log::Timeline;
 use Log::Timeline;
 class Processing does Log::Timeline::Task[&#39;Recipr&#39;, &#39;Backend&#39;, &#39;Processing&#39;] is export { }</code></pre>
 </div>
@@ -10930,9 +10406,7 @@ class Processing does Log::Timeline::Task[&#39;Recipr&#39;, &#39;Backend&#39;, &
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @promises = do for ^$threads {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @promises = do for ^$threads {
     start react whenever $queue -&gt; $recipe is copy {
         Recipr::Log::Timeline::Processing.log: -&gt; {
             #...same code here
@@ -10949,9 +10423,7 @@ my @promises = do for ^$threads {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-$queue.send: ($i++, $recipe);</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">$queue.send: ($i++, $recipe);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10959,9 +10431,7 @@ $queue.send: ($i++, $recipe);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-start react whenever $queue -&gt; ($serial, $recipe) is copy {</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">start react whenever $queue -&gt; ($serial, $recipe) is copy {</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10987,9 +10457,7 @@ start react whenever $queue -&gt; ($serial, $recipe) is copy {</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-await start for @recipes -&gt; $r { # Rest of the loop is the same.</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">await start for @recipes -&gt; $r { # Rest of the loop is the same.</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -11018,9 +10486,7 @@ await start for @recipes -&gt; $r { # Rest of the loop is the same.</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Emitting does Log::Timeline::Task[&#39;Recipr&#39;, &#39;Backend&#39;, &#39;Emitting&#39;]
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Emitting does Log::Timeline::Task[&#39;Recipr&#39;, &#39;Backend&#39;, &#39;Emitting&#39;]
                  is export { }</code></pre>
 </div>
 </div>
@@ -11029,9 +10495,7 @@ class Emitting does Log::Timeline::Task[&#39;Recipr&#39;, &#39;Backend&#39;, &#3
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-await start for @recipes -&gt; $r {
+<pre class="highlight"><code class="language-raku" data-lang="raku">await start for @recipes -&gt; $r {
     Recipr::Log::Timeline::Emitting.log: -&gt; {
         # same code as before.
     }
@@ -11049,9 +10513,7 @@ await start for @recipes -&gt; $r {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-unit module Recipr::Log::Timeline;
+<pre class="highlight"><code class="language-raku" data-lang="raku">unit module Recipr::Log::Timeline;
 use Log::Timeline;
 
 class Processing does Log::Timeline::Task[&#39;Recipr&#39;, &#39;Processing&#39;, &#39;Processing&#39;]
@@ -11079,9 +10541,7 @@ class Saving does Log::Timeline::Task[&#39;Recipr&#39;, &#39;Processing&#39;, &#
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @promises = do for ^$threads {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @promises = do for ^$threads {
     start react whenever $queue -&gt; $recipe is copy {
         Recipr::Log::Timeline::Processing.log: -&gt; {
             my @real-ingredients = $recipe.ingredients.grep( /^^\w+/)
@@ -11140,11 +10600,7 @@ my @promises = do for ^$threads {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env perl6
-
-use Inline::Perl5;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Inline::Perl5;
 
 use MealMaster:from&lt;Perl5&gt;;
 
@@ -11233,11 +10689,7 @@ sub process-recipe( $serial, $recipe ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env perl6
-
-use Inline::Perl5;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Inline::Perl5;
 use MealMaster:from&lt;Perl5&gt;;
 
 my $input-file-name = @*ARGS[0] // &#34;allrecip.mmf&#34;;
@@ -11284,9 +10736,7 @@ for @recipes.rotor(400) -&gt; @chunk {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-      Title: Vegetable Casserole Supreme
+<pre class="highlight"><code class="language-raku" data-lang="raku">      Title: Vegetable Casserole Supreme
  Categories: Casseroles, Vegetables
       Yield: 6 servings
 
@@ -11306,11 +10756,7 @@ for @recipes.rotor(400) -&gt; @chunk {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env perl6
-
-use Inline::Perl5;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Inline::Perl5;
 
 use MealMaster:from&lt;Perl5&gt;;
 
@@ -11479,9 +10925,7 @@ sub process-recipes( $serial, $recipe ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes;
 
 unit role Raku::Recipes::Grammar::Measures;
 
@@ -11494,9 +10938,7 @@ token unit     { @unit-types }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-our @unit-types is export = &lt;g tbsp clove tbsps cloves liters liter
+<pre class="highlight"><code class="language-raku" data-lang="raku">our @unit-types is export = &lt;g tbsp clove tbsps cloves liters liter
     ltablespoons Unit tablespoon spoons cloves clove spoon cup cups&gt;;</code></pre>
 </div>
 </div>
@@ -11508,9 +10950,7 @@ our @unit-types is export = &lt;g tbsp clove tbsps cloves liters liter
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes::CSVDator;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::CSVDator;
 use Raku::Recipes::Grammar::Measures;
 
 my @products;
@@ -11547,9 +10987,7 @@ token product {:i @products }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&#39;(&#39; ~ &#39;)&#39; $&lt;content&gt; = .+?</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#39;(&#39; ~ &#39;)&#39; $&lt;content&gt; = .+?</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -11560,9 +10998,7 @@ token product {:i @products }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes::Grammarole::Measured-Ingredients;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::Grammarole::Measured-Ingredients;
 
 grammar Tester does Raku::Recipes::Grammarole::Measured-Ingredients {}
 say Tester.subparse(&#34;1⁄2 onion&#34;,
@@ -11593,9 +11029,7 @@ say Tester.subparse(&#34;1⁄3 liter wine (or beer)&#34;, rule =&gt; &#34;ingred
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token measured-ingredient {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token measured-ingredient {
     [ &lt;quantity&gt; \h* &lt;unit&gt; \h+ &lt;product&gt; || &lt;quantity&gt; \h+ &lt;product&gt;] s?
 }</code></pre>
 </div>
@@ -11605,9 +11039,7 @@ token measured-ingredient {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say Tester.subparse(&#34;3 eggs (free run)&#34;,
+<pre class="highlight"><code class="language-raku" data-lang="raku">say Tester.subparse(&#34;3 eggs (free run)&#34;,
         rule =&gt; &#34;ingredient-description&#34;);</code></pre>
 </div>
 </div>
@@ -11644,9 +11076,7 @@ say Tester.subparse(&#34;3 eggs (free run)&#34;,
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes::Grammarole::Measured-Ingredients;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::Grammarole::Measured-Ingredients;
 
 unit grammar Raku::Recipes::Grammar::RecipeMark does Raku::Recipes::Grammarole::Measured-Ingredients;
 
@@ -11698,9 +11128,7 @@ token words { &lt;[\w \- \&#39;]&gt;+ }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token TOP {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token TOP {
     &#34;#&#34; \h+ &lt;title&gt;
     &lt;.separation&gt;
     &lt;description&gt;
@@ -11723,9 +11151,7 @@ token TOP {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes::Grammar::RecipeMark;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::Grammar::RecipeMark;
 use Grammar::Tracer;
 
 my $rm = Raku::Recipes::Grammar::RecipeMark.new;
@@ -11741,9 +11167,7 @@ for &lt;tuna-risotto tuna-risotto-low-cost&gt; -&gt; $fn {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-title =&gt; ⌈Tuna risotto⌋
+<pre class="highlight"><code class="language-raku" data-lang="raku">title =&gt; ⌈Tuna risotto⌋
  words =&gt; ⌈Tuna⌋
  words =&gt; ⌈risotto⌋
 description =&gt; ⌈A relatively simple version of this rich, creamy dish of Italian origin.⌋
@@ -11808,9 +11232,7 @@ numbered-instruction =&gt; ⌈1. Slightly-fry tuna with its own oil it until it 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-unit class Raku::Recipes::Grammar::RecipeMark::Actions;
+<pre class="highlight"><code class="language-raku" data-lang="raku">unit class Raku::Recipes::Grammar::RecipeMark::Actions;
 
 method TOP($/) { make {
     title =&gt; ~$/&lt;title&gt;,
@@ -11882,11 +11304,7 @@ method sentence($/) { make ~$/; }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env perl6
-
-use Raku::Recipes::Grammar::RecipeMark;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::Grammar::RecipeMark;
 use Raku::Recipes::Grammar::RecipeMark::Actions;
 
 my $rm = Raku::Recipes::Grammar::RecipeMark.new;
@@ -11905,9 +11323,7 @@ for &lt;main/rice/tuna-risotto
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-{description =&gt; A healthy way to start a meal, or to munch between them., ingredient-list =&gt; ({Carrots =&gt; {quantity =&gt; 250, unit =&gt; g}} {Cottage cheese =&gt; {options =&gt; ⌈(or cheese spread)⌋
+<pre class="highlight"><code class="language-raku" data-lang="raku">{description =&gt; A healthy way to start a meal, or to munch between them., ingredient-list =&gt; ({Carrots =&gt; {quantity =&gt; 250, unit =&gt; g}} {Cottage cheese =&gt; {options =&gt; ⌈(or cheese spread)⌋
  content =&gt; ⌈or cheese spread⌋, quantity =&gt; 200, unit =&gt; g}} {Wheat tortillas =&gt; {quantity =&gt; 4, unit =&gt; Unit}}), instruction-list =&gt; [1 =&gt; Cut =&gt; the carrots in long sticks or slices. 2 =&gt; Spread =&gt; cheese over tortillas, cut them in half. 3 =&gt; Put =&gt; carrot sticks on tortillas, wrap
  them around. 4 =&gt; Add =&gt; fresh parsley, mint or coriander to taste.],
  persons =&gt; 4, preparation-minutes =&gt; 20, title =&gt; Carrot wraps}</code></pre>
@@ -11958,9 +11374,7 @@ for &lt;main/rice/tuna-risotto
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes::Grammarole::Measured-Ingredients;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::Grammarole::Measured-Ingredients;
 use Grammar::PrettyErrors;
 
 unit grammar RecipeMark::Grammar
@@ -12003,9 +11417,7 @@ token ws { &lt;!ww&gt; \v }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes::Grammarole::Measured-Ingredients;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::Grammarole::Measured-Ingredients;
 use Grammar::PrettyErrors;
 use X::RecipeMark;
 
@@ -12057,9 +11469,7 @@ token numbering {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Grammar::Message;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Grammar::Message;
 
 unit module X::RecipeMark;
 
@@ -12110,9 +11520,7 @@ class RepeatedIngredient does Base {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token ingredient-list {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token ingredient-list {
     :my $*INGREDIENTS = ∅;
     &lt;itemized-ingredient&gt;+ % \v
 }</code></pre>
@@ -12126,9 +11534,7 @@ token ingredient-list {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-{
+<pre class="highlight"><code class="language-raku" data-lang="raku">{
     my $product = tc ~$/&lt;ingredient-description&gt;&lt;measured-ingredient&gt; &lt;product&gt;;
     if $product ∉ $*INGREDIENTS {
         $*INGREDIENTS ∪= $product;
@@ -12146,9 +11552,7 @@ token ingredient-list {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-{
+<pre class="highlight"><code class="language-raku" data-lang="raku">{
     if +$/ &lt; $*LAST {
         X::RecipeMark::OutOfOrder.new( :match($/),
         :number(+$/),
@@ -12182,9 +11586,7 @@ token ingredient-list {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-%ingredient{%ingredient.keys[0]}{&#39;options&#39;} = ~$/&lt;options&gt;&lt;content&gt; if $/&lt;options&gt;;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">%ingredient{%ingredient.keys[0]}{&#39;options&#39;} = ~$/&lt;options&gt;&lt;content&gt; if $/&lt;options&gt;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -12192,9 +11594,7 @@ token ingredient-list {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use RecipeMark::Grammar;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use RecipeMark::Grammar;
 use RecipeMark::Grammar::Actions;
 use JSON::Fast;
 
@@ -12242,9 +11642,7 @@ method product-list() {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use lib &lt;lib ../lib&gt;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use lib &lt;lib ../lib&gt;;
 use RecipeMark;
 
 multi sub MAIN( &#34;check&#34;, $file where .IO.e ) {
@@ -12266,9 +11664,7 @@ multi sub MAIN( &#34;shopping-list&#34;, $file where .IO.e ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-Usage:
+<pre class="highlight"><code class="language-raku" data-lang="raku">Usage:
   recipemark check &lt;file&gt;
   recipemark shopping-list &lt;file&gt;</code></pre>
 </div>
@@ -12278,9 +11674,7 @@ Usage:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-% Chapter-16/recipemark shopping-list recipes/main/rice/tuna-risotto-low-cost.md
+<pre class="highlight"><code class="language-raku" data-lang="raku">% Chapter-16/recipemark shopping-list recipes/main/rice/tuna-risotto-low-cost.md
 # Shopping list
 * [ ] Butter.
 * [ ] Cheese.
@@ -12300,9 +11694,7 @@ Usage:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method vegan() {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method vegan() {
     my $data = Raku::Recipes::CSVDator.new;
     return so all self.product-list.map:
             { $data.get-ingredient($_)&lt;Vegan&gt; };
@@ -12314,9 +11706,7 @@ method vegan() {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi sub MAIN( &#34;vegan&#34;, $file where .IO.e ) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN( &#34;vegan&#34;, $file where .IO.e ) {
     my $recipemark = RecipeMark.new( $file );
     say $recipemark.title,
             $recipemark.vegan ??
@@ -12366,9 +11756,7 @@ multi sub MAIN( &#34;vegan&#34;, $file where .IO.e ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-# &lt;%= $recipemark.title %&gt;
+<pre class="highlight"><code class="language-raku" data-lang="raku"># &lt;%= $recipemark.title %&gt;
 
 &lt;%= $recipemark.description %&gt;
 
@@ -12402,9 +11790,7 @@ for $recipemark.instruction-list[0][] -&gt; $instruction {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-$recipemark.instruction-list[0][]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">$recipemark.instruction-list[0][]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -12415,9 +11801,7 @@ $recipemark.instruction-list[0][]</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi sub MAIN(&#34;md&#34;, $file where .IO.e ) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN(&#34;md&#34;, $file where .IO.e ) {
     my $template-name=&#34;templates/recipemark.md&#34;;
     my $template-file = &#34;resources/$template-name&#34;.IO.e
             ?? &#34;resources/$template-name&#34;.IO.slurp
@@ -12436,9 +11820,7 @@ multi sub MAIN(&#34;md&#34;, $file where .IO.e ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-➜ raku-recipes-apress git:(master) ✗ Chapter-16/recipemark md recipes/ appetizers/carrot-wraps.md
+<pre class="highlight"><code class="language-raku" data-lang="raku">➜ raku-recipes-apress git:(master) ✗ Chapter-16/recipemark md recipes/ appetizers/carrot-wraps.md
 # Carrot wraps
 
 A healthy way to start a meal, or to munch between them.
@@ -12465,9 +11847,7 @@ A healthy way to start a meal, or to munch between them.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&lt;!DOCTYPE html&gt;
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;!DOCTYPE html&gt;
 &lt;html lang=&#34;en&#34;&gt;
 &lt;head&gt;
     &lt;meta charset=&#34;UTF-8&#34;&gt;
@@ -12516,9 +11896,7 @@ take &#34;&lt;li&gt; %data&lt;quantity&gt; %data&lt;unit&gt; &#34;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
----------- Recipe via Meal-Master (tm) v8.05
+<pre class="highlight"><code class="language-raku" data-lang="raku">---------- Recipe via Meal-Master (tm) v8.05
       Title: &lt;%= $recipemark.title %&gt;
  Categories: &lt;%= $categories %&gt;
       Yield: &lt;%= $recipemark.persons %&gt; servings
@@ -12560,9 +11938,7 @@ take &#34;&lt;li&gt; %data&lt;quantity&gt; %data&lt;unit&gt; &#34;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi sub MAIN(&#34;mmf&#34;, $file where .IO.e ) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub MAIN(&#34;mmf&#34;, $file where .IO.e ) {
     my $template-file= template-file &#34;templates/recipemark.mmf&#34;;
     my &amp;generate-page := template :($categories, $recipemark),
     $template-file;
@@ -12577,9 +11953,7 @@ multi sub MAIN(&#34;mmf&#34;, $file where .IO.e ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
----------- Recipe via Meal-Master (tm) v8.05
+<pre class="highlight"><code class="language-raku" data-lang="raku">---------- Recipe via Meal-Master (tm) v8.05
       Title: Tuna risotto
  Categories: main, rice
       Yield: 4 servings
@@ -12632,9 +12006,7 @@ multi sub MAIN(&#34;mmf&#34;, $file where .IO.e ) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-unit role Grammar::Common::Text;
+<pre class="highlight"><code class="language-raku" data-lang="raku">unit role Grammar::Common::Text;
 
 token sentence { &lt;first-word&gt; &lt;.separators&gt; &lt;sub-sentence&gt; &lt;.stop&gt;}
 token stop { &#34;.&#34; | &#34;?&#34; | &#34;!&#34; }
@@ -12652,9 +12024,7 @@ token words { &lt;[\w \- \&#39;]&gt;+ }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Raku::Recipes::Grammarole::Measured-Ingredients;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Raku::Recipes::Grammarole::Measured-Ingredients;
 use Grammar::PrettyErrors;
 use Grammar::Common::Text;
 use X::RecipeMark;
@@ -12712,9 +12082,7 @@ token instruction { &lt;action-verb&gt; \h &lt;sub-sentence&gt; &lt;.stop&gt;}
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $number = 6.rand.Int;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $number = 6.rand.Int;
 my $prompt = &#34;*&#34;;
 say $number;
 while ( my $guess = prompt(&#34;$prompt Your guess&gt;&#34;) ) ne &#34;&#34; {
@@ -12732,9 +12100,7 @@ while ( my $guess = prompt(&#34;$prompt Your guess&gt;&#34;) ) ne &#34;&#34; {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my \n = (1..6).pick; ($_ &gt; n ?? &#34;&gt;&#34; !! &#34;&lt;&#34;).print while ( $_ = prompt(&#34;Your guess&gt; &#34;) ) != n</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my \n = (1..6).pick; ($_ &gt; n ?? &#34;&gt;&#34; !! &#34;&lt;&#34;).print while ( $_ = prompt(&#34;Your guess&gt; &#34;) ) != n</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -12770,9 +12136,7 @@ my \n = (1..6).pick; ($_ &gt; n ?? &#34;&gt;&#34; !! &#34;&lt;&#34;).print while
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-raku -e &#39;my \n = (1..6).pick; ($_ &gt; n ?? ⌈&gt;⌋ !! ⌈&lt;⌋).print while ( $_ = prompt(⌈ Your guess&gt; ⌋) ) != n&#39;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">raku -e &#39;my \n = (1..6).pick; ($_ &gt; n ?? ⌈&gt;⌋ !! ⌈&lt;⌋).print while ( $_ = prompt(⌈ Your guess&gt; ⌋) ) != n&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -12780,9 +12144,7 @@ raku -e &#39;my \n = (1..6).pick; ($_ &gt; n ?? ⌈&gt;⌋ !! ⌈&lt;⌋).print 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-{ $^b &gt; $^a
+<pre class="highlight"><code class="language-raku" data-lang="raku">{ $^b &gt; $^a
         ?? &amp;?BLOCK($^a, prompt(&#34;&gt; &#34;))
         !! $^b &lt; $^a ?? &amp;?BLOCK($^a, prompt(&#34;&lt; &#34;)) !! &#34;✓&#34;.say
 }((1..6).pick,0)</code></pre>
@@ -12836,9 +12198,7 @@ raku -e &#39;my \n = (1..6).pick; ($_ &gt; n ?? ⌈&gt;⌋ !! ⌈&lt;⌋).print 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say  [*] 1..( @*ARGS[0]
+<pre class="highlight"><code class="language-raku" data-lang="raku">say  [*] 1..( @*ARGS[0]
                 // %*ENV&lt;NUMBER&gt;
                 // die &#34;Use $*PROGRAM &lt;num&gt; or NUMBER=&lt;num&gt; $*PROGRAM&#34; );</code></pre>
 </div>
@@ -12856,9 +12216,7 @@ say  [*] 1..( @*ARGS[0]
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-NUMBER=225 ./factorial.p6</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">NUMBER=225 ./factorial.p6</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -12879,9 +12237,7 @@ Chapter-17/factorial.p6</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub MAIN( Int $number = %*ENV&lt;NUMBER&gt;) { say  [*] 1..$number }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub MAIN( Int $number = %*ENV&lt;NUMBER&gt;) { say  [*] 1..$number }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -12889,9 +12245,7 @@ sub MAIN( Int $number = %*ENV&lt;NUMBER&gt;) { say  [*] 1..$number }</code></pre
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-Type check failed in binding to parameter &#39;$number&#39;; expected Int but got
+<pre class="highlight"><code class="language-raku" data-lang="raku">Type check failed in binding to parameter &#39;$number&#39;; expected Int but got
 Any (Any)</code></pre>
 </div>
 </div>
@@ -12900,9 +12254,7 @@ Any (Any)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-Usage:
+<pre class="highlight"><code class="language-raku" data-lang="raku">Usage:
   factorial-v2.p6 [&lt;number&gt;]</code></pre>
 </div>
 </div>
@@ -12911,9 +12263,7 @@ Usage:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub MAIN( Int $number =%*ENV&lt;NUMBER&gt; ) { my $c = 1; say (1,* * $c++...∞) [$number-1] }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub MAIN( Int $number =%*ENV&lt;NUMBER&gt; ) { my $c = 1; say (1,* * $c++...∞) [$number-1] }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -12921,9 +12271,7 @@ sub MAIN( Int $number =%*ENV&lt;NUMBER&gt; ) { my $c = 1; say (1,* * $c++...∞)
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub MAIN( Int $n =%*ENV&lt;NUMBER&gt; ) { my $ფ = 1; $ფ *= $_ for 1..^$n; $ფ.say;}</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub MAIN( Int $n =%*ENV&lt;NUMBER&gt; ) { my $ფ = 1; $ფ *= $_ for 1..^$n; $ფ.say;}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -12931,9 +12279,7 @@ sub MAIN( Int $n =%*ENV&lt;NUMBER&gt; ) { my $ფ = 1; $ფ *= $_ for 1..^$n; $�
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-time raku ./factorial-v4.p6 10000
+<pre class="highlight"><code class="language-raku" data-lang="raku">time raku ./factorial-v4.p6 10000
 0,80s user 0,06s system 106% cpu 0,806 total</code></pre>
 </div>
 </div>
@@ -12951,9 +12297,7 @@ time raku ./factorial-v4.p6 10000
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Test::Script;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Test::Script;
 use lib &lt;.&gt;;
 
 for &lt;factorial factorial-v2 factorial-v3 factorial-v4&gt; -&gt; $f {
@@ -12969,9 +12313,7 @@ for &lt;factorial factorial-v2 factorial-v3 factorial-v4&gt; -&gt; $f {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub MAIN( Int $n =%*ENV&lt;NUMBER&gt; ) { my $ფ = 1; $ფ *= $_ for 1..$n; $ფ.say;}</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub MAIN( Int $n =%*ENV&lt;NUMBER&gt; ) { my $ფ = 1; $ფ *= $_ for 1..$n; $ფ.say;}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -12985,9 +12327,7 @@ sub MAIN( Int $n =%*ENV&lt;NUMBER&gt; ) { my $ფ = 1; $ფ *= $_ for 1..$n; $�
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say [+] (1,| [\*] (1...∞))[^@*ARGS[0]].map: 1/*</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say [+] (1,| [\*] (1...∞))[^@*ARGS[0]].map: 1/*</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -12998,9 +12338,7 @@ say [+] (1,| [\*] (1...∞))[^@*ARGS[0]].map: 1/*</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say [+] (1,| [\*] (1...^max(@*ARGS[0],20))).map: 1.0/*</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say [+] (1,| [\*] (1...^max(@*ARGS[0],20))).map: 1.0/*</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -13008,9 +12346,7 @@ say [+] (1,| [\*] (1...^max(@*ARGS[0],20))).map: 1.0/*</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say [+] (1,| [\*] (1..@*ARGS[0])).map: { FatRat.new(1,$_) }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say [+] (1,| [\*] (1..@*ARGS[0])).map: { FatRat.new(1,$_) }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -13018,9 +12354,7 @@ say [+] (1,| [\*] (1..@*ARGS[0])).map: { FatRat.new(1,$_) }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-2.718281828459045235360287471352662497757247093699959574966967627724076630
+<pre class="highlight"><code class="language-raku" data-lang="raku">2.718281828459045235360287471352662497757247093699959574966967627724076630
 [...41 lines here...]
 2010249505518816948032210025154264946398128736776589276881635983125</code></pre>
 </div>
@@ -13058,9 +12392,7 @@ say [+] (1,| [\*] (1..@*ARGS[0])).map: { FatRat.new(1,$_) }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-react whenever Supply.interval(@*ARGS[0]) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">react whenever Supply.interval(@*ARGS[0]) {
     with volumes-info()&lt;/&gt; {
         say &#34;Free M &#34;, (.&lt;free&gt;/2**20).Int,
         &#34;- Used &#34;, .&lt;used%&gt;
@@ -13079,9 +12411,7 @@ react whenever Supply.interval(@*ARGS[0]) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-raku -M FileSystem::Capacity::VolumesInfo -e &#39;react whenever Supply.interval(@*ARGS[0]) { with volumes-info()&lt;/&gt; { say &#34;FreeM &#34;, (.&lt;free&gt; / 2** 20).Int, &#34;- Used &#34;, .&lt;used%&gt; } }&#39; 15
+<pre class="highlight"><code class="language-raku" data-lang="raku">raku -M FileSystem::Capacity::VolumesInfo -e &#39;react whenever Supply.interval(@*ARGS[0]) { with volumes-info()&lt;/&gt; { say &#34;FreeM &#34;, (.&lt;free&gt; / 2** 20).Int, &#34;- Used &#34;, .&lt;used%&gt; } }&#39; 15
 FreeM 193112- Used 57%
 ...</code></pre>
 </div>
@@ -13091,9 +12421,7 @@ FreeM 193112- Used 57%
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-raku -M FileSystem::Capacity::VolumesInfo
+<pre class="highlight"><code class="language-raku" data-lang="raku">raku -M FileSystem::Capacity::VolumesInfo
     -e &#39;react whenever Supply.interval(@*ARGS[0]) {
         with volumes-info()&lt;/&gt; {
             say &#34;FreeM &#34;, (.&lt;free&gt; / 2 ** 20).Int, &#34;- Used &#34;, .&lt;used%&gt;

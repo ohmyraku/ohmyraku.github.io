@@ -19,7 +19,7 @@
  输入数据（存储在一个名为 scores.txt 的文件中）如下所示：
  Beth Ana Charlie Dave Ana Dave | 3:0 Charlie Beth | 3:1 Ana Beth | 2:3 Dave Charlie | 3:0 Ana Charlie | 3:1 Beth Dave | 0:3   第一行是选手名单。之后的每一行都记录了一场比赛的结果。
  在 Raku 中, 有一种方法可以解决这个问题。
- #!/usr/bin/env raku use v6; # start by printing out the header. say &amp;#34;Tournament Results:\n&amp;#34;; my $file = open &amp;#39;scores.</description>
+ use v6; # start by printing out the header. say &amp;#34;Tournament Results:\n&amp;#34;; my $file = open &amp;#39;scores.</description>
     </item>
     
   </channel>

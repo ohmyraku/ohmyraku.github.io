@@ -8467,9 +8467,7 @@ for @middle-edges -&gt; $edge {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Cube::Three;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Cube::Three;
 my $cube = Cube::Three.new();
 $cube.scramble;
 say $cube;
@@ -8778,10 +8776,7 @@ use Data::Dumper;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-use v6;
-
-use Digest::MD5;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Digest::MD5;
 use Terminal::ANSIColor;
 use Terminal::Spinners;</code></pre>
 </div>
@@ -11221,11 +11216,7 @@ shell&gt; jmp to sub MAIN   # find files containing &#34;sub MAIN&#34;</code></p
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use v6;
-
-my $fixednum;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $fixednum;
 my %score;
 my @exits = &lt;exit quit&gt;;
 
@@ -13488,9 +13479,7 @@ sub prefix: ( UInt $size ) { 1 d $size }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-perl" data-lang="perl">#!/usr/bin/env raku
-
-# Get the GTK::Simple libraries
+<pre class="highlight"><code class="language-raku" data-lang="raku"># Get the GTK::Simple libraries
 use GTK::Simple;
 use GTK::Simple::App;
 
@@ -13518,8 +13507,7 @@ $app.run;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-# Get the GTK::Simple libraries
+<pre class="highlight"><code class="language-raku" data-lang="raku"># Get the GTK::Simple libraries
 use GTK::Simple;
 use GTK::Simple::App;
 
@@ -13559,9 +13547,7 @@ $app.run;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-# Get the GTK::Simple libraries
+<pre class="highlight"><code class="language-raku" data-lang="raku"># Get the GTK::Simple libraries
 use GTK::Simple;
 use GTK::Simple::App;
 
@@ -13619,9 +13605,7 @@ $app.run;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-# Get the GTK::Simple libraries
+<pre class="highlight"><code class="language-raku" data-lang="raku"># Get the GTK::Simple libraries
 use GTK::Simple;
 use GTK::Simple::App;
 
@@ -19187,8 +19171,7 @@ True</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-unit sub MAIN( #=  Solve the 2019 AoC day 01 puzzle
+<pre class="highlight"><code class="language-raku" data-lang="raku">unit sub MAIN( #=  Solve the 2019 AoC day 01 puzzle
     Bool :$p2  #={ Solve p2 instead of p1 (the default)} );
 sub fuel($mass) { +$mass div 3 - 2 }
 multi total-fuel($mass) { fuel($mass).&amp;{$_ + .&amp;total-fuel} }
@@ -19208,8 +19191,7 @@ say lines.map($p2 ?? &amp;total-fuel !! &amp;fuel).sum;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-unit sub MAIN( #=  Solve the 2019 AoC day 01 puzzle
+<pre class="highlight"><code class="language-raku" data-lang="raku">unit sub MAIN( #=  Solve the 2019 AoC day 01 puzzle
     Bool :$p2  #={ Solve p2 instead of p1 (the default)} );
 sub fuel($mass) { +$mass div 3 - 2 }
 multi total-fuel($mass) { fuel($mass).&amp;{$_ + .&amp;total-fuel} }

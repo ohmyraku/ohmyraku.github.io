@@ -8,15 +8,16 @@
 
 <meta name="author" content="ohmyraku">
 <meta name="application-name" content="山川异域, 风月同天">
-<meta name="description" content="字符串 1. 1.1 使用字符串 1.1. 1. 你好, 世界! #!/usr/bin/env raku print &#39;Hello, World!&#39;   有两个内置函数可打印到控制台：print 和 say。 两者都打印其参数，但是 say 例程另外以换行符结束输出。
+<meta name="description" content="字符串 1. 1.1 使用字符串 1.1. 1. 你好, 世界! print &#39;Hello, World!&#39;   有两个内置函数可打印到控制台：print 和 say。 两者都打印其参数，但是 say 例程另外以换行符结束输出。
  因此，最快的解决方案是使用 say 并传递不带换行符的字符串：
- #!/usr/bin/env raku say &#39;Hello, World!&#39;   另一种解决方案是使用 print 并在字符串本身中包含 \n 字符：
- #!/usr/bin/env raku print &#34;Hello, World!\n&#34;   两个程序的输出是一样的：
+ say &#39;Hello, World!&#39;   另一种解决方案是使用 print 并在字符串本身中包含 \n 字符：
+ print &#34;Hello, World!\n&#34;   两个程序的输出是一样的：
  Hello, World!
  注意单引号和双引号之间的区别：单引号不会插入 \n 等特殊字符，而双引号会插入。 对于不带特殊字符的字符串使用双引号是没有错的，但是当你不希望在字符串中使用变量并且不需要插值变量时，最好使用适当的引号样式。
  在上面的示例中要看的另一件事是，单行程序不需要分号。
   1.2. 2. 跟人打招呼  询问用户的名字，并通过打印&#34;你好, &lt;名字&gt;!&#34; 来打招呼。
-   Raku 提供了一个简单的 prompt 函数，该函数执行两种操作：打印提示并读取输入。 因此，使用它的程序可能如下所示：">
+   Raku 提供了一个简单的 prompt 函数，该函数执行两种操作：打印提示并读取输入。 因此，使用它的程序可能如下所示：
+ say &#39;Hello, &#39; ~ prompt(&#39;Enter your name: &#39;) ~ &#39;!">
 <meta name="robots" content="noodp"/>
 <meta name="generator" content="Hugo 0.79.0" />
 <meta name="referrer" content="no-referrer" />
@@ -95,9 +96,7 @@ if (theme && theme !== "1") {
 <h3 id="_1_你好_世界">1.1. 1. 你好, 世界!</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-print &#39;Hello, World!&#39;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">print &#39;Hello, World!&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -108,9 +107,7 @@ print &#39;Hello, World!&#39;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;Hello, World!&#39;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;Hello, World!&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -118,9 +115,7 @@ say &#39;Hello, World!&#39;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-print &#34;Hello, World!\n&#34;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">print &#34;Hello, World!\n&#34;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -150,9 +145,7 @@ print &#34;Hello, World!\n&#34;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;Hello, &#39; ~ prompt(&#39;Enter your name: &#39;) ~ &#39;!&#39;;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;Hello, &#39; ~ prompt(&#39;Enter your name: &#39;) ~ &#39;!&#39;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -167,9 +160,7 @@ say &#39;Hello, &#39; ~ prompt(&#39;Enter your name: &#39;) ~ &#39;!&#39;;</code
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $name = prompt(&#39;Enter your name: &#39;);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $name = prompt(&#39;Enter your name: &#39;);
 say &#34;Hello, $name!&#34;;</code></pre>
 </div>
 </div>
@@ -178,9 +169,7 @@ say &#34;Hello, $name!&#34;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-print &#39;Enter your name: &#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">print &#39;Enter your name: &#39;;
 my $name = get();
 say &#34;Hello, $name!&#34;;</code></pre>
 </div>
@@ -190,9 +179,7 @@ say &#34;Hello, $name!&#34;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $name = $*IN.get();</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $name = $*IN.get();</code></pre>
 </div>
 </div>
 </div>
@@ -213,9 +200,7 @@ my $name = $*IN.get();</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;hello&#39;.chars;  # 5
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;hello&#39;.chars;  # 5
 say &#39;café&#39;.chars;   # 4
 say &#39;привет&#39;.chars; # 6</code></pre>
 </div>
@@ -228,9 +213,7 @@ say &#39;привет&#39;.chars; # 6</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;hello&#39;.codes;  # 5
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;hello&#39;.codes;  # 5
 say &#39;café&#39;.codes;   # 4
 say &#39;привет&#39;.codes; # 6</code></pre>
 </div>
@@ -243,9 +226,7 @@ say &#39;привет&#39;.codes; # 6</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;x̨&#39;.chars; # 1
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;x̨&#39;.chars; # 1
 say &#39;x̨&#39;.codes; # 2</code></pre>
 </div>
 </div>
@@ -257,9 +238,7 @@ say &#39;x̨&#39;.codes; # 2</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;x\x[0328]&#34;.chars; # 1
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;x\x[0328]&#34;.chars; # 1
 say &#34;x\x[0328]&#34;.codes; # 2</code></pre>
 </div>
 </div>
@@ -268,9 +247,7 @@ say &#34;x\x[0328]&#34;.codes; # 2</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;ę&#39;.chars; # 1
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;ę&#39;.chars; # 1
 say &#39;ę&#39;.codes; # 1</code></pre>
 </div>
 </div>
@@ -279,9 +256,7 @@ say &#39;ę&#39;.codes; # 1</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;e\x[0328]&#34;.chars; # 1
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;e\x[0328]&#34;.chars; # 1
 say &#34;e\x[0328]&#34;.codes; # 1</code></pre>
 </div>
 </div>
@@ -303,9 +278,7 @@ say &#34;e\x[0328]&#34;.codes; # 1</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $number = prompt(&#39;Enter number&gt; &#39;);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $number = prompt(&#39;Enter number&gt; &#39;);
 say $number.comb.unique.sort.join(&#39;, &#39;);</code></pre>
 </div>
 </div>
@@ -314,9 +287,7 @@ say $number.comb.unique.sort.join(&#39;, &#39;);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-$number.Str.comb</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">$number.Str.comb</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -330,9 +301,7 @@ $number.Str.comb</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-$number.comb.unique</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">$number.comb.unique</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -340,9 +309,7 @@ $number.comb.unique</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-$number.comb.unique.sort.join(&#39;, &#39;)</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">$number.comb.unique.sort.join(&#39;, &#39;)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -350,9 +317,7 @@ $number.comb.unique.sort.join(&#39;, &#39;)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-$number.comb.unique.sort.join(&#39;, &#39;).say;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">$number.comb.unique.sort.join(&#39;, &#39;).say;</code></pre>
 </div>
 </div>
 </div>
@@ -375,9 +340,7 @@ $number.comb.unique.sort.join(&#39;, &#39;).say;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $string = &#39;Hello, World!&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $string = &#39;Hello, World!&#39;;
 say $string.flip;</code></pre>
 </div>
 </div>
@@ -392,9 +355,7 @@ say $string.flip;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say flip &#39;Abcdef&#39;; # fedcbA
+<pre class="highlight"><code class="language-raku" data-lang="raku">say flip &#39;Abcdef&#39;; # fedcbA
 say &#39;Word&#39;.flip;   # droW</code></pre>
 </div>
 </div>
@@ -403,9 +364,7 @@ say &#39;Word&#39;.flip;   # droW</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&#39;Magic&#39;.flip.say; # cigaM</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#39;Magic&#39;.flip.say; # cigaM</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -416,9 +375,7 @@ say &#39;Word&#39;.flip;   # droW</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $string = &#39;Hello, World!&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $string = &#39;Hello, World!&#39;;
 my $reversed = $string.split(&#39;&#39;).reverse().join(&#39;&#39;);
 say $reversed; # !dlroW ,olleH</code></pre>
 </div>
@@ -441,9 +398,7 @@ say $reversed; # !dlroW ,olleH</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $string = &#39;Hello, World!&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $string = &#39;Hello, World!&#39;;
 $string ~~ s:g/\s+/ /;</code></pre>
 </div>
 </div>
@@ -455,9 +410,7 @@ $string ~~ s:g/\s+/ /;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $string = &#39; Hello, World! &#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $string = &#39; Hello, World! &#39;;
 say trim($string);</code></pre>
 </div>
 </div>
@@ -466,9 +419,7 @@ say trim($string);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say $string.trim;
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $string.trim;
 say &#39; Hello, World! &#39;.trim;</code></pre>
 </div>
 </div>
@@ -477,9 +428,7 @@ say &#39; Hello, World! &#39;.trim;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;¡&#39; ~ &#39; Hi &#39;.trim-leading;  # ¡Hi
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;¡&#39; ~ &#39; Hi &#39;.trim-leading;  # ¡Hi
 say &#39; Hi &#39;.trim-trailing ~ &#39;!&#39;; # Hi!</code></pre>
 </div>
 </div>
@@ -504,9 +453,7 @@ say &#39; Hi &#39;.trim-trailing ~ &#39;!&#39;; # Hi!</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $text = prompt(&#39;Enter short text &gt; &#39;);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $text = prompt(&#39;Enter short text &gt; &#39;);
 my $CamelName = $text.comb(/\w+/).map({.tclc}).join(&#39;&#39;);
 say $CamelName;</code></pre>
 </div>
@@ -532,9 +479,7 @@ say $CamelName;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $filename = &#39;file0.txt&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $filename = &#39;file0.txt&#39;;
 for 1..5 {
     $filename++;
     say $filename;
@@ -556,9 +501,7 @@ for 1..5 {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $filename = &#39;file000.txt&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $filename = &#39;file000.txt&#39;;
 for 1..500 {
     $filename++;
     say $filename;
@@ -586,9 +529,7 @@ for 1..500 {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say (&#39;0&#39; .. &#39;z&#39;).pick(15).join(&#39;&#39;);</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say (&#39;0&#39; .. &#39;z&#39;).pick(15).join(&#39;&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -605,9 +546,7 @@ say (&#39;0&#39; .. &#39;z&#39;).pick(15).join(&#39;&#39;);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say (&#39;0&#39; .. &#39;z&#39;).pick(1000).sort.join(&#39;&#39;);</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say (&#39;0&#39; .. &#39;z&#39;).pick(1000).sort.join(&#39;&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -625,9 +564,7 @@ say (&#39;0&#39; .. &#39;z&#39;).pick(1000).sort.join(&#39;&#39;);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @chars = &#39;0&#39; ... &#39;9&#39;, &#39;A&#39; ... &#39;Z&#39;, &#39;a&#39; ... &#39;z&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @chars = &#39;0&#39; ... &#39;9&#39;, &#39;A&#39; ... &#39;Z&#39;, &#39;a&#39; ... &#39;z&#39;;
 say @chars.pick(15).join(&#39;&#39;);</code></pre>
 </div>
 </div>
@@ -645,9 +582,7 @@ say @chars.pick(15).join(&#39;&#39;);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $password = &#39;&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $password = &#39;&#39;;
 $password ~= (&#39;0&#39; .. &#39;z&#39;).pick() for 1..15;
 say $password;</code></pre>
 </div>
@@ -660,9 +595,7 @@ say $password;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $password = &#39;&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $password = &#39;&#39;;
 $password ~= (&#39;0&#39; .. &#39;z&#39;).roll() for 1..15;
 say $password;</code></pre>
 </div>
@@ -696,9 +629,7 @@ RNA    U    G    C    A</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my %transcription =
+<pre class="highlight"><code class="language-raku" data-lang="raku">my %transcription =
     A =&gt; &#39;U&#39;, C =&gt; &#39;G&#39;, G =&gt; &#39;C&#39;, T =&gt; &#39;A&#39;;
 
 my $dna = &#39;ACCATCAGTC&#39;;
@@ -711,9 +642,7 @@ say $rna; # UGGUAGUCAG</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say $dna.trans(%transcription, :squash); # UGUAGUCAG</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $dna.trans(%transcription, :squash); # UGUAGUCAG</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -721,9 +650,7 @@ say $dna.trans(%transcription, :squash); # UGUAGUCAG</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say $dna.trans(&#39;ACCA&#39; =&gt; &#39;UGGU&#39;, &#39;TCA&#39; =&gt; &#39;AGU&#39;, &#39;GTC&#39; =&gt; &#39;CAG&#39;);</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $dna.trans(&#39;ACCA&#39; =&gt; &#39;UGGU&#39;, &#39;TCA&#39; =&gt; &#39;AGU&#39;, &#39;GTC&#39; =&gt; &#39;CAG&#39;);</code></pre>
 </div>
 </div>
 </div>
@@ -747,9 +674,7 @@ say $dna.trans(&#39;ACCA&#39; =&gt; &#39;UGGU&#39;, &#39;TCA&#39; =&gt; &#39;AGU
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $message = &#39;hello, world!&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $message = &#39;hello, world!&#39;;
 my $secret = $message.trans(
     [&#39;a&#39; .. &#39;z&#39;] =&gt;
     [&#39;w&#39; .. &#39;z&#39;, &#39;a&#39; .. &#39;v&#39;]
@@ -762,9 +687,7 @@ say $secret; # dahhk, sknhz!</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say $secret.trans(
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $secret.trans(
     [&#39;w&#39; .. &#39;z&#39;, &#39;a&#39; .. &#39;v&#39;] =&gt;
     [&#39;a&#39; .. &#39;z&#39;]
 );</code></pre>
@@ -802,9 +725,7 @@ say $secret.trans(
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-for 1, 2, 3 -&gt; $n {          # Program output:
+<pre class="highlight"><code class="language-raku" data-lang="raku">for 1, 2, 3 -&gt; $n {          # Program output:
     my $word = &#39;file&#39;;       # 1 file found
     $word ~= &#39;s&#39; if $n &gt; 1;  # 2 files found
     say &#34;$n $word found&#34;;    # 3 files found
@@ -819,9 +740,7 @@ for 1, 2, 3 -&gt; $n {          # Program output:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-for 1, 2, 3 -&gt; $n {
+<pre class="highlight"><code class="language-raku" data-lang="raku">for 1, 2, 3 -&gt; $n {
     say &#34;$n file{&#39;s&#39; if $n &gt; 1} found&#34;;
 }</code></pre>
 </div>
@@ -843,9 +762,7 @@ for 1, 2, 3 -&gt; $n {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $text = prompt(&#39;Text&gt; &#39;);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $text = prompt(&#39;Text&gt; &#39;);
 my %count;
 %count{$_}++ for $text.lc.comb(/\w+/);
 say (sort {%count{$^b} &lt;=&gt; %count{$^a}}, %count.keys)[0];</code></pre>
@@ -859,9 +776,7 @@ say (sort {%count{$^b} &lt;=&gt; %count{$^a}}, %count.keys)[0];</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $max = %count{(sort {%count{$^b} &lt;=&gt; %count{$^a}},
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $max = %count{(sort {%count{$^b} &lt;=&gt; %count{$^a}},
                  count.keys)[0]};
 .say for %count.keys.grep({%count{$_} == $max});</code></pre>
 </div>
@@ -880,9 +795,7 @@ my $max = %count{(sort {%count{$^b} &lt;=&gt; %count{$^a}},
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $a = &#39;the quick brown fox jumps over the lazy dog&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = &#39;the quick brown fox jumps over the lazy dog&#39;;
 my $b = &#39;what does the fox say?&#39;;
 
 my $common = &#39;&#39;;
@@ -918,9 +831,7 @@ say $common
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $a = prompt(&#39;First word &gt; &#39;);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = prompt(&#39;First word &gt; &#39;);
 my $b = prompt(&#39;Second word &gt; &#39;);
 
 say normalize($a) eq normalize($b)
@@ -939,9 +850,7 @@ sub normalize($word) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub normalize($word) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub normalize($word) {
     return $word.lc.comb.sort.join(&#39;&#39;).trans(&#39; &#39; =&gt; &#39;&#39;);
 }</code></pre>
 </div>
@@ -967,9 +876,7 @@ sub normalize($word) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $string = prompt(&#39;Enter a string: &#39;);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $string = prompt(&#39;Enter a string: &#39;);
 my $is_palindrome = $string eq $string.flip;
 
 say &#39;The string is &#39; ~
@@ -985,9 +892,7 @@ say &#39;The string is &#39; ~
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-$string ~~ s:g/\W+//;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">$string ~~ s:g/\W+//;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -998,9 +903,7 @@ $string ~~ s:g/\W+//;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-$string .= lc;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">$string .= lc;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1008,9 +911,7 @@ $string .= lc;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-$string = $string.lc;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">$string = $string.lc;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1018,9 +919,7 @@ $string = $string.lc;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $string = prompt(&#39;Enter a string: &#39;);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $string = prompt(&#39;Enter a string: &#39;);
 
 $string ~~ s:g/\W+//;
 $string .= lc;
@@ -1045,9 +944,7 @@ say &#39;The string is &#39; ~
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $string = prompt(&#39;Enter a string: &#39;);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $string = prompt(&#39;Enter a string: &#39;);
 $string ~~ s:g/\W+//;
 $string .= lc;
 
@@ -1074,9 +971,7 @@ say &#34;The string is$not palindromic.&#34;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-for 0 .. $length -&gt; $start {
+<pre class="highlight"><code class="language-raku" data-lang="raku">for 0 .. $length -&gt; $start {
     for $start .. $length - 1 -&gt; $end {
         ...
     }
@@ -1088,9 +983,7 @@ for 0 .. $length -&gt; $start {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $substring = $string.substr($start, $length - $end);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $substring = $string.substr($start, $length - $end);
 my $test = $substring;
 $test ~~ s:g/\W+//;
 $test .= lc;
@@ -1108,10 +1001,7 @@ if $test eq $test.flip &amp;&amp; $substring.chars &gt; $found.chars {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-
-my $string = prompt(&#39;Enter string&gt; &#39;);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $string = prompt(&#39;Enter string&gt; &#39;);
 my $length = $string.chars;
 my $found = &#39;&#39;;
 
@@ -1159,9 +1049,7 @@ if $found {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $text = $*IN.slurp; $text .= lc;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $text = $*IN.slurp; $text .= lc;
 $text ~~ s:g/\W+/ /;
 my $length = $text.chars;
 
@@ -1202,9 +1090,7 @@ for %phrases.keys.sort({%phrases{$^b} &lt;=&gt; %phrases{$^a}}) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-m:c($start)/(&lt;&lt; [\w+] ** 5 %% \s &gt;&gt;) .+ $0/</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">m:c($start)/(&lt;&lt; [\w+] ** 5 %% \s &gt;&gt;) .+ $0/</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1237,9 +1123,7 @@ m:c($start)/(&lt;&lt; [\w+] ** 5 %% \s &gt;&gt;) .+ $0/</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say π;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say π;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1253,9 +1137,7 @@ say π;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say pi;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say pi;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1263,9 +1145,7 @@ say pi;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say τ;
+<pre class="highlight"><code class="language-raku" data-lang="raku">say τ;
 say 𝑒;</code></pre>
 </div>
 </div>
@@ -1281,9 +1161,7 @@ say 𝑒;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say 1E120 &lt; ∞; # Prints True</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 1E120 &lt; ∞; # Prints True</code></pre>
 </div>
 </div>
 </div>
@@ -1301,9 +1179,7 @@ say 1E120 &lt; ∞; # Prints True</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $n = 5;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = 5;
 my $f = [*] 1 .. $n;
 say $f;</code></pre>
 </div>
@@ -1340,9 +1216,7 @@ say $f;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi sub factorial(Int $x where {$x &lt; 2}) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub factorial(Int $x where {$x &lt; 2}) {
     return 1;
 }</code></pre>
 </div>
@@ -1352,9 +1226,7 @@ multi sub factorial(Int $x where {$x &lt; 2}) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi sub factorial(Int $x) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub factorial(Int $x) {
     return $x * factorial($x - 1);
 }</code></pre>
 </div>
@@ -1367,9 +1239,7 @@ multi sub factorial(Int $x) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say factorial(5);</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say factorial(5);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1377,9 +1247,7 @@ say factorial(5);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-(Int $x where {$x &lt; 2})</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">(Int $x where {$x &lt; 2})</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1393,9 +1261,7 @@ say factorial(5);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub postfix:&lt;!&gt;($n) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub postfix:&lt;!&gt;($n) {
     return [*] 1 .. $n;
 }</code></pre>
 </div>
@@ -1405,9 +1271,7 @@ sub postfix:&lt;!&gt;($n) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say 5!;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 5!;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1415,9 +1279,7 @@ say 5!;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $x = 7;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 7;
 say $x!; # Prints 5040
 
 say .! for 3..7; # 6, 24, 120, 720, 5040</code></pre>
@@ -1428,9 +1290,7 @@ say .! for 3..7; # 6, 24, 120, 720, 5040</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub postfix:&lt;!&gt;($n) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub postfix:&lt;!&gt;($n) {
     $n &lt;= 1 ?? 1 !! $n * ($n - 1)!
 }
 
@@ -1458,9 +1318,7 @@ say 5!; # Prints 120</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my ($a, $b) = (1, 1);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my ($a, $b) = (1, 1);
 ($a, $b) = ($b, $a + $b) for 3 .. 10;
 say $b;</code></pre>
 </div>
@@ -1470,9 +1328,7 @@ say $b;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @fib = 1, 1, * + * ... *;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @fib = 1, 1, * + * ... *;
 say @fib[9];</code></pre>
 </div>
 </div>
@@ -1500,9 +1356,7 @@ say @fib[9];</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say $_ ** 2 for 1..10;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $_ ** 2 for 1..10;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1516,9 +1370,7 @@ say $_ ** 2 for 1..10;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-for 1..10 -&gt; $x {
+<pre class="highlight"><code class="language-raku" data-lang="raku">for 1..10 -&gt; $x {
     say $x * $x;
 }</code></pre>
 </div>
@@ -1531,9 +1383,7 @@ for 1..10 -&gt; $x {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-.say for map {$_ ** 2}, 1..10;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say for map {$_ ** 2}, 1..10;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1557,9 +1407,7 @@ for 1..10 -&gt; $x {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say 2 ** $_ for 0..9;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 2 ** $_ for 0..9;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1570,9 +1418,7 @@ say 2 ** $_ for 0..9;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @power2 = 1, 2, {$_ * 2} ... *;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @power2 = 1, 2, {$_ * 2} ... *;
 .say for @power2[^10];</code></pre>
 </div>
 </div>
@@ -1584,9 +1430,7 @@ my @power2 = 1, 2, {$_ * 2} ... *;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @power2 = 1, 2, 4 ... *;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @power2 = 1, 2, 4 ... *;
 say for @power2[^10];</code></pre>
 </div>
 </div>
@@ -1608,9 +1452,7 @@ say for @power2[^10];</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-.say if $_ % 2 for 1 .. 20;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say if $_ % 2 for 1 .. 20;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1618,9 +1460,7 @@ say for @power2[^10];</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-.say unless $_ % 2 for 1 .. 20;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say unless $_ % 2 for 1 .. 20;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1628,9 +1468,7 @@ say for @power2[^10];</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-.say for grep {$_ % 2}, 1..20;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say for grep {$_ % 2}, 1..20;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1638,9 +1476,7 @@ say for @power2[^10];</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-.say for grep {$_ %% 2}, 1..20;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">.say for grep {$_ %% 2}, 1..20;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1648,9 +1484,7 @@ say for @power2[^10];</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @odd = 1, 3 ... *;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @odd = 1, 3 ... *;
 say @odd[^10];</code></pre>
 </div>
 </div>
@@ -1659,9 +1493,7 @@ say @odd[^10];</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @even = 2, 4 ... *;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @even = 2, 4 ... *;
 say @even[^10];</code></pre>
 </div>
 </div>
@@ -1683,9 +1515,7 @@ say @even[^10];</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say 1/1000 =~= 1/1001;         # False
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 1/1000 =~= 1/1001;         # False
 say 1/1E20 =~= 1 / (1E20 + 1); # True</code></pre>
 </div>
 </div>
@@ -1700,9 +1530,7 @@ say 1/1E20 =~= 1 / (1E20 + 1); # True</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say0.1+0.2-0.3; #0</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say0.1+0.2-0.3; #0</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1710,9 +1538,7 @@ say0.1+0.2-0.3; #0</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&#39;%.20f&#39;.printf(0.1 + 0.2 - 0.3); # 0.00000000000000000000</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#39;%.20f&#39;.printf(0.1 + 0.2 - 0.3); # 0.00000000000000000000</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1729,9 +1555,7 @@ say0.1+0.2-0.3; #0</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $a = 83274938493874832658327320948349783624839479683297463483 72463286948532460989746932849382643928497328656329878246 39847823659328476832647392847836539843928645384329463287 53924837825643824302487637563724384782374803284710339876;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = 83274938493874832658327320948349783624839479683297463483 72463286948532460989746932849382643928497328656329878246 39847823659328476832647392847836539843928645384329463287 53924837825643824302487637563724384782374803284710339876;
 
 my $b = 23849389520394874100302935470340851094327485279287346539 23423599234023403275324932549011093234845878830238479823 38497357295682768498203985784582309487857450938547650202 34958452087248754293875293059257429584375683984543867549;
 
@@ -1767,9 +1591,7 @@ say $a * $b;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;Prime&#39; if is-prime(17);</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;Prime&#39; if is-prime(17);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1777,9 +1599,7 @@ say &#39;Prime&#39; if is-prime(17);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $n = 15;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = 15;
 say $n.is-prime
     ?? &#34;$n is prime&#34;
     !! &#34;$n is not prime&#34;
@@ -1811,9 +1631,7 @@ say $n.is-prime
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @numbers = grep {.is-prime}, 1..*;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @numbers = grep {.is-prime}, 1..*;
 say @numbers[^10];</code></pre>
 </div>
 </div>
@@ -1831,9 +1649,7 @@ say @numbers[^10];</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @numbers = (1..*).grep: *.is-prime;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @numbers = (1..*).grep: *.is-prime;
 say @numbers[^10];</code></pre>
 </div>
 </div>
@@ -1842,9 +1658,7 @@ say @numbers[^10];</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @numbers = (^Inf).grep: *.is-prime;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @numbers = (^Inf).grep: *.is-prime;
 say @numbers[^10];</code></pre>
 </div>
 </div>
@@ -1853,9 +1667,7 @@ say @numbers[^10];</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say ((^∞).grep: *.is-prime)[^10];</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say ((^∞).grep: *.is-prime)[^10];</code></pre>
 </div>
 </div>
 </div>
@@ -1876,9 +1688,7 @@ say ((^∞).grep: *.is-prime)[^10];</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $n = 123456789;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = 123456789;
 
 my @list;
 my @prime = grep {.is-prime}, 1..*;
@@ -1913,9 +1723,7 @@ say @list; # [3 3 3607 3803]</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $a = 16;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = 16;
 my $b = 280;
 
 my $gcd = $a gcd $b;
@@ -1928,9 +1736,7 @@ say $b/$gcd; # 35</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my Rat $r = $a/$b;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Rat $r = $a/$b;
 say $r.numerator;   # 2
 say $r.denominator; # 35</code></pre>
 </div>
@@ -1940,9 +1746,7 @@ say $r.denominator; # 35</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-dd $r; # Rat $r = &lt;2/35&gt;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">dd $r; # Rat $r = &lt;2/35&gt;</code></pre>
 </div>
 </div>
 </div>
@@ -1959,9 +1763,7 @@ dd $r; # Rat $r = &lt;2/35&gt;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $v = 42 / 0;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $v = 42 / 0;
 say &#39;It still works!&#39;;</code></pre>
 </div>
 </div>
@@ -1970,9 +1772,7 @@ say &#39;It still works!&#39;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $v = 42 / 0;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $v = 42 / 0;
 say $v;</code></pre>
 </div>
 </div>
@@ -1981,9 +1781,7 @@ say $v;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-Attempt to divide 42 by zero using div in block &lt;unit&gt; at divide0.rk line 2</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">Attempt to divide 42 by zero using div in block &lt;unit&gt; at divide0.rk line 2</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1991,9 +1789,7 @@ Attempt to divide 42 by zero using div in block &lt;unit&gt; at divide0.rk line 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
- try {
+<pre class="highlight"><code class="language-raku" data-lang="raku"> try {
     say 42 / 0;
     CATCH {
         default {
@@ -2023,9 +1819,7 @@ say &#39;It still works!&#39;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say 1.rand;   # between 0 and 1
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 1.rand;   # between 0 and 1
 say 2.5.rand; # between 0 and 2.5
 say pi.rand;  # between 0 and 3.14...</code></pre>
 </div>
@@ -2038,9 +1832,7 @@ say pi.rand;  # between 0 and 3.14...</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say10.rand.Int; #Either0,or1,2,3,4,5,6,7,8,or9butnot10</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say10.rand.Int; #Either0,or1,2,3,4,5,6,7,8,or9butnot10</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2048,9 +1840,7 @@ say10.rand.Int; #Either0,or1,2,3,4,5,6,7,8,or9butnot10</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-srand(1);</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">srand(1);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2058,9 +1848,7 @@ srand(1);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-srand(1);
+<pre class="highlight"><code class="language-raku" data-lang="raku">srand(1);
 my $a = 10.rand;
 
 srand(1);
@@ -2094,9 +1882,7 @@ say $a == $b; # True</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $n = 1234;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = 1234;
 $n **= 2;
 $n = sprintf &#39;%08i&#39;, $seed;
 $n ~~ s/^..(.*)..$/$0/;
@@ -2111,9 +1897,7 @@ say $n;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $n = 1234;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = 1234;
 $n **= 2;
 $n ~~ /(. ** 0..4)..$/;
 say ~$0;</code></pre>
@@ -2127,9 +1911,7 @@ say ~$0;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $n = 1234;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = 1234;
 $n **= 2;
 $n = ($n / 100).Int % 10000;
 say ~$0;</code></pre>
@@ -2140,9 +1922,7 @@ say ~$0;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $n = 1234;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = 1234;
 for 1..30 {
     $n **= 2;
     $n ~~ /(. ** 0..4)..$/;
@@ -2171,9 +1951,7 @@ for 1..30 {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @histogram;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @histogram;
 @histogram[10 * rand]++ for 1..100_000;
 say @histogram;</code></pre>
 </div>
@@ -2183,9 +1961,7 @@ say @histogram;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-@histogram[(10 * rand).Int]++</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">@histogram[(10 * rand).Int]++</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2216,9 +1992,7 @@ say @histogram;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my ($x1, $y1) = (10, 3);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my ($x1, $y1) = (10, 3);
 my ($x2, $y2) = (9, 1);
 say sqrt(($x1 - $x2) ** 2 + ($y1 - $y2) ** 2);</code></pre>
 </div>
@@ -2228,9 +2002,7 @@ say sqrt(($x1 - $x2) ** 2 + ($y1 - $y2) ** 2);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $a = 10+3i;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $a = 10+3i;
 my $b = 9+1i;
 say ($a - $b).abs;</code></pre>
 </div>
@@ -2273,9 +2045,7 @@ say ($a - $b).abs;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @data = 727.7, 1086.5, 1091.0, 1361.3, 1490.5, 1956.1;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @data = 727.7, 1086.5, 1091.0, 1361.3, 1490.5, 1956.1;
 
 my $avg = ([+] @data) / @data.elems;
 my $sigma = sqrt(
@@ -2297,9 +2067,7 @@ say $sigma; # 420.962489619523</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $sigma = sqrt(
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $sigma = sqrt(
     ([+] map (* - $avg) ** 2, @data) / (@data.elems - 1)
 );</code></pre>
 </div>
@@ -2309,9 +2077,7 @@ my $sigma = sqrt(
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @data = 727.7, 1086.5, 1091.0, 1361.3, 1490.5, 1956.1;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @data = 727.7, 1086.5, 1091.0, 1361.3, 1490.5, 1956.1;
 
 my $avg = ([+] @data) / @data.elems;
 @data
@@ -2334,9 +2100,7 @@ say sqrt(@σ[0] / (@data.elems - 1)); # 420.962489619523</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $x̄ = ([+] @data) / @data;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x̄ = ([+] @data) / @data;</code></pre>
 </div>
 </div>
 </div>
@@ -2363,9 +2127,7 @@ my $x̄ = ([+] @data) / @data;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub polar-to-cartesian($r, $φ) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub polar-to-cartesian($r, $φ) {
     $r * cos($φ), $r * sin($φ)
 }
 sub cartesian-to-polar($x, $y) {
@@ -2381,9 +2143,7 @@ sub cartesian-to-polar($x, $y) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say cartesian-to-polar(1, 2);
+<pre class="highlight"><code class="language-raku" data-lang="raku">say cartesian-to-polar(1, 2);
 say polar-to-cartesian(2.236068, 1.107149);</code></pre>
 </div>
 </div>
@@ -2395,9 +2155,7 @@ say polar-to-cartesian(2.236068, 1.107149);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub cartesian-to-polar($x, $y) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub cartesian-to-polar($x, $y) {
     sqrt($x² + $y²), cartesian-to-φ($x, $y)
 }
 
@@ -2444,9 +2202,7 @@ multi sub cartesian-to-φ($x, $y where {$x == 0 &amp;&amp; $y == 0}) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $inside = 0; my $n = 100_000;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $inside = 0; my $n = 100_000;
 for 1..$n {
     my @point = map {2.rand - 1}, 1..2; # 1..3 for sphere
     $inside++ if sqrt([+] map *², @point) &lt; 1;
@@ -2483,9 +2239,7 @@ say 4 * $inside / $n; # 8 for sphere</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-for 1 .. 0x10FFFD {
+<pre class="highlight"><code class="language-raku" data-lang="raku">for 1 .. 0x10FFFD {
     my $char = $_.chr;
     print $char if $char ~~ /&lt;:digit&gt;/;
 }</code></pre>
@@ -2509,9 +2263,7 @@ for 1 .. 0x10FFFD {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say $char ~ &#39; &#39; ~ $char.uniname if $char ~~ /&lt;:digit&gt;/;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $char ~ &#39; &#39; ~ $char.uniname if $char ~~ /&lt;:digit&gt;/;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2532,9 +2284,7 @@ say $char ~ &#39; &#39; ~ $char.uniname if $char ~~ /&lt;:digit&gt;/;</code></pr
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-10.rand.round</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">10.rand.round</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2542,9 +2292,7 @@ say $char ~ &#39; &#39; ~ $char.uniname if $char ~~ /&lt;:digit&gt;/;</code></pr
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $n = 10.rand.round;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $n = 10.rand.round;
 
 my $guess = prompt(&#39;Guess my number between 0 and 10: &#39;);
 
@@ -2566,9 +2314,7 @@ say &#39;Yes, this is it!&#39;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say $guess &lt; $n ?? &#39;Too small.&#39; !! &#39;Too big.&#39;;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say $guess &lt; $n ?? &#39;Too small.&#39; !! &#39;Too big.&#39;;</code></pre>
 </div>
 </div>
 </div>

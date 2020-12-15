@@ -475,9 +475,7 @@ Hello, world</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;Hello, World&#34;;         # Output: Hello, World
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;Hello, World&#34;;         # Output: Hello, World
 say( 2 * 21 );              # Output: 42</code></pre>
 </div>
 </div>
@@ -488,9 +486,7 @@ say( 2 * 21 );              # Output: 42</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $x = 1;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $x = 1;
 my @capitals = &#39;Algiers&#39;, &#39;Tirana&#39;, &#39;Berlin&#39;, &#39;Tokio&#39;;
 my %populations =
       Algiers =&gt; 3_500_000,
@@ -507,9 +503,7 @@ my %populations =
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say %populations{&#39;Algiers&#39;};    # Output: 3500000
+<pre class="highlight"><code class="language-raku" data-lang="raku">say %populations{&#39;Algiers&#39;};    # Output: 3500000
 say %populations.keys.sort;     # Output: (Algiers Berlin Tirana)
 say %populations.values.sum;    # Output: 7553400</code></pre>
 </div>
@@ -525,9 +519,7 @@ say %populations.values.sum;    # Output: 7553400</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $name = &#39;Larry&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $name = &#39;Larry&#39;;
 say &#34;Hello, $name&#34;;         # Output: Hello, Larry
 say &#39;Hello, $name&#39;;         # Output: Hello, $name</code></pre>
 </div>
@@ -537,9 +529,7 @@ say &#39;Hello, $name&#39;;         # Output: Hello, $name</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;a quote: \&#39; a backslash: \\&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;a quote: \&#39; a backslash: \\&#39;;
 # Output: a quote: &#39; a backslash: \</code></pre>
 </div>
 </div>
@@ -548,9 +538,7 @@ say &#39;a quote: \&#39; a backslash: \\&#39;;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $macbeth = q:to/END/;       # need to put the ; on this line!
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $macbeth = q:to/END/;       # need to put the ; on this line!
 When shall we three meet again?
 In thunder, lightning, or in rain?
     When the hurlyburly&#39;s done,
@@ -570,9 +558,7 @@ END
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-for 1, 2, 3 {
+<pre class="highlight"><code class="language-raku" data-lang="raku">for 1, 2, 3 {
     say $_;
 }
 if 1 &gt; 2 {
@@ -602,9 +588,7 @@ This runs</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-for 1, 2, 3 -&gt; $value {
+<pre class="highlight"><code class="language-raku" data-lang="raku">for 1, 2, 3 -&gt; $value {
     say $value;
 }</code></pre>
 </div>
@@ -614,9 +598,7 @@ for 1, 2, 3 -&gt; $value {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $callback = -&gt; $x, $y { $x + $y };
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $callback = -&gt; $x, $y { $x + $y };
 say $callback(1, 2);                    # Output: 3</code></pre>
 </div>
 </div>
@@ -628,9 +610,7 @@ say $callback(1, 2);                    # Output: 3</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub double($x) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub double($x) {
     return 2 * $x;
 }
 say double(2);         # Output: 4</code></pre>
@@ -644,9 +624,7 @@ say double(2);         # Output: 4</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub double(Numeric $x) { 2 * $x }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub double(Numeric $x) { 2 * $x }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -654,9 +632,7 @@ sub double(Numeric $x) { 2 * $x }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Point {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Point {
     has $.x;
     has $.y;
     method magnitude() {
@@ -719,9 +695,7 @@ say $p.magnitude();                  # Output: 5.3851648071345</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-$_ = 3; # the string to be matched against
+<pre class="highlight"><code class="language-raku" data-lang="raku">$_ = 3; # the string to be matched against
 my $x = 3;
 say &#34;yes&#34; if /&#34;$x&#34;/;      # Output: yes
 say &#34;yes&#34; if /&#34;{1 + 2}&#34;/; # Output: yes</code></pre>
@@ -747,9 +721,7 @@ say &#34;yes&#34; if /&#34;{1 + 2}&#34;/; # Output: yes</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-$ raku -e &#39;/!/&#39;
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ raku -e &#39;/!/&#39;
 ===SORRY!=== Error while compiling -e
 Unrecognized regex metacharacter ! (must be quoted to match literally)</code></pre>
 </div>
@@ -774,9 +746,7 @@ Unrecognized regex metacharacter ! (must be quoted to match literally)</code></p
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-# Start-of-line positions that ^^ matches:
+<pre class="highlight"><code class="language-raku" data-lang="raku"># Start-of-line positions that ^^ matches:
 &#34;⏏ab\n⏏de&#34;
 &#34;⏏ab\n⏏de\n&#34;
 
@@ -886,9 +856,7 @@ Unrecognized regex metacharacter ! (must be quoted to match literally)</code></p
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-for &#39;/usr/share/dict/words&#39;.IO.lines -&gt; $word {
+<pre class="highlight"><code class="language-raku" data-lang="raku">for &#39;/usr/share/dict/words&#39;.IO.lines -&gt; $word {
     say $word if lc($word) ~~ / ^ .e.rl $ /;
 }</code></pre>
 </div>
@@ -1005,9 +973,7 @@ pearl</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-for 0..0x1FFFF -&gt; $c {
+<pre class="highlight"><code class="language-raku" data-lang="raku">for 0..0x1FFFF -&gt; $c {
     if chr($c) ~~ /\n/ {
         printf &#34;U+%05X - %s\n&#34;, $c, $c.uniname
 }</code></pre>
@@ -1037,9 +1003,7 @@ U+02029 - PARAGRAPH SEPARATOR</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;perl&#39; ~~ / &lt;[aeiou]&gt;/; # Output: ⌜e⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;perl&#39; ~~ / &lt;[aeiou]&gt;/; # Output: ⌜e⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1056,9 +1020,7 @@ say &#39;perl&#39; ~~ / &lt;[aeiou]&gt;/; # Output: ⌜e⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-/ &lt;[\d]-[78]+[abc]&gt; /</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">/ &lt;[\d]-[78]+[abc]&gt; /</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1205,9 +1167,7 @@ say &#39;perl&#39; ~~ / &lt;[aeiou]&gt;/; # Output: ⌜e⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-/ ^ a ** 4 $ /;     # Matches exactly 4 a&#39;s
+<pre class="highlight"><code class="language-raku" data-lang="raku">/ ^ a ** 4 $ /;     # Matches exactly 4 a&#39;s
 / ^ a ** 2..4 $ /;  # Matches between 2 and 4 a&#39;s
 / ^ a ** 5..* $ /;  # Matches at least 5 a&#39;s</code></pre>
 </div>
@@ -1222,9 +1182,7 @@ say &#39;perl&#39; ~~ / &lt;[aeiou]&gt;/; # Output: ⌜e⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;&lt;a&gt; b &lt;c&gt;&#34; ~~ /&#34;&lt;&#34; .+ &#34;&gt;&#34;/; # Output: ⌜&lt;a&gt; b &lt;c&gt;⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;&lt;a&gt; b &lt;c&gt;&#34; ~~ /&#34;&lt;&#34; .+ &#34;&gt;&#34;/; # Output: ⌜&lt;a&gt; b &lt;c&gt;⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1232,9 +1190,7 @@ say &#34;&lt;a&gt; b &lt;c&gt;&#34; ~~ /&#34;&lt;&#34; .+ &#34;&gt;&#34;/; # Out
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;&lt;a&gt; b &lt;c&gt;&#34; ~~ /&#34;&lt;&#34; .+? &#34;&gt;&#34;/; # Output: ⌜&lt;a&gt;⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;&lt;a&gt; b &lt;c&gt;&#34; ~~ /&#34;&lt;&#34; .+? &#34;&gt;&#34;/; # Output: ⌜&lt;a&gt;⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1257,9 +1213,7 @@ say &#34;&lt;a&gt; b &lt;c&gt;&#34; ~~ /&#34;&lt;&#34; .+? &#34;&gt;&#34;/; # Ou
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;1,24,5&#39; ~~ / [\d+]* % &#39;,&#39; /; # Output: ⌜1,24,5⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;1,24,5&#39; ~~ / [\d+]* % &#39;,&#39; /; # Output: ⌜1,24,5⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1267,9 +1221,7 @@ say &#39;1,24,5&#39; ~~ / [\d+]* % &#39;,&#39; /; # Output: ⌜1,24,5⌟</code><
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;1,24,5&#39; ~~ / [\d+]*? % &#39;,&#39; /; # Output: ⌜⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;1,24,5&#39; ~~ / [\d+]*? % &#39;,&#39; /; # Output: ⌜⌟</code></pre>
 </div>
 </div>
 </div>
@@ -1281,9 +1233,7 @@ say &#39;1,24,5&#39; ~~ / [\d+]*? % &#39;,&#39; /; # Output: ⌜⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-/ Hi | Hello | Hey /</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">/ Hi | Hello | Hey /</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1297,9 +1247,7 @@ say &#39;1,24,5&#39; ~~ / [\d+]*? % &#39;,&#39; /; # Output: ⌜⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;aab&#39; ~~ / a+ | \w+ /;  # Output: ⌜aab⌟
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;aab&#39; ~~ / a+ | \w+ /;  # Output: ⌜aab⌟
 say &#39;aab&#39; ~~ / a+ || \w+ /; # Output: ⌜aa⌟</code></pre>
 </div>
 </div>
@@ -1311,9 +1259,7 @@ say &#39;aab&#39; ~~ / a+ || \w+ /; # Output: ⌜aa⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-/
+<pre class="highlight"><code class="language-raku" data-lang="raku">/
     | first branch
     | second branch
     | third branch
@@ -1325,9 +1271,7 @@ say &#39;aab&#39; ~~ / a+ || \w+ /; # Output: ⌜aa⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-/
+<pre class="highlight"><code class="language-raku" data-lang="raku">/
       first branch
     | second branch
     | third branch
@@ -1345,9 +1289,7 @@ say &#39;aab&#39; ~~ / a+ || \w+ /; # Output: ⌜aa⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-/ &lt;phonenumber&gt; &amp; .* 17 .* /</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">/ &lt;phonenumber&gt; &amp; .* 17 .* /</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1358,9 +1300,7 @@ say &#39;aab&#39; ~~ / a+ || \w+ /; # Output: ⌜aa⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-/ &lt;phonenumber&gt; &amp; &lt;-[9]&gt;* /</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">/ &lt;phonenumber&gt; &amp; &lt;-[9]&gt;* /</code></pre>
 </div>
 </div>
 </div>
@@ -1380,9 +1320,7 @@ say &#39;aab&#39; ~~ / a+ || \w+ /; # Output: ⌜aa⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;up to 200 MB&#39; ~~ / \d+ &lt;?before \s* &lt;[kMGT]&gt;? B &gt; /;
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;up to 200 MB&#39; ~~ / \d+ &lt;?before \s* &lt;[kMGT]&gt;? B &gt; /;
 # Output: ⌜200⌟</code></pre>
 </div>
 </div>
@@ -1394,9 +1332,7 @@ say &#39;up to 200 MB&#39; ~~ / \d+ &lt;?before \s* &lt;[kMGT]&gt;? B &gt; /;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;up to 200 MB&#39; ~~ / \d+ &lt;!before \s* &lt;[kMGT]&gt;? B &gt; /;
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;up to 200 MB&#39; ~~ / \d+ &lt;!before \s* &lt;[kMGT]&gt;? B &gt; /;
 # Output: ⌜20⌟</code></pre>
 </div>
 </div>
@@ -1405,9 +1341,7 @@ say &#39;up to 200 MB&#39; ~~ / \d+ &lt;!before \s* &lt;[kMGT]&gt;? B &gt; /;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;up to 200 MB&#39; ~~ / « \d+ » &lt;!before \s* &lt;[kMGT]&gt;? B &gt; /;
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;up to 200 MB&#39; ~~ / « \d+ » &lt;!before \s* &lt;[kMGT]&gt;? B &gt; /;
 # Output: Nil</code></pre>
 </div>
 </div>
@@ -1416,16 +1350,12 @@ say &#39;up to 200 MB&#39; ~~ / « \d+ » &lt;!before \s* &lt;[kMGT]&gt;? B &gt;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;200,50&#39; ~~ / &lt;?after \, &gt; \d+ /; # Output: ⌜50⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;200,50&#39; ~~ / &lt;?after \, &gt; \d+ /; # Output: ⌜50⌟</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;200,50&#39; ~~ / &lt;!after \, &gt; \d+ /; # Output: ⌜200⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;200,50&#39; ~~ / &lt;!after \, &gt; \d+ /; # Output: ⌜200⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1459,9 +1389,7 @@ say &#39;200,50&#39; ~~ / &lt;!after \, &gt; \d+ /; # Output: ⌜200⌟</code></
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $str = &#34;If I had a hammer, I&#39;d hammer in the morning&#34;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = &#34;If I had a hammer, I&#39;d hammer in the morning&#34;;
 say $str ~~ /h.mm\w*/; # Output: ⌜hammer⌟
 say $str ~~ /hummer/;  # Output: Nil</code></pre>
 </div>
@@ -1474,9 +1402,7 @@ say $str ~~ /hummer/;  # Output: Nil</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $str = &#34;If I had a hammer, I&#39;d hammer in the morning&#34;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = &#34;If I had a hammer, I&#39;d hammer in the morning&#34;;
 say $str.match(/h.mm\w*/); # Output: ⌜hammer⌟</code></pre>
 </div>
 </div>
@@ -1488,9 +1414,7 @@ say $str.match(/h.mm\w*/); # Output: ⌜hammer⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-/ a.b /;
+<pre class="highlight"><code class="language-raku" data-lang="raku">/ a.b /;
 rx/ a.b /;
 rx{ a.b };
 rx! a.b !;
@@ -1508,9 +1432,7 @@ regex { a.b }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-$_ = &#39;abc&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">$_ = &#39;abc&#39;;
 if m/b./ {
     say &#34;match&#34;;
 }</code></pre>
@@ -1521,9 +1443,7 @@ if m/b./ {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;abc&#34; ~~ m/b/; # Output: ⌜b⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;abc&#34; ~~ m/b/; # Output: ⌜b⌟</code></pre>
 </div>
 </div>
 </div>
@@ -1537,9 +1457,7 @@ say &#34;abc&#34; ~~ m/b/; # Output: ⌜b⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $str = &#34;If I had a hammer, I&#39;d hammer in the morning&#34;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = &#34;If I had a hammer, I&#39;d hammer in the morning&#34;;
 say $str.match(:global, /h.mm\w*/).join(&#39;|&#39;);
 # Output: hammer|hammer</code></pre>
 </div>
@@ -1549,9 +1467,7 @@ say $str.match(:global, /h.mm\w*/).join(&#39;|&#39;);
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;Hello, world&#39;.match(/:i hello/); # Output: ⌜Hello⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;Hello, world&#39;.match(/:i hello/); # Output: ⌜Hello⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1562,9 +1478,7 @@ say &#39;Hello, world&#39;.match(/:i hello/); # Output: ⌜Hello⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say (&#39;abc&#39; ~~ m:g/./).elems; # Output: 3</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say (&#39;abc&#39; ~~ m:g/./).elems; # Output: 3</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1616,9 +1530,7 @@ say (&#39;abc&#39; ~~ m:g/./).elems; # Output: 3</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-/ ab :i cd /;   # match only the cd case-insensitively
+<pre class="highlight"><code class="language-raku" data-lang="raku">/ ab :i cd /;   # match only the cd case-insensitively
 / [:i ab] cd /; # match only the ab case-insensitively</code></pre>
 </div>
 </div>
@@ -1687,9 +1599,7 @@ say (&#39;abc&#39; ~~ m:g/./).elems; # Output: 3</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @numbers = &#34;1308 5th Avenue&#34;.comb(/\d+/);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @numbers = &#34;1308 5th Avenue&#34;.comb(/\d+/);
 say @numbers;       # Output: [1308 5]</code></pre>
 </div>
 </div>
@@ -1698,9 +1608,7 @@ say @numbers;       # Output: [1308 5]</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my ($city, $area, $popul) = &#39;Berlin;891.8;3671000&#39;.split(/&#39;;&#39;/);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my ($city, $area, $popul) = &#39;Berlin;891.8;3671000&#39;.split(/&#39;;&#39;/);
 say $area;          # Output: 891.8</code></pre>
 </div>
 </div>
@@ -1712,9 +1620,7 @@ say $area;          # Output: 891.8</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my ($city, $rest) = &#39;Berlin;891.8;3671000&#39;.split(&#39;;&#39;, 2);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my ($city, $rest) = &#39;Berlin;891.8;3671000&#39;.split(&#39;;&#39;, 2);
 say $city;          # Output: Berlin
 say $rest;          # Output: 891.8;3671000</code></pre>
 </div>
@@ -1733,9 +1639,7 @@ say $rest;          # Output: 891.8;3671000</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;42 eur&#39;.subst( rx:i/ « eur » /, &#39;€&#39;); # Output: 42 €</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;42 eur&#39;.subst( rx:i/ « eur » /, &#39;€&#39;); # Output: 42 €</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1743,9 +1647,7 @@ say &#39;42 eur&#39;.subst( rx:i/ « eur » /, &#39;€&#39;); # Output: 42 €<
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;42 €&#39;.subst(/\s+/, &#39;&#39;);               # Output: 42€</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;42 €&#39;.subst(/\s+/, &#39;&#39;);               # Output: 42€</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1753,9 +1655,7 @@ say &#39;42 €&#39;.subst(/\s+/, &#39;&#39;);               # Output: 42€</co
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;1 2 3&#39;.subst(/\s+/, &#39;&#39;);              # Output: 12 3
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;1 2 3&#39;.subst(/\s+/, &#39;&#39;);              # Output: 12 3
 say &#39;1 2 3&#39;.subst(:g, /\s+/, &#39;&#39;);          # Output: 123</code></pre>
 </div>
 </div>
@@ -1764,9 +1664,7 @@ say &#39;1 2 3&#39;.subst(:g, /\s+/, &#39;&#39;);          # Output: 123</code><
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;9 of spades&#34;.subst(/\d+/, -&gt; $m { $m + 1 });
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;9 of spades&#34;.subst(/\d+/, -&gt; $m { $m + 1 });
     # Output: 10 of spades</code></pre>
 </div>
 </div>
@@ -1775,9 +1673,7 @@ say &#34;9 of spades&#34;.subst(/\d+/, -&gt; $m { $m + 1 });
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;9 of spades&#34;.subst(/(\d+)/, -&gt; $/ { $0 + 1 });
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;9 of spades&#34;.subst(/(\d+)/, -&gt; $/ { $0 + 1 });
     # Output: 10 of spades</code></pre>
 </div>
 </div>
@@ -1786,9 +1682,7 @@ say &#34;9 of spades&#34;.subst(/(\d+)/, -&gt; $/ { $0 + 1 });
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $var = &#39;1 2 3&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $var = &#39;1 2 3&#39;;
 $var ~~ s:g/ \s+ //;
 say $var;                                  # Output: 123</code></pre>
 </div>
@@ -1798,9 +1692,7 @@ say $var;                                  # Output: 123</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $var = &#39;&#34;fantastic&#34;, she said&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $var = &#39;&#34;fantastic&#34;, she said&#39;;
 $var ~~ s:g/ \&#34; (.*?) \&#34; /«$0»/;
 say $var;           # Output: «fantastic», she said</code></pre>
 </div>
@@ -1810,9 +1702,7 @@ say $var;           # Output: «fantastic», she said</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $ad = &#39;Buy now! USD 10 per book. Prices double soon to 20.&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $ad = &#39;Buy now! USD 10 per book. Prices double soon to 20.&#39;;
 $ad ~~ s:g[ \d+ ] = 2 * $/;
 say $ad;</code></pre>
 </div>
@@ -1833,9 +1723,7 @@ say $ad;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $input = &#34;It&#39;s just a jump to the left.
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $input = &#34;It&#39;s just a jump to the left.
 And then a step to the right.&#34;;
 
 $input ~~ s:g/ &lt;?before jump&gt; /⇑/;
@@ -1860,9 +1748,7 @@ And then a step to the right→.</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $input = &#39;2 links with 75MB each&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $input = &#39;2 links with 75MB each&#39;;
 say $input.subst(:g, / \d+ &lt;?before &lt;[MG]&gt; B&gt;/, 500);
     # Output: 2 links with 500MB each</code></pre>
 </div>
@@ -1878,9 +1764,7 @@ say $input.subst(:g, / \d+ &lt;?before &lt;[MG]&gt; B&gt;/, 500);
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $word-regex = /\w+/;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $word-regex = /\w+/;
 say &#34;Hello, world&#34; ~~ $word-regex;    # Output: ⌜Hello⌟</code></pre>
 </div>
 </div>
@@ -1892,9 +1776,7 @@ say &#34;Hello, world&#34; ~~ $word-regex;    # Output: ⌜Hello⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $audience = &#39;world&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $audience = &#39;world&#39;;
 my $greeting = &#39;Hello&#39;;
 
 if &#34;Hello, world&#34; ~~ / $greeting &#39;, &#39; $audience / {
@@ -1910,9 +1792,7 @@ if &#34;Hello, world&#34; ~~ / $greeting &#39;, &#39; $audience / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $audience = &#34;\\w+&#34;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $audience = &#34;\\w+&#34;;
 my $greeting = &#39;Hello&#39;;
 
 if &#34;Hello, world&#34; ~~ / $greeting &#39;, &#39; &lt;$audience&gt; / {
@@ -1928,9 +1808,7 @@ if &#34;Hello, world&#34; ~~ / $greeting &#39;, &#39; &lt;$audience&gt; / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @numbers = &#39;one&#39;, &#39;two&#39;, &#39;three&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @numbers = &#39;one&#39;, &#39;two&#39;, &#39;three&#39;;
 my $regex = / @numbers /;</code></pre>
 </div>
 </div>
@@ -1939,9 +1817,7 @@ my $regex = / @numbers /;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $regex = / [ &#39;one&#39; | &#39;two&#39; | &#39;three&#39; ] /</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $regex = / [ &#39;one&#39; | &#39;two&#39; | &#39;three&#39; ] /</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1955,9 +1831,7 @@ my $regex = / [ &#39;one&#39; | &#39;two&#39; | &#39;three&#39; ] /</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $count = 0;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $count = 0;
 my $str = &#34;between 23 and 42 numbers&#34;;
 
 if $str ~~ / [ \d+ { $count++ } \D* ]+ / {
@@ -1976,9 +1850,7 @@ if $str ~~ / [ \d+ { $count++ } \D* ]+ / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;1.0e42&#39; ~~ / ^ \d+ [&#39;.&#39; \d+]?  [e|E \d+]? $ /;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;1.0e42&#39; ~~ / ^ \d+ [&#39;.&#39; \d+]?  [e|E \d+]? $ /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1986,9 +1858,7 @@ say &#39;1.0e42&#39; ~~ / ^ \d+ [&#39;.&#39; \d+]?  [e|E \d+]? $ /;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&#39;1.0e42&#39; ~~ / ^
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#39;1.0e42&#39; ~~ / ^
     \d+        { say &#34;integer: &#39;$/&#39;&#34; }
     [&#39;.&#39; \d+]  { say &#34;decimal place: &#39;$/&#39;&#34; }
     [e|E \d+]  { say &#34;exponent: &#39;$/&#39;&#34; }
@@ -2016,9 +1886,7 @@ exponent: &#39;1.0e&#39;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $one-byte = / ^ \d ** 0..3 $ &lt;?{ $/.Int &lt;= 255 }&gt; /;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $one-byte = / ^ \d ** 0..3 $ &lt;?{ $/.Int &lt;= 255 }&gt; /;
 for 0, 100, 255, 256, 1000 -&gt; $num {
     if $num ~~ $one-byte {
         say $num;
@@ -2093,9 +1961,7 @@ for 0, 100, 255, 256, 1000 -&gt; $num {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-if &#34;Hello, world&#34; ~~ / (\w+) &#39;, &#39; (\w+) / {
+<pre class="highlight"><code class="language-raku" data-lang="raku">if &#34;Hello, world&#34; ~~ / (\w+) &#39;, &#39; (\w+) / {
     say &#34;Greeting: $0&#34;;         # Output: Greeting: Hello
     say &#34;Audience: $1&#34;;         # Output: Audience: world
 }</code></pre>
@@ -2124,9 +1990,7 @@ if &#34;Hello, world&#34; ~~ / (\w+) &#39;, &#39; (\w+) / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $input = &#34;There are 9 million bicycles in Beijing&#34;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $input = &#34;There are 9 million bicycles in Beijing&#34;;
 
 if $input ~~ /(\d+) \s+ (\w+)/ {
     say $0.^name;    # Output: Match
@@ -2143,9 +2007,7 @@ if $input ~~ /(\d+) \s+ (\w+)/ {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&#39;abcdef&#39; ~~ /(.) (b(c)(d(e))) /;
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#39;abcdef&#39; ~~ /(.) (b(c)(d(e))) /;
 say $0.Str;         # Output: a
 say $1.Str;         # Output: bcde
 say $1[0].Str;      # Output: c
@@ -2167,9 +2029,7 @@ say $1[1][0].Str;   # Output: e</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-if &#34;127.0.0.1&#34; ~~ /(\d+)**4 % &#34;.&#34;/ {
+<pre class="highlight"><code class="language-raku" data-lang="raku">if &#34;127.0.0.1&#34; ~~ /(\d+)**4 % &#34;.&#34;/ {
     say $0.elems;       # Output: 4
     say $0[3].Str;      # Output: 1
 }</code></pre>
@@ -2187,9 +2047,7 @@ if &#34;127.0.0.1&#34; ~~ /(\d+)**4 % &#34;.&#34;/ {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $str = &#39;Hello, World&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = &#39;Hello, World&#39;;
 if $str ~~ / $&lt;greeting&gt;=[\w+] &#39;, &#39; $&lt;audience&gt;=[\w+] / {
     say $&lt;greeting&gt;.Str;        # Output: Hello
     say $&lt;audience&gt;.Str;        # Output: World
@@ -2207,9 +2065,7 @@ if $str ~~ / $&lt;greeting&gt;=[\w+] &#39;, &#39; $&lt;audience&gt;=[\w+] / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my regex byte {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex byte {
     \d ** 1..3
     &lt;?{ $/.Int &lt;= 255 }&gt;
 }
@@ -2227,9 +2083,7 @@ if $str ~~ / ^ &lt;byte&gt; ** 4 % &#39;.&#39; $ / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $str = &#39;Hello, World&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = &#39;Hello, World&#39;;
 my regex word { \w+ };
 
 if $str ~~ /&lt;greeting=word&gt; &#39;, &#39; &lt;audience=word&gt;/ {
@@ -2272,9 +2126,7 @@ if $str ~~ /&lt;greeting=word&gt; &#39;, &#39; &lt;audience=word&gt;/ {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $encoded = &#39;a&#39; x 5;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $encoded = &#39;a&#39; x 5;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2282,9 +2134,7 @@ my $encoded = &#39;a&#39; x 5;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-for 2..15 -&gt; $number {
+<pre class="highlight"><code class="language-raku" data-lang="raku">for 2..15 -&gt; $number {
     my $encoded = &#39;a&#39; x $number;
     if $encoded ~~ / ^ (a ** 2..*) $0+ $ / {
         say &#34;$number is not a prime, a factor is &#34;, $0.chars;
@@ -2329,9 +2179,7 @@ for 2..15 -&gt; $number {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say 50101.is-prime; # Output: True</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 50101.is-prime; # Output: True</code></pre>
 </div>
 </div>
 </div>
@@ -2346,9 +2194,7 @@ say 50101.is-prime; # Output: True</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;abc&#34; ~~ /../; # Output: ⌜ab⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;abc&#34; ~~ /../; # Output: ⌜ab⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2356,9 +2202,7 @@ say &#34;abc&#34; ~~ /../; # Output: ⌜ab⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;abc&#34; ~~ /.(.)(.)/</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;abc&#34; ~~ /.(.)(.)/</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2386,9 +2230,7 @@ say &#34;abc&#34; ~~ /.(.)(.)/</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&#34;abc&#34; ∼∼ /.(.$&lt;char&gt;=[.])/</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#34;abc&#34; ∼∼ /.(.$&lt;char&gt;=[.])/</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2544,9 +2386,7 @@ char =&gt; ⌜c⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $str = &#39;Amanda sighed. &#34;It was madness&#34;, she said. &#39;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $str = &#39;Amanda sighed. &#34;It was madness&#34;, she said. &#39;
     ~ &#39;&#34;Sheer madness&#34;&#39;;
 if $str ~~ / \&#34; .* \&#34; / {
     say $/.Str;
@@ -2581,9 +2421,7 @@ if $str ~~ / \&#34; .* \&#34; / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&#39;mabracadabra&#39; ~~ / (.+a) (.*) $0 /;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#39;mabracadabra&#39; ~~ / (.+a) (.*) $0 /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2594,9 +2432,7 @@ if $str ~~ / \&#34; .* \&#34; / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&#39;mabracadabra&#39; ~~ /(.+a) (.*) { say &#34;0: &#39;$0&#39;; 1: &#39;$1&#39;&#34; } $0 /;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#39;mabracadabra&#39; ~~ /(.+a) (.*) { say &#34;0: &#39;$0&#39;; 1: &#39;$1&#39;&#34; } $0 /;</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -2677,9 +2513,7 @@ if $str ~~ / \&#34; .* \&#34; / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&#34;aaaaaa&#34; ~~ /^ (a+) &lt;[bcd]&gt; /;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#34;aaaaaa&#34; ~~ /^ (a+) &lt;[bcd]&gt; /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2725,9 +2559,7 @@ Nil</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $html-re = rx:ignorecase{
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $html-re = rx:ignorecase{
     &#39;&lt;&#39; $&lt;tag&gt;=[ &lt;[a..z]&gt;+ ] # opening tag
          &lt;-[ &gt; ]&gt;*           # attributes within opening tag
     &#39;&gt;&#39;
@@ -2778,9 +2610,7 @@ say &#39;more text &lt;a href=&#34;..:&#34;&gt;link text&lt;/a&gt; bla&#39; ~~ $
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;abc&#34; ~~ /ab | a.* /;        # Output: ⌜abc⌟
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;abc&#34; ~~ /ab | a.* /;        # Output: ⌜abc⌟
 say &#34;abc&#34; ~~ /ab | a {} .* /;    # Output: ⌜ab⌟</code></pre>
 </div>
 </div>
@@ -2917,9 +2747,7 @@ file=&#34;payroll.dat&#34;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;supercalifragilisticexpialidocious.&#34;
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;supercalifragilisticexpialidocious.&#34;
         ~~ / \w+ &lt;!before &#39;.&#39;&gt; /;
 # Output: ⌜supercalifragilisticexpialidociou⌟</code></pre>
 </div>
@@ -2969,9 +2797,7 @@ say &#34;supercalifragilisticexpialidocious.&#34;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;&#34;a,b&#34;,&#34;&#39; ~~ / ^ \&#34; .*? \&#34; $ /; # Output: ⌜&#34;a,b&#34;,&#34;⌟</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;&#34;a,b&#34;,&#34;&#39; ~~ / ^ \&#34; .*? \&#34; $ /; # Output: ⌜&#34;a,b&#34;,&#34;⌟</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2982,9 +2808,7 @@ say &#39;&#34;a,b&#34;,&#34;&#39; ~~ / ^ \&#34; .*? \&#34; $ /; # Output: ⌜&#3
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;&#34;a,b&#34;,&#34;&#39; ~~ / \&#34; &lt;-[&#34;]&gt;* \&#34; /;             # Output: ⌜&#34;a,b&#34;⌟
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;&#34;a,b&#34;,&#34;&#39; ~~ / \&#34; &lt;-[&#34;]&gt;* \&#34; /;             # Output: ⌜&#34;a,b&#34;⌟
 say &#39;&#34;a,b&#34;,&#34;&#39; ~~ / ^ \&#34; &lt;-[&#34;]&gt;* \&#34; $ /;         # Output: Nil</code></pre>
 </div>
 </div>
@@ -3004,9 +2828,7 @@ say &#39;&#34;a,b&#34;,&#34;&#39; ~~ / ^ \&#34; &lt;-[&#34;]&gt;* \&#34; $ /;   
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;a\\b&#34;; # Output: a\b</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;a\\b&#34;; # Output: a\b</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3014,9 +2836,7 @@ say &#34;a\\b&#34;; # Output: a\b</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say Q&#34;a\b&#34;; # Output: a\b say Q&#34;a\\b&#34;; # Output: a\\b</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say Q&#34;a\b&#34;; # Output: a\b say Q&#34;a\\b&#34;; # Output: a\\b</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3030,9 +2850,7 @@ say Q&#34;a\b&#34;; # Output: a\b say Q&#34;a\\b&#34;; # Output: a\\b</code></pr
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my regex quoted {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex quoted {
     \&#34; # opening quote
     [
         &lt;-[ &#34; \\ ]&gt; # regular character
@@ -3057,9 +2875,7 @@ my regex quoted {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my regex quoted {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex quoted {
     \&#34; # opening quote
     [
             &lt;-[ &#34; \\ ]&gt; # regular character
@@ -3181,9 +2997,7 @@ Result: FAIL</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my regex quoted {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex quoted {
     \&#34; # opening quote
     [
         &lt;-[ &#34; \\ ]&gt; # regular character
@@ -3306,9 +3120,7 @@ invalid input: no</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my regex byte {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex byte {
     \d ** 1..3
     &lt;?{ $/.Int &lt;= 255 }&gt;
 }
@@ -3325,9 +3137,7 @@ say $str ~~ / ^ &lt;byte&gt; ** 4 % &#39;.&#39; $ /;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &amp;byte.^name;   # Output: Regex
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &amp;byte.^name;   # Output: Regex
 say &amp;byte ~~ Code; # Output: True</code></pre>
 </div>
 </div>
@@ -3345,9 +3155,7 @@ No such method &#39;!cursor_start&#39; for invocant of type &#39;Str&#39;</code>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my regex a { . };
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex a { . };
 say &#34;x&#34; ~~ &amp;a; # Output: ⌜x⌟</code></pre>
 </div>
 </div>
@@ -3356,9 +3164,7 @@ say &#34;x&#34; ~~ &amp;a; # Output: ⌜x⌟</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my regex a { . }; &#34;x&#34; ~~ / &lt;a&gt; /;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my regex a { . }; &#34;x&#34; ~~ / &lt;a&gt; /;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3460,9 +3266,7 @@ my regex a { . }; &#34;x&#34; ~~ / &lt;a&gt; /;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my token byte {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my token byte {
     \d ** 1..3
     &lt;?{ $/.Int &lt;= 255 }&gt;
 }
@@ -3523,9 +3327,7 @@ FROM   account;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my token number { \d+ }
+<pre class="highlight"><code class="language-raku" data-lang="raku">my token number { \d+ }
 my rule  sum    { &lt;number&gt; &#39;+&#39; &lt;number&gt; }
 
 say &#39;1+2&#39;   ~~ / ^ &lt;sum&gt; $ /;
@@ -3537,9 +3339,7 @@ say &#39;1 + 2&#39; ~~ / ^ &lt;sum&gt; $ /;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token sum { &lt;number&gt; &lt;.ws&gt; &#39;+&#39; &lt;.ws&gt; &lt;number&gt; &lt;.ws&gt; },</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">token sum { &lt;number&gt; &lt;.ws&gt; &#39;+&#39; &lt;.ws&gt; &lt;number&gt; &lt;.ws&gt; },</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3565,9 +3365,7 @@ token sum { &lt;number&gt; &lt;.ws&gt; &#39;+&#39; &lt;.ws&gt; &lt;number&gt; &l
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;a a&#34; ~~ rule { a+ }
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;a a&#34; ~~ rule { a+ }
 say &#34;a a&#34; ~~ rule { a + }</code></pre>
 </div>
 </div>
@@ -3576,9 +3374,7 @@ say &#34;a a&#34; ~~ rule { a + }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token { [a &lt;.ws&gt;]+ }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">token { [a &lt;.ws&gt;]+ }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3586,9 +3382,7 @@ token { [a &lt;.ws&gt;]+ }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#39;ab&#39; ~~ rule { a b } # Output: Nil</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#39;ab&#39; ~~ rule { a b } # Output: Nil</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3605,9 +3399,7 @@ say &#39;ab&#39; ~~ rule { a b } # Output: Nil</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar IPv4Address {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar IPv4Address {
     token byte {
         \d ** 1..3
         &lt;?{ $/.Int &lt;= 255 }&gt;
@@ -3636,9 +3428,7 @@ if IPv4Address.parse($str) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say IPv4Address.subparse($str, :rule&lt;byte&gt;);        # Output: ⌜127⌟
+<pre class="highlight"><code class="language-raku" data-lang="raku">say IPv4Address.subparse($str, :rule&lt;byte&gt;);        # Output: ⌜127⌟
 say IPv4Address.parse($str, :rule&lt;byte&gt;);           # Output: Nil</code></pre>
 </div>
 </div>
@@ -3667,9 +3457,7 @@ say IPv4Address.parse($str, :rule&lt;byte&gt;);           # Output: Nil</code></
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar StandardSQL {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar StandardSQL {
     regex TOP {
         &#39;SELECT&#39; \s+ &lt;name&gt;
     }
@@ -3707,9 +3495,7 @@ say StandardSQL.parse(&#39;SELECT &#34;monthly salary&#34;&#39;);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar MysqlSQL is StandardSQL {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar MysqlSQL is StandardSQL {
     regex quoted_name {
         \` &lt;-[`]&gt;+ \`
     }
@@ -3731,9 +3517,7 @@ say MysqlSQL.parse(&#39;SELECT `monthly salary`&#39;);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-role ParseInteger {
+<pre class="highlight"><code class="language-raku" data-lang="raku">role ParseInteger {
     token unsigned { &lt;[0..9]&gt;+ }
     token signed   { [&#39;+&#39; | &#39;-&#39;]? &lt;unsigned&gt; }
 }
@@ -3781,9 +3565,7 @@ say Sum.parse(&#39;2 + -4&#39;);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar JSON {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar JSON {
     token value {
         | &lt;string&gt;
         | &lt;number&gt;
@@ -3808,9 +3590,7 @@ grammar JSON {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar JSON {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar JSON {
     proto token value {*};
     token value:sym&lt;string&gt; { &lt;string&gt; }
     token value:sym&lt;number&gt; { &lt;number&gt; }
@@ -3828,9 +3608,7 @@ grammar JSON {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token value:sym&lt;number&gt; {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token value:sym&lt;number&gt; {
     &#39;-&#39;?
     [ 0 | &lt;[1..9]&gt; &lt;[0..9]&gt;* ]
     [ \. &lt;[0..9]&gt;+ ]?
@@ -3843,9 +3621,7 @@ token value:sym&lt;number&gt; {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token value:sym&lt;null&gt; { &#39;null&#39; }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">token value:sym&lt;null&gt; { &#39;null&#39; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3853,9 +3629,7 @@ token value:sym&lt;null&gt; { &#39;null&#39; }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token value:sym&lt;null&gt; { &lt;sym&gt; }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">token value:sym&lt;null&gt; { &lt;sym&gt; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3866,9 +3640,7 @@ token value:sym&lt;null&gt; { &lt;sym&gt; }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar JSONValue {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar JSONValue {
     proto token value {*};
     token value:sym&lt;true&gt;  { &lt;sym&gt; }
     token value:sym&lt;false&gt; { &lt;sym&gt; }
@@ -3882,9 +3654,7 @@ grammar JSONValue {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-role DateValue {
+<pre class="highlight"><code class="language-raku" data-lang="raku">role DateValue {
 token value:sym&lt;date&gt; {
         &lt;[0..9]&gt;**4 &#39;-&#39; &lt;[0..9]&gt;**2 &#39;-&#39; &lt;[0..9]&gt;**2
     }
@@ -3899,9 +3669,7 @@ token value:sym&lt;date&gt; {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar JSONValueWithDate is JSONValue does DateValue { };
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar JSONValueWithDate is JSONValue does DateValue { };
 
 for &lt;true null 2015-12-24 42&gt; -&gt; $str {
     say $str, &#39;: &#39;, ?JSONValueWithDate.parse($str);
@@ -3927,9 +3695,7 @@ null: True
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-for &lt;true null 2015-12-24 42&gt; -&gt; $str {
+<pre class="highlight"><code class="language-raku" data-lang="raku">for &lt;true null 2015-12-24 42&gt; -&gt; $str {
     say $str, &#39;: &#39;, ?(JSONValue but DateValue).parse($str);
 }</code></pre>
 </div>
@@ -3942,9 +3708,7 @@ for &lt;true null 2015-12-24 42&gt; -&gt; $str {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-role IntegerValue {
+<pre class="highlight"><code class="language-raku" data-lang="raku">role IntegerValue {
     token value:sym&lt;integer&gt; { &lt;[0..9]&gt;+ }
 }
 
@@ -3998,9 +3762,7 @@ for &lt;true null 2015-12-24 42&gt; -&gt; $str {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar MathExpression {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar MathExpression {
     token TOP    { &lt;sum&gt; }
     rule sum     { &lt;product&gt;+ % &#39;+&#39; }
     rule product { &lt;term&gt;+ % &#39;*&#39; }
@@ -4049,9 +3811,7 @@ say MathExpression.parse(&#39;2 + 4 * 5 * (1 + 3)&#39;);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token number {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token number {
     (\d+)
     { die &#34;how did I get here?&#34; if $0 eq &#39;1&#39; }
 }</code></pre>
@@ -4085,9 +3845,7 @@ token number {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule sum { &lt;product&gt;+ % &#39;+&#39; }
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule sum { &lt;product&gt;+ % &#39;+&#39; }
 rule product { &lt;term&gt;+ % &#39;*&#39; }</code></pre>
 </div>
 </div>
@@ -4096,9 +3854,7 @@ rule product { &lt;term&gt;+ % &#39;*&#39; }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule expression { &lt;operator&gt;+ % &lt;term&gt; }
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule expression { &lt;operator&gt;+ % &lt;term&gt; }
 token operator { &#39;*&#39; | &#39;+&#39; }</code></pre>
 </div>
 </div>
@@ -4125,9 +3881,7 @@ token operator { &#39;*&#39; | &#39;+&#39; }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token a { &lt;a&gt;? &#39;a&#39; }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">token a { &lt;a&gt;? &#39;a&#39; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4153,9 +3907,7 @@ VAR2=</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token assignment {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token assignment {
     &lt;variable&gt; &#39;=&#39; &lt;string&gt;?
 }</code></pre>
 </div>
@@ -4169,9 +3921,7 @@ token assignment {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar MathExpression {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar MathExpression {
     token number { \d+ }
 }</code></pre>
 </div>
@@ -4181,9 +3931,7 @@ grammar MathExpression {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar MathExpression {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar MathExpression {
     token number { \d+ }
 }
 
@@ -4202,9 +3950,7 @@ multi sub MAIN(Bool :$test!) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar MathExpression {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar MathExpression {
     token number { \d+ }
     rule product { &lt;number&gt;+ % &#39;*&#39; }
 }
@@ -4260,9 +4006,7 @@ multi sub MAIN(Bool :$test!) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-zef install Grammar::Debugger</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">zef install Grammar::Debugger</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4273,9 +4017,7 @@ zef install Grammar::Debugger</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar INI {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar INI {
     token TOP      {
                         ^
                         &lt;.eol&gt;*
@@ -4299,9 +4041,7 @@ grammar INI {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-a= b
+<pre class="highlight"><code class="language-raku" data-lang="raku">a= b
 [foo]
 c: d</code></pre>
 </div>
@@ -4311,9 +4051,7 @@ c: d</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Grammar::Tracer;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Grammar::Tracer;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4321,9 +4059,7 @@ use Grammar::Tracer;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-INI.parse(q:to/EOF/);
+<pre class="highlight"><code class="language-raku" data-lang="raku">INI.parse(q:to/EOF/);
 a= b
 [foo]
 c: d
@@ -4377,9 +4113,7 @@ EOF</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar INIFile {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar INIFile {
     token TOP { &lt;section&gt;* }
     token section {
         &lt;header&gt;
@@ -4423,9 +4157,7 @@ password: s3kr1t</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-# comment parsing for SQL:
+<pre class="highlight"><code class="language-raku" data-lang="raku"># comment parsing for SQL:
 token ws { &lt;!ww&gt; \s* [ &#39;--&#39; \N* \n ]* }
 
 # comment parsing for INI files:
@@ -4440,9 +4172,7 @@ token eol { [ [ &lt;[#;]&gt; \N* ]? \n ]+ }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-int x = 42;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">int x = 42;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4450,9 +4180,7 @@ int x = 42;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-int x = 42; x y = 23;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">int x = 42; x y = 23;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4466,9 +4194,7 @@ int x = 42; x y = 23;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-a= 1
+<pre class="highlight"><code class="language-raku" data-lang="raku">a= 1
 b= 2
 c = a, 5, b</code></pre>
 </div>
@@ -4478,9 +4204,7 @@ c = a, 5, b</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar VariableLists {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar VariableLists {
     token TOP        { &lt;statement&gt;* }
     rule statement   { &lt;identifier&gt; &#39;=&#39; &lt;termlist&gt; \n }
     rule termlist    { &lt;term&gt; * % &#39;,&#39; }
@@ -4496,9 +4220,7 @@ grammar VariableLists {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-a= 1
+<pre class="highlight"><code class="language-raku" data-lang="raku">a= 1
 c = a, 5, b
 b= 2</code></pre>
 </div>
@@ -4508,9 +4230,7 @@ b= 2</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar VariableLists {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar VariableLists {
     token TOP {
         :my %*SYMBOLS;
         &lt;statement&gt;*
@@ -4541,9 +4261,7 @@ grammar VariableLists {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule statement {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule statement {
     &lt;identifier&gt;
     { %*SYMBOLS{ $&lt;identifier&gt; } = True }
     &#39;=&#39; &lt;termlist&gt;
@@ -4562,9 +4280,7 @@ rule statement {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token term { &lt;variable&gt; | &lt;number&gt; }
+<pre class="highlight"><code class="language-raku" data-lang="raku">token term { &lt;variable&gt; | &lt;number&gt; }
 token variable {
     &lt;identifier&gt;
     &lt;?{ %*SYMBOLS{ $&lt;identifier&gt; } }&gt;
@@ -4579,9 +4295,7 @@ token variable {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-VariableLists.parse(&#39;abc&#39;, rule =&gt; &#39;variable&#39;);</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">VariableLists.parse(&#39;abc&#39;, rule =&gt; &#39;variable&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4605,9 +4319,7 @@ VariableLists.parse(&#39;abc&#39;, rule =&gt; &#39;variable&#39;);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-a= 1
+<pre class="highlight"><code class="language-raku" data-lang="raku">a= 1
 b= 2
 {
     c = a, 5, b
@@ -4619,9 +4331,7 @@ b= 2
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-a = 1
+<pre class="highlight"><code class="language-raku" data-lang="raku">a = 1
 {
     b = 2
 }
@@ -4636,9 +4346,7 @@ c = a, 5, b</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar VariableLists {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar VariableLists {
     token TOP {
         :my %*SYMBOLS;
         &lt;statement&gt;*
@@ -4683,9 +4391,7 @@ grammar VariableLists {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-a= 1 b= 2
+<pre class="highlight"><code class="language-raku" data-lang="raku">a= 1 b= 2
 {
     c = a, 5, b
 }</code></pre>
@@ -4705,9 +4411,7 @@ a= 1 b= 2
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class SymbolTable {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class SymbolTable {
     has @!scopes = {}, ;
     method enter-scope() {
         @!scopes.push({})
@@ -4773,9 +4477,7 @@ grammar VariableLists {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method block {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method block {
     $*ST.enter-scope();
     LEAVE $*ST.leave-scope();
     self.block_wrapped();
@@ -4841,9 +4543,7 @@ rule block_wrapped {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-if &#39;abc&#39; ~~ /\w/ {
+<pre class="highlight"><code class="language-raku" data-lang="raku">if &#39;abc&#39; ~~ /\w/ {
     $/.make({&#39;a&#39; =&gt; &#39;bc&#39;});
     say $/.made;      # Output: {a =&gt; bc}
 }</code></pre>
@@ -4854,9 +4554,7 @@ if &#39;abc&#39; ~~ /\w/ {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-if &#39;abc&#39; ~~ /\w/ {
+<pre class="highlight"><code class="language-raku" data-lang="raku">if &#39;abc&#39; ~~ /\w/ {
     make {&#39;a&#39; =&gt; &#39;bc&#39;};
     say $/.made;     # Output: {a =&gt; bc}
 }</code></pre>
@@ -4876,9 +4574,7 @@ if &#39;abc&#39; ~~ /\w/ {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar MathExpression {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar MathExpression {
     token TOP    { &lt;sum&gt; }
     rule sum     { &lt;product&gt;+ % &#39;+&#39; }
     rule product { &lt;term&gt;+ % &#39;*&#39; }
@@ -4974,9 +4670,7 @@ say $match.made;       # Output: 24</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-proto token value {*};
+<pre class="highlight"><code class="language-raku" data-lang="raku">proto token value {*};
 token value:sym&lt;string&gt; { &lt;string&gt; }
 token value:sym&lt;number&gt; { &lt;number&gt; }</code></pre>
 </div>
@@ -4998,9 +4692,7 @@ token value:sym&lt;number&gt; { &lt;number&gt; }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class MathASTAction {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class MathASTAction {
     method reduce($op, @list) {
         return @list[0] if @list.elems == 1;
         return [$op, |@list];
@@ -5046,9 +4738,7 @@ say $match.made.perl;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method reduce($op, @list) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method reduce($op, @list) {
     return @list[0] if @list.elems == 1;
     return [$op, |@list];
 }
@@ -5081,9 +4771,7 @@ method product($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class VariableCollection {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class VariableCollection {
    has %.definitions;
     method TOP($/) {
         %.definitions{ $&lt;identifier&gt; } = $&lt;termlist&gt;.made;
@@ -5154,9 +4842,7 @@ say $actions.definitions;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule  termlist { &lt;term&gt; * % &#39;,&#39; }
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule  termlist { &lt;term&gt; * % &#39;,&#39; }
 token term     { &lt;identifier&gt; | &lt;number&gt; }</code></pre>
 </div>
 </div>
@@ -5180,9 +4866,7 @@ token term     { &lt;identifier&gt; | &lt;number&gt; }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule group {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule group {
     &#39;(&#39; &lt;sum&gt;
     [&#39;)&#39; || { die &#34;Cannot find closing &#39;)&#39;&#34; } ]
 }</code></pre>
@@ -5199,9 +4883,7 @@ rule group {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar MathExpression {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar MathExpression {
     token TOP           { &lt;sum&gt; }
     rule sum            { &lt;multiplication&gt;+ % &#39;+&#39; }
     rule multiplication { &lt;term&gt;+ % &#39;*&#39; }
@@ -5229,9 +4911,7 @@ say MathExpression.parse(&#34;(\n1&#34;);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-[ &#39;)&#39; || {die &#34;Cannot find closing &#39;)&#39;&#34; } ]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">[ &#39;)&#39; || {die &#34;Cannot find closing &#39;)&#39;&#34; } ]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5239,9 +4919,7 @@ say MathExpression.parse(&#34;(\n1&#34;);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-[ &#39;)&#39; || &lt;error(&#34;no closing &#39;)&#39;&#34;)&gt; ]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">[ &#39;)&#39; || &lt;error(&#34;no closing &#39;)&#39;&#34;)&gt; ]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5278,9 +4956,7 @@ say MathExpression.parse(&#34;(\n1&#34;);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $parsed = self.target.substr(0, self.pos)\
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $parsed = self.target.substr(0, self.pos)\
              .trim-trailing;</code></pre>
 </div>
 </div>
@@ -5292,9 +4968,7 @@ my $parsed = self.target.substr(0, self.pos)\
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method error($msg) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method error($msg) {
     my $parsed = self.target.substr(0, self.pos)\
                  .trim-trailing;
     my $context = $parsed.substr($parsed.chars - 10 max 0)
@@ -5338,9 +5012,7 @@ method error($msg) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method ws() {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method ws() {
     if self.pos &gt; $*HIGHWATER {
         $*HIGHWATER = self.pos;
         $*LASTRULE = callframe(1).code.name;
@@ -5357,9 +5029,7 @@ method ws() {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method parse($target, |c) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method parse($target, |c) {
     my $*HIGHWATER = 0;
     my $*LASTRULE;
     my $match = callsame;
@@ -5373,9 +5043,7 @@ method parse($target, |c) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method error($target) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method error($target) {
     my $parsed = $target.substr(0, $*HIGHWATER)\
                  .trim-trailing;
     my $line-no = $parsed.lines.elems;
@@ -5402,9 +5070,7 @@ method error($target) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token group {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token group {
     &#39;(&#39; &lt;sum&gt; &#39;)&#39;
 }</code></pre>
 </div>
@@ -5414,9 +5080,7 @@ token group {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token group {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token group {
     &#39;(&#39; ~ &#39;)&#39; &lt;sum&gt;
 }</code></pre>
 </div>
@@ -5429,9 +5093,7 @@ token group {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar MathExpression {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar MathExpression {
     token TOP           { &lt;sum&gt; }
     rule sum            { &lt;multiplication&gt;+ % &#39;+&#39; }
     rule multiplication { &lt;term&gt;+ % &#39;*&#39; }
@@ -5564,9 +5226,7 @@ MathExpression.parse(&#39;(1&#39;);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;e\c[COMBINING GRAVE ACCENT]&#34;.chars; # Output: 1</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;e\c[COMBINING GRAVE ACCENT]&#34;.chars; # Output: 1</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5580,9 +5240,7 @@ say &#34;e\c[COMBINING GRAVE ACCENT]&#34;.chars; # Output: 1</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-if &#34;e\c[COMBINING GRAVE ACCENT]&#34; ~~ / ^ . $ / {
+<pre class="highlight"><code class="language-raku" data-lang="raku">if &#34;e\c[COMBINING GRAVE ACCENT]&#34; ~~ / ^ . $ / {
     say &#34;A single grapheme cluster&#34;;
 }</code></pre>
 </div>
@@ -5622,9 +5280,7 @@ if &#34;e\c[COMBINING GRAVE ACCENT]&#34; ~~ / ^ . $ / {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;a&#34;.uniprop; # Output: Ll</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;a&#34;.uniprop; # Output: Ll</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5635,9 +5291,7 @@ say &#34;a&#34;.uniprop; # Output: Ll</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say &#34;a&#34;.uniprop(&#39;Script&#39;);         # Output: Latin
+<pre class="highlight"><code class="language-raku" data-lang="raku">say &#34;a&#34;.uniprop(&#39;Script&#39;);         # Output: Latin
 say &#34;a&#34;.uniprop(&#39;Block&#39;);          # Output: Basic Latin</code></pre>
 </div>
 </div>
@@ -5706,9 +5360,7 @@ say &#34;a&#34;.uniprop(&#39;Block&#39;);          # Output: Basic Latin</code><
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar S-Expression {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar S-Expression {
     proto token atom {*}
     token atom:sym&lt;identifier&gt; {
         &lt;[ a..z A..Z =*: ]&gt;
@@ -5731,9 +5383,7 @@ grammar S-Expression {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token atom:sym&lt;identifier&gt; {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token atom:sym&lt;identifier&gt; {
     | &lt;[ a..z A..Z =*: ]&gt; &lt;[ a..z A..Z 0..9 _ =*: ]&gt;*
     | &lt;[+-]&gt;
 }</code></pre>
@@ -5754,9 +5404,7 @@ token atom:sym&lt;identifier&gt; {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Test;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Test;
 
 my %atoms =
     integer    =&gt; (&#39;1&#39;, &#39;01234&#39;, &#39;-23&#39;, &#39;+12&#39;),
@@ -5802,9 +5450,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token expression {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token expression {
     &#39;(&#39; ~ &#39;)&#39; [&lt;atom&gt;* % \s+]
 }</code></pre>
 </div>
@@ -5814,9 +5460,7 @@ token expression {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token atom:sym&lt;expression&gt; { &lt;expression&gt; }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">token atom:sym&lt;expression&gt; { &lt;expression&gt; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5824,9 +5468,7 @@ token atom:sym&lt;expression&gt; { &lt;expression&gt; }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token TOP { \s* [&lt;expression&gt; \s*] * }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">token TOP { \s* [&lt;expression&gt; \s*] * }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5834,9 +5476,7 @@ token TOP { \s* [&lt;expression&gt; \s*] * }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @tests = &#39;()&#39;, &#39;(abc)&#39;, &#39; (abc) &#39;, &#39;( abc )&#39;,
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @tests = &#39;()&#39;, &#39;(abc)&#39;, &#39; (abc) &#39;, &#39;( abc )&#39;,
             &#39;(1)&#39;, &#39;(+1)&#39;, &#39;(-1)&#39;, &#39;( () ( ) )&#39;;
 
 for @tests -&gt; $t {
@@ -5858,9 +5498,7 @@ not ok 24 - can parse &#39;( () ( ) )&#39;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token expression {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token expression {
     \s* &#39;(&#39; ~ &#39;)&#39; [\s* &lt;atom&gt;* % \s+ \s*]
 }</code></pre>
 </div>
@@ -5870,9 +5508,7 @@ token expression {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar S-Expression {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar S-Expression {
     token TOP                  { \s* [&lt;expression&gt; \s*] *    }
     token expression           {
         \s* &#39;(&#39; ~ &#39;)&#39; [\s* &lt;atom&gt;* % \s+ \s*]
@@ -5900,9 +5536,7 @@ grammar S-Expression {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Identifier { has $.str }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Identifier { has $.str }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5910,9 +5544,7 @@ class Identifier { has $.str }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method atom:sym&lt;identifier&gt;($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method atom:sym&lt;identifier&gt;($/) {
     make Identifier.new(str =&gt; $/.Str);
 }</code></pre>
 </div>
@@ -5922,9 +5554,7 @@ method atom:sym&lt;identifier&gt;($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method string_contents($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method string_contents($/) {
     make $/.Str.subst(:global, / \\ (.) /, -&gt; $/ { $0 });
 }</code></pre>
 </div>
@@ -5934,9 +5564,7 @@ method string_contents($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Identifier { has $.str }
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Identifier { has $.str }
 
 class S-Actions {
     method TOP($/)                  {
@@ -5968,9 +5596,7 @@ class S-Actions {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $m = S-Expression.parse(
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $m = S-Expression.parse(
     Q&#39;((a &#34;b&#34;) 23 &#34;ab \\cd&#34;)&#39;,
     actions =&gt; S-Actions.new,
 );
@@ -5986,9 +5612,7 @@ is-deeply $m.made,
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub parse-s-expression(Str $input) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub parse-s-expression(Str $input) {
     my $m = S-Expression.parse($input,
         actions =&gt; S-Actions.new);
     unless $m {
@@ -6021,9 +5645,7 @@ sub parse-s-expression(Str $input) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule expression { &lt;term&gt; + % &lt;infix&gt; }</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule expression { &lt;term&gt; + % &lt;infix&gt; }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6031,9 +5653,7 @@ rule expression { &lt;term&gt; + % &lt;infix&gt; }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-proto token infix   { * }
+<pre class="highlight"><code class="language-raku" data-lang="raku">proto token infix   { * }
 token infix:sym&lt;*&gt;  { &lt;sym&gt; }
 token infix:sym&lt;/&gt;  { &lt;sym&gt; }
 token infix:sym&lt;+&gt;  { &lt;sym&gt; }
@@ -6049,9 +5669,7 @@ token infix:sym&lt;**&gt; { &lt;sym&gt; }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-proto token term { * }
+<pre class="highlight"><code class="language-raku" data-lang="raku">proto token term { * }
 token term:sym&lt;integer&gt; {
     &lt;[+-]&gt;? &lt;[0..9]&gt;+
 }
@@ -6069,9 +5687,7 @@ token identifier { &lt;[a..z]&gt;+ }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Grammar::ErrorReporting;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Grammar::ErrorReporting;
 
 grammar MathExpression does Grammar::ErrorReporting {
     rule TOP { &lt;.ws&gt; &lt;expression&gt; }
@@ -6134,9 +5750,7 @@ grammar MathExpression does Grammar::ErrorReporting {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class MathActions {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class MathActions {
     method opp-parse(@tokens) {
         sub opp-reduce(@stack) {
             my ($term1, $op, $term2) = @stack.splice(*-3, 3);
@@ -6184,9 +5798,7 @@ class MathActions {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method TOP($/) { make $&lt;expression&gt;.made }
+<pre class="highlight"><code class="language-raku" data-lang="raku">method TOP($/) { make $&lt;expression&gt;.made }
 method expression($/) {
     my @tokens = $/.caps.map({.value.made});
     make self.opp-parse(@tokens);
@@ -6215,9 +5827,7 @@ method identifier($/) { make $/.Str }</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub parse-math-expression(Str $input) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub parse-math-expression(Str $input) {
     my $match = MathExpression.parse($input,
         actions =&gt; MathActions.new);
     die &#34;Cannot parse input&#34; unless $match;
@@ -6230,9 +5840,7 @@ sub parse-math-expression(Str $input) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Test;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Test;
 plan 1;
 
 is-deeply parse-math-expression(&#39;1 + 2 * 3**4 * 5 + 6&#39;),
@@ -6257,9 +5865,7 @@ is-deeply parse-math-expression(&#39;1 + 2 * 3**4 * 5 + 6&#39;),
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Operator {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Operator {
     has Str $.symbol is required;
     has Numeric $.precedence is required;
     method new(Str $symbol, Numeric $precedence) {
@@ -6273,9 +5879,7 @@ class Operator {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method infix:sym&lt;+&gt;($/)  { make Operator.new(~$&lt;sym&gt;, 1) }
+<pre class="highlight"><code class="language-raku" data-lang="raku">method infix:sym&lt;+&gt;($/)  { make Operator.new(~$&lt;sym&gt;, 1) }
 method infix:sym&lt;*&gt;($/)  { make Operator.new(~$&lt;sym&gt;, 2) }
 method infix:sym&lt;**&gt;($/) { make Operator.new(~$&lt;sym&gt;, 3) }
 # more action methods go here</code></pre>
@@ -6286,9 +5890,7 @@ method infix:sym&lt;**&gt;($/) { make Operator.new(~$&lt;sym&gt;, 3) }
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-for @tokens[1..*] -&gt; $op, $term {
+<pre class="highlight"><code class="language-raku" data-lang="raku">for @tokens[1..*] -&gt; $op, $term {
     opp-reduce(@stack)
         while @stack &gt;= 3
            &amp;&amp; $op.precedence &lt;= @stack[*-2].precedence;
@@ -6308,9 +5910,7 @@ for @tokens[1..*] -&gt; $op, $term {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-if 1 &lt; 2 {
+<pre class="highlight"><code class="language-raku" data-lang="raku">if 1 &lt; 2 {
     say &#34;Inside the branch&#34;;
 }
 say &#34;outside the branch&#34;;</code></pre>
@@ -6321,9 +5921,7 @@ say &#34;outside the branch&#34;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-if 1 &lt; 2:
+<pre class="highlight"><code class="language-raku" data-lang="raku">if 1 &lt; 2:
     print(&#34;Inside the branch&#34;)
 print(&#34;outside the branch&#34;)</code></pre>
 </div>
@@ -6362,9 +5960,7 @@ b= 5</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar Pythonesque {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Pythonesque {
     token ws { \h* }
     rule expression  { &lt;term&gt; + % &lt;operator&gt;  }
     token term       { &lt;identifier&gt; | &lt;number&gt;}
@@ -6385,9 +5981,7 @@ grammar Pythonesque {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token line {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token line {
     ^^ ( \h* ) { self.handle_indentation($0) }
     &lt;statement&gt; $$ \n*
 }
@@ -6402,9 +5996,7 @@ token statement:sym&lt;expression&gt; {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token TOP {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token TOP {
     :my @*INDENTATION = (0,);
     &lt;line&gt;*
     $
@@ -6452,9 +6044,7 @@ method handle_indentation($match) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar Pythonesque {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Pythonesque {
 my class NEW_INDENTATION { }
 rule statement:sym&lt;if&gt; {
         &#39;if&#39;  &lt;expression&gt; &#39;:&#39;
@@ -6469,9 +6059,7 @@ rule statement:sym&lt;if&gt; {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-handle_indentation:
+<pre class="highlight"><code class="language-raku" data-lang="raku">handle_indentation:
 
 method handle_indentation($match) {
     my $current = $match.Str.chars;
@@ -6506,9 +6094,7 @@ method handle_indentation($match) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token enter_scope { &lt;?&gt; }
+<pre class="highlight"><code class="language-raku" data-lang="raku">token enter_scope { &lt;?&gt; }
 token leave_scope { &lt;?&gt; }
 token TOP {
     :my @*INDENTATION = (0,);
@@ -6527,9 +6113,7 @@ token TOP {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method handle_indentation($match) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method handle_indentation($match) {
     my $current = $match.Str.chars;
     my $last = @*INDENTATION[*-1];
     if $last ~~ NEW_INDENTATION {
@@ -6564,9 +6148,7 @@ method handle_indentation($match) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Operator {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Operator {
     has Str $.action is required;
 }
 class Variable {
@@ -6583,9 +6165,7 @@ class If {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Pythonesque::Actions {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Pythonesque::Actions {
     # more methods go here
     method statement:sym&lt;if&gt;($/) {
         make If.new(condition =&gt; $&lt;expression&gt;.made);
@@ -6612,9 +6192,7 @@ class Pythonesque::Actions {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Pythonesque::Actions {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Pythonesque::Actions {
     has @.scopes;
     method TOP($/) {
         make @.scopes[0];
@@ -6659,9 +6237,7 @@ class Pythonesque::Actions {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token TOP {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token TOP {
     :my @*INDENTATION = (0,);
     &lt;.enter_scope&gt;
     &lt;line&gt;*

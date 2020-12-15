@@ -10,13 +10,13 @@
 <meta name="application-name" content="山川异域, 风月同天">
 <meta name="description" content="1. Cro 开发工具 Cro包含帮助开发人员更有效地工作的工具。 当前，这些工具可通过命令行界面使用。 将来还将添加Web界面。 没有这些工具，完全有可能使用Cro。 它们旨在提供一些合理的默认值，但并不适合每个项目。
  1.1. 存根服务 可以使用cro stub命令对新服务进行存根。 一般用法是：
- #!/usr/bin/env raku cro stub &lt;service-type&gt; &lt;service-id&gt; &lt;path&gt; [&#39;links-and-options&#39;]   其中
+ cro stub &lt;service-type&gt; &lt;service-id&gt; &lt;path&gt; [&#39;links-and-options&#39;]   其中
  service-type是要创建的服务的类型 service-id是服务的ID（与其他cro命令一起使用；也将在.cro.yml中用作服务的默认描述性名称）
  路径是创建服务的位置 links-and-options指定指向应添加到存根的其他服务的链接，以及特定于服务类型的选项
  如果未指定链接和选项，则将以交互方式请求它们。 要提供选项，请使用类似于Perl 6冒号对的语法将其放在引号中，其中：foo启用选项，：！foo禁用选项，而：foo &lt;bar&gt;是带有值bar的选项foo。 例如：
- #!/usr/bin/env raku cro stub http foo services/foo &#39;:!secure :websocket&#39; cro stub http bar services/bar &#39;:!secure :websocket&#39;   已存根的服务从环境变量获取端口和证书配置，并且当服务之间存在关系时，其地址也将使用环境变量注入。 设置容器部署时，这很方便。
+ cro stub http foo services/foo &#39;:!secure :websocket&#39; cro stub http bar services/bar &#39;:!secure :websocket&#39;   已存根的服务从环境变量获取端口和证书配置，并且当服务之间存在关系时，其地址也将使用环境变量注入。 设置容器部署时，这很方便。
  链接导致存根服务包含创建可以与另一个端点通信的“客户端”的代码。 这些与选项一起使用，格式为：link &lt;service-id：endpoint-id&gt;。 service-id是目标.cro.yml的id字段，endpoint-id是该.cro.yml文件的终结点列表中条目的id字段。
- #!/usr/bin/env raku cro stub http foo services/foo &#39;:link&lt;flash-storage:http&gt;&#39;    1.">
+ cro stub http foo services/foo &#39;:link&lt;flash-storage:http&gt;&#39;    1.">
 <meta name="robots" content="noodp"/>
 <meta name="generator" content="Hugo 0.79.0" />
 <meta name="referrer" content="no-referrer" />
@@ -158,9 +158,7 @@ if (theme && theme !== "1") {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cro stub &lt;service-type&gt; &lt;service-id&gt; &lt;path&gt; [&#39;links-and-options&#39;]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro stub &lt;service-type&gt; &lt;service-id&gt; &lt;path&gt; [&#39;links-and-options&#39;]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -179,9 +177,7 @@ links-and-options指定指向应添加到存根的其他服务的链接，以及
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cro stub http foo services/foo &#39;:!secure :websocket&#39;
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro stub http foo services/foo &#39;:!secure :websocket&#39;
 cro stub http bar services/bar &#39;:!secure :websocket&#39;</code></pre>
 </div>
 </div>
@@ -193,9 +189,7 @@ cro stub http bar services/bar &#39;:!secure :websocket&#39;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cro stub http foo services/foo &#39;:link&lt;flash-storage:http&gt;&#39;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro stub http foo services/foo &#39;:link&lt;flash-storage:http&gt;&#39;</code></pre>
 </div>
 </div>
 </div>
@@ -211,9 +205,7 @@ cro stub http foo services/foo &#39;:link&lt;flash-storage:http&gt;&#39;</code><
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cro stub http flashcard-backend backend/flashcards</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro stub http flashcard-backend backend/flashcards</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -232,9 +224,7 @@ cro stub http flashcard-backend backend/flashcards</code></pre>
 <h3 id="_运行服务">1.3. 运行服务</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cro run [&lt;service-id&gt; ...]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro run [&lt;service-id&gt; ...]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -242,9 +232,7 @@ cro run [&lt;service-id&gt; ...]</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cro run</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro run</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -252,9 +240,7 @@ cro run</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cro run flashcard-backend</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro run flashcard-backend</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -262,9 +248,7 @@ cro run flashcard-backend</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cro run flashbard-backend users frontend</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro run flashbard-backend users frontend</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -275,9 +259,7 @@ cro run flashbard-backend users frontend</code></pre>
 <h3 id="_追踪服务">1.4. 追踪服务</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cro trace &lt;service-id-or-filter&gt;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro trace &lt;service-id-or-filter&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -288,9 +270,7 @@ cro trace &lt;service-id-or-filter&gt;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cro trace :!tcp</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro trace :!tcp</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -298,9 +278,7 @@ cro trace :!tcp</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cro trace :http</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro trace :http</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -308,9 +286,7 @@ cro trace :http</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cro trace :http :request</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro trace :http :request</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -318,9 +294,7 @@ cro trace :http :request</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cro trace :http flashcard-backend
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro trace :http flashcard-backend
 cro trace flashcard-backend :http</code></pre>
 </div>
 </div>
@@ -329,9 +303,7 @@ cro trace flashcard-backend :http</code></pre>
 <h3 id="_服务静态内容">1.5. 服务静态内容</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cro serve &lt;host-port&gt; [&lt;directory&gt;]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro serve &lt;host-port&gt; [&lt;directory&gt;]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -339,9 +311,7 @@ cro serve &lt;host-port&gt; [&lt;directory&gt;]</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cro serve 8080</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro serve 8080</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -349,9 +319,7 @@ cro serve 8080</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cro serve 8080 static_content/</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro serve 8080 static_content/</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -359,9 +327,7 @@ cro serve 8080 static_content/</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cro serve 192.168.0.1:8080 static_content/</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro serve 192.168.0.1:8080 static_content/</code></pre>
 </div>
 </div>
 </div>
@@ -375,9 +341,7 @@ cro serve 192.168.0.1:8080 static_content/</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cro link add &lt;from-service-id&gt; &lt;to-service-id&gt; [&lt;to-endpoint-id&gt;]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro link add &lt;from-service-id&gt; &lt;to-service-id&gt; [&lt;to-endpoint-id&gt;]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -391,9 +355,7 @@ cro link add &lt;from-service-id&gt; &lt;to-service-id&gt; [&lt;to-endpoint-id&g
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cro link code &lt;from-service-id&gt; &lt;to-service-id&gt; [&lt;to-endpoint-id&gt;]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro link code &lt;from-service-id&gt; &lt;to-service-id&gt; [&lt;to-endpoint-id&gt;]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -401,9 +363,7 @@ cro link code &lt;from-service-id&gt; &lt;to-service-id&gt; [&lt;to-endpoint-id&
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cro link rm &lt;from-service-id&gt; &lt;to-service-id&gt; [&lt;to-endpoint-id&gt;]</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cro link rm &lt;from-service-id&gt; &lt;to-service-id&gt; [&lt;to-endpoint-id&gt;]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -426,9 +386,7 @@ cro link rm &lt;from-service-id&gt; &lt;to-service-id&gt; [&lt;to-endpoint-id&gt
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # GET /
     get -&gt; {
         ...
@@ -441,9 +399,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # GET /catalogue/
     get -&gt; &#39;catalogue&#39; {
         ...
@@ -464,9 +420,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # GET /catalogue/products/42
     get -&gt; &#39;catalogue&#39;, &#39;products&#39;, uint32 $id {
         ...
@@ -484,9 +438,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     my subset UUIDv4 of Str where /^
         &lt;[0..9a..f]&gt; ** 12
         4 &lt;[0..9a..f]&gt; ** 3
@@ -507,9 +459,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # GET /products/by-tag
     # GET /products/by-tag/sparkly
     get -&gt; &#39;products&#39;, &#39;by-tag&#39;, $tag-name? {
@@ -523,9 +473,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">route {
     get -&gt; &#39;catalogue&#39;, &#39;tree&#39;, *@path {
         ...
     }
@@ -560,9 +508,7 @@ route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # POST /catalogue/products
     post -&gt; &#39;catalogue&#39;, &#39;products&#39; {
         ...
@@ -590,9 +536,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # POST /catalogue/products
     http &#39;POST&#39;, -&gt; &#39;catalogue&#39;, &#39;products&#39; {
         ...
@@ -612,9 +556,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     http &#39;LINK&#39;, -&gt; $id {
         ...
     }
@@ -643,9 +585,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # Must have a search term in the query string.
     get -&gt; &#39;search&#39;, :$term! {
         ...
@@ -678,9 +618,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # Require a single city to search in, and allow multiple selection of
     # interesting numbers of rooms.
     get -&gt; &#39;apartments&#39;, Str :$city!, :@rooms {
@@ -694,9 +632,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # Get a hash of all query string parameters
     get -&gt; &#39;search&#39;, &#39;advanced&#39;, :%params {
         ...
@@ -709,9 +645,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # Gets the accept header, if there is one.
     get -&gt; &#39;article&#39;, $name, :$accept is header {
         ...
@@ -735,9 +669,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # /search?term=mountains&amp;images=true
     get -&gt; search, :$term!, :$images where &#39;true&#39; {
         ...
@@ -766,9 +698,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     get -&gt; {
         say &#34;Request headers:&#34;;
         for request.headers {
@@ -792,9 +722,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-post -&gt; &#39;product&#39; {
+<pre class="highlight"><code class="language-raku" data-lang="raku">post -&gt; &#39;product&#39; {
     # Get the body produced by the body parser for a JSON request body (it
     # is deserialized automatically if the content-type of the request
     # indicates JSON).
@@ -838,9 +766,7 @@ put -&gt; &#39;product&#39;, $id, &#39;image&#39;, $filename {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-post -&gt; &#39;product&#39; {
+<pre class="highlight"><code class="language-raku" data-lang="raku">post -&gt; &#39;product&#39; {
     request-body -&gt; (:$name!, :$description!, :$price!) {
         # Do stuff here...
     }
@@ -855,9 +781,7 @@ post -&gt; &#39;product&#39; {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-post -&gt; &#39;product&#39; {
+<pre class="highlight"><code class="language-raku" data-lang="raku">post -&gt; &#39;product&#39; {
     request-body &#39;application/json&#39; =&gt; -&gt; (:$name!, :$description!, :$price!) {
         # Do stuff here...
     }
@@ -869,9 +793,7 @@ post -&gt; &#39;product&#39; {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-put -&gt; &#39;product&#39;, $id, &#39;image&#39; {
+<pre class="highlight"><code class="language-raku" data-lang="raku">put -&gt; &#39;product&#39;, $id, &#39;image&#39; {
     request-body-blob
         &#39;image/gif&#39; =&gt; -&gt; $gif {
             ...
@@ -887,9 +809,7 @@ put -&gt; &#39;product&#39;, $id, &#39;image&#39; {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-put -&gt; &#39;product&#39;, $id, &#39;image&#39; {
+<pre class="highlight"><code class="language-raku" data-lang="raku">put -&gt; &#39;product&#39;, $id, &#39;image&#39; {
     request-body-blob
         &#39;image/gif&#39; =&gt; -&gt; $gif {
             ...
@@ -908,9 +828,7 @@ put -&gt; &#39;product&#39;, $id, &#39;image&#39; {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-post -&gt; &#39;log&#39; {
+<pre class="highlight"><code class="language-raku" data-lang="raku">post -&gt; &#39;log&#39; {
     request-body
         -&gt; (:$level where &#39;error&#39;, :$message!) {
             # Process errors specially
@@ -957,9 +875,7 @@ post -&gt; &#39;log&#39; {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     body-parser My::Custom::BodyParser;
 
     post -&gt; &#39;product&#39; {
@@ -990,9 +906,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     get -&gt; &#39;test&#39; {
         given response {
             .append-header(&#39;Content-type&#39;, &#39;text/html&#39;);
@@ -1044,9 +958,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     get -&gt; &#39;test&#39; {
         content &#39;text/html&#39;, q:to/HTML/;
             &lt;h1&gt;Did you know...&lt;/h1&gt;
@@ -1073,9 +985,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     get -&gt; &#39;testing&#39; {
         redirect :permanent, &#39;/test&#39;;
     }
@@ -1109,9 +1019,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-get -&gt; {
+<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; {
     static &#39;www/index.html&#39;;
 }</code></pre>
 </div>
@@ -1121,9 +1029,7 @@ get -&gt; {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-get -&gt; &#39;css&#39;, *@path {
+<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; &#39;css&#39;, *@path {
     static &#39;css&#39;, @path;
 }</code></pre>
 </div>
@@ -1144,9 +1050,7 @@ get -&gt; &#39;css&#39;, *@path {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-get -&gt; &#39;downloads&#39;, *@path {
+<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; &#39;downloads&#39;, *@path {
     static &#39;files&#39;, @path, mime-types =&gt; {
         &#39;foo&#39; =&gt; &#39;application/x-foo&#39;
     }
@@ -1158,9 +1062,7 @@ get -&gt; &#39;downloads&#39;, *@path {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-get -&gt; &#39;content&#39;, *@path {
+<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; &#39;content&#39;, *@path {
     static &#39;static-data/content&#39;, @path,
         :indexes&lt;index.html index.htm&gt;;
 }</code></pre>
@@ -1183,9 +1085,7 @@ get -&gt; &#39;content&#39;, *@path {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     body-serializer Custom::Serializer::YAML;
 
     get -&gt; &#39;userlevels&#39; {
@@ -1230,9 +1130,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cache-control :public, :max-age(600);</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cache-control :public, :max-age(600);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1240,9 +1138,7 @@ cache-control :public, :max-age(600);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-get -&gt; &#39;css&#39;, *@path {
+<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; &#39;css&#39;, *@path {
     cache-control :public, :max-age(300);
     static &#39;css&#39;, @path;
 }</code></pre>
@@ -1253,9 +1149,7 @@ get -&gt; &#39;css&#39;, *@path {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cache-control :no-store;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cache-control :no-store;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1263,9 +1157,7 @@ cache-control :no-store;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-cache-control :no-store, :no-cache;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">cache-control :no-store, :no-cache;</code></pre>
 </div>
 </div>
 </div>
@@ -1282,9 +1174,7 @@ cache-control :no-store, :no-cache;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-get -&gt; {
+<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; {
     push-promise &#39;/css/main.css&#39;;
     content &#39;text/html&#39;, $some-content;
 }
@@ -1305,9 +1195,7 @@ get -&gt; &#39;css&#39;, *@path {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-get -&gt; {
+<pre class="highlight"><code class="language-raku" data-lang="raku">get -&gt; {
     push-promise &#39;/js/strings.js&#39;, headers =&gt; {
         Accept-language =&gt; *
     };
@@ -1331,9 +1219,7 @@ get -&gt; {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub product-routes() is export {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub product-routes() is export {
     route {
         get -&gt; &#39;products&#39; { ... }
         get -&gt; &#39;products&#39;, uint32 $id { ... }
@@ -1347,9 +1233,7 @@ sub product-routes() is export {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use OurService::Products;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use OurService::Products;
 
 my $app = route {
     get -&gt; { ... }
@@ -1362,9 +1246,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub product-routes() is export {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub product-routes() is export {
     route {
         get -&gt; { ... }
         get -&gt; uint32 $id { ... }
@@ -1378,9 +1260,7 @@ sub product-routes() is export {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use OurService::Products;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use OurService::Products;
 
 my $app = route {
     get -&gt; { ... }
@@ -1393,9 +1273,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     get -&gt; { ... }
     include &lt;catalogue products&gt; =&gt; product-routes;
 }</code></pre>
@@ -1406,9 +1284,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     include products  =&gt; product-routes,
             forum     =&gt; forum-routes,
                          static-content-routes;
@@ -1442,9 +1318,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     # Delegate requests to /special to MyTransform
     delegate special =&gt; MyTransform;
 
@@ -1461,9 +1335,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     delegate special           =&gt; MyTransform,
              &lt;multi part path&gt; =&gt; AnotherTransform,
              &lt;proxy *&gt;         =&gt; ProxyTransform.new(|%some-config);
@@ -1508,9 +1380,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $app = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $app = route {
     before SomeMiddleware;
     after SomeOtherMiddleware;
     get -&gt; {
@@ -1524,9 +1394,7 @@ my $app = route {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $routes = route {
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $routes = route {
     get -&gt; {
         content &#39;text/plain&#39;, &#39;Hello with middleware&#39;;
     }
@@ -1554,9 +1422,7 @@ my $app = Cro.compose(SomeMiddleware, $routes, SomeOtherMiddleware);</code></pre
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-Run any before middleware
+<pre class="highlight"><code class="language-raku" data-lang="raku">Run any before middleware
 If a route matches then
     Run applicable before-matched middleware
     Run the route handler
@@ -1589,9 +1455,7 @@ Run any after middleware</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-after {
+<pre class="highlight"><code class="language-raku" data-lang="raku">after {
     header &#39;Strict-transport-security&#39;, &#39;max-age=31536000; includeSubDomains&#39;
 }</code></pre>
 </div>
@@ -1601,9 +1465,7 @@ after {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-before {
+<pre class="highlight"><code class="language-raku" data-lang="raku">before {
     forbidden unless .connection.peer-host eq &#39;127.0.0.1&#39; | &#39;::1&#39;;
 }</code></pre>
 </div>
@@ -1613,9 +1475,7 @@ before {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-# WRONG - the first `after` will be skipped over and so never see the 403
+<pre class="highlight"><code class="language-raku" data-lang="raku"># WRONG - the first `after` will be skipped over and so never see the 403
 # Forbidden
 after {
     if .status == 403 &amp;&amp; !.has-body {
@@ -1675,9 +1535,7 @@ after {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-sub routes() is export {
+<pre class="highlight"><code class="language-raku" data-lang="raku">sub routes() is export {
     route {
         get -&gt; {
             content &#39;text/plain&#39;, &#39;Nothing to see here&#39;;
@@ -1696,9 +1554,7 @@ sub routes() is export {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Cro::HTTP::Test;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Cro::HTTP::Test;
 use MyService::Routes;
 
 test-service routes(), {
@@ -1791,9 +1647,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-headers =&gt; {
+<pre class="highlight"><code class="language-raku" data-lang="raku">headers =&gt; {
         Strict-Transport-Security =&gt; *,
         Cache-Control =&gt; /public/
     }</code></pre>
@@ -1810,9 +1664,7 @@ headers =&gt; {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-body-text =&gt; /:i success/</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">body-text =&gt; /:i success/</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1826,9 +1678,7 @@ body-text =&gt; /:i success/</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-body-blob =&gt; *.bytes &gt; 128</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">body-blob =&gt; *.bytes &gt; 128</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1857,9 +1707,7 @@ body-blob =&gt; *.bytes &gt; 128</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-test-given &#39;/add&#39;, {
+<pre class="highlight"><code class="language-raku" data-lang="raku">test-given &#39;/add&#39;, {
     test post(json =&gt; { :x(37), :y(5) }),
         status =&gt; 200,
         json =&gt; { :result(42) };
@@ -1881,9 +1729,7 @@ test-given &#39;/add&#39;, {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-test-given &#39;/add&#39;, headers =&gt; { X-Precision =&gt; &#39;15&#39; } {
+<pre class="highlight"><code class="language-raku" data-lang="raku">test-given &#39;/add&#39;, headers =&gt; { X-Precision =&gt; &#39;15&#39; } {
     ...
 }</code></pre>
 </div>
@@ -1893,9 +1739,7 @@ test-given &#39;/add&#39;, headers =&gt; { X-Precision =&gt; &#39;15&#39; } {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-test-given headers =&gt; { X-Precision =&gt; &#39;15&#39; } {
+<pre class="highlight"><code class="language-raku" data-lang="raku">test-given headers =&gt; { X-Precision =&gt; &#39;15&#39; } {
     ...
 }</code></pre>
 </div>
@@ -1916,9 +1760,7 @@ test-given headers =&gt; { X-Precision =&gt; &#39;15&#39; } {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $media-type = Cro::MediaType.parse(&#39;content/html; charset=UTF-8&#39;);</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $media-type = Cro::MediaType.parse(&#39;content/html; charset=UTF-8&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1969,9 +1811,7 @@ my $media-type = Cro::MediaType.parse(&#39;content/html; charset=UTF-8&#39;);</c
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $media-type = Cro::MediaType.new:
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $media-type = Cro::MediaType.new:
     type =&gt; &#39;application&#39;,
     tree =&gt; &#39;vnd&#39;,
     subtype-name =&gt; &#39;foobar&#39;,
@@ -2112,9 +1952,7 @@ say ~$media-type;   # application/vnd.foobar+json; charset=UTF-8</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-Cro::Uri.parse(&#34;http://example.com&#34;);</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">Cro::Uri.parse(&#34;http://example.com&#34;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2122,9 +1960,7 @@ Cro::Uri.parse(&#34;http://example.com&#34;);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-Cro::Uri.parse(&#34;http://example.com&#34;,
+<pre class="highlight"><code class="language-raku" data-lang="raku">Cro::Uri.parse(&#34;http://example.com&#34;,
                grammar =&gt; $custom-grammar,
                actions =&gt; $custom-actions);</code></pre>
 </div>
@@ -2191,9 +2027,7 @@ Cro::Uri.parse(&#34;http://example.com&#34;,
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-enum Cro::Uri::Host &lt;RegName IPv4 IPv6 IPvFuture&gt;;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">enum Cro::Uri::Host &lt;RegName IPv4 IPv6 IPvFuture&gt;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2243,9 +2077,7 @@ enum Cro::Uri::Host &lt;RegName IPv4 IPv6 IPvFuture&gt;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $base = Cro::Uri.parse(&#39;http://foo.com/bar/baz/wat.html&#39;);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $base = Cro::Uri.parse(&#39;http://foo.com/bar/baz/wat.html&#39;);
 say ~$base.add(&#39;../eek.html&#39;);  # http://foo.com/bar/eek.html</code></pre>
 </div>
 </div>
@@ -2260,9 +2092,7 @@ say ~$base.add(&#39;../eek.html&#39;);  # http://foo.com/bar/eek.html</code></pr
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Cro::Uri :decode-percents;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Cro::Uri :decode-percents;</code></pre>
 </div>
 </div>
 </div>
@@ -2276,9 +2106,7 @@ use Cro::Uri :decode-percents;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Cro::Uri :encode-percents;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Cro::Uri :encode-percents;</code></pre>
 </div>
 </div>
 </div>
@@ -2306,9 +2134,7 @@ use Cro::Uri :encode-percents;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-route -&gt; &#39;product&#39;, Int $id {
+<pre class="highlight"><code class="language-raku" data-lang="raku">route -&gt; &#39;product&#39;, Int $id {
     my $product = $repository.lookup-product($id);
     template &#39;templates/product.crotmp&#39;, $product;
 }</code></pre>
@@ -2319,9 +2145,7 @@ route -&gt; &#39;product&#39;, Int $id {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-route -&gt; &#39;product&#39;, Int $id {
+<pre class="highlight"><code class="language-raku" data-lang="raku">route -&gt; &#39;product&#39;, Int $id {
     my $product = $repository.lookup-product($id);
     content &#39;text/html&#39;, render-template &#39;templates/product.crotmp&#39;, $product;
 }</code></pre>
@@ -2337,9 +2161,7 @@ route -&gt; &#39;product&#39;, Int $id {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-route -&gt; &#39;product&#39;, Int $id {
+<pre class="highlight"><code class="language-raku" data-lang="raku">route -&gt; &#39;product&#39;, Int $id {
     my $product = $repository.lookup-product($id);
     template &#39;templates/product.crotmp&#39;, $product,
         content-type =&gt; &#39;text/plain&#39;;
@@ -2360,9 +2182,7 @@ route -&gt; &#39;product&#39;, Int $id {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-template-location &#39;templates/&#39;;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">template-location &#39;templates/&#39;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2370,9 +2190,7 @@ template-location &#39;templates/&#39;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Cro::WebApp::Template;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Cro::WebApp::Template;
 use Test;
 
 lives-ok { template-location &#39;templates/&#39;, :compile-all },
@@ -2389,9 +2207,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&lt;h1&gt;Oh, hello there&lt;/h1&gt;
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;h1&gt;Oh, hello there&lt;/h1&gt;
 &lt;p&gt;I&#39;ve been expecting you...&lt;/p&gt;</code></pre>
 </div>
 </div>
@@ -2415,9 +2231,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&lt;p&gt;Hello, &lt;.name&gt;. The weather today is &lt;.weather&gt;.&lt;/p&gt;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;p&gt;Hello, &lt;.name&gt;. The weather today is &lt;.weather&gt;.&lt;/p&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2425,9 +2239,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-{
+<pre class="highlight"><code class="language-raku" data-lang="raku">{
     name =&gt; &#39;Dave&#39;,
     weather =&gt; &#39;rain&#39;
 }</code></pre>
@@ -2438,9 +2250,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&lt;p&gt;Hello, Dave. The weather today is rain.&lt;/p&gt;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;p&gt;Hello, Dave. The weather today is rain.&lt;/p&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2473,9 +2283,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&lt;p&gt;Hello, &lt;$person.name&gt;. The weather is &lt;$weather.description&gt;, wich a low of
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;p&gt;Hello, &lt;$person.name&gt;. The weather is &lt;$weather.description&gt;, wich a low of
   &lt;$weather.low&gt;C and a high of &lt;$weather.high&gt;C.&lt;/p&gt;</code></pre>
 </div>
 </div>
@@ -2484,9 +2292,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&lt;p&gt;Hello, Darya. The weather is sunny, wich a low of
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;p&gt;Hello, Darya. The weather is sunny, wich a low of
   14C and a high of 25C.&lt;/p&gt;</code></pre>
 </div>
 </div>
@@ -2513,9 +2319,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-{
+<pre class="highlight"><code class="language-raku" data-lang="raku">{
     countries =&gt; [
         { name =&gt; &#39;Argentina&#39;, alpha2 =&gt; &#39;AR&#39; },
         { name =&gt; &#39;Bhutan&#39;, alpha2 =&gt; &#39;BT&#39; },
@@ -2544,9 +2348,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&lt;select name=&#34;country&#34;&gt;
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;select name=&#34;country&#34;&gt;
   &lt;@countries: $c&gt;
     &lt;option value=&#34;&lt;$c.alpha2&gt;&#34;&gt;&lt;$c.name&gt;&lt;/option&gt;
   &lt;/@&gt;
@@ -2626,9 +2428,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&lt;&amp;header&gt;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;&amp;header&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2650,9 +2450,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&lt;&amp;select(.countries, &#39;country&#39;)&gt;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;&amp;select(.countries, &#39;country&#39;)&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2663,9 +2461,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&lt;:macro bs-card($title)&gt;
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;:macro bs-card($title)&gt;
   &lt;div class=&#34;card&#34; style=&#34;width: 18rem;&#34;&gt;
     &lt;div class=&#34;card-body&#34;&gt;
       &lt;h5 class=&#34;card-title&#34;&gt;&lt;$title&gt;&lt;/h5&gt;
@@ -2680,9 +2476,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&lt;|bs-card(&#34;My Stuff&#34;)&gt;
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;|bs-card(&#34;My Stuff&#34;)&gt;
   It&#39;s my stuff, in a BS card!
 &lt;/|&gt;</code></pre>
 </div>
@@ -2698,9 +2492,7 @@ done-testing;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&lt;:use &#39;common.crotmp&#39;&gt;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;:use &#39;common.crotmp&#39;&gt;</code></pre>
 </div>
 </div>
 </div>
@@ -2756,9 +2548,7 @@ Cro::Source是消息或连接的源。例如，Cro::TCP::Listener生成Cro::TCP:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class Echo does Cro::Transform {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class Echo does Cro::Transform {
     method consumes() { Cro::TCP::Message }
     method produces() { Cro::TCP::Message }
 
@@ -2780,9 +2570,7 @@ class Echo does Cro::Transform {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my Cro::Service $echo-server = Cro.compose(
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Cro::Service $echo-server = Cro.compose(
     Cro::TCP::Listener.new(port =&gt; 8000),
     Echo
 );
@@ -2800,9 +2588,7 @@ $echo-server.start();</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Cro;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Cro;
 use Cro::HTTP::Request;
 use Cro::HTTP::RequestParser;
 use Cro::HTTP::Response;
@@ -2815,9 +2601,7 @@ use Cro::TCP;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class HTTPHello does Cro::Transform {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class HTTPHello does Cro::Transform {
     method consumes() { Cro::HTTP::Request }
     method produces() { Cro::HTTP::Response }
 
@@ -2840,9 +2624,7 @@ class HTTPHello does Cro::Transform {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my Cro::Service $http-service = Cro.compose(
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Cro::Service $http-service = Cro.compose(
     Cro::TCP::Listener.new( :host(&#39;localhost&#39;), :port(8181) ),
     Cro::HTTP::RequestParser.new,
     HTTPHello,
@@ -2855,9 +2637,7 @@ my Cro::Service $http-service = Cro.compose(
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-$http-service.start;
+<pre class="highlight"><code class="language-raku" data-lang="raku">$http-service.start;
 signal(SIGINT).tap: {
     note &#34;Shutting down...&#34;;
     $http-service.stop;
@@ -2880,9 +2660,7 @@ sleep;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my Cro::Connector $conn = Cro.compose(Cro::TCP::Connector);
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Cro::Connector $conn = Cro.compose(Cro::TCP::Connector);
 my Supply $responses = $conn.establish(
     host =&gt; &#39;localhost&#39;,
     port =&gt; 4242,
@@ -2906,9 +2684,7 @@ react {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my Cro::Connector $conn = Cro.compose(
+<pre class="highlight"><code class="language-raku" data-lang="raku">my Cro::Connector $conn = Cro.compose(
     Cro::HTTP::RequestSerializer,
     Cro::TLS::Connector,
     Cro::HTTP::ResponseParser

@@ -10,10 +10,10 @@
 <meta name="application-name" content="山川异域, 风月同天">
 <meta name="description" content="1. 第一章 创建一个简单的解释器 这是使用 Raku 创建编译器的一章。
  让我们从一个简单的解释器程序开始研究 Raku 强大的 grammar 和正则表达式，该程序可以解析并执行以下微型程序。 我将这种语言称为 Lingua。
- #!/usr/bin/env raku my x; x = 42; say x;   在理解此代码的含义时，你不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。
+ my x; x = 42; say x;   在理解此代码的含义时，你不会遇到任何问题，因为故意选择了类似于 Raku 本身的语法的语法，只是在变量名前没有任何符号。
  该程序声明一个名为 x 的变量，为其赋一个整数值，然后将该值打印到控制台。
  假设你将代码保存在文件 test.lng 中。 现在让我们使用 Raku 读取它。
- #!/usr/bin/env raku my $code = &#39;test.lng&#39;.IO.slurp(); say $code;   将此 Raku 程序保存在另一个文件 lingua.raku 中，然后运行它：
+ my $code = &#39;test.lng&#39;.IO.slurp(); say $code;   将此 Raku 程序保存在另一个文件 lingua.raku 中，然后运行它：
  $ raku lingua.raku   如果你安装了 Raku，则会打印出我们测试程序的内容。
  1.1. Grammar 现在是时候使用 Raku grammar 解析程序了。 从语法上讲，grammar 是类，但是它们使用正则表达式描述其方法的行为，这些方法又称为 rule 和 token。 第一个应用的 rule 通常称为 TOP; Raku 选择它为默认开始规则。 Grammar 用于解析某些文本，因此只需对已定义的 grammar 调用 parse 方法并将文本传递给它即可。 所有这些都在我们的第一个程序中得到了证明：">
 <meta name="robots" content="noodp"/>
@@ -197,9 +197,7 @@ if (theme && theme !== "1") {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my x;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my x;
 x = 42;
 say x;</code></pre>
 </div>
@@ -215,9 +213,7 @@ say x;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $code = &#39;test.lng&#39;.IO.slurp();
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $code = &#39;test.lng&#39;.IO.slurp();
 say $code;</code></pre>
 </div>
 </div>
@@ -239,9 +235,7 @@ say $code;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar Lingua {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Lingua {
     rule TOP {
         .*
     }
@@ -280,9 +274,7 @@ say x;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule TOP {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
     &lt;statement&gt;* %% &#39;;&#39;
 }</code></pre>
 </div>
@@ -295,9 +287,7 @@ rule TOP {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule statement {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule statement {
     &lt;-[;]&gt;*
 }</code></pre>
 </div>
@@ -310,9 +300,7 @@ rule statement {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-｢my x;
+<pre class="highlight"><code class="language-raku" data-lang="raku">｢my x;
 x = 42;
 say x;
 ｣
@@ -330,9 +318,7 @@ say x;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule statement {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule statement {
     | &lt;variable-declaration&gt;
     | &lt;assignment&gt;
     | &lt;function-call&gt;
@@ -347,9 +333,7 @@ rule statement {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule variable-declaration {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule variable-declaration {
     &#39;my&#39; &lt;variable-name&gt;
 }
 
@@ -367,9 +351,7 @@ rule function-call {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token variable-name {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token variable-name {
     \w+
 }</code></pre>
 </div>
@@ -382,9 +364,7 @@ token variable-name {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&#39;my&#39; &lt;variable-name&gt;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&#39;my&#39; &lt;variable-name&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -392,9 +372,7 @@ token variable-name {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my x
+<pre class="highlight"><code class="language-raku" data-lang="raku">my x
 my    x</code></pre>
 </div>
 </div>
@@ -406,9 +384,7 @@ my    x</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token value {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token value {
     \d+
 }</code></pre>
 </div>
@@ -421,9 +397,7 @@ token value {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule function-name {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule function-name {
     &#39;say&#39;
 }</code></pre>
 </div>
@@ -433,9 +407,7 @@ rule function-name {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-statement =&gt; ｢my x｣
+<pre class="highlight"><code class="language-raku" data-lang="raku">statement =&gt; ｢my x｣
   variable-declaration =&gt; ｢my x｣
    variable-name =&gt; ｢x｣
  statement =&gt; ｢x = 42｣
@@ -459,9 +431,7 @@ statement =&gt; ｢my x｣
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token function-name {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token function-name {
     &#39;say&#39;
 }</code></pre>
 </div>
@@ -488,9 +458,7 @@ token function-name {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my x;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my x;
 x = 42;
 say x;</code></pre>
 </div>
@@ -500,9 +468,7 @@ say x;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my %var;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my %var;
 
 grammar Lingua {
     . . .
@@ -517,9 +483,7 @@ grammar Lingua {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule variable-declaration {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule variable-declaration {
     &#39;my&#39; &lt;variable-name&gt; {
         %var{$&lt;variable-name&gt;} = 0;
     }
@@ -534,9 +498,7 @@ rule variable-declaration {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule assignment {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
     &lt;variable-name&gt; &#39;=&#39; &lt;value&gt; {
         %var{~$&lt;variable-name&gt;} = +$&lt;value&gt;;
     }
@@ -551,9 +513,7 @@ rule assignment {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule function-call {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule function-call {
     &lt;function-name&gt; &lt;variable-name&gt; {
         say %var{$&lt;variable-name&gt;}
             if $&lt;function-name&gt; eq &#39;say&#39;;
@@ -569,9 +529,7 @@ rule function-call {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $code = &#39;test.lng&#39;.IO.slurp();
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $code = &#39;test.lng&#39;.IO.slurp();
 my $result = Lingua.parse($code);
 #say $result;</code></pre>
 </div>
@@ -581,9 +539,7 @@ my $result = Lingua.parse($code);
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-$ raku lingua.raku
+<pre class="highlight"><code class="language-raku" data-lang="raku">$ raku lingua.raku
 42</code></pre>
 </div>
 </div>
@@ -627,9 +583,7 @@ say gamma;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my value;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my value;
 
 value = 100;
 say value;
@@ -658,9 +612,7 @@ say value;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class LinguaActions {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class LinguaActions {
     method variable-declaration($/) {
         %var{$&lt;variable-name&gt;} = 0;
     }
@@ -684,9 +636,7 @@ class LinguaActions {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-Lingua.parse($code, :actions(LinguaActions));</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">Lingua.parse($code, :actions(LinguaActions));</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -694,9 +644,7 @@ Lingua.parse($code, :actions(LinguaActions));</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Lingua;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Lingua;
 use LinguaActions;
 
 my $code = &#39;test.lng&#39;.IO.slurp();
@@ -725,9 +673,7 @@ Lingua.parse($code, :actions(LinguaActions));</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @cases = 7, 77, -84;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @cases = 7, 77, -84;
 for @cases -&gt; $number {
     say &#34;Test $number&#34;;
     say Number.parse($number);
@@ -739,9 +685,7 @@ for @cases -&gt; $number {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar Number {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Number {
     rule TOP {
         &lt;number&gt;
     }
@@ -1521,9 +1465,7 @@ OK .5E-3 = 0.0005 (Num)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar Calculator {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Calculator {
     rule TOP {
         &lt;number&gt; &#39;+&#39; &lt;number&gt;
     }
@@ -1539,9 +1481,7 @@ grammar Calculator {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class CalculatorActions {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class CalculatorActions {
     method TOP($/) {
         $/.make($&lt;number&gt;[0].made + $&lt;number&gt;[1].made);
     }
@@ -1557,9 +1497,7 @@ class CalculatorActions {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-Calculator.parse(&#39;3 + 4&#39;,
+<pre class="highlight"><code class="language-raku" data-lang="raku">Calculator.parse(&#39;3 + 4&#39;,
                  :actions(CalculatorActions)).made.say;</code></pre>
 </div>
 </div>
@@ -1571,9 +1509,7 @@ Calculator.parse(&#39;3 + 4&#39;,
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule TOP {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
     | &lt;addition&gt;
     | &lt;subtraction&gt;
 }
@@ -1592,9 +1528,7 @@ rule subtraction {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method TOP($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method TOP($/) {
     $/.make($&lt;addition&gt; ??
             $&lt;addition&gt;.made !! $&lt;subtraction&gt;.made);
 }
@@ -1613,9 +1547,7 @@ method subtraction($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @cases = &#39;3 + 4&#39;, &#39;3 - 4&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @cases = &#39;3 + 4&#39;, &#39;3 - 4&#39;;
 for @cases -&gt; $test {
     say &#34;$test = &#34; ~ Calculator.parse($test,
                      :actions(CalculatorActions)).made;
@@ -1636,9 +1568,7 @@ for @cases -&gt; $test {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule TOP {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
     &lt;number&gt; &lt;op&gt; &lt;number&gt;
 }
 
@@ -1655,9 +1585,7 @@ token op {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method TOP($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method TOP($/) {
     if $&lt;op&gt; eq &#39;+&#39; {
         $/.make($&lt;number&gt;[0].made + $&lt;number&gt;[1].made);
     }
@@ -1678,9 +1606,7 @@ method TOP($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-$/.make($&lt;number&gt;[0].made - $&lt;number&gt;[1].made);</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">$/.make($&lt;number&gt;[0].made - $&lt;number&gt;[1].made);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1688,9 +1614,7 @@ $/.make($&lt;number&gt;[0].made - $&lt;number&gt;[1].made);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class CalculatorActions {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class CalculatorActions {
     sub addition($a, $b) {
         $a + $b
     }
@@ -1708,9 +1632,7 @@ class CalculatorActions {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class CalculatorActions {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class CalculatorActions {
     my %operation =
         &#39;+&#39; =&gt; &amp;addition,
         &#39;-&#39; =&gt; &amp;subtraction;
@@ -1724,9 +1646,7 @@ class CalculatorActions {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method TOP($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method TOP($/) {
     $/.make(%operation{~$&lt;op&gt;}(
         $&lt;number&gt;[0].made, $&lt;number&gt;[1].made));
 }</code></pre>
@@ -1737,9 +1657,7 @@ method TOP($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class CalculatorActions {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class CalculatorActions {
     multi sub operation(&#39;+&#39;, $a, $b) {
         $a + $b
     }
@@ -1772,9 +1690,7 @@ class CalculatorActions {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule TOP {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
     &lt;number&gt; [&lt;op&gt; &lt;number&gt; &lt;ws&gt;]*
 }</code></pre>
 </div>
@@ -1784,9 +1700,7 @@ rule TOP {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my @cases =
+<pre class="highlight"><code class="language-raku" data-lang="raku">my @cases =
     &#39;3 + 4&#39;, &#39;3 - 4&#39;,
     &#39;7&#39;,
     &#39;1 + 2 + 3&#39;, &#39;1 + 3 + 5 + 7&#39;;</code></pre>
@@ -1797,9 +1711,7 @@ my @cases =
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi sub operation(&#39;+&#39;, @values) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation(&#39;+&#39;, @values) {
     [+] @values
 }
 
@@ -1813,9 +1725,7 @@ multi sub operation(&#39;-&#39;, @values) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method TOP($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method TOP($/) {
     $/.make(operation(~$&lt;op&gt;[0], $&lt;number&gt;.map: *.made));
 }</code></pre>
 </div>
@@ -1828,9 +1738,7 @@ method TOP($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method TOP($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method TOP($/) {
     if $&lt;op&gt; {
         $/.make(operation(~$&lt;op&gt;[0], $&lt;number&gt;.map: *.made));
     }
@@ -1845,9 +1753,7 @@ method TOP($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-3 + 4 = 7
+<pre class="highlight"><code class="language-raku" data-lang="raku">3 + 4 = 7
 3 - 4 = -1
 7 = 7
 1 + 2 + 3 = 6
@@ -1865,9 +1771,7 @@ method TOP($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method TOP($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method TOP($/) {
     my @numbers = $&lt;number&gt;.map: *.made;
     my $make = @numbers.shift;
 
@@ -1883,9 +1787,7 @@ method TOP($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi sub operation(&#39;+&#39;, $a is rw, $b) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation(&#39;+&#39;, $a is rw, $b) {
     $a += $b
 }
 
@@ -1916,9 +1818,7 @@ multi sub operation(&#39;-&#39;, $a is rw, $b) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar Calculator {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Calculator {
     . . .
 
     token op {
@@ -1948,9 +1848,7 @@ class CalculatorActions {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-3 * 4 = 12
+<pre class="highlight"><code class="language-raku" data-lang="raku">3 * 4 = 12
 100 / 25 = 4
 1 + 2 * 3 = 9</code></pre>
 </div>
@@ -1966,9 +1864,7 @@ class CalculatorActions {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar Calculator {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Calculator {
     rule TOP {
         &lt;term&gt;* %% &lt;op1&gt;
     }
@@ -2000,9 +1896,7 @@ grammar Calculator {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&lt;number&gt; [&lt;op&gt; &lt;number&gt; &lt;ws&gt;]*</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;number&gt; [&lt;op&gt; &lt;number&gt; &lt;ws&gt;]*</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2010,9 +1904,7 @@ grammar Calculator {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-&lt;number&gt;* %% &lt;op&gt;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">&lt;number&gt;* %% &lt;op&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2026,9 +1918,7 @@ grammar Calculator {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class CalculatorActions {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class CalculatorActions {
     . . .
 
     method TOP($/) {
@@ -2073,9 +1963,7 @@ class CalculatorActions {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use Test;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Test;
 
 . . .
 
@@ -2092,9 +1980,7 @@ for @cases -&gt; $test {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-ok 10 - 3 * 4 = 12
+<pre class="highlight"><code class="language-raku" data-lang="raku">ok 10 - 3 * 4 = 12
 ok 11 - 100 / 25 = 4
 ok 12 - 1 + 2 * 3 = 7
 ok 13 - 1 + 2 - 3 * 4 / 5 = 0.6</code></pre>
@@ -2105,9 +1991,7 @@ ok 13 - 1 + 2 - 3 * 4 / 5 = 0.6</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-for @cases -&gt; $test {
+<pre class="highlight"><code class="language-raku" data-lang="raku">for @cases -&gt; $test {
     my $parse = Calculator.parse($test, :actions(CalculatorActions));
     next unless isa-ok($parse, Match, &#34;parsed $test&#34;);
 
@@ -2122,9 +2006,7 @@ for @cases -&gt; $test {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-ok 1 - parsed 3 + 4
+<pre class="highlight"><code class="language-raku" data-lang="raku">ok 1 - parsed 3 + 4
 ok 2 - computed 3 + 4 = 7
 ok 3 - parsed 3 - 4
 ok 4 - computed 3 - 4 = -1
@@ -2142,9 +2024,7 @@ ok 4 - computed 3 - 4 = -1
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule factor {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule factor {
     &lt;number&gt;* %% &lt;op3&gt;
 }
 
@@ -2158,9 +2038,7 @@ token op3 {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token number {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token number {
     &lt;ws&gt; \d+ &lt;ws&gt;
 }</code></pre>
 </div>
@@ -2170,9 +2048,7 @@ token number {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule number {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule number {
     \d+
 }</code></pre>
 </div>
@@ -2182,9 +2058,7 @@ rule number {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi sub operation(&#39;**&#39;, $a is rw, $b) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation(&#39;**&#39;, $a is rw, $b) {
     $a **= $b
 }
 
@@ -2198,9 +2072,7 @@ method factor($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-ok 26 - parsed 2 ** 3
+<pre class="highlight"><code class="language-raku" data-lang="raku">ok 26 - parsed 2 ** 3
 ok 27 - computed 2 ** 3 = 8
 ok 28 - parsed 2 + 3 ** 4
 ok 29 - computed 2 + 3 ** 4 = 83
@@ -2221,9 +2093,7 @@ ok 33 - computed 2 ** 3 ** 4 = 4096</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule factor {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule factor {
     &lt;value&gt;* %% &lt;op3&gt;
 }
 
@@ -2238,9 +2108,7 @@ rule value {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method value($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method value($/) {
     $/.make($&lt;number&gt; ?? $&lt;number&gt;.made !! $&lt;TOP&gt;.made);
 }</code></pre>
 </div>
@@ -2250,9 +2118,7 @@ method value($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-ok 34 - parsed 10 * (20 - 30)
+<pre class="highlight"><code class="language-raku" data-lang="raku">ok 34 - parsed 10 * (20 - 30)
 ok 35 - computed 10 * (20 - 30) = -100
 ok 36 - parsed 10 * 20 - 30
 ok 37 - computed 10 * 20 - 30 = 170
@@ -2289,9 +2155,7 @@ ok 43 - computed 1 - (5 * (3 + 4)) / 2 = -16.5</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-# Declare a variable
+<pre class="highlight"><code class="language-raku" data-lang="raku"># Declare a variable
 my alpha;
 alpha = 100; # Assign a value</code></pre>
 </div>
@@ -2301,9 +2165,7 @@ alpha = 100; # Assign a value</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule TOP {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
     &lt;statement&gt;* %% &#39;;&#39;
 }</code></pre>
 </div>
@@ -2313,9 +2175,7 @@ rule TOP {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule statement {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule statement {
     | &lt;variable-declaration&gt;
     | &lt;assignment&gt;
     | &lt;function-call&gt;
@@ -2327,9 +2187,7 @@ rule statement {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule comment {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule comment {
     &#39;#&#39; \N*
 }</code></pre>
 </div>
@@ -2339,9 +2197,7 @@ rule comment {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule statement {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule statement {
     | &lt;comment&gt;
     | &lt;variable-declaration&gt;
     | &lt;assignment&gt;
@@ -2354,9 +2210,7 @@ rule statement {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule TOP {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
     [
         | &lt;comment&gt;
         | &lt;statement&gt; &#39;;&#39;
@@ -2375,9 +2229,7 @@ rule TOP {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my a;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my a;
 a = 10;
 say a</code></pre>
 </div>
@@ -2390,9 +2242,7 @@ say a</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $result = Lingua.parse($code, :actions(LinguaActions));
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $result = Lingua.parse($code, :actions(LinguaActions));
 say $result ?? &#39;OK&#39; !! &#39;Error&#39;;</code></pre>
 </div>
 </div>
@@ -2401,9 +2251,7 @@ say $result ?? &#39;OK&#39; !! &#39;Error&#39;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my /* inline comment */ a;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my /* inline comment */ a;
 # one-line comment
 a = 10;
 
@@ -2420,9 +2268,7 @@ say a;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule assignment {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
     &lt;variable-name&gt; &#39;=&#39; &lt;value&gt;
 }</code></pre>
 </div>
@@ -2432,9 +2278,7 @@ rule assignment {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token assignment {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token assignment {
     &lt;variable-name&gt; &lt;ws&gt; &#39;=&#39; &lt;ws&gt; &lt;value&gt;
 }</code></pre>
 </div>
@@ -2444,9 +2288,7 @@ token assignment {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-a=10;
+<pre class="highlight"><code class="language-raku" data-lang="raku">a=10;
 b=20;</code></pre>
 </div>
 </div>
@@ -2455,9 +2297,7 @@ b=20;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-a = 10;
+<pre class="highlight"><code class="language-raku" data-lang="raku">a = 10;
 b = 20;</code></pre>
 </div>
 </div>
@@ -2466,9 +2306,7 @@ b = 20;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-regex ws {
+<pre class="highlight"><code class="language-raku" data-lang="raku">regex ws {
     &lt;!ww&gt; \s*
 }</code></pre>
 </div>
@@ -2478,9 +2316,7 @@ regex ws {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-regex ws {
+<pre class="highlight"><code class="language-raku" data-lang="raku">regex ws {
     &lt;!ww&gt; [
         | \s*
         | \s* &#39;/*&#39; \s* .*? \s* &#39;*/&#39; \s*
@@ -2502,9 +2338,7 @@ regex ws {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token value {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token value {
     &lt;sign&gt;? [
         | &lt;integer&gt;
         | &lt;floating-point&gt;
@@ -2517,9 +2351,7 @@ token value {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method value($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method value($/) {
     $/.make(+$/);
 }</code></pre>
 </div>
@@ -2529,9 +2361,7 @@ method value($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my alpha;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my alpha;
 my beta;
 my gamma;
 
@@ -2555,9 +2385,7 @@ say gamma;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar Lingua {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Lingua {
     . . .
 
     rule value {
@@ -2585,9 +2413,7 @@ grammar Lingua {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class LinguaActions {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class LinguaActions {
     . . .
 
     method value($/) {
@@ -2613,9 +2439,7 @@ class LinguaActions {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule assignment {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule assignment {
     &lt;variable-name&gt; &#39;=&#39; &lt;expression&gt;
 }</code></pre>
 </div>
@@ -2625,9 +2449,7 @@ rule assignment {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method assignment($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method assignment($/) {
     %var{~$&lt;variable-name&gt;} = $&lt;expression&gt;.made;
 }
 
@@ -2642,9 +2464,7 @@ method value($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my pi;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my pi;
 pi = 22/7 - 0.001265; # very rough approximation
 say pi;
 
@@ -2664,9 +2484,7 @@ say x; # prints 14</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule value {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule value {
     | &lt;number&gt;
     | &lt;variable-name&gt;
     | &#39;(&#39; &lt;expression&gt; &#39;)&#39;
@@ -2678,9 +2496,7 @@ rule value {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method value($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method value($/) {
     if $&lt;number&gt; {
         $/.make($&lt;number&gt;.made);
     }
@@ -2701,9 +2517,7 @@ method value($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my r;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my r;
 r = 6371; # km
 
 my d;
@@ -2722,9 +2536,7 @@ say d;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my x;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my x;
 x = 10;</code></pre>
 </div>
 </div>
@@ -2733,9 +2545,7 @@ x = 10;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my x = 10;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">my x = 10;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2743,9 +2553,7 @@ my x = 10;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule variable-declaration {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule variable-declaration {
     &#39;my&#39; &lt;variable-name&gt; [ &#39;=&#39; &lt;expression&gt; ]?
 }</code></pre>
 </div>
@@ -2755,9 +2563,7 @@ rule variable-declaration {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method variable-declaration($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method variable-declaration($/) {
     %var{$&lt;variable-name&gt;} =
         $&lt;expression&gt; ?? $&lt;expression&gt;.made !! 0;
 }</code></pre>
@@ -2768,9 +2574,7 @@ method variable-declaration($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my pi = 3.1415926;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my pi = 3.1415926;
 my r = 6371; # km
 
 my d = 2 * pi * r;
@@ -2799,9 +2603,7 @@ say d;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-./lingua my-prog.lng</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">./lingua my-prog.lng</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2809,11 +2611,7 @@ say d;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-#!/usr/bin/env raku
-
-use lib &#39;.&#39;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use lib &#39;.&#39;;
 use Lingua;
 use LinguaActions;
 
@@ -2846,9 +2644,7 @@ sub error($message) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar Lingua {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar Lingua {
     rule TOP {
         [
             | &lt;comment&gt;
@@ -2876,9 +2672,7 @@ grammar Lingua {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-grammar CommentableLanguage {
+<pre class="highlight"><code class="language-raku" data-lang="raku">grammar CommentableLanguage {
     regex ws {
         &lt;!ww&gt; [
             | \s*
@@ -2901,9 +2695,7 @@ grammar CommentableLanguage {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use CommentableLanguage;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use CommentableLanguage;
 
 grammar Lingua is CommentableLanguage {
     . . .
@@ -2918,9 +2710,7 @@ grammar Lingua is CommentableLanguage {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule TOP {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
     [
         | &lt;one-line-comment&gt;
         | &lt;statement&gt; &#39;;&#39;
@@ -2936,9 +2726,7 @@ rule TOP {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-role Number {
+<pre class="highlight"><code class="language-raku" data-lang="raku">role Number {
     token number {
         &lt;sign&gt;? [
             | &lt;integer&gt;
@@ -2973,9 +2761,7 @@ role Number {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-use CommentableLanguage;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use CommentableLanguage;
 use Number;
 
 grammar Lingua is CommentableLanguage does Number {
@@ -2991,9 +2777,7 @@ grammar Lingua is CommentableLanguage does Number {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule expression {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule expression {
     &lt;term&gt;* %% &lt;op1&gt;
 }
 
@@ -3011,9 +2795,7 @@ rule factor {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my x;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my x;
 x = ;
 say x;</code></pre>
 </div>
@@ -3023,9 +2805,7 @@ say x;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-Cannot shift from an empty Array
+<pre class="highlight"><code class="language-raku" data-lang="raku">Cannot shift from an empty Array
   in sub process at /Users/ash/lingua/LinguaActions.rakumod (LinguaActions) line 52
   in method factor at /Users/ash/lingua/LinguaActions.rakumod (LinguaActions) line 46
   in regex factor at /Users/ash/lingua/Lingua.rakumod (Lingua) line 48
@@ -3049,9 +2829,7 @@ Actually thrown at:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule expression {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule expression {
     &lt;term&gt;+ %% &lt;op1&gt;
 }
 
@@ -3069,9 +2847,7 @@ rule factor {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-Error: parse failed</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">Error: parse failed</code></pre>
 </div>
 </div>
 </div>
@@ -3082,9 +2858,7 @@ Error: parse failed</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi token op(1) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi token op(1) {
     &#39;+&#39; | &#39;-&#39;
 }
 
@@ -3105,9 +2879,7 @@ multi token op(3) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule expression {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule expression {
     &lt;term&gt;+ %% &lt;op(1)&gt;
 }
 
@@ -3125,9 +2897,7 @@ rule factor {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method expression($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method expression($/) {
     $/.make(process($&lt;term&gt;, $&lt;op&gt;));
 }
 
@@ -3148,9 +2918,7 @@ method factor($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule expression {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule expression {
     &lt;expr(1)&gt;
 }
 
@@ -3181,9 +2949,7 @@ multi rule expr(4) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi rule expr($n) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi rule expr($n) {
     &lt;expr($n + 1)&gt;+ %% &lt;op($n)&gt;
 }</code></pre>
 </div>
@@ -3196,9 +2962,7 @@ multi rule expr($n) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method expression($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method expression($/) {
     $/.make($&lt;expr&gt;.made);
 }
 
@@ -3229,9 +2993,7 @@ method expr($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class LinguaActions {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class LinguaActions {
     has %!var;
 
     . . .
@@ -3243,9 +3005,7 @@ class LinguaActions {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method assignment($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method assignment($/) {
     %!var{~$&lt;variable-name&gt;} = $&lt;expression&gt;.made;
 }</code></pre>
 </div>
@@ -3255,9 +3015,7 @@ method assignment($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my $result = Lingua.parse($code,
+<pre class="highlight"><code class="language-raku" data-lang="raku">my $result = Lingua.parse($code,
                           :actions(LinguaActions.new));</code></pre>
 </div>
 </div>
@@ -3269,9 +3027,7 @@ my $result = Lingua.parse($code,
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token variable-name {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token variable-name {
     \w+
 }</code></pre>
 </div>
@@ -3281,9 +3037,7 @@ token variable-name {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my 4 = 3;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my 4 = 3;
 say 4;</code></pre>
 </div>
 </div>
@@ -3292,9 +3046,7 @@ say 4;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-token variable-name {
+<pre class="highlight"><code class="language-raku" data-lang="raku">token variable-name {
     [&lt;:alpha&gt; | &#39;_&#39;] \w*
 }</code></pre>
 </div>
@@ -3304,9 +3056,7 @@ token variable-name {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my var_4 = 3;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my var_4 = 3;
 say var_4;</code></pre>
 </div>
 </div>
@@ -3318,9 +3068,7 @@ say var_4;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-say 42;
+<pre class="highlight"><code class="language-raku" data-lang="raku">say 42;
 say 100 + 300 / 3 ** (7 - 5);</code></pre>
 </div>
 </div>
@@ -3329,9 +3077,7 @@ say 100 + 300 / 3 ** (7 - 5);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule function-call {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule function-call {
     &lt;function-name&gt; &lt;expression&gt;
 }</code></pre>
 </div>
@@ -3341,9 +3087,7 @@ rule function-call {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method function-call($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method function-call($/) {
     say %!var{$&lt;variable-name&gt;} if $&lt;function-name&gt; eq &#39;say&#39;;
 }</code></pre>
 </div>
@@ -3353,9 +3097,7 @@ method function-call($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method function-call($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method function-call($/) {
     say $&lt;expression&gt;.made;
 }</code></pre>
 </div>
@@ -3382,9 +3124,7 @@ method function-call($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my str = &#34;Hello, World&#34;;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my str = &#34;Hello, World&#34;;
 say str;
 
 say &#34;Hello indeed&#34;;</code></pre>
@@ -7608,9 +7348,7 @@ say b; ## 20</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env perl6
-
-use Test;
+<pre class="highlight"><code class="language-raku" data-lang="raku">use Test;
 
 test-file($_) for dir(&#39;t&#39;).sort;
 
@@ -8127,9 +7865,7 @@ say &#34;$q, $d&#34;; ## 100, 4</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my flag = 42;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my flag = 42;
 if flag say &#34;Depends&#34;;
 say &#34;Always&#34;;</code></pre>
 </div>
@@ -8142,9 +7878,7 @@ say &#34;Always&#34;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule condition {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule condition {
     &#39;if&#39; &lt;value&gt;
 }
 
@@ -8162,9 +7896,7 @@ rule statement {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class AST::Condition is ASTNode {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::Condition is ASTNode {
     has ASTNode $.value;
     has ASTNode $.statement;
 }</code></pre>
@@ -8175,9 +7907,7 @@ class AST::Condition is ASTNode {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi method statement($/ where !$&lt;condition&gt;) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method statement($/ where !$&lt;condition&gt;) {
     $/.make($&lt;statement&gt;.made);
 }
 
@@ -8205,9 +7935,7 @@ multi method statement($/ where $&lt;condition&gt;) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi method eval-node(AST::Condition $node) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::Condition $node) {
     if $node.value.value {
         self.eval-node($node.statement);
     }
@@ -8222,9 +7950,7 @@ multi method eval-node(AST::Condition $node) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my flag = 1;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my flag = 1;
 if flag say &#34;Printed&#34;; ## Printed
 
 flag = 0;
@@ -8241,9 +7967,7 @@ say &#34;Done&#34;; ## Done</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my flag = 0;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my flag = 0;
 if flag say &#34;Depends&#34; else say &#34;Otherwise&#34;;
 say &#34;Always&#34;;</code></pre>
 </div>
@@ -8256,9 +7980,7 @@ say &#34;Always&#34;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule TOP {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
     [
         | &lt;one-line-comment&gt;
         | &lt;statement=conditional-statement&gt; &#39;;&#39;
@@ -8285,9 +8007,7 @@ rule statement {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method TOP($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method TOP($/) {
     . . .
     for $&lt;statement&gt; -&gt; $statement {
         $top.statements.push($statement.made);
@@ -8301,9 +8021,7 @@ method TOP($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class AST::Condition is ASTNode {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::Condition is ASTNode {
     has ASTNode $.value;
     has ASTNode $.statement;
     has ASTNode $.antistatement;
@@ -8315,9 +8033,7 @@ class AST::Condition is ASTNode {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method conditional-statement($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method conditional-statement($/) {
     $/.make(AST::Condition.new(
         value =&gt; $/&lt;value&gt;.made,
         statement =&gt; $/&lt;statement&gt;[0].made,
@@ -8332,9 +8048,7 @@ method conditional-statement($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method statement($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method statement($/) {
     $/.make($&lt;statement&gt;.made);
 }</code></pre>
 </div>
@@ -8344,9 +8058,7 @@ method statement($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi method eval-node(AST::Condition $node) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::Condition $node) {
     if $node.value.value {
         self.eval-node($node.statement);
     }
@@ -8361,9 +8073,7 @@ multi method eval-node(AST::Condition $node) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi method eval-node(AST::Null) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::Null) {
 }</code></pre>
 </div>
 </div>
@@ -8372,9 +8082,7 @@ multi method eval-node(AST::Null) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-if 1 say &#34;A&#34; else say &#34;B&#34;; ## A
+<pre class="highlight"><code class="language-raku" data-lang="raku">if 1 say &#34;A&#34; else say &#34;B&#34;; ## A
 if 0 say &#34;A&#34; else say &#34;B&#34;; ## B
 
 my x;
@@ -8393,9 +8101,7 @@ say x; ## 40</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my n = 5;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my n = 5;
 loop n say n;</code></pre>
 </div>
 </div>
@@ -8407,9 +8113,7 @@ loop n say n;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule TOP {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
     [
         | &lt;one-line-comment&gt;
         | &lt;statement=conditional-statement&gt; &#39;;&#39;
@@ -8428,9 +8132,7 @@ rule loopped-statement {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class AST::Loop is ASTNode {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::Loop is ASTNode {
     has ASTNode $.variable;
     has ASTNode $.statement;
 }</code></pre>
@@ -8441,9 +8143,7 @@ class AST::Loop is ASTNode {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method loopped-statement($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method loopped-statement($/) {
     $/.make(AST::Loop.new(
         variable =&gt; AST::Variable.new(
             variable-name =&gt; ~$/&lt;variable-name&gt;
@@ -8458,9 +8158,7 @@ method loopped-statement($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi method eval-node(AST::Loop $node) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::Loop $node) {
     while %!var{$node.variable.variable-name} {
         self.eval-node($node.statement);
         %!var{$node.variable.variable-name}--;
@@ -8473,9 +8171,7 @@ multi method eval-node(AST::Loop $node) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-while %!var{$node.variable.variable-name} &gt; 0 {
+<pre class="highlight"><code class="language-raku" data-lang="raku">while %!var{$node.variable.variable-name} &gt; 0 {
     . . .</code></pre>
 </div>
 </div>
@@ -8484,9 +8180,7 @@ while %!var{$node.variable.variable-name} &gt; 0 {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my n = 5.5;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my n = 5.5;
 loop n say n;</code></pre>
 </div>
 </div>
@@ -8495,9 +8189,7 @@ loop n say n;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my n = 3;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my n = 3;
 loop n say n;
 ## 3
 ## 2
@@ -8511,9 +8203,7 @@ loop n say n;
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my c = 0;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my c = 0;
 if c {
     say &#34;c = $c&#34;;
     say &#34;IF block&#34;;
@@ -8535,9 +8225,7 @@ loop n {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule block {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule block {
     | &#39;{&#39; ~ &#39;}&#39; &lt;statement&gt;* %% &#39;;&#39;
     | &lt;statement&gt; &#39;;&#39;
 }</code></pre>
@@ -8554,9 +8242,7 @@ rule block {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-if 1 say &#34;A&#34;; else say &#34;B&#34;;</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">if 1 say &#34;A&#34;; else say &#34;B&#34;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -8567,9 +8253,7 @@ if 1 say &#34;A&#34;; else say &#34;B&#34;;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-loop n {
+<pre class="highlight"><code class="language-raku" data-lang="raku">loop n {
     say n;
     say 2 * n;
 };</code></pre>
@@ -8580,9 +8264,7 @@ loop n {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-loop n {
+<pre class="highlight"><code class="language-raku" data-lang="raku">loop n {
     say n;
     say 2 * n
 }</code></pre>
@@ -8593,9 +8275,7 @@ loop n {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi rule block() {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi rule block() {
     | &#39;{&#39; ~ &#39;}&#39; &lt;statement&gt;* %% &#39;;&#39;
     | &lt;statement&gt;
 }
@@ -8611,9 +8291,7 @@ multi rule block(&#39;;&#39;) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule conditional-statement {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule conditional-statement {
     | &#39;if&#39; &lt;value&gt; &lt;block()&gt; &#39;else&#39; &lt;block(&#39;;&#39;)&gt;
     | &#39;if&#39; &lt;value&gt; &lt;block(&#39;;&#39;)&gt;
 }
@@ -8628,9 +8306,7 @@ rule loopped-statement {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule conditional-statement {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule conditional-statement {
     &#39;if&#39; &lt;value&gt; [
         | &lt;block()&gt; &#39;else&#39; &lt;block(&#39;;&#39;)&gt;
         | &lt;block(&#39;;&#39;)&gt;
@@ -8643,9 +8319,7 @@ rule conditional-statement {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-| &#39;if&#39; &lt;value&gt; &lt;block()&gt; &#39;else&#39; &lt;block(&#39;;&#39;)&gt;
+<pre class="highlight"><code class="language-raku" data-lang="raku">| &#39;if&#39; &lt;value&gt; &lt;block()&gt; &#39;else&#39; &lt;block(&#39;;&#39;)&gt;
 | &#39;if&#39; &lt;value&gt; &lt;block(&#39;;&#39;)&gt;</code></pre>
 </div>
 </div>
@@ -8654,9 +8328,7 @@ rule conditional-statement {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule TOP {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
     [
         | &lt;one-line-comment&gt;
         | &lt;statement=conditional-statement&gt;
@@ -8671,9 +8343,7 @@ rule TOP {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method conditional-statement($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method conditional-statement($/) {
     $/.make(AST::Condition.new(
         value =&gt; $/&lt;value&gt;.made,
         statement =&gt; $/&lt;block&gt;[0]&lt;statement&gt;[0].made,
@@ -8700,9 +8370,7 @@ method loopped-statement($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class AST::Condition is ASTNode {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::Condition is ASTNode {
     has ASTNode $.value;
     has ASTNode @.statements;
     has ASTNode @.antistatements;
@@ -8719,9 +8387,7 @@ class AST::Loop is ASTNode {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method conditional-statement($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method conditional-statement($/) {
     $/.make(AST::Condition.new(
         value =&gt; $/&lt;value&gt;.made,
         statements =&gt; ($/&lt;block&gt;[0]&lt;statement&gt;.map: *.made),
@@ -8751,9 +8417,7 @@ method loopped-statement($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-loop n {
+<pre class="highlight"><code class="language-raku" data-lang="raku">loop n {
     say n;
     say 2 * n;
 }</code></pre>
@@ -8764,9 +8428,7 @@ loop n {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-AST::Loop.new(
+<pre class="highlight"><code class="language-raku" data-lang="raku">AST::Loop.new(
     variable =&gt; AST::Variable.new(
         . . .
     ),
@@ -8789,9 +8451,7 @@ AST::Loop.new(
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi method eval-node(AST::Condition $node) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::Condition $node) {
     if $node.value.value {
         self.eval-node($_) for $node.statements;
     }
@@ -8819,9 +8479,7 @@ multi method eval-node(AST::Loop $node) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-5
+<pre class="highlight"><code class="language-raku" data-lang="raku">5
 10
 4
 Cannot shift from an empty Array[ASTNode]
@@ -8834,9 +8492,7 @@ Cannot shift from an empty Array[ASTNode]
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method value() {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method value() {
     my $result = @.operands[0].value;
 
     for 1 .. @.operands.elems - 1 -&gt; $i {
@@ -8853,9 +8509,7 @@ method value() {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi method eval-node(AST::HashAssignment $node) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::HashAssignment $node) {
     %!var{$node.variable-name} = Hash.new;
     for 0 .. $node.keys.elems - 1 -&gt; $i {
         %!var{$node.variable-name}.{$node.keys[$i]} =
@@ -8869,9 +8523,7 @@ multi method eval-node(AST::HashAssignment $node) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my n = 5;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my n = 5;
 loop n {
     my n2 = n * n;
     say &#34;n = $n, n2 = $n2&#34;;
@@ -8894,9 +8546,7 @@ loop n {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-|  &amp;  &lt;  &lt;=  &gt;  &gt;=  ==  !=</code></pre>
+<pre class="highlight"><code class="language-raku" data-lang="raku">|  &amp;  &lt;  &lt;=  &gt;  &gt;=  ==  !=</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -8907,9 +8557,7 @@ loop n {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi token op(1) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi token op(1) {
     | &#39;|&#39;
     | &#39;&lt;&#39;  | &#39;&gt;&#39;
     | &#39;&lt;=&#39; | &#39;&gt;=&#39;
@@ -8926,9 +8574,7 @@ multi token op(2) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi token op(3) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi token op(3) {
     &#39;+&#39; | &#39;-&#39;
 }
 
@@ -8952,9 +8598,7 @@ multi rule expr(6) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi sub operation(&#39;|&#39;, $a, $b) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation(&#39;|&#39;, $a, $b) {
     $a || $b
 }
 
@@ -8992,9 +8636,7 @@ multi sub operation(&#39;==&#39;, $a, $b) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi sub operation(&#39;&lt;&#39;, $a, $b) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi sub operation(&#39;&lt;&#39;, $a, $b) {
     $a &lt; $b ?? 1 !! 0
 }</code></pre>
 </div>
@@ -9004,9 +8646,7 @@ multi sub operation(&#39;&lt;&#39;, $a, $b) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my x = 10;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my x = 10;
 my y = 20;
 
 if x &gt; y say &#34;&gt;&#34; else say &#34;&lt;&#34;; ## &lt;
@@ -9037,9 +8677,7 @@ if (10 &lt; 1) | (5 &lt; 50) say &#34;OK 2&#34;; ## OK 2</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my n = 1;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my n = 1;
 while n &lt;= 5 {
     say n;
     n = n + 1
@@ -9057,9 +8695,7 @@ while n &lt;= 5 {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-rule TOP {
+<pre class="highlight"><code class="language-raku" data-lang="raku">rule TOP {
     [
         . . .
         | &lt;statement=loopped-statement&gt;
@@ -9078,9 +8714,7 @@ rule while-statement {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-class AST::While is ASTNode {
+<pre class="highlight"><code class="language-raku" data-lang="raku">class AST::While is ASTNode {
     has ASTNode $.value;
     has ASTNode @.statements;
 }</code></pre>
@@ -9091,9 +8725,7 @@ class AST::While is ASTNode {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-method while-statement($/) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">method while-statement($/) {
     $/.make(AST::While.new(
         value =&gt; $/&lt;value&gt;.made,
         statements =&gt; ($/&lt;block&gt;&lt;statement&gt;.map: *.made),
@@ -9106,9 +8738,7 @@ method while-statement($/) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-multi method eval-node(AST::While $node) {
+<pre class="highlight"><code class="language-raku" data-lang="raku">multi method eval-node(AST::While $node) {
     while $node.value.value {
         self.eval-node($_) for $node.statements;
     }
@@ -9120,9 +8750,7 @@ multi method eval-node(AST::While $node) {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">#!/usr/bin/env raku
-
-my n = 1;
+<pre class="highlight"><code class="language-raku" data-lang="raku">my n = 1;
 while n &lt;= 5 {
     say n;
     n = n + 1
