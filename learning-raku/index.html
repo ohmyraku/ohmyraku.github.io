@@ -421,22 +421,16 @@ Defined as:
 </div>
 </div>
 <div class="paragraph">
-<p>我发现自己主要在 <a href="https://docs.raku.org" class="bare">https://docs.raku.org</a> 阅读在线文档。比这更糟糕的是谷歌像“raku Int” 这样的东西，并跟踪第一个结果。该网站还有一个方便的搜索功能以帮助你查找，而无需使用全文搜索。你可以在本地运行同一站点。在每个页面的底部查找这些详细信息。</p>
+<p>我发现自己主要在 <a href="https://docs.raku.org" class="bare">https://docs.raku.org</a> 阅读在线文档。比这更糟糕的是谷歌像 “raku Int” 这样的东西，并跟踪第一个结果。该网站还有一个方便的搜索功能以帮助你查找，而无需使用全文搜索。你可以在本地运行同一站点。在每个页面的底部查找这些详细信息。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_基础语法">1.4. 基础语法</h3>
 <div class="paragraph">
-<p>You often need to read code from the inside out, as you would a math formula, so that’s how I approach it here: starting from the very tiny and building up from there. This is a survey of the things you need to know and will read about in upcoming chapters. Don’t worry if you are a bit overwhelmed at this point. You’ll get used to these things as you practice.</p>
-</div>
-<div class="paragraph">
-<p>你经常需要从里到外读取代码，就像你的数学公式一样，这就是我这本书里的方法：从非常小的开始，从那里开始构建。这是对你需要了解的内容的调查，并将在后续章节中阅读。如果你在这一点上有点不知所措，别担心。练习时你会习惯这些东西。</p>
+<p>你经常需要从内到外地阅读代码，就像阅读一个数学公式一样，所以我在这里就是这样做的：从极小的地方开始，然后从那里建立起来。这是对你需要知道的事情的调查，在接下来的章节中你会读到这些内容。如果你在这一点上有点不知所措，不要担心。随着你的练习，你会习惯这些东西的。</p>
 </div>
 <div class="sect3">
 <h4 id="_项">1.4.1. 项</h4>
-<div class="paragraph">
-<p>At the lowest level a program has terms. These are the building blocks that form everything else. Think of these as the nouns of the language. Here are some terms:</p>
-</div>
 <div class="paragraph">
 <p>程序中最低级别的是项。这些是构成其他一切的基本构成要素。将这些视为语言的名词。下面是一些项：</p>
 </div>
@@ -451,25 +445,16 @@ now</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>These include literal data, such as <code>2</code> and <code>&#39;Hello&#39;</code>; variables, such as <code>$x</code>; and defined symbols, such as <code>π</code>. <code>now`is a term that represents the current time as an [`Instant</code>](<a href="https://docs.raku.org/type/Instant.html" class="bare">https://docs.raku.org/type/Instant.html</a>) object.</p>
+<p>这些包括字面值数据，例如 <code>2</code> 和 <code>&#39;Hello&#39;</code>;变量，例如 <code>$x</code> ;和定义的符号，例如 <strong>π</strong>。<code>now</code> 是一个项，表示当前时间为 <a href="https://docs.raku.org/type/Instant.html"><code>Instant</code></a> 对象。</p>
 </div>
 <div class="paragraph">
-<p>A variable typically starts with a sigil—a special character that denotes something about that variable. The variable <code>$x</code> has the <code>$</code> sigil. Don’t worry about those just yet, although you’ll see more later in this chapter.</p>
-</div>
-<div class="paragraph">
-<p>这些包括文字数据，例如 <code>2</code> 和 <code>&#39;Hello&#39;</code>;变量，例如 <code>$x</code> ;和定义的符号，例如 <strong>π</strong>。 <code>now</code> 是一个项，表示当前时间为 [<code>Instant</code>](<a href="https://docs.raku.org/type/Instant.html" class="bare">https://docs.raku.org/type/Instant.html</a>) 对象。</p>
-</div>
-<div class="paragraph">
-<p>变量通常以sigil开头 - 一个表示该变量的特殊字符。变量 <code>$x</code> 有 <code>$</code>  sigil。不要担心那些，尽管你会在本章后面看到更多内容。</p>
+<p>变量通常以 sigil 开头 - 一个表示该变量的特殊字符。变量 <code>$x</code> 有 <code>$</code> sigil。先不要担心这些，尽管你会在本章后面看到更多。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_运算符和表达式">1.4.2. 运算符和表达式</h4>
 <div class="paragraph">
-<p>An <strong>expression</strong> is a combination of terms and operators that produce a new value. If the terms are the nouns, operators are the verbs that specify the action. They turn one or more terms into a new value. Operands are the values that an operator uses. A unary operator does something to a single operand:</p>
-</div>
-<div class="paragraph">
-<p>表达式是产生新值的术语和运算符的组合。如果术语是名词，则运算符是指定动作的动词。他们将一个或多个术语转换为新值。操作数是操作员使用的值。一元运算符对单个操作数执行某些操作：</p>
+<p>表达式是项和操作符的组合，产生一个新的值。如果项是名词，那么运算符就是指定动作的动词。它们将一个或多个项转化为一个新的值。操作数是操作符使用的值。一元运算符对单个操作数进行操作。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -479,16 +464,10 @@ $x++            # add 1 to the current value in $x</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>That <code>#</code> and the text following it is a comment (which you’ll see more about in a moment). It’s some text that the program ignores and is a convenient way for you to leave notes about your code. I’ll often use comments to reinforce a point or show the output of an expression.</p>
+<p>&#34;#&#34; 和后面的文本是注释（一会儿你会看到更多）。它是一些被程序忽略的文本，是你对你的代码留下注释的一种方便方式。我经常使用注释来加强观点或显示表达式的输出。</p>
 </div>
 <div class="paragraph">
-<p>A binary operator works on two operands. Normally these operators show up between the operands (infixed):</p>
-</div>
-<div class="paragraph">
-<p>＃和它后面的文字是一个评论（你稍后会看到更多）。这是程序忽略的一些文本，是你留下关于代码的注释的便捷方式。我经常使用注释来强化一个点或显示一个表达式的输出。</p>
-</div>
-<div class="paragraph">
-<p>二元运算符适用于两个操作数。通常这些运算符出现在操作数之间（infixed）：</p>
+<p>二元运算符对两个操作数起作用。通常这些操作符显示在操作数之间（下标）。</p>
 </div>
 <div class="listingblock">
 <div class="content">
