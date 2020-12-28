@@ -8,15 +8,13 @@
 
 <meta name="author" content="ohmyraku">
 <meta name="application-name" content="山川异域, 风月同天">
-<meta name="description" content="1. Cro 开发工具 Cro包含帮助开发人员更有效地工作的工具。 当前，这些工具可通过命令行界面使用。 将来还将添加Web界面。 没有这些工具，完全有可能使用Cro。 它们旨在提供一些合理的默认值，但并不适合每个项目。
- 1.1. 存根服务 可以使用cro stub命令对新服务进行存根。 一般用法是：
+<meta name="description" content="1. Cro 开发工具 Cro 包含帮助开发人员更有效地工作的工具。 当前，这些工具可通过命令行界面使用。 将来还将添加 Web 界面。 没有这些工具，完全有可能使用 Cro。 它们旨在提供一些合理的默认值，但并不适合每个项目。
+ 1.1. 存根服务 可以使用 cro stub 命令对新服务进行存根。 一般用法是 :
  cro stub &lt;service-type&gt; &lt;service-id&gt; &lt;path&gt; [&#39;links-and-options&#39;]   其中
- service-type是要创建的服务的类型 service-id是服务的ID（与其他cro命令一起使用；也将在.cro.yml中用作服务的默认描述性名称）
- 路径是创建服务的位置 links-and-options指定指向应添加到存根的其他服务的链接，以及特定于服务类型的选项
- 如果未指定链接和选项，则将以交互方式请求它们。 要提供选项，请使用类似于Perl 6冒号对的语法将其放在引号中，其中：foo启用选项，：！foo禁用选项，而：foo &lt;bar&gt;是带有值bar的选项foo。 例如：
- cro stub http foo services/foo &#39;:!secure :websocket&#39; cro stub http bar services/bar &#39;:!secure :websocket&#39;   已存根的服务从环境变量获取端口和证书配置，并且当服务之间存在关系时，其地址也将使用环境变量注入。 设置容器部署时，这很方便。
- 链接导致存根服务包含创建可以与另一个端点通信的“客户端”的代码。 这些与选项一起使用，格式为：link &lt;service-id：endpoint-id&gt;。 service-id是目标.cro.yml的id字段，endpoint-id是该.cro.yml文件的终结点列表中条目的id字段。
- cro stub http foo services/foo &#39;:link&lt;flash-storage:http&gt;&#39;    1.">
+ service-type 是要创建的服务的类型 service-id 是服务的 ID（与其他 cro 命令一起使用；也将在.cro.yml 中用作服务的默认描述性名称）
+ 路径是创建服务的位置 links-and-options 指定指向应添加到存根的其他服务的链接，以及特定于服务类型的选项
+ 如果未指定链接和选项，则将以交互方式请求它们。 要提供选项，请使用类似于 Perl 6 冒号对的语法将其放在引号中，其中 :foo 启用选项，:!foo 禁用选项，而 :foo &lt;bar&gt;是带有值 bar 的选项 foo。 例如 :
+ cro stub http foo services/foo &#39;:!secure :websocket&#39; cro stub http bar services/bar &#39;:!">
 <meta name="robots" content="noodp"/>
 <meta name="generator" content="Hugo 0.79.0" />
 <meta name="referrer" content="no-referrer" />
@@ -73,69 +71,85 @@ if (theme && theme !== "1") {
         <li><a href="#_追踪服务">1.4. 追踪服务</a></li>
         <li><a href="#_服务静态内容">1.5. 服务静态内容</a></li>
         <li><a href="#_使用服务链接">1.6. 使用服务链接</a></li>
-        <li><a href="#_uri_段匹配">1.7. URI 段匹配</a></li>
-        <li><a href="#_请求方法">1.8. 请求方法</a></li>
-        <li><a href="#_查询字符串header_和_cookies">1.9. 查询字符串,header 和 cookies</a></li>
-        <li><a href="#_访问_crohttprequest_实例">1.10. 访问 Cro::HTTP::Request 实例</a></li>
-        <li><a href="#_请求体">1.11. 请求体</a></li>
-        <li><a href="#_添加自定义请求体解析器">1.12. 添加自定义请求体解析器</a></li>
-        <li><a href="#_生成响应">1.13. 生成响应</a></li>
-        <li><a href="#_服务静态内容_2">1.14. 服务静态内容</a></li>
-        <li><a href="#_添加自定义响应体序列化器">1.15. 添加自定义响应体序列化器</a></li>
-        <li><a href="#_设置响应体缓存能力">1.16. 设置响应体缓存能力</a></li>
-        <li><a href="#_push_承诺">1.17. Push 承诺</a></li>
-        <li><a href="#_组合路由">1.18. 组合路由</a></li>
-        <li><a href="#_代理路由到另一个_crotransform">1.19. 代理路由到另一个 Cro::Transform</a></li>
-        <li><a href="#_在路由块中应用中间件">1.20. 在路由块中应用中间件</a></li>
-        <li><a href="#_基本示例">1.21. 基本示例</a></li>
-        <li><a href="#_为服务设置测试">1.22. 为服务设置测试</a></li>
-        <li><a href="#_编写测试">1.23. 编写测试</a></li>
-        <li><a href="#_状态">1.24. 状态</a></li>
-        <li><a href="#_内容类型">1.25. 内容类型</a></li>
-        <li><a href="#_标题">1.26. 标题</a></li>
-        <li><a href="#_body_text">1.27. body-text</a></li>
-        <li><a href="#_body_blob">1.28. body-blob</a></li>
-        <li><a href="#_body">1.29. body</a></li>
-        <li><a href="#_json">1.30. json</a></li>
-        <li><a href="#_使用一个_uri一组标头等进行许多测试">1.31. 使用一个 URI，一组标头等进行许多测试</a></li>
       </ul>
     </li>
-    <li><a href="#_cromediatype">2. Cro::MediaType</a>
+    <li><a href="#_crohttprouter">2. Cro::HTTP::Router</a>
       <ul>
-        <li><a href="#_解析媒体类型">2.1. 解析媒体类型</a></li>
-        <li><a href="#_提取媒体类型部分">2.2. 提取媒体类型部分</a></li>
-        <li><a href="#_从零件构造媒体类型">2.3. 从零件构造媒体类型</a></li>
-        <li><a href="#_序列化媒体类型">2.4. 序列化媒体类型</a></li>
+        <li><a href="#_uri_段匹配">2.1. URI 段匹配</a></li>
+        <li><a href="#_请求方法">2.2. 请求方法</a></li>
+        <li><a href="#_查询字符串header_和_cookies">2.3. 查询字符串,header 和 cookies</a></li>
+        <li><a href="#_访问_crohttprequest_实例">2.4. 访问 Cro::HTTP::Request 实例</a></li>
+        <li><a href="#_请求体">2.5. 请求体</a></li>
+        <li><a href="#_添加自定义请求体解析器">2.6. 添加自定义请求体解析器</a></li>
+        <li><a href="#_生成响应">2.7. 生成响应</a></li>
+        <li><a href="#_服务静态内容_2">2.8. 服务静态内容</a></li>
+        <li><a href="#_添加自定义响应体序列化器">2.9. 添加自定义响应体序列化器</a></li>
+        <li><a href="#_设置响应体缓存能力">2.10. 设置响应体缓存能力</a></li>
+        <li><a href="#_push_承诺">2.11. Push 承诺</a></li>
+        <li><a href="#_组合路由">2.12. 组合路由</a></li>
+        <li><a href="#_代理路由到另一个_crotransform">2.13. 代理路由到另一个 Cro::Transform</a></li>
+        <li><a href="#_在路由块中应用中间件">2.14. 在路由块中应用中间件</a></li>
       </ul>
     </li>
-    <li><a href="#_cro_模块结构">3. Cro 模块结构</a>
+    <li><a href="#_crohttptest">3. Cro::HTTP::Test</a>
       <ul>
-        <li><a href="#_crocore">3.1. Cro::Core</a></li>
-        <li><a href="#_crotls">3.2. Cro::TLS</a></li>
-        <li><a href="#_crohttp">3.3. Cro::HTTP</a></li>
-        <li><a href="#_crowebsocket">3.4. Cro::WebSocket</a></li>
-        <li><a href="#_crozeromq">3.5. Cro::ZeroMQ</a></li>
-        <li><a href="#_解析方法">3.6. 解析方法</a></li>
-        <li><a href="#_获取uri部分">3.7. 获取URI部分</a></li>
-        <li><a href="#_uri字符串化">3.8. URI字符串化</a></li>
+        <li><a href="#_基本示例">3.1. 基本示例</a></li>
+        <li><a href="#_为服务设置测试">3.2. 为服务设置测试</a></li>
+        <li><a href="#_编写测试">3.3. 编写测试</a></li>
+        <li><a href="#_状态">3.4. 状态</a></li>
+        <li><a href="#_内容类型">3.5. 内容类型</a></li>
+        <li><a href="#_标题">3.6. 标题</a></li>
+        <li><a href="#_body_text">3.7. body-text</a></li>
+        <li><a href="#_body_blob">3.8. body-blob</a></li>
+        <li><a href="#_body">3.9. body</a></li>
+        <li><a href="#_json">3.10. json</a></li>
+        <li><a href="#_使用一个_uri一组标头等进行许多测试">3.11. 使用一个 URI，一组标头等进行许多测试</a></li>
       </ul>
     </li>
-    <li><a href="#_crowebapptemplate">4. Cro::WebApp::Template</a>
+    <li><a href="#_cromediatype">4. Cro::MediaType</a>
       <ul>
-        <li><a href="#_使用模板">4.1. 使用模板</a></li>
-        <li><a href="#_模板位置和编译">4.2. 模板位置和编译</a></li>
-        <li><a href="#_模板语言">4.3. 模板语言</a></li>
-        <li><a href="#_解包散列和对象属性">4.4. 解包散列和对象属性</a></li>
-        <li><a href="#_变量">4.5. 变量</a></li>
-        <li><a href="#_迭代">4.6. 迭代</a></li>
-        <li><a href="#_条件">4.7. 条件</a></li>
-        <li><a href="#_子例程和宏">4.8. 子例程和宏</a></li>
-        <li><a href="#_分解出sub和宏">4.9. 分解出sub和宏</a></li>
-        <li><a href="#_插入_html_和_javascript">4.10. 插入 HTML 和 JavaScript</a></li>
-        <li><a href="#_关键角色">4.11. 关键角色</a></li>
-        <li><a href="#_组成">4.12. 组成</a></li>
-        <li><a href="#_http_服务器示例">4.13. HTTP 服务器示例</a></li>
-        <li><a href="#_客户端管道">4.14. 客户端管道</a></li>
+        <li><a href="#_解析媒体类型">4.1. 解析媒体类型</a></li>
+        <li><a href="#_提取媒体类型部分">4.2. 提取媒体类型部分</a></li>
+        <li><a href="#_从零件构造媒体类型">4.3. 从零件构造媒体类型</a></li>
+        <li><a href="#_序列化媒体类型">4.4. 序列化媒体类型</a></li>
+      </ul>
+    </li>
+    <li><a href="#_cro_模块结构">5. Cro 模块结构</a>
+      <ul>
+        <li><a href="#_crocore">5.1. Cro::Core</a></li>
+        <li><a href="#_crotls">5.2. Cro::TLS</a></li>
+        <li><a href="#_crohttp">5.3. Cro::HTTP</a></li>
+        <li><a href="#_crowebsocket">5.4. Cro::WebSocket</a></li>
+        <li><a href="#_crozeromq">5.5. Cro::ZeroMQ</a></li>
+      </ul>
+    </li>
+    <li><a href="#_crouri">6. Cro::Uri</a>
+      <ul>
+        <li><a href="#_解析方法">6.1. 解析方法</a></li>
+        <li><a href="#_获取_uri_部分">6.2. 获取 URI 部分</a></li>
+        <li><a href="#_uri_字符串化">6.3. URI 字符串化</a></li>
+      </ul>
+    </li>
+    <li><a href="#_crowebapptemplate">7. Cro::WebApp::Template</a>
+      <ul>
+        <li><a href="#_使用模板">7.1. 使用模板</a></li>
+        <li><a href="#_模板位置和编译">7.2. 模板位置和编译</a></li>
+        <li><a href="#_模板语言">7.3. 模板语言</a></li>
+        <li><a href="#_解包散列和对象属性">7.4. 解包散列和对象属性</a></li>
+        <li><a href="#_变量">7.5. 变量</a></li>
+        <li><a href="#_迭代">7.6. 迭代</a></li>
+        <li><a href="#_条件">7.7. 条件</a></li>
+        <li><a href="#_子例程和宏">7.8. 子例程和宏</a></li>
+        <li><a href="#_分解出_sub_和宏">7.9. 分解出 sub 和宏</a></li>
+        <li><a href="#_插入_html_和_javascript">7.10. 插入 HTML 和 JavaScript</a></li>
+      </ul>
+    </li>
+    <li><a href="#_cro_方法">8. Cro 方法</a>
+      <ul>
+        <li><a href="#_关键角色">8.1. 关键角色</a></li>
+        <li><a href="#_组成">8.2. 组成</a></li>
+        <li><a href="#_http_服务器示例">8.3. HTTP 服务器示例</a></li>
+        <li><a href="#_客户端管道">8.4. 客户端管道</a></li>
       </ul>
     </li>
   </ul>
@@ -149,12 +163,12 @@ if (theme && theme !== "1") {
 <h2 id="_cro_开发工具">1. Cro 开发工具</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Cro包含帮助开发人员更有效地工作的工具。 当前，这些工具可通过命令行界面使用。 将来还将添加Web界面。 没有这些工具，完全有可能使用Cro。 它们旨在提供一些合理的默认值，但并不适合每个项目。</p>
+<p>Cro 包含帮助开发人员更有效地工作的工具。 当前，这些工具可通过命令行界面使用。 将来还将添加 Web 界面。 没有这些工具，完全有可能使用 Cro。 它们旨在提供一些合理的默认值，但并不适合每个项目。</p>
 </div>
 <div class="sect2">
 <h3 id="_存根服务">1.1. 存根服务</h3>
 <div class="paragraph">
-<p>可以使用cro stub命令对新服务进行存根。 一般用法是：</p>
+<p>可以使用 cro stub 命令对新服务进行存根。 一般用法是 :</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -165,15 +179,15 @@ if (theme && theme !== "1") {
 <p>其中</p>
 </div>
 <div class="paragraph">
-<p>service-type是要创建的服务的类型
-service-id是服务的ID（与其他cro命令一起使用；也将在.cro.yml中用作服务的默认描述性名称）</p>
+<p>service-type 是要创建的服务的类型
+service-id 是服务的 ID（与其他 cro 命令一起使用；也将在.cro.yml 中用作服务的默认描述性名称）</p>
 </div>
 <div class="paragraph">
 <p>路径是创建服务的位置
-links-and-options指定指向应添加到存根的其他服务的链接，以及特定于服务类型的选项</p>
+links-and-options 指定指向应添加到存根的其他服务的链接，以及特定于服务类型的选项</p>
 </div>
 <div class="paragraph">
-<p>如果未指定链接和选项，则将以交互方式请求它们。 要提供选项，请使用类似于Perl 6冒号对的语法将其放在引号中，其中：foo启用选项，：！foo禁用选项，而：foo &lt;bar&gt;是带有值bar的选项foo。 例如：</p>
+<p>如果未指定链接和选项，则将以交互方式请求它们。 要提供选项，请使用类似于 Perl 6 冒号对的语法将其放在引号中，其中 :foo 启用选项，:!foo 禁用选项，而 :foo &lt;bar&gt;是带有值 bar 的选项 foo。 例如 :</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -185,7 +199,7 @@ cro stub http bar services/bar &#39;:!secure :websocket&#39;</code></pre>
 <p>已存根的服务从环境变量获取端口和证书配置，并且当服务之间存在关系时，其地址也将使用环境变量注入。 设置容器部署时，这很方便。</p>
 </div>
 <div class="paragraph">
-<p>链接导致存根服务包含创建可以与另一个端点通信的“客户端”的代码。 这些与选项一起使用，格式为：link &lt;service-id：endpoint-id&gt;。 service-id是目标.cro.yml的id字段，endpoint-id是该.cro.yml文件的终结点列表中条目的id字段。</p>
+<p>链接导致存根服务包含创建可以与另一个端点通信的“客户端”的代码。 这些与选项一起使用，格式为 :link &lt;service-id:endpoint-id&gt;。 service-id 是目标.cro.yml 的 id 字段，endpoint-id 是该.cro.yml 文件的终结点列表中条目的 id 字段。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -195,13 +209,8 @@ cro stub http bar services/bar &#39;:!secure :websocket&#39;</code></pre>
 </div>
 <div class="sect2">
 <h3 id="_http_服务">1.2. HTTP 服务</h3>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">HTTP服务中的http服务类型存根使用Cro </dt>
-<dd>
-<p>HTTP :: Router并由Cro :: HTTP :: Server提供服务。 默认情况下，它对将接受HTTP / 1.0，HTTP / 1.1和HTTP / 2.0请求的HTTPS服务存根。</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>HTTP 服务中的 http 服务类型存根使用 Cro::HTTP::Router 并由 Cro::HTTP::Server 提供服务。 默认情况下，它对将接受 HTTP / 1.0，HTTP / 1.1 和 HTTP / 2.0 请求的 HTTPS 服务存根。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -209,15 +218,10 @@ cro stub http bar services/bar &#39;:!secure :websocket&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>可以提供以下选项：</p>
+<p>可以提供以下选项:</p>
 </div>
 <div class="paragraph">
-<p>：secure：生成HTTPS服务而不是HTTP服务（默认为：！secure）； 暗含：http1：http2，默认情况下，使用ALPN协商是否使用HTTP / 2</p>
-</div>
-<div class="paragraph">
-<p>：！http2：生成不支持HTTP 2的服务
-：！http1：生成不支持HTTP 1的服务
-：websocket：向Cro :: WebSocket模块添加依赖项，并添加存根Web套接字示例</p>
+<p>:secure:生成 HTTPS 服务而不是 HTTP 服务（默认为 :!secure）； 暗含 :http1:http2，默认情况下，使用 ALPN 协商是否使用 HTTP / 2</p>
 </div>
 </div>
 <div class="sect2">
@@ -228,7 +232,7 @@ cro stub http bar services/bar &#39;:!secure :websocket&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>cro run命令用于运行服务。 它会自动设置文件监视功能，并在服务发生源更改时重新启动服务（使用反跳功能来处理更改的踩踏事件，例如，由于从版本控制中获取正在运行的服务的最新更改或在编辑器中保存了许多文件） 。 要运行所有服务（通过在当前工作目录及其子目录中搜索.cro.yml文件来标识），请使用：</p>
+<p>cro run 命令用于运行服务。 它会自动设置文件监视功能，并在服务发生源更改时重新启动服务（使用反跳功能来处理更改的踩踏事件，例如，由于从版本控制中获取正在运行的服务的最新更改或在编辑器中保存了许多文件）。要运行所有服务（通过在当前工作目录及其子目录中搜索 <code>.cro.yml</code> 文件来标识），请使用 :</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -236,7 +240,7 @@ cro stub http bar services/bar &#39;:!secure :websocket&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>要运行特定服务，请编写其服务ID（必须在当前工作目录或其子目录之一的.cro.yml文件中显示为ID字段）：</p>
+<p>要运行特定服务，请编写其服务 ID（必须在当前工作目录或其子目录之一的.cro.yml 文件中显示为 ID 字段）:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -252,7 +256,7 @@ cro stub http bar services/bar &#39;:!secure :websocket&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>将显示服务的输出，并以服务名称为前缀。 发送SIGINT（按Ctrl + C）将终止所有服务。</p>
+<p>将显示服务的输出，并以服务名称为前缀。 发送 SIGINT（按 Ctrl + C）将终止所有服务。</p>
 </div>
 </div>
 <div class="sect2">
@@ -263,10 +267,10 @@ cro stub http bar services/bar &#39;:!secure :websocket&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>cro trace命令与cro run非常相似，只是它在服务中打开管道调试。 这样就可以查看每个服务正在接收和发送的流量，以及中间件如何解释和影响它。</p>
+<p>cro trace 命令与 cro run 非常相似，只是它在服务中打开管道调试。 这样就可以查看每个服务正在接收和发送的流量，以及中间件如何解释和影响它。</p>
 </div>
 <div class="paragraph">
-<p>输出的数量可能会有点不堪重负，因此可以通过消息类型名称对其进行过滤。 这是通过检查是否有任何名称分量（不区分大小写）等于过滤器来完成的。 包含过滤器表示为：name，而包含过滤器表示为：！name。 例如，要从跟踪中排除所有TCP消息，请执行以下操作：</p>
+<p>输出的数量可能会有点不堪重负，因此可以通过消息类型名称对其进行过滤。 这是通过检查是否有任何名称分量（不区分大小写）等于过滤器来完成的。 包含过滤器表示为 :name，而包含过滤器表示为 :!name。 例如，要从跟踪中排除所有 TCP 消息，请执行以下操作 :</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -274,7 +278,7 @@ cro stub http bar services/bar &#39;:!secure :websocket&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>只看到HTTP消息，这样做：</p>
+<p>只看到 HTTP 消息，这样做 :</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -282,7 +286,7 @@ cro stub http bar services/bar &#39;:!secure :websocket&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>为了进一步限制，只是要求，做到：</p>
+<p>为了进一步限制，只是要求，做到 :</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -290,7 +294,7 @@ cro stub http bar services/bar &#39;:!secure :websocket&#39;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>任何不以：开头的内容均视为服务名称。 顺序并不重要，因此它们是等效的：</p>
+<p>任何不以 <code>:</code> 开头的内容均视为服务名称。 顺序并不重要，因此它们是等效的:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -307,7 +311,7 @@ cro trace flashcard-backend :http</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>有时将HTTP服务器设置为提供一些静态内容很有用。 使用以下命令为localhost的端口8080提供当前目录：</p>
+<p>有时将 HTTP 服务器设置为提供一些静态内容很有用。 使用以下命令为 localhost 的端口 8080 提供当前目录 :</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -315,7 +319,7 @@ cro trace flashcard-backend :http</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>或指定目录服务：</p>
+<p>或指定目录服务 :</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -323,7 +327,7 @@ cro trace flashcard-backend :http</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>还可以在端口号之前提供要绑定的IP地址：</p>
+<p>还可以在端口号之前提供要绑定的 IP 地址 :</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -334,10 +338,10 @@ cro trace flashcard-backend :http</code></pre>
 <div class="sect2">
 <h3 id="_使用服务链接">1.6. 使用服务链接</h3>
 <div class="paragraph">
-<p>cro link子命令用于管理.cro.yml文件的链接部分。 这些描述了一种Cro服务如何使用另一种Cro服务，从而导致注入环境变量，这些变量指定了可以在其中找到该服务的主机和端口。 在生产中，这些将由诸如Kubernetes之类的容器引擎，某种配置管理系统来设置，甚至只是硬编码到包装脚本中。</p>
+<p>cro link 子命令用于管理 <code>.cro.yml</code> 文件的链接部分。 这些描述了一种 Cro 服务如何使用另一种 Cro 服务，从而导致注入环境变量，这些变量指定了可以在其中找到该服务的主机和端口。 在生产中，这些将由诸如 Kubernetes 之类的容器引擎，某种配置管理系统来设置，甚至只是硬编码到包装脚本中。</p>
 </div>
 <div class="paragraph">
-<p>要添加服务链接，请使用添加：</p>
+<p>要添加服务链接，请使用添加:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -345,13 +349,13 @@ cro trace flashcard-backend :http</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>其中from-service-id是应修改其链接的.cro.yml的ID，to-service-id是将要使用的服务的.cro.yml的ID，以及to-endpoint-id 是该服务的.cro.yml中端点的ID。 该命令将在存在匹配所链接服务协议的链接模板的情况下生成一些存根代码，你可以将其存入适当位置的服务代码中（Cro并不疯狂，以为它可以在以下位置编辑你的代码 你！）</p>
+<p>其中 from-service-id 是应修改其链接的 <code>.cro.yml</code> 的 ID，to-service-id 是将要使用的服务的 <code>.cro.yml</code> 的 ID，以及 to-endpoint-id 是该服务的 <code>.cro.yml</code> 中端点的 ID。 该命令将在存在匹配所链接服务协议的链接模板的情况下生成一些存根代码，你可以将其存入适当位置的服务代码中（Cro 并不疯狂，以为它可以在以下位置编辑你的代码 你!）</p>
 </div>
 <div class="paragraph">
-<p>如果未指定to-endpoint-id，并且to-service-id服务只有一个端点，那么默认情况下将使用该端点。 否则，含糊不清将被抱怨。</p>
+<p>如果未指定 to-endpoint-id，并且 to-service-id 服务只有一个端点，那么默认情况下将使用该端点。 否则，含糊不清将被抱怨。</p>
 </div>
 <div class="paragraph">
-<p>要重新生成现有链接的代码，请执行以下操作：</p>
+<p>要重新生成现有链接的代码，请执行以下操作 :</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -367,22 +371,21 @@ cro trace flashcard-backend :http</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这只是从from-service-id标识的.cro.yml的链接部分中删除条目。
-== Cro::HTTP::Router</p>
+<p>这只是从 from-service-id 标识的 <code>.cro.yml</code> 的链接部分中删除条目。</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">在Cro中，HTTP应用程序是Cro </dt>
-<dd>
-<p>Transform，将Cro :: HTTP :: Request对象转换为Cro :: HTTP :: Response对象。 Cro :: HTTP :: Router模块提供了一种声明式方式，可将HTTP请求映射到适当的处理程序，该处理程序进而产生响应。</p>
-</dd>
-</dl>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_crohttprouter">2. Cro::HTTP::Router</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在 Cro 中，HTTP 应用程序是 Cro::Transform，将 Cro::HTTP::Request 对象转换为 Cro::HTTP::Response 对象。Cro::HTTP::Router 模块提供了一种声明式方式，可将 HTTP 请求映射到适当的处理程序，该处理程序进而产生响应。</p>
 </div>
 <div class="sect2">
-<h3 id="_uri_段匹配">1.7. URI 段匹配</h3>
+<h3 id="_uri_段匹配">2.1. URI 段匹配</h3>
 <div class="paragraph">
-<p>路由器使用Perl 6签名来匹配URL并从中提取段。 一组路由放置在路由块中。 空签名对应于/。</p>
+<p>路由器使用 Perl 6 签名来匹配 URL 并从中提取段。一组路由放置在路由块中。空签名对应于/。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -395,7 +398,7 @@ cro trace flashcard-backend :http</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>文字URL片段表示为文字：</p>
+<p>文字 URL 片段表示为文字:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -413,10 +416,10 @@ cro trace flashcard-backend :http</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>位置变量用于捕获URI段。 默认情况下，它们将作为Str提供，因此在参数上放置Str类型约束等同于将其保留。</p>
+<p>位置变量用于捕获 URI 段。默认情况下，它们将作为 Str 提供，因此在参数上放置 Str 类型约束等同于将其保留。</p>
 </div>
 <div class="paragraph">
-<p>在参数上放置一个Int类型约束意味着仅当该段可以解析为整数（/ ^&#39;-&#39;？\ d + $ /）时，路由才会匹配。 UInt的识别和处理方式相同，但只允许使用正整数。 也可以使用int8，uint8，int16，uint16，int32，uint32，int64和uint64，它们的工作方式类似于Int或UInt，但是执行范围验证。</p>
+<p>在参数上放置一个 Int 类型约束意味着仅当该段可以解析为整数（/ ^&#39;-&#39;？\ d + $ /）时，路由才会匹配。UInt 的识别和处理方式相同，但只允许使用正整数。也可以使用 int8，uint8，int16，uint16，int32，uint32，int64 和 uint64，它们的工作方式类似于 Int 或 UInt，但是执行范围验证。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -434,7 +437,7 @@ cro trace flashcard-backend :http</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>为了进行更强大的匹配，还可以使用where子句或子集类型。</p>
+<p>为了进行更强大的匹配，还可以使用 where 子句或子集类型。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -452,7 +455,7 @@ cro trace flashcard-backend :http</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>对于子集类型，基础标称类型必须为Str或Int（或Any或Mu，与Str等效）。 URL段上的所有其他类型都是不允许的。</p>
+<p>对于子集类型，基础标称类型必须为 Str 或 Int（或 Any 或 Mu，与 Str 等效）。URL 段上的所有其他类型都是不允许的。</p>
 </div>
 <div class="paragraph">
 <p>可变段可以设为可选，在这种情况下，即使不存在该段，路由也将匹配。</p>
@@ -480,31 +483,26 @@ cro trace flashcard-backend :http</code></pre>
 }</code></pre>
 </div>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">与某些路由引擎不同，Cro </dt>
-<dd>
-<p>HTTP :: Router并不纯粹根据路由的声明顺序考虑路由。规则如下：</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>与某些路由引擎不同，Cro::HTTP::Router 并不纯粹根据路由的声明顺序考虑路由。规则如下:</p>
 </div>
 <div class="paragraph">
-<p>最长的文字初始段获胜。例如，对于GET / category / search的请求，无论以什么顺序声明，路线get→&#39;category&#39;，&#39;search&#39;{}都会胜过get→&#39;category&#39;，$ name {}。</p>
+<p>最长的文字初始段获胜。例如，对于 GET/category/search 的请求，无论以什么顺序声明，路线 get→&#39;category&#39;，&#39;search&#39;{}都会胜过 <code>get → &#39;category&#39;, $name {}</code>。</p>
 </div>
 <div class="paragraph">
-<p>声明的段总是比粗俗的段好。例如，给定GET / tree / describe，无论声明的顺序如何，路由get→&#39;tree&#39;，$ operation {}都会胜过get→&#39;tree&#39;，* @ path {}。</p>
+<p>声明的段总是比粗俗的段好。例如，给定 GET/tree/describe，无论声明的顺序如何，<code>route get→&#39;tree&#39;, $operation {}</code> 都会胜过 <code>get → &#39;tree&#39;，*@path {}</code>。</p>
 </div>
 <div class="paragraph">
-<p>具有某些约束的路段的路线将始终比那些没有约束的路段尝试。例如，get→&#39;product&#39;，ISBN13 $ i {}会在get→&#39;product&#39;，Str $ query {}之前尝试，然后选择是否匹配。就Cro路由器而言，与Str相比，Int受限制。以任何方式约束的路由均被视为“相等”，并且将按照在源代码中写入的顺序对其进行测试。</p>
+<p>具有某些约束的路段的路线将始终比那些没有约束的路段尝试。例如，<code>get → &#39;product&#39;, ISBN13 $ i {}</code> 会在 <code>get → &#39;product&#39;, Str $query {}</code> 之前尝试，然后选择是否匹配。就 Cro 路由器而言，与 Str 相比，Int 受限制。以任何方式约束的路由均被视为“相等”，并且将按照在源代码中写入的顺序对其进行测试。</p>
 </div>
 <div class="paragraph">
-<p>如果网段上没有路由匹配，则路由器将生成HTTP 404 Not Found响应。</p>
+<p>如果网段上没有路由匹配，则路由器将生成 HTTP 404 Not Found 响应。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_请求方法">1.8. 请求方法</h3>
+<h3 id="_请求方法">2.2. 请求方法</h3>
 <div class="paragraph">
-<p>除了get之外，路由器还为HTTP方法post，put，delete和patch导出子项。</p>
+<p>除了 get 之外，路由器还为 HTTP 方法 post，put，delete 和 patch 导出子项。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -532,7 +530,7 @@ cro trace flashcard-backend :http</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这些都是http子代码的缩写：</p>
+<p>这些都是 http 子代码的缩写:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -552,7 +550,7 @@ cro trace flashcard-backend :http</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>除了可以与任何HTTP请求方法一起使用之外：</p>
+<p>除了可以与任何 HTTP 请求方法一起使用之外:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -566,22 +564,17 @@ cro trace flashcard-backend :http</code></pre>
 }</code></pre>
 </div>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">但是，除非将用于承载应用程序的Cro </dt>
-<dd>
-<p>HTTP :: Server配置为使用其allowed-methods构造函数参数接受它们，否则它们将无法工作。</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>但是，除非将用于承载应用程序的 Cro::HTTP::Server 配置为使用其 allowed-methods 构造函数参数接受它们，否则它们将无法工作。</p>
 </div>
 <div class="paragraph">
-<p>如果路由在网段上匹配，但在HTTP方法上不匹配（例如，执行了PUT，但是唯一匹配的路由是GET和POST），则结果将是HTTP 405 Method Not Allowed响应。</p>
+<p>如果路由在网段上匹配，但在 HTTP 方法上不匹配（例如，执行了 PUT，但是唯一匹配的路由是 GET 和 POST），则结果将是 HTTP 405 Method Not Allowed 响应。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_查询字符串header_和_cookies">1.9. 查询字符串,header 和 cookies</h3>
+<h3 id="_查询字符串header_和_cookies">2.3. 查询字符串,header 和 cookies</h3>
 <div class="paragraph">
-<p>路由签名中的命名参数可用于解压缩和约束请求其他方面的路由匹配。 默认情况下，值是从查询字符串中获取的，但是可以应用特征使它们使用其他来源的数据。 请注意，默认情况下，Perl 6中的命名参数是可选的。 如果需要查询字符串参数，则应将其标记为此类。</p>
+<p>路由签名中的命名参数可用于解压缩和约束请求其他方面的路由匹配。默认情况下，值是从查询字符串中获取的，但是可以应用特征使它们使用其他来源的数据。请注意，默认情况下，Perl 6 中的命名参数是可选的。如果需要查询字符串参数，则应将其标记为此类。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -606,15 +599,10 @@ cro trace flashcard-backend :http</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>与URL段一样，可以使用Int，UInt，int64，uint64，int32，uint32，int16，uint16，int8和uint8类型将参数解析为整数并进行范围检查。 此外，还允许基于Int，UInt和Str的子集类型。</p>
+<p>与 URL 段一样，可以使用 Int，UInt，int64，uint64，int32，uint32，int16，uint16，int8 和 uint8 类型将参数解析为整数并进行范围检查。此外，还允许基于 Int，UInt 和 Str 的子集类型。</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">有时，可以在查询字符串中为给定名称提供多个值。 在这些情况下，如果没有类型约束，则将传递Cro </dt>
-<dd>
-<p>HTTP :: MultiValue类型的对象。 该对象继承自List，因此可以进行迭代以获取值。 它还扮演Stringy角色，并字符串化为逗号分隔的各种值。 为了排除这种情况，可以应用Str约束，如果存在多个值，该约束将拒绝接受请求。 要显式地允许多个值，请使用@ sigil（请注意，这不能与其他类型约束一起使用）。 这也将很乐意接受零或一个值，分别给出一个空列表和一个1元素列表。 使用where子句进一步约束它。</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>有时，可以在查询字符串中为给定名称提供多个值。在这些情况下，如果没有类型约束，则将传递 Cro::HTTP::MultiValue 类型的对象。该对象继承自 List，因此可以进行迭代以获取值。它还扮演 Stringy 角色，并字符串化为逗号分隔的各种值。为了排除这种情况，可以应用 Str 约束，如果存在多个值，该约束将拒绝接受请求。要显式地允许多个值，请使用 @sigil（请注意，这不能与其他类型约束一起使用）。这也将很乐意接受零或一个值，分别给出一个空列表和一个 1 元素列表。使用 where 子句进一步约束它。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -628,7 +616,7 @@ cro trace flashcard-backend :http</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>要获取所有查询字符串数据，可以使用一个名为hash的参数（可选地，带有is查询特征）：</p>
+<p>要获取所有查询字符串数据，可以使用一个名为 hash 的参数（可选地，带有 is 查询特征）:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -641,7 +629,7 @@ cro trace flashcard-backend :http</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Cookie和标头也可以使用is cookie和is标头特征解压缩到命名参数中。 标头会考虑到关于多个值的相同规则（cookie的每个名称可能没有重复的值）。 is标头特征是唯一不区分大小写的功能，因为请求标头被定义为不区分大小写。</p>
+<p>Cookie 和标头也可以使用 is cookie 和 is 标头特征解压缩到命名参数中。标头会考虑到关于多个值的相同规则（cookie 的每个名称可能没有重复的值）。is 标头特征是唯一不区分大小写的功能，因为请求标头被定义为不区分大小写。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -665,7 +653,7 @@ cro trace flashcard-backend :http</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>命名参数不参与使用路由段完成的请求的初始路由。 但是，它们可能会在与相同路线段匹配的多个可能路线之间平局。 在这种情况下，将按照在源代码中写入的顺序对其进行尝试，但不带任何命名参数的路由处理程序将在最后尝试。 这意味着可以通过所需的命名参数来区分处理程序。</p>
+<p>命名参数不参与使用路由段完成的请求的初始路由。但是，它们可能会在与相同路线段匹配的多个可能路线之间平局。在这种情况下，将按照在源代码中写入的顺序对其进行尝试，但不带任何命名参数的路由处理程序将在最后尝试。这意味着可以通过所需的命名参数来区分处理程序。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -683,18 +671,13 @@ cro trace flashcard-backend :http</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果在URL段上至少有一个匹配的路由处理程序，但是所有候选路由在使用命名参数表示的条件下均不匹配，则路由器将产生HTTP 400错误请求响应。</p>
+<p>如果在 URL 段上至少有一个匹配的路由处理程序，但是所有候选路由在使用命名参数表示的条件下均不匹配，则路由器将产生 HTTP 400 错误请求响应。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_访问_crohttprequest_实例">1.10. 访问 Cro::HTTP::Request 实例</h3>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">在请求处理程序内部，可以使用请求项来获取与当前请求相对应的Cro </dt>
-<dd>
-<p>HTTP :: Request对象。 在许多请求处理程序中，这不是必需的，因为签名允许解包最常见形式的请求信息。 但是，如果需要完整的请求标头集（按其原始顺序），则可以使用request访问它们。</p>
-</dd>
-</dl>
+<h3 id="_访问_crohttprequest_实例">2.4. 访问 Cro::HTTP::Request 实例</h3>
+<div class="paragraph">
+<p>在请求处理程序内部，可以使用请求项来获取与当前请求相对应的 Cro::HTTP::Request 对象。在许多请求处理程序中，这不是必需的，因为签名允许解包最常见形式的请求信息。但是，如果需要完整的请求标头集（按其原始顺序），则可以使用 request 访问它们。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -711,14 +694,9 @@ cro trace flashcard-backend :http</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_请求体">1.11. 请求体</h3>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">标题可用后，Cro </dt>
-<dd>
-<p>HTTP :: Router将调度请求； 一旦通过网络到达，请求主体（如果有）将变得可用。 请求项提供了Cro :: HTTP :: Request对象，该对象具有用于访问请求主体的各种方法（主体，主体文本和主体主体），所有方法均返回Promise。 为方便起见，路由器还导出子请求体，请求体文本和请求体blob，这些请求占用一个块。 这些例程将在请求对象上调用适当的方法，等待它，然后使用它调用该块。 例如：</p>
-</dd>
-</dl>
+<h3 id="_请求体">2.5. 请求体</h3>
+<div class="paragraph">
+<p>标题可用后，Cro::HTTP::Router 将调度请求； 一旦通过网络到达，请求主体（如果有）将变得可用。请求项提供了 Cro::HTTP::Request 对象，该对象具有用于访问请求主体的各种方法（主体，主体文本和主体主体），所有方法均返回 Promise。为方便起见，路由器还导出子请求体，请求体文本和请求体 blob，这些请求占用一个块。这些例程将在请求对象上调用适当的方法，等待它，然后使用它调用该块。例如:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -762,7 +740,7 @@ put -&gt; &#39;product&#39;, $id, &#39;image&#39;, $filename {
 </div>
 </div>
 <div class="paragraph">
-<p>块签名可以使用Perl 6签名来解压缩提交的数据。 例如，这对于解压缩JSON对象很有用：</p>
+<p>块签名可以使用 Perl 6 签名来解压缩提交的数据。例如，这对于解压缩 JSON 对象很有用:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -774,10 +752,10 @@ put -&gt; &#39;product&#39;, $id, &#39;image&#39;, $filename {
 </div>
 </div>
 <div class="paragraph">
-<p>如果无法绑定签名，则会引发异常，从而导致400 Bad Request响应。 这意味着签名也可以用于对请求主体进行基本验证。</p>
+<p>如果无法绑定签名，则会引发异常，从而导致 400 Bad Request 响应。这意味着签名也可以用于对请求主体进行基本验证。</p>
 </div>
 <div class="paragraph">
-<p>如果request-body，request-body-text或request-body-blob被成对传递，则该键将被视为要与请求的Content-type标头匹配的媒体类型。 媒体类型上的所有参数都将被忽略（例如，文本/纯文本的Content-type标头； charset = UTF-8将仅考虑文本/纯文本部分）。 如果请求与Content-type不匹配，则将引发异常，导致404错误请求响应。</p>
+<p>如果 request-body，request-body-text 或 request-body-blob 被成对传递，则该键将被视为要与请求的 Content-type 标头匹配的媒体类型。媒体类型上的所有参数都将被忽略（例如，文本/纯文本的 Content-type 标头； charset = UTF-8 将仅考虑文本/纯文本部分）。如果请求与 Content-type 不匹配，则将引发异常，导致 404 错误请求响应。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -789,7 +767,7 @@ put -&gt; &#39;product&#39;, $id, &#39;image&#39;, $filename {
 </div>
 </div>
 <div class="paragraph">
-<p>如果给定了多个参数，则将按顺序尝试它们，直到一个匹配为止，并抛出一个异常，如果不匹配，则会导致400 Bad Request响应。 参数可以是块，对或混合。 这允许打开请求正文的Content-type：</p>
+<p>如果给定了多个参数，则将按顺序尝试它们，直到一个匹配为止，并抛出一个异常，如果不匹配，则会导致 400 Bad Request 响应。参数可以是块，对或混合。这允许打开请求正文的 Content-type:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -805,7 +783,7 @@ put -&gt; &#39;product&#39;, $id, &#39;image&#39;, $filename {
 </div>
 </div>
 <div class="paragraph">
-<p>或打开Content-type，但最后提供一个块作为后备：</p>
+<p>或打开 Content-type，但最后提供一个块作为后备:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -824,7 +802,7 @@ put -&gt; &#39;product&#39;, $id, &#39;image&#39;, $filename {
 </div>
 </div>
 <div class="paragraph">
-<p>如果主体块的参数具有类型约束，where约束或子签名，则将对其进行测试以查看其是否与主体对象匹配。 如果没有，那么将尝试下一个替代方法。 这允许对某些传入数据的结构和内容进行模式匹配：</p>
+<p>如果主体块的参数具有类型约束，where 约束或子签名，则将对其进行测试以查看其是否与主体对象匹配。如果没有，那么将尝试下一个替代方法。这允许对某些传入数据的结构和内容进行模式匹配:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -841,37 +819,27 @@ put -&gt; &#39;product&#39;, $id, &#39;image&#39;, $filename {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_添加自定义请求体解析器">1.12. 添加自定义请求体解析器</h3>
+<h3 id="_添加自定义请求体解析器">2.6. 添加自定义请求体解析器</h3>
 <div class="paragraph">
-<p>默认情况下，为请求提供了五个正文解析器：</p>
+<p>默认情况下，为请求提供了五个正文解析器:</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Cro </dt>
-<dd>
-<p>HTTP :: BodyParser :: WWWFormUrlEncoded-每当内容类型为application / x-www-form-urlencoded时使用；解析表单数据并将其提供为Cro :: HTTP :: Body :: WWWFormUrlEncoded的实例</p>
-</dd>
-<dt class="hdlist1">Cro </dt>
-<dd>
-<p>HTTP :: BodyParser :: MultiPartFormData-每当内容类型为multipart / form-data时使用；解析多部分文档并将其提供为Cro :: HTTP :: Body :: MultiPartFormData的实例</p>
-</dd>
-<dt class="hdlist1">Cro </dt>
-<dd>
-<p>HTTP :: BodyParser :: JSON-每当内容类型是application-json或带有+ json后缀的任何内容时使用；使用JSON :: Fast模块解析数据，该模块返回哈希或数组</p>
-</dd>
-<dt class="hdlist1">Cro </dt>
-<dd>
-<p>HTTP :: BodyParser :: TextFallback-每当内容类型具有文本类型时使用（例如，text / plain，text / html）；使用正文</p>
-</dd>
-<dt class="hdlist1">Cro </dt>
-<dd>
-<p>HTTP :: BodyParser :: BlobFallback-不得已而为之，它将匹配任何消息；使用身体斑点</p>
-</dd>
-<dt class="hdlist1">Cro可以使用其他主体解析器进行扩展，这些主体解析器将实现Cro </dt>
-<dd>
-<p>HTTP :: BodyParser角色。可以在设置Cro :: HTTP :: Server时通过传递它们来全局添加它们。它们也可以在路由块的范围内应用：</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>Cro::HTTP::BodyParser::WWWFormUrlEncoded-每当内容类型为 application/x-www-form-urlencoded 时使用；解析表单数据并将其提供为 Cro::HTTP::Body::WWWFormUrlEncoded 的实例</p>
+</div>
+<div class="paragraph">
+<p>Cro::HTTP::BodyParser::MultiPartFormData-每当内容类型为 multipart/form-data 时使用；解析多部分文档并将其提供为 Cro::HTTP::Body::MultiPartFormData 的实例</p>
+</div>
+<div class="paragraph">
+<p>Cro::HTTP::BodyParser::JSON-每当内容类型是 application-json 或带有+ json 后缀的任何内容时使用；使用 JSON::Fast 模块解析数据，该模块返回哈希或数组</p>
+</div>
+<div class="paragraph">
+<p>Cro::HTTP::BodyParser::TextFallback-每当内容类型具有文本类型时使用（例如，text/plain，text/html）；使用正文</p>
+</div>
+<div class="paragraph">
+<p>Cro::HTTP::BodyParser::BlobFallback-不得已而为之，它将匹配任何消息；使用身体斑点</p>
+</div>
+<div class="paragraph">
+<p>Cro 可以使用其他主体解析器进行扩展，这些主体解析器将实现 Cro::HTTP::BodyParser 角色。可以在设置 Cro::HTTP::Server 时通过传递它们来全局添加它们。它们也可以在路由块的范围内应用:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -885,24 +853,14 @@ put -&gt; &#39;product&#39;, $id, &#39;image&#39;, $filename {
 }</code></pre>
 </div>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">在这里，使用了正文解析器My </dt>
-<dd>
-<p>Custom :: BodyParser，它大概会生成My :: Type类型的对象。 从使用YAML或XML解析器到将请求解析到特定于应用程序的域对象中，都可以使用它。</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>在这里，使用了正文解析器 My::Custom::BodyParser，它大概会生成 My::Type 类型的对象。从使用 YAML 或 XML 解析器到将请求解析到特定于应用程序的域对象中，都可以使用它。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_生成响应">1.13. 生成响应</h3>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">在调用请求处理程序之前，路由器会创建一个Cro </dt>
-<dd>
-<p>HTTP :: Response对象。 默认响应为204 No Content，如果设置了正文，则为200 OK。 可以使用响应项访问此对象。 因此，可以通过在响应项上调用方法来产生响应：</p>
-</dd>
-</dl>
+<h3 id="_生成响应">2.7. 生成响应</h3>
+<div class="paragraph">
+<p>在调用请求处理程序之前，路由器会创建一个 Cro::HTTP::Response 对象。默认响应为 204 No Content，如果设置了正文，则为 200 OK。可以使用响应项访问此对象。因此，可以通过在响应项上调用方法来产生响应:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -925,36 +883,26 @@ put -&gt; &#39;product&#39;, $id, &#39;image&#39;, $filename {
 <div class="paragraph">
 <p>这可能会花费很多时间，因此路由器模块还会导出各种例程，以处理最常见的形成响应的情况。</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">标头例程调用response.append-header。它可以接受两个字符串（名称和值），形式为Name：value的单个字符串或Cro </dt>
-<dd>
-<p>HTTP :: Header的实例。</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>标头例程调用 response.append-header。它可以接受两个字符串（名称和值），形式为 Name:value 的单个字符串或 Cro::HTTP::Header 的实例。</p>
 </div>
 <div class="paragraph">
-<p>内容例程采用一种内容类型和应构成响应主体的数据。数据将由主体串行器处理。有效的默认正文序列化器集允许：</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">将内容类型设置为application / json或带有+ json后缀的任何媒体类型，并提供可以由JSON </dt>
-<dd>
-<p>Fast处理的主体</p>
-</dd>
-</dl>
+<p>内容例程采用一种内容类型和应构成响应主体的数据。数据将由主体串行器处理。有效的默认正文序列化器集允许:</p>
 </div>
 <div class="paragraph">
-<p>提供一个Str主体，它将根据content-type中的任何字符集参数进行编码</p>
+<p>将内容类型设置为 application/json 或带有+ json 后缀的任何媒体类型，并提供可以由 JSON::Fast 处理的主体</p>
 </div>
 <div class="paragraph">
-<p>提供一个Blob，它将用作主体</p>
+<p>提供一个 Str 主体，它将根据 content-type 中的任何字符集参数进行编码</p>
+</div>
+<div class="paragraph">
+<p>提供一个 Blob，它将用作主体</p>
 </div>
 <div class="paragraph">
 <p>提供补给，这将意味着身体将随着时间的推移而产生；除非明确设置了内容长度标头，否则将使用分块传输编码发送响应</p>
 </div>
 <div class="paragraph">
-<p>因此，一个简单的HTML响应可以写为：</p>
+<p>因此，一个简单的 HTML 响应可以写为:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -972,16 +920,16 @@ put -&gt; &#39;product&#39;, $id, &#39;image&#39;, $filename {
 </div>
 </div>
 <div class="paragraph">
-<p>创建的例程用于响应创建新资源的POST请求。结果为HTTP 201响应。可能需要：</p>
+<p>创建的例程用于响应创建新资源的 POST 请求。结果为 HTTP 201 响应。可能需要:</p>
 </div>
 <div class="paragraph">
-<p>一个位置参数，用于指定所创建资源的位置，该位置参数将用于填充Location标头</p>
+<p>一个位置参数，用于指定所创建资源的位置，该位置参数将用于填充 Location 标头</p>
 </div>
 <div class="paragraph">
-<p>三个位置论点。第一个将用于设置Location标头；其余两个将传递给内容例程。为方便起见，先保存对创建的调用，然后再保存对内容的调用。</p>
+<p>三个位置论点。第一个将用于设置 Location 标头；其余两个将传递给内容例程。为方便起见，先保存对创建的调用，然后再保存对内容的调用。</p>
 </div>
 <div class="paragraph">
-<p>重定向例程用于重定向。它使用一个单独的位置参数来指定要重定向到的URL，并将其放置在Location响应标头中。默认情况下，重定向将导致HTTP 307临时重定向。 ：permanent named参数可以用来指示应该执行HTTP 308永久重定向。出于文档目的，可以传递：temporary。或者，：see-other可以用来实现HTTP 303响应；这是临时的，但表示应该在目标上执行GET请求，而不是保留原始请求方法。</p>
+<p>重定向例程用于重定向。它使用一个单独的位置参数来指定要重定向到的 URL，并将其放置在 Location 响应标头中。默认情况下，重定向将导致 HTTP 307 临时重定向。:permanent named 参数可以用来指示应该执行 HTTP 308 永久重定向。出于文档目的，可以传递: temporary。或者，:see-other 可以用来实现 HTTP 303 响应；这是临时的，但表示应该在目标上执行 GET 请求，而不是保留原始请求方法。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -996,26 +944,26 @@ put -&gt; &#39;product&#39;, $id, &#39;image&#39;, $filename {
 <p>对于包含主体的重定向响应，可以使用重定向例程的三参数形式。后两个参数将用于调用内容（因此，这完全等同于重定向后调用内容）。</p>
 </div>
 <div class="paragraph">
-<p>对于最常见的HTTP错误代码，还存在其他例程。这些全部采用零自变量或两个自变量。设置状态码后，两个参数的形式会将其两个参数传递给内容。他们是：</p>
+<p>对于最常见的 HTTP 错误代码，还存在其他例程。这些全部采用零自变量或两个自变量。设置状态码后，两个参数的形式会将其两个参数传递给内容。他们是:</p>
 </div>
 <div class="paragraph">
-<p>找不到，用于HTTP 404找不到
-错误请求，用于HTTP 400错误请求
-禁止，用于HTTP 403禁止
-冲突，用于HTTP 409冲突
-如果请求处理程序的评估结果为…​（即存根代码的Perl 6语法），则将生成HTTP 510 Not Implemented响应。如果评估路由处理程序产生异常，则该异常将被传递。然后，通常由响应序列化程序处理该响应序列化程序，该序列化程序将生成HTTP 500 Internal Server Error响应，但是可以插入其他中间件来更改发生的情况（例如，提供自定义错误页面）。</p>
+<p>找不到，用于 HTTP 404 找不到
+错误请求，用于 HTTP 400 错误请求
+禁止，用于 HTTP 403 禁止
+冲突，用于 HTTP 409 冲突
+如果请求处理程序的评估结果为…​（即存根代码的 Perl 6 语法），则将生成 HTTP 510 Not Implemented 响应。如果评估路由处理程序产生异常，则该异常将被传递。然后，通常由响应序列化程序处理该响应序列化程序，该序列化程序将生成 HTTP 500 Internal Server Error 响应，但是可以插入其他中间件来更改发生的情况（例如，提供自定义错误页面）。</p>
 </div>
 <div class="paragraph">
-<p>所有其他响应代码都是通过显式设置response.status产生的。</p>
+<p>所有其他响应代码都是通过显式设置 response.status 产生的。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_服务静态内容_2">1.14. 服务静态内容</h3>
+<h3 id="_服务静态内容_2">2.8. 服务静态内容</h3>
 <div class="paragraph">
-<p>静态例程用于轻松提供静态内容。 它将请求主体的内容设置为所服务文件的内容，并根据文件的扩展名设置内容类型。</p>
+<p>静态例程用于轻松提供静态内容。它将请求主体的内容设置为所服务文件的内容，并根据文件的扩展名设置内容类型。</p>
 </div>
 <div class="paragraph">
-<p>以其最简单的形式，static只是为单个文件提供服务：</p>
+<p>以其最简单的形式，static 只是为单个文件提供服务:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1025,7 +973,7 @@ put -&gt; &#39;product&#39;, $id, &#39;image&#39;, $filename {
 </div>
 </div>
 <div class="paragraph">
-<p>在其多参数形式中，它将第一个参数视为基本目录，然后对其余参数进行处理并将其视为要附加到基本目录的路径段。 这对于从基本目录提供内容很有用：</p>
+<p>在其多参数形式中，它将第一个参数视为基本目录，然后对其余参数进行处理并将其视为要附加到基本目录的路径段。这对于从基本目录提供内容很有用:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1034,19 +982,14 @@ put -&gt; &#39;product&#39;, $id, &#39;image&#39;, $filename {
 }</code></pre>
 </div>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">此表单永远不会在基本目录之外提供内容； 试图做../把戏的路径将无法逃脱。 基础也可以指定为IO </dt>
-<dd>
-<p>Path对象。</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>此表单永远不会在基本目录之外提供内容； 试图做../把戏的路径将无法逃脱。基础也可以指定为 IO::Path 对象。</p>
 </div>
 <div class="paragraph">
-<p>对于这两种形式中的任何一种，如果都找不到文件，则将提供HTTP 404响应。 如果路径解析为非常规文件（例如目录）或无法读取的文件，则将提供HTTP 403响应。</p>
+<p>对于这两种形式中的任何一种，如果都找不到文件，则将提供 HTTP 404 响应。如果路径解析为非常规文件（例如目录）或无法读取的文件，则将提供 HTTP 403 响应。</p>
 </div>
 <div class="paragraph">
-<p>MIME类型映射的文件扩展名的默认集合是从Apache Web服务器随附的列表中派生的。 如果未找到映射，则内容类型将设置为application / octet-stream。 要提供额外功能或覆盖默认值，请将mappins的哈希值传递给名为参数的mime类型。</p>
+<p>MIME 类型映射的文件扩展名的默认集合是从 Apache Web 服务器随附的列表中派生的。如果未找到映射，则内容类型将设置为 application/octet-stream。要提供额外功能或覆盖默认值，请将 mappins 的哈希值传递给名为参数的 mime 类型。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1058,7 +1001,7 @@ put -&gt; &#39;product&#39;, $id, &#39;image&#39;, $filename {
 </div>
 </div>
 <div class="paragraph">
-<p>要在请求目录时提供索引文件（例如，对content / foo /的请求将为downloads / foo / index.html提供服务），请传递名为参数的索引，并指定应考虑的文件名：</p>
+<p>要在请求目录时提供索引文件（例如，对 content/foo /的请求将为 downloads/foo/index.html 提供服务），请传递名为参数的索引，并指定应考虑的文件名:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1070,18 +1013,12 @@ put -&gt; &#39;product&#39;, $id, &#39;image&#39;, $filename {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_添加自定义响应体序列化器">1.15. 添加自定义响应体序列化器</h3>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">自定义主体序列化程序实现了Cro </dt>
-<dd>
-<p>BodySerializer角色。 他们可以通过考虑正文和/或响应标头（最通常是内容类型标头）的类型来决定何时适用。</p>
-</dd>
-<dt class="hdlist1">主体序列化器可以在配置Cro </dt>
-<dd>
-<p>HTTP :: Server时应用，在这种情况下，它们将适用于所有请求。 它们也可以在给定的路由块中应用：</p>
-</dd>
-</dl>
+<h3 id="_添加自定义响应体序列化器">2.9. 添加自定义响应体序列化器</h3>
+<div class="paragraph">
+<p>自定义主体序列化程序实现了 Cro::BodySerializer 角色。他们可以通过考虑正文和/或响应标头（最通常是内容类型标头）的类型来决定何时适用。</p>
+</div>
+<div class="paragraph">
+<p>主体序列化器可以在配置 Cro::HTTP::Server 时应用，在这种情况下，它们将适用于所有请求。它们也可以在给定的路由块中应用:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1096,37 +1033,37 @@ put -&gt; &#39;product&#39;, $id, &#39;image&#39;, $filename {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_设置响应体缓存能力">1.16. 设置响应体缓存能力</h3>
+<h3 id="_设置响应体缓存能力">2.10. 设置响应体缓存能力</h3>
 <div class="paragraph">
-<p>cache-control子控件提供了一种方便的方式来设置HTTP响应中的Cache-control标头，该标头控制是否可以将响应缓存到缓存以及缓存多长时间。如果已经有一个缓存控制标头，则将其删除并按指定添加一个新的标头。</p>
+<p>cache-control 子控件提供了一种方便的方式来设置 HTTP 响应中的 Cache-control 标头，该标头控制是否可以将响应缓存到缓存以及缓存多长时间。如果已经有一个缓存控制标头，则将其删除并按指定添加一个新的标头。</p>
 </div>
 <div class="paragraph">
-<p>可以为高速缓存控制子传递以下命名参数：</p>
+<p>可以为高速缓存控制子传递以下命名参数:</p>
 </div>
 <div class="paragraph">
-<p>：public-可以由任何缓存存储
-：private-只能由单用户缓存存储（例如，在浏览器中）</p>
+<p>:public-可以由任何缓存存储
+:private-只能由单用户缓存存储（例如，在浏览器中）</p>
 </div>
 <div class="paragraph">
-<p>：no-cache-缓存条目可能永远都不会被使用，除非检查它是否仍然有效</p>
+<p>:no-cache-缓存条目可能永远都不会被使用，除非检查它是否仍然有效</p>
 </div>
 <div class="paragraph">
-<p>：no-store-响应甚至可能永远不会存储在缓存中
-：max-age（600）-在缓存将其逐出之前内容可以变为多久</p>
+<p>:no-store-响应甚至可能永远不会存储在缓存中
+:max-age（600）-在缓存将其逐出之前内容可以变为多久</p>
 </div>
 <div class="paragraph">
-<p>：s-maxage（600）-对于maxage，但仅适用于共享缓存
-：must-revalidate-超过最大使用期限后，不得使用该响应</p>
+<p>:s-maxage（600）-对于 maxage，但仅适用于共享缓存
+:must-revalidate-超过最大使用期限后，不得使用该响应</p>
 </div>
 <div class="paragraph">
-<p>：proxy-revalidate-与必须重新验证相同，但用于共享代理
-：no-transform-不得转换响应（例如重新压缩图像）</p>
+<p>:proxy-revalidate-与必须重新验证相同，但用于共享代理
+:no-transform-不得转换响应（例如重新压缩图像）</p>
 </div>
 <div class="paragraph">
-<p>它将发出一个带有逗号分隔选项的单个Cache-Control标头。</p>
+<p>它将发出一个带有逗号分隔选项的单个 Cache-Control 标头。</p>
 </div>
 <div class="paragraph">
-<p>在任何高速缓存中最多将图像资产高速缓存10分钟的典型用法是：</p>
+<p>在任何高速缓存中最多将图像资产高速缓存 10 分钟的典型用法是:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1134,7 +1071,7 @@ put -&gt; &#39;product&#39;, $id, &#39;image&#39;, $filename {
 </div>
 </div>
 <div class="paragraph">
-<p>这可以与静态文件服务一起使用：</p>
+<p>这可以与静态文件服务一起使用:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1145,7 +1082,7 @@ put -&gt; &#39;product&#39;, $id, &#39;image&#39;, $filename {
 </div>
 </div>
 <div class="paragraph">
-<p>要声明一个响应永远不应该存储在缓存中，从理论上讲，它足以声明：</p>
+<p>要声明一个响应永远不应该存储在缓存中，从理论上讲，它足以声明:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1162,15 +1099,15 @@ put -&gt; &#39;product&#39;, $id, &#39;image&#39;, $filename {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_push_承诺">1.17. Push 承诺</h3>
+<h3 id="_push_承诺">2.11. Push 承诺</h3>
 <div class="paragraph">
-<p>即将发布的功能：：本节介绍即将发布的Cro版本中将包含的功能。</p>
+<p>即将发布的功能, 本节介绍即将发布的 Cro 版本中将包含的功能。</p>
 </div>
 <div class="paragraph">
-<p>HTTP / 2.0允许响应包括推送承诺。 推送承诺用于将与响应相关联的内容推送给客户端。 例如，可以推送页面所需的CSS，JavaScript或图像，以免客户端在解析页面时无需请求它们。</p>
+<p>HTTP/2.0 允许响应包括推送承诺。推送承诺用于将与响应相关联的内容推送给客户端。例如，可以推送页面所需的 CSS，JavaScript 或图像，以免客户端在解析页面时无需请求它们。</p>
 </div>
 <div class="paragraph">
-<p>路由器提供的推送承诺功能是在当前响应中包括推送承诺的最便捷方法。 最简单的方法是使用资源的路由来调用它以响应：</p>
+<p>路由器提供的推送承诺功能是在当前响应中包括推送承诺的最便捷方法。最简单的方法是使用资源的路由来调用它以响应:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1185,13 +1122,13 @@ get -&gt; &#39;css&#39;, *@path {
 </div>
 </div>
 <div class="paragraph">
-<p>如果通过包含或带有前缀的委托到达路由，则前导/将被解释为相对于封闭的路由块（换句话说，任何前缀都将作为形成所承诺的URL的前缀）。</p>
+<p>如果通过包含或带有前缀的委托到达路由，则前导/将被解释为相对于封闭的路由块（换句话说，任何前缀都将作为形成所承诺的 URL 的前缀）。</p>
 </div>
 <div class="paragraph">
-<p>推送承诺的处理类似于请求； 它们由HTTP / 2.0消息解析器发出，因此将通过正常请求所需要的所有中间件。</p>
+<p>推送承诺的处理类似于请求； 它们由 HTTP/2.0 消息解析器发出，因此将通过正常请求所需要的所有中间件。</p>
 </div>
 <div class="paragraph">
-<p>默认情况下，推送承诺请求中不包含标题。 要包含它们，请传递带有散列或成对列表的标题参数形参（如果标题排序或需要多个相同名称的标题，则存在后一种形式）。 要简单地传递出现在当前正在处理的请求中的所有标头，请使用*作为值； 如果当前请求没有这样的标头，则不会将其包含在推送承诺中。</p>
+<p>默认情况下，推送承诺请求中不包含标题。要包含它们，请传递带有散列或成对列表的标题参数形参（如果标题排序或需要多个相同名称的标题，则存在后一种形式）。要简单地传递出现在当前正在处理的请求中的所有标头，请使用*作为值； 如果当前请求没有这样的标头，则不会将其包含在推送承诺中。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1204,18 +1141,13 @@ get -&gt; &#39;css&#39;, *@path {
 </div>
 </div>
 <div class="paragraph">
-<p>在当前正在处理的请求不是HTTP / 2.0请求的情况下，推入承诺功能不执行任何操作。</p>
+<p>在当前正在处理的请求不是 HTTP/2.0 请求的情况下，推入承诺功能不执行任何操作。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_组合路由">1.18. 组合路由</h3>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">对于任何非平凡的服务，在单个文件中定义所有路由及其处理程序将变得难以管理。 通过include，可以将它们移至不同的模块。 例如，模块OurService </dt>
-<dd>
-<p>Products可以编写如下：</p>
-</dd>
-</dl>
+<h3 id="_组合路由">2.12. 组合路由</h3>
+<div class="paragraph">
+<p>对于任何非平凡的服务，在单个文件中定义所有路由及其处理程序将变得难以管理。通过 include，可以将它们移至不同的模块。例如，模块 OurService::Products 可以编写如下:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1229,7 +1161,7 @@ get -&gt; &#39;css&#39;, *@path {
 </div>
 </div>
 <div class="paragraph">
-<p>然后将其路由包含到顶级路由表中：</p>
+<p>然后将其路由包含到顶级路由表中:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1242,7 +1174,7 @@ my $app = route {
 </div>
 </div>
 <div class="paragraph">
-<p>由于模块中的每条路线都必须在其路线的开始处包含产品，因此这仍然有些重复。 因此，将模块重构为：</p>
+<p>由于模块中的每条路线都必须在其路线的开始处包含产品，因此这仍然有些重复。因此，将模块重构为:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1256,7 +1188,7 @@ my $app = route {
 </div>
 </div>
 <div class="paragraph">
-<p>可以通过在URL结构中添加前缀来保留URL结构：</p>
+<p>可以通过在 URL 结构中添加前缀来保留 URL 结构:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1269,7 +1201,7 @@ my $app = route {
 </div>
 </div>
 <div class="paragraph">
-<p>请注意，多个片段基础应该作为列表而不是带有/的字符串传递（而是在片段中寻找URL编码的“ /”）：</p>
+<p>请注意，多个片段基础应该作为列表而不是带有/的字符串传递（而是在片段中寻找 URL 编码的“ /”）:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1280,7 +1212,7 @@ my $app = route {
 </div>
 </div>
 <div class="paragraph">
-<p>include函数可以接受多个路由或对，因此无需重复键入include：</p>
+<p>include 函数可以接受多个路由或对，因此无需重复键入 include:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1292,29 +1224,19 @@ my $app = route {
 </div>
 </div>
 <div class="paragraph">
-<p>包含将所包含的路线与本地声明的路线合并，这意味着它们以“统一”方式一起考虑。 即使存在前缀，这也适用，这意味着可以放心地将路由处理程序分解为模块。 前缀被视为前面的其他文字段。 此设计的另一个受欢迎的结果是不会因在多个文件上拆分路由处理程序而导致路由性能损失。</p>
+<p>包含将所包含的路线与本地声明的路线合并，这意味着它们以“统一”方式一起考虑。即使存在前缀，这也适用，这意味着可以放心地将路由处理程序分解为模块。前缀被视为前面的其他文字段。此设计的另一个受欢迎的结果是不会因在多个文件上拆分路由处理程序而导致路由性能损失。</p>
 </div>
 <div class="paragraph">
-<p>如果包含的路由块具有主体解析器和主体序列化器，则它们对于包含的路由块中的路由也是可见的，从而可以排除使用主体解析器和序列化器。 由包含的路由块声明的主体解析器和序列化程序将比包含的路由块提供的主体解析器和序列化程序优先。</p>
+<p>如果包含的路由块具有主体解析器和主体序列化器，则它们对于包含的路由块中的路由也是可见的，从而可以排除使用主体解析器和序列化器。由包含的路由块声明的主体解析器和序列化程序将比包含的路由块提供的主体解析器和序列化程序优先。</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">包含操作只能用于应用来自使用Cro </dt>
-<dd>
-<p>HTTP :: Router构造的另一个HTTP路由器的路由。</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>包含操作只能用于应用来自使用 Cro::HTTP::Router 构造的另一个 HTTP 路由器的路由。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_代理路由到另一个_crotransform">1.19. 代理路由到另一个 Cro::Transform</h3>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">使用Cro </dt>
-<dd>
-<p>HTTP :: Router并不是编写HTTP请求处理程序的唯一方法。 路由器可以将特定路径或前缀下面的所有路径委托给使用Cro :: HTTP :: Request并生成Cro :: HTTP :: Response的任何Cro :: Transform。 它的用法如下：</p>
-</dd>
-</dl>
+<h3 id="_代理路由到另一个_crotransform">2.13. 代理路由到另一个 Cro::Transform</h3>
+<div class="paragraph">
+<p>使用 Cro::HTTP::Router 并不是编写 HTTP 请求处理程序的唯一方法。路由器可以将特定路径或前缀下面的所有路径委托给使用 Cro::HTTP::Request 并生成 Cro::HTTP::Response 的任何 Cro::Transform。它的用法如下:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1331,7 +1253,7 @@ my $app = route {
 </div>
 </div>
 <div class="paragraph">
-<p>可以将多个对传递给单个委托调用，因此上述示例可以理解为：</p>
+<p>可以将多个对传递给单个委托调用，因此上述示例可以理解为:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1342,41 +1264,26 @@ my $app = route {
 }</code></pre>
 </div>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">使用委托时，Cro </dt>
-<dd>
-<p>HTTP :: Request对象将被浅层复制，并且副本的前缀将从其目标中剥离； 这也会影响path和path-segments的返回值。 原始目标，原始路径和原始路径段方法将返回原始路径。</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>使用委托时，Cro::HTTP::Request 对象将被浅层复制，并且副本的前缀将从其目标中剥离； 这也会影响 path 和 path-segments 的返回值。原始目标，原始路径和原始路径段方法将返回原始路径。</p>
 </div>
 <div class="paragraph">
-<p>在路由块中声明的主体解析器将在请求的主体解析器选择器之前加上前缀，然后再传递给转换。 在路由块中声明的任何主体序列化器都将以转换产生的响应的主体序列化器选择器为前缀。</p>
+<p>在路由块中声明的主体解析器将在请求的主体解析器选择器之前加上前缀，然后再传递给转换。在路由块中声明的任何主体序列化器都将以转换产生的响应的主体序列化器选择器为前缀。</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">由于route {}块使对象执行Cro </dt>
-<dd>
-<p>Transform，因此也可以将其与委托一起使用。 这与include的语义略有不同，并且由于需要执行两次路由调度，所以执行起来会更糟。</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>由于 route {}块使对象执行 Cro::Transform，因此也可以将其与委托一起使用。这与 include 的语义略有不同，并且由于需要执行两次路由调度，所以执行起来会更糟。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_在路由块中应用中间件">1.20. 在路由块中应用中间件</h3>
+<h3 id="_在路由块中应用中间件">2.14. 在路由块中应用中间件</h3>
 <div class="paragraph">
-<p>*注意：此处描述的语义适用于Cro 0.8.0及更高版本。 早期版本缺少当前的before和after语义，相反，它们的before和after具有现在由before-matched和after-matched提供的语义。</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">在Cro中，中间件是请求处理管道中的组件。 它可以安装在服务器级别（有关更多信息，请参见Cro </dt>
-<dd>
-<p>HTTP :: Server），但也可以使用之前，之前匹配，之后和之后匹配的功能针对每个路由块进行安装。 对于Cro中的中间件新手来说，HTTP中间件指南概述了什么是中间件，以及Cro中不同的编写和使用HTTP中间件的方式之间的权衡。</p>
-</dd>
-</dl>
+<p>*注意: 此处描述的语义适用于 Cro 0.8.0 及更高版本。早期版本缺少当前的 before 和 after 语义，相反，它们的 before 和 after 具有现在由 before-matched 和 after-matched 提供的语义。</p>
 </div>
 <div class="paragraph">
-<p>before函数用于在处理路由块之前应用中间件。 同样，在处理了路由块之后，应用中间件之后。 因此：</p>
+<p>在 Cro 中，中间件是请求处理管道中的组件。它可以安装在服务器级别（有关更多信息，请参见 Cro::HTTP::Server），但也可以使用之前，之前匹配，之后和之后匹配的功能针对每个路由块进行安装。对于 Cro 中的中间件新手来说，HTTP 中间件指南概述了什么是中间件，以及 Cro 中不同的编写和使用 HTTP 中间件的方式之间的权衡。</p>
+</div>
+<div class="paragraph">
+<p>before 函数用于在处理路由块之前应用中间件。同样，在处理了路由块之后，应用中间件之后。因此:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1403,7 +1310,7 @@ my $app = Cro.compose(SomeMiddleware, $routes, SomeOtherMiddleware);</code></pre
 </div>
 </div>
 <div class="paragraph">
-<p>当中间件：</p>
+<p>当中间件:</p>
 </div>
 <div class="paragraph">
 <p>可能影响路由匹配的内容（例如，会话和授权中间件）</p>
@@ -1412,13 +1319,13 @@ my $app = Cro.compose(SomeMiddleware, $routes, SomeOtherMiddleware);</code></pre
 <p>无论路由块中的任何路由是否匹配，都应执行</p>
 </div>
 <div class="paragraph">
-<p>之前和之后使用的路由块不能与包含一起使用。 中间件应该在匹配之前运行，但是在匹配之前，不可能知道所包含的路由之一是否匹配。 改用委托。</p>
+<p>之前和之后使用的路由块不能与包含一起使用。中间件应该在匹配之前运行，但是在匹配之前，不可能知道所包含的路由之一是否匹配。改用委托。</p>
 </div>
 <div class="paragraph">
-<p>相反，匹配前和匹配后指定仅在路由已匹配时才使用的中间件。 因此，可以在使用它们的路由块上使用包含。</p>
+<p>相反，匹配前和匹配后指定仅在路由已匹配时才使用的中间件。因此，可以在使用它们的路由块上使用包含。</p>
 </div>
 <div class="paragraph">
-<p>因此，整个过程可以看作是：</p>
+<p>因此，整个过程可以看作是:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1430,28 +1337,17 @@ If a route matches then
 Run any after middleware</code></pre>
 </div>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">匹配前和匹配前均可使用任何使用Cro </dt>
-<dd>
-<p>HTTP :: Request并生成Cro :: HTTP :: Request的Cro :: Transform进行调用。</p>
-</dd>
-<dt class="hdlist1">匹配后和匹配后都可以使用Cro </dt>
-<dd>
-<p>Transform调用，该Cro :: Transform消耗Cro :: HTTP :: Response并生成Cro :: HTTP :: Response。</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>匹配前和匹配前均可使用任何使用 Cro::HTTP::Request 并生成 Cro::HTTP::Request 的 Cro::Transform 进行调用。</p>
+</div>
+<div class="paragraph">
+<p>匹配后和匹配后都可以使用 Cro::Transform 调用，该 Cro::Transform 消耗 Cro::HTTP::Response 并生成 Cro::HTTP::Response。</p>
 </div>
 <div class="paragraph">
 <p>允许在单个路由块中多次使用所有中间件添加功能，并且中间件将按照其出现的顺序进行添加。</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">为方便起见，可以将匹配前，匹配前，匹配后和匹配后的功能传递给块。 这将使用Cro </dt>
-<dd>
-<p>HTTP :: Request或Cro :: HTTP :: Response对象作为参数来调用，并且它可以改变请求或响应（忽略该块的返回值）。 也可以使用路由处理程序中可用的各种响应帮助器功能，因此可以通过以下方式为响应添加额外的标头：</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>为方便起见，可以将匹配前，匹配前，匹配后和匹配后的功能传递给块。这将使用 Cro::HTTP::Request 或 Cro::HTTP::Response 对象作为参数来调用，并且它可以改变请求或响应（忽略该块的返回值）。也可以使用路由处理程序中可用的各种响应帮助器功能，因此可以通过以下方式为响应添加额外的标头:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1461,7 +1357,7 @@ Run any after middleware</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在某些情况下，希望中间件本身能够产生响应。 使用块形式时，可以使用响应符号和所有有助于产生响应的功能。 如果在运行之前，设置了响应的状态，则将之前的视为已生成响应。 例如，可以使用以下方法实现对并非来自环回接口的所有请求产生403禁止响应：</p>
+<p>在某些情况下，希望中间件本身能够产生响应。使用块形式时，可以使用响应符号和所有有助于产生响应的功能。如果在运行之前，设置了响应的状态，则将之前的视为已生成响应。例如，可以使用以下方法实现对并非来自环回接口的所有请求产生 403 禁止响应:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1471,7 +1367,7 @@ Run any after middleware</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>“ before”实际上插入了两个管道组件：一个运行该块，一个输出由中间件产生的任何“早期”响应。 插入后一个组件，就好像它是紧接在之前之后的一个after引入的一样。 这意味着将跳过在before块之前指定的任何after中间件，以进行早期响应。</p>
+<p>“ before”实际上插入了两个管道组件: 一个运行该块，一个输出由中间件产生的任何“早期”响应。插入后一个组件，就好像它是紧接在之前之后的一个 after 引入的一样。这意味着将跳过在 before 块之前指定的任何 after 中间件，以进行早期响应。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1500,38 +1396,27 @@ after {
 </div>
 </div>
 <div class="paragraph">
-<p>当使用include时，包含路由块的匹配前中间件将在包含目标中的任何中间件之前应用，而包含路由块的匹配后中间件将在包含目标后应用。 有效地，包含路由块的中间件环绕了包含路由块的中间件。
-== Cro::HTTP::Test</p>
+<p>当使用 include 时，包含路由块的匹配前中间件将在包含目标中的任何中间件之前应用，而包含路由块的匹配后中间件将在包含目标后应用。有效地，包含路由块的中间件环绕了包含路由块的中间件。</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">原则上，可以通过使用Cro </dt>
-<dd>
-<p>HTTP :: Server托管应用程序，使用Cro :: HTTP :: Client对该应用程序发出请求并使用标准的测试库检查结果来编写Cro HTTP服务的测试。 该库通过以下方式使编写这样的测试更加容易，并更快地执行它们：</p>
-</dd>
-</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_crohttptest">3. Cro::HTTP::Test</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>原则上，可以通过使用 Cro::HTTP::Server 托管应用程序，使用 Cro::HTTP::Client 对该应用程序发出请求并使用标准的测试库检查结果来编写 Cro HTTP 服务的测试。 该库通过以下方式使编写这样的测试更加容易，并更快地执行它们:</p>
 </div>
 <div class="paragraph">
-<p>提供更方便的API来发出测试请求和检查结果</p>
+<p>提供更方便的 API 来发出测试请求和检查结果</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">跳过网络，仅将Cro </dt>
-<dd>
-<p>TCP对象从客户端管道传递到服务器管道，反之亦然</p>
-</dd>
-</dl>
-</div>
+<div class="paragraph">
+<p>跳过网络，仅将 Cro::TCP 对象从客户端管道传递到服务器管道，反之亦然</p>
 </div>
 <div class="sect2">
-<h3 id="_基本示例">1.21. 基本示例</h3>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">给定一个MyService </dt>
-<dd>
-<p>Routes模块，如下所示：</p>
-</dd>
-</dl>
+<h3 id="_基本示例">3.1. 基本示例</h3>
+<div class="paragraph">
+<p>给定一个 MyService::Routes 模块，如下所示:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1550,7 +1435,7 @@ after {
 </div>
 </div>
 <div class="paragraph">
-<p>我们可以像这样编写测试：</p>
+<p>我们可以像这样编写测试:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1581,67 +1466,49 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_为服务设置测试">1.22. 为服务设置测试</h3>
+<h3 id="_为服务设置测试">3.2. 为服务设置测试</h3>
 <div class="paragraph">
 <p>测试服务功能有两个候选。</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">test-service（Cro </dt>
-<dd>
-<p>Transform，＆tests，：$ fake-auth，：$ http）候选程序针对提供的HTTP应用程序运行测试，该应用程序可以是消耗Cro :: HTTP :: Request的任何Cro :: Transform并产生Cro :: HTTP :: Response。用Cro :: HTTP :: Router编写的应用程序可以做到这一点。也可以使用Cro.compose来放置（可能是模拟的）中间件。如果传递了可选的：$ fake-auth参数，它将在中间件之前，该中间件将请求的auth设置为指定的对象。这对于模拟用户或会话并因此测试授权非常有用。 http参数指定要在其下运行测试的HTTP版本。由于我们在测试中同时控制客户端和服务器端，因此不允许设置：http &lt;1.1 2&gt;。默认值为：http &lt;2&gt;。通过将这些命名的参数传递给测试服务，还可以伪造对等主机和对等端口。</p>
-</dd>
-<dt class="hdlist1">测试服务（$ uri，＆tests）候选者针对指定的基本URI运行测试，并通过Cro </dt>
-<dd>
-<p>HTTP :: Client连接到它。这样就可以使用Cro :: HTTP :: Test为使用Cro以外的东西构建的服务编写测试。</p>
-</dd>
-<dt class="hdlist1">所有其他命名参数作为Cro </dt>
-<dd>
-<p>HTTP :: Client构造函数参数传递。</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>test-service（Cro::Transform，＆tests，:$ fake-auth，:$ http）候选程序针对提供的 HTTP 应用程序运行测试，该应用程序可以是消耗 Cro::HTTP::Request 的任何 Cro::Transform 并产生 Cro::HTTP::Response。用 Cro::HTTP::Router 编写的应用程序可以做到这一点。也可以使用 Cro.compose 来放置（可能是模拟的）中间件。如果传递了可选的:$ fake-auth 参数，它将在中间件之前，该中间件将请求的 auth 设置为指定的对象。这对于模拟用户或会话并因此测试授权非常有用。 http 参数指定要在其下运行测试的 HTTP 版本。由于我们在测试中同时控制客户端和服务器端，因此不允许设置:http &lt;1.1 2&gt;。默认值为:http &lt;2&gt;。通过将这些命名的参数传递给测试服务，还可以伪造对等主机和对等端口。</p>
+</div>
+<div class="paragraph">
+<p>测试服务（$ uri，＆tests）候选者针对指定的基本 URI 运行测试，并通过 Cro::HTTP::Client 连接到它。这样就可以使用 Cro::HTTP::Test 为使用 Cro 以外的东西构建的服务编写测试。</p>
+</div>
+<div class="paragraph">
+<p>所有其他命名参数作为 Cro::HTTP::Client 构造函数参数传递。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_编写测试">1.23. 编写测试</h3>
+<h3 id="_编写测试">3.3. 编写测试</h3>
 <div class="paragraph">
 <p>测试功能在传递给测试服务的模块内部使用。它期望传递一个表示要测试的请求的位置参数，以及一个表示响应的期望属性的命名参数。</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">通过调用get，put，post，delete，head或patch中的一种来指定请求。还有其他HTTP方法的request（$ method，…​）（实际上，get只会调用request（&#39;GET&#39;，…​））。这些函数接受提供相对URI的可选位置参数，如果提供的话，该参数将附加到当前有效的基本URI上。 ：$ json命名参数经过特殊处理，扩展为{content-type ⇒&#39;application / json，body ⇒ $ json）。所有其他命名参数将传递给Cro </dt>
-<dd>
-<p>HTTP :: Client request`方法，从而使所有HTTP客户端功能可用。</p>
-</dd>
-<dt class="hdlist1">测试功能的命名参数构成检查。它们很大程度上遵循Cro </dt>
-<dd>
-<p>HTTP :: Response对象上的方法名称。可用的检查如下。</p>
-</dd>
-</dl>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_状态">1.24. 状态</h3>
 <div class="paragraph">
-<p>将响应的状态属性与支票进行智能匹配。虽然最常见的是整数，例如status ⇒ 200，但也可以使用status ⇒ * &lt;400（例如不是错误）之类的东西。</p>
+<p>通过调用 get，put，post，delete，head 或 patch 中的一种来指定请求。还有其他 HTTP 方法的 request（$ method，…​）（实际上，get 只会调用 request（&#39;GET&#39;，…​））。这些函数接受提供相对 URI 的可选位置参数，如果提供的话，该参数将附加到当前有效的基本 URI 上。 :$ json 命名参数经过特殊处理，扩展为{content-type ⇒&#39;application/json，body ⇒ $ json）。所有其他命名参数将传递给 Cro::HTTP::Client request`方法，从而使所有 HTTP 客户端功能可用。</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_内容类型">1.25. 内容类型</h3>
 <div class="paragraph">
-<p>检查内容类型是否等效。如果传递了字符串，它将解析为一种媒体类型，并检查该类型和子类型是否与响应匹配。如果字符串中有任何其他参数（例如字符集），则还将在接收的媒体类型中检查这些参数。如果接收到的媒体类型具有未提及的其他参数，则这些参数将被忽略。因此，check content-type ⇒&#39;text / plain’匹配text / plain;响应中为charset = utf8。</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">要进行更细粒度的控制，请传递一个块，该块将传递一个Cro </dt>
-<dd>
-<p>MediaType实例，并期望返回某种真实性以通过测试。</p>
-</dd>
-</dl>
+<p>测试功能的命名参数构成检查。它们很大程度上遵循 Cro::HTTP::Response 对象上的方法名称。可用的检查如下。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_标题">1.26. 标题</h3>
+<h3 id="_状态">3.4. 状态</h3>
+<div class="paragraph">
+<p>将响应的状态属性与支票进行智能匹配。虽然最常见的是整数，例如 status ⇒ 200，但也可以使用 <code>status ⇒ * &lt;400</code>（例如不是错误）之类的东西。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_内容类型">3.5. 内容类型</h3>
+<div class="paragraph">
+<p>检查内容类型是否等效。如果传递了字符串，它将解析为一种媒体类型，并检查该类型和子类型是否与响应匹配。如果字符串中有任何其他参数（例如字符集），则还将在接收的媒体类型中检查这些参数。如果接收到的媒体类型具有未提及的其他参数，则这些参数将被忽略。因此，<code>check content-type ⇒&#39;text/plain&#39;</code> 匹配 text/plain;响应中为 charset = utf8。</p>
+</div>
+<div class="paragraph">
+<p>要进行更细粒度的控制，请传递一个块，该块将传递一个 Cro::MediaType 实例，并期望返回某种真实性以通过测试。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_标题">3.6. 标题</h3>
 <div class="paragraph">
 <p>采用哈希将标头名称映射到标头值，或采用成对的列表进行相同的操作。如果标头存在并且标头的值与该值智能匹配，则测试通过。仅在关心标头存在但不希望检查其值时使用*。响应中的所有其他标头都将被忽略（也就是说，多余的标头被认为是可以的）。</p>
 </div>
@@ -1658,7 +1525,7 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_body_text">1.27. body-text</h3>
+<h3 id="_body_text">3.7. body-text</h3>
 <div class="paragraph">
 <p>获取响应的正文并将其与提供的值进行智能匹配。 字符串，正则表达式或代码对象都可能有用。</p>
 </div>
@@ -1672,7 +1539,7 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_body_blob">1.28. body-blob</h3>
+<h3 id="_body_blob">3.8. body-blob</h3>
 <div class="paragraph">
 <p>获取响应的主体斑点并将其与提供的值进行智能匹配。</p>
 </div>
@@ -1686,24 +1553,24 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_body">1.29. body</h3>
+<h3 id="_body">3.9. body</h3>
 <div class="paragraph">
-<p>获取响应的主体并将其与提供的值进行智能匹配。请注意，body属性根据响应的内容类型决定要生成的内容，从而选择合适的body解析器。因此，建议将其与content-type一起使用（始终在主体之前进行测试，如果主体测试失败，则跳过主体测试）。</p>
+<p>获取响应的主体并将其与提供的值进行智能匹配。请注意，body 属性根据响应的内容类型决定要生成的内容，从而选择合适的 body 解析器。因此，建议将其与 content-type 一起使用（始终在主体之前进行测试，如果主体测试失败，则跳过主体测试）。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_json">1.30. json</h3>
+<h3 id="_json">3.10. json</h3>
 <div class="paragraph">
-<p>这是JSON响应的常见情况的便捷捷径。它实现content-type ⇒ {.type eq’application&#39;&amp;&amp; .subtype-name eq’json&#39;|| .suffix eq’json&#39;}（也就是说，它接受application / json或诸如application / vnd.foobar + json之类的东西）。</p>
+<p>这是 JSON 响应的常见情况的便捷捷径。它实现 content-type ⇒ {.type eq’application&#39;&amp;&amp; .subtype-name eq’json&#39;|| .suffix eq’json&#39;}（也就是说，它接受 application/json 或诸如 application/vnd.foobar + json 之类的东西）。</p>
 </div>
 <div class="paragraph">
-<p>如果传递了代码值，则将使用反序列化的JSON主体调用代码，并且应返回真实值以通过测试。否则，将使用is-deeply测试例程来检查接收到的JSON的结构是否与预期的匹配。</p>
+<p>如果传递了代码值，则将使用反序列化的 JSON 主体调用代码，并且应返回真实值以通过测试。否则，将使用 is-deeply 测试例程来检查接收到的 JSON 的结构是否与预期的匹配。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_使用一个_uri一组标头等进行许多测试">1.31. 使用一个 URI，一组标头等进行许多测试</h3>
+<h3 id="_使用一个_uri一组标头等进行许多测试">3.11. 使用一个 URI，一组标头等进行许多测试</h3>
 <div class="paragraph">
-<p>重复测试的相同细节可能很麻烦。例如，通常希望针对同一URI编写许多测试，每次将其传递给不同的正文，或使用不同的请求方法。提供测试的功能有多种形式。它可以与URI和块一起使用：</p>
+<p>重复测试的相同细节可能很麻烦。例如，通常希望针对同一 URI 编写许多测试，每次将其传递给不同的正文，或使用不同的请求方法。提供测试的功能有多种形式。它可以与 URI 和块一起使用:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1717,15 +1584,10 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>在这种情况下，将针对附加在当前有效URI上的此URI执行所有测试，在测试服务块中，该有效URI是要测试的服务的基本URI。 如果各个测试用例也具有URI，则还将附加它。 可以嵌套给定的测试块，并且每个块都附加其URI段，从而建立新的当前有效URI。</p>
+<p>在这种情况下，将针对附加在当前有效 URI 上的此 URI 执行所有测试，在测试服务块中，该有效 URI 是要测试的服务的基本 URI。 如果各个测试用例也具有 URI，则还将附加它。 可以嵌套给定的测试块，并且每个块都附加其 URI 段，从而建立新的当前有效 URI。</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">也可以将命名参数传递给test-give，这些参数将用作请求参数，并传递给Cro </dt>
-<dd>
-<p>HTTP :: Client。 请注意，指定要获取或请求的任何命名参数都将覆盖test-given中指定的参数。</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>也可以将命名参数传递给 test-give，这些参数将用作请求参数，并传递给 Cro::HTTP::Client。 请注意，指定要获取或请求的任何命名参数都将覆盖 test-given 中指定的参数。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1735,7 +1597,7 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>第二种形式不需要相对的URI，而只是采用选项：</p>
+<p>第二种形式不需要相对的 URI，而只是采用选项:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1748,15 +1610,15 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_cromediatype">2. Cro::MediaType</h2>
+<h2 id="_cromediatype">4. Cro::MediaType</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Cro::MediaType 类提供了与媒体类型有关的一系列功能，包括将它们解析成它们的一部分或从它们的一部分序列化。</p>
 </div>
 <div class="sect2">
-<h3 id="_解析媒体类型">2.1. 解析媒体类型</h3>
+<h3 id="_解析媒体类型">4.1. 解析媒体类型</h3>
 <div class="paragraph">
-<p>要解析媒体类型，请将其传递给parse方法：</p>
+<p>要解析媒体类型，请将其传递给 parse 方法：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1764,13 +1626,13 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>这将产生一个Cro::MediaType实例。</p>
+<p>这将产生一个 Cro::MediaType 实例。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_提取媒体类型部分">2.2. 提取媒体类型部分</h3>
+<h3 id="_提取媒体类型部分">4.2. 提取媒体类型部分</h3>
 <div class="paragraph">
-<p>考虑一个示例媒体类型application/vnd.foobar+json; charset = UTF-8。 以下方法可用于提取部分媒体类型：</p>
+<p>考虑一个示例媒体类型 application/vnd.foobar+json; charset = UTF-8。 以下方法可用于提取部分媒体类型：</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1799,15 +1661,15 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_从零件构造媒体类型">2.3. 从零件构造媒体类型</h3>
+<h3 id="_从零件构造媒体类型">4.3. 从零件构造媒体类型</h3>
 <div class="paragraph">
 <p>可以调用新方法从其各个部分构造媒体类型。 类型和子类型名称的命名参数是必需的； 可以选择提供树，后缀和参数。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_序列化媒体类型">2.4. 序列化媒体类型</h3>
+<h3 id="_序列化媒体类型">4.4. 序列化媒体类型</h3>
 <div class="paragraph">
-<p>字符串化Cro::MediaType对象，以将其转换为媒体类型的字符串表示形式。</p>
+<p>字符串化 Cro::MediaType 对象，以将其转换为媒体类型的字符串表示形式。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1825,72 +1687,72 @@ say ~$media-type;   # application/vnd.foobar+json; charset=UTF-8</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_cro_模块结构">3. Cro 模块结构</h2>
+<h2 id="_cro_模块结构">5. Cro 模块结构</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Cro 分为多个模块，可以独立安装。这意味着可以将服务容器保持较小，例如，仅包括它们使用的Cro部件即可。它还允许依赖于Cro的任何模块仅依赖于它们所需的部件。</p>
+<p>Cro 分为多个模块，可以独立安装。这意味着可以将服务容器保持较小，例如，仅包括它们使用的 Cro 部件即可。它还允许依赖于 Cro 的任何模块仅依赖于它们所需的部件。</p>
 </div>
 <div class="sect2">
-<h3 id="_crocore">3.1. Cro::Core</h3>
+<h3 id="_crocore">5.1. Cro::Core</h3>
 <div class="paragraph">
-<p>Cro::Core软件包包含关键的Cro基础结构：</p>
+<p>Cro::Core 软件包包含关键的 Cro 基础结构：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Cro的关键角色（Cro::Source，Cro::Transform等）</p>
+<p>Cro 的关键角色（Cro::Source，Cro::Transform 等）</p>
 </li>
 <li>
-<p>Cro作曲家及其默认的连接管理器</p>
+<p>Cro 作曲家及其默认的连接管理器</p>
 </li>
 <li>
-<p>Cro::Uri和Cro::MediaType值类型</p>
+<p>Cro::Uri 和 Cro::MediaType 值类型</p>
 </li>
 <li>
-<p>Cro::TCP模块，提供TCP支持</p>
+<p>Cro::TCP 模块，提供 TCP 支持</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>所有其他Cro模块最终都依赖于此。</p>
+<p>所有其他 Cro 模块最终都依赖于此。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_crotls">3.2. Cro::TLS</h3>
+<h3 id="_crotls">5.2. Cro::TLS</h3>
 <div class="paragraph">
-<p>Cro::TLS软件包包含Cro::TLS模块，该模块提供TLS支持。</p>
+<p>Cro::TLS 软件包包含 Cro::TLS 模块，该模块提供 TLS 支持。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_crohttp">3.3. Cro::HTTP</h3>
+<h3 id="_crohttp">5.3. Cro::HTTP</h3>
 <div class="paragraph">
 <p>该模块包括：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Cro::HTTP::Client（用于发出HTTP请求）</p>
+<p>Cro::HTTP::Client（用于发出 HTTP 请求）</p>
 </li>
 <li>
-<p>Cro::HTTP::Server和Cro::HTTP::Router（用于构建HTTP服务）</p>
+<p>Cro::HTTP::Server 和 Cro::HTTP::Router（用于构建 HTTP 服务）</p>
 </li>
 <li>
-<p>用于multipart / form-data，application / x-www-form-urlencoded和JSON的HTTP消息主体解析器和序列化器</p>
+<p>用于 multipart / form-data，application / x-www-form-urlencoded 和 JSON 的 HTTP 消息主体解析器和序列化器</p>
 </li>
 <li>
-<p>HTTP / 1.1和HTTP / 2请求/响应解析器和序列化器</p>
+<p>HTTP / 1.1 和 HTTP / 2 请求/响应解析器和序列化器</p>
 </li>
 <li>
-<p>HTTP版本选择和连接管理基础结构</p>
+<p>HTTP 版本选择和连接管理基础结构</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>这取决于Cro::Core和Cro::TLS。</p>
+<p>这取决于 Cro::Core 和 Cro::TLS。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_crowebsocket">3.4. Cro::WebSocket</h3>
+<h3 id="_crowebsocket">5.4. Cro::WebSocket</h3>
 <div class="paragraph">
 <p>该模块包括：</p>
 </div>
@@ -1900,55 +1762,59 @@ say ~$media-type;   # application/vnd.foobar+json; charset=UTF-8</code></pre>
 <p>Cro::WebSocket::Client</p>
 </li>
 <li>
-<p>Cro::HTTP::Router::WebSocket（Cro::HTTP::路由器Web套接字插件）</p>
+<p>Cro::HTTP::Router::WebSocket（Cro::HTTP::路由器 Web 套接字插件）</p>
 </li>
 <li>
-<p>Web套接字协议解析器和序列化器</p>
+<p>Web 套接字协议解析器和序列化器</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>这取决于Cro::HTTP。</p>
+<p>这取决于 Cro::HTTP。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_crozeromq">3.5. Cro::ZeroMQ</h3>
+<h3 id="_crozeromq">5.5. Cro::ZeroMQ</h3>
 <div class="paragraph">
-<p>该模块为Cro中的ZeroMQ管道提供支持。</p>
+<p>该模块为 Cro 中的 ZeroMQ 管道提供支持。</p>
 </div>
 <div class="sect3">
-<h4 id="_cro">3.5.1. cro</h4>
+<h4 id="_cro">5.5.1. cro</h4>
 <div class="paragraph">
-<p>Cro开发工具。包括：</p>
+<p>Cro 开发工具。包括：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>cro命令行工具</p>
+<p>cro 命令行工具</p>
 </li>
 <li>
-<p>用于Cro开发的cro Web Web界面</p>
+<p>用于 Cro 开发的 cro Web Web 界面</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>它取决于Cro::WebSocket，因此取决于Cro::HTTP，Cro::TLS和Cro::Core。因此，它始终提供对存根HTTP服务的支持。如果安装了Cro::ZeroMQ，则它将提供对存根ZeroMQ服务的选项。
-== Cro::Uri</p>
+<p>它取决于 Cro::WebSocket，因此取决于 Cro::HTTP，Cro::TLS 和 Cro::Core。因此，它始终提供对存根 HTTP 服务的支持。如果安装了 Cro::ZeroMQ，则它将提供对存根 ZeroMQ 服务的选项。</p>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_crouri">6. Cro::Uri</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Cro::Uri类支持使用RFC 3986中指定的统一资源标识符。Cro::Uri实例是不可变的。</p>
-</div>
-</div>
+<p>Cro::Uri 类支持使用 RFC 3986 中指定的统一资源标识符。Cro::Uri 实例是不可变的。</p>
 </div>
 <div class="sect2">
-<h3 id="_解析方法">3.6. 解析方法</h3>
+<h3 id="_解析方法">6.1. 解析方法</h3>
 <div class="paragraph">
-<p>有很多方法可以将字符串解析为Cro::Uri实例。 它们都可以在Cro::Uri类型的对象上调用。</p>
+<p>有很多方法可以将字符串解析为 Cro::Uri 实例。 它们都可以在 Cro::Uri 类型的对象上调用。</p>
 </div>
 <div class="sect3">
-<h4 id="_解析">3.6.1. 解析</h4>
+<h4 id="_解析">6.1.1. 解析</h4>
 <div class="paragraph">
-<p>接受字符串并尝试将其解析为绝对URI。</p>
+<p>接受字符串并尝试将其解析为绝对 URI。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1956,7 +1822,7 @@ say ~$media-type;   # application/vnd.foobar+json; charset=UTF-8</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>默认情况下，此方法使用内部解析器和操作类，该类根据RFC 3986进行操作，但是可以将不同的解析器指定为命名参数：</p>
+<p>默认情况下，此方法使用内部解析器和操作类，该类根据 RFC 3986 进行操作，但是可以将不同的解析器指定为命名参数:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1966,64 +1832,64 @@ say ~$media-type;   # application/vnd.foobar+json; charset=UTF-8</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>如果解析失败，将抛出X::Cro::Uri::ParseError异常。此异常的uri-string字段包含错误的字符串。</p>
+<p>如果解析失败，将抛出 X::Cro::Uri::ParseError 异常。此异常的 uri-string 字段包含错误的字符串。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parse_relative">3.6.2. parse-relative</h4>
+<h4 id="_parse_relative">6.1.2. parse-relative</h4>
 <div class="paragraph">
-<p>接受字符串，并尝试将其解析为相对URI。在自定义和错误处理方面，诸如解析之类的功能。</p>
+<p>接受字符串，并尝试将其解析为相对 URI。在自定义和错误处理方面，诸如解析之类的功能。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parse_ref">3.6.3. parse-ref</h4>
+<h4 id="_parse_ref">6.1.3. parse-ref</h4>
 <div class="paragraph">
-<p>接受字符串并将其解析为URI引用（即绝对URI或相对URI）。在自定义和错误处理方面，诸如解析之类的功能。</p>
+<p>接受字符串并将其解析为 URI 引用（即绝对 URI 或相对 URI）。在自定义和错误处理方面，诸如解析之类的功能。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_获取uri部分">3.7. 获取URI部分</h3>
+<h3 id="_获取_uri_部分">6.2. 获取 URI 部分</h3>
 <div class="sect3">
-<h4 id="_schema">3.7.1. schema</h4>
+<h4 id="_schema">6.2.1. schema</h4>
 <div class="paragraph">
-<p>返回URI的模式。例如，给定http://example.com/，它将返回http。对于相对URI，这将返回一个类型对象。</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_authority">3.7.2. authority</h4>
-<div class="paragraph">
-<p>获取URI的授权部分（如果有的话）。例如，给定http：//foo@bar.com：42 / baz，<a href="mailto:它将返回foo@bar.com">它将返回foo@bar.com</a>：42。如果不存在，则返回一个类型对象。</p>
+<p>返回 URI 的模式。例如，给定 <a href="http://example.com/，它将返回" class="bare">http://example.com/，它将返回</a> http。对于相对 URI，这将返回一个类型对象。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_userinfo">3.7.3. userinfo</h4>
+<h4 id="_authority">6.2.2. authority</h4>
 <div class="paragraph">
-<p>获取授权的userinfo部分（如果有的话）。例如，给定http：//foo@bar.com：42 / baz，它将返回foo。如果不存在，则返回一个类型对象。</p>
+<p>获取 URI 的授权部分（如果有的话）。例如，给定 <a href="http://foo@bar.com:42/baz，它将返回" class="bare">http://foo@bar.com:42/baz，它将返回</a> <a href="mailto:foo@bar.com">foo@bar.com</a>:42。如果不存在，则返回一个类型对象。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_user">3.7.4. user</h4>
+<h4 id="_userinfo">6.2.3. userinfo</h4>
 <div class="paragraph">
-<p>获取userinfo的用户部分（如果存在）。解码任何百分比转义序列。</p>
+<p>获取授权的 userinfo 部分（如果有的话）。例如，给定 <a href="http://foo@bar.com:42/baz，它将返回" class="bare">http://foo@bar.com:42/baz，它将返回</a> foo。如果不存在，则返回一个类型对象。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_password">3.7.5. password</h4>
+<h4 id="_user">6.2.4. user</h4>
 <div class="paragraph">
-<p>获取userinfo的密码部分（如果存在）。 （请注意，URI规范不赞成使用此方法。此处提供此功能是为了方便那些需要使用此类URI的人员，并且在可预见的将来将保留在Cro中。）解码任何百分比转义序列。</p>
+<p>获取 userinfo 的用户部分（如果存在）。解码任何百分比转义序列。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_host">3.7.6. host</h4>
+<h4 id="_password">6.2.5. password</h4>
 <div class="paragraph">
-<p>返回授权的主机部分（如果有的话）。例如，给定http：//foo@bar.com：42 / baz，它将返回bar。如果不存在，则返回一个类型对象。主机名中的任何百分比转义序列都将被解码。</p>
+<p>获取 userinfo 的密码部分（如果存在）。 （请注意，URI 规范不赞成使用此方法。此处提供此功能是为了方便那些需要使用此类 URI 的人员，并且在可预见的将来将保留在 Cro 中。）解码任何百分比转义序列。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_host_class">3.7.7. host-class</h4>
+<h4 id="_host">6.2.6. host</h4>
 <div class="paragraph">
-<p>如果有一个主机，则返回其类。作为Cro::Uri::Host枚举的成员返回，该枚举定义为</p>
+<p>返回授权的主机部分（如果有的话）。例如，给定 <a href="http://foo@bar.com:42/baz，它将返回" class="bare">http://foo@bar.com:42/baz，它将返回</a> bar。如果不存在，则返回一个类型对象。主机名中的任何百分比转义序列都将被解码。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_host_class">6.2.7. host-class</h4>
+<div class="paragraph">
+<p>如果有一个主机，则返回其类。作为 Cro::Uri::Host 枚举的成员返回，该枚举定义为</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2035,45 +1901,45 @@ say ~$media-type;   # application/vnd.foobar+json; charset=UTF-8</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_port">3.7.8. port</h4>
+<h4 id="_port">6.2.8. port</h4>
 <div class="paragraph">
-<p>返回授权机构的端口部分（如果存在）。例如，给定http：//foo@bar.com：42 / baz，它将返回42。</p>
+<p>返回授权机构的端口部分（如果存在）。例如，给定 <a href="http://foo@bar.com:42/baz，它将返回" class="bare">http://foo@bar.com:42/baz，它将返回</a> 42。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_path">3.7.9. path</h4>
+<h4 id="_path">6.2.9. path</h4>
 <div class="paragraph">
-<p>返回URI的路径部分。路径部分为空的URI将返回空字符串。此方法不执行任何百分比解码。例如，给定http：//foo@bar.com：42 / baz / oh％20wow，它将返回/ baz / oh％20wow。</p>
+<p>返回 URI 的路径部分。路径部分为空的 URI 将返回空字符串。此方法不执行任何百分比解码。例如，给定 <a href="http://foo@bar.com:42/baz/oh％20wow，它将返回" class="bare">http://foo@bar.com:42/baz/oh％20wow，它将返回</a> <code>/baz/oh％20wow</code>。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_path_segments">3.7.10. path-segments</h4>
+<h4 id="_path_segments">6.2.10. path-segments</h4>
 <div class="paragraph">
-<p>返回URI解码路径段的列表。 ASCII范围之外的序列将被解码为UTF-8。给定http：//foo@bar.com：42 / baz / oh％20wow，此方法将返回列表（“ b​​az”，“ oh wow”）。</p>
+<p>返回 URI 解码路径段的列表。 ASCII 范围之外的序列将被解码为 UTF-8。给定 <a href="http://foo@bar.com:42/baz/oh％20wow，此方法将返回列表（“b​​az”，“oh" class="bare">http://foo@bar.com:42/baz/oh％20wow，此方法将返回列表（“b​​az”，“oh</a> wow”）。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_query">3.7.11. query</h4>
+<h4 id="_query">6.2.11. query</h4>
 <div class="paragraph">
-<p>返回URI的查询字符串部分。例如，给定http://bar.com:42/baz?x=1&amp;y=2，它将返回x = 1＆y = 2。没有执行百分比序列解码。 （要解析在HTTP应用程序中使用的查询字符串，请使用Cro::Uri::HTTP，它添加了此功能）。</p>
+<p>返回 URI 的查询字符串部分。例如，给定 <a href="http://bar.com:42/baz?x=1&amp;y=2，它将返回" class="bare">http://bar.com:42/baz?x=1&amp;y=2，它将返回</a> x = 1＆y = 2。没有执行百分比序列解码。 （要解析在 HTTP 应用程序中使用的查询字符串，请使用 Cro::Uri::HTTP，它添加了此功能）。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_fragment">3.7.12. fragment</h4>
+<h4 id="_fragment">6.2.12. fragment</h4>
 <div class="paragraph">
-<p>返回URI的片段部分。例如，给定http://bar.com/baz#abc，它将返回abc。</p>
+<p>返回 URI 的片段部分。例如，给定 <a href="http://bar.com/baz#abc，它将返回" class="bare">http://bar.com/baz#abc，它将返回</a> abc。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_uri字符串化">3.8. URI字符串化</h3>
+<h3 id="_uri_字符串化">6.3. URI 字符串化</h3>
 <div class="paragraph">
-<p>Str方法将URI转换回Str。</p>
+<p>Str 方法将 URI 转换回 Str。</p>
 </div>
 <div class="sect3">
-<h4 id="_解决相对_uri">3.8.1. 解决相对 URI</h4>
+<h4 id="_解决相对_uri">6.3.1. 解决相对 URI</h4>
 <div class="paragraph">
-<p>add方法以调用它的Cro::Uri实例为基础，实现相对URI的解析。可以使用将被解析为URI引用的字符串或另一个Cro::Uri对象来调用它。返回表示解析结果的新Cro::Uri实例。任何 。和..序列将作为分辨率的一部分进行处理。</p>
+<p>add 方法以调用它的 Cro::Uri 实例为基础，实现相对 URI 的解析。可以使用将被解析为 URI 引用的字符串或另一个 Cro::Uri 对象来调用它。返回表示解析结果的新 Cro::Uri 实例。任何 。和..序列将作为分辨率的一部分进行处理。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2083,12 +1949,12 @@ say ~$base.add(&#39;../eek.html&#39;);  # http://foo.com/bar/eek.html</code></pr
 </div>
 </div>
 <div class="sect3">
-<h4 id="_百分号解码">3.8.2. 百分号解码</h4>
+<h4 id="_百分号解码">6.3.2. 百分号解码</h4>
 <div class="paragraph">
-<p>解码百分比子例程接受一个字符串，并返回一个新字符串，其中所有百分比转义序列都将转换为Unicode字符（假定为UTF-8解码）。</p>
+<p>解码百分比子例程接受一个字符串，并返回一个新字符串，其中所有百分比转义序列都将转换为 Unicode 字符（假定为 UTF-8 解码）。</p>
 </div>
 <div class="paragraph">
-<p>此子例程默认情况下不导出，但可以使用解码百分比标签获得：</p>
+<p>此子例程默认情况下不导出，但可以使用解码百分比标签获得:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2097,12 +1963,12 @@ say ~$base.add(&#39;../eek.html&#39;);  # http://foo.com/bar/eek.html</code></pr
 </div>
 </div>
 <div class="sect3">
-<h4 id="_百分号编码">3.8.3. 百分号编码</h4>
+<h4 id="_百分号编码">6.3.3. 百分号编码</h4>
 <div class="paragraph">
-<p>encode-percents子例程接受一个字符串，并返回一个新字符串，在该字符串中所有不被视为保留的字符都进行了百分比编码。 非ASCII字符将使用UTF-8进行编码，并且每个字节进行百分比编码。</p>
+<p>encode-percents 子例程接受一个字符串，并返回一个新字符串，在该字符串中所有不被视为保留的字符都进行了百分比编码。 非 ASCII 字符将使用 UTF-8 进行编码，并且每个字节进行百分比编码。</p>
 </div>
 <div class="paragraph">
-<p>此子例程默认情况下不导出，但可以使用encode-percents标记获得：</p>
+<p>此子例程默认情况下不导出，但可以使用 encode-percents 标记获得:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2114,20 +1980,15 @@ say ~$base.add(&#39;../eek.html&#39;);  # http://foo.com/bar/eek.html</code></pr
 </div>
 </div>
 <div class="sect1">
-<h2 id="_crowebapptemplate">4. Cro::WebApp::Template</h2>
+<h2 id="_crowebapptemplate">7. Cro::WebApp::Template</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>模板通常用于将某些数据呈现为 HTML。 Cro 模板引擎在设计时就考虑到了 HTML，并注意应转义数据，因为它应该以HTML转义。 模板一次编译成Perl 6代码，然后可以通过将其传递给不同的输入多次使用。 输入数据可以是任何Perl 6对象，包括哈希或数组。</p>
+<p>模板通常用于将某些数据呈现为 HTML。Cro 模板引擎在设计时就考虑到了 HTML，并注意应转义数据，因为它应该以 HTML 转义。模板一次编译成 Perl 6 代码，然后可以通过将其传递给不同的输入多次使用。输入数据可以是任何 Perl 6 对象，包括哈希或数组。</p>
 </div>
 <div class="sect2">
-<h3 id="_使用模板">4.1. 使用模板</h3>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">要使用模板，请添加use Cro </dt>
-<dd>
-<p>WebApp :: Template;。 在文件顶部，其中包含要使用它们的路由。</p>
-</dd>
-</dl>
+<h3 id="_使用模板">7.1. 使用模板</h3>
+<div class="paragraph">
+<p>要使用模板，请添加 use Cro::WebApp::Template;。在文件顶部，其中包含要使用它们的路由。</p>
 </div>
 <div class="paragraph">
 <p>要将模板作为路线的结果进行渲染，请使用模板：</p>
@@ -2151,13 +2012,8 @@ say ~$base.add(&#39;../eek.html&#39;);  # http://foo.com/bar/eek.html</code></pr
 }</code></pre>
 </div>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">其中render-template渲染模板并返回这样做的结果，其内容来自Cro </dt>
-<dd>
-<p>HTTP :: Router并设置响应的内容类型以及正文。 请注意，默认情况下，模板设置的内容类型为text / html。 要使其不这样做，请传递content-type：</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>其中 render-template 渲染模板并返回这样做的结果，其内容来自 Cro::HTTP::Router 并设置响应的内容类型以及正文。请注意，默认情况下，模板设置的内容类型为 text/html。要使其不这样做，请传递 content-type：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2169,16 +2025,16 @@ say ~$base.add(&#39;../eek.html&#39;);  # http://foo.com/bar/eek.html</code></pr
 </div>
 </div>
 <div class="paragraph">
-<p>$ product将成为要渲染的模板的主题（有关模板语言的更多信息，请参见下文）</p>
+<p>$ product 将成为要渲染的模板的主题（有关模板语言的更多信息，请参见下文）</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_模板位置和编译">4.2. 模板位置和编译</h3>
+<h3 id="_模板位置和编译">7.2. 模板位置和编译</h3>
 <div class="paragraph">
-<p>默认情况下，将在当前工作目录中查找模板，并且模板中的&lt;：use&#39;…​&#39;&gt;指令也是如此。 模板在首次使用时也会被延迟编译。</p>
+<p>默认情况下，将在当前工作目录中查找模板，并且模板中的 &lt;:use&#39;…​&#39;&gt; 指令也是如此。模板在首次使用时也会被延迟编译。</p>
 </div>
 <div class="paragraph">
-<p>调用template-location函数以指定可以放置模板的目录。 这些调用位于搜索路径的前面，因此对模板位置的最新调用优先。 正在做：</p>
+<p>调用 template-location 函数以指定可以放置模板的目录。这些调用位于搜索路径的前面，因此对模板位置的最新调用优先。正在做：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2186,7 +2042,7 @@ say ~$base.add(&#39;../eek.html&#39;);  # http://foo.com/bar/eek.html</code></pr
 </div>
 </div>
 <div class="paragraph">
-<p>意味着可以在无需使用该路径限定的情况下找到template /目录下的模板。 （可选）传递：compile-all将立即编译所有模板，并在出现任何错误时死亡。 可以将其放入测试用例中：</p>
+<p>意味着可以在无需使用该路径限定的情况下找到 template/ 目录下的模板。（可选）传递：compile-all 将立即编译所有模板，并在出现任何错误时死亡。可以将其放入测试用例中：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2201,9 +2057,9 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_模板语言">4.3. 模板语言</h3>
+<h3 id="_模板语言">7.3. 模板语言</h3>
 <div class="paragraph">
-<p>模板以内容模式启动，这意味着模板文件由纯HTML组成：</p>
+<p>模板以内容模式启动，这意味着模板文件由纯 HTML 组成：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2212,19 +2068,19 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>将导致产生HTML。</p>
+<p>将导致产生 HTML。</p>
 </div>
 <div class="paragraph">
-<p>对模板引擎重要的语法由类似HTML的标记组成，该标记以非字母字符开头。 有些单独使用，例如&lt;.foo&gt;和&lt;$ foo&gt;，而另一些使用关闭器，例如&lt;@foo&gt; …​ &lt;/ @&gt;关闭器不需要一个就再次写出完整的打开器，只需 匹配“印记”。 如果需要，可以在更近的地方重复打开器的打开字母字符（因此&lt;@foo&gt;可以用&lt;/ @ foo&gt;关闭）。</p>
+<p>对模板引擎重要的语法由类似 HTML 的标记组成，该标记以非字母字符开头。有些单独使用，例如 <code>&lt;.foo&gt;</code> 和 <code>&lt;$foo&gt;</code>，而另一些使用关闭器，例如 <code>&lt;@foo&gt; …​ &lt;/@&gt;</code> 关闭器不需要一个就再次写出完整的打开器，只需 匹配&#34;印记&#34;。如果需要，可以在更近的地方重复打开器的打开字母字符（因此 <code>&lt;@foo&gt;</code> 可以用 <code>&lt;/@foo&gt;</code> 关闭）。</p>
 </div>
 <div class="paragraph">
-<p>与Perl 6一样，存在当前主题的概念，例如Perl 6 $ _。</p>
+<p>与 Perl 6 一样，存在当前主题的概念，例如 Perl 6 $_。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_解包散列和对象属性">4.4. 解包散列和对象属性</h3>
+<h3 id="_解包散列和对象属性">7.4. 解包散列和对象属性</h3>
 <div class="paragraph">
-<p>&lt;.name&gt;表单可用于访问当前主题的对象属性。 如果当前主题扮演关联角色，则此表单将更喜欢采用名称哈希键下的值，如果没有这样的键，则退回到寻找方法名称。</p>
+<p><code>&lt;.name&gt;</code> 形式可用于访问当前主题的对象属性。如果当前主题扮演关联角色，则此表单将更喜欢采用名称哈希键下的值，如果没有这样的键，则退回到寻找方法名称。</p>
 </div>
 <div class="paragraph">
 <p>例如，给定一个模板：</p>
@@ -2260,26 +2116,28 @@ done-testing;</code></pre>
 <p>还有其他各种形式：</p>
 </div>
 <div class="paragraph">
-<p>&lt;.elems（）&gt;将始终是方法调用，即使在关联上使用（也可以用来克服键回退）</p>
+<p><code>&lt;.elems()&gt;</code> 将始终是方法调用，即使在关联上使用（也可以用来克服键回退）</p>
 </div>
 <div class="paragraph">
-<p>&lt;.&lt;elems &gt;&gt;将始终是哈希索引
-&lt;.[0]&gt;索引数组元素0，假设主题是可索引的
-&lt;.{$ key}&gt;可用于进行间接哈希索引
-&lt;.[$ idx]&gt;可用于进行间接数组索引
-这些都可以链接在一起，从而允许&lt;.foo.bar.baz&gt;之类的东西用于挖掘对象/哈希。 使用索引器形式时，仅前导。 是必需的，因此&lt;。&lt;foo&gt;。&lt;bar &gt;&gt;可能只是&lt;.&lt;foo&gt; &lt;bar &gt;&gt;。</p>
+<p><code>&lt;.&lt;elems&gt;&gt;</code> 将始终是哈希索引
+<code>&lt;.[0]&gt;</code> 索引数组元素 0，假设主题是可索引的
+<code>&lt;.{$key}&gt;</code> 可用于进行间接哈希索引
+<code>&lt;.[$idx]&gt;</code> 可用于进行间接数组索引</p>
 </div>
 <div class="paragraph">
-<p>索引或方法调用的结果将被分层，然后进行HTML编码以插入到文档中。</p>
+<p>这些都可以链接在一起，从而允许 <code>&lt;.foo.bar.baz&gt;</code> 之类的东西用于挖掘对象/哈希。使用索引器形式时，仅前导。是必需的，因此 <code>&lt;.&lt;foo&gt;.&lt;bar&gt;&gt;</code> 可能只是 <code>&lt;.&lt;foo&gt; &lt;bar&gt;&gt;</code>。</p>
+</div>
+<div class="paragraph">
+<p>索引或方法调用的结果将被分层，然后进行 HTML 编码以插入到文档中。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_变量">4.5. 变量</h3>
+<h3 id="_变量">7.5. 变量</h3>
 <div class="paragraph">
-<p>&lt;$ …​&gt;语法可用于引用变量。 它将被字符串化，HTML编码并插入到文档中。 引用不存在的变量是模板编译时错误。 当前主题可以通过&lt;$ _&gt;访问。</p>
+<p><code>&lt;$…​&gt;</code> 语法可用于引用变量。它将被字符串化，HTML 编码并插入到文档中。引用不存在的变量是模板编译时错误。当前主题可以通过 <code>&lt;$_&gt;</code> 访问。</p>
 </div>
 <div class="paragraph">
-<p>允许变量使用&lt;.foo&gt;标记中允许的任何语法，例如&lt;$ product.name&gt;或&lt;$ product &lt;name &gt;&gt;。 例如，假设定义了变量$ person和$ weather，则：</p>
+<p>允许变量使用 <code>&lt;.foo&gt;</code> 标记中允许的任何语法，例如 <code>&lt;$product.name&gt;</code> 或 <code>&lt;$product &lt;name&gt;&gt;</code>。例如，假设定义了变量 <code>$person</code> 和 <code>$weather</code>，则：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2298,9 +2156,9 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_迭代">4.6. 迭代</h3>
+<h3 id="_迭代">7.6. 迭代</h3>
 <div class="paragraph">
-<p>@标记sigil用于迭代。 它可以与任何Iterable数据源一起使用，并且必须具有结束标记&lt;/ @&gt;。 将为迭代中的每个值评估两者之间的区域，默认情况下，当前目标将设置为当前值。</p>
+<p>@ 标记 sigil 用于迭代。它可以与任何 Iterable 数据源一起使用，并且必须具有结束标记 <code>&lt;/@&gt;</code>。将为迭代中的每个值评估两者之间的区域，默认情况下，当前目标将设置为当前值。</p>
 </div>
 <div class="paragraph">
 <p>例如，给定模板：</p>
@@ -2341,10 +2199,10 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>&lt;@foo&gt;形式是&lt;@。foo&gt;的缩写，遵循与&lt;.foo&gt;相同的规则进行解析。 也可以编写&lt;@ $ foo&gt;来遍历变量。</p>
+<p><code>&lt;@foo&gt;</code> 形式是 <code>&lt;@.foo&gt;</code> 的缩写，遵循与 <code>&lt;.foo&gt;</code> 相同的规则进行解析。也可以编写 <code>&lt;@ $foo&gt;</code> 来遍历变量。</p>
 </div>
 <div class="paragraph">
-<p>要指定一个变量来声明并使用当前迭代值填充，请在迭代目标之后放置一个：并命名该变量。 例如，较早的模板可以写为：</p>
+<p>要指定一个变量来声明并使用当前迭代值填充，请在迭代目标之后放置一个 <code>:</code> 并命名该变量。例如，较早的模板可以写为：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2356,40 +2214,40 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>保留当前的默认目标。 如果当前目标本身是可迭代的，则可以简单地编写&lt;@_&gt; …​ &lt;/ @ _&gt;。</p>
+<p>保留当前的默认目标。如果当前目标本身是可迭代的，则可以简单地编写 <code>&lt;@<em>&gt; …​ &lt;/@</em>&gt;</code>。</p>
 </div>
 <div class="paragraph">
 <p>如果开始和结束迭代标签是该行中唯一的东西，那么将不会为那些行生成任何输出，从而使输出更令人愉快。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_条件">4.7. 条件</h3>
+<h3 id="_条件">7.7. 条件</h3>
 <div class="paragraph">
-<p>&lt;？$ foo&gt; …​ &lt;/？&gt;（“ if”）和&lt;！$ foo&gt; …​ &lt;/！&gt;（“除非”）可用于条件执行。它们对指定的变量执行布尔测试。还可以将它们与主题引用语法一起使用，例如&lt;?. is-admin&gt; …​ &lt;/？&gt;。对于更复杂的条件，使用语法&lt;？{$ a eq $ b}&gt; …​ &lt;/？&gt;接受Perl 6表达式的子集。与Perl 6唯一的不同之处在于&lt;？{.answer == 42}&gt; …​ &lt;/？&gt;将具有与&lt;.answer&gt;中相同的哈希/对象语义，以与其余模板保持一致语言。</p>
+<p><code>&lt;?$foo&gt; …​ &lt;/?&gt;</code>（&#34;if&#34;）和 <code>&lt;!$foo&gt; …​ &lt;/!&gt;</code>(&#34;除非&#34;)可用于条件执行。它们对指定的变量执行布尔测试。还可以将它们与主题引用语法一起使用，例如 <code>&lt;?.is-admin&gt; …​ &lt;/?&gt;</code>。对于更复杂的条件，使用语法 <code>&lt;?{$a eq $b}&gt; …​ &lt;/?&gt;</code> 接受 Perl 6 表达式的子集。与 Perl 6 唯一的不同之处在于 <code>&lt;?{.answer == 42}&gt; …​ &lt;/?&gt;</code> 将具有与 <code>&lt;.answer&gt;</code> 中相同的哈希/对象语义，以与其余模板保持一致语言。</p>
 </div>
 <div class="paragraph">
 <p>允许以下构造：</p>
 </div>
 <div class="paragraph">
-<p>变量（$ foo）</p>
+<p>变量 (<code>$foo</code>）</p>
 </div>
 <div class="paragraph">
-<p>在&lt;.foo&gt;标记语法支持的范围内使用主题，方法调用和索引</p>
+<p>在 <code>&lt;.foo&gt;</code> 标记语法支持的范围内使用主题，方法调用和索引</p>
 </div>
 <div class="paragraph">
 <p>分组括号</p>
 </div>
 <div class="paragraph">
-<p>比较运算==，！=，&lt;，⇐，&gt; =，&gt;，eq，ne，lt，gt，===和！===</p>
+<p>比较运算 ==，！=，&lt;，⇐，&gt; =，&gt;，eq，ne，lt，gt，=== 和 !===</p>
 </div>
 <div class="paragraph">
-<p>&amp;&amp;，||和和或短路逻辑运算符</p>
+<p>&amp;&amp;，|| 和或短路逻辑运算符</p>
 </div>
 <div class="paragraph">
-<p>+，-，*，/和％数学运算</p>
+<p>+，-，*，/ 和 ％ 数学运算</p>
 </div>
 <div class="paragraph">
-<p>〜和x字符串操作</p>
+<p><code>~</code> 和 x 字符串操作</p>
 </div>
 <div class="paragraph">
 <p>数值文字（整数，浮点数和有理数）</p>
@@ -2405,7 +2263,7 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_子例程和宏">4.8. 子例程和宏</h3>
+<h3 id="_子例程和宏">7.8. 子例程和宏</h3>
 <div class="paragraph">
 <p>可以声明可以重用的模板子例程，以便排除公共元素。</p>
 </div>
@@ -2457,7 +2315,7 @@ done-testing;</code></pre>
 <p>参数可以是在一定条件下有效的表达式-即，文字，变量访问，取消引用和允许的一些基本运算符。</p>
 </div>
 <div class="paragraph">
-<p>模板宏的工作原理与模板子例程类似，不同之处在于它的用法具有主体。 该主体作为thunk传递，这意味着宏可以选择将其渲染0次或多次），可以选择设置新的默认目标。 例如，将一些内容包装在Bootstrap卡中的宏可能看起来像：</p>
+<p>模板宏的工作原理与模板子例程类似，不同之处在于它的用法具有主体。该主体作为 thunk 传递，这意味着宏可以选择将其渲染 0 次或多次），可以选择设置新的默认目标。例如，将一些内容包装在 Bootstrap 卡中的宏可能看起来像：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2472,7 +2330,7 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>其中&lt;：body&gt;标记要渲染的实体的点。 该宏可以用作：</p>
+<p>其中 <code>&lt;:body&gt;</code> 标记要渲染的实体的点。该宏可以用作：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2482,13 +2340,13 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>要在宏中为主体设置当前目标，请使用&lt;：body $ target&gt;。</p>
+<p>要在宏中为主体设置当前目标，请使用 <code>&lt;:body $target&gt;</code>。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_分解出sub和宏">4.9. 分解出sub和宏</h3>
+<h3 id="_分解出_sub_和宏">7.9. 分解出 sub 和宏</h3>
 <div class="paragraph">
-<p>模板子和宏可以分解为其他模板文件，然后使用&lt;：use …​&gt;导入：</p>
+<p>模板子和宏可以分解为其他模板文件，然后使用 <code>&lt;:use …​&gt;</code> 导入：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2497,54 +2355,58 @@ done-testing;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_插入_html_和_javascript">4.10. 插入 HTML 和 JavaScript</h3>
+<h3 id="_插入_html_和_javascript">7.10. 插入 HTML 和 JavaScript</h3>
 <div class="paragraph">
-<p>默认情况下，所有内容都是HTML转义的。 但是，有时需要将一小段预渲染的HTML放入模板输出中。 有两种方法可以实现此目的。</p>
+<p>默认情况下，所有内容都是 HTML 转义的。但是，有时需要将一小段预渲染的 HTML 放入模板输出中。有两种方法可以实现此目的。</p>
 </div>
 <div class="paragraph">
-<p>HTML内置函数称为&lt;＆HTML（.stuff）&gt;，首先检查是否没有以javascript开头的脚本标签或属性： 如果有，它将视为XSS攻击尝试并抛出异常。</p>
+<p>HTML 内置函数称为 <code>&lt;&amp;HTML(.stuff)&gt;</code>，首先检查是否没有以 javascript 开头的脚本标签或属性： 如果有，它将视为 XSS 攻击尝试并抛出异常。</p>
 </div>
 <div class="paragraph">
-<p>HTML-AND-JAVASCRIPT内置函数不会尝试任何XSS保护，而只是插入给出的任何内容而不会进行任何转义。</p>
+<p>HTML-AND-JAVASCRIPT 内置函数不会尝试任何 XSS 保护，而只是插入给出的任何内容而不会进行任何转义。</p>
 </div>
 <div class="paragraph">
-<p>请注意，HTML函数不能保证完全安全的XSS保护。 请非常小心地使用这两个功能。
-== Cro 方法</p>
+<p>请注意，HTML 函数不能保证完全安全的 XSS 保护。请非常小心地使用这两个功能。</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cro_方法">8. Cro 方法</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Cro的核心是建立Perl 6供应链，这些供应链处理从网络到达的消息并产生要通过网络发送的消息。</p>
-</div>
+<p>Cro 的核心是建立 Perl 6 供应链，这些供应链处理从网络到达的消息并产生要通过网络发送的消息。</p>
 </div>
 <div class="sect2">
-<h3 id="_关键角色">4.11. 关键角色</h3>
+<h3 id="_关键角色">8.1. 关键角色</h3>
 <div class="paragraph">
-<p>消息由Cro::Message表示。具体的实现包括：</p>
+<p>消息由 Cro::Message 表示。具体的实现包括：</p>
 </div>
 <div class="paragraph">
 <p>Cro::TCP::Message
 Cro::HTTP::Request
 Cro::HTTP::Response
-传入连接由Cro::Connection表示；实现包括：</p>
+传入连接由 Cro::Connection 表示；实现包括：</p>
 </div>
 <div class="paragraph">
 <p>Cro::TCP::ServerConnection
 Cro::TLS::ServerConnection
-Cro::Source是消息或连接的源。例如，Cro::TCP::Listener生成Cro::TCP::ServerConnection对象。</p>
+Cro::Source 是消息或连接的源。例如，Cro::TCP::Listener 生成 Cro::TCP::ServerConnection 对象。</p>
 </div>
 <div class="paragraph">
-<p>Cro::Transform将一个连接或消息转换为另一个。例如，Cro::HTTP::RequestParser会将Cro::TCP::Messages转换为Cro::HTTP::Requests，而Cro::HTTP::ResponseSerializer将Cro::HTTP::Responses转换为Cro::TCP::消息。这意味着在Cro中，HTTP应用程序只是从Cro::HTTP::Request转换为Cro::HTTP::Response。</p>
+<p>Cro::Transform 将一个连接或消息转换为另一个。例如，Cro::HTTP::RequestParser 会将 Cro::TCP::Messages 转换为 Cro::HTTP::Requests，而 Cro::HTTP::ResponseSerializer 将 Cro::HTTP::Responses 转换为 Cro::TCP::消息。这意味着在 Cro 中，HTTP 应用程序只是从 Cro::HTTP::Request 转换为 Cro::HTTP::Response。</p>
 </div>
 <div class="paragraph">
-<p>Cro::Sink消耗消息。它什么也不会产生。接收器位于消息处理管道的末尾。 TCP服务器中的接收器将使用Cro::TCP::Messages并通过网络发送它们。</p>
+<p>Cro::Sink 消耗消息。它什么也不会产生。接收器位于消息处理管道的末尾。TCP 服务器中的接收器将使用 Cro::TCP::Messages 并通过网络发送它们。</p>
 </div>
 <div class="paragraph">
-<p>某些消息或连接可以通过一个或多个消息来回复。这些扮演Cro::Replyable角色。任何产生可答复的内容还负责提供可以处理答复消息的内容。这种“东西”可以是变换，也可以是宿。可应答对象的示例包括Cro::TCP::ServerConnection和Cro::TLS::ServerConnection，它们提供了Cro::Sink应答器，可将Cro::TCP::Message对象发送回客户端。</p>
+<p>某些消息或连接可以通过一个或多个消息来回复。这些扮演 Cro::Replyable 角色。任何产生可答复的内容还负责提供可以处理答复消息的内容。这种&#34;东西&#34;可以是变换，也可以是宿。可应答对象的示例包括 Cro::TCP::ServerConnection 和 Cro::TLS::ServerConnection，它们提供了 Cro::Sink 应答器，可将 Cro::TCP::Message 对象发送回客户端。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_组成">4.12. 组成</h3>
+<h3 id="_组成">8.2. 组成</h3>
 <div class="paragraph">
-<p>Cro组件（源，转换和接收器）可以放在一起形成管道。此过程称为管道组成。也许最简单的示例是设置回显服务器：</p>
+<p>Cro 组件（源，转换和接收器）可以放在一起形成管道。此过程称为管道组成。也许最简单的示例是设置回显服务器：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2578,13 +2440,13 @@ $echo-server.start();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>请注意，如果Cro.compose（…​）具有以源开头和接收器结尾的内容，则仅返回Cro::Service。 那么在这种情况下，水槽从哪里来？ 由于连接是可答复的，因此它提供了接收器。 还值得注意的是，连接流神奇地变成了消息流。 如果编写者发现生成连接的对象后面是消耗消息的对象，它将把其余的管道传递给Cro::ConnectionManager实例，因此其余管道的处理将针对每个连接。</p>
+<p>请注意，如果 Cro.compose(…​) 具有以源开头和接收器结尾的内容，则仅返回 Cro::Service。那么在这种情况下，水槽从哪里来？ 由于连接是可答复的，因此它提供了接收器。还值得注意的是，连接流神奇地变成了消息流。如果编写者发现生成连接的对象后面是消耗消息的对象，它将把其余的管道传递给 Cro::ConnectionManager 实例，因此其余管道的处理将针对每个连接。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_http_服务器示例">4.13. HTTP 服务器示例</h3>
+<h3 id="_http_服务器示例">8.3. HTTP 服务器示例</h3>
 <div class="paragraph">
-<p>大多数Cro HTTP服务将使用诸如Cro::HTTP::Router和Cro::HTTP::Server之类的高级模块进行组装。 但是，可以在没有这些便利的情况下使用Cro.compose（…​）将HTTP处理管道组合在一起。 首先，需要各种组件和消息类型：</p>
+<p>大多数 Cro HTTP 服务将使用诸如 Cro::HTTP::Router 和 Cro::HTTP::Server 之类的高级模块进行组装。但是，可以在没有这些便利的情况下使用 Cro.compose(…​) 将 HTTP 处理管道组合在一起。首先，需要各种组件和消息类型：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2597,7 +2459,7 @@ use Cro::TCP;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>HTTP应用程序本身-一个简单的“ Hello，world”-是一个Cro::Transform，可将请求转换为响应：</p>
+<p>HTTP 应用程序本身-一个简单的 &#34;Hello，world&#34; -是一个 Cro::Transform，可将请求转换为响应：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2648,15 +2510,15 @@ sleep;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_客户端管道">4.14. 客户端管道</h3>
+<h3 id="_客户端管道">8.4. 客户端管道</h3>
 <div class="paragraph">
-<p>客户端（例如HTTP客户端）也表示为管道。 与服务器管道不同，在服务器管道中，应用程序位于管道的中心，在网络的两端。客户端管道在网络的中心，而应用程序在网络的两端。</p>
+<p>客户端（例如 HTTP 客户端）也表示为管道。与服务器管道不同，在服务器管道中，应用程序位于管道的中心，在网络的两端。客户端管道在网络的中心，而应用程序在网络的两端。</p>
 </div>
 <div class="paragraph">
-<p>客户端管道中心的组件将是Cro::Connector，它建立连接。 Cro::Connector能够建立连接并产生Cro::Transform，它将发送使用该连接消耗的消息并发出从网络连接接收到的消息。 具有连接器的管道不得具有Cro::Source或Cro::Sink。</p>
+<p>客户端管道中心的组件将是 Cro::Connector，它建立连接。Cro::Connector 能够建立连接并产生 Cro::Transform，它将发送使用该连接消耗的消息并发出从网络连接接收到的消息。具有连接器的管道不得具有 Cro::Source 或 Cro::Sink。</p>
 </div>
 <div class="paragraph">
-<p>连接，发送消息并在收到某种东西后立即断开连接的最小TCP客户端可以表示为：</p>
+<p>连接，发送消息并在收到某种东西后立即断开连接的最小 TCP 客户端可以表示为：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2677,10 +2539,10 @@ react {
 </div>
 </div>
 <div class="paragraph">
-<p>客户端上的建立方法建立连接。 它使用带有Supply的单个位置参数，将使用它来接收要发送的消息； 所有命名的参数都将传递给connect方法，该方法建立连接并返回转换。 建立方法将返回一个耗材，将在其上发出响应消息。</p>
+<p>客户端上的建立方法建立连接。它使用带有 Supply 的单个位置参数，将使用它来接收要发送的消息； 所有命名的参数都将传递给 connect 方法，该方法建立连接并返回转换。建立方法将返回一个耗材，将在其上发出响应消息。</p>
 </div>
 <div class="paragraph">
-<p>更复杂的管道是可能的。 例如，一个（不完全方便，但功能齐全的）HTTP客户端看起来像：</p>
+<p>更复杂的管道是可能的。例如，一个（不完全方便，但功能齐全的）HTTP 客户端看起来像：</p>
 </div>
 <div class="listingblock">
 <div class="content">
