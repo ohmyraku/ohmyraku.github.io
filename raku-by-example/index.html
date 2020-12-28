@@ -151,14 +151,14 @@ if (theme && theme !== "1") {
     </li>
     <li><a href="#_文件和目录使用状态图">10. 文件和目录使用状态图</a>
       <ul>
-        <li><a href="#_reading_file_sizes">10.1. Reading File Sizes</a></li>
-        <li><a href="#_generating_a_tree_map">10.2. Generating a Tree Map</a></li>
+        <li><a href="#_读取文件大小">10.1. 读取文件大小</a></li>
+        <li><a href="#_生成树状图">10.2. 生成树状图</a></li>
         <li><a href="#_火焰图">10.3. 火焰图</a></li>
-        <li><a href="#_functional_refactorings">10.4. Functional Refactorings</a></li>
-        <li><a href="#_more_language_support_for_functional_programming">10.5. More Language Support for Functional Programming</a></li>
-        <li><a href="#_more_improvements">10.6. More Improvements</a></li>
-        <li><a href="#_explore">10.7. Explore!</a></li>
-        <li><a href="#_summary">10.8. Summary</a></li>
+        <li><a href="#_功能重构">10.4. 功能重构</a></li>
+        <li><a href="#_更多的功能编程语言支持">10.5. 更多的功能编程语言支持</a></li>
+        <li><a href="#_更多改进">10.6. 更多改进</a></li>
+        <li><a href="#_探索">10.7. 探索!</a></li>
+        <li><a href="#_总结_9">10.8. 总结</a></li>
       </ul>
     </li>
     <li><a href="#_unicode_搜索工具">11. Unicode 搜索工具</a>
@@ -167,19 +167,19 @@ if (theme && theme !== "1") {
         <li><a href="#_数字">11.2. 数字</a></li>
         <li><a href="#_其它_unicode_属性">11.3. 其它 Unicode 属性</a></li>
         <li><a href="#_排序">11.4. 排序</a></li>
-        <li><a href="#_总结_9">11.5. 总结</a></li>
+        <li><a href="#_总结_10">11.5. 总结</a></li>
       </ul>
     </li>
     <li><a href="#_使用_inine_python_和_matplotlib_画图">12. 使用 Inine-Python 和 Matplotlib 画图</a>
       <ul>
         <li><a href="#_提取状态">12.1. 提取状态</a></li>
-        <li><a href="#_plotting_with_python">12.2. Plotting with Python</a></li>
-        <li><a href="#_bridging_the_gap">12.3. Bridging the Gap</a></li>
-        <li><a href="#_using_the_bridge_to_plot">12.4. Using the Bridge to Plot</a></li>
-        <li><a href="#_stacked_plots">12.5. Stacked Plots</a></li>
-        <li><a href="#_idiomatic_use_of_inlinepython">12.6. Idiomatic Use of Inline::Python</a></li>
-        <li><a href="#_idiomatic_use_of_inlinepython_2">12.7. Idiomatic Use of Inline::Python</a></li>
-        <li><a href="#_总结_10">12.8. 总结</a></li>
+        <li><a href="#_用_python_进行绘图">12.2. 用 Python 进行绘图</a></li>
+        <li><a href="#_缩小差距">12.3. 缩小差距</a></li>
+        <li><a href="#_使用桥接来画图">12.4. 使用桥接来画图</a></li>
+        <li><a href="#_堆叠图">12.5. 堆叠图</a></li>
+        <li><a href="#_inlinepython_的惯用方法">12.6. Inline::Python 的惯用方法</a></li>
+        <li><a href="#_inlinepython_的惯用方法_2">12.7. Inline::Python 的惯用方法</a></li>
+        <li><a href="#_总结_11">12.8. 总结</a></li>
       </ul>
     </li>
     <li><a href="#_接下来是什么">13. 接下来是什么</a>
@@ -1037,8 +1037,7 @@ $ autotime 2015-12-24 11:23:00
 $ autotime 1450915200
 2015-12-24
 $ autotime 1450956180
-2015-12-24 11:23:00
-----</code></pre>
+2015-12-24 11:23:00</code></pre>
 </div>
 </div>
 <div class="sect2">
@@ -1315,7 +1314,6 @@ else {
         say $dt.Str;
     }
 }
-
 
 multi sub MAIN(Str $date) {
     say Date.new($date).DateTime.posix
@@ -1784,9 +1782,7 @@ ok 2 - from-date-string</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-raku" data-lang="raku">use v6;
-
-# function to be tested
+<pre class="highlight"><code class="language-raku" data-lang="raku"># function to be tested
 sub doublespeak($x) {
     say $x ~ $x;
 }
@@ -2838,7 +2834,7 @@ method !create-schema() {
 </div>
 </div>
 <div class="paragraph">
-<p>多行字符串字符最好用 heredoc<sup class="footnote">[<a id="_footnoteref_45" class="footnote" href="#_footnotedef_45" title="View footnote.">45</a>]</sup>语法来写。  <code>qq:to/DELIMITER/</code> 告诉 Raku 要完成对当前行的解析，这样你仍然可以关闭方法调用的小括号，并添加语句结束分号。下一行开始字符串字面量，一直到 Raku 在一行上找到分界符为止。字符串字段的每一行的前导空格都会被剥去，缩进的分界符越多越好。</p>
+<p>多行字符串字符最好用 heredoc<sup class="footnote">[<a id="_footnoteref_45" class="footnote" href="#_footnotedef_45" title="View footnote.">45</a>]</sup>语法来写。<code>qq:to/DELIMITER/</code> 告诉 Raku 要完成对当前行的解析，这样你仍然可以关闭方法调用的小括号，并添加语句结束分号。下一行开始字符串字面量，一直到 Raku 在一行上找到分界符为止。字符串字段的每一行的前导空格都会被剥去，缩进的分界符越多越好。</p>
 </div>
 <div class="paragraph">
 <p>因此:</p>
@@ -4195,18 +4191,18 @@ method error($msg) {
 <h2 id="_文件和目录使用状态图">10. 文件和目录使用状态图</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You bought a shiny new 2TB disk just a short while ago and you’re already getting low disk space warnings. What’s taking up all that space?</p>
+<p>你刚买了一个闪亮的 2TB 新盘不久，就已经收到磁盘空间不足的警告。是什么占据了这么多的空间？</p>
 </div>
 <div class="paragraph">
-<p>To answer this question, and experiment a bit with data visualization, let’s write a small tool that visualizes which files use up how much disk space. We also get to explore some functional programming concepts in the process.</p>
+<p>为了回答这个问题，并尝试一下数据可视化，让我们写一个小工具，可视化哪些文件占用了多少磁盘空间。在这个过程中，我们还可以探索一些函数式编程的概念。</p>
 </div>
 <div class="sect2">
-<h3 id="_reading_file_sizes">10.1. Reading File Sizes</h3>
+<h3 id="_读取文件大小">10.1. 读取文件大小</h3>
 <div class="paragraph">
-<p>To visualize file usage, we must first recursively read all directories and files in a given directory, and record their sizes. To get a listing of all elements in a directory, we can use the dir1 function, which returns a lazy list of IO::Path2 objects.</p>
+<p>为了可视化文件的使用情况，我们必须首先递归地读取给定目录中的所有目录和文件，并记录它们的大小。为了得到一个目录中所有元素的列表，我们可以使用 dir 函数，它返回一个 IO::Path 对象的懒惰列表。</p>
 </div>
 <div class="paragraph">
-<p>We distinguish between directories, which can have child entries, and files, which can’t. Both can have a direct size, and in the case of directories also a total size, which includes files and subdirectories, recursively:</p>
+<p>我们区分目录和文件，前者可以有子项，后者不能。两者都可以有一个直接的大小，对于目录来说，也可以有一个总的大小，其中包括文件和子目录，递归。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4244,10 +4240,10 @@ sub tree(IO::Path $path) {
 </div>
 </div>
 <div class="paragraph">
-<p>The code for reading a file tree recursively uses the d and s methods on IO::Path. d returns True for directories and False for files. s returns the size.</p>
+<p>递归读取文件树的代码使用了 IO::Path 上的 d 和 s 方法。d 对目录返回 True，对文件返回 False，s 返回大小。</p>
 </div>
 <div class="paragraph">
-<p>Just to check that we’ve got a sensible data structure, we can write a short routine that prints it recursively, with indentation to indicate nesting of directory entries:</p>
+<p>为了检查我们是否有一个合理的数据结构，我们可以写一个简短的例程来递归地打印它，用缩进来表示目录项的嵌套。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4277,25 +4273,25 @@ sub MAIN($dir = &#39;.&#39;) {
 </div>
 </div>
 <div class="paragraph">
-<p>The subroutine print-tree is pretty boring, if you’re used to recursion.It prints out the name and size of the current node and, if the current node is a directory, recurses into each children with an increased indentation. The indentation is applied through the x string repetition operator, which when called as $string x $count repeats the $string $count times. It uses the ∼∼ smart matching operator to perform a type check; it tests if $tree is a Directory.</p>
+<p>print-tree 这个子程序非常无聊，如果你习惯于递归的话.它打印出当前节点的名称和大小，如果当前节点是一个目录，则递归到每个子节点，并增加缩进。缩进是通过x字符串重复操作符来应用的，当调用为 $string x $count时，会重复 $string $count 次数。它使用 <code>~~</code> 智能匹配操作符来执行类型检查；它测试 $tree 是否是一个 Directory。</p>
 </div>
 <div class="paragraph">
-<p>To get a human-readable representation of the size of a number, format- size knows a list of six units: the empty string for one, k (kilo) for 1024, M (mega) for 1024×1024, and so on. This list is stored in the array @units. The multiple associated with each unit is stored in @steps, which is initialized through the series operator …​. Its structure is INITIAL, CALLABLE …​ LIMIT, where it applies CALLABLE first to the initial value, and then to the next value generated, and so on, until it hits LIMIT. The limit here is *, a special term called Whatever, which means it’s unlimited. Thus, the sequence operator returns a lazy, potentially infinite, list and the trailing .head(6) call limits it to six values.</p>
+<p>为了得到一个人类可读的数字大小表示，format- size知道一个由六个单位组成的列表：空字符串表示1，k（千）表示1024，M（兆）表示1024×1024，等等。这个列表存储在数组 @units 中。与每个单位相关联的倍数存储在 @steps 中，它是通过系列运算符…​.，初始化的。其结构为 INITIAL，CALLABLE…​。LIMIT，其中它首先将 CALLABLE 应用于初始值，然后应用于下一个生成的值，以此类推，直到碰到 LIMIT。这里的 limit 是 <code>*</code>，是一个特殊的名词，叫 Whatever，意思是它是无限的。因此，序列操作符返回的是一个懒惰的、可能是无限的列表，而后面的 <code>.head(6)</code> 调用则将其限制为六个值。</p>
 </div>
 <div class="paragraph">
-<p>To find the most appropriate unit to print with the size, we have to iterate over both the values and the indices of the array, which for @steps.kv → $idx, $step { .. } accomplishes. sprintf, known from other programming languages, does the actual formatting to one digit after the dot and appends the unit.</p>
+<p>为了找到最合适的单位来打印大小，我们必须对数组的值和索引进行迭代，对于 <code>@steps.kv → $idx, $step { .sprintf }</code>，从其他编程语言中得知，实际的格式化工作是在点后的一位数字上进行，并附加单位。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_generating_a_tree_map">10.2. Generating a Tree Map</h3>
+<h3 id="_生成树状图">10.2. 生成树状图</h3>
 <div class="paragraph">
-<p>One possible visualization of file and directory sizes is a tree map, which represents each directory as a rectangle and each file inside it as a rectangle within the directory’s rectangle. The size of each rectangle is proportional to the size of the file or directory it represents.</p>
+<p>文件和目录大小的一种可能的可视化是树状图，它将每个目录表示为一个矩形，而目录内的每个文件则表示为目录矩形内的一个矩形。每个矩形的大小与它所代表的文件或目录的大小成正比。</p>
 </div>
 <div class="paragraph">
-<p>We’ll generate an SVG file containing all those rectangles. Modern browsers support displaying such files and also show mouse-over texts for each rectangle. This alleviates the burden of actually labeling the rectangles, which can be quite a hassle.</p>
+<p>我们将生成一个包含所有这些矩形的 SVG 文件。现代的浏览器支持显示这样的文件，并且还能显示每个矩形的鼠标移动文本。这就减轻了实际标注矩形的负担，这可能是相当麻烦的。</p>
 </div>
 <div class="paragraph">
-<p>To generate the SVG, we’ll use the SVG module, which you can install with</p>
+<p>为了生成 SVG，我们将使用 SVG 模块，你可以通过安装:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4303,7 +4299,7 @@ sub MAIN($dir = &#39;.&#39;) {
 </div>
 </div>
 <div class="paragraph">
-<p>This module provides a single static method, into which you pass nested pairs. Pairs whose values are arrays are turned into XML tags; other pairs are turned into attributes. As an example, this Raku script</p>
+<p>这个模块提供了一个单一的静态方法，您可以将嵌套的对传递到这个方法中。其值为数组的对被转化为 XML 标签；其他对被转化为属性。作为一个例子，这个 Raku 脚本:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4320,7 +4316,7 @@ print SVG.serialize(
 </div>
 </div>
 <div class="paragraph">
-<p>produces this output:</p>
+<p>产生这种输出:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4330,10 +4326,10 @@ height=&#34;20&#34;&gt; &lt;title&gt;example&lt;/title&gt;
 </div>
 </div>
 <div class="paragraph">
-<p>(without the indentation). The xmlns-tags are helpfully added by the SVG module and are necessary for programs to recognize the file as SVG.</p>
+<p>(没有缩进)。xmlns-tags 是由 SVG 模块帮助添加的，是程序识别 SVG 文件的必要条件。</p>
 </div>
 <div class="paragraph">
-<p>Returning to the tree maps (Figure 10-1), a very simple way to lay out the rectangle is to recurse into areas and for each area subdivide it either horizontally or vertically, depending upon which axis is longer:</p>
+<p>回到树状图（图10-1），一个非常简单的方法是将矩形重新划分为区域，并对每个区域进行水平或垂直的细分，这取决于哪个轴更长。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4407,31 +4403,31 @@ sub MAIN($dir = &#39;.&#39;) {
 </div>
 </div>
 <div class="paragraph">
-<p>The generated file is not pretty, due to the random colors and due to some files being identified as very narrow rectangles. But it does make it obvious that there are a few big files and many mostly small files in a directory (which happens to be the .git directory of a repository). Viewing a file in a browser shows the name of the file on mouse-over.</p>
+<p>生成的文件并不漂亮，由于颜色随机，而且由于一些文件被识别为很窄的矩形。但它确实可以明显地看出，在一个目录中，有一些大文件和许多大多是小文件（恰好是一个仓库的 <code>.git</code> 目录）。在浏览器中查看一个文件，鼠标移过去就会显示出文件的名称。</p>
 </div>
 <div class="paragraph">
-<p>How did we generate this file?</p>
+<p>我们是怎么生成这个文件的？</p>
 </div>
 <div class="paragraph">
-<p>Sub tree-map calls take to add elements to a result list, so it must be called in the context of a gather statement. gather { take 1; take 2 } returns a lazy list of two elements, 1, 2. But the take calls don’t have to occur in the lexical scope of the gather; they can be in any code that’s directly or indirectly called from the gather. We call that the dynamic scope.</p>
+<p>子树状图调用 take 是为了将元素添加到结果列表中，所以必须在 gather 语句的上下文中调用它，<code>gather { take 1; take 2 }</code> 返回一个由1，2两个元素组成的懒惰列表。但是 take 的调用不一定要发生在 gather 的词法作用域中，它们可以在任何从 gather 直接或间接调用的代码中。我们称之为动态范围。</p>
 </div>
 <div class="paragraph">
-<p>The rest of sub tree-map is mostly straightforward. For each direction in which the remaining rectangle can be split, we calculate a base unit that signifies how many pixels a byte should occupy. This is used to split up the current canvas into smaller ones and use those to recurse into tree-map.</p>
+<p>其余的子树状图主要是直接的。对于每个可以分割剩余矩形的方向，我们计算一个基本单位，表示一个字节应该占据多少像素。这用于将当前的画布分割成更小的画布，并使用这些画布来递归到树状图中。</p>
 </div>
 <div class="paragraph">
-<p>The random color generation uses ˆ256 to create a range from 0 to 256 (exclusive) and .pick returns a random element from this range. The result is a random CSS color string like rgb(120,240,5).</p>
+<p>随机颜色生成使用 <code>ˆ256</code> 创建一个从0到256的范围（排他性），然后 <code>.pick</code> 从这个范围返回一个随机元素。结果是一个随机的 CSS 颜色字符串，如 rgb(120,240,5)。</p>
 </div>
 <div class="paragraph">
-<p>In sub MAIN, the gather returns a list, which would normally be nested inside the outer array. The pipe symbol | in :svg[ …​, | gather …​ ] before the gather prevents the normal nesting and flattens the list into the outer array.</p>
+<p>在子 MAIN 中，gather 返回一个列表，它通常会嵌套在外部数组中。在 gather 之前的管道符号 <code>|</code> 可以防止正常的嵌套，并将列表扁平化到外部数组中。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_火焰图">10.3. 火焰图</h3>
 <div class="paragraph">
-<p>The disadvantage of tree maps as generated in the preceding is that the human brain isn’t very good at comparing the sizes of rectangles with different aspect ratios, especially if their widths are very different from their heights (i.e., very tall or very flat rectangles). Flame graphs prevent this perception error by showing file sizes as horizontal bars. The vertical arrangement indicates the nesting of directories and files inside other directories. The disadvantage is that less of the available space is used for visualizing the file sizes.</p>
+<p>前面生成的树状图的缺点是，人脑不善于比较不同长宽比的矩形的大小，特别是当它们的宽度与高度相差很大时（即非常高或非常平的矩形）。火焰图通过将文件大小显示为水平条来防止这种认知错误。垂直排列表示目录和文件在其他目录内的嵌套。缺点是用于可视化文件大小的可用空间较少。</p>
 </div>
 <div class="paragraph">
-<p>It is easier to generate flame graphs than tree maps, because you only need to subdivide in one direction, whereas the height of each bar is fixed. Here it is set to 15 pixels:</p>
+<p>生成火焰图比树状图更容易，因为你只需要在一个方向上进行细分，而每个条形图的高度是固定的。这里设置为15像素。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4466,7 +4462,7 @@ sub MAIN($dir = &#39;.&#39;) {
 </div>
 </div>
 <div class="paragraph">
-<p>We can add a switch to sub MAIN to call either tree-map or flame-graph, depending on a command-line option:</p>
+<p>我们可以在 <code>sub MAIN</code> 中添加一个开关，根据命令行选项，调用树状图或火焰图。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4489,25 +4485,25 @@ sub MAIN($dir = &#39;.&#39;) {
 </div>
 </div>
 <div class="paragraph">
-<p>Since SVG’s coordinate system places the zero of the vertical axis at the top, this actually produces an inverted flame graph, sometimes called an icicle graph (Figure 10-2):</p>
+<p>由于 SVG 的坐标系将垂直轴的零点置于顶部，这实际上产生了一个倒置的火焰图，有时也被称为冰柱图（图10-2）。</p>
 </div>
 <div class="paragraph">
-<p>Figure 10-2. Inverted flame graph, where the width of each bar represents a file/ directory size and the vertical position the nesting inside a directory</p>
+<p>图10-2. 倒置火焰图，其中每个条形图的宽度代表文件/目录的大小，垂直位置代表目录内的嵌套。</p>
 </div>
 <div class="paragraph">
-<p>This graph was generated by calling dirstat --type=flame src/rakubook/.</p>
+<p>这张图是通过调用 <code>dirstat --type=flame src/rakubook/</code> 生成的。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_functional_refactorings">10.4. Functional Refactorings</h3>
+<h3 id="_功能重构">10.4. 功能重构</h3>
 <div class="paragraph">
-<p>There’s a pattern that occurs three times in the code for generating tree maps and flame graphs: dividing an area based on the size of the files and directories in the tree associated with the area.</p>
+<p>在生成树状图和火焰图的代码中，有一个模式出现了三次：根据树中与该区域相关的文件和目录的大小来划分区域。</p>
 </div>
 <div class="paragraph">
-<p>Extracting such common code into a function is a good idea, but it’s slightly hindered by the fact that there is custom code inside the loop that’s part of the common code. Functional programming offers a solution: put the custom code inside a separate function and have the common code call it.</p>
+<p>把这样的常用代码提取到函数中是个好主意，但由于循环里面有自定义的代码是常用代码的一部分，所以稍有阻碍。函数式编程提供了一个解决方案：把自定义代码放在一个单独的函数里面，让通用代码来调用它。</p>
 </div>
 <div class="paragraph">
-<p>Applying this technique to the tree graph flame graph looks like this:</p>
+<p>将这种技术应用到树状图火焰图中，就会变成这样。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4565,8 +4561,10 @@ sub tree-map($tree, :$x1!, :$x2!, :$y1!, :$y2) {
 </div>
 </div>
 <div class="paragraph">
-<p>The newly introduced subroutine subdivide takes a directory tree, a start and end point, and finally a code object &amp;todo. For each child of the directory tree it calculates the new coordinates and then calls the &amp;todo function.
-The usage in subroutine flame-graph looks like this:</p>
+<p>新引入的子程序 subdivide 需要一个目录树、一个起点和终点，最后是一个代码对象 <code>&amp;todo</code>。对于目录树的每一个子程序，它都会计算出新的坐标，然后调用 <code>&amp;todo</code> 函数。</p>
+</div>
+<div class="paragraph">
+<p>子程序 flame-graph 中的用法是这样的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4576,14 +4574,13 @@ The usage in subroutine flame-graph looks like this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The code object being passed to subdivide starts with →, which introduces the signature of a block. The code block recurses into flame-graph, adding some extra arguments and turning two positional arguments into named arguments along the way.</p>
+<p>被传递给 subdivide 的代码对象以 <code>→</code> 开头，它引入了一个代码块的签名。该代码块递归到 flame-graph 中，增加了一些额外的参数，并将两个位置参数变成了命名参数在途中。</p>
 </div>
 <div class="paragraph">
-<p>This refactoring shortened the code and made it overall more pleasant
-to work with. But there’s still quite a bit of duplication between tree-map and flame-graph: both have an initial termination condition, a take of a rectangle, and then a call or two to subdivide. If we’re willing to put all the small differences into small, separate functions, we can unify it further.</p>
+<p>这种重构缩短了代码，并使其整体上更令人愉悦来工作。但树状图和火焰图之间还是有不少重复的地方：两者都有一个初始终止条件，一个矩形的取值，然后再调用一两个函数来进行细分。如果我们愿意把所有的小差异放到小的、独立的函数中，我们可以进一步统一它。</p>
 </div>
 <div class="paragraph">
-<p>If we were to pass all those new functions as arguments to each call, we would create an unpleasantly long argument list. Instead, we can use those functions to generate the previous functions flame-graph and tree-map:</p>
+<p>如果我们要把所有这些新函数作为参数传给每个调用，我们会创建一个令人不快的长参数列表。相反，我们可以用这些函数来生成前面的函数 flame-graph 和 tree-map。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4631,26 +4628,26 @@ my &amp;tree-map = svg-tree-gen
 </div>
 </div>
 <div class="paragraph">
-<p>Now we have a new function svg-tree-gen, which returns a function. The behavior of the returned function depends on the four small functions that svg-tree-gen receives as arguments.</p>
+<p>现在我们有一个新的函数 svg-tree-gen，它可以返回一个函数。返回函数的行为取决于 svg-tree-gen 收到的四个小函数作为参数。</p>
 </div>
 <div class="paragraph">
-<p>The first argument, terminate, determines under what condition the inner function should terminate early. For tree-map, that’s when the area is below 20 pixels; for flame-graph, that’s when the current y-coordinate $y1 exceeds the height of the whole image (stored in $y2). svg-tree-gen always calls this function with the four named arguments x1, x2, y1, and y2, so the terminate function must ignore the x1 and x2 values. It does this by adding | as a parameter, which is an anonymous capture. Such a parameter can bind arbitrary positional and named arguments, and since it’s an anonymous parameter, it discards all the values.</p>
+<p>第一个参数 terminate 决定了内部函数在什么情况下应该提前终止。对于树状图来说，就是当区域低于 20 像素时；对于火焰图来说，就是当当前的 y 坐标 $y1 超过整个图像的高度（存储在 $y2 中）时。svg-tree-gen 总是使用四个命名的参数 x1、x2、y1 和 y2 来调用这个函数，所以 terminate 函数必须忽略 x1 和 x2 的值。它通过添加 <code>|</code> 作为参数来实现这一点，这是一个匿名捕获。这样的参数可以绑定任意的位置参数和命名参数，由于是匿名参数，所以会丢弃所有的值。</p>
 </div>
 <div class="paragraph">
-<p>The second configuration function, base-height, determines the height of the rectangle in the base case. For flame-graph it’s a constant, so the configuration function must discard all arguments, again with a |. For tree-graph, it must return the difference between $y2 and $y1, as before the refactoring.</p>
+<p>第二个配置函数 base-height，确定矩形在基本情况下的高度。对于 flame-graph 来说，它是一个常数，所以配置函数必须丢弃所有的参数，同样用一个 <code>|</code>。对于树状图，它必须返回 $y2 和 $y1 之间的差值，就像重构前一样。</p>
 </div>
 <div class="paragraph">
-<p>The third function determines when to subdivide along the x axis. Flame graphs always divide along the x axis, so → | { True } accomplishes that. Our simplistic approach to tree graphs divides along the longer axis, so only along the x axis if $x2 – $x1 &gt; $y2 – $y1.</p>
+<p>第三个函数决定何时沿 x 轴进行细分。火焰图总是沿 x 轴划分，所以 <code>→ | { True }</code> 实现了这一点。我们对树形图的简单方法是沿着较长的轴划分，所以只有当 <code>$x2 - $x1 &gt; $y2 - $y1</code> 时才沿着x轴划分。</p>
 </div>
 <div class="paragraph">
-<p>The fourth and final function we pass to svg-tree-gen calculates the coordinate of the axis that isn’t being subdivided. In the case of flame-graph that’s increasing over the previous value by the height of the bars, and for tree-map it’s the unchanged coordinate,
-so we pass the identity function <code>→ $a { $a }</code>.</p>
+<p>第四个也是最后一个函数我们传递给 svg-tree-gen 计算没有被分割的轴的坐标。在 flame-graph 的情况下，那就是在之前的数值上增加条形图的高度，而对于 tree-map 来说，那就是不变的坐标。
+所以我们传递身份函数 <code>→ $a { $a }</code>。</p>
 </div>
 <div class="paragraph">
-<p>The inner function only needs a name because we need to call it from itself recursively; otherwise an anonymous function <code>sub ($tree, :$x1!, :$x2!, :$y1!, :$y2!) { …​ }</code> would have worked fine.</p>
+<p>内部函数只需要一个名字，因为我们需要从自身递归调用它；否则一个匿名函数 <code>sub ($tree, :$x1!, :$x2!, :$y1! }</code> 就可以了。</p>
 </div>
 <div class="paragraph">
-<p>This refactoring also unifies the names of the arguments to flame-graph and tree-map (previously, tree-map had :$y2 and flame-graph had :$height), so the call can now be simplified to</p>
+<p>这个重构也统一了 flame-graph 和 tree-map 的参数名称（之前 tree-map 有 <code>:$y2</code>，flame-graph 有 <code>:$height</code>），所以现在调用可以简化为:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4665,7 +4662,7 @@ say SVG.serialize(
 </div>
 </div>
 <div class="paragraph">
-<p>Now that we have very compact definitions of flame-graph and tree-map, it’s a good time to play with some of the parameters. Let’s introduce a bit of margin in the flame graph by having the increment in other greater than the bar height in base-height:</p>
+<p>现在我们已经有了非常紧凑的火焰图和树状图的定义，现在是玩一些参数的好时机。让我们在火焰图中引入一点余量，让其他的增量大于基准高度中的条形高度。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4676,7 +4673,7 @@ say SVG.serialize(
 </div>
 </div>
 <div class="paragraph">
-<p>Another knob to turn is to change the color generation to something more deterministic and make it configurable from the outside:</p>
+<p>另一个需要转动的旋钮是将颜色生成改为更确定的东西，并使其可从外部配置。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4702,7 +4699,7 @@ say SVG.serialize(
 </div>
 </div>
 <div class="paragraph">
-<p>We can, for instance, keep state within the color generator and return a slightly different color during each iteration:</p>
+<p>例如，我们可以在颜色生成器中保持状态，并在每次迭代中返回稍微不同的颜色。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4716,28 +4713,28 @@ say SVG.serialize(
 </div>
 </div>
 <div class="paragraph">
-<p>State variables keep their values between calls to the same subroutine and their initialization runs only on the first call. Hence this function slightly increases the lightness in each color channel for each invocation, except when it reaches 256, where the modulo operator % resets it back to a small value.</p>
+<p>状态变量在对同一子程序的调用之间保持其值，它们的初始化只在第一次调用时运行。因此这个函数在每次调用时都会略微增加每个颜色通道的亮度，除了当它达到256时，模数运算符 <code>%</code> 会将它重置回一个小值。</p>
 </div>
 <div class="paragraph">
-<p>If we plug this into our functions by passing color ⇒ &amp;color-range to the calls to svg-tree-gen, we get much less chaotic-looking output (Figures 10-3 and 10-4):</p>
+<p>如果我们通过将 <code>color ⇒ &amp;color-range</code> 传递给调用 svg-tree-gen 的函数来将其插入到我们的函数中，我们就可以得到看起来不那么混乱的输出（图10-3和10-4）。</p>
 </div>
 <div class="paragraph">
-<p>Figure 10-3. Tree map with deterministic color generation</p>
+<p>图10-3. 带有确定性颜色生成的树形图</p>
 </div>
 <div class="paragraph">
-<p>Figure 10-4. Flame graph with deterministic color generation and one pixel margin between bars</p>
+<p>图10-4. 带有确定性颜色生成的火焰图，条形图之间有一个像素的余量。</p>
 </div>
 <div class="paragraph">
-<p>We could also pass in the coordinates to the &amp;color routine, which would make it possible to write a color generator that produces a nice gradient.</p>
+<p>我们也可以将坐标传递给 <code>&amp;color</code> 例程，这样就可以写一个颜色生成器，生成一个漂亮的渐变。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_more_language_support_for_functional_programming">10.5. More Language Support for Functional Programming</h3>
+<h3 id="_更多的功能编程语言支持">10.5. 更多的功能编程语言支持</h3>
 <div class="paragraph">
-<p>As you’ve seen in the preceding examples, functional programming typically involves writing lots of small functions. Raku has some language features that make it very easy to write such small functions.</p>
+<p>正如你在前面的例子中所看到的，函数式编程通常需要编写大量的小函数。Raku 有一些语言特性，使得编写这种小函数非常容易。</p>
 </div>
 <div class="paragraph">
-<p>A common task is to write a function that calls a particular method on its argument, as we’ve seen here:</p>
+<p>一个常见的任务是编写一个函数，在其参数上调用一个特定的方法，正如我们在这里看到的那样。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4748,7 +4745,7 @@ say SVG.serialize(
 </div>
 </div>
 <div class="paragraph">
-<p>This can be abbreviated to *.total-size:</p>
+<p>可简写为 <code>*.total-size</code>。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4758,22 +4755,22 @@ say SVG.serialize(
 </div>
 </div>
 <div class="paragraph">
-<p>This works for chains of method calls too, so you could write @.children. map(*.total-size.round) if total-size returned a fractional number and you wanted to call the .round method on the result.</p>
+<p>这也适用于方法调用链，所以如果 total-size 返回一个小数，你可以写 <code>@.children.map(*.total-size.round)</code>，而你想在结果上调用 <code>.round</code> 方法。</p>
 </div>
 <div class="paragraph">
-<p>There are more cases where you can replace an expression with the “Whatever” star (<strong>) to create a small function. To create a function that adds 15 to its argument, you can write <code></code></strong><code> + 15</code> instead of <code>→ $a { $a + 15 }</code>.</p>
+<p>还有更多的情况下，你可以用 &#34;Whatever&#34;星号(<code><strong></strong></code><strong>)替换一个表达式来创建一个小函数。要创建一个在其参数上加15的函数，你可以写 <code></code></strong><code> + 15</code> 而不是 <code>→ $a { $a + 15 }</code>。</p>
 </div>
 <div class="paragraph">
-<p>If you need to write a function to just call another function, but pass more arguments to the second function, you can use the method assuming.</p>
+<p>如果你需要写一个函数，只是调用另一个函数，但传递更多的参数给第二个函数，你可以使用假设的方法。</p>
 </div>
 <div class="paragraph">
-<p>For example <code>→ $x { f(42, $x }</code> can be replaced with <code>&amp;f.assuming(42)</code>.This worksalsofornamedarguments,so→ $x { f($x, height ⇒ 42 ) } can be replaced with <code>&amp;f.assuming(height ⇒ 42)</code>.</p>
+<p>例如 <code>→ $x { f(42, $x }</code> 可以用 <code>&amp;f.assuming(42)</code> 代替。这个方法也适用于命名参数，所以 <code>→ $x { f($x, height ⇒ 42 ) }</code> 可以用 <code>&amp;f.assuming(height ⇒ 42)</code> 代替。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_more_improvements">10.6. More Improvements</h3>
+<h3 id="_更多改进">10.6. 更多改进</h3>
 <div class="paragraph">
-<p>The classes File and Directory have some common functionality, like the size and the name attributes, and the fact that they both have a method called total-size. A good way to factor out common behavior of classes is to put the common behavior into a role:</p>
+<p>File 和 Directory 这两个类有一些共同的功能，比如大小和名称属性，以及它们都有一个叫做 total-size 的方法。将类的共同行为因子化的一个好方法是将共同行为放到一个角色中。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4797,16 +4794,16 @@ class Directory does Path {
 </div>
 </div>
 <div class="paragraph">
-<p>A role looks structurally similar to a class, and using the does keyword in the class declaration applies the role to the class. This role application copies attributes and methods into the target class, but with some additional compile- time checks. One such check is that a class must implement stubbed-out methods like method total-size, where the …​ as the method body marked it as a stub. In addition, when you apply multiple roles to the same class, name clashes are detected and throw an error unless you implement the method in the class for disambiguation.</p>
+<p>角色在结构上与类相似，在类声明中使用 <code>do</code> 关键字将角色应用到类中。这个角色应用将属性和方法复制到目标类中，但是需要一些额外的编译时检查。其中一个检查是，一个类必须实现像方法 total-size 这样的存根方法，其中的 <code>…​</code> 作为方法体将其标记为存根。此外，当你将多个角色应用到同一个类中时，除非你在类中实现方法进行歧义，否则会检测到名称冲突并抛出一个错误。</p>
 </div>
 <div class="paragraph">
-<p>Roles are the preferred method of code reuse (apart from delegation) in Raku, because of the safety features mentioned previously.</p>
+<p>在 Raku 中，角色是代码重用的首选方法（除了授权），因为前面提到的安全特性。</p>
 </div>
 <div class="paragraph">
-<p>Now that File and Directory have a common role, you can use that role as a type constraint for subroutines that expect one of these types, such as sub <code>subdivide(Path $tree, $lower, $upper, &amp;todo)</code>.</p>
+<p>现在 File 和 Directory 有一个共同的角色，你可以使用这个角色作为期待这些类型之一的子程序的类型约束，比如 <code>sub subdivide(Path $tree, $lower, $upper, &amp;todo)</code>。</p>
 </div>
 <div class="paragraph">
-<p>Finally, the type argument to sub MAIN can have two possible values: flame for flame graphs or tree for tree maps. A data structure that models this behavior is an enum or enumeration:</p>
+<p>最后，sub MAIN 的类型参数可以有两种可能的值：火焰图的火焰或树图的树。模拟这种行为的数据结构是一个枚举或枚举。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4829,31 +4826,31 @@ sub MAIN($dir = &#39;.&#39;, GraphType :$type=flame) {
 </div>
 </div>
 <div class="paragraph">
-<p>The values of an enum are integers starting from zero, hence the comparison with == instead of eq. You can access the possible values of an enum either as short identifiers (flame) or through the namespace of the enum type, GraphType::flame.</p>
+<p>枚举的值是从零开始的整数，因此用 <code>==</code> 代替 <code>eq</code> 进行比较。你可以通过短标识符(flame)或者通过枚举类型的命名空间 GraphType::flame 来访问一个枚举的可能值。</p>
 </div>
 <div class="paragraph">
-<p>Now if you obtain a help message from the script (by running it with the --help option), the type argument is automatically documented: --type=&lt;GraphType&gt; (flame tree).</p>
+<p>现在，如果你从脚本中获得帮助信息（通过使用 <code>--help</code> 选项运行它），类型参数会自动被记录下来：<code>--type=&lt;GraphType&gt;</code>（火焰树）。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_explore">10.7. Explore!</h3>
+<h3 id="_探索">10.7. 探索!</h3>
 <div class="paragraph">
-<p>To get familiar with the functional programming concept, I encourage you to look through the code you’ve written so far and refactor near-duplicate code blocks into a common base and to swap out the code that differs into callbacks.</p>
+<p>为了熟悉函数式编程的概念，我鼓励你查看你目前所写的代码，并将近乎重复的代码块重构为一个共同的基础，并将不同的代码换成回调。</p>
 </div>
 <div class="paragraph">
-<p>More importantly, try to find abstractions that make sense. In the visualization examples, the underlying principle is divide and conquer.5 Can you come up with a general divide and conquer implementation that is still useful?</p>
+<p>更重要的是，尽量找到有意义的抽象。在可视化的例子中，底层原则是分而治之，5你能想出一个通用的分而治之的实现，还能用得上吗？</p>
 </div>
 <div class="paragraph">
-<p>Thinking back to the tree map and flame graphs, maybe you can separate the logic for sizing rectangles from the logic for placing the rectangles?</p>
+<p>回想树状图和火焰图，也许你可以把矩形的尺寸逻辑和放置矩形的逻辑分开？</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_summary">10.8. Summary</h3>
+<h3 id="_总结_9">10.8. 总结</h3>
 <div class="paragraph">
-<p>Functional programming offers techniques for extracting common logic into separate functions. The desired differences in behavior can be encoded in more functions that you pass in as arguments to other functions.</p>
+<p>函数式编程提供了将普通逻辑提取到独立函数中的技术。所需的行为差异可以被编码在更多的函数中，您可以将这些函数作为参数传递给其他函数。</p>
 </div>
 <div class="paragraph">
-<p>Raku supports functional programming by making functions first class, so you can pass them around as ordinary objects. It also offers closures (access to outer lexical variables from functions) and various shortcuts that make it more pleasant to write short functions.</p>
+<p>Raku 支持函数式编程，使函数成为第一类，所以你可以把它们作为普通对象来传递。它还提供了闭包(从函数中访问外部词法变量)和各种快捷方式，使得编写短函数更加愉快。</p>
 </div>
 </div>
 </div>
@@ -5095,7 +5092,7 @@ say @list.collate;                 # (a Ä ä o ö ø)</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_9">11.5. 总结</h3>
+<h3 id="_总结_10">11.5. 总结</h3>
 <div class="paragraph">
 <p>Raku 非常重视英语以外的其他语言，并不遗余力地帮助用户使用这些语言和它们所使用的字符。</p>
 </div>
@@ -5109,15 +5106,15 @@ say @list.collate;                 # (a Ä ä o ö ø)</code></pre>
 <h2 id="_使用_inine_python_和_matplotlib_画图">12. 使用 Inine-Python 和 Matplotlib 画图</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Occasionally I come across git repositories where I want to know how active they are and who the main developers are.</p>
+<p>偶尔会遇到 git 仓库，我想知道它们的活跃度以及主要开发者是谁。</p>
 </div>
 <div class="paragraph">
-<p>Let’s develop a script that plots the commit history, and explore how to use Python modules in Raku.</p>
+<p>让我们开发一个可以绘制提交历史的脚本，并探索如何在 Raku 中使用 Python 模块。</p>
 </div>
 <div class="sect2">
 <h3 id="_提取状态">12.1. 提取状态</h3>
 <div class="paragraph">
-<p>We want to plot the number of commits by author and date. We can get this information easily by passing some options to git log:</p>
+<p>我们想根据作者和日期绘制提交次数。我们可以通过向 git log 传递一些选项来获取这些信息。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5132,13 +5129,13 @@ for $proc.out.lines -&gt; $line {
 </div>
 </div>
 <div class="paragraph">
-<p>run executes an external command and :out tells it to capture the command’s output, making it available as $proc.out. The command is a list, with the first element being the actual executable and the rest being command-line arguments to this executable.</p>
+<p>run 执行一个外部命令，而 <code>:out</code> 则告诉它捕获命令的输出，使其成为 $proc.out。命令是一个列表，第一个元素是实际的可执行文件，其余是这个可执行文件的命令行参数。</p>
 </div>
 <div class="paragraph">
-<p>Here git log gets the options --date short --pretty=format:%ad!%an, which instructs it to produce lines like2017-03-01!John Doe.This line can be parsed with a simple call to $line.split: &#39;!&#39;, 2,which splits onthe! and limits the result to two elements.Assigning it to a two-element list( $date, $author ) unpacks it.We then use hashes to count commits by author(in %total), by author and date (%by-author), and finally by date. In the second case,%by-author{$author} isn’t even a hash yet and we can still hash-index it. This is due to a feature called autovivification, which automatically creates (“vivifies”) objects where we need them. The use of ++ creates integers, {…​} indexing creates hashes, […​] indexing, .push creates arrays, and so on.</p>
+<p>这里 git log 得到的选项是 <code>--date short --pretty=format:%ad!%an</code>，它指示它产生像 2017-03-01!John Doe这样的行。这行可以通过简单的调用 <code>$line.split</code> 来解析：&#39;!&#39;，2，它在 the! 上进行分割，并将结果限制为两个元素。然后，我们使用哈希值按作者(%total)，按作者和日期(%by-author)，最后按日期计算提交次数。在第二种情况下，%by-author{$author} 甚至还不是一个哈希值，我们仍然可以对它进行哈希索引。这要归功于一个叫做 autovivification 的特性，它能在我们需要的地方自动创建（&#34;vivifies&#34;）对象。使用 <code>++</code> 创建整数，{…​} 索引创建哈希，[…​] 索引，<code>.push</code> 创建数组，等等。</p>
 </div>
 <div class="paragraph">
-<p>To get from these hashes to the top contributors by commit count, we can sort %total by value. Since this sorts in ascending order, sorting by the negative value returns the list in descending order. The list contains Pair1 objects, where we only want the first five, and only their keys:</p>
+<p>要想从这些哈希值中得到提交次数最多的贡献者，我们可以按值对 %total 进行排序。因为这是按升序排序的，所以按负值排序会按降序返回列表。列表中包含 Pair1 对象，我们只需要前五个对象，而且只需要它们的键。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5146,7 +5143,7 @@ for $proc.out.lines -&gt; $line {
 </div>
 </div>
 <div class="paragraph">
-<p>For each author, we can extract the dates of their activity and their commit counts like this:</p>
+<p>对于每个作者，我们可以像这样提取他们的活动日期和提交次数。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5155,19 +5152,19 @@ my @counts = %by-author{$author}{@dates};</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The last line uses slicing, that is, indexing a hash with a list to return a list of elements.</p>
+<p>最后一行使用了 slicing，即用列表索引一个哈希，返回一个元素列表。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_plotting_with_python">12.2. Plotting with Python</h3>
+<h3 id="_用_python_进行绘图">12.2. 用 Python 进行绘图</h3>
 <div class="paragraph">
-<p>Matplotlib is a very versatile library for all sorts of plotting and visualization tasks. It is based on NumPy,2 a Python library for scientific and numeric computing.</p>
+<p>Matplotlib 是一个非常通用的库，适用于各种绘图和可视化任务。它基于 NumPy，一个用于科学和数值计算的 Python 库。</p>
 </div>
 <div class="paragraph">
-<p>Matplotlib3 is written in Python and for Python programs, but that won’t stop us from using it in a Raku program.</p>
+<p>Matplotlib 是用 Python 编写的，而且是为 Python 程序编写的，但这并不妨碍我们在 Raku 程序中使用它。</p>
 </div>
 <div class="paragraph">
-<p>But first, let’s take a look at a basic plotting example that uses dates on the x axis:</p>
+<p>但首先，让我们来看看一个在 x 轴上使用日期的基本绘图示例。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5187,22 +5184,22 @@ plt.show()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>To make this run, you have to install Python 2.7 and matplotlib.4 You can do this on Debian-based Linux systems with <code>apt-get install -y python-matplotlib</code>. The package name is the same on RPM-based distributions such as CentOS or SUSE Linux. MacOS users are advised to install Python 2.7 through homebrew or macports and then use <code>pip2 install matplotlib</code> or <code>pip2.7 install matplotlib</code> to get the library. Windows installation is probably easiest through the conda5 package manager, which offers prebuilt binaries of both Python and matplotlib.</p>
+<p>要运行这个程序，你必须安装 Python 2.7 和 matplotlib。你可以在基于 Debian 的 Linux 系统上用 <code>apt-get install -y python-matplotlib</code> 来完成。在基于 RPM 的发行版上，如 CentOS 或 SUSE Linux，软件包的名称是一样的。建议 MacOS 用户通过 homebrew 或 macports 安装 Python 2.7，然后使用 <code>pip2 install matplotlib</code> 或 <code>pip2.7 install matplotlib</code> 来获取库。Windows 的安装可能是最简单的，通过 conda5 包管理器，它提供了 Python 和 matplotlib 的预建二进制文件。</p>
 </div>
 <div class="paragraph">
-<p>When you run this script with python2.7 dates.py, it opens a GUI window, showing the plot and some controls, which allow you to zoom, scroll, and write the plot graphic to a file (Figure 12-1):</p>
+<p>当你用 python2.7 dates.py 运行这个脚本时，它将打开一个 GUI 窗口，显示绘图和一些控件，允许你缩放、滚动和将绘图图形写入一个文件 (图 12-1)。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_bridging_the_gap">12.3. Bridging the Gap</h3>
+<h3 id="_缩小差距">12.3. 缩小差距</h3>
 <div class="paragraph">
-<p>The Rakudo Raku compiler comes with a handy library for calling foreign functions6—called ‘NativeCall’—which allows you to call functions written in C, or anything with a compatible binary interface.</p>
+<p>Rakudo Raku 编译器自带了一个方便的库，用于调用外来函数，即 &#34;NativeCall&#34;，它允许你调用用C写的函数，或者任何具有兼容二进制接口的函数。</p>
 </div>
 <div class="paragraph">
-<p>The Inline::Python7 library uses the native call functionality to talk to Python’s C API and offers interoperability between Raku and Python code. At the time of writing, this interoperability is still fragile in places, but can be worth using for some of the great libraries that Python has to offer.</p>
+<p>Inline::Python 库使用本地调用功能与 Python 的 C API 对话，并提供 Raku 和 Python 代码之间的互操作性。在写这篇文章的时候，这种互操作性在某些地方还是很脆弱的，但是对于 Python 所提供的一些优秀的库来说，还是值得使用的。</p>
 </div>
 <div class="paragraph">
-<p>To install Inline::Python, you must have a C compiler available, and then run</p>
+<p>要安装 Inline::Python，你必须有一个可用的 C 编译器，然后运行</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5210,7 +5207,7 @@ plt.show()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Now you can start to run Python 2 code in your Raku programs:</p>
+<p>现在你可以开始在你的 Raku 程序中运行 Python 代码了。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5221,7 +5218,7 @@ $py.run: &#39;print(&#34;Hello, Raku&#34;)&#39;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Besides the run method, which takes a string of Python code and executes it, you can also use call to call Python routines by specifying the namespace, the routine to call, and a list of arguments:</p>
+<p>除了运行方法，即接收一串 Python 代码并执行它之外，你还可以通过指定命名空间、要调用的例程和参数列表，使用 call 来调用 Python 例程。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5234,10 +5231,10 @@ $py.call(&#39;__builtin__&#39;, &#39;print&#39;, $date); # 2017-01-31</code></pr
 </div>
 </div>
 <div class="paragraph">
-<p>The arguments that you pass to call are Raku objects, such as the three Int objects in this example. Inline::Python automatically translates them into the corresponding Python built-in data structure. It translates numbers, strings, arrays, and hashes. Return values are also translated in the opposite direction, though since Python 2 does not distinguish properly between byte and Unicode strings, Python strings end up as buffers in Raku.</p>
+<p>您传递给调用的参数是 Raku 对象，例如本例中的三个 Int 对象。Inline::Python 会自动将它们翻译成相应的 Python 内置数据结构。它可以翻译数字、字符串、数组和哈希。尽管由于 Python 2 没有正确区分字节和 Unicode 字符串，Python 字符串在 Raku 中最终会被翻译成缓冲区，但返回值也会被反方向翻译。</p>
 </div>
 <div class="paragraph">
-<p>Objects that Inline::Python cannot translate are handled as opaque objects on the Raku side. You can pass them back into Python routines(as shown with the preceding print call) and you can call methods on them:</p>
+<p>Inline::Python 不能翻译的对象在 Raku 端被处理成不透明的对象。你可以把它们传回 Python 例程中(如前面的 print 调用所示)，并且你可以调用它们的方法。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5245,7 +5242,7 @@ $py.call(&#39;__builtin__&#39;, &#39;print&#39;, $date); # 2017-01-31</code></pr
 </div>
 </div>
 <div class="paragraph">
-<p>Raku exposes attributes through methods, so Raku has no syntax for accessing attributes from foreign objects directly. For instance, if you try to access the year attribute of datetime.date through the normal method call syntax, you get an error:</p>
+<p>Raku 通过方法暴露属性，所以 Raku 没有直接从外部对象访问属性的语法。例如，如果你试图通过正常的方法调用语法来访问 datetime.date 的年份属性，你会得到一个错误。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5253,7 +5250,7 @@ $py.call(&#39;__builtin__&#39;, &#39;print&#39;, $date); # 2017-01-31</code></pr
 </div>
 </div>
 <div class="paragraph">
-<p>dies with</p>
+<p>死于：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5261,7 +5258,7 @@ $py.call(&#39;__builtin__&#39;, &#39;print&#39;, $date); # 2017-01-31</code></pr
 </div>
 </div>
 <div class="paragraph">
-<p>Instead, you have to use the getattr builtin:</p>
+<p>相反，你必须使用内置的 getattr。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5270,9 +5267,9 @@ $py.call(&#39;__builtin__&#39;, &#39;print&#39;, $date); # 2017-01-31</code></pr
 </div>
 </div>
 <div class="sect2">
-<h3 id="_using_the_bridge_to_plot">12.4. Using the Bridge to Plot</h3>
+<h3 id="_使用桥接来画图">12.4. 使用桥接来画图</h3>
 <div class="paragraph">
-<p>We need access to two namespaces in Python, datetime and matplotlib.pyplot, so let’s start by importing them and writing some short helpers:</p>
+<p>我们需要访问 Python 中的两个命名空间，datetime 和 matplotlib.pyplot，所以让我们从导入它们开始，并编写一些简短的帮助程序。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5289,7 +5286,7 @@ sub pydate(Str $d) {
 </div>
 </div>
 <div class="paragraph">
-<p>We can now call pydate(&#39;2017-03-01&#39;) to create a Python datetime. date object from an ISO-formatted string and call the plot function to access functionality from matplotlib:</p>
+<p>我们现在可以调用 pydate(&#39;2017-03-01&#39;) 从 ISO 格式化的字符串中创建一个 Python 的 datetime.date 对象，并调用 plotlib 的 plot 函数来访问 matplotlib 的功能。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5307,10 +5304,10 @@ $subplots.plot:
 </div>
 </div>
 <div class="paragraph">
-<p>The Raku call plot(&#39;subplots&#39;) corresponds to the Python code fig, subplots = plt.subplots(). Passing arrays to Python functions needs a bit of extra work, because Inline::Python flattens arrays. Using an extra $ sigil in front of an array puts it into an extra scalar and thus prevents the flattening.</p>
+<p>Raku 调用 plot(&#39;subplots&#39;) 对应于 Python 代码 fig，subplots = plt.subplots()。将数组传递给 Python 函数需要一点额外的工作，因为 Inline::Python 将数组扁平化。在数组前面使用一个额外的 $ 标记会使它变成一个额外的标量，从而防止扁平化。</p>
 </div>
 <div class="paragraph">
-<p>Now we can actually plot the number of commits by author, add a legend, and plot the result:</p>
+<p>现在我们可以绘制作者的提交次数，添加一个图例，然后绘制结果。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5331,19 +5328,19 @@ plot(&#39;show&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>When run in the zef git repository,8 it produces the plot shown in Figure 12-2:</p>
+<p>当在 zef git 仓库中运行时，它产生的图如图12-2所示。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_stacked_plots">12.5. Stacked Plots</h3>
+<h3 id="_堆叠图">12.5. 堆叠图</h3>
 <div class="paragraph">
-<p>I am not yet happy with the plot, so I want to explore using stacked plots for presenting the same information. In a regular plot, the y coordinate of each plotted value is proportional to its value. In a stacked plot, it is the distance to the previous value that is proportional to its value. This is nice for values that add up to a total that is also interesting.</p>
+<p>我对这个图还不满意，所以我想探索使用叠加图来呈现同样的信息。在常规图中，每个绘图值的y坐标与其值成正比。在叠加图中，与前一个值的距离与其值成正比。这对于数值加起来的总和也很有意思。</p>
 </div>
 <div class="paragraph">
-<p>Matplotlib offers a method called stackplot9 for this task. Contrary to multiple plot calls on a subplot object, it requires a shared x axis for all data series. Hence we must construct one array for each author of git commits, where dates with no value are set to zero.</p>
+<p>Matplotlib 为这个任务提供了一个名为 stackplot 的方法。与子图对象上的多次绘图调用相反，它需要为所有数据系列提供一个共享的x轴。因此，我们必须为每个 git 提交的作者构造一个数组，其中没有值的日期被设置为0。</p>
 </div>
 <div class="paragraph">
-<p>This time we have to construct an array of arrays where each inner array has the values for one author:</p>
+<p>这次我们要构造一个数组，每个数组内部有一个作者的值。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5358,7 +5355,7 @@ for @dates -&gt; $d {
 </div>
 </div>
 <div class="paragraph">
-<p>Now plotting becomes a simple matter of a method call, followed by the usual commands to add a title and show the plot:</p>
+<p>现在，绘图变成了一个简单的方法调用，然后是添加标题和显示情节的常用命令。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5368,13 +5365,13 @@ plot(&#39;show&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The result (again run on the zef source repository) is shown in Figure 12-3:</p>
+<p>结果（再次在 zef 源码库上运行）如图12-3所示。</p>
 </div>
 <div class="paragraph">
-<p>Comparing this to the previous visualization reveals a discrepancy: there were no commits in 2014, and yet the stacked plot makes it appear this way. In fact, the previous plots would have shown the same “alternative facts” if we had chosen lines instead of points. It comes from matplotlib (like nearly all plotting libraries) interpolating linearly between data points. But in our case, a date with no data points means zero commits happened on that date.</p>
+<p>将其与之前的可视化比较，发现了一个差异：2014年没有提交，但堆叠图却让它看起来是这样的。事实上，如果我们选择线而不是点，之前的图也会显示同样的&#34;另类事实&#34;。这来自于 matplotlib（像几乎所有的绘图库一样）在数据点之间进行线性插值。但在我们的例子中，一个没有数据点的日期意味着该日没有发生任何提交。</p>
 </div>
 <div class="paragraph">
-<p>To communicate this to matplotlib, we must explicitly insert zero values for missing dates. This can be achieved by replacing</p>
+<p>为了将这一点传达给 matplotlib，我们必须明确地为缺失的日期插入零值。这可以通过替换:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5382,7 +5379,7 @@ plot(&#39;show&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>with the line</p>
+<p>用下面这行代码:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5390,16 +5387,16 @@ plot(&#39;show&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The minmax method10 finds the minimal and maximal values, and returns them in a Range.11 Assigning the range to an array turns it into an array of all values between the minimal and the maximal value. The logic for assembling the @stack variable already maps missing values to zero.</p>
+<p>minmax 方法 10 找到最小值和最大值，并以 Range 的形式返回。11 将 Range 分配给一个数组后，它就变成了一个包含最小值和最大值之间所有值的数组。汇编 @stack 变量的逻辑已经将缺失的值映射为零。</p>
 </div>
 <div class="paragraph">
-<p>The result looks a bit better, but still far from perfect (Figure 12-4):</p>
+<p>结果看起来好了一些，但还是远远不够完美（图12-4）。</p>
 </div>
 <div class="paragraph">
-<p>Thinking more about the problem, contributions from separate days should not be joined together, because it produces misleading results. Matplotlib doesn’t support adding a legend automatically to stacked plots, so this seems to be to be a dead end.</p>
+<p>进一步思考这个问题，不应该将不同日子的贡献连接在一起，因为这会产生误导性的结果。Matplotlib 不支持为堆叠图自动添加图例，所以这似乎是一个死胡同。</p>
 </div>
 <div class="paragraph">
-<p>Since a dot plot didn’t work very well, let’s try a different kind of plot that represents each data point separately: a bar chart, or more specifically, a stacked bar chart. Matplotlib offers the bar plotting method where the named parameter bottom can be used to generate the stacking:</p>
+<p>既然点阵图的效果不是很好，那我们就试试另一种分别表示每个数据点的图：条形图，或者更具体地说，堆叠条形图。Matplotlib 提供了条形图绘制方法，其中命名参数 bottom 可以用来生成叠加。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5419,7 +5416,7 @@ for @dates -&gt; $d {
 </div>
 </div>
 <div class="paragraph">
-<p>We need to supply color names ourselves and set the edge color of the bars to the same color, otherwise the black edge color dominates the result:</p>
+<p>我们需要自己提供颜色名称，并将条形图的边缘颜色设置为相同的颜色，否则黑色的边缘颜色会主导结果。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5445,42 +5442,42 @@ plot(&#39;show&#39;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If you want to improve the result further, you could experiment with limiting the number of bars by lumping together contributions by week or month (or maybe $n-day period).</p>
+<p>如果你想进一步改善结果，你可以尝试通过按周或月(或者是 $n 天的时间段)将捐款集中在一起来限制条数。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_idiomatic_use_of_inlinepython">12.6. Idiomatic Use of Inline::Python</h3>
+<h3 id="_inlinepython_的惯用方法">12.6. Inline::Python 的惯用方法</h3>
 <div class="paragraph">
-<p>Now that the plots look informative and correct, it’s time to explore how to better emulate the typical Python APIs through Inline::Python.</p>
+<p>现在，这些图看起来很有信息量，也很正确，现在是时候探索如何通过 Inline::Python 更好地模拟典型的 Python API 了。</p>
 </div>
 <div class="sect3">
-<h4 id="_types_of_python_apis">12.6.1. Types of Python APIs</h4>
+<h4 id="_python_api_的类型">12.6.1. Python API 的类型</h4>
 <div class="paragraph">
-<p>Python is an object-oriented language, so many APIs involve method calls, which Inline::Python helpfully automatically translates for us.</p>
+<p>Python 是一门面向对象的语言，所以许多 API 都涉及到方法调用，Inline::Python 会帮助我们自动翻译这些方法。</p>
 </div>
 <div class="paragraph">
-<p>But the objects must come from somewhere and typically this is by calling a function that returns an object, or by instantiating a class. In Python, those two are really the same under the hood, since instantiating a class is the same as calling the class as if it were a function.</p>
+<p>但是对象必须来自某个地方，通常是通过调用一个返回对象的函数，或者通过实例化一个类。在 Python 中，这两种方式在本质上是一样的，因为实例化一个类就像调用一个函数一样。</p>
 </div>
 <div class="paragraph">
-<p>If you want to improve the result further, you could experiment with limiting the number of bars by lumping together contributions by week or month (or maybe $n-day period).</p>
+<p>如果你想进一步改善结果，你可以尝试通过将贡献按周或月（或者可能是 $n 天的周期）归纳在一起来限制条数。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_idiomatic_use_of_inlinepython_2">12.7. Idiomatic Use of Inline::Python</h3>
+<h3 id="_inlinepython_的惯用方法_2">12.7. Inline::Python 的惯用方法</h3>
 <div class="paragraph">
-<p>Now that the plots look informative and correct, it’s time to explore how to better emulate the typical Python APIs through Inline::Python.</p>
+<p>现在，这些图看起来很有信息量，也很正确，现在是时候探索如何通过 Inline::Python 更好地模拟典型的 Python API 了。</p>
 </div>
 <div class="sect3">
-<h4 id="_types_of_python_apis_2">12.7.1. Types of Python APIs</h4>
+<h4 id="_python_api_的类型_2">12.7.1. Python API 的类型</h4>
 <div class="paragraph">
-<p>Python is an object-oriented language, so many APIs involve method calls, which Inline::Python helpfully automatically translates for us.</p>
+<p>Python 是一门面向对象的语言，所以许多 API 都涉及到方法调用，Inline::Python 会帮助我们自动翻译这些方法。</p>
 </div>
 <div class="paragraph">
-<p>But the objects must come from somewhere and typically this is by calling a function that returns an object, or by instantiating a class. In Python, those two are really the same under the hood, since instantiating a class is the same as calling the class as if it were a function.</p>
+<p>但是对象必须来自某个地方，通常是通过调用一个返回对象的函数，或者通过实例化一个类。在 Python 中，这两种方式在本质上是一样的，因为实例化一个类就像调用一个函数一样。</p>
 </div>
 <div class="paragraph">
-<p>An example of this (in Python) would be</p>
+<p>这方面的一个例子 (在 Python 中) 是这样的</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5489,7 +5486,7 @@ import subplots result = subplots()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>But the matplotlib documentation tends to use another, equivalent syntax:</p>
+<p>但 matplotlib 文档往往使用另一种等价的语法。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5498,13 +5495,13 @@ result = plt.subplots()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This uses the subplots symbol (class or function) as a method on the module matplotlib.pyplot, which the import statement aliases to plt. This is a more object-oriented syntax for the same API.</p>
+<p>这使用子图符号(类或函数)作为模块 matplotlib.pyplot 上的方法，导入语句将其别名为 plt.这是一种更面向对象的语法，用于相同的 API。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_mapping_the_function_api">12.7.2. Mapping the Function API</h4>
+<h4 id="_函数_api_的映射">12.7.2. 函数 API 的映射</h4>
 <div class="paragraph">
-<p>The previous code examples used this Perl 6 code to call the subplots symbol:</p>
+<p>前面的代码示例使用了这段 Perl 6 代码来调用 subplots 符号。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5533,19 +5530,19 @@ show();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This makes the functions’ usage quite nice, but comes at the cost of duplicating their names. One can view this as a feature, because it allows the creation of different aliases, or as a source for bugs when the order is messed up, or a name misspelled.</p>
+<p>这使得函数的使用相当不错，但代价是重复了它们的名字。我们可以把这看作是一个特性，因为它允许创建不同的别名，也可以看作是一个错误的来源，当顺序被打乱，或者名字拼写错误时。</p>
 </div>
 <div class="paragraph">
-<p>How could we avoid the duplication should we choose to create wrapper functions?</p>
+<p>如果我们选择创建包装函数，如何避免重复？</p>
 </div>
 <div class="paragraph">
-<p>This is where Raku’s flexibility and introspection abilities pay off. There are two key components that allow a nicer solution: the fact that declarations are expressions, and that you can introspect variables for their names.</p>
+<p>这就是 Raku 的灵活性和自省能力的作用。有两个关键部分可以让解决方案更加完善：声明是表达式的事实，以及你可以反省变量的名称。</p>
 </div>
 <div class="paragraph">
-<p>The first part means you can write mysub my ($a, $b), which declares the variables $a and $b, and calls a function with those variables as arguments. The second part means that $a.VAR.name returns a string &#39;$a&#39;, the name of the variable.</p>
+<p>第一部分意味着你可以写 <code>mysub my ($a, $b)</code>，声明变量 $a 和 $b，并调用一个以这些变量为参数的函数。第二部分的意思是，$a.VAR.name 返回一个字符串 &#39;$a&#39;，即变量的名称。</p>
 </div>
 <div class="paragraph">
-<p>Let’s combine this to create a wrapper that initializes subroutines for us:</p>
+<p>让我们结合这个来创建一个包装器，为我们初始化子程序。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5565,8 +5562,7 @@ pysub &#39;matplotlib.pyplot&#39;,
 </div>
 </div>
 <div class="paragraph">
-<p>This avoids duplicating the name, but forces us to use some lower-level
-Raku features in sub pysub. Using ordinary variables means that accessing their .VAR.name results in the name of the variable, not the name of the variable that’s used on the caller side. So we can’t use slurpy arguments as in</p>
+<p>这样就避免了名称的重复，但迫使我们在子 pysub 中使用一些低级的 Raku 功能。使用普通变量意味着访问它们的 <code>.VAR.name</code> 的结果是变量的名称，而不是在调用方使用的变量名称。所以，我们不能使用像在</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5574,13 +5570,13 @@ Raku features in sub pysub. Using ordinary variables means that accessing their 
 </div>
 </div>
 <div class="paragraph">
-<p>Instead we must use |args to obtain the rest of the arguments in a Capture.12 This doesn’t flatten the list of variables passed to the function, so when we iterate over them, we must do so by accessing args[0]. By default, loop variables are read-only, which we can avoid by using &lt;→ instead of → to introduce the signature. Fortunately, that also preserves the name of the caller side variable.</p>
+<p>相反，我们必须使用 <code>|args</code> 来获取 Capture 中其余的参数。这并没有将传递给函数的变量列表扁平化，所以当我们在它们上面迭代时，我们必须通过访问 <code>args[0]</code> 来实现。默认情况下，循环变量是只读的，我们可以通过使用 &lt;-&gt; 而不是 -&gt; 来引入签名来避免。幸运的是，这也保留了调用方变量的名称。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_an_object_oriented_interface">12.7.3. An Object-Oriented Interface</h4>
+<h4 id="_面向对象的接口">12.7.3. 面向对象的接口</h4>
 <div class="paragraph">
-<p>Instead of exposing the functions, we can also create types that emulate the method calls on Python modules. For that, we can implement a class with a method FALLBACK, which Raku calls for us when calling a method that is not implemented in the class:</p>
+<p>我们可以不暴露函数，也可以创建模拟 Python 模块上方法调用的类型。为此，我们可以在一个类中实现一个方法 FALLBACK，当调用类中没有实现的方法时，Raku 会帮我们调用。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5604,13 +5600,13 @@ $pyplot.show;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Class PyPlot inherits directly from Mu, the root of the Raku type hierarchy, instead of Any, the default parent class (which in turn inherits from Mu). Any introduces a large number of methods that Raku objects get by default, and since FALLBACK is only invoked when a method is not present, this is something to avoid.</p>
+<p>类 PyPlot 直接继承自 Raku 类型层次结构的根 Mu，而不是默认的父类 Any（后者又继承自 Mu）。Any 引入了大量 Raku 对象默认得到的方法，由于 FALLBACK 只有在方法不存在时才会被调用，所以这是需要避免的。</p>
 </div>
 <div class="paragraph">
-<p>The method TWEAK is another method that Raku calls automatically for us, after the object has been fully instantiated. All-caps method names are reserved for such special purposes. It is marked as a submethod, which means it is not inherited into subclasses. Since TWEAK is called at the level of each class, if it were a regular method, a subclass would call it twice implicitly. Note that TWEAK is only supported in Rakudo version 2016.11 and later.</p>
+<p>TWEAK 这个方法是在对象完全实例化后，Raku 自动为我们调用的另一个方法。全大写的方法名是为了这种特殊用途而保留的。它被标记为子方法，这意味着它不会被继承到子类中。由于 TWEAK 是在每个类的层次上被调用的，如果它是一个普通的方法，一个子类会隐式地调用它两次。需要注意的是，TWEAK 只在 Rakudo 2016.11 及以后的版本中支持。</p>
 </div>
 <div class="paragraph">
-<p>There’s nothing specific to the Python package matplotlib.pyplot in class PyPlot, except the namespace name. We could easily generalize it to any namespace:</p>
+<p>除了命名空间名称外，PyPlot 类中的 Python 包 matplotlib.pyplot 并没有什么特别之处。我们可以很容易地将其泛化到任何命名空间。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5628,7 +5624,7 @@ my $pyplot = PythonModule.new(:$py, :namespace&lt;matplotlib.pyplot&gt;);</code>
 </div>
 </div>
 <div class="paragraph">
-<p>This is one Raku type that can represent any Python module. If instead we want a separate Raku type for each Python module, we could use roles, which are optionally parameterized:</p>
+<p>这是一个可以代表任何 Python 模块的 Raku 类型。如果我们想要为每个 Python 模块建立一个单独的 Raku 类型，我们可以使用 roles，它可以选择参数化。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5646,7 +5642,7 @@ my $pyplot = PythonModule[&#39;matplotlib.pyplot&#39;].new(:$py);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Using this approach, we can create type constraints for Python modules in Raku space:</p>
+<p>使用这种方法，我们可以在 Raku 空间中为 Python 模块创建类型约束。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5656,17 +5652,17 @@ my $pyplot = PythonModule[&#39;matplotlib.pyplot&#39;].new(:$py);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Passing in any wrapped Python module other than matplotlib.pyplot results in a type error.</p>
+<p>传入除 matplotlib.pyplot 以外的任何封装的 Python 模块都会导致类型错误。</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_总结_10">12.8. 总结</h3>
+<h3 id="_总结_11">12.8. 总结</h3>
 <div class="paragraph">
-<p>We’ve explored several ways to represent commit occurrence in plots and utilized Inline::Python to interface with a Python-based plotting library.</p>
+<p>我们已经探索了几种在绘图中表示提交发生的方法，并利用 Inline::Python 与一个基于 Python 的绘图库接口。</p>
 </div>
 <div class="paragraph">
-<p>A bit of Raku metaprogramming allowed us to emulate different kinds of Python APIs pretty directly in Raku code, allowing a fairly direct translation of the original library’s documentation into Raku code.</p>
+<p>通过 Raku 元编程，我们可以在 Raku 代码中直接模拟不同类型的 Python API，允许将原始库的文档直接翻译成 Raku 代码。</p>
 </div>
 </div>
 </div>
